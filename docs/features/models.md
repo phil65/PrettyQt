@@ -6,7 +6,7 @@ PrettyQt includes a large amount of ItemModels for Qt-based types, Python built-
 preferred choice for most models.
 * In general, the models are unstyled (with some few exceptions. Styling should be done via the extensive [proxy system](proxies.md) which is baked into PrettyQt.
 
-### Builtin-Type models
+## Builtin-Type models
 
 
 | Type | Model | Description |
@@ -23,20 +23,20 @@ preferred choice for most models.
 | `list[logging.LogRecord]` | [LogRecordModel](logrecordmodel.md) | Table showing a list of LogRecords
 | `list[re.Match]` | [RegexMatchesModel](regexmatchesmodel.md) | Table do display list of regex matches
 | `object`| [PythonObjectTreeModel](pythonobjecttreemodel.md) | Tree model showing all attributes of an object.
-| `xml.etree.ElementTree` | XmlModel | Tree view for an xml ElementTree
+| `xml.etree.ElementTree` | [XmlModel](xmlmodel.md) | Tree view for an xml ElementTree
 
-### Qt-Type models
+## Qt-Type models
 
 | Type | Model | Description |
 |------|-------|-------------|
 | `list[QtGui.QAction]` | [ActionsModel](actionsmodel.md)| Table displaying all available info for a QAction. Supports editing QAction properties.
 | `list[QtGui.QShortcut]` | [ShortcutsModel](shortcutsmodel.md) | Table displaying a list of shortcuts. Supports editing Shortcut properties.
-| `list[QtCore.QStorageInfo]` [StorageInfoModel](storageinfomodel.md) | Read-only list of available drives
+| `list[QtCore.QStorageInfo]` | [StorageInfoModel](storageinfomodel.md) | Read-only list of available drives
 | `list[QtWidgets.QWidget]` | xyz | Table displaying a list of QWidgets and their properties
 | `list[QtCore.QModelIndex]` | [ModelIndexModel](modelindexmodel.md) | Model displaying all roles of a list of ModelIndexes.
 | `QtCore.QObject` | xyz | Table model to display all available Properties of a QObject.
 
-### External type models
+## External type models
 
 | Type | Package | Model | Description |
 |------|---------|-------|-------------|

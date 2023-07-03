@@ -101,45 +101,39 @@ almost every class from Qt is covered.
 
 | Qt Module           | PrettyQt module            |
 |---------------------|----------------------------|
-| QtBluetooth         | prettyqt.bluetooth         |
-| QtCharts            | prettyqt.charts            |
-| QtCore              | prettyqt.core              |
-| QtDesigner          | prettyqt.designer          |
-| QtGui               | prettyqt.gui               |
-| QtLocation          | prettyqt.location          |
-| QtMultimedia        | prettyqt.multimedia        |
-| QtMultimediaWidgets | prettyqt.multimediawidgets |
-| QtNetwork           | prettyqt.network           |
-| QtOpenGLWidgets     | prettyqt.openglwidgets     |
-| QtPdf               | prettyqt.pdf               |
-| QtPdfWidgets        | prettyqt.pdfwidgets        |
-| QtPositioning       | prettyqt.positioning       |
-| QtPrintSupport      | prettyqt.printsupport      |
-| QtQml               | prettyqt.qml               |
-| QtHelp              | prettyqt.qthelp            |
-| QtQuick             | prettyqt.quick             |
-| QtQuickWidgets      | prettyqt.quickwidgets      |
-| QScintilla          | prettyqt.scintilla         |
-| QtScXml             | prettyqt.scxml             |
-| QtSpatialAudio      | prettyqt.spatialaudio      |
-| QtStateMachine      | prettyqt.statemachine      |
-| QtSvg               | prettyqt.svg               |
-| QtSvgWidgets        | prettyqt.svgwidgets        |
-| QtTest              | prettyqt.test              |
-| QtTextToSpeech      | prettyqt.texttospeech      |
-| QtWebChannel        | prettyqt.webchannel        |
-| QtWebEngineCore     | prettyqt.webenginecore     |
-| QtWebEngineWidgets  | prettyqt.webenginewidgets  |
-| QtWidgets           | prettyqt.widgets           |
+| QtBluetooth         | [prettyqt.bluetooth](bluetooth.md)         |
+| QtCharts            | [prettyqt.charts](charts.md)            |
+| QtCore              | [prettyqt.core](core.md)              |
+| QtDesigner          | [prettyqt.designer](designer.md)          |
+| QtGui               | [prettyqt.gui](gui.md)               |
+| QtLocation          | [prettyqt.location](location.md)          |
+| QtMultimedia        | [prettyqt.multimedia](multimedia.md)        |
+| QtMultimediaWidgets | [prettyqt.multimediawidgets](multimediawidgets.md) |
+| QtNetwork           | [prettyqt.network](network.md)           |
+| QtOpenGLWidgets     | [prettyqt.openglwidgets](openglwidgets.md)     |
+| QtPdf               | [prettyqt.pdf](pdf.md)               |
+| QtPdfWidgets        | [prettyqt.pdfwidgets](pdfwidgets.md)        |
+| QtPositioning       | [prettyqt.positioning](positioning.md)       |
+| QtPrintSupport      | [prettyqt.printsupport](printsupport.md)      |
+| QtQml               | [prettyqt.qml](qml.md)               |
+| QtHelp              | [prettyqt.qthelp](qthelp.md)            |
+| QtQuick             | [prettyqt.quick](quick.md)             |
+| QtQuickWidgets      | [prettyqt.quickwidgets](quickwidgets.md)      |
+| QScintilla          | [prettyqt.scintilla](scintilla.md)         |
+| QtScXml             | [prettyqt.scxml](scxml.md)             |
+| QtSpatialAudio      | [prettyqt.spatialaudio](spatialaudio.md)      |
+| QtStateMachine      | [prettyqt.statemachine](statemachine.md)      |
+| QtSvg               | [prettyqt.svg](svg.md)               |
+| QtSvgWidgets        | [prettyqt.svgwidgets](svgwidgets.md)        |
+| QtTest              | [prettyqt.test](test.md)              |
+| QtTextToSpeech      | [prettyqt.texttospeech](texttospeech.md)      |
+| QtWebChannel        | [prettyqt.webchannel](webchannel.md)        |
+| QtWebEngineCore     | [prettyqt.webenginecore](webenginecore.md)     |
+| QtWebEngineWidgets  | [prettyqt.webenginewidgets](webenginewidgets.md)  |
+| QtWidgets           | [prettyqt.widgets](widgets.md)           |
 
 
-All subclassed Qt classes in mentioned modules are called exactly like the
-Qt-Counterpart, except that the leading Q is missing.
-
-### Examples:
-
-- QtWidgets.QWidget -> widgets.Widget
-- QtCore.QObject -> core.Object
+[Read more](general.md) about the general API design.
 
 Apart from the mentioned mixin tree and the corresponding classes, this library also
 contains a lot of custom widgets, delegates, eventfilters, validators,
@@ -164,25 +158,24 @@ pip install prettyqt
 ```
 
 ## Required dependencies
-- [bidict](https://pypi.org/project/bidict)
-- [pygments](https://pypi.org/project/pygments)
-- [qstylizer](https://pypi.org/project/qstylizer)
-- [typing_extensions](https://pypi.org/project/typing_extensions)
 
-# And one of...
-- [pyside6](https://pypi.org/project/pyside6)
-- [pyqt6](https://pypi.org/project/pyqt6)
+* [bidict](https://pypi.org/project/bidict)
+* [pygments](https://pypi.org/project/pygments)
+* [qstylizer](https://pypi.org/project/qstylizer)
+* [typing_extensions](https://pypi.org/project/typing_extensions)
+* [pyside6](https://pypi.org/project/pyside6) or [pyqt6](https://pypi.org/project/pyqt6)\*
 
-Note: Only Qt 6.5+ is supported.
+\*Note: Only Qt 6.5+ is supported.
 
 ## Optional dependencies
-- [orjson](https://pypi.org/project/orjson)
-- [numpy](https://pypi.org/project/numpy)
-- [ipython](https://pypi.org/project/ipython)
-- [qtconsole](https://pypi.org/project/qtconsole)
-- [pillow](https://pypi.org/project/pillow)
-- [fsspec](https://pypi.org/project/fsspec)
-- [docutils](https://pypi.org/project/docutils)
+
+* [orjson](https://pypi.org/project/orjson)
+* [numpy](https://pypi.org/project/numpy)
+* [ipython](https://pypi.org/project/ipython)
+* [qtconsole](https://pypi.org/project/qtconsole)
+* [pillow](https://pypi.org/project/pillow)
+* [fsspec](https://pypi.org/project/fsspec)
+* [docutils](https://pypi.org/project/docutils)
 
 
 ## Installation from sources

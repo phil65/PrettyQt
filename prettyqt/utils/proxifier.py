@@ -67,7 +67,10 @@ class Sliced:
     def highlight_current(
         self, mode="column"
     ) -> custom_models.SliceHighlightCurrentProxyModel:
-        """Filter subsection to display."""
+        """Filter subsection to display.
+
+        Wraps current model with a SliceHighlightCurrentProxyModel.
+        """
         from prettyqt import custom_models
 
         proxy = custom_models.SliceHighlightCurrentProxyModel(
@@ -84,7 +87,16 @@ class Sliced:
         selector: Callable[[Any], bool] | None = None,
         selector_role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> custom_models.SliceValueTransformationProxyModel:
-        """Conditionally apply modifications to given area."""
+        """Conditionally apply modifications to given area.
+
+        Wraps current model with a SliceValueTransformationProxyModel.
+
+        Arguments:
+            fn: Callable to use for modifying.
+            role: role to modify
+            selector: Callable to filter cells which should be modified.
+            selector_role: data role the selector callable should get as an argument.
+        """
         from prettyqt import custom_models
 
         proxy = custom_models.SliceValueTransformationProxyModel(
@@ -194,6 +206,10 @@ class Sliced:
 
         For trees, set tree=True. That way checkboxes change to tristate and
         propagate changes to parents and children.
+
+        Arguments:
+            callback: Callback to trigger when checkstate changes.
+            tree: Whether the underlying model is a tree.
         """
         from prettyqt import custom_models
 
@@ -219,7 +235,7 @@ class Sliced:
         Wraps current model with a  SliceChangeIconSizeProxyModel.
 
         Arguments:
-            size: new size
+            size: New size for decoration role.
         """
         from prettyqt import custom_models
 
@@ -305,7 +321,10 @@ class Proxifier:
             raise AttributeError(name)
 
     def transpose(self) -> core.TransposeProxyModel:
-        """Wraps model in a Proxy which transposes rows/columns."""
+        """Transpose rows/columns.
+
+        Wraps current model with a TransposeProxyModel.
+        """
         proxy = core.TransposeProxyModel(parent=self._widget)
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)

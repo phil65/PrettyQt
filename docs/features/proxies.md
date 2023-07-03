@@ -3,7 +3,7 @@ has quick access to proxy superpowers hidden behind the "[proxifier](proxifier.m
 The following section will give an overview about the included proxies and how to apply them.
 
 
-### Slice proxies
+## Slice proxies
 
 PrettyQt introduces a base proxy model which allows its subclasses to be selectively applied to
 the source model by using python slicing syntax.
@@ -69,7 +69,7 @@ Here is a short overview of the included slice proxies:
 |[SliceValueTransformationProxyModel](slicevaluetransformationproxymodel.md)| Changes the values of any data role of given slice area based on a callback.|
 
 
-### Sort/Filter proxies.
+## Sort/Filter proxies.
 
 In addition to the mentioned SliceFilterProxyModel, PrettyQt also contains
 several proxies based on QSortFilterProxyModel. These can be more powerful
