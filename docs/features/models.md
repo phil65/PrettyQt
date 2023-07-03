@@ -23,7 +23,7 @@ preferred choice for most models.
 | `list[logging.LogRecord]` | [LogRecordModel](logrecordmodel.md) | Table showing a list of LogRecords
 | `list[re.Match]` | [RegexMatchesModel](regexmatchesmodel.md) | Table do display list of regex matches
 | `object`| [PythonObjectTreeModel](pythonobjecttreemodel.md) | Tree model showing all attributes of an object.
-| `xml.etree.ElementTree` | [XmlModel](xmlmodel.md) | Tree view for an xml ElementTree
+| `xml.etree.ElementTree, ElementTreeIterator` | [XmlModel](xmlmodel.md) | Tree view for an xml ElementTree
 
 ## Qt-Type models
 
@@ -49,6 +49,6 @@ preferred choice for most models.
 | `pandas.Index` | pandas | [PandasIndexModel](pandasindexmodel.md) | Model to show a pandas (Multi)Index
 | `polars.DataFrame` | polars | [PolarsTableModel](polarstablemodel.md) | Model to display a polars DataFrame
 | `git.Repo, git.Tree`| gitpython | [GitPythonTreeModel](gitpythontreemodel.md) | Model to display a polars DataFrame
-| `lxml.etree._Element` | lxml | [XmlModel](xmlmodel.md) | Tree view for an xml ElementTree
+| `lxml.etree._Element, lxml.etree.iterparse` | lxml | [LxmlModel](lxmlmodel.md) | Tree view for an lxml ElementTree (iterator) (semi-lazy)
 
 

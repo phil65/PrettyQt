@@ -2,10 +2,10 @@
 
 ## Supports
 
-`ET.ElementTree | lxml.etree._Element`
+`ET.ElementTree | ET.Element | xml TreeIterator`
 
 ### Additional roles
 
-| Role                                      | Data                     |
-| ------------------------------------------|--------------------------|
-| ImportlibTreeModel.Roles.DistributionRole | Distribution instance    |
+| Role                    | Data            |
+| ------------------------|----------  -----|
+| XmlModel.Roles.NodeRole | Element Node    |

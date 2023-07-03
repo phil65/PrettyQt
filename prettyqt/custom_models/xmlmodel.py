@@ -1,14 +1,26 @@
 from __future__ import annotations
 
-import importlib
+import enum
 import io
+import logging
 import xml.etree.ElementTree as ET
 
-from prettyqt import constants, custom_models
+from prettyqt import constants, core, custom_models
 from prettyqt.utils import datatypes
 
 
-class TagColumn(custom_models.ColumnItem):
+logger = logging.getLogger(__name__)
+
+
+class XmlColumnItem(custom_models.ColumnItem):
+    def get_data(self, item: XmlModel.TreeItem, role: constants.ItemDataRole):
+        match role:
+            case XmlModel.Roles.NodeRole:
+                logger.info(item.obj)
+                return item.obj
+
+
+class TagColumn(XmlColumnItem):
     name = "Tag"
     doc = "Tag"
 
@@ -16,9 +28,10 @@ class TagColumn(custom_models.ColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.obj.tag
+        return super().get_data(item, role)
 
 
-class TextColumn(custom_models.ColumnItem):
+class TextColumn(XmlColumnItem):
     name = "Text"
     doc = "Text"
 
@@ -26,9 +39,10 @@ class TextColumn(custom_models.ColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.obj.text
+        return super().get_data(item, role)
 
 
-class TailColumn(custom_models.ColumnItem):
+class TailColumn(XmlColumnItem):
     name = "Tail"
     doc = "Tail"
 
@@ -36,9 +50,10 @@ class TailColumn(custom_models.ColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.obj.tail
+        return super().get_data(item, role)
 
 
-class AttributeColumn(custom_models.ColumnItem):
+class AttributeColumn(XmlColumnItem):
     name = "Attribute"
     doc = "Attribute"
 
@@ -46,12 +61,30 @@ class AttributeColumn(custom_models.ColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.obj.attrib
+        return super().get_data(item, role)
 
 
-class XmlModel(custom_models.ColumnItemModel):
-    """Semi-lazy xml model. Fetches all direct child items when accessing index."""
-
+class BaseXmlModel(custom_models.ColumnItemModel):
     COLUMNS = [TagColumn, TextColumn, TailColumn, AttributeColumn]
+
+    def __init__(self, obj, **kwargs):
+        super().__init__(obj=obj, columns=self.COLUMNS, show_root=True, **kwargs)
+
+    class Roles(enum.IntEnum):
+        NodeRole = constants.USER_ROLE + 24245
+
+    def _has_children(self, item: XmlModel.TreeItem) -> bool:
+        return len(item.obj) > 0
+
+    def _fetch_object_children(self, item: XmlModel.TreeItem) -> list[XmlModel.TreeItem]:
+        return [self.TreeItem(obj=i) for i in item.obj]
+
+
+class XmlModel(BaseXmlModel):
+    """Semi-lazy xml model. Fetches all direct child nodes when needed.
+
+    Model cant be modified, that only really makes sense for a full DOM implementation.
+    """
 
     def __init__(
         self,
@@ -60,48 +93,46 @@ class XmlModel(custom_models.ColumnItemModel):
         **kwargs,
     ):
         match obj:
+            case io.StringIO():
+                context = ET.iterparse(obj, events=("start",))
+                _, root = next(context)
             case str():
                 context = ET.iterparse(io.StringIO(obj), events=("start",))
                 _, root = next(context)
             case datatypes.IsTreeIterator():
                 _, root = next(obj)
             case ET.ElementTree():
-                xml_str = ET.tostring(xml._root, encoding="unicode")
+                xml_str = ET.tostring(obj._root, encoding="unicode")
                 context = ET.iterparse(io.StringIO(xml_str), events=("start",))
                 _, root = next(context)
-            case _ if importlib.util.find_spec("lxml"):
-                from lxml import etree
-
-                if isinstance(obj, etree._Element):
-                    root = obj
-                else:
-                    raise TypeError(obj)
             case _:
                 raise TypeError(obj)
-        super().__init__(
-            obj=root,
-            columns=self.COLUMNS,
-            show_root=show_root,
-            **kwargs,
-        )
+        super().__init__(obj=root, **kwargs)
 
     @classmethod
     def supports(cls, instance) -> bool:
         match instance:
             case datatypes.IsTreeIterator() | ET.ElementTree():
                 return True
-            case _ if importlib.util.find_spec("lxml"):
-                from lxml import etree
-
-                return isinstance(instance, etree._Element)
             case _:
                 return False
 
-    def _has_children(self, item: XmlModel.TreeItem) -> bool:
-        return bool(item.obj)
-
-    def _fetch_object_children(self, item: XmlModel.TreeItem) -> list[XmlModel.TreeItem]:
-        return [self.TreeItem(obj=i) for i in item.obj]
+    def get_parent_node(self, node_or_index: core.ModelIndex | ET.Element):
+        # only lxml has Element.getparent()
+        # for builtin Elements we need to go through indexes since we do not have a
+        # full ElementTree.
+        # might be worth having two XML models, a lazy one and a full-featured one.
+        # Then we could use xpath to get parent here.
+        if isinstance(node_or_index, core.ModelIndex):
+            index = node_or_index
+        elif indexes := self.search_tree(
+            node_or_index, role=self.Roles.NodeRole, max_results=1
+        ):
+            index = indexes[0]
+        else:
+            return None
+        parent = index.parent()
+        return parent.data(self.Roles.NodeRole)
 
 
 if __name__ == "__main__":
@@ -120,5 +151,12 @@ if __name__ == "__main__":
     table.setRootIsDecorated(True)
     # table.setSortingEnabled(True)
     table.set_model(model)
+
+    def test(new, old):
+        node = new.data(new.model().Roles.NodeRole)
+        new.model().get_parent_node(node)
+
+    table.selectionModel().currentChanged.connect(test)
     table.show()
-    app.exec()
+    with app.debug_mode():
+        app.exec()
