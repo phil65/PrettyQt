@@ -181,7 +181,7 @@ if __name__ == "__main__":
         view.set_model(model)
         view.set_selection_behavior("rows")
         view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-        view.set_delegate("variant", column=1)
+        view.set_delegate("editor", column=1)
         view.show()
         widget.show()
         view.resize(500, 300)

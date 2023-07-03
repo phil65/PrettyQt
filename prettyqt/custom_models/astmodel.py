@@ -230,7 +230,7 @@ if __name__ == "__main__":
         model = AstModel(tree)
         view.set_model(model)
         view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-        view.set_delegate("variant")
+        view.set_delegate("editor")
         view.resize(1000, 1000)
         view.show()
         with app.debug_mode():

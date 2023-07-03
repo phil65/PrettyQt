@@ -140,7 +140,7 @@ if __name__ == "__main__":
         i.setWhatsThis("abc")
     model = ShortcutsModel(shortcuts, parent=view)
     view.setModel(model)
-    view.set_delegate("variant")
+    view.set_delegate("editor")
     view.resize(640, 480)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_selection_behavior("rows")

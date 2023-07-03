@@ -364,7 +364,7 @@ if __name__ == "__main__":
     model = PandasColumnListModel(df)
     tableview = widgets.TreeView()
     tableview.setup_dragdrop_move()
-    tableview.set_delegate("variant")
+    tableview.set_delegate("editor")
     tableview.set_model(model)
 
     tableview.show()

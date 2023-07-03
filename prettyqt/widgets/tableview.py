@@ -231,9 +231,6 @@ if __name__ == "__main__":
 
     app = widgets.app()
     widget = debugging.example_table()
-    widget.set_delegate("variant")
-    test = widget.model()[2, :]
-    print(test)
     widget.show()
     widget.resize(500, 500)
     widget.resize_visible_columns_to_contents()

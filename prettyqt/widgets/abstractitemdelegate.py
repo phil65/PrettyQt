@@ -42,4 +42,3 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    # delegate = AbstractItemDelegate.for_id("variant")

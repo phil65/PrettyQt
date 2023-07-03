@@ -114,6 +114,6 @@ if __name__ == "__main__":
     table.show()
     model = PolarsTableModel(df, parent=table)
     table.set_model(model)
-    table.set_delegate("variant")
+    table.set_delegate("editor")
 
     app.exec()

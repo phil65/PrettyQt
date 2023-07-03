@@ -13,7 +13,7 @@ from prettyqt.utils import bidict, datatypes, helpers, listdelegators
 
 DelegateStr = Literal[
     "widget",
-    "variant",
+    "editor",
     "html",
     "button",
     "no_focus",
@@ -354,8 +354,8 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         match delegate:
             case widgets.QAbstractItemDelegate():
                 dlg = delegate
-            # case "variant":
-            #     delegate = custom_delegates.VariantDelegate(parent=self, **kwargs)
+            # case "editor":
+            #     delegate = custom_delegates.EditorDelegate(parent=self, **kwargs)
             # case "widget":
             #     delegate = custom_delegates.WidgetDelegate(parent=self, **kwargs)
             # case "html":

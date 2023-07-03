@@ -228,7 +228,7 @@ if __name__ == "__main__":
     model = ActionsModel(actions, parent=view)
     view.setModel(model)
     view.resize(640, 480)
-    view.set_delegate("variant")
+    view.set_delegate("editor")
     view.set_selection_behavior("rows")
     view.adapt_sizes()
     view.show()

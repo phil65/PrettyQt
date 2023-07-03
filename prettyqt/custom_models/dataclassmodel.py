@@ -77,7 +77,7 @@ if __name__ == "__main__":
     model = DataClassModel(items, parent=view)
     view.set_model(model)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-    view.set_delegate("variant")
+    view.set_delegate("editor")
     view.resize(1000, 1000)
     with app.debug_mode():
         view.show()

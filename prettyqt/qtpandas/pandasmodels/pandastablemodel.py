@@ -248,6 +248,6 @@ if __name__ == "__main__":
     print(table.get_models())
     # table.set_model(table.model().proxifier.get_proxy("color_values", parent=table))
     # model = model.proxifier.get_proxy("read_only")
-    table.set_delegate("variant")
+    table.set_delegate("editor")
 
     app.exec()

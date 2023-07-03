@@ -2,7 +2,7 @@ Several additional delegates are supplied by PrettyQt.
 
 | Delegate                   | Description                                     |
 |----------------------------|-------------------------------------------------|
-| **VariantDelegate**        | regular delegate supporting many data types     |
+| **EditorDelegate**        | regular delegate supporting many data types     |
 | **HtmlItemDelegate**       | supports HTML for text                          |
 | **IconDelegate**           |                                                 |
 | **NoFocusDelegate**        | hides focus frame                               |
@@ -13,7 +13,7 @@ Several additional delegates are supplied by PrettyQt.
 | **WidgetDelegate**         |                                                 |
 
 
-The most important one is the "VariantDelegate", which basically works
+The most important one is the "EditorDelegate", which basically works
 like the default delegate, but supports editing a larger amount
 of datatypes.
 

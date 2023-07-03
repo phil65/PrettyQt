@@ -169,7 +169,7 @@ if __name__ == "__main__":
     #     selector_role=constants.USER_ROLE,
     # )
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-    view.set_delegate("variant")
+    view.set_delegate("editor")
     view.resize(1000, 1000)
     view.show()
     with app.debug_mode():

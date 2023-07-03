@@ -241,7 +241,7 @@ class DataFrameViewer(widgets.Widget):
         self.table_level.set_scrollbar_policy("always_off")
         self.table_level.h_header.sectionResized.connect(self._index_resized)
         self.table_level.v_header.sectionResized.connect(self._header_resized)
-        self.table_level.set_delegate("variant")
+        self.table_level.set_delegate("editor")
 
         self.table_header = widgets.TableView(frame_shadow="plain")
         self.table_header.v_header.hide()
@@ -250,7 +250,7 @@ class DataFrameViewer(widgets.Widget):
         self.table_header.set_horizontal_scroll_mode("pixel")
         self.table_header.setHorizontalScrollBar(self.hscroll)
         self.table_header.h_header.sectionResized.connect(self._column_resized)
-        self.table_header.set_delegate("variant")
+        self.table_header.set_delegate("editor")
 
         self.table_index = widgets.TableView(frame_shadow="plain")
         self.table_index.h_header.hide()
@@ -268,7 +268,7 @@ class DataFrameViewer(widgets.Widget):
         self.table_data.set_scroll_mode("pixel")
         self.table_data.setHorizontalScrollBar(self.hscroll)
         self.table_data.setVerticalScrollBar(self.vscroll)
-        self.table_data.set_delegate("variant")
+        self.table_data.set_delegate("editor")
         layout = self.set_layout("grid", spacing=0, margin=0)
         layout[0, 0] = self.table_level
         layout[0, 1] = self.table_header

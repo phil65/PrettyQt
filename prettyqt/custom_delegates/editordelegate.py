@@ -12,10 +12,64 @@ from prettyqt.utils import datatypes
 logger = logging.getLogger(__name__)
 
 
-class VariantDelegate(widgets.StyledItemDelegate):
-    """Delegate which supports editing many data types."""
+class EditorDelegate(widgets.StyledItemDelegate):
+    """Delegate which supports editing a large range of data types.
 
-    ID = "variant"
+    Allows editing a large range of different types from Qt, builtin libraries as well
+    as some Numpy types.
+
+    The following data types are supported:
+
+    * bool
+    * enum.Flag
+    * enum.Enum
+    * int
+    * float
+    * str
+    * range
+    * slice
+    * list of ints
+    * list of floats
+    * list of strings
+    * pathlib.Path
+    * re.Pattern
+    * datetime.date
+    * datetime.time
+    * datetime.datetime
+    * QtCore.QRegularExpression
+    * QtCore.QTime
+    * QtCore.QDate
+    * QtCore.QDateTime
+    * QtCore.QPoint
+    * QtCore.QPointF
+    * QtCore.QRect
+    * QtCore.QRectF
+    * QtCore.QRection
+    * QtCore.QKeyCombination
+    * QtCore.QLocale
+    * QtCore.QSize
+    * QtCore.QSizeF
+    * QtCore.QUrl
+    * QtGui.QFont
+    * QtGui.QKeySequence
+    * QtGui.QPalette
+    * QtGui.QColor
+    * QtGui.QBrush
+    * QtGui.QCursor
+    * QtGui.QIcon
+    * QtWidgets.QSizePolicy
+
+    If numpy is installed, the following types are supported, too:
+
+    * numpy.floating
+    * numpy.integer
+    * numpy.str_
+    * numpy.datetime64
+    * numpy.bool_
+
+    """
+
+    ID = "editor"
 
     def __init__(
         self,
@@ -63,7 +117,10 @@ class VariantDelegate(widgets.StyledItemDelegate):
     ):
         val = self._data_for_index(index, self._role)
         logger.info(f"creating editor for {val!r}...")
-        widget = datatypes.get_editor_for_value(val, parent)
+        if isinstance(val, list):
+            widget = datatypes.get_editor_for_value_list(val, parent)
+        else:
+            widget = datatypes.get_editor_for_value(val, parent)
         if widget is None:
             logger.warning(f"Could not find editor for {val!r} ({type(val)})")
             return None
@@ -135,6 +192,6 @@ if __name__ == "__main__":
     table_widget.resize(500, 300)
     table_widget.show()
     with app.debug_mode():
-        delegate = table_widget.set_delegate("variant", column=1, set_edit_role=True)
+        delegate = table_widget.set_delegate("editor", column=1)
         delegate.closeEditor.connect(print)
         app.exec()

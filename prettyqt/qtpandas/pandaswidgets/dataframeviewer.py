@@ -26,7 +26,7 @@ class DataTableView(widgets.TableView):
         self.set_margin(0)
         self.set_delegate("no_focus")
         self.set_scrollbar_policy("always_off")
-        self.set_delegate("variant")
+        self.set_delegate("editor")
         self.set_size_policy("expanding", "expanding")
         self.set_df(df)
 

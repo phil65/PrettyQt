@@ -48,15 +48,15 @@ def test_progressbardelegate(qtbot, tablewidget):
     tablewidget.hide()
 
 
-def test_variantdelegate(qtbot, tablewidget):
-    delegate = custom_delegates.VariantDelegate(parent=tablewidget)
+def test_editordelegate(qtbot, tablewidget):
+    delegate = custom_delegates.EditorDelegate(parent=tablewidget)
     tablewidget.show()
     tablewidget.setItemDelegateForColumn(0, delegate)
     tablewidget.hide()
 
 
 def test_widgetdelegate(qtbot, tablewidget):
-    delegate = custom_delegates.VariantDelegate(parent=tablewidget)
+    delegate = custom_delegates.EditorDelegate(parent=tablewidget)
     tablewidget.show()
     tablewidget.setItemDelegateForColumn(0, delegate)
     tablewidget.hide()

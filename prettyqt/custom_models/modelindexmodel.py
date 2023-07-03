@@ -51,7 +51,7 @@ class ModelIndexModel(custom_models.ListMixin, core.AbstractTableModel):
 
     def setup_delegates(self, view):
         for i, v in enumerate(self.role_mapping.values(), start=len(self.FIXED_HEADER)):
-            view.set_delegate("variant", column=i, data_role=v)
+            view.set_delegate("editor", column=i, data_role=v)
 
     @property
     def headers(self):
@@ -143,8 +143,8 @@ if __name__ == "__main__":
         indexes = list(my_model.iter_tree(fetch_more=True))
         model = ModelIndexModel(indexes=indexes, parent=view)
         for i, v in enumerate(model.role_mapping.values(), start=len(model.FIXED_HEADER)):
-            view.set_delegate("variant", column=i, role=v)
-        # view.set_delegate("variant")
+            view.set_delegate("editor", column=i, role=v)
+        # view.set_delegate("editor")
         view.set_model(model)
         view.set_selection_behavior("rows")
         view.set_edit_triggers("all")

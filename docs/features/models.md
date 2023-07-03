@@ -2,7 +2,7 @@ PrettyQt includes a large amount of ItemModels for Qt-based types, Python built-
 
 * All models are proper views on data structures, not populated StandardItemModels.
 * Boolean values are always handled via CheckState role, both for editing and displaying.
-* Some of the models should be used in conjunction with the [VariantDelegate](variantdelegate.md). That delegate supports editing a large amount of different datatypes and should be the
+* Some of the models should be used in conjunction with the [EditorDelegate](editordelegate.md). That delegate supports editing a large amount of different datatypes and should be the
 preferred choice for most models.
 * In general, the models are unstyled (with some few exceptions. Styling should be done via the extensive [proxy system](proxies.md) which is baked into PrettyQt.
 

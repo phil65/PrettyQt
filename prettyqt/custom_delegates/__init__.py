@@ -8,7 +8,7 @@ from .progressbardelegate import ProgressBarDelegate
 from .radiodelegate import RadioDelegate
 from .renderlinkdelegate import RenderLinkDelegate
 from .stardelegate import StarDelegate
-from .variantdelegate import VariantDelegate
+from .editordelegate import EditorDelegate
 from .widgetdelegate import WidgetDelegate
 
 
@@ -22,5 +22,5 @@ __all__ = [
     "NoFocusDelegate",
     "HtmlItemDelegate",
     "WidgetDelegate",
-    "VariantDelegate",
+    "EditorDelegate",
 ]

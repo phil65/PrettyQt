@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
     widget = debugging.example_table()
-    widget.set_delegate("variant")
+    widget.set_delegate("editor")
     with app.debug_mode():
         test = SectionAutoSpanEventFilter(widget)
         widget.show()
