@@ -16,12 +16,16 @@ class SliceAppearanceProxyModel(custom_models.SliceIdentityProxyModel):
         override: bool = True,
         **kwargs,
     ):
-        self._foreground = foreground
-        self._background = background
-        self._font = font
-        self._alignment = alignment
-        self._override = override
         super().__init__(**kwargs)
+        self._foreground = gui.QColor()
+        self.set_foreground(foreground)
+        self._background = gui.QColor()
+        self.set_background(background)
+        self._font = gui.QFont()
+        self.set_font(font)
+        self._alignment = constants.ALIGN_CENTER_LEFT
+        self.set_alignment(alignment)
+        self._override = override
 
     def data(
         self,
@@ -34,60 +38,67 @@ class SliceAppearanceProxyModel(custom_models.SliceIdentityProxyModel):
         if self._override or data is None:
             match role:
                 case constants.FOREGROUND_ROLE:
-                    return self._foreground
+                    return self._foreground if self._foreground.isValid() else None
                 case constants.BACKGROUND_ROLE:
-                    return self._background
+                    return self._background if self._background.isValid() else None
                 case constants.FONT_ROLE:
                     return self._font
                 case constants.ALIGNMENT_ROLE:
                     return self._alignment
         return super().data(index, role)
 
-    def set_font(self, font: gui.QFont | str):
-        self._font = gui.QFont(font)
+    def set_font(self, font: gui.QFont | str | None):
+        self._font = gui.QFont(font) if font else gui.QFont()
         self.update_all()
 
     def get_font(self) -> gui.QFont:
-        return self._font
+        return self._font or gui.QFont()
 
-    def set_foreground(self, foreground: datatypes.ColorType | gui.QBrush | None):
+    def set_foreground(self, foreground: datatypes.ColorAndBrushType | None):
         match foreground:
-            case None | gui.QBrush():
-                pass
+            case None:
+                foreground = gui.QColor()
+            case gui.QBrush():
+                foreground = foreground.color()
             case _:
                 foreground = colors.get_color(foreground).as_qt()
         self._foreground = foreground
         self.update_all()
 
-    def get_foreground(self) -> gui.QColor | gui.QBrush | None:
+    def get_foreground(self) -> gui.QColor:
         return self._foreground
 
-    def set_background(self, background: datatypes.ColorType | gui.QBrush | None):
+    def set_background(self, background: datatypes.ColorAndBrushType | None):
         match background:
-            case None | gui.QBrush():
-                pass
+            case None:
+                background = gui.QColor()
+            case gui.QBrush():
+                background = background.color()
             case _:
                 background = colors.get_color(background).as_qt()
         self._background = background
         self.update_all()
 
-    def get_background(self) -> gui.QColor | gui.QBrush | None:
+    def get_background(self) -> gui.QColor:
         return self._background
 
     def set_alignment(
         self, alignment: constants.AlignmentFlag | constants.AlignmentStr | None
     ):
-        if isinstance(alignment, str):
-            alignment = constants.ALIGNMENTS[alignment]
+        match alignment:
+            case None:
+                alignment = constants.ALIGN_CENTER_LEFT
+            case str() | constants.AlignmentFlag():
+                alignment = constants.ALIGNMENTS.get_enum_value(alignment)
         self._alignment = alignment
         self.update_all()
 
-    def get_alignment(self) -> constants.AlignmentFlag | None:
+    def get_alignment(self) -> constants.AlignmentFlag:
         return self._alignment
 
     font_value = core.Property(gui.QFont, get_font, set_font)
-    foreground_value = core.Property(object, get_foreground, set_foreground)
-    background_value = core.Property(object, get_background, set_background)
+    foreground_value = core.Property(gui.QColor, get_foreground, set_foreground)
+    background_value = core.Property(gui.QColor, get_background, set_background)
     alignment_value = core.Property(constants.AlignmentFlag, get_alignment, set_alignment)
 
 
@@ -96,7 +107,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
     table = debugging.example_table()
-    table.proxifier[:, 0].style(foreground="red")
+    table.proxifier[:, 1].style()
     table.show()
     with app.debug_mode():
         app.exec()
