@@ -377,7 +377,10 @@ class FSSpecTreeModel(
             index = self.index(index)
         tree_item = index.internalPointer()
         path = tree_item.obj["name"]
-        self.fs.rm_file(path)
+        # TODO: returned bool should indicate whether operation is possible,
+        # not whether file exists after trying.
+        with self.remove_row(index.row(), index.parent()):
+            self.fs.rm_file(path)
         return self.fs.exists(path)
 
     def rmdir(self, index: core.QModelIndex | str) -> bool:
@@ -385,7 +388,10 @@ class FSSpecTreeModel(
             index = self.index(index)
         tree_item = index.internalPointer()
         path = tree_item.obj["name"]
-        self.fs.rmdir(path)
+        # TODO: returned bool should indicate whether operation is possible,
+        # not whether file exists after trying.
+        with self.remove_row(index.row(), index.parent()):
+            self.fs.rmdir(path)
         return self.fs.exists(path)
 
     def setRootPath(self, path: os.PathLike | None) -> core.ModelIndex:
@@ -436,12 +442,14 @@ class FSSpecTreeModel(
     # def dragEnterEvent(self, event):
     #     event.accept() if event.mimeData().hasUrls() else super().dragEnterEvent(event)
 
-    def removeRows(self, row: int, count: int, parent: core.ModelIndex):
-        # end_row = row + count - 1
-        # with self.remove_rows(row, end_row, parent):
-        #     for i in range(end_row, row - 1, -1):
-        #         self.items.pop(i)
-        return True
+    # def removeRows(self, row: int, count: int, parent: core.ModelIndex):
+    #     end_row = row + count - 1
+    #     with self.remove_rows(row, end_row, parent):
+    #         for i in range(end_row, row - 1, -1):
+    #             index = self.index(i, 0, parent)
+    #             path = index.data(self.Roles.FilePathRole)
+    #             self.rm_file(path)
+    #     return True
 
     def remove_items(self, offsets: Iterable[int]):
         for offset in sorted(offsets, reverse=True):
