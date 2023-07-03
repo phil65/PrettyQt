@@ -51,7 +51,10 @@ class Sliced:
         self._widget = widget
 
     def filter(self) -> custom_models.SliceFilterProxyModel:
-        """Filter subsection to display."""
+        """Filter subsection to display.
+
+        Wraps current model with a SliceFilterProxyModel.
+        """
         from prettyqt import custom_models
 
         proxy = custom_models.SliceFilterProxyModel(
@@ -109,6 +112,17 @@ class Sliced:
         For makin an area checkable, usually set_checkable should be preferred
         since it keeps track of checked items and triggers a callback on checkstate
         change.
+
+        Arguments:
+            selectable: Changes the ItemIsSelectable Flag
+            editable: Changes the ItemIsEnabled Flag
+            drag_enabled: Changes the ItemIsDragEnabed Flag
+            drop_enabled: Changes the ItemIsDropEnabled Flag
+            user_checkable: Changes the ItemIsUserCheckable Flag
+            enabled: Changes the ItemIsEnabled Flag
+            auto_tristate: Changes the ItemIsAutoTristate Flag
+            never_has_children: Changes the ItemNeverHasChildren Flag
+            user_tristate: Changes the ItemIsUserTristate Flag
         """
         from prettyqt import custom_models
 
@@ -144,6 +158,17 @@ class Sliced:
         date_format: str | None = None,
         time_format: str | None = None,
     ) -> custom_models.SliceDisplayTextProxyModel:
+        """Format non-str values returned by DisplayRole.
+
+        Wraps current model with a SliceDisplayTextProxyModel.
+
+        Arguments:
+            int_format: Format to use for int values
+            float_format: Format to use for float values
+            datetime_format: Format to use for QDateTime / datetime.datetime objects.
+            date_format: Format to use for QDate / datetime.date objects
+            time_format: Format to use for QTime / datetime.time objects.
+        """
         from prettyqt import custom_models
 
         proxy = custom_models.SliceDisplayTextProxyModel(
@@ -189,6 +214,13 @@ class Sliced:
     def change_icon_size(
         self, size: datatypes.SizeType
     ) -> custom_models.SliceChangeIconSizeProxyModel:
+        """Change the size of pixmap / icon provided by decoration role.
+
+        Wraps current model with a  SliceChangeIconSizeProxyModel.
+
+        Arguments:
+            size: new size
+        """
         from prettyqt import custom_models
 
         size = datatypes.to_size(size)
@@ -206,7 +238,15 @@ class Sliced:
         font: str | gui.QFont | None = None,
         alignment: constants.AlignmentFlag | constants.AlignmentStr | None = None,
     ) -> custom_models.SliceAppearanceProxyModel:
-        """Apply styling to given area."""
+        """Apply styling to given area.
+
+        Wraps current model with a SliceAppearanceProxyModel.
+
+            foreground: Color / Brush to use for foreground role.
+            background: Color / Brush to use for background role.
+            font: Font to use for font role.
+            alignment: Alignment to use for alignment role.
+        """
         from prettyqt import custom_models
 
         proxy = custom_models.SliceAppearanceProxyModel(
@@ -225,7 +265,14 @@ class Sliced:
         low_color: datatypes.ColorType = "green",
         high_color: datatypes.ColorType = "red",
     ) -> custom_models.SliceColorValuesProxyModel:
-        """Make given area read-only."""
+        """Color numerical values.
+
+        Wraps model with a SliceColorValuesProxyModel.
+
+        Arguments:
+            low_color: color to use for "low" values
+            high_color: color to use for "high" values
+        """
         from prettyqt import custom_models
 
         proxy = custom_models.SliceColorValuesProxyModel(
@@ -278,7 +325,13 @@ class Proxifier:
     def melt(
         self, id_columns: list[int], var_name: str = "Variable", value_name: str = "Value"
     ) -> custom_models.MeltProxyModel:
-        """Wraps model in a Proxy which unpivots the table to a long format."""
+        """Wraps model in a Proxy which unpivots the table to a long format.
+
+        Arguments:
+            id_columns: Identifier variables
+            var_name: header to use for variable column
+            value_name: header to use for value_name
+        """
         from prettyqt import custom_models
 
         proxy = custom_models.MeltProxyModel(
@@ -348,6 +401,15 @@ class Proxifier:
         | constants.OrientationStr = constants.HORIZONTAL,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> custom_models.ChangeHeadersProxyModel:
+        """Change headers of source model.
+
+        Wraps current model with a ChangeHeadersProxyModel.
+
+        Arguments:
+            headers: new headers to use
+            orientation: orientation of the header which should be modified.
+            role: Header role to change
+        """
         from prettyqt import custom_models
 
         proxy = custom_models.ChangeHeadersProxyModel(
