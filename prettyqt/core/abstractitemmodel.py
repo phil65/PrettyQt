@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from collections.abc import Iterator, Sequence
 import contextlib
 import logging
 
@@ -350,17 +350,24 @@ class AbstractItemModelMixin(core.ObjectMixin):
         """Get all child indexes for given index (first column only).
 
         To get indexes recursively, use iter_tree.
+
+        Arguments:
+            index: ModelIndex to get children from
         """
         indexes = [self.index(i, 0, index) for i in range(self.rowCount(index))]
         return listdelegators.BaseListDelegator(indexes)
 
     def get_index_key(
         self, index: core.ModelIndex, include_column: bool = False
-    ) -> tuple[tuple[int, int] | int, ...]:
-        """Return a key for `index` from the source model into the _source_offset map.
+    ) -> tuple[tuple[int, int], ...]:
+        """Return a key tuple for given ModelIndex.
 
-        The key is a tuple of row indices on
-        the path from the top if the model to the `index`.
+        The key tuple consists either of row integers or (row, column) indices
+        describing the index position from top to bottom.
+
+        Arguments:
+            index: ModelIndex to get a key for
+            include_column: whether to include the column in the index key.
         """
         key_path = []
         parent = index
@@ -371,15 +378,21 @@ class AbstractItemModelMixin(core.ObjectMixin):
         return tuple(reversed(key_path))
 
     def index_from_key(
-        self, key_path: tuple[int | tuple[int, int], ...]
+        self, key_path: Sequence[tuple[int, int] | int]
     ) -> core.ModelIndex:
-        """Return a source QModelIndex for the given key."""
+        """Return a source QModelIndex for the given key.
+
+        Arguments:
+            key_path: Key path to get an index for.
+                      Should be a sequence of either (row, column)  or row indices
+        """
         model = self.sourceModel()
         if model is None:
             return core.ModelIndex()
-        index = model.index(key_path[0], 0)
-        for row in key_path[1:]:
-            index = model.index(row, 0, index)
+        index = core.ModelIndex()
+        for key in key_path:
+            key = (key, 0) if isinstance(key, int) else key
+            index = model.index(*key, index)
         return index
 
     @staticmethod
