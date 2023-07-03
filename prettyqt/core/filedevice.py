@@ -128,6 +128,15 @@ class FileDeviceMixin(core.IODeviceMixin):
         """
         return FILE_ERROR.inverse[self.error()]
 
+    def is_readable(self) -> bool:
+        return self.permissions() & core.QFileDevice.Permission.ReadUser
+
+    def is_writable(self) -> bool:
+        return self.permissions() & core.QFileDevice.Permission.WriteUser
+
+    def is_executable(self) -> bool:
+        return self.permissions() & core.QFileDevice.Permission.ExeUser
+
 
 class FileDevice(FileDeviceMixin, core.QFileDevice):
     pass
