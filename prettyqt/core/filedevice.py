@@ -91,6 +91,9 @@ class FileDeviceMixin(core.IODeviceMixin):
     def __str__(self):
         return self.fileName()
 
+    # def __fspath__(self) -> str:
+    #     return self.fileName()
+
     def get_permissions(self) -> list[PermissionStr]:
         return PERMISSIONS.get_list(self.permissions())
 
@@ -129,12 +132,15 @@ class FileDeviceMixin(core.IODeviceMixin):
         return FILE_ERROR.inverse[self.error()]
 
     def is_readable(self) -> bool:
+        """Returns whether file has ReadUser permission flag."""
         return self.permissions() & core.QFileDevice.Permission.ReadUser
 
     def is_writable(self) -> bool:
+        """Returns whether file has WriteUser permission flag."""
         return self.permissions() & core.QFileDevice.Permission.WriteUser
 
     def is_executable(self) -> bool:
+        """Returns whether file has ExeUser permission flag."""
         return self.permissions() & core.QFileDevice.Permission.ExeUser
 
 

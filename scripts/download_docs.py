@@ -1,9 +1,11 @@
 import inspect
-import requests
-from bs4 import BeautifulSoup
 import pathlib
 
+from bs4 import BeautifulSoup
+import requests
+
 from prettyqt.qt import QtCore, QtGui, QtWidgets
+
 
 module_dict = dict(QtWidgets=QtWidgets, QtGui=QtGui, QtCore=QtCore)
 

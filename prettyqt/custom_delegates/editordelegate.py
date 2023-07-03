@@ -18,6 +18,9 @@ class EditorDelegate(widgets.StyledItemDelegate):
     Allows editing a large range of different types from Qt, builtin libraries as well
     as some Numpy types.
 
+    The Delegate also has an extended displayText method to show a repr-like string for
+    different data types.
+
     The following data types are supported:
 
     * bool

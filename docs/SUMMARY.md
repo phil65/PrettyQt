@@ -95,6 +95,7 @@
     * [qthelp](api/qthelp.md)
     * [quick](api/quick.md)
     * [quickwidgets](api/quickwidgets.md)
+    * [scintilla](api/scintilla.md)
     * [scxml](api/scxml.md)
     * [spatialaudio](api/spatialaudio.md)
     * [statemachine](api/statemachine.md)
@@ -108,8 +109,3 @@
     * [webenginewidgets](api/webenginewidgets.md)
     * [widgets](api/widgets.md)
 * [Changelog](changelog.md)
-<!--
-        # - scintilla: api/scintilla.md
-        # - scxml: api/scxml.md
-        # - utils: api/utils.md
- -->

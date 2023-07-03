@@ -1,7 +1,8 @@
 import inspect
 import pathlib
 
-from prettyqt import widgets, custom_widgets
+from prettyqt import custom_widgets, widgets
+
 
 module_dict = dict(custom_widgets=custom_widgets)
 app = widgets.app()
