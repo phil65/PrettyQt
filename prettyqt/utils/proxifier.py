@@ -136,6 +136,27 @@ class Sliced:
         self._widget.set_model(proxy)
         return proxy
 
+    def set_format(
+        self,
+        int_format: str | None = None,
+        float_format: str | None = None,
+        datetime_format: str | None = None,
+        date_format: str | None = None,
+        time_format: str | None = None,
+    ) -> custom_models.SliceDisplayTextProxyModel:
+        from prettyqt import custom_models
+
+        proxy = custom_models.SliceDisplayTextProxyModel(
+            int_format=int_format or "{:.4f}",
+            float_format=float_format or "{:.4f}",
+            datetime_format=datetime_format or "%m/%d/%Y, %H:%M:%S",
+            date_format=date_format or "%m/%d/%Y",
+            time_format=time_format or "%H:%M:%S",
+        )
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
+
     def set_checkable(
         self,
         callback: Callable[[core.ModelIndex], Any] | None = None,

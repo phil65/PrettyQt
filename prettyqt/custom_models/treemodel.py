@@ -15,12 +15,12 @@ logger = logging.getLogger(__name__)
 class TreeItem:
     """Tree node class that can be used to build trees of objects."""
 
-    __slots__ = ("parent_item", "obj", "child_items", "has_children", "children_fetched")
+    __slots__ = ("parent_item", "obj", "children", "has_children", "children_fetched")
 
     def __init__(self, obj, parent: Self | None = None):
         self.parent_item = parent
         self.obj = obj
-        self.child_items: list[Self] = []
+        self.children: list[Self] = []
         self.has_children = True
         self.children_fetched = False
 
@@ -28,7 +28,7 @@ class TreeItem:
         return get_repr(self, self.obj)
 
     def __iter__(self) -> Iterator[Self]:
-        return iter(self.child_items)
+        return iter(self.children)
 
     def __getitem__(self, index: int) -> Self:
         return self.child(index)
@@ -57,18 +57,18 @@ class TreeItem:
 
     def append_child(self, item: Self):
         item.parent_item = self
-        self.child_items.append(item)
+        self.children.append(item)
 
     def insert_children(self, idx: int, items: Sequence[Self]):
-        self.child_items[idx:idx] = items
+        self.children[idx:idx] = items
         for item in items:
             item.parent_item = self
 
     def child(self, row: int) -> Self:
-        return self.child_items[row]
+        return self.children[row]
 
     def child_count(self) -> int:
-        return len(self.child_items)
+        return len(self.children)
 
     def parent(self) -> Self | None:
         return self.parent_item
@@ -95,31 +95,31 @@ class TreeItem:
         """Get siblings of self."""
         if self.parent_item is None:
             return ()
-        return tuple(child for child in self.parent_item.child_items if child is not self)
+        return tuple(child for child in self.parent_item.children if child is not self)
 
     @property
     def left_sibling(self) -> Self | None:
         """Get sibling left of self."""
         if self.parent_item:
-            children = self.parent_item.child_items
+            children = self.parent_item.children
             if child_idx := children.index(self):
-                return self.parent_item.child_items[child_idx - 1]
+                return self.parent_item.children[child_idx - 1]
 
     @property
     def right_sibling(self) -> Self | None:
         """Get sibling right of self."""
         if self.parent_item:
-            children = self.parent_item.child_items
+            children = self.parent_item.children
             child_idx = children.index(self)
             if child_idx + 1 < len(children):
-                return self.parent_item.child_items[child_idx + 1]
+                return self.parent_item.children[child_idx + 1]
 
     @property
     def node_path(self) -> Iterable[Self]:
         """Get tuple of nodes starting from root."""
         if self.parent_item is None:
             return [self]
-        return tuple(*list(self.parent_item.node_path), self)
+        return (*list(self.parent_item.node_path), self)
 
     @property
     def is_root(self) -> bool:
@@ -129,7 +129,7 @@ class TreeItem:
     @property
     def is_leaf(self) -> bool:
         """Get indicator if self is leaf node."""
-        return not len(list(self.child_items))
+        return not len(list(self.children))
 
     @property
     def root(self) -> Self:
@@ -149,12 +149,12 @@ class TreeItem:
         )
 
     def row(self) -> int:
-        return self.parent_item.child_items.index(self) if self.parent_item else 0
+        return self.parent_item.children.index(self) if self.parent_item else 0
 
     def pretty_print(self, indent: int = 0):
         text = indent * "    " + str(self)
         logger.debug(text)
-        for child_item in self.child_items:
+        for child_item in self.children:
             child_item.pretty_print(indent + 1)
 
 
@@ -228,7 +228,7 @@ class TreeModel(core.AbstractItemModel):
 
     def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
-        return 0 if parent.column() > 0 else self.data_by_index(parent).child_count()
+        return 0 if parent.column() > 0 else len(self.data_by_index(parent).children)
 
     def hasChildren(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
@@ -267,7 +267,7 @@ class TreeModel(core.AbstractItemModel):
             parent_item.children_fetched = True
 
     def _fetch_object_children(self, treeitem) -> list[TreeModel.TreeItem]:
-        return treeitem.child_items
+        return treeitem.children
 
     def _has_children(self, treeitem) -> bool:
         return treeitem.has_children
@@ -329,7 +329,7 @@ def preorder_iter(
     ):
         if not filter_condition or filter_condition(tree):
             yield tree
-        for child in tree.child_items:
+        for child in tree.children:
             yield from preorder_iter(child, filter_condition, stop_condition, max_depth)
 
 

@@ -410,7 +410,7 @@ class PythonObjectTreeModel(custom_models.ColumnItemModel):
         tree_item = self.data_by_index(tree_index)
         if not tree_item.children_fetched:
             return None
-        old_items = tree_item.child_items
+        old_items = tree_item.children
         new_items = self._fetch_object_children(tree_item)
 
         old_item_names = [(item.obj_name, item.is_attribute) for item in old_items]
@@ -437,7 +437,7 @@ class PythonObjectTreeModel(custom_models.ColumnItemModel):
                     first = i1  # row number of first that will be removed
                     last = i1 + i2 - 1  # row number of last element after insertion
                     with self.remove_rows(first, last, tree_index):
-                        del tree_item.child_items[i1:i2]
+                        del tree_item.children[i1:i2]
 
                     first = i1  # row number of first element after insertion
                     last = i1 + j2 - j1 - 1  # row number of last element after insertion
@@ -448,7 +448,7 @@ class PythonObjectTreeModel(custom_models.ColumnItemModel):
                     first = i1  # row number of first that will be removed
                     last = i1 + i2 - 1  # row number of last element after insertion
                     with self.remove_rows(first, last, tree_index):
-                        del tree_item.child_items[i1:i2]
+                        del tree_item.children[i1:i2]
 
                 case "insert":
                     first = i1
