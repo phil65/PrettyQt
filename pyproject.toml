@@ -79,6 +79,7 @@ docs = [
     "pymdown-extensions",
     "mkdocs-literate-nav",
     "mkdocs-autolinks-plugin",
+    "mkdocs-include-markdown-plugin",
     # "mkdocs-autorefs",
     "mkdocs-glightbox",
 ]
@@ -92,6 +93,7 @@ addons = [
     "qtconsole",
     "ipython",
     "pandas",
+    "lxml",
 ]
 
 pyqt6 = [
@@ -129,6 +131,7 @@ dependencies = [
     "mkdocs-glightbox",
     # "mkdocs-autorefs",
     "mkdocs-autolinks-plugin",
+    "mkdocs-include-markdown-plugin",
 ]
 
 [tool.hatch.envs.docs.scripts]
@@ -214,6 +217,8 @@ numpy = {version = "^1", optional=true}
 qtconsole = {version = "^5", optional=true}
 ipython = {version = "^8", optional=true}
 pandas = {version = "^2.0.2", optional = true}
+attrs = {version = "*", optional = true}
+lxml = {version = "*", optional = true}
 
 pywin32 = {version = "*", markers = "sys_platform == 'win32'"}
 comtypes = {version = "^1.1", markers = "sys_platform == 'win32'"}
@@ -229,7 +234,7 @@ pyside6 = {version = "^6.5", python = "<3.12", optional=true}
 [tool.poetry.extras]
 pyside6 = ["pyside6", "PySide6-QtAds"]
 pyqt6 = ["pyqt6", "PyQt6-Charts", "PyQt6-WebEngine", "PyQt6-QScintilla", "PyQtAds"]
-addons = ["docutils", "orjson", "fsspec", "pillow", "numpy", "qtconsole", "ipython", "pandas"]
+addons = ["docutils", "orjson", "fsspec", "pillow", "numpy", "qtconsole", "ipython", "pandas", "attrs", "lxml"]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7"
@@ -250,6 +255,7 @@ mkdocs = "^1"
 mkdocs-material = "^9"
 mkdocstrings = {version = "^0", extras = ["python"]}
 mkdocs-glightbox = "*"
+mkdocs-include-markdown-plugin = {version = "^4", python = "<3.12"}
 
 pymdown-extensions = "^10"
 black = "^23"
