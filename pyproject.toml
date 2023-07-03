@@ -82,6 +82,7 @@ docs = [
     "mkdocs-include-markdown-plugin",
     # "mkdocs-autorefs",
     "mkdocs-glightbox",
+    "mkdocs-section-index",
 ]
 
 addons = [
@@ -132,6 +133,7 @@ dependencies = [
     # "mkdocs-autorefs",
     "mkdocs-autolinks-plugin",
     "mkdocs-include-markdown-plugin",
+    "mkdocs-section-index",
 ]
 
 [tool.hatch.envs.docs.scripts]
@@ -256,6 +258,7 @@ mkdocs-material = "^9"
 mkdocstrings = {version = "^0", extras = ["python"]}
 mkdocs-glightbox = "*"
 mkdocs-include-markdown-plugin = {version = "^4", python = "<3.12"}
+mkdocs-section-index = "^0.3.5"
 
 pymdown-extensions = "^10"
 black = "^23"

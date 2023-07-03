@@ -42,9 +42,10 @@ plugins:
 - search
 # - social  # this one has dependency which is not on pypi for windows. (cairocffi)
 - tags
-- glightbox
-- include-markdown
-- literate-nav:
+- section-index  # clickable sections leading to index page (https://github.com/oprypin/mkdocs-section-index)
+- glightbox  # better image support
+- include-markdown  # include content of other markdown files
+- literate-nav:  # move nav out of mkdocs.yml
     nav_file: SUMMARY.md
 # - autorefs  # allows linking to any header
 - autolinks  # allows linking to any markdown page (alternative: https://github.com/Jackiexiao/mkdocs-roamlinks-plugin)
@@ -64,10 +65,13 @@ plugins:
           # https://mkdocstrings.github.io/python/usage/
           show_source: true
           show_signature_annotations: true
+          merge_init_into_class: true
+          # ignore_init_summary: true
           # show_if_no_docstring: true
           inherited_members: false
           signature_crossrefs: true
           separate_signature: true
+          line_length: 90
 markdown_extensions:
 - codehilite
 - admonition

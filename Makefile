@@ -47,6 +47,7 @@ mypy: ## run mypy type checking
 
 docs: ## builds the documentation
 	poetry run mkdocs build
+	$(BROWSER) site/index.html
 
 serve: ## run html server watching file changes in realtime
 	poetry run mkdocs serve --dirtyreload

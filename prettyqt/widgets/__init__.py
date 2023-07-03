@@ -1,8 +1,3 @@
-"""widgets module.
-
-contains QtWidgets-based classes
-"""
-
 from __future__ import annotations
 
 import sys
