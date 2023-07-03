@@ -39,13 +39,13 @@ ProxyStr = Literal[
 ]
 
 
-class ProxyWrapper:
-    def __init__(self, indexer, widget: core.QAbstractItemModel, proxifier: Proxyfier):
+class Sliced:
+    def __init__(self, indexer, widget: widgets.QAbstractItemView, proxifier: Proxifier):
         if widget.model() is None:
             raise RuntimeError("Need a model in order to proxify.")
         # PySide6 shows empty tables when no parent is set.
         if widget.model().parent() is None:
-            raise RuntimeError("Setting proxy without parent.")
+            widget.model().setParent(widget)
         self._indexer = indexer
         self.proxifier = proxifier
         self._widget = widget
@@ -217,19 +217,20 @@ class ProxyWrapper:
         return proxy
 
 
-class Proxyfier:
-    def __init__(self, widget: widgets.QWidget):
+class Proxifier:
+    def __init__(self, widget: widgets.QAbstractItemView):
         self._widget = widget
         self._wrapper = None
 
-    def __getitem__(self, value: slice) -> ProxyWrapper:
+    def __getitem__(self, value: slice) -> Sliced:
+        """Return a Sliced Object."""
         logger.debug(f"Building {value!r} ProxyModel for {self._widget!r}")
-        self._wrapper = ProxyWrapper(indexer=value, widget=self._widget, proxifier=self)
+        self._wrapper = Sliced(indexer=value, widget=self._widget, proxifier=self)
         return self._wrapper
 
     def __getattr__(self, name: str):
         indexer = (slice(None, None, None), slice(None, None, None))
-        self._wrapper = ProxyWrapper(indexer=indexer, widget=self._widget, proxifier=self)
+        self._wrapper = Sliced(indexer=indexer, widget=self._widget, proxifier=self)
         if hasattr(self._wrapper, name):
             return getattr(self._wrapper, name)
         else:
@@ -270,6 +271,15 @@ class Proxyfier:
         return proxy
 
     def reorder_columns(self, order: list[int]) -> custom_models.ColumnOrderProxyModel:
+        """Reorder columns to given order.
+
+        Wraps current model with a ColumnOrderProxyModel which rearranges columns to given
+        order.
+
+        Arguments:
+            order: list of indexes. Does not need to include all column indexes,
+                  missing ones will be hidden.
+        """
         from prettyqt import custom_models
 
         proxy = custom_models.ColumnOrderProxyModel(order=order, parent=self._widget)
@@ -278,7 +288,11 @@ class Proxyfier:
         return proxy
 
     def to_list(self) -> custom_models.TableToListProxyModel:
-        """Wraps model in a Proxy which converts table to a tree."""
+        """Convert table to a list.
+
+        Wraps model with a TableToListProxyModel which reshapes table to one column
+        by concatenating the seperatate columns into a one-columned list.
+        """
         from prettyqt import custom_models
 
         proxy = custom_models.TableToListProxyModel(parent=self._widget)
@@ -334,6 +348,52 @@ class Proxyfier:
         proxy_instance.setSourceModel(self._widget.model())
         self._widget.set_model(proxy_instance)
         return proxy_instance
+
+    def map_to(
+        self,
+        index_or_selection: core.ModelIndex | core.QItemSelection,
+        target: widgets.QAbstractItemView | core.QAbstractItemModel,
+    ) -> core.ModelIndex | core.QItemSelection:
+        """Map index or selection to given target.
+
+        Arguments:
+            index_or_selection: What should be mapped.
+            target: Either an ItemView or a (proxy) model which is linked to our current
+                    model.
+        """
+        if isinstance(target, widgets.QAbstractItemView):
+            target = target.model()
+        mapper = custom_models.ProxyMapper(self._widget.model(), target)
+        match index_or_selection:
+            case core.ModelIndex():
+                return mapper.map_index(from_=0, to=1, index=index_or_selection)
+            case core.QItemSelection():
+                return mapper.map_selection(from_=0, to=1, selection=index_or_selection)
+            case _:
+                raise TypeError(index_or_selection)
+
+    def map_from(
+        self,
+        index_or_selection: core.ModelIndex | core.QItemSelection,
+        source: widgets.QAbstractItemView | core.QAbstractItemModel,
+    ) -> core.ModelIndex | core.QItemSelection:
+        """Map index or selection from given source.
+
+        Arguments:
+            index_or_selection: What should be mapped.
+            source: Either an ItemView or a (proxy) model which is linked to our current
+                    model.
+        """
+        if isinstance(source, widgets.QAbstractItemView):
+            source = source.model()
+        mapper = custom_models.ProxyMapper(self._widget.model(), source)
+        match index_or_selection:
+            case core.ModelIndex():
+                return mapper.map_index(from_=1, to=0, index=index_or_selection)
+            case core.QItemSelection():
+                return mapper.map_selection(from_=1, to=0, selection=index_or_selection)
+            case _:
+                raise TypeError(index_or_selection)
 
 
 if __name__ == "__main__":

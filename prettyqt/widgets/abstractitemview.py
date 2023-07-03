@@ -147,7 +147,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         )
         from prettyqt.utils import proxifier
 
-        self.proxifier = proxifier.Proxyfier(self)
+        self.proxifier = proxifier.Proxifier(self)
 
     def __len__(self) -> int:
         return model.rowCount() if (model := self.model()) is not None else 0
