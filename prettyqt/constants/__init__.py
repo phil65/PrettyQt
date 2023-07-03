@@ -1075,7 +1075,22 @@ FOCUS_POLICY: bidict[FocusPolicyStr, Qt.FocusPolicy] = bidict(
 )
 
 WindowTypeStr = Literal[
-    "frameless", "popup", "stay_on_top", "tool", "window_title", "customize_window"
+    "widget",
+    "window",
+    "dialog",
+    "sheet",
+    "drawer",
+    "frameless",
+    "popup",
+    "stay_on_top",
+    "tool",
+    "tool_tip",
+    "splash_screen",
+    "subwindow",
+    "foreign_window",
+    "cover_window",
+    "window_title",
+    "customize_window",
 ]
 
 WINDOW_TYPE: bidict[WindowTypeStr, Qt.WindowType] = bidict(
