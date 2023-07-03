@@ -2,7 +2,7 @@
 
 ## Supports
 
-`lxml.etree.ElementTree | lxml.etree.iterparse`
+`lxml.etree.ElementTree`
 
 ### Additional roles
 

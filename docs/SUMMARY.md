@@ -20,6 +20,7 @@
         * [ModelIndexModel](features/models/modelindexmodel.md)
         * [GitPythonTreeModel](features/models/gitpythontreemodel.md)
         * [LxmlModel](features/models/lxmlmodel.md)
+        * [LazyLxmlModel](features/models/lazylxmlmodel.md)
         * [ShortcutsModel](features/models/shortcutsmodel.md)
         * [StorageInfoModel](features/models/storageinfomodel.md)
         * [FrameInfoModel](features/models/frameinfomodel.md)

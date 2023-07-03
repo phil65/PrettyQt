@@ -16,7 +16,7 @@ preferred choice for most models.
 | `type` | [ParentClassTreeModel](parentclasstreemodel.md) | Tree showing all Parent classes
 | `importlib.metadata.distribution`| [ImportLibTreeModel](importlibtreemodel.md) | Tree model showing a dependency tree of given package
 | `inspect.Traceback` | [FrameInfoModel](frameinfomodel.md) | Table model showing Traceback
-| `inspect.FrameInfo` | [FrameInfoModel](frameinfomodel.md) | ""
+| `inspect.FrameInfo` | [FrameInfoModel](frameinfomodel.md) | Table model showing FrameInfo
 | `DataClass` | [DataclassFieldsModel](dataclassfieldsmodel.md) | Table showing all fields + metadata of a dataclass
 | `Sequence[DataClass]` | [DataclassModel](dataclassmodel.md) | Table showing a list of dataclasses and their field values
 | `ast.AST` | [AstModel](astmodel.md) | Tree model to show an abstract syntax tree
@@ -40,15 +40,16 @@ preferred choice for most models.
 
 | Type | Package | Model | Description |
 |------|---------|-------|-------------|
-| `AttrsDataclass` | attrs | [AttrsFieldsModel](attrsfieldsmodel.md) | Detail table containing all relevant information for each Attrs dataclass.
-| `list[AttrsDataclass]`| attrs | [AttrsModel](attrsmodel.md) | comparison view for a list of Pydantic models.
-|`pydantic.BaseModel`| pydantic | [PydanticFieldsModel](pydanticfieldsmodel.md) | Detail table containing all relevant information for each BaseModel field.
-| `list[pydantic.BaseModel]` | pydantic | [PydanticModel](pydanticmodel.md) | comparison view for a list of Pydantic models.
-| `fsspec.FileSystem` | fsspec | [FsSpecModel](fsspecmodel.md) | Model with same interface as QFileSystemModel
-| `pandas.DataFrame` | fsspec | [PandasTableModel](pandastablemodel.md) | Model to show a pandas DataFrame
-| `pandas.Index` | pandas | [PandasIndexModel](pandasindexmodel.md) | Model to show a pandas (Multi)Index
-| `polars.DataFrame` | polars | [PolarsTableModel](polarstablemodel.md) | Model to display a polars DataFrame
-| `git.Repo, git.Tree`| gitpython | [GitPythonTreeModel](gitpythontreemodel.md) | Model to display a polars DataFrame
-| `lxml.etree._Element, lxml.etree.iterparse` | lxml | [LxmlModel](lxmlmodel.md) | Tree view for an lxml ElementTree (iterator) (semi-lazy)
+| `AttrsDataclass` | [attrs](https://www.attrs.org/en/stable/) | [AttrsFieldsModel](attrsfieldsmodel.md) | Detail table containing all relevant information for each Attrs dataclass.
+| `list[AttrsDataclass]`| [attrs](https://www.attrs.org/en/stable/) | [AttrsModel](attrsmodel.md) | Comparison view for a list of Pydantic models.
+| `pydantic.BaseModel`| [pydantic](https://pydantic.dev) | [PydanticFieldsModel](pydanticfieldsmodel.md) | Table containing all relevant information for each BaseModel field.
+| `list[pydantic.BaseModel]` | [pydantic](https://pydantic.dev) | [PydanticModel](pydanticmodel.md) | Comparison view for a list of Pydantic models.
+| `fsspec.FileSystem` | [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) | [FsSpecModel](fsspecmodel.md) | Model with same interface as QFileSystemModel
+| `pandas.DataFrame` | [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) | [PandasTableModel](pandastablemodel.md) | Model to show a pandas DataFrame
+| `pandas.Index` | [pandas](https://pandas.pydata.org) | [PandasIndexModel](pandasindexmodel.md) | Model to show a pandas (Multi)Index
+| `polars.DataFrame` | [polars](https://www.pola.rs) | [PolarsTableModel](polarstablemodel.md) | Model to display a polars DataFrame
+| `git.Repo, git.Tree`| [gitpython](https://github.com/gitpython-developers/GitPython) | [GitPythonTreeModel](gitpythontreemodel.md) | Model to display a polars DataFrame
+| `lxml.etree.Element, lxml.etree.iterparse` | [lxml](https://pypi.org/project/lxml/) | [LazyLxmlModel](lazylxmlmodel.md) | Tree view for an lxml iterparse iterator (lazy)
+| `lxml.etree.ElementTree` | [lxml](https://pypi.org/project/lxml/) | [LxmlModel](lxmlmodel.md) | Tree view for an lxml ElementTree (full DOM)
 
 

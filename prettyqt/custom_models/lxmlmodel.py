@@ -12,6 +12,46 @@ logger = logging.getLogger(__name__)
 
 
 class LxmlModel(custom_models.BaseXmlModel):
+    """DOM xml model based on lxml. Parses full xml.
+
+    Covers more features than the lazy models. (modifying the tree, xpath, ..)
+    """
+
+    def __init__(
+        self,
+        obj: str | bytes | etree.ElementTree,
+        **kwargs,
+    ):
+        match obj:
+            case bytes():
+                xml_str = etree.XML(obj.decode())
+                tree = etree.ElementTree(xml_str)
+            case str():
+                tree = etree.ElementTree(etree.XML(obj))
+            case etree.ElementTree():
+                tree = obj
+            case _:
+                raise TypeError(obj)
+        self.tree = tree
+        super().__init__(obj=self.tree.getroot(), **kwargs)
+
+    @classmethod
+    def supports(cls, instance) -> bool:
+        match instance:
+            case etree.ElementTree():
+                return True
+            case _:
+                return False
+
+    def get_parent_node(self, node_or_index: core.ModelIndex | etree.Element):
+        if not isinstance(node_or_index, core.ModelIndex):
+            return node_or_index.getparent()
+        index = node_or_index
+        parent = index.parent()
+        return parent.data(self.Roles.NodeRole)
+
+
+class LazyLxmlModel(custom_models.BaseXmlModel):
     """Semi-lazy xml model based on lxml. Fetches all direct child nodes when needed.
 
     Model cant be modified, that only really makes sense for a full DOM implementation.
@@ -36,6 +76,8 @@ class LxmlModel(custom_models.BaseXmlModel):
                 )
                 _, root = next(context)
             case etree.iterparse():
+                _, root = next(obj)
+            case etree.Element():
                 root = obj
             case _:
                 raise TypeError(obj)
@@ -55,6 +97,14 @@ class LxmlModel(custom_models.BaseXmlModel):
         index = node_or_index
         parent = index.parent()
         return parent.data(self.Roles.NodeRole)
+
+    def get_key_for_element(self, element):
+        child_elem = self
+        key = []
+        while parent_elem := child_elem.getparent():
+            key.append(parent_elem.index(child_elem))
+            child_elem = parent_elem
+        return key
 
 
 if __name__ == "__main__":
