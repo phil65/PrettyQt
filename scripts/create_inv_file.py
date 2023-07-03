@@ -1,11 +1,14 @@
+import codecs
 import re
 import sys
 import zlib
-import codecs
+
 import PySide6
 import requests
+
 from sphinx.ext.intersphinx import inspect_main
 from sphinx.util.inventory import InventoryFileReader
+
 
 pyside_uri = "https://doc.qt.io/qtforpython/"
 package_name = "PySide6"
@@ -27,61 +30,64 @@ def create_modified_inv():
 
     # download the original objects.inv file
     with open(original_inv, mode="wb") as f:
-        f.write(requests.get(pyside_uri + "objects.inv").content)
+        f.write(requests.get(f"{pyside_uri}objects.inv").content)
 
-    fin = open(original_inv, mode="rb")
-    fout = open(modified_inv, mode="wb")
+    with open(original_inv, mode="rb") as fin:
+        fout = open(modified_inv, mode="wb")
 
-    # use the same compression for the output file as
-    # sphinx.util.inventory.InventoryFile.dump
-    compressor = zlib.compressobj(9)
+        # use the same compression for the output file as
+        # sphinx.util.inventory.InventoryFile.dump
+        compressor = zlib.compressobj(9)
 
-    reader = InventoryFileReader(fin)
+        reader = InventoryFileReader(fin)
 
-    # copy the header
-    for i in range(4):
-        fout.write((reader.readline() + "\n").encode("utf-8"))
+        # copy the header
+        for _i in range(4):
+            fout.write((reader.readline() + "\n").encode("utf-8"))
 
-    for line in reader.read_compressed_lines():
-        # the re.match code is copied from
-        # sphinx.util.inventory.InventoryFile.load_v2
-        m = re.match(r"(?x)(.+?)\s+(\S*:\S*)\s+(-?\d+)\s+(\S+)\s+(.*)", line.rstrip())
-        if not m:
-            continue
+        for line in reader.read_compressed_lines():
+            # the re.match code is copied from
+            # sphinx.util.inventory.InventoryFile.load_v2
+            m = re.match(r"(?x)(.+?)\s+(\S*:\S*)\s+(-?\d+)\s+(\S+)\s+(.*)", line.rstrip())
+            if not m:
+                continue
 
-        name, typ, prio, location, dispname = m.groups()
-        location = location.rstrip("$") + name
+            name, typ, prio, location, dispname = m.groups()
+            location = location.rstrip("$") + name
 
-        write(name, typ, prio, location, dispname)
-        if name.endswith("QtCore.Signal"):
-            # QtCore.SignalInstance maps to QtCore.Signal
-            write(package_name + ".QtCore.SignalInstance", typ, prio, location, dispname)
+            write(name, typ, prio, location, dispname)
+            if name.endswith("QtCore.Signal"):
+                # QtCore.SignalInstance maps to QtCore.Signal
+                write(
+                    f"{package_name}.QtCore.SignalInstance", typ, prio, location, dispname
+                )
 
-        # apply the aliases
-        for module in alias_modules:
-            m = re.match(
-                r"{0}\.{1}\.{0}\.{1}\.(\w+)(\.\w+)?".format(package_name, module), name
-            )
-            if m:
-                classname, method = m.groups()
-                if method is None:
-                    method = ""
+            # apply the aliases
+            for module in alias_modules:
+                m = re.match(
+                    r"{0}\.{1}\.{0}\.{1}\.(\w+)(\.\w+)?".format(package_name, module),
+                    name,
+                )
+                if m:
+                    classname, method = m.groups()
+                    if method is None:
+                        method = ""
 
-                aliases = [
-                    "PyQt6" + "." + module + "." + classname + method,
-                    "prettyqt.qt" + "." + module + "." + classname + method,
-                    "qtpy" + "." + module + "." + classname + method,
-                    "PySide6" + "." + module + "." + classname + method,
-                    module + "." + classname + method,
-                    classname + method,
-                ]
+                    aliases = [
+                        f"PyQt6.{module}.{classname}{method}",
+                        f"prettyqt.qt.{module}.{classname}{method}",
+                        f"prettyqt.{module[2:].lower()}.{classname}{method}",
+                        f"qtpy.{module}.{classname}{method}",
+                        f"PySide6.{module}.{classname}{method}",
+                        f"{module}.{classname}{method}",
+                        classname + method,
+                    ]
 
-                for alias in aliases:
-                    write(alias, typ, prio, location, dispname)
-                    # print(location)
+                    for alias in aliases:
+                        write(alias, typ, prio, location, dispname)
+                        # print(location)
 
-    fout.write(compressor.flush())
-    fin.close()
+        fout.write(compressor.flush())
     fout.close()
 
 
@@ -89,10 +95,10 @@ def main():
     create_modified_inv()
 
     print("Created:")
-    print("  " + original_inv)
-    print("  " + original_txt)
-    print("  " + modified_inv)
-    print("  " + modified_txt)
+    print(f"  {original_inv}")
+    print(f"  {original_txt}")
+    print(f"  {modified_inv}")
+    print(f"  {modified_txt}")
 
     # redirect the print() statements in the inspect_main() function to a file
     sys.stdout = codecs.open(original_txt, "wb", encoding="utf-8")
