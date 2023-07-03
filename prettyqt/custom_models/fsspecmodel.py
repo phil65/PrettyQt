@@ -49,16 +49,17 @@ class FsSpecColumnItem(custom_models.ColumnItem):
     identifier: str = ""
 
     def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
+        name = item.obj["name"]
         match role:
             case FSSpecTreeModel.Roles.FilePathRole:
-                return item.obj["name"]
+                return name
             case FSSpecTreeModel.Roles.FilePathRole:
-                path = item.obj["name"]
+                path = name
                 return pathlib.Path(path).name if path else ""
             case FSSpecTreeModel.Roles.FilePermissions:
-                return self.model.permissions(item.obj["name"])
+                return self.model.permissions(name)
             case FSSpecTreeModel.Roles.ProtocolPathRole:
-                return self.model.get_protocol_path(item.obj["name"])
+                return self.model.get_protocol_path(name)
 
 
 class NameColumn(FsSpecColumnItem):
@@ -71,7 +72,7 @@ class NameColumn(FsSpecColumnItem):
             case constants.DISPLAY_ROLE:
                 return pathlib.Path(path).name if (path := item.obj["name"]) else ""
             case constants.DECORATION_ROLE:
-                return _icon_provider.get_icon(core.FileInfo(item.obj["name"]))
+                return _icon_provider.get_icon(core.QFileInfo(item.obj["name"]))
             case _:
                 return super().get_data(item, role)
 
@@ -98,12 +99,16 @@ class SizeColumn(FsSpecColumnItem):
     identifier = "size"
     name = "Size"
     doc = "File size."
+    precision = 2
+    fmt: core._locale.DataSizeFormatStr = "iec"
 
     def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                if item.obj["size"] > 0:
-                    return core.Locale().get_formatted_data_size(item.obj["size"])
+                if (size := item.obj["size"]) > 0:
+                    return core.Locale().get_formatted_data_size(
+                        size, precision=self.precision, fmt=self.fmt
+                    )
                 else:
                     return ""
             case constants.SORT_ROLE:
@@ -129,6 +134,7 @@ class CreatedColumn(FsSpecColumnItem):
     identifier = "created"
     name = "Created"
     doc = "Creation date of file."
+    display_format = "%m/%d/%Y, %H:%M:%S"
 
     def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         if not item.obj.get("created"):
@@ -136,7 +142,7 @@ class CreatedColumn(FsSpecColumnItem):
         created = datetime.datetime.fromtimestamp(item.obj["created"])
         match role:
             case constants.DISPLAY_ROLE:
-                return created.strftime("%m/%d/%Y, %H:%M:%S")
+                return created.strftime(self.display_format)
             case constants.USER_ROLE:
                 return created
             case _:
@@ -147,6 +153,7 @@ class ModifiedColumn(FsSpecColumnItem):
     identifier = "mtime"
     name = "Modified"
     doc = "Modified"
+    display_format = "%m/%d/%Y, %H:%M:%S"
 
     def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         if not item.obj.get("mtime"):
@@ -154,7 +161,7 @@ class ModifiedColumn(FsSpecColumnItem):
         mtime = datetime.datetime.fromtimestamp(item.obj["mtime"])
         match role:
             case constants.DISPLAY_ROLE:
-                return mtime.strftime("%m/%d/%Y, %H:%M:%S")
+                return mtime.strftime(self.display_format)
             case constants.USER_ROLE:
                 return mtime
             case _:
@@ -169,7 +176,8 @@ class PermissionsColumn(FsSpecColumnItem):
     def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return oct(int(item.obj["mode"]))[-4:] if item.obj.get("mode") else ""
+                if mode := item.obj.get("mode"):
+                    return oct(int(mode))[-4:]
             case _:
                 return super().get_data(item, role)
 

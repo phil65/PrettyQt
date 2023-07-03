@@ -43,29 +43,41 @@ class FileSystemColumn(custom_models.ColumnItem):
 
 class TotalColumn(custom_models.ColumnItem):
     name = "Total"
+    precision = 2
+    fmt: core._locale.DataSizeFormatStr = "iec"
 
     def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return core.Locale().get_formatted_data_size(item.bytesTotal())
+                return core.Locale().get_formatted_data_size(
+                    item.bytesTotal(), precision=self.precision, fmt=self.fmt
+                )
 
 
 class FreeColumn(custom_models.ColumnItem):
     name = "Free"
+    precision = 2
+    fmt: core._locale.DataSizeFormatStr = "iec"
 
     def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return core.Locale().get_formatted_data_size(item.bytesFree())
+                return core.Locale().get_formatted_data_size(
+                    item.bytesFree(), precision=self.precision, fmt=self.fmt
+                )
 
 
 class AvailableColumn(custom_models.ColumnItem):
     name = "Available"
+    precision = 2
+    fmt: core._locale.DataSizeFormatStr = "iec"
 
     def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return core.Locale().get_formatted_data_size(item.bytesAvailable())
+                return core.Locale().get_formatted_data_size(
+                    item.bytesAvailable(), precision=self.precision, fmt=self.fmt
+                )
 
 
 class ReadyColumn(custom_models.ColumnItem):

@@ -57,11 +57,13 @@ class ModuleColumn(custom_models.ColumnItem):
 
 class CreatedColumn(custom_models.ColumnItem):
     name = "Created"
+    display_format = "yyyy-MM-dd hh:mm:ss.zzzzzz"
 
     def get_data(self, item: logging.LogRecord, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return str(core.DateTime.from_seconds(item.created))
+                dt = core.DateTime.from_seconds(item.created)
+                return dt.fromString(self.display_format)
             case constants.USER_ROLE:
                 return core.DateTime.from_seconds(item.created)
 

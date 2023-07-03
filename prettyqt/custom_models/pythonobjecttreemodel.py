@@ -14,8 +14,6 @@ from prettyqt import constants, core, custom_models, gui
 logger = logging.getLogger(__name__)
 
 
-_PRETTY_PRINTER = pprint.PrettyPrinter(indent=4)
-
 _ALL_PREDICATES = (
     inspect.isgenerator,
     inspect.istraceback,
@@ -205,11 +203,13 @@ class PredicateColumn(custom_models.ColumnItem):
 class PrettyPrintColumn(custom_models.ColumnItem):
     name = "Pretty print"
     doc = "Pretty printed representation of the object using the pprint module."
+    indent = 4
 
     def get_data(self, item, role: constants.ItemDataRole = constants.DISPLAY_ROLE):
         match role:
             case constants.DISPLAY_ROLE:
-                return _PRETTY_PRINTER.pformat(item.obj)
+                prettyprinter = pprint.PrettyPrinter(indent=self.indent)
+                return prettyprinter.pformat(item.obj)
 
 
 class DocStringColumn(custom_models.ColumnItem):
