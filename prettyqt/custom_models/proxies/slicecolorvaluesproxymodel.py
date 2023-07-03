@@ -43,11 +43,11 @@ class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
     model = MyModel()
     table = widgets.TableView()
     table.set_model(model)
-    table[:, :3].proxify.highlight_current(mode="all")
+    table[:, :3].proxify.color_values(mode="all")
     table.show()
     # or
     indexer = (slice(None), slice(None, 3))
-    proxy = custom_models.SliceFilterProxyModel(indexer=indexer)
+    proxy = custom_models.SliceColorValuesProxyModel(indexer=indexer)
     proxy.set_source_model(model)
     table.set_model(proxy)
     table.show()

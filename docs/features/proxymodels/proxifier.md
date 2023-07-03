@@ -1,0 +1,1 @@
+::: prettyqt.utils.proxifier.Proxifier
