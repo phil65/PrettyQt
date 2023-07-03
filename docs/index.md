@@ -20,12 +20,13 @@ hide:
   - [more than 25 general-purpose proxy models](proxies.md)
   - [10 ItemDelegates for different purposes](delegates.md)
   - [20 different validators](validators.md)
+  - Integration with pandas / numpy.
   - much, much more.
 
-PrettyQt basically is a wrapper for the whole Qt API (either on top of PySide6 or PyQt6).
+PrettyQt basically is a wrapper for the whole Qt API (either on top of PySide6 or PyQt6 bindings).
 Perhaps it can be seen as a small Python equivalent of the KDE framework.
 
-The library contains a tree of mixins, with one mixin for each Qt class.
+A large part of the library consists of a tree of mixins, with one mixin for each Qt class.
 These mixins also inherit from each other and are applied to the Qt classes.
 That way each class gets all helper methods from all sub-mixins.
 

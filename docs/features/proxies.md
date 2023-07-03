@@ -1,5 +1,5 @@
 Every class containing the AbstractItemViewMixin (`widgets.TreeView`, `widgets.TableView`, ...)
-has quick access to proxy superpowers hidden behind the "proxifier" attribute.
+has quick access to proxy superpowers hidden behind the "[proxifier](proxifier.md)" attribute.
 The following section will give an overview about the included proxies and how to apply them.
 
 
@@ -7,7 +7,7 @@ The following section will give an overview about the included proxies and how t
 
 PrettyQt introduces a base proxy model which allows its subclasses to be selectively applied to
 the source model by using python slicing syntax.
-They can get quickly set up via our proxifier.
+They can get quickly set up via our [Proxifier](proxifier.md).
 
 
 Example:
@@ -48,7 +48,7 @@ proxy.setSourceModel(table.model())
 table.set_model(proxy)
 ```
 
-If you want to apply a slice proxy to the whole model, use slices without start and stop values:
+If you want to apply a slice proxy to all cells of the model, use slices without start and stop values:
 
 ``` py
 table.proxifier[:, :].style(background="green")
@@ -58,13 +58,14 @@ Here is a short overview of the included slice proxies:
 
 | Proxy                                                                  | Description                                              |
 | -----------------------------------------------------------------------|----------------------------------------------------------|
+|[SliceFilterProxyModel](slicefilterproxymodel.md)                          | Show only selected slice of given source model.|
 |[SliceAppearanceProxyModel](sliceappearanceproxymodel.md)                  | Applies styling to given slice by overriding font, color and alignment roles.|
 |[SliceChangeFlagsProxyModel](slicechangeflagsproxymodel.md)                | Selectively change the ItemFlags of the model|
 |[SliceChangeIconSizeProxymodel](slicechangeiconsizeproxymodel.md)          | Allows to change the size of the Icon / Pixmap shown for DecorationRole.|
 |[SliceCheckableProxyModel](slicecheckableproxymodel.md)                    | Makes an area of the table checkable and triggers a callback on checkstate change.|
 |[SliceCheckableTreeProxyModel](slicecheckabletreeproxymodel.md)            | Makes an area of a tree checkable and triggers a callback on checkstate change.|
 |[SliceColorValuesProxyModel](slicecolorvaluesproxymodel.md)                | Color an area with numerical values based on their value.|
-|[SliceFilterProxyModel](slicefilterproxymodel.md)                          | Show only selected slice of given source model.|
+|[SliceDisplayTextProxyModel](slicedisplaytextproxymodel.md)                | Format non-str DisplayRole values according to formatter strings.|
 |[SliceValueTransformationProxyModel](slicevaluetransformationproxymodel.md)| Changes the values of any data role of given slice area based on a callback.|
 
 
@@ -93,6 +94,15 @@ Some of these proxies might partly overlap in functionality, but theres always a
 |[FlattenedTreeProxyModel](flattenedtreeproxymodel.md) | Moves all rows up to the root level.     |
 |[MeltProxyModel](meltproxymodel.md)                   |Unpivot a Table from wide to long format. |
 |[ColumnOrderProxyModel](columnorderproxymodel.md)     |Reorder columns and hide columns.         |
+
+
+## Proxies for pandas models
+
+| Proxy                                                  | Description                                          |
+| -------------------------------------------------------|------------------------------------------------------|
+|[PandasStringColumnFilterProxyModel](pandasstringcolumnfilterproxymodel.md)   | A fast FilterProxyModel for pandas DataFrame str columns.   |
+|[PandasEvalFilterProxyModel](pandasevalfilterproxymodel.md) | A pandas.eval based FilterProxyModel.                                         |
+|[PandasMultiStringColumnFilterModel](pandasmultistringcolumnfilterproxymodel.md) | A ProxyModel to filter based on contents of multiple columns. |
 
 
 ## Other Proxies
