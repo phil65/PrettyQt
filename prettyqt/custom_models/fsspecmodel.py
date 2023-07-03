@@ -509,10 +509,7 @@ class FSSpecTreeModel(
         column = min(column, 0)
         if row != -1:
             begin_row = row
-        elif parent_index.isValid():
-            begin_row = self.rowCount(parent_index) + 1
-        else:
-            begin_row = self.rowCount() + 1
+        begin_row = self.rowCount(parent_index) + 1
         print(begin_row)
         return True
 

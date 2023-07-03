@@ -97,7 +97,7 @@
     * [quickwidgets](api/quickwidgets.md)
     * [scxml](api/scxml.md)
     * [spatialaudio](api/spatialaudio.md)
-    * [statemachin](api/statemachin.md)
+    * [statemachine](api/statemachine.md)
     * [svg](api/svg.md)
     * [svgwidgets](api/svgwidgets.md)
     * [syntaxhighlighters](api/syntaxhighlighters.md)
