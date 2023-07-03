@@ -311,7 +311,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
             return
         for i in range(self.rowCount(parent_index)):
             child_index = self.index(i, 0, parent_index)
-            yield from self.iter_tree(child_index, depth)
+            yield from self.iter_tree(child_index, depth, fetch_more=fetch_more)
 
     def search_tree(
         self,
@@ -358,7 +358,10 @@ class AbstractItemModelMixin(core.ObjectMixin):
         return listdelegators.BaseListDelegator(indexes)
 
     def get_index_key(
-        self, index: core.ModelIndex, include_column: bool = False
+        self,
+        index: core.ModelIndex,
+        include_column: bool = False,
+        parent_index: core.ModelIndex | None = None,
     ) -> tuple[tuple[int, int], ...]:
         """Return a key tuple for given ModelIndex.
 
@@ -368,28 +371,32 @@ class AbstractItemModelMixin(core.ObjectMixin):
         Arguments:
             index: ModelIndex to get a key for
             include_column: whether to include the column in the index key.
+            parent_index: Get key up to given ModelIndex. By default, get key up to root.
         """
         key_path = []
         parent = index
-        while parent.isValid():
+        while parent.isValid() and parent != parent_index:
             key = (parent.row(), parent.column()) if include_column else parent.row()
             key_path.append(key)
             parent = parent.parent()
         return tuple(reversed(key_path))
 
     def index_from_key(
-        self, key_path: Sequence[tuple[int, int] | int]
+        self,
+        key_path: Sequence[tuple[int, int] | int],
+        parent_index: core.ModelIndex | None = None,
     ) -> core.ModelIndex:
         """Return a source QModelIndex for the given key.
 
         Arguments:
             key_path: Key path to get an index for.
                       Should be a sequence of either (row, column)  or row indices
+            parent_index: ModelIndex to start indexing from. Defaults to root index.
         """
         model = self.sourceModel()
         if model is None:
             return core.ModelIndex()
-        index = core.ModelIndex()
+        index = parent_index or core.ModelIndex()
         for key in key_path:
             key = (key, 0) if isinstance(key, int) else key
             index = model.index(*key, index)
