@@ -56,7 +56,7 @@ class SliceEdit(widgets.Widget):
             self.spinbox_start.set_value(value.start)
         if value.stop is not None:
             self.spinbox_stop.set_value(value.stop)
-        if value.step is None:
+        if value.step is not None:
             self.spinbox_step.set_value(value.step)
 
 
