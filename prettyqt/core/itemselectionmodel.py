@@ -36,5 +36,12 @@ SELECTION_FLAG: bidict[SelectionFlagStr, core.QItemSelectionModel.SelectionFlag]
 
 
 class ItemSelectionModel(core.ObjectMixin, core.QItemSelectionModel):
+    def __contains__(self, index: core.ModelIndex) -> bool:
+        return self.isSelected(index)
+
     def set_current_index(self, index, flag: SelectionFlagStr):
         self.setCurrentIndex(index, SELECTION_FLAG[flag])
+
+
+if __name__ == "__main__":
+    model = ItemSelectionModel()
