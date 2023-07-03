@@ -1,4 +1,3 @@
-custom_widgets module
-=====================
+# custom_widgets module
 
 ::: prettyqt.custom_widgets

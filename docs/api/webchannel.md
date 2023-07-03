@@ -1,0 +1,3 @@
+# webchannel module
+
+::: prettyqt.webchannel

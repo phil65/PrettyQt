@@ -1,0 +1,3 @@
+# designer module
+
+::: prettyqt.designer

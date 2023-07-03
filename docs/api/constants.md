@@ -1,4 +1,3 @@
-constants module
-================
+# constants module
 
 ::: prettyqt.constants

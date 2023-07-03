@@ -1,4 +1,3 @@
-webenginecore module
-====================
+# webenginecore module
 
 ::: prettyqt.webenginecore

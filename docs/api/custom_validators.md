@@ -1,4 +1,3 @@
-custom_validators module
-========================
+# custom_validators module
 
 ::: prettyqt.custom_validators

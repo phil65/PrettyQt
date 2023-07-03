@@ -1,4 +1,3 @@
-pdf module
-==========
+# pdf module
 
 ::: prettyqt.pdf

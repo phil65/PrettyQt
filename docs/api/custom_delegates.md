@@ -1,4 +1,3 @@
-custom_delegates module
-=======================
+# custom_delegates module
 
 ::: prettyqt.custom_delegates

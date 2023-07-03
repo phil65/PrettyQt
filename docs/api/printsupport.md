@@ -1,0 +1,3 @@
+# printsupport module
+
+::: prettyqt.printsupport

@@ -1,4 +1,3 @@
-gui module
-==========
+# gui module
 
 ::: prettyqt.gui

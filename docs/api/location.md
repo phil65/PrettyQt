@@ -1,4 +1,3 @@
-location module
-===============
+# location module
 
 ::: prettyqt.location

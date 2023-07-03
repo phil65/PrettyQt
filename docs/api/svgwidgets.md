@@ -1,0 +1,3 @@
+# svgwidgets module
+
+::: prettyqt.svgwidgets

@@ -1,0 +1,3 @@
+# spatialaudio module
+
+::: prettyqt.spatialaudio
