@@ -31,7 +31,7 @@ class TreeItem:
         return iter(self.children)
 
     def __getitem__(self, index: int) -> Self:
-        return self.child(index)
+        return self.children[index]
 
     def __rshift__(self, other: Self):
         """Set children using >> bitshift operator for self >> other.
@@ -63,12 +63,6 @@ class TreeItem:
         self.children[idx:idx] = items
         for item in items:
             item.parent_item = self
-
-    def child(self, row: int) -> Self:
-        return self.children[row]
-
-    def child_count(self) -> int:
-        return len(self.children)
 
     def parent(self) -> Self | None:
         return self.parent_item
@@ -201,14 +195,11 @@ class TreeModel(core.AbstractItemModel):
         self, row: int, column: int, parent: core.ModelIndex | None = None
     ) -> core.ModelIndex:
         parent = parent or core.ModelIndex()
-        parent_item = self.data_by_index(parent)
-
         if not self.hasIndex(row, column, parent):
             return core.ModelIndex()
-
-        if child_item := parent_item.child(row):  # isnt this always true?
-            return self.createIndex(row, column, child_item)
-        return core.ModelIndex()
+        parent_item = self.data_by_index(parent)
+        child_item = parent_item.children[row]
+        return self.createIndex(row, column, child_item)
 
     def parent(self, index: core.ModelIndex | None = None) -> core.ModelIndex:
         # hacky way to let the case without any arguments get through.

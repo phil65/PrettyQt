@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from abc import ABCMeta
+from collections.abc import Sequence
 import datetime
 import enum
 import os
@@ -287,7 +288,18 @@ def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:
     return repr(val)
 
 
-def get_widget_for_value(val, parent=None):
+def get_editor_for_value_list(ls: Sequence, parent=None):
+    from prettyqt import widgets
+
+    container = widgets.Widget(parent)
+    container.set_layout("vertical")
+    editors = [get_editor_for_value(val, parent=container) for val in ls]
+    container.box.add(editors)
+    container.set_window_flags("tool")
+    return container
+
+
+def get_editor_for_value(val, parent=None):
     from prettyqt import core, custom_widgets, gui, widgets
 
     match val:

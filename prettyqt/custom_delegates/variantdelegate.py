@@ -63,7 +63,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
     ):
         val = self._data_for_index(index, self._role)
         logger.info(f"creating editor for {val!r}...")
-        widget = datatypes.get_widget_for_value(val, parent)
+        widget = datatypes.get_editor_for_value(val, parent)
         if widget is None:
             logger.warning(f"Could not find editor for {val!r} ({type(val)})")
             return None
