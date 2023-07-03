@@ -20,18 +20,30 @@ class LinkedSelectionModel(core.ItemSelectionModel):
         self._mapper = custom_models.ProxyMapper(*self._models)
         for w in itemviews:
             w.selectionModel().currentChanged.connect(self._on_current_change)
+            w.selectionModel().selectionChanged.connect(self._on_selection_change)
 
     def _on_current_change(self, new: core.ModelIndex, _):
-        source = new.model()
-        if source is None:
-            logger.warning("No model connected to index")
-            return
+        source = self.sender().model()
         source_index = self._models.index(source)
-        targets = list(range(len(self._models)))
-        targets.remove(source_index)
-        for target in targets:
-            mapped_idx = self._mapper.map_index(from_=source_index, to=target, index=new)
-            self._itemviews[target].setCurrentIndex(mapped_idx)
+        target_indexes = list(range(len(self._models)))
+        target_indexes.remove(source_index)
+        for target_index in target_indexes:
+            mapped = self._mapper.map_index(
+                from_=source_index, to=target_index, index=new
+            )
+            self._itemviews[target_index].setCurrentIndex(mapped)
+
+    def _on_selection_change(self, new: core.QItemSelection, _):
+        source_model = self.sender().model()
+        source_index = self._models.index(source_model)
+        target_indexes = list(range(len(self._models)))
+        target_indexes.remove(source_index)
+        for target_index in target_indexes:
+            selected = self._mapper.map_selection(
+                from_=source_index, to=target_index, selection=new
+            )
+            sel_model = self._itemviews[target_index].selectionModel()
+            sel_model.select(selected, sel_model.SelectionFlag.Select)
 
 
 if __name__ == "__main__":
