@@ -254,9 +254,16 @@ def _icon(*names, **kwargs) -> QtGui.QIcon:
     return _instance().icon(*names, **kwargs)
 
 
-def for_color(color: str | QtGui.QColor) -> gui.Icon:
-    if isinstance(color, str):
-        color = gui.Color(color)
+def for_color(color: str | QtGui.QColor | QtGui.QBrush) -> gui.Icon:
+    match color:
+        case str():
+            color = gui.Color(color)
+        case gui.QBrush():
+            color = color.color()
+        case gui.QColor():
+            pass
+        case _:
+            raise TypeError(color)
     if color.isValid():
         bitmap = gui.Pixmap(16, 16)
         bitmap.fill(color)
