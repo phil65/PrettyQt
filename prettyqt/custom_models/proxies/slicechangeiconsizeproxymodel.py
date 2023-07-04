@@ -13,6 +13,7 @@ class SliceChangeIconSizeProxyModel(custom_models.SliceIdentityProxyModel):
     """Proxy model which changes the icon size of the Decoration role."""
 
     ID = "change_icon_size"
+    ICON = "mdi.resize"
 
     def __init__(self, size: datatypes.SizeType, **kwargs):
         super().__init__(**kwargs)

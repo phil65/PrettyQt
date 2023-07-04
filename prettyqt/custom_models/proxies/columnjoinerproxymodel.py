@@ -45,6 +45,7 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
     """
 
     ID = "column_join"
+    ICON = "mdi.table-column-plus-before"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

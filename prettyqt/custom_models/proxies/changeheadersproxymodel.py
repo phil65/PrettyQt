@@ -34,6 +34,7 @@ class ChangeHeadersProxyModel(core.IdentityProxyModel):
     """
 
     ID = "change_headers"
+    ICON = "table-headers-eye"
 
     def __init__(
         self,

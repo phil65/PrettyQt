@@ -30,6 +30,7 @@ class SliceMapRoleProxyModel(custom_models.SliceIdentityProxyModel):
     """
 
     ID = "map_role"
+    ICON = "mdi.directions-fork"
 
     def __init__(
         self,

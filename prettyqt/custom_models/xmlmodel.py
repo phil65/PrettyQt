@@ -65,6 +65,7 @@ class AttributeColumn(XmlColumnItem):
 
 
 class BaseXmlModel(custom_models.ColumnItemModel):
+    ICON = "mdi.xml"
     COLUMNS = [TagColumn, TextColumn, TailColumn, AttributeColumn]
 
     def __init__(self, obj, **kwargs):

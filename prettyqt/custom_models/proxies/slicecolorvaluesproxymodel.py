@@ -55,6 +55,7 @@ class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
     """
 
     ID = "color_values"
+    ICON = "mdi.palette-outline"
     ColorMode = ColorMode
     core.Enum(ColorMode)
 

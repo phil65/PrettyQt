@@ -30,6 +30,7 @@ class SliceFilterProxyModel(custom_models.SliceIdentityProxyModel):
     """
 
     ID = "slice_filter"
+    ICON = "mdi.table-filter"
 
     def rowCount(self, index: core.ModelIndex | None = None) -> int:
         rowcount = super().rowCount()

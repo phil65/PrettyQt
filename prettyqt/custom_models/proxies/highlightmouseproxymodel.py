@@ -26,6 +26,7 @@ class HighlightMouseProxyModel(core.IdentityProxyModel):
     """
 
     ID = "highlight_mouse"
+    ICON = "mdi.cursor-default-click-outline"
 
     def __init__(
         self,

@@ -6,6 +6,7 @@ from prettyqt.utils import colors, datatypes
 
 class SliceAppearanceProxyModel(custom_models.SliceIdentityProxyModel):
     ID = "slice_appearance"
+    ICON = "mdi.palette-outline"
 
     def __init__(
         self,

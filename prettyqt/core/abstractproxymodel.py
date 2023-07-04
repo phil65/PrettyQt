@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 class AbstractProxyModelMixin(core.AbstractItemModelMixin):
     ID = ""
+    ICON = "mdi.table-edit"
 
     def __pretty__(
         self, fmt: Callable[[Any], Any], **kwargs: Any

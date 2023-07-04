@@ -33,6 +33,7 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, core.QSortFilterProxyMo
     invalidated = core.Signal()
     filter_mode_changed = core.Signal(str)
     ID = "sort_filter"
+    ICON = "mdi.table-filter"
 
     def __init__(self, *args, **kwargs):
         self._filter_mode: FilterModeStr = "wildcard"

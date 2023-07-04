@@ -30,6 +30,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
     """
 
     ID = "appearance"
+    ICON = "mdi.palette-outline"
 
     def __init__(
         self,

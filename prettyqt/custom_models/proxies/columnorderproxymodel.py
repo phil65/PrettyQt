@@ -25,6 +25,7 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
     """
 
     ID = "column_order"
+    ICON = "mdi.reorder-vertical"
 
     def __init__(self, order: list[int], **kwargs):
         self._column_order = order
