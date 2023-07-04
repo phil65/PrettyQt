@@ -59,4 +59,5 @@ Here is a short overview of the included slice proxies:
 |[SliceCheckableTreeProxyModel](slicecheckabletreeproxymodel.md)            | Makes an area of a tree checkable and triggers a callback on checkstate change.|
 |[SliceColorValuesProxyModel](slicecolorvaluesproxymodel.md)                | Color an area with numerical values based on their value.|
 |[SliceDisplayTextProxyModel](slicedisplaytextproxymodel.md)                | Format non-str DisplayRole values according to formatter strings.|
+|[SliceMapRoleProxyModel](slicemaproleproxymodel.md)                        | Map an ItemDataRole to another.|
 |[SliceValueTransformationProxyModel](slicevaluetransformationproxymodel.md)| Changes the values of any data role of given slice area based on a callback.|

@@ -276,6 +276,33 @@ class Sliced:
         self._widget.set_model(proxy)
         return proxy
 
+    def map_role(
+        self,
+        from_: constants.ItemDataRole,
+        to: constants.ItemDataRole,
+        converter: Callable | None = None,
+    ) -> custom_models.MapRoleProxyMpodel:
+        """Map ItemDataRole to another role for data().
+
+        Wraps model with a MapRoleProxyMpodel.
+
+        Arguments:
+            from_: role to map from
+            to: role to map to
+            converter: modify mapped values with callable
+        """
+        from prettyqt import custom_models
+
+        proxy = custom_models.MapRoleProxyMpodel(
+            indexer=self._indexer,
+            parent=self._widget,
+            mapping={from_: to},
+            converter=converter,
+        )
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
+
     def color_values(
         self,
         low_color: datatypes.ColorType = "green",
@@ -496,6 +523,20 @@ class Proxifier:
                 return mapper.map_selection(from_=1, to=0, selection=index_or_selection)
             case _:
                 raise TypeError(index_or_selection)
+
+    def sync_current_selection_with(
+        self,
+        target: widgets.QAbstractItemView | core.QAbstractItemModel,
+    ):
+        """Map index or selection from given source.
+
+        Arguments:
+            target: Either an ItemView or a (proxy) model which is linked to our current
+                    model.
+        """
+        if isinstance(target, widgets.QAbstractItemView):
+            target = target.model()
+        custom_models.ProxyMapper(self._widget.model(), target)
 
 
 if __name__ == "__main__":

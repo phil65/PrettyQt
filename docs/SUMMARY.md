@@ -45,6 +45,7 @@
             * [SliceValueTransformationProxyModel](features/proxymodels/slicevaluetransformationproxymodel.md)
             * [SliceAppearanceProxyModel](features/proxymodels/sliceappearanceproxymodel.md)
             * [SliceDisplayTextProxyModel](features/proxymodels/slicedisplaytextproxymodel.md)
+            * [SliceMapRoleProxyModel](features/proxymodels/slicemaproleproxymodel.md)
         * [Reshape / Styling proxies](features/reshapeproxies.md)
             * [MeltProxyModel](features/proxymodels/meltproxymodel.md)
             * [FlattenedTreeProxyModel](features/proxymodels/flattenedtreeproxymodel.md)

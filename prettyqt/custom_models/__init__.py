@@ -52,6 +52,7 @@ from .proxies.slicechangeflagsproxymodel import SliceChangeFlagsProxyModel
 from .proxies.slicecolorvaluesproxymodel import SliceColorValuesProxyModel
 from .proxies.slicevaluetransformationproxymodel import SliceValueTransformationProxyModel
 from .proxies.slicehighlightcurrentproxymodel import SliceHighlightCurrentProxyModel
+from .proxies.slicemaproleproxymodel import SliceMapRoleProxyModel
 
 # Reshape proxies
 
@@ -143,6 +144,7 @@ __all__ = [
     "PredicateFilterProxyModel",
     "SliceChangeFlagsProxyModel",
     "SliceHighlightCurrentProxyModel",
+    "SliceMapRoleProxyModel",
     "SliceColorValuesProxyModel",
     "HighlightMouseProxyModel",
     "ProxyMapper",
