@@ -4,6 +4,7 @@ import prettyqt
 
 from prettyqt import charts, gui
 from prettyqt.qt import QtCore
+from prettyqt.utils import datatypes
 
 
 class XYSeriesMixin(charts.AbstractSeriesMixin):
@@ -14,10 +15,12 @@ class XYSeriesMixin(charts.AbstractSeriesMixin):
         # self._process_name = ""
         self.setUseOpenGL()
 
-    def __setitem__(self, index: int, val: QtCore.QPointF):
-        self.replace(index, val)
+    def __setitem__(self, index: int, val: datatypes.PointFType):
+        """Set point at given index to value."""
+        self.replace(index, datatypes.toPointF(val))
 
     def __delitem__(self, index: int):
+        """Remove point with given index."""
         self.remove(index)
 
     # def __setstate__(self, state):
@@ -27,6 +30,7 @@ class XYSeriesMixin(charts.AbstractSeriesMixin):
     #     return type(self), (), self.__getstate__()
 
     def __add__(self, other: QtCore.QPointF) -> XYSeries:
+        """Append a point to the Series."""
         self.append(other)
         return self
 

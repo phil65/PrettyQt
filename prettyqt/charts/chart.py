@@ -6,7 +6,18 @@ from prettyqt import charts, constants, core, gui, widgets
 from prettyqt.utils import bidict, datatypes
 
 
-THEMES = bidict(
+ThemeStr = Literal[
+    "Light",
+    "Blue Cerulean",
+    "Dark",
+    "Brown Sand",
+    "Blue NCS",
+    "High Contrast",
+    "Blue Icy",
+    "Qt",
+]
+
+THEMES: bidict[ThemeStr, charts.QChart.ChartTheme] = bidict(
     {
         "Light": charts.QChart.ChartTheme.ChartThemeLight,
         "Blue Cerulean": charts.QChart.ChartTheme.ChartThemeBlueCerulean,
@@ -19,16 +30,6 @@ THEMES = bidict(
     }
 )
 
-ThemeStr = Literal[
-    "Light",
-    "Blue Cerulean",
-    "Dark",
-    "Brown Sand",
-    "Blue NCS",
-    "High Contrast",
-    "Blue Icy",
-    "Qt",
-]
 
 AnimationOptionStr = Literal["none", "grid_axis", "series", "all"]
 
@@ -61,18 +62,28 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
         )
 
     def adjust_style_to_palette(self):
+        """Adjusts the chart theme to current Palette.
+
+        Checks if palette is dark-ish and applies an appropriate theme to the chart.
+        """
         pal = gui.GuiApplication.get_palette()
         style = "Dark" if pal.is_dark() else "Light"
         self.set_theme(style)
 
     def get_axes(
         self,
-        orientation: constants.OrientationStr | None = None,
+        orientation: constants.OrientationStr | constants.Orientation | None = None,
         series: charts.QAbstractBarSeries | None = None,
     ) -> list[charts.QAbstractAxis]:
+        """Get axes of chart.
+
+        Arguments:
+            orientation: Orientation of the axes that should get returned.
+            series: Series to return axes for. Returns all axes if None.
+        """
         if orientation is None:
             orientation = constants.HORIZONTAL | constants.VERTICAL
-        return self.axes(constants.ORIENTATION[orientation], series)
+        return self.axes(constants.ORIENTATION.get_enum_value(orientation), series)
 
     def update_boundaries(self):
         """Set new min/max values based on axis."""
@@ -95,17 +106,20 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
     def set_legend_alignment(
         self, alignment: constants.SideStr | constants.AlignmentFlag
     ):
-        self.legend().setAlignment(constants.SIDES[alignment])
+        """Set alignment of the chart legend."""
+        self.legend().setAlignment(constants.SIDES.get_enum_value(alignment))
 
-    def set_theme(self, theme_name: ThemeStr):
-        self.setTheme(THEMES[theme_name])
+    def set_theme(self, theme_name: ThemeStr | charts.QChart.ChartTheme):
+        self.setTheme(THEMES.get_enum_value(theme_name))
 
     def set_margins(self, margins: datatypes.MarginsType):
         margins = datatypes.to_margins(margins)
         self.setMargins(margins)
 
-    def set_animation_options(self, option: AnimationOptionStr):
-        self.setAnimationOptions(ANIMATION_OPTIONS[option])
+    def set_animation_options(
+        self, option: AnimationOptionStr | charts.QChart.AnimationOption
+    ):
+        self.setAnimationOptions(ANIMATION_OPTIONS.get_enum_value(option))
 
     def apply_nice_numbers(self):
         """Adjust both axis to display nice round numbers."""

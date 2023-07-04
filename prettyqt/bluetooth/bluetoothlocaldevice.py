@@ -44,12 +44,14 @@ PAIRING: bidict[PairingStr, Pairing] = bidict(
 
 class BluetoothLocalDevice(core.ObjectMixin, bluetooth.QBluetoothLocalDevice):
     def __bool__(self):
+        """Return True when local device is valid."""
         return self.isValid()
 
     def __repr__(self):
         return get_repr(self, self.address())
 
     def get_error(self) -> ErrorStr:
+        """Get error code."""
         return ERROR.inverse[self.error()]
 
     def set_host_mode(self, mode: HostModeStr | HostMode):
@@ -84,17 +86,22 @@ class BluetoothLocalDevice(core.ObjectMixin, bluetooth.QBluetoothLocalDevice):
         return PAIRING.inverse[self.pairingStatus(address)]
 
     def request_pairing(
-        self, address: bluetooth.QBluetoothAddress | int | str, pairing: PairingStr
+        self,
+        address: bluetooth.QBluetoothAddress | int | str,
+        pairing: PairingStr | Pairing,
     ):
+        """Request a pairing to given bluetooth address."""
         if isinstance(address, int | str):
             address = bluetooth.QBluetoothAddress(address)
-        self.requestPairing(address, PAIRING[pairing])
+        self.requestPairing(address, PAIRING.get_enum_value(pairing))
 
     def get_connected_devices(self) -> list[bluetooth.BluetoothAddress]:
+        """Get addresses for connected devices."""
         return [bluetooth.BluetoothAddress(i) for i in self.connectedDevices()]
 
     @classmethod
-    def get_all_devices(cls) -> list[bluetooth.BluetoothHostInfo]:
+    def for_all_devices(cls) -> list[bluetooth.BluetoothHostInfo]:
+        """Get host info for all devices."""
         return [bluetooth.BluetoothHostInfo(i) for i in cls.allDevices()]
 
 

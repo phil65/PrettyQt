@@ -32,20 +32,32 @@ class BluetoothServiceDiscoveryAgent(
     core.ObjectMixin, bluetooth.QBluetoothServiceDiscoveryAgent
 ):
     def start_discovery(self, full: bool = False):
+        """Start bluetooth service discovery.
+
+        Arguments:
+            full: full discovery instead of minimal discovery.
+        """
         if full:
             flag = bluetooth.QBluetoothServiceDiscoveryAgent.FullDiscovery
         else:
             flag = bluetooth.QBluetoothServiceDiscoveryAgent.MinimalDiscovery
         self.start(flag)
 
-    def get_error(self) -> str:
+    def get_error(self) -> ErrorStr:
+        """Get error code."""
         return ERRORS.inverse[self.error()]
 
     def set_remote_address(
         self, address: str | int | bluetooth.QBluetoothAddress
     ) -> bool:
+        """Set remote address.
+
+        Arguments:
+            address: address of the remote
+        """
         address = bluetooth.BluetoothAddress(address)
         return self.setRemoteAddress(address)
 
     def get_discovered_services(self) -> list[bluetooth.BluetoothServiceInfo]:
+        """Get list of discovered devices."""
         return [bluetooth.BluetoothServiceInfo(i) for i in self.discoveredServices()]

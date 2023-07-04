@@ -576,23 +576,27 @@ SERVICE_CLASS_UUID: bidict[ServiceClassUuidStr, su] = bidict(
 class BluetoothUuid(core.UuidMixin, QtBluetooth.QBluetoothUuid):
     @classmethod
     def characteristic_to_string(cls, characteristic: CharacteristicTypeStr | md) -> str:
+        """Return string representation for given characteristic."""
         return cls.characteristicToString(
             CHARACTERISTIC_TYPES.get_enum_value(characteristic)
         )
 
     @classmethod
     def descriptor_to_string(cls, descriptor: DescriptorTypeStr | dt) -> str:
+        """Return string representation for given descriptor."""
         return cls.descriptorToString(DESCRIPTOR_TYPE.get_enum_value(descriptor))
 
     @classmethod
     def protocol_to_string(cls, protocol: ProtocolUuidstr | pu) -> str:
+        """Return string representation for given protocol."""
         return cls.protocolToString(PROTOCOL_UUID.get_enum_value(protocol))
 
     @classmethod
     def service_class_to_string(cls, service_class: DescriptorTypeStr | su) -> str:
+        """Return string representation for given service class."""
         return cls.serviceClassToString(SERVICE_CLASS_UUID.get_enum_value(service_class))
 
 
 if __name__ == "__main__":
     address = BluetoothUuid()
-    BluetoothUuid.service_class_to_string("bond_management")
+    print(BluetoothUuid.service_class_to_string("bond_management"))

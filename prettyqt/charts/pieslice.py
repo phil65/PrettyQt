@@ -24,7 +24,9 @@ class PieSlice(core.ObjectMixin, QtCharts.QPieSlice):
     def __repr__(self):
         return get_repr(self, self.label(), self.value())
 
-    def set_label_position(self, position: LabelPositionStr):
+    def set_label_position(
+        self, position: LabelPositionStr | QtCharts.QPieSlice.LabelPosition
+    ):
         """Set the label position.
 
         Args:

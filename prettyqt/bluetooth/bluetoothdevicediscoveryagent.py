@@ -76,7 +76,12 @@ class BluetoothDeviceDiscoveryAgent(
     #     return INQUIRY_TYPES.inverse[self.inquiryType()]
 
     def start_discovery(self, classic: bool = True, low_energy: bool = True):
-        """Start discovery of bluetooth devices."""
+        """Start discovery of bluetooth devices.
+
+        Arguments:
+            classic: use classic method
+            low_energy: use BLE mode
+        """
         flag = bluetooth.QBluetoothDeviceDiscoveryAgent.NoMethod
         if classic:
             flag |= bluetooth.QBluetoothDeviceDiscoveryAgent.ClassicMethod

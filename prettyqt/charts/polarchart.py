@@ -22,4 +22,5 @@ class PolarChart(charts.ChartMixin, charts.QPolarChart):
         axis: charts.QAbstractAxis,
         orientation: PolarOrientationStr | charts.QPolarChart.PolarOrientation,
     ):
+        """Add axis with given orientation."""
         self.addAxis(axis, POLAR_ORIENTATIONS.get_enum_value(orientation))

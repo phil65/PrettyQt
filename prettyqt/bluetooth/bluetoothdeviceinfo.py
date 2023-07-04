@@ -298,24 +298,31 @@ class BluetoothDeviceInfo(bluetooth.QBluetoothDeviceInfo):
         return get_repr(self, self.get_address(), self.name())
 
     def __bool__(self):
+        """Return true if device info is valid."""
         return self.isValid()
 
     def get_address(self) -> bluetooth.BluetoothAddress:
+        """Get bluetooth address."""
         return bluetooth.BluetoothAddress(self.address())
 
     def get_device_ids(self) -> list[bluetooth.BluetoothUuid]:
+        """Get list of device ids."""
         return [bluetooth.BluetoothUuid(i) for i in self.deviceIds()]
 
     def get_service_ids(self) -> list[bluetooth.BluetoothUuid]:
+        """Get list of service ids."""
         return [bluetooth.BluetoothUuid(i) for i in self.serviceIds()]
 
     def get_service_uuids(self) -> list[bluetooth.BluetoothUuid]:
+        """Get list of service UUIDs."""
         return [bluetooth.BluetoothUuid(i) for i in self.serviceUuids()]
 
     def get_major_device_class(self) -> MajorDeviceClassStr:
+        """Get major device class."""
         return MAJOR_DEVICE_CLASS.inverse[self.majorDeviceClass()]
 
     def get_minor_device_class(self) -> str:
+        """Get minor device class."""
         major = self.get_major_device_class()
         match major:
             case "computer":
@@ -351,6 +358,7 @@ class BluetoothDeviceInfo(bluetooth.QBluetoothDeviceInfo):
                 raise ValueError(major)
 
     def get_service_classes(self) -> list[ServiceClassStr]:
+        """Get list of service classes."""
         return SERVICE_CLASS.get_list(self.serviceClasses())
 
 

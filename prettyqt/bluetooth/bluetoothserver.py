@@ -36,17 +36,19 @@ class BluetoothServer(core.ObjectMixin, bluetooth.QBluetoothServer):
         | bluetooth.QBluetoothServiceInfo.Protocol,
         parent: core.QObject | None = None,
     ):
-        if isinstance(protocol, str):
-            protocol = bluetooth.bluetoothserviceinfo.PROTOCOL[protocol]
+        protocol = bluetooth.bluetoothserviceinfo.PROTOCOL.get_enum_value(protocol)
         super().__init__(protocol, parent)
 
     def get_error(self) -> ErrorStr:
+        """Get error code."""
         return ERROR.inverse[self.error()]
 
     def get_server_type(self) -> bluetooth.bluetoothserviceinfo.ProtocolStr:
+        """Get server type."""
         return bluetooth.bluetoothserviceinfo.PROTOCOL.inverse[self.serverType()]
 
     def get_server_address(self) -> bluetooth.BluetoothAddress:
+        """Return bluetooth server address."""
         return bluetooth.BluetoothAddress(self.serverAddress())
 
 

@@ -20,12 +20,14 @@ LABELS_POSITIONS: bidict[
 
 class AbstractBarSeriesMixin(charts.AbstractSeriesMixin):
     def __delitem__(self, item: int | charts.QBarSet):
+        """Implements `del series[0]`."""
         if isinstance(item, int):
             barsets = self.barSets()
             item = barsets[item]
         self.remove(item)
 
     def __getitem__(self, index: int) -> charts.QBarSet:
+        """Implements `barset = series[1]`."""
         barsets = self.barSets()
         return barsets[index]
 

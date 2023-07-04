@@ -12,6 +12,7 @@ class BluetoothAddress(QtBluetooth.QBluetoothAddress):
         return self.toString()
 
     def __bool__(self):
+        """True when address is not null."""
         return not self.isNull()
 
 

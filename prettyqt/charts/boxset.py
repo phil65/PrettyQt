@@ -32,14 +32,20 @@ class BoxSet(core.ObjectMixin, QtCharts.QBoxSet):
             self.label(),
         )
 
-    def __getitem__(self, index: int | ValuePositionStr) -> float:
+    def __getitem__(
+        self, index: int | ValuePositionStr | QtCharts.QBoxSet.ValuePositions
+    ) -> float:
+        """Returns the value of the box-and-whiskers item specified by index."""
         if type(index) is not int:
             index = VALUE_POSITION.get_enum_value(index).value
         if not (0 <= index <= 4):
             raise KeyError(index)
         return self.at(index)
 
-    def __setitem__(self, index: int | ValuePositionStr, value: int):
+    def __setitem__(
+        self, index: int | ValuePositionStr | QtCharts.QBoxSet.ValuePositions, value: int
+    ):
+        """Sets the value specified by value in the position specified by index."""
         if type(index) is not int:
             index = VALUE_POSITION.get_enum_value(index).value
         if not (0 <= index <= 4):

@@ -62,8 +62,7 @@ class BluetoothSocket(core.IODeviceMixin, bluetooth.QBluetoothSocket):
         | bluetooth.QBluetoothServiceInfo.Protocol,
         parent: core.QObject | None = None,
     ):
-        if isinstance(protocol, str):
-            protocol = bluetooth.bluetoothserviceinfo.PROTOCOL[protocol]
+        protocol = bluetooth.bluetoothserviceinfo.PROTOCOL.get_enum_value(protocol)
         super().__init__(protocol, parent)
 
     def get_error(self) -> SocketErrorStr:

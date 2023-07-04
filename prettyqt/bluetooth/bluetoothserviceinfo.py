@@ -65,6 +65,11 @@ PROTOCOL: bidict[ProtocolStr, Protocol] = bidict(
 class BluetoothServiceInfo(
     QtBluetooth.QBluetoothServiceInfo, MutableMapping, metaclass=datatypes.QABCMeta
 ):
+    """BluetoothServiceInfo class.
+
+    Also implements MutableMapping interface, can be used as a dicionary.
+    """
+
     def __getitem__(self, value: str | int | AttributeId):
         match value:
             case int():
@@ -90,6 +95,7 @@ class BluetoothServiceInfo(
         return self.removeAttribute(flag)
 
     def __setitem__(self, index: str | int | AttributeId, value):
+        """Set attribute."""
         match index:
             case int():
                 flag = index
@@ -104,6 +110,7 @@ class BluetoothServiceInfo(
         return self.contains(attr)
 
     def __iter__(self):
+        """Iter the info attributes."""
         return iter(self.attributes())
 
     def __len__(self):
