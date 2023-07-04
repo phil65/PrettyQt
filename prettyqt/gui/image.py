@@ -162,7 +162,7 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
                     return icon
         return None  #  gui.Icon.fromTheme("text-x-generic")
 
-    def to_pil(self) -> Image:
+    def to_pil(self):
         from PIL import Image as PILImage
 
         buffer = core.Buffer()
