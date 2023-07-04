@@ -5,8 +5,7 @@ import logging
 import attr
 import attrs
 
-from prettyqt import constants, custom_models
-from prettyqt.qt import QtCore, QtGui
+from prettyqt import constants, core, custom_models, gui
 from prettyqt.utils import datatypes
 
 
@@ -29,11 +28,11 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
         "Value",
         "Type",
         "Default",
+        "Metadata",
         "In __init__",
         "In __repr__",
         "Eq",
         "Hash",
-        "Metadata",
         "Keyword only",
         "Inherited",
         "Validator",
@@ -52,7 +51,7 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
 
     def data(
         self,
-        index: QtCore.QModelIndex,
+        index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         if not index.isValid():
@@ -62,7 +61,7 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
         value = getattr(self._instance, field_name)
         match role, index.column():
             case constants.FONT_ROLE, 0:
-                font = QtGui.QFont()
+                font = gui.QFont()
                 font.setBold(True)
                 return font
             case constants.DISPLAY_ROLE, 0:
@@ -72,21 +71,23 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
             case constants.DISPLAY_ROLE, 1:
                 return field.type
             case constants.FONT_ROLE, 1:
-                font = QtGui.QFont()
+                font = gui.QFont()
                 font.setItalic(True)
                 return font
             case constants.DISPLAY_ROLE, 2:
                 return field.default
-            case constants.CHECKSTATE_ROLE, 3:
-                return self.to_checkstate(field.init)
-            case constants.CHECKSTATE_ROLE, 4:
-                return self.to_checkstate(field.repr)
-            case constants.CHECKSTATE_ROLE, 5:
-                return self.to_checkstate(field.eq)
-            case constants.CHECKSTATE_ROLE, 6:
-                return self.to_checkstate(field.hash)
-            case constants.DISPLAY_ROLE, 7:
+            case constants.DISPLAY_ROLE, 3:
                 return str(field.metadata)
+            case constants.EDIT_ROLE, 3:
+                return field.metadata
+            case constants.CHECKSTATE_ROLE, 4:
+                return self.to_checkstate(field.init)
+            case constants.CHECKSTATE_ROLE, 5:
+                return self.to_checkstate(field.repr)
+            case constants.CHECKSTATE_ROLE, 6:
+                return self.to_checkstate(field.eq)
+            case constants.CHECKSTATE_ROLE, 7:
+                return self.to_checkstate(field.hash)
             case constants.CHECKSTATE_ROLE, 8:
                 return self.to_checkstate(field.kw_only)
             case constants.CHECKSTATE_ROLE, 9:
@@ -102,6 +103,13 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
         #     for base_cls in type(self._instance).__bases__
         # )
         return not attr._make._has_frozen_base_class(type(self._instance))
+
+    def flags(self, index: core.ModelIndex):
+        match index.column():
+            case 0 | 1 | 2 | 3:
+                return super().flags(index)
+            case _:
+                return super().flags(index) & ~constants.IS_ENABLED
 
 
 if __name__ == "__main__":
