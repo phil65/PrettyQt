@@ -59,7 +59,6 @@ dev = [
 typing = [
     "mypy",
     "types-Deprecated",
-    "types-docutils",
     "types-orjson",
     "types-python-dateutil",
     "types-requests",
@@ -87,7 +86,6 @@ docs = [
 ]
 
 addons = [
-    "docutils",
     "orjson",
     "fsspec",
     "pillow",
@@ -213,7 +211,6 @@ pygments = "^2.6"
 qstylizer = "^0.2"
 typing-extensions = "^4.5.0"
 
-docutils = {version = "^0.19", optional=true}
 orjson = {version = "^3", python = "<3.12", optional=true}
 fsspec = {version = "^2023.1.0", optional=true}
 pillow = {version = "^10", optional=true}
@@ -238,7 +235,7 @@ pyside6 = {version = "^6.5", python = "<3.12", optional=true}
 [tool.poetry.extras]
 pyside6 = ["pyside6", "PySide6-QtAds"]
 pyqt6 = ["pyqt6", "PyQt6-Charts", "PyQt6-WebEngine", "PyQt6-QScintilla", "PyQtAds"]
-addons = ["docutils", "orjson", "fsspec", "pillow", "numpy", "qtconsole", "ipython", "pandas", "attrs", "lxml"]
+addons = ["orjson", "fsspec", "pillow", "numpy", "qtconsole", "ipython", "pandas", "attrs", "lxml"]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7"
@@ -248,7 +245,6 @@ pytest-cov = "^4"
 pytest-qt = "^4.1"
 mypy = "^1"
 types-Deprecated = "^1.2"
-types-docutils = "^0"
 types-orjson = "^3.6"
 types-python-dateutil = "^2"
 types-requests = "^2.31.0.1"

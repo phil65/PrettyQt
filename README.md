@@ -125,7 +125,6 @@ Note: Only Qt 6.5+ is supported.
 - [qtconsole](https://pypi.org/project/qtconsole)
 - [pillow](https://pypi.org/project/pillow)
 - [fsspec](https://pypi.org/project/fsspec)
-- [docutils](https://pypi.org/project/docutils)
 
 
 ## Installation from sources

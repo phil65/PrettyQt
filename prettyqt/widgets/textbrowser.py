@@ -32,22 +32,7 @@ class TextBrowser(widgets.TextEditMixin, widgets.QTextBrowser):
         file_path = pathlib.Path(file_path)
         with file_path.open() as f:
             file_content = f.read()
-        self.set_markdown(file_content)
-
-    def set_markdown(self, source: str):
-        self.setMarkdown(source)
-
-    def set_rst_file(self, file_path: datatypes.PathType):
-        file_path = pathlib.Path(file_path)
-        with file_path.open() as f:
-            file_content = f.read()
-        self.set_rst(file_content)
-
-    def set_rst(self, source: str):
-        import docutils.core
-
-        html = docutils.core.publish_string(source, writer_name="html")
-        self.setHtml(str(html))
+        self.setMarkdown(file_content)
 
     def get_search_paths(self) -> list[pathlib.Path]:
         return [pathlib.Path(p) for p in self.searchPaths()]
