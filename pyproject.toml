@@ -283,9 +283,17 @@ log_cli = true
 log_format = "%(asctime)s %(levelname)s %(message)s"
 log_date_format = "%Y-%m-%d %H:%M:%S"
 
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "@overload",
+    "except ImportError",
+]
+
 [tool.mypy]
 python_version = "3.10"
-disable_error_code = ["assignment", "misc", "attr-defined", "import", "no-any-expr", "misc", "attr-defined"]
+disable_error_code = ["assignment", "misc", "attr-defined", "import", "misc", "attr-defined"]
 
 [tool.ruff]
 line-length = 90
