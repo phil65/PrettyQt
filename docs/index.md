@@ -36,47 +36,60 @@ from "TreeViewMxin", "AbstractItemViewMixin", "AbstractScrollAreaMixin",
 
 To illustrate this, we will use some of our included models:
 
-```py
-from prettyqt import custom_models, widgets
 
-app = widgets.app()
-widget = widgets.TreeView()
-model = custom_models.SubClassTreeModel(core.AbstractItemModelMixin)
-widget.set_model(model)
-widget.show()
-```
+!!! Example "Class hierarchy example"
 
-<figure markdown>
-  ![Image title](images/abstractitemmodelmixin_subclasses.png)
-  <figcaption>AbstractitemModelMixin subclasses</figcaption>
-</figure>
+    === "Subclass tree"
 
-You can see a comparison here between Our mixin tree and the original Qt Tree.
-As you can notice, every Qt class with Subclasses has a corresponding Mixin.
+        ```py
+        from prettyqt import custom_models, widgets
 
-To show what this leads to, we will look at another example:
+        app = widgets.app()
+        widget = widgets.TreeView()
+        model = custom_models.SubClassTreeModel(core.AbstractItemModelMixin)
+        widget.set_model(model)
+        widget.show()
+        ```
 
-```py
-from prettyqt import custom_models, widgets
+        <figure markdown>
+          ![Image title](images/abstractitemmodelmixin_subclasses.png)
+          <figcaption>AbstractitemModelMixin subclasses</figcaption>
+        </figure>
 
-app = widgets.app()
-widget = widgets.TreeView()
-model = custom_models.ParentClassTreeModel(widgets.TreeWidget)
-widget.set_model(model)
-widget.show()
-```
+    === "Parentclass tree"
 
-<figure markdown>
-  ![Image title](images/treewidget_parentclasses.png)
-  <figcaption>TreeWidget parent classes</figcaption>
-</figure>
+        ```py
+        from prettyqt import custom_models, widgets
 
-when passing `show_mro=True` to ParentclassTreeModel, we can also take a loot at the method resolution order:
+        app = widgets.app()
+        widget = widgets.TreeView()
+        model = custom_models.ParentClassTreeModel(widgets.TreeWidget)
+        widget.set_model(model)
+        widget.show()
+        ```
 
-<figure markdown>
-  ![Image title](images/treewidget_mro.png)
-  <figcaption>TreeWidget MRO</figcaption>
-</figure>
+        <figure markdown>
+          ![Image title](images/treewidget_parentclasses.png)
+          <figcaption>TreeWidget parent classes</figcaption>
+        </figure>
+
+    === "MRO tree"
+
+        ```py
+        from prettyqt import custom_models, widgets
+
+        app = widgets.app()
+        widget = widgets.TreeView()
+        model = custom_models.ParentClassTreeModel(widgets.TreeWidget, mro=True)
+        widget.set_model(model)
+        widget.show()
+        ```
+
+        <figure markdown>
+          ![Image title](images/treewidget_mro.png)
+          <figcaption>TreeWidget MRO</figcaption>
+        </figure>
+
 
 Main objective is to make Qt feel "pythonic". Qt is originally a C++ Framework,
 and using it can be quite cumbersome for Python developers. (very restrictive when it comes to types,
@@ -84,9 +97,9 @@ very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to impro
 
 - adding more powerful methods to the classes, which accept more types and have more options (in form of keyword arguments)
 - doing conversions for method parameters to lessen the strictness for types. (Example: points, sizes and rectangles can also be passed to Qt methods as tuples.)
-- raising Exceptions or returning None instead of returning -1 or invalid objects.
+- raising Exceptions or returning `None` instead of returning `-1` or invalid objects.
 - all enum getters/setters also work with strings. Everything typed with Literals for an excellent IDE experience. (Example: )
-- adding a lot of __dunder__ methods to the classes to make them behave like good python citizens.
+- adding a lot of \__dunder__ methods to the classes to make them behave like good python citizens.
 
 
 The minimum supported python version is 3.10. Since large parts of the library are dealing with type conversions, the match-case statement is essential, therefore makin it impossible to use older Python versions.

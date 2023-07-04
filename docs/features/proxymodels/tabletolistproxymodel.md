@@ -4,4 +4,4 @@
 
 | Qt Property          | Type    | Description                      |
 | ---------------------|---------|----------------------------------|
-| **header_title**:    | `str`   | Header for the resulting column  |
+| **header_title**     | `str`   | Header for the resulting column  |

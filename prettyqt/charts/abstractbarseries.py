@@ -37,7 +37,7 @@ class AbstractBarSeriesMixin(charts.AbstractSeriesMixin):
         """Set the labels position.
 
         Args:
-            position: labels position
+            position: Labels position
         """
         self.setLabelsPosition(LABELS_POSITIONS.get_enum_value(position))
 
@@ -45,7 +45,7 @@ class AbstractBarSeriesMixin(charts.AbstractSeriesMixin):
         """Return current labels position.
 
         Returns:
-            labels position
+            Labels position
         """
         return LABELS_POSITIONS.inverse[self.labelsPosition()]
 

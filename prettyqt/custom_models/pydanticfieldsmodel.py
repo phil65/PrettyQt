@@ -17,6 +17,10 @@ class PydanticFieldsModel(custom_models.BaseFieldsModel):
     More information about pydantic can be found [here][https://www.pydantic.dev/].
 
     Frozen BaseModels / frozen fields read-only.
+
+    !!! info
+        For being able to edit more types, using the
+        [EditordDelegate](../delegates/editordelegate.md) is recommended.
     """
 
     HEADER = [

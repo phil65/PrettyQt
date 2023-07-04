@@ -1,5 +1,5 @@
 * [Home](index.md)
-* API Guidelines
+* Usage
     * [General](api_guidelines/general.md)
     * [Types](api_guidelines/types.md)
     * [Bindings](api_guidelines/bindings.md)
@@ -34,7 +34,7 @@
             * [LazyLxmlModel](features/models/lazylxmlmodel.md)
     * [Proxy models](features/proxies.md)
         * [Proxifier](features/proxymodels/proxifier.md)
-        * Slice proxies
+        * [Slice proxies](features/sliceproxies.md)
             * [SliceFilterProxyModel](features/proxymodels/slicefilterproxymodel.md)
             * [SliceChangeFlagsProxyModel](features/proxymodels/slicechangeflagsproxymodel.md)
             * [SliceChangeIconSizeProxyModel](features/proxymodels/slicechangeiconsizeproxymodel.md)
@@ -45,7 +45,7 @@
             * [SliceValueTransformationProxyModel](features/proxymodels/slicevaluetransformationproxymodel.md)
             * [SliceAppearanceProxyModel](features/proxymodels/sliceappearanceproxymodel.md)
             * [SliceDisplayTextProxyModel](features/proxymodels/slicedisplaytextproxymodel.md)
-        * Reshape / Styling proxies
+        * [Reshape / Styling proxies](features/reshapeproxies.md)
             * [MeltProxyModel](features/proxymodels/meltproxymodel.md)
             * [FlattenedTreeProxyModel](features/proxymodels/flattenedtreeproxymodel.md)
             * [ColumnJoinerProxyModel](features/proxymodels/columnjoinerproxymodel.md)
@@ -53,7 +53,7 @@
             * [TableToListProxyModel](features/proxymodels/tabletolistproxymodel.md)
             * [AppearanceProxyModel](features/proxymodels/appearanceproxymodel.md)
             * [ChangeHeadersProxymodel](features/proxymodels/changeheadersproxymodel.md)
-        * SortFilter proxies
+        * [Sort / Filter proxies](features/sortfilterproxies.md)
             * [FuzzyFilterProxyModel](features/proxymodels/fuzzyfilterproxymodel.md)
             * [SubsetFilterProxyModel](features/proxymodels/subsetfilterproxymodel.md)
             * [MultiColumnFilterProxyModel](features/proxymodels/multicolumnfilterproxymodel.md)

@@ -16,9 +16,13 @@ logger = logging.getLogger(__name__)
 class AttrsFieldsModel(custom_models.BaseFieldsModel):
     """Table model to display the fields and their metadata of an dataclass.
 
-    More information about attrs can be found [here][https://www.attrs.org/].
+    More information about attrs can be found [here](https://www.attrs.org/).
 
-    Frozen dataclasses are read-only.
+    Frozen dataclasses are read-only, otherwise the data can be modified.
+
+    !!! info
+        For being able to edit more types, using the
+        [EditordDelegate](../delegates/editordelegate.md) is recommended.
     """
 
     HEADER = [

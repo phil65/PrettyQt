@@ -12,6 +12,15 @@ logger = logging.getLogger(__name__)
 
 
 class PydanticModel(custom_models.BaseDataclassModel):
+    """Table model to display a list of [pydantic](https://www.pydantic.dev/) BaseModels.
+
+    Non-frozen fields can be edited.
+
+    !!! info
+        For being able to edit more types, using the
+        [EditordDelegate](../delegates/editordelegate.md) is recommended.
+    """
+
     def __init__(self, items: Sequence[pydantic.BaseModel], **kwargs):
         super().__init__(items, **kwargs)
 

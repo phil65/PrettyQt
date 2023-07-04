@@ -9,4 +9,4 @@
 
 | Qt Property          | Type     | Description                                     |
 | ---------------------|----------|-------------------------------------------------|
-| **use_model_roles**: | `bool`   | Use QAbstractItemModel.roleNames() for columns  |
+| **use_model_roles**  | `bool`   | Use QAbstractItemModel.roleNames() for columns  |

@@ -19,6 +19,6 @@
 
 | Qt Property         | Type                     | Description                        |
 | --------------------|--------------------------| -----------------------------------|
-| **highlight_mode**: | `str`                    | Highlighting mode                  |
+| **highlight_mode**  | `str`                    | Highlighting mode                  |
 | **highlight_color** | `gui.QColor`             | Color to use for highlighted cells |
 | **highlight_role**  | `constants.ItemDataRole` | Role to use for comparing          |

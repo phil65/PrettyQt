@@ -43,6 +43,6 @@ table.show()
 
 | Qt Property     | Type        | Description                             |
 | ----------------|-------------| --------------------------------------- |
-| **id_columns**: | `list[int]` | Columns to use as identifier variables  |
+| **id_columns**  | `list[int]` | Columns to use as identifier variables  |
 | **var_name**    | `str`       | Header for variable column              |
 | **value_name**  | `str`       | Header for value column                 |
