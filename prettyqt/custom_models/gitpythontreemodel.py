@@ -13,7 +13,15 @@ logger = logging.getLogger(__name__)
 
 
 class GitPythonTreeModel(custom_models.TreeModel):
-    """Base Tree Model to display a file tree combined with Git information."""
+    """Base Tree Model to display a file tree combined with Git information.
+
+    ```py
+    model = GitPythonTreeModel(PATH_TO_GIT_FOLDER)
+    table = widgets.TreeView()
+    table.set_model(model)
+    table.show()
+    ```
+    """
 
     HEADER = [
         "Name",

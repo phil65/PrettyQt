@@ -2,22 +2,14 @@ from __future__ import annotations
 
 import prettyqt
 
-from prettyqt import charts, gui
-from prettyqt.qt import QtCore
+from prettyqt import charts, core, gui
 from prettyqt.utils import datatypes
 
 
 class XYSeriesMixin(charts.AbstractSeriesMixin):
-    """QXYSeries with some custom properties."""
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # self._process_name = ""
-        self.setUseOpenGL()
-
     def __setitem__(self, index: int, val: datatypes.PointFType):
         """Set point at given index to value."""
-        self.replace(index, datatypes.toPointF(val))
+        self.replace(index, datatypes.to_pointf(val))
 
     def __delitem__(self, index: int):
         """Remove point with given index."""
@@ -29,17 +21,16 @@ class XYSeriesMixin(charts.AbstractSeriesMixin):
     # def __reduce__(self):
     #     return type(self), (), self.__getstate__()
 
-    def __add__(self, other: QtCore.QPointF) -> XYSeries:
+    def __add__(self, other: datatypes.PointFType) -> XYSeries:
         """Append a point to the Series."""
-        self.append(other)
+        self.append(datatypes.to_pointf(other))
         return self
 
-    def serialize_fields(self):
+    def get_points(self) -> list[core.QPoint]:
         if prettyqt.qt.API == "pyqt6":
-            points = [self.at(i) for i in range(self.count())]
+            return [self.at(i) for i in range(self.count())]
         else:
-            points = self.points()
-        return dict(points=points)
+            return self.points()
 
     def get_pen(self) -> gui.Pen:
         return gui.Pen(self.pen())

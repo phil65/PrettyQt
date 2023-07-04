@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
+
 from prettyqt import constants, custom_models, gui
 
 
@@ -113,7 +115,7 @@ class ShortcutsModel(custom_models.ColumnTableModel):
         ParentColumn,
     ]
 
-    def __init__(self, shortcuts, parent=None):
+    def __init__(self, shortcuts: Sequence[gui.QShortcut], parent=None):
         super().__init__(shortcuts, self.COLUMNS, parent=parent)
 
     @classmethod

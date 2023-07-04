@@ -1,13 +1,9 @@
-"""pandasmodels module.
-
-contains Pandas-related models
-"""
-
 from .pandascategorylistmodel import PandasCategoryListModel
 from .pandascolumnlistmodel import PandasColumnListModel, PandasIndexListModel
 from .pandasindexfilterproxymodel import (
     PandasEvalFilterProxyModel,
     PandasStringColumnFilterProxyModel,
+    PandasMultiStringColumnFilterProxyModel,
 )
 from .pandastablemodel import (
     DataTableModel,
@@ -27,4 +23,5 @@ __all__ = [
     "HorizontalHeaderModel",
     "PandasEvalFilterProxyModel",
     "PandasStringColumnFilterProxyModel",
+    "PandasMultiStringColumnFilterProxyModel",
 ]

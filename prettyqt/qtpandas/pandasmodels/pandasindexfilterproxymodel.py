@@ -21,7 +21,7 @@ class BasePandasIndexFilterProxyModel(core.IdentityProxyModel):
 
     Mappings in both directions are calculated then with numpy methods.
 
-    Very fast filter model compared to row-based SortFilterProxyModel approach.
+    Faster filter model compared to row-based SortFilterProxyModel approach.
     Doesnt need a copy of whole dataframe, only mapping indexes are built.
 
     There are lot of use cases though where the better option probably is to not
@@ -218,7 +218,7 @@ class PandasEvalFilterProxyModel(BasePandasIndexFilterProxyModel):
     expression = core.Property(str, get_expression, set_expression)
 
 
-class PandasMultiStringColumnFilterModel(BasePandasIndexFilterProxyModel):
+class PandasMultiStringColumnFilterProxyModel(BasePandasIndexFilterProxyModel):
     def __init__(self, **kwargs):
         self._filters: dict[str, str] = {}
         super().__init__(**kwargs)
@@ -255,7 +255,7 @@ if __name__ == "__main__":
     model = pandasmodels.DataTableWithHeaderModel(df)
     proxy = PandasStringColumnFilterProxyModel(parent=model)
     proxy.setSourceModel(model)
-    w = debugging.proxy_comparer(proxy)
+    w = debugging.ProxyComparerWidget(proxy)
     w.show()
     with app.debug_mode():
         app.exec()

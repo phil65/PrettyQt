@@ -24,9 +24,9 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
     The columns are joined based on a formatter and appended to the end of the model
     as a new column.
 
-    The formatter must look like "{0} - {1}: {4}".
+    The formatter must look like `{0} - {1}: {4}`.
     The format codes are then populated with the content of given columns,
-    in this case it would be {Text of column 0} - {Text of Column 1}: {Text of Column 4}
+    in this case it would be `{Text of column 0} - {Text of Column 1}: {Text of Column 4}`
 
     ### Example
 
@@ -77,6 +77,8 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
         return self.sourceModel().index(row, column, parent)
 
     def parent(self, index=None):
+        if index is None:
+            return super().parent()
         if self.is_additional_column(index.column()):
             return core.ModelIndex()
         return self.sourceModel().parent(index)
@@ -96,9 +98,8 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
                 match formatter:
                     case str():
                         for name in field_names:
-                            data = self.data(
-                                self.index(index.row(), int(name), index.parent())
-                            )
+                            idx = self.index(index.row(), int(name), index.parent())
+                            data = self.data(idx)
                             formatter = formatter.replace(f"{{{name}}}", data)
                         return formatter
                     case Callable():
@@ -125,9 +126,7 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
         column = proxy_index.column()
         if self.is_additional_column(column):
             return core.ModelIndex()
-        return self.sourceModel().index(
-            proxy_index.row(), proxy_index.column(), proxy_index.parent()
-        )
+        return self.sourceModel().index(proxy_index.row(), column, proxy_index.parent())
 
     def mapFromSource(self, index):
         if self.is_additional_column(index.column()):
