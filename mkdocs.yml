@@ -49,6 +49,9 @@ plugins:
     nav_file: SUMMARY.md
 # - autorefs  # allows linking to any header
 - autolinks  # allows linking to any markdown page (alternative: https://github.com/Jackiexiao/mkdocs-roamlinks-plugin)
+- gen-files: # https://github.com/oprypin/mkdocs-gen-files
+    scripts:
+      - docs/gen_pages.py  # or any other name or path
 - mkdocstrings:
     default_handler: python
     handlers:
