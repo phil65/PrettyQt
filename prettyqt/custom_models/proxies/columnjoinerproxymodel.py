@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 class ColumnMapping:
     formatter: str | Callable
     header: str
-    flags: constants.ItemFlag = constants.IS_ENABLED | constants.IS_SELECTABLE
+    flags: constants.ItemFlag | None = None
 
 
 class ColumnJoinerProxyModel(core.AbstractProxyModel):
@@ -65,7 +65,12 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         column = index.column()
         if self.is_additional_column(column):
-            return self.mapping[column - self.columnCount()].flags
+            flags = self.mapping[column - self.columnCount()].flags
+            return (
+                flags
+                if flags is not None
+                else constants.IS_ENABLED | constants.IS_SELECTABLE
+            )
         return self.sourceModel().flags(index)
 
     def is_additional_column(self, column: int):
@@ -134,24 +139,32 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
             return core.ModelIndex()
         return self.sourceModel().index(index.row(), index.column(), index.parent())
 
-    def add_mapping(self, column_name: str, formatter: str):
-        """Form: for example "{0} ({1}), with numbers referencing the columns."""
-        self.mapping.append(ColumnMapping(formatter, column_name))
+    def add_mapping(
+        self, header: str, formatter: str, flags: constants.ItemFlag | None = None
+    ):
+        """Add a new column to the table.
+
+        Arguments:
+            header: Label used for the section header.
+            formatter: String formatter (example "{0}: {1}")
+            flags: ItemFlags for new column
+        """
+        self.mapping.append(ColumnMapping(formatter, header, flags))
 
 
 if __name__ == "__main__":
     from prettyqt import gui, widgets
 
     app = widgets.app()
-    dct = dict(a=[1, 2, 3], b=["d", "e", "f"], c=["te", "st", "test"], d=["x", "y", "z"])
-    model = gui.StandardItemModel.from_dict(dct)
+    data = dict(first=["John", "Mary"], last=["Doe", "Bo"])
+    model = gui.StandardItemModel.from_dict(data)
     table = widgets.TableView()
-    proxy = ColumnJoinerProxyModel()
-    proxy.setSourceModel(model)
-    proxy.add_mapping(column_name="header", formatter="{0} {1}")
-    proxy.add_mapping(column_name="header2", formatter="{2} {3}")
-    table.set_model(proxy)
+    table.set_model(model)
+    table.proxifier.add_column(header="Full name", formatter="{1}, {0}")
     table.show()
-    table.resize(1000, 1000)
+    table.resize(400, 130)
+    table.h_header.resize_sections("stretch")
+    table.set_title("ColumnJoinerProxymodel")
+    table.set_icon("mdi.table-column-plus-before")
     with app.debug_mode():
         app.exec()

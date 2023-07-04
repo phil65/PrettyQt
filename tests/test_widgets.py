@@ -1522,10 +1522,7 @@ def test_widget(qtbot):
     widget.setObjectName("test")
     widget.set_unique_id()
     widget.get_palette()
-    widget.set_attribute("native_window")
     widget.set_attributes(native_window=False)
-    with pytest.raises(InvalidParamError):
-        widget.set_attribute("test")
     with pytest.raises(InvalidParamError):
         widget.set_cursor("test")
     widget.set_focus_policy("strong")

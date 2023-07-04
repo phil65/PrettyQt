@@ -98,7 +98,7 @@ markdown_extensions:
     line_spans: __span
     pygments_lang_class: true
     # linenums: true
-- pymdownx.inlinehilite  # syntax highlighting
+- pymdownx.inlinehilite  # syntax highlighting inside line (`#!py mycode`)
 - pymdownx.snippets  # syntax highlighting
 - pymdownx.superfences:  # syntax highlighting
     custom_fences:

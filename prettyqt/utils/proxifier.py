@@ -424,13 +424,17 @@ class Proxifier:
         self,
         header: str,
         formatter: str,
-        flags: constants.ItemFlag = constants.IS_ENABLED | constants.IS_SELECTABLE,
+        flags: constants.ItemFlag | None = None,
     ) -> custom_models.ColumnJoinerProxyModel:
         """Add a new column with given header to the table.
 
         Column content can be defined by a formatter.
-        Example: "{2} - {4}" would result in
-        <displayRole of column 2> - <displayRole of column4>
+
+        Arguments:
+            header: Title for section header
+            formatter: String formatter (Example: "{2} - {4}" would result in
+                       <displayRole of column 2> - <displayRole of column4>
+            flags: ItemFlags for new column (default: Enabled and selectable)
         """
         from prettyqt import custom_models
 
