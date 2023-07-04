@@ -35,19 +35,19 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         return maps
 
     @property
-    def h_header(self):
+    def h_header(self) -> widgets.HeaderView:
         return self.horizontalHeader()
 
     @h_header.setter
-    def h_header(self, header):
+    def h_header(self, header: widgets.QHeaderView):
         self.setHorizontalHeader(header)
 
     @property
-    def v_header(self):
+    def v_header(self) -> widgets.HeaderView:
         return self.verticalHeader()
 
     @v_header.setter
-    def v_header(self, header):
+    def v_header(self, header: widgets.QHeaderView):
         self.setVerticalHeader(header)
 
     def is_cell_visible(self, row: int, column: int) -> bool:

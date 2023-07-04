@@ -29,11 +29,11 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
         self.h_header = widgets.HeaderView("horizontal", parent=self)
 
     @property
-    def h_header(self):
+    def h_header(self) -> widgets.HeaderView:
         return self.header()
 
     @h_header.setter
-    def h_header(self, header):
+    def h_header(self, header: widgets.QHeaderView):
         self.setHeader(header)
 
     def show_root(self, value: bool):
