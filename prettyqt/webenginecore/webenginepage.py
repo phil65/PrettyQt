@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 import logging
+import os
 
 from typing import Literal
 import webbrowser
@@ -204,6 +205,7 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
     """A web engine page holds the HTML document contents, link history + actions."""
 
     def get_icon(self) -> gui.Icon | None:
+        """Return icon. If icon is Null, return None."""
         icon = self.icon()
         return None if icon.isNull() else gui.Icon(icon)
 
@@ -314,6 +316,7 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
         return LIFECYCLE_STATE.inverse[self.lifecycleState()]
 
     def trigger_action(self, action: WebActionStr | mod.WebAction, checked: bool = False):
+        """Trigger action."""
         self.triggerAction(WEB_ACTION.get_enum_value(action), checked)
 
     def set_feature_permission(
@@ -322,6 +325,7 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
         feature: FeatureStr | mod.Feature,
         policy: PermissionPolicyStr | mod.PermissionPolicy,
     ):
+        """Set permission of feature for given URL."""
         url = core.Url(url)
         self.setFeaturePermission(
             url, FEATURE.get_enum_value(feature), PERMISSION_POLICY.get_enum_value(policy)
@@ -332,6 +336,7 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
         return webenginecore.WebEngineHistory(hist)
 
     def get_settings(self) -> webenginecore.WebEngineSettings:
+        """Get WebEngineSettings (a MutableMapping)."""
         settings = self.settings()
         return webenginecore.WebEngineSettings(settings)
 
@@ -340,40 +345,73 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
         setting_name: webenginecore.webenginesettings.WebAttributeStr,
         value: bool,
     ):
+        """Set WebEngine setting to value."""
         self.get_settings()[setting_name] = value
 
     def get_setting(
         self,
         setting_name: webenginecore.webenginesettings.WebAttributeStr,
     ) -> bool:
+        """Return value of given WebEngine setting."""
         return self.get_settings()[setting_name]
 
     def get_scripts(self) -> webenginecore.WebEngineScriptCollection:
+        """Get script collection."""
         return webenginecore.WebEngineScriptCollection(self.scripts())
 
     def open_in_browser(self):
+        """Open page URL in default system browser."""
         try:
             webbrowser.open(self.getUrl().toString())
         except ValueError as e:
             logger.exception(e)
 
-    # def choose_files(
-    #     self,
-    #     mode: FileSelectionModeStr,
-    #     old_files: List[str],
-    #     mimetypes: List[str],
-    # ) -> List[str]:
-    #     return self.chooseFiles(FILE_SELECTION_MODE[mode], old_files, mimetypes)
+    def insert_stylesheet(
+        self, name: str, css: str | os.PathLike, immediately: bool = True
+    ):
+        """Load css using JavaScript.
 
-    def mousedown(self, selector: str, btn: int = 0):
+        Arguments:
+            name: CSS id
+            css: CSS stylesheet, either a string or a PathLike object.
+            immediately: whther to run javascript immediately
+        """
+        if isinstance(css, os.PathLike):
+            path = core.File(os.fspath(css))
+            if not path.open(
+                core.File.OpenModeFlag.ReadOnly | core.File.OpenModeFlag.Text
+            ):
+                return
+            css = path.readAll().data().decode("utf-8")
+        script = webenginecore.WebEngineScript()
+        s = """
+        (function() {
+        css = document.createElement('style');
+        css.type = 'text/css';
+        css.id = "{}";
+        document.head.appendChild(css);
+        css.innerText = `{}`;
+        })()
+        """
+        s = s.format(name, css)
+        script = webenginecore.WebEngineScript()
+        if immediately:
+            self.runJavaScript(s, script.ScriptWorldId.ApplicationWorld)
+        script.setName(name)
+        script.setSourceCode(s)
+        script.setInjectionPoint(script.InjectionPoint.DocumentReady)
+        script.setRunsOnSubFrames(True)
+        script.setWorldId(script.ScriptWorldId.ApplicationWorld)
+        self.scripts().insert(script)
+
+    def mousedown(self, selector: str, btn: Literal["left", "middle", "right"]):
         """Simulate a mousedown event on the targeted element.
 
-        :param selector: A CSS3 selector to targeted element.
-        :param btn: The number of mouse button.
-            0 - left button,
-            1 - middle button,
-            2 - right button
+        Arguments:
+            selector: A CSS3 selector to targeted element
+            btn: Mouse button
         """
+        btn_id = dict(left=0, middle=1, right=2)[btn]
         return self.runJavaScript(
             f"""
             (function () {{
@@ -381,7 +419,7 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
                 var evt = document.createEvent("MouseEvents");
                 evt.initMouseEvent("mousedown", true, true, window,
                                    1, 1, 1, 1, 1, false, false, false, false,
-                                   {btn!r}, element);
+                                   {btn_id!r}, element);
                 return element.dispatchEvent(evt);
             }})();
         """
