@@ -79,6 +79,7 @@
         * [RegexEditor](features/widgets/regexeditor.md)
         * [ScrollAreaTocWidget](features/widgets/scrollareatocwidget.md)
     * [Layouts](features/layouts.md)
+        * [MultiLineLayout](features/layouts/multilinelayout.md)
     * [Delegates](features/delegates.md)
         * [EditorDelegate](features/delegates/editordelegate.md)
         * [Editors](features/widgets/editors.md)

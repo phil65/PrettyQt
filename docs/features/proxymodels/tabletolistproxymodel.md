@@ -1,3 +1,36 @@
+!!! Example "MeltProxyModel"
+
+    === "Without proxy"
+
+        ```py
+        app = widgets.app()
+        data = dict(first=["John", "Mary"], last=["Doe", "Bo"])
+        model = gui.StandardItemModel.from_dict(data)
+        table = widgets.TableView()
+        table.set_model(model)
+        # table.proxifier.to_list()
+        table.show()
+
+        ```
+        <figure markdown>
+          ![Image title](../../images/tabletolistproxymodel_before.png)
+        </figure>
+
+    === "With proxy"
+
+        ```py
+        app = widgets.app()
+        data = dict(first=["John", "Mary"], last=["Doe", "Bo"])
+        model = gui.StandardItemModel.from_dict(data)
+        table = widgets.TableView()
+        table.set_model(model)
+        table.proxifier.to_list()
+        table.show()
+        ```
+        <figure markdown>
+          ![Image title](../../images/tabletolistproxymodel_after.png)
+        </figure>
+
 ::: prettyqt.custom_models.TableToListProxyModel
 
 ### Qt Properties
