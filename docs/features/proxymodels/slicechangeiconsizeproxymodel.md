@@ -1,12 +1,4 @@
-::: prettyqt.custom_models.SliceHighlightCurrentProxyModel
-
-Three modes are possible:
-
-| Mode    | Description                                                |
-|---------|------------------------------------------------------------|
-| all     | Highlights all cells with same content.                    |
-| column  | Highlights all cells of the same column with same content. |
-| row     | Highlights all cells of the same row with same content.    |
+::: prettyqt.custom_models.SliceChangeIconSizeProxyModel
 
 
 !!! note
@@ -37,21 +29,14 @@ table.show()
   <figcaption>Mode: all</figcaption>
 </figure>
 
-<figure markdown>
-  ![Image title](../../images/highlightcurrentproxymodel_column.png)
-  <figcaption>Mode: column</figcaption>
-</figure>
-
-<figure markdown>
-  ![Image title](../../images/highlightcurrentproxymodel_row.png)
-  <figcaption>Mode: row</figcaption>
-</figure>
-
 
 ### Qt Properties
 
-| Qt Property         | Type                     | Description                        |
-| --------------------|--------------------------| -----------------------------------|
-| **highlight_mode**  | `str`                    | Highlighting mode                  |
-| **highlight_color** | `gui.QColor`             | Color to use for highlighted cells |
-| **highlight_role**  | `constants.ItemDataRole` | Role to use for comparing          |
+| Qt Property         | Type        | Description                  |
+| --------------------|-------------| ---------------------------- |
+| **column_slice**    | `slice`     | Slice for filtering columns  |
+| **row_slice**       | `slice`     | Slice for filtering rows     |
+| **icon_size**       | `core.QSize`| Icon size for DecorationRole |
+
+!!! note
+    Due to Qt limitations, the Qt properties contain a list with 3 items instead of a slice.

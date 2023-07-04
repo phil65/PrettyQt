@@ -262,7 +262,7 @@ class FSSpecTreeModel(
     def set_protocol(self, protocol: str, **kwargs):
         self.fs = fsspec.filesystem(protocol, **kwargs)
 
-    def _get_columns_for_protocol(self, protocol: str):
+    def _get_columns_for_protocol(self, protocol: str) -> list[FsSpecColumnItem]:
         match self.fs.protocol:
             case "github":
                 return [

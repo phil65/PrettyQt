@@ -300,6 +300,16 @@ def get_editor_for_value_list(ls: Sequence, parent=None):
 
 
 def get_editor_for_value(val, parent=None):
+    """Returns an editor for given value.
+
+    Functions checks for type and returns an appropriate editor.
+    The returned editor is guaranteed to have a get_value and set_value method
+    which can be used to the given value.
+
+    Arguments:
+        val: Any value type
+        parent: parent widget for editor
+    """
     from prettyqt import core, custom_widgets, gui, widgets
 
     match val:
@@ -393,6 +403,7 @@ T = TypeVar("T")
 
 
 def align_types(source: T, target: VariantType | tuple) -> T:
+    """Align target to the type of source."""
     from prettyqt import core, gui
     from prettyqt.utils import colors
 
@@ -416,6 +427,7 @@ def align_types(source: T, target: VariantType | tuple) -> T:
 
 
 def make_qtype(obj):
+    """Cast a subclassed PrettyQt instance to its orginal Qt Type."""
     from prettyqt import core
 
     match obj:

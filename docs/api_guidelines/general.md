@@ -46,3 +46,6 @@ widget = widgets.Widget(modality="window")
 
 * The layer aims to be thin, with no significant overhead. Developers should still use common sense when it comes to using the subclasses vs the original Qt classes though. In loops which get called very often (like paintEvent), it probably still makes sense in lot of cases to not use any subclasses for performance reasons.
 It should also be mentioned that Qt does not accept derived classes in some places. (for example as a return value for QAbstractItemModel.data())
+
+* PrettyQt tries to align with Qt´s module hierarchy, meaning that `core` module does not import stuff from `QtGui / gui`, `gui` module does not import `QtWidgets / widgets` etc.
+In cases where it is not possible,

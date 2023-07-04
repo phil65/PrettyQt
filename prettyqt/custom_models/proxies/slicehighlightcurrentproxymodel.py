@@ -18,9 +18,9 @@ class SliceHighlightCurrentProxyModel(custom_models.SliceIdentityProxyModel):
 
     Possible modes are:
 
-    * All: Highlight all cells within given slice
-    * Column: Highlight all cells of same column as current if cell is within given slice.
-    * Row: Highlight all cells of same row as current if cell is within given slice.
+    * `all`: Highlight all cells with same value.
+    * `column`: Highlight all cells with same value and same column as current.
+    * `row`: Highlight all cells with same value and same row as current.
 
     !!! note
         This is a slice proxy and can be selectively applied to a model.
@@ -138,7 +138,7 @@ if __name__ == "__main__":
     model = gui.StandardItemModel.from_dict(dct)
     table = widgets.TableView()
     table.set_model(model)
-    table.proxifier[:, ::2].highlight_current(mode="column")
+    # table.proxifier[:, ::2].highlight_current(mode="column")
     table.resize(500, 200)
     table.set_title("Example")
     table.set_icon("mdi.cursor-default-click-outline")

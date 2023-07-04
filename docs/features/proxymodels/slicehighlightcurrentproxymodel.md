@@ -17,7 +17,7 @@
         # table.proxifier[:, ::2].highlight_current(mode="column")
         ```
         <figure markdown>
-          ![Image title](../../images/slicehighlightcurrentproxymodel_all.png)
+          ![Image title](../../images/slicehighlightcurrentproxymodel_none.png)
         </figure>
 
     === "Row mode"
