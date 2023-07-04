@@ -5,6 +5,7 @@ import os
 import pathlib
 
 from prettyqt import core, widgets
+from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -14,58 +15,75 @@ class FileTree(widgets.TreeView):
     def __init__(self, *args, filters: list[str] | None = None, **kwargs):
         super().__init__(*args, **kwargs)
         self.setRootIsDecorated(True)
-        self.h_header.set_resize_mode("resize_to_contents")
         self.setup_dragdrop_move()
-
         model = widgets.FileSystemModel()
         model.resolve_sym_links(False)
-        model.set_root_path("C:/")
         if filters:
             model.set_name_filters(filters, hide=False)
         self.set_model(model)
-        self.expanded_ids = []
+        self._expanded_ids = []
 
-    def get_expanded_state(self) -> list[str]:
-        self.expanded_ids = []
-        for i in range(self.model().rowCount()):
-            self._save_expanded_on_level(self.model().index(i, 0))
-        return self.expanded_ids
+    def get_expanded_state(self, root_index: core.ModelIndex | None = None) -> list[str]:
+        """Get a list of all expanded paths.
 
-    def set_expanded_state(self, state: list[str]):
-        self.expanded_ids = state
+        Can be used to re-expand to the same state.
+        """
+        root = root_index or self.rootIndex()
+        model = self.model()
+        self._expanded_ids = []
+
+        def _save_expanded_on_level(index: core.ModelIndex):
+            if not self.isExpanded(index):
+                return None
+            model = self.model()
+            if index.isValid():
+                path = model.data(index, model.Roles.FilePathRole)
+                self._expanded_ids.append(path)
+            for i in range(model.rowCount(index)):
+                val = model.index(i, 0, index)
+                _save_expanded_on_level(val)
+
+        for i in range(model.rowCount(root)):
+            _save_expanded_on_level(model.index(i, 0, root))
+        return self._expanded_ids
+
+    def set_expanded_state(
+        self, state: list[str], root_index: core.ModelIndex | None = None
+    ):
+        """Set all indexes which correspond to given paths to expanded."""
+        root = root_index or self.rootIndex()
+        model = self.model()
+        self._expanded_ids = state
+
+        def _restore_expanded_on_level(index: core.ModelIndex):
+            model = self.model()
+            path = model.data(index, model.Roles.FilePathRole)
+            if path not in self._expanded_ids:
+                return None
+            self.setExpanded(index, True)
+            if not model.hasChildren(index):
+                return None
+            path = pathlib.Path(path)
+            for it in path.iterdir():
+                child_index = model.index(str(path / it))
+                _restore_expanded_on_level(child_index)
+
         with self.updates_off():
-            for i in range(self.model().rowCount()):
-                self._restore_expanded_on_level(self.model().index(i, 0))
+            for i in range(model.rowCount(root)):
+                _restore_expanded_on_level(model.index(i, 0))
 
-    def _save_expanded_on_level(self, index: core.ModelIndex):
-        if not self.isExpanded(index):
-            return None
-        model = self.model()
-        if index.isValid():
-            path = model.data(index, model.FilePathRole)
-            self.expanded_ids.append(path)
-        for i in range(model.rowCount(index)):
-            val = model.index(i, 0, index)
-            self._save_expanded_on_level(val)
-
-    def _restore_expanded_on_level(self, index: core.ModelIndex):
-        model = self.model()
-        path = model.data(index, model.FilePathRole)
-        if path not in self.expanded_ids:
-            return None
-        self.setExpanded(index, True)
-        if not model.hasChildren(index):
-            return None
-        path = pathlib.Path(path)
-        for it in path.iterdir():
-            child_index = model.index(str(path / it))
-            self._restore_expanded_on_level(child_index)
+    def set_root_path(self, path: datatypes.PathType):
+        """Set tree rootpath to given path."""
+        path = os.fspath(path)
+        self.model().set_root_path(path)
+        index = self.model().index(path)
+        self.setRootIndex(index)
 
 
 class BreadCrumbsToolBar(widgets.ToolBar):
     path_clicked = core.Signal(pathlib.Path)
 
-    def set_breadcrumbs(self, path: os.PathLike):
+    def set_breadcrumbs(self, path: datatypes.PathType):
         self.clear()
         path = pathlib.Path(path)
         logger.info(f"Setting breadrumbs to {path}")
@@ -122,6 +140,8 @@ class FileExplorer(widgets.Widget):
 
 if __name__ == "__main__":
     app = widgets.app()
-    w = FileExplorer()
+    w = FileTree()
+    w.set_root_path("C:/")
     w.show()
     app.exec()
+    print(w.get_expanded_state())
