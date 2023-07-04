@@ -252,7 +252,7 @@ if __name__ == "__main__":
     a = pd.Series(["a", "bc", "c", "d", "aa"] * 100000, dtype=pd.StringDtype())
     b = pd.Series(["a", "b", "c", "fjkdsj", "fdf"] * 100000, dtype=pd.StringDtype())
     df = pd.DataFrame(dict(a=a, b=b))
-    model = pandasmodels.DataTableWithHeaderModel(df)
+    model = pandasmodels.PandasDataFrameModel(df)
     proxy = PandasStringColumnFilterProxyModel(parent=model)
     proxy.setSourceModel(model)
     w = debugging.ProxyComparerWidget(proxy)

@@ -14,16 +14,21 @@ from prettyqt import constants, core
 logger = logging.getLogger(__name__)
 
 
-class DataTableModel(core.AbstractTableModel):
+class PandasDataFrameModel(core.AbstractTableModel):
     class Roles(enum.IntEnum):
         """Role names."""
 
         DTypeRole = constants.USER_ROLE + 4555
         ColumnNameRole = constants.USER_ROLE + 4556
 
-    def __init__(self, df: pd.DataFrame, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, df, *args, **kwargs):
+        self._multiindex_separator = " | "
         self.df = df
+        super().__init__(*args, **kwargs)
+
+    @classmethod
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, pd.DataFrame)
 
     def headerData(
         self,
@@ -31,7 +36,27 @@ class DataTableModel(core.AbstractTableModel):
         orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
-        pass
+        match role, orientation:
+            case constants.ALIGNMENT_ROLE, constants.HORIZONTAL:
+                return constants.ALIGN_CENTER | constants.ALIGN_BOTTOM
+            case constants.DISPLAY_ROLE, constants.HORIZONTAL:
+                header = self.df.columns[section]
+                if isinstance(header, tuple | list):
+                    return self._multiindex_separator.join(str(i) for i in header)
+                return str(header)
+                # label = helpers.format_name(self.df.columns[section])
+                # return f"{label}\n{self.df.iloc[:, section].dtype}"
+            # case constants.DECORATION_ROLE, constants.HORIZONTAL if self.show_icons:
+            #     dtype = self.df.iloc[:, section].dtype
+            #     return icons.icon_for_dtype(dtype)
+            case _, _:
+                return None
+
+    def set_multiindex_separator(self, separator: str):
+        self._multiindex_separator = separator
+
+    def get_multiindex_separator(self) -> str:
+        return self._multiindex_separator
 
     def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         if self.df is None:
@@ -97,44 +122,6 @@ class DataTableModel(core.AbstractTableModel):
                 by=self.df.columns[ncol], ascending=is_ascending
             )
         self.update_all()
-
-
-class DataTableWithHeaderModel(DataTableModel):
-    def __init__(self, *args, **kwargs):
-        self._multiindex_separator = " | "
-        super().__init__(*args, **kwargs)
-
-    @classmethod
-    def supports(cls, instance) -> bool:
-        return isinstance(instance, pd.DataFrame)
-
-    def headerData(
-        self,
-        section: int,
-        orientation: constants.Orientation,
-        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-    ):
-        match role, orientation:
-            case constants.ALIGNMENT_ROLE, constants.HORIZONTAL:
-                return constants.ALIGN_CENTER | constants.ALIGN_BOTTOM
-            case constants.DISPLAY_ROLE, constants.HORIZONTAL:
-                header = self.df.columns[section]
-                if isinstance(header, tuple | list):
-                    return self._multiindex_separator.join(str(i) for i in header)
-                return str(header)
-                # label = helpers.format_name(self.df.columns[section])
-                # return f"{label}\n{self.df.iloc[:, section].dtype}"
-            # case constants.DECORATION_ROLE, constants.HORIZONTAL if self.show_icons:
-            #     dtype = self.df.iloc[:, section].dtype
-            #     return icons.icon_for_dtype(dtype)
-            case _, _:
-                return None
-
-    def set_multiindex_separator(self, separator: str):
-        self._multiindex_separator = separator
-
-    def get_multiindex_separator(self) -> str:
-        return self._multiindex_separator
 
     multiindex_separator = core.Property(
         str, get_multiindex_separator, set_multiindex_separator
@@ -238,7 +225,7 @@ if __name__ == "__main__":
     df = pd.DataFrame(np.random.randn(60, 60), index=index, columns=index)
     table = widgets.TableView()
     table.show()
-    model = DataTableWithHeaderModel(df, parent=table)
+    model = PandasDataFrameModel(df, parent=table)
     model = model.proxifier[6:7, ::2].style("red", role=constants.FOREGROUND_ROLE)
     model = model.proxifier[1:4, ::2].style(
         "Courier", role=constants.FONT_ROLE, point_size=30

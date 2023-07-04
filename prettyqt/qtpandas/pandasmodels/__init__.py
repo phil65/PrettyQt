@@ -5,9 +5,8 @@ from .pandasindexfilterproxymodel import (
     PandasStringColumnFilterProxyModel,
     PandasMultiStringColumnFilterProxyModel,
 )
-from .pandastablemodel import (
-    DataTableModel,
-    DataTableWithHeaderModel,
+from .pandasdataframemodel import (
+    PandasDataFrameModel,
     HorizontalHeaderModel,
     VerticalHeaderModel,
 )
@@ -17,8 +16,7 @@ __all__ = [
     "PandasCategoryListModel",
     "PandasColumnListModel",
     "PandasIndexListModel",
-    "DataTableModel",
-    "DataTableWithHeaderModel",
+    "PandasDataFrameModel",
     "VerticalHeaderModel",
     "HorizontalHeaderModel",
     "PandasEvalFilterProxyModel",

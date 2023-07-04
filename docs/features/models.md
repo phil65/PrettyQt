@@ -45,7 +45,7 @@ preferred choice for most models.
 | `pydantic.BaseModel`| [pydantic](https://pydantic.dev) | [PydanticFieldsModel](pydanticfieldsmodel.md) | Table containing all relevant information for each BaseModel field.
 | `list[pydantic.BaseModel]` | [pydantic](https://pydantic.dev) | [PydanticModel](pydanticmodel.md) | Comparison view for a list of Pydantic models.
 | `fsspec.FileSystem` | [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) | [FsSpecModel](fsspecmodel.md) | Model with same interface as QFileSystemModel
-| `pandas.DataFrame` | [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) | [PandasTableModel](pandastablemodel.md) | Model to show a pandas DataFrame
+| `pandas.DataFrame` | [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) | [PandasDataFrameModel](pandasdataframemodel.md) | Model to show a pandas DataFrame
 | `pandas.Index` | [pandas](https://pandas.pydata.org) | [PandasIndexModel](pandasindexmodel.md) | Model to show a pandas (Multi)Index
 | `polars.DataFrame` | [polars](https://www.pola.rs) | [PolarsTableModel](polarstablemodel.md) | Model to display a polars DataFrame
 | `git.Repo, git.Tree`| [gitpython](https://github.com/gitpython-developers/GitPython) | [GitPythonTreeModel](gitpythontreemodel.md) | Model to display a polars DataFrame

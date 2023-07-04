@@ -519,7 +519,7 @@ if __name__ == "__main__":
 
     from prettyqt.qtpandas import pandasmodels
 
-    class DataFrameModel(pandasmodels.DataTableModel):
+    class DataFrameModel(pandasmodels.PandasDataFrameModel):
         def read_level(
             self, y: int = 0, xs: int = 0, xe: int | None = None, orient=None
         ) -> list[gui.StandardItem]:

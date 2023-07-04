@@ -83,12 +83,16 @@ class TableToListProxyModel(core.IdentityProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import debugging, widgets
+    from prettyqt import gui, widgets
 
     app = widgets.app()
-    table = debugging.example_table()
-    table.proxifier.transpose()
-    table.proxifier.get_proxy("table_to_list")
-    splitter = debugging.ProxyComparerWidget(table.model())
-    splitter.show()
+    data = dict(first=["John", "Mary"], last=["Doe", "Bo"])
+    model = gui.StandardItemModel.from_dict(data)
+    table = widgets.TableView()
+    table.set_model(model)
+    table.proxifier.to_list()
+    # table.proxifier.transpose()
+    # table.proxifier.to_list()
+    # splitter = debugging.ProxyComparerWidget(table.model())
+    # splitter.show()
     app.exec()

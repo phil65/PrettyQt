@@ -9,7 +9,7 @@ PrettyQt includes multiple models to display Pandas dataframes.
 One of the key "issues" is that in contrast to QAbstractTableModels, a pandas DataFrame can have MultiIndexes.
 PrettyQt offers several approaches to display these MultiIndexes.
 
-DataTableWithHeaderModel is a very simple model which is displaying MultiIndexes by joining
+PandasDataFrameModel is a very simple model which is displaying MultiIndexes by joining
 the multiple index levels using a separator. (the separator value is exposed as a Qt Property)
 
 In addition, two composed widgets are included which consist of three different tables (one for data, one for the index, one for the headers) which are synced on scrolling / resizing.

@@ -161,7 +161,11 @@ if __name__ == "__main__":
     model = gui.StandardItemModel.from_dict(data)
     table = widgets.TableView()
     table.set_model(model)
+    table.setWindowTitle("MeltProxyModel example")
+    table.set_icon("mdi6.table-pivot")
     table.show()
-    table.proxifier.melt(id_columns=[0, 1])
+    table.resize(600, 130)
+    table.h_header.resize_sections("stretch")
+    # table.proxifier.melt(id_columns=[0, 1])
     with app.debug_mode():
         app.exec()

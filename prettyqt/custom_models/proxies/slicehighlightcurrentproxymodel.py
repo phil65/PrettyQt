@@ -127,26 +127,22 @@ class SliceHighlightCurrentProxyModel(custom_models.SliceIdentityProxyModel):
 if __name__ == "__main__":
     from prettyqt import gui, widgets
 
-    app = widgets.app(style="Vista")
+    app = widgets.app(style="Windows")
     dct = dict(
-        a=["a", "a", "a", "a"],
-        b=["a", "a", "a", "a"],
-        c=["a", "a", "a", "a"],
-        d=["a", "a", "a", "a"],
-        e=["a", "a", "a", "a"],
+        a=["a", "b", "a", "b"],
+        b=["a", "b", "a", "b"],
+        c=["a", "b", "a", "b"],
+        d=["b", "a", "b", "a"],
+        e=["a", "b", "a", "a"],
     )
-
-    # dct = dict(
-    #     a=["a", "b", "a", "b"],
-    #     b=["a", "b", "a", "b"],
-    #     c=["a", "b", "a", "b"],
-    #     d=["b", "a", "b", "a"],
-    #     e=["a", "b", "a", "b"],
-    # )
     model = gui.StandardItemModel.from_dict(dct)
     table = widgets.TableView()
     table.set_model(model)
-    table.proxifier[:, ::2].highlight_current(mode="all")
+    table.proxifier[:, ::2].highlight_current(mode="column")
+    table.resize(500, 200)
+    table.set_title("Example")
+    table.set_icon("mdi.cursor-default-click-outline")
     table.show()
+    table.h_header.resize_sections("stretch")
     with app.debug_mode():
         app.exec()
