@@ -19,6 +19,7 @@ icon_cache: dict[key_type, QtGui.QIcon] = {}
 # Linux packagers, please set this to True if you want to make qtawesome
 # use system fonts
 SYSTEM_FONTS = False
+PREFIXES = ("mdi.", "mdi6.", "fa5.", "fa5s.", "ei.", "ph.")
 
 
 def hook(obj: dict) -> dict:
@@ -312,7 +313,7 @@ def get_icon(
         icon = os.fspath(icon)
     if (icon, color, as_qicon) in icon_cache:
         return icon_cache[(icon, color, as_qicon)]
-    if isinstance(icon, str) and icon.startswith("mdi."):
+    if isinstance(icon, str) and icon.startswith(PREFIXES):
         new = _icon(icon, color=color) if color is not None else _icon(icon)
     else:
         new = QtGui.QIcon(icon)  # type: ignore

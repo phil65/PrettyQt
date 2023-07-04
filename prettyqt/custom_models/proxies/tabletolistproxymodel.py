@@ -11,7 +11,7 @@ class TableToListProxyModel(core.IdentityProxyModel):
     """
 
     ID = "table_to_list"
-    ICON = "mdi.table-pivot"
+    ICON = "mdi6.table-pivot"
 
     def __init__(self, *args, header_title: str = "", **kwargs):
         super().__init__(*args, **kwargs)

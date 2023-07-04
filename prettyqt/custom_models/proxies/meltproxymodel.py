@@ -10,6 +10,7 @@ class MeltProxyModel(core.AbstractProxyModel):
     """
 
     ID = "melt"
+    ICON = "mdi6.table-pivot"
 
     def __init__(
         self,
