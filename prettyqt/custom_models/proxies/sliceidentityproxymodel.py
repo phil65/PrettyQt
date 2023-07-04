@@ -23,13 +23,15 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
         self._indexer = (slice(None), slice(None))
         self.set_indexer(indexer)
 
-    def indexer_contains(self, index: core.ModelIndex) -> bool:
+    def indexer_contains(self, index: core.ModelIndex | tuple[int, int]) -> bool:
         """Check whether given ModelIndex is included in our Indexer."""
+        if isinstance(index, core.ModelIndex):
+            index = (index.row(), index.column())
         col_slice = self.update_slice_boundaries(self.get_column_slice(), typ="column")
         row_slice = self.update_slice_boundaries(self.get_row_slice(), typ="row")
         # logger.info(f"{col_slice=} {row_slice=}")
         to_check = (row_slice, col_slice)  # instead of _indexer, for negative indexes.
-        return helpers.is_position_in_index(index.row(), index.column(), to_check)
+        return helpers.is_position_in_index(*index, to_check)
 
     def update_slice_boundaries(self, sl: slice, typ="row") -> slice:
         """Update slice boundaries by resolving negative indexes."""
