@@ -4,6 +4,7 @@ import dataclasses
 import sys
 
 from prettyqt import constants, core, gui, widgets
+from prettyqt.utils import datatypes
 
 
 @dataclasses.dataclass
@@ -104,15 +105,17 @@ class ActionGrid(widgets.Frame):
     def __init__(
         self,
         columns: int = 4,
-        button_size: core.QSize | None = None,
-        icon_size: core.QSize | None = None,
+        button_size: datatypes.SizeType | None = None,
+        icon_size: datatypes.SizeType | None = None,
         tool_button_style=constants.ToolButtonStyle.ToolButtonTextUnderIcon,
         **kwargs,
     ):
         super().__init__(**kwargs)
         self._columns = columns
-        self._button_size = core.QSize(button_size) if button_size else core.QSize()
-        self._icon_size = core.QSize(icon_size) if icon_size else core.QSize()
+        self._button_size = (
+            datatypes.to_size(button_size) if button_size else core.QSize()
+        )
+        self._icon_size = datatypes.to_size(icon_size) if icon_size else core.QSize()
         self._tool_button_style = tool_button_style
 
         self._grid_slots: list[ActionGridItem] = []

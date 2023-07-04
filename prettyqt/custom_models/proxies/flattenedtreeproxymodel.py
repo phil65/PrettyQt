@@ -86,8 +86,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         if not source_index.isValid():
             return source_index
         key = self.get_index_key(source_index)
-        offset = self._source_offset[key]
-        row = offset + source_index.row()
+        row = self._source_offset[key] + source_index.row()
         return self.index(row, 0)
 
     def mapToSource(self, index: core.ModelIndex) -> core.ModelIndex:
@@ -104,7 +103,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         return (
             core.ModelIndex()
             if parent.isValid()
-            else self.createIndex(row, column, parent)  # object=row)
+            else self.createIndex(row, column, ptr=row)  # object=row)
         )
 
     def parent(self, child=None) -> core.ModelIndex:

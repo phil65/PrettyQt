@@ -48,7 +48,7 @@ if __name__ == "__main__":
     app = widgets.app()
     table = debugging.example_table()
     table.proxifier.transpose()
-    table.proxifier.get_proxy("table_to_list")
+    table.proxifier.to_list()
     splitter = ProxyComparerWidget(table.model())
     splitter.show()
     app.exec()
