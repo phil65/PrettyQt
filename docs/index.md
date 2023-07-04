@@ -143,7 +143,7 @@ almost every class from Qt is covered.
 | QtWebChannel        | [prettyqt.webchannel](webchannel.md)        |
 | QtWebEngineCore     | [prettyqt.webenginecore](webenginecore.md)     |
 | QtWebEngineWidgets  | [prettyqt.webenginewidgets](webenginewidgets.md)  |
-| QtWidgets           | [prettyqt.widgets](widgets.md)           |
+| QtWidgets           | [prettyqt.widgets](api/widgets.md)           |
 
 
 [Read more](general.md) about the general API design.

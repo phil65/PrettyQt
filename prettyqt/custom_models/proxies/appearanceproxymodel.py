@@ -13,7 +13,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
     """Proxy model for changing the "style roles" of the source model.
 
     In contrast to
-    [SliceAppearanceProxyModel](../features/proxies/sliceappearanceproxymodel.md),
+    [SliceAppearanceProxyModel](../features/proxymodels/sliceappearanceproxymodel.md),
     this one works in a more "static" way, meaning that you can change the
     color / font / alignment of indexes via model.setData even when the source model
     is not item-based (like a StandardItemModel).
