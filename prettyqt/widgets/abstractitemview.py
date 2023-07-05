@@ -369,7 +369,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def set_delegate(
         self,
-        delegate: widgets.QAbstractItemDelegate | DelegateStr,
+        delegate: widgets.QAbstractItemDelegate | DelegateStr | None,
         *,
         column: int | None = None,
         row: int | None = None,
@@ -391,6 +391,8 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             case str():
                 Klass = helpers.get_class_for_id(widgets.StyledItemDelegate, delegate)
                 dlg = Klass(parent=self, **kwargs)
+            case None:
+                dlg = widgets.StyledItemDelegate()
             case _:
                 raise ValueError(delegate)
         match column, row:
