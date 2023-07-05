@@ -67,6 +67,32 @@ class AbstractProxyModelMixin(core.AbstractItemModelMixin):
             models[idx - 1].setSourceModel(models[idx + 1])
             self.setSourceModel(None)
 
+    def get_source_mapping(self, leaves_only: bool = False):
+        _source_key = []
+        _source_offset = {}
+        source = self.sourceModel()
+
+        def create_mapping(
+            model,
+            index: core.ModelIndex,
+            key_path: tuple[int, ...],
+            leaves_only: bool = False,
+        ):
+            if (rowcount := model.rowCount(index)) > 0:
+                if not leaves_only:
+                    _source_offset[key_path] = len(_source_offset)
+                    _source_key.append(key_path)
+                for i in range(rowcount):
+                    child = model.index(i, 0, index)
+                    create_mapping(model, child, (*key_path, i), leaves_only=leaves_only)
+            else:
+                _source_offset[key_path] = len(_source_offset)
+                _source_key.append(key_path)
+
+        for i in range(source.rowCount()):
+            create_mapping(source, source.index(i, 0), (i,), leaves_only=leaves_only)
+        return _source_key, _source_offset
+
 
 class AbstractProxyModel(AbstractProxyModelMixin, core.QAbstractProxyModel):
     pass

@@ -123,26 +123,7 @@ class FlattenTreeProxyModel(core.AbstractProxyModel):
         return super().data(index, role)
 
     def _update_mapping(self):
-        source = self.sourceModel()
-
-        self._source_key = []
-        self._source_offset = {}
-
-        def create_mapping(model, index: core.ModelIndex, key_path: tuple[int, ...]):
-            if (rowcount := model.rowCount(index)) > 0:
-                if not self._leaves_only:
-                    self._source_offset[key_path] = len(self._source_offset)
-                    self._source_key.append(key_path)
-                for i in range(rowcount):
-                    child = model.index(i, 0, index)
-                    create_mapping(model, child, (*key_path, i))
-            else:
-                self._source_offset[key_path] = len(self._source_offset)
-                self._source_key.append(key_path)
-
-        if source is not None:
-            for i in range(source.rowCount()):
-                create_mapping(source, source.index(i, 0), (i,))
+        self._source_key, self._source_offset = self.get_source_mapping(self._leaves_only)
 
     def _source_data_changed(self, top: core.ModelIndex, bottom: core.ModelIndex):
         changed_indexes = [top.sibling(i, 0) for i in range(top.row(), bottom.row() + 1)]
