@@ -10,7 +10,7 @@ from typing_extensions import Self
 
 from prettyqt import core, gui
 from prettyqt.qt import API
-from prettyqt.utils import bidict, serializemixin
+from prettyqt.utils import bidict, helpers, serializemixin
 
 
 FormatStr = Literal[
@@ -96,8 +96,19 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
     def __setitem__(self, index: tuple[int, int], value):
         self.setPixel(index[0], index[1], value)
 
-    def __getitem__(self, index: tuple[int, int]) -> int:
-        return self.pixel(index[0], index[1])
+    def __getitem__(self, index: tuple[int, int]) -> int | list[int]:
+        match index:
+            case int() as row, int() as col:
+                return self.pixel(row, col)
+            case (row, col):
+                rowcount = self.height()
+                colcount = self.width()
+                return [
+                    self.pixel(i, j)
+                    for i, j in helpers.yield_positions(row, col, rowcount, colcount)
+                ]
+            case _:
+                raise TypeError(index)
 
     @classmethod
     def from_ndarray(cls, arr) -> Self:
@@ -115,7 +126,9 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
             gui.QImage.Format.Format_RGB888,
         )
 
-    def to_ndarray(self, fmt: FormatStr = "rgb888", channels: int = 3):
+    def to_ndarray(
+        self, fmt: FormatStr | gui.QImage.Format = "rgb888", channels: int = 3
+    ):
         import numpy as np
 
         qimage = self.convert_to_format(fmt)
