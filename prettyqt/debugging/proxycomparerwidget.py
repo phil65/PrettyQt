@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import logging
 
+from typing import Literal
+
 from prettyqt import core, custom_models, widgets
 
 
@@ -9,13 +11,30 @@ logger = logging.getLogger(__name__)
 
 
 class ProxyComparerWidget(widgets.Splitter):
-    def __init__(self, proxy: core.QAbstractProxyModel, is_tree: bool = False, **kwargs):
+    def __init__(
+        self,
+        proxy: core.QAbstractProxyModel,
+        itemview: Literal["tree", "table", "list"]
+        | type[widgets.QAbstractItemView] = "table",
+        **kwargs,
+    ):
         super().__init__(**kwargs)
         self.proxy_tables = []
+        match itemview:
+            case "tree":
+                View = widgets.TreeView
+            case "table":
+                View = widgets.TableView
+            case "list":
+                View = widgets.ListView
+            case type():
+                View = itemview
+            case _:
+                raise TypeError(itemview)
         while isinstance(proxy, core.QAbstractProxyModel):
             container = widgets.Widget()
             layout = container.set_layout("vertical")
-            table = widgets.TreeView() if is_tree else widgets.TableView()
+            table = View()
             table.set_model(proxy)
             table.set_delegate("editor")
             self.proxy_tables.append(table)
@@ -33,7 +52,7 @@ class ProxyComparerWidget(widgets.Splitter):
 
         container = widgets.Widget()
         layout = container.set_layout("vertical")
-        table = widgets.TreeView() if is_tree else widgets.TableView()
+        table = View()
         table.set_model(proxy)
         table.set_delegate("editor")
         self.proxy_tables.append(table)
