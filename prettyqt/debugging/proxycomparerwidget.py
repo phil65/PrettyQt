@@ -19,10 +19,12 @@ class ProxyComparerWidget(widgets.Splitter):
         delegate: widgets.abstractitemview.DelegateStr
         | widgets.QItemDelegate
         | None = "editor",
+        link_selections: bool = True,
         **kwargs,
     ):
         super().__init__(**kwargs)
-        self.proxy_tables = []
+        self.model_itemviews = []
+        self.linker = None
         # determine ItemView class for the models
         match itemview:
             case "tree":
@@ -51,7 +53,7 @@ class ProxyComparerWidget(widgets.Splitter):
             table = View()
             table.set_model(model)
             table.set_delegate(delegate)
-            self.proxy_tables.append(table)
+            self.model_itemviews.append(table)
             prop_table = widgets.TableView()
             prop_table.set_delegate("editor")
             prop_model = custom_models.WidgetPropertiesModel(model)
@@ -63,6 +65,8 @@ class ProxyComparerWidget(widgets.Splitter):
             col_splitter.add(prop_table)
             layout.add(col_splitter)
             self.add(container)
+        if link_selections:
+            self.linker = custom_models.LinkedSelectionModel(*self.model_itemviews)
 
 
 if __name__ == "__main__":

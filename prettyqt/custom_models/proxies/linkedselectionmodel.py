@@ -9,6 +9,10 @@ logger = logging.getLogger(__name__)
 
 
 class LinkedSelectionModel(core.ItemSelectionModel):
+    # TODO: atm this doesnt need to inherit from ItemSelectionModel.
+    # Not sure if there is any advantage in doing so...
+    # Otherwise we could rename to SelectionLinker and just inherit from
+    # object / core.Object
     def __init__(
         self,
         *itemviews,
@@ -55,7 +59,6 @@ if __name__ == "__main__":
     table.proxifier.get_proxy("table_to_list")
     w = debugging.ProxyComparerWidget(table.model())
     tables = w.find_children(widgets.TableView)
-    mod = LinkedSelectionModel(*w.proxy_tables)
     with app.debug_mode():
         w.show()
         app.exec()
