@@ -100,19 +100,10 @@ class ScrollMode(enum.Enum):
     HeadersOnly = 4
 
 
-class ExpandMode(enum.Enum):
-    Always = 1
-    OnFocus = 2
-
-
 ScrollModeStr = Literal["single", "multi", "headers_only"]
-ExpandModeStr = Literal["always", "on_focus"]
 
 SCROLL_MODE: bidict[ScrollModeStr, ScrollMode] = bidict(
     single=ScrollMode.Single, multi=ScrollMode.Multi, headers_only=ScrollMode.HeadersOnly
-)
-EXPAND_MODE: bidict[ExpandModeStr, ExpandMode] = bidict(
-    always=ExpandMode.Always, on_focus=ExpandMode.OnFocus
 )
 
 
@@ -121,9 +112,6 @@ class ScrollAreaTocWidget(widgets.TreeView):
 
     ScrollMode = ScrollMode
     core.Enum(ScrollMode)
-
-    ExpandMode = ExpandMode
-    core.Enum(ExpandMode)
 
     def __init__(
         self,
@@ -136,7 +124,7 @@ class ScrollAreaTocWidget(widgets.TreeView):
         # TODO: not sure if parent should always equal scrollarea..."""
         self._WidgetClass = widget_class
         self._scroll_mode = ScrollMode.Single
-        self._expand_mode = ExpandMode.Always
+        self._always_expanded = False
         self._last_visible = None
         self.scrollarea = scrollarea
         super().__init__(scrollarea, **kwargs)
@@ -159,7 +147,7 @@ class ScrollAreaTocWidget(widgets.TreeView):
 
     def _get_map(self):
         maps = super()._get_map()
-        maps |= {"expandMode": EXPAND_MODE, "scrollMode": SCROLL_MODE}
+        maps |= {"scrollMode": SCROLL_MODE}
         return maps
 
     def showEvent(self, event):
@@ -186,7 +174,7 @@ class ScrollAreaTocWidget(widgets.TreeView):
         widget.widget().installEventFilter(self)
         self.selectionModel().currentRowChanged.connect(self._on_current_change)
         self.selectionModel().selectionChanged.connect(self._on_selection_change)
-        # if self._expand_mode == "always":
+        # if self._always_expanded:
         self.expandAll()
 
     def _on_current_change(self, new, old):
@@ -217,7 +205,7 @@ class ScrollAreaTocWidget(widgets.TreeView):
         sig = self.selectionModel().currentRowChanged
         with self.signal_blocked(sig, self._on_current_change):
             self.select_index(None)
-            if self.get_expand_mode() != "always":
+            if not self._always_expanded:
                 self.collapseAll()
             match self.get_scroll_mode():
                 case "multi":
@@ -278,17 +266,14 @@ class ScrollAreaTocWidget(widgets.TreeView):
     def set_scroll_mode(self, mode: ScrollMode | ScrollModeStr):
         self._scroll_mode = SCROLL_MODE.get_enum_value(mode)
 
-    def _expandMode(self):
-        return self._expand_mode
+    def is_always_expanded(self) -> bool:
+        return self._always_expanded
 
-    def get_expand_mode(self) -> ExpandModeStr:
-        return EXPAND_MODE.inverse[self._expandMode()]
-
-    def set_expand_mode(self, mode: ExpandModeStr | ExpandMode):
-        self._expand_mode = EXPAND_MODE.get_enum_value(mode)
+    def set_always_expanded(self, always_expanded: bool):
+        self._always_expanded = always_expanded
 
     scrollMode = core.Property(enum.Enum, _scrollMode, set_scroll_mode)
-    expandMode = core.Property(enum.Enum, _expandMode, set_expand_mode)
+    always_expanded = core.Property(bool, is_always_expanded, set_always_expanded)
 
 
 if __name__ == "__main__":
