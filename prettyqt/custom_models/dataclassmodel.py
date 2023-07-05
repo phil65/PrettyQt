@@ -18,7 +18,7 @@ class DataClassModel(custom_models.BaseDataclassModel):
 
     !!! info
         For being able to edit more types, using the
-        [EditordDelegate](../delegates/editordelegate.md) is recommended.
+        [EditorDelegate](/features/delegates/editordelegate.md) is recommended.
     """
 
     def __init__(self, items: Sequence[datatypes.IsDataclass], **kwargs):

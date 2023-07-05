@@ -21,7 +21,7 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
 
     !!! info
         For being able to edit more types, using the
-        [EditordDelegate](../delegates/editordelegate.md) is recommended.
+        [EditorDelegate](/features/delegates/editordelegate.md) is recommended.
     """
 
     HEADER = [
