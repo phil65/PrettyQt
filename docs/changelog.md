@@ -1,3 +1,34 @@
+## v1.52.0 (2023-07-05)
+
+### Feat
+
+- **SliceChangeIconSizeProxyModel**: also support QColors and QPixmaps for DecorationRole
+- Slicing support for Image
+- add VerticalLabel
+- **WebEnginePage**: add insert stylesheet method
+- add TwoListsSelectionWidget
+- add mkdocs gen-pages plugin
+- **SliceIdentityProxymodel**: also support tuples for indexer_contains
+- add SliceMapRoleProxymodel
+- **AbstractItemModel**: allow setting parent for index_from_key / get_index_key
+- **FileDevice**: add some permission getters
+- **AbstractItemModel**: fetch_more kwarg for iter_tree (no need for prefetch_tree anymore)
+- **LinkedSelectionModel**: also map selection
+- add SliceDisplayTextProxyModel
+- add BrushEdit
+- **IconProvider**: for_color supports QBrush
+- **ItemSelectionModel**: add __contains__ method
+- **Proxifer**: add map_from / map_to methods
+- add LinkedSelectionModel
+- **ProxyMapper**: allow more than 2 models for mapping
+
+### Fix
+
+- **SliceChangeIconSizeProxyModel**: use proper val for caching
+- **TableToListProxyModel**: fix Verticalheader labelling
+- Allow icons from all charmaps
+- **SliceEdit**: fix step=None
+
 ## v1.51.0 (2023-07-01)
 
 ### Feat
