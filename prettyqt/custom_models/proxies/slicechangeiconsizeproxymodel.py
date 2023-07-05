@@ -27,13 +27,29 @@ class SliceChangeIconSizeProxyModel(custom_models.SliceIdentityProxyModel):
     ):
         if role == constants.DECORATION_ROLE and self.indexer_contains(index):
             original = super().data(index, role)
-            if isinstance(original, gui.QIcon):
-                hashed = original.cacheKey()
-                if hashed in self._cache:
-                    return self._cache[hashed]
-                p = original.pixmap(self._size)
-                self._cache[hashed] = p
-                return p
+            match original:
+                case gui.QIcon():
+                    hashed = original.cacheKey()
+                    if hashed in self._cache:
+                        return self._cache[hashed]
+                    p = original.pixmap(self._size)
+                    self._cache[hashed] = p
+                    return p
+                case gui.QColor():
+                    hashed = original.name()
+                    if hashed in self._cache:
+                        return self._cache[hashed]
+                    p = gui.QPixmap(self._size)
+                    p.fill(original)
+                    self._cache[hashed] = p
+                    return p
+                case gui.QPixmap():
+                    hashed = original.cacheKey()
+                    if hashed in self._cache:
+                        return self._cache[hashed]
+                    p = original.scaled(self._size)
+                    self._cache[hashed] = p
+                    return p
         return super().data(index, role)
 
     def set_icon_size(self, size: core.QSize):
@@ -57,12 +73,12 @@ if __name__ == "__main__":
     tree.show()
     tree.set_sorting_enabled(True)
     tree.resize(650, 400)
-    tree.h_header.resize_sections("stretch")
     tree.set_icon("mdi.file-cabinet")
     tree.setWindowTitle("Example")
     index = model.setRootPath("E:/")
     # tree.setRootIndex(index)
-    tree.proxifier.get_proxy("change_icon_size", size=(30, 30), indexer=None)
+    tree.h_header.resize_sections("stretch")
+    # tree.proxifier.get_proxy("change_icon_size", size=(30, 30), indexer=None)
 
     with app.debug_mode():
         app.exec()
