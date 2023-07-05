@@ -21,7 +21,11 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
         colcount = self.columnCount()
         match index:
             case int() as row, int() as col:
-                if row >= rowcount or col >= rowcount:
+                if row < 0:
+                    row = rowcount + row
+                if col < 0:
+                    col = colcount + col
+                if row >= rowcount or row < 0 or col >= colcount or col < 0:
                     raise IndexError(index)
                 item = self.itemAtPosition(row, col)
                 return i if (i := item.widget()) is not None else item.layout()
@@ -36,7 +40,9 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
                 ]
                 return listdelegators.BaseListDelegator(list(set(items)))
             case int() as row:
-                if row >= rowcount:
+                if row < 0:
+                    row = rowcount + row
+                if row >= rowcount or row < 0:
                     raise IndexError(index)
                 item = self.itemAt(row)
                 return i if (i := item.widget()) is not None else item.layout()
