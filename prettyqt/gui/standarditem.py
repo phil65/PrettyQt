@@ -160,9 +160,8 @@ class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
             if size is None:
                 tooltip = f"<img src={path!r}>"
             else:
-                if isinstance(size, core.QSize):
-                    size = (size.width(), size.height())
-                tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
+                s = datatypes.to_size(size)
+                tooltip = f'<img src={path!r} width="{s.width()}" height="{s.height()}">'
         if rich_text:
             tooltip = f"<html>{html.escape(tooltip)}</html>"
         super().setToolTip(tooltip)
