@@ -88,6 +88,31 @@ class AbstractItemModelMixin(core.ObjectMixin):
             case _:
                 raise TypeError(index)
 
+    @staticmethod
+    def is_descendent_of(
+        indexes: list[core.ModelIndex] | core.QItemSelection | core.QItemSelectionRange,
+        index: core.ModelIndex,
+    ) -> bool:
+        if not index.isValid():
+            return False
+        match indexes:
+            case list():
+                if index in indexes:
+                    return False
+                while (index := index.parent()).isValid():
+                    if index in indexes:
+                        return True
+                return False
+            case core.QItemSelection() | core.QItemSelectionRange():
+                if indexes.contains(index):
+                    return False
+                while (index := index.parent()).isValid():
+                    if indexes.contains(index):
+                        return True
+                return False
+            case _:
+                raise TypeError(indexes)
+
     def set_data(
         self,
         index: tuple[int | slice, int | slice] | core.ModelIndex,

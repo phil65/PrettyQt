@@ -352,6 +352,15 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
                 raise ValueError(expand)
         self.selectionModel().select(index, flag)
 
+    # def move_selection(self, row_offset: int = 0, column_offset: int = 0):
+    #     """Move selection by an offset."""
+    #     for index in self.selectedIndexes():
+    #         new_idx = self.model().index(
+    #             index.row() + row_offset, index.column() + column_offset, index.parent()
+    #         )
+    #         if new_idx.isValid():
+    #             self.set_current_index(new_idx, current=True, expand="rows")
+
     def move_row_selection(self, dy: int):
         for row in self.selected_rows():
             new_idx = self.model().index(row + dy, 0)
