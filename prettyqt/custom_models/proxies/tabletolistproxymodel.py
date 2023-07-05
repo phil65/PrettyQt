@@ -38,7 +38,7 @@ class TableToListProxyModel(core.IdentityProxyModel):
                 post = super().headerData(row_section, constants.VERTICAL, role)
                 pre_str = col_section if pre is None else pre
                 post_str = row_section if post is None else post
-                return f"{pre_str} - {post_str}"
+                return f"{pre_str} | {post_str}"
         return None
 
     def rowCount(self, parent: core.ModelIndex | None = None) -> int:

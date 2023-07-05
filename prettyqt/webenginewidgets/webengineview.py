@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-import os
 import webbrowser
 
 from prettyqt import core, webenginecore, widgets
@@ -25,17 +24,7 @@ class WebEngineView(widgets.WidgetMixin, QtWebEngineWidgets.QWebEngineView):
         Args:
             url: URL to set
         """
-        match url:
-            case str():
-                url = core.Url(url)
-            case os.PathLike():
-                url = core.Url.fromLocalFile(os.fspath(url))
-            case None:
-                url = core.QUrl()
-            case core.QUrl():
-                pass
-            case _:
-                raise TypeError(url)
+        url = datatypes.to_url(url)
         self.setUrl(url)
 
     def get_url(self) -> core.Url:
@@ -52,17 +41,7 @@ class WebEngineView(widgets.WidgetMixin, QtWebEngineWidgets.QWebEngineView):
         Args:
             url: URL to load
         """
-        match url:
-            case str():
-                url = core.Url(url)
-            case os.PathLike():
-                url = core.Url.fromLocalFile(os.fspath(url))
-            case None:
-                url = core.QUrl()
-            case core.QUrl():
-                pass
-            case _:
-                raise TypeError(url)
+        url = datatypes.to_url(url)
         self.load(url)
 
     def set_zoom(self, zoom: float):
