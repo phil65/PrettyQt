@@ -37,7 +37,7 @@ class MeltProxyModel(core.AbstractProxyModel):
         return 0 if self.sourceModel() is None else len(self._id_columns) + 2
 
     def is_source_column(self, column: int) -> bool:
-        return column < self.columnCount() - 2
+        return 0 <= column < self.columnCount() - 2
 
     def is_variable_column(self, column: int) -> bool:
         return column == self.columnCount() - 2
@@ -125,7 +125,8 @@ class MeltProxyModel(core.AbstractProxyModel):
 
     def set_id_columns(self, columns: list[int]):
         """Set identifier variable columns."""
-        self._id_columns = columns
+        with self.reset_model():
+            self._id_columns = columns
 
     def get_var_name(self) -> str:
         """Get variable column header."""
@@ -134,6 +135,8 @@ class MeltProxyModel(core.AbstractProxyModel):
     def set_var_name(self, name: str):
         """Set header for variable column."""
         self._var_name = name
+        section = self.columnCount() - 2
+        self.headerDataChanged.emit(constants.HORIZONTAL, section, section)
 
     def get_value_name(self) -> str:
         """Get value column header."""
@@ -142,6 +145,8 @@ class MeltProxyModel(core.AbstractProxyModel):
     def set_value_name(self, name: str):
         """Set header for value column."""
         self._value_name = name
+        section = self.columnCount() - 1
+        self.headerDataChanged.emit(constants.HORIZONTAL, section, section)
 
     id_columns = core.Property(list, get_id_columns, set_id_columns)
     var_name = core.Property(str, get_var_name, set_var_name)
