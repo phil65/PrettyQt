@@ -41,6 +41,6 @@
 
 ### Additional roles
 
-| Role                                  | Data                       |
-| --------------------------------------|----------------------------|
-| ParentClassTreeModel.Roles.SourceRole | Source code of the class   |
+| Role                                    | Data                       |
+| ----------------------------------------|----------------------------|
+| `ParentClassTreeModel.Roles.SourceRole` | Source code of the class   |

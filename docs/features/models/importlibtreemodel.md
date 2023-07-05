@@ -8,6 +8,6 @@ Tree model to display a python [distribution](https://docs.python.org/3/library/
 
 ### Additional roles
 
-| Role                                      | Data                     |
-| ------------------------------------------|--------------------------|
-| ImportlibTreeModel.Roles.DistributionRole | Distribution instance    |
+| Role                                        | Data                     |
+| --------------------------------------------|--------------------------|
+| `ImportlibTreeModel.Roles.DistributionRole` | Distribution instance    |

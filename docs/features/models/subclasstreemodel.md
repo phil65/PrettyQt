@@ -21,9 +21,9 @@ widget.show()
 
 ### Additional roles
 
-| Role                               | Data                       |
-| -----------------------------------|----------------------------|
-| SubClassTreeModel.Roles.SourceRole | Source code of the class   |
+| Role                                 | Data                       |
+| -------------------------------------|----------------------------|
+| `SubClassTreeModel.Roles.SourceRole` | Source code of the class   |
 
 
 ### Qt Properties

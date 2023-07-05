@@ -11,6 +11,6 @@
 
 ### Additional roles
 
-| Role                    | Data                     |
-| ------------------------|--------------------------|
-| AstModel.Roles.NodeRole | Ast Node                 |
+| Role                      | Data                     |
+| --------------------------|--------------------------|
+| `AstModel.Roles.NodeRole` | Ast Node                 |

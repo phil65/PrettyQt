@@ -6,6 +6,6 @@
 
 ### Additional roles
 
-| Role                    | Data            |
-| ------------------------|----------  -----|
-| XmlModel.Roles.NodeRole | Element Node    |
+| Role                      | Data            |
+| --------------------------|-----------------|
+| `XmlModel.Roles.NodeRole` | Element Node    |

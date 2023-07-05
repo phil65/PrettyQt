@@ -6,6 +6,6 @@
 
 ### Additional roles
 
-| Role                         | Data              |
-| -----------------------------|-------------------|
-| LazyLxmlModel.Roles.NodeRole | Lxml Element Node |
+| Role                           | Data              |
+| -------------------------------|-------------------|
+| `LazyLxmlModel.Roles.NodeRole` | Lxml Element Node |
