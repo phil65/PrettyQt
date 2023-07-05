@@ -14,8 +14,12 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
     def __getitem__(
         self, index: int | slice | tuple[int | slice, int | slice] | core.QModelIndex
     ) -> gui.QStandardItem | listdelegators.BaseListDelegator[gui.QStandardItem]:
+        rowcount = self.rowCount()
+        colcount = self.columnCount()
         match index:
-            case int():
+            case int() as row:
+                if row < 0:
+                    row = row + rowcount
                 if index >= self.rowCount():
                     raise IndexError(index)
                 return self.item(index)
@@ -24,10 +28,12 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
             case core.QModelIndex():
                 return self.itemFromIndex(index)
             case int() as row, int() as col:
+                if row < 0:
+                    row = row + rowcount
+                if col < 0:
+                    col = col + colcount
                 return self.item(row, col)
             case (row, col):
-                rowcount = self.rowCount()
-                colcount = self.columnCount()
                 items = [
                     self.item(i, j)
                     for i, j in helpers.yield_positions(row, col, rowcount, colcount)
