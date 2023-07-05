@@ -4,36 +4,63 @@ Proxy model to flatten a tree to appear like a table.
 
 Original model:
 
-```py
-model = MyTreeModel()
-table = widgets.TableView()
-table.set_model(model)
-table.show()
-```
+!!! Example "MeltProxyModel"
 
-<figure markdown>
-  ![Image title](../../images/meltproxymodel_before.png)
-  <figcaption>Original table</figcaption>
-</figure>
+    === "Without proxy"
 
+        ```py
+        table = widgets.TreeView()
+        source_model = custom_models.ParentClassTreeModel(widgets.Frame)
+        table.set_model(source_model)
+        # table.proxifier.flatten()
+        ```
+        <figure markdown>
+          ![Image title](../../images/flattentreeproxymodel_without.png)
+        </figure>
 
-Flattened:
+    === "With proxy"
+
+        ```py
+        table = widgets.TreeView()
+        source_model = custom_models.ParentClassTreeModel(widgets.Frame)
+        table.set_model(source_model)
+        table.proxifier.flatten()
+        ```
+        <figure markdown>
+          ![Image title](../../images/flattentreeproxymodel.png)
+        </figure>
+
+    === "Path mode"
+
+        ```py
+        table = widgets.TreeView()
+        source_model = custom_models.ParentClassTreeModel(widgets.Frame)
+        table.set_model(source_model)
+        table.proxifier.flatten(show_path=True)
+        ```
+        <figure markdown>
+          ![Image title](../../images/flattentreeproxymodel_path.png)
+        </figure>
+
+    === "Leaves only mode"
+
+        ```py
+        table = widgets.TreeView()
+        source_model = custom_models.ParentClassTreeModel(widgets.Frame)
+        table.set_model(source_model)
+        table.proxifier.flatten(leaves_only=True)
+        ```
+        <figure markdown>
+          ![Image title](../../images/flattentreeproxymodel_leaves_only.png)
+        </figure>
 
 ```py
 table.proxifier.flatten()
-table.show()
-```
-or
-```py
+# or
 proxy = custom_models.FlattenTreeProxyModel()
 proxy.set_source_model(model)
 table.set_model(proxy)
-table.show()
 ```
-<figure markdown>
-  ![Image title](../../images/flattentreeproxymodel.png)
-  <figcaption>FlattenTreeProxyModel</figcaption>
-</figure>
 
 ### API
 
@@ -43,5 +70,5 @@ table.show()
 
 | Qt Property         | Type    | Description                                 |
 | --------------------|---------|---------------------------------------------|
-| **flattening_mode** | `Enum`  | How to flatten the model                    |
-| **display_mode**    | `Enum`  | How the label of the model should look like |
+| **show_path**       | `bool`  | Show full path in first column              |
+| **leaves_only**     | `bool`  | Only include tree leaves                    |

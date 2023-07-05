@@ -123,6 +123,8 @@ class FlattenTreeProxyModel(core.AbstractProxyModel):
         return super().data(index, role)
 
     def _update_mapping(self):
+        if self.sourceModel() is None:
+            return
         self._source_key, self._source_offset = self.get_source_mapping(self._leaves_only)
 
     def _source_data_changed(self, top: core.ModelIndex, bottom: core.ModelIndex):
@@ -152,7 +154,7 @@ if __name__ == "__main__":
     source_model = custom_models.ParentClassTreeModel(widgets.Frame)
     table.set_model(source_model)
     table.expandAll()
-    table.proxifier.flatten()
+    table.proxifier.flatten(leaves_only=True)
     table.show()
     table.resize(600, 500)
     table.h_header.resize_sections("stretch")
