@@ -8,6 +8,7 @@ class TableToListProxyModel(core.IdentityProxyModel):
 
     Reshapes a table by concatenating all columns into one large column,
     so that the new rowCount equals to sourceModel rowCount * sourceModel columnCount.
+    If a verticalHeader is available, it will show the original position of the cell.
     """
 
     ID = "table_to_list"
@@ -32,7 +33,7 @@ class TableToListProxyModel(core.IdentityProxyModel):
                 return self._header_title or None
             case constants.VERTICAL, constants.DISPLAY_ROLE:
                 col_section = section % super().columnCount()
-                row_section = section // super().rowCount()
+                row_section = section // super().columnCount()
                 pre = super().headerData(col_section, constants.HORIZONTAL, role)
                 post = super().headerData(row_section, constants.VERTICAL, role)
                 pre_str = col_section if pre is None else pre
@@ -83,16 +84,26 @@ class TableToListProxyModel(core.IdentityProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import gui, widgets
+    from prettyqt import debugging, gui, widgets
 
     app = widgets.app()
-    data = dict(first=["John", "Mary"], last=["Doe", "Bo"])
+    data = dict(
+        first=["John", "Mary"],
+        last=["Doe", "Bo"],
+        height=[5.5, 6.0],
+        weight=[130, 150],
+    )
     model = gui.StandardItemModel.from_dict(data)
     table = widgets.TableView()
     table.set_model(model)
     table.proxifier.to_list()
+    # table.show()
+    table.resize(600, 500)
+    table.h_header.resize_sections("stretch")
+    table.set_title("Table to list")
+    table.set_icon("mdi6.table-pivot")
     # table.proxifier.transpose()
     # table.proxifier.to_list()
-    # splitter = debugging.ProxyComparerWidget(table.model())
-    # splitter.show()
+    splitter = debugging.ProxyComparerWidget(table.model())
+    splitter.show()
     app.exec()
