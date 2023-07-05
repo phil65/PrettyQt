@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 
-from prettyqt import constants, core, custom_models
+from prettyqt import constants, core, custom_models, gui
 from prettyqt.utils import datatypes
 
 
@@ -18,7 +18,7 @@ class SliceChangeIconSizeProxyModel(custom_models.SliceIdentityProxyModel):
     def __init__(self, size: datatypes.SizeType, **kwargs):
         super().__init__(**kwargs)
         self._size = datatypes.to_size(size)
-        self._cache = dict()
+        self._cache = {}
 
     def data(
         self,
@@ -27,8 +27,8 @@ class SliceChangeIconSizeProxyModel(custom_models.SliceIdentityProxyModel):
     ):
         if role == constants.DECORATION_ROLE and self.indexer_contains(index):
             original = super().data(index, role)
-            if original is not None:
-                hashed = hash(original)
+            if isinstance(original, gui.QIcon):
+                hashed = original.cacheKey()
                 if hashed in self._cache:
                     return self._cache[hashed]
                 p = original.pixmap(self._size)
@@ -37,6 +37,7 @@ class SliceChangeIconSizeProxyModel(custom_models.SliceIdentityProxyModel):
         return super().data(index, role)
 
     def set_icon_size(self, size: core.QSize):
+        self._cache = {}
         self._size = size
 
     def get_icon_size(self) -> core.QSize:
@@ -51,12 +52,17 @@ if __name__ == "__main__":
     app = widgets.app()
     tree = widgets.TreeView()
     # tree.setUniformRowHeights(False)
-    model = widgets.FileSystemModel(parent=tree)
-    model.setRootPath("C:/")
+    model = widgets.FileSystemModel()
     tree.set_model(model)
-    tree.proxifier.get_proxy(
-        "change_icon_size", size=(100, 100), indexer=(None, slice(None, None, 2))
-    )
     tree.show()
+    tree.set_sorting_enabled(True)
+    tree.resize(650, 400)
+    tree.h_header.resize_sections("stretch")
+    tree.set_icon("mdi.file-cabinet")
+    tree.setWindowTitle("Example")
+    index = model.setRootPath("E:/")
+    # tree.setRootIndex(index)
+    tree.proxifier.get_proxy("change_icon_size", size=(30, 30), indexer=None)
+
     with app.debug_mode():
         app.exec()
