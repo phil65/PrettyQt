@@ -6,7 +6,7 @@ import logging
 from typing import Literal
 
 from prettyqt import constants, core, custom_models, gui
-from prettyqt.utils import colors, datatypes, helpers
+from prettyqt.utils import bidict, colors, datatypes, helpers
 
 
 logger = logging.getLogger(__name__)
@@ -19,6 +19,14 @@ class ColorMode(enum.IntEnum):
     Visible = 2
     Seen = 3
     Range = 4
+
+
+COLOR_MODE = bidict(
+    all=ColorMode.All,
+    visible=ColorMode.Visible,
+    seen=ColorMode.Seen,
+    range=ColorMode.Range,
+)
 
 
 class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
@@ -60,13 +68,18 @@ class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
     core.Enum(ColorMode)
 
     def __init__(self, *args, mode: ColorMode = ColorMode.Visible, **kwargs):
-        super().__init__(*args, **kwargs)
         self._mode = mode
-        self._max = 0.0
-        self._role = constants.USER_ROLE
-        self._last_span = ((-1, -1), (-1, -1))
         self._low_color = gui.QColor("green")
         self._high_color = gui.QColor("red")
+        super().__init__(*args, **kwargs)
+        self._max = 0.0
+        self._role = constants.EDIT_ROLE
+        self._last_span = ((-1, -1), (-1, -1))
+
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"colorMode": COLOR_MODE}
+        return maps
 
     def data(
         self,
@@ -75,8 +88,9 @@ class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
     ):
         if not self.indexer_contains(index):
             return super().data(index, role)
+        val = super().data(index, self._role)
         match role:
-            case constants.BACKGROUND_ROLE:
+            case constants.BACKGROUND_ROLE if isinstance(val, int | float):
                 return self.get_color_for_index(index)
             case _:
                 return super().data(index, role)
@@ -101,6 +115,7 @@ class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
                     # TODO: we probably should clamp based on self._indexer.
                     delegator = model[v_span[0] : v_span[1], h_span[0] : h_span[1]]
                     data = delegator.data(self._role)
+                    data = [i for i in data if isinstance(i, int | float)]
                     max_ = max(data) if data else 1.0
                     self._max = max_
                     top_left = self.index(v_span[0], h_span[0])
@@ -119,46 +134,35 @@ class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
         )
         return gui.QColor(*col)
 
-    def setLowColor(self, color: datatypes.ColorType):
+    def set_low_color(self, color: datatypes.ColorType):
         self._low_color = colors.get_color(color).as_qt()
 
-    def setHighColor(self, color: datatypes.ColorType):
+    def set_high_color(self, color: datatypes.ColorType):
         self._high_color = colors.get_color(color).as_qt()
 
-    def getLowColor(self) -> gui.QColor:
+    def get_low_color(self) -> gui.QColor:
         return self._low_color
 
-    def getHighColor(self) -> gui.QColor:
+    def get_high_color(self) -> gui.QColor:
         return self._high_color
 
-    def setColorMode(self, mode: SliceColorValuesProxyModel.ColorMode):
-        self._mode = mode
+    def set_color_mode(self, mode: SliceColorValuesProxyModel.ColorMode | ColorModeStr):
+        self._mode = COLOR_MODE.get_enum_value(mode)
 
-    def getColorMode(self) -> SliceColorValuesProxyModel.ColorMode:
+    def get_color_mode(self) -> SliceColorValuesProxyModel.ColorMode:
         return self._mode
 
-    color_mode = core.Property(
-        ColorMode,
-        getColorMode,
-        setColorMode,
-    )
-
-    low_color = core.Property(gui.QColor, getLowColor, setLowColor)
-
-    high_color = core.Property(
-        gui.QColor,
-        getHighColor,
-        setHighColor,
-    )
+    color_mode = core.Property(ColorMode, get_color_mode, set_color_mode)
+    low_color = core.Property(gui.QColor, get_low_color, set_low_color)
+    high_color = core.Property(gui.QColor, get_high_color, set_high_color)
 
 
 if __name__ == "__main__":
     from prettyqt import debugging, widgets
 
     app = widgets.app()
-
     table = debugging.example_table()
-    table.proxifier[1:4, :].color_values()
+    table.proxifier[:, :].color_values()
     table.show()
     with app.debug_mode():
         app.exec()
