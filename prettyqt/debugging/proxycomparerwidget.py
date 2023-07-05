@@ -16,11 +16,13 @@ class ProxyComparerWidget(widgets.Splitter):
         proxy: core.QAbstractProxyModel,
         itemview: Literal["tree", "table", "list"]
         | type[widgets.QAbstractItemView] = "table",
+        delegate: widgets.abstractitemview.DelegateStr
+        | widgets.QItemDelegate
+        | None = "editor",
         **kwargs,
     ):
         super().__init__(**kwargs)
         self.proxy_tables = []
-
         # determine ItemView class for the models
         match itemview:
             case "tree":
@@ -48,13 +50,14 @@ class ProxyComparerWidget(widgets.Splitter):
             layout = container.set_layout("vertical")
             table = View()
             table.set_model(model)
-            table.set_delegate("editor")
+            table.set_delegate(delegate)
             self.proxy_tables.append(table)
             prop_table = widgets.TableView()
             prop_table.set_delegate("editor")
             prop_model = custom_models.WidgetPropertiesModel(model)
             prop_table.set_model(prop_model)
-            layout.add(widgets.Label(type(model).__name__))
+            header = widgets.Label(type(model).__name__)
+            layout.add(header)
             col_splitter = widgets.Splitter("vertical")
             col_splitter.add(table)
             col_splitter.add(prop_table)
