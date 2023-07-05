@@ -88,6 +88,12 @@ class WidgetMixin(core.ObjectMixin):
         else:
             super().resize(*size)
 
+    def set_width(self, width: int):
+        self.resize(width, self.height())
+
+    def set_height(self, height: int):
+        self.resize(self.width(), height)
+
     def set_enabled(self, enabled: bool = True) -> None:
         self.setEnabled(enabled)
 
