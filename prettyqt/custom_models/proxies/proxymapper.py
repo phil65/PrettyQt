@@ -12,7 +12,7 @@ class ProxyMapper(core.Object):
     """Class to map indexes / ItemSelections from one proxy to another.
 
     Also handles cases like:
-
+    ```
                 Root model
                     |
                shared proxy
@@ -20,7 +20,7 @@ class ProxyMapper(core.Object):
             Proxy_1_1     Proxy_2_1
               |            |
             Proxy_1_2     Proxy_2_2
-
+    ```
     When mapping from 1_2 to 2_2, it will find the closest parent ("shared proxy" here),
     use mapToSource / mapSelectionFromSource until it gets there,
     and then mapFromSource / mapSelectionFromSource to get down to 2_2.

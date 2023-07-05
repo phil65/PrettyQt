@@ -27,17 +27,18 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
         """Check whether given ModelIndex is included in our Indexer."""
         if isinstance(index, core.ModelIndex):
             index = (index.row(), index.column())
-        col_slice = self.update_slice_boundaries(self.get_column_slice(), typ="column")
-        row_slice = self.update_slice_boundaries(self.get_row_slice(), typ="row")
+        col_slice = self.get_column_slice()
+        row_slice = self.get_row_slice()
+        source = self.sourceModel()
+        col_slice = self.update_slice_boundaries(col_slice, count=source.columnCount())
+        row_slice = self.update_slice_boundaries(row_slice, count=source.rowCount())
         # logger.info(f"{col_slice=} {row_slice=}")
         to_check = (row_slice, col_slice)  # instead of _indexer, for negative indexes.
         return helpers.is_position_in_index(*index, to_check)
 
-    def update_slice_boundaries(self, sl: slice, typ="row") -> slice:
+    def update_slice_boundaries(self, sl: slice, count: int) -> slice:
         """Update slice boundaries by resolving negative indexes."""
         # Not sure yet whats the best approach here and which cases I should support...
-        source = self.sourceModel()
-        count = source.rowCount() if typ == "row" else source.columnCount()
         # if sl.end is larger than count, clip it (or perhaps throw exception?)
         # if sl.stop is not None and sl.stop >= count:
         #     sl = slice(sl.start, count, sl.step)

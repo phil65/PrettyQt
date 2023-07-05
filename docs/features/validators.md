@@ -14,17 +14,17 @@ The following validators are included:
 |`JsonValidator`
 |`MonotonicListValidator`
 |`NotStrictValidator`
-|`PathValidator` |allows strings which represent an existing path. Can be set to either accept files, folders or both.
-|`PythonCodeValidator`|- allows a string which can be parsed by ast.parse
-|`QssValidator`|- allows a string which can be parsed as CSS.
-|`RegexPatternValidator`|- allows a string which can be parsed as a regular expression.
-|`IntListValidator`|- allows a comma separated list of integers
-|`FloatListValidator`|- allows a comma separated list of floats
-|`ScientificIntegerValidator`| - for integers in scientific annotation. also allows SI unit prefix like 'M', 'n' etc.
-|`ScientificFloatValidator`| - for floats in scientific annotation. also allows SI unit prefix like 'M', 'n' etc.
-|`TextLengthValidator`|- allows limiting textlength to a given minimum / maximim
-|`WhitelistValidator`|- whitelist specific strings
-|`FunctionValidator`|- validate string based on a Callable (Signature: Callable[[str], bool])
+|`PathValidator` |allows strings which represent an existing path. Can be set to either accept files, folders or both
+|`PythonCodeValidator`| Allows a string which can be parsed by ast.parse
+|`QssValidator`| Allows a string which can be parsed as CSS
+|`RegexPatternValidator`| Allows a string which can be parsed as a regular expression
+|`IntListValidator`| Allows a comma separated list of integers
+|`FloatListValidator`| Allows a comma separated list of floats
+|`ScientificIntegerValidator`|  For integers in scientific annotation. also allows SI unit prefix like 'M', 'n' etc.
+|`ScientificFloatValidator`|  For floats in scientific annotation. also allows SI unit prefix like 'M', 'n' etc.
+|`TextLengthValidator`| Allows limiting textlength to a given minimum / maximum
+|`WhitelistValidator`| Whitelist specific strings
+|`FunctionValidator`| Validate string based on a Callable (Signature: Callable[[str], bool])
 
 
 Apart from LineEdits, ComboBoxes and SpinBoxes, PlainTextEdits also gained the ability to take a validator.

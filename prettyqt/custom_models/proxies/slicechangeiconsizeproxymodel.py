@@ -10,7 +10,10 @@ logger = logging.getLogger(__name__)
 
 
 class SliceChangeIconSizeProxyModel(custom_models.SliceIdentityProxyModel):
-    """Proxy model which changes the icon size of the Decoration role."""
+    """Proxy model which changes the icon size of the Decoration role.
+
+    Supports QColors, QPixmaps and QIcons in DecorationRole.
+    """
 
     ID = "change_icon_size"
     ICON = "mdi.resize"

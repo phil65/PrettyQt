@@ -183,7 +183,7 @@ class PermissionsColumn(FsSpecColumnItem):
 
 
 class IsLinkColumn(FsSpecColumnItem):
-    identifier = "mode"
+    identifier = "is_link"
     name = "Is link"
     doc = "Whether file is a symbolic link."
 
@@ -218,11 +218,13 @@ class FSSpecTreeModel(
     windows, FsSpec does not support a "real" root folder (aka a listing of drives.)
     """
 
-    COLUMNS = [
+    DEFAULT_COLUMNS = [
         NameColumn,
-        PathColumn,
         SizeColumn,
         TypeColumn,
+    ]
+    EXTRA_COLUMNS = [
+        PathColumn,
         CreatedColumn,
         ModifiedColumn,
         PermissionsColumn,
@@ -256,24 +258,25 @@ class FSSpecTreeModel(
     ):
         self.set_protocol(protocol, **kwargs)
         obj = self.fs.info(root)
-        columns = self._get_columns_for_protocol(protocol)
+        columns = self.DEFAULT_COLUMNS + self._get_extra_columns_for_protocol(protocol)
         super().__init__(obj, columns=columns, parent=parent, show_root=show_root)
 
     def set_protocol(self, protocol: str, **kwargs):
         self.fs = fsspec.filesystem(protocol, **kwargs)
 
-    def _get_columns_for_protocol(self, protocol: str) -> list[FsSpecColumnItem]:
+    def _get_extra_columns_for_protocol(self, protocol: str) -> list[FsSpecColumnItem]:
         match self.fs.protocol:
             case "github":
-                return [
-                    col
-                    for col in self.COLUMNS
-                    if col.identifier in {"name", "mode", "type", "size", "sha"}
-                ]
+                columns = {"size", "sha"}
             case "file":
-                return [col for col in self.COLUMNS if col.identifier != "sha"]
+                columns = {"path", "created", "mtime", "mode", "is_link"}
+            case "smb":
+                columns = {"uid", "gid", "mtime", "time"}
+            case "memory":
+                columns = {"created"}
             case _:
-                return self.COLUMNS
+                return self.EXTRA_COLUMNS
+        return [col for col in self.EXTRA_COLUMNS if col.identifier in columns]
 
     def _has_children(self, item: FSSpecTreeModel.TreeItem) -> bool:
         return item.obj["type"] == "directory"

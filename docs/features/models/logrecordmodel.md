@@ -2,4 +2,4 @@
 
 ## Supports
 
-`logging.LogRecord`
+`Sequence[logging.LogRecord]`

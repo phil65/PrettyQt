@@ -25,7 +25,7 @@ table.proxifier[:20, :].change_flags(editable=False)
 table.proxifier[0].make_checkable(callback=my_callback)
 ```
 
-Every call here basically adds another ProxyModel layer (all based on SliceIdentityProxyModel).
+Every call here basically adds another ProxyModel layer (all based on [SliceIdentityProxyModel](sliceidentityproxymodel.md)).
 The proxy models should all perform very well with large tables since they never need to loop over the whole column / row range.
 
 The proxifier attribute basically gives quick access to set up these proxies.
