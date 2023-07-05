@@ -2,437 +2,617 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://phil65.github.io/PrettyQt/index.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/changelog.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/bluetooth.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/charts.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/constants.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/core.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/custom_delegates.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/custom_models.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/custom_validators.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/custom_widgets.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/api/designer.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/gui.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/location.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/multimedia.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/multimediawidgets.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/network.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/api/openglwidgets.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/pdf.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/pdfwidgets.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/positioning.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/api/printsupport.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/qml.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/qthelp.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/quick.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/quickwidgets.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/api/scintilla.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/api/scxml.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/api/spatialaudio.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/api/statemachine.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/svg.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/api/svgwidgets.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/syntaxhighlighters.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/api/test.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/texttospeech.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/api/webchannel.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/webenginecore.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/webenginewidgets.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/widgets.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/api_guidelines/bindings.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api_guidelines/general.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api_guidelines/types.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/animating.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/delegates.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/layouts.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/pandas.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/pandasproxies.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxies.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/reshapeproxies.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/sliceproxies.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/sortfilterproxies.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/tools.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/validators.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/widgets.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/delegates/editordelegate.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/layouts/multilinelayout.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/actionsmodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/astmodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/attrsfieldsmodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/attrsmodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/dataclassfieldsmodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/dataclassmodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/models/frameinfomodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/fsspecmodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/gitpythontreemodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/importlibtreemodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/models/lazylxmlmodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/models/logrecordmodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/models/lxmlmodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/models/mappingmodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/modelindexmodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/models/pandasindexmodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/parentclasstreemodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/models/polarsdataframemodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/pydanticfieldsmodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/pydanticmodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/models/pythonobjecttreemodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/models/regexmatchesmodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/shortcutsmodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/storageinfomodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/subclasstreemodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models/xmlmodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/appearanceproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/changeheadersproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/columnjoinerproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/columnorderproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://phil65.github.io/PrettyQt/features/proxymodels/flattenedtreeproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <loc>https://phil65.github.io/PrettyQt/features/proxymodels/flattentreeproxymodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/fuzzyfilterproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/highlightmouseproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/meltproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/multicolumnfilterproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/proxymodels/pandasevalfilterproxymodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/proxymodels/pandasmultistringcolumnfilterproxymodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/proxymodels/pandasstringcolumnfilterproxymodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/predicatefilterproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://phil65.github.io/PrettyQt/features/proxymodels/proxymapper.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <loc>https://phil65.github.io/PrettyQt/features/proxymodels/proxifier.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/rangefilterproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/sliceappearanceproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/slicechangeflagsproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/slicechangeiconsizeproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/slicecheckableproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/slicecheckabletreeproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/slicecolorvaluesproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/proxymodels/slicedisplaytextproxymodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/slicefilterproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/slicehighlightcurrentproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/proxymodels/sliceidentityproxymodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/proxymodels/slicemaproleproxymodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/slicevaluetransformationproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/subsetfilterproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/tabletolistproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/proxymodels/valuefilterproxymodel.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/tools/linkedselectionmodel.html</loc>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/tools/proxymapper.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/widgets/annotatedscrollbar.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/widgets/astviewer.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/widgets/commandpalette.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/widgets/configwidget.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/widgets/editors.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/widgets/filterheader.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/widgets/proxycomparerwidget.html</loc>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/widgets/regexeditor.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/widgets/scrollareatocwidget.html</loc>
-         <lastmod>2023-07-01</lastmod>
+         <lastmod>2023-07-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
