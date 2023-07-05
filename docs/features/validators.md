@@ -5,15 +5,13 @@ The following validators are included:
 
 | Validator                | Description                                |
 |--------------------------|--------------------------------------------|
-|`AlphanumericValidator`
-|`BlacklistValidator`
-|`ColorValidator`
-|`CompositeValidator`
+|`AlphanumericValidator` | Allows alphanumeric chars
+|`BlacklistValidator` | Forbid a list of strings as input
+|`ColorValidator` | Allows strings which can be parsed as a color
 |`HexValidator`
 |`IntegerValidator`
-|`JsonValidator`
-|`MonotonicListValidator`
-|`NotStrictValidator`
+|`JsonValidator`| Allows strings which can be parsed by json.loads.
+|`MonotonicListValidator` | Allows strings representing a monotonic list.
 |`PathValidator` |allows strings which represent an existing path. Can be set to either accept files, folders or both
 |`PythonCodeValidator`| Allows a string which can be parsed by ast.parse
 |`QssValidator`| Allows a string which can be parsed as CSS
@@ -25,6 +23,9 @@ The following validators are included:
 |`TextLengthValidator`| Allows limiting textlength to a given minimum / maximum
 |`WhitelistValidator`| Whitelist specific strings
 |`FunctionValidator`| Validate string based on a Callable (Signature: Callable[[str], bool])
+|`NotStrictValidator` | Validator which takes other validators and converts Invalid State to Intermediate State
+|`AndValidator` | Validator which can be used to AND-combine other validators
+|`AndValidator` | Validator which can be used to OR-combine other validators
 
 
 Apart from LineEdits, ComboBoxes and SpinBoxes, PlainTextEdits also gained the ability to take a validator.

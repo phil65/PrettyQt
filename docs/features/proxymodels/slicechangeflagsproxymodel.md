@@ -1,4 +1,41 @@
-This proxy can selectively change the ItemFlags of the source model. (Example: change cells to read-only)
+!!! Example "SliceChangeFlagsProxyModel"
+
+    === "Without proxy"
+
+        ```py
+        table = widgets.TreeView()
+        data = dict(
+            first=["John", "Mary"],
+            last=["Doe", "Bo"],
+            height=[5.5, 6.0],
+            weight=[130, 150],
+        )
+        source_model = gui.StandardItemModel.from_dict(data)
+        table.set_model(source_model)
+        # table.proxifier.change_flags(enabled=False)
+        ```
+        <figure markdown>
+          ![Image title](../../images/slicechangeflagsproxymodel_before.png)
+        </figure>
+
+    === "With proxy"
+
+        ```py
+        table = widgets.TreeView()
+        data = dict(
+            first=["John", "Mary"],
+            last=["Doe", "Bo"],
+            height=[5.5, 6.0],
+            weight=[130, 150],
+        )
+        source_model = gui.StandardItemModel.from_dict(data)
+        table.set_model(source_model)
+        table.proxifier.change_flags(enabled=False)
+        ```
+        <figure markdown>
+          ![Image title](../../images/slicechangeflagsproxymodel_after.png)
+        </figure>
+
 
 Supports changing all ItemRoles by passing keyword arguments.
 

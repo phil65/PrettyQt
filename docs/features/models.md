@@ -47,7 +47,7 @@ preferred choice for most models.
 | `fsspec.FileSystem` | [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) | [FsSpecModel](fsspecmodel.md) | Model with same interface as QFileSystemModel
 | `pandas.DataFrame` | [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) | [PandasDataFrameModel](pandasdataframemodel.md) | Model to show a pandas DataFrame
 | `pandas.Index` | [pandas](https://pandas.pydata.org) | [PandasIndexModel](pandasindexmodel.md) | Model to show a pandas (Multi)Index
-| `polars.DataFrame` | [polars](https://www.pola.rs) | [PolarsTableModel](polarstablemodel.md) | Model to display a polars DataFrame
+| `polars.DataFrame` | [polars](https://www.pola.rs) | [PolarsDataFrameModel](polarsdataframemodel.md) | Model to display a polars DataFrame
 | `git.Repo, git.Tree`| [gitpython](https://github.com/gitpython-developers/GitPython) | [GitPythonTreeModel](gitpythontreemodel.md) | Model to display a polars DataFrame
 | `lxml.etree.Element, lxml.etree.iterparse` | [lxml](https://pypi.org/project/lxml/) | [LazyLxmlModel](lazylxmlmodel.md) | Tree view for an lxml iterparse iterator (lazy)
 | `lxml.etree.ElementTree` | [lxml](https://pypi.org/project/lxml/) | [LxmlModel](lxmlmodel.md) | Tree view for an lxml ElementTree (full DOM)

@@ -84,7 +84,7 @@ class TableToListProxyModel(core.IdentityProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import debugging, gui, widgets
+    from prettyqt import gui, widgets
 
     app = widgets.app()
     data = dict(
@@ -96,14 +96,13 @@ if __name__ == "__main__":
     model = gui.StandardItemModel.from_dict(data)
     table = widgets.TableView()
     table.set_model(model)
-    table.proxifier.to_list()
-    # table.show()
+    table.show()
     table.resize(600, 500)
     table.h_header.resize_sections("stretch")
     table.set_title("Table to list")
     table.set_icon("mdi6.table-pivot")
     # table.proxifier.transpose()
     # table.proxifier.to_list()
-    splitter = debugging.ProxyComparerWidget(table.model())
-    splitter.show()
+    # splitter = debugging.ProxyComparerWidget(table.model())
+    # splitter.show()
     app.exec()

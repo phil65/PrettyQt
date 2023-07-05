@@ -9,7 +9,10 @@ logger = logging.getLogger(__name__)
 
 
 class SliceChangeFlagsProxyModel(custom_models.SliceIdentityProxyModel):
+    """Proxy model to selectively change the ItemFlags of the source model."""
+
     ID = "change_flags"
+    ICON = "mdi.flag"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -55,13 +58,23 @@ class SliceChangeFlagsProxyModel(custom_models.SliceIdentityProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import gui, widgets
 
+    data = dict(
+        first=["John", "Mary"],
+        last=["Doe", "Bo"],
+        height=[5.5, 6.0],
+        weight=[130, 150],
+    )
+    model = gui.StandardItemModel.from_dict(data)
     app = widgets.app()
     table = widgets.TableView()
-    table.set_model_for(["a", "b", "c"])
-    proxy = table.proxifier.get_proxy("change_flags", indexer=(0, 0))
-    proxy._flags_to_remove = constants.IS_EDITABLE
+    table.set_model(model)
+    # proxy = table.proxifier[:, 2:].change_flags(enabled=False)
     table.show()
+    table.resize(600, 150)
+    table.h_header.resize_sections("stretch")
+    table.set_title("Change flags")
+    table.set_icon("mdi.flag")
     with app.debug_mode():
         app.exec()

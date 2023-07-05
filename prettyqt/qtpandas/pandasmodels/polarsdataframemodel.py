@@ -13,7 +13,7 @@ from prettyqt import constants, core
 logger = logging.getLogger(__name__)
 
 
-class PolarsTableModel(core.AbstractTableModel):
+class PolarsDataFrameModel(core.AbstractTableModel):
     class Roles(enum.IntEnum):
         """Role names."""
 
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     )
     table = widgets.TableView()
     table.show()
-    model = PolarsTableModel(df, parent=table)
+    model = PolarsDataFrameModel(df, parent=table)
     table.set_model(model)
     table.set_delegate("editor")
 

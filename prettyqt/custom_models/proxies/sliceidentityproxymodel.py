@@ -173,12 +173,20 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import gui, widgets
 
     app = widgets.app()
+    data = dict(
+        first=["John", "Mary"],
+        last=["Doe", "Bo"],
+        height=[5.5, 6.0],
+        weight=[130, 150],
+    )
+    model = gui.StandardItemModel.from_dict(data)
     table = widgets.TableView()
-    table.set_model(["a", "b", "c"])
-    table.proxifier.get_proxy("read_only", indexer=(0, 0))
+    table.set_model(model)
+    table.proxifier[-1].change_flags(enabled=False)
+    model.insertColumn(0, [gui.StandardItem("new"), gui.StandardItem("new")])
     table.show()
     with app.debug_mode():
         app.exec()

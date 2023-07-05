@@ -1,0 +1,3 @@
+## Supports
+
+`polars.DataFrame`
