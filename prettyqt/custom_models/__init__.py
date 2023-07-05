@@ -57,7 +57,7 @@ from .proxies.slicemaproleproxymodel import SliceMapRoleProxyModel
 # Reshape proxies
 
 from .proxies.tabletolistproxymodel import TableToListProxyModel
-from .proxies.flattenedtreeproxymodel import FlattenedTreeProxyModel
+from .proxies.flattentreeproxymodel import FlattenTreeProxyModel
 from .proxies.meltproxymodel import MeltProxyModel
 from .proxies.columnorderproxymodel import ColumnOrderProxyModel
 
@@ -134,7 +134,7 @@ __all__ = [
     "SliceCheckableProxyModel",
     "SliceCheckableTreeProxyModel",
     "TableToListProxyModel",
-    "FlattenedTreeProxyModel",
+    "FlattenTreeProxyModel",
     "MeltProxyModel",
     "ColumnOrderProxyModel",
     "SliceAppearanceProxyModel",

@@ -48,7 +48,7 @@
             * [SliceMapRoleProxyModel](features/proxymodels/slicemaproleproxymodel.md)
         * [Reshape / Styling proxies](features/reshapeproxies.md)
             * [MeltProxyModel](features/proxymodels/meltproxymodel.md)
-            * [FlattenedTreeProxyModel](features/proxymodels/flattenedtreeproxymodel.md)
+            * [FlattenTreeProxyModel](features/proxymodels/flattentreeproxymodel.md)
             * [ColumnJoinerProxyModel](features/proxymodels/columnjoinerproxymodel.md)
             * [ColumnOrderProxyModel](features/proxymodels/columnorderproxymodel.md)
             * [TableToListProxyModel](features/proxymodels/tabletolistproxymodel.md)

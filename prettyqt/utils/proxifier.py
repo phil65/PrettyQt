@@ -357,13 +357,23 @@ class Proxifier:
         self._widget.set_model(proxy)
         return proxy
 
-    def flatten(self) -> custom_models.FlattenedTreeProxyModel:
-        """Wraps model in a Proxy which flattens tree structures."""
+    def flatten(
+        self, show_path: bool = False, leaves_only: bool = False
+    ) -> custom_models.FlattenTreeProxyModel:
+        """Wraps model in a Proxy which flattens tree to one column.
+
+        Arguments:
+            show_path: Whether the first column should show the full tree path.
+            leaves_only: whether the proxied model should return only tree leaves.
+
+        """
         # ss = """QTreeView::branch{border-image: url(none.png);}"""
         # self._widget.set_stylesheet(ss)
         from prettyqt import custom_models
 
-        proxy = custom_models.FlattenedTreeProxyModel(parent=self._widget)
+        proxy = custom_models.FlattenTreeProxyModel(
+            parent=self._widget, show_path=show_path, leaves_only=leaves_only
+        )
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy

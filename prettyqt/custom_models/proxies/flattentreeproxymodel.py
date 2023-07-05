@@ -1,38 +1,20 @@
 from __future__ import annotations
 
-import enum
-
 from prettyqt import constants, core
 
 
-class FlatteningMode(enum.IntEnum):
-    Default = 1
-    InternalNodesDisabled = 2
-    LeavesOnly = 4
-
-
-class DisplayMode(enum.IntEnum):
-    Path = 1
-    Title = 2
-
-
-class FlattenedTreeProxyModel(core.AbstractProxyModel):
+class FlattenTreeProxyModel(core.AbstractProxyModel):
     ID = "flatten_tree"
 
-    FlatteningMode = FlatteningMode
-    core.Enum(FlatteningMode)
-
-    DisplayMode = DisplayMode
-    core.Enum(DisplayMode)
-
     def __init__(self, parent: widgets.QWidget | None = None, **kwargs):
-        super().__init__(parent, **kwargs)
+        self._leaves_only = False
+        self._show_path = False
         self._source_column = 0
-        self._flattening_mode = FlatteningMode.Default
-        self._display_mode = DisplayMode.Path
+        self.PATH_SEPARATOR = " / "
         self._source_root_index = core.ModelIndex()
         self._source_key: list[tuple[int, ...]] = []
         self._source_offset: dict[tuple[int, ...], int] = {}
+        super().__init__(parent, **kwargs)
 
     def setSourceModel(self, model: core.QAbstractItemModel):
         if (old_model := self.sourceModel()) is not None:
@@ -65,22 +47,22 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
     def get_root_index(self) -> core.ModelIndex:
         return self._source_root_index
 
-    def set_flattening_mode(self, mode: FlattenedTreeProxyModel.FlatteningMode):
-        if mode != self._flattening_mode:
+    def set_leaves_only(self, leaves_only: bool):
+        if leaves_only != self._leaves_only:
             with self.reset_model():
-                self._flattening_mode = mode
+                self._leaves_only = leaves_only
                 self._update_mapping()
 
-    def get_flattening_mode(self) -> FlattenedTreeProxyModel.FlatteningMode:
-        return self._flattening_mode
+    def is_leaves_only(self) -> bool:
+        return self._leaves_only
 
-    def set_display_mode(self, mode: FlattenedTreeProxyModel.DisplayMode):
-        if mode != self._display_mode:
+    def set_show_path(self, show: bool):
+        if show != self._show_path:
             with self.reset_model():
-                self._display_mode = mode
+                self._show_path = show
 
-    def get_display_mode(self) -> FlattenedTreeProxyModel.DisplayMode:
-        return self._display_mode
+    def is_path_shown(self) -> bool:
+        return self._show_path
 
     def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
         if not source_index.isValid():
@@ -103,7 +85,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         return (
             core.ModelIndex()
             if parent.isValid()
-            else self.createIndex(row, column, ptr=row)  # object=row)
+            else self.createIndex(row, column, row)  # object=row)
         )
 
     def parent(self, child=None) -> core.ModelIndex:
@@ -119,25 +101,25 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         flags = super().flags(index)
-        if self._flattening_mode != self.FlatteningMode.InternalNodesDisabled:
-            return flags
-        index = self.mapToSource(index)
-        model = self.sourceModel()
-        enabled = flags & constants.ItemFlag.ItemIsEnabled
-        if model is not None and model.rowCount(index) > 0 and enabled:
-            flags ^= constants.ItemFlag.ItemIsEnabled
         return flags
+        # this would disable non-leave items
+        # index = self.mapToSource(index)
+        # model = self.sourceModel()
+        # enabled = flags & constants.ItemFlag.ItemIsEnabled
+        # if model is not None and model.rowCount(index) > 0 and enabled:
+        #     flags ^= constants.ItemFlag.ItemIsEnabled
+        # return flags
 
     def data(
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
-        if role == constants.DISPLAY_ROLE and self._display_mode == DisplayMode.Path:
+        if role == constants.DISPLAY_ROLE and self._show_path:
             index = self.mapToSource(index)
             model = self.sourceModel()
             path = model.get_breadcrumbs_path(index)
-            return " / ".join(str(i) for i in path)
+            return self.PATH_SEPARATOR.join(str(i) for i in path)
         return super().data(index, role)
 
     def _update_mapping(self):
@@ -148,11 +130,12 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
 
         def create_mapping(model, index: core.ModelIndex, key_path: tuple[int, ...]):
             if (rowcount := model.rowCount(index)) > 0:
-                if self._flattening_mode != self.FlatteningMode.LeavesOnly:
+                if not self._leaves_only:
                     self._source_offset[key_path] = len(self._source_offset)
                     self._source_key.append(key_path)
                 for i in range(rowcount):
-                    create_mapping(model, model.index(i, 0, index), (*key_path, i))
+                    child = model.index(i, 0, index)
+                    create_mapping(model, child, (*key_path, i))
             else:
                 self._source_offset[key_path] = len(self._source_offset)
                 self._source_key.append(key_path)
@@ -176,24 +159,22 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         with self.reset_model():
             self._update_mapping()
 
-    flatteningMode = core.Property(
-        FlatteningMode,
-        get_flattening_mode,
-        set_flattening_mode,
-    )
-
-    displayMode = core.Property(
-        DisplayMode,
-        get_display_mode,
-        set_display_mode,
-    )
+    leaves_only = core.Property(bool, is_leaves_only, set_leaves_only)
+    show_path = core.Property(bool, is_path_shown, set_show_path)
 
 
 if __name__ == "__main__":
-    from prettyqt import debugging, widgets
+    from prettyqt import custom_models, widgets
 
     app = widgets.app()
-    table = debugging.example_tree()
+    table = widgets.TreeView()
+    source_model = custom_models.ParentClassTreeModel(widgets.Frame)
+    table.set_model(source_model)
+    table.expandAll()
     table.proxifier.flatten()
     table.show()
+    table.resize(600, 500)
+    table.h_header.resize_sections("stretch")
+    table.set_icon("mdi6.table-pivot")
+    table.set_title("Flatten")
     app.exec()

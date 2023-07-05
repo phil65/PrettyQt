@@ -25,19 +25,19 @@ table.show()
 ```
 or
 ```py
-proxy = custom_models.FlattenedTreeProxyModel()
+proxy = custom_models.FlattenTreeProxyModel()
 proxy.set_source_model(model)
 table.set_model(proxy)
 table.show()
 ```
 <figure markdown>
-  ![Image title](../../images/flattenedtreeproxymodel.png)
-  <figcaption>FlattenedTreeProxyModel</figcaption>
+  ![Image title](../../images/flattentreeproxymodel.png)
+  <figcaption>FlattenTreeProxyModel</figcaption>
 </figure>
 
 ### API
 
-::: prettyqt.custom_models.FlattenedTreeProxyModel
+::: prettyqt.custom_models.FlattenTreeProxyModel
 
 ### Qt Properties
 
