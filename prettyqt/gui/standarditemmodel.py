@@ -153,6 +153,7 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
         for column, v in enumerate(dct.values()):
             for row, label in enumerate(v):
                 item = gui.StandardItem(str(label))
+                item.setData(label, constants.EDIT_ROLE)
                 model.setItem(row, column, item)
         return model
 
