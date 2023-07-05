@@ -20,6 +20,8 @@ class ProxyComparerWidget(widgets.Splitter):
     ):
         super().__init__(**kwargs)
         self.proxy_tables = []
+
+        # determine ItemView class for the models
         match itemview:
             case "tree":
                 View = widgets.TreeView
@@ -31,34 +33,33 @@ class ProxyComparerWidget(widgets.Splitter):
                 View = itemview
             case _:
                 raise TypeError(itemview)
+
+        # collect models
+        models = []
         while isinstance(proxy, core.QAbstractProxyModel):
+            models.append(proxy)
+            proxy = proxy.sourceModel()
+        models.append(proxy)
+
+        # add column for each model
+
+        for model in reversed(models):
             container = widgets.Widget()
             layout = container.set_layout("vertical")
             table = View()
-            table.set_model(proxy)
+            table.set_model(model)
             table.set_delegate("editor")
             self.proxy_tables.append(table)
             prop_table = widgets.TableView()
             prop_table.set_delegate("editor")
-            model = custom_models.WidgetPropertiesModel(proxy)
-            prop_table.set_model(model)
-            layout.add(widgets.Label(type(proxy).__name__))
+            prop_model = custom_models.WidgetPropertiesModel(model)
+            prop_table.set_model(prop_model)
+            layout.add(widgets.Label(type(model).__name__))
             col_splitter = widgets.Splitter("vertical")
-            col_splitter.add(prop_table)
             col_splitter.add(table)
+            col_splitter.add(prop_table)
             layout.add(col_splitter)
             self.add(container)
-            proxy = proxy.sourceModel()
-
-        container = widgets.Widget()
-        layout = container.set_layout("vertical")
-        table = View()
-        table.set_model(proxy)
-        table.set_delegate("editor")
-        self.proxy_tables.append(table)
-        layout.add(widgets.Label(type(proxy).__name__))
-        layout.add(table)
-        self.add(container)
 
 
 if __name__ == "__main__":
