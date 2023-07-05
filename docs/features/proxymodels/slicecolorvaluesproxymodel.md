@@ -1,19 +1,44 @@
+!!! Example "SliceColorValuesProxyModel"
+
+    === "Without proxy"
+
+        ```py
+        val_range = range(0, 100, 10)
+        data = dict(
+            a=random.sample(val_range, k=10),
+            b=random.sample(val_range, k=10),
+            c=random.sample(val_range, k=10),
+        )
+        model = gui.StandardItemModel.from_dict(data)
+        table = widgets.TableView()
+        table.set_model(model)
+        # table.proxifier[:, :].color_values()
+        ```
+        <figure markdown>
+          ![Image title](../../images/slicecolorvaluesproxymodel_before.png)
+        </figure>
+
+    === "With proxy"
+
+        ```py
+        val_range = range(0, 100, 10)
+        data = dict(
+            a=random.sample(val_range, k=10),
+            b=random.sample(val_range, k=10),
+            c=random.sample(val_range, k=10),
+        )
+        model = gui.StandardItemModel.from_dict(data)
+        table = widgets.TableView()
+        table.set_model(model)
+        table.proxifier[:, :].color_values()
+        ```
+        <figure markdown>
+          ![Image title](../../images/slicecolorvaluesproxymodel_after.png)
+        </figure>
+
+
 ::: prettyqt.custom_models.SliceColorValuesProxyModel
 
-<figure markdown>
-  ![Image title](../../images/highlightcurrentproxymodel_all.png)
-  <figcaption>Mode: all</figcaption>
-</figure>
-
-<figure markdown>
-  ![Image title](../../images/highlightcurrentproxymodel_column.png)
-  <figcaption>Mode: column</figcaption>
-</figure>
-
-<figure markdown>
-  ![Image title](../../images/highlightcurrentproxymodel_row.png)
-  <figcaption>Mode: row</figcaption>
-</figure>
 
 ### Qt Properties
 
