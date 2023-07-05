@@ -176,6 +176,17 @@ class TabWidget(widgets.WidgetMixin, widgets.QTabWidget):
         # Create a reference to maintain access to the detached tab
         self.detached_tabs[name] = detached_tab
 
+    def add(self, widget: widgets.QWidget | widgets.QLayout):
+        """Add widget / layout to TabWidget.
+
+        Tab label is chosen based on following order:
+        windowTitle -> objectName -> className
+        """
+        label = (widget.windowTitle() if isinstance(widget, widgets.QWidget) else "") or (
+            widget.objectName() or type(widget).__name__
+        )
+        self.add_tab(widget, label)
+
     def add_tab(
         self,
         item: widgets.QWidget | widgets.QLayout,
