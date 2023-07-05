@@ -1,6 +1,11 @@
 from __future__ import annotations
 
+import logging
+
 from prettyqt import constants, core
+
+
+logger = logging.getLogger(__name__)
 
 
 class MeltProxyModel(core.AbstractProxyModel):
@@ -75,6 +80,7 @@ class MeltProxyModel(core.AbstractProxyModel):
             return self.sourceModel().headerData(section, orientation, role)
 
     def index(self, row: int, column: int, parent: core.ModelIndex):
+        # TODO: broken
         if column not in self._id_columns:
             return self.createIndex(row, column, core.ModelIndex())
         col_pos = self.get_source_column_for_proxy_column(column)
@@ -93,31 +99,35 @@ class MeltProxyModel(core.AbstractProxyModel):
         return column - sum(column > col for col in self._id_columns)
 
     def mapToSource(self, proxy_index: core.ModelIndex) -> core.ModelIndex:
-        if not proxy_index.isValid():
+        source = self.sourceModel()
+        if source is None or not proxy_index.isValid():
             return core.ModelIndex()
         row, column = proxy_index.row(), proxy_index.column()
-        row_count = self.sourceModel().rowCount()
+        row_count = source.rowCount()
         if self.is_variable_column(column):
             return core.ModelIndex()
         elif self.is_value_column(column):
             source_col = self.value_columns[row // row_count]
             source_row = row % row_count
-            return self.sourceModel().index(source_row, source_col, core.ModelIndex())
+            return source.index(source_row, source_col, core.ModelIndex())
         else:
             source_col = self.get_source_column_for_proxy_column(column)
             source_row = row % row_count
-            return self.sourceModel().index(source_row, source_col)
+            return source.index(source_row, source_col)
 
     def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
         # TODO: this is still broken.
-        row, col = source_index.row(), source_index.column()
-        if col in self._id_columns:
-            row_pos = row if row < self.sourceModel().rowCount() else row / 2
-            # col_pos = self.get_proxy_column_for_source_column(col)
-            col_pos = col
-            return self.sourceModel().index(row_pos, col_pos, core.ModelIndex())
-        else:
+        source = self.sourceModel()
+        if source is None or not source_index.isValid():
             return core.ModelIndex()
+        row, col = source_index.row(), source_index.column()
+        # we can only really return a corresponding index for the value columns.
+        # Var column is completely virtual and the id columns would have multiple
+        # source indexes which correspond to the proxy index.
+        if col not in self.value_columns:
+            return core.ModelIndex()
+        # TODO: convert row / col
+        return source.index(row, col, core.ModelIndex())
 
     def get_id_columns(self) -> list[int]:
         """Get list of identifier columns."""
@@ -156,7 +166,7 @@ class MeltProxyModel(core.AbstractProxyModel):
 if __name__ == "__main__":
     from prettyqt import gui, widgets
 
-    app = widgets.app()
+    app = widgets.app(style="Windows")
     data = dict(
         first=["John", "Mary"],
         last=["Doe", "Bo"],
@@ -171,6 +181,6 @@ if __name__ == "__main__":
     table.show()
     table.resize(600, 130)
     table.h_header.resize_sections("stretch")
-    # table.proxifier.melt(id_columns=[0, 1])
+    table.proxifier.melt(id_columns=[0, 1])
     with app.debug_mode():
         app.exec()
