@@ -285,6 +285,7 @@ exclude_lines = [
     "if TYPE_CHECKING:",
     "@overload",
     "except ImportError",
+    'if __name__ == "__main__":'
 ]
 
 [tool.mypy]
