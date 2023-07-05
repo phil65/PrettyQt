@@ -1,14 +1,39 @@
+!!! Example "Class hierarchy example"
+
+    === "Parentclass tree"
+
+        ```py
+        from prettyqt import custom_models, widgets
+
+        app = widgets.app()
+        widget = widgets.TreeView()
+        model = custom_models.ParentClassTreeModel(widgets.TreeWidget)
+        widget.set_model(model)
+        widget.show()
+        ```
+
+        <figure markdown>
+          ![Image title](treewidget_parentclasses.png)
+        </figure>
+
+    === "MRO tree"
+
+        ```py
+        from prettyqt import custom_models, widgets
+
+        app = widgets.app()
+        widget = widgets.TreeView()
+        model = custom_models.ParentClassTreeModel(widgets.TreeWidget, mro=True)
+        widget.set_model(model)
+        widget.show()
+        ```
+
+        <figure markdown>
+          ![Image title](treewidget_mro.png)
+        </figure>
+
+
 ::: prettyqt.custom_models.ParentClassTreeModel
-
-<figure markdown>
-  ![Image title](../../images/treewidget_parentclasses.png)
-  <figcaption>ParentClassTreeModel for TreeWidget</figcaption>
-</figure>
-
-<figure markdown>
-  ![Image title](../../images/treewidget_mro.png)
-  <figcaption>ParentClassTreeModel for TreeWidget (mro mode)</figcaption>
-</figure>
 
 ## Supports
 

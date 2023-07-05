@@ -1,3 +1,18 @@
+
+```py
+from prettyqt import custom_models, widgets
+
+app = widgets.app()
+widget = widgets.TreeView()
+model = custom_models.SubClassTreeModel(core.AbstractItemModelMixin)
+widget.set_model(model)
+widget.show()
+```
+
+<figure markdown>
+  ![Image title](abstractitemmodelmixin_subclasses.png)
+</figure>
+
 ::: prettyqt.custom_models.SubClassTreeModel
 
 ## Supports
