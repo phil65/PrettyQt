@@ -35,6 +35,7 @@
     * [Proxy models](features/proxies.md)
         * [Proxifier](features/proxymodels/proxifier.md)
         * [Slice proxies](features/sliceproxies.md)
+            * [SliceIdentityProxyModel](features/proxymodels/sliceidentityproxymodel.md)
             * [SliceFilterProxyModel](features/proxymodels/slicefilterproxymodel.md)
             * [SliceChangeFlagsProxyModel](features/proxymodels/slicechangeflagsproxymodel.md)
             * [SliceChangeIconSizeProxyModel](features/proxymodels/slicechangeiconsizeproxymodel.md)

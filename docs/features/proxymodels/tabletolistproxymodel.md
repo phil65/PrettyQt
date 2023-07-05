@@ -1,10 +1,14 @@
-!!! Example "MeltProxyModel"
+!!! Example "TableToListProxyModel"
 
     === "Without proxy"
 
         ```py
-        app = widgets.app()
-        data = dict(first=["John", "Mary"], last=["Doe", "Bo"])
+        data = dict(
+            first=["John", "Mary"],
+            last=["Doe", "Bo"],
+            height=[5.5, 6.0],
+            weight=[130, 150],
+        )
         model = gui.StandardItemModel.from_dict(data)
         table = widgets.TableView()
         table.set_model(model)
@@ -19,8 +23,12 @@
     === "With proxy"
 
         ```py
-        app = widgets.app()
-        data = dict(first=["John", "Mary"], last=["Doe", "Bo"])
+        data = dict(
+            first=["John", "Mary"],
+            last=["Doe", "Bo"],
+            height=[5.5, 6.0],
+            weight=[130, 150],
+        )
         model = gui.StandardItemModel.from_dict(data)
         table = widgets.TableView()
         table.set_model(model)

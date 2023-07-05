@@ -226,6 +226,11 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self.set_model(model)
 
     def get_model(self, skip_proxies: bool = False) -> core.QAbstractItemModel:
+        """Get current model of the ItemView.
+
+        Arguments:
+            skip_proxies: Whether to get current model or the non-proxy sourceModel.
+        """
         model = self.model()
         if skip_proxies:
             while isinstance(model, core.QAbstractProxyModel):
@@ -235,7 +240,11 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def get_models(
         self, proxies_only: bool = False
     ) -> listdelegators.BaseListDelegator[core.QAbstractProxyModel]:
-        """Get a list of all (proxy) models connected to this view."""
+        """Get a list of all (proxy) models connected to this view.
+
+        Arguments:
+            proxies_only: whether the non-proxy sourceModel should be included.
+        """
         model = self.model()
         models = []
         while isinstance(model, core.QAbstractProxyModel):
@@ -253,7 +262,15 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         current: bool = False,
         expand: Literal["rows", "columns"] | None = None,
     ):
-        # index = self.model().index(self._selected_index)
+        """Set current index.
+
+        Arguments:
+            index: Index to set.
+            operation: Whether to select, deselect or toggle the current state.
+            clear: Clear Whether to clear previously selected indexes.
+            current: Current selection will be updated.
+            expand: Whether to expand selection to whole column / row.
+        """
         match index:
             case None:
                 self.selectionModel().setCurrentIndex(
