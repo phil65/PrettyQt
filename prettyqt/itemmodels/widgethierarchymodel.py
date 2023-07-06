@@ -80,7 +80,7 @@ class BaseHierarchyModel(itemmodels.TreeModel):
 
     def __init__(
         self,
-        obj: type[core.QObject],
+        obj: core.QObject,
         show_root: bool = True,
         parent: core.QObject | None = None,
     ):

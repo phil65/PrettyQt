@@ -4,7 +4,6 @@ import functools
 import logging
 
 from prettyqt import (
-    constants,
     core,
     custom_widgets,
     debugging,
@@ -15,23 +14,6 @@ from prettyqt import (
 
 
 logger = logging.getLogger(__name__)
-
-
-class HierarchyView(widgets.TreeView):
-    object_selected = core.Signal(core.QObject)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.set_indentation(10)
-        self.h_header.resize_sections()
-        self.setRootIsDecorated(True)
-        self.setWordWrap(True)
-
-    def select_object(self, qobject: core.QObject):
-        index = self.model().search_tree(qobject, constants.USER_ROLE + 23324)
-        if index:
-            self.set_current_index(index[0], current=True)
-            self.scroll_to(index[0])
 
 
 def get_tabbed(qobject: core.QObject, parent: widgets.QWidget | None = None):
@@ -88,15 +70,11 @@ class QObjectDetailsDialog(widgets.MainWindow):
         self.console = ipython.InProcessIPythonWidget(self)
         self.console.push_vars(dict(app=widgets.app(), qobject=qobject))
         self.tabwidget, self.propertyview = get_tabbed(qobject)
-        self.hierarchyview = HierarchyView()
-        model = itemmodels.WidgetHierarchyModel(qobject, parent=self.hierarchyview)
-        self.hierarchyview.set_model(model)
-        self.hierarchyview.h_header = custom_widgets.FilterHeader(self.hierarchyview)
-        self.hierarchyview.expandAll()
+        self.hierarchyview = custom_widgets.QObjectHierarchyTreeView()
+        self.hierarchyview.set_qobject(qobject)
         self.hierarchyview.selectionModel().currentRowChanged.connect(
             self._current_changed
         )
-
         logtable = widgets.TableView()
         model = itemmodels.LogRecordModel(logging.getLogger(), parent=logtable)
         w = widgets.Widget()

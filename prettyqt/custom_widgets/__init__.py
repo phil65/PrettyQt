@@ -21,6 +21,7 @@ from .widgeteditor import WidgetEditor
 from .collapsibleframe import CollapsibleFrame
 from .orientedtableview import OrientedTableView
 from .qobjectpropertiestableview import QObjectPropertiesTableView
+from .qobjecthierarchytreeview import QObjectHierarchyTreeView
 from .commandpalette import CommandPalette
 from .editors.lineedits import IntLineEdit, FloatLineEdit, UrlLineEdit, StringListEdit
 from .editors.keycombinationedit import KeyCombinationEdit
@@ -94,7 +95,8 @@ __all__ = [
     "CommandPalette",
     "ClickableLabel",
     "OrientedTableView",
-    "QObjectPropertiesTableView",
+    "QObjectPropertiesTabletreeView",
+    "QObjectHierarchyTreeView",
     "FilterHeader",
     "HierarchicalHeaderView",
     "SpanTableView",
