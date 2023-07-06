@@ -686,11 +686,7 @@ if __name__ == "__main__":
     view.setModel(model)
 
     for i in range(10):
-        items = []
-
-        for j in range(10):
-            items.append(gui.StandardItem(f"item({i},{j})"))
-
+        items = [gui.StandardItem(f"item({i},{j})") for j in range(10)]
         model.appendRow(items)
 
     # Horizontal header settings.

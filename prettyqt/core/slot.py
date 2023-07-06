@@ -73,10 +73,11 @@ def AutoSlot(func):
         concretes = get_concretes(args)
         if stripped_optionals:
             required_annotations = tuple(concretes)
-            combos = []
-            for i in range(len(stripped_optionals) + 1):
-                for subset in itertools.combinations(stripped_optionals, i):
-                    combos.append(subset)
+            combos = [
+                subset
+                for i in range(len(stripped_optionals) + 1)
+                for subset in itertools.combinations(stripped_optionals, i)
+            ]
             for combo in combos:
                 func = QtCore.Slot(*combo + required_annotations, result=return_)(func)
             return func

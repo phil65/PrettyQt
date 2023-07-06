@@ -68,10 +68,7 @@ class TabBarWrapper:
             return fn
 
         def fn(*args, **kwargs):
-            result = []
-            for i in self._range:
-                result.append(method(i, *args, **kwargs))
-            return result
+            return [method(i, *args, **kwargs) for i in self._range]
 
         return fn
 
