@@ -162,9 +162,17 @@ class WidgetMixin(core.ObjectMixin):
     def map_to(
         self,
         widget: widgets.QWidget | Literal["global", "parent", "window"],
-        pos_or_rect,
+        pos_or_rect: datatypes.PointType
+        | datatypes.RectType
+        | datatypes.PointFType
+        | datatypes.RectFType,
     ) -> core.QRect | core.QRectF | core.QPoint | core.QPointF:
-        """Map a point or rect to a widget, global position or parent."""
+        """Map a point or rect to a widget, global position or parent.
+
+        Arguments:
+            widget: What to map to.
+            pos_or_rect: Point or rect to map.
+        """
         match pos_or_rect:
             case int(), int():
                 pos_or_rect = core.QPoint(*pos_or_rect)
@@ -205,9 +213,17 @@ class WidgetMixin(core.ObjectMixin):
     def map_from(
         self,
         widget: widgets.QWidget | Literal["global", "parent", "window"],
-        pos_or_rect,
+        pos_or_rect: datatypes.PointType
+        | datatypes.RectType
+        | datatypes.PointFType
+        | datatypes.RectFType,
     ) -> core.QRect | core.QRectF | core.QPoint | core.QPointF:
-        """Map a point or rect from a widget, global position or parent."""
+        """Map a point or rect from a widget, global position or parent.
+
+        Arguments:
+            widget: What to map from.
+            pos_or_rect: Point or rect to map.
+        """
         match pos_or_rect:
             case int(), int():
                 pos_or_rect = core.QPoint(*pos_or_rect)
@@ -1059,6 +1075,11 @@ class WidgetMixin(core.ObjectMixin):
         return gui.FontInfo(self.fontInfo())
 
     def set_margin(self, margin: datatypes.MarginsType):
+        """Set content margins for the widget.
+
+        Arguments:
+            margin: margins to use
+        """
         self.setContentsMargins(datatypes.to_margins(margin))
 
     def raise_dock(self) -> bool:
