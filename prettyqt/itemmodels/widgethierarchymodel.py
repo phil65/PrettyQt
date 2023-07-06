@@ -115,16 +115,20 @@ class WidgetHierarchyModel(itemmodels.TreeModel):
         if not index.isValid():
             return None
         widget = self.data_by_index(index).obj
-        match role, index.column():
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE, _:
+        prop = self.props[index.column()]
+        val = prop.read(widget)
+        is_bool = isinstance(val, bool)
+        match role:
+            case constants.DISPLAY_ROLE | constants.EDIT_ROLE if not is_bool:
+                return val
+            case constants.CHECKSTATE_ROLE if is_bool:
+                return self.to_checkstate(val)
+            case constants.USER_ROLE:
                 prop = self.props[index.column()]
-                return prop.read(widget)
-            case constants.USER_ROLE, _:
-                prop = self.props[index.column()]
-                return prop.read(widget)
-            case self.Roles.WidgetRole, _:
+                return val
+            case self.Roles.WidgetRole:
                 return widget
-            case constants.SIZE_HINT_ROLE, _:
+            case constants.SIZE_HINT_ROLE:
                 return core.QSize(250, 35)
 
     def setData(
@@ -141,18 +145,19 @@ class WidgetHierarchyModel(itemmodels.TreeModel):
                     prop.write(widget, value)
                 # self.update_row(index.row())
                 return True
+            case constants.CHECKSTATE_ROLE:
+                with self.change_layout():
+                    prop.write(widget, bool(value))
+                return True
         return False
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         prop = self.props[index.column()]
-        if prop.isWritable():
-            return (
-                super().flags(index)
-                | constants.IS_EDITABLE
-                | constants.IS_ENABLED
-                | constants.IS_SELECTABLE
-            )
-        return super().flags(index)
+        widget = self.data_by_index(index).obj
+        val = prop.read(widget)
+        flag = constants.IS_CHECKABLE if isinstance(val, bool) else constants.IS_EDITABLE
+        default = super().flags(index)
+        return (default | flag) if prop.isWritable() else default
 
     def _fetch_object_children(
         self, item: WidgetHierarchyModel.TreeItem
