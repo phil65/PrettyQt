@@ -5,8 +5,8 @@ from __future__ import annotations
 
 import logging
 
-from prettyqt import constants, core, custom_models, custom_widgets, gui, widgets
-from prettyqt.custom_models.pythonobjecttreemodel import (
+from prettyqt import constants, core, custom_widgets, gui, itemmodels, widgets
+from prettyqt.itemmodels.pythonobjecttreemodel import (
     CommentsColumn,
     DocStringColumn,
     FileColumn,
@@ -41,7 +41,7 @@ class ObjectBrowser(widgets.MainWindow):
         self.set_icon("mdi.language-python")
         self._auto_refresh = False
         self._refresh_rate = 2
-        self._tree_model = custom_models.PythonObjectTreeModel(obj)
+        self._tree_model = itemmodels.PythonObjectTreeModel(obj)
         self._attr_details = [
             Klass(model=self._tree_model) for Klass in DEFAULT_ATTR_DETAILS
         ]

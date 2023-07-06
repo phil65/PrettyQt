@@ -10,14 +10,14 @@ class ValidatorMixin(core.ObjectMixin):
         return get_repr(self)
 
     def __and__(self, other: Validator):
-        from prettyqt import custom_validators
+        from prettyqt import validators
 
-        return custom_validators.AndValidator([self, other])
+        return validators.AndValidator([self, other])
 
     def __or__(self, other: Validator):
-        from prettyqt import custom_validators
+        from prettyqt import validators
 
-        return custom_validators.OrValidator([self, other])
+        return validators.OrValidator([self, other])
 
     def is_valid_value(self, value: str, pos: int = 0) -> bool:
         val = self.validate(value, pos)

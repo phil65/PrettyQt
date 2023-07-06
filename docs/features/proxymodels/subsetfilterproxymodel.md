@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.SubsetFilterProxyModel
+::: prettyqt.itemmodels.SubsetFilterProxyModel
 
 !!! note
     If you only need filtering based on slices or a single column / row,

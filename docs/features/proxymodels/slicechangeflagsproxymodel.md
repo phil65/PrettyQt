@@ -67,7 +67,7 @@ or
 
 ```py
 indexer = (slice(None, None, 2), slice(2, None))
-proxy = custom_models.SliceChangeFlagsProxyModel(indexer=indexer, readable=False)
+proxy = itemmodels.SliceChangeFlagsProxyModel(indexer=indexer, readable=False)
 proxy.set_source_model(model)
 table.set_model(proxy)
 table.show()
@@ -77,7 +77,7 @@ Read more about [slices](https://docs.python.org/3/library/functions.html#slice)
 
 ### API
 
-::: prettyqt.custom_models.SliceChangeFlagsProxyModel
+::: prettyqt.itemmodels.SliceChangeFlagsProxyModel
 
 ### Qt Properties
 

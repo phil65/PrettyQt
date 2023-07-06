@@ -140,7 +140,7 @@ class Cursor(serializemixin.SerializeMixin, gui.QCursor):
                 new = geom.bottomLeft()
         new_pos = core.Point(new.x() + x_offset, new.y() + y_offset)
         if duration > 0:
-            from prettyqt.custom_animations import cursormoveanimation
+            from prettyqt.animations import cursormoveanimation
 
             cls._cursor_animation = cursormoveanimation.CursorMoveAnimation(
                 duration=duration, end=new_pos

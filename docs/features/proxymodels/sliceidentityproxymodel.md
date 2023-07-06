@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.SliceIdentityProxyModel
+::: prettyqt.itemmodels.SliceIdentityProxyModel
 
 Read more about [slices](https://docs.python.org/3/library/functions.html#slice).
 

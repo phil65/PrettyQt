@@ -83,7 +83,7 @@
 
 ### API
 
-::: prettyqt.custom_models.SliceHighlightCurrentProxyModel
+::: prettyqt.itemmodels.SliceHighlightCurrentProxyModel
 
 ### Qt Properties
 

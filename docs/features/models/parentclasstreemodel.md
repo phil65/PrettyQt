@@ -3,11 +3,11 @@
     === "Parentclass tree"
 
         ```py
-        from prettyqt import custom_models, widgets
+        from prettyqt import itemmodels, widgets
 
         app = widgets.app()
         widget = widgets.TreeView()
-        model = custom_models.ParentClassTreeModel(widgets.TreeWidget)
+        model = itemmodels.ParentClassTreeModel(widgets.TreeWidget)
         widget.set_model(model)
         widget.show()
         ```
@@ -19,11 +19,11 @@
     === "MRO tree"
 
         ```py
-        from prettyqt import custom_models, widgets
+        from prettyqt import itemmodels, widgets
 
         app = widgets.app()
         widget = widgets.TreeView()
-        model = custom_models.ParentClassTreeModel(widgets.TreeWidget, mro=True)
+        model = itemmodels.ParentClassTreeModel(widgets.TreeWidget, mro=True)
         widget.set_model(model)
         widget.show()
         ```
@@ -33,7 +33,7 @@
         </figure>
 
 
-::: prettyqt.custom_models.ParentClassTreeModel
+::: prettyqt.itemmodels.ParentClassTreeModel
 
 ## Supports
 

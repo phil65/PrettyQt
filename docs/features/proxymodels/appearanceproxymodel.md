@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.AppearanceProxyModel
+::: prettyqt.itemmodels.AppearanceProxyModel
 
 ### Qt Properties
 

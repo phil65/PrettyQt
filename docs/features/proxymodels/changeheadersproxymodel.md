@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.ChangeHeadersProxyModel
+::: prettyqt.itemmodels.ChangeHeadersProxyModel
 
 ### Qt Properties
 

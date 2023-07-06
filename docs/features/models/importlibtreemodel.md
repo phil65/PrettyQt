@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.ImportlibTreeModel
+::: prettyqt.itemmodels.ImportlibTreeModel
 
 Tree model to display a python [distribution](https://docs.python.org/3/library/importlib.metadata.html#distributions) and its dependencies.
 

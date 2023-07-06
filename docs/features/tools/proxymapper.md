@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.ProxyMapper
+::: prettyqt.itemmodels.ProxyMapper
 
 
 When having a complex proxy tree like:

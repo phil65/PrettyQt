@@ -39,7 +39,7 @@
           ![Image title](../../images/tabletolistproxymodel_after.png)
         </figure>
 
-::: prettyqt.custom_models.TableToListProxyModel
+::: prettyqt.itemmodels.TableToListProxyModel
 
 ### Qt Properties
 

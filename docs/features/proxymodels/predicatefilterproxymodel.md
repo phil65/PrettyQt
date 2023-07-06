@@ -1,1 +1,1 @@
-::: prettyqt.custom_models.PredicateFilterProxyModel
+::: prettyqt.itemmodels.PredicateFilterProxyModel

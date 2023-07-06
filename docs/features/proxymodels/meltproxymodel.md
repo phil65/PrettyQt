@@ -42,13 +42,13 @@
           ![Image title](../../images/meltproxymodel_after.png)
         </figure>
 
-::: prettyqt.custom_models.MeltProxyModel
+::: prettyqt.itemmodels.MeltProxyModel
 
 
 ```py
 table.proxifier.melt(id_columns=[0, 1])
 # equals
-proxy = custom_models.MeltProxyModel(id_columns=[0, 1])
+proxy = itemmodels.MeltProxyModel(id_columns=[0, 1])
 proxy.set_source_model(table.model())
 table.set_model(proxy)
 ```

@@ -37,7 +37,7 @@
         </figure>
 
 
-::: prettyqt.custom_models.SliceColorValuesProxyModel
+::: prettyqt.itemmodels.SliceColorValuesProxyModel
 
 
 ### Qt Properties

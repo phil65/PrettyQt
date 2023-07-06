@@ -29,4 +29,4 @@
           ![Image title](../../images/columnjoinerproxymodel_after.png)
         </figure>
 
-::: prettyqt.custom_models.ColumnJoinerProxyModel
+::: prettyqt.itemmodels.ColumnJoinerProxyModel

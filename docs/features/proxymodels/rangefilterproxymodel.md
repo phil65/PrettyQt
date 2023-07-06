@@ -1,1 +1,1 @@
-::: prettyqt.custom_models.ProxyMapper
+::: prettyqt.itemmodels.ProxyMapper

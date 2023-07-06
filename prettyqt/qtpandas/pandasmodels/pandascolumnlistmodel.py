@@ -8,14 +8,14 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from prettyqt import constants, core, custom_models
+from prettyqt import constants, core, itemmodels
 from prettyqt.utils import helpers
 
 
 logger = logging.getLogger(__name__)
 
 
-class PandasColumnListModel(custom_models.ModelMixin, core.AbstractTableModel):
+class PandasColumnListModel(itemmodels.ModelMixin, core.AbstractTableModel):
     HEADER = ["Name", "Type", "Size"]
     MIME_TYPE = "mime_columns"
     content_type = "features"
@@ -194,7 +194,7 @@ def label_for_index(index: pd.Index) -> str:
             return "Regular"
 
 
-class PandasIndexListModel(custom_models.ModelMixin, core.AbstractTableModel):
+class PandasIndexListModel(itemmodels.ModelMixin, core.AbstractTableModel):
     HEADER = ["Name", "Index type", "Monotonic"]
     MIME_TYPE = "mime_indexes"
 

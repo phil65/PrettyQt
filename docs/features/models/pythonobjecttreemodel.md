@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.PythonObjectTreeModel
+::: prettyqt.itemmodels.PythonObjectTreeModel
 
 ## Supports
 

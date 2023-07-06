@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.RegexMatchesModel
+::: prettyqt.itemmodels.RegexMatchesModel
 
 ## Supports
 

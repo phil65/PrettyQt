@@ -231,9 +231,9 @@ class PlainTextEdit(PlainTextEditMixin, widgets.QPlainTextEdit):
 
 
 if __name__ == "__main__":
-    from prettyqt import custom_validators
+    from prettyqt import validators
 
-    val = custom_validators.RegexPatternValidator()
+    val = validators.RegexPatternValidator()
     app = widgets.app()
     widget = widgets.PlainTextEdit("\n".join(f"abc{i}" for i in range(1000)))
     widget.show_whitespace_and_tabs(True)

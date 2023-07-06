@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.ActionsModel
+::: prettyqt.itemmodels.ActionsModel
 
 ## Supports
 

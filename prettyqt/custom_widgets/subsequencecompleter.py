@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, custom_models, widgets
+from prettyqt import constants, core, itemmodels, widgets
 
 
 class SubsequenceCompleter(widgets.Completer):
@@ -11,7 +11,7 @@ class SubsequenceCompleter(widgets.Completer):
         self.completion_search_term = ""
         self.source_model = None
         self.set_completion_mode("unfiltered_popup")
-        self.proxy_model = custom_models.SubsequenceSortFilterProxyModel(parent=self)
+        self.proxy_model = itemmodels.SubsequenceSortFilterProxyModel(parent=self)
         self.proxy_model.setFilterCaseSensitivity(self.caseSensitivity())
         self.set_case_sensitive(False)
         self._force_next_update = True
@@ -20,7 +20,7 @@ class SubsequenceCompleter(widgets.Completer):
 
     def setModel(self, model: core.QAbstractItemModel):
         self.source_model = model
-        self.proxy_model = custom_models.SubsequenceSortFilterProxyModel(parent=self)
+        self.proxy_model = itemmodels.SubsequenceSortFilterProxyModel(parent=self)
         self.proxy_model.setFilterCaseSensitivity(self.caseSensitivity())
         self.proxy_model.set_search_term(self.completion_search_term)
         self.proxy_model.setSourceModel(self.source_model)
@@ -51,7 +51,7 @@ class SubsequenceCompleter(widgets.Completer):
 
 if __name__ == "__main__":
     from prettyqt import widgets
-    from prettyqt.custom_models.importlibdistributionmodel import (
+    from prettyqt.itemmodels.importlibdistributionmodel import (
         ImportlibDistributionModel,
     )
 

@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.attrsmodel.AttrsModel
+::: prettyqt.itemmodels.attrsmodel.AttrsModel
 
 ## Supports
 

@@ -12,7 +12,7 @@ from prettyqt.utils import classhelpers, datatypes
 
 
 if TYPE_CHECKING:
-    from prettyqt import custom_models
+    from prettyqt import itemmodels
 
 
 logger = logging.getLogger(__name__)
@@ -50,14 +50,14 @@ class Sliced:
         self.proxifier = proxifier
         self._widget = widget
 
-    def filter(self) -> custom_models.SliceFilterProxyModel:
+    def filter(self) -> itemmodels.SliceFilterProxyModel:
         """Filter subsection to display.
 
         Wraps current model with a SliceFilterProxyModel.
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.SliceFilterProxyModel(
+        proxy = itemmodels.SliceFilterProxyModel(
             indexer=self._indexer, parent=self._widget
         )
         proxy.setSourceModel(self._widget.model())
@@ -66,14 +66,14 @@ class Sliced:
 
     def highlight_current(
         self, mode="column"
-    ) -> custom_models.SliceHighlightCurrentProxyModel:
+    ) -> itemmodels.SliceHighlightCurrentProxyModel:
         """Filter subsection to display.
 
         Wraps current model with a SliceHighlightCurrentProxyModel.
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.SliceHighlightCurrentProxyModel(
+        proxy = itemmodels.SliceHighlightCurrentProxyModel(
             indexer=self._indexer, parent=self._widget, mode=mode
         )
         proxy.setSourceModel(self._widget.model())
@@ -86,7 +86,7 @@ class Sliced:
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
         selector: Callable[[Any], bool] | None = None,
         selector_role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-    ) -> custom_models.SliceValueTransformationProxyModel:
+    ) -> itemmodels.SliceValueTransformationProxyModel:
         """Conditionally apply modifications to given area.
 
         Wraps current model with a SliceValueTransformationProxyModel.
@@ -97,9 +97,9 @@ class Sliced:
             selector: Callable to filter cells which should be modified.
             selector_role: data role the selector callable should get as an argument.
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.SliceValueTransformationProxyModel(
+        proxy = itemmodels.SliceValueTransformationProxyModel(
             indexer=self._indexer, parent=self._widget
         )
         proxy.add_transformer(fn, role, selector, selector_role)
@@ -118,7 +118,7 @@ class Sliced:
         auto_tristate: bool | None = None,
         never_has_children: bool | None = None,
         user_tristate: bool | None = None,
-    ) -> custom_models.SliceChangeFlagsProxyModel:
+    ) -> itemmodels.SliceChangeFlagsProxyModel:
         """Change Item flags for given slice.
 
         For makin an area checkable, usually set_checkable should be preferred
@@ -136,9 +136,9 @@ class Sliced:
             never_has_children: Changes the ItemNeverHasChildren Flag
             user_tristate: Changes the ItemIsUserTristate Flag
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.SliceChangeFlagsProxyModel(
+        proxy = itemmodels.SliceChangeFlagsProxyModel(
             indexer=self._indexer, parent=self._widget
         )
         flags = dict(
@@ -169,7 +169,7 @@ class Sliced:
         datetime_format: str | None = None,
         date_format: str | None = None,
         time_format: str | None = None,
-    ) -> custom_models.SliceDisplayTextProxyModel:
+    ) -> itemmodels.SliceDisplayTextProxyModel:
         """Format non-str values returned by DisplayRole.
 
         Wraps current model with a SliceDisplayTextProxyModel.
@@ -181,9 +181,9 @@ class Sliced:
             date_format: Format to use for QDate / datetime.date objects
             time_format: Format to use for QTime / datetime.time objects.
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.SliceDisplayTextProxyModel(
+        proxy = itemmodels.SliceDisplayTextProxyModel(
             int_format=int_format or "{:.4f}",
             float_format=float_format or "{:.4f}",
             datetime_format=datetime_format or "%m/%d/%Y, %H:%M:%S",
@@ -198,10 +198,7 @@ class Sliced:
         self,
         callback: Callable[[core.ModelIndex], Any] | None = None,
         tree: bool = False,
-    ) -> (
-        custom_models.SliceCheckableProxyModel
-        | custom_models.SliceCheckableTreeProxyModel
-    ):
+    ) -> itemmodels.SliceCheckableProxyModel | itemmodels.SliceCheckableTreeProxyModel:
         """Make given area checkable and trigger a callback on checkstate change.
 
         For trees, set tree=True. That way checkboxes change to tristate and
@@ -211,14 +208,14 @@ class Sliced:
             callback: Callback to trigger when checkstate changes.
             tree: Whether the underlying model is a tree.
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
         if tree:
-            proxy = custom_models.SliceCheckableTreeProxyModel(
+            proxy = itemmodels.SliceCheckableTreeProxyModel(
                 indexer=self._indexer, parent=self._widget
             )
         else:
-            proxy = custom_models.SliceCheckableProxyModel(
+            proxy = itemmodels.SliceCheckableProxyModel(
                 indexer=self._indexer, parent=self._widget
             )
         if callback:
@@ -229,7 +226,7 @@ class Sliced:
 
     def change_icon_size(
         self, size: datatypes.SizeType
-    ) -> custom_models.SliceChangeIconSizeProxyModel:
+    ) -> itemmodels.SliceChangeIconSizeProxyModel:
         """Change the size of pixmap / icon provided by decoration role.
 
         Wraps current model with a  SliceChangeIconSizeProxyModel.
@@ -237,10 +234,10 @@ class Sliced:
         Arguments:
             size: New size for decoration role.
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
         size = datatypes.to_size(size)
-        proxy = custom_models.SliceChangeIconSizeProxyModel(
+        proxy = itemmodels.SliceChangeIconSizeProxyModel(
             indexer=self._indexer, size=size, parent=self._widget
         )
         proxy.setSourceModel(self._widget.model())
@@ -253,7 +250,7 @@ class Sliced:
         background: datatypes.ColorType | gui.QBrush | None = None,
         font: str | gui.QFont | None = None,
         alignment: constants.AlignmentFlag | constants.AlignmentStr | None = None,
-    ) -> custom_models.SliceAppearanceProxyModel:
+    ) -> itemmodels.SliceAppearanceProxyModel:
         """Apply styling to given area.
 
         Wraps current model with a SliceAppearanceProxyModel.
@@ -263,9 +260,9 @@ class Sliced:
             font: Font to use for font role.
             alignment: Alignment to use for alignment role.
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.SliceAppearanceProxyModel(
+        proxy = itemmodels.SliceAppearanceProxyModel(
             indexer=self._indexer, parent=self._widget
         )
         proxy.setSourceModel(self._widget.model())
@@ -281,7 +278,7 @@ class Sliced:
         from_: constants.ItemDataRole,
         to: constants.ItemDataRole,
         converter: Callable | None = None,
-    ) -> custom_models.MapRoleProxyMpodel:
+    ) -> itemmodels.MapRoleProxyMpodel:
         """Map ItemDataRole to another role for data().
 
         Wraps model with a MapRoleProxyMpodel.
@@ -291,9 +288,9 @@ class Sliced:
             to: role to map to
             converter: modify mapped values with callable
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.MapRoleProxyMpodel(
+        proxy = itemmodels.MapRoleProxyMpodel(
             indexer=self._indexer,
             parent=self._widget,
             mapping={from_: to},
@@ -307,7 +304,7 @@ class Sliced:
         self,
         low_color: datatypes.ColorType = "green",
         high_color: datatypes.ColorType = "red",
-    ) -> custom_models.SliceColorValuesProxyModel:
+    ) -> itemmodels.SliceColorValuesProxyModel:
         """Color numerical values.
 
         Wraps model with a SliceColorValuesProxyModel.
@@ -316,9 +313,9 @@ class Sliced:
             low_color: color to use for "low" values
             high_color: color to use for "high" values
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.SliceColorValuesProxyModel(
+        proxy = itemmodels.SliceColorValuesProxyModel(
             indexer=self._indexer, parent=self._widget
         )
         proxy.set_low_color(low_color)
@@ -359,7 +356,7 @@ class Proxifier:
 
     def flatten(
         self, show_path: bool = False, leaves_only: bool = False
-    ) -> custom_models.FlattenTreeProxyModel:
+    ) -> itemmodels.FlattenTreeProxyModel:
         """Wraps model in a Proxy which flattens tree to one column.
 
         Arguments:
@@ -369,9 +366,9 @@ class Proxifier:
         """
         # ss = """QTreeView::branch{border-image: url(none.png);}"""
         # self._widget.set_stylesheet(ss)
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.FlattenTreeProxyModel(
+        proxy = itemmodels.FlattenTreeProxyModel(
             parent=self._widget, show_path=show_path, leaves_only=leaves_only
         )
         proxy.setSourceModel(self._widget.model())
@@ -380,7 +377,7 @@ class Proxifier:
 
     def melt(
         self, id_columns: list[int], var_name: str = "Variable", value_name: str = "Value"
-    ) -> custom_models.MeltProxyModel:
+    ) -> itemmodels.MeltProxyModel:
         """Wraps model in a Proxy which unpivots the table to a long format.
 
         Arguments:
@@ -388,9 +385,9 @@ class Proxifier:
             var_name: header to use for variable column
             value_name: header to use for value_name
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.MeltProxyModel(
+        proxy = itemmodels.MeltProxyModel(
             id_columns=id_columns,
             var_name=var_name,
             value_name=value_name,
@@ -400,7 +397,7 @@ class Proxifier:
         self._widget.set_model(proxy)
         return proxy
 
-    def reorder_columns(self, order: list[int]) -> custom_models.ColumnOrderProxyModel:
+    def reorder_columns(self, order: list[int]) -> itemmodels.ColumnOrderProxyModel:
         """Reorder columns to given order.
 
         Wraps current model with a ColumnOrderProxyModel which rearranges columns to given
@@ -410,22 +407,22 @@ class Proxifier:
             order: list of indexes. Does not need to include all column indexes,
                   missing ones will be hidden.
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.ColumnOrderProxyModel(order=order, parent=self._widget)
+        proxy = itemmodels.ColumnOrderProxyModel(order=order, parent=self._widget)
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
-    def to_list(self) -> custom_models.TableToListProxyModel:
+    def to_list(self) -> itemmodels.TableToListProxyModel:
         """Convert table to a list.
 
         Wraps model with a TableToListProxyModel which reshapes table to one column
         by concatenating the seperatate columns into a one-columned list.
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.TableToListProxyModel(parent=self._widget)
+        proxy = itemmodels.TableToListProxyModel(parent=self._widget)
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
@@ -435,7 +432,7 @@ class Proxifier:
         header: str,
         formatter: str,
         flags: constants.ItemFlag | None = None,
-    ) -> custom_models.ColumnJoinerProxyModel:
+    ) -> itemmodels.ColumnJoinerProxyModel:
         """Add a new column with given header to the table.
 
         Column content can be defined by a formatter.
@@ -446,9 +443,9 @@ class Proxifier:
                        <displayRole of column 2> - <displayRole of column4>
             flags: ItemFlags for new column (default: Enabled and selectable)
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.ColumnJoinerProxyModel(parent=self._widget)
+        proxy = itemmodels.ColumnJoinerProxyModel(parent=self._widget)
         proxy.add_mapping(header=header, formatter=formatter, flags=flags)
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
@@ -460,7 +457,7 @@ class Proxifier:
         orientation: constants.Orientation
         | constants.OrientationStr = constants.HORIZONTAL,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-    ) -> custom_models.ChangeHeadersProxyModel:
+    ) -> itemmodels.ChangeHeadersProxyModel:
         """Change headers of source model.
 
         Wraps current model with a ChangeHeadersProxyModel.
@@ -470,9 +467,9 @@ class Proxifier:
             orientation: orientation of the header which should be modified.
             role: Header role to change
         """
-        from prettyqt import custom_models
+        from prettyqt import itemmodels
 
-        proxy = custom_models.ChangeHeadersProxyModel(
+        proxy = itemmodels.ChangeHeadersProxyModel(
             header=headers, role=role, orientation=orientation, parent=self._widget
         )
         proxy.setSourceModel(self._widget.model())
@@ -506,7 +503,7 @@ class Proxifier:
         """
         if isinstance(target, widgets.QAbstractItemView):
             target = target.model()
-        mapper = custom_models.ProxyMapper(self._widget.model(), target)
+        mapper = itemmodels.ProxyMapper(self._widget.model(), target)
         match index_or_selection:
             case core.ModelIndex():
                 return mapper.map_index(source=0, target=1, index=index_or_selection)
@@ -531,7 +528,7 @@ class Proxifier:
         """
         if isinstance(source, widgets.QAbstractItemView):
             source = source.model()
-        mapper = custom_models.ProxyMapper(self._widget.model(), source)
+        mapper = itemmodels.ProxyMapper(self._widget.model(), source)
         match index_or_selection:
             case core.ModelIndex():
                 return mapper.map_index(source=1, target=0, index=index_or_selection)
@@ -554,7 +551,7 @@ class Proxifier:
         """
         if isinstance(target, widgets.QAbstractItemView):
             target = target.model()
-        custom_models.ProxyMapper(self._widget.model(), target)
+        itemmodels.ProxyMapper(self._widget.model(), target)
 
 
 if __name__ == "__main__":

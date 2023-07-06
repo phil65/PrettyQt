@@ -3,11 +3,11 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from prettyqt import constants, core, custom_models, widgets
+from prettyqt import constants, core, itemmodels, widgets
 from prettyqt.qtpandas import pandasmodels
 
 
-class RowsColumn(custom_models.ColumnItem):
+class RowsColumn(itemmodels.ColumnItem):
     name = "Rows"
 
     def get_data(self, item, role):
@@ -18,7 +18,7 @@ class RowsColumn(custom_models.ColumnItem):
                 return len(item.index)
 
 
-class ColumnsColumn(custom_models.ColumnItem):
+class ColumnsColumn(itemmodels.ColumnItem):
     name = "Columns"
 
     def get_data(self, item, role):
@@ -29,7 +29,7 @@ class ColumnsColumn(custom_models.ColumnItem):
                 return len(item.columns)
 
 
-class IndexDescriptionColumn(custom_models.ColumnItem):
+class IndexDescriptionColumn(itemmodels.ColumnItem):
     name = "Index"
 
     def get_data(self, item, role):
@@ -40,7 +40,7 @@ class IndexDescriptionColumn(custom_models.ColumnItem):
                 return str(item.index.name)
 
 
-class DataFrameListModel(custom_models.ColumnTableModel):
+class DataFrameListModel(itemmodels.ColumnTableModel):
     COLUMNS = [RowsColumn, ColumnsColumn, IndexDescriptionColumn]
 
     def __init__(self, dfs, parent=None):

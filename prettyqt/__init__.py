@@ -30,7 +30,7 @@ def debug():
 
 
 def show(item):
-    from prettyqt import core, debugging, widgets, custom_models, qtpandas  # noqa
+    from prettyqt import core, debugging, widgets, itemmodels, qtpandas  # noqa
     from prettyqt.utils import classhelpers
 
     debug.app = widgets.app(organization_name="phil65", application_name="Prettyqt")
@@ -53,11 +53,11 @@ __all__ = [
     "charts",
     "constants",
     "core",
-    "custom_animations",
+    "animations",
     "itemdelegates",
-    "custom_models",
+    "itemmodels",
     "custom_network",
-    "custom_validators",
+    "validators",
     "custom_widgets",
     "debugging",
     "designer",

@@ -144,7 +144,7 @@ class FilterHeader(widgets.HeaderView):
 
 
 if __name__ == "__main__":
-    from prettyqt.custom_models import widgetpropertiesmodel
+    from prettyqt.itemmodels import widgetpropertiesmodel
 
     app = widgets.app()
     with app.debug_mode():

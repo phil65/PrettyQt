@@ -3,7 +3,7 @@ from __future__ import annotations
 import ast
 import logging
 
-from prettyqt import constants, core, custom_models, custom_widgets, widgets
+from prettyqt import constants, core, custom_widgets, itemmodels, widgets
 
 
 logger = logging.getLogger(__name__)
@@ -43,7 +43,7 @@ class AstViewer(widgets.Splitter):
 
     def set_ast(self, ast_tree: str):
         if self.tree.model() is None:
-            model = custom_models.AstModel(ast_tree, show_root=True, parent=self.tree)
+            model = itemmodels.AstModel(ast_tree, show_root=True, parent=self.tree)
             self.tree.set_model(model)
             self.tree.selectionModel().currentChanged.connect(self._on_current_change)
         else:

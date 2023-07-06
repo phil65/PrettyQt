@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.SliceAppearanceProxyModel
+::: prettyqt.itemmodels.SliceAppearanceProxyModel
 
 ### Qt Properties
 

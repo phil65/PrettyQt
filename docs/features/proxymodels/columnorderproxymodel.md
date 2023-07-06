@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.ColumnOrderProxyModel
+::: prettyqt.itemmodels.ColumnOrderProxyModel
 
 ### Qt Properties
 

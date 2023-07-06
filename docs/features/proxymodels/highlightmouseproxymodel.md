@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.HighlightMouseProxyModel
+::: prettyqt.itemmodels.HighlightMouseProxyModel
 
 ### Qt Properties
 

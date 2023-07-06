@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.lxmlmodel.LxmlModel
+::: prettyqt.itemmodels.lxmlmodel.LxmlModel
 
 ## Supports
 

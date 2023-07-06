@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, custom_animations, eventfilters, widgets
+from prettyqt import animations, core, eventfilters, widgets
 
 
 class AnimatedToolTipEventFilter(eventfilters.BaseEventFilter):
@@ -16,9 +16,9 @@ class AnimatedToolTipEventFilter(eventfilters.BaseEventFilter):
             translucent_background=True,
         )
         self.tool_tip.hide()
-        self.slide_anim = custom_animations.SlideAnimation(self.tool_tip, duration=1000)
+        self.slide_anim = animations.SlideAnimation(self.tool_tip, duration=1000)
         self.slide_anim.apply_to(self.tool_tip)
-        self.fade_anim = custom_animations.FadeInAnimation(duration=1000)
+        self.fade_anim = animations.FadeInAnimation(duration=1000)
         self.fade_anim.apply_to(self.tool_tip)
         self.animation = self.slide_anim | self.fade_anim
 

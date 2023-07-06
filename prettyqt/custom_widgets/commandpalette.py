@@ -6,7 +6,7 @@ from collections.abc import Sequence
 import logging
 import pathlib
 
-from prettyqt import constants, core, custom_models, gui, widgets
+from prettyqt import constants, core, gui, itemmodels, widgets
 from prettyqt.utils import colors, datatypes
 
 
@@ -40,8 +40,8 @@ class CommandTable(widgets.TableView):
             sorting_enabled=True,
         )
         # self.set_cursor("pointing_hand")
-        self._model = custom_models.ActionsModel([], parent=self)
-        self._proxy = custom_models.FuzzyFilterProxyModel(
+        self._model = itemmodels.ActionsModel([], parent=self)
+        self._proxy = itemmodels.FuzzyFilterProxyModel(
             filter_key_column=0, invalidated=self.select_first_row
         )
         self._proxy.set_filter_case_sensitive(False)

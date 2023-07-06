@@ -63,7 +63,7 @@ def get_validator(
     validator: ValidatorStr | datatypes.PatternType,
     **kwargs,
 ) -> gui.QValidator:
-    from prettyqt import custom_validators
+    from prettyqt import validators
 
     match validator:
         case "email":
@@ -79,7 +79,7 @@ def get_validator(
         case re.Pattern():
             return gui.RegularExpressionValidator(core.RegularExpression(validator))
         case Callable():
-            return custom_validators.FunctionValidator(validator)
+            return validators.FunctionValidator(validator)
         case _:
             raise ValueError(validator)
 
@@ -171,12 +171,12 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
         append: bool = False,
         **kwargs,
     ) -> gui.QValidator:
-        from prettyqt import custom_validators
+        from prettyqt import validators
 
         match validator:
             case str() if "|" in validator:
-                validators = [get_validator(i, **kwargs) for i in validator.split("|")]
-                validator: widgets.QValidator = custom_validators.AndValidator(validators)
+                vals = [get_validator(i, **kwargs) for i in validator.split("|")]
+                validator: widgets.QValidator = validators.AndValidator(vals)
             case str() | re.Pattern() | core.QRegularExpression() | Callable():
                 validator = get_validator(validator, **kwargs)
             case None | gui.QValidator():
@@ -184,17 +184,15 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
             case _:
                 raise ValueError(validator)
         if empty_allowed is False:
-            validator = custom_validators.AndValidator(
-                [validator, custom_validators.NotEmptyValidator()]
+            validator = validators.AndValidator(
+                [validator, validators.NotEmptyValidator()]
             )
         elif empty_allowed is True:
-            validator = custom_validators.OrValidator(
-                [validator, custom_validators.EmptyValidator()]
-            )
+            validator = validators.OrValidator([validator, validators.EmptyValidator()])
         if not strict:
-            validator = custom_validators.NotStrictValidator(validator)
+            validator = validators.NotStrictValidator(validator)
         if append and (prev := widget.validator()) is not None:
-            validator = custom_validators.AndValidator([prev, validator])
+            validator = validators.AndValidator([prev, validator])
         self.setValidator(validator)
         self._set_validation_color()
         return validator

@@ -1,10 +1,10 @@
 
 ```py
-from prettyqt import custom_models, widgets
+from prettyqt import itemmodels, widgets
 
 app = widgets.app()
 widget = widgets.TreeView()
-model = custom_models.SubClassTreeModel(core.AbstractItemModelMixin)
+model = itemmodels.SubClassTreeModel(core.AbstractItemModelMixin)
 widget.set_model(model)
 widget.show()
 ```
@@ -13,7 +13,7 @@ widget.show()
   ![Image title](abstractitemmodelmixin_subclasses.png)
 </figure>
 
-::: prettyqt.custom_models.SubClassTreeModel
+::: prettyqt.itemmodels.SubClassTreeModel
 
 ## Supports
 

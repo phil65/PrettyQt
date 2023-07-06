@@ -4,7 +4,7 @@ import functools
 import logging
 
 from prettyqt import constants, core, custom_widgets, debugging, ipython, widgets
-from prettyqt.custom_models import (
+from prettyqt.itemmodels import (
     logrecordmodel,
     widgethierarchymodel,
     widgetpropertiesmodel,

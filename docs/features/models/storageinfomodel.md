@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.StorageInfoModel
+::: prettyqt.itemmodels.StorageInfoModel
 
 ## Supports
 

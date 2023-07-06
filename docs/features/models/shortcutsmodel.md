@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.ShortcutsModel
+::: prettyqt.itemmodels.ShortcutsModel
 
 ## Supports
 

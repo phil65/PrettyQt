@@ -7,7 +7,7 @@ import pathlib
 
 from typing import Any
 
-from prettyqt import custom_validators, custom_widgets, gui, widgets
+from prettyqt import custom_widgets, gui, validators, widgets
 from prettyqt.utils import datatypes
 
 
@@ -122,7 +122,7 @@ class String(DataItem):
     def _create_widget(self) -> widgets.LineEdit:
         widget = widgets.LineEdit()
         if self.notempty:
-            val = custom_validators.NotEmptyValidator()
+            val = validators.NotEmptyValidator()
             widget.set_validator(val)
         if self.regex is not None:
             val = gui.RegularExpressionValidator()
@@ -140,7 +140,7 @@ class RegexPattern(DataItem):
     def _create_widget(self) -> custom_widgets.SingleLineTextEdit:
         widget = custom_widgets.SingleLineTextEdit()
         if self.notempty:
-            val = custom_validators.NotEmptyValidator()
+            val = validators.NotEmptyValidator()
             widget.set_validator(val)
         widget.set_syntaxhighlighter("regex")
         if self.value is not None:

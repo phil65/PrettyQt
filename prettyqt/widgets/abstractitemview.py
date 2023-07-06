@@ -204,7 +204,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             data: data to choose model for.
         """
         # we import to collect the models
-        from prettyqt import custom_models  # noqa: F401
+        from prettyqt import itemmodels  # noqa: F401
 
         # TODO: probably better to check models from external modules later
         # so we dont have to import everything even if not needed.

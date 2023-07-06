@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.gitpythontreemodel.GitPythonTreeModel
+::: prettyqt.itemmodels.gitpythontreemodel.GitPythonTreeModel
 
 ## Supports
 

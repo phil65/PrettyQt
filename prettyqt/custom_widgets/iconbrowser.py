@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import sys
 
-from prettyqt import constants, core, custom_models, iconprovider, widgets
+from prettyqt import constants, core, iconprovider, itemmodels, widgets
 from prettyqt.eventfilters import listviewgridresizeeventfilter
 from prettyqt.utils import colors, datatypes
 
@@ -31,7 +31,7 @@ class IconBrowser(widgets.MainWindow):
         model = IconModel(icon_color="text_role")
         model.setStringList(sorted(icon_names))
 
-        self._proxy_model = custom_models.FuzzyFilterProxyModel()
+        self._proxy_model = itemmodels.FuzzyFilterProxyModel()
         self._proxy_model.setSourceModel(model)
         self._proxy_model.set_filter_case_sensitive(True)
         self._proxy_model.set_match_color(None)

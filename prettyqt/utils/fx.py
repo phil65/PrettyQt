@@ -248,9 +248,9 @@ class Fx:
         delay: int = 0,
     ) -> AnimationTimer:
         """Trigger a zoom animation with given anchor."""
-        from prettyqt import custom_animations
+        from prettyqt import animations
 
-        anim = custom_animations.ZoomAnimation(parent=self._widget, anchor=anchor)
+        anim = animations.ZoomAnimation(parent=self._widget, anchor=anchor)
         anim.set_easing(easing)
         anim.set_start_value(start)
         anim.set_end_value(end)

@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.AstModel
+::: prettyqt.itemmodels.AstModel
 
 <figure markdown>
   ![Image title](../../images/astmodel.png)

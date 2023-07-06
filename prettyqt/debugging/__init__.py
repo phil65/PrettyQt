@@ -83,7 +83,7 @@ def is_deleted(obj) -> bool:
 
 def example_tree(flatten: bool = False):
     from prettyqt import widgets
-    from prettyqt.custom_models import JsonModel
+    from prettyqt.itemmodels import JsonModel
 
     dist = [
         dict(

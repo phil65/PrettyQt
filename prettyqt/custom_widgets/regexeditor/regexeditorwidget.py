@@ -14,7 +14,7 @@ except ImportError:  # Python < 3.11
 
 import re
 
-from prettyqt import constants, core, custom_models, custom_widgets, widgets
+from prettyqt import constants, core, custom_widgets, itemmodels, widgets
 from prettyqt.syntaxhighlighters import RegexMatchHighlighter
 
 
@@ -50,7 +50,7 @@ class RegexEditorWidget(widgets.Widget):
             checked=True,
             state_changed=self.textedit_quickref.setVisible,
         )
-        model = custom_models.RegexMatchesModel()
+        model = itemmodels.RegexMatchesModel()
         self.table_matches.set_model(model)
         self.table_matches.setColumnWidth(0, 60)
         self.table_matches.setColumnWidth(1, 60)
@@ -113,7 +113,7 @@ class RegexEditorWidget(widgets.Widget):
                 text = self.textedit_teststring.text()
                 self.matches = list(self.prog.finditer(text))
                 self.label_num_matches.set_text(f"{len(self.matches)} matches")
-                model = custom_models.RegexMatchesModel(self.matches)
+                model = itemmodels.RegexMatchesModel(self.matches)
                 self.table_matches.set_model(model)
                 sel_model = self.table_matches.selectionModel()
                 sel_model.currentRowChanged.connect(self.on_match_list_current_change)

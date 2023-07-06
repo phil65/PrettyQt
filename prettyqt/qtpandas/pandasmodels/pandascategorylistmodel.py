@@ -7,14 +7,14 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from prettyqt import constants, core, custom_models
+from prettyqt import constants, core, itemmodels
 from prettyqt.utils import helpers
 
 
 logger = logging.getLogger(__name__)
 
 
-class PandasCategoryListModel(custom_models.ModelMixin, core.AbstractTableModel):
+class PandasCategoryListModel(itemmodels.ModelMixin, core.AbstractTableModel):
     MIME_TYPE = "mime_categories"
     HEADER = ["Name", "Code"]
 

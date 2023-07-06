@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.MappingModel
+::: prettyqt.itemmodels.MappingModel
 
 ## Supports
 

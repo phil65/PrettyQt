@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.ValueFilterProxyModel
+::: prettyqt.itemmodels.ValueFilterProxyModel
 
 | Qt Property       | Type     | Description                 |
 | ------------------|----------|-----------------------------|

@@ -14,6 +14,14 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
 
+def pickle_roundtrip(something):
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
+        pickle.dump(something, jar)
+    with path.open("rb") as jar:
+        return pickle.load(jar)
+
+
 def test_animationgroup():
     group = core.AnimationGroup()
     anim = core.PropertyAnimation()
@@ -139,21 +147,13 @@ def test_datastream():
 
 def test_date():
     date = core.Date(1, 1, 2000)
-    path = pathlib.Path("data.pkl")
-    with path.open("wb") as jar:
-        pickle.dump(date, jar)
-    with path.open("rb") as jar:
-        new = pickle.load(jar)
+    new = pickle_roundtrip(date)
     assert date == new
 
 
 def test_datetime():
     dt = core.DateTime(2000, 11, 11, 0, 0, 0)
-    path = pathlib.Path("data.pkl")
-    with path.open("wb") as jar:
-        pickle.dump(dt, jar)
-    with path.open("rb") as jar:
-        new = pickle.load(jar)
+    new = pickle_roundtrip(dt)
     assert dt == new
     dt.set_timezone("Europe/Berlin")
     tz = core.TimeZone("Europe/Berlin")
@@ -432,11 +432,7 @@ def test_modelindex():
 
 def test_object(qapp):
     obj = core.Object()
-    path = pathlib.Path("data.pkl")
-    with path.open("wb") as jar:
-        pickle.dump(obj, jar)
-    with path.open("rb") as jar:
-        obj = pickle.load(jar)
+    obj = pickle_roundtrip(obj)
     w = widgets.Splitter("horizontal")
     w1 = widgets.PushButton(object_name="w1")
     w2 = widgets.PlainTextEdit(object_name="w2")
@@ -557,11 +553,7 @@ def test_regularexpressionmatchiterator():
 
 def test_regularexpression():
     regex = core.RegularExpression("[0-9]")
-    path = pathlib.Path("data.pkl")
-    with path.open("wb") as jar:
-        pickle.dump(regex, jar)
-    with path.open("rb") as jar:
-        regex = pickle.load(jar)
+    regex = pickle_roundtrip(regex)
     match = regex.match("123")
     assert match.span() == (0, 1)
     for _match in regex.finditer("123"):
@@ -772,11 +764,7 @@ def test_timezone():
     assert tz.get_id() == "UTC-12:00"
     assert str(tz) == "UTC-12:00"
     assert repr(tz) == "TimeZone('UTC-12:00')"
-    path = pathlib.Path("data.pkl")
-    with path.open("wb") as jar:
-        pickle.dump(tz, jar)
-    with path.open("rb") as jar:
-        tz = pickle.load(jar)
+    tz = pickle_roundtrip(tz)
     assert tz.get_display_name("standard") == "UTC-12:00"
 
 

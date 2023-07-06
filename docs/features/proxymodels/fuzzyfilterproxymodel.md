@@ -1,1 +1,1 @@
-::: prettyqt.custom_models.FuzzyFilterProxyModel
+::: prettyqt.itemmodels.FuzzyFilterProxyModel

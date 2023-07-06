@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.ModelIndexModel
+::: prettyqt.itemmodels.ModelIndexModel
 
 ## Supports
 

@@ -4,7 +4,7 @@ import logging
 
 from typing import Literal
 
-from prettyqt import core, custom_models, widgets
+from prettyqt import core, itemmodels, widgets
 
 
 logger = logging.getLogger(__name__)
@@ -56,7 +56,7 @@ class ProxyComparerWidget(widgets.Splitter):
             self.model_itemviews.append(table)
             prop_table = widgets.TableView()
             prop_table.set_delegate("editor")
-            prop_model = custom_models.WidgetPropertiesModel(model)
+            prop_model = itemmodels.WidgetPropertiesModel(model)
             prop_table.set_model(prop_model)
             header = widgets.Label(type(model).__name__)
             layout.add(header)
@@ -66,7 +66,7 @@ class ProxyComparerWidget(widgets.Splitter):
             layout.add(col_splitter)
             self.add(container)
         if link_selections:
-            self.linker = custom_models.LinkedSelectionModel(*self.model_itemviews)
+            self.linker = itemmodels.LinkedSelectionModel(*self.model_itemviews)
 
 
 if __name__ == "__main__":

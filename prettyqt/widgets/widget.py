@@ -1069,7 +1069,7 @@ if __name__ == "__main__":
     #     end_value=1,
     # )
     # widget.play_animation("fade_in")
-    # val = custom_animations.FadeInAnimation()
+    # val = animations.FadeInAnimation()
     # val.apply_to(widget)
     # val.start()
     widget.fx.set_graphics_effect("colorize")

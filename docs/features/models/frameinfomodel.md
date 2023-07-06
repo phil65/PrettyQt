@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.FrameInfoModel
+::: prettyqt.itemmodels.FrameInfoModel
 
 ## Supports
 

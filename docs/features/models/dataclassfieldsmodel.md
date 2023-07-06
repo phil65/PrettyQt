@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.DataClassFieldsModel
+::: prettyqt.itemmodels.DataClassFieldsModel
 
 ## Supports
 

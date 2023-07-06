@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.XmlModel
+::: prettyqt.itemmodels.XmlModel
 
 ## Supports
 

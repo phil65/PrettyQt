@@ -5,7 +5,7 @@ import logging
 
 from typing import Literal
 
-from prettyqt import constants, core, custom_models, gui, widgets
+from prettyqt import constants, core, gui, itemmodels, widgets
 from prettyqt.utils import bidict
 
 
@@ -25,7 +25,7 @@ class SectionWidget(widgets.Widget):
             self.box.add(subitem)
 
 
-class ScrollAreaTocModel(custom_models.TreeModel):
+class ScrollAreaTocModel(itemmodels.TreeModel):
     def __init__(
         self, *args, widget_class: type[widgets.QWidget] = widgets.QWidget, **kwargs
     ):

@@ -199,7 +199,7 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    from prettyqt.custom_models.importlibdistributionmodel import (
+    from prettyqt.itemmodels.importlibdistributionmodel import (
         ImportlibDistributionModel,
     )
 

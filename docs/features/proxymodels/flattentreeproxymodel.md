@@ -10,7 +10,7 @@ Original model:
 
         ```py
         table = widgets.TreeView()
-        source_model = custom_models.ParentClassTreeModel(widgets.Frame)
+        source_model = itemmodels.ParentClassTreeModel(widgets.Frame)
         table.set_model(source_model)
         # table.proxifier.flatten()
         ```
@@ -22,7 +22,7 @@ Original model:
 
         ```py
         table = widgets.TreeView()
-        source_model = custom_models.ParentClassTreeModel(widgets.Frame)
+        source_model = itemmodels.ParentClassTreeModel(widgets.Frame)
         table.set_model(source_model)
         table.proxifier.flatten()
         ```
@@ -34,7 +34,7 @@ Original model:
 
         ```py
         table = widgets.TreeView()
-        source_model = custom_models.ParentClassTreeModel(widgets.Frame)
+        source_model = itemmodels.ParentClassTreeModel(widgets.Frame)
         table.set_model(source_model)
         table.proxifier.flatten(show_path=True)
         ```
@@ -46,7 +46,7 @@ Original model:
 
         ```py
         table = widgets.TreeView()
-        source_model = custom_models.ParentClassTreeModel(widgets.Frame)
+        source_model = itemmodels.ParentClassTreeModel(widgets.Frame)
         table.set_model(source_model)
         table.proxifier.flatten(leaves_only=True)
         ```
@@ -57,14 +57,14 @@ Original model:
 ```py
 table.proxifier.flatten()
 # or
-proxy = custom_models.FlattenTreeProxyModel()
+proxy = itemmodels.FlattenTreeProxyModel()
 proxy.set_source_model(model)
 table.set_model(proxy)
 ```
 
 ### API
 
-::: prettyqt.custom_models.FlattenTreeProxyModel
+::: prettyqt.itemmodels.FlattenTreeProxyModel
 
 ### Qt Properties
 

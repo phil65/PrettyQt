@@ -1,0 +1,3 @@
+# validators module
+
+::: prettyqt.validators

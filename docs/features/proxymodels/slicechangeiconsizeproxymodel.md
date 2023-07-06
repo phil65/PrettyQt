@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.SliceChangeIconSizeProxyModel
+::: prettyqt.itemmodels.SliceChangeIconSizeProxyModel
 
 !!! Example "SliceChangeIconSizeProxyModel"
 
@@ -40,7 +40,7 @@ table.set_model(model)
 table[0].proxify.change_icon_size(size=20)
 table.show()
 # or
-proxy = custom_models.SliceFilterProxyModel(indexer=0, size=20)
+proxy = itemmodels.SliceFilterProxyModel(indexer=0, size=20)
 proxy.set_source_model(model)
 table.set_model(proxy)
 table.show()
