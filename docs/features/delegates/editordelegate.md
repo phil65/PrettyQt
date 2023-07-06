@@ -1,1 +1,1 @@
-::: prettyqt.custom_delegates.EditorDelegate
+::: prettyqt.itemdelegates.EditorDelegate

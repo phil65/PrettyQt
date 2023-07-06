@@ -381,13 +381,13 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             case widgets.QAbstractItemDelegate():
                 dlg = delegate
             # case "editor":
-            #     delegate = custom_delegates.EditorDelegate(parent=self, **kwargs)
+            #     delegate = itemdelegates.EditorDelegate(parent=self, **kwargs)
             # case "widget":
-            #     delegate = custom_delegates.WidgetDelegate(parent=self, **kwargs)
+            #     delegate = itemdelegates.WidgetDelegate(parent=self, **kwargs)
             # case "html":
-            #     delegate = custom_delegates.HtmlItemDelegate(parent=self, **kwargs)
+            #     delegate = itemdelegates.HtmlItemDelegate(parent=self, **kwargs)
             # case "button":
-            #     delegate = custom_delegates.ButtonDelegate(parent=self, **kwargs)
+            #     delegate = itemdelegates.ButtonDelegate(parent=self, **kwargs)
             case str():
                 Klass = classhelpers.get_class_for_id(
                     widgets.StyledItemDelegate, delegate

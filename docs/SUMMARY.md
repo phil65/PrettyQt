@@ -92,7 +92,7 @@
     * [charts](api/charts.md)
     * [constants](api/constants.md)
     * [core](api/core.md)
-    * [custom_delegates](api/custom_delegates.md)
+    * [itemdelegates](api/itemdelegates.md)
     * [custom_models](api/custom_models.md)
     * [custom_validators](api/custom_validators.md)
     * [custom_widgets](api/custom_widgets.md)

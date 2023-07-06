@@ -1,0 +1,3 @@
+# itemdelegates module
+
+::: prettyqt.itemdelegates

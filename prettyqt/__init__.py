@@ -54,7 +54,7 @@ __all__ = [
     "constants",
     "core",
     "custom_animations",
-    "custom_delegates",
+    "itemdelegates",
     "custom_models",
     "custom_network",
     "custom_validators",

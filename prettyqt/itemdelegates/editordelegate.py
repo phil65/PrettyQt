@@ -97,11 +97,11 @@ class EditorDelegate(widgets.StyledItemDelegate):
         # if not self.is_supported_type(value):
         #     option = widgets.StyleOptionViewItem(option)
         #     option.state &= ~widgets.QStyle.StateFlag.State_Enabled
-        from prettyqt import custom_delegates
+        from prettyqt import itemdelegates
 
         match value := self._data_for_index(index, self._role):
             case gui.QIcon():
-                icon_delegate = custom_delegates.IconDelegate()
+                icon_delegate = itemdelegates.IconDelegate()
                 icon_delegate.paint(painter, option, index)
                 return
             case enum.Enum():  # PySide6 needs this when using Views
