@@ -60,6 +60,8 @@ class CompositeValidator(gui.Validator):
 class AndValidator(CompositeValidator):
     """Validator to AND-combine other validators."""
 
+    ID = "and"
+
     def validate(  # type: ignore
         self, text: str, pos: int = 0
     ) -> tuple[gui.QValidator.State, str, int]:
@@ -74,6 +76,8 @@ class AndValidator(CompositeValidator):
 
 class OrValidator(CompositeValidator):
     """Validator to OR-combine other validators."""
+
+    ID = "or"
 
     def validate(  # type: ignore
         self, text: str, pos: int = 0
