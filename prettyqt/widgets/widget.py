@@ -25,7 +25,7 @@ if TYPE_CHECKING:
 
 LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow", "border"]
 
-QWIDGETSIZE_MAX = 16777215  # widgets.QWIDGETSIZE_MAX
+QWIDGETSIZE_MAX = 16_777_215  # widgets.QWIDGETSIZE_MAX
 
 PositionPossibilityType = (
     Literal["parent", "window", "screen", "mouse"]
