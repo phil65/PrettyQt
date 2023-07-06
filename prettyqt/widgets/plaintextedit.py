@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
-from prettyqt.utils import bidict, colors, datatypes, helpers, texteditselecter
+from prettyqt.utils import bidict, classhelpers, colors, datatypes, texteditselecter
 
 
 LINE_WRAP_MODE = bidict(
@@ -174,7 +174,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         self, validator: gui.QValidator | widgets.lineedit.ValidatorStr | None, **kwargs
     ) -> gui.QValidator:
         if isinstance(validator, str):
-            ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
+            ValidatorClass = classhelpers.get_class_for_id(gui.ValidatorMixin, validator)
             validator = ValidatorClass(**kwargs)
         self.validator = validator
         self._set_validation_color()

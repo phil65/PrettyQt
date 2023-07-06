@@ -8,7 +8,7 @@ import operator
 from typing import TYPE_CHECKING, Any, Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.utils import datatypes, helpers
+from prettyqt.utils import classhelpers, datatypes
 
 
 if TYPE_CHECKING:
@@ -486,7 +486,7 @@ class Proxifier:
         return proxy
 
     def get_proxy(self, proxy: ProxyStr, **kwargs) -> core.QAbstractProxyModel:
-        Klass = helpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
+        Klass = classhelpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
         proxy_instance = Klass(parent=self._widget, **kwargs)
         proxy_instance.setSourceModel(self._widget.model())
         self._widget.set_model(proxy_instance)
@@ -509,9 +509,11 @@ class Proxifier:
         mapper = custom_models.ProxyMapper(self._widget.model(), target)
         match index_or_selection:
             case core.ModelIndex():
-                return mapper.map_index(from_=0, to=1, index=index_or_selection)
+                return mapper.map_index(source=0, target=1, index=index_or_selection)
             case core.QItemSelection():
-                return mapper.map_selection(from_=0, to=1, selection=index_or_selection)
+                return mapper.map_selection(
+                    source=0, target=1, selection=index_or_selection
+                )
             case _:
                 raise TypeError(index_or_selection)
 
@@ -532,9 +534,11 @@ class Proxifier:
         mapper = custom_models.ProxyMapper(self._widget.model(), source)
         match index_or_selection:
             case core.ModelIndex():
-                return mapper.map_index(from_=1, to=0, index=index_or_selection)
+                return mapper.map_index(source=1, target=0, index=index_or_selection)
             case core.QItemSelection():
-                return mapper.map_selection(from_=1, to=0, selection=index_or_selection)
+                return mapper.map_selection(
+                    source=1, target=0, selection=index_or_selection
+                )
             case _:
                 raise TypeError(index_or_selection)
 

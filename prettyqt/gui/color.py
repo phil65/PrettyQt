@@ -177,16 +177,29 @@ class Color(QtGui.QColor):
             case "svg_argb":
                 fill_str = f"rgb({self.red()}, {self.green()}, {self.blue()})"
                 return f'fill="{fill_str}" fill-opacity="{self.alpha()}"'
-            case "qcss_argb":
-                return (
-                    f"rgba({self.red()}, {self.green()}, {self.blue()}, {self.alpha()})"
-                )
-            case "qcss_rgb":
-                return f"rgb({self.red()}, {self.green()}, {self.blue()})"
+            case "qcss_argb" | "qcss_rgb":
+                return self.get_css(fmt="rgba" if name_format == "qcss_argb" else "rgb")
             case _ if name_format in NAME_FORMAT:
                 return self.name(NAME_FORMAT[name_format])
             case _:
                 raise ValueError(name_format)
+
+    def get_css(self, fmt: Literal["rgb", "rgba", "hsva", "hsla"] | None = None) -> str:
+        css_format = fmt or self.spec()
+        match css_format:
+            case self.Spec.Rgb | "rgba":
+                string = ", ".join([str(i) for i in self.getRgb()])
+                return f"rgba({string})"
+            case self.Spec.Hsv | "hsva":
+                string = ", ".join([str(i) for i in self.getHsv()])
+                return f"hsva({string})"
+            case self.Spec.Hsl | "hsla":
+                string = ", ".join([str(i) for i in self.getHsl()])
+                return f"hsla({string})"
+            case "rgb":
+                return f"rgb({self.red()}, {self.green()}, {self.blue()})"
+            case _:
+                raise ValueError(css_format)
 
     def as_qt(self) -> QtGui.QColor:
         return self.convertTo(self.spec())

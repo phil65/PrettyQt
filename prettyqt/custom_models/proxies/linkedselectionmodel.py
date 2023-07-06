@@ -33,7 +33,7 @@ class LinkedSelectionModel(core.ItemSelectionModel):
         target_indexes.remove(source_index)
         for target_index in target_indexes:
             mapped = self._mapper.map_index(
-                from_=source_index, to=target_index, index=new
+                source=source_index, target=target_index, index=new
             )
             self._itemviews[target_index].setCurrentIndex(mapped)
 
@@ -44,7 +44,7 @@ class LinkedSelectionModel(core.ItemSelectionModel):
         target_indexes.remove(source_index)
         for target_index in target_indexes:
             selected = self._mapper.map_selection(
-                from_=source_index, to=target_index, selection=new
+                source=source_index, target=target_index, selection=new
             )
             sel_model = self._itemviews[target_index].selectionModel()
             sel_model.select(selected, sel_model.SelectionFlag.Select)

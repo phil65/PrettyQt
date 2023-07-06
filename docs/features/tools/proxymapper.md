@@ -23,7 +23,7 @@ then the ProxyMapper can be used to map indexes and ItemSelections easily betwee
 ``` py
 mapper = ProxyMapper(proxy_1_2, proxy_2_1)
 index = proxy_1_2.index(0, 0)
-mapped_index = mapper.map_index(from_=0, to=1, index)
+mapped_index = mapper.map_index(source=0, target=1, index)
 ```
 
 The mapper will find the closest parent ("shared_proxy" here),

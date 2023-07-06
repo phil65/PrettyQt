@@ -1,24 +1,16 @@
 from __future__ import annotations
 
-import collections
-
 from collections.abc import Sequence
 import contextlib
-import functools
 import logging
-from operator import and_
+
 from typing import Any
 
 from prettyqt import constants, core
+from prettyqt.utils import classhelpers
 
 
 logger = logging.getLogger(__name__)
-
-
-def lca_type(classes: list[type]) -> type:
-    return next(
-        iter(functools.reduce(and_, (collections.Counter(cls.mro()) for cls in classes)))
-    )
 
 
 class BaseDataclassModel(core.AbstractTableModel):
@@ -26,7 +18,7 @@ class BaseDataclassModel(core.AbstractTableModel):
         super().__init__(**kwargs)
         self.items = items
         klasses = [type(i) for i in items]
-        self.Class = lca_type(klasses)
+        self.Class = classhelpers.lca_type(klasses)
         logger.debug(f"{type(self).__name__}: found common ancestor {self.Class}")
         self._fields = self.get_fields()
         self._field_names = list(self._fields.keys())

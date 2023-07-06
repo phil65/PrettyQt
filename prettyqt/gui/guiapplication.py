@@ -13,6 +13,10 @@ from prettyqt.utils import colors, datatypes
 class GuiApplicationMixin(core.CoreApplicationMixin):
     palette_changed = core.Signal(gui.Palette)
 
+    def __init__(self, *args, **kwargs):
+        self._window_icon_color = "darkcyan"
+        super().__init__(*args, **kwargs)
+
     def event(self, e):
         match e.type():
             case core.QEvent.Type.ApplicationPaletteChange:
@@ -143,7 +147,8 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
         Args:
             icon: icon to use
         """
-        icon = iconprovider.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
+        color = self.get_window_icon_color()
+        icon = iconprovider.get_icon(icon, color=color)
         self.setWindowIcon(icon)
 
     def get_icon(self) -> gui.Icon | None:
@@ -186,6 +191,14 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
             window_id = windows[0].winId()
             tb = taskbaritem.TaskBarItem(window_id)
             tb.set_progress_value(value, total)
+
+    def set_window_icon_color(self, color: datatypes.ColorType):
+        self._window_icon_color = colors.get_color(color).name()
+
+    def get_window_icon_color(self):
+        return self._window_icon_color
+
+    window_icon_color = core.Property(str, get_window_icon_color, set_window_icon_color)
 
 
 class GuiApplication(GuiApplicationMixin, gui.QGuiApplication):

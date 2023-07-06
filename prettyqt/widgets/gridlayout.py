@@ -79,7 +79,9 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
     #     return type(self), (), self.__getstate__()
 
     def __iter__(self) -> Iterator[widgets.QWidget | widgets.QLayout]:
-        return iter(item for i in range(self.count()) if (item := self[i]) is not None)
+        return iter(
+            item for i in range(self.count()) if (item := self.itemAt(i)) is not None
+        )
 
     def __add__(
         self,
@@ -103,9 +105,11 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
         colstart: int,
         rowspan: int = 1,
         colspan: int = 1,
-        alignment: constants.AlignmentStr | None = None,
+        alignment: constants.AlignmentStr | constants.AlignmentFlag | None = None,
     ):
-        flag = constants.ALIGNMENTS[alignment or "none"]
+        if alignment is None:
+            alignment = "none"
+        flag = constants.ALIGNMENTS.get_enum_value(alignment)
         match item:
             case widgets.QWidget():
                 self.addWidget(item, rowstart, colstart, rowspan, colspan, flag)

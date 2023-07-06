@@ -8,7 +8,7 @@ import logging
 from typing import Any, Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.utils import bidict, datatypes, helpers, listdelegators
+from prettyqt.utils import bidict, classhelpers, datatypes, listdelegators
 
 
 DelegateStr = Literal[
@@ -211,7 +211,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         if importlib.util.find_spec("pandas") is not None:
             from prettyqt.qtpandas import pandasmodels  # noqa: F401
 
-        for Klass in helpers.get_subclasses(core.QAbstractItemModel):
+        for Klass in classhelpers.get_subclasses(core.QAbstractItemModel):
             if (
                 "supports" in Klass.__dict__
                 and callable(Klass.supports)
@@ -389,7 +389,9 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             # case "button":
             #     delegate = custom_delegates.ButtonDelegate(parent=self, **kwargs)
             case str():
-                Klass = helpers.get_class_for_id(widgets.StyledItemDelegate, delegate)
+                Klass = classhelpers.get_class_for_id(
+                    widgets.StyledItemDelegate, delegate
+                )
                 dlg = Klass(parent=self, **kwargs)
             case None:
                 dlg = widgets.StyledItemDelegate()

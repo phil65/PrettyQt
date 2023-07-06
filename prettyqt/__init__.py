@@ -31,10 +31,10 @@ def debug():
 
 def show(item):
     from prettyqt import core, debugging, widgets, custom_models, qtpandas  # noqa
-    from prettyqt.utils import helpers
+    from prettyqt.utils import classhelpers
 
     debug.app = widgets.app(organization_name="phil65", application_name="Prettyqt")
-    for klass in helpers.get_subclasses(core.QAbstractItemModel):
+    for klass in classhelpers.get_subclasses(core.QAbstractItemModel):
         if "supports" in klass.__dict__ and klass.supports(item):
             if issubclass(klass, core.QAbstractTableModel):
                 viewer = widgets.TableView()

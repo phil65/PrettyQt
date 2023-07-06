@@ -5,7 +5,7 @@ import logging
 
 from prettyqt import constants, core
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import helpers
+from prettyqt.utils import classhelpers
 
 
 logger = logging.getLogger(__name__)
@@ -15,7 +15,7 @@ class WidgetsDetailsModel(core.AbstractTableModel):
     def __init__(self, items: Sequence[QtWidgets.QWidget], **kwargs):
         super().__init__(**kwargs)
         self.items = items
-        common_ancestor = helpers.find_common_ancestor([type(i) for i in self.items])
+        common_ancestor = classhelpers.find_common_ancestor([type(i) for i in self.items])
         logger.debug(f"{type(self).__name__}: found common ancestor {common_ancestor}")
         self.props = core.MetaObject(common_ancestor.staticMetaObject).get_properties(
             only_stored=True

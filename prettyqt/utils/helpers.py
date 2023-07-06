@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from collections import defaultdict
-from datetime import timedelta
-import inspect
+import datetime
 import itertools
 import logging
 import re
-import types
 import typing
 
 
@@ -21,24 +18,7 @@ TIME_REGEX = re.compile(
 CASE_PATTERN = re.compile(r"(?<!^)(?=[A-Z])")
 
 
-# def add_docs(klass):
-#     import pathlib
-#     from prettyqt import paths
-#     klass_name = klass.__name__
-#     qclass = klass
-#     for k in klass.mro():
-#         if k.__name__.startswith("Q"):
-#             qclass = k
-#             break
-#     module = k.__module__.split(".")[1]
-#     path = paths.DOCSTRING_PATH /  module
-#     filepath = path / f"Q{klass_name.replace('Mixin', '')}.txt"
-#     if filepath.exists():
-#         klass.__doc__ =  filepath.read_text()
-#     return klass
-
-
-def is_in_slice(a_slice: slice | range, idx: int):
+def is_in_slice(a_slice: slice | range, idx: int) -> bool:
     """Note: this always returns False for negative slice.stop."""
     start = a_slice.start or 0
     is_behind_range = a_slice.stop is not None and idx >= a_slice.stop
@@ -61,24 +41,6 @@ def is_position_in_index(x: int, y: int, index) -> bool:
             return is_in_slice(col, y) and is_in_slice(row, x)
         case int() as row, int() as col:
             return x == row and y == col
-
-
-def find_common_ancestor(cls_list: list[type]) -> type:
-    mros = [list(inspect.getmro(cls)) for cls in cls_list]
-    track = defaultdict(int)
-    while mros:
-        for mro in mros:
-            cur = mro.pop(0)
-            track[cur] += 1
-            if (
-                track[cur] >= len(cls_list)
-                and not cur.__name__.endswith("Mixin")
-                and cur.__name__.startswith("Q")
-            ):
-                return cur
-            if len(mro) == 0:
-                mros.remove(mro)
-    raise TypeError("Couldnt find common base class")
 
 
 def yield_positions(
@@ -138,7 +100,7 @@ def parse_time(time_str: str) -> int:
         raise ValueError(time_str)
     dct = parts.groupdict()
     time_params = {name: int(param) for (name, param) in dct.items() if param}
-    secs = timedelta(**time_params).total_seconds()
+    secs = datetime.timedelta(**time_params).total_seconds()
     return int(secs * 1000)
 
 
@@ -182,35 +144,6 @@ def get_color_percentage(color_1: tuple, color_2: tuple, percent: float) -> tupl
         for i, _ in enumerate(color_1)
     ]
     return tuple(ls)
-
-
-def get_subclasses(klass, include_abstract: bool = False):
-    for i in klass.__subclasses__():
-        yield from get_subclasses(i)
-        if include_abstract or not inspect.isabstract(i):
-            yield i
-
-
-T = typing.TypeVar("T", bound=type)
-
-
-def get_class_for_id(base_class: T, id_: str) -> T:
-    base_classes = (
-        typing.get_args(base_class)
-        if isinstance(base_class, types.UnionType)
-        else (base_class,)
-    )
-    for base_class in base_classes:
-        for Klass in get_subclasses(base_class):
-            if "ID" in Klass.__dict__ and id_ == Klass.ID:
-                logger.debug(f"found class for id {Klass.ID!r}")
-                return Klass
-    raise ValueError(f"Couldnt find class with id {id_!r} for base class {base_class}")
-
-
-def get_module_classes(module: types.ModuleType) -> list[type]:
-    clsmembers = inspect.getmembers(module, inspect.isclass)
-    return [tpl[1] for tpl in clsmembers]
 
 
 def move_in_list(ls: list, indexes: list[int], target_row: int) -> list:
@@ -282,7 +215,7 @@ def ansi2html(ansi_string: str, styles: dict[int, dict[str, str]] = ANSI_STYLES)
 
         try:
             params = [int(p) for p in params.split(";")]
-        except ValueError:
+        except ValueError:  # noqa: PERF203
             params = [0]
 
         for i, v in enumerate(params):

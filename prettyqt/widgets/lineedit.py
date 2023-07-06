@@ -6,7 +6,7 @@ import re
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.utils import bidict, datatypes, get_repr, helpers
+from prettyqt.utils import bidict, classhelpers, datatypes, get_repr
 
 
 EchoModeStr = Literal["normal", "no_echo", "password", "echo_on_edit"]
@@ -71,7 +71,7 @@ def get_validator(
         case "website":
             return gui.RegularExpressionValidator(WEB_REGEX)
         case str():
-            ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
+            ValidatorClass = classhelpers.get_class_for_id(gui.ValidatorMixin, validator)
             validator = ValidatorClass(**kwargs)
             return validator
         case core.QRegularExpression():

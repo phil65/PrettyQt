@@ -13,7 +13,7 @@ import types
 from typing import TYPE_CHECKING, Any, TypeVar, get_args
 
 from prettyqt import constants, core
-from prettyqt.utils import datatypes, helpers, listdelegators
+from prettyqt.utils import classhelpers, datatypes, helpers, listdelegators
 
 
 if TYPE_CHECKING:
@@ -127,7 +127,9 @@ class ObjectMixin:
             case str():
                 from prettyqt import eventfilters
 
-                Klass = helpers.get_class_for_id(eventfilters.BaseEventFilter, filter_)
+                Klass = classhelpers.get_class_for_id(
+                    eventfilters.BaseEventFilter, filter_
+                )
                 filter_ = Klass(parent=self, **kwargs)
             case _:
                 raise ValueError(filter_)

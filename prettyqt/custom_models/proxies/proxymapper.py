@@ -8,6 +8,14 @@ from prettyqt import core
 logger = logging.getLogger(__name__)
 
 
+def get_proxy_chain(model: core.QAbstractItemModel) -> list[core.QAbstractItemModel]:
+    models = [model]
+    while isinstance(model, core.QAbstractProxyModel):
+        model = model.sourceModel()
+        models.append(model)
+    return models
+
+
 class ProxyMapper(core.Object):
     """Class to map indexes / ItemSelections from one proxy to another.
 
@@ -32,7 +40,7 @@ class ProxyMapper(core.Object):
         **kwargs,
     ):
         super().__init__(**kwargs)
-        chains = [self.get_proxy_chain(proxy) for proxy in proxies]
+        chains = [get_proxy_chain(proxy) for proxy in proxies]
         common_list = [
             element
             for element in chains[0]
@@ -44,30 +52,26 @@ class ProxyMapper(core.Object):
         logger.debug(f"Common source: {common_source}")
         self._chains = [chain[: chain.index(common_source)] for chain in chains]
 
-    @staticmethod
-    def get_proxy_chain(model: core.QAbstractItemModel) -> list[core.QAbstractItemModel]:
-        models = [model]
-        while isinstance(model, core.QAbstractProxyModel):
-            model = model.sourceModel()
-            models.append(model)
-        return models
-
-    def map_index(self, from_: int, to: int, index: core.ModelIndex) -> core.ModelIndex:
-        for model in self._chains[from_]:
+    def map_index(
+        self, source: int, target: int, index: core.ModelIndex
+    ) -> core.ModelIndex:
+        """Map index from source to target."""
+        for model in self._chains[source]:
             logger.debug(f"mapping from {model!r} to {model.sourceModel()!r}")
             index = model.mapToSource(index)
-        for model in reversed(self._chains[to]):
+        for model in reversed(self._chains[target]):
             logger.debug(f"mapping from {model.sourceModel()!r} to {model!r}")
             index = model.mapFromSource(index)
         return index
 
     def map_selection(
-        self, from_: int, to: int, selection: core.QItemSelection
+        self, source: int, target: int, selection: core.QItemSelection
     ) -> core.QItemSelection:
-        for model in self._chains[from_]:
+        """Map selection from source to target."""
+        for model in self._chains[source]:
             logger.debug(f"mapping from {model!r} to {model.sourceModel()!r}")
             selection = model.mapSelectionToSource(selection)
-        for model in reversed(self._chains[to]):
+        for model in reversed(self._chains[target]):
             logger.debug(f"mapping from {model.sourceModel()!r} to {model!r}")
             selection = model.mapSelectionFromSource(selection)
         return selection

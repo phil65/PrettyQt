@@ -263,7 +263,8 @@ class WidgetMixin(core.ObjectMixin):
         Args:
             icon: icon to use
         """
-        icon = iconprovider.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
+        color = widgets.app().get_window_icon_color()
+        icon = iconprovider.get_icon(icon, color=color)
         super().setWindowIcon(icon)
 
     setWindowIcon = set_icon
