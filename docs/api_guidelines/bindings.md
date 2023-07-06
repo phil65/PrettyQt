@@ -14,3 +14,11 @@ Reason for that is that these are the first versions which are basically on par 
 For a long time, PyQt was the only really usable binding. Especially PySide2 was buggy to an extent that it was almost unusable for more complex applications. That changed greatly in recent months up to a point where it is today at least on par with PyQt6.
 
 Starting with 6.5.2, my personal recommendation would be to use PySide6, mainly for excellent support and for pushing features which go beyond just generating a 1:1 binding. (\__feature__ imports, opaque containers, PyPy compatibility, ...)
+
+
+### Differences between Frameworks:
+
+This list will try to keep track about the (subtle) differences between the frameworks.
+* PyQt cannot handle `type` as a Property.
+(TypeError: unable to convert a Python 'PyQt6.sip.wrappertype' object to a C++ 'PyQt_PyObject' instance)
+* PySide6 offers opaque containers for some types (QIntList etc.)

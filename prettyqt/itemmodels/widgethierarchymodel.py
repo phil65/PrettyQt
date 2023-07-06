@@ -4,7 +4,7 @@ import enum
 import logging
 
 from prettyqt import constants, core, itemmodels
-from prettyqt.qt import QtWidgets
+from prettyqt.utils import classhelpers
 
 
 logger = logging.getLogger(__name__)
@@ -72,27 +72,46 @@ class FakeLayoutProp:
         pass
 
 
-class WidgetHierarchyModel(itemmodels.TreeModel):
+class BaseHierarchyModel(itemmodels.TreeModel):
     class Roles(enum.IntEnum):
         """Custom roles."""
 
         WidgetRole = constants.USER_ROLE + 23324
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.BaseClass = QtWidgets.QWidget
-        self.props = core.MetaObject(self.BaseClass.staticMetaObject).get_properties(
-            only_stored=True
-        )
-        self.props.insert(0, FakeClassNameProp())
-        self.props.insert(1, FakeLayoutProp())
-        self.props.insert(1, FakeUserPropertyNameProp())
-        self.props.insert(1, FakeUserPropertyValueProp())
-        # self.props.sort(key=lambda x: x.get_name())
+    def __init__(
+        self,
+        obj: type[core.QObject],
+        show_root: bool = True,
+        parent: core.QObject | None = None,
+    ):
+        self.BaseClass = None
+        self.props = None
+        super().__init__(obj=obj, show_root=show_root, parent=parent)
+        self.set_base_class("QWidget")
 
-    @classmethod
-    def supports(cls, instance) -> bool:
-        return isinstance(instance, QtWidgets.QWidget)
+    def set_base_class(self, klass: str | type[core.QObject]):
+        if isinstance(klass, str):
+            for kls in classhelpers.get_subclasses(core.QObject):
+                if kls.__name__ == klass:
+                    klass = kls
+                    break
+            else:
+                klass = core.QObject
+        with self.reset_model():
+            self.BaseClass = klass
+            metaobj = klass.staticMetaObject
+            self.props = core.MetaObject(metaobj).get_properties(only_stored=True)
+            self.props.insert(0, FakeClassNameProp())
+            if issubclass(klass, widgets.QWidget):
+                self.props.insert(1, FakeLayoutProp())
+            self.props.insert(1, FakeUserPropertyNameProp())
+            self.props.insert(1, FakeUserPropertyValueProp())
+
+    def get_base_class_name(self) -> str:
+        return self.BaseClass.__name__
+
+    def get_base_class(self) -> type[core.QObject]:
+        return self.BaseClass
 
     def columnCount(self, parent=None):
         return len(self.props)
@@ -159,6 +178,15 @@ class WidgetHierarchyModel(itemmodels.TreeModel):
         default = super().flags(index)
         return (default | flag) if prop.isWritable() else default
 
+    base_class_name = core.Property(str, get_base_class_name, set_base_class)
+    # base_class = core.Property(type, get_base_class, set_base_class, stored=False)
+
+
+class WidgetHierarchyModel(BaseHierarchyModel):
+    @classmethod
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, core.QObject)
+
     def _fetch_object_children(
         self, item: WidgetHierarchyModel.TreeItem
     ) -> list[WidgetHierarchyModel.TreeItem]:
@@ -177,23 +205,31 @@ class WidgetHierarchyModel(itemmodels.TreeModel):
         )
 
 
-class LayoutHierarchyModel(WidgetHierarchyModel):
+class LayoutHierarchyModel(BaseHierarchyModel):
+    @classmethod
+    def supports(cls, instance) -> bool:
+        from prettyqt import widgets
+
+        return isinstance(instance, widgets.QWidget)
+
     def _fetch_object_children(
         self, item: LayoutHierarchyModel.TreeItem
     ) -> list[LayoutHierarchyModel.TreeItem]:
+        from prettyqt import widgets
+
         match item.obj:
             case (
-                QtWidgets.QSplitter()
-                | QtWidgets.QToolBox()
-                | QtWidgets.QStackedWidget()
-                | QtWidgets.QTabWidget()
+                widgets.QSplitter()
+                | widgets.QToolBox()
+                | widgets.QStackedWidget()
+                | widgets.QTabWidget()
             ):
                 items = [item.obj.widget(i) for i in range(item.obj.count())]
-            case QtWidgets.QWidget():
+            case widgets.QWidget():
                 layout = item.obj.layout()
                 items = [layout.itemAt(i) for i in range(layout.count())]
                 items = [w if (w := i.widget()) else i.layout() for i in items]
-            case QtWidgets.QLayout():
+            case widgets.QLayout():
                 layout = item.obj
                 items = [layout.itemAt(i) for i in range(layout.count())]
                 items = [w if (w := i.widget()) else i.layout() for i in items]
@@ -202,8 +238,16 @@ class LayoutHierarchyModel(WidgetHierarchyModel):
         return [self.TreeItem(obj=i) for i in items]
 
     def _has_children(self, item: LayoutHierarchyModel.TreeItem) -> bool:
+        from prettyqt import widgets
+
         match item.obj:
-            case QtWidgets.QSplitter():
+            case (
+                widgets.QSplitter()
+                | widgets.QToolBox()
+                | widgets.QStackedWidget()
+                | widgets.QTabWidget()
+                | widgets.QLayout()
+            ):
                 return item.obj.count() > 0
             case _:
                 layout = item.obj.layout()
@@ -218,12 +262,13 @@ if __name__ == "__main__":
     view.setRootIsDecorated(True)
     widget = debugging.example_widget()
 
-    model = WidgetHierarchyModel(widget, show_root=True, parent=view)
-    view.set_model(model)
-    view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-    view.set_delegate("editor")
-    view.resize(1000, 1000)
+    model = WidgetHierarchyModel(widget, parent=view)
+    view = debugging.ProxyComparerWidget(model, itemview="tree")
+    # view.set_model(model)
+    # view.setEditTriggers(view.EditTrigger.AllEditTriggers)
+    # view.set_delegate("editor")
+    # view.resize(1000, 1000)
     view.show()
-    widget.show()
+    # widget.show()
     with app.debug_mode():
         app.exec()
