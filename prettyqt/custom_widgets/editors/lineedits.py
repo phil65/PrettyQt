@@ -12,11 +12,6 @@ class IntLineEdit(widgets.LineEdit):
         super().__init__(*args, object_name=object_name, **kwargs)
         self.set_validator("integer", bottom=0, top=1000000000)
 
-    def _on_value_change(self):
-        value = self.get_value()
-        self._set_validation_color()
-        self.value_changed.emit(value)
-
     def get_value(self) -> int:
         val = super().get_value()
         return int(val) if val and val.isnumeric() else 0
@@ -33,11 +28,6 @@ class FloatLineEdit(widgets.LineEdit):
     def __init__(self, *args, object_name: str = "float_lineedit", **kwargs):
         super().__init__(*args, object_name=object_name, **kwargs)
         self.set_validator("double", bottom=0.0)
-
-    def _on_value_change(self):
-        value = self.get_value()
-        self._set_validation_color()
-        self.value_changed.emit(value)
 
     def get_value(self) -> float:
         val = super().get_value()
@@ -58,11 +48,6 @@ class UrlLineEdit(widgets.LineEdit):
     def __init__(self, *args, object_name: str = "float_lineedit", **kwargs):
         super().__init__(*args, object_name=object_name, **kwargs)
         self.set_validator("website")
-
-    def _on_value_change(self):
-        value = self.get_value()
-        self._set_validation_color()
-        self.value_changed.emit(value)
 
     def get_value(self) -> core.QUrl:
         val = super().get_value()
