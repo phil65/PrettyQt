@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, Literal
 
 from prettyqt import gui
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, colors, datatypes
 
 
 CoordinateModeStr = Literal["logical", "object", "stretch_to_device", "object_bounding"]
@@ -127,8 +127,8 @@ PRESET: bidict[PresetStr, gui.QGradient.Preset] = bidict(
 
 
 class GradientMixin:
-    def __setitem__(self, key: float, value):
-        self.setColorAt(key, value)
+    def __setitem__(self, key: float, value: datatypes.ColorType):
+        self.set_color_at(key, value)
 
     def serialize(self) -> dict[str, Any]:
         return dict(
@@ -136,6 +136,9 @@ class GradientMixin:
             spread=self.get_spread(),
             stops=self.get_stops(),
         )
+
+    def set_color_at(self, key: float, color: datatypes.ColorType):
+        super().setColorAt(key, colors.get_color(color))
 
     def set_coordinate_mode(self, mode: CoordinateModeStr | gui.QGradient.CoordinateMode):
         """Set the coordinate mode.
