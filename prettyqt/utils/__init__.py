@@ -49,6 +49,9 @@ class bidict(bdct.bidict[KT, VT]):
     def get_enum_value(self, value: KT | VT) -> VT:
         return self[value] if isinstance(value, str) else value
 
+    def get_str_value(self, value: KT | VT) -> KT:
+        return value if isinstance(value, str) else self.inverse[value]
+
 
 class InvalidParamError(ValueError):
     """Exception raised for invalid params in method calls.
