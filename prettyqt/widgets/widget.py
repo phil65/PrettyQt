@@ -445,6 +445,22 @@ class WidgetMixin(core.ObjectMixin):
         cover: bool | None = None,
         window_title: bool | None = None,
     ):
+        """Set window flags.
+
+        Arguments:
+            minimize: set WindowMinimizeButtonHint flag
+            maximize: set WindowMaximizeButtonHint flag
+            close: set WindowCloseButtonHint flag
+            stay_on_top: set WindowStaysOnTopHint flag
+            frameless: set FramelessWindowHint flag
+            window: set Window flag
+            dialog: set Dialog flag
+            tooltip: set ToolTip flag
+            tool: set Tool flag
+            customize: set CustomizeWindowHint flag
+            cover: set CoverWindow flag
+            window_title: set WindowTitleHint flag
+        """
         flags = {
             constants.WindowType.WindowMinimizeButtonHint: minimize,
             constants.WindowType.WindowMaximizeButtonHint: maximize,
@@ -522,6 +538,67 @@ class WidgetMixin(core.ObjectMixin):
         always_stack_on_top: bool | None = None,
         contents_margins_respects_safe_area: bool | None = None,
     ):
+        """Set window attributes.
+
+        Attributes:
+            accept_drops: set AcceptDrops attribute
+            always_show_tooltips: set AlwaysShowToolTips attribute
+            custom_whats_this: set CustomWhatsThis attribute
+            delete_on_close: set DeleteOnClose attribute
+            disabled: set Disabled attribute
+            dont_show_on_screen: set DontShowOnScreen attribute
+            force_disabled: set ForceDisabled attribute
+            force_updates_disabled: set ForceUpdatesDisabled attribute
+            hover: set Hover attribute
+            input_method_enabled: set InputMethodEnabled attribute
+            keyboard_focus_change: set KeyboardFocusChange attribute
+            key_compression: set KeyCompression attribute
+            layout_on_entire_rect: set LayoutOnEntireRect attribute
+            layout_uses_widget_rect: set LayoutUsesWidgetRect attribute
+            mapped: set Mapped attribute
+            mouse_no_mask: set MouseNoMask attribute
+            mouse_tracking: set MouseTracking attribute
+            moved: set Moved attribute
+            no_child_events_for_parent: set NoChildEventsForParent attribute
+            no_child_events_from_children: set NoChildEventsFromChildren attribute
+            no_mouse_replay: set NoMouseReplay attribute
+            no_mouse_propagation: set NoMousePropagation attribute
+            transparent_for_mouse_events: set TransparentForMouseEvents attribute
+            no_system_background: set NoSystemBackground attribute
+            opaque_paint_event: set OpaquePaintEvent attribute
+            outside_ws_range: set OutsideWSRange attribute
+            paint_on_screen: set PaintOnScreen attribute
+            paint_unclipped: set PaintUnclipped attribute
+            pending_move_event: set PendingMoveEvent attribute
+            pending_resize_egent: set PendingResizeEvent attribute
+            quit_on_close: set QuitOnClose attribute
+            resized: set Resized attribute
+            right_to_left: set RightToLeft attribute
+            set_cursor: set SetCursor attribute
+            set_font: set SetFont attribute
+            set_palette: set SetPalette attribute
+            set_style: set SetStyle attribute
+            static_contents: set StaticContents attribute
+            style_sheet: set StyleSheet attribute
+            style_sheet_target: set StyleSheetTarget attribute
+            tablet_tracking: set TabletTracking attribute
+            translucent_background: set TranslucentBackground attribute
+            under_mouse: set UnderMouse attribute
+            updates_disabled: set UpdatesDisabled attribute
+            window_modified: set WindowModified attribute
+            window_propagation: set WindowPropagation attribute
+            mac_always_show_tool_window: set MacAlwaysShowToolWindow attribute
+            set_locale: set SetLocale attribute
+            styled_background: set StyledBackground attribute
+            show_without_activating: set ShowWithoutActivating attribute
+            native_window: set NativeWindow attribute
+            dont_create_native_ancestors: set DontCreateNativeAncestors attribute
+            accept_touch_events: set AcceptTouchEvents attribute
+            touch_pad_single_touch_events: set TouchPadAcceptSingleTouchEvents attribute
+            always_stack_on_top: set AlwaysStackOnTop attribute
+            contents_margins_respects_safe_area: set ContentsMarginsRespectsSafeArea
+                                                 attribute
+        """
         Attr = constants.WidgetAttribute
         flags = {
             Attr.WA_AcceptDrops: accept_drops,
@@ -661,6 +738,7 @@ class WidgetMixin(core.ObjectMixin):
 
     @contextlib.contextmanager
     def updates_off(self) -> Iterator[None]:
+        """Context manager to turn off updates for this widget."""
         updates = self.updatesEnabled()
         self.setUpdatesEnabled(False)
         yield None
@@ -668,6 +746,7 @@ class WidgetMixin(core.ObjectMixin):
 
     @contextlib.contextmanager
     def edit_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:
+        """Context manager to edit the stylesheet (using qstylizer)."""
         ss = self.get_stylesheet()
         yield ss
         self.set_stylesheet(ss)
@@ -675,6 +754,7 @@ class WidgetMixin(core.ObjectMixin):
     def set_stylesheet(
         self, ss: None | str | qstylizer.style.StyleSheet | datatypes.PathType
     ):
+        """Set stylesheet for this widget."""
         match ss:
             case None:
                 ss = ""
@@ -687,6 +767,7 @@ class WidgetMixin(core.ObjectMixin):
         self.setStyleSheet(ss)
 
     def get_stylesheet(self) -> qstylizer.style.StyleSheet:
+        """Get current stylesheet."""
         try:
             return qstylizer.parser.parse(self.styleSheet())
         except ValueError:
@@ -694,12 +775,14 @@ class WidgetMixin(core.ObjectMixin):
 
     @contextlib.contextmanager
     def edit_palette(self) -> Iterator[gui.Palette]:
+        """Context manager to edit the palette of the widget."""
         palette = gui.Palette(self.palette())
         yield palette
         self.setPalette(palette)
 
     @contextlib.contextmanager
     def edit_font(self) -> Iterator[gui.Font]:
+        """Context manager to edit the font of the widget."""
         font = gui.Font(self.font())
         yield font
         self.setFont(font)
@@ -935,6 +1018,7 @@ class WidgetMixin(core.ObjectMixin):
     def set_cursor(
         self, cursor: constants.CursorShapeStr | constants.CursorShape | gui.QCursor
     ):
+        """Set the cursor for this widget."""
         if isinstance(cursor, gui.QCursor):
             curs = cursor
         else:
@@ -990,6 +1074,12 @@ class WidgetMixin(core.ObjectMixin):
         area: datatypes.RectType | gui.QRegion | gui.QBitmap | None,
         typ: gui.region.RegionTypeStr = "rectangle",
     ):
+        """Set mask of the widget.
+
+        Arguments:
+            area: Mask area
+            typ: type of region (only used if area is a QRegion)
+        """
         match area:
             case None:
                 self.clearMask()
@@ -1008,6 +1098,10 @@ class WidgetMixin(core.ObjectMixin):
         return pathlib.Path(path) if path else None
 
     def get_image(self) -> gui.QPixmap:
+        """Get a pixmap for the widget.
+
+        Implements a workaround to also include QOpenGlWidgets.
+        """
         from prettyqt.qt import QtOpenGLWidgets
 
         image = self.grab()
@@ -1036,6 +1130,7 @@ class WidgetMixin(core.ObjectMixin):
         return gui.Cursor(self.cursor())
 
     def set_style(self, style: str | widgets.QStyle):
+        """Set widget style."""
         if isinstance(style, str):
             style = widgets.QStyleFactory.create(style)
         self.setStyle(style)
