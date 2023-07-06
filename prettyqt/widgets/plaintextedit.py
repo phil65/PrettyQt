@@ -22,6 +22,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         self._allow_wheel_zoom = False
         self._hl = None
         self._current_line_color = gui.Color(0, 0, 0, 0)
+        self._validation_color = gui.Color("orange")
         self.selecter = texteditselecter.TextEditSelecter(self)
         self.validator: gui.QValidator | None = None
         self.textChanged.connect(self._on_value_change)
@@ -164,11 +165,17 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
     def _on_value_change(self):
         self.value_changed.emit(self.text())
         if self.validator is not None:
-            self._set_validation_color()
+            self._update_background()
 
-    def _set_validation_color(self):
-        color = None if self.is_valid() else "orange"
+    def _update_background(self):
+        color = None if self.is_valid() else self._validation_color
         self.set_background_color(color)
+
+    def set_validation_color(self, color: datatypes.ColorType):
+        self._validation_color = colors.get_color(color).as_qt()
+
+    def get_validation_color(self) -> gui.QColor:
+        return self._validation_color
 
     def set_validator(
         self, validator: gui.QValidator | widgets.lineedit.ValidatorStr | None, **kwargs
@@ -177,7 +184,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
             ValidatorClass = classhelpers.get_class_for_id(gui.ValidatorMixin, validator)
             validator = ValidatorClass(**kwargs)
         self.validator = validator
-        self._set_validation_color()
+        self._update_background()
         return validator
 
     def set_regex_validator(self, regex: str, flags=0) -> gui.RegularExpressionValidator:
@@ -224,6 +231,10 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         widget_margins = self.contentsMargins()
         doc_height = self.document().get_pixel_height(exact=exact)
         return widget_margins.top() + doc_height + widget_margins.bottom()
+
+    validation_color = core.Property(
+        gui.QColor, get_validation_color, set_validation_color
+    )
 
 
 class PlainTextEdit(PlainTextEditMixin, widgets.QPlainTextEdit):

@@ -6,7 +6,7 @@ import re
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.utils import bidict, classhelpers, datatypes, get_repr
+from prettyqt.utils import bidict, classhelpers, colors, datatypes, get_repr
 
 
 EchoModeStr = Literal["normal", "no_echo", "password", "echo_on_edit"]
@@ -89,12 +89,13 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
     tab_pressed = core.Signal()
 
     def __init__(self, *args, **kwargs):
+        self._validation_color = gui.Color("orange")
         super().__init__(*args, **kwargs)
         self.textChanged.connect(self._on_value_change)
 
     def _on_value_change(self):
         val = self.get_value()
-        self._set_validation_color()
+        self._update_background()
         self.value_changed.emit(val)
 
     def __repr__(self):
@@ -194,7 +195,7 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
         if append and (prev := widget.validator()) is not None:
             validator = validators.AndValidator([prev, validator])
         self.setValidator(validator)
-        self._set_validation_color()
+        self._update_background()
         return validator
 
     def set_input_mask(self, mask: str):
@@ -207,9 +208,15 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
                 mask = "0000-00-00"
         self.setInputMask(mask)
 
-    def _set_validation_color(self):
-        color = None if self.hasAcceptableInput() else "orange"
+    def _update_background(self):
+        color = None if self.hasAcceptableInput() else self._validation_color
         self.set_background_color(color)
+
+    def set_validation_color(self, color: datatypes.ColorType):
+        self._validation_color = colors.get_color(color).as_qt()
+
+    def get_validation_color(self) -> gui.QColor:
+        return self._validation_color
 
     def set_echo_mode(self, mode: EchoModeStr | widgets.QLineEdit.EchoMode):
         """Set echo mode.
