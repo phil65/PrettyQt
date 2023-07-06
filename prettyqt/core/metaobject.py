@@ -3,11 +3,13 @@ from __future__ import annotations
 from collections.abc import Callable
 import logging
 
-from typing import Any
+from typing import Any, TypeVar
 
 from prettyqt import constants, core
 from prettyqt.utils import datatypes, helpers
 
+
+T = TypeVar("T", bound=core.QObject)
 
 logger = logging.getLogger(__name__)
 
@@ -296,7 +298,7 @@ class MetaObject:
         logger.debug(f"connected {len(handles)} signals to {fn_or_qobject}.")
         return handles
 
-    def copy(self, qobject: core.QObject, forward_signals: bool = True):
+    def copy(self, qobject: T, forward_signals: bool = True) -> T:
         """Create a copy of given QObject."""
         try:
             new = type(qobject)()
