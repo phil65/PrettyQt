@@ -86,25 +86,24 @@ class RegexEditorWidget(widgets.Widget):
         layout.add(self.textedit_quickref)
         self._update_view()
 
-    def __getattr__(self, attr):
-        return self.regexinput.__getattribute__(attr)
-
     def on_match_list_current_change(self, index_new, index_old):
         model = self.table_matches.model()
         span = model.data(index_new, constants.USER_ROLE)  # type: ignore
         self.textedit_teststring.selecter.select_text(*span)
 
-    def _update_view(self) -> None:
+    def _update_view(self):
         self.prog = None
         self.matches = []
         with self.textedit_teststring.signals_blocked():
-            if not self.pattern:
+            if not self.regexinput.get_pattern():
                 self._highlighter.set_spans(None)
                 self.table_matches.set_model(None)
                 self.label_num_matches.set_text("0 matches")
                 return None
             try:
-                self.prog = re.compile(self.pattern, self.compile_flags)
+                self.prog = re.compile(
+                    self.regexinput.get_pattern(), self.regexinput.get_flags()
+                )
             except sre_constants.error:
                 self._highlighter.set_spans(None)
                 self.table_matches.set_model(None)
