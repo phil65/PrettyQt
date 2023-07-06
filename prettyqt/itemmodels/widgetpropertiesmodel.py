@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 
 from prettyqt import constants, core, eventfilters
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 
 
 logger = logging.getLogger(__name__)
@@ -30,7 +30,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         # "Enumerator",
     ]
 
-    def __init__(self, widget: QtWidgets.QWidget, **kwargs):
+    def __init__(self, widget: core.QObject, **kwargs):
         self._widget = None
         self._metaobj = None
         self.event_catcher = None
@@ -40,7 +40,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
 
     @classmethod
     def supports(cls, instance) -> bool:
-        return isinstance(instance, QtWidgets.QWidget)
+        return isinstance(instance, core.QObject)
 
     def set_widget(self, widget):
         if self._widget:

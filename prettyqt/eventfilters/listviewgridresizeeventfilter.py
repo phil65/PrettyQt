@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import core, eventfilters
-from prettyqt.qt import QtWidgets
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
 
 
 class ListViewGridResizeEventFilter(eventfilters.BaseEventFilter):

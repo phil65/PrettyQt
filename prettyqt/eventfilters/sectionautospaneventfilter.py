@@ -1,6 +1,12 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, eventfilters, widgets
+from typing import TYPE_CHECKING
+
+from prettyqt import constants, core, eventfilters
+
+
+if TYPE_CHECKING:
+    from prettyqt import widgets
 
 
 class SectionAutoSpanEventFilter(eventfilters.BaseEventFilter):
@@ -53,7 +59,7 @@ class SectionAutoSpanEventFilter(eventfilters.BaseEventFilter):
 
 
 if __name__ == "__main__":
-    from prettyqt import debugging
+    from prettyqt import debugging, widgets  # noqa: F811
 
     app = widgets.app()
     widget = debugging.example_table()
