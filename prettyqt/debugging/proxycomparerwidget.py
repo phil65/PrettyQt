@@ -56,7 +56,7 @@ class ProxyComparerWidget(widgets.Splitter):
             self.model_itemviews.append(table)
             prop_table = widgets.TableView()
             prop_table.set_delegate("editor")
-            prop_model = itemmodels.WidgetPropertiesModel(model)
+            prop_model = itemmodels.QObjectPropertiesModel(model)
             prop_table.set_model(prop_model)
             header = widgets.Label(type(model).__name__)
             layout.add(header)

@@ -3,20 +3,22 @@ from __future__ import annotations
 import functools
 import logging
 
-from prettyqt import constants, core, custom_widgets, debugging, ipython, widgets
-from prettyqt.itemmodels import (
-    logrecordmodel,
-    widgethierarchymodel,
-    widgetpropertiesmodel,
+from prettyqt import (
+    constants,
+    core,
+    custom_widgets,
+    debugging,
+    ipython,
+    itemmodels,
+    widgets,
 )
-from prettyqt.qt import QtCore, QtWidgets
 
 
 logger = logging.getLogger(__name__)
 
 
 class HierarchyView(widgets.TreeView):
-    object_selected = core.Signal(QtCore.QObject)
+    object_selected = core.Signal(core.QObject)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -25,7 +27,7 @@ class HierarchyView(widgets.TreeView):
         self.setRootIsDecorated(True)
         self.setWordWrap(True)
 
-    def select_object(self, qobject: QtCore.QObject):
+    def select_object(self, qobject: core.QObject):
         index = self.model().search_tree(qobject, constants.USER_ROLE + 23324)
         if index:
             self.set_current_index(index[0], current=True)
@@ -43,12 +45,12 @@ class PropertyView(widgets.TableView):
     def set_qobject(self, qobject):
         if (model := self.get_model(skip_proxies=True)) is not None:
             model.unhook()
-        model = widgetpropertiesmodel.WidgetPropertiesModel(qobject, parent=self)
+        model = itemmodels.QObjectPropertiesModel(qobject, parent=self)
         model.dataChanged.connect(self.repaint)
         self.set_model(model)
 
     @classmethod
-    def get_tabbed(cls, qobject: QtCore.QObject, parent: QtWidgets.QWidget | None = None):
+    def get_tabbed(cls, qobject: core.QObject, parent: widgets.QWidget | None = None):
         tabwidget = widgets.TabWidget(parent=parent)
         propertyview = cls(object_name="property_view", parent=tabwidget)
         propertyview.set_qobject(qobject)
@@ -56,7 +58,7 @@ class PropertyView(widgets.TableView):
         tabwidget.add_tab(propertyview, "Main")
 
         if hasattr(qobject, "model") and (model := qobject.model()) is not None:
-            while isinstance(model, QtCore.QAbstractProxyModel):
+            while isinstance(model, core.QAbstractProxyModel):
                 view = cls(
                     object_name=f"property_view({type(model).__name__})",
                     parent=tabwidget,
@@ -90,7 +92,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
 
     def __init__(
         self,
-        qobject: QtCore.QObject,
+        qobject: core.QObject,
         *args,
         object_name="qobject_details_dialog",
         **kwargs,
@@ -101,9 +103,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
         self.console.push_vars(dict(app=widgets.app(), qobject=qobject))
         self.tabwidget, self.propertyview = PropertyView.get_tabbed(qobject)
         self.hierarchyview = HierarchyView()
-        model = widgethierarchymodel.WidgetHierarchyModel(
-            qobject, parent=self.hierarchyview
-        )
+        model = itemmodels.WidgetHierarchyModel(qobject, parent=self.hierarchyview)
         self.hierarchyview.set_model(model)
         self.hierarchyview.h_header = custom_widgets.FilterHeader(self.hierarchyview)
         self.hierarchyview.expandAll()
@@ -112,7 +112,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
         )
 
         logtable = widgets.TableView()
-        model = logrecordmodel.LogRecordModel(logging.getLogger(), parent=logtable)
+        model = itemmodels.LogRecordModel(logging.getLogger(), parent=logtable)
         w = widgets.Widget()
         w.set_layout("vertical")
         logtable.set_model(model)
@@ -121,7 +121,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
         stalker = debugging.Stalker(qobject, log_level=logging.DEBUG)
         stalker.hook()
         self.stalkers.append(stalker)
-        for widget in qobject.find_children(QtWidgets.QWidget):
+        for widget in qobject.find_children(widgets.QWidget):
             stalker = debugging.Stalker(widget, log_level=logging.DEBUG)
             stalker.hook()
             fn = functools.partial(self._on_widget_click, widget)
@@ -150,7 +150,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
 
     def eventFilter(self, source, event):
         match event.type():
-            case QtCore.QEvent.Type.MouseButtonRelease:
+            case core.QEvent.Type.MouseButtonRelease:
                 raise ValueError
         return False
 

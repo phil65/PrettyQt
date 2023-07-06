@@ -144,13 +144,13 @@ class FilterHeader(widgets.HeaderView):
 
 
 if __name__ == "__main__":
-    from prettyqt.itemmodels import widgetpropertiesmodel
+    from prettyqt import itemmodels
 
     app = widgets.app()
     with app.debug_mode():
         view = widgets.TableView()
 
-        model = widgetpropertiesmodel.WidgetPropertiesModel(view, parent=view)
+        model = itemmodels.QObjectPropertiesModel(view, parent=view)
         # model = model.proxifier[:, 0:3]
         view.set_selection_behavior("rows")
         view.setEditTriggers(view.EditTrigger.AllEditTriggers)

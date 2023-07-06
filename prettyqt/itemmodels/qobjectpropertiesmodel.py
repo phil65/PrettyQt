@@ -9,7 +9,7 @@ from prettyqt.qt import QtGui
 logger = logging.getLogger(__name__)
 
 
-class WidgetPropertiesModel(core.AbstractTableModel):
+class QObjectPropertiesModel(core.AbstractTableModel):
     HEADER = [
         "Property name",
         "Value",
@@ -31,7 +31,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
     ]
 
     def __init__(self, widget: core.QObject, **kwargs):
-        self._widget = None
+        self._qobject = None
         self._metaobj = None
         self.event_catcher = None
         self._handles: list[core.QMetaObject.Connection] = []
@@ -43,26 +43,26 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         return isinstance(instance, core.QObject)
 
     def set_widget(self, widget):
-        if self._widget:
+        if self._qobject:
             self.unhook()
-        self._widget = widget
-        self._metaobj = core.MetaObject(self._widget.metaObject())
+        self._qobject = widget
+        self._metaobj = core.MetaObject(self._qobject.metaObject())
         self.event_catcher = eventfilters.EventCatcher(
-            include=["resize", "move"], parent=self._widget
+            include=["resize", "move"], parent=self._qobject
         )
-        logger.debug(f"Connected {self._widget!r} to {self!r}")
+        logger.debug(f"Connected {self._qobject!r} to {self!r}")
         self.event_catcher.caught.connect(self.force_layoutchange)
-        self._widget.installEventFilter(self.event_catcher)
+        self._qobject.installEventFilter(self.event_catcher)
         self._handles = self._metaobj.connect_signals(
-            self._widget, self.force_layoutchange, only_notifiers=True
+            self._qobject, self.force_layoutchange, only_notifiers=True
         )
         self.update_all()
 
     def unhook(self):
         for handle in self._handles:
-            self._widget.disconnect(handle)
-        self._widget.removeEventFilter(self.event_catcher)
-        logger.debug(f"Disconnected {self._widget!r} from {self!r}")
+            self._qobject.disconnect(handle)
+        self._qobject.removeEventFilter(self.event_catcher)
+        logger.debug(f"Disconnected {self._qobject!r} from {self!r}")
 
     def columnCount(self, parent=None) -> int:
         return len(self.HEADER)
@@ -98,7 +98,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
                 font.setBold(True)
                 return font
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 1:
-                return prop.read(self._widget)
+                return prop.read(self._qobject)
             case constants.DISPLAY_ROLE, 2:
                 return prop.get_meta_type().get_name()
             case constants.FONT_ROLE, 2:
@@ -136,7 +136,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
             #     enumerator = prop.get_enumerator()
             #     return "" if enumerator is None else enumerator.get_name()
             case constants.USER_ROLE, _:
-                return prop.read(self._widget)
+                return prop.read(self._qobject)
 
     def setData(
         self,
@@ -149,7 +149,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         prop = self._metaobj.get_property(index.row())
         match role, index.column():
             case constants.USER_ROLE | constants.EDIT_ROLE, _:
-                prop.write(self._widget, value)
+                prop.write(self._qobject, value)
                 self.update_row(index.row())
                 return True
         return False
@@ -176,7 +176,7 @@ if __name__ == "__main__":
     view = widgets.TableView()
     view.set_icon("mdi.folder")
     with app.debug_mode():
-        model = WidgetPropertiesModel(widget)
+        model = QObjectPropertiesModel(widget)
         model.dataChanged.connect(view.repaint)
         view.set_model(model)
         view.set_selection_behavior("rows")

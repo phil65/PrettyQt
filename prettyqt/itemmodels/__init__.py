@@ -33,7 +33,7 @@ from .actionsmodel import ActionsModel
 from .modelindexmodel import ModelIndexModel
 from .storageinfomodel import StorageInfoModel
 from .shortcutsmodel import ShortcutsModel
-from .widgetpropertiesmodel import WidgetPropertiesModel
+from .qobjectpropertiesmodel import QObjectPropertiesModel
 from .widgetsdetailsmodel import WidgetsDetailsModel
 from .widgethierarchymodel import WidgetHierarchyModel, LayoutHierarchyModel
 
@@ -117,7 +117,7 @@ __all__ = [
     "LogRecordModel",
     "BaseXmlModel",
     "XmlModel",
-    "WidgetPropertiesModel",
+    "QObjectPropertiesModel",
     "WidgetHierarchyModel",
     "LayoutHierarchyModel",
     "WidgetsDetailsModel",
