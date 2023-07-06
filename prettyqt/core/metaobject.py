@@ -280,6 +280,11 @@ class MetaObject:
         handles = []
         for signal in self.get_signals(only_notifiers=only_notifiers):
             signal_name = signal.get_name()
+            if not hasattr(source_qobject, signal_name):
+                # PyQt6 reports applicationNameChanged for QCoreApplication,
+                # but it doesnt exist...
+                logger.warning(f"Signal {signal_name} does not exist.")
+                continue
             signal_instance = source_qobject.__getattribute__(signal_name)
             slot = (
                 fn_or_qobject.__getattribute__(signal_name)

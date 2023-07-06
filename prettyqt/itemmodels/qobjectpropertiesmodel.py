@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 
-from prettyqt import constants, core, eventfilters
+from prettyqt import constants, core
 from prettyqt.qt import QtGui
 
 
@@ -30,39 +30,19 @@ class QObjectPropertiesModel(core.AbstractTableModel):
         # "Enumerator",
     ]
 
-    def __init__(self, widget: core.QObject, **kwargs):
-        self._qobject = None
-        self._metaobj = None
-        self.event_catcher = None
-        self._handles: list[core.QMetaObject.Connection] = []
+    def __init__(self, qobject: core.QObject, **kwargs):
+        self._qobject = qobject
+        self._metaobj = core.MetaObject(self._qobject.metaObject())
         super().__init__(**kwargs)
-        self.set_widget(widget)
 
     @classmethod
     def supports(cls, instance) -> bool:
         return isinstance(instance, core.QObject)
 
-    def set_widget(self, widget):
-        if self._qobject:
-            self.unhook()
-        self._qobject = widget
-        self._metaobj = core.MetaObject(self._qobject.metaObject())
-        self.event_catcher = eventfilters.EventCatcher(
-            include=["resize", "move"], parent=self._qobject
-        )
-        logger.debug(f"Connected {self._qobject!r} to {self!r}")
-        self.event_catcher.caught.connect(self.force_layoutchange)
-        self._qobject.installEventFilter(self.event_catcher)
-        self._handles = self._metaobj.connect_signals(
-            self._qobject, self.force_layoutchange, only_notifiers=True
-        )
-        self.update_all()
-
-    def unhook(self):
-        for handle in self._handles:
-            self._qobject.disconnect(handle)
-        self._qobject.removeEventFilter(self.event_catcher)
-        logger.debug(f"Disconnected {self._qobject!r} from {self!r}")
+    def set_qobject(self, qobject):
+        with self.reset_model():
+            self._qobject = qobject
+            self._metaobj = core.MetaObject(self._qobject.metaObject())
 
     def columnCount(self, parent=None) -> int:
         return len(self.HEADER)
@@ -144,8 +124,6 @@ class QObjectPropertiesModel(core.AbstractTableModel):
         value,
         role: constants.ItemDataRole = constants.EDIT_ROLE,
     ) -> bool:
-        if not index.isValid():
-            return None
         prop = self._metaobj.get_property(index.row())
         match role, index.column():
             case constants.USER_ROLE | constants.EDIT_ROLE, _:

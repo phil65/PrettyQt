@@ -129,3 +129,8 @@ class CoreApplicationMixin(core.ObjectMixin):
 
 class CoreApplication(CoreApplicationMixin, core.QCoreApplication):
     pass
+
+
+if __name__ == "__main__":
+    app = CoreApplication([])
+    app.applicationNameChanged.connect(print)
