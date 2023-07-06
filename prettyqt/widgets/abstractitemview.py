@@ -486,7 +486,11 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         return (x.row() for x in self.selected_indexes())
 
     def selected_data(self, role=constants.USER_ROLE) -> Generator[Any, None, None]:
-        """Return generator yielding selected userData."""
+        """Return generator yielding selected userData.
+
+        Arguments:
+            role: ItemRole to return data for.
+        """
         return (x.data(role) for x in self.selected_indexes())
 
     def setup_dragdrop_move(self):
@@ -506,29 +510,25 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def set_selection_behavior(
         self,
-        behaviour: SelectionBehaviourStr | widgets.QAbstractItemView.SelectionBehavior,
+        behavior: SelectionBehaviourStr | widgets.QAbstractItemView.SelectionBehavior,
     ):
-        """Set selection behaviour for given item view.
+        """Set selection behavior for given item view.
 
-        Args:
-            behaviour: selection behaviour to use
+        Arguments:
+            behavior: Selection behavior
         """
-        self.setSelectionBehavior(SELECTION_BEHAVIOR.get_enum_value(behaviour))
+        self.setSelectionBehavior(SELECTION_BEHAVIOR.get_enum_value(behavior))
 
     def get_selection_behavior(self) -> SelectionBehaviourStr:
-        """Return current selection behaviour.
+        """Return current selection behavior.
 
         Returns:
-            selection behaviour
+            selection behavior
         """
         return SELECTION_BEHAVIOR.inverse[self.selectionBehavior()]
 
     def get_drop_indicator_position(self) -> DropIndicatorPositionStr:
-        """Return position of the drop indicator in relation to the closest item.
-
-        Returns:
-            drop indicator position
-        """
+        """Return position of the drop indicator in relation to the closest item."""
         return DROP_INDICATOR_POSITION.inverse[self.dropIndicatorPosition()]
 
     def set_drag_drop_mode(
@@ -542,11 +542,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self.setDragDropMode(DRAG_DROP_MODE.get_enum_value(mode))
 
     def get_drag_drop_mode(self) -> DragDropModeStr:
-        """Return current drag-drop mode.
-
-        Returns:
-            drag-drop mode
-        """
+        """Return current drag-drop mode."""
         return DRAG_DROP_MODE.inverse[self.dragDropMode()]
 
     def set_state(self, state: StateStr | widgets.QAbstractItemView.State):
@@ -558,11 +554,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self.setState(STATE.get_enum_value(state))
 
     def get_state(self) -> StateStr:
-        """Return current state.
-
-        Returns:
-            state
-        """
+        """Return current state."""
         return STATE.inverse[self.state()]
 
     def set_selection_mode(
@@ -578,11 +570,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self.setSelectionMode(SELECTION_MODE.get_enum_value(mode))
 
     def get_selection_mode(self) -> SelectionModeStr:
-        """Return current selection mode.
-
-        Returns:
-            selection mode
-        """
+        """Return current selection mode."""
         return SELECTION_MODE.inverse[self.selectionMode()]
 
     def set_scroll_mode(self, mode: ScrollModeStr | widgets.QAbstractItemView.ScrollMode):
@@ -605,11 +593,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self.setHorizontalScrollMode(SCROLL_MODE.get_enum_value(mode))
 
     def get_horizontal_scroll_mode(self) -> ScrollModeStr:
-        """Return current horizontal scroll mode.
-
-        Returns:
-            horizontal scroll mode
-        """
+        """Return current horizontal scroll mode."""
         return SCROLL_MODE.inverse[self.horizontalScrollMode()]
 
     def set_vertical_scroll_mode(
@@ -623,11 +607,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self.setVerticalScrollMode(SCROLL_MODE.get_enum_value(mode))
 
     def get_vertical_scroll_mode(self) -> ScrollModeStr:
-        """Return current vertical scroll mode.
-
-        Returns:
-            vertical scroll mode
-        """
+        """Return current vertical scroll mode."""
         return SCROLL_MODE.inverse[self.verticalScrollMode()]
 
     def num_selected(self) -> int:
