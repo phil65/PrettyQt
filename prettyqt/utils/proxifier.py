@@ -78,6 +78,7 @@ class Sliced:
         )
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
+        self._widget.selectionModel().currentChanged.connect(proxy.highlight_index)
         return proxy
 
     def modify(

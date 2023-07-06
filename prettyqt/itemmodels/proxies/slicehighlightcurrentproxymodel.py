@@ -58,19 +58,6 @@ class SliceHighlightCurrentProxyModel(itemmodels.SliceIdentityProxyModel):
         self._current_row = None
         self._highlight_color = colors.get_color(highlight_color).as_qt()
         super().__init__(**kwargs)
-        parent: widgets.AbstractItemView = self.parent()  # type: ignore
-        parent.model_changed.connect(self._on_model_change)
-        if sel_model := parent.selectionModel():
-            sel_model.currentChanged.connect(self._on_current_change)
-
-    def _on_model_change(self, model):
-        self.parent().selectionModel().currentChanged.connect(self._on_current_change)
-
-    def _on_current_change(self, new, old):
-        with self.change_layout():
-            self._current_value = new.data(constants.DISPLAY_ROLE)
-            self._current_column = new.column()
-            self._current_row = new.row()
 
     def set_highlight_color(self, color: datatypes.ColorType):
         """Set color used for highlighting cells."""
@@ -95,6 +82,30 @@ class SliceHighlightCurrentProxyModel(itemmodels.SliceIdentityProxyModel):
     def get_highlight_role(self) -> constants.ItemDataRole:
         """Get highlight mode."""
         return self._data_role
+
+    def set_highlight_column(self, column: int):
+        with self.change_layout():
+            self._current_column = column
+
+    def get_highlight_column(self) -> int:
+        return self._current_column
+
+    def set_highlight_row(self, row: int):
+        with self.change_layout():
+            self._current_row = row
+
+    def get_highlight_row(self) -> int:
+        return self._current_row
+
+    def set_current_value(self, value):
+        with self.change_layout():
+            self._current_value = value
+
+    def highlight_index(self, index: core.ModelIndex):
+        with self.change_layout():
+            self._current_value = index.data(self._data_role)
+            self._current_row = index.row()
+            self._current_column = index.column()
 
     def data(
         self,
@@ -122,6 +133,8 @@ class SliceHighlightCurrentProxyModel(itemmodels.SliceIdentityProxyModel):
     highlightRole = core.Property(
         constants.ItemDataRole, get_highlight_role, set_highlight_role
     )
+    highlight_column = core.Property(int, get_highlight_column, set_highlight_column)
+    highlight_row = core.Property(int, get_highlight_row, set_highlight_row)
 
 
 if __name__ == "__main__":
@@ -138,7 +151,7 @@ if __name__ == "__main__":
     model = gui.StandardItemModel.from_dict(dct)
     table = widgets.TableView()
     table.set_model(model)
-    # table.proxifier[:, ::2].highlight_current(mode="column")
+    table.proxifier[:, ::2].highlight_current(mode="column")
     table.resize(500, 200)
     table.set_title("Example")
     table.set_icon("mdi.cursor-default-click-outline")
