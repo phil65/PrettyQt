@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 import traceback
 
-from prettyqt import constants, core, itemmodels, widgets
+from prettyqt import constants, core, itemmodels
 from prettyqt.utils import signallogger
 
 
@@ -184,7 +184,7 @@ class LogRecordModel(itemmodels.ColumnTableModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import debugging
+    from prettyqt import debugging, widgets
     from prettyqt.qt import QtGui
 
     logger = logging.getLogger()

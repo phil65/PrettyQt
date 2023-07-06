@@ -43,6 +43,8 @@ class HighlightMouseProxyModel(core.IdentityProxyModel):
         self._current_row = None
         self._highlight_color = colors.get_color(highlight_color).as_qt()
         super().__init__(parent, **kwargs)
+        # TODO: this should be done in proxifier I think,
+        # ItemModel shouldnt know about widget.
         parent.setMouseTracking(True)
         parent.entered.connect(self.cell_entered)
         parent.installEventFilter(self)

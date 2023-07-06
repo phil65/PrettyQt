@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 
-from prettyqt import constants, gui, itemmodels
+from prettyqt import constants, core, gui, itemmodels
 
 
 logger = logging.getLogger(__name__)
@@ -174,7 +174,7 @@ class ActionsModel(itemmodels.ColumnTableModel):
         UsageCountColumn,
     ]
 
-    def __init__(self, actions: list[gui.QAction], parent: widgets.QWidget | None = None):
+    def __init__(self, actions: list[gui.QAction], parent: core.QObject | None = None):
         super().__init__(actions, self.COLUMNS, parent=parent)
 
     @classmethod
