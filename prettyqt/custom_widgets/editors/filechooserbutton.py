@@ -54,6 +54,10 @@ class FileChooserButton(widgets.Widget):
         self.button.setDefaultAction(action)
         layout.add(self.button)
 
+    @classmethod
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, pathlib.Path)
+
     @core.Slot()
     def open_file(self):
         dialog = widgets.FileDialog(

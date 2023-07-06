@@ -93,6 +93,10 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
         super().__init__(*args, **kwargs)
         self.textChanged.connect(self._on_value_change)
 
+    @classmethod
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, str)
+
     def _on_value_change(self):
         val = self.get_value()
         self._update_background()

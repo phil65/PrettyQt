@@ -10,6 +10,10 @@ class CheckBox(widgets.AbstractButtonMixin, widgets.QCheckBox):
         super().__init__(*args, **kwargs)
         self.stateChanged.connect(self.value_changed)
 
+    @classmethod
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, bool)
+
     def set_checkstate(self, state: constants.CheckStateStr | constants.CheckState):
         """Set checkstate of the checkbox.
 

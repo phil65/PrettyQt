@@ -13,6 +13,10 @@ class SpinBox(widgets.AbstractSpinBoxMixin, widgets.QSpinBox):
         super().__init__(*args, maximum=maximum, **kwargs)
         self.valueChanged.connect(self.value_changed)
 
+    @classmethod
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, int)
+
     def set_range(self, start: int | None, end: int | None):
         self.setMinimum(start)
         self.setMaximum(end)

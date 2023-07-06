@@ -10,6 +10,10 @@ class DoubleSpinBox(widgets.AbstractSpinBoxMixin, widgets.QDoubleSpinBox):
         super().__init__(*args, maximum=maximum, **kwargs)
         self.valueChanged.connect(self.value_changed)
 
+    @classmethod
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, float)
+
     def set_range(self, start: float | None, end: float | None):
         self.set_minimum(start)
         self.set_maximum(end)
