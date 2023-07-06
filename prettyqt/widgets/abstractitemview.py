@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Generator
+from collections.abc import Generator, Sequence
 import functools
 import importlib.util
 import logging
@@ -371,12 +371,20 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self,
         delegate: widgets.QAbstractItemDelegate | DelegateStr | None,
         *,
-        column: int | None = None,
-        row: int | None = None,
+        column: int | Sequence | None = None,
+        row: int | Sequence | None = None,
         persistent: bool = False,
         **kwargs,
     ):
-        """Set a delegate. Delegates can also be set by Id."""
+        """Set a item delegate for the view.
+
+        Arguments:
+            delegate: Delegate to set. Can also be the id of the delegate.
+            column: Column the delegate should be set for.
+            row: Row the column should be set for.
+            persistent: If True, open persistent editors for given area.
+            kwargs: Keyword args to pass to the Delegate ctor if delegate is set by id.
+        """
         match delegate:
             case widgets.QAbstractItemDelegate():
                 dlg = delegate
@@ -400,6 +408,9 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         match column, row:
             case int(), int():
                 raise ValueError("Only set column or row, not both.")
+            case Sequence(), None:
+                for i in column:
+                    self.set_delegate(delegate, column=i, row=row, persistent=persistent)
             case int(), None:
                 self.setItemDelegateForColumn(column, dlg)
                 if persistent:
@@ -407,6 +418,11 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
                     for i in range(model.rowCount()):
                         index = model.index(i, column)
                         self.openPersistentEditor(index)
+            case None, Sequence():
+                for i in row:
+                    self.set_delegate(
+                        delegate, column=column, row=i, persistent=persistent
+                    )
             case None, int():
                 self.setItemDelegateForRow(row, dlg)
                 if persistent:
@@ -669,7 +685,12 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self.setIconSize(datatypes.to_size(size))
 
     def get_size_hint_for_column(self, col: int, row_limit: int = 25) -> int:
-        """Get a size hint for given column by finding widest cell."""
+        """Get a size hint for given column by finding widest cell.
+
+        Arguments:
+            col: columnt to get size hint for.
+            row_limit: number of rows to check.
+        """
         to_check = min(row_limit, self.model().rowCount())
         return max(
             self.sizeHintForIndex(self.model().index(row, col)).width()
@@ -682,6 +703,12 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         orientation: constants.OrientationStr | constants.Orientation,
     ) -> list[core.QMetaObject.Connection]:
         orientation = constants.ORIENTATION.get_enum_value(orientation)
+        """Sync ItemView cell widths and scrollbars with another ItemView.
+
+        Arguments:
+            table_to_sync: Table to sync with
+            orientation: Whether to sync horizontal or vertical orientation.
+        """
 
         def _table_resized(col, _, new_size, table, orientation):
             if orientation == constants.HORIZONTAL:
@@ -710,6 +737,11 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def get_visible_section_span(
         self, orientation: constants.OrientationStr | constants.Orientation
     ) -> tuple[int, int]:
+        """Get range of visible sections.
+
+        Arguments:
+            orientation: Whether to get section span for horizontal or vertical header.
+        """
         orientation = constants.ORIENTATION.get_enum_value(orientation)
         top_left = core.QPoint(0, 0)
         bottom_right = self.viewport().rect().bottomRight()
