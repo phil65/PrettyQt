@@ -66,6 +66,7 @@ plugins:
           domains: [std, py]
         options:
           # https://mkdocstrings.github.io/python/usage/
+          show_docstring_returns: false
           show_source: true
           show_signature_annotations: true
           show_symbol_type_toc: true
