@@ -6,7 +6,7 @@ from typing import Literal, overload
 from typing_extensions import Self
 
 from prettyqt import constants, core, widgets
-from prettyqt.utils import bidict, listdelegators
+from prettyqt.utils import bidict, datatypes, listdelegators
 
 
 # @contxtlib.contextmanager
@@ -280,16 +280,13 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     ) -> listdelegators.ListDelegator[widgets.QWidget | widgets.QLayout]:
         return listdelegators.ListDelegator(self)
 
-    def set_margin(self, margin: tuple[int, int, int, int] | int | None):
+    def set_margin(self, margin: datatypes.MarginsType | None):
         match margin:
             case None:
                 self.unsetContentsMargins()
-            case int():
-                self.setContentsMargins(margin, margin, margin, margin)
-            case (int(), int(), int(), int()):
-                self.setContentsMargins(*margin)
             case _:
-                raise ValueError(margin)
+                margin = datatypes.to_margins(margin)
+                self.setContentsMargins(margin)
 
     def set_spacing(self, pixels: int):
         self.setSpacing(pixels)

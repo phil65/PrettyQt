@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt import widgets
-from prettyqt.utils import listdelegators
+from prettyqt.utils import datatypes, listdelegators
 
 
 class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):
@@ -45,8 +45,9 @@ class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):
         items = [self.itemAt(i).graphicsItem() for i in range(self.count())]
         return listdelegators.ListDelegator(items)
 
-    def set_margin(self, margin: int):
-        self.setContentsMargins(margin, margin, margin, margin)
+    def set_margin(self, margin: datatypes.MarginsType):
+        m = datatypes.to_margins(margin)
+        self.setContentsMargins(m.left(), m.top(), m.right(), m.bottom())
 
 
 class GraphicsLayout(GraphicsLayoutMixin, widgets.QGraphicsLayout):

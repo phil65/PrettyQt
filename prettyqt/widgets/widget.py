@@ -1058,8 +1058,8 @@ class WidgetMixin(core.ObjectMixin):
     def get_font_info(self) -> gui.FontInfo:
         return gui.FontInfo(self.fontInfo())
 
-    def set_margin(self, margin: int):
-        self.setContentsMargins(margin, margin, margin, margin)
+    def set_margin(self, margin: datatypes.MarginsType):
+        self.setContentsMargins(datatypes.to_margins(margin))
 
     def raise_dock(self) -> bool:
         w = self.find_parent(widgets.QDockWidget)
