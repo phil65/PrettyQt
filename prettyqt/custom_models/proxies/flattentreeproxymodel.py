@@ -76,7 +76,7 @@ class FlattenTreeProxyModel(core.AbstractProxyModel):
             return index
         row = index.row()
         source_key_path = self._source_key[row]
-        return self.index_from_key(source_key_path)
+        return self.source_index_from_key(source_key_path)
 
     def index(
         self, row: int, column: int = 0, parent: core.ModelIndex | None = None

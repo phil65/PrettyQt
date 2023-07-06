@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Generator
+from collections.abc import Callable, Generator, Sequence
 import logging
 
 from typing import Any
 
 from prettyqt import core, qt
+from prettyqt.utils import modelhelpers
 
 
 logger = logging.getLogger(__name__)
@@ -92,6 +93,21 @@ class AbstractProxyModelMixin(core.AbstractItemModelMixin):
         for i in range(source.rowCount()):
             create_mapping(source, source.index(i, 0), (i,), leaves_only=leaves_only)
         return _source_key, _source_offset
+
+    def source_index_from_key(
+        self,
+        key_path: Sequence[tuple[int, int] | int],
+        parent_index: core.ModelIndex | None = None,
+    ) -> core.ModelIndex:
+        """Return a QModelIndex of the sourceModel for the given key.
+
+        Arguments:
+            key_path: Key path to get an index for.
+                      Should be a sequence of either (row, column)  or row indices
+            parent_index: ModelIndex to start indexing from. Defaults to root index.
+        """
+        model = self.sourceModel()
+        return modelhelpers.index_from_key(model, key_path, parent_index)
 
 
 class AbstractProxyModel(AbstractProxyModelMixin, core.QAbstractProxyModel):

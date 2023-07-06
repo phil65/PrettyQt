@@ -7,7 +7,7 @@ import logging
 from typing import Any, Literal, overload
 
 from prettyqt import constants, core
-from prettyqt.utils import bidict, helpers, listdelegators
+from prettyqt.utils import bidict, helpers, listdelegators, modelhelpers
 
 
 logger = logging.getLogger(__name__)
@@ -87,31 +87,6 @@ class AbstractItemModelMixin(core.ObjectMixin):
                 return self.index(row, 0)
             case _:
                 raise TypeError(index)
-
-    @staticmethod
-    def is_descendent_of(
-        indexes: list[core.ModelIndex] | core.QItemSelection | core.QItemSelectionRange,
-        index: core.ModelIndex,
-    ) -> bool:
-        if not index.isValid():
-            return False
-        match indexes:
-            case list():
-                if index in indexes:
-                    return False
-                while (index := index.parent()).isValid():
-                    if index in indexes:
-                        return True
-                return False
-            case core.QItemSelection() | core.QItemSelectionRange():
-                if indexes.contains(index):
-                    return False
-                while (index := index.parent()).isValid():
-                    if indexes.contains(index):
-                        return True
-                return False
-            case _:
-                raise TypeError(indexes)
 
     def set_data(
         self,
@@ -411,21 +386,14 @@ class AbstractItemModelMixin(core.ObjectMixin):
         key_path: Sequence[tuple[int, int] | int],
         parent_index: core.ModelIndex | None = None,
     ) -> core.ModelIndex:
-        """Return a source QModelIndex for the given key.
+        """Return a  ModelIndex for the given key path.
 
         Arguments:
             key_path: Key path to get an index for.
                       Should be a sequence of either (row, column)  or row indices
             parent_index: ModelIndex to start indexing from. Defaults to root index.
         """
-        model = self.sourceModel()
-        if model is None:
-            return core.ModelIndex()
-        index = parent_index or core.ModelIndex()
-        for key in key_path:
-            key = (key, 0) if isinstance(key, int) else key
-            index = model.index(*key, index)
-        return index
+        return modelhelpers.index_from_key(self, key_path, parent_index)
 
     @staticmethod
     def to_checkstate(value: bool):
