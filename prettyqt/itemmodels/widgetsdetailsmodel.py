@@ -4,7 +4,6 @@ from collections.abc import Sequence
 import logging
 
 from prettyqt import constants, core
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import classhelpers
 
 
@@ -12,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class WidgetsDetailsModel(core.AbstractTableModel):
-    def __init__(self, items: Sequence[QtWidgets.QWidget], **kwargs):
+    def __init__(self, items: Sequence[core.QObject], **kwargs):
         super().__init__(**kwargs)
         self.items = items
         common_ancestor = classhelpers.find_common_ancestor([type(i) for i in self.items])
@@ -25,7 +24,7 @@ class WidgetsDetailsModel(core.AbstractTableModel):
     @classmethod
     def supports(cls, instance) -> bool:
         match instance:
-            case (QtWidgets.QWidget(), *_):
+            case (core.QObject(), *_):
                 return True
             case _:
                 return False
