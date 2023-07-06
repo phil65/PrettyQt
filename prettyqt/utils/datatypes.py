@@ -18,7 +18,20 @@ from prettyqt.qt import QtCore
 
 
 class QABCMeta(type(QtCore.QObject), ABCMeta):
-    pass
+    """Metaclass, mainly used for inheriting from MutableMapping."""
+
+
+class Singleton(type(QtCore.QObject), type):
+    """Metaclass to create a singleton."""
+
+    def __init__(cls, name, bases, dct):
+        super().__init__(name, bases, dct)
+        cls.instance = None
+
+    def __call__(cls, *args, **kw):
+        if cls.instance is None:
+            cls.instance = super().__call__(*args, **kw)
+        return cls.instance
 
 
 Indexer = tuple[slice | int, slice | int]
