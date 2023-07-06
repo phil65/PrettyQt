@@ -39,6 +39,7 @@ dependencies = [
     "qstylizer",
     "typing-extensions",
 ]
+# dynamic = ["version"]
 
 [project.urls]
 Documentation = "https://phil65.github.io/PrettyQt/index.html"
@@ -112,6 +113,9 @@ iconbrowser = "prettyqt.custom_widgets.iconbrowser:run"
 [project.entry-points.pyinstaller40]
 hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
 
+[[envs.default.matrix]]
+python = ["3.10", "3.11"]
+
 [tool.hatch.build.targets.wheel.hooks.mypyc]
 dependencies = ["hatch-mypyc"]
 # [build.targets.wheel.hooks.mypyc]
@@ -136,6 +140,12 @@ dependencies = [
     "mkdocs-gen-files",
 ]
 
+[envs.default.scripts]
+test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg --cov=tests'
+
+[tool.hatch.envs.default.scripts]
+test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg --cov=tests'
+
 [tool.hatch.envs.docs.scripts]
 build = "mkdocs build --clean"
 serve = "mkdocs serve --dirtyreload"
@@ -158,15 +168,6 @@ features = [
   "dev",
 ]
 
-
-# [tool.hatch.envs.nightly]
-# features = [
-#   "addons",
-#   "pyside6",
-#   "pyqt6",
-#   "dev",
-# ]
-
 [tool.hatch.envs.test]
 dependencies = [
   "coverage[toml]",
@@ -175,12 +176,6 @@ dependencies = [
   "pytest-qt",
 ]
 
-[envs.default.scripts]
-test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg --cov=tests'
-
-[[envs.default.matrix]]
-python = ["3.10", "3.11"]
-# version = ["42", "3.14"]
 
 [tool.poetry]
 name = "PrettyQt"

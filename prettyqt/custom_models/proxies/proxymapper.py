@@ -45,7 +45,7 @@ class ProxyMapper(core.Object):
         self._chains = [chain[: chain.index(common_source)] for chain in chains]
 
     @staticmethod
-    def get_proxy_chain(model) -> list[core.QAbstractItemModel]:
+    def get_proxy_chain(model: core.QAbstractItemModel) -> list[core.QAbstractItemModel]:
         models = [model]
         while isinstance(model, core.QAbstractProxyModel):
             model = model.sourceModel()

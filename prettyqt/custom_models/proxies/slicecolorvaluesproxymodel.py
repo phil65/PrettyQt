@@ -158,11 +158,26 @@ class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import debugging, widgets
+    import random
+
+    from prettyqt import widgets
 
     app = widgets.app()
-    table = debugging.example_table()
-    table.proxifier[:, :].color_values()
+
+    val_range = range(0, 100, 10)
+    data = dict(
+        a=random.sample(val_range, k=10),
+        b=random.sample(val_range, k=10),
+        c=random.sample(val_range, k=10),
+    )
+    model = gui.StandardItemModel.from_dict(data)
+    table = widgets.TableView()
+    table.set_model(model)
+    # table.proxifier[:, :].color_values()
+    table.set_size_adjust_policy("content")
+    table.setWindowTitle("Color values")
+    table.set_icon("mdi.palette")
     table.show()
+    table.adjustSize()
     with app.debug_mode():
         app.exec()

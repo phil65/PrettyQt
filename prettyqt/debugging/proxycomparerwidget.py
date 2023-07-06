@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 class ProxyComparerWidget(widgets.Splitter):
     def __init__(
         self,
-        proxy: core.QAbstractProxyModel,
+        model: core.QAbstractProxyModel,
         itemview: Literal["tree", "table", "list"]
         | type[widgets.QAbstractItemView] = "table",
         delegate: widgets.abstractitemview.DelegateStr
@@ -40,10 +40,10 @@ class ProxyComparerWidget(widgets.Splitter):
 
         # collect models
         models = []
-        while isinstance(proxy, core.QAbstractProxyModel):
-            models.append(proxy)
-            proxy = proxy.sourceModel()
-        models.append(proxy)
+        while isinstance(model, core.QAbstractProxyModel):
+            models.append(model)
+            model = model.sourceModel()
+        models.append(model)
 
         # add column for each model
 

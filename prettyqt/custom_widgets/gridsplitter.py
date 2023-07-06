@@ -27,7 +27,7 @@ class GridSplitter(widgets.Splitter):
         colcount = self.columnCount()
         match index:
             case int() as row, int() as col:
-                if row >= rowcount or col >= rowcount:
+                if row >= rowcount or col >= colcount:
                     raise IndexError(index)
                 return self.itemAtPosition(row, col)
             case (row, col):

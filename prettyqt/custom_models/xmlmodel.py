@@ -16,7 +16,6 @@ class XmlColumnItem(custom_models.ColumnItem):
     def get_data(self, item: XmlModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case XmlModel.Roles.NodeRole:
-                logger.info(item.obj)
                 return item.obj
 
 
