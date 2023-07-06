@@ -146,9 +146,15 @@ class ParentClassTreeModel(BaseClassTreeModel):
         return len(item.obj.__bases__) > 0
 
     def set_show_mro(self, show: bool):
+        """Toggles mro mode on or off.
+
+        Arguments:
+            show: toggle mro mode on/off
+        """
         self._show_mro = show
 
     def get_show_mro(self) -> bool:
+        """Returns True if mro mode is turned on."""
         return self._show_mro
 
     show_mro = core.Property(bool, get_show_mro, set_show_mro)

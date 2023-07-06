@@ -92,6 +92,11 @@ class AstModel(itemmodels.TreeModel):
         return len(self.HEADER) if self.ast_tree is not None else 0
 
     def set_ast(self, ast_tree: ast.AST | str = ""):
+        """Set an AST tree for the model.
+
+        Arguments:
+            ast_tree: Abstract syntax tree
+        """
         match ast_tree:
             case str():
                 code = ast_tree

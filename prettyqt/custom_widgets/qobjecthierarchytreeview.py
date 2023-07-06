@@ -20,8 +20,7 @@ class QObjectHierarchyTreeView(widgets.TreeView):
 
     def select_object(self, qobject: core.QObject):
         model = self.get_model(skip_proxies=True)
-        index = model.search_tree(qobject, model.Roles.WidgetRole)
-        if index:
+        if index := model.search_tree(qobject, model.Roles.WidgetRole):
             self.set_current_index(index[0], current=True)
             self.scroll_to(index[0])
 

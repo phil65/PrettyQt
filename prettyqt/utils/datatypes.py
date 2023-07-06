@@ -13,7 +13,6 @@ from urllib import parse
 
 import dateutil.parser
 
-from prettyqt import core
 from prettyqt.qt import QtCore
 
 
@@ -84,6 +83,7 @@ class IsTreeIterator(Protocol):
 
 
 if TYPE_CHECKING:
+    from prettyqt import core
     from prettyqt.qt import QtGui, QtWidgets
 
     UrlType = str | QtCore.QUrl
@@ -563,7 +563,7 @@ def to_rectf(rect: RectFType | QtCore.QRect):
 
 
 def to_vector3d(vector: Vector3DType):
-    from prettyqt import gui
+    from prettyqt import core, gui
 
     match vector:
         case (int() | float(), int() | float(), int() | float()):
