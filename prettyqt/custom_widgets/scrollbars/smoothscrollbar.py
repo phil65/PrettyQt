@@ -17,37 +17,37 @@ class SmoothScrollBar(widgets.ScrollBar):
         super().__init__(orientation, parent)
         self._value = self.value()
         self.widget = parent
-        self.animation = core.PropertyAnimation()
-        self.animation.apply_to(self.value)
-        self.animation.set_easing(easing)
-        self.animation.setDuration(animation_duration)
-        self.animation.finished.connect(self.scroll_ended)
+        self._animation = core.PropertyAnimation()
+        self._animation.apply_to(self.value)
+        self._animation.set_easing(easing)
+        self._animation.setDuration(animation_duration)
+        self._animation.finished.connect(self.scroll_ended)
         self.widget.viewport().installEventFilter(self)
         if trigger:
             self.widget.h_scrollbar.valueChanged.connect(gui.Cursor.fake_mouse_move)
 
     def mouseMoveEvent(self, e):
-        self.animation.stop()
+        self._animation.stop()
         self._value = self.value()
         super().mouseMoveEvent(e)
 
     def mousePressEvent(self, e):
-        self.animation.stop()
+        self._animation.stop()
         self._value = self.value()
         super().mousePressEvent(e)
 
     def mouseReleaseEvent(self, e):
-        self.animation.stop()
+        self._animation.stop()
         self._value = self.value()
         super().mouseReleaseEvent(e)
 
     def setValue(self, value: int):
         if value == self.value():
             return
-        self.animation.stop()
+        self._animation.stop()
         self.scroll_ended.emit()
-        self.animation.set_range(self.value(), value)
-        self.animation.start()
+        self._animation.set_range(self.value(), value)
+        self._animation.start()
 
     def scroll_by_value(self, value: int):
         """Scroll by given distance."""
@@ -69,6 +69,31 @@ class SmoothScrollBar(widgets.ScrollBar):
             self.widget.v_scrollbar.scroll_by_value(-event.angleDelta().y())
             return True
         return False
+
+    def set_animation_duration(self, duration: int):
+        self._animation.setDuration(duration)
+
+    def get_animation_duration(self) -> int:
+        return self._animation.duration()
+
+    def set_animation_easing(
+        self,
+        easing: core.easingcurve.TypeStr | core.QEasingCurve.Type = "out_cubic",
+    ):
+        self._animation.set_easing(easing)
+
+    def get_animation_easing(self) -> core.easingcurve.TypeStr:
+        return self._animation.get_easing()
+
+    def animationEasing(self) -> core.QEasingCurve.Type:
+        return self._animation.type()
+
+    animation_duration = core.Property(
+        int, set_animation_duration, get_animation_duration
+    )
+    animation_easing = core.Property(
+        core.EasingCurve.Type, set_animation_easing, get_animation_easing
+    )
 
 
 if __name__ == "__main__":
