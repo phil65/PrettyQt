@@ -96,6 +96,56 @@ class Color(QtGui.QColor):
     def from_hsv(cls, h: float, s: float, v: float, a: float = 1.0) -> Self:
         return cls(cls.fromHsvF(h, s, v, a))
 
+    # @classmethod
+    # def interpolate_color(
+    #     cls,
+    #     start: QtGui.QColor,
+    #     end: QtGui.QColor,
+    #     percent: int,
+    #     colorspace: SpecStr | QtGui.QColor.Spec = "rgb",
+    # ) -> Self:
+    #     """Get an interpolated color value.
+
+    #     Args:
+    #         start: The start color.
+    #         end: The end color.
+    #         percent: Which value to get (0 - 100)
+    #         colorspace: The desired interpolation color system. If None, take
+    #                     system from start color.
+    #     Return:
+    #         The interpolated QColor, with the same spec as the given start color.
+    #     """
+    #     def _get_color(colorspace, start, end):
+    #         out = cls()
+    #         match colorspace:
+    #             case "rgb":
+    #                 components = helpers.get_color_percentage(
+    #                     start.getRgb(), end.getRgb(), percent  # type: ignore
+    #                 )
+    #                 out.setRgb(*components)
+    #             case "hsv":
+    #                 components = helpers.get_color_percentage(
+    #                     start.getHsv(), end.getHsv(), percent  # type: ignore
+    #                 )
+    #                 out.setHsv(*components)
+    #             case "hsl":
+    #                 components = helpers.get_color_percentage(
+    #                     start.getHsl(), end.getHsl(), percent  # type: ignore
+    #                 )
+    #                 out.setHsl(*components)
+    #         return out
+
+    #     match colorspace:
+    #         case None:
+    #             colorspace = SPEC.inverse[start.spec()]
+    #             color = _get_color(colorspace, start, end)
+    #         case str() | QtGui.QColor.Spec():
+    #             colorspace = SPEC.get_str_value(colorspace)
+    #             color = _get_color(colorspace, start, end)
+    #         case _:
+    #             raise ValueError("Invalid colorspace!")
+    #     return cls(color.convert_to(colorspace))
+
     @classmethod
     def interpolate_color(
         cls,

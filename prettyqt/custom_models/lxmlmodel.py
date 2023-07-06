@@ -50,6 +50,20 @@ class LxmlModel(custom_models.BaseXmlModel):
         parent = index.parent()
         return parent.data(self.Roles.NodeRole)
 
+    @staticmethod
+    def get_key_for_element(element: etree.Element) -> list[int]:
+        child_elem = element
+        key = []
+        while (parent_elem := child_elem.getparent()) is not None:
+            key.append(parent_elem.index(child_elem))
+            child_elem = parent_elem
+        return key
+
+    def get_indexes_from_xpath(self, xpath: str):
+        elements = self.tree.xpath(xpath)
+        keys = [self.get_key_for_element(element) for element in elements]
+        [self.index_from_key(key) for key in keys]
+
 
 class LazyLxmlModel(custom_models.BaseXmlModel):
     """Semi-lazy xml model based on lxml. Fetches all direct child nodes when needed.
@@ -128,6 +142,7 @@ if __name__ == "__main__":
         new.model().get_parent_node(node)
 
     table.selectionModel().currentChanged.connect(test)
+    print(model.get_indexes_from_xpath("element"))
     table.show()
     with app.debug_mode():
         app.exec()

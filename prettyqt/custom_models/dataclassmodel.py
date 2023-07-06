@@ -54,30 +54,31 @@ class DataClassModel(custom_models.BaseDataclassModel):
 if __name__ == "__main__":
     from prettyqt import widgets
 
+    app = widgets.app()
+
     @dataclasses.dataclass
     class BaseSetting:
         name: str
-        label: str
         description: str
-        requires_restart: bool = False
-
-    @dataclasses.dataclass
-    class SelectionSetting(BaseSetting):
-        options: list[str] | None = None
+        some_bool: bool = False
         minimum: float = 0.0
         maximum: float = 0.0
-        pattern: str = ""
-        requires_restart: bool = False
 
-    app_style = SelectionSetting(
-        name="app_style",
-        label="App style",
-        description="Some longer text",
-        options=[],
-        requires_restart=True,
+    one = BaseSetting(
+        name="Setting 1",
+        description="Description of setting 1",
+        some_bool=True,
+        minimum=5.0,
     )
-    app = widgets.app()
-    items = [BaseSetting(name="test", label="some label", description="jhaj"), app_style]
+
+    two = BaseSetting(
+        name="Setting 2",
+        description="Description of setting 2",
+        some_bool=True,
+        minimum=50.0,
+    )
+
+    items = [one, two]
     klasses = [type(i) for i in items]
     view = widgets.TableView()
     view.set_icon("mdi.folder")

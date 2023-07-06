@@ -146,6 +146,20 @@ def get_color_percentage(color_1: tuple, color_2: tuple, percent: float) -> tupl
     return tuple(ls)
 
 
+def call_and_append_until(
+    caller: object,
+    call: typing.Callable,
+    condition: typing.Callable,
+    append_caller: bool = True,
+) -> list:
+    ls = [caller] if append_caller else []
+    child_elem = caller
+    while condition(parent_elem := call(child_elem)):
+        ls.append(parent_elem.index(child_elem))
+        child_elem = parent_elem
+    return ls
+
+
 def move_in_list(ls: list, indexes: list[int], target_row: int) -> list:
     """Moves items with given indexes inside list ls to target row."""
     new = [ls[i] for i in indexes]
