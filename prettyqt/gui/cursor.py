@@ -15,7 +15,7 @@ class Cursor(serializemixin.SerializeMixin, gui.QCursor):
     @classmethod
     def fake_mouse_move(cls):
         cls.setPos(cls.pos() + core.Point(0, 1))
-        gui.Application.processEvents()
+        gui.GuiApplication.processEvents()
         cls.setPos(cls.pos() - core.Point(0, 1))
 
     @classmethod
