@@ -90,6 +90,8 @@ class BaseHierarchyModel(itemmodels.TreeModel):
         self.set_base_class("QWidget")
 
     def set_base_class(self, klass: str | type[core.QObject]):
+        from prettyqt import widgets
+
         if isinstance(klass, str):
             for kls in classhelpers.get_subclasses(core.QObject):
                 if kls.__name__ == klass:

@@ -34,57 +34,43 @@ class HierarchyView(widgets.TreeView):
             self.scroll_to(index[0])
 
 
-class PropertyView(widgets.TableView):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.set_icon("mdi.folder")
-        self.set_selection_behavior("rows")
-        self.setEditTriggers(self.EditTrigger.AllEditTriggers)
-        self.set_delegate("editor", column=1)
+def get_tabbed(qobject: core.QObject, parent: widgets.QWidget | None = None):
+    tabwidget = widgets.TabWidget(parent=parent)
+    propertyview = custom_widgets.QObjectPropertiesTableView(
+        object_name="property_view", parent=tabwidget
+    )
+    propertyview.set_qobject(qobject)
+    propertyview.h_header = custom_widgets.FilterHeader(propertyview)
+    tabwidget.add_tab(propertyview, "Main")
 
-    def set_qobject(self, qobject):
-        if (model := self.get_model(skip_proxies=True)) is not None:
-            model.unhook()
-        model = itemmodels.QObjectPropertiesModel(qobject, parent=self)
-        model.dataChanged.connect(self.repaint)
-        self.set_model(model)
-
-    @classmethod
-    def get_tabbed(cls, qobject: core.QObject, parent: widgets.QWidget | None = None):
-        tabwidget = widgets.TabWidget(parent=parent)
-        propertyview = cls(object_name="property_view", parent=tabwidget)
-        propertyview.set_qobject(qobject)
-        propertyview.h_header = custom_widgets.FilterHeader(propertyview)
-        tabwidget.add_tab(propertyview, "Main")
-
-        if hasattr(qobject, "model") and (model := qobject.model()) is not None:
-            while isinstance(model, core.QAbstractProxyModel):
-                view = cls(
-                    object_name=f"property_view({type(model).__name__})",
-                    parent=tabwidget,
-                )
-                view.h_header = custom_widgets.FilterHeader(view)
-                view.set_qobject(model)
-                tabwidget.add_tab(view, type(model).__name__)
-                model = model.sourceModel()
-            view = cls(
+    if hasattr(qobject, "model") and (model := qobject.model()) is not None:
+        while isinstance(model, core.QAbstractProxyModel):
+            view = custom_widgets.QObjectPropertiesTableView(
                 object_name=f"property_view({type(model).__name__})",
                 parent=tabwidget,
             )
             view.h_header = custom_widgets.FilterHeader(view)
             view.set_qobject(model)
             tabwidget.add_tab(view, type(model).__name__)
-        # if (
-        #     hasattr(qobject, "menuWidget")
-        #     and (menu_widget := qobject.menuWidget()) is not None
-        # ):
-        #     view = cls(
-        #         object_name=f"property_view({type(model).__name__})",
-        #         parent=tabwidget,
-        #     )
-        #     view.set_qobject(menu_widget)
-        #     tabwidget.add_tab(view, type(model).__name__)
-        return tabwidget, propertyview
+            model = model.sourceModel()
+        view = custom_widgets.QObjectPropertiesTableView(
+            object_name=f"property_view({type(model).__name__})",
+            parent=tabwidget,
+        )
+        view.h_header = custom_widgets.FilterHeader(view)
+        view.set_qobject(model)
+        tabwidget.add_tab(view, type(model).__name__)
+    # if (
+    #     hasattr(qobject, "menuWidget")
+    #     and (menu_widget := qobject.menuWidget()) is not None
+    # ):
+    #     view = cls(
+    #         object_name=f"property_view({type(model).__name__})",
+    #         parent=tabwidget,
+    #     )
+    #     view.set_qobject(menu_widget)
+    #     tabwidget.add_tab(view, type(model).__name__)
+    return tabwidget, propertyview
 
 
 class QObjectDetailsDialog(widgets.MainWindow):
@@ -101,7 +87,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
         self.qobject = qobject
         self.console = ipython.InProcessIPythonWidget(self)
         self.console.push_vars(dict(app=widgets.app(), qobject=qobject))
-        self.tabwidget, self.propertyview = PropertyView.get_tabbed(qobject)
+        self.tabwidget, self.propertyview = get_tabbed(qobject)
         self.hierarchyview = HierarchyView()
         model = itemmodels.WidgetHierarchyModel(qobject, parent=self.hierarchyview)
         self.hierarchyview.set_model(model)
@@ -173,7 +159,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
 if __name__ == "__main__":
     app = widgets.app()
     tree = widgets.TreeView()
-    tree.set_model(dict(a=2))
+    tree.set_model_for(dict(a=2))
     widget = debugging.example_widget()
     with app.debug_mode(log_level=logging.INFO):
         wnd = QObjectDetailsDialog(widget)
