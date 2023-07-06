@@ -1144,6 +1144,27 @@ class WidgetMixin(core.ObjectMixin):
             if isinstance(child, typ):
                 return child
 
+    def set_layout_direction(
+        self, direction: constants.LayoutDirectionStr | constants.LayoutDirection | None
+    ):
+        """Set layout direction.
+
+        Args:
+            direction: layout direction
+        """
+        if direction is None:
+            self.unsetLayoutDirection()
+        else:
+            self.setLayoutDirection(constants.LAYOUT_DIRECTION.get_enum_value(direction))
+
+    def get_layout_direction(self) -> constants.LayoutDirectionStr:
+        """Get the current layout direction.
+
+        Returns:
+            layout direction
+        """
+        return constants.LAYOUT_DIRECTION.inverse[self.layoutDirection()]
+
 
 class Widget(WidgetMixin, widgets.QWidget):
     pass
