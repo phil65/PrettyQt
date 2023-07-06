@@ -18,23 +18,30 @@ class QObjectPropertiesTableView(widgets.TableView):
         self.setEditTriggers(self.EditTrigger.AllEditTriggers)
         self.set_delegate("editor", column=1)
 
-    def set_qobject(self, qobject):
+    def set_qobject(
+        self,
+        qobject: core.QObject,
+        update_on_event: bool = True,
+        update_on_signal_emission: bool = True,
+    ):
         prev_model = self.get_model(skip_proxies=True)
         if prev_model is not None and prev_model._qobject:
             self.unhook()
         model = itemmodels.QObjectPropertiesModel(qobject, parent=self)
         # model.dataChanged.connect(self.repaint)
         self.set_model(model)
-        self.event_catcher = eventfilters.EventCatcher(
-            include=["resize", "move"], parent=qobject
-        )
-        logger.debug(f"Connected {qobject!r} to {model!r}")
-        self.event_catcher.caught.connect(model.force_layoutchange)
-        qobject.installEventFilter(self.event_catcher)
-        metaobj = core.MetaObject(qobject.metaObject())
-        self._handles = metaobj.connect_signals(
-            qobject, model.force_layoutchange, only_notifiers=True
-        )
+        if update_on_event:
+            self.event_catcher = eventfilters.EventCatcher(
+                include=["resize", "move"], parent=qobject
+            )
+            logger.debug(f"Connected {qobject!r} to {model!r}")
+            self.event_catcher.caught.connect(model.force_layoutchange)
+            qobject.installEventFilter(self.event_catcher)
+        if update_on_signal_emission:
+            metaobj = core.MetaObject(qobject.metaObject())
+            self._handles = metaobj.connect_signals(
+                qobject, model.force_layoutchange, only_notifiers=True
+            )
 
     def unhook(self):
         model = self.get_model(skip_proxies=True)
