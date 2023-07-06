@@ -38,6 +38,7 @@ class SliceHighlightCurrentProxyModel(itemmodels.SliceIdentityProxyModel):
     proxy = itemmodels.SliceFilterProxyModel(indexer=indexer)
     proxy.set_source_model(model)
     table.set_model(proxy)
+    table.selectionModel().currentChanged.connect(proxy.highlight_index)
     table.show()
     ```
     """

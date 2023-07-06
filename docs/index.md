@@ -96,19 +96,17 @@ and using it can be quite cumbersome for Python developers. (very restrictive wh
 very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to improve this by:
 
 - adding more powerful methods to the classes, which accept more types and have more options (in form of keyword arguments)
-- doing conversions for method parameters to lessen the strictness for types. (Example: points, sizes and rectangles can also be passed to Qt methods as tuples.)
+- doing [type conversions](types.md) for method parameters to lessen the strictness for types.
 - raising Exceptions or returning `None` instead of returning `-1` or invalid objects.
 - all enum getters/setters also work with strings. Everything typed with Literals for an excellent IDE experience. (Example: )
 - adding a lot of \__dunder__ methods to the classes to make them behave like good python citizens.
 
 
-The minimum supported python version is 3.10. Since large parts of the library are dealing with type conversions, the match-case statement is essential, therefore makin it impossible to use older Python versions.
-The minimum supported Qt version is 6.5, since it is the first Qt Version which is up-to-par featurewise with Qt5.
+The minimum supported python version is 3.10.
+The minimum supported Qt version is 6.5
 
 The aim is to support the last two released Python versions as well as keeping support for the last Qt LTS release.
 
-Apart from the 3D related modules (Qt3D, QtDataVizualization), QtXml and QtSql,
-almost every class from Qt is covered.
 
 ## Covered Qt modules
 
@@ -205,6 +203,4 @@ poetry install
 
 ## Contributing to prettyqt [![Open Source Helpers](https://www.codetriage.com/phil65/prettyqt/badges/users.svg)](https://www.codetriage.com/phil65/prettyqt)
 
-All contributions, bug reports, bug fixes, documentation improvements, enhancements, and ideas are welcome.
-
-Or maybe through using PrettyQt you have an idea of your own or are looking for something in the documentation and thinking ‘this can be improved’...you can do something about it!
+All contributions, bug reports, bug fixes, documentation improvements, enhancements, and ideas are welcome!
