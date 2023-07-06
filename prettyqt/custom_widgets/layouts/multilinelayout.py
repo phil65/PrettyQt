@@ -64,9 +64,9 @@ class MultiLineLayout(widgets.BoxLayout):
             self._add_sub_layout()
         self.layouts[-1].add(item)
 
-    def get_items(self) -> listdelegators.BaseListDelegator[widgets.QLayoutItem]:
+    def get_items(self) -> listdelegators.ListDelegator[widgets.QLayoutItem]:
         items = [i.get_items() for i in self.layouts]
-        return listdelegators.BaseListDelegator(itertools.chain(*items))
+        return listdelegators.ListDelegator(itertools.chain(*items))
 
     def itemAt(self, idx: int) -> widgets.QLayoutItem | None:
         if len(self.layouts) == 0 or len(self.get_items()) == 0:

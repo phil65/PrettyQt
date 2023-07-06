@@ -229,7 +229,7 @@ class ObjectMixin:
         recursive: bool = True,
         property_selector: dict[str, datatypes.VariantType | Callable] | None = None,
         only_prettyqt_classes: bool = False,
-    ) -> listdelegators.BaseListDelegator[T]:
+    ) -> listdelegators.ListDelegator[T]:
         """Find children with given type and name.
 
         Children can be filtered by passing a property selector dictionary.
@@ -274,7 +274,7 @@ class ObjectMixin:
             ]
         if only_prettyqt_classes:
             objects = [i for i in objects if i.__module__.startswith("prettyqt")]
-        return listdelegators.BaseListDelegator(objects)
+        return listdelegators.ListDelegator(objects)
 
     def find_child(
         self,

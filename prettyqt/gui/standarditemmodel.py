@@ -13,7 +13,7 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
 
     def __getitem__(
         self, index: int | slice | tuple[int | slice, int | slice] | core.QModelIndex
-    ) -> gui.QStandardItem | listdelegators.BaseListDelegator[gui.QStandardItem]:
+    ) -> gui.QStandardItem | listdelegators.ListDelegator[gui.QStandardItem]:
         rowcount = self.rowCount()
         colcount = self.columnCount()
         match index:
@@ -38,7 +38,7 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
                     self.item(i, j)
                     for i, j in helpers.yield_positions(row, col, rowcount, colcount)
                 ]
-                return listdelegators.BaseListDelegator(items)
+                return listdelegators.ListDelegator(items)
             case _:
                 raise TypeError(index)
 
@@ -73,9 +73,9 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
             case _:
                 raise TypeError("wrong type for addition")
 
-    def get_children(self) -> listdelegators.BaseListDelegator[gui.QStandardItem]:
+    def get_children(self) -> listdelegators.ListDelegator[gui.QStandardItem]:
         items = [self.item(index) for index in range(self.rowCount())]
-        return listdelegators.BaseListDelegator(items)
+        return listdelegators.ListDelegator(items)
 
     def add(self, *item: str | gui.QStandardItem):
         for i in item:
@@ -89,14 +89,14 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
         mode: constants.MatchFlagStr | constants.MatchFlag = "exact",
         recursive: bool = False,
         case_sensitive: bool = False,
-    ) -> listdelegators.BaseListDelegator[gui.QStandardItem]:
+    ) -> listdelegators.ListDelegator[gui.QStandardItem]:
         flag = constants.MATCH_FLAGS.get_enum_value(mode)
         if recursive:
             flag |= constants.MatchFlag.MatchRecursive
         if case_sensitive:
             flag |= constants.MatchFlag.MatchCaseSensitive
         items = self.findItems(text, flag, column)  # type: ignore
-        return listdelegators.BaseListDelegator(items)
+        return listdelegators.ListDelegator(items)
 
     def add_item(
         self,

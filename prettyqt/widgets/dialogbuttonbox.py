@@ -144,7 +144,7 @@ class DialogButtonBox(widgets.WidgetMixin, widgets.QDialogButtonBox):
 
     def add_default_buttons(
         self, buttons: Sequence[StandardButtonStr]
-    ) -> listdelegators.BaseListDelegator[widgets.QPushButton]:
+    ) -> listdelegators.ListDelegator[widgets.QPushButton]:
         return [self.add_default_button(btn) for btn in buttons]
 
     def add_default_button(

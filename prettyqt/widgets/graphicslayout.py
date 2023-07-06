@@ -9,7 +9,7 @@ from prettyqt.utils import listdelegators
 class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):
     def __getitem__(
         self, index: int | slice
-    ) -> widgets.QGraphicsItem | listdelegators.BaseListDelegator[widgets.QGraphicsItem]:
+    ) -> widgets.QGraphicsItem | listdelegators.ListDelegator[widgets.QGraphicsItem]:
         match index:
             case int():
                 if index >= self.count():
@@ -20,7 +20,7 @@ class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):
                 stop = index.stop or self.count()
                 rng = range(index.start or 0, stop, index.step or 1)
                 items = [self.itemAt(i).graphicsItem() for i in rng]
-                return listdelegators.BaseListDelegator(items)
+                return listdelegators.ListDelegator(items)
             case _:
                 raise TypeError(index)
 
@@ -41,9 +41,9 @@ class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):
         # for PySide2
         return self.count()
 
-    def get_children(self) -> listdelegators.BaseListDelegator[widgets.QGraphicsItem]:
+    def get_children(self) -> listdelegators.ListDelegator[widgets.QGraphicsItem]:
         items = [self.itemAt(i).graphicsItem() for i in range(self.count())]
-        return listdelegators.BaseListDelegator(items)
+        return listdelegators.ListDelegator(items)
 
     def set_margin(self, margin: int):
         self.setContentsMargins(margin, margin, margin, margin)

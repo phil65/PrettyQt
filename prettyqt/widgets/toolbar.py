@@ -20,7 +20,7 @@ class ToolBarMixin(widgets.WidgetMixin):
 
     def __getitem__(
         self, row: int | slice
-    ) -> widgets.QWidget | listdelegators.BaseListDelegator[widgets.QWidget]:
+    ) -> widgets.QWidget | listdelegators.ListDelegator[widgets.QWidget]:
         match row:
             case int():
                 action = self.actions()[row]
@@ -33,7 +33,7 @@ class ToolBarMixin(widgets.WidgetMixin):
                 values = list(range(count)[row])
                 actions = [actions[i] for i in values]
                 ls = [self.widgetForAction(i) for i in actions]
-                return listdelegators.BaseListDelegator(ls)
+                return listdelegators.ListDelegator(ls)
             case _:
                 raise TypeError(row)
 
@@ -141,9 +141,9 @@ class ToolBarMixin(widgets.WidgetMixin):
     def get_allowed_areas(self) -> list[constants.ToolbarAreaStr]:
         return constants.TOOLBAR_AREA.get_list(self.allowedAreas())
 
-    def get_widgets(self) -> listdelegators.BaseListDelegator[widgets.QWidget]:
+    def get_widgets(self) -> listdelegators.ListDelegator[widgets.QWidget]:
         widgets = [self.widgetForAction(i) for i in self.actions()]
-        return listdelegators.BaseListDelegator(widgets)
+        return listdelegators.ListDelegator(widgets)
 
     def show_tooltips(
         self,

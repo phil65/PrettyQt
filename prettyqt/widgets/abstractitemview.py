@@ -239,7 +239,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def get_models(
         self, proxies_only: bool = False
-    ) -> listdelegators.BaseListDelegator[core.QAbstractProxyModel]:
+    ) -> listdelegators.ListDelegator[core.QAbstractProxyModel]:
         """Get a list of all (proxy) models connected to this view.
 
         Arguments:
@@ -252,7 +252,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             model = model.sourceModel()
         if (not proxies_only) and model is not None:
             models.append(model)
-        return listdelegators.BaseListDelegator(models)
+        return listdelegators.ListDelegator(models)
 
     def set_current_index(
         self,
@@ -455,11 +455,11 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             return model.currentIndex().column()
         return None
 
-    def selected_indexes(self) -> listdelegators.BaseListDelegator[core.QModelIndex]:
+    def selected_indexes(self) -> listdelegators.ListDelegator[core.QModelIndex]:
         """Return list of selected indexes in first row."""
         indexes = (x for x in self.selectedIndexes() if x.column() == 0)
         indexes = sorted(indexes, key=lambda x: x.row())
-        return listdelegators.BaseListDelegator(indexes)
+        return listdelegators.ListDelegator(indexes)
 
     def selected_names(self) -> Generator[Any, None, None]:
         """Return generator yielding item names."""

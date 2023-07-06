@@ -10,10 +10,7 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
 
     def __getitem__(
         self, index: int | slice
-    ) -> (
-        widgets.QTreeWidgetItem
-        | listdelegators.BaseListDelegator[widgets.QTreeWidgetItem]
-    ):
+    ) -> widgets.QTreeWidgetItem | listdelegators.ListDelegator[widgets.QTreeWidgetItem]:
         match index:
             case int():
                 item = self.topLevelItem(index)
@@ -24,7 +21,7 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
                 count = self.topLevelItemCount() if index.stop is None else index.stop
                 values = list(range(count)[index])
                 ls = [self.topLevelItem(i) for i in values]
-                return listdelegators.BaseListDelegator(ls)
+                return listdelegators.ListDelegator(ls)
             case _:
                 raise TypeError(index)
 
@@ -39,18 +36,18 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
         mode: constants.MatchFlagStr | constants.MatchFlag = "exact",
         recursive: bool = False,
         case_sensitive: bool = False,
-    ) -> listdelegators.BaseListDelegator[widgets.QTreeWidgetItem]:
+    ) -> listdelegators.ListDelegator[widgets.QTreeWidgetItem]:
         flag = constants.MATCH_FLAGS.get_enum_value(mode)
         if recursive:
             flag |= constants.MatchFlag.MatchRecursive
         if case_sensitive:
             flag |= constants.MatchFlag.MatchCaseSensitive
         items = self.findItems(text, flag, column)
-        return listdelegators.BaseListDelegator(items)
+        return listdelegators.ListDelegator(items)
 
     def get_items(
         self, recursive: bool = False
-    ) -> listdelegators.BaseListDelegator[widgets.QTreeWidgetItem]:
+    ) -> listdelegators.ListDelegator[widgets.QTreeWidgetItem]:
         """Get TreeWidgetItems of this widget.
 
         Arguments:
@@ -69,7 +66,7 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
                 results.append(node)
                 items.extend(node.child(i) for i in range(node.childCount()))
             nodes = items
-        return listdelegators.BaseListDelegator(results[1:])
+        return listdelegators.ListDelegator(results[1:])
 
     def scroll_to_item(
         self,

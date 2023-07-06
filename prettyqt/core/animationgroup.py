@@ -19,7 +19,7 @@ class AnimationGroupMixin(core.AbstractAnimationMixin):
     @overload
     def __getitem__(
         self, index: slice
-    ) -> listdelegators.BaseListDelegator[core.QAbstractAnimation]:
+    ) -> listdelegators.ListDelegator[core.QAbstractAnimation]:
         ...
 
     def __getitem__(self, index: int | slice):
@@ -38,7 +38,7 @@ class AnimationGroupMixin(core.AbstractAnimationMixin):
                 stop = index.stop or count
                 rng = range(index.start or 0, stop, index.step or 1)
                 anims = [self.animationAt(i) for i in rng]
-                return listdelegators.BaseListDelegator(anims)
+                return listdelegators.ListDelegator(anims)
             case _:
                 raise TypeError(index)
 

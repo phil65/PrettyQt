@@ -22,7 +22,7 @@ class GridSplitter(widgets.Splitter):
 
     def __getitem__(
         self, index: tuple[int | slice, int | slice] | int | str
-    ) -> widgets.QWidget | listdelegators.BaseListDelegator[widgets.QWidget] | None:
+    ) -> widgets.QWidget | listdelegators.ListDelegator[widgets.QWidget] | None:
         rowcount = self.rowCount()
         colcount = self.columnCount()
         match index:
@@ -36,7 +36,7 @@ class GridSplitter(widgets.Splitter):
                     for i, j in helpers.yield_positions(row, col, rowcount, colcount)
                     if (item := self.itemAtPosition(i, j)) is not None
                 ]
-                return listdelegators.BaseListDelegator(list(set(items)))
+                return listdelegators.ListDelegator(list(set(items)))
             case int() as row:
                 if row >= rowcount:
                     raise IndexError(index)
@@ -44,7 +44,7 @@ class GridSplitter(widgets.Splitter):
             case slice() as rowslice:
                 count = rowcount if rowslice.stop is None else rowslice.stop
                 items = [self.itemAt(i) for i in range(count)[rowslice]]
-                return listdelegators.BaseListDelegator(list(set(items)))
+                return listdelegators.ListDelegator(list(set(items)))
             case str():
                 return self.find_child(widgets.QWidget, index)
             case _:

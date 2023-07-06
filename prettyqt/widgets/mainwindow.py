@@ -313,7 +313,7 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
 
     def get_docks(
         self, position: constants.DockWidgetAreaStr | None = None
-    ) -> listdelegators.BaseListDelegator[widgets.QDockWidget]:
+    ) -> listdelegators.ListDelegator[widgets.QDockWidget]:
         docks = self.find_children(widgets.QDockWidget, recursive=False)
         if position is None:
             return docks
@@ -348,7 +348,7 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
 
     def get_toolbars(
         self, position: constants.ToolbarAreaStr | None = None
-    ) -> listdelegators.BaseListDelegator[widgets.QToolBar]:
+    ) -> listdelegators.ListDelegator[widgets.QToolBar]:
         toolbars = self.find_children(widgets.QToolBar, recursive=False)
         if position is None:
             return toolbars

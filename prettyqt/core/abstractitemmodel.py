@@ -60,12 +60,12 @@ class AbstractItemModelMixin(core.ObjectMixin):
     @overload
     def __getitem__(
         self, index: tuple[slice, int] | tuple[int, slice] | tuple[slice, slice]
-    ) -> listdelegators.BaseListDelegator[core.ModelIndex]:
+    ) -> listdelegators.ListDelegator[core.ModelIndex]:
         ...
 
     def __getitem__(
         self, index: tuple[int | slice, int | slice]
-    ) -> core.ModelIndex | listdelegators.BaseListDelegator[core.ModelIndex]:
+    ) -> core.ModelIndex | listdelegators.ListDelegator[core.ModelIndex]:
         # TODO: do proxies need mapToSource here?
         rowcount = self.rowCount()
         colcount = self.columnCount()
@@ -79,7 +79,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
                     self.index(i, j)
                     for i, j in helpers.yield_positions(row, col, rowcount, colcount)
                 ]
-                return listdelegators.BaseListDelegator(indexes)
+                return listdelegators.ListDelegator(indexes)
             case int() as row:
                 if row >= rowcount:
                     raise IndexError(index)
@@ -320,7 +320,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         parent_index: core.ModelIndex | None = None,
         max_results: int | None = None,
         depth: int | None = None,
-    ) -> listdelegators.BaseListDelegator[core.ModelIndex]:
+    ) -> listdelegators.ListDelegator[core.ModelIndex]:
         """Search the tree for indexes with a given value in given role.
 
         Compared to QAbstractItemModel.match, this method allows to set a maximum
@@ -342,11 +342,11 @@ class AbstractItemModelMixin(core.ObjectMixin):
                 results.append(idx)
                 if len(results) == max_results:
                     break
-        return listdelegators.BaseListDelegator(results)
+        return listdelegators.ListDelegator(results)
 
     def get_child_indexes(
         self, index: core.ModelIndex
-    ) -> listdelegators.BaseListDelegator[core.ModelIndex]:
+    ) -> listdelegators.ListDelegator[core.ModelIndex]:
         """Get all child indexes for given index (first column only).
 
         To get indexes recursively, use iter_tree.
@@ -355,7 +355,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
             index: ModelIndex to get children from
         """
         indexes = [self.index(i, 0, index) for i in range(self.rowCount(index))]
-        return listdelegators.BaseListDelegator(indexes)
+        return listdelegators.ListDelegator(indexes)
 
     def get_index_key(
         self,

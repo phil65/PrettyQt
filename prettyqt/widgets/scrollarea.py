@@ -25,7 +25,7 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, widgets.QScrollArea):
         partial_allowed: bool = True,
         margin: int = 10,
         recursive: bool = True,
-    ) -> listdelegators.BaseListDelegator[T]:
+    ) -> listdelegators.ListDelegator[T]:
         """Return all widgets which are visible in the viewport.
 
         Results can be filtered by type and whether widget is fully or partially visible.
@@ -44,9 +44,9 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, widgets.QScrollArea):
                 found.append(w)
             elif not partial_allowed and rect.contains(mapped):
                 found.append(w)
-        return listdelegators.BaseListDelegator(found)
+        return listdelegators.ListDelegator(found)
 
-    def get_children(self) -> listdelegators.BaseListDelegator[widgets.QWidget]:
+    def get_children(self) -> listdelegators.ListDelegator[widgets.QWidget]:
         return self.widget().layout().get_children()
 
     def set_widget(self, widget: widgets.QWidget):

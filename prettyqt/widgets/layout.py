@@ -77,7 +77,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     @overload
     def __getitem__(
         self, index: slice
-    ) -> listdelegators.BaseListDelegator[widgets.QWidget | widgets.QLayout]:
+    ) -> listdelegators.ListDelegator[widgets.QWidget | widgets.QLayout]:
         ...
 
     @overload
@@ -89,7 +89,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     ) -> (
         widgets.QWidget
         | widgets.QLayout
-        | listdelegators.BaseListDelegator[widgets.QWidget | widgets.QLayout]
+        | listdelegators.ListDelegator[widgets.QWidget | widgets.QLayout]
     ):
         match index:
             case int():
@@ -107,7 +107,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
                 stop = index.stop or self.count()
                 rng = range(index.start or 0, stop, index.step or 1)
                 widgets = [self[i] for i in rng]
-                return listdelegators.BaseListDelegator(widgets, parent=self)
+                return listdelegators.ListDelegator(widgets, parent=self)
             case _:
                 raise TypeError(index)
 
@@ -277,8 +277,8 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
 
     def get_children(
         self,
-    ) -> listdelegators.BaseListDelegator[widgets.QWidget | widgets.QLayout]:
-        return listdelegators.BaseListDelegator(self)
+    ) -> listdelegators.ListDelegator[widgets.QWidget | widgets.QLayout]:
+        return listdelegators.ListDelegator(self)
 
     def set_margin(self, margin: tuple[int, int, int, int] | int | None):
         match margin:

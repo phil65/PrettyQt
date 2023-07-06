@@ -18,7 +18,7 @@ class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
 
     def __getitem__(
         self, index: int | slice | tuple[int | slice, int | slice] | core.QModelIndex
-    ) -> gui.QStandardItem | listdelegators.BaseListDelegator[gui.QStandardItem]:
+    ) -> gui.QStandardItem | listdelegators.ListDelegator[gui.QStandardItem]:
         match index:
             case int():
                 if index >= self.childCount():
@@ -35,7 +35,7 @@ class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
                     self.child(i, j)
                     for i, j in helpers.yield_positions(row, col, rowcount, colcount)
                 ]
-                return listdelegators.BaseListDelegator(children)
+                return listdelegators.ListDelegator(children)
             case _:
                 raise TypeError(index)
 
@@ -56,9 +56,9 @@ class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
             case _:
                 raise TypeError("wrong type for addition")
 
-    def get_children(self) -> listdelegators.BaseListDelegator[gui.QStandardItem]:
+    def get_children(self) -> listdelegators.ListDelegator[gui.QStandardItem]:
         items = [self.child(index) for index in range(self.rowCount())]
-        return listdelegators.BaseListDelegator(items)
+        return listdelegators.ListDelegator(items)
 
     def add(self, *item: str | gui.QStandardItem):
         for i in item:

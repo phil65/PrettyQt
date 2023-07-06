@@ -26,10 +26,7 @@ class ListWidget(widgets.ListViewMixin, widgets.QListWidget):
 
     def __getitem__(
         self, row: int | slice
-    ) -> (
-        widgets.QListWidgetItem
-        | listdelegators.BaseListDelegator[widgets.QListWidgetItem]
-    ):
+    ) -> widgets.QListWidgetItem | listdelegators.ListDelegator[widgets.QListWidgetItem]:
         match row:
             case int():
                 item = self.item(row)
@@ -40,7 +37,7 @@ class ListWidget(widgets.ListViewMixin, widgets.QListWidget):
                 count = self.itemCount() if row.stop is None else row.stop
                 values = list(range(count)[row])
                 ls = [self.item(i) for i in values]
-                return listdelegators.BaseListDelegator(ls)
+                return listdelegators.ListDelegator(ls)
             case _:
                 raise TypeError(row)
 
@@ -65,9 +62,9 @@ class ListWidget(widgets.ListViewMixin, widgets.QListWidget):
         data = self.get_value()
         self.value_changed.emit(data)
 
-    def get_children(self) -> listdelegators.BaseListDelegator[widgets.QListWidgetItem]:
+    def get_children(self) -> listdelegators.ListDelegator[widgets.QListWidgetItem]:
         items = [self.item(row) for row in range(self.count())]
-        return listdelegators.BaseListDelegator(items)
+        return listdelegators.ListDelegator(items)
 
     def add_items(self, items: Iterable | Mapping):
         match items:
@@ -169,14 +166,14 @@ class ListWidget(widgets.ListViewMixin, widgets.QListWidget):
         mode: constants.MatchFlagStr | constants.MatchFlag = "exact",
         recursive: bool = False,
         case_sensitive: bool = False,
-    ) -> listdelegators.BaseListDelegator[widgets.QListWidgetItem]:
+    ) -> listdelegators.ListDelegator[widgets.QListWidgetItem]:
         flag = constants.MATCH_FLAGS.get_enum_value(mode)
         if recursive:
             flag |= constants.MatchFlag.MatchRecursive
         if case_sensitive:
             flag |= constants.MatchFlag.MatchCaseSensitive
         items = self.findItems(text, flag, column)  # type: ignore
-        return listdelegators.BaseListDelegator(items)
+        return listdelegators.ListDelegator(items)
 
 
 if __name__ == "__main__":

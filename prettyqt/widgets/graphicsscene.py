@@ -193,9 +193,9 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
         item: widgets.QGraphicsItem,
         mode: constants.ItemSelectionModeStr
         | constants.ItemSelectionMode = "intersects_shape",
-    ) -> listdelegators.BaseListDelegator[widgets.QGraphicsItem]:
+    ) -> listdelegators.ListDelegator[widgets.QGraphicsItem]:
         items = self.collidingItems(item, constants.ITEM_SELECTION_MODE[mode])
-        return listdelegators.BaseListDelegator(items)
+        return listdelegators.ListDelegator(items)
 
     def add_item_group(self, *items: widgets.QGraphicsItem) -> widgets.GraphicsItemGroup:
         group = widgets.GraphicsItemGroup()

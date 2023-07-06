@@ -52,14 +52,12 @@ class TabWidget(widgets.WidgetMixin, widgets.QTabWidget):
         ...
 
     @overload
-    def __getitem__(
-        self, index: slice
-    ) -> listdelegators.BaseListDelegator[widgets.QWidget]:
+    def __getitem__(self, index: slice) -> listdelegators.ListDelegator[widgets.QWidget]:
         ...
 
     def __getitem__(
         self, index: int | slice
-    ) -> widgets.QWidget | listdelegators.BaseListDelegator[widgets.QWidget]:
+    ) -> widgets.QWidget | listdelegators.ListDelegator[widgets.QWidget]:
         match index:
             case int():
                 if index >= self.count():
@@ -67,7 +65,7 @@ class TabWidget(widgets.WidgetMixin, widgets.QTabWidget):
                 return self.widget(index)
             case slice():
                 rng = range(index.start or 0, index.stop or self.count(), index.step or 1)
-                return listdelegators.BaseListDelegator(self.widget(i) for i in rng)
+                return listdelegators.ListDelegator(self.widget(i) for i in rng)
             case _:
                 raise TypeError(index)
 

@@ -23,7 +23,7 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsGridLayou
                     for i, j in helpers.yield_positions(row, col, rowcount, colcount)
                     if (item := self.itemAt(i, j)) is not None
                 ]
-                return listdelegators.BaseListDelegator(list(set(items)))
+                return listdelegators.ListDelegator(list(set(items)))
             case int() as row:
                 if row >= rowcount:
                     raise IndexError(index)
@@ -31,7 +31,7 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsGridLayou
             case slice() as rowslice:
                 count = rowcount if rowslice.stop is None else rowslice.stop
                 items = [self.itemAt(i) for i in range(count)[rowslice]]
-                return listdelegators.BaseListDelegator(list(set(item)))
+                return listdelegators.ListDelegator(list(set(item)))
             case str():
                 return self.find_child(widgets.QGraphicsWidget, index)
             case _:

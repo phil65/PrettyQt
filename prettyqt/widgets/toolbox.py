@@ -9,7 +9,7 @@ from prettyqt.utils import datatypes, listdelegators
 class ToolBox(widgets.FrameMixin, widgets.QToolBox):
     def __getitem__(
         self, index: int | str
-    ) -> widgets.QWidget | listdelegators.BaseListDelegator[widgets.QWidget]:
+    ) -> widgets.QWidget | listdelegators.ListDelegator[widgets.QWidget]:
         match index:
             case int():
                 return self.widget(index)
@@ -22,7 +22,7 @@ class ToolBox(widgets.FrameMixin, widgets.QToolBox):
                 stop = index.stop or self.count()
                 rng = range(index.start or 0, stop, index.step or 1)
                 wdgs = [self.widget(i) for i in rng]
-                return listdelegators.BaseListDelegator(wdgs)
+                return listdelegators.ListDelegator(wdgs)
             case _:
                 raise TypeError(index)
 
@@ -45,9 +45,9 @@ class ToolBox(widgets.FrameMixin, widgets.QToolBox):
     def __contains__(self, item: widgets.QWidget):
         return self.indexOf(item) >= 0
 
-    def get_children(self) -> listdelegators.BaseListDelegator[widgets.QWidget]:
+    def get_children(self) -> listdelegators.ListDelegator[widgets.QWidget]:
         widgets = [self.widget(i) for i in range(self.count())]
-        return listdelegators.BaseListDelegator(widgets)
+        return listdelegators.ListDelegator(widgets)
 
     def add_widget(
         self,

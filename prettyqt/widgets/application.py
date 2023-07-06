@@ -123,7 +123,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
     @classmethod
     def widgets_at(
         cls, pos: datatypes.PointType
-    ) -> listdelegators.BaseListDelegator[widgets.QWidget]:
+    ) -> listdelegators.ListDelegator[widgets.QWidget]:
         """Return ALL widgets at `pos`.
 
         Arguments:

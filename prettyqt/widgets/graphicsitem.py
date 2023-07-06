@@ -46,9 +46,9 @@ class GraphicsItemMixin:
         self,
         mode: constants.ItemSelectionModeStr
         | constants.ItemSelectionMode = "intersects_shape",
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QGraphicsItem]:
+    ) -> listdelegators.ListDelegator[QtWidgets.QGraphicsItem]:
         items = self.collidingItems(constants.ITEM_SELECTION_MODE.get_enum_value(mode))
-        return listdelegators.BaseListDelegator(items)
+        return listdelegators.ListDelegator(items)
 
     def collides_with(
         self,

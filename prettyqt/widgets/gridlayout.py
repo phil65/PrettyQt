@@ -14,7 +14,7 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
     ) -> (
         widgets.QWidget
         | widgets.QLayout
-        | listdelegators.BaseListDelegator[widgets.QWidget | widgets.QLayout]
+        | listdelegators.ListDelegator[widgets.QWidget | widgets.QLayout]
         | None
     ):
         rowcount = self.rowCount()
@@ -38,7 +38,7 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
                 items = [
                     w if (w := i.widget()) is not None else i.layout() for i in items
                 ]
-                return listdelegators.BaseListDelegator(list(set(items)))
+                return listdelegators.ListDelegator(list(set(items)))
             case int() as row:
                 if row < 0:
                     row = rowcount + row
@@ -52,7 +52,7 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
                 items = [
                     w if (w := i.widget()) is not None else i.layout() for i in items
                 ]
-                return listdelegators.BaseListDelegator(list(set(items)))
+                return listdelegators.ListDelegator(list(set(items)))
             case str():
                 return self.find_child(widgets.QWidget | widgets.QLayout, index)
             case _:

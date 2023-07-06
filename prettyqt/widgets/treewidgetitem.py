@@ -49,7 +49,7 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         self, index: int | slice
     ) -> (
         QtWidgets.QTreeWidgetItem
-        | listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]
+        | listdelegators.ListDelegator[QtWidgets.QTreeWidgetItem]
     ):
         match index:
             case int():
@@ -61,7 +61,7 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
                 count = self.childCount() if index.stop is None else index.stop
                 values = list(range(count)[index])
                 ls = [self.child(i) for i in values]
-                return listdelegators.BaseListDelegator(ls)
+                return listdelegators.ListDelegator(ls)
             case _:
                 raise TypeError(index)
 
@@ -83,7 +83,7 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
 
     def get_children(
         self, recursive: bool = False
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]:
+    ) -> listdelegators.ListDelegator[QtWidgets.QTreeWidgetItem]:
         """Get children of this item.
 
         recursive option is written iteratively to also support original QTreeWidgetItems.
@@ -98,13 +98,13 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
                 results.append(node)
                 items.extend(node.child(i) for i in range(node.childCount()))
             nodes = items
-        return listdelegators.BaseListDelegator(results[1:])
+        return listdelegators.ListDelegator(results[1:])
 
     def get_top_level_items(
         self,
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]:
+    ) -> listdelegators.ListDelegator[QtWidgets.QTreeWidgetItem]:
         items = [self.topLevelItem(i) for i in range(self.topLevelItemCount())]
-        return listdelegators.BaseListDelegator(items)
+        return listdelegators.ListDelegator(items)
 
     def collapse(self, recursive: bool = False):
         if recursive:
