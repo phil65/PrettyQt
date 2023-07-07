@@ -87,7 +87,7 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install poetry
-        poetry install -E pyside6
+        poetry install -E pyside6 -E addons
         poetry run mkdocs build
     - name: Build and publish
       run: |

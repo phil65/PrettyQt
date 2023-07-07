@@ -16,6 +16,7 @@ from prettyqt import (
     designer,
     eventfilters,
     gui,
+    itemdelegates,
     itemmodels,
     ipython,
     # location,
