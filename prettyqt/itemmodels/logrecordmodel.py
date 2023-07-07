@@ -5,7 +5,6 @@ import logging
 import traceback
 
 from prettyqt import constants, core, itemmodels
-from prettyqt.utils import signallogger
 
 
 logger = logging.getLogger(__name__)
@@ -155,6 +154,7 @@ class LogRecordModel(itemmodels.ColumnTableModel):
         FileNameColumn,
         FunctionNameColumn,
         LineNoColumn,
+        MessageColumn,
         ModuleColumn,
         CreatedColumn,
         ProcessColumn,
@@ -164,16 +164,10 @@ class LogRecordModel(itemmodels.ColumnTableModel):
         RelativeCreatedColumn,
         NameColumn,
         PathNameColumn,
-        MessageColumn,
     ]
 
-    def __init__(self, logger, level=logging.DEBUG, *args, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(items=[], columns=self.COLUMNS, **kwargs)
-        self.handler = signallogger.SignalLogger()
-        self.handler.signals.log_record.connect(self.add)
-        core.CoreApplication.call_on_exit(lambda: logger.removeHandler(self.handler))
-        self.handler.setLevel(level)
-        logger.addHandler(self.handler)
 
     @classmethod
     def supports(cls, instance) -> bool:
@@ -186,46 +180,16 @@ class LogRecordModel(itemmodels.ColumnTableModel):
 
 if __name__ == "__main__":
     from prettyqt import debugging, widgets
-    from prettyqt.qt import QtGui
 
     logger = logging.getLogger()
 
     app = widgets.app()
     with app.debug_mode():
-        widget = widgets.TableView()
-        model = LogRecordModel(logger, parent=widget)
-
-        def color_log(x):
-            # print("fsfksj", x)
-            match x:
-                case "DEBUG":
-                    return QtGui.QColor("lightblue")
-                case "INFO":
-                    return QtGui.QColor("lightgreen")
-                case "WARNING":
-                    return QtGui.QColor("orange")
-                case "ERROR":
-                    return QtGui.QColor("red")
-
-        widget.set_model(model)
-        widget.proxifier[0].modify(color_log, role=constants.BACKGROUND_ROLE)
-        w = widgets.Widget()
-        w.set_layout("vertical")
-        widget.set_selection_behavior("rows")
-        stalker = debugging.Stalker(widget)
-
-        def raise_exc():
-            try:
-                raise Exception("test")
-            except Exception as e:
-                logger.exception(e)
-
-        w.box += widgets.PushButton("Raise", clicked=raise_exc)
-        w.box += widgets.PushButton("Debug", clicked=lambda: logger.debug("Debug"))
-        w.box += widgets.PushButton("Info", clicked=lambda: logger.info("Info"))
-        w.box += widgets.PushButton("Warning", clicked=lambda: logger.warning("Warning"))
-        w.box += widgets.PushButton("Critical", clicked=lambda: logger.critical("Critic"))
-        w.box += widget
-        w.show()
-        widget.show()
+        with debugging.Stalker(app) as stalker:
+            stalker.show()
         app.exec()
+        # def raise_exc():
+        #     try:
+        #         raise Exception("test")
+        #     except Exception as e:
+        #         logger.exception(e)

@@ -274,8 +274,13 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
 
 
 if __name__ == "__main__":
+    from prettyqt import debugging
+
     app = widgets.app()
     widget = LineEdit()
+
+    stalker = debugging.Stalker(widget)
+    stalker.hook()
     action = gui.Action(text="hallo", icon="mdi.folder")
     # widget.add_action(action)
     widget.set_validator("website")
@@ -283,5 +288,6 @@ if __name__ == "__main__":
     widget.setClearButtonEnabled(True)
     # widget.set_regex_validator("[0-9]+")
     widget.show()
-    app.exec()
+    with app.debug_mode():
+        app.exec()
     print(widget.hasAcceptableInput())

@@ -8,7 +8,6 @@ from prettyqt import (
     custom_widgets,
     debugging,
     ipython,
-    itemmodels,
     widgets,
 )
 
@@ -72,15 +71,12 @@ class QObjectDetailsDialog(widgets.MainWindow):
         self.tabwidget, self.propertyview = get_tabbed(qobject)
         self.hierarchyview = custom_widgets.QObjectHierarchyTreeView()
         self.hierarchyview.set_qobject(qobject)
-        self.hierarchyview.selectionModel().currentRowChanged.connect(
-            self._current_changed
-        )
-        logtable = widgets.TableView()
-        model = itemmodels.LogRecordModel(logging.getLogger(), parent=logtable)
+        sel_model = self.hierarchyview.selectionModel()
+        sel_model.currentRowChanged.connect(self._current_changed)
+        self.logtable = custom_widgets.LogRecordTableView()
+        self.logtable.set_logger(logging.getLogger())
         w = widgets.Widget()
         w.set_layout("vertical")
-        logtable.set_model(model)
-        logtable.set_selection_behavior("rows")
         self.stalkers = []
         stalker = debugging.Stalker(qobject, log_level=logging.DEBUG)
         stalker.hook()
@@ -105,7 +101,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
 
         self.add_dockwidget(self.hierarchyview, window_title="Hierarchy view")
         self.add_dockwidget(self.tabwidget, window_title="Property view")
-        self.add_dockwidget(logtable, window_title="Log", visible=False)
+        self.add_dockwidget(self.logtable, window_title="Log", visible=False)
         self.add_dockwidget(self.console, window_title="Console", visible=False)
         self.menubar = self.menuBar()
         action = widgets.mainwindow.PopupMenuAction("Docks", parent=self)
