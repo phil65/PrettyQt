@@ -298,7 +298,8 @@ class PythonObjectTreeItem(itemmodels.ColumnItemModel.TreeItem):
 
 class PythonObjectTreeModel(itemmodels.ColumnItemModel):
     TreeItem = PythonObjectTreeItem
-
+    IS_RECURSIVE = True
+    ICON = "mdi.python"
     COLUMNS = [
         NameColumn,
         DescriptionColumn,

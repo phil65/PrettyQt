@@ -183,18 +183,14 @@ class LicenseColumn(DistributionColumn):
 
 
 class ImportlibTreeModel(itemmodels.ColumnItemModel):
-    """Model showing the dependency tree of a distribution.
-
-    !!! Warning
-        Model can be recursive, so be careful with iterating whole tree.
-    """
+    """Model showing the dependency tree of a distribution."""
 
     @core.Enum
     class Roles(enum.IntEnum):
         DistributionRole = constants.USER_ROLE + 43255
 
     TreeItem = DistTreeItem
-
+    IS_RECURSIVE = True
     COLUMNS = [
         NameColumn,
         VersionColumn,
