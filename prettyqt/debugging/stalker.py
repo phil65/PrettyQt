@@ -87,7 +87,10 @@ class Stalker(core.Object):
         self._obj.installEventFilter(self.eventcatcher)
         # enable logging of signals emitted by connecting all signals to our fn
         for signal in self._meta.get_signals(only_notifiers=False):
-            signal_instance = self._obj.__getattribute__(signal.get_name())
+            signal_name = signal.get_name()
+            # PyQt reports non-existing signals in MetaObject.
+            if hasattr(self._obj, signal_name):
+                signal_instance = self._obj.__getattribute__(signal_name)
             fn = self._on_signal_emitted(signal)
             handle = signal_instance.connect(fn)
             self._handles.append(handle)
@@ -162,7 +165,14 @@ class Stalker(core.Object):
         objects = self.findChildren(type_filter)
         return collections.Counter([type(o) for o in objects])
 
-    logLevel = core.Property(int, get_log_level, set_log_level)
+    def show(self):
+        from prettyqt import custom_widgets
+
+        widget = custom_widgets.LogRecordTableView()
+        widget.set_logger(logger, level=self.log_level)
+        widget.show()
+
+    log_level = core.Property(int, get_log_level, set_log_level)
 
 
 if __name__ == "__main__":
@@ -174,5 +184,5 @@ if __name__ == "__main__":
     with app.debug_mode():
         with Stalker(widget, log_level=logging.INFO) as stalker:
             stalker.eventsignals.MouseButtonPress.connect(print)
-            app.sleep(5)
-        app.exec()
+            stalker.show()
+            app.exec()
