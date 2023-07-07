@@ -264,7 +264,7 @@ class MetaType(QtCore.QMetaType):
                 return str
             case QtCore.QMetaType.Type.QByteArray:
                 return bytes
-            case QtCore.QMetaType.Type.QVariantList:
+            case QtCore.QMetaType.Type.QVariantList | QtCore.QMetaType.Type.QStringList:
                 return list
             case QtCore.QMetaType.Type.QVariantMap:
                 return dict
@@ -336,6 +336,12 @@ class MetaType(QtCore.QMetaType):
                 return QtGui.QCursor
             case QtCore.QMetaType.Type.QIcon:
                 return QtGui.QIcon
+            case QtCore.QMetaType.Type.QVariant:
+                return object
+            case QtCore.QMetaType.Type.QEasingCurve:
+                return QtCore.QEasingCurve
+            case QtCore.QMetaType.Type.QObjectStar:
+                return QtCore.QObject
 
         from prettyqt.qt import QtWidgets
 
@@ -343,8 +349,9 @@ class MetaType(QtCore.QMetaType):
             case QtCore.QMetaType.Type.QSizePolicy:
                 return QtWidgets.QSizePolicy
             case _:
-                raise NotImplementedError(self.id())
+                return object
 
 
 if __name__ == "__main__":
-    metatype = MetaType(2)
+    metatype = MetaType(66532)
+    print(metatype)
