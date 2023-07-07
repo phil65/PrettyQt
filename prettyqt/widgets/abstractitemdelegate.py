@@ -25,8 +25,9 @@ class AbstractItemDelegateMixin(core.ObjectMixin):
     #             raise NameError(f"Delegate with id {identifier!r} already registered.")
     #         cls._registry[identifier] = cls
 
+    @staticmethod
     def _data_for_index(
-        self, index: core.ModelIndex, role: constants.ItemDataRole = constants.USER_ROLE
+        index: core.ModelIndex, role: constants.ItemDataRole = constants.USER_ROLE
     ):
         # using index.data() sometimes casts stuff in PyQt6
         model = index.model()
