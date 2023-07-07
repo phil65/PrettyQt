@@ -14290,14 +14290,14 @@
 <p>Validator ID: <strong>whitelist</strong></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Validator
+WhitelistValidator
+ObjectMixin
 QValidator
+QObject
 Object
 object
-WhitelistValidator
-QObject
+Validator
 ValidatorMixin
-ObjectMixin
 Validator --&gt; WhitelistValidator
 ValidatorMixin --&gt; Validator
 ObjectMixin --&gt; ValidatorMixin

@@ -14253,14 +14253,14 @@
 <p>Validator ID: <strong>not_strict</strong></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-NotStrictValidator
-Validator
+ObjectMixin
 QValidator
+QObject
 Object
 object
-QObject
+NotStrictValidator
+Validator
 ValidatorMixin
-ObjectMixin
 Validator --&gt; NotStrictValidator
 ValidatorMixin --&gt; Validator
 ObjectMixin --&gt; ValidatorMixin

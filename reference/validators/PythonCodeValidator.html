@@ -14245,14 +14245,14 @@
 <p>Validator ID: <strong>python_code</strong></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Validator
+PythonCodeValidator
+ObjectMixin
 QValidator
+QObject
 Object
 object
-QObject
+Validator
 ValidatorMixin
-ObjectMixin
-PythonCodeValidator
 Validator --&gt; PythonCodeValidator
 ValidatorMixin --&gt; Validator
 ObjectMixin --&gt; ValidatorMixin

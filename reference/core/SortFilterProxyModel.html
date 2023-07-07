@@ -14812,16 +14812,16 @@
 <p>Qt Base Class: <a href="https://doc.qt.io/qtforpython-6/PySide6/QtCore/QSortFilterProxyModel.html">QSortFilterProxyModel</a></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+AbstractItemModelMixin
+QAbstractProxyModel
 QSortFilterProxyModel
+SortFilterProxyModel
+AbstractProxyModelMixin
+QAbstractItemModel
+ObjectMixin
+QObject
 Object
 object
-SortFilterProxyModel
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-ObjectMixin
-AbstractItemModelMixin
-AbstractProxyModelMixin
 AbstractProxyModelMixin --&gt; SortFilterProxyModel
 AbstractItemModelMixin --&gt; AbstractProxyModelMixin
 ObjectMixin --&gt; AbstractItemModelMixin

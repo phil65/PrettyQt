@@ -14552,18 +14552,18 @@ min/max values are calculated on-the fly.</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+AbstractItemModelMixin
+QAbstractProxyModel
+QIdentityProxyModel
+SliceColorValuesProxyModel
+AbstractProxyModelMixin
+SliceIdentityProxyModel
+ObjectMixin
+IdentityProxyModel
+QAbstractItemModel
+QObject
 Object
 object
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-SliceColorValuesProxyModel
-IdentityProxyModel
-AbstractItemModelMixin
-ObjectMixin
-SliceIdentityProxyModel
-QIdentityProxyModel
-AbstractProxyModelMixin
 SliceIdentityProxyModel --&gt; SliceColorValuesProxyModel
 IdentityProxyModel --&gt; SliceIdentityProxyModel
 AbstractProxyModelMixin --&gt; IdentityProxyModel

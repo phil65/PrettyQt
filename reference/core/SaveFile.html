@@ -14203,17 +14203,17 @@
 <p>Qt Base Class: <a href="https://doc.qt.io/qtforpython-6/PySide6/QtCore/QSaveFile.html">QSaveFile</a></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-QIODeviceBase
+FileDeviceMixin
 SaveFile
+QFileDevice
+QSaveFile
+QIODevice
+ObjectMixin
+QObject
 Object
 object
-QIODevice
-QFileDevice
 IODeviceMixin
-QSaveFile
-QObject
-ObjectMixin
-FileDeviceMixin
+QIODeviceBase
 FileDeviceMixin --&gt; SaveFile
 IODeviceMixin --&gt; FileDeviceMixin
 ObjectMixin --&gt; IODeviceMixin

@@ -14202,18 +14202,18 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-QStringListModel
-QHelpIndexModel
-object
+AbstractItemModelMixin
+AbstractListModelMixin
+QAbstractListModel
 StringListModelMixin
 QAbstractItemModel
-QObject
-AbstractListModelMixin
 ObjectMixin
-AbstractItemModelMixin
-QAbstractListModel
+QObject
+QStringListModel
+Object
+object
 HelpIndexModel
+QHelpIndexModel
 StringListModelMixin --&gt; HelpIndexModel
 AbstractListModelMixin --&gt; StringListModelMixin
 AbstractItemModelMixin --&gt; AbstractListModelMixin

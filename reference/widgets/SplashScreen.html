@@ -14499,15 +14499,15 @@
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
 SplashScreenMixin
-Object
 QSplashScreen
+ObjectMixin
+QObject
+Object
+QWidget
 object
 SplashScreen
-QObject
-QWidget
-QPaintDevice
 WidgetMixin
-ObjectMixin
+QPaintDevice
 SplashScreenMixin --&gt; SplashScreen
 WidgetMixin --&gt; SplashScreenMixin
 ObjectMixin --&gt; WidgetMixin

@@ -14460,16 +14460,16 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+StateMixin
+AbstractStateMixin
+ObjectMixin
+QState
+QStateMachine
+QObject
 Object
 object
-StateMachine
-StateMixin
 QAbstractState
-QObject
-QStateMachine
-QState
-ObjectMixin
-AbstractStateMixin
+StateMachine
 StateMixin --&gt; StateMachine
 AbstractStateMixin --&gt; StateMixin
 ObjectMixin --&gt; AbstractStateMixin

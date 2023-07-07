@@ -14227,15 +14227,15 @@
 <p>Validator ID: <strong>not_empty</strong></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Validator
-QValidator
-Object
-object
-QObject
-ValidatorMixin
-ObjectMixin
 NotEmptyValidator
+ObjectMixin
+QValidator
+QObject
+Object
 BlacklistValidator
+object
+Validator
+ValidatorMixin
 BlacklistValidator --&gt; NotEmptyValidator
 Validator --&gt; BlacklistValidator
 ValidatorMixin --&gt; Validator

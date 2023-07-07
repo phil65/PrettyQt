@@ -14457,18 +14457,18 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-PandasStringColumnFilterProxyModel
-object
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-IdentityProxyModel
 AbstractItemModelMixin
-ObjectMixin
+BasePandasIndexFilterProxyModel
+QAbstractProxyModel
 QIdentityProxyModel
 AbstractProxyModelMixin
-BasePandasIndexFilterProxyModel
+QAbstractItemModel
+ObjectMixin
+IdentityProxyModel
+QObject
+Object
+object
+PandasStringColumnFilterProxyModel
 BasePandasIndexFilterProxyModel --&gt; PandasStringColumnFilterProxyModel
 IdentityProxyModel --&gt; BasePandasIndexFilterProxyModel
 AbstractProxyModelMixin --&gt; IdentityProxyModel

@@ -14514,18 +14514,18 @@ spot free for other stuff.</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-object
-QAbstractItemModel
-QAbstractProxyModel
-QObject
 AbstractItemModelMixin
-SliceDisplayTextProxyModel
-IdentityProxyModel
-ObjectMixin
-SliceIdentityProxyModel
+QAbstractProxyModel
 QIdentityProxyModel
 AbstractProxyModelMixin
+SliceIdentityProxyModel
+ObjectMixin
+IdentityProxyModel
+QAbstractItemModel
+QObject
+Object
+SliceDisplayTextProxyModel
+object
 SliceIdentityProxyModel --&gt; SliceDisplayTextProxyModel
 IdentityProxyModel --&gt; SliceIdentityProxyModel
 AbstractProxyModelMixin --&gt; IdentityProxyModel

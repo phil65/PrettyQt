@@ -14300,14 +14300,14 @@ Also supports SI unit prefix like 'M', 'n' etc.</p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
 BaseScientificValidator
-Validator
+ObjectMixin
 QValidator
+QObject
 Object
 object
-QObject
-ValidatorMixin
-ObjectMixin
 ScientificFloatValidator
+Validator
+ValidatorMixin
 BaseScientificValidator --&gt; ScientificFloatValidator
 Validator --&gt; BaseScientificValidator
 ValidatorMixin --&gt; Validator

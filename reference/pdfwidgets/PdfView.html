@@ -14924,19 +14924,19 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-AbstractScrollAreaMixin
-object
-QPdfView
-QWidget
-QFrame
-QObject
-PdfView
-FrameMixin
-WidgetMixin
+QAbstractScrollArea
 QPaintDevice
 ObjectMixin
-QAbstractScrollArea
+QObject
+Object
+FrameMixin
+QWidget
+PdfView
+object
+QFrame
+WidgetMixin
+AbstractScrollAreaMixin
+QPdfView
 AbstractScrollAreaMixin --&gt; PdfView
 FrameMixin --&gt; AbstractScrollAreaMixin
 WidgetMixin --&gt; FrameMixin

@@ -14731,23 +14731,23 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-AbstractScrollAreaMixin
-object
+QAbstractItemView
 QAbstractScrollArea
-QObject
-QWidget
-QFrame
 QPaintDevice
-AbstractItemViewMixin
-FrameMixin
 TreeViewMixin
+QTreeView
+ObjectMixin
+QObject
+Object
+FrameMixin
+QFrame
+object
+QWidget
+TreeView
 WidgetMixin
 QObjectHierarchyTreeView
-ObjectMixin
-QAbstractItemView
-TreeView
-QTreeView
+AbstractScrollAreaMixin
+AbstractItemViewMixin
 TreeView --&gt; QObjectHierarchyTreeView
 TreeViewMixin --&gt; TreeView
 AbstractItemViewMixin --&gt; TreeViewMixin

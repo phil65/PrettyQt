@@ -14344,16 +14344,16 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-VariantAnimation
 CursorMoveAnimation
+QAbstractAnimation
+VariantAnimationMixin
+VariantAnimation
+ObjectMixin
+AbstractAnimationMixin
+QObject
 Object
 object
-QObject
-ObjectMixin
-QAbstractAnimation
 QVariantAnimation
-VariantAnimationMixin
-AbstractAnimationMixin
 VariantAnimation --&gt; CursorMoveAnimation
 VariantAnimationMixin --&gt; VariantAnimation
 AbstractAnimationMixin --&gt; VariantAnimationMixin

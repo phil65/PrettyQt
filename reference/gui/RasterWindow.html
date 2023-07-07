@@ -14288,20 +14288,20 @@
 <p>Qt Base Class: <a href="https://doc.qt.io/qtforpython-6/PySide6/QtGui/QRasterWindow.html">QRasterWindow</a></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+QSurface
+PaintDeviceMixin
+QWindow
+ObjectMixin
+QRasterWindow
+SurfaceMixin
+QObject
 QPaintDeviceWindow
+object
 Object
 RasterWindow
-object
-QRasterWindow
-QWindow
-QObject
-QSurface
-SurfaceMixin
 QPaintDevice
 WindowMixin
 PaintDeviceWindowMixin
-ObjectMixin
-PaintDeviceMixin
 PaintDeviceWindowMixin --&gt; RasterWindow
 WindowMixin --&gt; PaintDeviceWindowMixin
 ObjectMixin --&gt; WindowMixin

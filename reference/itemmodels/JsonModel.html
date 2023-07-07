@@ -14320,17 +14320,17 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+ColumnItemModel
 JsonModel
-AbstractItemModel
-Object
-object
+AbstractItemModelMixin
+ColumnItemModelMixin
+TreeModel
+ObjectMixin
 QAbstractItemModel
 QObject
-TreeModel
-ColumnItemModel
-AbstractItemModelMixin
-ObjectMixin
-ColumnItemModelMixin
+Object
+object
+AbstractItemModel
 ColumnItemModel --&gt; JsonModel
 ColumnItemModelMixin --&gt; ColumnItemModel
 object --&gt; ColumnItemModelMixin

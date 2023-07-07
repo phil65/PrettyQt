@@ -14644,17 +14644,17 @@ is not item-based (like a StandardItemModel).</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-object
-QAbstractItemModel
-QAbstractProxyModel
-QObject
 AbstractItemModelMixin
-ObjectMixin
-IdentityProxyModel
+QAbstractProxyModel
 QIdentityProxyModel
 AbstractProxyModelMixin
+QAbstractItemModel
+ObjectMixin
+IdentityProxyModel
+QObject
+Object
 AppearanceProxyModel
+object
 IdentityProxyModel --&gt; AppearanceProxyModel
 AbstractProxyModelMixin --&gt; IdentityProxyModel
 AbstractItemModelMixin --&gt; AbstractProxyModelMixin

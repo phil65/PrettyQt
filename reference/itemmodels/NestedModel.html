@@ -14452,16 +14452,16 @@ defaults to the the top-level item</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-AbstractItemModel
-Object
-object
+ListMixin
+AbstractItemModelMixin
 NestedModel
 QAbstractItemModel
-ListMixin
-QObject
-AbstractItemModelMixin
-ObjectMixin
 ModelMixin
+ObjectMixin
+QObject
+Object
+object
+AbstractItemModel
 ListMixin --&gt; NestedModel
 object --&gt; ListMixin
 ModelMixin --&gt; NestedModel

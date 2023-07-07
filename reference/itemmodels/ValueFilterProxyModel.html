@@ -14473,17 +14473,17 @@ filterKeyColumn properties.</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+AbstractItemModelMixin
+QAbstractProxyModel
 QSortFilterProxyModel
+ValueFilterProxyModel
+SortFilterProxyModel
+AbstractProxyModelMixin
+QAbstractItemModel
+ObjectMixin
+QObject
 Object
 object
-SortFilterProxyModel
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-AbstractItemModelMixin
-ObjectMixin
-ValueFilterProxyModel
-AbstractProxyModelMixin
 SortFilterProxyModel --&gt; ValueFilterProxyModel
 AbstractProxyModelMixin --&gt; SortFilterProxyModel
 AbstractItemModelMixin --&gt; AbstractProxyModelMixin

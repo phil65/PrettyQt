@@ -14334,17 +14334,17 @@
 <p>Qt Base Class: <a href="https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QApplication.html">QApplication</a></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-object
-QObject
+QCoreApplication
+QGuiApplication
 GuiApplicationMixin
 QApplication
 ObjectMixin
-QCoreApplication
 ApplicationMixin
-Application
+QObject
+Object
+object
 CoreApplicationMixin
-QGuiApplication
+Application
 ApplicationMixin --&gt; Application
 GuiApplicationMixin --&gt; ApplicationMixin
 CoreApplicationMixin --&gt; GuiApplicationMixin

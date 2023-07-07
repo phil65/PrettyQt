@@ -14348,20 +14348,20 @@
 <p>Qt Base Class: <a href="https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QGraphicsProxyWidget.html">QGraphicsProxyWidget</a></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-GraphicsProxyWidget
-GraphicsLayoutItemMixin
-QGraphicsItem
-Object
-object
-QGraphicsProxyWidget
 GraphicsObjectMixin
+QGraphicsProxyWidget
+GraphicsProxyWidget
+QGraphicsItem
+ObjectMixin
+Object
 GraphicsItemMixin
+GraphicsWidgetMixin
+QGraphicsObject
+object
+QGraphicsWidget
 QObject
 QGraphicsLayoutItem
-QGraphicsWidget
-GraphicsWidgetMixin
-ObjectMixin
-QGraphicsObject
+GraphicsLayoutItemMixin
 GraphicsWidgetMixin --&gt; GraphicsProxyWidget
 GraphicsObjectMixin --&gt; GraphicsWidgetMixin
 ObjectMixin --&gt; GraphicsObjectMixin

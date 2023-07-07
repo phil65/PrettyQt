@@ -14203,15 +14203,15 @@
 <p>Qt Base Class: <a href="https://doc.qt.io/qtforpython-6/PySide6/QtCore/QBuffer.html">QBuffer</a></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-QIODeviceBase
+QIODevice
+QBuffer
+ObjectMixin
+QObject
 Object
 object
-QIODevice
-IODeviceMixin
-QObject
 Buffer
-ObjectMixin
-QBuffer
+IODeviceMixin
+QIODeviceBase
 IODeviceMixin --&gt; Buffer
 ObjectMixin --&gt; IODeviceMixin
 object --&gt; ObjectMixin

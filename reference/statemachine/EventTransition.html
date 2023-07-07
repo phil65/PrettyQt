@@ -14236,14 +14236,14 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-AbstractTransitionMixin
+QAbstractTransition
+EventTransition
+QEventTransition
+ObjectMixin
+QObject
 Object
 object
-QObject
-ObjectMixin
-QAbstractTransition
-QEventTransition
-EventTransition
+AbstractTransitionMixin
 AbstractTransitionMixin --&gt; EventTransition
 ObjectMixin --&gt; AbstractTransitionMixin
 object --&gt; ObjectMixin

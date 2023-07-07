@@ -14469,17 +14469,17 @@ missing sections will be hidden.</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-object
-QAbstractItemModel
-QAbstractProxyModel
-QObject
 AbstractItemModelMixin
+QAbstractProxyModel
+ColumnOrderProxyModel
+QIdentityProxyModel
+AbstractProxyModelMixin
+QAbstractItemModel
 ObjectMixin
 IdentityProxyModel
-QIdentityProxyModel
-ColumnOrderProxyModel
-AbstractProxyModelMixin
+QObject
+Object
+object
 IdentityProxyModel --&gt; ColumnOrderProxyModel
 AbstractProxyModelMixin --&gt; IdentityProxyModel
 AbstractItemModelMixin --&gt; AbstractProxyModelMixin

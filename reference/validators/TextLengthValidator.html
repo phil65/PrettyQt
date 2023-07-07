@@ -14339,14 +14339,14 @@
 <p>Validator ID: <strong>text_length</strong></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Validator
+ObjectMixin
 QValidator
+QObject
+TextLengthValidator
 Object
 object
-QObject
+Validator
 ValidatorMixin
-ObjectMixin
-TextLengthValidator
 Validator --&gt; TextLengthValidator
 ValidatorMixin --&gt; Validator
 ObjectMixin --&gt; ValidatorMixin

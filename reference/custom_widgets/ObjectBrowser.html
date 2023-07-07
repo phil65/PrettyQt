@@ -14995,16 +14995,16 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
 QMainWindow
-object
+ObjectMixin
+ObjectBrowser
 QObject
 QWidget
-QPaintDevice
-ObjectBrowser
-WidgetMixin
-ObjectMixin
+Object
+object
 MainWindow
+WidgetMixin
+QPaintDevice
 MainWindow --&gt; ObjectBrowser
 WidgetMixin --&gt; MainWindow
 ObjectMixin --&gt; WidgetMixin

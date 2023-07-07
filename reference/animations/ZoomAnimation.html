@@ -14339,17 +14339,17 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-QAnimationGroup
-object
-AnimationGroupMixin
-QParallelAnimationGroup
-QObject
-ParallelAnimationGroup
-ObjectMixin
-QAbstractAnimation
 ZoomAnimation
+ParallelAnimationGroup
+QAnimationGroup
+QAbstractAnimation
+ObjectMixin
+QObject
 AbstractAnimationMixin
+Object
+AnimationGroupMixin
+object
+QParallelAnimationGroup
 ParallelAnimationGroup --&gt; ZoomAnimation
 AnimationGroupMixin --&gt; ParallelAnimationGroup
 AbstractAnimationMixin --&gt; AnimationGroupMixin

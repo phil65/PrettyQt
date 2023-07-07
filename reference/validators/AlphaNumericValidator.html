@@ -14241,14 +14241,14 @@
 <p>Validator ID: <strong>alphanumeric</strong></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Validator
+ObjectMixin
 QValidator
+QObject
 Object
 object
-QObject
-ValidatorMixin
-ObjectMixin
 AlphaNumericValidator
+Validator
+ValidatorMixin
 Validator --&gt; AlphaNumericValidator
 ValidatorMixin --&gt; Validator
 ObjectMixin --&gt; ValidatorMixin

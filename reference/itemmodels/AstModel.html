@@ -14684,15 +14684,15 @@ They are part of the builtin <code>ast</code> module.</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-AbstractItemModel
-Object
-object
-QAbstractItemModel
-QObject
+AbstractItemModelMixin
 AstModel
 TreeModel
 ObjectMixin
-AbstractItemModelMixin
+QAbstractItemModel
+QObject
+Object
+object
+AbstractItemModel
 TreeModel --&gt; AstModel
 AbstractItemModel --&gt; TreeModel
 AbstractItemModelMixin --&gt; AbstractItemModel

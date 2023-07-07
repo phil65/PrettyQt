@@ -14259,15 +14259,15 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-QIODeviceBase
+QLocalSocket
+QIODevice
+LocalSocket
+ObjectMixin
+QObject
 Object
 object
-QIODevice
-QLocalSocket
 IODeviceMixin
-QObject
-ObjectMixin
-LocalSocket
+QIODeviceBase
 IODeviceMixin --&gt; LocalSocket
 ObjectMixin --&gt; IODeviceMixin
 object --&gt; ObjectMixin

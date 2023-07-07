@@ -14825,16 +14825,16 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-object
-QAbstractItemModel
-MeltProxyModel
+AbstractItemModelMixin
 QAbstractProxyModel
-QObject
+AbstractProxyModelMixin
+QAbstractItemModel
 AbstractProxyModel
 ObjectMixin
-AbstractItemModelMixin
-AbstractProxyModelMixin
+QObject
+Object
+object
+MeltProxyModel
 AbstractProxyModel --&gt; MeltProxyModel
 AbstractProxyModelMixin --&gt; AbstractProxyModel
 AbstractItemModelMixin --&gt; AbstractProxyModelMixin

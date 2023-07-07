@@ -15265,17 +15265,17 @@ should be applied.</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-object
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-IdentityProxyModel
-ObjectMixin
 AbstractItemModelMixin
-SliceIdentityProxyModel
+QAbstractProxyModel
 QIdentityProxyModel
 AbstractProxyModelMixin
+SliceIdentityProxyModel
+ObjectMixin
+IdentityProxyModel
+QAbstractItemModel
+QObject
+Object
+object
 IdentityProxyModel --&gt; SliceIdentityProxyModel
 AbstractProxyModelMixin --&gt; IdentityProxyModel
 AbstractItemModelMixin --&gt; AbstractProxyModelMixin

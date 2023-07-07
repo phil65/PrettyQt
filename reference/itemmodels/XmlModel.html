@@ -14323,18 +14323,18 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-AbstractItemModel
-Object
-object
+ColumnItemModel
+AbstractItemModelMixin
+ColumnItemModelMixin
+TreeModel
+ObjectMixin
 QAbstractItemModel
 QObject
-TreeModel
-ColumnItemModel
-BaseXmlModel
-AbstractItemModelMixin
-ObjectMixin
 XmlModel
-ColumnItemModelMixin
+Object
+object
+AbstractItemModel
+BaseXmlModel
 BaseXmlModel --&gt; XmlModel
 ColumnItemModel --&gt; BaseXmlModel
 ColumnItemModelMixin --&gt; ColumnItemModel

@@ -14396,17 +14396,17 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+AbstractItemModelMixin
+QAbstractProxyModel
 QSortFilterProxyModel
+SubsetFilterProxyModel
+SortFilterProxyModel
+AbstractProxyModelMixin
+QAbstractItemModel
+ObjectMixin
+QObject
 Object
 object
-SortFilterProxyModel
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-SubsetFilterProxyModel
-ObjectMixin
-AbstractItemModelMixin
-AbstractProxyModelMixin
 SortFilterProxyModel --&gt; SubsetFilterProxyModel
 AbstractProxyModelMixin --&gt; SortFilterProxyModel
 AbstractItemModelMixin --&gt; AbstractProxyModelMixin

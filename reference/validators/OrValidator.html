@@ -14247,15 +14247,15 @@
 <p>Validator ID: <strong>or</strong></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Validator
+CompositeValidator
+OrValidator
+ObjectMixin
 QValidator
+QObject
 Object
 object
-OrValidator
-QObject
+Validator
 ValidatorMixin
-ObjectMixin
-CompositeValidator
 CompositeValidator --&gt; OrValidator
 Validator --&gt; CompositeValidator
 ValidatorMixin --&gt; Validator

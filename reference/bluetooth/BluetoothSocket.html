@@ -14262,15 +14262,15 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-QIODeviceBase
+QBluetoothSocket
+QIODevice
+ObjectMixin
+QObject
 Object
 object
-QIODevice
 BluetoothSocket
 IODeviceMixin
-QObject
-QBluetoothSocket
-ObjectMixin
+QIODeviceBase
 IODeviceMixin --&gt; BluetoothSocket
 ObjectMixin --&gt; IODeviceMixin
 object --&gt; ObjectMixin

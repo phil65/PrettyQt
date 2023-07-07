@@ -14279,14 +14279,14 @@
 <p>Validator ID: <strong>monotonic</strong></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Validator
-QValidator
 MonotonicListValidator
+ObjectMixin
+QValidator
+QObject
 Object
 object
-QObject
+Validator
 ValidatorMixin
-ObjectMixin
 Validator --&gt; MonotonicListValidator
 ValidatorMixin --&gt; Validator
 ObjectMixin --&gt; ValidatorMixin

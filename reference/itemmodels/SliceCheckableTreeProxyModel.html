@@ -14460,18 +14460,18 @@ indexes will become partially checked if needed.)</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-object
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-IdentityProxyModel
 AbstractItemModelMixin
-ObjectMixin
-SliceIdentityProxyModel
+QAbstractProxyModel
+SliceCheckableTreeProxyModel
 QIdentityProxyModel
 AbstractProxyModelMixin
-SliceCheckableTreeProxyModel
+SliceIdentityProxyModel
+ObjectMixin
+IdentityProxyModel
+QAbstractItemModel
+QObject
+Object
+object
 SliceIdentityProxyModel --&gt; SliceCheckableTreeProxyModel
 IdentityProxyModel --&gt; SliceIdentityProxyModel
 AbstractProxyModelMixin --&gt; IdentityProxyModel

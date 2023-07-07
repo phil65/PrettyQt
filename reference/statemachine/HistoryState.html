@@ -14400,14 +14400,14 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+AbstractStateMixin
+ObjectMixin
+QHistoryState
 HistoryState
+QObject
 Object
 object
 QAbstractState
-QObject
-QHistoryState
-ObjectMixin
-AbstractStateMixin
 AbstractStateMixin --&gt; HistoryState
 ObjectMixin --&gt; AbstractStateMixin
 object --&gt; ObjectMixin

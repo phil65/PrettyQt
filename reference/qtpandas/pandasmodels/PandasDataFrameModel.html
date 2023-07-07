@@ -14538,16 +14538,16 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-PandasDataFrameModel
-Object
-AbstractTableModel
-object
-QAbstractItemModel
-QAbstractTableModel
-QObject
 AbstractItemModelMixin
+PandasDataFrameModel
 AbstractTableModelMixin
+QAbstractTableModel
+QAbstractItemModel
 ObjectMixin
+AbstractTableModel
+QObject
+Object
+object
 AbstractTableModel --&gt; PandasDataFrameModel
 AbstractTableModelMixin --&gt; AbstractTableModel
 AbstractItemModelMixin --&gt; AbstractTableModelMixin

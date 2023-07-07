@@ -15561,18 +15561,18 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-QSlider
-Object
-SpanSlider
-object
+AbstractSliderMixin
+QAbstractSlider
+ObjectMixin
+Slider
 QObject
 QWidget
-QPaintDevice
-AbstractSliderMixin
+Object
+object
+QSlider
+SpanSlider
 WidgetMixin
-ObjectMixin
-QAbstractSlider
-Slider
+QPaintDevice
 Slider --&gt; SpanSlider
 AbstractSliderMixin --&gt; Slider
 WidgetMixin --&gt; AbstractSliderMixin

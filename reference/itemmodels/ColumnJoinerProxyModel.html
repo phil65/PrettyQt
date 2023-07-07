@@ -14615,16 +14615,16 @@ in this case it would be <code>{Text of column 0} - {Text of Column 1}: {Text of
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+AbstractItemModelMixin
+QAbstractProxyModel
+AbstractProxyModelMixin
+QAbstractItemModel
+ObjectMixin
+AbstractProxyModel
+QObject
 Object
 object
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-AbstractProxyModel
-ObjectMixin
-AbstractItemModelMixin
 ColumnJoinerProxyModel
-AbstractProxyModelMixin
 AbstractProxyModel --&gt; ColumnJoinerProxyModel
 AbstractProxyModelMixin --&gt; AbstractProxyModel
 AbstractItemModelMixin --&gt; AbstractProxyModelMixin

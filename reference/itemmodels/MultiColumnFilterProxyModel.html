@@ -14434,17 +14434,17 @@ for all columns is done in one go.</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+AbstractItemModelMixin
+QAbstractProxyModel
 QSortFilterProxyModel
+SortFilterProxyModel
+MultiColumnFilterProxyModel
+AbstractProxyModelMixin
+QAbstractItemModel
+ObjectMixin
+QObject
 Object
 object
-SortFilterProxyModel
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-MultiColumnFilterProxyModel
-ObjectMixin
-AbstractItemModelMixin
-AbstractProxyModelMixin
 SortFilterProxyModel --&gt; MultiColumnFilterProxyModel
 AbstractProxyModelMixin --&gt; SortFilterProxyModel
 AbstractItemModelMixin --&gt; AbstractProxyModelMixin

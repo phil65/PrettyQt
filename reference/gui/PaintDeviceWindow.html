@@ -14288,19 +14288,19 @@
 <p>Qt Base Class: <a href="https://doc.qt.io/qtforpython-6/PySide6/QtGui/QPaintDeviceWindow.html">QPaintDeviceWindow</a></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-QPaintDeviceWindow
-Object
-object
-QWindow
-QObject
 QSurface
+PaintDeviceMixin
+QWindow
+ObjectMixin
+QObject
 SurfaceMixin
+Object
+QPaintDeviceWindow
+object
+PaintDeviceWindow
 QPaintDevice
 WindowMixin
 PaintDeviceWindowMixin
-ObjectMixin
-PaintDeviceWindow
-PaintDeviceMixin
 PaintDeviceWindowMixin --&gt; PaintDeviceWindow
 WindowMixin --&gt; PaintDeviceWindowMixin
 ObjectMixin --&gt; WindowMixin

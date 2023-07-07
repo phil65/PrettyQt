@@ -14411,17 +14411,17 @@ If a verticalHeader is available, it will show the original position of the cell
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+AbstractItemModelMixin
+QAbstractProxyModel
+QIdentityProxyModel
+AbstractProxyModelMixin
+QAbstractItemModel
+ObjectMixin
+IdentityProxyModel
+QObject
 Object
 object
 TableToListProxyModel
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-ObjectMixin
-IdentityProxyModel
-AbstractItemModelMixin
-QIdentityProxyModel
-AbstractProxyModelMixin
 IdentityProxyModel --&gt; TableToListProxyModel
 AbstractProxyModelMixin --&gt; IdentityProxyModel
 AbstractItemModelMixin --&gt; AbstractProxyModelMixin

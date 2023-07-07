@@ -14202,17 +14202,17 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-QIODeviceBase
-AbstractSocketMixin
-Object
-TcpSocket
-QAbstractSocket
-object
 QIODevice
-IODeviceMixin
-QObject
+AbstractSocketMixin
 ObjectMixin
+QObject
+Object
 QTcpSocket
+object
+QAbstractSocket
+IODeviceMixin
+QIODeviceBase
+TcpSocket
 AbstractSocketMixin --&gt; TcpSocket
 IODeviceMixin --&gt; AbstractSocketMixin
 ObjectMixin --&gt; IODeviceMixin

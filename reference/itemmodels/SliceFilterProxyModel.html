@@ -14618,18 +14618,18 @@ SortFilterProxyModel with a column filter. (O(1) instead of O(n))</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+AbstractItemModelMixin
+QAbstractProxyModel
+QIdentityProxyModel
+SliceFilterProxyModel
+AbstractProxyModelMixin
+SliceIdentityProxyModel
+ObjectMixin
+IdentityProxyModel
+QAbstractItemModel
+QObject
 Object
 object
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-SliceFilterProxyModel
-AbstractItemModelMixin
-IdentityProxyModel
-ObjectMixin
-SliceIdentityProxyModel
-QIdentityProxyModel
-AbstractProxyModelMixin
 SliceIdentityProxyModel --&gt; SliceFilterProxyModel
 IdentityProxyModel --&gt; SliceIdentityProxyModel
 AbstractProxyModelMixin --&gt; IdentityProxyModel

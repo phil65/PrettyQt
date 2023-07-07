@@ -14690,18 +14690,18 @@
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
 AstViewer
-Object
 QSplitter
-object
-QObject
-QWidget
-QFrame
-QPaintDevice
-FrameMixin
-WidgetMixin
-SplitterMixin
 ObjectMixin
+QObject
+Object
+FrameMixin
+QFrame
+object
 Splitter
+QWidget
+SplitterMixin
+WidgetMixin
+QPaintDevice
 Splitter --&gt; AstViewer
 SplitterMixin --&gt; Splitter
 FrameMixin --&gt; SplitterMixin

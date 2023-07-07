@@ -14365,18 +14365,18 @@
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+AbstractItemModelMixin
+QAbstractProxyModel
+QIdentityProxyModel
+AbstractProxyModelMixin
+SliceIdentityProxyModel
+ObjectMixin
+IdentityProxyModel
+QAbstractItemModel
+QObject
 Object
 object
 SliceChangeFlagsProxyModel
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-IdentityProxyModel
-AbstractItemModelMixin
-ObjectMixin
-SliceIdentityProxyModel
-QIdentityProxyModel
-AbstractProxyModelMixin
 SliceIdentityProxyModel --&gt; SliceChangeFlagsProxyModel
 IdentityProxyModel --&gt; SliceIdentityProxyModel
 AbstractProxyModelMixin --&gt; IdentityProxyModel

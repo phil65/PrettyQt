@@ -14793,19 +14793,19 @@ decreases it.</p>
 <p>Qt Base Class: <a href="https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QScrollArea.html">QScrollArea</a></p>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-AbstractScrollAreaMixin
-object
+QAbstractScrollArea
 ScrollArea
+QPaintDevice
+ObjectMixin
+QObject
+Object
+FrameMixin
 QScrollArea
+object
 QWidget
 QFrame
-QObject
-QPaintDevice
-FrameMixin
 WidgetMixin
-ObjectMixin
-QAbstractScrollArea
+AbstractScrollAreaMixin
 AbstractScrollAreaMixin --&gt; ScrollArea
 FrameMixin --&gt; AbstractScrollAreaMixin
 WidgetMixin --&gt; FrameMixin

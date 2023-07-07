@@ -14601,18 +14601,18 @@ The selector receives the content of given data role as an argument.</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-object
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-IdentityProxyModel
 AbstractItemModelMixin
-ObjectMixin
-SliceIdentityProxyModel
-SliceValueTransformationProxyModel
+QAbstractProxyModel
 QIdentityProxyModel
 AbstractProxyModelMixin
+SliceIdentityProxyModel
+ObjectMixin
+IdentityProxyModel
+QAbstractItemModel
+QObject
+Object
+object
+SliceValueTransformationProxyModel
 SliceIdentityProxyModel --&gt; SliceValueTransformationProxyModel
 IdentityProxyModel --&gt; SliceIdentityProxyModel
 AbstractProxyModelMixin --&gt; IdentityProxyModel

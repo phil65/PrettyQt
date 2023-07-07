@@ -14603,17 +14603,17 @@ To display the html code properly, a HtmlItemDelegate is needed.</p>
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
+AbstractItemModelMixin
+QAbstractProxyModel
 QSortFilterProxyModel
+FuzzyFilterProxyModel
+SortFilterProxyModel
+AbstractProxyModelMixin
+QAbstractItemModel
+ObjectMixin
+QObject
 Object
 object
-SortFilterProxyModel
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-FuzzyFilterProxyModel
-ObjectMixin
-AbstractItemModelMixin
-AbstractProxyModelMixin
 SortFilterProxyModel --&gt; FuzzyFilterProxyModel
 AbstractProxyModelMixin --&gt; SortFilterProxyModel
 AbstractItemModelMixin --&gt; AbstractProxyModelMixin

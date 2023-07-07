@@ -14392,18 +14392,18 @@ Py passing an optional converter function, values which are mapped can be modifi
 </table>
 <h2 id="class-diagram">₼ Class diagram</h2>
 <pre class="mermaid"><code>graph TD;
-Object
-object
-QAbstractItemModel
-QAbstractProxyModel
-QObject
-IdentityProxyModel
 AbstractItemModelMixin
-ObjectMixin
+QAbstractProxyModel
 QIdentityProxyModel
-SliceIdentityProxyModel
 SliceMapRoleProxyModel
 AbstractProxyModelMixin
+SliceIdentityProxyModel
+ObjectMixin
+IdentityProxyModel
+QAbstractItemModel
+QObject
+Object
+object
 SliceIdentityProxyModel --&gt; SliceMapRoleProxyModel
 IdentityProxyModel --&gt; SliceIdentityProxyModel
 AbstractProxyModelMixin --&gt; IdentityProxyModel
