@@ -189,7 +189,6 @@ def get_class_table(klasses: type[core.QObject]):
         parent_str = ", ".join(link_for_class(parent) for parent in parents)
         line = f"|{link_for_class(kls)}|{kls.__module__}|{subclass_str}|{parent_str}|"
         lines.append(line)
-    lines.extend(f"|`{kls.__name__}`|{kls.__module__}|" for kls in klasses)
     return "\n\n" + "\n".join(lines) + "\n\n"
 
 
