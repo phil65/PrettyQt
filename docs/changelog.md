@@ -1,3 +1,9 @@
+## v1.53.1 (2023-07-07)
+
+### Fix
+
+- **build**: install addons for docs build
+
 ## v1.53.0 (2023-07-07)
 
 ### Feat
