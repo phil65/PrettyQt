@@ -7,22 +7,98 @@ from pathlib import Path
 import inspect
 import mkdocs_gen_files
 
-from prettyqt import core, gui, itemmodels, widgets
+from prettyqt import (
+    core,
+    charts,
+    custom_network,
+    custom_widgets,
+    debugging,
+    designer,
+    eventfilters,
+    gui,
+    itemmodels,
+    ipython,
+    # location,
+    multimedia,
+    multimediawidgets,
+    network,
+    openglwidgets,
+    pdf,
+    pdfwidgets,
+    positioning,
+    printsupport,
+    qml,
+    qthelp,
+    quick,
+    quickwidgets,
+    # statemachine,
+    svg,
+    svgwidgets,
+    texttospeech,
+    validators,
+    webenginecore,
+    webenginewidgets,
+    widgets,
+)
 
+# app = widgets.app()
 BASE_URL = "https://doc.qt.io/qtforpython-6/PySide6/"
+# table = widgets.TableView()
 
 
-def write_file_for_klass(klass, parts, file):
+def class_name(cls):
+    """Return a string representing the class"""
+    # NOTE: can be changed to str(class) for more complete class info
+    return cls.__name__
+
+
+def classes_tree(klasses):
+    module_classes = set()
+    inheritances = []
+
+    def inspect_class(klass):
+        if class_name(klass) not in module_classes:
+            # if klass.__module__.startswith(base_module):
+            module_classes.add(class_name(klass))
+            for base in klass.__bases__:
+                inheritances.append((class_name(base), class_name(klass)))
+                inspect_class(base)
+
+    for klass in klasses:
+        inspect_class(klass)
+    return module_classes, inheritances
+
+
+def classes_tree_to_mermaid(klasses, inheritances):
+    return "graph TD;\n" + "\n".join(
+        list(klasses) + ["%s --> %s" % (a, b) for a, b in inheritances]
+    )
+
+
+HIDE_NAV = """---
+hide:
+  - toc
+---
+
+"""
+
+
+def write_file_for_klass(klass: type, parts: tuple[str, ...], file):
     ident = ".".join(parts)
     file.write(f"::: prettyqt.{ident}.{klass.__name__}\n")
     # print(ident)
     if issubclass(klass, itemmodels.SliceIdentityProxyModel):
-        print("here")
         file.write("!!! note\n")
         file.write(
-            "This is a [slice proxy](SliceIdentityProxyModel.md) and can be selectively applied to a model.\n\n"
+            "    This is a [slice proxy](SliceIdentityProxyModel.md) and can be selectively applied to a model.\n\n"
+        )
+    if issubclass(klass, core.AbstractItemModelMixin) and klass.IS_RECURSIVE:
+        file.write("!!! Warning\n")
+        file.write(
+            "    Model can be recursive, so be careful with iterating whole tree.\n\n"
         )
     if issubclass(klass, core.QObject):
+        # model = itemmodels.QObjectPropertiesModel()
         table = get_prop_table_for_klass(klass)
         file.write(table)
         table = get_ancestor_table_for_klass(klass)
@@ -34,6 +110,7 @@ def write_file_for_klass(klass, parts, file):
         file.write(f"\n\nValidator ID: **{klass.ID}**\n\n")
     if hasattr(klass, "ID") and issubclass(klass, widgets.AbstractItemDelegateMixin):
         file.write(f"\n\nDelegate ID: **{klass.ID}**\n\n")
+    text = get_mermaid_for_klass(klass, file)
 
 
 def get_prop_table_for_klass(klass: type[core.QObject]):
@@ -55,26 +132,40 @@ def get_prop_table_for_klass(klass: type[core.QObject]):
     if props_without_super:
         lines.extend(
             (
-                f"\n### Class Properties:\n",
+                f"\n## Class Properties\n",
                 "|Qt Property|Type|User property|\n|-----------|----|-----------|",
             )
         )
         lines.extend(
-            f"|`{prop.get_name()}`|{prop.get_meta_type()}|{'x' if prop.get_name() == user_prop_name else ''}|"
+            f"|`{prop.get_name()}`|**{(prop.get_meta_type().get_name() or '').rstrip('*')}**|{'x' if prop.get_name() == user_prop_name else ''}|"
             for prop in props_without_super
         )
     if super_props:
         lines.extend(
             (
-                f"\n### Inherited Properties:\n",
+                f"\n## Inherited Properties\n",
                 "|Qt Property|Type|User property|\n|-----------|----|-----------|",
             )
         )
         lines.extend(
-            f"|`{prop.get_name()}`|{prop.get_meta_type()}|{'x' if prop.get_name() == user_prop_name else ''}|"
+            f"|`{prop.get_name()}`|**{(prop.get_meta_type().get_name() or '').rstrip('*')}**|{'x' if prop.get_name() == user_prop_name else ' '}|"
             for prop in super_props
         )
     return "\n\n" + "\n".join(lines) + "\n\n"
+
+
+def get_mermaid_for_klass(klass, fd):
+    classes, inheritances = classes_tree([klass])
+    text = classes_tree_to_mermaid(classes, inheritances)
+    fd.write("\n\n## ₼ Class diagram\n\n``` mermaid\n")
+    fd.write(text)
+    fd.write("\n```\n")
+
+
+def link_for_class(klass):
+    if klass is set:
+        return "set"
+    return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
 
 
 def get_ancestor_table_for_klass(klass: type[core.QObject]):
@@ -83,16 +174,26 @@ def get_ancestor_table_for_klass(klass: type[core.QObject]):
         return ""
     lines = ["|Ancestor|Description|", "|--------|-----------|"]
     lines.extend(
-        f"|`{subklass.__name__}`|{subklass.__module__}|" for subklass in subclasses
+        f"|{link_for_class(subklass)}|{subklass.__module__}|" for subklass in subclasses
     )
+    return "\n\n## Child classes\n\n" + "\n".join(lines) + "\n\n"
+
+
+def get_class_table(klasses: type[core.QObject]):
+    lines = ["|Name|Module|Inherits|Ancestors|", "|--|--|--|--|"]
+    for kls in klasses:
+        subclasses = kls.__subclasses__()
+        parents = kls.__bases__
+        subclass_str = ", ".join(link_for_class(subclass) for subclass in subclasses)
+        parent_str = ", ".join(link_for_class(parent) for parent in parents)
+        line = f"|{link_for_class(kls)}|{kls.__module__}|{subclass_str}|{parent_str}|"
+        lines.append(line)
+    lines.extend(f"|`{kls.__name__}`|{kls.__module__}|" for kls in klasses)
     return "\n\n" + "\n".join(lines) + "\n\n"
 
 
 def write_files_for_module(module_path, doc_path, parts):
     full_doc_path = Path("reference", doc_path)
-    with mkdocs_gen_files.open(full_doc_path.with_name("index.md"), "w") as fd:
-        ident = ".".join(parts)
-        fd.write(f"::: prettyqt.{ident}")
     try:
         module = importlib.import_module(module_path)
         klass_names = [i[0] for i in inspect.getmembers(module, inspect.isclass)]
@@ -105,15 +206,24 @@ def write_files_for_module(module_path, doc_path, parts):
         ]
     except (AttributeError, ImportError) as e:
         klasses = []
-    mkdocs_gen_files.set_edit_path(full_doc_path.with_name("index.md"), module_path)
     for klass in klasses:
         kls_name = klass.__name__
         nav[(*parts, kls_name)] = doc_path.with_name(f"{kls_name}.md").as_posix()
         with mkdocs_gen_files.open(full_doc_path.with_name(f"{kls_name}.md"), "w") as fd:
             write_file_for_klass(klass, parts, fd)
+        # with mkdocs_gen_files.open(full_doc_path.with_name(f"{kls_name}_with_inherited.md"), "w") as fd:
+        #     ident = ".".join(parts)
+        #     file.write(f"::: prettyqt.{ident}.{klass.__name__}\n")
+        #     file.write(f"    options:\n")
+        #     file.write(f"      allow_inspection: false\n")
         mkdocs_gen_files.set_edit_path(
             full_doc_path.with_name(f"{kls_name}.md"), module_path
         )
+    with mkdocs_gen_files.open(full_doc_path.with_name("index.md"), "w") as fd:
+        fd.write(HIDE_NAV)
+        text = get_class_table(klasses)
+        fd.write(text)
+    mkdocs_gen_files.set_edit_path(full_doc_path.with_name("index.md"), module_path)
 
 
 nav = mkdocs_gen_files.Nav()
