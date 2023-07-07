@@ -1,3 +1,33 @@
+## v1.53.0 (2023-07-07)
+
+### Feat
+
+- **AbstractItemModel**: add to_mermaid_tree method
+- **AbstractTableModel**: add to_markdown method
+- **Stalker**: add show method
+- **MetaObject**: add has_property and copy_properties_to methods
+- **AbstractItemView**: support Sequence as column/row kwarg for set_delegate
+- **Widget**: add get/set_layout_direction
+- `get_css` method for Gradient subclasses
+- **Gradient**: add set_color_at method
+- **StandardItemModel**: allow negative indexes for \__getitem__
+- **GridLayout**: allow negative indexes for (int, int) and int indexer
+- **Widget**: add set_width / set_height methods
+- add GridSplitter
+- **ProxyComparerWidget**: add link_selections kwarg
+- **AbstractItemView**: allow None for set_delegate
+- **ProxyComparerWiget**: allow custom delegate for ItemViews
+- **TabWidget**: add `add` method
+- **ProxyComparerWidget**: add itemview kwarg
+- **ProxyComparerWidget**: add is_tree kwarg
+- **AbstractItemModel**: add is_descendent_of helper
+
+### Fix
+
+- **LogRecordModel**: correct time formatting
+- **Cursor**: fix typo
+- **MeltProxyModel**: emit signals when props change
+
 ## v1.52.0 (2023-07-05)
 
 ### Feat
