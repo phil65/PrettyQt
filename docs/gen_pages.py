@@ -173,7 +173,7 @@ def get_ancestor_table_for_klass(klass: type[core.QObject]):
     subclasses = klass.__subclasses__()
     if not subclasses:
         return ""
-    lines = ["|Ancestor|Description|", "|--------|-----------|"]
+    lines = ["|Ancestor|Module|", "|--------|-----------|"]
     lines.extend(
         f"|{link_for_class(subklass)}|{subklass.__module__}|" for subklass in subclasses
     )
@@ -181,7 +181,7 @@ def get_ancestor_table_for_klass(klass: type[core.QObject]):
 
 
 def get_class_table(klasses: type[core.QObject]):
-    lines = ["|Name|Module|Inherits|Ancestors|", "|--|--|--|--|"]
+    lines = ["|Name|Module|Ancestors|Inherits|", "|--|--|--|--|"]
     for kls in klasses:
         subclasses = kls.__subclasses__()
         parents = kls.__bases__
