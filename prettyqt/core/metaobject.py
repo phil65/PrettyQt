@@ -91,14 +91,22 @@ class MetaObject:
         return self.className()
 
     def get_class_info(self, include_super: bool = True) -> dict[str, str]:
-        """Get MetaObject class info."""
+        """Get MetaObject class info.
+
+        Arguments:
+            include_super: Whether to include class info from parent classes.
+        """
         start = 0 if include_super else self.item.classInfoOffset()
         count = self.item.classInfoCount()
         classinfos = [self.item.classInfo(i) for i in range(start, count)]
         return {i.name(): i.value() for i in classinfos}
 
     def get_method(self, index: int | str) -> core.MetaMethod:
-        """Get MetaMethod based on index or name."""
+        """Get MetaMethod based on index or name.
+
+        Arguments:
+            index: index or method name
+        """
         if isinstance(index, int):
             method = core.MetaMethod(self.item.method(index))
             if not method.isValid():
@@ -110,7 +118,11 @@ class MetaObject:
         raise KeyError(index)
 
     def get_enum(self, index: int | str) -> core.MetaEnum:
-        """Get MetaEnum based on index or name."""
+        """Get MetaEnum based on index or name.
+
+        Arguments:
+            index: index or Enum name
+        """
         if isinstance(index, int):
             enum = core.MetaEnum(self.item.enumerator(index))
             if not enum.isValid():
@@ -121,8 +133,28 @@ class MetaObject:
                 return enumerator
         raise KeyError(index)
 
+    def has_property(self, name: str):
+        """Check if a property with given name exists.
+
+        Only checks for non-dynamic properties.
+
+        Arguments:
+            name: property name
+        """
+        try:
+            self.get_property(name)
+            return True
+        except KeyError:
+            return False
+
     def get_property(self, index: int | str) -> core.MetaProperty:
-        """Get MetaProperty based on index or name."""
+        """Get MetaProperty based on index or name.
+
+        Only returns non-dynamic properties.
+
+        Arguments:
+            index: index or property name
+        """
         if isinstance(index, int):
             prop = core.MetaProperty(self.item.property(index))
             if not prop.isValid():
@@ -134,7 +166,11 @@ class MetaObject:
         raise KeyError(index)
 
     def get_constructor(self, index: int | str) -> core.MetaMethod:
-        """Get ctor MetaMethod based on index or name."""
+        """Get ctor MetaMethod based on index or name.
+
+        Arguments:
+            index: index or constructor name
+        """
         if isinstance(index, int):
             method = core.MetaMethod(self.item.constructor(index))
             if not method.isValid():
@@ -149,15 +185,21 @@ class MetaObject:
         self,
         include_super: bool = True,
         type_filter: core.metamethod.MethodTypeStr | None = None,
-        filter_shit: bool = True,
+        filter_internal: bool = True,
     ) -> list[core.MetaMethod]:
-        """Get all MetaMethods based on given criteria."""
+        """Get all MetaMethods based on given criteria.
+
+        Arguments:
+            include_super: Whether to include Methods from parent classes
+            type_filter: Method type to filter for.
+            filter_internal: Filter Qt-internal methods
+        """
         start = 0 if include_super else self.item.methodOffset()
         methods = [
             method
             for i in range(start, self.item.methodCount())
             if not (method := self.get_method(i)).get_name().startswith("_q_")
-            or not filter_shit
+            or not filter_internal
         ]
         if type_filter is None:
             return methods
@@ -165,7 +207,11 @@ class MetaObject:
             return [i for i in methods if i.get_method_type() == type_filter]
 
     def get_enums(self, include_super: bool = True) -> list[core.MetaEnum]:
-        """Get all MetaEnums based on given criteria."""
+        """Get all MetaEnums based on given criteria.
+
+        Arguments:
+            include_super: Whether to include Enums from parent classes.
+        """
         start = 0 if include_super else self.item.enumeratorOffset()
         return [self.get_enum(i) for i in range(start, self.item.enumeratorCount())]
 
@@ -188,7 +234,21 @@ class MetaObject:
         only_with_notifiers: bool = False,
         only_with_type_name: str = "",
     ) -> list[core.MetaProperty]:
-        """Get all MetaProperties based on given criteria."""
+        """Get all MetaProperties based on given criteria.
+
+        Arguments:
+            include_super: Whether to include properties from parent classes,
+            only_writable: Whether to filter for writable properties.
+            only_stored: Whether to filter for stored properties.
+            only_bindable: Whether to filter for bindable properties.
+            only_designable: Whether to filter for designable properties.
+            only_final: Whether to filter for final properties.
+            only_required: Whether to filter for required properties.
+            only_enum_type: Whether to filter for Enum type properties.
+            only_flag_type: Whether to filter for Flag_type properties.
+            only_with_notifiers: Whether to filter for properties with notifier.
+            only_with_type_name: Only include properties with given give name as type.
+        """
         start = 0 if include_super else self.item.propertyOffset()
         count = self.item.propertyCount()
         prop_list = []
@@ -213,7 +273,12 @@ class MetaObject:
     def get_property_values(
         self, qobject: core.QObject, cast_types: bool = False
     ) -> dict[str, Any]:
-        """Get a dictionary containing all MetaProperties values from given qobject."""
+        """Get a dictionary containing all MetaProperties values from given qobject.
+
+        Arguments:
+            qobject: QObject to get properties from
+            cast_types: Whether to cast types to PrettyQt classes.
+        """
         vals = {prop.get_name(): prop.read(qobject) for prop in self.get_properties()}
         if cast_types:
             return {k: datatypes.make_serializable(v) for k, v in vals.items()}
@@ -223,7 +288,12 @@ class MetaObject:
     def get_signals(
         self, include_super: bool = True, only_notifiers: bool = False
     ) -> list[core.MetaMethod]:
-        """Get all signal MetaMethods based on given criteria."""
+        """Get all signal MetaMethods based on given criteria.
+
+        Arguments:
+            include_super: Whether to include Signals from parent classes
+            only_notifiers: Whether to filter for property notifier signals
+        """
         if only_notifiers:
             return [  # type: ignore
                 prop.get_notify_signal()
@@ -234,11 +304,19 @@ class MetaObject:
             return self.get_methods(include_super=include_super, type_filter="signal")
 
     def get_slots(self, include_super: bool = True) -> list[core.MetaMethod]:
-        """Get all slot MetaMethods based on given criteria."""
+        """Get all slot MetaMethods based on given criteria.
+
+        Arguments:
+            include_super: Whether to include Slots from parent classes
+        """
         return self.get_methods(include_super=include_super, type_filter="slot")
 
     def get_plain_methods(self, include_super: bool = True) -> list[core.MetaMethod]:
-        """Get all plain MetaMethods based on given criteria."""
+        """Get all plain MetaMethods based on given criteria.
+
+        Arguments:
+            include_super: Whether to include plain methods from parent classes
+        """
         return self.get_methods(include_super=include_super, type_filter="method")
 
     def get_meta_type(self) -> core.MetaType:
@@ -299,7 +377,13 @@ class MetaObject:
         return handles
 
     def copy(self, qobject: T, forward_signals: bool = True) -> T:
-        """Create a copy of given QObject."""
+        """Create a copy of given QObject.
+
+        Arguments:
+            qobject: QObject to create a copied instance for.
+            forward_signals: Whether to connect all signals from qobject to the new
+                             instance.
+        """
         try:
             new = type(qobject)()
         except TypeError:
@@ -312,6 +396,22 @@ class MetaObject:
             self.connect_signals(new, qobject)
         logger.debug(f"copied {qobject!r}")
         return new
+
+    @classmethod
+    def copy_properties_to(cls, source: core.QObject, target: core.QObject):
+        """Sets all properties of target to value of source.
+
+        Only sets properties which exist for both QObjects.
+
+        Arguments:
+            source: Source QObject
+            target: Target QObject
+        """
+        source_metaobj = cls(source.metaObject())
+        target_metaobj = cls(target.metaObject())
+        for prop in target_metaobj.get_properties(only_writable=True):
+            if source_metaobj.has_property(prop_name := prop.get_name()):
+                target.setProperty(prop_name, source.property(prop_name))
 
     def get_property_class_affiliations(self) -> dict[str, list[core.MetaProperty]]:
         """Get a mapping of class -> property affiliations."""
