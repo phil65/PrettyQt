@@ -4,7 +4,7 @@ from prettyqt.qt.QtStateMachine import *  # noqa: F403
 
 from .abstractstate import AbstractState, AbstractStateMixin
 from .abstracttransition import AbstractTransition, AbstractTransitionMixin
-from .eventtransition import EventTransition, EventTransitionMixin
+from .eventtransition import EventTransition
 from .finalstate import FinalState
 from .historystate import HistoryState
 from .signaltransition import SignalTransition
@@ -23,5 +23,4 @@ __all__ = [
     "AbstractTransitionMixin",
     "SignalTransition",
     "EventTransition",
-    "EventTransitionMixin",
 ]
