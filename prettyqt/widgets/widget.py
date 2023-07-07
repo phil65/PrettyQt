@@ -44,6 +44,15 @@ class WidgetMixin(core.ObjectMixin):
         if margin is not None:
             self.set_margin(margin)
 
+    @classmethod
+    def grab_example_pixmap(cls):
+        widget = cls()
+        widget.show()
+        widgets.app().processEvents()
+        pixmap = widget.grab()
+        widget.hide()
+        return pixmap
+
     def _get_map(self):
         maps = super()._get_map()
         maps |= {
