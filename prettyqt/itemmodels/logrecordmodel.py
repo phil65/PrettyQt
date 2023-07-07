@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime
 import logging
 import traceback
 
@@ -63,7 +64,7 @@ class CreatedColumn(itemmodels.ColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 dt = core.DateTime.from_seconds(item.created)
-                return dt.fromString(self.display_format)
+                return dt.toString(self.display_format)
             case constants.USER_ROLE:
                 return core.DateTime.from_seconds(item.created)
 
@@ -114,7 +115,7 @@ class RelativeCreatedColumn(itemmodels.ColumnItem):
     def get_data(self, item: logging.LogRecord, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return str(item.relativeCreated)
+                return str(datetime.timedelta(milliseconds=item.relativeCreated))
 
 
 class NameColumn(itemmodels.ColumnItem):
