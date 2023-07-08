@@ -56,6 +56,18 @@ hide:
 """
 
 
+def get_widget_screenshot(widget: widgets.QWidget) -> bytes:
+    widget.show()
+    widgets.app().processEvents()
+    pixmap = widget.grab()
+    widget.hide()
+    ba = core.ByteArray()
+    buffer = core.QBuffer(ba)
+    buffer.open(core.QIODeviceBase.OpenModeFlag.WriteOnly)
+    ok = pixmap.save(buffer, "PNG")
+    return ba.data()
+
+
 def write_file_for_klass(klass: type, parts: tuple[str, ...], file):
     ident = ".".join(parts)
     file.write(f"::: prettyqt.{ident}.{klass.__name__}\n")
