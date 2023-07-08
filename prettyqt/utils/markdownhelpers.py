@@ -28,6 +28,7 @@ AdmonitionTypeStr = Literal[
     "quote",
 ]
 
+
 BASE_URL = "https://doc.qt.io/qtforpython-6/PySide6/"
 
 
@@ -105,7 +106,7 @@ def get_prop_table(props, user_prop_name: str | None = None) -> str:
 
 def get_qt_help_link(klass):
     mod = klass.__module__.replace("PySide6.", "").replace("PyQt6.", "")
-    url = f"{BASE_URL}{mod}/{klass.__name__}.html"
+    url = f"{BASE_URL}{mod}/{klass.__qualname__.replace('.', '/')}.html"
     return f"[{klass.__name__}]({url})"
 
 
@@ -126,11 +127,19 @@ def get_prop_tables_for_klass(klass: type[core.QObject]) -> str:
         return ""
     lines = []
     if props_without_super:
-        lines.append("\n## Class Properties\n")
-        lines.append(get_prop_table(props_without_super, user_prop_name))
+        lines.extend(
+            (
+                "\n## Class Properties\n",
+                get_prop_table(props_without_super, user_prop_name),
+            )
+        )
     if super_props:
-        lines.append("\n## Inherited properties\n")
-        lines.append(get_prop_table(super_props, user_prop_name))
+        lines.extend(
+            (
+                "\n## Inherited properties\n",
+                get_prop_table(super_props, user_prop_name),
+            )
+        )
     return "\n\n" + "\n".join(lines) + "\n\n"
 
 
@@ -175,12 +184,11 @@ def get_ancestor_table_for_klass(klass: type[core.QObject]) -> str:
 
 
 def get_image(path: str, caption: str = "") -> str:
-    text = f"""
+    return f"""
 <figure markdown>
-  ![Image title](images/{path})
+  ![Image title]({path})
   <figcaption>{caption}</figcaption>
 </figure>"""
-    return text
 
 
 def get_class_table(klasses: list[type[core.QObject]]) -> str:
@@ -212,3 +220,16 @@ def model_to_markdown(
         sections = [str(i) if i else "" for i in row]
         lines.append(f"|{'|'.join(sections)}|")
     return "\n".join(lines)
+
+
+def get_dependecy_table(distribution):
+    from prettyqt import itemmodels, widgets
+
+    model = itemmodels.ImportlibTreeModel("prettyqt")
+    table = widgets.TreeView(word_wrap=False)
+    table.set_model(model)
+    table.expand_all(depth=2)
+    table.proxifier.reorder_columns(
+        ["Name", "Constraints", "Extra", "Summary", "Homepage"]
+    )
+    return model_to_markdown(table.model())
