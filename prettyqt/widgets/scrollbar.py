@@ -15,6 +15,12 @@ class ScrollBarMixin(widgets.AbstractSliderMixin):
         super().__init__(ori, parent)
         self.valueChanged.connect(self.on_value_change)
 
+    @classmethod
+    def setup_example(cls):
+        w = widgets.ScrollArea()
+        w.v_scrollbar = cls(orientation="vertical", parent=w)
+        return w
+
     def scroll_by_value(self, value: int):
         """Scroll by given distance."""
         value = min(max(self.minimum(), self.value() + value), self.maximum())

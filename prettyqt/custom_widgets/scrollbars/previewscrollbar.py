@@ -12,6 +12,11 @@ class PreviewScrollBar(widgets.ScrollBar):
         self._scale = 0.3
         # self.installEventFilter("slider_move_to_mouse_click")
 
+    @classmethod
+    def setup_example(cls):
+        w = widgets.PlainTextEdit()
+        return cls(parent=w)
+
     def sizeHint(self):
         expand = (
             core.QSize(self._width, 1)
@@ -70,7 +75,10 @@ class PreviewScrollBar(widgets.ScrollBar):
             # minimap_fully_visible = minimap_visible_height == minimap_height
             height_ratio = minimap_height / v_scroll.height()
             map_scroll_distance = minimap_height - minimap_visible_height
-            scroll_per_value = map_scroll_distance / v_scroll.maximum()
+            if v_scroll.maximum():
+                scroll_per_value = map_scroll_distance / v_scroll.maximum()
+            else:
+                scroll_per_value = 1
             # doc_x_margin = 1
             # doc_height = min(gr.height(), textarea_height)
             # yoffset = 1  # top instead of center-aligned (gr.height() - doc_height) / 2

@@ -35,6 +35,12 @@ class FilterHeader(widgets.HeaderView):
         self._update_filter_boxes()
         self.update_geometries()
 
+    @classmethod
+    def setup_example(cls):
+        w = widgets.TableView()
+        widget = cls(parent=w)
+        return widget
+
     def editors_visible(self) -> bool:
         return self._editors_visible
 

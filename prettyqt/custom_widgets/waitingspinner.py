@@ -92,8 +92,8 @@ class BaseWaitingSpinner(widgets.Widget):
                     painter.setBrush(color)
                     painter.draw_rounded_rect(
                         (0, -self._line_width / 2, self._line_length, self._line_width),
-                        self._roundness,
-                        self._roundness,
+                        int(self._roundness),
+                        int(self._roundness),
                         relative=True,
                     )
 

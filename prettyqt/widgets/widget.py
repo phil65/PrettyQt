@@ -45,13 +45,8 @@ class WidgetMixin(core.ObjectMixin):
             self.set_margin(margin)
 
     @classmethod
-    def grab_example_pixmap(cls):
-        widget = cls()
-        widget.show()
-        widgets.app().processEvents()
-        pixmap = widget.grab()
-        widget.hide()
-        return pixmap
+    def setup_example(cls):
+        return cls()
 
     def _get_map(self):
         maps = super()._get_map()
