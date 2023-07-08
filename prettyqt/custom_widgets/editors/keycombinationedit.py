@@ -27,7 +27,7 @@ class KeyCombinationEdit(widgets.WidgetMixin, widgets.QKeySequenceEdit):
 
     def get_value(self) -> str:
         seq = self.keySequence()
-        return seq[0].toString() if len(seq) > 0 else ""
+        return seq[0].toString() if seq.count() > 0 else ""
 
     def is_valid(self) -> bool:
         return True

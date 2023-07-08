@@ -36,7 +36,7 @@ from prettyqt.utils import colors, datatypes
 class BaseWaitingSpinner(widgets.Widget):
     def __init__(
         self,
-        parent: widgets.QWidget | None,
+        parent: widgets.QWidget | None = None,
         modality: constants.ModalityStr = "none",
     ):
         super().__init__(parent=parent)
@@ -91,9 +91,9 @@ class BaseWaitingSpinner(widgets.Widget):
                     )
                     painter.setBrush(color)
                     painter.draw_rounded_rect(
-                        (0, -self._line_width / 2, self._line_length, self._line_width),
-                        int(self._roundness),
-                        int(self._roundness),
+                        (0, -self._line_width // 2, self._line_length, self._line_width),
+                        self._roundness,
+                        self._roundness,
                         relative=True,
                     )
 
@@ -237,7 +237,7 @@ class BaseWaitingSpinner(widgets.Widget):
 class WaitingSpinner(BaseWaitingSpinner):
     def __init__(
         self,
-        parent: widgets.QWidget | None,
+        parent: widgets.QWidget | None = None,
         center_on_parent: bool = True,
         disable_parent: bool = True,
         modality: constants.ModalityStr = "none",

@@ -149,9 +149,12 @@ class Stalker(core.Object):
 
     def _on_signal_emitted(self, signal: core.MetaMethod):
         def fn(*args, **kwargs):
-            self.signal_emitted.emit(signal, args)
-            self.signal_counter[signal.get_name()] += 1
-            self.log(f"Emitted signal {signal.get_name()}{args}")
+            try:
+                self.signal_emitted.emit(signal, args)
+                self.signal_counter[signal.get_name()] += 1
+                self.log(f"Emitted signal {signal.get_name()}{args}")
+            except RuntimeError:
+                pass
 
         return fn
 

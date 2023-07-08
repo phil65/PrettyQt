@@ -4,7 +4,10 @@ from prettyqt import widgets
 
 
 class SizeGrip(widgets.WidgetMixin, widgets.QSizeGrip):
-    pass
+    @classmethod
+    def setup_example(cls):
+        w = widgets.Widget()
+        return cls(w)
 
 
 if __name__ == "__main__":

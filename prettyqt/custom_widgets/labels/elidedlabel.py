@@ -18,7 +18,7 @@ class ElidedLabel(widgets.Frame):
         self.set_size_policy("expanding", "preferred")
 
     def __repr__(self):
-        return get_repr(self, self.text())
+        return get_repr(self, self.elided_text)
 
     def set_text(self, text: str):
         self._text = text
@@ -27,7 +27,7 @@ class ElidedLabel(widgets.Frame):
     def get_text(self) -> str:
         return self._text
 
-    text = core.Property(str, get_text, set_text)
+    elided_text = core.Property(str, get_text, set_text)
 
     def paintEvent(self, event):
         super().paintEvent(event)

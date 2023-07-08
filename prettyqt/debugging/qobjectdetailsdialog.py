@@ -129,6 +129,11 @@ class QObjectDetailsDialog(widgets.MainWindow):
         logger.info(repr(widget))
         self.hierarchyview.select_object(widget)
 
+    @classmethod
+    def setup_example(cls):
+        w = widgets.PlainTextEdit()
+        return cls(w)
+
 
 if __name__ == "__main__":
     app = widgets.app()

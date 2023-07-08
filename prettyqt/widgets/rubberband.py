@@ -20,8 +20,12 @@ class RubberBandMixin(widgets.WidgetMixin):
         parent: widgets.QWidget | None = None,
         **kwargs,
     ):
-        shape = SHAPE[shape] if isinstance(shape, str) else shape
+        shape = SHAPE.get_enum_value(shape)
         super().__init__(shape, parent, **kwargs)
+
+    @classmethod
+    def setup_example(cls):
+        return cls(widgets.QRubberBand.Shape.Rectangle)
 
     def get_shape(self) -> ShapeStr:
         return SHAPE.inverse[self.shape()]

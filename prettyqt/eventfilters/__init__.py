@@ -8,11 +8,16 @@ from .hovericoneventfilter import HoverIconEventFilter
 from .listviewgridresizeeventfilter import ListViewGridResizeEventFilter
 from .sectionautospaneventfilter import SectionAutoSpanEventFilter
 from .slidermovetomouseclickeventfilter import SliderMoveToMouseClickEventFilter
-from .timelabeleventfilter import DateLabelEventFilter, TimeLabelEventFilter
+from .timelabeleventfilter import (
+    DateLabelEventFilter,
+    TimeLabelEventFilter,
+    TextUpdateEventFilter,
+)
 
 
 __all__ = [
     "BaseEventFilter",
+    "TextUpdateEventFilter",
     "HoverIconEventFilter",
     "AnimatedToolTipEventFilter",
     "EventCatcher",

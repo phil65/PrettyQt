@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 class ErrorMessageBox(widgets.MessageBox):
     """An message box widget for displaying Python exception."""
 
-    def __init__(self, title: str, text_or_exception: str | Exception, parent):
+    def __init__(self, title: str, text_or_exception: str | Exception, parent=None):
         if isinstance(text_or_exception, str):
             text = text_or_exception
             exc = None
@@ -49,6 +49,10 @@ class ErrorMessageBox(widgets.MessageBox):
                 sys.exit(1)
             case widgets.MessageBox.StandardButton.Ok:
                 return True
+
+    @classmethod
+    def setup_example(cls):
+        return cls("Title", "Test message")
 
     @classmethod
     def from_exc(cls, e: Exception, parent=None):

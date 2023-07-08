@@ -6,7 +6,7 @@ from prettyqt import gui, widgets
 class TracebackDialog(widgets.Dialog):
     """A dialog box that shows Python traceback."""
 
-    def __init__(self, parent):
+    def __init__(self, parent: widgets.QWidget | None = None):
         super().__init__(parent, window_title="Traceback")
         layout = self.set_layout("vertical")
         self._text = widgets.TextEdit(self, read_only=True, line_wrap_mode="none")

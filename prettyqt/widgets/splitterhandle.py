@@ -15,6 +15,11 @@ class SplitterHandle(widgets.WidgetMixin, widgets.QSplitterHandle):
         ori = constants.ORIENTATION.get_enum_value(orientation)
         super().__init__(ori, parent, **kwargs)
 
+    @classmethod
+    def setup_example(cls):
+        w = widgets.Splitter("horizontal")
+        return cls("horizontal", w)
+
     def mouseDoubleClickEvent(self, ev):
         self.double_clicked.emit(self)
 

@@ -5,4 +5,6 @@ from prettyqt.qt import QtHelp
 
 
 class HelpIndexWidget(widgets.ListViewMixin, QtHelp.QHelpIndexWidget):
-    pass
+    @classmethod
+    def setup_example(cls):
+        return None

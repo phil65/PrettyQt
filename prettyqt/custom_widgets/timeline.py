@@ -69,6 +69,10 @@ class Timeline(widgets.Widget):
         self.add(other)
         return self
 
+    @classmethod
+    def setup_example(cls):
+        return cls(duration=60, length=60)
+
     def add_sample(
         self,
         duration: int,

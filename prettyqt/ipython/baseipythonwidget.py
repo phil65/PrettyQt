@@ -44,6 +44,10 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
         )
         self.adjust_style_to_palette()
 
+    @classmethod
+    def setup_example(cls):
+        return None
+
     def set_completion_mode(self, mode: CompletionmodeStr):
         self._set_completion_widget(mode)
 
