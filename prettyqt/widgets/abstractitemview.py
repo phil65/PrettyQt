@@ -374,7 +374,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         column: int | Sequence | None = None,
         row: int | Sequence | None = None,
         persistent: bool = False,
-        **kwargs,
+        **kwargs: Any,
     ):
         """Set a item delegate for the view.
 
@@ -485,7 +485,9 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         """Return generator yielding row nums."""
         return (x.row() for x in self.selected_indexes())
 
-    def selected_data(self, role=constants.USER_ROLE) -> Generator[Any, None, None]:
+    def selected_data(
+        self, role: constants.ItemDataRole = constants.USER_ROLE
+    ) -> Generator[Any, None, None]:
         """Return generator yielding selected userData.
 
         Arguments:
