@@ -111,6 +111,10 @@ class LabeledSlider(widgets.Widget):
                         self.adjust_margins()
                 painter.drawText(left, bottom, v_str)
 
+    @classmethod
+    def setup_example(cls):
+        return cls(labels=["a", "b", "c"])
+
     def adjust_margins(self):
         self.box.setContentsMargins(
             self.left_margin,

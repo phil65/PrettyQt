@@ -19,6 +19,11 @@ class OptionalWidget(widgets.GroupBox):
     def __getattr__(self, value: str):
         return self.widget.__getattribute__(value)
 
+    @classmethod
+    def setup_example(cls):
+        w = widgets.CheckBox("Example")
+        return cls(widget=w)
+
     @property
     def enabled(self) -> bool:
         return self.isChecked()

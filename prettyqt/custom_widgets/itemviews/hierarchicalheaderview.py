@@ -36,19 +36,11 @@ class HierarchicalHeaderView(widgets.HeaderView):
 
     header_model = None
 
-    def __init__(
-        self,
-        orientation: constants.Orientation | constants.OrientationStr,
-        parent: widgets.QWidget,
-    ):
-        super().__init__(orientation, parent, highlight_sections=True)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, highlight_sections=True, **kwargs)
         self.setSectionsClickable(True)
         self.sectionResized.connect(self.on_section_resized)
         self.show()  # force to be visible
-        if orientation in {constants.HORIZONTAL, "horizontal"}:
-            parent.setHorizontalHeader(self)
-        else:
-            parent.setVerticalHeader(self)
         self.sectionMoved.connect(self._on_section_moved)
 
     def init_from_new_model(
@@ -602,8 +594,8 @@ if __name__ == "__main__":
     # Prepare view
     #    oldh, oldv = view.horizontalHeader(), view.verticalHeader()
     #    oldh.setParent(form), oldv.setParent(form) #Save old headers for some reason
-    HierarchicalHeaderView(constants.HORIZONTAL, view)
-    HierarchicalHeaderView(constants.VERTICAL, view)
+    view.h_header = HierarchicalHeaderView(constants.HORIZONTAL)
+    view.v_header = HierarchicalHeaderView(constants.VERTICAL)
     view.h_header.setSectionsMovable(True)  # reorder DataFrame columns manually
     # Set data
     model = DataFrameModel(df)

@@ -99,6 +99,13 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
             case _:
                 raise TypeError(index)
 
+    @classmethod
+    def setup_example(cls):
+        model = core.StringListModel(["a", "b", "c"])
+        header = cls(orientation="vertical")
+        header.setModel(model)
+        return header
+
     def _get_map(self):
         maps = super()._get_map()
         maps |= {"defaultAlignment": constants.ALIGNMENTS}

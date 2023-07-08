@@ -11,9 +11,15 @@ logger = logging.getLogger(__name__)
 class OrientedTableView(widgets.TableView):
     """TableView class with some convenience methods for oriented tables."""
 
-    def __init__(self, orientation: constants.Orientation, **kwargs):
+    def __init__(
+        self, orientation: constants.Orientation | constants.OrientationStr, **kwargs
+    ):
         super().__init__(**kwargs)
-        self.orientation = orientation
+        self.orientation = constants.ORIENTATION.get_enum_value(orientation)
+
+    @classmethod
+    def setup_example(cls):
+        return cls(orientation="vertical")
 
     def get_higher_levels(self, levels: int) -> core.ItemSelection:
         model = self.model()
