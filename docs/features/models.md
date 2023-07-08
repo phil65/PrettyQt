@@ -24,6 +24,7 @@ preferred choice for most models.
 | `list[re.Match]` | [RegexMatchesModel](regexmatchesmodel.md) | Table do display list of regex matches
 | `object`| [PythonObjectTreeModel](pythonobjecttreemodel.md) | Tree model showing all attributes of an object.
 | `xml.etree.ElementTree, ElementTreeIterator` | [XmlModel](xmlmodel.md) | Tree view for an xml ElementTree
+| `pkgutil.ModuleInfo, types.ModuleType` | [ModuleInfoModel](ModuleInfoModel.md) | Tree view to display a module hierarchy.
 
 ## Qt-Type models
 
