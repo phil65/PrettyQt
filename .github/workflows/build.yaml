@@ -56,10 +56,14 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
     - name: Create documentation
+      # combine test coverage with --cov-append?
       # if: matrix.python-version == '3.10' && runner.os == 'Linux'
-      run: |
-        poetry install -E pyside6 -E addons
-        poetry run mkdocs build
+      uses: coactions/setup-xvfb@v1
+      timeout-minutes: 5
+      with:
+        run: |
+          poetry install -E pyside6 -E addons
+          poetry run mkdocs build
     # - name: Build and publish
     #   if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.10' && runner.os == 'Linux'
     #   run: |
@@ -82,13 +86,20 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
+
     - name: Install packages
+
       # if: runner.os == 'Linux'
       run: |
         pip install --upgrade pip
         pip install poetry
         poetry install -E pyside6 -E addons
-        poetry run mkdocs build
+    - name: Build documentation
+      uses: coactions/setup-xvfb@v1
+      timeout-minutes: 5
+      with:
+        run: |
+          poetry run mkdocs build
     - name: Build and publish
       run: |
         poetry config pypi-token.pypi ${{ secrets.PYPI_SECRET }}
