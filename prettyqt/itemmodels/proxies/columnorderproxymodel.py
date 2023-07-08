@@ -7,8 +7,8 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
     """Proxy model which reorders the columns of the source model.
 
     Proxy model which reorders / hides the columns of the source model by passing a list
-    containing the new order. If not all indexes are part of the list, then the
-    missing sections will be hidden.
+    containing the new order. Order indexes can either be an integer or the Column header.
+    If not all indexes are part of the list, then the missing sections will be hidden.
 
     ### Example
 
@@ -27,16 +27,41 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
     ID = "column_order"
     ICON = "mdi.reorder-vertical"
 
-    def __init__(self, order: list[int], **kwargs):
+    def __init__(self, order: list[int | str], **kwargs):
         self._column_order = order
         super().__init__(**kwargs)
+        self.set_column_order(order)
 
     def get_column_order(self) -> list[int]:
         return self._column_order
 
-    def set_column_order(self, order: list[int]):
+    def setSourceModel(self, model):
+        super().setSourceModel(model)
+        self._resolve_string_indexes()
+
+    def _resolve_string_indexes(self):
+        new_order = []
+        source = self.sourceModel()
+        for index in self._column_order:
+            if isinstance(index, str):
+                for i in range(source.columnCount()):
+                    print(i)
+                    if (
+                        source.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
+                        == index
+                    ):
+                        index = i
+                        break
+                else:
+                    raise ValueError(index)
+            new_order.append(index)
+        self._column_order = new_order
+
+    def set_column_order(self, order: list[int | str]):
         with self.reset_model():
             self._column_order = order
+            if self.sourceModel() is not None:
+                self._resolve_string_indexes()
 
     def mapToSource(self, proxy_index: core.ModelIndex) -> core.ModelIndex:
         if not proxy_index.isValid():
@@ -120,8 +145,9 @@ if __name__ == "__main__":
     source_model = gui.StandardItemModel.from_dict(data)
     app = widgets.app()
     table = widgets.TableView()
-    model = ColumnOrderProxyModel(order=[1, 2], parent=table)
-    model.setSourceModel(source_model)
+    model = ColumnOrderProxyModel(
+        order=["b", "c"], parent=table, source_model=source_model
+    )
     table.set_model(model)
     table.show()
     with app.debug_mode():
