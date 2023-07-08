@@ -113,6 +113,10 @@ markdown_extensions:
     toc_depth: 2
 use_directory_urls: false
 
+extra_javascript:
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - javascripts/tablesort.js
+
 extra:
   social:
   - icon: fontawesome/brands/github
