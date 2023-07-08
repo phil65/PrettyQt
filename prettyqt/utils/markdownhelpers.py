@@ -174,6 +174,15 @@ def get_ancestor_table_for_klass(klass: type[core.QObject]) -> str:
     return "\n\n## Child classes\n\n" + "\n".join(lines) + "\n\n"
 
 
+def get_image(path: str, caption: str = "") -> str:
+    text = f"""
+<figure markdown>
+  ![Image title](images/{path})
+  <figcaption>{caption}</figcaption>
+</figure>"""
+    return text
+
+
 def get_class_table(klasses: list[type[core.QObject]]) -> str:
     lines = ["|Name|Module|Child classes|Inherits|", "|--|--|--|--|"]
     for kls in klasses:
