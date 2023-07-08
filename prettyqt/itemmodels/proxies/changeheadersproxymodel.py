@@ -77,7 +77,7 @@ class ChangeHeadersProxyModel(core.IdentityProxyModel):
         self,
         section: int,
         orientation: constants.Orientation,
-        role: constants.ItemDataRole,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         if orientation == self._orientation and role == self._role:
             if isinstance(self._header, dict) and section in self._header:

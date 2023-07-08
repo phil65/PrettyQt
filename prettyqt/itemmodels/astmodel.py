@@ -127,7 +127,7 @@ class AstModel(itemmodels.TreeModel):
         section: int,
         orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-    ) -> str | None:
+    ):
         match orientation, role, section:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
                 return self.HEADER[section]

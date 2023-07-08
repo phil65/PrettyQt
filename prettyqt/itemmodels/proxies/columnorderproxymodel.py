@@ -89,7 +89,7 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
         self,
         section: int,
         orientation: constants.Orientation,
-        role: constants.ItemDataRole,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         if orientation == constants.HORIZONTAL:
             section = self._column_order[section]
@@ -107,10 +107,13 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
             return core.ModelIndex()
         return self.createIndex(source_parent.row(), 0, source_parent.internalPointer())
 
-    def index(self, row: int, column: int, parent_index: core.ModelIndex):
-        if parent_index.column() > 0 or self.sourceModel() is None:
+    def index(
+        self, row: int, column: int, parent: core.ModelIndex | None = None
+    ) -> core.ModelIndex:
+        parent = parent or core.ModelIndex()
+        if parent.column() > 0 or self.sourceModel() is None:
             return core.ModelIndex()
-        source_parent = self.mapToSource(parent_index).sibling(parent_index.row(), 0)
+        source_parent = self.mapToSource(parent).sibling(parent.row(), 0)
         source_index = self.sourceModel().index(
             row, self._column_order[column], source_parent
         )

@@ -40,7 +40,9 @@ class NestedModel(  # type: ignore
             else len(self.items)
         )
 
-    def index(self, row: int, column: int, parent: core.ModelIndex | None = None):
+    def index(
+        self, row: int, column: int, parent: core.ModelIndex | None = None
+    ) -> core.ModelIndex:
         parent = parent or core.ModelIndex()
         if not self.hasIndex(row, column, parent):
             return core.ModelIndex()

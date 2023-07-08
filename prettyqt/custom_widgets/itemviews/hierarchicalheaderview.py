@@ -558,16 +558,21 @@ if __name__ == "__main__":
             self.df = self.df[cols] if horizontal else self.df.T[cols].T
             return True
 
-        # def headerData(self, section, orientation, role):
-        #     if role != constants.DISPLAY_ROLE:
-        #         return
-        #     strings = (str(i) for i in idx)
-        #     if orientation == constants.HORIZONTAL:
-        #         idx = self.df.columns
-        #         return "\n".join(strings) if isinstance(idx, tuple) else str(idx)
-        #     else:
-        #         idx = self.df.index
-        #         return " | ".join(strings) if isinstance(idx, tuple) else str(idx)
+    # def headerData(
+    #     self,
+    #     section: int,
+    #     orientation: constants.Orientation,
+    #     role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    # ):
+    #     if role != constants.DISPLAY_ROLE:
+    #         return
+    #     strings = (str(i) for i in idx)
+    #     if orientation == constants.HORIZONTAL:
+    #         idx = self.df.columns
+    #         return "\n".join(strings) if isinstance(idx, tuple) else str(idx)
+    #     else:
+    #         idx = self.df.index
+    #         return " | ".join(strings) if isinstance(idx, tuple) else str(idx)
 
     app = widgets.app()
     form = widgets.Widget()

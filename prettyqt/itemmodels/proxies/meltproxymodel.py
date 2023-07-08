@@ -79,8 +79,11 @@ class MeltProxyModel(core.AbstractProxyModel):
             section = self.get_source_column_for_proxy_column(section)
             return self.sourceModel().headerData(section, orientation, role)
 
-    def index(self, row: int, column: int, parent: core.ModelIndex):
+    def index(
+        self, row: int, column: int, parent: core.ModelIndex | None = None
+    ) -> core.ModelIndex:
         # TODO: broken
+        parent = parent or core.ModelIndex()
         if column not in self._id_columns:
             return self.createIndex(row, column, core.ModelIndex())
         col_pos = self.get_source_column_for_proxy_column(column)

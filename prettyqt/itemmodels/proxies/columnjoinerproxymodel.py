@@ -77,7 +77,8 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
         col_count = self.sourceModel().columnCount()
         return column >= col_count
 
-    def index(self, row, column, parent):
+    def index(self, row: int, column: int, parent: core.ModelIndex | None = None):
+        parent = parent or core.ModelIndex()
         if self.is_additional_column(column):
             return self.createIndex(row, column, core.ModelIndex())
         return self.sourceModel().index(row, column, parent)
