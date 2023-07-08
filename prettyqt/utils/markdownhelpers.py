@@ -90,15 +90,14 @@ def index_tree_to_mermaid(klasses, inheritances):
 
 
 def get_prop_table(props, user_prop_name: str | None = None) -> str:
-    lines: list[str] = []
-    lines.extend("|Qt Property|Type|User property|\n|-----------|----|-----------|")
+    lines = ["|Qt Property|Type|User property|", "|-----------|----|-----------|"]
     for prop in props:
         sections: list[str] = [
             f"`{prop.get_name()}`",
             f"**{(prop.get_meta_type().get_name() or '').rstrip('*')}**",
             "x" if prop.get_name() == user_prop_name else "",
         ]
-        lines.extend(f"|{'|'.join(sections)}|")
+        lines.append(f"|{'|'.join(sections)}|")
     return "\n".join(lines)
 
 
@@ -119,11 +118,11 @@ def get_prop_tables_for_klass(klass: type[core.QObject]) -> str:
         return ""
     lines = []
     if props_without_super:
-        lines.extend("\n## Class Properties\n")
-        lines.extend(get_prop_table(props_without_super, user_prop_name))
+        lines.append("\n## Class Properties\n")
+        lines.append(get_prop_table(props_without_super, user_prop_name))
     if super_props:
-        lines.extend("\n## Inherited properties\n")
-        lines.extend(get_prop_table(super_props, user_prop_name))
+        lines.append("\n## Inherited properties\n")
+        lines.append(get_prop_table(super_props, user_prop_name))
     return "\n\n" + "\n".join(lines) + "\n\n"
 
 
@@ -140,10 +139,11 @@ def get_admonition(
 
 def get_mermaid_for_klass(klass: type) -> str:
     classes, inheritances = classes_tree([klass])
-    lines = []
-    lines.extend("\n## ₼ Class diagram\n\n``` mermaid\n")
-    lines.extend(classes_tree_to_mermaid(classes, inheritances))
-    lines.extend("```\n")
+    lines = [
+        "\n## ₼ Class diagram\n\n``` mermaid\n",
+        classes_tree_to_mermaid(classes, inheritances),
+        "```\n",
+    ]
     return "\n".join(lines)
 
 
