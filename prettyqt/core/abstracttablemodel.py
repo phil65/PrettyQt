@@ -51,22 +51,6 @@ class AbstractTableModelMixin(core.AbstractItemModelMixin):
         data, h_header, v_header = self.get_table_data(**kwargs)
         return pd.DataFrame(data=data, columns=h_header, index=v_header)
 
-    def to_markdown(self, use_checkstate_role: bool = True, **kwargs):
-        data, h_header, v_header = self.get_table_data(**kwargs)
-        if use_checkstate_role:
-            kwargs["role"] = constants.CHECKSTATE_ROLE
-            check_data, _, __ = self.get_table_data(**kwargs)
-            for i, row in enumerate(data):
-                for j, _column in enumerate(row):
-                    if check_data[i][j]:
-                        data[i][j] = "x"
-
-        lines = [f"|{'|'.join(h_header)}|", f"|{'--|--'.join('' for _ in h_header)}|"]
-        for row in data:
-            sections = [str(i) if i else "" for i in row]
-            lines.append(f"|{'|'.join(sections)}|")
-        return "\n".join(lines)
-
 
 class AbstractTableModel(AbstractTableModelMixin, core.QAbstractTableModel):
     pass

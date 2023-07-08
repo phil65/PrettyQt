@@ -400,39 +400,6 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def to_checkstate(value: bool):
         return constants.CheckState.Checked if value else constants.CheckState.Unchecked
 
-    def to_mermaid_tree(self, index, role=constants.DISPLAY_ROLE):
-        indexes, inheritances = index_tree([index], role=role)
-        lines = []
-        text = index_tree_to_mermaid(indexes, inheritances)
-        lines.append("\n\n## Index diagram\n\n``` mermaid\n")
-        lines.append(text)
-        lines.append("\n```\n")
-        return "".join(lines)
-
-
-def index_tree(indexes, role):
-    module_classes = set()
-    inheritances = []
-
-    def inspect_index(index, role):
-        if index.data(role) not in module_classes:
-            # if klass.__module__.startswith(base_module):
-            module_classes.add(index.data(role))
-            # for child_index in index.model().get_child_indexes(index):
-            for child_index in index.model().iter_tree(index, depth=1, fetch_more=True):
-                inheritances.append((child_index.data(role), index.data(role)))
-                inspect_index(child_index, role)
-
-    for index in indexes:
-        inspect_index(index, role)
-    return module_classes, inheritances
-
-
-def index_tree_to_mermaid(klasses, inheritances):
-    return "graph TD;\n" + "\n".join(
-        list(klasses) + [f"{a} --> {b}" for a, b in inheritances]
-    )
-
 
 class AbstractItemModel(AbstractItemModelMixin, core.QAbstractItemModel):
     pass
