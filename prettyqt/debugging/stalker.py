@@ -100,10 +100,13 @@ class Stalker(core.Object):
         self.old_disconnectNotify = self._obj.disconnectNotify
         self._obj.connectNotify = self._on_signal_connected
         self._obj.disconnectNotify = self._on_signal_disconnected
+        self._obj.destroyed.connect(self.unhook)
+        self.destroyed.connect(self.unhook)
 
     def unhook(self):
         if self.eventcatcher is None:
-            raise RuntimeError("need to hook Stalker before unhooking")
+            logger.warning("unhook() called before hook()")
+            return None
         """Clean up our mess."""
         self._obj.connectNotify = self.old_connectNotify
         self._obj.disconnectNotify = self.old_disconnectNotify
@@ -115,7 +118,7 @@ class Stalker(core.Object):
         self._obj.removeEventFilter(self.eventcatcher)
 
     def log(self, message: str):
-        if self._log_level:
+        if self.log_level:
             try:
                 logger.log(self._log_level, f"{self._obj!r}: {message}")
             except RuntimeError:
