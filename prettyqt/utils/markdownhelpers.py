@@ -28,6 +28,8 @@ AdmonitionTypeStr = Literal[
     "quote",
 ]
 
+BASE_URL = "https://doc.qt.io/qtforpython-6/PySide6/"
+
 
 def class_name(cls):
     """Return a string representing the class."""
@@ -101,6 +103,12 @@ def get_prop_table(props, user_prop_name: str | None = None) -> str:
     return "\n".join(lines)
 
 
+def get_qt_help_link(klass):
+    mod = klass.__module__.replace("PySide6.", "").replace("PyQt6.", "")
+    url = f"{BASE_URL}{mod}/{klass.__name__}.html"
+    return f"[{klass.__name__}]({url})"
+
+
 def get_prop_tables_for_klass(klass: type[core.QObject]) -> str:
     metaobject = core.MetaObject(klass.staticMetaObject)
     user_prop_name = (
@@ -150,6 +158,8 @@ def get_mermaid_for_klass(klass: type) -> str:
 def link_for_class(klass: type) -> str:
     if klass is set:
         return "set"
+    if klass.__module__.startswith(("PyQt", "PySide")):
+        return get_qt_help_link(klass)
     return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
 
 
@@ -157,7 +167,7 @@ def get_ancestor_table_for_klass(klass: type[core.QObject]) -> str:
     subclasses = klass.__subclasses__()
     if not subclasses:
         return ""
-    lines = ["|Ancestor|Module|", "|--------|-----------|"]
+    lines = ["|Class|Module|", "|--------|-----------|"]
     lines.extend(
         f"|{link_for_class(subklass)}|{subklass.__module__}|" for subklass in subclasses
     )
@@ -165,7 +175,7 @@ def get_ancestor_table_for_klass(klass: type[core.QObject]) -> str:
 
 
 def get_class_table(klasses: list[type[core.QObject]]) -> str:
-    lines = ["|Name|Module|Ancestors|Inherits|", "|--|--|--|--|"]
+    lines = ["|Name|Module|Child classes|Inherits|", "|--|--|--|--|"]
     for kls in klasses:
         subclasses = kls.__subclasses__()
         parents = kls.__bases__

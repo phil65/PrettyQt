@@ -42,10 +42,9 @@ from prettyqt import (
     widgets,
 )
 
-from prettyqt.utils import markdownhelpers
+from prettyqt.utils import classhelpers, markdownhelpers
 
 # app = widgets.app()
-BASE_URL = "https://doc.qt.io/qtforpython-6/PySide6/"
 # table = widgets.TableView()
 
 
@@ -75,9 +74,9 @@ def write_file_for_klass(klass: type, parts: tuple[str, ...], file):
         file.write(table)
         table = markdownhelpers.get_ancestor_table_for_klass(klass)
         file.write(table)
-        if parts[-1] in ["core", "gui", "widgets"]:
-            url = f"{BASE_URL}Qt{parts[-1].capitalize()}/Q{klass.__name__}.html"
-            file.write(f"Qt Base Class: [Q{klass.__name__}]({url})")
+        qt_parent = classhelpers.get_qt_parent_class(klass)
+        if qt_parent:
+            file.write(f"Qt Base Class: {markdownhelpers.get_qt_help_link(qt_parent)}")
     if hasattr(klass, "ID") and issubclass(klass, gui.Validator):
         file.write(f"\n\nValidator ID: **{klass.ID}**\n\n")
     if hasattr(klass, "ID") and issubclass(klass, widgets.AbstractItemDelegateMixin):
@@ -105,11 +104,12 @@ def write_files_for_module(module_path, doc_path, parts):
         nav[(*parts, kls_name)] = doc_path.with_name(f"{kls_name}.md").as_posix()
         with mkdocs_gen_files.open(full_doc_path.with_name(f"{kls_name}.md"), "w") as fd:
             write_file_for_klass(klass, parts, fd)
-        # with mkdocs_gen_files.open(full_doc_path.with_name(f"{kls_name}_with_inherited.md"), "w") as fd:
+        #     fd.write(f"[All members]({kls_name}_with_inherited.md)")
+        # with mkdocs_gen_files.open(full_doc_path.with_name(f"{kls_name}_with_inherited.md"), "w") as file:
         #     ident = ".".join(parts)
         #     file.write(f"::: prettyqt.{ident}.{klass.__name__}\n")
         #     file.write(f"    options:\n")
-        #     file.write(f"      allow_inspection: false\n")
+        #     file.write(f"      inherit_members: true\n")
         mkdocs_gen_files.set_edit_path(
             full_doc_path.with_name(f"{kls_name}.md"), module_path
         )

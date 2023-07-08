@@ -67,6 +67,13 @@ def get_subclasses(klass: type, include_abstract: bool = False) -> type:
             yield i
 
 
+def get_qt_parent_class(klass: type) -> type | None:
+    return next(
+        (kls for kls in klass.mro() if kls.__module__.startswith(("PyQt", "PySide"))),
+        None,
+    )
+
+
 def get_class_for_id(base_class: T, id_: str) -> T:
     base_classes = (
         typing.get_args(base_class)
