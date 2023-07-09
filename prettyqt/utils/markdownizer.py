@@ -7,11 +7,13 @@ import dataclasses
 import importlib
 import logging
 import os
+import pathlib
 import textwrap
 import types
 import typing
 from typing import Literal
 
+from prettyqt import core
 from prettyqt.utils import helpers, markdownhelpers
 
 
@@ -150,9 +152,31 @@ class Link:
         return "".join(elements)
 
 
+class Docs:
+    def __init__(self, root_path):
+        self.root_path = pathlib.Path("./prettyqt")
+        self.folder_exclude = ["__pyinstaller"]
+
+    def write(self, document):
+        pass
+
+    def yield_files(self, glob: str = "*/*.py"):
+        for path in sorted(self.root_path.rglob(glob)):
+            if any(i in str(path) for i in self._folder_exclude) or path.is_dir():
+                continue
+            yield path
+
+
 class MarkdownDocument:
-    def __init__(self, items=None, hide_toc: bool = False, hide_nav: bool = False):
+    def __init__(
+        self,
+        items=None,
+        hide_toc: bool = False,
+        hide_nav: bool = False,
+        path: str | os.PathLike = "",
+    ):
         self.items = items or []
+        self.path = path
         self.options = collections.defaultdict(list)
         if hide_toc:
             self.options["hide"].append("toc")
@@ -160,15 +184,23 @@ class MarkdownDocument:
             self.options["hide"].append("nav")
 
     def __add__(self, other):
-        self.items.append(other)
+        self.append(other)
         return self
 
     def __iter__(self):
         return iter(self.items)
 
+    def write(self, path: str | os.PathLike, edit_path: str | os.PathLike | None = None):
+        import mkdocs_gen_files
+
+        with mkdocs_gen_files.open(path, "w") as fd:
+            fd.write(self.to_markdown())
+        if edit_path:
+            mkdocs_gen_files.set_edit_path(path, edit_path)
+
     def to_markdown(self) -> str:
         header = self.get_header()
-        return header + "\n".join(i.to_markdown() for i in self.items)
+        return header + "\n\n".join(i.to_markdown() for i in self.items)
 
     def get_header(self) -> str:
         if not self.options:
@@ -178,35 +210,54 @@ class MarkdownDocument:
         )
         return HEADER.format(options=text)
 
-    def append(self, other):
+    def append(self, other: str | BaseMarkdownSection):
+        if isinstance(other, str):
+            other = MarkdownText(other)
         self.items.append(other)
 
 
-class MarkdownText:
-    def __init__(self, text: str = ""):
+class BaseMarkdownSection:
+    def __init__(self, header: str = ""):
+        self.header = header
+
+    def __str__(self):
+        return self.to_markdown()
+
+    def to_markdown(self):
+        text = self._to_markdown()
+        if self.header:
+            return f"## {self.header}\n\n{text}"
+        return text
+
+
+class MarkdownText(BaseMarkdownSection):
+    def __init__(self, text: str | BaseMarkdownSection = "", header: str = ""):
+        super().__init__(header=header)
         self.text = text
 
-    def to_markdown(self) -> str:
-        return self.text
+    def _to_markdown(self) -> str:
+        return self.text if isinstance(self.text, str) else self.text.to_markdown()
 
 
 class MarkdownCode(MarkdownText):
-    def __init__(self, language: str, text: str = ""):
-        super().__init__(text)
+    def __init__(
+        self, language: str, text: str | BaseMarkdownSection = "", header: str = ""
+    ):
+        super().__init__(text, header)
         self.language = language
 
-    def to_markdown(self) -> str:
+    def _to_markdown(self) -> str:
         return f"``` {self.language}\n{self.text}\n```"
 
 
-class MarkdownImage:
-    def __init__(self, path: str, caption: str, title: str = ""):
-        super().__init__()
+class MarkdownImage(BaseMarkdownSection):
+    def __init__(self, path: str, caption: str, title: str = "", header: str = ""):
+        super().__init__(header=header)
         self.title = title
         self.caption = caption
         self.path = path
 
-    def to_markdown(self) -> str:
+    def _to_markdown(self) -> str:
         lines = ["<figure markdown>", f"![{self.title}]({self.path})"]
         if self.caption:
             lines.append(f"  <figcaption>{self.caption}</figcaption>")
@@ -227,11 +278,30 @@ class Admonition(MarkdownText):
         self.title = title
         self.collapsible = collapsible
 
-    def to_markdown(self) -> str:
+    def _to_markdown(self) -> str:
         block_start = "???" if self.collapsible else "!!!"
         title = repr(self.title) if self.title else ""
         text = textwrap.indent(self.text, "    ")
         return f"{block_start} {self.typ} {title}\n{text}\n\n"
+
+
+class BinaryImage(MarkdownImage):
+    def __init__(
+        self, data: bytes, path: str, caption: str = "", title: str = "", header: str = ""
+    ):
+        super().__init__(path=path, header=header, caption=caption, title=title)
+        self.data = data
+
+    def _to_markdown(self) -> str:
+        import pathlib
+
+        import mkdocs_gen_files
+
+        path = pathlib.Path(self.path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with mkdocs_gen_files.open(self.path, "wb") as file:
+            file.write(self.data)
+        return super()._to_markdown()
 
 
 class MermaidDiagram(MarkdownCode):
@@ -256,76 +326,190 @@ class MermaidDiagram(MarkdownCode):
         connections,
         orientation: str = "",
         attributes: dict[str, str] | None = None,
+        header: str = "",
     ):
-        super().__init__(language="mermaid")
-        self.graph_type = graph_type
-        self.orientation = orientation
+        super().__init__(language="mermaid", header=header)
+        self.graph_type = (
+            graph_type if graph_type not in self.TYPE_MAP else self.TYPE_MAP[graph_type]
+        )
+        self.orientation = (
+            orientation
+            if orientation not in self.ORIENTATION
+            else self.ORIENTATION[orientation]
+        )
         self.items = set(items)
         self.connections = set(connections)
         self.attributes = attributes or {}
 
     @classmethod
-    def for_classes(cls, klasses):
+    def for_classes(cls, klasses, header: str = ""):
         items, connections = helpers.get_connections(
             klasses, child_getter=lambda x: x.__bases__, id_getter=lambda x: x.__name__
         )
-        return cls(graph_type="flow_top_down", items=items, connections=connections)
-
-    def to_markdown(self) -> str:
-        self.text = f"{self.graph_type} {self.orientation};\n" + "\n".join(
-            list(self.items) + [f"{a} --> {b}" for a, b in self.connections]
+        return cls(
+            graph_type="flow_top_down",
+            items=items,
+            connections=connections,
+            header=header,
         )
-        return super().to_markdown()
+
+    def _to_markdown(self) -> str:
+        items = list(self.items) + [f"{a} --> {b}" for a, b in self.connections]
+        item_str = textwrap.indent("\n".join(items), "  ")
+        text = f"{self.graph_type} {self.orientation}\n{item_str}"
+        return f"```mermaid\n{text}\n```"
 
 
 class Table(MarkdownText):
     def __init__(
         self,
-        data: Sequence[str] | dict[str, list] | None = None,
-        headers: Sequence[Sequence[str]] | None = None,
-        column_modifiers: dict[str, Callable] | None = None,
+        data: Sequence[Sequence[str]] | Sequence[dict] | dict[str, list] | None = None,
+        columns: Sequence[str] | None = None,
+        column_modifiers: dict[str, Callable[[str], str]] | None = None,
+        header: str = "",
     ):
+        super().__init__(header=header)
         column_modifiers = column_modifiers or {}
         match data:
             case Mapping():
-                self.data = data
-            case (str(), *_):
-                self.data = {headers[i]: col for i, col in enumerate(self.data)}
+                self.data = {str(k): [str(i) for i in v] for k, v in data.items()}
+            case ((str(), *_), *_):
+                h = columns or [str(i) for i in range(len(data))]
+                self.data = {h[i]: col for i, col in enumerate(data)}
+            case (dict(), *_):
+                self.data = v = {k: [dic[k] for dic in data] for k in data[0]}
         for k, v in column_modifiers.items():
             self.data[k] = [v(i) for i in self.data[k]]
 
     @classmethod
-    def get_class_table(cls, klasses: list[type]) -> str:
-        lines = ["|Name|Module|Child classes|Inherits|", "|--|--|--|--|"]
+    def get_property_table(
+        cls, props, user_prop_name: str | None = None, header: str = ""
+    ) -> Table:
+        lines = []
+        headers = ["Qt Property", "Type", "User property"]
+        for prop in props:
+            sections: list[str] = [
+                f"`{prop.get_name()}`",
+                f"**{(prop.get_meta_type().get_name() or '').rstrip('*')}**",
+                "x" if prop.get_name() == user_prop_name else "",
+            ]
+            lines.append(sections)
+        return cls(columns=headers, data=list(zip(*lines)), header=header)
+
+    @classmethod
+    def get_prop_tables_for_klass(cls, klass: type[core.QObject]) -> list[Table]:
+        metaobject = core.MetaObject(klass.staticMetaObject)
+        user_prop_name = (
+            user_prop.get_name()
+            if (user_prop := metaobject.get_user_property()) is not None
+            else None
+        )
+        props_without_super = metaobject.get_properties(include_super=False)
+        prop_names_without_super = [p.get_name() for p in props_without_super]
+        props_with_super = metaobject.get_properties(include_super=True)
+        super_props = [
+            p for p in props_with_super if p.get_name() not in prop_names_without_super
+        ]
+        if not props_with_super:
+            return []
+        lines = []
+        if props_without_super:
+            item = cls.get_property_table(
+                props_without_super, user_prop_name, header="Class Properties"
+            )
+            lines.append(item)
+        if super_props:
+            item = cls.get_property_table(
+                super_props, user_prop_name, header="Inherited Properties"
+            )
+            lines.append(item)
+        return lines
+
+    @classmethod
+    def get_classes_table(cls, klasses: list[type]) -> Table:
+        """Create a table containing information about a list of classes.
+
+        Includes columns for child and parent classes including links.
+        """
+        ls = []
         for kls in klasses:
             subclasses = kls.__subclasses__()
             parents = kls.__bases__
             subclass_str = ", ".join(
-                markdownhelpers.link_for_class(subclass) for subclass in subclasses
+                markdownhelpers.link_for_class(sub) for sub in subclasses
             )
             parent_str = ", ".join(
                 markdownhelpers.link_for_class(parent) for parent in parents
             )
-            link = markdownhelpers.link_for_class(kls)
-            line = f"|{link}|{kls.__module__}|{subclass_str}|{parent_str}|"
-            lines.append(line)
-        return "\n\n" + "\n".join(lines) + "\n\n"
+            data = dict(
+                Name=markdownhelpers.link_for_class(kls),
+                Module=kls.__module__,
+                Children=subclass_str,
+                Inherits=parent_str,
+            )
+            ls.append(data)
+        return cls(ls)
 
-    def to_markdown(self) -> str:
-        headers = list(self.data.keys())
+    @classmethod
+    def get_dependency_table(cls, distribution):
+        from prettyqt import itemmodels
+
+        model = itemmodels.ImportlibTreeModel("prettyqt")
+        list(model.iter_tree(depth=2))
+        proxy = itemmodels.ColumnOrderProxyModel(
+            order=["Name", "Constraints", "Extra", "Summary", "Homepage"],
+            source_model=model,
+        )
+        return cls.from_itemmodel(proxy)
+
+    @classmethod
+    def get_ancestor_table_for_klass(cls, klass: type[core.QObject]) -> Table:
+        subclasses = klass.__subclasses__()
+        if not subclasses:
+            return None
+        data = dict(
+            Class=[markdownhelpers.link_for_class(kls) for kls in subclasses],
+            Module=[kls.__module__ for kls in subclasses],
+        )
+        return cls(data=data, header="Child classes")
+
+    @classmethod
+    def from_itemmodel(
+        cls,
+        model: core.AbstractItemModelMixin,
+        use_checkstate_role: bool = True,
+        **kwargs,
+    ) -> Table:
+        from prettyqt import constants
+
+        data, h_header, _ = model.get_table_data(**kwargs)
+        if use_checkstate_role:
+            kwargs["role"] = constants.CHECKSTATE_ROLE
+            check_data, _, __ = model.get_table_data(**kwargs)
+            for i, row in enumerate(data):
+                for j, _column in enumerate(row):
+                    if check_data[i][j]:
+                        data[i][j] = "x"
+        data = list(zip(*data))
+        return cls(data, columns=h_header)
+
+    def _to_markdown(self) -> str:
+        # print(self.data)
+        headers = [str(i) for i in self.data.keys()]
         lines = [f"|{'|'.join(headers)}|", f"|{'--|--'.join('' for _ in headers)}|"]
-        lines.extend(f"|{'|'.join(row)}|" for row in self.iter_rows())
+        lines.extend(f"|{'|'.join(row)}|" for row in self._iter_rows())
         return "\n".join(lines)
 
-    def iter_rows(self):
-        return (
-            [str(self.data[k][j]) for k in self.data.keys()]
-            for j, _ in enumerate(self.data)
-        )
+    def _iter_rows(self):
+        length = min(len(i) for i in self.data.values())
+        for j, _ in enumerate(range(length)):
+            yield [self.data[k][j] or "" for k in self.data.keys()]
 
 
 class DocStringSection(MarkdownText):
-    def __init__(self, obj: types.ModuleType | str | os.PathLike | type, **kwargs):
+    def __init__(
+        self, obj: types.ModuleType | str | os.PathLike | type, header: str = "", **kwargs
+    ):
         """Docstring section.
 
         Possible keyword arguments:
@@ -440,6 +624,7 @@ class DocStringSection(MarkdownText):
                                   the signature is also formatted using it.
                                   Default: False.
         """
+        super().__init__(header=header)
         match obj:
             case types.ModuleType():
                 self.module_path = obj.__name__
@@ -452,22 +637,41 @@ class DocStringSection(MarkdownText):
                 self.module_path = mod.__name__
         self.options = kwargs
 
-    def to_markdown(self) -> str:
+    def _to_markdown(self) -> str:
         md = f"::: {self.module_path}\n"
         if self.options:
             lines = [f"    {k} : {v}" for k, v in self.options]
             md = md + "\n" + "\n".join(lines)
-        return f"\n{md}\n"
+        return f"{md}\n"
+
+
+class LiterateNav(BaseMarkdownSection):
+    def __init__(
+        self, mapping: dict[str | tuple[str, ...], str], indentation: int | str = ""
+    ):
+        import mkdocs_gen_files
+
+        nav = mkdocs_gen_files.Nav()
+        for k, v in mapping.items():
+            nav[k] = v
+        self.text = nav.build_literate_nav()
+
+    def write(self, path: str = "SUMMARY.md"):
+        import mkdocs_gen_files
+
+        with mkdocs_gen_files.open(path, "w") as nav_file:
+            nav_file.writelines(self.text)
 
 
 if __name__ == "__main__":
     doc = MarkdownDocument([], True, True)
-    graph = MermaidDiagram.for_classes([Table])
-    doc.append(graph)
     doc += Admonition("info", "etst")
+    doc += Table(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
+    doc += Table.get_prop_tables_for_klass(core.StringListModel)[0]
+    doc += DocStringSection(helpers, header="DocStrings")
+    doc += Table.get_dependency_table("prettyqt")
+    doc += MermaidDiagram.for_classes([Table], header="Mermaid diagram")
 
-    table = Table(data=dict(a=[1, 2], b=["c", "D"]))
-    doc.append(table)
-    docstring = DocStringSection(helpers)
-    doc.append(docstring)
     print(doc.to_markdown())
+    logger.info(markdownhelpers.get_mermaid_for_klass(Table))
+    # print(text)
