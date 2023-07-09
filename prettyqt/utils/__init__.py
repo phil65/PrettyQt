@@ -61,14 +61,14 @@ class InvalidParamError(ValueError):
         valid_options: allowed options
     """
 
-    def __init__(self, value, valid_options: Iterable):
+    def __init__(self, value: Any, valid_options: Iterable):
         self.value = value
         opts = " / ".join(repr(opt) for opt in valid_options)
         self.message = f"Invalid value: {value!r}. Allowed options are {opts}."
         super().__init__(self.message)
 
 
-def get_repr(obj: Any, *args, **kwargs: Any) -> str:
+def get_repr(obj: Any, *args: Any, **kwargs: Any) -> str:
     """Get a suitable __repr__ string for an object.
 
     Args:

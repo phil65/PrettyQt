@@ -63,7 +63,10 @@ class EventCatcher(eventfilters.BaseEventFilter):
         ):
             self.caught.emit(event)
             # logger.debug(f"{source!r}: {event.type()!r}")
-            return self.do_filter(event) if callable(self.do_filter) else self.do_filter
+            val = self.do_filter(event) if callable(self.do_filter) else self.do_filter
+            if not isinstance(val, bool):
+                logger.warning(f"Non-bool value returned for {source!r}: {val} ")
+            return bool(val)
         return False
 
 
