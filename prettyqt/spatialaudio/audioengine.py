@@ -12,7 +12,7 @@ OutputModeStr = Literal["infinite", "once"]
 OUTPUT_MODE: bidict[OutputModeStr, QtSpatialAudio.QAudioEngine.OutputMode] = bidict(
     surround=QtSpatialAudio.QAudioEngine.OutputMode.Surround,
     stereo=QtSpatialAudio.QAudioEngine.OutputMode.Stereo,
-    headphone=QtSpatialAudio.QAudioEngine.OutputMode.HeadPhone,
+    headphone=QtSpatialAudio.QAudioEngine.OutputMode.Headphone,
 )
 
 
