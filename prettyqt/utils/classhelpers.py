@@ -88,6 +88,11 @@ def get_class_for_id(base_class: T, id_: str) -> T:
     raise ValueError(f"Couldnt find class with id {id_!r} for base class {base_class}")
 
 
-def get_module_classes(module: types.ModuleType) -> list[type]:
-    clsmembers = inspect.getmembers(module, inspect.isclass)
-    return [tpl[1] for tpl in clsmembers]
+def get_module_classes(
+    module: types.ModuleType, type_filter: type | None | types.UnionType = None
+) -> list[type]:
+    return [
+        tpl[1]
+        for tpl in inspect.getmembers(module, inspect.isclass)
+        if type_filter is None or issubclass(tpl[1], type_filter)
+    ]
