@@ -78,6 +78,18 @@ class Palette(serializemixin.SerializeMixin, gui.QPalette):
     def __repr__(self):
         return get_repr(self, self.get_color("button"), self.get_color("window"))
 
+    def yield_colors(
+        self, mode: Literal["auto", "auto_inverted", "dark", "light"] = "auto"
+    ):
+        if mode == "auto":
+            mode = "dark" if self.is_dark() else "light"
+        elif mode == "auto_inverted":
+            mode = "light" if self.is_dark() else "dark"
+        for color in gui.Color.colorNames():
+            c = gui.Color(color)
+            if (c.is_dark() and mode == "dark") or (not c.is_dark() and mode == "light"):
+                yield c.as_qt()
+
     def highlight_inactive(self, enable: bool = True):
         if enable:
             color = self.color(self.ColorGroup.Active, self.ColorRole.Highlight)
@@ -192,4 +204,4 @@ class Palette(serializemixin.SerializeMixin, gui.QPalette):
 
 if __name__ == "__main__":
     pal = Palette()
-    print(pal.get_colors())
+    print(list(pal.yield_dark_colors()))
