@@ -43,6 +43,7 @@
             * [SliceCheckableProxyModel](features/proxymodels/slicecheckableproxymodel.md)
             * [SliceCheckableTreeProxyModel](features/proxymodels/slicecheckabletreeproxymodel.md)
             * [SliceColorValuesProxyModel](features/proxymodels/slicecolorvaluesproxymodel.md)
+            * [SliceColorCategoriesProxyModel](features/proxymodels/slicecolorcategoriesproxymodel.md)
             * [SliceHighlightCurrentProxyModel](features/proxymodels/slicehighlightcurrentproxymodel.md)
             * [SliceValueTransformationProxyModel](features/proxymodels/slicevaluetransformationproxymodel.md)
             * [SliceAppearanceProxyModel](features/proxymodels/sliceappearanceproxymodel.md)

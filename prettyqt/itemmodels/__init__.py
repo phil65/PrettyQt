@@ -51,6 +51,7 @@ from .proxies.slicecheckableproxymodel import (
 from .proxies.sliceappearanceproxymodel import SliceAppearanceProxyModel
 from .proxies.slicechangeflagsproxymodel import SliceChangeFlagsProxyModel
 from .proxies.slicecolorvaluesproxymodel import SliceColorValuesProxyModel
+from .proxies.slicecolorcategoriesproxymodel import SliceColorCategoriesProxyModel
 from .proxies.slicevaluetransformationproxymodel import SliceValueTransformationProxyModel
 from .proxies.slicehighlightcurrentproxymodel import SliceHighlightCurrentProxyModel
 from .proxies.slicemaproleproxymodel import SliceMapRoleProxyModel

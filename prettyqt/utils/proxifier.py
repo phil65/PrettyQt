@@ -321,7 +321,21 @@ class Sliced:
         )
         proxy.set_low_color(low_color)
         proxy.set_high_color(high_color)
-        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
+
+    def color_categories(
+        self,
+    ) -> itemmodels.SliceColorCategoriesProxyModel:
+        """Color numerical values.
+
+        Wraps model with a SliceColorCategoriesProxyModel.
+        """
+        from prettyqt import itemmodels
+
+        proxy = itemmodels.SliceColorCategoriesProxyModel(
+            indexer=self._indexer, parent=self._widget, source_model=self._widget.model()
+        )
         self._widget.set_model(proxy)
         return proxy
 
