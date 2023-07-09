@@ -40,13 +40,15 @@ class SliceChangeFlagsProxyModel(itemmodels.SliceIdentityProxyModel):
         return flags
 
     def set_flags_to_add(self, flags: constants.ItemFlag):
-        self._flags_to_add = flags
+        with self.change_layout():
+            self._flags_to_add = flags
 
     def get_flags_to_add(self) -> constants.ItemFlag:
         return self._flags_to_add
 
     def set_flags_to_remove(self, flags: constants.ItemFlag):
-        self._flags_to_remove = flags
+        with self.change_layout():
+            self._flags_to_remove = flags
 
     def get_flags_to_remove(self) -> constants.ItemFlag:
         return self._flags_to_remove
