@@ -78,7 +78,7 @@ docs = [
     "mkdocstrings[python]",
     "pymdown-extensions",
     "mkdocs-literate-nav",
-    "mkdocs-autolinks-plugin",
+    "mkdocs-roamlinks-plugin",
     "mkdocs-include-markdown-plugin",
     # "mkdocs-autorefs",
     "mkdocs-glightbox",
@@ -134,7 +134,7 @@ dependencies = [
     "pymdown-extensions",
     "mkdocs-glightbox",
     # "mkdocs-autorefs",
-    "mkdocs-autolinks-plugin",
+    "mkdocs-roamlinks-plugin",
     "mkdocs-include-markdown-plugin",
     "mkdocs-section-index",
     "mkdocs-gen-files",
@@ -267,7 +267,7 @@ black = "^23"
 devtools = "^0"
 commitizen = "^3"
 mkdocs-literate-nav = "^0.6.0"
-mkdocs-autolinks-plugin = "^0.7.0"
+mkdocs-roamlinks-plugin = "^0.3.0"
 mkdocs-gen-files = "^0.5.0"
 
 [tool.pytest.ini_options]
