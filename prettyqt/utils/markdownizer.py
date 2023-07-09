@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import collections
+
 from collections.abc import Callable, Mapping, Sequence
 import dataclasses
 import importlib
@@ -8,10 +10,9 @@ import os
 import textwrap
 import types
 import typing
-
 from typing import Literal
 
-from prettyqt.utils import helpers
+from prettyqt.utils import helpers, markdownhelpers
 
 
 T = typing.TypeVar("T", bound=type)
@@ -44,6 +45,13 @@ BASE_URL = "https://doc.qt.io/qtforpython-6/PySide6/"
 LINK_SHAPES = {"normal": "---", "dotted": "-.-", "thick": "==="}
 
 LINK_HEADS = {"none": "", "arrow": ">", "left-arrow": "<", "bullet": "o", "cross": "x"}
+
+HEADER = """---
+hide:
+{options}
+---
+
+"""
 
 
 @dataclasses.dataclass
@@ -142,6 +150,38 @@ class Link:
         return "".join(elements)
 
 
+class MarkdownDocument:
+    def __init__(self, items=None, hide_toc: bool = False, hide_nav: bool = False):
+        self.items = items or []
+        self.options = collections.defaultdict(list)
+        if hide_toc:
+            self.options["hide"].append("toc")
+        if hide_nav:
+            self.options["hide"].append("nav")
+
+    def __add__(self, other):
+        self.items.append(other)
+        return self
+
+    def __iter__(self):
+        return iter(self.items)
+
+    def to_markdown(self) -> str:
+        header = self.get_header()
+        return header + "\n".join(i.to_markdown() for i in self.items)
+
+    def get_header(self) -> str:
+        if not self.options:
+            return ""
+        text = "\n".join(
+            [f"  - {i}" for k in self.options.keys() for i in self.options[k]]
+        )
+        return HEADER.format(options=text)
+
+    def append(self, other):
+        self.items.append(other)
+
+
 class MarkdownText:
     def __init__(self, text: str = ""):
         self.text = text
@@ -190,7 +230,7 @@ class Admonition(MarkdownText):
     def to_markdown(self) -> str:
         block_start = "???" if self.collapsible else "!!!"
         title = repr(self.title) if self.title else ""
-        text = textwrap.indent(self.text, 4)
+        text = textwrap.indent(self.text, "    ")
         return f"{block_start} {self.typ} {title}\n{text}\n\n"
 
 
@@ -254,6 +294,23 @@ class Table(MarkdownText):
         for k, v in column_modifiers.items():
             self.data[k] = [v(i) for i in self.data[k]]
 
+    @classmethod
+    def get_class_table(cls, klasses: list[type]) -> str:
+        lines = ["|Name|Module|Child classes|Inherits|", "|--|--|--|--|"]
+        for kls in klasses:
+            subclasses = kls.__subclasses__()
+            parents = kls.__bases__
+            subclass_str = ", ".join(
+                markdownhelpers.link_for_class(subclass) for subclass in subclasses
+            )
+            parent_str = ", ".join(
+                markdownhelpers.link_for_class(parent) for parent in parents
+            )
+            link = markdownhelpers.link_for_class(kls)
+            line = f"|{link}|{kls.__module__}|{subclass_str}|{parent_str}|"
+            lines.append(line)
+        return "\n\n" + "\n".join(lines) + "\n\n"
+
     def to_markdown(self) -> str:
         headers = list(self.data.keys())
         lines = [f"|{'|'.join(headers)}|", f"|{'--|--'.join('' for _ in headers)}|"]
@@ -294,9 +351,13 @@ class DocStringSection(MarkdownText):
 
 
 if __name__ == "__main__":
+    doc = MarkdownDocument([], True, True)
     graph = MermaidDiagram.for_classes([Table])
-    print(graph.to_markdown())
+    doc.append(graph)
+    doc += Admonition("info", "etst")
+
     table = Table(data=dict(a=[1, 2], b=["c", "D"]))
-    print(table.to_markdown())
+    doc.append(table)
     docstring = DocStringSection(helpers)
-    print(docstring.to_markdown())
+    doc.append(docstring)
+    print(doc.to_markdown())
