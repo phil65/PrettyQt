@@ -58,9 +58,10 @@ class Sliced:
         from prettyqt import itemmodels
 
         proxy = itemmodels.SliceFilterProxyModel(
-            indexer=self._indexer, parent=self._widget
+            indexer=self._indexer,
+            parent=self._widget,
+            source_model=self._widget.model(),
         )
-        proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
@@ -74,9 +75,11 @@ class Sliced:
         from prettyqt import itemmodels
 
         proxy = itemmodels.SliceHighlightCurrentProxyModel(
-            indexer=self._indexer, parent=self._widget, mode=mode
+            indexer=self._indexer,
+            parent=self._widget,
+            mode=mode,
+            source_model=self._widget.model(),
         )
-        proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         self._widget.selectionModel().currentChanged.connect(proxy.highlight_index)
         return proxy
@@ -101,10 +104,11 @@ class Sliced:
         from prettyqt import itemmodels
 
         proxy = itemmodels.SliceValueTransformationProxyModel(
-            indexer=self._indexer, parent=self._widget
+            indexer=self._indexer,
+            parent=self._widget,
+            source_model=self._widget.model(),
         )
         proxy.add_transformer(fn, role, selector, selector_role)
-        proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
@@ -140,7 +144,9 @@ class Sliced:
         from prettyqt import itemmodels
 
         proxy = itemmodels.SliceChangeFlagsProxyModel(
-            indexer=self._indexer, parent=self._widget
+            indexer=self._indexer,
+            parent=self._widget,
+            source_model=self._widget.model(),
         )
         flags = dict(
             selectable=selectable,
@@ -159,7 +165,6 @@ class Sliced:
             proxy.set_flags_to_add(functools.reduce(operator.ior, flags_to_add))
         if flags_to_remove:
             proxy.set_flags_to_remove(functools.reduce(operator.ior, flags_to_remove))
-        proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
@@ -190,8 +195,8 @@ class Sliced:
             datetime_format=datetime_format or "%m/%d/%Y, %H:%M:%S",
             date_format=date_format or "%m/%d/%Y",
             time_format=time_format or "%H:%M:%S",
+            source_model=self._widget.model(),
         )
-        proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
@@ -213,15 +218,18 @@ class Sliced:
 
         if tree:
             proxy = itemmodels.SliceCheckableTreeProxyModel(
-                indexer=self._indexer, parent=self._widget
+                indexer=self._indexer,
+                parent=self._widget,
+                source_model=self._widget.model(),
             )
         else:
             proxy = itemmodels.SliceCheckableProxyModel(
-                indexer=self._indexer, parent=self._widget
+                indexer=self._indexer,
+                parent=self._widget,
+                source_model=self._widget.model(),
             )
         if callback:
             proxy.checkstate_changed.connect(callback)
-        proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
@@ -239,9 +247,11 @@ class Sliced:
 
         size = datatypes.to_size(size)
         proxy = itemmodels.SliceChangeIconSizeProxyModel(
-            indexer=self._indexer, size=size, parent=self._widget
+            indexer=self._indexer,
+            size=size,
+            parent=self._widget,
+            source_model=self._widget.model(),
         )
-        proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
@@ -264,9 +274,10 @@ class Sliced:
         from prettyqt import itemmodels
 
         proxy = itemmodels.SliceAppearanceProxyModel(
-            indexer=self._indexer, parent=self._widget
+            indexer=self._indexer,
+            parent=self._widget,
+            source_model=self._widget.model(),
         )
-        proxy.setSourceModel(self._widget.model())
         proxy.set_foreground(foreground)
         proxy.set_background(background)
         proxy.set_font(font)
@@ -279,7 +290,7 @@ class Sliced:
         from_: constants.ItemDataRole,
         to: constants.ItemDataRole,
         converter: Callable | None = None,
-    ) -> itemmodels.MapRoleProxyMpodel:
+    ) -> itemmodels.SliceMapRoleProxyModel:
         """Map ItemDataRole to another role for data().
 
         Wraps model with a MapRoleProxyMpodel.
@@ -291,13 +302,13 @@ class Sliced:
         """
         from prettyqt import itemmodels
 
-        proxy = itemmodels.MapRoleProxyMpodel(
+        proxy = itemmodels.SliceMapRoleProxyModel(
             indexer=self._indexer,
             parent=self._widget,
             mapping={from_: to},
             converter=converter,
+            source_model=self._widget.model(),
         )
-        proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
@@ -317,7 +328,7 @@ class Sliced:
         from prettyqt import itemmodels
 
         proxy = itemmodels.SliceColorValuesProxyModel(
-            indexer=self._indexer, parent=self._widget
+            indexer=self._indexer, parent=self._widget, source_model=self._widget.model()
         )
         proxy.set_low_color(low_color)
         proxy.set_high_color(high_color)
@@ -364,8 +375,9 @@ class Proxifier:
 
         Wraps current model with a TransposeProxyModel.
         """
-        proxy = core.TransposeProxyModel(parent=self._widget)
-        proxy.setSourceModel(self._widget.model())
+        proxy = core.TransposeProxyModel(
+            parent=self._widget, source_model=self._widget.model()
+        )
         self._widget.set_model(proxy)
         return proxy
 
@@ -384,9 +396,11 @@ class Proxifier:
         from prettyqt import itemmodels
 
         proxy = itemmodels.FlattenTreeProxyModel(
-            parent=self._widget, show_path=show_path, leaves_only=leaves_only
+            parent=self._widget,
+            show_path=show_path,
+            leaves_only=leaves_only,
+            source_model=self._widget.model(),
         )
-        proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
@@ -407,8 +421,8 @@ class Proxifier:
             var_name=var_name,
             value_name=value_name,
             parent=self._widget,
+            source_model=self._widget.model(),
         )
-        proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
@@ -424,8 +438,9 @@ class Proxifier:
         """
         from prettyqt import itemmodels
 
-        proxy = itemmodels.ColumnOrderProxyModel(order=order, parent=self._widget)
-        proxy.setSourceModel(self._widget.model())
+        proxy = itemmodels.ColumnOrderProxyModel(
+            order=order, parent=self._widget, source_model=self._widget.model()
+        )
         self._widget.set_model(proxy)
         return proxy
 
@@ -437,8 +452,9 @@ class Proxifier:
         """
         from prettyqt import itemmodels
 
-        proxy = itemmodels.TableToListProxyModel(parent=self._widget)
-        proxy.setSourceModel(self._widget.model())
+        proxy = itemmodels.TableToListProxyModel(
+            parent=self._widget, source_model=self._widget.model()
+        )
         self._widget.set_model(proxy)
         return proxy
 
@@ -460,9 +476,10 @@ class Proxifier:
         """
         from prettyqt import itemmodels
 
-        proxy = itemmodels.ColumnJoinerProxyModel(parent=self._widget)
+        proxy = itemmodels.ColumnJoinerProxyModel(
+            parent=self._widget, source_model=self._widget.model()
+        )
         proxy.add_mapping(header=header, formatter=formatter, flags=flags)
-        proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
@@ -485,22 +502,27 @@ class Proxifier:
         from prettyqt import itemmodels
 
         proxy = itemmodels.ChangeHeadersProxyModel(
-            header=headers, role=role, orientation=orientation, parent=self._widget
+            header=headers,
+            role=role,
+            orientation=orientation,
+            parent=self._widget,
+            source_model=self._widget.model(),
         )
-        proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
     def set_sort_filter_proxy(self, **kwargs) -> core.SortFilterProxyModel:
-        proxy = core.SortFilterProxyModel(parent=self._widget, **kwargs)
-        proxy.setSourceModel(self._widget.model())
+        proxy = core.SortFilterProxyModel(
+            parent=self._widget, source_model=self._widget.model(), **kwargs
+        )
         self._widget.set_model(proxy)
         return proxy
 
     def get_proxy(self, proxy: ProxyStr, **kwargs) -> core.QAbstractProxyModel:
         Klass = classhelpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
-        proxy_instance = Klass(parent=self._widget, **kwargs)
-        proxy_instance.setSourceModel(self._widget.model())
+        proxy_instance = Klass(
+            parent=self._widget, source_model=self._widget.model(), **kwargs
+        )
         self._widget.set_model(proxy_instance)
         return proxy_instance
 
