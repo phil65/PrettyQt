@@ -109,6 +109,7 @@ __all__ = [
     "SubClassTreeModel",
     "ParentClassTreeModel",
     "FrameInfoModel",
+    "ModuleInfoModel",
     "BaseFieldsModel",
     "BaseDataclassModel",
     "DataClassModel",

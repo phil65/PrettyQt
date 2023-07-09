@@ -18,6 +18,7 @@
             * [LogRecordModel](features/models/logrecordmodel.md)
             * [MappingModel](features/models/mappingmodel.md)
             * [XmlModel](features/models/xmlmodel.md)
+            * [ModuleInfoModel](features/models/moduleinfomodel.md)
         * Qt types
             * [ActionsModel](features/models/actionsmodel.md)
             * [ShortcutsModel](features/models/shortcutsmodel.md)
