@@ -22,9 +22,6 @@ class SliceHighlightCurrentProxyModel(itemmodels.SliceIdentityProxyModel):
     * `column`: Highlight all cells with same value and same column as current.
     * `row`: Highlight all cells with same value and same row as current.
 
-    !!! note
-        This is a slice proxy and can be selectively applied to a model.
-
     ### Example
 
     ```py

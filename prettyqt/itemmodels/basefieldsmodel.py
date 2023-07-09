@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 class BaseFieldsModel(core.AbstractTableModel):
     HEADER: list[str] = []
+    DELEGATE_DEFAULT = "editor"
 
     def __init__(self, instance, **kwargs):
         self._instance = instance

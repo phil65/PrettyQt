@@ -18,10 +18,6 @@ class AttrsFieldsModel(itemmodels.BaseFieldsModel):
     More information about attrs can be found [here](https://www.attrs.org/).
 
     Frozen dataclasses are read-only, otherwise the data can be modified.
-
-    !!! info
-        For being able to edit more types, using the
-        [EditorDelegate](/features/delegates/editordelegate.md) is recommended.
     """
 
     HEADER = [

@@ -13,12 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class AttrsModel(itemmodels.BaseDataclassModel):
-    """Table model to display a list of [attrs](https://www.attrs.org/) dataclasses.
-
-    !!! info
-        For being able to edit more types, using the
-        [EditorDelegate](/features/delegates/editordelegate.md) is recommended.
-    """
+    """Table model to display a list of [attrs](https://www.attrs.org/) dataclasses."""
 
     def __init__(self, items: Sequence[datatypes.IsAttrs], **kwargs):
         super().__init__(items, **kwargs)

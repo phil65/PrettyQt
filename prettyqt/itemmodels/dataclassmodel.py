@@ -14,12 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 class DataClassModel(itemmodels.BaseDataclassModel):
-    """Table model to display a list of dataclasses.
-
-    !!! info
-        For being able to edit more types, using the
-        [EditorDelegate](/features/delegates/editordelegate.md) is recommended.
-    """
+    """Table model to display a list of dataclasses."""
 
     def __init__(self, items: Sequence[datatypes.IsDataclass], **kwargs):
         super().__init__(items, **kwargs)

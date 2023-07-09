@@ -38,6 +38,7 @@ LAYOUT_CHANGE_HINT: bidict[
 
 class AbstractItemModelMixin(core.ObjectMixin):
     IS_RECURSIVE = False  # for docs
+    DELEGATE_DEFAULT = None
     DEFAULT_FLAGS = (
         constants.DRAG_ENABLED | constants.IS_ENABLED | constants.IS_SELECTABLE
     )

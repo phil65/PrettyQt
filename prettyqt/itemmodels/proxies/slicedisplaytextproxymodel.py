@@ -20,9 +20,6 @@ class SliceDisplayTextProxyModel(itemmodels.SliceIdentityProxyModel):
 
     https://docs.python.org/3/library/string.html#format-specification-mini-language
 
-    !!! note
-        This is a slice proxy and can be selectively applied to a model.
-
     ### Example
 
     ```py

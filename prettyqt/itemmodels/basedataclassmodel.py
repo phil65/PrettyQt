@@ -14,6 +14,8 @@ logger = logging.getLogger(__name__)
 
 
 class BaseDataclassModel(core.AbstractTableModel):
+    DELEGATE_DEFAULT = "editor"
+
     def __init__(self, items: Sequence, **kwargs):
         super().__init__(**kwargs)
         self.items = items

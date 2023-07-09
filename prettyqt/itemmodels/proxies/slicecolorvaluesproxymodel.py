@@ -42,9 +42,6 @@ class SliceColorValuesProxyModel(itemmodels.SliceIdentityProxyModel):
     The last two modes have the advantage that nothing needs to be computed in advance,
     min/max values are calculated on-the fly.
 
-    !!! note
-        This is a slice proxy and can be selectively applied to a model.
-
     ### Example
 
     ```py
