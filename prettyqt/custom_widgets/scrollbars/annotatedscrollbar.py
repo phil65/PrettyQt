@@ -17,6 +17,13 @@ class AnnotatedScrollBar(widgets.ScrollBar):
         self._annotations = []
         self._document_length = 100
 
+    @classmethod
+    def create_example(cls):
+        widget = widgets.PlainTextEdit("\n".join(str(i) for i in range(1000)))
+        widget.v_scrollbar = AnnotatedScrollBar(constants.VERTICAL)
+        widget.v_scrollbar.set_annotations([(10, 20), (50, 60), (82, 85)])
+        return widget
+
     def set_annotations(self, annotations: list[tuple[int, int]]):
         self._annotations = annotations
 

@@ -11,6 +11,13 @@ class HelpSearchResultWidget(widgets.WidgetMixin):  # , qthelp.QHelpSearchResult
     def __getattr__(self, val):
         return getattr(self.item, val)
 
+    @classmethod
+    def setup_example(self):
+        core_engine = qthelp.HelpEngineCore("test")
+        engine = qthelp.HelpSearchEngine(core_engine)
+        widget = engine.get_result_widget()
+        return widget
+
     def get_link_at(self, point: datatypes.PointType) -> core.Url:
         if isinstance(point, tuple):
             point = core.Point(*point)

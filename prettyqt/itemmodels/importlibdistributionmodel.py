@@ -215,6 +215,17 @@ class ImportlibTreeModel(itemmodels.ColumnItemModel):
         )
 
     @classmethod
+    def setup_example(cls):
+        from prettyqt import widgets
+
+        model = cls("prettyqt")
+        table = widgets.TreeView(word_wrap=False)
+        table.set_model(model)
+        table.set_delegate("render_link", column=5)
+        table.expand_all(depth=4)
+        return table
+
+    @classmethod
     def supports(cls, instance) -> bool:
         return isinstance(instance, metadata.Distribution)
 
