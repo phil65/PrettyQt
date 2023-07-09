@@ -60,11 +60,18 @@ def find_common_ancestor(cls_list: list[type]) -> type:
     raise TypeError("Couldnt find common base class")
 
 
-def get_subclasses(klass: type, include_abstract: bool = False) -> type:
+def get_subclasses(klass: type, include_abstract: bool = False) -> typing.Iterator[type]:
     for i in klass.__subclasses__():
         yield from get_subclasses(i)
         if include_abstract or not inspect.isabstract(i):
             yield i
+
+
+def get_class_by_name(klass_name: str, parent_type: type = object) -> type | None:
+    return next(
+        (klass_name for kls in get_subclasses(parent_type) if kls.__name__ == klass_name),
+        None,
+    )
 
 
 def get_qt_parent_class(klass: type) -> type | None:
