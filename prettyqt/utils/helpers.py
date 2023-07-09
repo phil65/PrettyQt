@@ -71,6 +71,24 @@ def yield_positions(
             raise TypeError((rows, columns))
 
 
+def get_connections(objects, child_getter, id_getter):
+    items = set()
+    connections = []
+
+    def add_connections(klass):
+        cls_name = id_getter(klass)
+        if cls_name not in items:
+            # if klass.__module__.startswith(base_module):
+            items.add(cls_name)
+            for base in child_getter(klass):
+                connections.append((id_getter(base), cls_name))
+                add_connections(base)
+
+    for obj in objects:
+        add_connections(obj)
+    return items, connections
+
+
 def dump_json(data: str):
     try:
         import orjson
