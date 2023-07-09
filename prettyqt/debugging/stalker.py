@@ -124,13 +124,13 @@ class Stalker(core.Object):
             with contextlib.suppress(RuntimeError):
                 logger.log(self._log_level, f"{self._obj!r}: {message}")
 
-    def _on_signal_connected(self, signal: core.QMetaMethod):
-        signal = core.MetaMethod(signal)
+    def _on_signal_connected(self, qsignal: core.QMetaMethod):
+        signal = core.MetaMethod(qsignal)
         self.log(f"Connected signal {signal.get_name()}")
         self.signal_connected.emit(signal)
 
-    def _on_signal_disconnected(self, signal: core.QMetaMethod):
-        signal = core.MetaMethod(signal)
+    def _on_signal_disconnected(self, qsignal: core.QMetaMethod):
+        signal = core.MetaMethod(qsignal)
         self.log(f"Disconnected signal {signal.get_name()}")
         self.signal_disconnected.emit(signal)
 

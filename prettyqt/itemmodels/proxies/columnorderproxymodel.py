@@ -45,7 +45,6 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
         for index in self._column_order:
             if isinstance(index, str):
                 for i in range(source.columnCount()):
-                    print(i)
                     if (
                         source.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
                         == index
