@@ -1,3 +1,0 @@
-# widgets module
-
-::: prettyqt.widgets

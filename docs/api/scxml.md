@@ -1,3 +1,0 @@
-# scxml module
-
-::: prettyqt.scxml

@@ -1,3 +1,0 @@
-# itemmodels module
-
-::: prettyqt.itemmodels

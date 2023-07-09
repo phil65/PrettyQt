@@ -1,3 +1,0 @@
-# charts module
-
-::: prettyqt.charts

@@ -1,3 +1,0 @@
-# pdfwidgets module
-
-::: prettyqt.pdfwidgets

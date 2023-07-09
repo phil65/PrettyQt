@@ -1,3 +1,0 @@
-# qml module
-
-::: prettyqt.qml

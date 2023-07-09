@@ -1,3 +1,0 @@
-# statemachine module
-
-::: prettyqt.statemachine

@@ -1,3 +1,0 @@
-# qthelp module
-
-::: prettyqt.qthelp

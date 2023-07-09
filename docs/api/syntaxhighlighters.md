@@ -1,3 +1,0 @@
-# syntaxhighlighters module
-
-::: prettyqt.syntaxhighlighters

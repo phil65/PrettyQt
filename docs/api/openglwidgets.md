@@ -1,3 +1,0 @@
-# openglwidgets module
-
-::: prettyqt.openglwidgets
