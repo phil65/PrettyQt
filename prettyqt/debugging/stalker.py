@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import collections
+import contextlib
 
 # import enum
 import logging
@@ -100,8 +101,8 @@ class Stalker(core.Object):
         self.old_disconnectNotify = self._obj.disconnectNotify
         self._obj.connectNotify = self._on_signal_connected
         self._obj.disconnectNotify = self._on_signal_disconnected
-        self._obj.destroyed.connect(self.unhook)
-        self.destroyed.connect(self.unhook)
+        # self._obj.destroyed.connect(self.unhook)
+        # self.destroyed.connect(self.unhook)
 
     def unhook(self):
         if self.eventcatcher is None:
@@ -115,14 +116,13 @@ class Stalker(core.Object):
         for handle in self._handles:
             self._obj.disconnect(handle)
         self._handles = []
-        self._obj.removeEventFilter(self.eventcatcher)
+        with contextlib.suppress(RuntimeError):
+            self._obj.removeEventFilter(self.eventcatcher)
 
     def log(self, message: str):
         if self.log_level:
-            try:
+            with contextlib.suppress(RuntimeError):
                 logger.log(self._log_level, f"{self._obj!r}: {message}")
-            except RuntimeError:
-                logger.error("Object probably already deleted.")
 
     def _on_signal_connected(self, signal: core.QMetaMethod):
         signal = core.MetaMethod(signal)
@@ -136,7 +136,10 @@ class Stalker(core.Object):
 
     def _on_event_detected(self, event) -> bool:
         """Used for EventCatcher, returns false to not eat signals."""
-        self.event_detected.emit(event)
+        try:
+            self.event_detected.emit(event)
+        except RuntimeError:
+            return
         match event.type():
             case core.Event.Type.KeyPress:
                 combo = gui.KeySequence(event.keyCombination()).toString()

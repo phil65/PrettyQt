@@ -92,6 +92,8 @@ markdown_extensions:
 - pymdownx.keys
 - pymdownx.mark
 - pymdownx.tilde
+# - pymdownx.magiclink # auto-convert links
+# - pymdownx.saneheaders # require a whitespace after header #
 - pymdownx.tasklist:
     custom_checkbox: true
 - pymdownx.highlight:  # syntax highlighting
