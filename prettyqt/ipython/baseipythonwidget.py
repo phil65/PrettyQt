@@ -16,6 +16,7 @@ KindStr = Literal["plain", "rich"]
 
 # disables 'Please pass -Xfrozen_modules=off' warning
 os.environ["PYDEVD_DISABLE_FILE_VALIDATION"] = "1"
+os.environ["JUPYTER_PLATFORM_DIRS"] = "1"
 
 logger = logging.getLogger(__name__)
 
