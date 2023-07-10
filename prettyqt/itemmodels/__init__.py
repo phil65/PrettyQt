@@ -55,6 +55,7 @@ from .proxies.slicecolorcategoriesproxymodel import SliceColorCategoriesProxyMod
 from .proxies.slicevaluetransformationproxymodel import SliceValueTransformationProxyModel
 from .proxies.slicehighlightcurrentproxymodel import SliceHighlightCurrentProxyModel
 from .proxies.slicemaproleproxymodel import SliceMapRoleProxyModel
+from .proxies.slicetomarkdownproxymodel import SliceToMarkdownProxyModel
 
 # Reshape proxies
 
@@ -136,6 +137,7 @@ __all__ = [
     "RangeFilterProxyModel",
     "SliceCheckableProxyModel",
     "SliceCheckableTreeProxyModel",
+    "SliceToMarkdownProxyModel",
     "TableToListProxyModel",
     "FlattenTreeProxyModel",
     "MeltProxyModel",
