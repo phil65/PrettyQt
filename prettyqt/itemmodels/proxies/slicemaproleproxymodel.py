@@ -48,7 +48,7 @@ class SliceMapRoleProxyModel(itemmodels.SliceIdentityProxyModel):
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         if role in self._mapping.inverse and self.indexer_contains(index):
-            value = self.sourceModel().data(index, self._mapping.inverse[role])
+            value = super().data(index, self._mapping.inverse[role])
             return self._converter(value) if self._converter else value
         return super().data(index, role)
 
