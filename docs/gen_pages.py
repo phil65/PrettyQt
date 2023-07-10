@@ -8,8 +8,6 @@ from pathlib import Path
 import inspect
 import sys
 
-import mkdocs_gen_files
-
 import prettyqt
 from prettyqt import qt, core, gui, itemmodels, widgets
 
@@ -105,9 +103,8 @@ def write_files_for_module(module_path, doc_path, parts):
         #     and not klass.__name__.endswith("Mixin")
         # ):
         #     if widget := klass.setup_example():
-        #         data = get_widget_screenshot(widget)
         #         doc += markdownizer.BinaryImage(
-        #             data=data,
+        #             data=get_widget_screenshot(widget),
         #             path=f"./docs/images/widgets/{kls_name}.png",
         #             header="🖼 Screenshot",
         #         )
@@ -119,7 +116,7 @@ def write_files_for_module(module_path, doc_path, parts):
     page.write(full_doc_path.with_name("index.md"), edit_path=module_path)
 
 
-docs = markdownizer.Docs(root_path="./prettyqt")
+docs = markdownizer.Docs(module_name="prettyqt")
 for path in docs.yield_files("*/__init__.py"):
     module_path = path.with_suffix("")
     doc_path = path.with_suffix(".md")
