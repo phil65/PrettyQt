@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import logging
 import importlib
 from pathlib import Path
 import inspect
+import sys
+
 import mkdocs_gen_files
 
 import prettyqt
@@ -12,11 +15,15 @@ from prettyqt import qt, core, gui, itemmodels, widgets
 
 from prettyqt.utils import classhelpers, markdownhelpers, markdownizer
 
+logger = logging.getLogger(__name__)
+
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+
 for mod in prettyqt.__all__:
     try:
         importlib.import_module(f"prettyqt.{mod}")
     except ImportError:
-        print(f"{mod} not available. binding: {qt.API}", flush=True)
+        logger.warning(f"{mod} not available. binding: {qt.API}")
 
 app = widgets.app()
 # table = widgets.TableView()

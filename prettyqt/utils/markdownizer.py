@@ -195,8 +195,10 @@ class MarkdownDocument:
 
         with mkdocs_gen_files.open(path, "w") as fd:
             fd.write(self.to_markdown())
+            logger.info(f"Written MarkDown file to {path}")
         if edit_path:
             mkdocs_gen_files.set_edit_path(path, edit_path)
+            logger.info(f"Setting edit path to {edit_path}")
 
     def to_markdown(self) -> str:
         header = self.get_header()
@@ -301,6 +303,7 @@ class BinaryImage(MarkdownImage):
         path.parent.mkdir(parents=True, exist_ok=True)
         with mkdocs_gen_files.open(self.path, "wb") as file:
             file.write(self.data)
+        logger.info(f"Written image to {self.path}")
         return super()._to_markdown()
 
 
@@ -659,6 +662,7 @@ class LiterateNav(BaseMarkdownSection):
     def write(self, path: str = "SUMMARY.md"):
         import mkdocs_gen_files
 
+        logger.info(f"Written SUMMARY to {path}")
         with mkdocs_gen_files.open(path, "w") as nav_file:
             nav_file.writelines(self.text)
 
