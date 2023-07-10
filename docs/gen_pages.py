@@ -120,13 +120,10 @@ def write_files_for_module(module_path, doc_path, parts):
     page.write(full_doc_path.with_name("index.md"), edit_path=module_path)
 
 
-for path in sorted(Path("./prettyqt").rglob("*/__init__.py")):
-    if "__pyinstaller" in str(path) or path.is_dir():
-        continue
+docs = markdownizer.Docs(root_path="./prettyqt")
+for path in docs.yield_files("*/__init__.py"):
     module_path = path.relative_to("./prettyqt").with_suffix("")
     doc_path = path.relative_to("./prettyqt").with_suffix(".md")
-    if module_path.parts[0] == "qt":
-        continue
     parts = tuple(module_path.parts)
     complete_module_path = "prettyqt." + ".".join(parts)
     try:

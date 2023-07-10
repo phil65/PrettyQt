@@ -155,16 +155,15 @@ class Link:
 class Docs:
     def __init__(self, root_path):
         self.root_path = pathlib.Path("./prettyqt")
-        self.folder_exclude = ["__pyinstaller"]
+        self._exclude = ["__pyinstaller", "qt"]
 
     def write(self, document):
         pass
 
     def yield_files(self, glob: str = "*/*.py"):
         for path in sorted(self.root_path.rglob(glob)):
-            if any(i in str(path) for i in self._folder_exclude) or path.is_dir():
-                continue
-            yield path
+            if all(i not in path.parts for i in self._exclude) and not path.is_dir():
+                yield path
 
 
 class MarkdownDocument:
@@ -230,6 +229,23 @@ class BaseMarkdownSection:
         if self.header:
             return f"## {self.header}\n\n{text}"
         return text
+
+
+# class TabWidget(Admonition):
+#     def __init__(
+#         self,
+#         items=None,
+#     ):
+#         super().__init__(header=header)
+#         self.items = items or []
+#         self.title = title
+
+#     def _to_markdown(self) -> str:
+#         lines = [f'!!! Example "{self.title}"']
+
+#         for item in self.items:
+#             header = f"=== {header!r}"
+#             text = textwrap.indent(item.to_markdown(), "        ")
 
 
 class MarkdownText(BaseMarkdownSection):
