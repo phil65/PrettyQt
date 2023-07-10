@@ -11,11 +11,12 @@ class HtmlItemDelegate(widgets.StyledItemDelegate):
     (see ButtonDelegate)
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, mode: str = "html", *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.doc = gui.TextDocument()
         self.text_option = gui.TextOption()
         self.text_option.setWrapMode(gui.TextOption.WrapMode.NoWrap)
+        self._mode = mode
         self.doc.setDefaultTextOption(self.text_option)
         self.doc.setDocumentMargin(0)
 
@@ -53,9 +54,26 @@ class HtmlItemDelegate(widgets.StyledItemDelegate):
     def prepare_doc(self, option: widgets.QStyleOptionViewItem):
         self.text_option.setAlignment(option.displayAlignment)
         self.doc.setDefaultFont(option.font)
-        self.doc.setHtml(option.text)
+        Feat = self.doc.MarkdownFeature
+        match self._mode:
+            case "html":
+                self.doc.setHtml(option.text)
+            case "markdown_no_html":
+                self.doc.setMarkdown(option.text, Feat.MarkdownNoHTML)
+            case "markdown_commonmark":
+                self.doc.setMarkdown(option.text, Feat.MarkdownDialectCommonMark)
+            case "markdown_github":
+                self.doc.setMarkdown(option.text, Feat.MarkdownDialectGitHub)
         # self.doc.setTextWidth(option.rect.width())
         self.doc.setPageSize(core.QSizeF(option.rect.width(), option.rect.height()))
+
+    def get_markup_mode(self, str):
+        return self._mode
+
+    def set_markup_mode(self, mode: str):
+        self._mode = mode
+
+    markup_mode = core.Property(str, get_markup_mode, set_markup_mode)
 
 
 if __name__ == "__main__":
