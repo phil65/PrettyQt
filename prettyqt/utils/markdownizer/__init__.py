@@ -169,9 +169,10 @@ class Docs:
 class MarkdownDocument:
     def __init__(
         self,
-        items=None,
+        items: list | None = None,
         hide_toc: bool = False,
         hide_nav: bool = False,
+        hide_path: bool = False,
         path: str | os.PathLike = "",
     ):
         self.items = items or []
@@ -181,6 +182,8 @@ class MarkdownDocument:
             self.options["hide"].append("toc")
         if hide_nav:
             self.options["hide"].append("nav")
+        if hide_path:
+            self.options["hide"].append("path")
 
     def __add__(self, other):
         self.append(other)
@@ -325,10 +328,9 @@ class BinaryImage(MarkdownImage):
 
 class MermaidDiagram(MarkdownCode):
     TYPE_MAP = dict(
-        flow_left_right="graph LR",
+        flow="graph",
         sequence="sequenceDiagram",
         state="stateDiagram-v2",
-        flow_top_down="graph TD",
     )
     ORIENTATION = dict(
         default="",
@@ -366,7 +368,23 @@ class MermaidDiagram(MarkdownCode):
             klasses, child_getter=lambda x: x.__bases__, id_getter=lambda x: x.__name__
         )
         return cls(
-            graph_type="flow_top_down",
+            graph_type="flow",
+            orientation="TD",
+            items=items,
+            connections=connections,
+            header=header,
+        )
+
+    @classmethod
+    def for_subclasses(cls, klasses, header: str = ""):
+        items, connections = helpers.get_connections(
+            klasses,
+            child_getter=lambda x: x.__subclasses__(),
+            id_getter=lambda x: x.__name__,
+        )
+        return cls(
+            graph_type="flow",
+            orientation="RL",
             items=items,
             connections=connections,
             header=header,
@@ -482,7 +500,7 @@ class Table(MarkdownText):
         return cls.from_itemmodel(proxy)
 
     @classmethod
-    def get_ancestor_table_for_klass(cls, klass: type[core.QObject]) -> Table:
+    def get_ancestor_table_for_klass(cls, klass: type[core.QObject]) -> Table | None:
         subclasses = klass.__subclasses__()
         if not subclasses:
             return None
@@ -666,14 +684,15 @@ class DocStringSection(MarkdownText):
 
 class LiterateNav(BaseMarkdownSection):
     def __init__(
-        self, mapping: dict[str | tuple[str, ...], str], indentation: int | str = ""
+        self, mapping: dict[str | tuple[str, ...], str] | None = None, indentation: int | str = ""
     ):
         import mkdocs_gen_files
 
         super().__init__()
         self.nav = mkdocs_gen_files.Nav()
-        for k, v in mapping.items():
-            self.nav[k] = v
+        if mapping:
+            for k, v in mapping.items():
+                self.nav[k] = v
 
     def write(self, path: str = "SUMMARY.md"):
         import mkdocs_gen_files
