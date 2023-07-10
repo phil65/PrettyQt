@@ -181,7 +181,7 @@ class Docs:
             else:
                 for i in inspect.getmembers(module, inspect.isclass):
                     if i[1].__module__.startswith(self.module_name):
-                        yield i[1]
+                        yield path, i[1]
 
 
 class MarkdownDocument:
