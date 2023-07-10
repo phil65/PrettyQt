@@ -8,6 +8,7 @@ import importlib
 import logging
 import os
 import pathlib
+import re
 import textwrap
 import types
 import typing
@@ -516,11 +517,15 @@ class Table(MarkdownText):
             parent_str = ", ".join(
                 markdownhelpers.link_for_class(parent) for parent in parents
             )
+            desc = [
+                kls.__doc__.split("\n")[0] if kls.__doc__ else "" for kls in subclasses
+            ]
             data = dict(
                 Name=markdownhelpers.link_for_class(kls),
                 # Module=kls.__module__,
                 Children=subclass_str,
                 Inherits=parent_str,
+                Description=desc,
             )
             ls.append(data)
         return cls(ls)
@@ -542,9 +547,13 @@ class Table(MarkdownText):
         subclasses = klass.__subclasses__()
         if not subclasses:
             return None
+        # STRIP_CODE = r"```[^\S\r\n]*[a-z]*\n.*?\n```"
+        # docs = [re.sub(STRIP_CODE, '', k.__module__, 0, re.DOTALL) for k in subclasses]
+        desc = [kls.__doc__.split("\n")[0] if kls.__doc__ else "" for kls in subclasses]
         data = dict(
             Class=[markdownhelpers.link_for_class(kls) for kls in subclasses],
             Module=[kls.__module__ for kls in subclasses],
+            Description=desc,
         )
         return cls(data=data, header="Child classes")
 
