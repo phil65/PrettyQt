@@ -110,6 +110,9 @@ pyside6 = ["pyside6"]
 regexeditor = "prettyqt.custom_widgets.regexeditor.__main__:run"
 iconbrowser = "prettyqt.custom_widgets.iconbrowser:run"
 
+[project.entry-points."mkdocs.plugins"]
+linkreplacer = "prettyqt.__linkreplacer:LinkReplacerPlugin"
+
 [project.entry-points.pyinstaller40]
 hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
 
@@ -204,6 +207,10 @@ iconbrowser = "prettyqt.custom_widgets.iconbrowser:run"
 
 [tool.poetry.plugins."pyinstaller40"]
 hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
+
+[tool.poetry.plugins."mkdocs.plugins"]
+linkreplacer = "prettyqt.__linkreplacer:LinkReplacerPlugin"
+
 
 # [tool.poetry.plugins."pytest11"]
 # pytest-qt = "prettyqt.prettyqtest.plugin"
