@@ -153,8 +153,9 @@ class Link:
 
 
 class Docs:
-    def __init__(self, root_path):
-        self.root_path = pathlib.Path("./prettyqt")
+    def __init__(self, module_name: str):
+        self.module_name = module_name
+        self.root_path = pathlib.Path(f"./{module_name}")
         self._exclude = ["__pyinstaller", "qt"]
 
     def write(self, document):
@@ -163,7 +164,23 @@ class Docs:
     def yield_files(self, glob: str = "*/*.py"):
         for path in sorted(self.root_path.rglob(glob)):
             if all(i not in path.parts for i in self._exclude) and not path.is_dir():
-                yield path
+                yield path.relative_to(self.root_path)
+
+    def yield_classes_for_glob(self, glob="*/*.py"):
+        import inspect
+
+        for path in self.yield_files(glob):
+            module_path = path.with_suffix("")
+            parts = tuple(module_path.parts)
+            module_path = f"{self.module_name}." + ".".join(parts)
+            try:
+                module = importlib.import_module(module_path)
+            except (ImportError, AttributeError):
+                continue
+            else:
+                for i in inspect.getmembers(module, inspect.isclass):
+                    if i[1].__module__.startswith(self.module_name):
+                        yield i[1]
 
 
 class MarkdownDocument:
@@ -218,6 +235,21 @@ class MarkdownDocument:
         if isinstance(other, str):
             other = MarkdownText(other)
         self.items.append(other)
+
+
+class MarkdownClassDocument(MarkdownDocument):
+    def __init__(self, klass: type, parts: tuple[str, ...] | None = None, **kwargs):
+        super().__init__(**kwargs)
+        self.klass = klass
+        self.parts = parts or ()
+        self._build()
+
+    def _build(self):
+        self.append(DocStringSection(f'{".".join(self.parts)}.{self.klass.__name__}'))
+        if table := Table.get_ancestor_table_for_klass(self.klass):
+            self.append(table)
+        self.append(MermaidDiagram.for_classes([self.klass]))
+        # self.append(MermaidDiagram.for_subclasses([self.klass]))
 
 
 class BaseMarkdownSection:
@@ -463,14 +495,20 @@ class Table(MarkdownText):
         return lines
 
     @classmethod
-    def get_classes_table(cls, klasses: list[type]) -> Table:
+    def get_classes_table(
+        cls,
+        klasses: list[type],
+        filter_fn: Callable | None = None,
+    ) -> Table:
         """Create a table containing information about a list of classes.
 
         Includes columns for child and parent classes including links.
         """
         ls = []
+        if filter_fn is None:
+            filter_fn = lambda _: True
         for kls in klasses:
-            subclasses = kls.__subclasses__()
+            subclasses = [subkls for subkls in kls.__subclasses__() if filter_fn(subkls)]
             parents = kls.__bases__
             subclass_str = ", ".join(
                 markdownhelpers.link_for_class(sub) for sub in subclasses
@@ -480,7 +518,7 @@ class Table(MarkdownText):
             )
             data = dict(
                 Name=markdownhelpers.link_for_class(kls),
-                Module=kls.__module__,
+                # Module=kls.__module__,
                 Children=subclass_str,
                 Inherits=parent_str,
             )
@@ -684,7 +722,9 @@ class DocStringSection(MarkdownText):
 
 class LiterateNav(BaseMarkdownSection):
     def __init__(
-        self, mapping: dict[str | tuple[str, ...], str] | None = None, indentation: int | str = ""
+        self,
+        mapping: dict[str | tuple[str, ...], str] | None = None,
+        indentation: int | str = "",
     ):
         import mkdocs_gen_files
 

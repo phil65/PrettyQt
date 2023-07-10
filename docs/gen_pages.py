@@ -96,34 +96,33 @@ def write_files_for_module(module_path, doc_path, parts):
         klasses = []
     for klass in klasses:
         kls_name = klass.__name__
-        print(f"preparing stuff for {kls_name}")
         mapping[(*parts, kls_name)] = doc_path.with_name(f"{kls_name}.md").as_posix()
         path = full_doc_path.with_name(f"{kls_name}.md")
         doc = get_document_for_klass(klass, parts, path=path)
-        if (
-            hasattr(klass, "setup_example")
-            and "Abstract" not in klass.__name__
-            and not klass.__name__.endswith("Mixin")
-        ):
-            if widget := klass.setup_example():
-                data = get_widget_screenshot(widget)
-                doc += markdownizer.BinaryImage(
-                    data=data,
-                    path=f"./docs/images/widgets/{kls_name}.png",
-                    header="🖼 Screenshot",
-                )
+        # if (
+        #     hasattr(klass, "setup_example")
+        #     and "Abstract" not in klass.__name__
+        #     and not klass.__name__.endswith("Mixin")
+        # ):
+        #     if widget := klass.setup_example():
+        #         data = get_widget_screenshot(widget)
+        #         doc += markdownizer.BinaryImage(
+        #             data=data,
+        #             path=f"./docs/images/widgets/{kls_name}.png",
+        #             header="🖼 Screenshot",
+        #         )
         doc.write(path, edit_path=module_path)
 
     # if klasses:
-    page = markdownizer.MarkdownDocument(hide_nav=True)
+    page = markdownizer.MarkdownDocument(hide_toc=True)
     page += markdownhelpers.get_class_table(klasses)
     page.write(full_doc_path.with_name("index.md"), edit_path=module_path)
 
 
 docs = markdownizer.Docs(root_path="./prettyqt")
 for path in docs.yield_files("*/__init__.py"):
-    module_path = path.relative_to("./prettyqt").with_suffix("")
-    doc_path = path.relative_to("./prettyqt").with_suffix(".md")
+    module_path = path.with_suffix("")
+    doc_path = path.with_suffix(".md")
     parts = tuple(module_path.parts)
     complete_module_path = "prettyqt." + ".".join(parts)
     try:

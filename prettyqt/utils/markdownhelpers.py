@@ -158,13 +158,13 @@ def get_image(path: str, caption: str = "") -> str:
 
 
 def get_class_table(klasses: list[type[core.QObject]]) -> str:
-    lines = ["|Name|Module|Child classes|Inherits|", "|--|--|--|--|"]
+    lines = ["|Name|Child classes|Inherits|", "|--|--|--|"]
     for kls in klasses:
         subclasses = kls.__subclasses__()
         parents = kls.__bases__
         subclass_str = ", ".join(link_for_class(subclass) for subclass in subclasses)
         parent_str = ", ".join(link_for_class(parent) for parent in parents)
-        line = f"|{link_for_class(kls)}|{kls.__module__}|{subclass_str}|{parent_str}|"
+        line = f"|{link_for_class(kls)}|{subclass_str}|{parent_str}|"
         lines.append(line)
     return "\n\n" + "\n".join(lines) + "\n\n"
 
