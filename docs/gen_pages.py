@@ -120,24 +120,24 @@ def write_files_for_module(module_path, doc_path, parts):
     page.write(full_doc_path.with_name("index.md"), edit_path=module_path)
 
 
-for path in sorted(Path("./prettyqt").rglob("*/*.py")):
+for path in sorted(Path("./prettyqt").rglob("*/__init__.py")):
     if "__pyinstaller" in str(path) or path.is_dir():
         continue
     module_path = path.relative_to("./prettyqt").with_suffix("")
     doc_path = path.relative_to("./prettyqt").with_suffix(".md")
-    parts = tuple(module_path.parts)
-    if parts[-1] != "__init__" or parts[0] == "qt":
+    if module_path.parts[0] == "qt":
         continue
-    module_path = "prettyqt." + ".".join(parts)
+    parts = tuple(module_path.parts)
+    complete_module_path = "prettyqt." + ".".join(parts)
     try:
-        module = importlib.import_module(module_path)
+        module = importlib.import_module(complete_module_path)
         klasses = [i[1] for i in inspect.getmembers(module, inspect.isclass)]
     except (AttributeError, ImportError) as e:
         klasses = []
     parts = parts[:-1]
     # print(parts, doc_path.with_name("index.md").as_posix())
     mapping[parts] = doc_path.with_name("index.md").as_posix()
-    write_files_for_module(module_path, doc_path, parts)
+    write_files_for_module(complete_module_path, doc_path, parts)
 
 page = markdownizer.LiterateNav(mapping)
 page.write("reference/SUMMARY.md")

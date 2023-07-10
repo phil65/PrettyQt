@@ -654,17 +654,17 @@ class LiterateNav(BaseMarkdownSection):
     ):
         import mkdocs_gen_files
 
-        nav = mkdocs_gen_files.Nav()
+        super().__init__()
+        self.nav = mkdocs_gen_files.Nav()
         for k, v in mapping.items():
-            nav[k] = v
-        self.text = nav.build_literate_nav()
+            self.nav[k] = v
 
     def write(self, path: str = "SUMMARY.md"):
         import mkdocs_gen_files
 
         logger.info(f"Written SUMMARY to {path}")
         with mkdocs_gen_files.open(path, "w") as nav_file:
-            nav_file.writelines(self.text)
+            nav_file.writelines(self.nav.build_literate_nav())
 
 
 if __name__ == "__main__":
