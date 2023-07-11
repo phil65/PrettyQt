@@ -116,7 +116,8 @@ def write_files_for_module(module_path, doc_path, parts):
     page.write(full_doc_path.with_name("index.md"), edit_path=module_path)
 
 
-docs = markdownizer.Docs(module_name="prettyqt")
+docs = markdownizer.Docs(module_name="prettyqt", exclude_modules=["qt"])
+
 for path in docs.yield_files("*/__init__.py"):
     module_path = path.with_suffix("")
     doc_path = path.with_suffix(".md")

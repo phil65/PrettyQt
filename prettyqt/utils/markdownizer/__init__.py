@@ -156,17 +156,21 @@ class Link:
 
 
 class Docs:
-    def __init__(self, module_name: str):
+    def __init__(self, module_name: str, exclude_modules: list[str] | None = None):
         self.module_name = module_name
         self.root_path = pathlib.Path(f"./{module_name}")
-        self._exclude = ["__pyinstaller", "qt"]
+        self._exclude = exclude_modules or []
 
     def write(self, document):
         pass
 
     def yield_files(self, glob: str = "*/*.py"):
         for path in sorted(self.root_path.rglob(glob)):
-            if all(i not in path.parts for i in self._exclude) and not path.is_dir():
+            if (
+                all(i not in path.parts for i in self._exclude)
+                and not any(i.startswith("__") for i in path.parent.parts)
+                and not path.is_dir()
+            ):
                 yield path.relative_to(self.root_path)
 
     def yield_klasses_for_module(
