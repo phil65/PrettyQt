@@ -11,7 +11,7 @@ import sys
 import prettyqt
 from prettyqt import qt, core, gui, itemmodels, widgets
 
-from prettyqt.utils import classhelpers, markdownhelpers, markdownizer
+from prettyqt.utils import classhelpers, markdownizer
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +23,7 @@ for mod in prettyqt.__all__:
     except ImportError:
         logger.warning(f"{mod} not available. binding: {qt.API}")
 
-app = widgets.app()
+# app = widgets.app()
 # table = widgets.TableView()
 
 SLICE_PROXY_INFO = "This is a [slice proxy](SliceIdentityProxyModel.md) and can be selectively applied to a model."
@@ -39,18 +39,6 @@ hide:
 mapping = {}
 
 
-def get_widget_screenshot(widget: widgets.QWidget) -> bytes:
-    widget.show()
-    widget.adjustSize()
-    pixmap = widget.grab()
-    widget.hide()
-    ba = core.ByteArray()
-    buffer = core.QBuffer(ba)
-    buffer.open(core.QIODeviceBase.OpenModeFlag.WriteOnly)
-    ok = pixmap.save(buffer, "PNG")
-    return ba.data()
-
-
 def get_document_for_klass(klass: type, parts: tuple[str, ...], path: str = ""):
     doc = markdownizer.Document(path=path)
     doc += markdownizer.DocStrings(f'prettyqt.{".".join(parts)}.{klass.__name__}')
@@ -58,6 +46,13 @@ def get_document_for_klass(klass: type, parts: tuple[str, ...], path: str = ""):
         doc += markdownizer.Admonition("info", SLICE_PROXY_INFO)
     if issubclass(klass, core.AbstractItemModelMixin) and klass.IS_RECURSIVE:
         doc += markdownizer.Admonition("warning", RECURSIVE_MODEL_INFO)
+    if issubclass(klass, core.AbstractItemModelMixin) and issubclass(klass, core.QObject):
+        sig = inspect.signature(klass.__init__)
+        params = list(sig.parameters.values())
+        if len(params) > 1:
+            typ = params[1].annotation
+            doc += markdownizer.Admonition("info", f"Supported data type: `{typ}`")
+
     if (
         issubclass(klass, core.AbstractItemModelMixin)
         and klass.DELEGATE_DEFAULT is not None
@@ -71,7 +66,7 @@ def get_document_for_klass(klass: type, parts: tuple[str, ...], path: str = ""):
         if table := markdownizer.Table.get_ancestor_table_for_klass(klass):
             doc += table
         if qt_parent := classhelpers.get_qt_parent_class(klass):
-            doc += f"Qt Base Class: {markdownhelpers.get_qt_help_link(qt_parent)}"
+            doc += f"Qt Base Class: {markdownizer.link_for_class(qt_parent)}"
     if hasattr(klass, "ID") and issubclass(klass, gui.Validator):
         doc += f"\n\nValidator ID: **{klass.ID}**\n\n"
     if hasattr(klass, "ID") and issubclass(klass, widgets.AbstractItemDelegateMixin):
@@ -103,8 +98,8 @@ def write_files_for_module(module_path, doc_path, parts):
         #     and not klass.__name__.endswith("Mixin")
         # ):
         #     if widget := klass.setup_example():
-        #         doc += markdownizer.BinaryImage(
-        #             data=get_widget_screenshot(widget),
+        #         doc += markdownizer.WidgetScreenShot(
+        #             widget=widget,
         #             path=full_doc_path.parent / f"{kls_name}.png",
         #             header="🖼 Screenshot",
         #         )
@@ -112,7 +107,7 @@ def write_files_for_module(module_path, doc_path, parts):
 
     # if klasses:
     page = markdownizer.Document(hide_toc=True)
-    page += markdownhelpers.get_class_table(klasses)
+    page += markdownizer.Table.get_classes_table(klasses)
     page.write(full_doc_path.with_name("index.md"), edit_path=module_path)
 
 
@@ -125,7 +120,7 @@ for path in docs.yield_files("*/__init__.py"):
     complete_module_path = "prettyqt." + ".".join(parts)
     try:
         module = importlib.import_module(complete_module_path)
-        klasses = [i[1] for i in inspect.getmembers(module, inspect.isclass)]
+        klasses = [klass for _name, klass in inspect.getmembers(module, inspect.isclass)]
     except (AttributeError, ImportError) as e:
         klasses = []
     parts = parts[:-1]
