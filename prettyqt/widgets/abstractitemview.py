@@ -15,6 +15,7 @@ DelegateStr = Literal[
     "widget",
     "editor",
     "html",
+    "markdown",
     "button",
     "no_focus",
     "render_link",

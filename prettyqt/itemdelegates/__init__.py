@@ -1,7 +1,7 @@
 """Module containing custom delegate classes."""
 
 from .buttondelegate import ButtonDelegate
-from .htmlitemdelegate import HtmlItemDelegate
+from .htmlitemdelegate import HtmlItemDelegate, MarkdownItemDelegate
 from .icondelegate import IconDelegate
 from .nofocusdelegate import NoFocusDelegate
 from .progressbardelegate import ProgressBarDelegate
@@ -21,6 +21,7 @@ __all__ = [
     "RenderLinkDelegate",
     "NoFocusDelegate",
     "HtmlItemDelegate",
+    "MarkdownItemDelegate",
     "WidgetDelegate",
     "EditorDelegate",
 ]

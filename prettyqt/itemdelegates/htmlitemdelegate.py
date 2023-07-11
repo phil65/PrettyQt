@@ -3,20 +3,14 @@ from __future__ import annotations
 from prettyqt import core, gui, widgets
 
 
-class HtmlItemDelegate(widgets.StyledItemDelegate):
-    ID = "html"
-    """Delegate do display HTML text.
-
-    An alternative approach would be go grab a pixmal from a QLabel for painting.
-    (see ButtonDelegate)
-    """
-
-    def __init__(self, mode: str = "html", *args, **kwargs):
+class BaseMarkupDelegate(widgets.StyledItemDelegate):
+    # An alternative approach would be go grab a pixmap from a QLabel for painting.
+    # (see ButtonDelegate)
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.doc = gui.TextDocument()
         self.text_option = gui.TextOption()
         self.text_option.setWrapMode(gui.TextOption.WrapMode.NoWrap)
-        self._mode = mode
         self.doc.setDefaultTextOption(self.text_option)
         self.doc.setDocumentMargin(0)
 
@@ -54,18 +48,38 @@ class HtmlItemDelegate(widgets.StyledItemDelegate):
     def prepare_doc(self, option: widgets.QStyleOptionViewItem):
         self.text_option.setAlignment(option.displayAlignment)
         self.doc.setDefaultFont(option.font)
-        Feat = self.doc.MarkdownFeature
-        match self._mode:
-            case "html":
-                self.doc.setHtml(option.text)
-            case "markdown_no_html":
-                self.doc.setMarkdown(option.text, Feat.MarkdownNoHTML)
-            case "markdown_commonmark":
-                self.doc.setMarkdown(option.text, Feat.MarkdownDialectCommonMark)
-            case "markdown_github":
-                self.doc.setMarkdown(option.text, Feat.MarkdownDialectGitHub)
+        self.set_text(option.text)
         # self.doc.setTextWidth(option.rect.width())
         self.doc.setPageSize(core.QSizeF(option.rect.width(), option.rect.height()))
+
+
+class HtmlItemDelegate(BaseMarkupDelegate):
+    """Delegate do display HTML text."""
+
+    ID = "html"
+
+    def set_text(self, text: str):
+        self.doc.setHtml(text)
+
+
+class MarkdownItemDelegate(BaseMarkupDelegate):
+    """Delegate do display Markdown text."""
+
+    ID = "markdown"
+
+    def __init__(self, *args, mode: str = "markdown_github", **kwargs):
+        super().__init__(*args, **kwargs)
+        self._mode = mode
+
+    def set_text(self, text: str):
+        Feat = self.doc.MarkdownFeature
+        match self._mode:
+            case "markdown_no_html":
+                self.doc.setMarkdown(text, Feat.MarkdownNoHTML)
+            case "markdown_commonmark":
+                self.doc.setMarkdown(text, Feat.MarkdownDialectCommonMark)
+            case "markdown_github" | "":
+                self.doc.setMarkdown(text, Feat.MarkdownDialectGitHub)
 
     def get_markup_mode(self, str):
         return self._mode
