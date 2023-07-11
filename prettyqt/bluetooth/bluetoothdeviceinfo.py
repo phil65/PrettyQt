@@ -81,26 +81,26 @@ MinorAudioVideoClassStr = Literal[
     "gaming",
 ]
 
-MINOR_AUDIO_VIDEO_CLASS: bidict[
-    MinorAudioVideoClassStr, mod.MinorAudioVideoClass
-] = bidict(
-    uncategorized=mod.MinorAudioVideoClass.UncategorizedAudioVideoDevice,
-    wearable_headset=mod.MinorAudioVideoClass.WearableHeadsetDevice,
-    hands_free=mod.MinorAudioVideoClass.HandsFreeDevice,
-    microphone=mod.MinorAudioVideoClass.Microphone,
-    loudspeaker=mod.MinorAudioVideoClass.Loudspeaker,
-    headphones=mod.MinorAudioVideoClass.Headphones,
-    portable_audio=mod.MinorAudioVideoClass.PortableAudioDevice,
-    car_audio=mod.MinorAudioVideoClass.CarAudio,
-    set_top_box=mod.MinorAudioVideoClass.SetTopBox,
-    hifi_audio=mod.MinorAudioVideoClass.HiFiAudioDevice,
-    vcr=mod.MinorAudioVideoClass.Vcr,
-    video_camera=mod.MinorAudioVideoClass.VideoCamera,
-    camcorder=mod.MinorAudioVideoClass.Camcorder,
-    video_monitor=mod.MinorAudioVideoClass.VideoMonitor,
-    video_display_and_loudspeaker=mod.MinorAudioVideoClass.VideoDisplayAndLoudspeaker,
-    video_conferencing=mod.MinorAudioVideoClass.VideoConferencing,
-    gaming=mod.MinorAudioVideoClass.GamingDevice,
+MINOR_AUDIO_VIDEO_CLASS: bidict[MinorAudioVideoClassStr, mod.MinorAudioVideoClass] = (
+    bidict(
+        uncategorized=mod.MinorAudioVideoClass.UncategorizedAudioVideoDevice,
+        wearable_headset=mod.MinorAudioVideoClass.WearableHeadsetDevice,
+        hands_free=mod.MinorAudioVideoClass.HandsFreeDevice,
+        microphone=mod.MinorAudioVideoClass.Microphone,
+        loudspeaker=mod.MinorAudioVideoClass.Loudspeaker,
+        headphones=mod.MinorAudioVideoClass.Headphones,
+        portable_audio=mod.MinorAudioVideoClass.PortableAudioDevice,
+        car_audio=mod.MinorAudioVideoClass.CarAudio,
+        set_top_box=mod.MinorAudioVideoClass.SetTopBox,
+        hifi_audio=mod.MinorAudioVideoClass.HiFiAudioDevice,
+        vcr=mod.MinorAudioVideoClass.Vcr,
+        video_camera=mod.MinorAudioVideoClass.VideoCamera,
+        camcorder=mod.MinorAudioVideoClass.Camcorder,
+        video_monitor=mod.MinorAudioVideoClass.VideoMonitor,
+        video_display_and_loudspeaker=mod.MinorAudioVideoClass.VideoDisplayAndLoudspeaker,
+        video_conferencing=mod.MinorAudioVideoClass.VideoConferencing,
+        gaming=mod.MinorAudioVideoClass.GamingDevice,
+    )
 )
 
 

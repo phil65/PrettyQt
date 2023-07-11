@@ -8,13 +8,13 @@ from prettyqt.utils import bidict, datatypes
 
 ImageWriterErrorStr = Literal["device", "unsupported_format", "invalid_image", "unknown"]
 
-IMAGE_WRITER_ERROR: bidict[
-    ImageWriterErrorStr, gui.QImageWriter.ImageWriterError
-] = bidict(
-    device=gui.QImageWriter.ImageWriterError.DeviceError,
-    unsupported_format=gui.QImageWriter.ImageWriterError.UnsupportedFormatError,
-    invalid_image=gui.QImageWriter.ImageWriterError.InvalidImageError,
-    unknown=gui.QImageWriter.ImageWriterError.UnknownError,
+IMAGE_WRITER_ERROR: bidict[ImageWriterErrorStr, gui.QImageWriter.ImageWriterError] = (
+    bidict(
+        device=gui.QImageWriter.ImageWriterError.DeviceError,
+        unsupported_format=gui.QImageWriter.ImageWriterError.UnsupportedFormatError,
+        invalid_image=gui.QImageWriter.ImageWriterError.InvalidImageError,
+        unknown=gui.QImageWriter.ImageWriterError.UnknownError,
+    )
 )
 
 

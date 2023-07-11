@@ -8,11 +8,11 @@ from prettyqt.utils import bidict
 
 PolarOrientationStr = Literal["radial", "angular"]
 
-POLAR_ORIENTATIONS: bidict[
-    PolarOrientationStr, charts.QPolarChart.PolarOrientation
-] = bidict(
-    radial=charts.QPolarChart.PolarOrientation.PolarOrientationRadial,
-    angular=charts.QPolarChart.PolarOrientation.PolarOrientationAngular,
+POLAR_ORIENTATIONS: bidict[PolarOrientationStr, charts.QPolarChart.PolarOrientation] = (
+    bidict(
+        radial=charts.QPolarChart.PolarOrientation.PolarOrientationRadial,
+        angular=charts.QPolarChart.PolarOrientation.PolarOrientationAngular,
+    )
 )
 
 

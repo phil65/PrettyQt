@@ -10,11 +10,11 @@ from prettyqt.utils import bidict
 
 DeletionPolicyStr = Literal["keep", "delete"]
 
-DELETION_POLICY: bidict[
-    DeletionPolicyStr, core.QAbstractAnimation.DeletionPolicy
-] = bidict(
-    keep=core.QAbstractAnimation.DeletionPolicy.KeepWhenStopped,
-    delete=core.QAbstractAnimation.DeletionPolicy.DeleteWhenStopped,
+DELETION_POLICY: bidict[DeletionPolicyStr, core.QAbstractAnimation.DeletionPolicy] = (
+    bidict(
+        keep=core.QAbstractAnimation.DeletionPolicy.KeepWhenStopped,
+        delete=core.QAbstractAnimation.DeletionPolicy.DeleteWhenStopped,
+    )
 )
 
 DirectionStr = Literal["forward", "backward"]

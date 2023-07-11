@@ -10,14 +10,14 @@ ImageReaderErrorStr = Literal[
     "file_not_found", "device", "unsupported_format", "invalid_data", "unknown"
 ]
 
-IMAGE_READER_ERROR: bidict[
-    ImageReaderErrorStr, gui.QImageReader.ImageReaderError
-] = bidict(
-    file_not_found=gui.QImageReader.ImageReaderError.FileNotFoundError,
-    device=gui.QImageReader.ImageReaderError.DeviceError,
-    unsupported_format=gui.QImageReader.ImageReaderError.UnsupportedFormatError,
-    invalid_data=gui.QImageReader.ImageReaderError.InvalidDataError,
-    unknown=gui.QImageReader.ImageReaderError.UnknownError,
+IMAGE_READER_ERROR: bidict[ImageReaderErrorStr, gui.QImageReader.ImageReaderError] = (
+    bidict(
+        file_not_found=gui.QImageReader.ImageReaderError.FileNotFoundError,
+        device=gui.QImageReader.ImageReaderError.DeviceError,
+        unsupported_format=gui.QImageReader.ImageReaderError.UnsupportedFormatError,
+        invalid_data=gui.QImageReader.ImageReaderError.InvalidDataError,
+        unknown=gui.QImageReader.ImageReaderError.UnknownError,
+    )
 )
 
 

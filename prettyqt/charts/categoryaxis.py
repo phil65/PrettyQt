@@ -9,11 +9,11 @@ from prettyqt.utils import bidict
 
 LabelsPositionStr = Literal["center", "on_value"]
 
-LABELS_POSITIONS: bidict[
-    LabelsPositionStr, charts.QCategoryAxis.AxisLabelsPosition
-] = bidict(
-    center=charts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionCenter,
-    on_value=charts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionOnValue,
+LABELS_POSITIONS: bidict[LabelsPositionStr, charts.QCategoryAxis.AxisLabelsPosition] = (
+    bidict(
+        center=charts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionCenter,
+        on_value=charts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionOnValue,
+    )
 )
 
 

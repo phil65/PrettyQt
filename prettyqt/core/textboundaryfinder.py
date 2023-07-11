@@ -15,15 +15,15 @@ BoundaryReasonStr = Literal[
     "soft_hyphen",
 ]
 
-BOUNDARY_REASONS: bidict[
-    BoundaryReasonStr, QtCore.QTextBoundaryFinder.BoundaryReason
-] = bidict(
-    not_at_boundary=QtCore.QTextBoundaryFinder.BoundaryReason.NotAtBoundary,
-    break_opportunity=QtCore.QTextBoundaryFinder.BoundaryReason.BreakOpportunity,
-    start_of_item=QtCore.QTextBoundaryFinder.BoundaryReason.StartOfItem,
-    end_of_item=QtCore.QTextBoundaryFinder.BoundaryReason.EndOfItem,
-    mandatory_break=QtCore.QTextBoundaryFinder.BoundaryReason.MandatoryBreak,
-    soft_hyphen=QtCore.QTextBoundaryFinder.BoundaryReason.SoftHyphen,
+BOUNDARY_REASONS: bidict[BoundaryReasonStr, QtCore.QTextBoundaryFinder.BoundaryReason] = (
+    bidict(
+        not_at_boundary=QtCore.QTextBoundaryFinder.BoundaryReason.NotAtBoundary,
+        break_opportunity=QtCore.QTextBoundaryFinder.BoundaryReason.BreakOpportunity,
+        start_of_item=QtCore.QTextBoundaryFinder.BoundaryReason.StartOfItem,
+        end_of_item=QtCore.QTextBoundaryFinder.BoundaryReason.EndOfItem,
+        mandatory_break=QtCore.QTextBoundaryFinder.BoundaryReason.MandatoryBreak,
+        soft_hyphen=QtCore.QTextBoundaryFinder.BoundaryReason.SoftHyphen,
+    )
 )
 
 BoundaryTypeStr = Literal[

@@ -619,12 +619,12 @@ FORMAT_TYPE: bidict[FormatTypeStr, QtCore.QLocale.FormatType] = bidict(
 
 MeasurementSystemStr = Literal["metric", "imperial_us", "imperial_uk"]
 
-MEASUREMENT_SYSTEM: bidict[
-    MeasurementSystemStr, QtCore.QLocale.MeasurementSystem
-] = bidict(
-    metric=QtCore.QLocale.MeasurementSystem.MetricSystem,
-    imperial_us=QtCore.QLocale.MeasurementSystem.ImperialUSSystem,
-    imperial_uk=QtCore.QLocale.MeasurementSystem.ImperialUKSystem,
+MEASUREMENT_SYSTEM: bidict[MeasurementSystemStr, QtCore.QLocale.MeasurementSystem] = (
+    bidict(
+        metric=QtCore.QLocale.MeasurementSystem.MetricSystem,
+        imperial_us=QtCore.QLocale.MeasurementSystem.ImperialUSSystem,
+        imperial_uk=QtCore.QLocale.MeasurementSystem.ImperialUKSystem,
+    )
 )
 
 DataSizeFormatStr = Literal["iec", "traditional", "si"]

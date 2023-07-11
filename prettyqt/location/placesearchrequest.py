@@ -8,12 +8,12 @@ from prettyqt.utils import bidict
 
 RelevanceHintStr = Literal["unspecified", "distance", "lexical_place_name"]
 
-RELEVANCE_HINT: bidict[
-    RelevanceHintStr, location.QPlaceSearchRequest.RelevanceHint
-] = bidict(
-    unspecified=location.QPlaceSearchRequest.RelevanceHint.UnspecifiedHint,
-    distance=location.QPlaceSearchRequest.RelevanceHint.DistanceHint,
-    lexical_place_name=location.QPlaceSearchRequest.RelevanceHint.LexicalPlaceNameHint,
+RELEVANCE_HINT: bidict[RelevanceHintStr, location.QPlaceSearchRequest.RelevanceHint] = (
+    bidict(
+        unspecified=location.QPlaceSearchRequest.RelevanceHint.UnspecifiedHint,
+        distance=location.QPlaceSearchRequest.RelevanceHint.DistanceHint,
+        lexical_place_name=location.QPlaceSearchRequest.RelevanceHint.LexicalPlaceNameHint,
+    )
 )
 
 

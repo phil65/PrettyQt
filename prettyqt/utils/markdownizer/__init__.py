@@ -68,7 +68,7 @@ def link_for_class(klass: type) -> str:
 def label_for_class(klass: type) -> str:
     if klass.__module__.startswith(("PyQt", "PySide")):
         return f"{klass.__module__.split('.')[-1]}.{klass.__name__}"
-    elif klass.__module__.startswith(("prettyqt.")):
+    elif klass.__module__.startswith("prettyqt."):
         parts = klass.__module__.split(".")
         return f"{parts[1]}.{klass.__name__}"
     return klass.__qualname__

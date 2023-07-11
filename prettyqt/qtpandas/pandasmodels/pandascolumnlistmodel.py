@@ -269,8 +269,7 @@ class PandasIndexListModel(itemmodels.ModelMixin, core.AbstractTableModel):
             case constants.TOOLTIP_ROLE, _:
                 index = self.get_index(index.row())
                 return (
-                    f"<b>{index.name}</b><br>"
-                    f"{'Contains NaNs'}: {index.hasnans}<br>"
+                    f"<b>{index.name}</b><br>{'Contains NaNs'}: {index.hasnans}<br>"
                     # f"{_('Monotonic')}: {index.is_monotonic}"
                 )
 

@@ -30,27 +30,27 @@ StandardButtonStr = Literal[
     "ignore",
 ]
 
-STANDARD_BUTTON: bidict[
-    StandardButtonStr, widgets.QDialogButtonBox.StandardButton
-] = bidict(
-    cancel=widgets.QDialogButtonBox.StandardButton.Cancel,
-    ok=widgets.QDialogButtonBox.StandardButton.Ok,
-    save=widgets.QDialogButtonBox.StandardButton.Save,
-    open=widgets.QDialogButtonBox.StandardButton.Open,
-    close=widgets.QDialogButtonBox.StandardButton.Close,
-    discard=widgets.QDialogButtonBox.StandardButton.Discard,
-    apply=widgets.QDialogButtonBox.StandardButton.Apply,
-    reset=widgets.QDialogButtonBox.StandardButton.Reset,
-    restore_defaults=widgets.QDialogButtonBox.StandardButton.RestoreDefaults,
-    help=widgets.QDialogButtonBox.StandardButton.Help,
-    save_all=widgets.QDialogButtonBox.StandardButton.SaveAll,
-    yes=widgets.QDialogButtonBox.StandardButton.Yes,
-    yes_to_all=widgets.QDialogButtonBox.StandardButton.YesToAll,
-    no=widgets.QDialogButtonBox.StandardButton.No,
-    no_to_all=widgets.QDialogButtonBox.StandardButton.NoToAll,
-    abort=widgets.QDialogButtonBox.StandardButton.Abort,
-    retry=widgets.QDialogButtonBox.StandardButton.Retry,
-    ignore=widgets.QDialogButtonBox.StandardButton.Ignore,
+STANDARD_BUTTON: bidict[StandardButtonStr, widgets.QDialogButtonBox.StandardButton] = (
+    bidict(
+        cancel=widgets.QDialogButtonBox.StandardButton.Cancel,
+        ok=widgets.QDialogButtonBox.StandardButton.Ok,
+        save=widgets.QDialogButtonBox.StandardButton.Save,
+        open=widgets.QDialogButtonBox.StandardButton.Open,
+        close=widgets.QDialogButtonBox.StandardButton.Close,
+        discard=widgets.QDialogButtonBox.StandardButton.Discard,
+        apply=widgets.QDialogButtonBox.StandardButton.Apply,
+        reset=widgets.QDialogButtonBox.StandardButton.Reset,
+        restore_defaults=widgets.QDialogButtonBox.StandardButton.RestoreDefaults,
+        help=widgets.QDialogButtonBox.StandardButton.Help,
+        save_all=widgets.QDialogButtonBox.StandardButton.SaveAll,
+        yes=widgets.QDialogButtonBox.StandardButton.Yes,
+        yes_to_all=widgets.QDialogButtonBox.StandardButton.YesToAll,
+        no=widgets.QDialogButtonBox.StandardButton.No,
+        no_to_all=widgets.QDialogButtonBox.StandardButton.NoToAll,
+        abort=widgets.QDialogButtonBox.StandardButton.Abort,
+        retry=widgets.QDialogButtonBox.StandardButton.Retry,
+        ignore=widgets.QDialogButtonBox.StandardButton.Ignore,
+    )
 )
 
 

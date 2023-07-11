@@ -10,13 +10,13 @@ ProcessEventFlagStr = Literal[
     "all", "exclude_user_input", "exclude_socket_notifiers", "wait_for_more"
 ]
 
-PROCESS_EVENT_FLAGS: bidict[
-    ProcessEventFlagStr, core.QEventLoop.ProcessEventsFlag
-] = bidict(
-    all=core.QEventLoop.ProcessEventsFlag.AllEvents,
-    exclude_user_input=core.QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents,
-    exclude_socket_notifiers=core.QEventLoop.ProcessEventsFlag.ExcludeSocketNotifiers,
-    wait_for_more=core.QEventLoop.ProcessEventsFlag.WaitForMoreEvents,
+PROCESS_EVENT_FLAGS: bidict[ProcessEventFlagStr, core.QEventLoop.ProcessEventsFlag] = (
+    bidict(
+        all=core.QEventLoop.ProcessEventsFlag.AllEvents,
+        exclude_user_input=core.QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents,
+        exclude_socket_notifiers=core.QEventLoop.ProcessEventsFlag.ExcludeSocketNotifiers,
+        wait_for_more=core.QEventLoop.ProcessEventsFlag.WaitForMoreEvents,
+    )
 )
 
 

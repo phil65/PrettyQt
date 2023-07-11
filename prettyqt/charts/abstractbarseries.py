@@ -8,13 +8,13 @@ from prettyqt.utils import bidict
 
 LabelsPositionStr = Literal["center", "inside_end", "inside_base", "outside_end"]
 
-LABELS_POSITIONS: bidict[
-    LabelsPositionStr, charts.QAbstractBarSeries.LabelsPosition
-] = bidict(
-    center=charts.QAbstractBarSeries.LabelsPosition.LabelsCenter,
-    inside_end=charts.QAbstractBarSeries.LabelsPosition.LabelsInsideEnd,
-    inside_base=charts.QAbstractBarSeries.LabelsPosition.LabelsInsideBase,
-    outside_end=charts.QAbstractBarSeries.LabelsPosition.LabelsOutsideEnd,
+LABELS_POSITIONS: bidict[LabelsPositionStr, charts.QAbstractBarSeries.LabelsPosition] = (
+    bidict(
+        center=charts.QAbstractBarSeries.LabelsPosition.LabelsCenter,
+        inside_end=charts.QAbstractBarSeries.LabelsPosition.LabelsInsideEnd,
+        inside_base=charts.QAbstractBarSeries.LabelsPosition.LabelsInsideBase,
+        outside_end=charts.QAbstractBarSeries.LabelsPosition.LabelsOutsideEnd,
+    )
 )
 
 

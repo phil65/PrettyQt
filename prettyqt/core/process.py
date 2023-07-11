@@ -33,14 +33,14 @@ ProcessChannelModeStr = Literal[
     "separate", "merged", "forwarded", "forwarded_error", "forwarded_output"
 ]
 
-PROCESS_CHANNEL_MODES: bidict[
-    ProcessChannelModeStr, core.QProcess.ProcessChannelMode
-] = bidict(
-    separate=core.QProcess.ProcessChannelMode.SeparateChannels,
-    merged=core.QProcess.ProcessChannelMode.MergedChannels,
-    forwarded=core.QProcess.ProcessChannelMode.ForwardedChannels,
-    forwarded_error=core.QProcess.ProcessChannelMode.ForwardedErrorChannel,
-    forwarded_output=core.QProcess.ProcessChannelMode.ForwardedOutputChannel,
+PROCESS_CHANNEL_MODES: bidict[ProcessChannelModeStr, core.QProcess.ProcessChannelMode] = (
+    bidict(
+        separate=core.QProcess.ProcessChannelMode.SeparateChannels,
+        merged=core.QProcess.ProcessChannelMode.MergedChannels,
+        forwarded=core.QProcess.ProcessChannelMode.ForwardedChannels,
+        forwarded_error=core.QProcess.ProcessChannelMode.ForwardedErrorChannel,
+        forwarded_output=core.QProcess.ProcessChannelMode.ForwardedOutputChannel,
+    )
 )
 
 ProcessErrorStr = Literal[

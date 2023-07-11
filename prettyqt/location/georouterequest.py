@@ -35,23 +35,23 @@ FEATURE_TYPES: bidict[FeatureTypeStr, QtLocation.QGeoRouteRequest.FeatureType] =
 
 FeatureWeightStr = Literal["neutral", "prefer", "require", "avoid", "disallow"]
 
-FEATURE_WEIGHTS: bidict[
-    FeatureWeightStr, QtLocation.QGeoRouteRequest.FeatureWeight
-] = bidict(
-    neutral=QtLocation.QGeoRouteRequest.FeatureWeight.NeutralFeatureWeight,
-    prefer=QtLocation.QGeoRouteRequest.FeatureWeight.PreferFeatureWeight,
-    require=QtLocation.QGeoRouteRequest.FeatureWeight.RequireFeatureWeight,
-    avoid=QtLocation.QGeoRouteRequest.FeatureWeight.AvoidFeatureWeight,
-    disallow=QtLocation.QGeoRouteRequest.FeatureWeight.DisallowFeatureWeight,
+FEATURE_WEIGHTS: bidict[FeatureWeightStr, QtLocation.QGeoRouteRequest.FeatureWeight] = (
+    bidict(
+        neutral=QtLocation.QGeoRouteRequest.FeatureWeight.NeutralFeatureWeight,
+        prefer=QtLocation.QGeoRouteRequest.FeatureWeight.PreferFeatureWeight,
+        require=QtLocation.QGeoRouteRequest.FeatureWeight.RequireFeatureWeight,
+        avoid=QtLocation.QGeoRouteRequest.FeatureWeight.AvoidFeatureWeight,
+        disallow=QtLocation.QGeoRouteRequest.FeatureWeight.DisallowFeatureWeight,
+    )
 )
 
 ManeuverDetailStr = Literal["none", "basic"]
 
-MANEUVER_DETAIL: bidict[
-    ManeuverDetailStr, QtLocation.QGeoRouteRequest.ManeuverDetail
-] = bidict(
-    none=QtLocation.QGeoRouteRequest.ManeuverDetail.NoManeuvers,
-    basic=QtLocation.QGeoRouteRequest.ManeuverDetail.BasicManeuvers,
+MANEUVER_DETAIL: bidict[ManeuverDetailStr, QtLocation.QGeoRouteRequest.ManeuverDetail] = (
+    bidict(
+        none=QtLocation.QGeoRouteRequest.ManeuverDetail.NoManeuvers,
+        basic=QtLocation.QGeoRouteRequest.ManeuverDetail.BasicManeuvers,
+    )
 )
 
 RouteOptimizationStr = Literal["shortest", "fastest", "most_economic", "most_scenic"]
@@ -67,11 +67,11 @@ ROUTE_OPTIMIZATION: bidict[
 
 SegmentDetailStr = Literal["none", "basic"]
 
-SEGMENT_DETAIL: bidict[
-    SegmentDetailStr, QtLocation.QGeoRouteRequest.SegmentDetail
-] = bidict(
-    none=QtLocation.QGeoRouteRequest.SegmentDetail.NoSegmentData,
-    basic=QtLocation.QGeoRouteRequest.SegmentDetail.BasicSegmentData,
+SEGMENT_DETAIL: bidict[SegmentDetailStr, QtLocation.QGeoRouteRequest.SegmentDetail] = (
+    bidict(
+        none=QtLocation.QGeoRouteRequest.SegmentDetail.NoSegmentData,
+        basic=QtLocation.QGeoRouteRequest.SegmentDetail.BasicSegmentData,
+    )
 )
 
 TravelModeStr = Literal["car", "pedestrian", "bicycle", "public_transit", "truck"]

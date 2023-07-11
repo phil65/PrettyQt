@@ -30,28 +30,28 @@ StandardLocationStr = Literal[
     "app_config",
 ]
 
-STANDARD_LOCATION: bidict[
-    StandardLocationStr, QtCore.QStandardPaths.StandardLocation
-] = bidict(
-    desktop=QtCore.QStandardPaths.StandardLocation.DesktopLocation,
-    documents=QtCore.QStandardPaths.StandardLocation.DocumentsLocation,
-    fonts=QtCore.QStandardPaths.StandardLocation.FontsLocation,
-    applications=QtCore.QStandardPaths.StandardLocation.ApplicationsLocation,
-    music=QtCore.QStandardPaths.StandardLocation.MusicLocation,
-    movies=QtCore.QStandardPaths.StandardLocation.MoviesLocation,
-    pictures=QtCore.QStandardPaths.StandardLocation.PicturesLocation,
-    temp=QtCore.QStandardPaths.StandardLocation.TempLocation,
-    home=QtCore.QStandardPaths.StandardLocation.HomeLocation,
-    cache=QtCore.QStandardPaths.StandardLocation.CacheLocation,
-    generic_cache=QtCore.QStandardPaths.StandardLocation.GenericCacheLocation,
-    generic_data=QtCore.QStandardPaths.StandardLocation.GenericDataLocation,
-    runtime=QtCore.QStandardPaths.StandardLocation.RuntimeLocation,
-    config=QtCore.QStandardPaths.StandardLocation.ConfigLocation,
-    download=QtCore.QStandardPaths.StandardLocation.DownloadLocation,
-    generic_config=QtCore.QStandardPaths.StandardLocation.GenericConfigLocation,
-    app_data=QtCore.QStandardPaths.StandardLocation.AppDataLocation,
-    app_local_data=QtCore.QStandardPaths.StandardLocation.AppLocalDataLocation,
-    app_config=QtCore.QStandardPaths.StandardLocation.AppConfigLocation,
+STANDARD_LOCATION: bidict[StandardLocationStr, QtCore.QStandardPaths.StandardLocation] = (
+    bidict(
+        desktop=QtCore.QStandardPaths.StandardLocation.DesktopLocation,
+        documents=QtCore.QStandardPaths.StandardLocation.DocumentsLocation,
+        fonts=QtCore.QStandardPaths.StandardLocation.FontsLocation,
+        applications=QtCore.QStandardPaths.StandardLocation.ApplicationsLocation,
+        music=QtCore.QStandardPaths.StandardLocation.MusicLocation,
+        movies=QtCore.QStandardPaths.StandardLocation.MoviesLocation,
+        pictures=QtCore.QStandardPaths.StandardLocation.PicturesLocation,
+        temp=QtCore.QStandardPaths.StandardLocation.TempLocation,
+        home=QtCore.QStandardPaths.StandardLocation.HomeLocation,
+        cache=QtCore.QStandardPaths.StandardLocation.CacheLocation,
+        generic_cache=QtCore.QStandardPaths.StandardLocation.GenericCacheLocation,
+        generic_data=QtCore.QStandardPaths.StandardLocation.GenericDataLocation,
+        runtime=QtCore.QStandardPaths.StandardLocation.RuntimeLocation,
+        config=QtCore.QStandardPaths.StandardLocation.ConfigLocation,
+        download=QtCore.QStandardPaths.StandardLocation.DownloadLocation,
+        generic_config=QtCore.QStandardPaths.StandardLocation.GenericConfigLocation,
+        app_data=QtCore.QStandardPaths.StandardLocation.AppDataLocation,
+        app_local_data=QtCore.QStandardPaths.StandardLocation.AppLocalDataLocation,
+        app_config=QtCore.QStandardPaths.StandardLocation.AppConfigLocation,
+    )
 )
 
 

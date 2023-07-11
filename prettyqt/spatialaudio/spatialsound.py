@@ -13,12 +13,12 @@ DistanceModelStr = Literal[
     "manual_attenuation",
 ]
 
-DISTANCE_MODEL: bidict[
-    DistanceModelStr, QtSpatialAudio.QSpatialSound.DistanceModel
-] = bidict(
-    logarithmic=QtSpatialAudio.QSpatialSound.DistanceModel.Logarithmic,
-    linear=QtSpatialAudio.QSpatialSound.DistanceModel.Linear,
-    manual_attenuation=QtSpatialAudio.QSpatialSound.DistanceModel.ManualAttenuation,
+DISTANCE_MODEL: bidict[DistanceModelStr, QtSpatialAudio.QSpatialSound.DistanceModel] = (
+    bidict(
+        logarithmic=QtSpatialAudio.QSpatialSound.DistanceModel.Logarithmic,
+        linear=QtSpatialAudio.QSpatialSound.DistanceModel.Linear,
+        manual_attenuation=QtSpatialAudio.QSpatialSound.DistanceModel.ManualAttenuation,
+    )
 )
 
 LoopsStr = Literal["infinite", "once"]

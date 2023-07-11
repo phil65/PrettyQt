@@ -31,12 +31,12 @@ STEP_TYPES: bidict[StepTypeStr, QtWidgets.QSpinBox.StepType] = bidict(
 
 StepEnabledFlagStr = Literal["none", "up_enabled", "down_enabled"]
 
-STEP_ENABLED_FLAG: bidict[
-    StepEnabledFlagStr, QtWidgets.QSpinBox.StepEnabledFlag
-] = bidict(
-    none=QtWidgets.QSpinBox.StepEnabledFlag.StepNone,
-    up_enabled=QtWidgets.QSpinBox.StepEnabledFlag.StepUpEnabled,
-    down_enabled=QtWidgets.QSpinBox.StepEnabledFlag.StepDownEnabled,
+STEP_ENABLED_FLAG: bidict[StepEnabledFlagStr, QtWidgets.QSpinBox.StepEnabledFlag] = (
+    bidict(
+        none=QtWidgets.QSpinBox.StepEnabledFlag.StepNone,
+        up_enabled=QtWidgets.QSpinBox.StepEnabledFlag.StepUpEnabled,
+        down_enabled=QtWidgets.QSpinBox.StepEnabledFlag.StepDownEnabled,
+    )
 )
 
 

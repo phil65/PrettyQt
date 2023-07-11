@@ -31,14 +31,14 @@ PRIMARIES: bidict[PrimariesStr, QtGui.QColorSpace.Primaries] = bidict(
 
 TransformFunctionStr = Literal["custom", "linear", "gamma", "srgb", "pro_photo_rgb"]
 
-TRANSFER_FUNCTION: bidict[
-    TransformFunctionStr, QtGui.QColorSpace.TransferFunction
-] = bidict(
-    custom=QtGui.QColorSpace.TransferFunction.Custom,
-    linear=QtGui.QColorSpace.TransferFunction.Linear,
-    gamma=QtGui.QColorSpace.TransferFunction.Gamma,
-    srgb=QtGui.QColorSpace.TransferFunction.SRgb,
-    pro_photo_rgb=QtGui.QColorSpace.TransferFunction.ProPhotoRgb,
+TRANSFER_FUNCTION: bidict[TransformFunctionStr, QtGui.QColorSpace.TransferFunction] = (
+    bidict(
+        custom=QtGui.QColorSpace.TransferFunction.Custom,
+        linear=QtGui.QColorSpace.TransferFunction.Linear,
+        gamma=QtGui.QColorSpace.TransferFunction.Gamma,
+        srgb=QtGui.QColorSpace.TransferFunction.SRgb,
+        pro_photo_rgb=QtGui.QColorSpace.TransferFunction.ProPhotoRgb,
+    )
 )
 
 
