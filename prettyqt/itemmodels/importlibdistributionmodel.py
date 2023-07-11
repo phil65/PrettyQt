@@ -79,7 +79,7 @@ class NameColumn(DistributionColumn):
     def get_data(self, item, role):
         match role:
             case constants.DISPLAY_ROLE:
-                return item.metadata["Name"]
+                return item.metadata["Name"] or ""
             case _:
                 return super().get_data(item, role)
 
@@ -91,7 +91,7 @@ class VersionColumn(DistributionColumn):
     def get_data(self, item, role):
         match role:
             case constants.DISPLAY_ROLE:
-                return item.version
+                return item.version or ""
             case _:
                 return super().get_data(item, role)
 
@@ -141,7 +141,7 @@ class SummaryColumn(DistributionColumn):
     def get_data(self, item, role):
         match role:
             case constants.DISPLAY_ROLE:
-                return item.metadata["Summary"]
+                return item.metadata["Summary"] or ""
             case _:
                 return super().get_data(item, role)
 
@@ -153,7 +153,7 @@ class HomepageColumn(DistributionColumn):
     def get_data(self, item, role):
         match role:
             case constants.DISPLAY_ROLE:
-                return item.metadata["Home-Page"]
+                return item.metadata["Home-Page"] or ""
             case _:
                 return super().get_data(item, role)
 
@@ -165,7 +165,7 @@ class AuthorColumn(DistributionColumn):
     def get_data(self, item, role):
         match role:
             case constants.DISPLAY_ROLE:
-                return item.metadata["Author"]
+                return item.metadata["Author"] or ""
             case _:
                 return super().get_data(item, role)
 
@@ -177,7 +177,7 @@ class LicenseColumn(DistributionColumn):
     def get_data(self, item, role):
         match role:
             case constants.DISPLAY_ROLE:
-                return item.metadata["License"]
+                return item.metadata["License"] or ""
             case _:
                 return super().get_data(item, role)
 
