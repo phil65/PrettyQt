@@ -52,7 +52,7 @@ def get_widget_screenshot(widget: widgets.QWidget) -> bytes:
 
 
 def get_document_for_klass(klass: type, parts: tuple[str, ...], path: str = ""):
-    doc = markdownizer.MarkdownDocument(path=path)
+    doc = markdownizer.Document(path=path)
     doc += markdownizer.DocStringSection(f'prettyqt.{".".join(parts)}.{klass.__name__}')
     if issubclass(klass, itemmodels.SliceIdentityProxyModel):
         doc += markdownizer.Admonition("info", SLICE_PROXY_INFO)
@@ -111,7 +111,7 @@ def write_files_for_module(module_path, doc_path, parts):
         doc.write(path, edit_path=module_path)
 
     # if klasses:
-    page = markdownizer.MarkdownDocument(hide_toc=True)
+    page = markdownizer.Document(hide_toc=True)
     page += markdownhelpers.get_class_table(klasses)
     page.write(full_doc_path.with_name("index.md"), edit_path=module_path)
 

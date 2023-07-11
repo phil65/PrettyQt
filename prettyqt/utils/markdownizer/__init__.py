@@ -3,25 +3,24 @@ from __future__ import annotations
 import collections
 
 from collections.abc import Callable, Mapping, Sequence
-import dataclasses
 import importlib
-import inspect
 
 import logging
 import os
 import pathlib
-import re
 import textwrap
 import types
 import typing
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.utils import helpers, markdownhelpers
+from prettyqt.utils import helpers
+from prettyqt.utils.markdownizer.basesection import BaseSection
+from prettyqt.utils.markdownizer.docs import Docs
+from prettyqt.utils.markdownizer.literatenav import LiterateNav
 
-
+__all__ = ["BaseSection", "Docs", "LiterateNav"]
 T = typing.TypeVar("T", bound=type)
-GraphTypeStr = Literal["TODO"]
 
 
 logger = logging.getLogger(__name__)
@@ -45,11 +44,6 @@ GraphTypeStr = Literal["TODO"]
 
 BASE_URL = "https://doc.qt.io/qtforpython-6/PySide6/"
 
-# Link are created following the documentation here :
-# https://mermaid.js.org/syntax/flowchart.html#links-between-nodes
-LINK_SHAPES = {"normal": "---", "dotted": "-.-", "thick": "==="}
-
-LINK_HEADS = {"none": "", "arrow": ">", "left-arrow": "<", "bullet": "o", "cross": "x"}
 
 HEADER = """---
 hide:
@@ -82,155 +76,7 @@ def label_for_class(klass: type) -> str:
     return klass.__qualname__
 
 
-@dataclasses.dataclass
-class NodeShape:
-    def __init__(self, start: str, end: str):
-        self.start = start
-        self.end = end
-
-
-# Shapes are created following the documentation here :
-# https://mermaid.js.org/syntax/flowchart.html#node-shapes
-
-
-NODE_SHAPES = {
-    "normal": NodeShape("[", "]"),
-    "round-edge": NodeShape("(", ")"),
-    "stadium-shape": NodeShape("([", "])"),
-    "subroutine-shape": NodeShape("[[", "]]"),
-    "cylindrical": NodeShape("[(", ")]"),
-    "circle": NodeShape("((", "))"),
-    "label-shape": NodeShape(">", "]"),
-    "rhombus": NodeShape("{", ")"),
-    "hexagon": NodeShape("{{", ")}"),
-    "parallelogram": NodeShape("[/", "/]"),
-    "parallelogram-alt": NodeShape("[\\", "\\]"),
-    "trapezoid": NodeShape("[/", "\\]"),
-    "trapezoid-alt": NodeShape("[\\", "/]"),
-    "double-circle": NodeShape("(((", ")))"),
-}
-
-
-class Node:
-    def __init__(
-        self,
-        identifier: str,
-        content: str = "",
-        shape: str = "normal",
-        sub_nodes: list = None,
-    ):
-        sub_nodes = sub_nodes or []
-        self.id = helpers.to_snake(identifier)
-        self.content = content if content else self.id
-        self.shape = NODE_SHAPES[shape]
-        self.sub_nodes = sub_nodes
-
-        # TODO: verify that content match a working string pattern
-
-    def add_sub_nodes(self, new_nodes: list[Node] = None):
-        if new_nodes is None:
-            new_nodes = []
-        self.sub_nodes = self.sub_nodes + new_nodes
-
-    def __repr__(self):
-        return f"{self.id}['{self.content}'] Nb_children:{len(self.sub_nodes)}"
-
-    def __str__(self):
-        return "" + (
-            "\n".join(
-                [
-                    f'subgraph {self.id} ["{self.content}"]',
-                    "\n".join([str(node) for node in self.sub_nodes]),
-                    "end",
-                ]
-            )
-            if len(self.sub_nodes)
-            else "".join([self.id, self.shape.start, f'"{self.content}"', self.shape.end])
-        )
-
-
-class Link:
-    def __init__(
-        self,
-        origin: Node,
-        end: Node,
-        shape: str = "normal",
-        head_left: str = "none",
-        head_right: str = "arrow",
-        message: str = "",
-    ):
-        self.origin = origin
-        self.end = end
-        self.head_left = LINK_HEADS[head_left]
-        self.head_right = LINK_HEADS[head_right]
-        self.shape = LINK_SHAPES[shape]
-        self.message = message
-
-    def __str__(self):
-        elements = [
-            f"{self.origin.id} ",
-            self.head_left,
-            self.shape,
-            self.head_right,
-            f"|{self.message}|" if self.message else "",
-            f" {self.end.id}",
-        ]
-        return "".join(elements)
-
-
-class Docs:
-    def __init__(self, module_name: str, exclude_modules: list[str] | None = None):
-        self.module_name = module_name
-        self.root_path = pathlib.Path(f"./{module_name}")
-        self._exclude = exclude_modules or []
-
-    def write(self, document):
-        pass
-
-    def yield_files(self, glob: str = "*/*.py"):
-        for path in sorted(self.root_path.rglob(glob)):
-            if (
-                all(i not in path.parts for i in self._exclude)
-                and not any(i.startswith("__") for i in path.parent.parts)
-                and not path.is_dir()
-            ):
-                yield path.relative_to(self.root_path)
-
-    def yield_klasses_for_module(
-        self, mod: types.ModuleType, recursive: bool = False, _seen=None
-    ):
-        if recursive:
-            seen = _seen or set()
-            for _submod_name, submod in inspect.getmembers(mod, inspect.ismodule):
-                if submod.__name__.startswith(self.module_name) and submod not in seen:
-                    seen.add(submod)
-                    yield from self.yield_klasses_for_module(
-                        submod, recursive=True, _seen=seen
-                    )
-        for i in inspect.getmembers(mod, inspect.isclass):
-            if i[1].__module__.startswith(self.module_name):
-                yield i[1]
-
-    def yield_classes_for_glob(
-        self, glob="*/*.py", recursive: bool = False, avoid_duplicates: bool = True
-    ):
-        seen = set()
-        for path in self.yield_files(glob):
-            module_path = path.with_suffix("")
-            parts = tuple(module_path.parts)
-            module_path = f"{self.module_name}." + ".".join(parts)
-            try:
-                module = importlib.import_module(module_path)
-            except (ImportError, AttributeError):
-                continue
-            else:
-                for klass in self.yield_klasses_for_module(module, recursive=recursive):
-                    if (klass, path) not in seen or not avoid_duplicates:
-                        seen.add((klass, path))
-                        yield klass, path
-
-
-class MarkdownDocument:
+class Document:
     def __init__(
         self,
         items: list | None = None,
@@ -278,13 +124,13 @@ class MarkdownDocument:
         )
         return HEADER.format(options=text)
 
-    def append(self, other: str | BaseMarkdownSection):
+    def append(self, other: str | BaseSection):
         if isinstance(other, str):
-            other = MarkdownText(other)
+            other = Text(other)
         self.items.append(other)
 
 
-class MarkdownClassDocument(MarkdownDocument):
+class ClassDocument(Document):
     def __init__(self, klass: type, parts: tuple[str, ...] | None = None, **kwargs):
         super().__init__(**kwargs)
         self.klass = klass
@@ -297,20 +143,6 @@ class MarkdownClassDocument(MarkdownDocument):
             self.append(table)
         self.append(MermaidDiagram.for_classes([self.klass]))
         # self.append(MermaidDiagram.for_subclasses([self.klass]))
-
-
-class BaseMarkdownSection:
-    def __init__(self, header: str = ""):
-        self.header = header
-
-    def __str__(self):
-        return self.to_markdown()
-
-    def to_markdown(self):
-        text = self._to_markdown() + "\n"
-        if self.header:
-            return f"## {self.header}\n\n{text}"
-        return text
 
 
 # class TabWidget(Admonition):
@@ -330,8 +162,8 @@ class BaseMarkdownSection:
 #             text = textwrap.indent(item.to_markdown(), "        ")
 
 
-class MarkdownText(BaseMarkdownSection):
-    def __init__(self, text: str | BaseMarkdownSection = "", header: str = ""):
+class Text(BaseSection):
+    def __init__(self, text: str | BaseSection = "", header: str = ""):
         super().__init__(header=header)
         self.text = text
 
@@ -339,10 +171,8 @@ class MarkdownText(BaseMarkdownSection):
         return self.text if isinstance(self.text, str) else self.text.to_markdown()
 
 
-class MarkdownCode(MarkdownText):
-    def __init__(
-        self, language: str, text: str | BaseMarkdownSection = "", header: str = ""
-    ):
+class Code(Text):
+    def __init__(self, language: str, text: str | BaseSection = "", header: str = ""):
         super().__init__(text, header)
         self.language = language
 
@@ -350,7 +180,7 @@ class MarkdownCode(MarkdownText):
         return f"``` {self.language}\n{self.text}\n```"
 
 
-class MarkdownImage(BaseMarkdownSection):
+class Image(BaseSection):
     def __init__(
         self, path: str, caption: str, title: str = "Image title", header: str = ""
     ):
@@ -368,7 +198,7 @@ class MarkdownImage(BaseMarkdownSection):
         return "\n".join(lines)
 
 
-class Admonition(MarkdownText):
+class Admonition(Text):
     def __init__(
         self,
         typ: AdmonitionTypeStr,
@@ -388,7 +218,7 @@ class Admonition(MarkdownText):
         return f"{block_start} {self.typ} {title}\n{text}\n\n"
 
 
-class BinaryImage(MarkdownImage):
+class BinaryImage(Image):
     def __init__(
         self,
         data: bytes,
@@ -413,7 +243,7 @@ class BinaryImage(MarkdownImage):
         return super()._to_markdown()
 
 
-class MermaidDiagram(MarkdownCode):
+class MermaidDiagram(Code):
     TYPE_MAP = dict(
         flow="graph",
         sequence="sequenceDiagram",
@@ -486,7 +316,7 @@ class MermaidDiagram(MarkdownCode):
         return f"```mermaid\n{text}\n```"
 
 
-class Table(MarkdownText):
+class Table(Text):
     def __init__(
         self,
         data: Sequence[Sequence[str]] | Sequence[dict] | dict[str, list] | None = None,
@@ -642,7 +472,7 @@ class Table(MarkdownText):
             yield [self.data[k][j] or "" for k in self.data.keys()]
 
 
-class DocStringSection(MarkdownText):
+class DocStringSection(Text):
     def __init__(
         self, obj: types.ModuleType | str | os.PathLike | type, header: str = "", **kwargs
     ):
@@ -781,30 +611,8 @@ class DocStringSection(MarkdownText):
         return f"{md}\n"
 
 
-class LiterateNav(BaseMarkdownSection):
-    def __init__(
-        self,
-        mapping: dict[str | tuple[str, ...], str] | None = None,
-        indentation: int | str = "",
-    ):
-        import mkdocs_gen_files
-
-        super().__init__()
-        self.nav = mkdocs_gen_files.Nav()
-        if mapping:
-            for k, v in mapping.items():
-                self.nav[k] = v
-
-    def write(self, path: str = "SUMMARY.md"):
-        import mkdocs_gen_files
-
-        logger.info(f"Written SUMMARY to {path}")
-        with mkdocs_gen_files.open(path, "w") as nav_file:
-            nav_file.writelines(self.nav.build_literate_nav())
-
-
 if __name__ == "__main__":
-    doc = MarkdownDocument([], True, True)
+    doc = Document([], True, True)
     doc += Admonition("info", "etst")
     doc += Table(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
     doc += Table.get_prop_tables_for_klass(core.StringListModel)[0]
@@ -813,5 +621,4 @@ if __name__ == "__main__":
     doc += MermaidDiagram.for_classes([Table], header="Mermaid diagram")
 
     print(doc.to_markdown())
-    logger.info(markdownhelpers.get_mermaid_for_klass(Table))
     # print(text)
