@@ -21,6 +21,8 @@ PROCESS_EVENT_FLAGS: bidict[
 
 
 class EventLoop(core.ObjectMixin, core.QEventLoop):
+    """Means of entering and leaving an event loop."""
+
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self._executing = False

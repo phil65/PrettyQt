@@ -8,6 +8,8 @@ from prettyqt.utils import datatypes
 
 
 class PropertyAnimation(core.VariantAnimationMixin, core.QPropertyAnimation):
+    """Animates Qt properties."""
+
     ID = "property"
 
     def __init__(self, *args, **kwargs):

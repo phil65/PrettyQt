@@ -91,7 +91,10 @@ def run_async(
 
 
 class ThreadPool(core.ObjectMixin, core.QThreadPool):
-    """Note: signals only work correctly when exclusively using start_worker method."""
+    """Manages a collection of QThreads.
+
+    Note: signals only work correctly when exclusively using start_worker method.
+    """
 
     __instance: Self | None = None  # a global instance
 

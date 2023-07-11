@@ -9,6 +9,8 @@ from prettyqt.utils import datatypes, get_repr
 
 
 class FileSystemWatcher(core.ObjectMixin, core.QFileSystemWatcher):
+    """Interface for monitoring files and directories for modifications."""
+
     def __repr__(self):
         return get_repr(self, self.directories() + self.files())
 

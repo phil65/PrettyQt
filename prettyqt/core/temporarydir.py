@@ -8,6 +8,8 @@ from prettyqt.utils import datatypes, get_repr
 
 
 class TemporaryDir(QtCore.QTemporaryDir):
+    """Creates a unique directory for temporary use."""
+
     def __getattr__(self, attr: str):
         return getattr(self.to_path(), attr)
 

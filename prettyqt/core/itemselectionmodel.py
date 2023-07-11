@@ -36,6 +36,8 @@ SELECTION_FLAG: bidict[SelectionFlagStr, core.QItemSelectionModel.SelectionFlag]
 
 
 class ItemSelectionModel(core.ObjectMixin, core.QItemSelectionModel):
+    """Keeps track of a view's selected items."""
+
     def __contains__(self, index: core.ModelIndex) -> bool:
         return self.isSelected(index)
 

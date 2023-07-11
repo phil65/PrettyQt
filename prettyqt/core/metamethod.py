@@ -25,6 +25,8 @@ METHOD_TYPE: bidict[MethodTypeStr, core.QMetaMethod.MethodType] = bidict(
 
 
 class MetaMethod:
+    """Meta-data about an member method."""
+
     def __init__(self, metamethod: core.QMetaMethod):
         self.item = metamethod
 

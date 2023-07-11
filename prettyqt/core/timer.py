@@ -5,6 +5,8 @@ from prettyqt.utils import helpers
 
 
 class Timer(core.ObjectMixin, core.QTimer):
+    """Repetitive and single-shot timers."""
+
     def _get_map(self):
         maps = super()._get_map()
         maps |= {"timerType": constants.TIMER_TYPE}

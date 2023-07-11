@@ -660,6 +660,8 @@ OFFSET = ord("🇦") - ord("A")
 
 
 class Locale(QtCore.QLocale):
+    """Converts between numbers and their string representations in various languages."""
+
     def __repr__(self):
         return get_repr(self, self.bcp47Name())
 

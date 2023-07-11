@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class RectF(QtCore.QRectF):
+    """Defines a finite rectangle in the plane using floating point precision."""
+
     def __repr__(self):
         return get_repr(self, self.x(), self.y(), self.width(), self.height())
 

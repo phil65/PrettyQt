@@ -10,6 +10,8 @@ from prettyqt.utils import get_repr
 
 
 class FileInfo(core.QFileInfo):
+    """System-independent file information."""
+
     def __init__(self, *args, **kwargs):
         if len(args) == 1 and isinstance(args[0], os.PathLike):
             super().__init__(os.fspath(args[0]))

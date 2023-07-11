@@ -10,6 +10,8 @@ from prettyqt.utils import datatypes, get_repr
 
 
 class StorageInfo(QtCore.QStorageInfo):
+    """Provides information about currently mounted storage and drives."""
+
     def __init__(
         self,
         path: QtCore.QStorageInfo | QtCore.QDir | datatypes.PathType | None = None,

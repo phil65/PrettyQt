@@ -25,6 +25,8 @@ STATE: bidict[StateStr, core.QTimeLine.State] = bidict(
 
 
 class TimeLine(core.ObjectMixin, core.QTimeLine):
+    """Timeline for controlling animations."""
+
     def _get_map(self):
         maps = super()._get_map()
         maps |= {"direction": DIRECTION}

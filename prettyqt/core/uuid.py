@@ -80,7 +80,7 @@ class UuidMixin:
 
 
 class Uuid(UuidMixin, QtCore.QUuid):
-    pass
+    """Stores a Universally Unique Identifier (UUID)."""
 
 
 if __name__ == "__main__":

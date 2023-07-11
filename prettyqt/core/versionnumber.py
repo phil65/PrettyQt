@@ -9,6 +9,8 @@ from prettyqt.utils import datatypes, get_repr
 
 
 class VersionNumber(QtCore.QVersionNumber):
+    """Contains a version number with an arbitrary number of segments."""
+
     def __init__(self, *args, **kwargs):
         match args:
             case (str(),):

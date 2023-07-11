@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class RegularExpressionMatchIterator(core.QRegularExpressionMatchIterator):
+    """Iterator on the results of a global match of a QRegularExpression."""
+
     def __repr__(self):
         return get_repr(self)
 

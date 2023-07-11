@@ -5,6 +5,8 @@ from prettyqt.qt import QtCore
 
 
 class DeadlineTimer(QtCore.QDeadlineTimer):
+    """Marks a deadline in the future."""
+
     def set_type(self, typ: constants.TimerTypeStr | constants.TimerType):
         """Set the timer type.
 

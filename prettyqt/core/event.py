@@ -314,5 +314,7 @@ MouseButtonType: bidict[MouseButtonTypeStr, QtCore.QEvent.Type] = bidict(
 
 
 class Event(QtCore.QEvent):
+    """The base class of all event classes. Event objects contain event parameters."""
+
     def __repr__(self):
         return get_repr(self, self.type())

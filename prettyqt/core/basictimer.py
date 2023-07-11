@@ -4,6 +4,8 @@ from prettyqt import constants, core
 
 
 class BasicTimer(core.QBasicTimer):
+    """Timer events for objects."""
+
     def __bool__(self):
         return self.isActive()
 

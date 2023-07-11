@@ -13,6 +13,8 @@ DB = core.MimeDatabase()
 
 
 class MimeData(core.ObjectMixin, core.QMimeData):
+    """Container for data that records information about its MIME type."""
+
     def __len__(self):
         return len(self.formats())
 

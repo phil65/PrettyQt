@@ -12,6 +12,8 @@ if TYPE_CHECKING:
 
 
 class FileSelector(core.ObjectMixin, core.QFileSelector):
+    """Convenient way of selecting file variants."""
+
     def select_path(self, path: datatypes.PathType) -> str:
         return self.select(os.fspath(path))
 

@@ -33,6 +33,8 @@ STATUS: bidict[StatusStr, QtCore.QDataStream.Status] = bidict(
 
 
 class DataStream(QtCore.QDataStream):
+    """Serialization of binary data to a QIODevice."""
+
     def set_byte_order(self, order: ByteOrderStr | QtCore.QDataStream.ByteOrder):
         """Set byte order.
 

@@ -4,4 +4,4 @@ from prettyqt.qt import QtCore
 
 
 class ItemSelection(QtCore.QItemSelection):
-    pass
+    """Manages information about selected items in a model."""

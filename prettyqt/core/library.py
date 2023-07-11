@@ -27,6 +27,8 @@ LOAD_HINTS: bidict[LoadHintStr, core.QLibrary.LoadHint] = bidict(
 
 
 class Library(core.ObjectMixin, core.QLibrary):
+    """Loads shared libraries at runtime."""
+
     def __bool__(self):
         return self.isLoaded()
 

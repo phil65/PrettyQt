@@ -34,6 +34,8 @@ SHARED_MEMORY_ERROR: bidict[
 
 
 class SharedMemory(core.ObjectMixin, core.QSharedMemory):
+    """Access to a shared memory segment."""
+
     def __repr__(self):
         return get_repr(self, self.key())
 

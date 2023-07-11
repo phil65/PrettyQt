@@ -4,4 +4,4 @@ from prettyqt import core
 
 
 class SaveFile(core.FileDeviceMixin, core.QSaveFile):
-    pass
+    """Interface for safely writing to files."""

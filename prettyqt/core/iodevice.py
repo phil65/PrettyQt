@@ -52,4 +52,4 @@ class IODeviceMixin(core.ObjectMixin):
 
 
 class IODevice(IODeviceMixin, core.QIODevice):
-    pass
+    """The base interface class of all I/O devices in Qt."""

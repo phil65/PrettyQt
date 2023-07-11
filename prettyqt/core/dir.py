@@ -82,6 +82,8 @@ SORT_FLAG: bidict[SortFlagStr, core.QDir.SortFlag] = bidict(
 
 
 class Dir(core.QDir):
+    """Access to directory structures and their contents."""
+
     def __getattr__(self, attr: str):
         return getattr(self.to_path(), attr)
 

@@ -5,6 +5,8 @@ from prettyqt.utils import classhelpers, get_repr
 
 
 class MetaEnum:
+    """Meta-data about an enumerator."""
+
     def __init__(self, metaenum: QtCore.QMetaEnum):
         self.item = metaenum
 

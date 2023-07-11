@@ -79,7 +79,7 @@ class AnimationGroupMixin(core.AbstractAnimationMixin):
 
 
 class AnimationGroup(AnimationGroupMixin, core.QAnimationGroup):
-    pass
+    """Abstract base class for groups of animations."""
 
 
 if __name__ == "__main__":

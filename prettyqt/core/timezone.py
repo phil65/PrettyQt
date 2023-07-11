@@ -25,6 +25,8 @@ TIME_TYPE: bidict[TimeTypeStr, core.QTimeZone.TimeType] = bidict(
 
 
 class TimeZone(core.QTimeZone):
+    """Identifies how a time representation relates to UTC."""
+
     def __init__(self, *args):
         match args:
             case (str() as string, *rest):

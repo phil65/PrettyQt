@@ -12,6 +12,8 @@ from prettyqt.utils import datatypes, get_repr
 
 
 class Line(core.QLine):
+    """Two-dimensional vector using integer precision."""
+
     def __repr__(self):
         return get_repr(self, self.get_p1(), self.get_p2())
 

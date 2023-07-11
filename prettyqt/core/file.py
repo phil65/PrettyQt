@@ -8,4 +8,4 @@ class FileMixin(core.FileDeviceMixin):
 
 
 class File(FileMixin, core.QFile):
-    pass
+    """Interface for reading from and writing to files."""

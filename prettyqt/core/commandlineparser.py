@@ -25,6 +25,8 @@ SINGLE_DASH_WORD: bidict[SingleDashWordStr, mod.SingleDashWordOptionMode] = bidi
 
 
 class CommandLineParser(core.QCommandLineParser):
+    """Means for handling the command line options."""
+
     def set_single_dash_word_option_mode(self, mode: SingleDashWordStr):
         """Set the single dash word option mode.
 

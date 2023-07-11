@@ -7,6 +7,8 @@ from prettyqt.utils import get_repr
 
 
 class RegularExpressionMatch(core.QRegularExpressionMatch):
+    """The results of a matching a QRegularExpression against a string."""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.string = None

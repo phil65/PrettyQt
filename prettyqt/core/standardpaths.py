@@ -56,6 +56,8 @@ STANDARD_LOCATION: bidict[
 
 
 class StandardPaths(QtCore.QStandardPaths):
+    """Methods for accessing standard paths."""
+
     @classmethod
     def get_display_name(cls, location: StandardLocationStr) -> str:
         return cls.displayName(STANDARD_LOCATION[location])

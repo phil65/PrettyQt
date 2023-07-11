@@ -20,6 +20,8 @@ LOCK_ERROR: bidict[LockErrorStr, QtCore.QLockFile.LockError] = bidict(
 
 
 class LockFile(QtCore.QLockFile):
+    """Locking between processes using a file."""
+
     def __init__(self, path: datatypes.PathType):
         super().__init__(os.fspath(path))
 

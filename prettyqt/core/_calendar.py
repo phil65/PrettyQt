@@ -18,6 +18,8 @@ SYSTEM: bidict[SystemStr, core.QCalendar.System] = bidict(
 
 
 class Calendar(core.QCalendar):
+    """Describes calendar systems."""
+
     def __init__(self, system: str | core.QCalendar.System = "gregorian"):
         typ = system if isinstance(system, core.QCalendar.System) else SYSTEM[system]
         super().__init__(typ)

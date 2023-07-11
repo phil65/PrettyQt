@@ -69,6 +69,8 @@ logger = logging.getLogger(__name__)
 
 
 class MetaObject:
+    """Contains meta-information about Qt objects."""
+
     def __init__(self, metaobject: core.QMetaObject):
         self.item = metaobject
 

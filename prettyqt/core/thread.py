@@ -23,5 +23,7 @@ PRIORITY: bidict[PriorityStr, QtCore.QThread.Priority] = bidict(
 
 
 class Thread(QtCore.QThread):
+    """Platform-independent way to manage threads."""
+
     def get_priority(self) -> PriorityStr:
         return PRIORITY.inverse[self.priority()]

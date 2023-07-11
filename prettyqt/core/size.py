@@ -7,6 +7,8 @@ from prettyqt.utils import datatypes, get_repr
 
 
 class Size(QtCore.QSize):
+    """Defines the size of a two-dimensional object using integer point precision."""
+
     def __repr__(self):
         return get_repr(self, self.width(), self.height())
 

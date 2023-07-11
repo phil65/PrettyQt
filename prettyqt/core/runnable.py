@@ -4,4 +4,4 @@ from prettyqt.qt import QtCore
 
 
 class Runnable(QtCore.QRunnable):
-    pass
+    """The base class for all runnable objects."""

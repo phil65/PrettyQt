@@ -25,6 +25,8 @@ CLOCK_TYPE: bidict[ClockTypeStr, QtCore.QElapsedTimer.ClockType] = bidict(
 
 
 class ElapsedTimer(QtCore.QElapsedTimer):
+    """Fast way to calculate elapsed times."""
+
     def __bool__(self):
         return self.isValid()
 

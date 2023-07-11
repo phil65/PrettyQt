@@ -10,6 +10,8 @@ from prettyqt.utils import datatypes, get_repr
 
 
 class LineF(core.QLineF):
+    """Two-dimensional vector using floating point precision."""
+
     def __repr__(self):
         return get_repr(self, self.get_p1(), self.get_p2())
 

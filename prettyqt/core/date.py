@@ -7,6 +7,8 @@ from prettyqt.qt import QtCore
 
 
 class Date(QtCore.QDate):
+    """Date functions."""
+
     def __repr__(self):
         template = super().__repr__().split("(")[1]  # type: ignore
         return f"{type(self).__name__}({template}"

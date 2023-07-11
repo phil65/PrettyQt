@@ -18,6 +18,8 @@ MATCH_MODE: bidict[MatchModeStr, core.QMimeDatabase.MatchMode] = bidict(
 
 
 class MimeDatabase(core.QMimeDatabase):
+    """Maintains a database of MIME types."""
+
     def get_mime_type_for_file(
         self,
         path: datatypes.PathType | core.QFileInfo,

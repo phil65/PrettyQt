@@ -106,6 +106,8 @@ CurveMethod = Callable[[float], float]
 
 
 class EasingCurve(serializemixin.SerializeMixin, QtCore.QEasingCurve):
+    """Easing curves for controlling animation."""
+
     def __init__(self, other_or_type: TypeStr | int | QtCore.QEasingCurve = "linear"):
         if isinstance(other_or_type, str) and other_or_type in TYPE:
             typ = TYPE[other_or_type]

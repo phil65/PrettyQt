@@ -6,6 +6,8 @@ from prettyqt import core, qt
 class ConcatenateTablesProxyModel(
     core.AbstractItemModelMixin, core.QConcatenateTablesProxyModel
 ):
+    """Proxies multiple source models, concatenating their rows."""
+
     ID = "concatenate"
 
     def parent(self, *args):

@@ -52,6 +52,8 @@ TOKEN_TYPE: bidict[TokenTypeStr, QtCore.QXmlStreamReader.TokenType] = bidict(
 
 
 class XmlStreamReader(QtCore.QXmlStreamReader):
+    """Fast parser for reading well-formed XML via a simple streaming API."""
+
     def __iter__(self):
         return self
 

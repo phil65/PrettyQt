@@ -4,6 +4,8 @@ from prettyqt.qt import QtCore
 
 
 class PersistentModelIndex(QtCore.QPersistentModelIndex):
+    """Used to locate data in a data model."""
+
     def __bool__(self):
         return self.isValid()
 

@@ -62,6 +62,8 @@ MATCH_OPTIONS: bidict[MatchOptionStr, mod.MatchOption] = bidict(
 
 
 class RegularExpression(core.QRegularExpression):
+    """Pattern matching using regular expressions."""
+
     def __init__(
         self,
         pattern: str | core.QRegularExpression | re.Pattern = "",

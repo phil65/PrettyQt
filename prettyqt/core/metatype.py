@@ -215,6 +215,8 @@ ENUM_END_INDEX = 66065
 
 
 class MetaType(QtCore.QMetaType):
+    """Manages named types in the meta-object system."""
+
     def __bool__(self):
         return self.isValid()
 

@@ -13,7 +13,7 @@ class AbstractTableModelMixin(core.AbstractItemModelMixin):
 
 
 class AbstractTableModel(AbstractTableModelMixin, core.QAbstractTableModel):
-    pass
+    """Abstract model that can be subclassed to create table models."""
 
 
 if __name__ == "__main__":

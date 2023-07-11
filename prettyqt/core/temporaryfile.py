@@ -4,4 +4,4 @@ from prettyqt import core
 
 
 class TemporaryFile(core.FileMixin, core.QTemporaryFile):
-    pass
+    """I/O device that operates on temporary files."""

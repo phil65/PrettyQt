@@ -46,6 +46,8 @@ LOCATION: bidict[LocationStr, mod] = bidict(
 
 
 class LibraryInfo(core.QLibraryInfo):
+    """Information about the Qt library."""
+
     @classmethod
     def get_location(cls, location: LocationStr) -> pathlib.Path:
         path = cls.path(LOCATION.get_enum_value(location))

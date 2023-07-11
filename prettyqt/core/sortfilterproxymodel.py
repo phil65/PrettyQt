@@ -29,6 +29,8 @@ FILTER_MODE: bidict[FilterModeStr, FilterMode] = bidict(
 
 
 class SortFilterProxyModel(core.AbstractProxyModelMixin, core.QSortFilterProxyModel):
+    """Support for sorting and filtering data passed between another model and a view."""
+
     FilterMode = core.Enum(FilterMode)
     invalidated = core.Signal()
     filter_mode_changed = core.Signal(str)

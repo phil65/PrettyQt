@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class Point(QtCore.QPoint):
+    """Defines a point in the plane using integer precision."""
+
     def __repr__(self):
         return get_repr(self, self.x(), self.y())
 

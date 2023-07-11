@@ -403,7 +403,7 @@ class ObjectMixin:
 
 
 class Object(ObjectMixin, core.QObject):
-    pass
+    """The base class of all Qt objects."""
 
 
 if __name__ == "__main__":

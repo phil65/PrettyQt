@@ -20,6 +20,8 @@ COMPRESSION: bidict[CompressionStr, core.QResource.Compression] = bidict(
 
 
 class Resource(core.QResource):
+    """Interface for reading directly from resources."""
+
     def __repr__(self):
         return get_repr(self, self.absoluteFilePath(), self.get_locale())
 

@@ -128,7 +128,7 @@ class CoreApplicationMixin(core.ObjectMixin):
 
 
 class CoreApplication(CoreApplicationMixin, core.QCoreApplication):
-    pass
+    """Event loop for Qt applications without UI."""
 
 
 if __name__ == "__main__":

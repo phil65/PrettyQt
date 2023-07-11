@@ -85,6 +85,8 @@ PERMISSIONS: bidict[PermissionStr, core.QFileDevice.Permission] = bidict(
 
 
 class FileDeviceMixin(core.IODeviceMixin):
+    """Interface for reading from and writing to open files."""
+
     def __repr__(self):
         return get_repr(self, self.fileName())
 

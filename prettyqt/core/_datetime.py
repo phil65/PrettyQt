@@ -8,6 +8,8 @@ from prettyqt import constants, core
 
 
 class DateTime(core.QDateTime):
+    """DateTime funcitons."""
+
     def __repr__(self):
         template = super().__repr__().split("(")[1]
         return f"{type(self).__name__}({template}"

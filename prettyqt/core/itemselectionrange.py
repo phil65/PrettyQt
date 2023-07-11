@@ -6,6 +6,8 @@ from prettyqt import core
 
 
 class ItemSelectionRange(core.QItemSelectionRange):
+    """Manages information about a range of selected items in a model."""
+
     def __contains__(self, other: core.ModelIndex):
         return self.contains(other)
 

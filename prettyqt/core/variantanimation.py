@@ -61,7 +61,7 @@ class VariantAnimationMixin(core.AbstractAnimationMixin):
 
 
 class VariantAnimation(VariantAnimationMixin, core.QVariantAnimation):
-    pass
+    """Base class for animations."""
 
 
 if __name__ == "__main__":

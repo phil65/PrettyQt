@@ -11,6 +11,8 @@ logger = logging.getLogger(__name__)
 
 
 class ProxyComparerWidget(widgets.Splitter):
+    """Splitter widget showing a comparison view between a proxy and its sourceModels."""
+
     def __init__(
         self,
         model: core.QAbstractProxyModel,

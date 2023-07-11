@@ -42,6 +42,8 @@ BOUNDARY_TYPES: bidict[BoundaryTypeStr, QtCore.QTextBoundaryFinder.BoundaryType]
 
 
 class TextBoundaryFinder(QtCore.QTextBoundaryFinder):
+    """Way of finding Unicode text boundaries in a string."""
+
     def __init__(
         self,
         string_or_other: str | QtCore.QTextBoundaryFinder = "",

@@ -77,6 +77,8 @@ FORMATTING_OPTIONS: bidict[FormattingOptionStr, QtCore.QUrl.UrlFormattingOption]
 
 
 class Url(serializemixin.SerializeMixin, QtCore.QUrl):
+    """Convenient interface for working with URLs."""
+
     def __init__(self, *args, **kwargs):
         match args:
             case (os.PathLike(), *rest):

@@ -7,6 +7,8 @@ from prettyqt.utils import get_repr
 
 
 class Margins(QtCore.QMargins):
+    """Defines the four margins of a rectangle."""
+
     def __repr__(self):
         return get_repr(self, self.left(), self.top(), self.right(), self.bottom())
 

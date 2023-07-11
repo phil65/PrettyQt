@@ -49,6 +49,8 @@ STATUS: bidict[StatusStr, QtCore.QTextStream.Status] = bidict(
 
 
 class TextStream(QtCore.QTextStream):
+    """Convenient interface for reading and writing text."""
+
     def set_field_alignment(
         self, alignment: FieldAlignmentStr | QtCore.QTextStream.FieldAlignment
     ):

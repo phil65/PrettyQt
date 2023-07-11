@@ -4,6 +4,8 @@ from prettyqt import core
 
 
 class PluginLoader(core.ObjectMixin, core.QPluginLoader):
+    """Load a plugin at runtime."""
+
     def get_load_hints(self) -> list[core.library.LoadHintStr]:
         return core.library.LOAD_HINTS.get_list(self.loadHints())
 

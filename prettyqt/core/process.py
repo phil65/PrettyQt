@@ -67,6 +67,8 @@ PROCESS_STATES: bidict[ProcessStateStr, core.QProcess.ProcessState] = bidict(
 
 
 class Process(core.IODeviceMixin, core.QProcess):
+    """Used to start external programs and to communicate with them."""
+
     def set_read_channel(
         self, channel: ProcessChannelStr | core.QProcess.ProcessChannelMode
     ):

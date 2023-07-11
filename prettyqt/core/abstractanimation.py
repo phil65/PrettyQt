@@ -34,6 +34,8 @@ STATE: bidict[StateStr, core.QAbstractAnimation.State] = bidict(
 
 
 class AbstractAnimationMixin(core.ObjectMixin):
+    """The base of all animations."""
+
     def __len__(self):
         return self.duration()
 

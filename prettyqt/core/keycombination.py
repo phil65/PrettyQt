@@ -80,6 +80,8 @@ class Keys:
 
 
 class KeyCombination(serializemixin.SerializeMixin, QtCore.QKeyCombination):
+    """Stores a combination of a key with optional modifiers."""
+
     def __init__(self, *args, **kwargs):
         match args:
             case (str(),) if args[0] in MODIFIERS.inverse.values():

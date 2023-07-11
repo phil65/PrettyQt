@@ -16,6 +16,8 @@ TYPE: bidict[TypeStr, core.QSocketNotifier.Type] = bidict(
 
 
 class SocketNotifier(core.ObjectMixin, core.QSocketNotifier):
+    """Support for monitoring activity on a file descriptor."""
+
     # def __repr__(self):
     #     return f"{type(self).__name__}({self.socket()}, {self.type()})"
 

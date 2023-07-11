@@ -7,6 +7,8 @@ from prettyqt.utils import datatypes, get_repr
 
 
 class Rect(QtCore.QRect):
+    """Defines a rectangle in the plane using integer precision."""
+
     def __repr__(self):
         return get_repr(self, self.x(), self.y(), self.width(), self.height())
 

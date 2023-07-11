@@ -49,7 +49,7 @@ class TranslatorMixin(core.ObjectMixin):
 
 
 class Translator(TranslatorMixin, core.QTranslator):
-    pass
+    """Internationalization support for text output."""
 
 
 if __name__ == "__main__":
