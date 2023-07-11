@@ -108,6 +108,7 @@ def get_class_for_id(base_class: T, id_: str) -> T:
 def get_module_classes(
     module: types.ModuleType | str | tuple[str, ...],
     type_filter: type | None | types.UnionType = None,
+    module_filter: str | None = None,
 ) -> list[type]:
     if isinstance(module, str | tuple):
         if isinstance(module, tuple):
@@ -120,5 +121,6 @@ def get_module_classes(
     return [
         kls
         for _name, kls in inspect.getmembers(module, inspect.isclass)
-        if type_filter is None or issubclass(kls, type_filter)
+        if (type_filter is None or issubclass(kls, type_filter))
+        and (module_filter is None or kls.__module__.startswith(module_filter))
     ]

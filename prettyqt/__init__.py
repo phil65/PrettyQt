@@ -9,6 +9,21 @@ __version__ = "1.54.0"
 # os.environ["PYTHONBREAKPOINT"] = "prettyqt.debug"
 
 
+def import_all():
+    import importlib
+    import logging
+
+    logger = logging.getLogger(__name__)
+    mods = []
+    for mod in __all__:
+        try:
+            mod = importlib.import_module(f"prettyqt.{mod}")
+            mods.append(mod)
+        except ImportError:
+            logger.warning(f"{mod} not available. binding: {qt.API}")
+    return mods
+
+
 def debug():
     """Print the local variables in the caller's frame."""
     import inspect

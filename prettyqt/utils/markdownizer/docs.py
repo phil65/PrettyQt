@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import contextlib
 import importlib
 import inspect
 import logging
@@ -51,6 +52,14 @@ class Docs:
             if klass.__module__.startswith(self.module_name):
                 yield klass
 
+    def yield_modules_for_glob(self, glob="*/*.py"):
+        for path in self.yield_files(glob):
+            module_path = path.with_suffix("")
+            parts = tuple(module_path.parts)
+            complete_module_path = "prettyqt." + ".".join(parts)
+            with contextlib.suppress(ImportError):
+                yield importlib.import_module(complete_module_path)
+
     def yield_classes_for_glob(
         self, glob="*/*.py", recursive: bool = False, avoid_duplicates: bool = True
     ):
@@ -61,7 +70,7 @@ class Docs:
             module_path = f"{self.module_name}." + ".".join(parts)
             try:
                 module = importlib.import_module(module_path)
-            except (ImportError, AttributeError):
+            except (ImportError, AttributeError):  # noqa: PERF203
                 continue
             else:
                 for klass in self.yield_klasses_for_module(module, recursive=recursive):
