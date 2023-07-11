@@ -10,6 +10,7 @@ from prettyqt.utils.markdownizer.admonition import Admonition
 from prettyqt.utils.markdownizer.docs import Docs
 from prettyqt.utils.markdownizer.literatenav import LiterateNav
 from prettyqt.utils.markdownizer.docstrings import DocStrings
+from prettyqt.utils.markdownizer.list import List
 from prettyqt.utils.markdownizer.table import Table
 from prettyqt.utils.markdownizer.mermaiddiagram import MermaidDiagram
 from prettyqt.utils.markdownizer.document import Document, ClassDocument, ModuleDocument
@@ -27,6 +28,7 @@ __all__ = [
     "Admonition",
     "MermaidDiagram",
     "Table",
+    "List",
     "ClassDocument",
     "ModuleDocument",
 ]
@@ -38,26 +40,21 @@ BASE_URL = "https://doc.qt.io/qtforpython-6/PySide6/"
 BUILTIN_URL = "https://docs.python.org/3/library/functions.html#{klass}"
 
 
-def get_qt_help_link(klass: type) -> str:
-    mod = klass.__module__.replace("PySide6.", "").replace("PyQt6.", "")
-    url = f"{BASE_URL}{mod}/{klass.__qualname__.replace('.', '/')}.html"
-    return f"[{klass.__name__}]({url})"
-
-
 def link_for_class(klass: type) -> str:
     if klass.__module__ == "builtins":
         return f"[{klass.__name__}]({BUILTIN_URL.format(klass=klass)})"
-    if klass.__module__.startswith(("PyQt", "PySide")):
-        return get_qt_help_link(klass)
-    if klass.__module__.startswith("prettyqt"):
+    elif klass.__module__.startswith(("PyQt", "PySide")):
+        mod = klass.__module__.replace("PySide6.", "").replace("PyQt6.", "")
+        url = f"{BASE_URL}{mod}/{klass.__qualname__.replace('.', '/')}.html"
+        return f"[{klass.__name__}]({url})"
+    elif klass.__module__.startswith("prettyqt"):
         return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
     try:
         dist = metadata.distribution(klass.__module__.split(".")[0])
     except metadata.PackageNotFoundError:
         return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
     else:
-        url = dist.metadata["Home-Page"]
-        if url:
+        if url := dist.metadata["Home-Page"]:
             return f"[{klass.__qualname__}]({url})"
         return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
 
