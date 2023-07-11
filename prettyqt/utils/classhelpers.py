@@ -97,16 +97,19 @@ def get_class_for_id(base_class: T, id_: str) -> T:
 
 
 def get_module_classes(
-    module: types.ModuleType | str, type_filter: type | None | types.UnionType = None
+    module: types.ModuleType | str | tuple[str, ...],
+    type_filter: type | None | types.UnionType = None,
 ) -> list[type]:
-    if isinstance(module, str):
+    if isinstance(module, str | tuple):
+        if isinstance(module, tuple):
+            module = ".".join(module)
         try:
             module = importlib.import_module(module)
         except ImportError:
             logger.warning(f"Could not import {module!r}")
             return []
     return [
-        tpl[1]
-        for tpl in inspect.getmembers(module, inspect.isclass)
-        if type_filter is None or issubclass(tpl[1], type_filter)
+        kls
+        for _name, kls in inspect.getmembers(module, inspect.isclass)
+        if type_filter is None or issubclass(kls, type_filter)
     ]
