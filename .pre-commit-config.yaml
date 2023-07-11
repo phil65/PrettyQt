@@ -34,9 +34,10 @@ repos:
       stages: [commit-msg]
       additional_dependencies: [typing-extensions] # cz-github-convention]
 - repo: https://github.com/ambv/black
-  rev: 23.3.0
+  rev: 23.7.0
   hooks:
     - id: black
+      args: [--preview]
 
 # - repo: https://github.com/pre-commit/mirrors-mypy
 #   rev: v0.982
