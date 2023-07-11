@@ -357,7 +357,8 @@ class MarkdownImage(BaseMarkdownSection):
         super().__init__(header=header)
         self.title = title
         self.caption = caption
-        self.path = path
+        # TODO: linkreplacer doesnt work yet with full path
+        self.path = pathlib.Path(path).name  # this should not be needed.
 
     def _to_markdown(self) -> str:
         lines = ["<figure markdown>", f"  ![{self.title}]({self.path})"]
