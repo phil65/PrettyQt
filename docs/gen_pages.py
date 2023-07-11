@@ -53,7 +53,7 @@ def get_widget_screenshot(widget: widgets.QWidget) -> bytes:
 
 def get_document_for_klass(klass: type, parts: tuple[str, ...], path: str = ""):
     doc = markdownizer.Document(path=path)
-    doc += markdownizer.DocStringSection(f'prettyqt.{".".join(parts)}.{klass.__name__}')
+    doc += markdownizer.DocStrings(f'prettyqt.{".".join(parts)}.{klass.__name__}')
     if issubclass(klass, itemmodels.SliceIdentityProxyModel):
         doc += markdownizer.Admonition("info", SLICE_PROXY_INFO)
     if issubclass(klass, core.AbstractItemModelMixin) and klass.IS_RECURSIVE:

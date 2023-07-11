@@ -164,7 +164,7 @@ def get_class_table(klasses: list[type[core.QObject]]) -> str:
         parents = kls.__bases__
         subclass_str = ", ".join(link_for_class(subclass) for subclass in subclasses)
         parent_str = ", ".join(link_for_class(parent) for parent in parents)
-        desc = kls.__doc__.split("\n")[0] if kls.__doc__ else ""
+        desc = kls.__doc__.split("\n")[0] if isinstance(kls.__doc__, str) else ""
         line = f"|{link_for_class(kls)}|{subclass_str}|{parent_str}|{desc}|"
         lines.append(line)
     return "\n\n" + "\n".join(lines) + "\n\n"

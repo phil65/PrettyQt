@@ -97,7 +97,8 @@ class Table(markdownizer.Text):
                 markdownizer.link_for_class(parent) for parent in parents
             )
             desc = [
-                kls.__doc__.split("\n")[0] if kls.__doc__ else "" for kls in subclasses
+                kls.__doc__.split("\n")[0] if isinstance(kls.__doc__, str) else ""
+                for kls in subclasses
             ]
             data = dict(
                 Name=markdownizer.link_for_class(kls),
@@ -128,7 +129,10 @@ class Table(markdownizer.Text):
             return None
         # STRIP_CODE = r"```[^\S\r\n]*[a-z]*\n.*?\n```"
         # docs = [re.sub(STRIP_CODE, '', k.__module__, 0, re.DOTALL) for k in subclasses]
-        desc = [kls.__doc__.split("\n")[0] if kls.__doc__ else "" for kls in subclasses]
+        desc = [
+            kls.__doc__.split("\n")[0] if isinstance(kls.__doc__, str) else ""
+            for kls in subclasses
+        ]
         data = dict(
             Class=[markdownizer.link_for_class(kls) for kls in subclasses],
             Module=[kls.__module__ for kls in subclasses],

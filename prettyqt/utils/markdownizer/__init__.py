@@ -11,7 +11,7 @@ from prettyqt.utils.markdownizer.literatenav import LiterateNav
 from prettyqt.utils.markdownizer.docstrings import DocStrings
 from prettyqt.utils.markdownizer.table import Table
 from prettyqt.utils.markdownizer.mermaiddiagram import MermaidDiagram
-from prettyqt.utils.markdownizer.document import Document
+from prettyqt.utils.markdownizer.document import Document, ClassDocument, ModuleDocument
 
 __all__ = [
     "BaseSection",
@@ -26,6 +26,8 @@ __all__ = [
     "Admonition",
     "MermaidDiagram",
     "Table",
+    "ClassDocument",
+    "ModuleDocument",
 ]
 
 
@@ -55,21 +57,6 @@ def label_for_class(klass: type) -> str:
         parts = klass.__module__.split(".")
         return f"{parts[1]}.{klass.__name__}"
     return klass.__qualname__
-
-
-class ClassDocument(Document):
-    def __init__(self, klass: type, parts: tuple[str, ...] | None = None, **kwargs):
-        super().__init__(**kwargs)
-        self.klass = klass
-        self.parts = parts or ()
-        self._build()
-
-    def _build(self):
-        self.append(DocStrings(f'{".".join(self.parts)}.{self.klass.__name__}'))
-        if table := Table.get_ancestor_table_for_klass(self.klass):
-            self.append(table)
-        self.append(MermaidDiagram.for_classes([self.klass]))
-        # self.append(MermaidDiagram.for_subclasses([self.klass]))
 
 
 if __name__ == "__main__":
