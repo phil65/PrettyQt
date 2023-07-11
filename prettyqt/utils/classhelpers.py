@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import collections
+import contextlib
 import functools
 import importlib
 import inspect
@@ -124,3 +125,25 @@ def get_module_classes(
         if (type_filter is None or issubclass(kls, type_filter))
         and (module_filter is None or kls.__module__.startswith(module_filter))
     ]
+
+
+def get_topmost_module_path_for_klass(klass: type) -> str:
+    """Return path of topmost module containing given class."""
+    path = klass.__module__
+    parts = path.split(".")
+    while parts:
+        with contextlib.suppress(TypeError):
+            new_path = ".".join(parts)
+            mod = importlib.import_module(new_path)
+            klasses = [kls for _kls_name, kls in inspect.getmembers(mod, inspect.isclass)]
+            if klass in klasses:
+                path = new_path
+        parts = parts[:-1]
+    return path
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+
+    path = get_topmost_module_path_for_klass(widgets.AbstractItemView)
+    print(path)
