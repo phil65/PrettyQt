@@ -49,7 +49,7 @@ if __name__ == "__main__":
     doc += markdownizer.Admonition("info", "etst")
     doc += markdownizer.Table(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
     doc += markdownizer.Table.get_prop_tables_for_klass(core.StringListModel)[0]
-    doc += markdownizer.DocStringSection(helpers, header="DocStrings")
+    doc += markdownizer.DocStrings(helpers, header="DocStrings")
     doc += markdownizer.Table.get_dependency_table("prettyqt")
     doc += markdownizer.MermaidDiagram.for_classes(
         [markdownizer.Table], header="Mermaid diagram"

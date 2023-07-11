@@ -20,6 +20,24 @@ class BaseSection:
         return text
 
 
+class Text(BaseSection):
+    def __init__(self, text: str | BaseSection = "", header: str = ""):
+        super().__init__(header=header)
+        self.text = text
+
+    def _to_markdown(self) -> str:
+        return self.text if isinstance(self.text, str) else self.text.to_markdown()
+
+
+class Code(Text):
+    def __init__(self, language: str, text: str | BaseSection = "", header: str = ""):
+        super().__init__(text, header)
+        self.language = language
+
+    def _to_markdown(self) -> str:
+        return f"``` {self.language}\n{self.text}\n```"
+
+
 if __name__ == "__main__":
     section = BaseSection(module_name="prettyqt")
     section.to_markdown()
