@@ -8,10 +8,6 @@ from typing import Literal
 import warnings
 
 
-class PythonQtError(ImportError):
-    pass
-
-
 API_NAMES = {"pyqt6": "PyQt6", "pyside6": "PySide6"}
 
 

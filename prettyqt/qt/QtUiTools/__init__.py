@@ -1,6 +1,6 @@
 """Provides QtTest classes and functions."""
 
-from prettyqt.qt import PYSIDE6, PythonQtError
+from prettyqt.qt import PYSIDE6
 
 
 if PYSIDE6:
@@ -10,4 +10,4 @@ if PYSIDE6:
     LUPDATE_CMD = "pyside6-lupdate -verbose"
     UIC_CMD = "pyside6-uic"
 else:
-    raise PythonQtError("No Qt bindings could be found")
+    raise ModuleNotFoundError("No Qt bindings could be found")

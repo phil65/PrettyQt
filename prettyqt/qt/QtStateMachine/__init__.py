@@ -1,6 +1,6 @@
 """Provides QtStateMachine classes and functions."""
 
-from prettyqt.qt import PYSIDE6, PythonQtError
+from prettyqt.qt import PYSIDE6
 
 
 # elif PYQT6:
@@ -8,4 +8,4 @@ from prettyqt.qt import PYSIDE6, PythonQtError
 if PYSIDE6:
     from PySide6.QtStateMachine import *
 else:
-    raise PythonQtError("No Qt bindings could be found")
+    raise ModuleNotFoundError("No Qt bindings could be found")

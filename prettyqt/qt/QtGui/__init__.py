@@ -1,6 +1,6 @@
 """Provides QtGui classes and functions."""
 
-from prettyqt.qt import PYQT6, PYSIDE6, PythonQtError
+from prettyqt.qt import PYQT6, PYSIDE6
 from prettyqt.utils import get_repr
 
 if PYQT6:
@@ -28,7 +28,7 @@ if PYQT6:
 elif PYSIDE6:
     from PySide6.QtGui import *  # type: ignore
 else:
-    raise PythonQtError("No Qt bindings could be found")
+    raise ModuleNotFoundError("No Qt bindings could be found")
 
 
 def __repr__(self):
