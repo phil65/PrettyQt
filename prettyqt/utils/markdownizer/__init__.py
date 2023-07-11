@@ -74,10 +74,12 @@ def label_for_class(klass: type) -> str:
     return klass.__qualname__
 
 
-def to_html_list(ls: list[str]):
+def to_html_list(ls: list[str], shorten_after: int | None = None):
     if not ls:
         return ""
-    item_str = "".join(f"<li>{i}</li>" for i in ls)
+    item_str = "".join(f"<li>{i}</li>" for i in ls[:shorten_after])
+    if shorten_after and len(ls) > shorten_after:
+        item_str += "<li>...</li>"
     return f"<ul>{item_str}</ul>"
 
 
