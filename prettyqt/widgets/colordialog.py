@@ -17,6 +17,8 @@ OPTIONS: bidict[OptionStr, widgets.QColorDialog.ColorDialogOption] = bidict(
 
 
 class ColorDialog(widgets.DialogMixin, widgets.QColorDialog):
+    """Dialog widget for specifying colors."""
+
     @classmethod
     def get_color(
         cls,

@@ -10,6 +10,8 @@ if TYPE_CHECKING:
 
 
 class UndoView(widgets.ListViewMixin, widgets.QUndoView):
+    """Displays the contents of a QUndoStack."""
+
     def __getitem__(self, index: int) -> gui.QUndoCommand:
         return self.stack().command(index)
 

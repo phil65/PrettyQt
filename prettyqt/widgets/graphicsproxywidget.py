@@ -4,7 +4,7 @@ from prettyqt import widgets
 
 
 class GraphicsProxyWidget(widgets.GraphicsWidgetMixin, widgets.QGraphicsProxyWidget):
-    pass
+    """Proxy layer for embedding a QWidget in a QGraphicsScene."""
 
 
 if __name__ == "__main__":

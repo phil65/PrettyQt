@@ -146,7 +146,7 @@ class AbstractSliderMixin(widgets.WidgetMixin):
 
 
 class AbstractSlider(AbstractSliderMixin, widgets.QAbstractSlider):
-    pass
+    """Integer value within a range."""
 
 
 if __name__ == "__main__":

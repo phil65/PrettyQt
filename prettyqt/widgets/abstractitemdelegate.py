@@ -36,7 +36,7 @@ class AbstractItemDelegateMixin(core.ObjectMixin):
 
 
 class AbstractItemDelegate(AbstractItemDelegateMixin, QtWidgets.QAbstractItemDelegate):
-    pass
+    """Used to display and edit data items from a model."""
 
 
 if __name__ == "__main__":

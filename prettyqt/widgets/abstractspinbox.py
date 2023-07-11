@@ -123,7 +123,7 @@ class AbstractSpinBoxMixin(widgets.WidgetMixin):
 
 
 class AbstractSpinBox(AbstractSpinBoxMixin, QtWidgets.QAbstractSpinBox):
-    pass
+    """Spinbox and a line edit to display values."""
 
 
 if __name__ == "__main__":

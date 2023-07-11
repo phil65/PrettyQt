@@ -34,6 +34,8 @@ SECTIONS: bidict[SectionStr, widgets.QDateTimeEdit.Section] = bidict(
 
 
 class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
+    """Widget for editing dates and times."""
+
     value_changed = core.Signal(datetime.datetime)
 
     def __init__(self, *args, **kwargs):

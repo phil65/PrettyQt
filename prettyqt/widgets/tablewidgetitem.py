@@ -11,6 +11,8 @@ from prettyqt.utils import datatypes
 
 
 class TableWidgetItem(QtWidgets.QTableWidgetItem):
+    """Item for use with the QTableWidget class."""
+
     def __setitem__(self, index: int | constants.ItemDataRoleStr, value):
         self.set_data(index, value)
 

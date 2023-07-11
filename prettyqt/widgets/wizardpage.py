@@ -50,4 +50,4 @@ class WizardPageMixin(widgets.WidgetMixin):
 
 
 class WizardPage(WizardPageMixin, widgets.QWizardPage):
-    pass
+    """The base class for wizard pages."""

@@ -187,7 +187,7 @@ class ToolBarMixin(widgets.WidgetMixin):
 
 
 class ToolBar(ToolBarMixin, widgets.QToolBar):
-    pass
+    """Movable panel that contains a set of controls."""
 
 
 if __name__ == "__main__":

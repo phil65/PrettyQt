@@ -45,7 +45,7 @@ class DialogMixin(widgets.WidgetMixin):
 
 
 class Dialog(DialogMixin, widgets.QDialog):
-    pass
+    """The base class of dialog windows."""
 
 
 if __name__ == "__main__":

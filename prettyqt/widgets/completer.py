@@ -25,6 +25,8 @@ SORT_MODE: bidict[SortModeStr, widgets.QCompleter.ModelSorting] = bidict(
 
 
 class Completer(core.ObjectMixin, widgets.QCompleter):
+    """Completions based on an item model."""
+
     path_updated = core.Signal(str)
 
     def _get_map(self):

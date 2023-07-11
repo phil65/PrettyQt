@@ -6,6 +6,8 @@ from prettyqt.qt import QtWidgets
 
 
 class WhatsThis(QtWidgets.QWhatsThis):
+    """Simple description of any widget, i.e. answering the question "What's This?"."""
+
     @classmethod
     @contextlib.contextmanager
     def enter_mode(cls):

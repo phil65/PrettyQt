@@ -5,6 +5,8 @@ from prettyqt.utils import datatypes
 
 
 class AbstractButtonMixin(widgets.WidgetMixin):
+    """Abstract button widget base class, providing functionality common to buttons."""
+
     def __bool__(self):
         return self.isChecked()
 

@@ -8,6 +8,8 @@ from prettyqt.utils import datatypes
 
 
 class FileIconProvider(gui.AbstractFileIconProviderMixin, QtWidgets.QFileIconProvider):
+    """File icons for the QFileSystemModel class."""
+
     def get_icon(
         self,
         typ: gui.abstractfileiconprovider.IconTypeStr

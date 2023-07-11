@@ -273,7 +273,7 @@ class WizardMixin(widgets.DialogMixin):
 
 
 class Wizard(WizardMixin, widgets.QWizard):
-    pass
+    """Framework for wizards."""
 
 
 if __name__ == "__main__":

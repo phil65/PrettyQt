@@ -9,4 +9,4 @@ class GraphicsEffectMixin(core.ObjectMixin):
 
 
 class GraphicsEffect(GraphicsEffectMixin, QtWidgets.QGraphicsEffect):
-    pass
+    """The base class for all graphics effects."""

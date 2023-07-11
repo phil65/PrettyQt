@@ -90,7 +90,7 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
 
 
 class TreeView(TreeViewMixin, widgets.QTreeView):
-    pass
+    """Default model/view implementation of a tree view."""
 
 
 if __name__ == "__main__":

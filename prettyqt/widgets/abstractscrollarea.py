@@ -182,7 +182,7 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
 
 
 class AbstractScrollArea(AbstractScrollAreaMixin, widgets.QAbstractScrollArea):
-    pass
+    """Scrolling area with on-demand scroll bars."""
 
 
 if __name__ == "__main__":

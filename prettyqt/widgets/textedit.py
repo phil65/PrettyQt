@@ -141,7 +141,7 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
 
 
 class TextEdit(TextEditMixin, widgets.QTextEdit):
-    pass
+    """Widget that is used to edit and display both plain and rich text."""
 
 
 if __name__ == "__main__":

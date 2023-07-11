@@ -74,7 +74,7 @@ class FrameMixin(widgets.WidgetMixin):
 
 
 class Frame(FrameMixin, widgets.QFrame):
-    pass
+    """The base class of widgets that can have a frame."""
 
 
 if __name__ == "__main__":

@@ -82,6 +82,8 @@ ROLES: bidict[RoleStr, widgets.QDialogButtonBox.ButtonRole] = bidict(
 
 
 class DialogButtonBox(widgets.WidgetMixin, widgets.QDialogButtonBox):
+    """Widget presenting buttons in a layout that is appropriate to the widget style."""
+
     button_clicked = core.Signal(str)
 
     def __init__(self, *args, **kwargs):

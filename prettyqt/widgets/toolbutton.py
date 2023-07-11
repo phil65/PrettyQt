@@ -19,6 +19,8 @@ POPUP_MODE: bidict[PopupModeStr, widgets.QToolButton.ToolButtonPopupMode] = bidi
 
 
 class ToolButton(widgets.AbstractButtonMixin, widgets.QToolButton):
+    """Quick-access button to commands or options, usually used inside a QToolBar."""
+
     def __getitem__(self, item: str) -> QtGui.QAction:
         menu = self.menu()
         return menu[item]

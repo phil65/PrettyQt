@@ -4,4 +4,4 @@ from prettyqt import widgets
 
 
 class GraphicsPathItem(widgets.AbstractGraphicsShapeItemMixin, widgets.QGraphicsPathItem):
-    pass
+    """Path item that you can add to a QGraphicsScene."""

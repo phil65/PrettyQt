@@ -18,6 +18,8 @@ class CustomTitleBar(widgets.Widget):
 
 
 class DockWidget(widgets.WidgetMixin, widgets.QDockWidget):
+    """Widget that can be docked inside a QMainWindow ."""
+
     def __init__(self, *args, allowed_areas="all", **kwargs):
         super().__init__(*args, allowed_areas=allowed_areas, **kwargs)
         self._area: constants.DockWidgetAreasStr = "none"

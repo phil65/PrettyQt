@@ -37,6 +37,8 @@ HORIZONTAL_HEADER_FORMAT: bidict[
 
 
 class CalendarWidget(widgets.WidgetMixin, widgets.QCalendarWidget):
+    """Monthly based calendar widget allowing the user to select a date."""
+
     def _get_map(self):
         maps = super()._get_map()
         maps |= {

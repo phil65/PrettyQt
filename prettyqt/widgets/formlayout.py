@@ -37,6 +37,8 @@ FIELD_GROWTH_POLICY: bidict[FieldGrowthPolicyStr, mod.FieldGrowthPolicy] = bidic
 
 
 class FormLayout(widgets.LayoutMixin, widgets.QFormLayout):
+    """Manages forms of input widgets and their associated labels."""
+
     ID = "form"
 
     def __init__(self, *args, **kwargs):

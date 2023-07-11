@@ -4,6 +4,8 @@ from prettyqt import constants, widgets
 
 
 class GraphicsLinearLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsLinearLayout):
+    """Horizontal or vertical layout for managing widgets in Graphics View."""
+
     def __init__(
         self,
         orientation: constants.OrientationStr | constants.Orientation = "horizontal",

@@ -15,6 +15,8 @@ SUBMIT_POLICY: bidict[SubmitPolicyStr, widgets.QDataWidgetMapper.SubmitPolicy] =
 
 
 class DataWidgetMapper(core.ObjectMixin, widgets.QDataWidgetMapper):
+    """Mapping between a section of a data model to widgets."""
+
     def __setitem__(self, key: int, value: widgets.QWidget):
         self.addMapping(value, key)
 

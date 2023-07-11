@@ -4,6 +4,8 @@ from prettyqt import core, widgets
 
 
 class DoubleSpinBox(widgets.AbstractSpinBoxMixin, widgets.QDoubleSpinBox):
+    """Spin box widget that takes doubles."""
+
     value_changed = core.Signal(float)
 
     def __init__(self, *args, maximum: float = float("inf"), **kwargs):

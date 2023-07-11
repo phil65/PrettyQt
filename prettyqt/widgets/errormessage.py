@@ -4,7 +4,7 @@ from prettyqt import widgets
 
 
 class ErrorMessage(widgets.DialogMixin, widgets.QErrorMessage):
-    pass
+    """Error message display dialog."""
 
 
 if __name__ == "__main__":

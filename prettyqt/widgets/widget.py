@@ -1192,7 +1192,7 @@ class WidgetMixin(core.ObjectMixin):
 
 
 class Widget(WidgetMixin, widgets.QWidget):
-    pass
+    """The base class of all user interface objects."""
 
 
 if __name__ == "__main__":

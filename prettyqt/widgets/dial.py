@@ -4,6 +4,8 @@ from prettyqt import core, widgets
 
 
 class Dial(widgets.AbstractSliderMixin, widgets.QDial):
+    """Rounded range control (like a speedometer or potentiometer)."""
+
     value_changed = core.Signal(int)
 
     def __init__(self, *args, **kwargs):

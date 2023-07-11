@@ -223,7 +223,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
 
 
 class TableView(TableViewMixin, widgets.QTableView):
-    pass
+    """Default model/view implementation of a table view."""
 
 
 if __name__ == "__main__":

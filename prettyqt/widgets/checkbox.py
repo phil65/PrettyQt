@@ -4,6 +4,8 @@ from prettyqt import constants, core, widgets
 
 
 class CheckBox(widgets.AbstractButtonMixin, widgets.QCheckBox):
+    """Checkbox with a text label."""
+
     value_changed = core.Signal(int)
 
     def __init__(self, *args, **kwargs):

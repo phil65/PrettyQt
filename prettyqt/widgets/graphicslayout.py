@@ -51,7 +51,7 @@ class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):
 
 
 class GraphicsLayout(GraphicsLayoutMixin, widgets.QGraphicsLayout):
-    pass
+    """The base class for all layouts in Graphics View."""
 
 
 if __name__ == "__main__":

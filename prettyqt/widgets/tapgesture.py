@@ -4,6 +4,8 @@ from prettyqt import core, widgets
 
 
 class TapGesture(widgets.GestureMixin, widgets.QTapGesture):
+    """Describes a tap gesture made by the user."""
+
     def get_position(self) -> core.PointF:
         return core.PointF(self.position())
 

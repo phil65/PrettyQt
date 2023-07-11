@@ -45,6 +45,8 @@ SIZE_ADJUST_POLICY: bidict[SizeAdjustPolicyStr, mod.SizeAdjustPolicy] = bidict(
 
 
 class ComboBoxMixin(widgets.WidgetMixin):
+    """Combobox that lets the user select a font family."""
+
     value_changed = core.Signal(object)
 
     def __init__(self, *args, **kwargs):
@@ -174,7 +176,7 @@ class ComboBoxMixin(widgets.WidgetMixin):
 
 
 class ComboBox(ComboBoxMixin, widgets.QComboBox):
-    pass
+    """Combined button and popup list."""
 
 
 if __name__ == "__main__":

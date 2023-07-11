@@ -4,7 +4,7 @@ from prettyqt import widgets
 
 
 class ColumnView(widgets.AbstractItemViewMixin, widgets.QColumnView):
-    pass
+    """Model/view implementation of a column view."""
 
 
 if __name__ == "__main__":

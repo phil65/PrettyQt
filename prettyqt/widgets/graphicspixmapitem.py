@@ -16,6 +16,8 @@ SHAPE_MODE: bidict[ShapeModeStr, widgets.QGraphicsPixmapItem.ShapeMode] = bidict
 
 
 class GraphicsPixmapItem(widgets.GraphicsItemMixin, widgets.QGraphicsPixmapItem):
+    """Pixmap item that you can add to a QGraphicsScene."""
+
     def set_transformation_mode(
         self, mode: constants.TransformationModeStr | constants.TransformationMode
     ):

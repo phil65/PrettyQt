@@ -4,4 +4,4 @@ from prettyqt import widgets
 
 
 class GraphicsItemGroup(widgets.GraphicsItemMixin, widgets.QGraphicsItemGroup):
-    pass
+    """Container that treats a group of items as a single item."""

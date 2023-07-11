@@ -9,6 +9,8 @@ from prettyqt.utils import datatypes
 
 
 class TextBrowser(widgets.TextEditMixin, widgets.QTextBrowser):
+    """Rich text browser with hypertext navigation."""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setOpenExternalLinks(True)

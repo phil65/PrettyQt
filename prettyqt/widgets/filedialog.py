@@ -43,7 +43,7 @@ VIEW_MODE: bidict[ViewModeStr, widgets.QFileDialog.ViewMode] = bidict(
 
 
 class FileDialog(widgets.DialogMixin, widgets.QFileDialog):
-    """Simple dialog used to display some widget."""
+    """Dialog that allow users to select files or directories."""
 
     def __init__(
         self,

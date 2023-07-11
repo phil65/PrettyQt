@@ -6,6 +6,8 @@ from prettyqt import constants, gui, widgets
 class GraphicsPolygonItem(
     widgets.AbstractGraphicsShapeItemMixin, widgets.QGraphicsPolygonItem
 ):
+    """Polygon item that you can add to a QGraphicsScene."""
+
     def get_polygon(self) -> gui.PolygonF:
         return gui.PolygonF(self.polygon())
 

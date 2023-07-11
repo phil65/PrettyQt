@@ -4,6 +4,8 @@ from prettyqt import gui, widgets
 
 
 class FontDialog(widgets.DialogMixin, widgets.QFontDialog):
+    """Dialog widget for selecting a font."""
+
     def get_current_font(self) -> gui.Font:
         return gui.Font(self.currentFont())
 

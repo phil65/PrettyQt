@@ -42,7 +42,7 @@ class GraphicsLayoutItemMixin:
 
 
 class GraphicsLayoutItem(GraphicsLayoutItemMixin, widgets.QGraphicsLayoutItem):
-    pass
+    """Can be inherited to allow your custom items to be managed by layouts."""
 
 
 if __name__ == "__main__":

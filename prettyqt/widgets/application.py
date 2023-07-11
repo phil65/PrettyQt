@@ -308,7 +308,8 @@ class ApplicationMixin(gui.GuiApplicationMixin):
 
 
 class Application(ApplicationMixin, widgets.QApplication):
-    pass
+    """Manages the GUI application's control flow and main settings."""
+
     # def __init__(self, *args, **kwargs):
     #     super().__init__()
 

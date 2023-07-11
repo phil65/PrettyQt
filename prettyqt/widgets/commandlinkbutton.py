@@ -4,6 +4,8 @@ from prettyqt import core, widgets
 
 
 class CommandLinkButton(widgets.PushButtonMixin, widgets.QCommandLinkButton):
+    """Vista style command link button."""
+
     value_changed = core.Signal(bool)
 
 

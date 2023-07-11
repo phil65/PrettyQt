@@ -8,7 +8,7 @@ class CommonStyleMixin(widgets.StyleMixin):
 
 
 class CommonStyle(CommonStyleMixin, widgets.QCommonStyle):
-    pass
+    """Encapsulates the common Look and Feel of a GUI."""
 
 
 if __name__ == "__main__":

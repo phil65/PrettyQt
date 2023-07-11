@@ -4,7 +4,7 @@ from prettyqt import widgets
 
 
 class FocusFrame(widgets.WidgetMixin, widgets.QFocusFrame):
-    pass
+    """Focus frame which can be outside of a widget's normal paintable area."""
 
 
 if __name__ == "__main__":

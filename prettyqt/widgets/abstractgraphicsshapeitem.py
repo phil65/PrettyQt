@@ -10,4 +10,4 @@ class AbstractGraphicsShapeItemMixin(widgets.GraphicsItemMixin):
 class AbstractGraphicsShapeItem(
     AbstractGraphicsShapeItemMixin, widgets.QAbstractGraphicsShapeItem
 ):
-    pass
+    """Common base for all path items."""

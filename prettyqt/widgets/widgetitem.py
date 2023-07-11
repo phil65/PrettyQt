@@ -4,7 +4,7 @@ from prettyqt import widgets
 
 
 class WidgetItem(widgets.LayoutItemMixin, widgets.QWidgetItem):
-    pass
+    """Layout item that represents a widget."""
 
 
 if __name__ == "__main__":

@@ -743,7 +743,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
 
 class AbstractItemView(AbstractItemViewMixin, widgets.QAbstractItemView):
-    pass
+    """The basic functionality for item view classes."""
 
 
 if __name__ == "__main__":

@@ -7,6 +7,8 @@ from prettyqt.utils import datatypes, listdelegators
 
 
 class ToolBox(widgets.FrameMixin, widgets.QToolBox):
+    """Column of tabbed widget items."""
+
     def __getitem__(
         self, index: int | str
     ) -> widgets.QWidget | listdelegators.ListDelegator[widgets.QWidget]:

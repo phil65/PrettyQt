@@ -109,7 +109,7 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
 
 
 class TreeWidget(TreeWidgetMixin, widgets.QTreeWidget):
-    pass
+    """Tree view that uses a predefined tree model."""
 
 
 if __name__ == "__main__":

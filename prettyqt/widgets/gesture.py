@@ -56,7 +56,7 @@ class GestureMixin(core.ObjectMixin):
 
 
 class Gesture(GestureMixin, widgets.QGesture):
-    pass
+    """A gesture, containing properties that describe the corresponding user input."""
 
 
 if __name__ == "__main__":

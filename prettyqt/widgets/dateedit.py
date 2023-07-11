@@ -7,6 +7,8 @@ from prettyqt.utils import datatypes
 
 
 class DateEdit(widgets.DateTimeEditMixin, widgets.QDateEdit):
+    """Widget for editing dates based on the QDateTimeEdit widget."""
+
     value_changed = core.Signal(datetime.datetime)
 
     def set_value(self, value: datatypes.DateType):

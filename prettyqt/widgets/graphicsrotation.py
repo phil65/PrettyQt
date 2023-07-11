@@ -5,6 +5,8 @@ from prettyqt.utils import datatypes
 
 
 class GraphicsRotation(widgets.GraphicsTransformMixin, widgets.QGraphicsRotation):
+    """Rotation transformation around a given axis."""
+
     def set_axis(self, axis: constants.AxisStr | constants.Axis):
         self.setAxis(constants.AXIS.get_enum_value(axis))
 

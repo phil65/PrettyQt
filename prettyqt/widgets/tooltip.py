@@ -5,6 +5,8 @@ from prettyqt.utils import datatypes
 
 
 class ToolTip(QtWidgets.QToolTip):
+    """Tool tips (balloon help) for any widget."""
+
     @classmethod
     def show_text(
         cls,

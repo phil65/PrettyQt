@@ -8,4 +8,4 @@ class GraphicsObjectMixin(core.ObjectMixin, widgets.GraphicsItemMixin):
 
 
 class GraphicsObject(GraphicsObjectMixin, widgets.QGraphicsObject):
-    pass
+    """Base class for all graphics items that require signals, slots and properties."""

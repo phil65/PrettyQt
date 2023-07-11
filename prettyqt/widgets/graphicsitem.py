@@ -115,7 +115,7 @@ class GraphicsItemMixin:
 
 
 class GraphicsItem(GraphicsItemMixin, QtWidgets.QGraphicsItem):
-    pass
+    """The base class for all graphical items in a QGraphicsScene."""
 
 
 if __name__ == "__main__":

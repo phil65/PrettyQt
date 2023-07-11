@@ -4,6 +4,8 @@ from prettyqt import widgets
 
 
 class VBoxLayout(widgets.boxlayout.BoxLayoutMixin, widgets.QVBoxLayout):
+    """Lines up widgets vertically."""
+
     ID = "vertical"
 
 

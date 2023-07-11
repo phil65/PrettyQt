@@ -7,6 +7,8 @@ from prettyqt.utils import helpers, listdelegators
 
 
 class GraphicsGridLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsGridLayout):
+    """Grid layout for managing widgets in Graphics View."""
+
     def __getitem__(
         self, index: tuple[int | slice, int | slice] | int
     ) -> widgets.QGraphicsLayoutItem | None:
