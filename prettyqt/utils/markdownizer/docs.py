@@ -29,7 +29,11 @@ class Docs:
                 yield path.relative_to(self.root_path)
 
     def yield_klasses_for_module(
-        self, mod: types.ModuleType, recursive: bool = False, _seen=None
+        self,
+        mod: types.ModuleType,
+        recursive: bool = False,
+        filter_by___all__: bool = False,
+        _seen=None,
     ):
         if recursive:
             seen = _seen or set()
@@ -39,9 +43,13 @@ class Docs:
                     yield from self.yield_klasses_for_module(
                         submod, recursive=True, _seen=seen
                     )
-        for i in inspect.getmembers(mod, inspect.isclass):
-            if i[1].__module__.startswith(self.module_name):
-                yield i[1]
+        for klass_name, klass in inspect.getmembers(mod, inspect.isclass):
+            if filter_by___all__ and (
+                not hasattr(mod, "__all__") or klass_name not in mod.__all__
+            ):
+                continue
+            if klass.__module__.startswith(self.module_name):
+                yield klass
 
     def yield_classes_for_glob(
         self, glob="*/*.py", recursive: bool = False, avoid_duplicates: bool = True
