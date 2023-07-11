@@ -61,6 +61,7 @@ class WidgetMixin(core.ObjectMixin):
     def add_shortcut(
         self,
         keysequence: datatypes.KeyCombinationType,
+        *,
         callback: Callable | None = None,
         context: constants.ShortcutContextStr = "window",
     ) -> gui.Shortcut:
@@ -117,6 +118,7 @@ class WidgetMixin(core.ObjectMixin):
     def add_action(
         self,
         text: str | gui.Action,
+        *,
         parent: widgets.QWidget | None = None,
         data: Any = None,
         **kwargs: datatypes.VariantType,
@@ -384,6 +386,7 @@ class WidgetMixin(core.ObjectMixin):
     def set_tooltip(
         self,
         tooltip: str | datatypes.PathType,
+        *,
         size: datatypes.SizeType | None = None,
         rich_text: bool = False,
     ):
@@ -407,6 +410,7 @@ class WidgetMixin(core.ObjectMixin):
     def set_font(
         self,
         font_name: gui.QFont | str | None = None,
+        *,
         font_size: int | None = None,
         weight: int | None = None,
         italic: bool = False,
@@ -452,6 +456,7 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_flags(
         self,
+        *,
         minimize: bool | None = None,
         maximize: bool | None = None,
         close: bool | None = None,
@@ -501,6 +506,7 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_attributes(
         self,
+        *,
         accept_drops: bool | None = None,
         always_show_tooltips: bool | None = None,
         custom_whats_this: bool | None = None,
@@ -898,6 +904,7 @@ class WidgetMixin(core.ObjectMixin):
     def set_layout(
         self,
         layout: LayoutStr | widgets.QLayout,
+        *,
         margin: int | None = None,
         **kwargs: datatypes.VariantType,
     ) -> widgets.QLayout:
@@ -953,6 +960,7 @@ class WidgetMixin(core.ObjectMixin):
             "bottom_left",
             "bottom_right",
         ] = "center",
+        *,
         scale_ratio: int | None = None,
         x_offset: int = 0,
         y_offset: int = 0,

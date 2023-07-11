@@ -110,6 +110,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def check_index(
         self,
         index: core.ModelIndex,
+        *,
         index_is_valid: bool = False,
         do_not_use_parent: bool = False,
         parent_is_invalid: bool = False,
@@ -153,6 +154,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def get_column_type(
         self,
         column: int,
+        *,
         rows_to_check: int = 10,
         role=constants.DISPLAY_ROLE,
     ) -> type | None:
@@ -290,6 +292,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def iter_tree(
         self,
         parent_index: core.ModelIndex | None = None,
+        *,
         depth: int | None = None,
         fetch_more: bool = False,
     ) -> Iterator[core.ModelIndex]:
@@ -318,6 +321,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def search_tree(
         self,
         value: Any,
+        *,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
         parent_index: core.ModelIndex | None = None,
         max_results: int | None = None,
@@ -362,6 +366,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def get_index_key(
         self,
         index: core.ModelIndex,
+        *,
         include_column: bool = False,
         parent_index: core.ModelIndex | None = None,
     ) -> tuple[tuple[int, int], ...]:
@@ -386,6 +391,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def index_from_key(
         self,
         key_path: Sequence[tuple[int, int] | int],
+        *,
         parent_index: core.ModelIndex | None = None,
     ) -> core.ModelIndex:
         """Return a  ModelIndex for the given key path.
@@ -395,7 +401,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
                       Should be a sequence of either (row, column)  or row indices
             parent_index: ModelIndex to start indexing from. Defaults to root index.
         """
-        return modelhelpers.index_from_key(self, key_path, parent_index)
+        return modelhelpers.index_from_key(self, key_path, parent_index=parent_index)
 
     @staticmethod
     def to_checkstate(value: bool):
@@ -406,6 +412,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         label,
         orientation: constants.Orientation
         | constants.OrientationStr = constants.HORIZONTAL,
+        *,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> int | None:
         o = constants.ORIENTATION.get_enum_value(orientation)
@@ -416,6 +423,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
 
     def get_table_data(
         self,
+        *,
         include_index: bool = False,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
         x_range: slice | int | None = None,
