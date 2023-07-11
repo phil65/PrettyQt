@@ -17,7 +17,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 prettyqt.import_all()
 
 docs = markdownizer.Docs(module_name="prettyqt", exclude_modules=["qt"])
-ref_page = markdownizer.LiterateNav(path="reference")
+ref_page = docs.create_nav(path="reference")
 
 for path in docs.yield_files("*/__init__.py"):
     mod_path = path.with_suffix("")
@@ -34,12 +34,12 @@ for path in docs.yield_files("*/__init__.py"):
         doc = markdownizer.PrettyQtClassDocument(
             klass=klass, module_path=f'prettyqt.{".".join(parts)}', path=path
         )
-        doc.write(path, edit_path=complete_mod_path)
+        doc.write(path)
     if klasses:
         ref_page[parts] = doc_path.with_name("index.md").as_posix()
         ref_doc_path = full_doc_path.with_name("index.md")
         page = markdownizer.Document(hide_toc=True, path=ref_doc_path)
         page += markdownizer.Table.get_classes_table(klasses)
-        page.write(full_doc_path.with_name("index.md"), edit_path=complete_mod_path)
+        page.write(full_doc_path.with_name("index.md"))
 
 ref_page.write()

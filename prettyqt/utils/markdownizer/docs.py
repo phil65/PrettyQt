@@ -4,6 +4,7 @@ import contextlib
 import importlib
 import inspect
 import logging
+import os
 import pathlib
 import types
 
@@ -18,12 +19,15 @@ class Docs:
         self.module_name = module_name
         self.root_path = pathlib.Path(f"./{module_name}")
         self._exclude = exclude_modules or []
+        self.navs = []
 
     def write(self, document):
         pass
 
-    def create_nav(self):
-        return markdownizer.LiterateNav()
+    def create_nav(self, path: str | os.PathLike):
+        nav = markdownizer.LiterateNav(path=path)
+        self.navs.append(nav)
+        return nav
 
     def yield_files(self, glob: str = "*/*.py"):
         for path in sorted(self.root_path.rglob(glob)):
