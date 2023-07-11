@@ -14,7 +14,10 @@ from prettyqt.utils.markdownizer.list import List
 from prettyqt.utils.markdownizer.table import Table
 from prettyqt.utils.markdownizer.mermaiddiagram import MermaidDiagram
 from prettyqt.utils.markdownizer.document import Document, ClassDocument, ModuleDocument
-from prettyqt.utils.markdownizer.prettyqtmarkdown import WidgetScreenShot
+from prettyqt.utils.markdownizer.prettyqtmarkdown import (
+    WidgetScreenShot,
+    PrettyQtClassDocument,
+)
 
 __all__ = [
     "BaseSection",
@@ -32,6 +35,7 @@ __all__ = [
     "List",
     "ClassDocument",
     "ModuleDocument",
+    "PrettyQtClassDocument",
     "WidgetScreenShot",
 ]
 

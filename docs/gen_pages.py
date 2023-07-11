@@ -39,42 +39,6 @@ hide:
 mapping = {}
 
 
-def get_document_for_klass(klass: type, parts: tuple[str, ...], path: str = ""):
-    doc = markdownizer.Document(path=path)
-    doc += markdownizer.DocStrings(f'prettyqt.{".".join(parts)}.{klass.__name__}')
-    if issubclass(klass, itemmodels.SliceIdentityProxyModel):
-        doc += markdownizer.Admonition("info", SLICE_PROXY_INFO)
-    if issubclass(klass, core.AbstractItemModelMixin) and klass.IS_RECURSIVE:
-        doc += markdownizer.Admonition("warning", RECURSIVE_MODEL_INFO)
-    if issubclass(klass, core.AbstractItemModelMixin) and issubclass(klass, core.QObject):
-        sig = inspect.signature(klass.__init__)
-        params = list(sig.parameters.values())
-        if len(params) > 1:
-            typ = params[1].annotation
-            doc += markdownizer.Admonition("info", f"Supported data type: `{typ}`")
-
-    if (
-        issubclass(klass, core.AbstractItemModelMixin)
-        and klass.DELEGATE_DEFAULT is not None
-    ):
-        msg = f"Recommended delegate: {klass.DELEGATE_DEFAULT!r}"
-        doc += markdownizer.Admonition("info", msg)
-    if issubclass(klass, core.QObject):
-        # model = itemmodels.QObjectPropertiesModel()
-        for table in markdownizer.Table.get_prop_tables_for_klass(klass):
-            doc += table
-        if table := markdownizer.Table.get_ancestor_table_for_klass(klass):
-            doc += table
-        if qt_parent := classhelpers.get_qt_parent_class(klass):
-            doc += f"Qt Base Class: {markdownizer.link_for_class(qt_parent)}"
-    if hasattr(klass, "ID") and issubclass(klass, gui.Validator):
-        doc += f"\n\nValidator ID: **{klass.ID}**\n\n"
-    if hasattr(klass, "ID") and issubclass(klass, widgets.AbstractItemDelegateMixin):
-        doc += f"\n\nDelegate ID: **{klass.ID}**\n\n"
-    doc += markdownizer.MermaidDiagram.for_classes([klass])
-    return doc
-
-
 def write_files_for_module(module_path, doc_path, parts):
     full_doc_path = Path("reference", doc_path)
     try:
@@ -91,18 +55,9 @@ def write_files_for_module(module_path, doc_path, parts):
         kls_name = klass.__name__
         mapping[(*parts, kls_name)] = doc_path.with_name(f"{kls_name}.md").as_posix()
         path = full_doc_path.with_name(f"{kls_name}.md")
-        doc = get_document_for_klass(klass, parts, path=path)
-        # if (
-        #     hasattr(klass, "setup_example")
-        #     and "Abstract" not in klass.__name__
-        #     and not klass.__name__.endswith("Mixin")
-        # ):
-        #     if widget := klass.setup_example():
-        #         doc += markdownizer.WidgetScreenShot(
-        #             widget=widget,
-        #             path=full_doc_path.parent / f"{kls_name}.png",
-        #             header="🖼 Screenshot",
-        #         )
+        doc = markdownizer.PrettyQtClassDocument(
+            klass=klass, module_path=f'prettyqt.{".".join(parts)}', path=path
+        )
         doc.write(path, edit_path=module_path)
 
     # if klasses:

@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 class PrettyQtClassDocument(markdownizer.ClassDocument):
     def _build(self):
         super()._build()
-        if issubclass(self.klass, itemmodels.AbstractItemModelMixin) and issubclass(
+        if issubclass(self.klass, core.AbstractItemModelMixin) and issubclass(
             self.klass, core.QObject
         ):
             sig = inspect.signature(self.klass.__init__)
@@ -46,13 +46,24 @@ class PrettyQtClassDocument(markdownizer.ClassDocument):
             for table in markdownizer.Table.get_prop_tables_for_klass(self.klass):
                 self.append(table)  # noqa: PERF402
             if qt_parent := classhelpers.get_qt_parent_class(self.klass):
-                self.append(f"Qt Base Class: {markdownizer.get_qt_help_link(qt_parent)}")
+                self.append(f"Qt Base Class: {markdownizer.link_for_class(qt_parent)}")
         if hasattr(self.klass, "ID") and issubclass(self.klass, gui.Validator):
             self.append(f"\n\nValidator ID: **{self.klass.ID}**\n\n")
         if hasattr(self.klass, "ID") and issubclass(
             self.klass, widgets.AbstractItemDelegateMixin
         ):
             self.append(f"\n\nDelegate ID: **{self.klass.ID}**\n\n")
+        # if (
+        #     hasattr(klass, "setup_example")
+        #     and "Abstract" not in klass.__name__
+        #     and not klass.__name__.endswith("Mixin")
+        # ):
+        #     if widget := klass.setup_example():
+        #         doc += markdownizer.WidgetScreenShot(
+        #             widget=widget,
+        #             path=full_doc_path.parent / f"{kls_name}.png",
+        #             header="🖼 Screenshot",
+        #         )
 
 
 class WidgetScreenShot(markdownizer.BinaryImage):
