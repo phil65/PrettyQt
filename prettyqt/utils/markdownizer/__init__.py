@@ -2,6 +2,7 @@ from __future__ import annotations
 
 
 import logging
+from importlib import metadata
 
 from prettyqt.utils.markdownizer.basesection import BaseSection, Text, Code
 from prettyqt.utils.markdownizer.image import Image, BinaryImage
@@ -34,20 +35,31 @@ __all__ = [
 logger = logging.getLogger(__name__)
 
 BASE_URL = "https://doc.qt.io/qtforpython-6/PySide6/"
+BUILTIN_URL = "https://docs.python.org/3/library/functions.html#{klass}"
 
 
-def get_qt_help_link(klass):
+def get_qt_help_link(klass: type) -> str:
     mod = klass.__module__.replace("PySide6.", "").replace("PyQt6.", "")
     url = f"{BASE_URL}{mod}/{klass.__qualname__.replace('.', '/')}.html"
     return f"[{klass.__name__}]({url})"
 
 
 def link_for_class(klass: type) -> str:
-    if klass is set:
-        return "set"
+    if klass.__module__ == "builtins":
+        return f"[{klass.__name__}]({BUILTIN_URL.format(klass=klass)})"
     if klass.__module__.startswith(("PyQt", "PySide")):
         return get_qt_help_link(klass)
-    return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
+    if klass.__module__.startswith("prettyqt"):
+        return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
+    try:
+        dist = metadata.distribution(klass.__module__.split(".")[0])
+    except metadata.PackageNotFoundError:
+        return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
+    else:
+        url = dist.metadata["Home-Page"]
+        if url:
+            return f"[{klass.__qualname__}]({url})"
+        return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
 
 
 def label_for_class(klass: type) -> str:
@@ -70,6 +82,9 @@ if __name__ == "__main__":
     doc += DocStrings(helpers, header="DocStrings")
     doc += Table.get_dependency_table("prettyqt")
     doc += MermaidDiagram.for_classes([Table], header="Mermaid diagram")
+    from fsspec import AbstractFileSystem
 
-    print(doc.to_markdown())
+    print(link_for_class(AbstractFileSystem))
+
+    # print(doc.to_markdown())
     # print(text)
