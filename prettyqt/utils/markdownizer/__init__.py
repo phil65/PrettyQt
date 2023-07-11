@@ -5,6 +5,8 @@ import collections
 from collections.abc import Callable, Mapping, Sequence
 import dataclasses
 import importlib
+import inspect
+
 import logging
 import os
 import pathlib
@@ -167,9 +169,25 @@ class Docs:
             if all(i not in path.parts for i in self._exclude) and not path.is_dir():
                 yield path.relative_to(self.root_path)
 
-    def yield_classes_for_glob(self, glob="*/*.py"):
-        import inspect
+    def yield_klasses_for_module(
+        self, mod: types.ModuleType, recursive: bool = False, _seen=None
+    ):
+        if recursive:
+            seen = _seen or set()
+            for _submod_name, submod in inspect.getmembers(mod, inspect.ismodule):
+                if submod.__name__.startswith(self.module_name) and submod not in seen:
+                    seen.add(submod)
+                    yield from self.yield_klasses_for_module(
+                        submod, recursive=True, _seen=seen
+                    )
+        for i in inspect.getmembers(mod, inspect.isclass):
+            if i[1].__module__.startswith(self.module_name):
+                yield i[1]
 
+    def yield_classes_for_glob(
+        self, glob="*/*.py", recursive: bool = False, avoid_duplicates: bool = True
+    ):
+        seen = set()
         for path in self.yield_files(glob):
             module_path = path.with_suffix("")
             parts = tuple(module_path.parts)
@@ -179,9 +197,10 @@ class Docs:
             except (ImportError, AttributeError):
                 continue
             else:
-                for i in inspect.getmembers(module, inspect.isclass):
-                    if i[1].__module__.startswith(self.module_name):
-                        yield path, i[1]
+                for klass in self.yield_klasses_for_module(module, recursive=recursive):
+                    if (klass, path) not in seen or not avoid_duplicates:
+                        seen.add((klass, path))
+                        yield klass, path
 
 
 class MarkdownDocument:

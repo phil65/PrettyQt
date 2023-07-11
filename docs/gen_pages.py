@@ -105,7 +105,7 @@ def write_files_for_module(module_path, doc_path, parts):
         #     if widget := klass.setup_example():
         #         doc += markdownizer.BinaryImage(
         #             data=get_widget_screenshot(widget),
-        #             path=f"./docs/images/widgets/{kls_name}.png",
+        #             path=full_doc_path.parent / f"{kls_name}.png",
         #             header="🖼 Screenshot",
         #         )
         doc.write(path, edit_path=module_path)
