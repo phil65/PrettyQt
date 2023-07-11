@@ -45,7 +45,7 @@ def list_all_properties(only_enums: bool = False):
             klass_props = {
                 k: v for k, v in klass_props.items() if v.get_enumerator_type()
             }
-        props.update(klass_props)
+        props |= klass_props
     return props
 
 
