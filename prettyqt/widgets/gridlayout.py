@@ -7,6 +7,8 @@ from prettyqt.utils import helpers, listdelegators
 
 
 class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
+    """Lays out widgets in a grid."""
+
     ID = "grid"
 
     def __getitem__(

@@ -341,7 +341,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
 
 
 class Layout(LayoutMixin, widgets.QLayout):
-    pass
+    """The base class of geometry managers."""
 
 
 if __name__ == "__main__":

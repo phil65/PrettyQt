@@ -28,6 +28,8 @@ INPUT_MODE: bidict[InputModeStr, mod.InputMode] = bidict(
 
 
 class InputDialog(widgets.DialogMixin, widgets.QInputDialog):
+    """Simple convenience dialog to get a single value from the user."""
+
     def _get_map(self):
         maps = super()._get_map()
         maps |= {

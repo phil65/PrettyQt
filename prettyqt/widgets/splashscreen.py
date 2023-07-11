@@ -51,7 +51,7 @@ class SplashScreenMixin(widgets.WidgetMixin):
 
 
 class SplashScreen(SplashScreenMixin, widgets.QSplashScreen):
-    pass
+    """Splash screen that can be shown during application startup."""
 
 
 if __name__ == "__main__":

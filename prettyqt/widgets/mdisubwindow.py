@@ -11,11 +11,7 @@ SUB_WINDOW_OPTION = bidict(
 
 
 class MdiSubWindow(widgets.WidgetMixin, widgets.QMdiSubWindow):
-    def serialize_fields(self):
-        return dict(
-            keyboard_single_step=self.keyboardSingleStep(),
-            keyboard_page_step=self.keyboardPageStep(),
-        )
+    """Subwindow class for QMdiArea."""
 
 
 if __name__ == "__main__":

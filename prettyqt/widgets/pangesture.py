@@ -4,6 +4,8 @@ from prettyqt import core, widgets
 
 
 class PanGesture(widgets.GestureMixin, widgets.QPanGesture):
+    """Describes a panning gesture made by the user."""
+
     def get_delta(self) -> core.PointF:
         return core.PointF(self.delta())
 

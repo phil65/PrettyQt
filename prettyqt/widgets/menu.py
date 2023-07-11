@@ -75,7 +75,7 @@ class MenuMixin(widgets.WidgetMixin):
 
 
 class Menu(MenuMixin, widgets.QMenu):
-    pass
+    """Menu widget for use in menu bars, context menus, and other popup menus."""
 
 
 if __name__ == "__main__":

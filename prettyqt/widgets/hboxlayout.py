@@ -4,6 +4,8 @@ from prettyqt import widgets
 
 
 class HBoxLayout(widgets.boxlayout.BoxLayoutMixin, widgets.QHBoxLayout):
+    """Lines up widgets horizontally."""
+
     ID = "horizontal"
 
 

@@ -28,6 +28,8 @@ ITEM_INDEX_METHOD: bidict[ItemIndexMethodStr, widgets.QGraphicsScene.ItemIndexMe
 
 
 class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
+    """Surface for managing a large number of 2D graphical items."""
+
     class GridType(enum.IntEnum):
         """Grid type for background."""
 

@@ -4,4 +4,4 @@ from prettyqt import widgets
 
 
 class ItemDelegate(widgets.AbstractItemDelegateMixin, widgets.QItemDelegate):
-    pass
+    """Display and editing facilities for data items from a model."""

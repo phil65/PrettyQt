@@ -70,7 +70,7 @@ class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutIte
 
 
 class GraphicsWidget(GraphicsWidgetMixin, widgets.QGraphicsWidget):
-    pass
+    """The base class for all widget items in a QGraphicsScene."""
 
 
 if __name__ == "__main__":

@@ -8,6 +8,8 @@ from prettyqt.utils import datatypes, get_repr, serializemixin
 
 
 class ListWidgetItem(serializemixin.SerializeMixin, QtWidgets.QListWidgetItem):
+    """Item for use with the QListWidget item view class."""
+
     def __repr__(self):
         return get_repr(self, self.icon(), self.text())
 

@@ -4,6 +4,8 @@ from prettyqt import constants, core, widgets
 
 
 class SplitterHandle(widgets.WidgetMixin, widgets.QSplitterHandle):
+    """Handle functionality for the splitter."""
+
     double_clicked = core.Signal(object)
 
     def __init__(

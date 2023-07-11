@@ -24,7 +24,7 @@ TAB_POSITION: bidict[TabPositionStr, widgets.QTabWidget.TabPosition] = bidict(
 
 
 class TabWidget(widgets.WidgetMixin, widgets.QTabWidget):
-    """Widget for managing the tabs section."""
+    """Stack of tabbed widgets."""
 
     def __init__(
         self, closable: bool = False, detachable: bool = False, **kwargs

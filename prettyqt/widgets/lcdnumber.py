@@ -25,6 +25,8 @@ SEGMENT_STYLE: bidict[SegmentStyleStr, widgets.QLCDNumber.SegmentStyle] = bidict
 
 
 class LCDNumber(widgets.FrameMixin, widgets.QLCDNumber):
+    """Displays a number with LCD-like digits."""
+
     value_changed = core.Signal(float)
 
     def _get_map(self):

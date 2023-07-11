@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class KeySequenceEdit(widgets.WidgetMixin, widgets.QKeySequenceEdit):
+    """Allows to input a QKeySequence."""
+
     value_changed = core.Signal(gui.QKeySequence)
 
     def __init__(self, *args, **kwargs):

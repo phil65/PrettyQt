@@ -7,7 +7,7 @@ from prettyqt.qt import QtWidgets
 class PlainTextDocumentLayout(
     gui.AbstractTextDocumentLayoutMixin, QtWidgets.QPlainTextDocumentLayout
 ):
-    pass
+    """Implements a plain text layout for QTextDocument."""
 
 
 if __name__ == "__main__":

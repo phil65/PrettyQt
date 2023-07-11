@@ -9,7 +9,7 @@ class GraphicsTransformMixin(core.ObjectMixin):
 
 
 class GraphicsTransform(GraphicsTransformMixin, QtWidgets.QGraphicsTransform):
-    pass
+    """Abstract base class for building advanced transformations on QGraphicsItems."""
 
 
 if __name__ == "__main__":

@@ -76,6 +76,8 @@ SCROLL_METRIC: bidict[ScrollmetricStr, mod.ScrollMetric] = bidict(
 
 
 class ScrollerProperties(QtWidgets.QScrollerProperties):
+    """Stores the settings for a QScroller."""
+
     def __getitem__(self, metric: ScrollmetricStr | mod.ScrollMetric):
         return self.get_scroll_metric(metric)
 

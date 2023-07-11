@@ -8,6 +8,8 @@ from prettyqt import constants, gui, widgets
 
 
 class MenuBar(widgets.WidgetMixin, widgets.QMenuBar):
+    """Horizontal menu bar."""
+
     def __add__(self, other: gui.QAction | widgets.QMenu):
         self.add(other)
         return self

@@ -32,6 +32,8 @@ TAB_POSITION: bidict[TabPositionStr, widgets.QTabWidget.TabPosition] = bidict(
 
 
 class MdiArea(widgets.AbstractScrollAreaMixin, widgets.QMdiArea):
+    """Area in which MDI windows are displayed."""
+
     def __add__(self, other: widgets.QWidget):
         self.add(other)
         return self

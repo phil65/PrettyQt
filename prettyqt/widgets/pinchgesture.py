@@ -16,6 +16,8 @@ ChangeFlagStr = Literal["scale_factor", "rotation_angle", "center_point"]
 
 
 class PinchGesture(widgets.GestureMixin, widgets.QPinchGesture):
+    """Describes a pinch gesture made by the user."""
+
     def get_start_center_point(self) -> core.PointF:
         return core.PointF(self.startCenterPoint())
 

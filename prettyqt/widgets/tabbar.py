@@ -156,7 +156,7 @@ class TabBarMixin(widgets.WidgetMixin):
 
 
 class TabBar(TabBarMixin, widgets.QTabBar):
-    pass
+    """Tab bar, e.g. for use in tabbed dialogs."""
 
 
 if __name__ == "__main__":

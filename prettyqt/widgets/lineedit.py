@@ -85,6 +85,8 @@ def get_validator(
 
 
 class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
+    """One-line text editor."""
+
     value_changed = core.Signal(str)
     tab_pressed = core.Signal()
 

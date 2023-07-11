@@ -76,6 +76,8 @@ class FullScreenAction(gui.Action):
 
 
 class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
+    """Main application window."""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, dock_options=DEFAULT_OPTS, **kwargs)
         self.setMenuBar(widgets.MenuBar())

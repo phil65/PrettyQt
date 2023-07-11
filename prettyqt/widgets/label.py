@@ -9,6 +9,8 @@ from prettyqt.utils import colors, datatypes, get_repr
 
 
 class Label(widgets.FrameMixin, widgets.QLabel):
+    """Text or image display."""
+
     elision_changed = core.Signal(bool)
     clicked = core.Signal()
 

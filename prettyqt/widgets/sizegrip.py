@@ -4,6 +4,8 @@ from prettyqt import widgets
 
 
 class SizeGrip(widgets.WidgetMixin, widgets.QSizeGrip):
+    """Resize handle for resizing top-level windows."""
+
     @classmethod
     def setup_example(cls):
         w = widgets.Widget()

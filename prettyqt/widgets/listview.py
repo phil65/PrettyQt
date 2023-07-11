@@ -142,7 +142,7 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
 
 
 class ListView(ListViewMixin, widgets.QListView):
-    pass
+    """List or icon view onto a model."""
 
 
 if __name__ == "__main__":

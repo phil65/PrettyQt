@@ -42,7 +42,7 @@ class RubberBandMixin(widgets.WidgetMixin):
 
 
 class RubberBand(RubberBandMixin, widgets.QRubberBand):
-    pass
+    """Rectangle or line that can indicate a selection or a boundary."""
 
 
 if __name__ == "__main__":

@@ -92,6 +92,8 @@ BUTTON_ROLE: bidict[ButtonRoleStr, widgets.QMessageBox.ButtonRole] = bidict(
 
 
 class MessageBox(widgets.DialogMixin, widgets.QMessageBox):
+    """Modal dialog for informing the user (and for receiving an answer)."""
+
     def __init__(
         self,
         icon: datatypes.IconType | IconStr = None,

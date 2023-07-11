@@ -40,7 +40,7 @@ class LayoutItemMixin:
 
 
 class LayoutItem(LayoutItemMixin, widgets.QLayoutItem):
-    pass
+    """Abstract item that a QLayout manipulates."""
 
 
 if __name__ == "__main__":

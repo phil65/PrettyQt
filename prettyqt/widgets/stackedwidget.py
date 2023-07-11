@@ -7,6 +7,8 @@ from prettyqt.utils import animator, listdelegators
 
 
 class StackedWidget(widgets.FrameMixin, widgets.QStackedWidget):
+    """Widget containing stack of widgets where only one widget is visible at a time."""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.animator = animator.Animator(self)

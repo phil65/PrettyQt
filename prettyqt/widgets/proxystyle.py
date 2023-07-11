@@ -4,7 +4,7 @@ from prettyqt import widgets
 
 
 class ProxyStyle(widgets.CommonStyleMixin, widgets.QProxyStyle):
-    pass
+    """Convenience class that simplifies dynamically overriding QStyle elements."""
 
 
 if __name__ == "__main__":

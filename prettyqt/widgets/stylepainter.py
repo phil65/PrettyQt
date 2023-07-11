@@ -4,6 +4,8 @@ from prettyqt import gui, widgets
 
 
 class StylePainter(gui.PainterMixin, widgets.QStylePainter):
+    """Convenience class for drawing QStyle elements inside a widget."""
+
     def draw_complex_control(
         self,
         control: widgets.style.ComplexControlStr,

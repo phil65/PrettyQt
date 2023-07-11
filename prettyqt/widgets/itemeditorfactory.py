@@ -73,6 +73,8 @@ def get_creator_class(editor_cls: type[widgets.QWidget], property_name: str = ""
 
 
 class ItemEditorFactory(widgets.QItemEditorFactory):
+    """Widgets for editing item data in views and delegates."""
+
     creators = []
 
     @classmethod

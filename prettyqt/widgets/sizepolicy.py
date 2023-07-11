@@ -66,6 +66,8 @@ CONTROL_TYPE: bidict[ControlTypeStr, QtWidgets.QSizePolicy.ControlType] = bidict
 
 
 class SizePolicy(QtWidgets.QSizePolicy):
+    """Layout attribute describing horizontal and vertical resizing policy."""
+
     def __init__(self, *args, **kwargs):
         match args:
             case (str(), str()):

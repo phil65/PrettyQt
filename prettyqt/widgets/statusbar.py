@@ -5,6 +5,8 @@ from prettyqt.qt import QtGui
 
 
 class StatusBar(widgets.WidgetMixin, widgets.QStatusBar):
+    """Horizontal bar suitable for presenting status information."""
+
     def __add__(self, other: QtGui.QAction | widgets.QWidget) -> StatusBar:
         match other:
             case QtGui.QAction():

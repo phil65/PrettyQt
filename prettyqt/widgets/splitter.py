@@ -166,7 +166,7 @@ class SplitterMixin(widgets.FrameMixin):
 
 
 class Splitter(SplitterMixin, widgets.QSplitter):
-    pass
+    """Implements a splitter widget."""
 
 
 if __name__ == "__main__":

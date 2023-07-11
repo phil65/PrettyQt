@@ -32,6 +32,8 @@ MESSAGE_ICONS: bidict[MessageIconStr, QtWidgets.QSystemTrayIcon.MessageIcon] = b
 
 
 class SystemTrayIcon(core.ObjectMixin, QtWidgets.QSystemTrayIcon):
+    """Icon for an application in the system tray."""
+
     def set_icon(self, icon: datatypes.IconType):
         """Set the system tray icon.
 

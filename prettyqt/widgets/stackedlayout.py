@@ -15,6 +15,8 @@ STACKING_MODE: bidict[StackingModeStr, widgets.QStackedLayout.StackingMode] = bi
 
 
 class StackedLayout(widgets.LayoutMixin, widgets.QStackedLayout):
+    """Layout containing stack of widgets where only one widget is visible at a time."""
+
     ID = "stacked"
 
     def _get_map(self):

@@ -139,6 +139,8 @@ class HollowHandleStyle(widgets.ProxyStyle):
 
 
 class Slider(widgets.AbstractSliderMixin, widgets.QSlider):
+    """Vertical or horizontal slider."""
+
     value_changed = core.Signal(int)
     clicked = core.Signal(int)
 

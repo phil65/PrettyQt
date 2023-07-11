@@ -10,6 +10,8 @@ T = TypeVar("T", bound=widgets.QWidget)
 
 
 class ScrollArea(widgets.AbstractScrollAreaMixin, widgets.QScrollArea):
+    """Scrolling view onto another widget."""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         viewport = widgets.Widget(self, object_name=f"{type(self).__name__}_viewport")

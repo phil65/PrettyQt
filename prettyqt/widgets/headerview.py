@@ -288,7 +288,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
 
 
 class HeaderView(HeaderViewMixin, widgets.QHeaderView):
-    pass
+    """Header row or header column for item views."""
 
 
 if __name__ == "__main__":

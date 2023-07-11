@@ -41,6 +41,8 @@ STATE: bidict[StateStr, widgets.QScroller.State] = bidict(
 
 
 class Scroller(core.ObjectMixin):
+    """Enables kinetic scrolling for any scrolling widget or graphics item."""
+
     def __init__(self, item: widgets.QScroller):
         self.item = item
 

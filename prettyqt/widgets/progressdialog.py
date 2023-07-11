@@ -4,10 +4,7 @@ from prettyqt import widgets
 
 
 class ProgressDialog(widgets.DialogMixin, widgets.QProgressDialog):
-    """Progress dialog.
-
-    Wrapper for widgets.QProgressDialog
-    """
+    """Feedback on the progress of a slow operation."""
 
     def __init__(self, parent: widgets.QWidget | None = None):
         super().__init__(parent=parent)

@@ -38,7 +38,7 @@ class PushButtonMixin(widgets.AbstractButtonMixin):
 
 
 class PushButton(PushButtonMixin, widgets.QPushButton):
-    pass
+    """Command button."""
 
 
 if __name__ == "__main__":

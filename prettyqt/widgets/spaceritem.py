@@ -4,6 +4,8 @@ from prettyqt import widgets
 
 
 class SpacerItem(widgets.LayoutItemMixin, widgets.QSpacerItem):
+    """Blank space in a layout."""
+
     def __init__(
         self,
         w: int,

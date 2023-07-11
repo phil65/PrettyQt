@@ -267,7 +267,7 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
 
 
 class GraphicsView(GraphicsViewMixin, widgets.QGraphicsView):
-    pass
+    """Widget for displaying the contents of a QGraphicsScene."""
 
 
 if __name__ == "__main__":

@@ -238,7 +238,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
 
 
 class PlainTextEdit(PlainTextEditMixin, widgets.QPlainTextEdit):
-    pass
+    """Widget that is used to edit and display plain text."""
 
 
 if __name__ == "__main__":

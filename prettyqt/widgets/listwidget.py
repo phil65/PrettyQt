@@ -15,6 +15,8 @@ class NoData:
 
 
 class ListWidget(widgets.ListViewMixin, widgets.QListWidget):
+    """Item-based list widget."""
+
     value_changed = core.Signal(object)
 
     def __init__(self, *args, selection_mode: str = "single", **kwargs):

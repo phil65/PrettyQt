@@ -4,6 +4,8 @@ from prettyqt import core, widgets
 
 
 class RadioButton(widgets.AbstractButtonMixin, widgets.QRadioButton):
+    """Radio button with a text label."""
+
     value_changed = core.Signal(bool)
 
     def __init__(self, *args, **kwargs):

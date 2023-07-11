@@ -796,4 +796,4 @@ class StyleMixin(core.ObjectMixin):
 
 
 class Style(StyleMixin, widgets.QStyle):
-    pass
+    """Abstract base class that encapsulates the look and feel of a GUI."""

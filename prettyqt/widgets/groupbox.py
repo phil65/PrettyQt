@@ -5,7 +5,7 @@ from prettyqt.utils import get_repr
 
 
 class GroupBox(widgets.WidgetMixin, widgets.QGroupBox):
-    """GroupBox widget.
+    """Group box frame with a title.
 
     A group box provides a frame, a title on top, a keyboard shortcut,
     and displays various other widgets inside itself.

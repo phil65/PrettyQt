@@ -44,7 +44,7 @@ class ScrollBarMixin(widgets.AbstractSliderMixin):
 
 
 class ScrollBar(ScrollBarMixin, widgets.QScrollBar):
-    pass
+    """Vertical or horizontal scroll bar."""
 
 
 if __name__ == "__main__":

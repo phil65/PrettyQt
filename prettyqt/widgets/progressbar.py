@@ -15,6 +15,8 @@ TEXT_DIRECTIONS: bidict[TextDirectionStr, widgets.QProgressBar.Direction] = bidi
 
 
 class ProgressBar(widgets.WidgetMixin, widgets.QProgressBar):
+    """Horizontal or vertical progress bar."""
+
     def __init__(self, *args, text_visible: bool = True, **kwargs):
         super().__init__(*args, text_visible=text_visible, **kwargs)
 
