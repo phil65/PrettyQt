@@ -8,8 +8,6 @@ SH = widgets.QStyle.StyleHint
 
 
 class AutoResizeTextEditMixin:
-    """Base class."""
-
     def __init__(self, parent=None):
         super().__init__(parent)
         self.set_line_wrap_mode("none")
@@ -62,14 +60,14 @@ class AutoResizeTextEditMixin:
 
 
 class AutoResizeTextEdit(AutoResizeTextEditMixin, widgets.TextEdit):
-    """AutoResize QTextEdit."""
+    """TextEdit which adjusts its height to the contained text."""
 
     def get_document_size(self) -> core.QSize:
         return self.document().documentLayout().documentSize().toSize()
 
 
 class AutoResizePlainTextEdit(AutoResizeTextEditMixin, widgets.PlainTextEdit):
-    """AutoResize QPlainTextEdit."""
+    """PlainTextEdit which adjusts its height to the contained text."""
 
     def get_document_size(self) -> core.QSize:
         doc = self.document()

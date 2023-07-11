@@ -20,6 +20,7 @@ from .optionalwidget import OptionalWidget
 from .widgeteditor import WidgetEditor
 from .collapsibleframe import CollapsibleFrame
 from .orientedtableview import OrientedTableView
+from .autoresizingtextedit import AutoResizePlainTextEdit, AutoResizeTextEdit
 from .qobjectpropertiestableview import QObjectPropertiesTableView
 from .qobjecthierarchytreeview import QObjectHierarchyTreeView
 from .logrecordtableview import LogRecordTableView
@@ -146,6 +147,8 @@ __all__ = [
     "SelectionWidget",
     "CodeEditor",
     "Timeline",
+    "AutoResizePlainTextEdit",
+    "AutoResizeTextEdit",
     # "StarEditor",
     # "StarRating",
     "AstViewer",

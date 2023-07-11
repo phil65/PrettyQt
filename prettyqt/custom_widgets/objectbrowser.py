@@ -33,7 +33,7 @@ logger = logging.getLogger(__name__)
 
 
 class ObjectBrowser(widgets.MainWindow):
-    """Object browser main application window."""
+    """Info window for python objects."""
 
     def __init__(self, obj, stack=None, name: str = ""):
         super().__init__()

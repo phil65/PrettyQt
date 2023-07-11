@@ -4,6 +4,8 @@ from prettyqt import constants, core, gui, widgets
 
 
 class CodeEditor(widgets.PlainTextEdit):
+    """Super basic code editor."""
+
     def __init__(self, language: str = "python", **kwargs):
         super().__init__(**kwargs)
         self.line_area = LineNumberArea(self)

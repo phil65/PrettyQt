@@ -4,6 +4,8 @@ from prettyqt import core, widgets
 
 
 class CollapsibleFrame(widgets.Frame):
+    """Frame containing another widget which can be collapsed."""
+
     expanded = core.Signal()
     collapsed = core.Signal()
 

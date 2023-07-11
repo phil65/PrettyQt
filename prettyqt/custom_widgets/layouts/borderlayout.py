@@ -15,6 +15,8 @@ class ItemWrapper:
 
 
 class BorderLayout(widgets.Layout):
+    """Layout based on 5 Regions (north east, south, west and center)."""
+
     ID = "border"
 
     class Position(enum.IntEnum):

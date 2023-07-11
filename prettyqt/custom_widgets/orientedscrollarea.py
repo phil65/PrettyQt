@@ -4,6 +4,8 @@ from prettyqt import constants, core, widgets
 
 
 class OrientedScrollArea(widgets.ScrollArea):
+    """ScrollArea with helper methods if the Area is treated as having an orientation."""
+
     def __init__(
         self,
         orientation: constants.Orientation = constants.Orientation.Horizontal,

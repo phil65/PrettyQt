@@ -4,6 +4,8 @@ from prettyqt import constants, core, gui, widgets
 
 
 class FlowLayout(widgets.Layout):
+    """Layout which adjusts its children based on space available."""
+
     ID = "flow"
 
     def __init__(self, *args, **kwargs):

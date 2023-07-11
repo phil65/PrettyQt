@@ -22,6 +22,8 @@ def color_log(x):
 
 
 class LogRecordTableView(widgets.TableView):
+    """Table view showing a log table."""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_selection_behavior("rows")

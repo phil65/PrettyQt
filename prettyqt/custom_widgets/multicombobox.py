@@ -15,6 +15,8 @@ class SizeHintDelegate(widgets.StyledItemDelegate):
 
 
 class MultiComboBox(widgets.ComboBox):
+    """ComboBox allowing multiple-choice selection."""
+
     selectionChanged = core.Signal(list)
 
     def __init__(self, parent: widgets.QWidget | None = None, **kwargs):

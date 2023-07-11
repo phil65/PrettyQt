@@ -30,6 +30,8 @@ class CommandGroup:
 
 
 class CommandTable(widgets.TableView):
+    """TableView showing a Command Palette."""
+
     action_clicked = core.Signal(int)
 
     def __init__(self, parent: widgets.Widget | None = None) -> None:

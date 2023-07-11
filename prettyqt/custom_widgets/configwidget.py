@@ -45,6 +45,8 @@ class StrSetting(BaseSetting):
 
 
 class SettingsWindow(widgets.Widget):
+    """Widget to easilty create settings widgets based on dataclasses."""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         layout = self.set_layout("horizontal")
