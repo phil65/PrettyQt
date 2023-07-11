@@ -7,7 +7,7 @@ import types
 
 import mkdocs_gen_files
 
-from prettyqt.utils import classhelpers, markdownhelpers, markdownizer
+from prettyqt.utils import classhelpers, markdownizer
 
 
 logger = logging.getLogger(__name__)
@@ -140,7 +140,7 @@ class ModuleDocument(Document):
             self.append(markdownizer.DocStrings(f'{".".join(self.parts)}'))
         if self.show_class_table:
             klasses = classhelpers.get_module_classes(self.parts)
-            self.append(markdownhelpers.get_class_table(klasses))
+            self.append(markdownizer.Table.get_classes_table(klasses))
 
 
 if __name__ == "__main__":
