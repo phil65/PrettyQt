@@ -196,6 +196,9 @@ from prettyqt import validators
 from prettyqt import itemdelegates
 from prettyqt import custom_widgets
 from prettyqt import itemmodels
+from prettyqt.qt import QtWidgets
+
+QT_MODULE = QtWidgets
 
 
 def app(args: list[str] | None = None, style: str = "Fusion", **kwargs) -> Application:

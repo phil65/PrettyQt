@@ -109,7 +109,9 @@ from .undogroup import UndoGroup
 from .colorspace import ColorSpace
 from .action import Action, ActionMixin
 from .actiongroup import ActionGroup
+from prettyqt.qt import QtGui
 
+QT_MODULE = QtGui
 # might_be_rich_text = Qt.mightBeRichText
 
 

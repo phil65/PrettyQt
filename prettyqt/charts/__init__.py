@@ -27,6 +27,9 @@ from .legend import Legend
 from .chart import Chart, ChartMixin
 from .polarchart import PolarChart
 from .chartview import ChartView
+from prettyqt.qt import QtCharts
+
+QT_MODULE = QtCharts
 
 __all__ = [
     "BarSet",

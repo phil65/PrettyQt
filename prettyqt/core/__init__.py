@@ -155,6 +155,9 @@ from .pluginloader import PluginLoader  # type: ignore
 
 from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
 from .transposeproxymodel import TransposeProxyModel
+from prettyqt.qt import QtCore
+
+QT_MODULE = QtCore
 
 
 @contextlib.contextmanager

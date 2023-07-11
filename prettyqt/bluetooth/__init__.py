@@ -12,6 +12,9 @@ from .bluetoothsocket import BluetoothSocket
 from .bluetoothserver import BluetoothServer
 from .bluetoothdevicediscoveryagent import BluetoothDeviceDiscoveryAgent
 from .bluetoothservicediscoveryagent import BluetoothServiceDiscoveryAgent
+from prettyqt.qt import QtBluetooth
+
+QT_MODULE = QtBluetooth
 
 
 __all__ = [

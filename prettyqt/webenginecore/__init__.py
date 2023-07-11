@@ -22,7 +22,9 @@ try:
     from .webenginescript import WebEngineScript
     from .webenginescriptcollection import WebEngineScriptCollection
     from .webengineprofile import WebEngineProfile
+    from prettyqt.qt import QtWebEngineCore
 
+    QT_MODULE = QtWebEngineCore
     __all__ = [
         "WebEngineHttpRequest",
         "WebEngineUrlScheme",

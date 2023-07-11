@@ -18,6 +18,9 @@ from .designercustomwidgetinterface import DesignerCustomWidgetInterface
 from .designerformeditorinterface import DesignerFormEditorInterface
 from .abstractformbuilder import AbstractFormBuilder
 from .formbuilder import FormBuilder
+from prettyqt.qt import QtDesigner
+
+QT_MODULE = QtDesigner
 
 __all__ = [
     "PyDesignerCustomWidgetPlugin",
