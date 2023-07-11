@@ -18,7 +18,7 @@ class WidgetEditor(widgets.Widget):
         self._qobject = qobject
         self._initial_prop_values = {}
         self.event_catcher = eventfilters.EventCatcher(
-            exclude=core.QEvent.Type.Paint, parent=self._qobject
+            include=["resize", "move"], parent=self._qobject
         )
         self.event_catcher.caught.connect(self._update_editors)
         self._qobject.installEventFilter(self.event_catcher)

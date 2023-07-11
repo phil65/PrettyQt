@@ -85,10 +85,7 @@ class DebugMode(eventfilters.BaseEventFilter):
         widget = index.data()
         # logger.info(widget)
         for item in self.menu:
-            candidate = item.data()
-            if candidate != widget:
-                pass
-            else:
+            if item.data() == widget:
                 self.frame.resize(widget.size())
                 # self.frame.setParent(widget)
                 pos = widget.mapToGlobal(core.Point(0, 0))

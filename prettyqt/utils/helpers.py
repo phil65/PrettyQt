@@ -71,17 +71,17 @@ def yield_positions(
             raise TypeError((rows, columns))
 
 
-def get_connections(objects, child_getter, id_getter):
+def get_connections(objects, child_getter, id_getter=None):
     items = set()
     connections = []
 
-    def add_connections(klass):
-        cls_name = id_getter(klass)
-        if cls_name not in items:
-            # if klass.__module__.startswith(base_module):
-            items.add(cls_name)
-            for base in child_getter(klass):
-                connections.append((id_getter(base), cls_name))
+    def add_connections(item):
+        identifier = id_getter(item) if id_getter else item
+        if identifier not in items:
+            # if item.__module__.startswith(base_module):
+            items.add(identifier)
+            for base in child_getter(item):
+                connections.append((id_getter(base) if id_getter else base, identifier))
                 add_connections(base)
 
     for obj in objects:

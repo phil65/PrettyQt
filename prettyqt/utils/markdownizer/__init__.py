@@ -59,6 +59,29 @@ hide:
 """
 
 
+def get_qt_help_link(klass):
+    mod = klass.__module__.replace("PySide6.", "").replace("PyQt6.", "")
+    url = f"{BASE_URL}{mod}/{klass.__qualname__.replace('.', '/')}.html"
+    return f"[{klass.__name__}]({url})"
+
+
+def link_for_class(klass: type) -> str:
+    if klass is set:
+        return "set"
+    if klass.__module__.startswith(("PyQt", "PySide")):
+        return get_qt_help_link(klass)
+    return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
+
+
+def label_for_class(klass: type) -> str:
+    if klass.__module__.startswith(("PyQt", "PySide")):
+        return f"{klass.__module__.split('.')[-1]}.{klass.__name__}"
+    elif klass.__module__.startswith(("prettyqt.")):
+        parts = klass.__module__.split(".")
+        return f"{parts[1]}.{klass.__name__}"
+    return klass.__qualname__
+
+
 @dataclasses.dataclass
 class NodeShape:
     def __init__(self, start: str, end: str):
@@ -284,7 +307,7 @@ class BaseMarkdownSection:
         return self.to_markdown()
 
     def to_markdown(self):
-        text = self._to_markdown()
+        text = self._to_markdown() + "\n"
         if self.header:
             return f"## {self.header}\n\n{text}"
         return text
@@ -328,14 +351,16 @@ class MarkdownCode(MarkdownText):
 
 
 class MarkdownImage(BaseMarkdownSection):
-    def __init__(self, path: str, caption: str, title: str = "", header: str = ""):
+    def __init__(
+        self, path: str, caption: str, title: str = "Image title", header: str = ""
+    ):
         super().__init__(header=header)
         self.title = title
         self.caption = caption
         self.path = path
 
     def _to_markdown(self) -> str:
-        lines = ["<figure markdown>", f"![{self.title}]({self.path})"]
+        lines = ["<figure markdown>", f"  ![{self.title}]({self.path})"]
         if self.caption:
             lines.append(f"  <figcaption>{self.caption}</figcaption>")
         lines.append("</figure>")
@@ -364,7 +389,12 @@ class Admonition(MarkdownText):
 
 class BinaryImage(MarkdownImage):
     def __init__(
-        self, data: bytes, path: str, caption: str = "", title: str = "", header: str = ""
+        self,
+        data: bytes,
+        path: str,
+        caption: str = "",
+        title: str = "Image title",
+        header: str = "",
     ):
         super().__init__(path=path, header=header, caption=caption, title=title)
         self.data = data
@@ -421,8 +451,10 @@ class MermaidDiagram(MarkdownCode):
     @classmethod
     def for_classes(cls, klasses, header: str = ""):
         items, connections = helpers.get_connections(
-            klasses, child_getter=lambda x: x.__bases__, id_getter=lambda x: x.__name__
+            klasses, child_getter=lambda x: x.__bases__
         )
+        items = [label_for_class(i) for i in items]
+        connections = [(label_for_class(i), label_for_class(j)) for i, j in connections]
         return cls(
             graph_type="flow",
             orientation="TD",
@@ -534,17 +566,13 @@ class Table(MarkdownText):
         for kls in klasses:
             subclasses = [subkls for subkls in kls.__subclasses__() if filter_fn(subkls)]
             parents = kls.__bases__
-            subclass_str = ", ".join(
-                markdownhelpers.link_for_class(sub) for sub in subclasses
-            )
-            parent_str = ", ".join(
-                markdownhelpers.link_for_class(parent) for parent in parents
-            )
+            subclass_str = ", ".join(link_for_class(sub) for sub in subclasses)
+            parent_str = ", ".join(link_for_class(parent) for parent in parents)
             desc = [
                 kls.__doc__.split("\n")[0] if kls.__doc__ else "" for kls in subclasses
             ]
             data = dict(
-                Name=markdownhelpers.link_for_class(kls),
+                Name=link_for_class(kls),
                 # Module=kls.__module__,
                 Children=subclass_str,
                 Inherits=parent_str,
@@ -574,7 +602,7 @@ class Table(MarkdownText):
         # docs = [re.sub(STRIP_CODE, '', k.__module__, 0, re.DOTALL) for k in subclasses]
         desc = [kls.__doc__.split("\n")[0] if kls.__doc__ else "" for kls in subclasses]
         data = dict(
-            Class=[markdownhelpers.link_for_class(kls) for kls in subclasses],
+            Class=[link_for_class(kls) for kls in subclasses],
             Module=[kls.__module__ for kls in subclasses],
             Description=desc,
         )

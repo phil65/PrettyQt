@@ -108,6 +108,10 @@ class QObjectDetailsDialog(widgets.MainWindow):
         self.menubar.add_action(action)
         self.position_on("screen", scale_ratio=0.8)
 
+    @classmethod
+    def setup_example(cls):
+        return None
+
     def eventFilter(self, source, event):
         match event.type():
             case core.QEvent.Type.MouseButtonRelease:
