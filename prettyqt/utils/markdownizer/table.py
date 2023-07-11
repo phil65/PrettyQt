@@ -71,21 +71,20 @@ class Table(markdownizer.Text):
 
         for kls in klasses:
             subclasses = [subkls for subkls in kls.__subclasses__() if filter_fn(subkls)]
+            subclass_links = [markdownizer.link_for_class(sub) for sub in subclasses]
+            subclass_str = markdownizer.to_html_list(subclass_links, shorten_after=10)
             parents = kls.__bases__
-            subclass_str = ", ".join(
-                markdownizer.link_for_class(sub) for sub in subclasses
-            )
-            parent_str = ", ".join(
-                markdownizer.link_for_class(parent) for parent in parents
-            )
+            parent_links = [markdownizer.link_for_class(parent) for parent in parents]
+            parent_str = markdownizer.to_html_list(parent_links, shorten_after=10)
             desc = kls.__doc__.split("\n")[0] if isinstance(kls.__doc__, str) else ""
-
+            name = f"**<font size='4'>{markdownizer.link_for_class(kls)}</font>**"
+            module = f"*<font size='1'>{kls.__module__}</font>*"
             data = dict(
-                Name=markdownizer.link_for_class(kls),
+                Name=f"{name}<br>{module}<br>{desc}",
                 # Module=kls.__module__,
                 Children=subclass_str,
                 Inherits=parent_str,
-                Description=desc,
+                # Description=desc,
             )
             ls.append(data)
         return cls(ls)
