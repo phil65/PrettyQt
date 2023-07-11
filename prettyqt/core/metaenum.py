@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import get_repr
+from prettyqt.utils import classhelpers, get_repr
 
 
 class MetaEnum:
@@ -39,11 +39,22 @@ class MetaEnum:
     def get_scope(self) -> str:
         return self.item.scope()  # type: ignore
 
+    def get_scope_object(self):
+        scope = self.get_scope()
+        return QtCore.Qt if scope == "Qt" else classhelpers.get_class_by_name(scope)
+
     def get_name(self) -> str:
         return self.item.name()  # type: ignore
 
+    def list_options(self):
+        return [self.value(i) for i in range(self.keyCount())]
+
 
 if __name__ == "__main__":
-    from prettyqt import core
+    from prettyqt import widgets
 
-    metaobj = core.Object.get_static_metaobject()
+    metaobj = widgets.AbstractItemView.get_static_metaobject()
+    prop = metaobj.get_property("editTriggers")
+    enumerator = prop.get_enumerator()
+    print(enumerator)
+    print(enumerator.get_scope_object())
