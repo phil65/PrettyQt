@@ -73,7 +73,6 @@ from .standardiconswidget import StandardIconsWidget
 
 from .itemviews.filetree import FileTree
 from .itemviews.hierarchicalheaderview import HierarchicalHeaderView
-from .itemviews.spantableview import SpanTableView
 from .itemviews.filterheader import FilterHeader
 
 
@@ -96,12 +95,11 @@ __all__ = [
     "CommandPalette",
     "ClickableLabel",
     "OrientedTableView",
-    "QObjectPropertiesTabletreeView",
+    "QObjectPropertiesTableView",
     "QObjectHierarchyTreeView",
     "LogRecordTableView",
     "FilterHeader",
     "HierarchicalHeaderView",
-    "SpanTableView",
     "KeyCombinationEdit",
     "SingleLineTextEdit",
     "RegexLineEdit",
