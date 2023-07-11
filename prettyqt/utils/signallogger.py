@@ -21,5 +21,8 @@ class SignalLogger(logging.Handler):
 
     def emit(self, record):
         msg = self.format(record)
-        self.signals.formatted_line.emit(msg)
-        self.signals.log_record.emit(record)
+        try:
+            self.signals.formatted_line.emit(msg)
+            self.signals.log_record.emit(record)
+        except RuntimeError:
+            pass
