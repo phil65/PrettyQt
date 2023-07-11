@@ -216,6 +216,10 @@ class ObjectMixin:
         self.setObjectName(f"{class_name}_{count}")
 
     @classmethod
+    def get_qt_base_class(cls) -> type[core.QObject] | None:
+        return classhelpers.get_qt_parent_class(cls)
+
+    @classmethod
     def get_static_metaobject(cls) -> core.MetaObject:
         return core.MetaObject(cls.staticMetaObject)
 
