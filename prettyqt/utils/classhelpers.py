@@ -62,15 +62,24 @@ def find_common_ancestor(cls_list: list[type]) -> type:
 
 
 def get_subclasses(klass: type, include_abstract: bool = False) -> typing.Iterator[type]:
+    if getattr(klass.__subclasses__, "__self__", None) is None:
+        return
     for i in klass.__subclasses__():
         yield from get_subclasses(i)
         if include_abstract or not inspect.isabstract(i):
             yield i
 
 
-def get_class_by_name(klass_name: str, parent_type: type = object) -> type | None:
+def get_class_by_name(
+    klass_name: str, parent_type: type = object, module_filter: list[str] | None = None
+) -> type | None:
     return next(
-        (klass_name for kls in get_subclasses(parent_type) if kls.__name__ == klass_name),
+        (
+            kls
+            for kls in get_subclasses(parent_type)
+            if kls.__name__ == klass_name
+            and (module_filter is None or kls.__module__.split(".")[0] in module_filter)
+        ),
         None,
     )
 
