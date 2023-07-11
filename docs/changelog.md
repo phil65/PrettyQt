@@ -1,3 +1,26 @@
+## v1.54.0 (2023-07-11)
+
+### Feat
+
+- add SliceToMarkdownProxyModel
+- **HtmlItemDelegate**: also support some markdown flavors
+- custom LinkReplacer plugin for mkdocs
+- add SliceColorCategoriesProxyModel
+- **Palette**: add yield_colors method
+- **markdownhelpers**: add get_dependency_table method
+- add ModuleInfoModel
+- **ColumnOrderProxyModel**: allow str for indexes
+- **Widget**: add grab_example_pixmap classmethod
+
+### Fix
+
+- **SliceMapRoleProxyModel**: avoid recursive loop
+- **SliceChangeFlagsProxyModel**: emit ChangeLayout when props change
+- **spatialaudio**: fix some c&p errors
+- **DesktopServices**: wrong module for QUrl
+- **Stalker**: disconnect on destroyed signal
+- **docs**: fix table headers
+
 ## v1.53.2 (2023-07-07)
 
 ### Fix
