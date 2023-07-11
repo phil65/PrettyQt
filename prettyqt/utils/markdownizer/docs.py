@@ -7,6 +7,8 @@ import logging
 import pathlib
 import types
 
+from prettyqt.utils import markdownizer
+
 
 logger = logging.getLogger(__name__)
 
@@ -19,6 +21,9 @@ class Docs:
 
     def write(self, document):
         pass
+
+    def create_nav(self):
+        return markdownizer.LiterateNav()
 
     def yield_files(self, glob: str = "*/*.py"):
         for path in sorted(self.root_path.rglob(glob)):

@@ -3,13 +3,10 @@
 from __future__ import annotations
 
 import logging
-import importlib
 from pathlib import Path
-import inspect
 import sys
 
 import prettyqt
-from prettyqt import qt
 
 from prettyqt.utils import classhelpers, markdownizer
 
@@ -19,10 +16,8 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 prettyqt.import_all()
 
-mapping = {}
-
-
 docs = markdownizer.Docs(module_name="prettyqt", exclude_modules=["qt"])
+ref_page = markdownizer.LiterateNav(path="reference")
 
 for path in docs.yield_files("*/__init__.py"):
     mod_path = path.with_suffix("")
@@ -34,18 +29,17 @@ for path in docs.yield_files("*/__init__.py"):
     klasses = classhelpers.get_module_classes(complete_mod_path, module_filter="prettyqt")
     for klass in klasses:
         kls_name = klass.__name__
-        mapping[(*parts, kls_name)] = doc_path.with_name(f"{kls_name}.md").as_posix()
+        ref_page[(*parts, kls_name)] = doc_path.with_name(f"{kls_name}.md").as_posix()
         path = full_doc_path.with_name(f"{kls_name}.md")
         doc = markdownizer.PrettyQtClassDocument(
             klass=klass, module_path=f'prettyqt.{".".join(parts)}', path=path
         )
         doc.write(path, edit_path=complete_mod_path)
     if klasses:
-        mapping[parts] = doc_path.with_name("index.md").as_posix()
+        ref_page[parts] = doc_path.with_name("index.md").as_posix()
         ref_doc_path = full_doc_path.with_name("index.md")
         page = markdownizer.Document(hide_toc=True, path=ref_doc_path)
         page += markdownizer.Table.get_classes_table(klasses)
         page.write(full_doc_path.with_name("index.md"), edit_path=complete_mod_path)
 
-page = markdownizer.LiterateNav(mapping)
-page.write("reference/SUMMARY.md")
+ref_page.write()
