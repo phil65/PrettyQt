@@ -20,6 +20,9 @@ from .udpsocket import UdpSocket
 from .httppart import HttpPart
 from .httpmultipart import HttpMultiPart
 from .networkaccessmanager import NetworkAccessManager
+from prettyqt.qt import QtNetwork
+
+QT_MODULE = QtNetwork
 
 __all__ = [
     "NetworkProxy",

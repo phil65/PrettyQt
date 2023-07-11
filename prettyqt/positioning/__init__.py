@@ -17,6 +17,9 @@ from .geosatelliteinfosource import GeoSatelliteInfoSource
 from .nmeapositioninginfosource import NmeaPositionInfoSource
 from .geoareamonitorinfo import GeoAreaMonitorInfo
 from .geoareamonitorsource import GeoAreaMonitorSource
+from prettyqt.qt import QtPositioning
+
+QT_MODULE = QtPositioning
 
 __all__ = [
     "GeoAddress",

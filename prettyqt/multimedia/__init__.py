@@ -11,7 +11,9 @@ from .camera import Camera
 from .mediaplayer import MediaPlayer
 from .screencapture import ScreenCapture
 from .mediarecorder import MediaRecorder
+from prettyqt.qt import QtMultimedia
 
+QT_MODULE = QtMultimedia
 
 __all__ = [
     "AudioFormat",

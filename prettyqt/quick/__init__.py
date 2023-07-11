@@ -13,7 +13,9 @@ from .quickpainteditem import QuickPaintedItem
 from .quickwindow import QuickWindow
 from .quickview import QuickView
 from .sgnode import SGNode
+from prettyqt.qt import QtQuick
 
+QT_MODULE = QtQuick
 
 __all__ = [
     "SGNode",

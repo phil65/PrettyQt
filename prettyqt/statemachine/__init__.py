@@ -10,7 +10,9 @@ from .historystate import HistoryState
 from .signaltransition import SignalTransition
 from .state import State
 from .statemachine import StateMachine
+from prettyqt.qt import QtStateMachine
 
+QT_MODULE = QtStateMachine
 
 __all__ = [
     "AbstractState",

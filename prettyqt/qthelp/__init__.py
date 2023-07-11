@@ -17,6 +17,9 @@ from .helpenginecore import HelpEngineCore, HelpEngineCoreMixin
 from .helpengine import HelpEngine
 from .helpsearchengine import HelpSearchEngine
 from .helpfilterengine import HelpFilterEngine
+from prettyqt.qt import QtHelp
+
+QT_MODULE = QtHelp
 
 __all__ = [
     "HelpLink",

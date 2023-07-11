@@ -7,6 +7,8 @@ from .audioengine import AudioEngine
 from .audiolistener import AudioListener
 from .audioroom import AudioRoom
 from .spatialsound import SpatialSound
+from prettyqt.qt import QtSpatialAudio
 
+QT_MODULE = QtSpatialAudio
 
 __all__ = ["AmbientSound", "AudioEngine", "AudioListener", "AudioRoom", "SpatialSound"]

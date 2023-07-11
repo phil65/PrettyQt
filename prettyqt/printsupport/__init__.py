@@ -9,6 +9,9 @@ from .pagesetupdialog import PageSetupDialog
 from .printengine import PrintEngine
 from .printpreviewwidget import PrintPreviewWidget
 from .printpreviewdialog import PrintPreviewDialog
+from prettyqt.qt import QtPrintSupport
+
+QT_MODULE = QtPrintSupport
 
 __all__ = [
     "Printer",

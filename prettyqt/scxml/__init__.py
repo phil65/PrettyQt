@@ -9,6 +9,9 @@ from .scxmlcppdatamodel import ScXmlCppDataModel
 from .scxmlnulldatamodel import ScXmlNullDataModel
 from .scxmlinvokableservice import ScXmlInvokableService
 from .scxmlinvokableservicefactory import ScXmlInvokableServiceFactory
+from prettyqt.qt import QtScxml
+
+QT_MODULE = QtScxml
 
 __all__ = [
     "ScxmlCompiler",

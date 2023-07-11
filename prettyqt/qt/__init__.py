@@ -76,6 +76,7 @@ if API != initial_api and binding_specified:
 
 # Set display name of the Qt API
 API_NAME = API_NAMES[API]
+MODULE = sys.modules[API_NAME]
 
 
 def set_env_vars(qt_binding: Literal["PyQt6", "PySide6"]):

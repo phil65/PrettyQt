@@ -37,7 +37,9 @@ from .placematchreply import PlaceMatchReply
 from .placeidreply import PlaceIdReply
 from .placemanager import PlaceManager
 from .geoserviceprovider import GeoServiceProvider
+from prettyqt.qt import QtLocation
 
+QT_MODULE = QtLocation
 
 __all__ = [
     "VISIBILITY",

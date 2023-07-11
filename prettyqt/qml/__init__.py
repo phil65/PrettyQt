@@ -18,6 +18,9 @@ from .qmlengine import QmlEngine, QmlEngineMixin
 from .qmlapplicationengine import QmlApplicationEngine
 from .qmlcomponent import QmlComponent
 from .qmlimageproviderbase import QmlImageProviderBase, QmlImageProviderBaseMixin
+from prettyqt.qt import QtQml
+
+QT_MODULE = QtQml
 
 
 def register_objects_from_module(module):
