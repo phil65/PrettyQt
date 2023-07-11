@@ -74,6 +74,13 @@ def label_for_class(klass: type) -> str:
     return klass.__qualname__
 
 
+def to_html_list(ls: list[str]):
+    if not ls:
+        return ""
+    item_str = "".join(f"<li>{i}</li>" for i in ls)
+    return f"<ul>{item_str}</ul>"
+
+
 if __name__ == "__main__":
     from prettyqt import core
     from prettyqt.utils import helpers
