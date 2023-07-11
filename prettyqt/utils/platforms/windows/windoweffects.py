@@ -162,7 +162,7 @@ class WindowsEffects:
             | win32con.WS_MINIMIZEBOX
             | win32con.WS_MAXIMIZEBOX
             | win32con.WS_CAPTION
-            | win32con.WS_THICKFRAME
+            | win32con.WS_THICKFRAME,
             # | win32con.CS_DBLCLKS
             # | win32con.WS_POPUP
             # | win32con.WS_SYSMENU

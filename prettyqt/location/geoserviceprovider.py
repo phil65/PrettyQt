@@ -34,15 +34,15 @@ GeocodingFeatureStr = Literal[
     "localized",
 ]
 
-GEOCODING_FEATURES: bidict[
-    GeocodingFeatureStr, QGeoServiceProvider.GeocodingFeature
-] = bidict(
-    none=QGeoServiceProvider.GeocodingFeature.NoGeocodingFeatures,
-    online=QGeoServiceProvider.GeocodingFeature.OnlineGeocodingFeature,
-    offline=QGeoServiceProvider.GeocodingFeature.OfflineGeocodingFeature,
-    reverse=QGeoServiceProvider.GeocodingFeature.ReverseGeocodingFeature,
-    localized=QGeoServiceProvider.GeocodingFeature.LocalizedGeocodingFeature,
-    # any=QGeoServiceProvider.GeocodingFeature.AnyGeocodingFeatures,
+GEOCODING_FEATURES: bidict[GeocodingFeatureStr, QGeoServiceProvider.GeocodingFeature] = (
+    bidict(
+        none=QGeoServiceProvider.GeocodingFeature.NoGeocodingFeatures,
+        online=QGeoServiceProvider.GeocodingFeature.OnlineGeocodingFeature,
+        offline=QGeoServiceProvider.GeocodingFeature.OfflineGeocodingFeature,
+        reverse=QGeoServiceProvider.GeocodingFeature.ReverseGeocodingFeature,
+        localized=QGeoServiceProvider.GeocodingFeature.LocalizedGeocodingFeature,
+        # any=QGeoServiceProvider.GeocodingFeature.AnyGeocodingFeatures,
+    )
 )
 
 MappingFeatureStr = Literal[

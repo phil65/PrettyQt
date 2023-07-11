@@ -420,7 +420,7 @@ class DataSet(metaclass=DataSetMeta):
 
     def to_dict(self) -> dict:
         return {
-            k: (str(v.value) if isinstance(v.value, pathlib.Path) else v.value)
+            k: str(v.value) if isinstance(v.value, pathlib.Path) else v.value
             for k, v in self._items.items()
             if v.include and v.is_enabled
         }

@@ -12,12 +12,12 @@ mod = QtWidgets.QTreeWidgetItem
 
 ChildIndicatorPolicyStr = Literal["show", "dont_show", "dont_show_when_childless"]
 
-CHILD_INDICATOR_POLICY: bidict[
-    ChildIndicatorPolicyStr, mod.ChildIndicatorPolicy
-] = bidict(
-    show=mod.ChildIndicatorPolicy.ShowIndicator,
-    dont_show=mod.ChildIndicatorPolicy.DontShowIndicator,
-    dont_show_when_childless=mod.ChildIndicatorPolicy.DontShowIndicatorWhenChildless,
+CHILD_INDICATOR_POLICY: bidict[ChildIndicatorPolicyStr, mod.ChildIndicatorPolicy] = (
+    bidict(
+        show=mod.ChildIndicatorPolicy.ShowIndicator,
+        dont_show=mod.ChildIndicatorPolicy.DontShowIndicator,
+        dont_show_when_childless=mod.ChildIndicatorPolicy.DontShowIndicatorWhenChildless,
+    )
 )
 
 

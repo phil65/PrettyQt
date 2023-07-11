@@ -9,12 +9,12 @@ from prettyqt.utils import bidict, datatypes
 
 PlaybackStateStr = Literal["stopped", "playing", "paused"]
 
-PLAYBACK_STATE: bidict[
-    PlaybackStateStr, QtMultimedia.QMediaPlayer.PlaybackState
-] = bidict(
-    stopped=QtMultimedia.QMediaPlayer.PlaybackState.StoppedState,
-    playing=QtMultimedia.QMediaPlayer.PlaybackState.PlayingState,
-    paused=QtMultimedia.QMediaPlayer.PlaybackState.PausedState,
+PLAYBACK_STATE: bidict[PlaybackStateStr, QtMultimedia.QMediaPlayer.PlaybackState] = (
+    bidict(
+        stopped=QtMultimedia.QMediaPlayer.PlaybackState.StoppedState,
+        playing=QtMultimedia.QMediaPlayer.PlaybackState.PlayingState,
+        paused=QtMultimedia.QMediaPlayer.PlaybackState.PausedState,
+    )
 )
 
 ErrorStr = Literal["none", "resource", "format", "network", "access_denied"]

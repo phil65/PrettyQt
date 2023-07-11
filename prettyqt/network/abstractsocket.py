@@ -24,13 +24,13 @@ BIND_MODE: bidict[BindModeStr, mod.BindFlag] = bidict(
 
 NetworkLayerProtocolStr = Literal["ipv4", "ipv6", "any_ip", "unknown"]
 
-NETWORK_LAYER_PROTOCOL: bidict[
-    NetworkLayerProtocolStr, mod.NetworkLayerProtocol
-] = bidict(
-    ipv4=mod.NetworkLayerProtocol.IPv4Protocol,
-    ipv6=mod.NetworkLayerProtocol.IPv6Protocol,
-    any_ip=mod.NetworkLayerProtocol.AnyIPProtocol,
-    unknown=mod.NetworkLayerProtocol.UnknownNetworkLayerProtocol,
+NETWORK_LAYER_PROTOCOL: bidict[NetworkLayerProtocolStr, mod.NetworkLayerProtocol] = (
+    bidict(
+        ipv4=mod.NetworkLayerProtocol.IPv4Protocol,
+        ipv6=mod.NetworkLayerProtocol.IPv6Protocol,
+        any_ip=mod.NetworkLayerProtocol.AnyIPProtocol,
+        unknown=mod.NetworkLayerProtocol.UnknownNetworkLayerProtocol,
+    )
 )
 
 PauseModeStr = Literal["never", "on_ssl_errors"]

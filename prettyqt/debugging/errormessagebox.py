@@ -200,8 +200,9 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
                 # remove hardcoded fonts
                 html = html.replace("\n", "<br>")
                 html = (
-                    f"<span style='font-family: monaco,{font},"
-                    "monospace;'>" + html + "</span>"
+                    f"<span style='font-family: monaco,{font},monospace;'>"
+                    + html
+                    + "</span>"
                 )
                 tb_text = html
             else:

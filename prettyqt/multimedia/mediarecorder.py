@@ -48,12 +48,12 @@ QUALITY: bidict[QualityStr, QtMultimedia.QMediaRecorder.Quality] = bidict(
 
 RecorderStateStr = Literal["stopped", "recording", "paused"]
 
-RECORDER_STATE: bidict[
-    RecorderStateStr, QtMultimedia.QMediaRecorder.RecorderState
-] = bidict(
-    stopped=QtMultimedia.QMediaRecorder.RecorderState.StoppedState,
-    recording=QtMultimedia.QMediaRecorder.RecorderState.RecordingState,
-    paused=QtMultimedia.QMediaRecorder.RecorderState.PausedState,
+RECORDER_STATE: bidict[RecorderStateStr, QtMultimedia.QMediaRecorder.RecorderState] = (
+    bidict(
+        stopped=QtMultimedia.QMediaRecorder.RecorderState.StoppedState,
+        recording=QtMultimedia.QMediaRecorder.RecorderState.RecordingState,
+        paused=QtMultimedia.QMediaRecorder.RecorderState.PausedState,
+    )
 )
 
 

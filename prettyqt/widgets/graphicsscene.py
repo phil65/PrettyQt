@@ -19,11 +19,11 @@ SCENE_LAYER: bidict[SceneLayerStr, widgets.QGraphicsScene.SceneLayer] = bidict(
 
 ItemIndexMethodStr = Literal["bsp_tree", "none"]
 
-ITEM_INDEX_METHOD: bidict[
-    ItemIndexMethodStr, widgets.QGraphicsScene.ItemIndexMethod
-] = bidict(
-    bsp_tree=widgets.QGraphicsScene.ItemIndexMethod.BspTreeIndex,
-    none=widgets.QGraphicsScene.ItemIndexMethod.NoIndex,
+ITEM_INDEX_METHOD: bidict[ItemIndexMethodStr, widgets.QGraphicsScene.ItemIndexMethod] = (
+    bidict(
+        bsp_tree=widgets.QGraphicsScene.ItemIndexMethod.BspTreeIndex,
+        none=widgets.QGraphicsScene.ItemIndexMethod.NoIndex,
+    )
 )
 
 

@@ -58,13 +58,13 @@ SELECTION_BEHAVIOR: bidict[
 
 SelectionModeStr = Literal["single", "extended", "multi", "none"]
 
-SELECTION_MODE: bidict[
-    SelectionModeStr, widgets.QAbstractItemView.SelectionMode
-] = bidict(
-    single=widgets.QAbstractItemView.SelectionMode.SingleSelection,
-    extended=widgets.QAbstractItemView.SelectionMode.ExtendedSelection,
-    multi=widgets.QAbstractItemView.SelectionMode.MultiSelection,
-    none=widgets.QAbstractItemView.SelectionMode.NoSelection,
+SELECTION_MODE: bidict[SelectionModeStr, widgets.QAbstractItemView.SelectionMode] = (
+    bidict(
+        single=widgets.QAbstractItemView.SelectionMode.SingleSelection,
+        extended=widgets.QAbstractItemView.SelectionMode.ExtendedSelection,
+        multi=widgets.QAbstractItemView.SelectionMode.MultiSelection,
+        none=widgets.QAbstractItemView.SelectionMode.NoSelection,
+    )
 )
 
 ScrollModeStr = Literal["item", "pixel"]
