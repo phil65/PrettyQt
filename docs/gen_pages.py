@@ -26,7 +26,9 @@ for path in docs.yield_files("*/__init__.py"):
     complete_mod_path = "prettyqt." + ".".join(parts)
     parts = parts[:-1]
     full_doc_path = Path("reference", doc_path)
-    klasses = classhelpers.get_module_classes(complete_mod_path, module_filter="prettyqt")
+    klasses = list(
+        classhelpers.yield_module_classes(complete_mod_path, module_filter="prettyqt")
+    )
     for klass in klasses:
         kls_name = klass.__name__
         ref_page[(*parts, kls_name)] = doc_path.with_name(f"{kls_name}.md").as_posix()
@@ -40,6 +42,6 @@ for path in docs.yield_files("*/__init__.py"):
         ref_doc_path = full_doc_path.with_name("index.md")
         page = markdownizer.Document(hide_toc=True, path=ref_doc_path)
         page += markdownizer.Table.get_classes_table(klasses)
-        page.write(full_doc_path.with_name("index.md"))
+        page.write(ref_doc_path)
 
 ref_page.write()

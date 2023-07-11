@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import collections
+
+from collections.abc import Iterator, Sequence
 import contextlib
 import functools
 import importlib
@@ -72,7 +74,7 @@ def get_subclasses(klass: type, include_abstract: bool = False) -> typing.Iterat
 
 
 def get_class_by_name(
-    klass_name: str, parent_type: type = object, module_filter: list[str] | None = None
+    klass_name: str, *, parent_type: type = object, module_filter: list[str] | None = None
 ) -> type | None:
     return next(
         (
@@ -93,6 +95,12 @@ def get_qt_parent_class(klass: type) -> type | None:
 
 
 def get_class_for_id(base_class: T, id_: str) -> T:
+    """Get subclass of base class which has an attribute "ID" with given id.
+
+    Arguments:
+        base_class: Class to check subclasses from.
+        id_: id to search for.
+    """
     base_classes = (
         typing.get_args(base_class)
         if isinstance(base_class, types.UnionType)
@@ -106,25 +114,46 @@ def get_class_for_id(base_class: T, id_: str) -> T:
     raise ValueError(f"Couldnt find class with id {id_!r} for base class {base_class}")
 
 
-def get_module_classes(
-    module: types.ModuleType | str | tuple[str, ...],
+def yield_module_classes(
+    module: types.ModuleType | str | Sequence[str],
+    *,
     type_filter: type | None | types.UnionType = None,
     module_filter: str | None = None,
-) -> list[type]:
-    if isinstance(module, str | tuple):
-        if isinstance(module, tuple):
+    recursive: bool = False,
+) -> Iterator[type]:
+    """Yield classes from given module.
+
+    Arguments:
+        module: either a module or a path to a module in form of str or
+                Sequence of strings.
+        type_filter: only yield classes which are subclasses of given type.
+        module_filter: filter by a module prefix.
+        recursive: import all submodules recursively and also yield their classes.
+    """
+    if isinstance(module, str | Sequence):
+        if isinstance(module, Sequence):
             module = ".".join(module)
         try:
             module = importlib.import_module(module)
         except ImportError:
             logger.warning(f"Could not import {module!r}")
             return []
-    return [
+    if recursive:
+        for _name, submod in inspect.getmembers(module, inspect.ismodule):
+            if submod.__name__.startswith(module_filter or ""):
+                yield from yield_module_classes(
+                    submod,
+                    type_filter=type_filter,
+                    module_filter=submod.__name__,
+                    recursive=True,
+                )
+
+    yield from (
         kls
         for _name, kls in inspect.getmembers(module, inspect.isclass)
         if (type_filter is None or issubclass(kls, type_filter))
         and (module_filter is None or kls.__module__.startswith(module_filter))
-    ]
+    )
 
 
 def get_topmost_module_path_for_klass(klass: type) -> str:
@@ -145,5 +174,5 @@ def get_topmost_module_path_for_klass(klass: type) -> str:
 if __name__ == "__main__":
     from prettyqt import widgets
 
-    path = get_topmost_module_path_for_klass(widgets.AbstractItemView)
-    print(path)
+    path = yield_module_classes(widgets, recursive=False)
+    print(len(list(path)))

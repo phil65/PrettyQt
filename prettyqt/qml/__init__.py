@@ -25,9 +25,9 @@ QT_MODULE = QtQml
 
 def register_objects_from_module(module):
     from prettyqt import core
-    from prettyqt.utils import helpers
+    from prettyqt.utils import classhelpers
 
-    for Klass in helpers.get_module_classes(module):
+    for Klass in classhelpers.yield_module_classes(module):
         if core.ObjectMixin in Klass.mro():
             register_class(Klass)
 
