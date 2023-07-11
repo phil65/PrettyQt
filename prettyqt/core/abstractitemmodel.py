@@ -429,6 +429,8 @@ class AbstractItemModelMixin(core.ObjectMixin):
                 colrange = range(x_range.start or 0, stop, x_range.step or 1)
             case int():
                 colrange = range(x_range, x_range + 1)
+            case _:
+                raise TypeError(x_range)
 
         match y_range:
             case None:
@@ -438,7 +440,8 @@ class AbstractItemModelMixin(core.ObjectMixin):
                 rowrange = range(y_range.start or 0, stop, y_range.step or 1)
             case int():
                 rowrange = range(y_range, y_range + 1)
-
+            case _:
+                raise TypeError(y_range)
         data = [[self.index(i, j).data(role) for j in colrange] for i in rowrange]
         h_header = [self.headerData(i, constants.HORIZONTAL) for i in colrange]
         v_header = (
