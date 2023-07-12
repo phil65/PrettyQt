@@ -67,19 +67,21 @@ class MarkdownItemDelegate(BaseMarkupDelegate):
 
     ID = "markdown"
 
-    def __init__(self, *args, mode: str = "markdown_github", **kwargs):
+    def __init__(self, *args, mode: str = "github", **kwargs):
         super().__init__(*args, **kwargs)
         self._mode = mode
 
     def set_text(self, text: str):
         Feat = self.doc.MarkdownFeature
         match self._mode:
-            case "markdown_no_html":
+            case "no_html":
                 self.doc.setMarkdown(text, Feat.MarkdownNoHTML)
-            case "markdown_commonmark":
+            case "commonmark":
                 self.doc.setMarkdown(text, Feat.MarkdownDialectCommonMark)
-            case "markdown_github" | "":
+            case "github" | "":
                 self.doc.setMarkdown(text, Feat.MarkdownDialectGitHub)
+            case _:
+                raise ValueError(self._mode)
 
     def get_markup_mode(self, str):
         return self._mode

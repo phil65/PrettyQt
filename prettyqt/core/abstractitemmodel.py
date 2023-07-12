@@ -429,6 +429,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         x_range: slice | int | None = None,
         y_range: slice | int | None = None,
         parent_index: core.ModelIndex | None = None,
+        use_checkstate_role: bool = False,
     ):
         parent_index = parent_index or core.ModelIndex()
         # if self.canFetchMore(parent_index):
@@ -458,6 +459,17 @@ class AbstractItemModelMixin(core.ObjectMixin):
             [self.index(i, j, parent_index).data(role) for j in colrange]
             for i in rowrange
         ]
+        if use_checkstate_role:
+            check_data, _, __ = self.get_table_data(
+                role=constants.CHECKSTATE_ROLE,
+                x_range=x_range,
+                y_range=y_range,
+                parent_index=parent_index,
+            )
+            for i, row in enumerate(data):
+                for j, _column in enumerate(row):
+                    if check_data[i][j] is not None:
+                        data[i][j] = bool(check_data[i][j])
         h_header = [self.headerData(i, constants.HORIZONTAL) for i in colrange]
         v_header = (
             [self.headerData(i, constants.VERTICAL) for i in rowrange]

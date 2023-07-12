@@ -101,7 +101,7 @@ class SliceHighlightCurrentProxyModel(itemmodels.SliceIdentityProxyModel):
 
     def highlight_index(self, index: core.ModelIndex):
         with self.change_layout():
-            self._current_value = index.data(self._data_role)
+            self._current_value = index.data(self._data_role)  # super().data(index, role)
             self._current_row = index.row()
             self._current_column = index.column()
 
