@@ -57,9 +57,7 @@ class Document:
     def to_markdown(self) -> str:
         header = self.get_header()
         content_str = "\n\n".join(i.to_markdown() for i in self.items)
-        if header:
-            return header + content_str
-        return content_str
+        return header + content_str if header else content_str
 
     def get_header(self) -> str:
         lines = []
@@ -110,10 +108,18 @@ class ClassDocument(Document):
 
     def _build(self):
         module_path = ".".join(self.parts)
-        self.append(markdownizer.DocStrings(f"{module_path}.{self.klass.__name__}"))
+        self.append(
+            markdownizer.DocStrings(
+                f"{module_path}.{self.klass.__name__}", header="DocStrings"
+            ),
+        )
         if table := markdownizer.Table.get_ancestor_table_for_klass(self.klass):
             self.append(table)
-        self.append(markdownizer.MermaidDiagram.for_classes([self.klass]))
+        self.append(
+            markdownizer.MermaidDiagram.for_classes(
+                [self.klass], header="Inheritance diagram"
+            ),
+        )
         # self.append(markdownizer.MermaidDiagram.for_subclasses([self.klass]))
 
 
