@@ -100,8 +100,17 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
         if self.is_additional_column(column):
             if role == constants.DISPLAY_ROLE:
                 mapper = self.mapping[column - col_count]
-                field_names = [v[1] for v in string.Formatter().parse(mapper.formatter)]
                 formatter = mapper.formatter
+                field_names = [
+                    field_name
+                    for (
+                        _literal_text,
+                        field_name,
+                        _format_spec,
+                        _conversion,
+                    ) in string.Formatter().parse(formatter)
+                    # if field_name is not None
+                ]
                 match formatter:
                     case str():
                         for name in field_names:
