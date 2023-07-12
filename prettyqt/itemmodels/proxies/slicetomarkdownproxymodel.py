@@ -1,41 +1,12 @@
 from __future__ import annotations
 
 import logging
-import re
 
 from prettyqt import constants, core, gui, itemmodels
+from prettyqt.utils import markdownizer
 
 
 logger = logging.getLogger(__name__)
-
-
-def escape_markdown(text: str, version: int = 1, entity_type: str | None = None) -> str:
-    """Helper function to escape telegram markup symbols.
-
-    Args:
-        text: The text.
-        version: Use to specify the version of telegrams Markdown.
-            Either ``1`` or ``2``. Defaults to ``1``.
-        entity_type: For the entity types ``PRE``, ``CODE`` and the link
-            part of ``TEXT_LINKS``, only certain characters need to be escaped in
-            ``MarkdownV2``.
-            See the official API documentation for details. Only valid in combination with
-            ``version=2``, will be ignored else.
-    """
-    match version:
-        case 1 | "1":
-            escape_chars = r"_*`["
-        case 2 | "2":
-            if entity_type in ["pre", "code"]:
-                escape_chars = r"\`"
-            elif entity_type == "text_link":
-                escape_chars = r"\)"
-            else:
-                escape_chars = r"_*[]()~`>#+-=|{}.!"
-        case _:
-            raise ValueError("Markdown version must be either 1 or 2!")
-
-    return re.sub(f"([{re.escape(escape_chars)}])", r"\\\1", text)
 
 
 class SliceToMarkdownProxyModel(itemmodels.SliceIdentityProxyModel):
@@ -63,7 +34,7 @@ class SliceToMarkdownProxyModel(itemmodels.SliceIdentityProxyModel):
         label = index.data(constants.DISPLAY_ROLE)
         if not label:
             return ""
-        label = escape_markdown(label)
+        label = markdownizer.escape_markdown(label)
         font = index.data(constants.FONT_ROLE)
         if font and font.bold():
             label = f"**{label}**"

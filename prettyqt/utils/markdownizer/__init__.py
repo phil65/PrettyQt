@@ -2,7 +2,9 @@ from __future__ import annotations
 
 
 import logging
+import re
 from importlib import metadata
+import sys
 
 from prettyqt.utils.markdownizer.basesection import BaseSection, Text, Code
 from prettyqt.utils.markdownizer.image import Image, BinaryImage
@@ -43,26 +45,60 @@ __all__ = [
 logger = logging.getLogger(__name__)
 
 BASE_URL = "https://doc.qt.io/qtforpython-6/PySide6/"
-BUILTIN_URL = "https://docs.python.org/3/library/functions.html#{klass}"
+BUILTIN_URL = "https://docs.python.org/3/library/{mod}.html#{name}"
 
 
-def link_for_class(klass: type) -> str:
-    if klass.__module__ == "builtins":
-        return f"[{klass.__name__}]({BUILTIN_URL.format(klass=klass)})"
-    elif klass.__module__.startswith(("PyQt", "PySide")):
-        mod = klass.__module__.replace("PySide6.", "").replace("PyQt6.", "")
-        url = f"{BASE_URL}{mod}/{klass.__qualname__.replace('.', '/')}.html"
-        return f"[{klass.__name__}]({url})"
-    elif klass.__module__.startswith("prettyqt"):
-        return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
+def escape_markdown(text: str, version: int = 1, entity_type: str | None = None) -> str:
+    """Helper function to escape telegram markup symbols.
+
+    Args:
+        text: The text.
+        version: Use to specify the version of telegrams Markdown.
+            Either ``1`` or ``2``. Defaults to ``1``.
+        entity_type: For the entity types ``PRE``, ``CODE`` and the link
+            part of ``TEXT_LINKS``, only certain characters need to be escaped in
+            ``MarkdownV2``.
+            See the official API documentation for details. Only valid in combination with
+            ``version=2``, will be ignored else.
+    """
+    match version:
+        case 1 | "1":
+            escape_chars = r"_*`["
+        case 2 | "2":
+            if entity_type in ["pre", "code"]:
+                escape_chars = r"\`"
+            elif entity_type == "text_link":
+                escape_chars = r"\)"
+            else:
+                escape_chars = r"_*[]()~`>#+-=|{}.!"
+        case _:
+            raise ValueError("Markdown version must be either 1 or 2!")
+
+    return re.sub(f"([{re.escape(escape_chars)}])", r"\\\1", text)
+
+
+def link_for_class(kls: type) -> str:
+    if kls.__module__ == "builtins":
+        url = BUILTIN_URL.format(mod="functions", name=kls.__name__)
+        return f"[{kls.__name__}]({url})"
+    if kls.__module__ in sys.stdlib_module_names:
+        mod = kls.__module__
+        url = BUILTIN_URL.format(mod=mod, name=f"{mod}.{kls.__name__}")
+        return f"[{kls.__name__}]({url})"
+    elif kls.__module__.startswith(("PyQt", "PySide")):
+        mod = kls.__module__.replace("PySide6.", "").replace("PyQt6.", "")
+        url = f"{BASE_URL}{mod}/{kls.__qualname__.replace('.', '/')}.html"
+        return f"[{kls.__name__}]({url})"
+    elif kls.__module__.startswith("prettyqt"):
+        return f"[{kls.__qualname__}]({kls.__qualname__}.md)"
     try:
-        dist = metadata.distribution(klass.__module__.split(".")[0])
+        dist = metadata.distribution(kls.__module__.split(".")[0])
     except metadata.PackageNotFoundError:
-        return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
+        return f"[{kls.__qualname__}]({kls.__qualname__}.md)"
     else:
         if url := dist.metadata["Home-Page"]:
-            return f"[{klass.__qualname__}]({url})"
-        return f"[{klass.__qualname__}]({klass.__qualname__}.md)"
+            return f"[{kls.__qualname__}]({url})"
+        return f"[{kls.__qualname__}]({kls.__qualname__}.md)"
 
 
 def label_for_class(klass: type) -> str:

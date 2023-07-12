@@ -132,8 +132,8 @@ def iter_classes_for_module(
         filter_by___all__: Whether to filter based on whats defined in __all__.
         recursive: import all submodules recursively and also yield their classes.
     """
-    if isinstance(module, str | tuple):
-        if isinstance(module, tuple):
+    if isinstance(module, str | tuple | list):
+        if isinstance(module, tuple | list):
             module = ".".join(module)
         try:
             module = importlib.import_module(module)

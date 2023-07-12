@@ -34,6 +34,8 @@ def hook(obj: dict) -> dict:
 
 @dataclass
 class IconFont:
+    """Class describing an Icon font."""
+
     prefix: str
     font_path: str
     charmap_path: str
