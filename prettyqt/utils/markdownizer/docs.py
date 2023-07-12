@@ -24,7 +24,33 @@ class Docs:
     def write(self, document):
         pass
 
-    def create_nav(self, path: str | os.PathLike):
+    def get_overview_document(self):
+        page = markdownizer.Document(hide_toc=True, path=self.root_path / "index.md")
+        # page += self.get_dependency_table()
+        page += self.get_module_overview()
+        return page
+
+    def get_dependency_table(self) -> markdownizer.Table:
+        return markdownizer.Table.get_dependency_table(self.module_name)
+
+    def get_module_overview(self, module: str | None = None):
+        mod = importlib.import_module(module or self.module_name)
+        rows = [
+            (
+                submod_name,
+                submod.__doc__,
+                (
+                    markdownizer.to_html_list(submod.__all__)
+                    if hasattr(submod, "__all__")
+                    else ""
+                ),
+            )
+            for submod_name, submod in inspect.getmembers(mod, inspect.ismodule)
+        ]
+        rows = list(zip(*rows))
+        return markdownizer.Table(rows, columns=["Name", "Information", "Members"])
+
+    def create_nav(self, path: str | os.PathLike) -> markdownizer.LiterateNav:
         nav = markdownizer.LiterateNav(path=path)
         self.navs.append(nav)
         return nav
@@ -65,8 +91,8 @@ class Docs:
         for path in self.iter_files(glob):
             module_path = path.with_suffix("")
             parts = tuple(module_path.parts)
-            complete_module_path = "prettyqt." + ".".join(parts)
-            with contextlib.suppress(ImportError):
+            complete_module_path = f"{self.module_name}." + ".".join(parts)
+            with contextlib.suppress(ImportError, AttributeError):
                 yield importlib.import_module(complete_module_path)
 
     def iter_classes_for_glob(
@@ -90,4 +116,5 @@ class Docs:
 
 if __name__ == "__main__":
     doc = Docs(module_name="prettyqt")
-    print(list(doc.iter_files()))
+    page = doc.get_overview_document()
+    print(page)
