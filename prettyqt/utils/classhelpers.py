@@ -87,7 +87,16 @@ def get_class_by_name(
     )
 
 
-def get_qt_parent_class(klass: type) -> type | None:
+def get_qt_parent_class(klass: type, only_direct: bool = False) -> type | None:
+    """Get Qt-based parent class for given type.
+
+    Arguments:
+        klass: class to get parent type from
+        only_direct: whether only the direct parent should be checked.
+    """
+    if only_direct:
+        name = klass.mro()[0].__name__
+        return klass if name.startswith(("PyQt", "PySide")) else None
     return next(
         (kls for kls in klass.mro() if kls.__module__.startswith(("PyQt", "PySide"))),
         None,
