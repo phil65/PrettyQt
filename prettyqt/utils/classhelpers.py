@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import collections
 
-from collections.abc import Iterator, Sequence
+from collections.abc import Iterator
 import contextlib
 import functools
 import importlib
@@ -115,7 +115,7 @@ def get_class_for_id(base_class: T, id_: str) -> T:
 
 
 def iter_classes_for_module(
-    module: types.ModuleType | str | Sequence[str],
+    module: types.ModuleType | str | tuple[str],
     *,
     type_filter: type | None | types.UnionType = None,
     module_filter: str | None = None,
@@ -126,14 +126,14 @@ def iter_classes_for_module(
 
     Arguments:
         module: either a module or a path to a module in form of str or
-                Sequence of strings.
+                tuple of strings.
         type_filter: only yield classes which are subclasses of given type.
         module_filter: filter by a module prefix.
         filter_by___all__: Whether to filter based on whats defined in __all__.
         recursive: import all submodules recursively and also yield their classes.
     """
-    if isinstance(module, str | Sequence):
-        if isinstance(module, Sequence):
+    if isinstance(module, str | tuple):
+        if isinstance(module, tuple):
             module = ".".join(module)
         try:
             module = importlib.import_module(module)
