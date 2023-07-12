@@ -34,7 +34,7 @@ class SliceToMarkdownProxyModel(itemmodels.SliceIdentityProxyModel):
         label = index.data(constants.DISPLAY_ROLE)
         if not label:
             return ""
-        label = markdownizer.escape_markdown(label)
+        label = markdownizer.escape_markdown(str(label) if label is not None else "")
         font = index.data(constants.FONT_ROLE)
         if font and font.bold():
             label = f"**{label}**"
