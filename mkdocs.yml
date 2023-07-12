@@ -44,6 +44,7 @@ plugins:
 - tags
 - section-index  # clickable sections leading to index page (https://github.com/oprypin/mkdocs-section-index)
 - glightbox  # better image support
+- macros
 - include-markdown  # include content of other markdown files
 - literate-nav:  # move nav out of mkdocs.yml
     nav_file: SUMMARY.md

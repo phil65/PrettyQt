@@ -83,6 +83,7 @@ docs = [
     "mkdocs-glightbox",
     "mkdocs-section-index",
     "mkdocs-gen-files",
+    "mkdocs-macros-plugin",
 ]
 
 addons = [
@@ -139,6 +140,7 @@ dependencies = [
     "mkdocs-include-markdown-plugin",
     "mkdocs-section-index",
     "mkdocs-gen-files",
+    "mkdocs-macros-plugin",
 ]
 
 [envs.default.scripts]
@@ -269,13 +271,15 @@ mkdocstrings = {version = "^0", extras = ["python"]}
 mkdocs-glightbox = "*"
 mkdocs-include-markdown-plugin = {version = "^4", python = "<3.12"}
 mkdocs-section-index = "^0.3.5"
+mkdocs-macros-plugin = "^1"
+mkdocs-literate-nav = "^0.6.0"
+mkdocs-gen-files = "^0.5.0"
 
 pymdown-extensions = "^10"
 black = "^23"
 devtools = "^0"
 commitizen = "^3"
-mkdocs-literate-nav = "^0.6.0"
-mkdocs-gen-files = "^0.5.0"
+
 
 [tool.pytest.ini_options]
 minversion = "7.0"
