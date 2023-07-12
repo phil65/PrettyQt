@@ -2,10 +2,14 @@ from __future__ import annotations
 
 import logging
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui
 from prettyqt.utils import serializemixin
+
+
+if TYPE_CHECKING:
+    from prettyqt import widgets
 
 
 logger = logging.getLogger(__name__)
@@ -73,9 +77,13 @@ class Cursor(serializemixin.SerializeMixin, gui.QCursor):
     @classmethod
     def set_pos(
         cls,
-        where: Literal["screen", "current"] | gui.QScreen
-        # | QtWidgets.QWidget
-        | core.QRect | core.QPoint | tuple[int, int] | tuple[int, int, int, int],
+        where: Literal["screen", "current"]
+        | gui.QScreen
+        | widgets.QWidget
+        | core.QRect
+        | core.QPoint
+        | tuple[int, int]
+        | tuple[int, int, int, int],
         how: Literal[
             "center",
             "top",
@@ -117,8 +125,10 @@ class Cursor(serializemixin.SerializeMixin, gui.QCursor):
                 geom = gui.GuiApplication.primaryScreen().geometry()
             case gui.QScreen():
                 geom = where.geometry()
-            case _:  # not wanting to import QtWidgets here... perhaps create a protocol.
+            case _ if hasattr(where, "frameGeometry"):  # avoiding to import widgets here
                 geom = where.frameGeometry()
+            case _:
+                raise TypeError(where)
         match how:
             case "center":
                 new = geom.center()
@@ -138,6 +148,8 @@ class Cursor(serializemixin.SerializeMixin, gui.QCursor):
                 new = geom.bottomRight()
             case "bottom_left":
                 new = geom.bottomLeft()
+            case _:
+                raise TypeError(how)
         new_pos = core.Point(new.x() + x_offset, new.y() + y_offset)
         if duration > 0:
             from prettyqt.animations import cursormoveanimation

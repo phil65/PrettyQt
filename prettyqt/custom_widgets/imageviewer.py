@@ -56,6 +56,7 @@ class ImageViewer(widgets.Widget):
     def __init__(
         self,
         image: gui.QPixmap | os.PathLike | None = None,
+        *,
         show_border: bool = True,
         show_size: bool = False,
         border_width: int = 1,

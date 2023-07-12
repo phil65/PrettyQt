@@ -4,6 +4,8 @@ from prettyqt import core, widgets
 
 
 class SliceEdit(widgets.Widget):
+    """Simple editor to edit slices."""
+
     value_changed = core.Signal(slice)
 
     def __init__(self, *args, **kwargs):

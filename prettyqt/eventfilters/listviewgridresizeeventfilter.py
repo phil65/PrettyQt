@@ -6,7 +6,7 @@ from prettyqt import core, eventfilters
 
 
 if TYPE_CHECKING:
-    from prettyqt.qt import QtWidgets
+    from prettyqt import widgets
 
 
 class ListViewGridResizeEventFilter(eventfilters.BaseEventFilter):
@@ -15,7 +15,7 @@ class ListViewGridResizeEventFilter(eventfilters.BaseEventFilter):
     ID = "listview_grid_resize"
 
     def __init__(
-        self, num_columns: int = 5, parent: QtWidgets.QListView | None = None, **kwargs
+        self, num_columns: int = 5, parent: widgets.ListView | None = None, **kwargs
     ):
         super().__init__(parent=parent, **kwargs)
         self._view_columns = num_columns
@@ -26,7 +26,7 @@ class ListViewGridResizeEventFilter(eventfilters.BaseEventFilter):
                 self._resize(source)
         return super().eventFilter(source, event)
 
-    def _resize(self, source: QtWidgets.QListView):
+    def _resize(self, source: widgets.ListView):
         width = source.width() - 30
         # The minus 30 above ensures we don't end up with an item width that
         # can't be drawn the expected number of times across the view without
