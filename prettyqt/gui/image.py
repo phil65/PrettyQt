@@ -105,7 +105,7 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
                 colcount = self.width()
                 return [
                     self.pixel(i, j)
-                    for i, j in helpers.yield_positions(row, col, rowcount, colcount)
+                    for i, j in helpers.iter_positions(row, col, rowcount, colcount)
                 ]
             case _:
                 raise TypeError(index)

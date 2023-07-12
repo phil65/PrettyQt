@@ -19,7 +19,7 @@ class SyntaxHighlighterMixin(core.ObjectMixin):
         return gui.TextCharFormat(self.format(position))
 
     @classmethod
-    def yield_rules(cls) -> Iterator[tuple[Pattern, int, gui.TextCharFormat]]:
+    def iter_rules(cls) -> Iterator[tuple[Pattern, int, gui.TextCharFormat]]:
         for rule in cls.RULES:
             if isinstance(rule.compiled, list):
                 for i in rule.compiled:
@@ -30,7 +30,7 @@ class SyntaxHighlighterMixin(core.ObjectMixin):
     def highlightBlock(self, text: str):
         """Apply syntax highlighting to the given block of text."""
         # Do other syntax formatting
-        for expression, nth, fmt in self.yield_rules():
+        for expression, nth, fmt in self.iter_rules():
             for match in expression.finditer(text):
                 span = match.span(nth)
                 self.setFormat(span[0], span[1] - span[0], fmt)

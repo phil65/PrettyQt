@@ -56,7 +56,7 @@ class SliceColorCategoriesProxyModel(itemmodels.SliceIdentityProxyModel):
     def __init__(self, *args, **kwargs):
         self._role = constants.DISPLAY_ROLE
         self._color_map = {}
-        self.color_generator = itertools.cycle(gui.Palette().yield_colors())
+        self.color_generator = itertools.cycle(gui.Palette().iter_colors())
         self._color_none = False
         self._cast_to_str = False
         super().__init__(*args, **kwargs)
@@ -100,7 +100,7 @@ class SliceColorCategoriesProxyModel(itemmodels.SliceIdentityProxyModel):
     def set_cast_to_str(self, val: bool):
         with self.change_layout():
             self._color_map = {}
-            self.color_generator = itertools.cycle(gui.Palette().yield_colors())
+            self.color_generator = itertools.cycle(gui.Palette().iter_colors())
             self._cast_to_str = val
 
     color_none = core.Property(bool, is_none_colored, set_none_colored)

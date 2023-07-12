@@ -79,7 +79,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
             case (row, col):
                 indexes = [
                     self.index(i, j)
-                    for i, j in helpers.yield_positions(row, col, rowcount, colcount)
+                    for i, j in helpers.iter_positions(row, col, rowcount, colcount)
                 ]
                 return listdelegators.ListDelegator(indexes)
             case int() as row:
@@ -102,7 +102,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
             case (row, col):
                 rowcount = self.rowCount()
                 colcount = self.columnCount()
-                for i, j in helpers.yield_positions(row, col, rowcount, colcount):
+                for i, j in helpers.iter_positions(row, col, rowcount, colcount):
                     self.setData(self.index(i, j), value, role)
             case _:
                 raise TypeError(index)

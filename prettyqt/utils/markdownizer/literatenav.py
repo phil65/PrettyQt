@@ -43,4 +43,4 @@ class LiterateNav(markdownizer.BaseSection):
 
 if __name__ == "__main__":
     doc = LiterateNav(module_name="prettyqt")
-    print(list(doc.yield_files()))
+    print(list(doc.iter_files()))

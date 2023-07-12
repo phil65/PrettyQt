@@ -19,7 +19,7 @@ prettyqt.import_all()
 docs = markdownizer.Docs(module_name="prettyqt", exclude_modules=["qt"])
 ref_page = docs.create_nav(path="reference")
 
-for path in docs.yield_files("*/__init__.py"):
+for path in docs.iter_files("*/__init__.py"):
     mod_path = path.with_suffix("")
     doc_path = path.with_suffix(".md")
     parts = tuple(mod_path.parts)
@@ -27,7 +27,7 @@ for path in docs.yield_files("*/__init__.py"):
     parts = parts[:-1]
     full_doc_path = Path("reference", doc_path)
     klasses = list(
-        classhelpers.yield_module_classes(complete_mod_path, module_filter="prettyqt")
+        classhelpers.iter_classes_for_module(complete_mod_path, module_filter="prettyqt")
     )
     for klass in klasses:
         kls_name = klass.__name__

@@ -34,7 +34,7 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
             case (row, col):
                 items = [
                     item
-                    for i, j in helpers.yield_positions(row, col, rowcount, colcount)
+                    for i, j in helpers.iter_positions(row, col, rowcount, colcount)
                     if (item := self.itemAtPosition(i, j)) is not None
                 ]
                 items = [

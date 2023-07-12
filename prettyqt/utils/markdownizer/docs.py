@@ -29,7 +29,7 @@ class Docs:
         self.navs.append(nav)
         return nav
 
-    def yield_files(self, glob: str = "*/*.py"):
+    def iter_files(self, glob: str = "*/*.py"):
         for path in sorted(self.root_path.rglob(glob)):
             if (
                 all(i not in path.parts for i in self._exclude)
@@ -38,7 +38,7 @@ class Docs:
             ):
                 yield path.relative_to(self.root_path)
 
-    def yield_klasses_for_module(
+    def iter_classes_for_module(
         self,
         mod: types.ModuleType,
         recursive: bool = False,
@@ -50,7 +50,7 @@ class Docs:
             for _submod_name, submod in inspect.getmembers(mod, inspect.ismodule):
                 if submod.__name__.startswith(self.module_name) and submod not in seen:
                     seen.add(submod)
-                    yield from self.yield_klasses_for_module(
+                    yield from self.iter_classes_for_module(
                         submod, recursive=True, _seen=seen
                     )
         for klass_name, klass in inspect.getmembers(mod, inspect.isclass):
@@ -61,19 +61,19 @@ class Docs:
             if klass.__module__.startswith(self.module_name):
                 yield klass
 
-    def yield_modules_for_glob(self, glob="*/*.py"):
-        for path in self.yield_files(glob):
+    def iter_modules_for_glob(self, glob="*/*.py"):
+        for path in self.iter_files(glob):
             module_path = path.with_suffix("")
             parts = tuple(module_path.parts)
             complete_module_path = "prettyqt." + ".".join(parts)
             with contextlib.suppress(ImportError):
                 yield importlib.import_module(complete_module_path)
 
-    def yield_classes_for_glob(
+    def iter_classes_for_glob(
         self, glob="*/*.py", recursive: bool = False, avoid_duplicates: bool = True
     ):
         seen = set()
-        for path in self.yield_files(glob):
+        for path in self.iter_files(glob):
             module_path = path.with_suffix("")
             parts = tuple(module_path.parts)
             module_path = f"{self.module_name}." + ".".join(parts)
@@ -82,7 +82,7 @@ class Docs:
             except (ImportError, AttributeError):  # noqa: PERF203
                 continue
             else:
-                for klass in self.yield_klasses_for_module(module, recursive=recursive):
+                for klass in self.iter_classes_for_module(module, recursive=recursive):
                     if (klass, path) not in seen or not avoid_duplicates:
                         seen.add((klass, path))
                         yield klass, path
@@ -90,4 +90,4 @@ class Docs:
 
 if __name__ == "__main__":
     doc = Docs(module_name="prettyqt")
-    print(list(doc.yield_files()))
+    print(list(doc.iter_files()))

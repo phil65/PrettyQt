@@ -78,7 +78,7 @@ class Palette(serializemixin.SerializeMixin, gui.QPalette):
     def __repr__(self):
         return get_repr(self, self.get_color("button"), self.get_color("window"))
 
-    def yield_colors(
+    def iter_colors(
         self, mode: Literal["auto", "auto_inverted", "dark", "light"] = "auto"
     ):
         if mode == "auto":

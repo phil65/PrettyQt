@@ -33,7 +33,7 @@ class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
                 colcount = self.columnCount()
                 children = [
                     self.child(i, j)
-                    for i, j in helpers.yield_positions(row, col, rowcount, colcount)
+                    for i, j in helpers.iter_positions(row, col, rowcount, colcount)
                 ]
                 return listdelegators.ListDelegator(children)
             case _:

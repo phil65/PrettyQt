@@ -139,7 +139,7 @@ class ModuleDocument(Document):
         if self.docstrings:
             self.append(markdownizer.DocStrings(f'{".".join(self.parts)}'))
         if self.show_class_table:
-            klasses = list(classhelpers.yield_module_classes(self.parts))
+            klasses = list(classhelpers.iter_classes_for_module(self.parts))
             self.append(markdownizer.Table.get_classes_table(klasses))
 
 

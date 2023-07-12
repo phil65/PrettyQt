@@ -43,7 +43,7 @@ def is_position_in_index(x: int, y: int, index) -> bool:
             return x == row and y == col
 
 
-def yield_positions(
+def iter_positions(
     rows: int | slice, columns: int | slice, num_rows: int, num_columns: int
 ) -> typing.Iterator[tuple[int, int]]:
     """Yields all x-y pairs for given row/column indexers.

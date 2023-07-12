@@ -36,7 +36,7 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
             case (row, col):
                 items = [
                     self.item(i, j)
-                    for i, j in helpers.yield_positions(row, col, rowcount, colcount)
+                    for i, j in helpers.iter_positions(row, col, rowcount, colcount)
                 ]
                 return listdelegators.ListDelegator(items)
             case _:

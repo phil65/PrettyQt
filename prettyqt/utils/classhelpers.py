@@ -114,7 +114,7 @@ def get_class_for_id(base_class: T, id_: str) -> T:
     raise ValueError(f"Couldnt find class with id {id_!r} for base class {base_class}")
 
 
-def yield_module_classes(
+def iter_classes_for_module(
     module: types.ModuleType | str | Sequence[str],
     *,
     type_filter: type | None | types.UnionType = None,
@@ -143,7 +143,7 @@ def yield_module_classes(
     if recursive:
         for _name, submod in inspect.getmembers(module, inspect.ismodule):
             if submod.__name__.startswith(module_filter or ""):
-                yield from yield_module_classes(
+                yield from iter_classes_for_module(
                     submod,
                     type_filter=type_filter,
                     module_filter=submod.__name__,
@@ -179,5 +179,5 @@ def get_topmost_module_path_for_klass(klass: type) -> str:
 if __name__ == "__main__":
     from prettyqt import widgets
 
-    path = yield_module_classes(widgets, recursive=False)
+    path = iter_classes_for_module(widgets, recursive=False)
     print(len(list(path)))
