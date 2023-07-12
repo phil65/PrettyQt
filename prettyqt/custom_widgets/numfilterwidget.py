@@ -8,6 +8,8 @@ from prettyqt import core, gui, widgets
 
 
 class NumFilterWidget(widgets.Widget):
+    """Widget with a button to choose from a comparison op (>=, >, etc) + a lineedit."""
+
     filter_changed = core.Signal(object)
 
     def __init__(self, *args, **kwargs):

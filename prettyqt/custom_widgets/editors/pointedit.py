@@ -5,6 +5,8 @@ from prettyqt.utils import datatypes
 
 
 class PointEdit(widgets.Widget):
+    """Simple Editor for QPoints."""
+
     value_changed = core.Signal(core.Point)
 
     def __init__(self, *args, object_name: str = "point_edit", **kwargs):

@@ -4,6 +4,8 @@ from prettyqt import core, gui, widgets
 
 
 class PreviewScrollBar(widgets.ScrollBar):
+    """Scrollbar showing a small preview of a (Plain)TextEdit."""
+
     def __init__(self, *args, parent=None, **kwargs):
         super().__init__(*args, **kwargs)
         self._scrollarea = parent

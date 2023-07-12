@@ -4,6 +4,8 @@ from prettyqt import core, gui, widgets
 
 
 class PaletteEdit(widgets.Widget):
+    """Simple editor to edit QPalettes."""
+
     value_changed = core.Signal(gui.Palette)
 
     def __init__(self, *args, object_name: str = "palette_edit", **kwargs):
