@@ -79,16 +79,22 @@ class Document:
 
 class ClassDocument(Document):
     def __init__(
-        self, klass: type, module_path: tuple[str, ...] | str | None = None, **kwargs
+        self,
+        klass: type,
+        module_path: tuple[str, ...] | str | None = None,
+        path: str | os.PathLike = "",
+        **kwargs,
     ):
         """Document showing info about a class.
 
         Arguments:
             klass: class to show info for
             module_path: If given, overrides module returned by class.__module__
+            path: some path for the file.
             kwargs: keyword arguments passed to base class
         """
-        super().__init__(**kwargs)
+        path = pathlib.Path(path).with_name(f"{klass.__name__}.md")
+        super().__init__(path=path, **kwargs)
         self.klass = klass
         match module_path:
             case str():
@@ -116,6 +122,7 @@ class ModuleDocument(Document):
 
     Arguments:
         module: ModuleType or path to model to show info for.
+        module: Some path for the file.
         docstrings: Whether to show docstrings for given module.
         show_class_table: ModuleType or path to model to show info for.
     """
@@ -123,11 +130,14 @@ class ModuleDocument(Document):
     def __init__(
         self,
         module: tuple[str, ...] | str | types.ModuleType,
+        path: str | os.PathLike = "",
+        *,
         docstrings: bool = False,
         show_class_table: bool = True,
         **kwargs,
     ):
-        super().__init__(**kwargs)
+        path = pathlib.Path(path).with_name("index.md")
+        super().__init__(path=path, **kwargs)
         match module:
             case (str(), *_):
                 self.parts = module

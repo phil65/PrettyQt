@@ -28,16 +28,13 @@ for path in docs.iter_files("*/__init__.py"):
         classhelpers.iter_classes_for_module(complete_mod_path, module_filter="prettyqt")
     )
     for klass in klasses:
-        kls_name = klass.__name__
-        path = doc_path.with_name(f"{kls_name}.md")
         doc = markdownizer.PrettyQtClassDocument(
-            klass=klass, module_path=f'prettyqt.{".".join(parts)}', path=path
+            klass=klass, module_path=f'prettyqt.{".".join(parts)}', path=doc_path
         )
-        nav[(*parts, kls_name)] = doc_path.with_name(f"{kls_name}.md")
+        nav[(*parts, klass.__name__)] = doc_path.with_name(f"{klass.__name__}.md")
     if klasses:
-        ref_doc_path = doc_path.with_name("index.md")
         page = markdownizer.ModuleDocument(
-            hide_toc=True, module=complete_mod_path, path=ref_doc_path
+            hide_toc=True, module=complete_mod_path, path=doc_path
         )
         nav[parts] = doc_path.with_name("index.md")
 nav.write()
