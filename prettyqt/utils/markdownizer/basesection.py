@@ -30,12 +30,23 @@ class Text(BaseSection):
 
 
 class Code(Text):
-    def __init__(self, language: str, text: str | BaseSection = "", header: str = ""):
+    def __init__(
+        self,
+        language: str,
+        text: str | BaseSection = "",
+        header: str = "",
+        linenums: int | None = None,
+        hl_lines: list[int] | None = None,
+        title: str = "",
+    ):
         super().__init__(text, header)
         self.language = language
+        self.title = title
+        self.linenums = linenums
 
     def _to_markdown(self) -> str:
-        return f"``` {self.language}\n{self.text}\n```"
+        title = f" title={self.title}" if self.title else ""
+        return f"``` {self.language}{title}\n{self.text}\n```"
 
 
 if __name__ == "__main__":
