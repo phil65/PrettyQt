@@ -102,25 +102,6 @@ class WidgetScreenShot(markdownizer.BinaryImage):
         )
 
 
-def model_to_markdown(
-    model: core.AbstractItemModelMixin, use_checkstate_role: bool = True, **kwargs
-) -> str:
-    data, h_header, v_header = model.get_table_data(**kwargs)
-    if use_checkstate_role:
-        kwargs["role"] = constants.CHECKSTATE_ROLE
-        check_data, _, __ = model.get_table_data(**kwargs)
-        for i, row in enumerate(data):
-            for j, _column in enumerate(row):
-                if check_data[i][j]:
-                    data[i][j] = "x"
-
-    lines = [f"|{'|'.join(h_header)}|", f"|{'--|--'.join('' for _ in h_header)}|"]
-    for row in data:
-        sections = [str(i) if i else "" for i in row]
-        lines.append(f"|{'|'.join(sections)}|")
-    return "\n".join(lines)
-
-
 def to_mermaid_tree(index: core.ModelIndex, role=constants.DISPLAY_ROLE):
     indexes, inheritances = helpers.get_connections(
         [index],

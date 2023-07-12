@@ -25,7 +25,7 @@ class Docs:
         pass
 
     def get_overview_document(self):
-        page = markdownizer.Document(hide_toc=True, path=self.root_path / "index.md")
+        page = markdownizer.Document(hide_toc=True, path="index.md")
         # page += self.get_dependency_table()
         page += self.get_module_overview()
         return page
@@ -40,7 +40,7 @@ class Docs:
                 submod_name,
                 submod.__doc__,
                 (
-                    markdownizer.to_html_list(submod.__all__)
+                    markdownizer.to_html_list(submod.__all__, make_link=True)
                     if hasattr(submod, "__all__")
                     else ""
                 ),

@@ -87,28 +87,52 @@ def escape_markdown(text: str, version: int = 1, entity_type: str | None = None)
 #     logger.warning(inv.values())
 
 
-def link_for_class(kls: type) -> str:
+def linked(identifier: str, title: str | None = None) -> str:
+    return f"[{identifier if title is None else title}]({identifier}.md)"
+
+
+def styled(
+    text: str,
+    size: int | None = None,
+    bold: bool = False,
+    recursive: bool = False,
+    code: bool = False,
+) -> str:
+    if size:
+        text = f"<font size='{size}'>{text}</font>"
+    if bold:
+        text = f"**{text}**"
+    if recursive:
+        text = f"*{text}*"
+    if code:
+        text = f"`{text}`"
+    return text
+
+
+def link_for_class(kls: type, **kwargs) -> str:
     if kls.__module__ == "builtins":
         url = BUILTIN_URL.format(mod="functions", name=kls.__name__)
-        return f"[{kls.__name__}]({url})"
-    if kls.__module__ in sys.stdlib_module_names:
+        link = linked(url, title=kls.__name__)
+    elif kls.__module__ in sys.stdlib_module_names:
         mod = kls.__module__
         url = BUILTIN_URL.format(mod=mod, name=f"{mod}.{kls.__name__}")
-        return f"[{kls.__name__}]({url})"
+        link = linked(url, title=kls.__name__)
     elif kls.__module__.startswith(("PyQt", "PySide")):
         mod = kls.__module__.replace("PySide6.", "").replace("PyQt6.", "")
         url = f"{BASE_URL}{mod}/{kls.__qualname__.replace('.', '/')}.html"
-        return f"[{kls.__name__}]({url})"
+        link = linked(url, title=kls.__name__)
     elif kls.__module__.startswith("prettyqt"):
-        return f"[{kls.__qualname__}]({kls.__qualname__}.md)"
+        link = linked(kls.__qualname__)
     try:
         dist = metadata.distribution(kls.__module__.split(".")[0])
     except metadata.PackageNotFoundError:
-        return f"[{kls.__qualname__}]({kls.__qualname__}.md)"
+        link = linked(kls.__qualname__)
     else:
         if url := dist.metadata["Home-Page"]:
-            return f"[{kls.__qualname__}]({url})"
-        return f"[{kls.__qualname__}]({kls.__qualname__}.md)"
+            link = linked(url, title=kls.__qualname__)
+        else:
+            link = linked(kls.__qualname__)
+    return styled(link, **kwargs)
 
 
 def label_for_class(klass: type) -> str:
@@ -120,10 +144,15 @@ def label_for_class(klass: type) -> str:
     return klass.__qualname__
 
 
-def to_html_list(ls: list[str], shorten_after: int | None = None):
+def to_html_list(
+    ls: list[str], shorten_after: int | None = None, make_link: bool = False
+):
     if not ls:
         return ""
-    item_str = "".join(f"<li>{i}</li>" for i in ls[:shorten_after])
+    item_str = "".join(
+        f"<li>{linked(i)}</li>" if make_link else f"<li>{i}</li>"
+        for i in ls[:shorten_after]
+    )
     if shorten_after and len(ls) > shorten_after:
         item_str += "<li>...</li>"
     return f"<ul>{item_str}</ul>"
