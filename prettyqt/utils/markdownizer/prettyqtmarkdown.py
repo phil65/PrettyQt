@@ -17,6 +17,9 @@ logger = logging.getLogger(__name__)
 
 class PrettyQtClassDocument(markdownizer.ClassDocument):
     def _build(self):
+        if qt_parent := classhelpers.get_qt_parent_class(self.klass):
+            self.append(f"Qt Base Class: {markdownizer.link_for_class(qt_parent)}")
+            self.append(f"Signature: `{qt_parent.__doc__}`")
         super()._build()
         if issubclass(self.klass, core.AbstractItemModelMixin) and issubclass(
             self.klass, core.QObject
@@ -42,11 +45,9 @@ class PrettyQtClassDocument(markdownizer.ClassDocument):
             msg = f"Recommended delegate: {self.klass.DELEGATE_DEFAULT!r}"
             self.append(markdownizer.Admonition("info", msg))
         if issubclass(self.klass, core.QObject):
-            # model = itemmodels.QObjectPropertiesModel()
-            for table in markdownizer.Table.get_prop_tables_for_klass(self.klass):
-                self.append(table)  # noqa: PERF402
-            if qt_parent := classhelpers.get_qt_parent_class(self.klass):
-                self.append(f"Qt Base Class: {markdownizer.link_for_class(qt_parent)}")
+            self.append(
+                markdownizer.Table.get_property_table(self.klass, header="Property table")
+            )
         if hasattr(self.klass, "ID") and issubclass(self.klass, gui.Validator):
             self.append(f"\n\nValidator ID: **{self.klass.ID}**\n\n")
         if hasattr(self.klass, "ID") and issubclass(
@@ -141,7 +142,7 @@ if __name__ == "__main__":
     doc = markdownizer.Document([], True, True)
     doc += markdownizer.Admonition("info", "etst")
     doc += markdownizer.Table(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
-    doc += markdownizer.Table.get_prop_tables_for_klass(core.StringListModel)[0]
+    doc += markdownizer.Table.get_property_table(core.StringListModel)
     doc += markdownizer.DocStrings(helpers, header="DocStrings")
     doc += markdownizer.Table.get_dependency_table("prettyqt")
     doc += markdownizer.MermaidDiagram.for_classes(

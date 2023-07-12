@@ -156,6 +156,11 @@ class DocStrings(markdownizer.Text):
     def _to_markdown(self) -> str:
         md = f"::: {self.module_path}\n"
         if self.options:
-            lines = [f"    {k} : {v}" for k, v in self.options]
-            md = md + "\n" + "\n".join(lines)
+            options = "\n".join(f"      {k}: {v}" for k, v in self.options.items())
+            md = f"{md}    options:\n{options}\n"
         return f"{md}\n"
+
+
+if __name__ == "__main__":
+    docstrings = DocStrings("a.b", testus=10)
+    print(docstrings)

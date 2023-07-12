@@ -47,6 +47,7 @@ plugins:
 - include-markdown  # include content of other markdown files
 - literate-nav:  # move nav out of mkdocs.yml
     nav_file: SUMMARY.md
+    # implicit_index: true
 # - autorefs  # allows linking to any header
 - linkreplacer  # allows linking to any markdown page (alternative: https://github.com/Jackiexiao/mkdocs-roamlinks-plugin)
 - gen-files: # https://github.com/oprypin/mkdocs-gen-files

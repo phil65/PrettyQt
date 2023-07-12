@@ -24,7 +24,9 @@ class Table(markdownizer.Text):
                 self.data = {str(k): [str(i) for i in v] for k, v in data.items()}
             case ((str(), *_), *_):
                 h = columns or [str(i) for i in range(len(data))]
-                self.data = {h[i]: col for i, col in enumerate(data)}
+                self.data = {}
+                for i, col in enumerate(data):
+                    self.data[h[i]] = [str(j) for j in col]
             case (dict(), *_):
                 self.data = {k: [dic[k] for dic in data] for k in data[0]}
             case ():
@@ -105,10 +107,17 @@ class Table(markdownizer.Text):
 
     @classmethod
     def get_property_table(
-        cls, properties, user_prop_name: str | None = None, header: str = ""
+        cls,
+        qobject: core.QObject | type[core.QObject],
+        user_prop_name: str | None = None,
+        header: str = "",
     ) -> Self:
         lines = []
         headers = ["Qt Property", "Type", "Options"]
+        if isinstance(qobject, core.QObject):
+            properties = core.MetaObject(qobject.metaObject()).get_properties()
+        elif issubclass(qobject, core.QObject):
+            properties = core.MetaObject(qobject.staticMetaObject).get_properties()
         for prop in properties:
             property_name = f"`{prop.get_name()}`"
             if prop.get_name() == user_prop_name:
@@ -124,35 +133,6 @@ class Table(markdownizer.Text):
             ]
             lines.append(sections)
         return cls(columns=headers, data=list(zip(*lines)), header=header)
-
-    @classmethod
-    def get_prop_tables_for_klass(cls, klass: type[core.QObject]) -> list[Self]:
-        metaobject = core.MetaObject(klass.staticMetaObject)
-        user_prop_name = (
-            user_prop.get_name()
-            if (user_prop := metaobject.get_user_property()) is not None
-            else None
-        )
-        props_without_super = metaobject.get_properties(include_super=False)
-        prop_names_without_super = [p.get_name() for p in props_without_super]
-        props_with_super = metaobject.get_properties(include_super=True)
-        super_props = [
-            p for p in props_with_super if p.get_name() not in prop_names_without_super
-        ]
-        if not props_with_super:
-            return []
-        lines = []
-        if props_without_super:
-            item = cls.get_property_table(
-                props_without_super, user_prop_name, header="Class Properties"
-            )
-            lines.append(item)
-        if super_props:
-            item = cls.get_property_table(
-                super_props, user_prop_name, header="Inherited Properties"
-            )
-            lines.append(item)
-        return lines
 
     @classmethod
     def from_itemmodel(
@@ -182,9 +162,21 @@ class Table(markdownizer.Text):
         from prettyqt import itemmodels
 
         model = itemmodels.ImportlibTreeModel(distribution)
-        list(model.iter_tree(depth=2))
         proxy = itemmodels.ColumnOrderProxyModel(
             order=["Name", "Constraints", "Extra", "Summary", "Homepage"],
             source_model=model,
         )
         return cls.from_itemmodel(proxy)
+
+
+if __name__ == "__main__":
+    from prettyqt import itemmodels
+
+    model = itemmodels.QObjectPropertiesModel(core.PropertyAnimation())
+    proxy = itemmodels.SliceToMarkdownProxyModel(None, source_model=model)
+    table = Table.from_itemmodel(
+        proxy, role=itemmodels.SliceToMarkdownProxyModel.Roles.MarkdownRole
+    )
+    # list(model.iter_tree(depth=2))
+    # table = Table.get_dependency_table("prettyqt")
+    print(str(table))
