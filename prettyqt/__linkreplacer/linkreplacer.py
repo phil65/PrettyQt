@@ -29,7 +29,7 @@ class AutoLinkReplacerPlugin:
         self.mapping = mapping
         self.base_docs_url = pathlib.Path(base_docs_url)
         # Absolute URL of the linker
-        self.abs_linker_url = os.path.dirname(self.base_docs_url / page_url)
+        self.linker_url = os.path.dirname(self.base_docs_url / page_url)  # noqa: PTH120
 
     def __call__(self, match):
         # Name of the markdown file
@@ -42,15 +42,16 @@ class AutoLinkReplacerPlugin:
         abs_link_url = (self.base_docs_url / self.mapping[filename][0]).parent
         # need os.replath here bc pathlib.relative_to throws an exception
         # when linking across drives
-        rel_path = os.path.relpath(abs_link_url, self.abs_linker_url)
-        rel_link_url = os.path.join(rel_path, filename.replace(".md", ".html"))
+        rel_path = os.path.relpath(abs_link_url, self.linker_url)
+        html_filename = filename.replace(".md", ".html")
+        rel_link_url = os.path.join(rel_path, html_filename)  # noqa: PTH118
         new_text = (
             match.group(0).replace(match.group(2), rel_link_url)
             if match.group(5) is None
             else match.group(0).replace(match.group(2), rel_link_url + match.group(5))
         )
         new_text = new_text.replace("\\", "/")
-        logger.info(f"LinkReplacer: {match.group(0)=} -> {new_text=}")
+        logger.debug(f"LinkReplacer: {match.group(3)=} -> {rel_link_url=}")
         return new_text
 
 
@@ -60,7 +61,7 @@ class LinkReplacerPlugin(BasePlugin):
         page_url = page.file.src_path
         mapping = collections.defaultdict(list)
         for file_ in files:
-            filename = os.path.basename(file_.abs_src_path)
+            filename = os.path.basename(file_.abs_src_path)  # noqa: PTH119
             mapping[filename].append(file_.url)
         plugin = AutoLinkReplacerPlugin(base_docs_url, page_url, mapping)
         markdown = re.sub(AUTOLINK_RE, plugin, markdown)

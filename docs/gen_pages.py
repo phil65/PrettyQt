@@ -22,9 +22,8 @@ ref_page = docs.create_nav(path="reference")
 for path in docs.iter_files("*/__init__.py"):
     mod_path = path.with_suffix("")
     doc_path = path.with_suffix(".md")
-    parts = tuple(mod_path.parts)
-    complete_mod_path = "prettyqt." + ".".join(parts)
-    parts = parts[:-1]
+    complete_mod_path = "prettyqt." + ".".join(mod_path.parts)
+    parts = mod_path.parts[:-1]
     full_doc_path = Path("reference", doc_path)
     klasses = list(
         classhelpers.iter_classes_for_module(complete_mod_path, module_filter="prettyqt")
@@ -40,8 +39,8 @@ for path in docs.iter_files("*/__init__.py"):
     if klasses:
         ref_page[parts] = doc_path.with_name("index.md").as_posix()
         ref_doc_path = full_doc_path.with_name("index.md")
-        page = markdownizer.Document(hide_toc=True, path=ref_doc_path)
-        page += markdownizer.Table.get_classes_table(klasses)
+        page = markdownizer.ModuleDocument(
+            hide_toc=True, module=complete_mod_path, path=ref_doc_path
+        )
         page.write(ref_doc_path)
-
 ref_page.write()

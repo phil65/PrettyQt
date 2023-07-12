@@ -35,14 +35,10 @@ class Table(markdownizer.Text):
             self.data[k] = [v(i) for i in self.data[k]]
 
     def _to_markdown(self) -> str:
-        # print(self.data)
         if not self.data:
             return ""
         headers = [str(i) for i in self.data.keys()]
         lines = [f"|{'|'.join(headers)}|", f"|{'--|--'.join('' for _ in headers)}|"]
-        from pprint import pprint
-
-        pprint(list(self._iter_rows()))
         lines.extend(f"|{'|'.join(row)}|" for row in self._iter_rows())
         return "\n".join(lines)
 
