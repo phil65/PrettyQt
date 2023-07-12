@@ -23,6 +23,8 @@ MOVIE_STATE: bidict[MovieStateStr, QtGui.QMovie.MovieState] = bidict(
 
 
 class Movie(core.ObjectMixin, QtGui.QMovie):
+    """Convenience class for playing movies with QImageReader."""
+
     def __repr__(self):
         return get_repr(self, self.fileName(), self.get_format())
 

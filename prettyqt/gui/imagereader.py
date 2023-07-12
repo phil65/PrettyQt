@@ -22,6 +22,8 @@ IMAGE_READER_ERROR: bidict[ImageReaderErrorStr, gui.QImageReader.ImageReaderErro
 
 
 class ImageReader(gui.QImageReader):
+    """Format independent interface for reading images from files or other devices."""
+
     def __getitem__(self, key: str) -> str:
         return self.text(key)
 

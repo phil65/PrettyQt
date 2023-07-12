@@ -102,6 +102,8 @@ STANDARD_KEYS = bidict(
 
 
 class KeySequence(QtGui.QKeySequence):
+    """Encapsulates a key sequence as used by shortcuts."""
+
     def __init__(self, *args, **kwargs):
         match args:
             case (str(),) if args[0] in STANDARD_KEYS:

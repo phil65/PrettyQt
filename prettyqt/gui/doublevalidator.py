@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class DoubleValidator(gui.ValidatorMixin, gui.QDoubleValidator):
+    """Range checking of floating-point numbers."""
+
     ID = "double"
 
     def __init__(self, *args, **kwargs):

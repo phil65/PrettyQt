@@ -11,6 +11,8 @@ from prettyqt.utils import datatypes, serializemixin
 
 
 class Polygon(serializemixin.SerializeMixin, QtGui.QPolygon):
+    """List of points using integer precision."""
+
     def __repr__(self):
         return f"{type(self).__name__}(<{len(self)} points>)"
 

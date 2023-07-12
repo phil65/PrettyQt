@@ -51,7 +51,7 @@ class PaintDeviceMixin:
 
 
 class PaintDevice(PaintDeviceMixin, QtGui.QPaintDevice):
-    pass
+    """The base class of objects that can be painted on with QPainter."""
 
 
 if __name__ == "__main__":

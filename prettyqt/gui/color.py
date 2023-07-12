@@ -34,6 +34,8 @@ def is_valid_color(text: str):
 
 
 class Color(QtGui.QColor):
+    """Colors based on RGB, HSV or CMYK values."""
+
     def __init__(self, *args):
         match args:
             case (QtGui.QColor(),):

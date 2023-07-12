@@ -18,6 +18,8 @@ FONT_FILTERS: bidict[FontFilterStr, widgets.QFontComboBox.FontFilter] = bidict(
 
 
 class FontComboBox(widgets.ComboBoxMixin, widgets.QFontComboBox):
+    """Combobox that lets the user select a font family."""
+
     value_changed = core.Signal(gui.QFont)
 
     def _get_map(self):

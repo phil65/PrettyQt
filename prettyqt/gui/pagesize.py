@@ -153,6 +153,8 @@ UnitStr = Literal["millimeter", "point", "inch", "pica", "didot", "cicero"]
 
 
 class PageSize(QtGui.QPageSize):
+    """Describes the size and name of a defined page size."""
+
     def __repr__(self):
         return get_repr(self, self.get_id())
 

@@ -5,6 +5,8 @@ from prettyqt.utils import datatypes, get_repr, serializemixin
 
 
 class Brush(serializemixin.SerializeMixin, gui.QBrush):
+    """Defines the fill pattern of shapes drawn by QPainter."""
+
     def __repr__(self):
         return get_repr(self, self.get_color(), self.get_style())
 

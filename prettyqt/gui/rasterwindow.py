@@ -4,7 +4,7 @@ from prettyqt import gui
 
 
 class RasterWindow(gui.PaintDeviceWindowMixin, gui.QRasterWindow):
-    pass
+    """Convenience class for using QPainter on a QWindow."""
 
 
 if __name__ == "__main__":

@@ -228,7 +228,7 @@ class ActionMixin(core.ObjectMixin):
 
 
 class Action(ActionMixin, gui.QAction):
-    pass
+    """Abstraction for user commands that can be added to different GUI components."""
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ from prettyqt import gui
 
 
 class Bitmap(gui.PixmapMixin, gui.QBitmap):
-    pass
+    """Monochrome (1-bit depth) pixmaps."""
 
 
 if __name__ == "__main__":

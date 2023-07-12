@@ -33,6 +33,8 @@ UNITS: bidict[UnitStr, gui.QPageLayout.Unit] = bidict(
 
 
 class PageLayout(gui.QPageLayout):
+    """Describes the size, orientation and margins of a page."""
+
     def __repr__(self):
         return get_repr(self)
 

@@ -5,6 +5,8 @@ from prettyqt.utils import colors, datatypes, get_repr, serializemixin
 
 
 class Pen(serializemixin.SerializeMixin, gui.QPen):
+    """Defines how a QPainter should draw lines and outlines of shapes."""
+
     def __repr__(self):
         return get_repr(self, self.get_color())
 

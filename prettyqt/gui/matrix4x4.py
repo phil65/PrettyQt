@@ -4,7 +4,7 @@ from prettyqt.qt import QtGui
 
 
 class Matrix4x4(QtGui.QMatrix4x4):
-    pass
+    """Represents a 4x4 transformation matrix in 3D space."""
 
 
 if __name__ == "__main__":

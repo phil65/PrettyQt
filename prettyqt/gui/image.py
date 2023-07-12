@@ -93,6 +93,8 @@ FORMAT: bidict[FormatStr, gui.QImage.Format] = bidict(
 
 
 class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
+    """Hardware-independent image representation with direct access to the pixel data."""
+
     def __setitem__(self, index: tuple[int, int], value):
         self.setPixel(index[0], index[1], value)
 

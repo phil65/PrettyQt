@@ -19,6 +19,8 @@ ICON_ENGINE_HOOK: bidict[IconEngineHookStr, gui.QIconEngine.IconEngineHook] = bi
 
 
 class IconEngine(serializemixin.SerializeMixin, gui.QIconEngine):
+    """Abstract base class for QIcon renderers."""
+
     def __repr__(self):
         return get_repr(self)
 

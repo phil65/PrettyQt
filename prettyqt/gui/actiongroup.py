@@ -17,6 +17,8 @@ EXCLUSION_POLICY: bidict[ExclusionPolicyStr, QtGui.QActionGroup.ExclusionPolicy]
 
 
 class ActionGroup(core.ObjectMixin, QtGui.QActionGroup):
+    """Groups actions together."""
+
     def __init__(self, parent: core.QObject | None = None, **kwargs):
         super().__init__(parent, **kwargs)
 

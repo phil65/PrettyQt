@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class ConicalGradient(gui.GradientMixin, gui.QConicalGradient):
+    """Used in combination with QBrush to specify a conical gradient brush."""
+
     def __repr__(self):
         return get_repr(self, self.get_center(), self.angle())
 

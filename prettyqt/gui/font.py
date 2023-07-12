@@ -148,6 +148,8 @@ WeightStr = Literal[
 
 
 class Font(gui.QFont):
+    """Specifies a query for a font used for drawing text."""
+
     def __repr__(self):
         return get_repr(
             self, self.family(), self.pointSize(), self.weight(), self.italic()

@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class RadialGradient(gui.GradientMixin, gui.QRadialGradient):
+    """Used in combination with QBrush to specify a radial gradient brush."""
+
     def __repr__(self):
         return get_repr(
             self,

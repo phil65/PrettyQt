@@ -4,6 +4,8 @@ from prettyqt.qt import QtGui
 
 
 class PixmapCache(QtGui.QPixmapCache):
+    """Application-wide cache for pixmaps."""
+
     def __setitem__(self, key: str, value: QtGui.QPixmap):
         self.insert(key, value)
 

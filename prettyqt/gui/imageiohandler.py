@@ -76,6 +76,8 @@ TRANSFORMATION: bidict[TransformationStr, mod.Transformation] = bidict(
 
 
 class ImageIOHandler(mod):
+    """Defines the common image I/O interface for all image formats in Qt."""
+
     def __getitem__(self, key: ImageOptionStr | mod.ImageOption) -> datatypes.Variant:
         return self.get_option(key)
 

@@ -43,6 +43,8 @@ TRANSFER_FUNCTION: bidict[TransformFunctionStr, QtGui.QColorSpace.TransferFuncti
 
 
 class ColorSpace(serializemixin.SerializeMixin, QtGui.QColorSpace):
+    """Color space abstraction."""
+
     def __bool__(self):
         return self.isValid()
 

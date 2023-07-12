@@ -97,6 +97,8 @@ WritingSystemStr = Literal[
 
 
 class FontDatabase(QtGui.QFontDatabase):
+    """Information about the fonts available in the underlying window system."""
+
     font_paths: dict[str, int] = {}
 
     @classmethod

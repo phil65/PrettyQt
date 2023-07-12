@@ -7,6 +7,8 @@ from prettyqt.utils import datatypes
 
 
 class DesktopServices(gui.QDesktopServices):
+    """Methods for accessing common desktop services."""
+
     @classmethod
     def open_url(cls, location: datatypes.PathType | datatypes.UrlType) -> bool:
         if not isinstance(location, core.QUrl):

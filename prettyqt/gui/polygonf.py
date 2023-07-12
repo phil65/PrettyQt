@@ -12,6 +12,8 @@ from prettyqt.utils import datatypes, serializemixin
 
 
 class PolygonF(serializemixin.SerializeMixin, gui.QPolygonF):
+    """List of points using floating point precision."""
+
     def __repr__(self):
         return f"{type(self).__name__}(<{len(self)} points>)"
 

@@ -67,6 +67,8 @@ GROUP: bidict[GroupStr, gui.QPalette.ColorGroup] = bidict(
 
 
 class Palette(serializemixin.SerializeMixin, gui.QPalette):
+    """Contains color groups for each widget state."""
+
     def __getitem__(self, index: RoleStr | gui.QPalette.ColorRole) -> gui.Color:
         return self.get_color(index)
 

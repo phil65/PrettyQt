@@ -16,6 +16,8 @@ MODES: bidict[ModeStr, gui.QClipboard.Mode] = bidict(
 
 
 class Clipboard(core.ObjectMixin):
+    """Access to the window system clipboard."""
+
     def __init__(self, item: gui.QClipboard):
         self.item = item
 

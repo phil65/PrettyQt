@@ -11,6 +11,8 @@ from prettyqt.utils import colors, datatypes, serializemixin
 
 
 class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
+    """Off-screen image representation that can be used as a paint device."""
+
     def __bool__(self):
         return not self.isNull()
 

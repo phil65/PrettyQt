@@ -274,7 +274,7 @@ class PainterMixin:
 
 
 class Painter(PainterMixin, gui.QPainter):
-    pass
+    """Performs low-level painting on widgets and other paint devices."""
 
 
 if __name__ == "__main__":

@@ -203,7 +203,7 @@ class GradientMixin:
 
 
 class Gradient(GradientMixin, gui.QGradient):
-    pass
+    """Used in combination with QBrush to specify gradient fills."""
 
 
 if __name__ == "__main__":

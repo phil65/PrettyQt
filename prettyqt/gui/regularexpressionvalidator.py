@@ -7,6 +7,8 @@ from prettyqt.utils import datatypes, get_repr
 
 
 class RegularExpressionValidator(gui.ValidatorMixin, gui.QRegularExpressionValidator):
+    """Used to check a string against a regular expression."""
+
     ID = "regular_expression"
 
     def __init__(self, *args, **kwargs):

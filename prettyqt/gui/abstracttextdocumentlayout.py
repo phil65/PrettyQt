@@ -31,7 +31,7 @@ class AbstractTextDocumentLayoutMixin(core.ObjectMixin):
 class AbstractTextDocumentLayout(
     AbstractTextDocumentLayoutMixin, QtGui.QAbstractTextDocumentLayout
 ):
-    pass
+    """Abstract base class used to implement custom layouts for QTextDocuments."""
 
 
 if __name__ == "__main__":

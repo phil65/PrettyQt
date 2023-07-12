@@ -5,6 +5,8 @@ from prettyqt.qt import QtGui
 
 
 class FontMetrics(QtGui.QFontMetrics):
+    """Font metrics information."""
+
     def elided_text(
         self,
         text: str,

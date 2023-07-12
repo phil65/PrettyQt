@@ -202,7 +202,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
 
 
 class GuiApplication(GuiApplicationMixin, gui.QGuiApplication):
-    pass
+    """Manages the GUI application's control flow and main settings."""
 
 
 if __name__ == "__main__":

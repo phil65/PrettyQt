@@ -23,6 +23,8 @@ StateStr = Literal["off", "on"]
 
 
 class Icon(serializemixin.SerializeMixin, gui.QIcon):
+    """Scalable icons in different modes and states."""
+
     def __repr__(self):
         return get_repr(self)
 

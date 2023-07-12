@@ -6,6 +6,8 @@ from prettyqt import constants, core, gui
 
 
 class Drag(core.ObjectMixin, gui.QDrag):
+    """Support for MIME-based drag and drop data transfer."""
+
     def get_pixmap(self) -> gui.Pixmap:
         return gui.Pixmap(self.pixmap())
 

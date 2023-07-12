@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class LinearGradient(gui.GradientMixin, gui.QLinearGradient):
+    """Used in combination with QBrush to specify a linear gradient brush."""
+
     def __repr__(self):
         return get_repr(self, self.get_start(), self.get_final_stop())
 

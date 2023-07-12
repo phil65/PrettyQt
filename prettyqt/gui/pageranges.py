@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class PageRanges(QtGui.QPageRanges):
+    """Represents a collection of page ranges."""
+
     def __bool__(self):
         return not self.isEmpty()
 

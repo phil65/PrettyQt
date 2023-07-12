@@ -5,6 +5,8 @@ from prettyqt.utils import datatypes
 
 
 class PdfWriter(core.ObjectMixin, gui.PagedPaintDeviceMixin, gui.QPdfWriter):
+    """Class to generate PDFs that can be used as a paint device."""
+
     def set_desktop_resolution(self):
         primary = gui.app().primaryScreen()
         dpi = primary.logicalDotsPerInch()

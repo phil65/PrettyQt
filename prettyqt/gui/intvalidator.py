@@ -8,6 +8,8 @@ MAX_VAL = 1_000_000_000  # could be 2_147_483_647, but no point in random number
 
 
 class IntValidator(gui.ValidatorMixin, gui.QIntValidator):
+    """Validator that ensures a string contains a integer within a specified range."""
+
     ID = "integer_classic"
 
     def __repr__(self):

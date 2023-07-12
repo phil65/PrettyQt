@@ -19,6 +19,8 @@ IMAGE_WRITER_ERROR: bidict[ImageWriterErrorStr, gui.QImageWriter.ImageWriterErro
 
 
 class ImageWriter(gui.QImageWriter):
+    """Format independent interface for writing images to files or other devices."""
+
     def __setitem__(self, key: str, val: str):
         self.setText(key, val)
 

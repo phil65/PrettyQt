@@ -4,6 +4,8 @@ from prettyqt import constants, core, gui
 
 
 class Screen:
+    """Used to query screen properties."""
+
     def __init__(self, item: gui.QScreen):
         self.item = item
 

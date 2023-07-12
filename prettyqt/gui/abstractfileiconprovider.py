@@ -42,4 +42,4 @@ class AbstractFileIconProviderMixin:
 class AbstractFileIconProvider(
     AbstractFileIconProviderMixin, QtGui.QAbstractFileIconProvider
 ):
-    pass
+    """File icons for the QFileSystemModel class."""

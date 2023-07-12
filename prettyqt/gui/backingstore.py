@@ -6,6 +6,8 @@ from prettyqt.qt import QtGui
 
 
 class BackingStore(QtGui.QBackingStore):
+    """Drawing area for QWindow."""
+
     @contextlib.contextmanager
     def paint_on_region(self, region: QtGui.QRegion):
         self.beginPaint(region)
