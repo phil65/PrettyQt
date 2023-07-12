@@ -2,11 +2,15 @@ from __future__ import annotations
 
 from collections.abc import Callable, Mapping, Sequence
 from importlib import metadata
+import logging
 
 from typing_extensions import Self
 
 from prettyqt import core
 from prettyqt.utils import markdownizer
+
+
+logger = logging.getLogger(__name__)
 
 
 class Table(markdownizer.Text):
@@ -141,16 +145,11 @@ class Table(markdownizer.Text):
         use_checkstate_role: bool = True,
         **kwargs,
     ) -> Self:
-        from prettyqt import constants
+        proxy = itemmodels.SliceToMarkdownProxyModel(None, source_model=model)
 
-        data, h_header, _ = model.get_table_data(**kwargs)
-        if use_checkstate_role:
-            kwargs["role"] = constants.CHECKSTATE_ROLE
-            check_data, _, __ = model.get_table_data(**kwargs)
-            for i, row in enumerate(data):
-                for j, _column in enumerate(row):
-                    if check_data[i][j]:
-                        data[i][j] = "x"
+        data, h_header, _ = proxy.get_table_data(
+            use_checkstate_role=use_checkstate_role, **kwargs
+        )
         data = list(zip(*data))
         return cls(data, columns=h_header)
 
@@ -173,10 +172,8 @@ if __name__ == "__main__":
     from prettyqt import itemmodels
 
     model = itemmodels.QObjectPropertiesModel(core.PropertyAnimation())
-    proxy = itemmodels.SliceToMarkdownProxyModel(None, source_model=model)
-    table = Table.from_itemmodel(
-        proxy, role=itemmodels.SliceToMarkdownProxyModel.Roles.MarkdownRole
-    )
+    # print(proxy.get_table_data(use_checkstate_role=True))
+    table = Table.from_itemmodel(model)
     # list(model.iter_tree(depth=2))
-    # table = Table.get_dependency_table("prettyqt")
-    print(str(table))
+    table = Table.get_dependency_table("prettyqt")
+    print(logger.warning(table))
