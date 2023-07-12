@@ -5,7 +5,7 @@ import logging
 import os
 import types
 
-from prettyqt.utils import markdownizer
+from prettyqt.utils import classhelpers, markdownizer
 
 
 logger = logging.getLogger(__name__)
@@ -13,7 +13,11 @@ logger = logging.getLogger(__name__)
 
 class DocStrings(markdownizer.Text):
     def __init__(
-        self, obj: types.ModuleType | str | os.PathLike | type, header: str = "", **kwargs
+        self,
+        obj: types.ModuleType | str | os.PathLike | type,
+        header: str = "",
+        for_topmost: bool = False,
+        **kwargs,
     ):
         """Docstring section.
 
@@ -134,12 +138,19 @@ class DocStrings(markdownizer.Text):
             case types.ModuleType():
                 self.module_path = obj.__name__
             case type():
-                self.module_path = f"{obj.__module__}.{obj.__qualname__}"
+                if for_topmost:
+                    self.module_path = classhelpers.get_topmost_module_path_for_klass(obj)
+                else:
+                    self.module_path = f"{obj.__module__}.{obj.__qualname__}"
             case str():
-                self.module_path = obj
+                self.module_path = obj  # for setting a manual path
+            case tuple() | list():
+                self.module_path = ".".join(obj)
             case os.PathLike():
                 mod = importlib.import_module(os.fspath(obj))
                 self.module_path = mod.__name__
+            case _:
+                raise TypeError(obj)
         self.options = kwargs
 
     def _to_markdown(self) -> str:
