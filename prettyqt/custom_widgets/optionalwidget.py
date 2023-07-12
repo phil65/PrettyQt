@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from prettyqt import widgets
+from prettyqt import core, widgets
 
 
 class OptionalWidget(widgets.GroupBox):
+    """Wraps another widget in a GroupBox with and CheckBock and makes it optional."""
+
+    value_changed = core.Signal(object)
+
     def __init__(
         self,
         widget: widgets.QWidget,
@@ -15,9 +19,21 @@ class OptionalWidget(widgets.GroupBox):
         self.box.add(widget)
         self.widget = widget
         self.toggled.connect(self.widget.setEnabled)
+        self.widget.value_changed.connect(self._on_value_change)
+        self.toggled.connect(self._on_enable_change)
+
+    def _on_value_change(self, val):
+        self.value_changed.emit(val)
+
+    def _on_enable_change(self, val):
+        self.widget.setEnabled(val)
+        if val:
+            self.value_changed.emit(self.widget.get_value())
+        else:
+            self.value_changed.emit(None)
 
     def __getattr__(self, value: str):
-        return self.widget.__getattribute__(value)
+        return getattr(self.widget, value)
 
     @classmethod
     def setup_example(cls):
@@ -40,5 +56,6 @@ if __name__ == "__main__":
     app = widgets.app()
     img = widgets.RadioButton("test")
     widget = OptionalWidget(img, "Test")
+    widget.value_changed.connect(print)
     widget.show()
     app.exec()
