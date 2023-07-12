@@ -77,6 +77,16 @@ def escape_markdown(text: str, version: int = 1, entity_type: str | None = None)
     return re.sub(f"([{re.escape(escape_chars)}])", r"\\\1", text)
 
 
+# import pathlib
+# from mkdocstrings import inventory
+
+# path = pathlib.Path(__file__, "../qt6.inv")
+# with path.open("rb") as file:
+#     inv = inventory.Inventory.parse_sphinx(file)
+
+#     logger.warning(inv.values())
+
+
 def link_for_class(kls: type) -> str:
     if kls.__module__ == "builtins":
         url = BUILTIN_URL.format(mod="functions", name=kls.__name__)
@@ -126,7 +136,7 @@ if __name__ == "__main__":
     doc = Document([], True, True)
     doc += Admonition("info", "etst")
     doc += Table(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
-    doc += Table.get_prop_tables_for_klass(core.StringListModel)[0]
+    doc += Table.get_property_table(core.StringListModel)
     doc += DocStrings(helpers, header="DocStrings")
     doc += Table.get_dependency_table("prettyqt")
     doc += MermaidDiagram.for_classes([Table], header="Mermaid diagram")
