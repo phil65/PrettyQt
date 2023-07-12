@@ -22,14 +22,16 @@ class LiterateNav(markdownizer.BaseSection):
         super().__init__()
         self.path = pathlib.Path(path) / "SUMMARY.md"
         self.nav = mkdocs_gen_files.Nav()
-        self._mapping = dict()
+        self._mapping = {}
         if mapping:
             for k, v in mapping.items():
                 self.nav[k] = v
                 self._mapping[k] = v
 
-    def __setitem__(self, item, value):
-        self.nav[item] = value
+    def __setitem__(self, item: tuple | str, value: str | os.PathLike):
+        if isinstance(item, str):
+            item = tuple(item.split("."))
+        self.nav[item] = pathlib.Path(value).as_posix()
         self._mapping[item] = value
 
     def __getitem__(self, item):
@@ -38,9 +40,20 @@ class LiterateNav(markdownizer.BaseSection):
     def write(self):
         logger.info(f"Written SUMMARY to {self.path}")
         with mkdocs_gen_files.open(self.path, "w") as nav_file:
-            nav_file.writelines(self.nav.build_literate_nav())
+            nav_file.writelines(self.iter_rows())
+
+    def iter_rows(self):
+        return self.nav.build_literate_nav()
+
+    def to_markdown(self):
+        return "\n".join(self.iter_rows())
+
+    def add_document(self, nav_path: str | tuple, file_path: os.PathLike | str, **kwargs):
+        self.__setitem__(nav_path, file_path)
+        return markdownizer.Document(**kwargs)
 
 
 if __name__ == "__main__":
-    doc = LiterateNav(module_name="prettyqt")
-    print(list(doc.iter_files()))
+    nav = LiterateNav(path="prettyqt")
+    doc = nav.add_document(("a", "ab"), "Path/to/something")
+    print(nav)

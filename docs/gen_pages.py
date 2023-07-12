@@ -30,17 +30,15 @@ for path in docs.iter_files("*/__init__.py"):
     )
     for klass in klasses:
         kls_name = klass.__name__
-        ref_page[(*parts, kls_name)] = doc_path.with_name(f"{kls_name}.md").as_posix()
+        ref_page[(*parts, kls_name)] = doc_path.with_name(f"{kls_name}.md")
         path = full_doc_path.with_name(f"{kls_name}.md")
         doc = markdownizer.PrettyQtClassDocument(
             klass=klass, module_path=f'prettyqt.{".".join(parts)}', path=path
         )
-        doc.write(path)
     if klasses:
-        ref_page[parts] = doc_path.with_name("index.md").as_posix()
+        ref_page[parts] = doc_path.with_name("index.md")
         ref_doc_path = full_doc_path.with_name("index.md")
         page = markdownizer.ModuleDocument(
             hide_toc=True, module=complete_mod_path, path=ref_doc_path
         )
-        page.write(ref_doc_path)
 ref_page.write()

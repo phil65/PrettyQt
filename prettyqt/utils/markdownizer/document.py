@@ -41,21 +41,30 @@ class Document:
     def __iter__(self):
         return iter(self.items)
 
-    def write(self, path: str | os.PathLike, edit_path: str | os.PathLike | None = None):
-        with mkdocs_gen_files.open(path, "w") as fd:
+    def __str__(self):
+        return self.to_markdown()
+
+    def write(self, edit_path: str | os.PathLike | None = None):
+        with mkdocs_gen_files.open(self.path, "w") as fd:
             fd.write(self.to_markdown())
-            logger.info(f"Written MarkDown file to {path}")
+            logger.info(f"Written MarkDown file to {self.path}")
         if edit_path:
-            mkdocs_gen_files.set_edit_path(path, edit_path)
+            mkdocs_gen_files.set_edit_path(self.path, edit_path)
             logger.info(f"Setting edit path to {edit_path}")
 
     def to_markdown(self) -> str:
         header = self.get_header()
-        return header + "\n\n".join(i.to_markdown() for i in self.items)
+        content_str = "\n\n".join(i.to_markdown() for i in self.items)
+        if header:
+            return header + content_str
+        return content_str
 
     def get_header(self) -> str:
         lines = []
-        for option in self.header_options.keys():
+        keys = self.header_options.keys()
+        if not keys:
+            return ""
+        for option in keys:
             lines.append(f"{option}:")
             lines.extend(f"  - {area}" for area in self.header_options[option])
         return HEADER.format(options="\n".join(lines))
@@ -89,6 +98,7 @@ class ClassDocument(Document):
             case _:
                 raise TypeError(module_path)
         self._build()
+        self.write()
 
     def _build(self):
         module_path = ".".join(self.parts)
@@ -128,6 +138,7 @@ class ModuleDocument(Document):
         self.docstrings = docstrings
         self.show_class_table = show_class_table
         self._build()
+        self.write()
 
     def _build(self):
         if self.docstrings:
@@ -142,5 +153,5 @@ class ModuleDocument(Document):
 
 
 if __name__ == "__main__":
-    doc = Document(hide_toc=True)
+    doc = Document()
     print(doc.to_markdown())
