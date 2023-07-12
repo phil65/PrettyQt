@@ -12,12 +12,7 @@ from prettyqt.utils import classhelpers, markdownizer
 
 logger = logging.getLogger(__name__)
 
-HEADER = """---
-hide:
-{options}
----
-
-"""
+HEADER = "---\n{options}\n---\n\n"
 
 
 class Document:
@@ -31,13 +26,13 @@ class Document:
     ):
         self.items = items or []
         self.path = path
-        self.options = collections.defaultdict(list)
+        self.header_options = collections.defaultdict(list)
         if hide_toc:
-            self.options["hide"].append("toc")
+            self.header_options["hide"].append("toc")
         if hide_nav:
-            self.options["hide"].append("nav")
+            self.header_options["hide"].append("nav")
         if hide_path:
-            self.options["hide"].append("path")
+            self.header_options["hide"].append("path")
 
     def __add__(self, other):
         self.append(other)
@@ -59,12 +54,11 @@ class Document:
         return header + "\n\n".join(i.to_markdown() for i in self.items)
 
     def get_header(self) -> str:
-        if not self.options:
-            return ""
-        text = "\n".join(
-            [f"  - {i}" for k in self.options.keys() for i in self.options[k]]
-        )
-        return HEADER.format(options=text)
+        lines = []
+        for option in self.header_options.keys():
+            lines.append(f"{option}:")
+            lines.extend(f"  - {area}" for area in self.header_options[option])
+        return HEADER.format(options="\n".join(lines))
 
     def append(self, other: str | markdownizer.BaseSection):
         if isinstance(other, str):
@@ -144,5 +138,5 @@ class ModuleDocument(Document):
 
 
 if __name__ == "__main__":
-    doc = ModuleDocument(collections)
+    doc = Document(hide_toc=True)
     print(doc.to_markdown())
