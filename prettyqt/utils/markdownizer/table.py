@@ -79,6 +79,7 @@ class Table(markdownizer.Text):
             parent_links = [markdownizer.link_for_class(parent) for parent in parents]
             parent_str = markdownizer.to_html_list(parent_links, shorten_after=10)
             desc = kls.__doc__.split("\n")[0] if isinstance(kls.__doc__, str) else ""
+            desc = markdownizer.escaped(desc)
             name = markdownizer.link_for_class(kls, size=4, bold=True)
             module = markdownizer.styled(kls.__module__, size=1, recursive=True)
             data = dict(

@@ -10,7 +10,7 @@ from prettyqt.utils.markdownizer.basesection import BaseSection, Text, Code
 from prettyqt.utils.markdownizer.image import Image, BinaryImage
 from prettyqt.utils.markdownizer.admonition import Admonition
 from prettyqt.utils.markdownizer.docs import Docs
-from prettyqt.utils.markdownizer.literatenav import LiterateNav
+from prettyqt.utils.markdownizer.literatenav import Nav
 from prettyqt.utils.markdownizer.docstrings import DocStrings
 from prettyqt.utils.markdownizer.list import List
 from prettyqt.utils.markdownizer.table import Table
@@ -24,7 +24,7 @@ from prettyqt.utils.markdownizer.prettyqtmarkdown import (
 __all__ = [
     "BaseSection",
     "Docs",
-    "LiterateNav",
+    "Nav",
     "DocStrings",
     "Text",
     "Code",
@@ -48,7 +48,7 @@ BASE_URL = "https://doc.qt.io/qtforpython-6/PySide6/"
 BUILTIN_URL = "https://docs.python.org/3/library/{mod}.html#{name}"
 
 
-def escape_markdown(text: str, version: int = 1, entity_type: str | None = None) -> str:
+def escaped(text: str, version: int = 1, entity_type: str | None = None) -> str:
     """Helper function to escape telegram markup symbols.
 
     Args:

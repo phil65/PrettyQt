@@ -8,6 +8,9 @@ from prettyqt.utils import markdownizer
 
 logger = logging.getLogger(__name__)
 
+# HTML <h{i}> to font px size map
+FONT_SIZE_MAP = {1: 34, 2: 30, 3: 24, 4: 20, 5: 18, 6: 16}
+
 
 class SliceToMarkdownProxyModel(itemmodels.SliceIdentityProxyModel):
     """Proxy model which transforms cell contents to markdown.
@@ -35,7 +38,7 @@ class SliceToMarkdownProxyModel(itemmodels.SliceIdentityProxyModel):
         checkstate = super().data(index, constants.CHECKSTATE_ROLE)
         # if not label and checkstate is None:
         #     return ""
-        label = markdownizer.escape_markdown(str(label) if label is not None else "")
+        label = markdownizer.escaped(str(label) if label is not None else "")
         if label:
             # background = super().data(index, constants.BACKGROUND_ROLE)
             foreground = super().data(index, constants.FOREGROUND_ROLE)

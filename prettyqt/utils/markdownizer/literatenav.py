@@ -12,7 +12,7 @@ from prettyqt.utils import markdownizer
 logger = logging.getLogger(__name__)
 
 
-class LiterateNav(markdownizer.BaseSection):
+class Nav(markdownizer.BaseSection):
     def __init__(
         self,
         path: str | os.PathLike,
@@ -54,6 +54,6 @@ class LiterateNav(markdownizer.BaseSection):
 
 
 if __name__ == "__main__":
-    nav = LiterateNav(path="prettyqt")
+    nav = Nav(path="prettyqt")
     doc = nav.add_document(("a", "ab"), "Path/to/something")
     print(nav)

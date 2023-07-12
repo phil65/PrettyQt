@@ -38,7 +38,11 @@ class Docs:
         rows = [
             (
                 submod_name,
-                submod.__doc__,
+                (
+                    submod.__doc__.split("\n")[0]
+                    if submod.__doc__
+                    else "*No docstrings defined.*"
+                ),
                 (
                     markdownizer.to_html_list(submod.__all__, make_link=True)
                     if hasattr(submod, "__all__")
@@ -50,8 +54,8 @@ class Docs:
         rows = list(zip(*rows))
         return markdownizer.Table(rows, columns=["Name", "Information", "Members"])
 
-    def create_nav(self, path: str | os.PathLike) -> markdownizer.LiterateNav:
-        nav = markdownizer.LiterateNav(path=path)
+    def create_nav(self, path: str | os.PathLike) -> markdownizer.Nav:
+        nav = markdownizer.Nav(path=path)
         self.navs.append(nav)
         return nav
 
