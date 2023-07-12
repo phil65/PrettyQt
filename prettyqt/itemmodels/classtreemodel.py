@@ -22,9 +22,7 @@ def get_comments(klass: type) -> str | None:
 
 @functools.cache
 def get_doc(klass: type) -> str | None:
-    doc = inspect.getdoc(klass)
-    with contextlib.suppress(AttributeError):
-        return inspect.cleandoc(doc)
+    return inspect.getdoc(klass)
 
 
 @functools.cache
