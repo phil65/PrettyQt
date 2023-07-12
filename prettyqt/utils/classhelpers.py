@@ -119,6 +119,7 @@ def yield_module_classes(
     *,
     type_filter: type | None | types.UnionType = None,
     module_filter: str | None = None,
+    filter_by___all__: bool = False,
     recursive: bool = False,
 ) -> Iterator[type]:
     """Yield classes from given module.
@@ -128,6 +129,7 @@ def yield_module_classes(
                 Sequence of strings.
         type_filter: only yield classes which are subclasses of given type.
         module_filter: filter by a module prefix.
+        filter_by___all__: Whether to filter based on whats defined in __all__.
         recursive: import all submodules recursively and also yield their classes.
     """
     if isinstance(module, str | Sequence):
@@ -145,15 +147,18 @@ def yield_module_classes(
                     submod,
                     type_filter=type_filter,
                     module_filter=submod.__name__,
+                    filter_by___all__=filter_by___all__,
                     recursive=True,
                 )
-
-    yield from (
-        kls
-        for _name, kls in inspect.getmembers(module, inspect.isclass)
-        if (type_filter is None or issubclass(kls, type_filter))
-        and (module_filter is None or kls.__module__.startswith(module_filter))
-    )
+    for klass_name, kls in inspect.getmembers(module, inspect.isclass):
+        has_all = hasattr(module, "__all__")
+        if filter_by___all__ and (not has_all or klass_name not in module.__all__):
+            continue
+        if type_filter is not None and not issubclass(kls, type_filter):
+            continue
+        if module_filter is not None and not kls.__module__.startswith(module_filter):
+            continue
+        yield kls
 
 
 def get_topmost_module_path_for_klass(klass: type) -> str:
