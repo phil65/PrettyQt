@@ -145,6 +145,8 @@ class Table(markdownizer.Text):
         use_checkstate_role: bool = True,
         **kwargs,
     ) -> Self:
+        from prettyqt import itemmodels
+
         proxy = itemmodels.SliceToMarkdownProxyModel(None, source_model=model)
 
         data, h_header, _ = proxy.get_table_data(
