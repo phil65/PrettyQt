@@ -66,6 +66,10 @@ class PrettyQtClassDocument(markdownizer.ClassDocument):
         #         )
 
 
+class PrettyQtModuleDocument(markdownizer.ClassDocument):
+    pass
+
+
 class WidgetScreenShot(markdownizer.BinaryImage):
     def __init__(
         self,
