@@ -316,7 +316,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
             return
         for i in range(self.rowCount(parent_index)):
             child_index = self.index(i, 0, parent_index)
-            yield from self.iter_tree(child_index, depth, fetch_more=fetch_more)
+            yield from self.iter_tree(child_index, depth=depth, fetch_more=fetch_more)
 
     def search_tree(
         self,
@@ -428,12 +428,16 @@ class AbstractItemModelMixin(core.ObjectMixin):
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
         x_range: slice | int | None = None,
         y_range: slice | int | None = None,
+        parent_index: core.ModelIndex | None = None,
     ):
+        parent_index = parent_index or core.ModelIndex()
+        # if self.canFetchMore(parent_index):
+        #     self.fetchMore(parent_index)
         match x_range:
             case None:
-                colrange = range(self.columnCount())
+                colrange = range(self.columnCount(parent_index))
             case slice():
-                stop = x_range.stop or self.columnCount()
+                stop = x_range.stop or self.columnCount(parent_index)
                 colrange = range(x_range.start or 0, stop, x_range.step or 1)
             case int():
                 colrange = range(x_range, x_range + 1)
@@ -442,15 +446,18 @@ class AbstractItemModelMixin(core.ObjectMixin):
 
         match y_range:
             case None:
-                rowrange = range(self.rowCount())
+                rowrange = range(self.rowCount(parent_index))
             case slice():
-                stop = y_range.stop or self.rowCount()
+                stop = y_range.stop or self.rowCount(parent_index)
                 rowrange = range(y_range.start or 0, stop, y_range.step or 1)
             case int():
                 rowrange = range(y_range, y_range + 1)
             case _:
                 raise TypeError(y_range)
-        data = [[self.index(i, j).data(role) for j in colrange] for i in rowrange]
+        data = [
+            [self.index(i, j, parent_index).data(role) for j in colrange]
+            for i in rowrange
+        ]
         h_header = [self.headerData(i, constants.HORIZONTAL) for i in colrange]
         v_header = (
             [self.headerData(i, constants.VERTICAL) for i in rowrange]
