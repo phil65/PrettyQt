@@ -16,6 +16,33 @@ logger = logging.getLogger(__name__)
 
 
 class Cursor(serializemixin.SerializeMixin, gui.QCursor):
+    """Provides a mouse cursor with an arbitrary shape.
+
+    This class is mainly used to create mouse cursors that are associated
+    with particular widgets and to get and set the position of the mouse cursor.
+    Qt has a number of standard cursor shapes, but you can also make custom cursor
+    shapes based on a QBitmap, a mask and a hotspot.
+    To associate a cursor with a widget, use `widget.set_cursor()`.
+    To associate a cursor with all widgets (normally for a short period of time),
+    use `GuiApplication.set_override_cursor()`.
+    To set a cursor shape use `QCursor.setShape()` or use the QCursor
+    constructor which takes the shape as argument, or you can use one of the
+    predefined cursors defined in the `Qt.CursorShape` enum.
+    If you want to create a cursor with your own bitmap,
+    either use the QCursor constructor which takes a bitmap and a mask
+    or the constructor which takes a pixmap as arguments.
+    To set or get the position of the mouse cursor use the
+    static methods `QCursor.pos()` and `QCursor.setPos()`.
+
+    !!! note:
+        It is possible to create a QCursor before QGuiApplication,
+        but it is not useful except as a place-holder for a real QCursor
+        created after QGuiApplication.
+        Attempting to use a QCursor that was created before QGuiApplication will
+        result in a crash.
+
+    """
+
     @classmethod
     def fake_mouse_move(cls):
         cls.setPos(cls.pos() + core.Point(0, 1))
