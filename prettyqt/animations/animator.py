@@ -4,6 +4,17 @@ from prettyqt import constants, core, gui, widgets
 
 
 class Animator(core.Object):
+    """Helper class to animate TabWidget / StackedWidget transistions and other.
+
+    Required interface:
+
+       * `currentIndex` / `setCurrentIndex`
+       * `widget`
+       * `indexOf`
+       * `count`
+       * `rect`
+    """
+
     def __init__(self, widget):
         super().__init__(widget)
         self._widget = widget

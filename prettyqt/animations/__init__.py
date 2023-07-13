@@ -45,6 +45,7 @@ from .slideanimation import SlideAnimation
 from .textanimation import TextAnimation
 from .zoomanimation import ZoomAnimation
 from .fx import Fx
+from .animator import Animator
 
 
 __all__ = [
@@ -52,5 +53,5 @@ __all__ = [
     "ZoomAnimation",
     "TextAnimation",
     "CursorMoveAnimation",
-    "Fx",
+    "Animator",
 ]

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import overload
 
-from prettyqt import widgets
-from prettyqt.utils import animator, listdelegators
+from prettyqt import animations, widgets
+from prettyqt.utils import listdelegators
 
 
 class StackedWidget(widgets.FrameMixin, widgets.QStackedWidget):
@@ -11,7 +11,7 @@ class StackedWidget(widgets.FrameMixin, widgets.QStackedWidget):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.animator = animator.Animator(self)
+        self.animator = animations.Animator(self)
 
     def __add__(self, other: widgets.QWidget) -> StackedWidget:
         self.addWidget(other)

@@ -50,4 +50,12 @@ for path in docs.iter_files("*/__init__.py"):
         for klass in klasses:
             additional_nav.add_class_page(klass=klass, path=doc_path)
 
+# from prettyqt import itemmodels, widgets
+
+# model = itemmodels.TupleTreeModel(additional_nav._mapping)
+# app = widgets.app()
+# table = widgets.TreeView()
+# table.set_model(model)
+# table.show()
+# app.exec()
 docs.write_navs()

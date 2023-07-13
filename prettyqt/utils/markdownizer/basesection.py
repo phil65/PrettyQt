@@ -2,11 +2,20 @@ from __future__ import annotations
 
 import logging
 
+from prettyqt.utils import node
+
 
 logger = logging.getLogger(__name__)
 
 
-class BaseSection:
+class BaseSection(node.BaseNode):
+    """Base class for everything which can be expressed as Markup.
+
+    The class inherits from BaseNode. The idea is that starting from the
+    root nav (aka Docs) down to nested Markup blocks, the whole project can be represented
+    by one tree.
+    """
+
     def __init__(self, header: str = ""):
         self.header = header
 
@@ -15,12 +24,15 @@ class BaseSection:
 
     def to_markdown(self):
         text = self._to_markdown() + "\n"
-        if self.header:
-            return f"## {self.header}\n\n{text}"
-        return text
+        return f"## {self.header}\n\n{text}" if self.header else text
 
 
 class Text(BaseSection):
+    """Class for any Markup text.
+
+    All classes inheriting from BaseSection can get converted to this Type.
+    """
+
     def __init__(self, text: str | BaseSection = "", header: str = ""):
         super().__init__(header=header)
         self.text = text
@@ -30,6 +42,8 @@ class Text(BaseSection):
 
 
 class Code(Text):
+    """Class representing a Code block."""
+
     def __init__(
         self,
         language: str,

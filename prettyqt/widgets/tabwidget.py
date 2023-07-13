@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Literal, overload
 
-from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.utils import animator, bidict, datatypes, listdelegators
+from prettyqt import animations, core, gui, iconprovider, widgets
+from prettyqt.utils import bidict, datatypes, listdelegators
 
 
 TabShapeStr = Literal["rounded", "triangular"]
@@ -31,7 +31,7 @@ class TabWidget(widgets.WidgetMixin, widgets.QTabWidget):
     ) -> None:
         # Basic initalization
         super().__init__(**kwargs)
-        self.animator = animator.Animator(self)
+        self.animator = animations.Animator(self)
         self.tabCloseRequested.connect(self.remove_tab)
         self.tab_bar = widgets.TabBar(self)
 

@@ -11,14 +11,13 @@ from prettyqt.utils import get_repr
 logger = logging.getLogger(__name__)
 
 
-class Node:
+class BaseNode:
     """A Node class that can be used to build trees."""
 
-    __slots__ = ("parent_item", "obj", "children")
+    __slots__ = ("parent_item", "children")
 
-    def __init__(self, obj, parent: Self | None = None):
+    def __init__(self, parent: Self | None = None):
         self.parent_item = parent
-        self.obj = obj
         self.children: list[Self] = []
 
     def __repr__(self):
@@ -149,12 +148,22 @@ class Node:
             child_item.pretty_print(indent + 1)
 
 
+class Node(BaseNode):
+    """Like BaseNode, but with one object attached to the node."""
+
+    __slots__ = ("obj",)
+
+    def __init__(self, obj, parent: Self | None = None):
+        super().__init__(parent)
+        self.obj = obj
+
+
 def preorder_iter(
-    tree: Node,
-    filter_condition: Callable[[Node], bool] | None = None,
-    stop_condition: Callable[[Node], bool] | None = None,
+    tree: BaseNode,
+    filter_condition: Callable[[BaseNode], bool] | None = None,
+    stop_condition: Callable[[BaseNode], bool] | None = None,
     max_depth: int = 0,
-) -> Iterable[Node]:
+) -> Iterable[BaseNode]:
     """Iterate through all children of a tree.
 
     Pre-Order Iteration Algorithm, NLR
