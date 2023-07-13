@@ -88,7 +88,8 @@ def escaped(text: str, version: int = 1, entity_type: str | None = None) -> str:
 
 
 def linked(identifier: str, title: str | None = None) -> str:
-    return f"[{identifier if title is None else title}]({identifier}.md)"
+    suffix = "" if identifier.startswith(("http:", "https:", "www.")) else ".md"
+    return f"[{identifier if title is None else title}]({identifier}{suffix})"
 
 
 def styled(
