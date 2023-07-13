@@ -7,6 +7,7 @@ from prettyqt import constants, core
 
 class RegexMatchesModel(core.AbstractTableModel):
     HEADER = ["Start", "End", "Value", "Groups"]
+    SUPPORTS = list[re.Match]
 
     def __init__(self, matches: list | None = None, **kwargs):
         super().__init__(**kwargs)

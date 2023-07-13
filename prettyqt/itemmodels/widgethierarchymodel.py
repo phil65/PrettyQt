@@ -185,6 +185,10 @@ class BaseHierarchyModel(itemmodels.TreeModel):
 
 
 class WidgetHierarchyModel(BaseHierarchyModel):
+    """Tree model showing the child tree of a QObject."""
+
+    SUPPORTS = core.QObject
+
     @classmethod
     def supports(cls, instance) -> bool:
         return isinstance(instance, core.QObject)
@@ -208,6 +212,10 @@ class WidgetHierarchyModel(BaseHierarchyModel):
 
 
 class LayoutHierarchyModel(BaseHierarchyModel):
+    """Tree model showing the layout hierarchy of widgets."""
+
+    SUPPORTS = "widgets.QWidget"
+
     @classmethod
     def supports(cls, instance) -> bool:
         from prettyqt import widgets

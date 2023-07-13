@@ -19,6 +19,7 @@ class DataClassFieldsModel(itemmodels.BaseFieldsModel):
     Frozen dataclasses are read-only, otherwise the data can be modified.
     """
 
+    SUPPORTS = datatypes.IsDataclass
     HEADER = [
         "Field name",
         "Value",

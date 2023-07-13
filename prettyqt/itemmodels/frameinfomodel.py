@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 import inspect
 import logging
 
@@ -13,6 +14,7 @@ SOURCE_FONT = gui.Font.mono(as_qt=True)
 
 class FrameInfoModel(itemmodels.ListMixin, core.AbstractTableModel):
     HEADER = ["Filename", "Line number", "Function", "Code context", "Index", "Positions"]
+    SUPPORTS = Sequence[inspect.FrameInfo | inspect.Traceback]
 
     @classmethod
     def supports(cls, instance) -> bool:

@@ -15,6 +15,8 @@ logger = logging.getLogger(__name__)
 class AttrsModel(itemmodels.BaseDataclassModel):
     """Table model to display a list of [attrs](https://www.attrs.org/) dataclasses."""
 
+    SUPPORTS = Sequence[datatypes.IsAttrs]
+
     def __init__(self, items: Sequence[datatypes.IsAttrs], **kwargs):
         super().__init__(items, **kwargs)
 

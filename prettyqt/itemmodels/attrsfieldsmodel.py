@@ -20,6 +20,7 @@ class AttrsFieldsModel(itemmodels.BaseFieldsModel):
     Frozen dataclasses are read-only, otherwise the data can be modified.
     """
 
+    SUPPORTS = datatypes.IsAttrs
     HEADER = [
         "Value",
         "Type",

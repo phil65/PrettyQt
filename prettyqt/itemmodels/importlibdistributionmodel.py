@@ -189,6 +189,7 @@ class ImportlibTreeModel(itemmodels.ColumnItemModel):
     class Roles(enum.IntEnum):
         DistributionRole = constants.USER_ROLE + 43255
 
+    SUPPORTS = metadata.Distribution | str
     TreeItem = DistTreeItem
     IS_RECURSIVE = True
     COLUMNS = [

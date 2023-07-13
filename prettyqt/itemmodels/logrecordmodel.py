@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 import datetime
 import logging
 import traceback
@@ -165,6 +166,7 @@ class LogRecordModel(itemmodels.ColumnTableModel):
         NameColumn,
         PathNameColumn,
     ]
+    SUPPORTS = Sequence[logging.LogRecord]
 
     def __init__(self, **kwargs):
         super().__init__(items=[], columns=self.COLUMNS, **kwargs)

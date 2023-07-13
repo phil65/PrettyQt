@@ -208,6 +208,9 @@ class ShaColumn(FsSpecColumnItem):
                 return super().get_data(item, role)
 
 
+FsSpecProtocolStr = str
+
+
 class FSSpecTreeModel(
     widgets.filesystemmodel.FileSystemModelMixin, itemmodels.ColumnItemModel
 ):
@@ -218,6 +221,7 @@ class FSSpecTreeModel(
     windows, FsSpec does not support a "real" root folder (aka a listing of drives.)
     """
 
+    SUPPORTS = FsSpecProtocolStr | fsspec.AbstractFileSystem
     DEFAULT_COLUMNS = [
         NameColumn,
         SizeColumn,
@@ -258,11 +262,19 @@ class FSSpecTreeModel(
     ):
         self.set_protocol(protocol, **kwargs)
         obj = self.fs.info(root)
-        columns = self.DEFAULT_COLUMNS + self._get_extra_columns_for_protocol(protocol)
+        columns = self.DEFAULT_COLUMNS + self._get_extra_columns_for_protocol(
+            self.fs.protocol
+        )
         super().__init__(obj, columns=columns, parent=parent, show_root=show_root)
 
-    def set_protocol(self, protocol: str, **kwargs):
-        self.fs = fsspec.filesystem(protocol, **kwargs)
+    @classmethod
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, fsspec.AbstractFileSystem | str)
+
+    def set_protocol(self, protocol: str | fsspec.AbstractFileSystem, **kwargs):
+        if isinstance(protocol, str):
+            protocol = fsspec.filesystem(protocol, **kwargs)
+        self.fs = protocol
 
     def _get_extra_columns_for_protocol(self, protocol: str) -> list[FsSpecColumnItem]:
         match self.fs.protocol:

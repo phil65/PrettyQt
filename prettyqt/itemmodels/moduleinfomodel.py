@@ -19,6 +19,7 @@ class ModuleInfoModel(itemmodels.TreeModel):
     """Tree Model to display a module hierarchy (using pkgutil)."""
 
     HEADER = ["Name", "Path", "Is Package"]
+    SUPPORTS = str | os.PathLike | types.ModuleType | pkgutil.ModuleInfo
 
     def __init__(self, obj, **kwargs):
         match obj:

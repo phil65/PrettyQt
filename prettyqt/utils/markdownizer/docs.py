@@ -41,6 +41,7 @@ class Docs(markdownizer.Nav):
 
     def create_nav(self, section: str | os.PathLike) -> markdownizer.Nav:
         nav = markdownizer.Nav(section=section, module_name=self.module_name)
+        # self.nav[(section,)]
         self.navs.append(nav)
         return nav
 

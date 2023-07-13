@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
+
 from prettyqt import constants, core, itemmodels
 
 
 class MappingModel(itemmodels.ListMixin, core.AbstractTableModel):
+    SUPPORTS = Sequence[dict]
+
     @classmethod
     def supports(cls, instance) -> bool:
         match instance:

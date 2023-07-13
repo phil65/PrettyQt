@@ -86,6 +86,8 @@ class XmlModel(BaseXmlModel):
     Model cant be modified, that only really makes sense for a full DOM implementation.
     """
 
+    SUPPORTS = io.StringIO | str | datatypes.IsTreeIterator | ET.ElementTree
+
     def __init__(
         self,
         obj: str | datatypes.IsTreeIterator | ET.ElementTree,

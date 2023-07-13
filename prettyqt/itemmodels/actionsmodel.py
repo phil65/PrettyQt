@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 import logging
 
 from prettyqt import constants, core, gui, itemmodels
@@ -165,6 +166,7 @@ class ActionsModel(itemmodels.ColumnTableModel):
     All properties of the Action can be edited.
     """
 
+    SUPPORTS = Sequence[gui.QAction]
     COLUMNS = [
         NameColumn,
         ToolTipColumn,

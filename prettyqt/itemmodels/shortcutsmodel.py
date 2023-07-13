@@ -114,6 +114,7 @@ class ShortcutsModel(itemmodels.ColumnTableModel):
         ContextColumn,
         ParentColumn,
     ]
+    SUPPORTS = gui.QShortcut
 
     def __init__(self, shortcuts: Sequence[gui.QShortcut], parent=None):
         super().__init__(shortcuts, self.COLUMNS, parent=parent)

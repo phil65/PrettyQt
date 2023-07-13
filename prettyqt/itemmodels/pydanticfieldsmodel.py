@@ -19,6 +19,7 @@ class PydanticFieldsModel(itemmodels.BaseFieldsModel):
     Frozen BaseModels / frozen fields read-only.
     """
 
+    SUPPORTS = pydantic.BaseModel
     HEADER = [
         "Value",
         "Type",

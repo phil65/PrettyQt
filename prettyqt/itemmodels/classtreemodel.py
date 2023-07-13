@@ -100,6 +100,8 @@ class SubClassTreeModel(BaseClassTreeModel):
     Also supports `types.UnionType`.
     """
 
+    SUPPORTS = type | types.UnionType
+
     @classmethod
     def supports(cls, instance) -> bool:
         return isinstance(instance, type | types.UnionType)
@@ -121,6 +123,8 @@ class SubClassTreeModel(BaseClassTreeModel):
 
 class ParentClassTreeModel(BaseClassTreeModel):
     """Tree model to display the parent class tree of a python class."""
+
+    SUPPORTS = type
 
     def __init__(self, *args, **kwargs):
         self._show_mro = False

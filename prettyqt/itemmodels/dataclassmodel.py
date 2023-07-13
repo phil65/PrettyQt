@@ -16,6 +16,8 @@ logger = logging.getLogger(__name__)
 class DataClassModel(itemmodels.BaseDataclassModel):
     """Table model to display a list of dataclasses."""
 
+    SUPPORTS = Sequence[datatypes.IsDataclass]
+
     def __init__(self, items: Sequence[datatypes.IsDataclass], **kwargs):
         super().__init__(items, **kwargs)
 

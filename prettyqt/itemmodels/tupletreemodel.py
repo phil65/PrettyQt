@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Hashable
 import logging
 import pathlib
 
@@ -22,9 +23,8 @@ class TupleTreeModel(itemmodels.TreeModel):
     ```
     """
 
-    HEADER = [
-        "Name",
-    ]
+    SUPPORTS = dict[tuple[Hashable, ...] | pathlib.Path, str]
+    HEADER = ["Name"]
 
     def __init__(self, mapping: dict, **kwargs):
         super().__init__((), **kwargs)
@@ -54,7 +54,7 @@ class TupleTreeModel(itemmodels.TreeModel):
         tup = self.data_by_index(index).obj
         match role, index.column():
             case constants.DISPLAY_ROLE, 0:
-                return self.mapping[tup]
+                return str(self.mapping[tup])
 
     @classmethod
     def supports(cls, instance) -> bool:

@@ -17,6 +17,8 @@ class LxmlModel(itemmodels.BaseXmlModel):
     Covers more features than the lazy models. (modifying the tree, xpath, ..)
     """
 
+    SUPPORTS = bytes | str | etree.ElementTree
+
     def __init__(
         self,
         obj: str | bytes | etree.ElementTree,
@@ -70,6 +72,8 @@ class LazyLxmlModel(itemmodels.BaseXmlModel):
 
     Model cant be modified, that only really makes sense for a full DOM implementation.
     """
+
+    SUPPORTS = io.BytesIO | bytes | str | etree.iterparse | etree.Element
 
     def __init__(
         self,

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
+
 from prettyqt import constants, core, itemmodels
 
 
@@ -120,6 +122,7 @@ class StorageInfoModel(itemmodels.ColumnTableModel):
         ReadOnlyColumn,
         ValidColumn,
     ]
+    SUPPORTS = Sequence[core.QStorageInfo]
 
     def __init__(self, volumes: list[core.QStorageInfo], parent=None):
         super().__init__(volumes, self.COLUMNS, parent=parent)

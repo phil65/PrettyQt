@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 import logging
 
 from typing import Any
@@ -23,6 +24,7 @@ class ModelIndexModel(itemmodels.ListMixin, core.AbstractTableModel):
     ```
     """
 
+    SUPPORTS = Sequence[core.QModelIndex]
     ID = "modelindex"
     FIXED_HEADER = ["Path", "Row", "Column", "Flags"]
 

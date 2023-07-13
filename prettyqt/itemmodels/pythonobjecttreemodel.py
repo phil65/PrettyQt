@@ -300,6 +300,7 @@ class PythonObjectTreeModel(itemmodels.ColumnItemModel):
     TreeItem = PythonObjectTreeItem
     IS_RECURSIVE = True
     ICON = "mdi.python"
+    SUPPORTS = object
     COLUMNS = [
         NameColumn,
         DescriptionColumn,

@@ -17,6 +17,8 @@ class PydanticModel(itemmodels.BaseDataclassModel):
     Non-frozen fields can be edited.
     """
 
+    SUPPORTS = Sequence[pydantic.BaseModel]
+
     def __init__(self, items: Sequence[pydantic.BaseModel], **kwargs):
         super().__init__(items, **kwargs)
 

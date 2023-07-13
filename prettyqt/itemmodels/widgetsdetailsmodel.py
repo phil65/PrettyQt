@@ -11,6 +11,8 @@ logger = logging.getLogger(__name__)
 
 
 class WidgetsDetailsModel(core.AbstractTableModel):
+    SUPPORTS = Sequence[core.QObject]
+
     def __init__(self, items: Sequence[core.QObject], **kwargs):
         super().__init__(**kwargs)
         self.items = items

@@ -69,6 +69,7 @@ class AstModel(itemmodels.TreeModel):
     class Roles(enum.IntEnum):
         NodeRole = constants.USER_ROLE
 
+    SUPPORTS = ast.AST
     HEADER = [
         "Node type",
         "Name",

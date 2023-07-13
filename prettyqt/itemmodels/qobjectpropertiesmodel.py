@@ -29,6 +29,7 @@ class QObjectPropertiesModel(core.AbstractTableModel):
         "User Type",
         # "Enumerator",
     ]
+    SUPPORTS = core.QObject
 
     def __init__(self, qobject: core.QObject, **kwargs):
         self._qobject = qobject

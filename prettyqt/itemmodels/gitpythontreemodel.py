@@ -24,6 +24,7 @@ class GitPythonTreeModel(itemmodels.TreeModel):
     ```
     """
 
+    SUPPORTS = os.PathLike | str | git.Tree | git.Repo
     HEADER = [
         "Name",
         "Absolute path",
@@ -143,6 +144,7 @@ class GitPythonCommitTreeModel(itemmodels.TreeModel):
     ```
     """
 
+    SUPPORTS = os.PathLike | str | git.Repo | git.Commit
     HEADER = [
         "Sha",
         "Absolute path",

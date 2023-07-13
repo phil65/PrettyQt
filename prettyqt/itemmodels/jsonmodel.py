@@ -56,6 +56,7 @@ class JsonItem:
 
 class JsonModel(itemmodels.ColumnItemModel):
     COLUMNS = [NameColumn, ValueColumn, TypeColumn]
+    SUPPORTS = Mapping
 
     def __init__(
         self,
