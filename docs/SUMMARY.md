@@ -89,5 +89,6 @@
     * [Animating](features/animating.md)
     * [Validators](features/validators.md)
     * [Pandas](features/pandas.md)
-* [API Reference](reference/)
+* [Qt Modules](qt_modules/)
+* [Additional modules](additional_modules/)
 * [Changelog](changelog.md)
