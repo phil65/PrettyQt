@@ -53,15 +53,27 @@ class Nav(markdownizer.BaseSection):
         self.__setitem__(nav_path, file_path)
         return markdownizer.Document(**kwargs)
 
-    def add_class_page(self, klass, parts, path, **kwargs):
-        doc = markdownizer.PrettyQtClassDocument(
+    def add_class_page(self, klass, path, **kwargs):
+        parts = pathlib.Path(path).parts[:-1]
+        page = markdownizer.PrettyQtClassDocument(
             klass=klass,
             module_path=f'{self.module_name}.{".".join(parts)}',
             path=path,
             **kwargs,
         )
         self[(*parts, klass.__name__)] = path.with_name(f"{klass.__name__}.md")
-        return doc
+        return page
+
+    def add_module_page(self, module, path, **kwargs):
+        parts = pathlib.Path(path).parts[:-1]
+        page = markdownizer.ModuleDocument(
+            hide_toc=True,
+            module=module,
+            path=path,
+            **kwargs,
+        )
+        self[parts] = path.with_name("index.md")
+        return page
 
 
 if __name__ == "__main__":
