@@ -34,6 +34,8 @@ class AnimationTimer(core.Timer):
 
 
 class AnimationWrapper:
+    """Wrapper for property animations."""
+
     def __init__(self, prop_name: str, fx: Fx):
         self.fx = fx
         self._widget = fx._widget
@@ -162,6 +164,8 @@ class AnimationWrapper:
 
 
 class Fx:
+    """Fx delegator which allows a quick and easy way to animate widgets."""
+
     def __init__(self, widget: widgets.QWidget):
         self._widget = widget
         self._wrapper = None

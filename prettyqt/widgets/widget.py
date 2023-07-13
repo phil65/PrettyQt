@@ -13,8 +13,8 @@ from typing import TYPE_CHECKING, Any, Literal, overload
 import qstylizer.parser
 import qstylizer.style
 
-from prettyqt import constants, core, gui, iconprovider, widgets
-from prettyqt.utils import colors, datatypes, fx
+from prettyqt import animations, constants, core, gui, iconprovider, widgets
+from prettyqt.utils import colors, datatypes
 
 
 if TYPE_CHECKING:
@@ -40,7 +40,7 @@ PositionPossibilityType = (
 class WidgetMixin(core.ObjectMixin):
     def __init__(self, *args, margin: int | None = None, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fx = fx.Fx(self)
+        self.fx = animations.Fx(self)
         if margin is not None:
             self.set_margin(margin)
 
