@@ -123,17 +123,14 @@ class Docs:
         seen = set()
         for path in self.iter_files(glob):
             module_path = path.with_suffix("")
-            parts = tuple(module_path.parts)
-            module_path = f"{self.module_name}." + ".".join(parts)
-            try:
-                module = importlib.import_module(module_path)
-            except (ImportError, AttributeError):  # noqa: PERF203
-                continue
-            else:
-                for klass in self.iter_classes_for_module(module, recursive=recursive):
-                    if (klass, path) not in seen or not avoid_duplicates:
-                        seen.add((klass, path))
-                        yield klass, path
+            parts = tuple(self.module_name, *module_path.parts)
+            module = classhelpers.to_module(parts)
+            if not module:
+                return
+            for klass in self.iter_classes_for_module(module, recursive=recursive):
+                if (klass, path) not in seen or not avoid_duplicates:
+                    seen.add((klass, path))
+                    yield klass, path
 
 
 if __name__ == "__main__":
