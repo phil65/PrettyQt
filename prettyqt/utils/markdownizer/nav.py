@@ -19,21 +19,19 @@ class Nav(markdownizer.BaseSection):
     def __init__(
         self,
         section: str | os.PathLike,
-        mapping: dict[str | tuple[str, ...], str] | None = None,
-        indentation: int | str = "",
         module_name: str = "",
+        filename: str = "SUMMARY.md",
     ):
         super().__init__()
         self.section = section
-        self.path = pathlib.Path(section) / "SUMMARY.md"
+        self.filename = filename
+        self.path = pathlib.Path(section) / self.filename
         self.nav = mkdocs_gen_files.Nav()
         self.module_name = module_name
+        self.indentation = 0
         self._mapping = {}
         self.navs = []
-        if mapping:
-            for k, v in mapping.items():
-                self.nav[k] = v
-                self._mapping[k] = v
+        self.pages = []
 
     def __setitem__(self, item: tuple | str, value: str | os.PathLike):
         if isinstance(item, str):
@@ -62,7 +60,9 @@ class Nav(markdownizer.BaseSection):
 
     def add_document(self, nav_path: str | tuple, file_path: os.PathLike | str, **kwargs):
         self.__setitem__(nav_path, file_path)
-        return markdownizer.Document(**kwargs)
+        page = markdownizer.Document(**kwargs)
+        self.pages[nav_path] = page
+        return page
 
     def get_overview_document(self, predicate: Callable | None = None):
         page = markdownizer.Document(
@@ -105,6 +105,7 @@ class Nav(markdownizer.BaseSection):
             **kwargs,
         )
         self[(*parts, klass.__name__)] = path.with_name(f"{klass.__name__}.md")
+        self.pages.append(page)
         return page
 
     def add_module_page(self, module, path, **kwargs):
@@ -117,6 +118,7 @@ class Nav(markdownizer.BaseSection):
             **kwargs,
         )
         self[parts] = path.with_name("index.md")
+        self.pages.append(page)
         return page
 
 

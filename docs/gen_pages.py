@@ -14,11 +14,22 @@ logger = logging.getLogger(__name__)
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
+QT_MODULE_ATTR = "QT_MODULE"
+
 prettyqt.import_all()
 
 docs = markdownizer.Docs(module_name="prettyqt", exclude_modules=["qt"])
-nav = docs.create_nav(section="qt_modules")
-nav2 = docs.create_nav(section="additional_modules")
+qt_nav = docs.create_nav(section="qt_modules")
+additional_nav = docs.create_nav(section="additional_modules")
+qt_overview = qt_nav.get_overview_document(predicate=lambda x: hasattr(x, QT_MODULE_ATTR))
+qt_overview.write()
+additional_overview = additional_nav.get_overview_document(
+    predicate=lambda x: not hasattr(x, QT_MODULE_ATTR)
+)
+additional_overview.write()
+
+qt_nav[("overview",)] = "index.md"
+additional_nav[("overview",)] = "index.md"
 
 for path in docs.iter_files("*/__init__.py"):
     doc_path = path.with_suffix(".md")
@@ -28,15 +39,15 @@ for path in docs.iter_files("*/__init__.py"):
     klasses = list(
         docs.iter_classes_for_module(complete_module_path, filter_by___all__=True)
     )
-    if module and hasattr(module, "QT_MODULE"):
-        for klass in klasses:
-            nav.add_class_page(klass=klass, path=doc_path)
+    if module and hasattr(module, QT_MODULE_ATTR):
         if klasses:
-            nav.add_module_page(module=module_path, path=doc_path)
+            qt_nav.add_module_page(module=module_path, path=doc_path)
+        for klass in klasses:
+            qt_nav.add_class_page(klass=klass, path=doc_path)
     else:
-        for klass in klasses:
-            nav2.add_class_page(klass=klass, path=doc_path)
         if klasses:
-            nav2.add_module_page(module=module_path, path=doc_path)
+            additional_nav.add_module_page(module=module_path, path=doc_path)
+        for klass in klasses:
+            additional_nav.add_class_page(klass=klass, path=doc_path)
 
-docs.write()
+docs.write_navs()
