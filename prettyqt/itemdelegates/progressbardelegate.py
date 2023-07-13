@@ -4,10 +4,18 @@ from prettyqt import constants, core, gui, widgets
 
 
 class ProgressBarDelegate(widgets.StyledItemDelegate):
+    """Delegate to show a value in form of a progress bar."""
+
     ID = "progress_bar"
 
-    def __init__(self, role: constants.ItemDataRole = constants.DISPLAY_ROLE, **kwargs):
+    def __init__(
+        self,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+        total: int = 100,
+        **kwargs,
+    ):
         self._role = role
+        self._total = total
         super().__init__(**kwargs)
 
     def paint(
@@ -20,7 +28,7 @@ class ProgressBarDelegate(widgets.StyledItemDelegate):
         opt = widgets.StyleOptionProgressBar()
         opt.rect = option.rect
         opt.minimum = 0
-        opt.maximum = 100
+        opt.maximum = self._total
         opt.progress = progress
         opt.text = f"{progress}%"
         opt.textVisible = True
@@ -28,6 +36,21 @@ class ProgressBarDelegate(widgets.StyledItemDelegate):
         widgets.Application.style().drawControl(
             widgets.Style.ControlElement.CE_ProgressBar, opt, painter
         )
+
+    def set_total(self, total: int):
+        self._total = total
+
+    def get_total(self) -> int:
+        return self._total
+
+    def set_role(self, role: constants.ItemDataRole):
+        self._role = role
+
+    def get_role(self) -> constants.ItemDataRole:
+        return self._role
+
+    total = core.Property(int, get_total, set_total)
+    role = core.Property(constants.ItemDataRole, get_role, set_role)
 
 
 if __name__ == "__main__":
