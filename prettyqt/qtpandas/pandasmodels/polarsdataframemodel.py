@@ -14,6 +14,10 @@ logger = logging.getLogger(__name__)
 
 
 class PolarsDataFrameModel(core.AbstractTableModel):
+    """Model to display polars DataFrames."""
+
+    SUPPORTS = pl.DataFrame
+
     class Roles(enum.IntEnum):
         """Role names."""
 

@@ -15,6 +15,10 @@ logger = logging.getLogger(__name__)
 
 
 class PandasDataFrameModel(core.AbstractTableModel):
+    """Table model for pandas DataFrames."""
+
+    SUPPORTS = pd.DataFrame
+
     class Roles(enum.IntEnum):
         """Role names."""
 
