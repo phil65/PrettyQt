@@ -66,6 +66,18 @@ def to_module(
             raise TypeError(module)
 
 
+def to_module_parts(module: Sequence[str] | str | types.ModuleType) -> tuple[str, ...]:
+    match module:
+        case (str(), *_):
+            return tuple(module)
+        case str():
+            return tuple(module.split("."))
+        case types.ModuleType():
+            return tuple(module.__name__.split("."))
+        case _:
+            raise TypeError(module)
+
+
 def find_common_ancestor(cls_list: list[type]) -> type:
     mros = [list(inspect.getmro(cls)) for cls in cls_list]
     track = collections.defaultdict(int)
