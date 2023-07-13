@@ -73,7 +73,7 @@ class IconBrowser(widgets.MainWindow):
         layout.add(self._listview)
         layout.add(self._copy_button)
         self.setCentralWidget(frame)
-        self.add_shortcut("return", self._copy_icon_text)
+        self.add_shortcut("return", callback=self._copy_icon_text)
         self._lineedit.setFocus()
         self.position_on("screen")
 
