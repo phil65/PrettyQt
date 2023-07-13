@@ -125,6 +125,7 @@ class Docs:
     def iter_classes_for_glob(
         self, glob="*/*.py", recursive: bool = False, avoid_duplicates: bool = True
     ):
+        """Yields (class, path) tuples."""
         seen = set()
         for path in self.iter_files(glob):
             module_path = path.with_suffix("")

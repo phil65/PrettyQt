@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import collections
 
-from collections.abc import Iterator
+from collections.abc import Iterator, Sequence
 import contextlib
 import functools
 import importlib
@@ -44,6 +44,26 @@ def lca_type(classes: list[type]) -> type:
             )
         )
     )
+
+
+def to_module(
+    module: str | Sequence[str] | types.ModuleType,
+    return_none: bool = True,
+) -> types.ModuleType | None:
+    match module:
+        case (str(), *_) | str():
+            module_path = module if isinstance(module, str) else ".".join(module)
+            try:
+                return importlib.import_module(module_path)
+            except (ImportError, AttributeError) as e:
+                logger.warning(f"Could not import {module_path!r}")
+                if return_none:
+                    return
+                raise e
+        case types.ModuleType():
+            pass
+        case _:
+            raise TypeError(module)
 
 
 def find_common_ancestor(cls_list: list[type]) -> type:
@@ -141,14 +161,9 @@ def iter_classes_for_module(
         filter_by___all__: Whether to filter based on whats defined in __all__.
         recursive: import all submodules recursively and also yield their classes.
     """
-    if isinstance(module, str | tuple | list):
-        if isinstance(module, tuple | list):
-            module = ".".join(module)
-        try:
-            module = importlib.import_module(module)
-        except ImportError:
-            logger.warning(f"Could not import {module!r}")
-            return []
+    module = to_module(module)
+    if not module:
+        return []
     if recursive:
         for _name, submod in inspect.getmembers(module, inspect.ismodule):
             if submod.__name__.startswith(module_filter or ""):
