@@ -22,6 +22,7 @@ class Nav(markdownizer.BaseSection):
         super().__init__()
         self.path = pathlib.Path(path) / "SUMMARY.md"
         self.nav = mkdocs_gen_files.Nav()
+        self.module_name = "prettyqt"
         self._mapping = {}
         if mapping:
             for k, v in mapping.items():
@@ -51,6 +52,16 @@ class Nav(markdownizer.BaseSection):
     def add_document(self, nav_path: str | tuple, file_path: os.PathLike | str, **kwargs):
         self.__setitem__(nav_path, file_path)
         return markdownizer.Document(**kwargs)
+
+    def add_class_page(self, klass, parts, path, **kwargs):
+        doc = markdownizer.PrettyQtClassDocument(
+            klass=klass,
+            module_path=f'{self.module_name}.{".".join(parts)}',
+            path=path,
+            **kwargs,
+        )
+        self[(*parts, klass.__name__)] = path.with_name(f"{klass.__name__}.md")
+        return doc
 
 
 if __name__ == "__main__":

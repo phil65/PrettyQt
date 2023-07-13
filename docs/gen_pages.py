@@ -37,4 +37,4 @@ for path in docs.iter_files("*/__init__.py"):
             hide_toc=True, module=complete_mod_path, path=doc_path
         )
         nav[parts] = doc_path.with_name("index.md")
-nav.write()
+docs.write()

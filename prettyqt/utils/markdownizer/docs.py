@@ -25,8 +25,9 @@ class Docs:
         self._exclude = exclude_modules or []
         self.navs = []
 
-    def write(self, document):
-        pass
+    def write(self):
+        for nav in self.navs:
+            nav.write()
 
     def get_files(self):
         return self._editor.files
