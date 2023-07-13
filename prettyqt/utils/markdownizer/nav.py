@@ -15,12 +15,13 @@ logger = logging.getLogger(__name__)
 class Nav(markdownizer.BaseSection):
     def __init__(
         self,
-        path: str | os.PathLike,
+        section: str | os.PathLike,
         mapping: dict[str | tuple[str, ...], str] | None = None,
         indentation: int | str = "",
     ):
         super().__init__()
-        self.path = pathlib.Path(path) / "SUMMARY.md"
+        self.section = section
+        self.path = pathlib.Path(section) / "SUMMARY.md"
         self.nav = mkdocs_gen_files.Nav()
         self.module_name = "prettyqt"
         self._mapping = {}
@@ -58,7 +59,7 @@ class Nav(markdownizer.BaseSection):
         page = markdownizer.PrettyQtClassDocument(
             klass=klass,
             module_path=f'{self.module_name}.{".".join(parts)}',
-            path=path,
+            path=pathlib.Path(self.section, path),
             **kwargs,
         )
         self[(*parts, klass.__name__)] = path.with_name(f"{klass.__name__}.md")
@@ -70,7 +71,7 @@ class Nav(markdownizer.BaseSection):
         page = markdownizer.ModuleDocument(
             hide_toc=True,
             module=complete_mod_path,
-            path=path,
+            path=pathlib.Path(self.section, path),
             **kwargs,
         )
         self[parts] = path.with_name("index.md")

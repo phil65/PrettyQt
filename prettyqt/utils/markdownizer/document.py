@@ -27,7 +27,6 @@ class Document:
     ):
         self.items = items or []
         self.path = path
-        self.path = str(pathlib.Path("reference", path))
         self.header_options = collections.defaultdict(list)
         if hide_toc:
             self.header_options["hide"].append("toc")

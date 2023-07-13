@@ -17,7 +17,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 prettyqt.import_all()
 
 docs = markdownizer.Docs(module_name="prettyqt", exclude_modules=["qt"])
-nav = docs.create_nav(path="reference")
+nav = docs.create_nav(section="reference")
 
 for path in docs.iter_files("*/__init__.py"):
     doc_path = path.with_suffix(".md")

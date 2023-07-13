@@ -68,8 +68,8 @@ class Docs:
         rows = list(zip(*rows))
         return markdownizer.Table(rows, columns=["Name", "Information", "Members"])
 
-    def create_nav(self, path: str | os.PathLike) -> markdownizer.Nav:
-        nav = markdownizer.Nav(path=path)
+    def create_nav(self, section: str | os.PathLike) -> markdownizer.Nav:
+        nav = markdownizer.Nav(section=section)
         self.navs.append(nav)
         return nav
 
