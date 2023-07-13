@@ -30,9 +30,9 @@ A large part of the library consists of a tree of mixins, with one mixin for eac
 These mixins also inherit from each other and are applied to the Qt classes.
 That way each class gets all helper methods from all sub-mixins.
 
-Example: The class "TreeView" inherits from original Qt Class "QTreeView" and gets helper methods
-from "TreeViewMxin", "AbstractItemViewMixin", "AbstractScrollAreaMixin",
-"FrameMixin", "WidgetMixin" and "ObjectMixin".
+Example: The class `TreeView` inherits from original Qt Class `QTreeView` and gets helper methods
+from `TreeViewMxin`, `AbstractItemViewMixin`, `AbstractScrollAreaMixin`,
+`FrameMixin`, `WidgetMixin` and `ObjectMixin`.
 
 To illustrate this, we will use some of our included models:
 
@@ -99,7 +99,7 @@ very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to impro
 - doing [type conversions](types.md) for method parameters to lessen the strictness for types.
 - raising Exceptions or returning `None` instead of returning `-1` or invalid objects.
 - all enum getters/setters also work with strings. Everything typed with Literals for an excellent IDE experience. (Example: )
-- adding a lot of \__dunder__ methods to the classes to make them behave like good python citizens.
+- adding a lot of `__dunder__` methods to the classes to make them behave like good python citizens.
 
 
 The minimum supported python version is 3.10.

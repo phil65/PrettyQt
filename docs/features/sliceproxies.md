@@ -5,7 +5,7 @@ They can get quickly set up via our [Proxifier](proxifier.md).
 
 Example:
 
-``` py
+```py
 model = MyTableModel()
 table = widgets.TableView()
 table.set_model(model)
@@ -30,12 +30,12 @@ The proxy models should all perform very well with large tables since they never
 
 The proxifier attribute basically gives quick access to set up these proxies.
 
-``` py
+```py
 table.proxifier[:-1, 5::2].filter()
 ```
 basically equals something like:
 
-``` py
+```py
 proxy = SliceFilterProxyModel(indexer=(slice(None, -1, 1), slice(5, None, 2)))
 proxy.setSourceModel(table.model())
 table.set_model(proxy)
@@ -43,7 +43,7 @@ table.set_model(proxy)
 
 If you want to apply a slice proxy to all cells of the model, use slices without start and stop values:
 
-``` py
+```py
 table.proxifier[:, :].style(background="green")
 ```
 

@@ -46,7 +46,7 @@ class Code(Text):
 
     def _to_markdown(self) -> str:
         title = f" title={self.title}" if self.title else ""
-        return f"``` {self.language}{title}\n{self.text}\n```"
+        return f"```{self.language}{title}\n{self.text}\n```"
 
 
 if __name__ == "__main__":
