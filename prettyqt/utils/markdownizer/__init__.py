@@ -48,31 +48,20 @@ BASE_URL = "https://doc.qt.io/qtforpython-6/PySide6/"
 BUILTIN_URL = "https://docs.python.org/3/library/{mod}.html#{name}"
 
 
-def escaped(text: str, version: int = 1, entity_type: str | None = None) -> str:
+def escaped(text: str, entity_type: str | None = None) -> str:
     """Helper function to escape telegram markup symbols.
 
     Args:
         text: The text.
-        version: Use to specify the version of telegrams Markdown.
-            Either ``1`` or ``2``. Defaults to ``1``.
         entity_type: For the entity types ``PRE``, ``CODE`` and the link
-            part of ``TEXT_LINKS``, only certain characters need to be escaped in
-            ``MarkdownV2``.
-            See the official API documentation for details. Only valid in combination with
-            ``version=2``, will be ignored else.
+                     part of ``TEXT_LINKS``, only certain characters need to be escaped.
     """
-    match version:
-        case 1 | "1":
-            escape_chars = r"_*`["
-        case 2 | "2":
-            if entity_type in ["pre", "code"]:
-                escape_chars = r"\`"
-            elif entity_type == "text_link":
-                escape_chars = r"\)"
-            else:
-                escape_chars = r"_*[]()~`>#+-=|{}.!"
-        case _:
-            raise ValueError("Markdown version must be either 1 or 2!")
+    if entity_type in ["pre", "code"]:
+        escape_chars = r"\`"
+    elif entity_type == "text_link":
+        escape_chars = r"\)"
+    else:
+        escape_chars = r"_*[]()~`>#+-=|{}.!"
 
     return re.sub(f"([{re.escape(escape_chars)}])", r"\\\1", text)
 

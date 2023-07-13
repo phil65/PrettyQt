@@ -87,6 +87,8 @@ class ClassDocument(Document):
         Arguments:
             klass: class to show info for
             module_path: If given, overrides module returned by class.__module__
+                         This can be useful if you want to link to an aliased class
+                         (for example a class imported to __init__.py)
             path: some path for the file.
             kwargs: keyword arguments passed to base class
         """
@@ -94,14 +96,10 @@ class ClassDocument(Document):
         super().__init__(path=path, **kwargs)
         self.klass = klass
         match module_path:
-            case str():
-                self.parts = module_path.split(".")
-            case (str(), *_):
-                self.parts = module_path
             case None:
                 self.parts = klass.__module__.split(".")
             case _:
-                raise TypeError(module_path)
+                self.parts = classhelpers.to_module_parts(module_path)
         self._build()
         self.write()
 
@@ -143,21 +141,16 @@ class ModuleDocument(Document):
     ):
         path = pathlib.Path(path).with_name("index.md")
         super().__init__(path=path, **kwargs)
-        match module:
-            case (str(), *_):
-                self.parts = module
-            case str():
-                self.parts = module.split(".")
-            case types.ModuleType():
-                self.parts = module.__name__
-            case _:
-                raise TypeError(module)
+        self.parts = classhelpers.to_module_parts(module)
+        self.module = classhelpers.to_module(self.parts)
         self.docstrings = docstrings
         self.show_class_table = show_class_table
         self._build()
         self.write()
 
     def _build(self):
+        if doc := self.module.__doc__:
+            self.append(doc)
         if self.docstrings:
             self.append(markdownizer.DocStrings(f'{".".join(self.parts)}'))
         if self.show_class_table:
