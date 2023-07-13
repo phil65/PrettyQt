@@ -1,3 +1,16 @@
+## v1.55.0 (2023-07-13)
+
+### Feat
+
+- first quick shot for GitPythonCommitTreeModel
+- **OptionalWidget**: add value_changed signal
+- **MetaEnum**: add get_scope_object and list_options methods
+- **Object**: add get_qt_base_class method
+
+### Fix
+
+- fix link creation
+
 ## v1.54.0 (2023-07-11)
 
 ### Feat
