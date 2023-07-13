@@ -10,7 +10,7 @@ import types
 
 import mkdocs_gen_files
 
-from prettyqt.utils import markdownizer
+from prettyqt.utils import classhelpers, markdownizer
 
 
 logger = logging.getLogger(__name__)
@@ -84,20 +84,14 @@ class Docs:
 
     def iter_classes_for_module(
         self,
-        mod: types.ModuleType | str | tuple | list,
+        module: types.ModuleType | str | tuple | list,
         recursive: bool = False,
         filter_by___all__: bool = False,
         _seen=None,
     ):
-        match mod:
-            case str():
-                mod = importlib.import_module(mod)
-            case tuple() | list():
-                mod = importlib.import_module(".".join(mod))
-            case types.ModuleType():
-                pass
-            case _:
-                raise TypeError(mod)
+        mod = classhelpers.to_module(module)
+        if mod is None:
+            return
         if recursive:
             seen = _seen or set()
             for _submod_name, submod in inspect.getmembers(mod, inspect.ismodule):

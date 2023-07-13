@@ -24,7 +24,7 @@ for path in docs.iter_files("*/__init__.py"):
     mod_path = ".".join(path.with_suffix("").parts)
     complete_mod_path = f"prettyqt.{mod_path}"
     klasses = list(
-        classhelpers.iter_classes_for_module(complete_mod_path, module_filter="prettyqt")
+        docs.iter_classes_for_module(complete_mod_path, filter_by___all__=True)
     )
     for klass in klasses:
         nav.add_class_page(klass=klass, path=doc_path)
