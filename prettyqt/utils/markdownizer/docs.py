@@ -8,6 +8,8 @@ import os
 import pathlib
 import types
 
+import mkdocs_gen_files
+
 from prettyqt.utils import markdownizer
 
 
@@ -18,11 +20,16 @@ class Docs:
     def __init__(self, module_name: str, exclude_modules: list[str] | None = None):
         self.module_name = module_name
         self.root_path = pathlib.Path(f"./{module_name}")
+        self._editor = mkdocs_gen_files.editor.FilesEditor.current()
+        self._docs_dir = pathlib.Path(self._editor.config["docs_dir"])
         self._exclude = exclude_modules or []
         self.navs = []
 
     def write(self, document):
         pass
+
+    def get_files(self):
+        return self._editor.files
 
     def get_overview_document(self):
         page = markdownizer.Document(hide_toc=True, path="index.md")
@@ -32,6 +39,12 @@ class Docs:
 
     def get_dependency_table(self) -> markdownizer.Table:
         return markdownizer.Table.get_dependency_table(self.module_name)
+
+    def add_dependency_page(self, path: str | os.PathLike, **kwargs):
+        page = markdownizer.Document(path=self._docs_dir / path, **kwargs)
+        page += self.get_dependency_table()
+        page.write()
+        return page
 
     def get_module_overview(self, module: str | None = None):
         mod = importlib.import_module(module or self.module_name)
@@ -121,4 +134,3 @@ class Docs:
 if __name__ == "__main__":
     doc = Docs(module_name="prettyqt")
     page = doc.get_overview_document()
-    print(page)
