@@ -60,6 +60,7 @@ class Table(markdownizer.Text):
         cls,
         klasses: list[type],
         filter_fn: Callable | None = None,
+        shorten_lists_after: int = 10,
     ) -> Self:
         """Create a table containing information about a list of classes.
 
@@ -74,10 +75,14 @@ class Table(markdownizer.Text):
         for kls in klasses:
             subclasses = [subkls for subkls in kls.__subclasses__() if filter_fn(subkls)]
             subclass_links = [markdownizer.link_for_class(sub) for sub in subclasses]
-            subclass_str = markdownizer.to_html_list(subclass_links, shorten_after=10)
+            subclass_str = markdownizer.to_html_list(
+                subclass_links, shorten_after=shorten_lists_after
+            )
             parents = kls.__bases__
             parent_links = [markdownizer.link_for_class(parent) for parent in parents]
-            parent_str = markdownizer.to_html_list(parent_links, shorten_after=10)
+            parent_str = markdownizer.to_html_list(
+                parent_links, shorten_after=shorten_lists_after
+            )
             desc = kls.__doc__.split("\n")[0] if isinstance(kls.__doc__, str) else ""
             desc = markdownizer.escaped(desc)
             name = markdownizer.link_for_class(kls, size=4, bold=True)
