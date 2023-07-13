@@ -16,27 +16,19 @@ from prettyqt.utils import classhelpers, markdownizer
 logger = logging.getLogger(__name__)
 
 
-class Docs:
-    def __init__(self, module_name: str, exclude_modules: list[str] | None = None):
+class Docs(markdownizer.Nav):
+    def __init__(
+        self, module_name: str, exclude_modules: list[str] | None = None, **kwargs
+    ):
+        super().__init__(module_name=module_name, section="", **kwargs)
         self.module_name = module_name
         self.root_path = pathlib.Path(f"./{module_name}")
         self._editor = mkdocs_gen_files.editor.FilesEditor.current()
         self._docs_dir = pathlib.Path(self._editor.config["docs_dir"])
         self._exclude = exclude_modules or []
-        self.navs = []
-
-    def write(self):
-        for nav in self.navs:
-            nav.write()
 
     def get_files(self):
         return self._editor.files
-
-    def get_overview_document(self):
-        page = markdownizer.Document(hide_toc=True, path="index.md")
-        # page += self.get_dependency_table()
-        page += self.get_module_overview()
-        return page
 
     def get_dependency_table(self) -> markdownizer.Table:
         return markdownizer.Table.get_dependency_table(self.module_name)
@@ -47,29 +39,8 @@ class Docs:
         page.write()
         return page
 
-    def get_module_overview(self, module: str | None = None):
-        mod = importlib.import_module(module or self.module_name)
-        rows = [
-            (
-                submod_name,
-                (
-                    submod.__doc__.split("\n")[0]
-                    if submod.__doc__
-                    else "*No docstrings defined.*"
-                ),
-                (
-                    markdownizer.to_html_list(submod.__all__, make_link=True)
-                    if hasattr(submod, "__all__")
-                    else ""
-                ),
-            )
-            for submod_name, submod in inspect.getmembers(mod, inspect.ismodule)
-        ]
-        rows = list(zip(*rows))
-        return markdownizer.Table(rows, columns=["Name", "Information", "Members"])
-
     def create_nav(self, section: str | os.PathLike) -> markdownizer.Nav:
-        nav = markdownizer.Nav(section=section)
+        nav = markdownizer.Nav(section=section, module_name=self.module_name)
         self.navs.append(nav)
         return nav
 
