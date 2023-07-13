@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 import os
 import pathlib
+import time
 
 import git
 
@@ -131,6 +132,80 @@ class GitPythonTreeModel(itemmodels.TreeModel):
         return False if isinstance(item.obj, git.Blob) else len(item.obj.trees) > 0
 
 
+class GitPythonCommitTreeModel(itemmodels.TreeModel):
+    """Base Tree Model to display a file tree combined with Git information.
+
+    ```py
+    model = GitPythonCommitTreeModel(PATH_TO_GIT_FOLDER)
+    table = widgets.TreeView()
+    table.set_model(model)
+    table.show()
+    ```
+    """
+
+    HEADER = [
+        "Sha",
+        "Absolute path",
+    ]
+
+    def __init__(
+        self, repo: os.PathLike | str | git.Tree | git.Repo | git.Commit, **kwargs
+    ):
+        match repo:
+            case os.PathLike() | str():
+                commit = git.Repo(repo).head.commit
+            case git.Repo():
+                commit = repo.tree().head.commit
+            case git.Commit():
+                commit = repo
+            case _:
+                raise TypeError(repo)
+        super().__init__(commit, **kwargs)
+
+    def columnCount(self, parent: core.ModelIndex | None = None):
+        return len(self.HEADER)
+
+    def headerData(
+        self,
+        section: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ) -> str | None:
+        match orientation, role, section:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
+                return self.HEADER[section]
+        return None
+
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
+        if not index.isValid():
+            return None
+        commit = self.data_by_index(index).obj
+        match role, index.column():
+            case constants.DISPLAY_ROLE, 0:
+                gmtime = time.gmtime(commit.committed_date)
+                return time.strftime("%a, %d %b %Y %H:%M", gmtime)
+            case constants.DISPLAY_ROLE, 0:
+                return commit.authored_date
+            case constants.DISPLAY_ROLE, 1:
+                return commit.hexsha
+
+    @classmethod
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, git.Commit)
+
+    def _fetch_object_children(
+        self, item: GitPythonTreeModel.TreeItem
+    ) -> list[GitPythonTreeModel.TreeItem]:
+        return [self.TreeItem(obj=i) for i in item.obj.parents]
+
+    def _has_children(self, item: GitPythonTreeModel.TreeItem) -> bool:
+        return len(item.obj.parents) > 0
+
+
 if __name__ == "__main__":
     from prettyqt import widgets
 
@@ -138,7 +213,7 @@ if __name__ == "__main__":
     view = widgets.TreeView()
     view.setRootIsDecorated(True)
     p = pathlib.Path.cwd()
-    model = GitPythonTreeModel(p)
+    model = GitPythonCommitTreeModel(p)
     view.set_model(model)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_delegate("editor")
