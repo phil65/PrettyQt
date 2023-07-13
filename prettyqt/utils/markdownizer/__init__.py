@@ -123,15 +123,16 @@ def link_for_class(kls: type, **kwargs) -> str:
         link = linked(url, title=kls.__name__)
     elif kls.__module__.startswith("prettyqt"):
         link = linked(kls.__qualname__)
-    try:
-        dist = metadata.distribution(kls.__module__.split(".")[0])
-    except metadata.PackageNotFoundError:
-        link = linked(kls.__qualname__)
     else:
-        if url := dist.metadata["Home-Page"]:
-            link = linked(url, title=kls.__qualname__)
-        else:
+        try:
+            dist = metadata.distribution(kls.__module__.split(".")[0])
+        except metadata.PackageNotFoundError:
             link = linked(kls.__qualname__)
+        else:
+            if url := dist.metadata["Home-Page"]:
+                link = linked(url, title=kls.__qualname__)
+            else:
+                link = linked(kls.__qualname__)
     return styled(link, **kwargs)
 
 
