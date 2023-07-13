@@ -9,8 +9,8 @@ import sys
 from prettyqt.utils.markdownizer.basesection import BaseSection, Text, Code
 from prettyqt.utils.markdownizer.image import Image, BinaryImage
 from prettyqt.utils.markdownizer.admonition import Admonition
-from prettyqt.utils.markdownizer.docs import Docs
 from prettyqt.utils.markdownizer.nav import Nav
+from prettyqt.utils.markdownizer.docs import Docs
 from prettyqt.utils.markdownizer.docstrings import DocStrings
 from prettyqt.utils.markdownizer.list import List
 from prettyqt.utils.markdownizer.table import Table
