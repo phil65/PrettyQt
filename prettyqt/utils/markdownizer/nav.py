@@ -65,10 +65,11 @@ class Nav(markdownizer.BaseSection):
         return page
 
     def add_module_page(self, module, path, **kwargs):
+        complete_mod_path = f"{self.module_name}.{module}"
         parts = pathlib.Path(path).parts[:-1]
         page = markdownizer.ModuleDocument(
             hide_toc=True,
-            module=module,
+            module=complete_mod_path,
             path=path,
             **kwargs,
         )
