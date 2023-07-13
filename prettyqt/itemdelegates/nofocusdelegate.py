@@ -3,8 +3,12 @@ from __future__ import annotations
 from prettyqt import core, gui, widgets
 
 
-# Remove dotted border on cell focus.  https://stackoverflow.com/a/55252650/3620725
+# https://stackoverflow.com/a/55252650/3620725
+
+
 class NoFocusDelegate(widgets.StyledItemDelegate):
+    """Delegate to remove dotted border on cell focus."""
+
     ID = "no_focus"
 
     def paint(

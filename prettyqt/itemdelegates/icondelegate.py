@@ -4,6 +4,8 @@ from prettyqt import constants, core, gui, widgets
 
 
 class IconDelegate(widgets.StyledItemDelegate):
+    """Delegate to paint QIcons, QPixmaps, QColors and QImages."""
+
     ID = "icon"
 
     def __init__(self, role: constants.ItemDataRole = constants.USER_ROLE, **kwargs):

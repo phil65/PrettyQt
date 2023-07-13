@@ -4,6 +4,8 @@ from prettyqt import constants, core, gui, widgets
 
 
 class ButtonDelegate(widgets.StyledItemDelegate):
+    """Delegate to show a button inside a table cell."""
+
     ID = "button"
 
     def __init__(

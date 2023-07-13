@@ -34,10 +34,3 @@ widget.fx.slide(start=(0, 0), end=(100, 0), duration=400)
 Animating stylesheet values is also possible easily:
 
 TODO.
-
-
-
-
-
-
-
