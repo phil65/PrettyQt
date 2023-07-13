@@ -1,6 +1,12 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, gui, widgets
+from typing import TYPE_CHECKING
+
+from prettyqt import constants, core
+
+
+if TYPE_CHECKING:
+    from prettyqt import widgets
 
 
 class Animator(core.Object):
@@ -125,41 +131,10 @@ class Animator(core.Object):
         self.active = False
 
     def fade_in(self, widget: int | widgets.QWidget):
+        from prettyqt import custom_widgets
+
         widget = self._widget.widget(widget) if isinstance(widget, int) else widget
-        self._widget.fader_widget = FaderWidget(
+        self._widget.fader_widget = custom_widgets.FaderWidget(
             self._widget.currentWidget(), widget, self.speed
         )
         self._widget.setCurrentWidget(widget)
-
-
-class FaderWidget(widgets.Widget):
-    pixmap_opacity = 1.0
-
-    def __init__(
-        self,
-        old_widget: widgets.QWidget,
-        new_widget: widgets.QWidget,
-        duration: int = 300,
-    ):
-        super().__init__(new_widget)
-
-        pr = gui.Window().devicePixelRatio()
-        self.old_pixmap = gui.Pixmap(new_widget.size() * pr)
-        self.old_pixmap.setDevicePixelRatio(pr)
-        old_widget.render(self.old_pixmap)
-
-        self.timeline = core.TimeLine(duration=duration, finished=self.close)
-        self.timeline.value_changed.connect(self.animate)
-        self.timeline.start()
-
-        self.resize(new_widget.size())
-        self.show()
-
-    def paintEvent(self, event):
-        with gui.Painter(self) as painter:
-            painter.setOpacity(self.pixmap_opacity)
-            painter.drawPixmap(0, 0, self.old_pixmap)
-
-    def animate(self, value: float):
-        self.pixmap_opacity = 1.0 - value
-        self.repaint()

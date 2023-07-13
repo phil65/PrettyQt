@@ -13,6 +13,8 @@ from .labels.clickablelabel import ClickableLabel
 from .labels.iconlabel import IconLabel
 from .labels.iconwidget import IconWidget
 
+from .crossfadewidget import CrossFadeWidget
+from .faderwidget import FaderWidget
 from .imageviewer import ImageViewer
 from .editors.listinput import ListInput
 from .booldicttoolbutton import BoolDictToolButton
@@ -86,6 +88,8 @@ __all__ = [
     "StringListEdit",
     "UrlLineEdit",
     "ImageViewer",
+    "CrossFadeWidget",
+    "FaderWidget",
     "ElidedLabel",
     "ListInput",
     "BoolDictToolButton",
