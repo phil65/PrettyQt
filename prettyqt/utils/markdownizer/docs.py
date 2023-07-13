@@ -84,11 +84,20 @@ class Docs:
 
     def iter_classes_for_module(
         self,
-        mod: types.ModuleType,
+        mod: types.ModuleType | str | tuple | list,
         recursive: bool = False,
         filter_by___all__: bool = False,
         _seen=None,
     ):
+        match mod:
+            case str():
+                mod = importlib.import_module(mod)
+            case tuple() | list():
+                mod = importlib.import_module(".".join(mod))
+            case types.ModuleType():
+                pass
+            case _:
+                raise TypeError(mod)
         if recursive:
             seen = _seen or set()
             for _submod_name, submod in inspect.getmembers(mod, inspect.ismodule):
