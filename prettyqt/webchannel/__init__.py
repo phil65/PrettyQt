@@ -10,6 +10,9 @@ logger = logging.getLogger(__name__)
 
 try:
     from .webchannel import WebChannel
+    from prettyqt.qt import QtWebChannel
+
+    QT_MODULE = QtWebChannel
 
     __all__ = ["WebChannel"]
 except ModuleNotFoundError:
