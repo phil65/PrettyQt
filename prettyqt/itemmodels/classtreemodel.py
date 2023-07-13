@@ -97,7 +97,19 @@ class BaseClassTreeModel(itemmodels.TreeModel):
 class SubClassTreeModel(BaseClassTreeModel):
     """Model to display the subclass tree of a python class.
 
-    Also supports `types.UnionType`.
+    ```py
+    from prettyqt import itemmodels, widgets
+
+    app = widgets.app()
+    widget = widgets.TreeView()
+    model = itemmodels.SubClassTreeModel(core.AbstractItemModelMixin)
+    widget.set_model(model)
+    widget.show()
+    ```
+
+    <figure markdown>
+      ![Image title](abstractitemmodelmixin_subclasses.png)
+    </figure>
     """
 
     SUPPORTS = type | types.UnionType
@@ -122,7 +134,42 @@ class SubClassTreeModel(BaseClassTreeModel):
 
 
 class ParentClassTreeModel(BaseClassTreeModel):
-    """Tree model to display the parent class tree of a python class."""
+    """Tree model to display the parent class tree of a python class.
+
+    !!! Example "Class hierarchy example"
+
+        === "Parentclass tree"
+
+            ```py
+            from prettyqt import itemmodels, widgets
+
+            app = widgets.app()
+            widget = widgets.TreeView()
+            model = itemmodels.ParentClassTreeModel(widgets.TreeWidget)
+            widget.set_model(model)
+            widget.show()
+            ```
+
+            <figure markdown>
+              ![Image title](treewidget_parentclasses.png)
+            </figure>
+
+        === "MRO tree"
+
+            ```py
+            from prettyqt import itemmodels, widgets
+
+            app = widgets.app()
+            widget = widgets.TreeView()
+            model = itemmodels.ParentClassTreeModel(widgets.TreeWidget, mro=True)
+            widget.set_model(model)
+            widget.show()
+            ```
+
+            <figure markdown>
+              ![Image title](treewidget_mro.png)
+            </figure>
+    """
 
     SUPPORTS = type
 

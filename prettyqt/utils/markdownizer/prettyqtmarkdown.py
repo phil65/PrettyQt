@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import inspect
 import logging
 
 from prettyqt import constants, core, gui, itemmodels, widgets
@@ -21,16 +20,6 @@ class PrettyQtClassDocument(markdownizer.ClassDocument):
             self.append(f"Qt Base Class: {markdownizer.link_for_class(qt_parent)}")
             self.append(f"Signature: `{qt_parent.__doc__}`")
         super()._build()
-        if issubclass(self.klass, core.AbstractItemModelMixin) and issubclass(
-            self.klass, core.QObject
-        ):
-            sig = inspect.signature(self.klass.__init__)
-            params = list(sig.parameters.values())
-            if len(params) > 1:
-                typ = params[1].annotation
-                self.append(
-                    markdownizer.Admonition("info", f"Supported data type: `{typ}`")
-                )
         if issubclass(self.klass, itemmodels.SliceIdentityProxyModel):
             self.append(markdownizer.Admonition("info", SLICE_PROXY_INFO))
         if (
@@ -43,6 +32,11 @@ class PrettyQtClassDocument(markdownizer.ClassDocument):
             and self.klass.DELEGATE_DEFAULT is not None
         ):
             msg = f"Recommended delegate: {self.klass.DELEGATE_DEFAULT!r}"
+            self.append(markdownizer.Admonition("info", msg))
+        if issubclass(self.klass, core.AbstractItemModelMixin) and hasattr(
+            self.klass, "SUPPORTS"
+        ):
+            msg = f"Supported data type: `{self.klass.SUPPORTS}`"
             self.append(markdownizer.Admonition("info", msg))
         if issubclass(self.klass, core.QObject):
             self.append(

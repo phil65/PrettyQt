@@ -15,6 +15,9 @@ class PydanticModel(itemmodels.BaseDataclassModel):
     """Table model to display a list of [pydantic](https://www.pydantic.dev/) BaseModels.
 
     Non-frozen fields can be edited.
+
+    !!! note
+        This ItemModel only supports Pydantic v2 BaseModels.
     """
 
     SUPPORTS = Sequence[pydantic.BaseModel]

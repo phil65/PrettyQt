@@ -1,3 +1,0 @@
-## Supports
-
-`pandas.Index`

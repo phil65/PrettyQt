@@ -17,6 +17,9 @@ class PydanticFieldsModel(itemmodels.BaseFieldsModel):
     More information about pydantic can be found [here][https://www.pydantic.dev/].
 
     Frozen BaseModels / frozen fields read-only.
+
+    !!! note
+        This ItemModel only supports Pydantic v2 BaseModels.
     """
 
     SUPPORTS = pydantic.BaseModel
