@@ -18,7 +18,7 @@ QT_MODULE_ATTR = "QT_MODULE"
 
 prettyqt.import_all()
 
-docs = markdownizer.Docs(module_name="prettyqt", exclude_modules=["qt"])
+docs = markdownizer.Docs(module=prettyqt, exclude_modules=["qt"])
 qt_nav = docs.create_nav(section="qt_modules")
 additional_nav = docs.create_nav(section="additional_modules")
 qt_overview = qt_nav.add_overview_page(predicate=lambda x: hasattr(x, QT_MODULE_ATTR))

@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 HEADER = "---\n{options}\n---\n\n"
 
 
-class Document:
+class Document(markdownizer.BaseSection):
     def __init__(
         self,
         items: list | None = None,
@@ -25,6 +25,7 @@ class Document:
         hide_path: bool = False,
         path: str | os.PathLike = "",
     ):
+        super().__init__()
         self.items = items or []
         self.path = path
         self.header_options = collections.defaultdict(list)
@@ -167,4 +168,4 @@ class ModuleDocument(Document):
 
 if __name__ == "__main__":
     doc = Document()
-    print(doc.to_markdown())
+    # print(doc.children)

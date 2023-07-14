@@ -44,9 +44,10 @@ class Nav(markdownizer.BaseSection):
     def children(self):
         return self.navs + self.pages
 
-    # @children.setter
-    # def children(self, pages):
-    #     self.pages = pages
+    @children.setter
+    def children(self, items):
+        self.navs = [i for i in items if isinstance(i, Nav)]
+        self.pages = [i for i in items if not isinstance(i, Nav)]
 
     def create_nav(self, section: str | os.PathLike) -> markdownizer.Nav:
         nav = markdownizer.Nav(section=section, module_name=self.module_name)
@@ -76,7 +77,7 @@ class Nav(markdownizer.BaseSection):
     def add_document(self, nav_path: str | tuple, file_path: os.PathLike | str, **kwargs):
         self.__setitem__(nav_path, file_path)
         page = markdownizer.Document(**kwargs)
-        self.pages[nav_path] = page
+        self.pages.append(page)
         return page
 
     def add_overview_page(self, predicate: Callable | None = None):
@@ -128,6 +129,6 @@ class Nav(markdownizer.BaseSection):
 
 
 if __name__ == "__main__":
-    nav = Nav(path="prettyqt")
+    nav = Nav(section="prettyqt")
     doc = nav.add_document(("a", "ab"), "Path/to/something")
     print(nav)

@@ -17,6 +17,7 @@ class BaseSection(node.BaseNode):
     """
 
     def __init__(self, header: str = ""):
+        super().__init__()
         self.header = header
 
     def __str__(self):

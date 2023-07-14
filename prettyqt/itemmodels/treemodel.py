@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 class TreeItem(node.Node):
     """Tree node class used for Qt TreeModels."""
 
-    __slots__ = ("has_children", "children_fetched")
+    # __slots__ = ("has_children", "children_fetched")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

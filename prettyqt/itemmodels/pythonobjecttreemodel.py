@@ -280,7 +280,7 @@ class SourceCodeColumn(itemmodels.ColumnItem):
 class PythonObjectTreeItem(itemmodels.ColumnItemModel.TreeItem):
     """Tree node class that can be used to build trees of objects."""
 
-    __slots__ = ("obj_name", "obj_path", "is_attribute")
+    # __slots__ = ("obj_name", "obj_path", "is_attribute")
 
     def __init__(
         self,

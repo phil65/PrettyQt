@@ -38,14 +38,14 @@ class NodeResolver(baseresolver.BaseResolver):
 class BaseNode:
     """A Node class that can be used to build trees."""
 
-    __slots__ = ("parent_item", "children")
+    # __slots__ = ("parent_item", "children")
 
     def __init__(self, parent: Self | None = None):
         self.parent_item = parent
         self.children: list[Self] = []
 
     def __repr__(self):
-        return get_repr(self, self.obj)
+        return get_repr(self)
 
     def __iter__(self) -> Iterator[Self]:
         return iter(self.children)
@@ -167,7 +167,7 @@ class BaseNode:
 
     def pretty_print(self, indent: int = 0):
         text = indent * "    " + str(self)
-        logger.debug(text)
+        logger.info(text)
         for child_item in self.children:
             child_item.pretty_print(indent + 1)
 
@@ -175,11 +175,14 @@ class BaseNode:
 class Node(BaseNode):
     """Like BaseNode, but with one object attached to the node."""
 
-    __slots__ = ("obj",)
+    # __slots__ = ("obj",)
 
     def __init__(self, obj, parent: Self | None = None):
         super().__init__(parent)
         self.obj = obj
+
+    def __repr__(self):
+        return get_repr(self, self.obj)
 
 
 def preorder_iter(

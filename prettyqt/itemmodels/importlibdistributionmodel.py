@@ -42,7 +42,7 @@ def list_package_requirements(package_name: str) -> list[metadata.Distribution]:
 
 
 class DistTreeItem(itemmodels.ColumnItemModel.TreeItem):
-    __slots__ = ("requires", "metadata", "version", "markers")
+    # __slots__ = ("requires", "metadata", "version", "markers")
 
     def __init__(
         self,
