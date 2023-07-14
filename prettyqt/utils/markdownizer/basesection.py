@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import logging
 
+import mkdocs_gen_files
+
 from prettyqt.utils import node
 
 
@@ -26,6 +28,23 @@ class BaseSection(node.BaseNode):
     def to_markdown(self):
         text = self._to_markdown() + "\n"
         return f"## {self.header}\n\n{text}" if self.header else text
+
+    def virtual_files(self):
+        return {}
+
+    def all_virtual_files(self):
+        """Return a dictionary containing all virtual files of itself and all children."""
+        dct = {k: v for des in self.descendants for k, v in des.virtual_files().items()}
+        return dct | self.virtual_files()
+
+    def write(self):
+        # path = pathlib.Path(self.path)
+        # path.parent.mkdir(parents=True, exist_ok=True)
+        for k, v in self.all_virtual_files().items():
+            logger.info(f"Written file to {k}")
+            mode = "w" if isinstance(v, str) else "wb"
+            with mkdocs_gen_files.open(k, mode) as file:
+                file.write(v)
 
 
 class Text(BaseSection):
