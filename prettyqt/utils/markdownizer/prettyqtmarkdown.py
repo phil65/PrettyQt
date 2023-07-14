@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from importlib import metadata
 import logging
 
 from prettyqt import constants, core, gui, itemmodels, widgets
@@ -39,9 +40,7 @@ class PrettyQtClassDocument(markdownizer.ClassDocument):
             msg = f"Supported data type: `{self.klass.SUPPORTS}`"
             self.append(markdownizer.Admonition("info", msg))
         if issubclass(self.klass, core.QObject):
-            self.append(
-                markdownizer.Table.get_property_table(self.klass, header="Property table")
-            )
+            self.append(markdownizer.PropertyTable(self.klass, header="Property table"))
         if hasattr(self.klass, "ID") and issubclass(self.klass, gui.Validator):
             self.append(f"\n\nValidator ID: **{self.klass.ID}**\n\n")
         if hasattr(self.klass, "ID") and issubclass(
@@ -113,13 +112,68 @@ def index_tree_to_mermaid(klasses, inheritances):
     )
 
 
+class PropertyTable(markdownizer.Table):
+    def __init__(
+        self,
+        qobject: core.QObject | type[core.QObject],
+        user_prop_name: str | None = None,
+        header: str = "",
+    ):
+        lines = []
+        headers = ["Qt Property", "Type", "Options"]
+        if isinstance(qobject, core.QObject):
+            properties = core.MetaObject(qobject.metaObject()).get_properties()
+        elif issubclass(qobject, core.QObject):
+            properties = core.MetaObject(qobject.staticMetaObject).get_properties()
+        for prop in properties:
+            property_name = f"`{prop.get_name()}`"
+            if prop.get_name() == user_prop_name:
+                property_name += " *(User property)*"
+            # if (flag := prop.get_enumerator()):
+
+            meta_type = prop.get_meta_type()
+            property_type = f"**{(meta_type.get_name() or '').rstrip('*')}**"
+            sections: list[str] = [
+                property_name,
+                property_type,
+                "x" if prop.get_name() == user_prop_name else "",
+            ]
+            lines.append(sections)
+        super().__init__(columns=headers, data=list(zip(*lines)), header=header)
+
+
+class ItemModelTable(markdownizer.Table):
+    def __init__(
+        self,
+        model: core.AbstractItemModelMixin,
+        use_checkstate_role: bool = True,
+        **kwargs,
+    ):
+        proxy = itemmodels.SliceToMarkdownProxyModel(None, source_model=model)
+        data, h_header, _ = proxy.get_table_data(
+            use_checkstate_role=use_checkstate_role, **kwargs
+        )
+        data = list(zip(*data))
+        super().__init__(data, columns=h_header)
+
+
+class DependencyTable(ItemModelTable):
+    def __init__(self, distribution: str | metadata.Distribution = "prettyqt"):
+        model = itemmodels.ImportlibTreeModel(distribution)
+        proxy = itemmodels.ColumnOrderProxyModel(
+            order=["Name", "Constraints", "Extra", "Summary", "Homepage"],
+            source_model=model,
+        )
+        super().__init__(proxy)
+
+
 if __name__ == "__main__":
     doc = markdownizer.Document([], True, True)
     doc += markdownizer.Admonition("info", "etst")
     doc += markdownizer.Table(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
-    doc += markdownizer.Table.get_property_table(core.StringListModel)
+    doc += markdownizer.PropertyTable(core.StringListModel)
     doc += markdownizer.DocStrings(helpers, header="DocStrings")
-    doc += markdownizer.Table.get_dependency_table("prettyqt")
+    doc += markdownizer.DependencyTable("prettyqt")
     doc += markdownizer.MermaidDiagram.for_classes(
         [markdownizer.Table], header="Mermaid diagram"
     )

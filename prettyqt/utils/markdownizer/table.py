@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Mapping, Sequence
-from importlib import metadata
+import importlib
+import inspect
 import logging
 
 from typing_extensions import Self
 
-from prettyqt import core
 from prettyqt.utils import markdownizer
 
 
@@ -98,7 +98,33 @@ class Table(markdownizer.Text):
         return cls(ls)
 
     @classmethod
-    def get_ancestor_table_for_klass(cls, klass: type[core.QObject]) -> Self | None:
+    def get_module_overview(
+        cls, module: str | None = None, predicate: Callable | None = None
+    ):
+        mod = importlib.import_module(module)
+        rows = [
+            (
+                submod_name,
+                # markdownizer.link_for_class(submod, size=4, bold=True),
+                (
+                    submod.__doc__.split("\n")[0]
+                    if submod.__doc__
+                    else "*No docstrings defined.*"
+                ),
+                (
+                    markdownizer.to_html_list(submod.__all__, make_link=True)
+                    if hasattr(submod, "__all__")
+                    else ""
+                ),
+            )
+            for submod_name, submod in inspect.getmembers(mod, inspect.ismodule)
+            if (predicate is None or predicate(submod)) and "__" not in submod.__name__
+        ]
+        rows = list(zip(*rows))
+        return cls(rows, columns=["Name", "Information", "Members"])
+
+    @classmethod
+    def get_ancestor_table_for_klass(cls, klass: type) -> Self | None:
         subclasses = klass.__subclasses__()
         if not subclasses:
             return None
@@ -115,73 +141,7 @@ class Table(markdownizer.Text):
         )
         return cls(data=data, header="Child classes")
 
-    @classmethod
-    def get_property_table(
-        cls,
-        qobject: core.QObject | type[core.QObject],
-        user_prop_name: str | None = None,
-        header: str = "",
-    ) -> Self:
-        lines = []
-        headers = ["Qt Property", "Type", "Options"]
-        if isinstance(qobject, core.QObject):
-            properties = core.MetaObject(qobject.metaObject()).get_properties()
-        elif issubclass(qobject, core.QObject):
-            properties = core.MetaObject(qobject.staticMetaObject).get_properties()
-        for prop in properties:
-            property_name = f"`{prop.get_name()}`"
-            if prop.get_name() == user_prop_name:
-                property_name += " *(User property)*"
-            # if (flag := prop.get_enumerator()):
-
-            meta_type = prop.get_meta_type()
-            property_type = f"**{(meta_type.get_name() or '').rstrip('*')}**"
-            sections: list[str] = [
-                property_name,
-                property_type,
-                "x" if prop.get_name() == user_prop_name else "",
-            ]
-            lines.append(sections)
-        return cls(columns=headers, data=list(zip(*lines)), header=header)
-
-    @classmethod
-    def from_itemmodel(
-        cls,
-        model: core.AbstractItemModelMixin,
-        use_checkstate_role: bool = True,
-        **kwargs,
-    ) -> Self:
-        from prettyqt import itemmodels
-
-        proxy = itemmodels.SliceToMarkdownProxyModel(None, source_model=model)
-
-        data, h_header, _ = proxy.get_table_data(
-            use_checkstate_role=use_checkstate_role, **kwargs
-        )
-        data = list(zip(*data))
-        return cls(data, columns=h_header)
-
-    @classmethod
-    def get_dependency_table(
-        cls,
-        distribution: str | metadata.Distribution = "prettyqt",
-    ) -> Self:
-        from prettyqt import itemmodels
-
-        model = itemmodels.ImportlibTreeModel(distribution)
-        proxy = itemmodels.ColumnOrderProxyModel(
-            order=["Name", "Constraints", "Extra", "Summary", "Homepage"],
-            source_model=model,
-        )
-        return cls.from_itemmodel(proxy)
-
 
 if __name__ == "__main__":
-    from prettyqt import itemmodels
-
-    model = itemmodels.QObjectPropertiesModel(core.PropertyAnimation())
-    # print(proxy.get_table_data(use_checkstate_role=True))
-    table = Table.from_itemmodel(model)
-    # list(model.iter_tree(depth=2))
-    table = Table.get_dependency_table("prettyqt")
+    table = Table()
     print(logger.warning(table))

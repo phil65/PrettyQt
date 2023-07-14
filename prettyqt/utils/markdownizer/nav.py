@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-import importlib
-import inspect
 import logging
 import os
 import pathlib
@@ -64,37 +62,15 @@ class Nav(markdownizer.BaseSection):
         self.pages[nav_path] = page
         return page
 
-    def get_overview_document(self, predicate: Callable | None = None):
+    def add_overview_page(self, predicate: Callable | None = None):
         page = markdownizer.Document(
             hide_toc=True, path=pathlib.Path(self.section, "index.md")
         )
         # page += self.get_dependency_table()
-        page += self.get_module_overview(predicate=predicate)
+        page += markdownizer.Table.get_module_overview(
+            self.module_name, predicate=predicate
+        )
         return page
-
-    def get_module_overview(
-        self, module: str | None = None, predicate: Callable | None = None
-    ):
-        mod = importlib.import_module(module or self.module_name)
-        rows = [
-            (
-                submod_name,
-                (
-                    submod.__doc__.split("\n")[0]
-                    if submod.__doc__
-                    else "*No docstrings defined.*"
-                ),
-                (
-                    markdownizer.to_html_list(submod.__all__, make_link=True)
-                    if hasattr(submod, "__all__")
-                    else ""
-                ),
-            )
-            for submod_name, submod in inspect.getmembers(mod, inspect.ismodule)
-            if (predicate is None or predicate(submod)) and "__" not in submod.__name__
-        ]
-        rows = list(zip(*rows))
-        return markdownizer.Table(rows, columns=["Name", "Information", "Members"])
 
     def add_class_page(self, klass, path, **kwargs):
         parts = pathlib.Path(path).parts[:-1]

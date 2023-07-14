@@ -19,6 +19,9 @@ from prettyqt.utils.markdownizer.document import Document, ClassDocument, Module
 from prettyqt.utils.markdownizer.prettyqtmarkdown import (
     WidgetScreenShot,
     PrettyQtClassDocument,
+    PropertyTable,
+    ItemModelTable,
+    DependencyTable,
 )
 
 __all__ = [
@@ -39,6 +42,9 @@ __all__ = [
     "ModuleDocument",
     "PrettyQtClassDocument",
     "WidgetScreenShot",
+    "PropertyTable",
+    "ItemModelTable",
+    "DependencyTable",
 ]
 
 
@@ -156,9 +162,9 @@ if __name__ == "__main__":
     doc = Document([], True, True)
     doc += Admonition("info", "etst")
     doc += Table(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
-    doc += Table.get_property_table(core.StringListModel)
+    doc += PropertyTable(core.StringListModel)
     doc += DocStrings(helpers, header="DocStrings")
-    doc += Table.get_dependency_table("prettyqt")
+    doc += DependencyTable("prettyqt")
     doc += MermaidDiagram.for_classes([Table], header="Mermaid diagram")
     from fsspec import AbstractFileSystem
 

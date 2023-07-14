@@ -107,4 +107,4 @@ class Docs(markdownizer.Nav):
 
 if __name__ == "__main__":
     doc = Docs(module_name="prettyqt")
-    page = doc.get_overview_document()
+    page = doc.add_overview_page()
