@@ -166,7 +166,7 @@ class BaseNode:
         return self.parent_item.children.index(self) if self.parent_item else 0
 
     def pretty_print(self, indent: int = 0):
-        text = indent * "    " + str(self)
+        text = indent * "    " + repr(self)
         logger.info(text)
         for child_item in self.children:
             child_item.pretty_print(indent + 1)

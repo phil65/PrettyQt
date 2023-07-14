@@ -7,7 +7,7 @@ import pathlib
 
 import mkdocs_gen_files
 
-from prettyqt.utils import markdownizer
+from prettyqt.utils import get_repr, markdownizer
 
 
 logger = logging.getLogger(__name__)
@@ -30,6 +30,14 @@ class Nav(markdownizer.BaseSection):
         self._mapping = {}
         self.navs = []
         self.pages = []
+
+    def __repr__(self):
+        return get_repr(
+            self,
+            section=self.section,
+            module_name=self.module_name,
+            filename=self.filename,
+        )
 
     def __setitem__(self, item: tuple | str, value: str | os.PathLike):
         if isinstance(item, str):

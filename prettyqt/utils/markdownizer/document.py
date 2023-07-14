@@ -8,7 +8,7 @@ import types
 
 import mkdocs_gen_files
 
-from prettyqt.utils import classhelpers, markdownizer
+from prettyqt.utils import classhelpers, get_repr, markdownizer
 
 
 logger = logging.getLogger(__name__)
@@ -35,6 +35,9 @@ class Document(markdownizer.BaseSection):
             self.header_options["hide"].append("nav")
         if hide_path:
             self.header_options["hide"].append("path")
+
+    def __repr__(self):
+        return get_repr(self, path=str(self.path))
 
     def __add__(self, other):
         self.append(other)
