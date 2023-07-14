@@ -167,6 +167,27 @@ class DependencyTable(ItemModelTable):
         super().__init__(proxy)
 
 
+class MarkdownModel(itemmodels.TreeModel):
+    def columnCount(self, index):
+        return 3
+
+    def data(self, index, role):
+        data = self.data_by_index(index).obj
+        match role, index.column():
+            case constants.DISPLAY_ROLE, 0:
+                return repr(data)
+            case constants.DISPLAY_ROLE, 1:
+                return data.to_markdown().count("\n")
+            # case constants.DISPLAY_ROLE, 2:
+            #     return data.to_markdown()
+
+    def _fetch_object_children(self, treeitem) -> list[MarkdownModel.TreeItem]:
+        return [self.TreeItem(i) for i in treeitem.obj.children]
+
+    def _has_children(self, treeitem) -> bool:
+        return len(treeitem.obj.children) > 0
+
+
 if __name__ == "__main__":
     doc = markdownizer.Document([], True, True)
     doc += markdownizer.Admonition("info", "etst")

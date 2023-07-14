@@ -13,7 +13,7 @@ from prettyqt.utils import markdownizer
 logger = logging.getLogger(__name__)
 
 
-class Table(markdownizer.Text):
+class Table(markdownizer.BaseSection):
     def __init__(
         self,
         data: Sequence[Sequence[str]] | Sequence[dict] | dict[str, list] | None = None,
