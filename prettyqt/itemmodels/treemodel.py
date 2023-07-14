@@ -23,6 +23,8 @@ class TreeItem(node.Node):
 class TreeModel(core.AbstractItemModel):
     """TreeModel which is used as a base for most TreeModels implemented.
 
+    Tree gets dynamically populated whenever the the indexes get "expanded".
+
     basically, only 2 methods need to be defined in order to build the tree:
 
     def _fetch_object_children(self, TreeModel.TreeItem) -> list[TreeModel.TreeItem]:
@@ -104,7 +106,7 @@ class TreeModel(core.AbstractItemModel):
             return core.ModelIndex()
 
         child_item = self.data_by_index(index)
-        parent_item = child_item.parent()
+        parent_item = child_item.parent_item
 
         if parent_item is None or parent_item == self.root_item:
             return core.ModelIndex()

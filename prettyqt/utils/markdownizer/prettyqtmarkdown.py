@@ -3,7 +3,7 @@ from __future__ import annotations
 from importlib import metadata
 import logging
 
-from prettyqt import constants, core, gui, itemmodels, widgets
+from prettyqt import constants, core, custom_widgets, gui, itemmodels, widgets
 from prettyqt.utils import classhelpers, datatypes, helpers, markdownizer
 
 
@@ -197,7 +197,8 @@ class MarkdownWidget(widgets.Widget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.tree = widgets.TreeView()
-        self.textbox = widgets.TextBrowser()
+        self.textbox = custom_widgets.CodeEditor()
+        self.textbox.set_syntaxhighlighter("markdown")
         layout = self.set_layout("grid")
         layout[0, 0] = self.tree
         layout[0, 1] = self.textbox
@@ -209,7 +210,7 @@ class MarkdownWidget(widgets.Widget):
 
     def _on_current_change(self, new, old):
         text = new.data(new.model().Roles.MarkdownRole)
-        self.textbox.setMarkdown(text)
+        self.textbox.set_text(text)
 
 
 if __name__ == "__main__":

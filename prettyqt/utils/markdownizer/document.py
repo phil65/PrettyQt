@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import collections
 import logging
 import os
 import pathlib
@@ -26,13 +25,13 @@ class Document(markdownizer.BaseSection):
         super().__init__()
         self.items = items or []
         self.path = path
-        self.header_options = collections.defaultdict(list)
+        self.header_options = {}
         if hide_toc:
-            self.header_options["hide"].append("toc")
+            self.header_options.setdefault("hide", []).append("toc")
         if hide_nav:
-            self.header_options["hide"].append("nav")
+            self.header_options.setdefault("hide", []).append("nav")
         if hide_path:
-            self.header_options["hide"].append("path")
+            self.header_options.setdefault("hide", []).append("path")
 
     def __repr__(self):
         return get_repr(self, path=str(self.path))

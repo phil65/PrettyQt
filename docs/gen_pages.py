@@ -57,10 +57,10 @@ qt_nav.write()
 # docs.write_navs()
 
 
-# from prettyqt import itemmodels, widgets
-# model = itemmodels.TupleTreeModel(additional_nav._mapping)
+# from prettyqt import widgets
+
 # app = widgets.app()
-# table = widgets.TreeView()
-# table.set_model(model)
+# table = markdownizer.MarkdownWidget()
+# table.set_markdown(additional_nav)
 # table.show()
 # app.exec()

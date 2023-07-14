@@ -134,12 +134,40 @@ class WebEngineView(widgets.WidgetMixin, QtWebEngineWidgets.QWebEngineView):
 
 
 if __name__ == "__main__":
+    import pathlib
+
     from prettyqt import widgets
 
     app = widgets.app()
-    path = "https://www.google.com"
     widget = WebEngineView()
-    widget.set_url(path)
-    widget.find_text("test", backward=True, case_sensitive=True, callback=None)
+
+    import markdown
+
+    path = pathlib.Path("E:\\dev\\prettyqt\\docs\\index.md")
+
+    extensions = [
+        "pymdownx.arithmatex",
+        "pymdownx.betterem",
+        "pymdownx.caret",
+        "pymdownx.critic",
+        "pymdownx.details",
+        "pymdownx.emoji",
+        "pymdownx.inlinehilite",
+        "pymdownx.magiclink",
+        "pymdownx.mark",
+        "pymdownx.smartsymbols",
+        "pymdownx.superfences",
+        "pymdownx.tasklist",
+        "pymdownx.tabbed",
+        "pymdownx.tilde",
+    ]
+
+    html = markdown.markdown(path.read_text(), extensions=extensions)
+    widget.setHtml(html)
+    page = widget.page()
+    path = pathlib.Path(
+        "E:\\dev\\prettyqt\\site\\assets\\stylesheets\\main.26e3688c.min.css"
+    )
+    page.insert_stylesheet("main.26e3688c.min", path)
     widget.show()
     app.exec()
