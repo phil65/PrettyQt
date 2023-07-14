@@ -4,7 +4,7 @@ import logging
 
 import mkdocs_gen_files
 
-from prettyqt.utils import node
+from prettyqt.utils import get_repr, node
 
 
 logger = logging.getLogger(__name__)
@@ -56,6 +56,9 @@ class Text(BaseSection):
     def __init__(self, text: str | BaseSection = "", header: str = ""):
         super().__init__(header=header)
         self.text = text
+
+    def __repr__(self):
+        return get_repr(self, text=self.text)
 
     def _to_markdown(self) -> str:
         return self.text if isinstance(self.text, str) else self.text.to_markdown()

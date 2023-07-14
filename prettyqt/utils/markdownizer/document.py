@@ -47,6 +47,14 @@ class Document(markdownizer.BaseSection):
     def __str__(self):
         return self.to_markdown()
 
+    @property
+    def children(self):
+        return self.items
+
+    @children.setter
+    def children(self, children):
+        self.items = children
+
     def virtual_files(self):
         return {self.path: self.to_markdown()}
 

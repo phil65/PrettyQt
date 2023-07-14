@@ -68,15 +68,15 @@ class InvalidParamError(ValueError):
         super().__init__(self.message)
 
 
-def get_repr(obj: Any, *args: Any, **kwargs: Any) -> str:
+def get_repr(_obj: Any, *args: Any, **kwargs: Any) -> str:
     """Get a suitable __repr__ string for an object.
 
     Args:
-        obj: The object to get a repr for.
+        _obj: The object to get a repr for.
         *args: Arguments for the repr
         **kwargs: Keyword arguments for the repr
     """
-    classname = type(obj).__name__
+    classname = type(_obj).__name__
     parts = [repr(val) for val in args]
     kw_parts = [f"{name}={val!r}" for name, val in kwargs.items()]
     return f"{classname}({', '.join(parts + kw_parts)})"

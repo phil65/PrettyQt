@@ -5,7 +5,7 @@ import logging
 import os
 import types
 
-from prettyqt.utils import classhelpers, markdownizer
+from prettyqt.utils import classhelpers, get_repr, markdownizer
 
 
 logger = logging.getLogger(__name__)
@@ -134,6 +134,7 @@ class DocStrings(markdownizer.Text):
                                   Default: False.
         """
         super().__init__(header=header)
+        self.obj = obj
         match obj:
             case types.ModuleType():
                 self.module_path = obj.__name__
@@ -152,6 +153,9 @@ class DocStrings(markdownizer.Text):
             case _:
                 raise TypeError(obj)
         self.options = kwargs
+
+    def __repr__(self):
+        return get_repr(self, obj=self.obj)
 
     def _to_markdown(self) -> str:
         md = f"::: {self.module_path}\n"

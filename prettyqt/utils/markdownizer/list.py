@@ -22,6 +22,9 @@ class List(markdownizer.BaseSection):
     def __len__(self):
         return len(self.listitems)
 
+    def __repr__(self):
+        return get_repr(self, listitems=self.listitems)
+
     def _to_markdown(self):
         lines = [f"  - {i}" for i in self.listitems]
         return "\n" + "\n".join(lines) + "\n"
