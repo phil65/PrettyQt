@@ -53,6 +53,11 @@ class Table(markdownizer.Text):
         for j, _ in enumerate(range(length)):
             yield [self.data[k][j] or "" for k in self.data.keys()]
 
+    @classmethod
+    def for_items(cls, items, columns: dict[str, Callable]):
+        ls = [{k: v(item) for k, v in columns.items()} for item in items]
+        return cls(ls)
+
     # class ClassTable(Table):
 
     @classmethod
@@ -69,9 +74,10 @@ class Table(markdownizer.Text):
         ls = []
         if filter_fn is None:
 
-            def filter_fn(_):
+            def always_true(_):
                 return True
 
+            filter_fn = always_true
         for kls in klasses:
             subclasses = [subkls for subkls in kls.__subclasses__() if filter_fn(subkls)]
             subclass_links = [markdownizer.link_for_class(sub) for sub in subclasses]
