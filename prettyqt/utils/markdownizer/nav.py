@@ -50,7 +50,7 @@ class Nav(markdownizer.BaseSection):
 
     @property
     def children(self):
-        return self.navs + self.pages
+        return self.pages + self.navs
 
     @children.setter
     def children(self, items):
@@ -67,20 +67,11 @@ class Nav(markdownizer.BaseSection):
         for nav in self.navs:
             nav.write()
 
-    def write(self):
-        self.write_navs()
-        logger.info(f"Written SUMMARY to {self.path}")
-        with mkdocs_gen_files.open(self.path, "w") as nav_file:
-            nav_file.writelines(self.iter_rows())
-
     def virtual_files(self):
         return {self.path: self.to_markdown()}
 
-    def iter_rows(self):
-        return self.nav.build_literate_nav()
-
     def to_markdown(self):
-        return "\n".join(self.iter_rows())
+        return "".join(self.nav.build_literate_nav())
 
     def add_document(self, nav_path: str | tuple, file_path: os.PathLike | str, **kwargs):
         self.__setitem__(nav_path, file_path)
@@ -132,7 +123,6 @@ class Nav(markdownizer.BaseSection):
         self.pages.append(page)
         parts = pathlib.Path(path).parts[:-1]
         self[parts] = path.with_name("dependencies.md")
-        page.write()
         return page
 
 

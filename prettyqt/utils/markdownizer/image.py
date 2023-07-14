@@ -39,15 +39,5 @@ class BinaryImage(Image):
         super().__init__(path=path, header=header, caption=caption, title=title)
         self.data = data
 
-    def _to_markdown(self) -> str:
-        import mkdocs_gen_files
-
-        path = pathlib.Path(self.path)
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with mkdocs_gen_files.open(self.path, "wb") as file:
-            file.write(self.data)
-        logger.info(f"Written image to {self.path}")
-        return super()._to_markdown()
-
     def virtual_files(self):
         return {self.path: self.data}

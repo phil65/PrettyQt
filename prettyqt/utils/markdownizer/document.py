@@ -6,8 +6,6 @@ import os
 import pathlib
 import types
 
-import mkdocs_gen_files
-
 from prettyqt.utils import classhelpers, get_repr, markdownizer
 
 
@@ -51,14 +49,6 @@ class Document(markdownizer.BaseSection):
 
     def virtual_files(self):
         return {self.path: self.to_markdown()}
-
-    def write(self, edit_path: str | os.PathLike | None = None):
-        with mkdocs_gen_files.open(self.path, "w") as fd:
-            fd.write(self.to_markdown())
-            logger.info(f"Written MarkDown file to {self.path}")
-        if edit_path:
-            mkdocs_gen_files.set_edit_path(self.path, edit_path)
-            logger.info(f"Setting edit path to {edit_path}")
 
     def to_markdown(self) -> str:
         header = self.get_header()
@@ -108,7 +98,6 @@ class ClassDocument(Document):
             case _:
                 self.parts = classhelpers.to_module_parts(module_path)
         self._build()
-        self.write()
 
     def _build(self):
         module_path = ".".join(self.parts)
@@ -153,7 +142,6 @@ class ModuleDocument(Document):
         self.docstrings = docstrings
         self.show_class_table = show_class_table
         self._build()
-        self.write()
 
     def _build(self):
         if doc := self.module.__doc__:

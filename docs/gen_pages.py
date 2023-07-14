@@ -22,11 +22,9 @@ docs = markdownizer.Docs(module=prettyqt, exclude_modules=["qt"])
 qt_nav = docs.create_nav(section="qt_modules")
 additional_nav = docs.create_nav(section="additional_modules")
 qt_overview = qt_nav.add_overview_page(predicate=lambda x: hasattr(x, QT_MODULE_ATTR))
-qt_overview.write()
 additional_overview = additional_nav.add_overview_page(
     predicate=lambda x: not hasattr(x, QT_MODULE_ATTR)
 )
-additional_overview.write()
 
 qt_nav[("overview",)] = "index.md"
 additional_nav[("overview",)] = "index.md"
@@ -50,12 +48,19 @@ for path in docs.iter_files("*/__init__.py"):
         for klass in klasses:
             additional_nav.add_class_page(klass=klass, path=doc_path)
 
-# from prettyqt import itemmodels, widgets
+additional_nav.pretty_print()
 
+qt_overview.write()
+additional_overview.write()
+additional_nav.write()
+qt_nav.write()
+# docs.write_navs()
+
+
+# from prettyqt import itemmodels, widgets
 # model = itemmodels.TupleTreeModel(additional_nav._mapping)
 # app = widgets.app()
 # table = widgets.TreeView()
 # table.set_model(model)
 # table.show()
 # app.exec()
-docs.write_navs()
