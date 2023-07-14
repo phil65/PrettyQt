@@ -4,6 +4,8 @@ from prettyqt import core, location, positioning
 
 
 class Place(location.QPlace):
+    """Represents a set of data about a place."""
+
     def __bool__(self):
         return not self.isEmpty()
 

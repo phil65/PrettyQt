@@ -5,6 +5,8 @@ from prettyqt.qt import QtLocation
 
 
 class GeoCodingManager(core.ObjectMixin):
+    """Support for geocoding operations."""
+
     def __init__(self, item: QtLocation.QGeoCodingManager):
         self.item = item
 

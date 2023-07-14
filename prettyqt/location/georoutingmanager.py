@@ -4,6 +4,8 @@ from prettyqt import core, location
 
 
 class GeoRoutingManager(core.ObjectMixin):
+    """Support for geographic routing operations."""
+
     def __init__(self, item: location.QGeoRoutingManager):
         self.item = item
 

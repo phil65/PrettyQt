@@ -8,6 +8,8 @@ from prettyqt import location
 
 
 class PlaceSearchReply(location.PlaceReplyMixin, location.QPlaceSearchReply):
+    """Manages a place search operation started by an instance of QPlaceManager."""
+
     def __iter__(self) -> Iterator[location.PlaceSearchResult]:
         return iter(self.get_results())
 

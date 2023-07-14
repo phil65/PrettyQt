@@ -6,6 +6,8 @@ from prettyqt.utils import datatypes
 
 
 class PlaceIcon(QtLocation.QPlaceIcon):
+    """Represents an icon."""
+
     def __bool__(self):
         return not self.isEmpty()
 

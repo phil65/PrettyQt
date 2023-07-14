@@ -4,6 +4,8 @@ from prettyqt.qt import QtLocation
 
 
 class PlaceRatings(QtLocation.QPlaceRatings):
+    """Holds rating information about a place."""
+
     def __bool__(self):
         return not self.isEmpty()
 

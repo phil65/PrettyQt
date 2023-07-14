@@ -21,6 +21,8 @@ OperationTypeStr = Literal[
 
 
 class PlaceIdReply(location.PlaceReplyMixin, location.QPlaceIdReply):
+    """Manages saving and removal operations of places and categories."""
+
     def __repr__(self):
         return get_repr(self, self.operationType())
 

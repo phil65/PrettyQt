@@ -294,6 +294,8 @@ SERVICE_CLASS: bidict[ServiceClassStr, mod.ServiceClass] = bidict(
 
 
 class BluetoothDeviceInfo(bluetooth.QBluetoothDeviceInfo):
+    """Stores information about the Bluetooth device."""
+
     def __repr__(self):
         return get_repr(self, self.get_address(), self.name())
 

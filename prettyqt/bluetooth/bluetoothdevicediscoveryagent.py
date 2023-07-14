@@ -49,6 +49,8 @@ ERROR: bidict[ErrorStr, Error] = bidict(
 class BluetoothDeviceDiscoveryAgent(
     core.ObjectMixin, bluetooth.QBluetoothDeviceDiscoveryAgent
 ):
+    """Discovers the Bluetooth devices nearby."""
+
     device_discovered = core.Signal(object)  # bluetooth.BluetoothDeviceInfo casts signal.
 
     def __init__(self, *args, **kwargs):

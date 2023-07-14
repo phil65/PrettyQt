@@ -28,6 +28,8 @@ StatusStr = Literal["null", "ready", "loading", "error"]
 
 
 class QuickWidget(widgets.WidgetMixin, QtQuickWidgets.QQuickWidget):
+    """Class providing a widget for displaying a Qt Quick user interface."""
+
     def set_source(self, source: datatypes.UrlType | datatypes.PathType):
         if isinstance(source, os.PathLike):
             source = os.fspath(source)

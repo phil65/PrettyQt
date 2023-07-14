@@ -30,6 +30,8 @@ ERROR: bidict[ErrorStr, Error] = bidict(
 
 
 class BluetoothServer(core.ObjectMixin, bluetooth.QBluetoothServer):
+    """Uses the RFCOMM or L2cap protocol to communicate with a Bluetooth device."""
+
     def __init__(
         self,
         protocol: bluetooth.bluetoothserviceinfo.ProtocolStr

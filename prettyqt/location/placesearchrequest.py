@@ -18,6 +18,8 @@ RELEVANCE_HINT: bidict[RelevanceHintStr, location.QPlaceSearchRequest.RelevanceH
 
 
 class PlaceSearchRequest(location.QPlaceSearchRequest):
+    """Represents the set of parameters for a search request."""
+
     def get_visibility_scope(self) -> location.VisibilityStr:
         """Return the scope of the visibility.
 

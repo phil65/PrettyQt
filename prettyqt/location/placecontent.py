@@ -34,7 +34,7 @@ class PlaceContentMixin:
 
 
 class PlaceContent(PlaceContentMixin, location.QPlaceContent):
-    pass
+    """Holds content about places."""
 
 
 if __name__ == "__main__":

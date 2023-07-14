@@ -4,6 +4,8 @@ from prettyqt import bluetooth
 
 
 class BluetoothHostInfo(bluetooth.QBluetoothHostInfo):
+    """Encapsulates the details of a local QBluetooth device."""
+
     def set_address(self, address: bluetooth.QBluetoothAddress | int | str):
         """Set address to given value."""
         if isinstance(address, int | str):

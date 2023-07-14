@@ -26,6 +26,8 @@ RoleStr = Literal[
 
 
 class PdfBookmarkModel(core.AbstractItemModelMixin, pdf.QPdfBookmarkModel):
+    """Holds a tree of of links within a PDF document, such as the table of contents."""
+
     def __init__(self, parent: core.QObject | None = None):
         super().__init__(parent)
         self.setDocument(pdf.PdfDocument(self))

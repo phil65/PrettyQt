@@ -574,6 +574,8 @@ SERVICE_CLASS_UUID: bidict[ServiceClassUuidStr, su] = bidict(
 
 
 class BluetoothUuid(core.UuidMixin, QtBluetooth.QBluetoothUuid):
+    """Generates a UUID for each Bluetooth service."""
+
     @classmethod
     def characteristic_to_string(cls, characteristic: CharacteristicTypeStr | md) -> str:
         """Return string representation for given characteristic."""

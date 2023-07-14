@@ -30,4 +30,4 @@ class PlaceSearchResultMixin:
 
 
 class PlaceSearchResult(PlaceSearchResultMixin, location.QPlaceSearchResult):
-    pass
+    """The base class for search results."""

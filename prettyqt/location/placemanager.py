@@ -4,6 +4,8 @@ from prettyqt import core, location, positioning
 
 
 class PlaceManager(core.Object):
+    """An interface allowing clients to access places stored in a particular backend."""
+
     on_finished = core.Signal(location.PlaceSearchReply)
 
     def __init__(self, item: location.QPlaceManager):

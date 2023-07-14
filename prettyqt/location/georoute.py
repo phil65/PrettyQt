@@ -30,4 +30,4 @@ class GeoRouteMixin:
 
 
 class GeoRoute(GeoRouteMixin, location.QGeoRoute):
-    pass
+    """Represents a route between two points."""

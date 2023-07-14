@@ -26,6 +26,8 @@ RoleStr = Literal[
 
 
 class PdfSearchModel(core.AbstractItemModelMixin, pdf.QPdfSearchModel):
+    """Searches for a string in a PDF document and holds the results."""
+
     def __init__(self, parent: core.QObject | None = None):
         super().__init__(parent)
         self.setDocument(pdf.PdfDocument(self))

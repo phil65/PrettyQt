@@ -1,10 +1,6 @@
-"""Animations package.
+"""Package containing stuff related to animating widgets.
 
-PrettyQt makes it easy to animate your widgets.
-All animation-related methods are available via the Widget.fx attribute.
-Easy one-liners to bring
 
-## some Examples:
 ```py
 # a lot of animations depend on current geometry.
 # It´s advisable to show widget first so that it gets layouted.
@@ -33,7 +29,10 @@ widget.fx.zoom(start=1, end=1.5, duration=400)
 widget.fx.slide(start=(0, 0), end=(100, 0), duration=400)
 ```
 
-Animating stylesheet values is also possible easily:
+PrettyQt makes it easy to animate your widgets.
+All animation-related methods are available via the Widget.fx attribute.
+
+Animating stylesheet values is also possible easily.
 
 TODO.
 

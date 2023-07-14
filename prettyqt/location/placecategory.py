@@ -4,6 +4,8 @@ from prettyqt import location
 
 
 class PlaceCategory(location.QPlaceCategory):
+    """Represents a category that a QPlace can be associated with."""
+
     def __str__(self):
         return self.name()
 

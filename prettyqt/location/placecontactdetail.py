@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class PlaceContactDetail(QtLocation.QPlaceContactDetail):
+    """Represents a contact detail such as a phone number or website url."""
+
     def __init__(
         self,
         other_or_label: None | str | QtLocation.QPlaceAttribute = None,

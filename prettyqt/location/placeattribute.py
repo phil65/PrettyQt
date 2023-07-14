@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class PlaceAttribute(QtLocation.QPlaceAttribute):
+    """Represents generic attribute information about a place."""
+
     def __init__(
         self,
         other_or_label: None | str | QtLocation.QPlaceAttribute = None,

@@ -6,4 +6,4 @@ from prettyqt import location
 class PlaceProposedSearchResult(
     location.PlaceSearchResultMixin, location.QPlaceProposedSearchResult
 ):
-    pass
+    """Represents a search result containing a proposed search."""

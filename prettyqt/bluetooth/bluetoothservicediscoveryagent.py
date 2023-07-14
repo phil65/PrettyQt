@@ -31,6 +31,8 @@ ERRORS: bidict[ErrorStr, module.Error] = bidict(
 class BluetoothServiceDiscoveryAgent(
     core.ObjectMixin, bluetooth.QBluetoothServiceDiscoveryAgent
 ):
+    """Enables you to query for Bluetooth services."""
+
     def start_discovery(self, full: bool = False):
         """Start bluetooth service discovery.
 

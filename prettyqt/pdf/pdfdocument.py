@@ -45,6 +45,8 @@ StatusStr = Literal[
 
 
 class PdfDocument(core.ObjectMixin, QtPdf.QPdfDocument):
+    """Loads a PDF document and renders pages from it."""
+
     def get_error(self) -> ErrorStr:
         """Return current error.
 

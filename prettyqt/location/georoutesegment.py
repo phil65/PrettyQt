@@ -4,6 +4,8 @@ from prettyqt import location, positioning
 
 
 class GeoRouteSegment(location.QGeoRouteSegment):
+    """Represents a segment of a route."""
+
     def __bool__(self):
         return self.isValid()
 

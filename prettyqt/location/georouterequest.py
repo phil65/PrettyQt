@@ -86,6 +86,8 @@ TRAVEL_MODE: bidict[TravelModeStr, QtLocation.QGeoRouteRequest.TravelMode] = bid
 
 
 class GeoRouteRequest(QtLocation.QGeoRouteRequest):
+    """Represents the params and restrictions defining a routing information request."""
+
     def get_waypoints(self) -> list[positioning.GeoCoordinate]:
         return [positioning.GeoCoordinate(wp) for wp in self.waypoints()]
 

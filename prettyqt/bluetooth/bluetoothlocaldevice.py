@@ -43,6 +43,8 @@ PAIRING: bidict[PairingStr, Pairing] = bidict(
 
 
 class BluetoothLocalDevice(core.ObjectMixin, bluetooth.QBluetoothLocalDevice):
+    """Enables access to the local Bluetooth device."""
+
     def __bool__(self):
         """Return True when local device is valid."""
         return self.isValid()

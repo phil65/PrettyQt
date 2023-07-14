@@ -33,6 +33,8 @@ ZOOM_MODE: bidict[ZoomModeStr, QtPdfWidgets.QPdfView.ZoomMode] = bidict(
 
 
 class PdfView(widgets.AbstractScrollAreaMixin, QtPdfWidgets.QPdfView):
+    """PDF viewer widget ."""
+
     def __init__(self, parent: widgets.QWidget | None = None, **kwargs):
         super().__init__(parent, **kwargs)
         self.setDocument(pdf.PdfDocument(self))

@@ -65,7 +65,7 @@ PROTOCOL: bidict[ProtocolStr, Protocol] = bidict(
 class BluetoothServiceInfo(
     QtBluetooth.QBluetoothServiceInfo, MutableMapping, metaclass=datatypes.QABCMeta
 ):
-    """BluetoothServiceInfo class.
+    """Enables access to the attributes of a Bluetooth service.
 
     Also implements MutableMapping interface, can be used as a dicionary.
     """

@@ -129,6 +129,8 @@ ROUTING_FEATURES: bidict[RoutingFeatureStr, QGeoServiceProvider.RoutingFeature] 
 
 
 class GeoServiceProvider(core.ObjectMixin, location.QGeoServiceProvider):
+    """Aggregates access to services which provide geographical information."""
+
     def get_error(self) -> ErrorStr:
         return ERROR.inverse[self.error()]
 

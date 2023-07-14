@@ -56,6 +56,8 @@ SOCKET_STATE: bidict[SocketStateStr, SocketState] = bidict(
 
 
 class BluetoothSocket(core.IODeviceMixin, bluetooth.QBluetoothSocket):
+    """Enables connection to a Bluetooth device running a bluetooth server."""
+
     def __init__(
         self,
         protocol: bluetooth.bluetoothserviceinfo.ProtocolStr

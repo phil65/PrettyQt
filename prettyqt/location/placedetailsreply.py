@@ -6,6 +6,8 @@ from prettyqt import location
 
 
 class PlaceDetailsReply(location.PlaceReplyMixin, location.QPlaceDetailsReply):
+    """Manages a place details fetch operation started by an instance of QPlaceManager."""
+
     @classmethod
     def clone_from(cls, obj: location.QPlaceDetailsReply) -> Self:
         reply = cls(obj.parent())

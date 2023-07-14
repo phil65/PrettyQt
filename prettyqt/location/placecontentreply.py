@@ -6,6 +6,8 @@ from prettyqt import location
 
 
 class PlaceContentReply(location.PlaceReplyMixin, location.QPlaceContentReply):
+    """Manages a content retrieval operation started by an instance of QPlaceManager."""
+
     def __len__(self):
         return self.totalCount()
 

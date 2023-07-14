@@ -41,6 +41,8 @@ INSTRUCTION_DIRECTION: bidict[
 
 
 class GeoManeuver(QtLocation.QGeoManeuver):
+    """Represents info relevant to the point at which two QGeoRouteSegments meet."""
+
     def __bool__(self):
         return self.isValid()
 

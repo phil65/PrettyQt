@@ -8,6 +8,8 @@ from prettyqt import location
 
 
 class PlaceMatchReply(location.PlaceReplyMixin, location.QPlaceMatchReply):
+    """Manages a place matching operation started by an instance of QPlaceManager."""
+
     def __iter__(self) -> Iterator[location.Place]:
         return iter(self.get_places())
 

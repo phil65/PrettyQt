@@ -4,6 +4,8 @@ from prettyqt import location
 
 
 class PlaceContentRequest(location.QPlaceContentRequest):
+    """Represents the parameters of a content request."""
+
     def set_content_type(
         self, typ: location.placecontent.TypeStr | location.PlaceContent.Type
     ):
