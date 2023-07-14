@@ -40,6 +40,20 @@ class Nav(markdownizer.BaseSection):
     def __getitem__(self, item):
         return self._mapping[item]
 
+    @property
+    def children(self):
+        return self.navs + self.pages
+
+    # @children.setter
+    # def children(self, pages):
+    #     self.pages = pages
+
+    def create_nav(self, section: str | os.PathLike) -> markdownizer.Nav:
+        nav = markdownizer.Nav(section=section, module_name=self.module_name)
+        # self.nav[(section,)]
+        self.navs.append(nav)
+        return nav
+
     def write_navs(self):
         for nav in self.navs:
             nav.write()
@@ -49,6 +63,9 @@ class Nav(markdownizer.BaseSection):
         logger.info(f"Written SUMMARY to {self.path}")
         with mkdocs_gen_files.open(self.path, "w") as nav_file:
             nav_file.writelines(self.iter_rows())
+
+    def virtual_files(self):
+        return {self.path: self.to_markdown()}
 
     def iter_rows(self):
         return self.nav.build_literate_nav()
@@ -95,6 +112,18 @@ class Nav(markdownizer.BaseSection):
         )
         self[parts] = path.with_name("index.md")
         self.pages.append(page)
+        return page
+
+    def get_dependency_table(self) -> markdownizer.Table:
+        return markdownizer.DependencyTable(self.module_name)
+
+    def add_dependency_page(self, path: str | os.PathLike, **kwargs):
+        page = markdownizer.Document(path=pathlib.Path(self.section, path), **kwargs)
+        page += self.get_dependency_table()
+        self.pages.append(page)
+        parts = pathlib.Path(path).parts[:-1]
+        self[parts] = path.with_name("dependencies.md")
+        page.write()
         return page
 
 

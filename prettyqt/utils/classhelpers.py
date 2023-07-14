@@ -61,7 +61,7 @@ def to_module(
                     return
                 raise e
         case types.ModuleType():
-            pass
+            return module
         case _:
             raise TypeError(module)
 

@@ -4,7 +4,6 @@ import contextlib
 import importlib
 import inspect
 import logging
-import os
 import pathlib
 import types
 
@@ -18,32 +17,19 @@ logger = logging.getLogger(__name__)
 
 class Docs(markdownizer.Nav):
     def __init__(
-        self, module_name: str, exclude_modules: list[str] | None = None, **kwargs
+        self,
+        module: types.ModuleType | str,
+        exclude_modules: list[str] | None = None,
+        **kwargs,
     ):
-        super().__init__(module_name=module_name, section="", **kwargs)
-        self.module_name = module_name
-        self.root_path = pathlib.Path(f"./{module_name}")
+        self.module = classhelpers.to_module(module)
+        self.module_name = self.module.__name__
+        super().__init__(module_name=self.module_name, section="", **kwargs)
+        self.root_path = pathlib.Path(f"./{self.module_name}")
         self._editor = mkdocs_gen_files.editor.FilesEditor.current()
         self._docs_dir = pathlib.Path(self._editor.config["docs_dir"])
+        self.files = self._editor.files
         self._exclude = exclude_modules or []
-
-    def get_files(self):
-        return self._editor.files
-
-    def get_dependency_table(self) -> markdownizer.Table:
-        return markdownizer.Table.get_dependency_table(self.module_name)
-
-    def add_dependency_page(self, path: str | os.PathLike, **kwargs):
-        page = markdownizer.Document(path=self._docs_dir / path, **kwargs)
-        page += self.get_dependency_table()
-        page.write()
-        return page
-
-    def create_nav(self, section: str | os.PathLike) -> markdownizer.Nav:
-        nav = markdownizer.Nav(section=section, module_name=self.module_name)
-        # self.nav[(section,)]
-        self.navs.append(nav)
-        return nav
 
     def iter_files(self, glob: str = "*/*.py"):
         for path in sorted(self.root_path.rglob(glob)):

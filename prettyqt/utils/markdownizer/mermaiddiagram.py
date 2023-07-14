@@ -84,3 +84,12 @@ class MermaidDiagram(markdownizer.Code):
         item_str = textwrap.indent("\n".join(items), "  ")
         text = f"{self.graph_type} {self.orientation}\n{item_str}"
         return f"```mermaid\n{text}\n```"
+
+
+class MermaidMindMap(markdownizer.Code):
+    def __init__(self, items: dict, header: str = ""):
+        super().__init__(language="mermaid", header=header)
+
+    @classmethod
+    def from_index(self, model):
+        pass
