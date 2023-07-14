@@ -54,4 +54,5 @@ __all__ = [
     "TextAnimation",
     "CursorMoveAnimation",
     "Animator",
+    "Fx",
 ]
