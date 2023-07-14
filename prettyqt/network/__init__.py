@@ -1,3 +1,5 @@
+"""Classes to make network programming easier and more portable."""
+
 from __future__ import annotations
 
 from prettyqt.qt.QtNetwork import *  # noqa: F403

@@ -1,7 +1,4 @@
-"""test module.
-
-contains QtTest-based classes
-"""
+"""Classes for unit testing Qt applications and libraries."""
 
 from .abstractitemmodeltester import AbstractItemModelTester
 from .signalspy import SignalSpy

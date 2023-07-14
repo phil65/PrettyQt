@@ -1,3 +1,5 @@
+"""A rich set of classes to handle multimedia content."""
+
 from __future__ import annotations
 
 from prettyqt.qt.QtMultimedia import *  # noqa: F403

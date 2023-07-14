@@ -5,6 +5,8 @@ import os
 import pathlib
 import types
 
+from typing import Any
+
 from prettyqt.utils import classhelpers, get_repr, markdownizer
 
 
@@ -84,7 +86,7 @@ class ClassDocument(Document):
         klass: type,
         module_path: tuple[str, ...] | str | None = None,
         path: str | os.PathLike = "",
-        **kwargs,
+        **kwargs: Any,
     ):
         """Document showing info about a class.
 

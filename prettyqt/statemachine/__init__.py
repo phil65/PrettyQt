@@ -1,3 +1,5 @@
+""" Provides classes for creating and executing state graphs."""
+
 from __future__ import annotations
 
 from prettyqt.qt.QtStateMachine import *  # noqa: F403

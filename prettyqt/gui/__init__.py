@@ -1,3 +1,5 @@
+"""Base classes for graphical user interface (GUI) components."""
+
 from __future__ import annotations
 
 import sys

@@ -1,4 +1,4 @@
-"""Provides QtWebEngineWidgets classes and functions."""
+"""Provides widgets to embed browser components in the user interface."""
 
 from prettyqt.qt import PYQT6, PYSIDE6
 

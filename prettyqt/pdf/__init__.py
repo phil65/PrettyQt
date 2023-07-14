@@ -1,3 +1,5 @@
+"""Classes and functions for rendering PDF documents."""
+
 from __future__ import annotations
 
 from prettyqt.qt.QtPdf import *  # noqa: F403

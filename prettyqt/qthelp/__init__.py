@@ -1,3 +1,5 @@
+"""Classes for integrating documentation into applications."""
+
 from __future__ import annotations
 
 from prettyqt.qt.QtHelp import *  # noqa: F403

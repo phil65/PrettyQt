@@ -1,7 +1,4 @@
-"""svg module.
-
-contains QtSvg-based classes
-"""
+"""Classes for displaying the contents of SVG files."""
 
 from prettyqt.qt.QtSvg import *  # noqa: F403
 

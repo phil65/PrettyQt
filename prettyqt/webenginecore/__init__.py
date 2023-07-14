@@ -1,7 +1,4 @@
-"""Webenginewidgets module.
-
-contains QtWebEngineCore-based classes
-"""
+"""Classes and functions for embedding web content in applications."""
 
 import logging
 

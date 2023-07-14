@@ -1,3 +1,5 @@
+"""Provides classes / tools for creating and embedding state machines from SCXML files."""
+
 from __future__ import annotations
 
 from prettyqt.qt.QtScxml import *  # noqa: F403

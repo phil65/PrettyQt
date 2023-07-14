@@ -1,3 +1,5 @@
+"""A declarative framework for building dynamic apps with custom user interfaces."""
+
 from __future__ import annotations
 
 from prettyqt.qt.QtQuick import *  # noqa: F403
