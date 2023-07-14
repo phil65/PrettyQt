@@ -5,10 +5,34 @@ import logging
 
 from typing_extensions import Self
 
-from prettyqt.utils import get_repr
+from prettyqt.utils import baseresolver, get_repr
 
 
 logger = logging.getLogger(__name__)
+
+
+class NodeResolver(baseresolver.BaseResolver):
+    def __init__(self, path_attr: str = "obj", ignore_case: bool = False):
+        """Resolve any `Node` paths using attribute `path_attr`.
+
+        Arguments:
+            path_attr: Name of the node attribute to be used for resolving
+            ignore_case: Enable case insensisitve handling.
+        """
+        super().__init__(ignore_case=ignore_case)
+        self.path_attr = path_attr
+
+    def get_parent(self, node):
+        return node.parent
+
+    def get_children(self, node):
+        return node.children
+
+    def get_root(self, node):
+        return node.root
+
+    def get_attribute(self, node):
+        return getattr(node, self.path_attr)
 
 
 class BaseNode:

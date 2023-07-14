@@ -94,7 +94,8 @@ from .proxies.columnjoinerproxymodel import ColumnJoinerProxyModel
 from .proxies.predicatefilterproxymodel import PredicateFilterProxyModel
 from .proxies.highlightmouseproxymodel import HighlightMouseProxyModel
 
-# Proxy tooling
+# tooling
+from .itemmodelresolver import ItemModelResolver
 from .proxies.proxymapper import ProxyMapper
 from .proxies.linkedselectionmodel import LinkedSelectionModel
 
@@ -173,6 +174,7 @@ __all__ = [
     "SliceColorValuesProxyModel",
     "HighlightMouseProxyModel",
     "ProxyMapper",
+    "ItemModelResolver",
     "LinkedSelectionModel",
     # external
     "attrsmodel",
