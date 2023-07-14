@@ -23,6 +23,7 @@ from prettyqt.utils.markdownizer.prettyqtmarkdown import (
     ItemModelTable,
     DependencyTable,
     MarkdownModel,
+    MarkdownWidget,
 )
 
 __all__ = [
@@ -47,6 +48,7 @@ __all__ = [
     "ItemModelTable",
     "DependencyTable",
     "MarkdownModel",
+    "MarkdownWidget",
 ]
 
 

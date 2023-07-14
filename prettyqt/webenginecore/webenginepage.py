@@ -388,12 +388,12 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
         (function() {
         css = document.createElement('style');
         css.type = 'text/css';
-        css.id = "{}";
+        css.id = "%s";
         document.head.appendChild(css);
-        css.innerText = `{}`;
+        css.innerText = `%s`;
         })()
         """
-        s = s.format(name, css)
+        s = s % (name, css)
         script = webenginecore.WebEngineScript()
         if immediately:
             self.runJavaScript(s, script.ScriptWorldId.ApplicationWorld)

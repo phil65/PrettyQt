@@ -168,6 +168,9 @@ class DependencyTable(ItemModelTable):
 
 
 class MarkdownModel(itemmodels.TreeModel):
+    class Roles:
+        MarkdownRole = constants.USER_ROLE + 5325
+
     def columnCount(self, index):
         return 3
 
@@ -180,12 +183,33 @@ class MarkdownModel(itemmodels.TreeModel):
                 return data.to_markdown().count("\n")
             # case constants.DISPLAY_ROLE, 2:
             #     return data.to_markdown()
+            case self.Roles.MarkdownRole, _:
+                return data.to_markdown()
 
     def _fetch_object_children(self, treeitem) -> list[MarkdownModel.TreeItem]:
         return [self.TreeItem(i) for i in treeitem.obj.children]
 
     def _has_children(self, treeitem) -> bool:
         return len(treeitem.obj.children) > 0
+
+
+class MarkdownWidget(widgets.Widget):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.tree = widgets.TreeView()
+        self.textbox = widgets.TextBrowser()
+        layout = self.set_layout("grid")
+        layout[0, 0] = self.tree
+        layout[0, 1] = self.textbox
+
+    def set_markdown(self, item: markdownizer.BaseSection):
+        model = MarkdownModel(item)
+        self.tree.set_model(model)
+        self.tree.selectionModel().currentRowChanged.connect(self._on_current_change)
+
+    def _on_current_change(self, new, old):
+        text = new.data(new.model().Roles.MarkdownRole)
+        self.textbox.setMarkdown(text)
 
 
 if __name__ == "__main__":
