@@ -48,3 +48,6 @@ class BinaryImage(Image):
             file.write(self.data)
         logger.info(f"Written image to {self.path}")
         return super()._to_markdown()
+
+    def virtual_files(self):
+        return {self.path: self.data}

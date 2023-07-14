@@ -45,6 +45,9 @@ class Document:
     def __str__(self):
         return self.to_markdown()
 
+    def virtual_files(self):
+        return {self.path: self.to_markdown()}
+
     def write(self, edit_path: str | os.PathLike | None = None):
         with mkdocs_gen_files.open(self.path, "w") as fd:
             fd.write(self.to_markdown())
