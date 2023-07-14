@@ -27,6 +27,7 @@ AUTOLINK_RE = r"\[([^\]]+)\]\((([^)/]+\.(md|png|jpg))(#.*)*)\)"
 class AutoLinkReplacerPlugin:
     def __init__(self, base_docs_url, page_url, mapping):
         self.mapping = mapping
+        self.page_url = page_url
         self.base_docs_url = pathlib.Path(base_docs_url)
         # Absolute URL of the linker
         self.linker_url = os.path.dirname(self.base_docs_url / page_url)  # noqa: PTH120
@@ -38,20 +39,24 @@ class AutoLinkReplacerPlugin:
             return f"`{match.group(3).replace('.md', '')}`"
         filenames = self.mapping[filename]
         if len(filenames) > 1:
-            logger.warning(f"{match} has multiple targets: {filenames}")
+            logger.warning(
+                f"{self.page_url}: {match.group(3)} has multiple targets: {filenames}"
+            )
         abs_link_url = (self.base_docs_url / self.mapping[filename][0]).parent
         # need os.replath here bc pathlib.relative_to throws an exception
         # when linking across drives
         rel_path = os.path.relpath(abs_link_url, self.linker_url)
-        html_filename = filename.replace(".md", ".html")
-        rel_link_url = os.path.join(rel_path, html_filename)  # noqa: PTH118
+        # html_filename = filename.replace(".md", ".html")
+        rel_link_url = os.path.join(rel_path, filename)  # noqa: PTH118
         new_text = (
             match.group(0).replace(match.group(2), rel_link_url)
             if match.group(5) is None
             else match.group(0).replace(match.group(2), rel_link_url + match.group(5))
         )
         new_text = new_text.replace("\\", "/")
-        logger.debug(f"LinkReplacer: {match.group(3)=} -> {rel_link_url=}")
+        logger.debug(
+            f"LinkReplacer: {self.page_url}: {match.group(3)=} -> {rel_link_url=}"
+        )
         return new_text
 
 
