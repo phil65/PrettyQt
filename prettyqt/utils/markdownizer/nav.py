@@ -90,7 +90,8 @@ class Nav(markdownizer.BaseSection):
         return page
 
     def add_class_page(self, klass, path, **kwargs):
-        parts = pathlib.Path(path).parts[:-1]
+        path = pathlib.Path(path)
+        parts = path.parts[:-1]
         page = markdownizer.PrettyQtClassDocument(
             klass=klass,
             module_path=f'{self.module_name}.{".".join(parts)}',
@@ -102,8 +103,9 @@ class Nav(markdownizer.BaseSection):
         return page
 
     def add_module_page(self, module, path, **kwargs):
+        path = pathlib.Path(path)
         complete_mod_path = f"{self.module_name}.{module}"
-        parts = pathlib.Path(path).parts[:-1]
+        parts = path.parts[:-1]
         page = markdownizer.ModuleDocument(
             hide_toc=True,
             module=complete_mod_path,
@@ -118,10 +120,11 @@ class Nav(markdownizer.BaseSection):
         return markdownizer.DependencyTable(self.module_name)
 
     def add_dependency_page(self, path: str | os.PathLike, **kwargs):
+        path = pathlib.Path(path)
         page = markdownizer.Document(path=pathlib.Path(self.section, path), **kwargs)
         page += self.get_dependency_table()
         self.pages.append(page)
-        parts = pathlib.Path(path).parts[:-1]
+        parts = path.parts[:-1]
         self[parts] = path.with_name("dependencies.md")
         return page
 
