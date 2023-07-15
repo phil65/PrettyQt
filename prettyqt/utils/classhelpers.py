@@ -50,6 +50,13 @@ def to_module(
     module: str | Sequence[str] | types.ModuleType,
     return_none: bool = True,
 ) -> types.ModuleType | None:
+    """Returns a module for given module path. If module is given, just return it.
+
+    Arguments:
+        module: A ModuleType, str or sequence.
+        return_none: In case module cant get imported, return None.
+                     If False, Exception is thrown.
+    """
     match module:
         case (str(), *_) | str():
             module_path = module if isinstance(module, str) else ".".join(module)
@@ -67,6 +74,13 @@ def to_module(
 
 
 def to_module_parts(module: Sequence[str] | str | types.ModuleType) -> tuple[str, ...]:
+    """Returns a tuple describing the module path.
+
+    Result is of form ("module", "submodule", "subsubmodule")
+
+    Arguments:
+        module: A ModuleType, str or sequence.
+    """
     match module:
         case (str(), *_):
             return tuple(module)
@@ -97,6 +111,12 @@ def find_common_ancestor(cls_list: list[type]) -> type:
 
 
 def get_subclasses(klass: type, include_abstract: bool = False) -> typing.Iterator[type]:
+    """Recursively iter all subclasses of given klass.
+
+    Arguments:
+        klass: class to get subclasses from
+        include_abstract: whether abstract base classes should be included.
+    """
     if getattr(klass.__subclasses__, "__self__", None) is None:
         return
     for i in klass.__subclasses__():
@@ -108,6 +128,14 @@ def get_subclasses(klass: type, include_abstract: bool = False) -> typing.Iterat
 def get_class_by_name(
     klass_name: str, *, parent_type: type = object, module_filter: list[str] | None = None
 ) -> type | None:
+    """Get class by given Name.
+
+    Arguments:
+        klass_name: class name to search for
+        parent_type: Only check subclasses of given type.
+        module_filter: Only consider classes which do not include any of the strs in the
+                      module path.
+    """
     return next(
         (
             kls
@@ -198,7 +226,13 @@ def iter_classes_for_module(
 
 
 def get_topmost_module_path_for_klass(klass: type) -> str:
-    """Return path of topmost module containing given class."""
+    """Return path of topmost module containing given class.
+
+    If a class is imported in any of its parent modules, return that "shorter" path.
+
+    Arguments:
+        klass: Klass to get the path for.
+    """
     path = klass.__module__
     parts = path.split(".")
     while parts:
