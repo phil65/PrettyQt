@@ -41,7 +41,7 @@ class Admonition(markdownizer.Text):
 
     def _to_markdown(self) -> str:
         block_start = "???" if self.collapsible else "!!!"
-        title = repr(self.title) if self.title else ""
+        title = f'"{self.title}"'
         text = textwrap.indent(self.text, "    ")
         return f"{block_start} {self.typ} {title}\n{text}\n\n"
 

@@ -109,7 +109,7 @@ class ClassDocument(Document):
         self._build()
 
     def _build(self):
-        module_path = ".".join(self.parts)
+        module_path = ".".join(self.parts).rstrip(".")
         self.append(
             markdownizer.DocStrings(
                 f"{module_path}.{self.klass.__name__}", header="DocStrings"
