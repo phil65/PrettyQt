@@ -8,6 +8,8 @@ class StringListModelMixin(core.AbstractListModelMixin):
 
 
 class StringListModel(StringListModelMixin, core.QStringListModel):
+    """Model that supplies strings to views."""
+
     def __repr__(self):
         return f"{type(self).__name__}: ({self.rowCount()})"
 

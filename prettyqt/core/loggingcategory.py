@@ -17,6 +17,8 @@ MSG_TYPE: bidict[MsgTypeStr, QtCore.QtMsgType] = bidict(
 
 
 class LoggingCategory(QtCore.QLoggingCategory):
+    """Represents a category, or 'area' in the logging infrastructure."""
+
     def get_level(self) -> MsgTypeStr:
         if self.isDebugEnabled():
             return "debug"

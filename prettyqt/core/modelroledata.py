@@ -4,4 +4,4 @@ from prettyqt.qt import QtCore
 
 
 class ModelRoleData(QtCore.QModelRoleData):
-    pass
+    """Holds a role and the data associated to that role."""

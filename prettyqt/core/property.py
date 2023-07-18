@@ -4,7 +4,7 @@ from prettyqt.qt import QtCore
 
 
 class Property(QtCore.Property):
-    pass
+    """Template class that enables automatic property bindings."""
 
 
 if __name__ == "__main__":

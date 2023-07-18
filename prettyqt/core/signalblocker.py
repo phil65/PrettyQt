@@ -4,4 +4,4 @@ from prettyqt.qt import QtCore
 
 
 class SignalBlocker(QtCore.QSignalBlocker):
-    pass
+    """Exception-safe wrapper around QObject.blockSignals()."""

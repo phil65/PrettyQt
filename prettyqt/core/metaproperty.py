@@ -7,6 +7,8 @@ from prettyqt.utils import get_repr
 
 
 class MetaProperty:
+    """Meta-data about a property."""
+
     def __init__(self, metaproperty: core.QMetaProperty):
         self.item = metaproperty
 

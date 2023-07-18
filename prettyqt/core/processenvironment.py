@@ -11,6 +11,8 @@ from prettyqt.utils import datatypes
 class ProcessEnvironment(
     QtCore.QProcessEnvironment, MutableMapping, metaclass=datatypes.QABCMeta
 ):
+    """Holds the environment variables that can be passed to a program."""
+
     def __bool__(self):
         return not self.isEmpty()
 

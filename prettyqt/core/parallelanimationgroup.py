@@ -4,6 +4,8 @@ from prettyqt import core
 
 
 class ParallelAnimationGroup(core.AnimationGroupMixin, core.QParallelAnimationGroup):
+    """Parallel group of animations."""
+
     def set_duration(self, duration: int):
         for anim in self:
             match anim:

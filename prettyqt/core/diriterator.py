@@ -22,6 +22,8 @@ ITERATOR_FLAG: bidict[IteratorFlagStr, core.QDirIterator.IteratorFlag] = bidict(
 
 
 class DirIterator(core.QDirIterator):
+    """Iterator for directory entrylists."""
+
     def __iter__(self):
         return self
 

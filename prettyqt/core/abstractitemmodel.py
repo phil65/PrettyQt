@@ -486,7 +486,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
 
 
 class AbstractItemModel(AbstractItemModelMixin, core.QAbstractItemModel):
-    pass
+    """The abstract interface for item model classes."""
 
     # @abc.abstractmethod
     # def index(self, *args, **kwargs):

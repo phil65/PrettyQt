@@ -111,7 +111,7 @@ class AbstractProxyModelMixin(core.AbstractItemModelMixin):
 
 
 class AbstractProxyModel(AbstractProxyModelMixin, core.QAbstractProxyModel):
-    pass
+    """Base class for proxy item models that can do sorting, filtering and processing."""
 
 
 if __name__ == "__main__":

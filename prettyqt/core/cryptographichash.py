@@ -45,6 +45,8 @@ ALGORITHM: bidict[AlgorithmStr, QtCore.QCryptographicHash.Algorithm] = bidict(
 
 
 class CryptographicHash(QtCore.QCryptographicHash):
+    """Way to generate cryptographic hashes."""
+
     def __init__(self, method: QtCore.QCryptographicHash.Algorithm | AlgorithmStr):
         if isinstance(method, QtCore.QCryptographicHash.Algorithm):
             arg = method

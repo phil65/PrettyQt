@@ -4,4 +4,4 @@ from prettyqt.qt import QtCore
 
 
 class CollatorSortKey(QtCore.QCollatorSortKey):
-    pass
+    """Can be used to speed up string collation."""

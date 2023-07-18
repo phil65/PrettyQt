@@ -4,6 +4,8 @@ from prettyqt import core
 
 
 class SignalMapper(core.ObjectMixin, core.QSignalMapper):
+    """Bundles signals from identifiable senders."""
+
     def __getitem__(self, index: int | str | core.QObject) -> core.QObject:
         return self.mapping(index)
 

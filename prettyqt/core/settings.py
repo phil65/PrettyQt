@@ -32,6 +32,8 @@ SCOPE: bidict[ScopeStr, core.QSettings.Scope] = bidict(
 class Settings_(
     core.ObjectMixin, core.QSettings, MutableMapping, metaclass=datatypes.QABCMeta
 ):
+    """Persistent platform-independent application settings."""
+
     # Setting class with original behavior, compatible with original QSettings
     def __init__(self, *args, settings_id: str | None = None):
         super().__init__(*args)

@@ -4,4 +4,4 @@ from prettyqt.qt import QtCore
 
 
 class RandomGenerator(QtCore.QRandomGenerator):
-    pass
+    """Allows one to obtain random values from a high-quality Random Number Generator."""

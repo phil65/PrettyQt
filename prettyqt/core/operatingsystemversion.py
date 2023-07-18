@@ -20,6 +20,8 @@ OS_TYPE: bidict[OsTypeStr, core.QOperatingSystemVersion.OSType] = bidict(
 
 
 class OperatingSystemVersion(core.QOperatingSystemVersion):
+    """Information about the operating system version."""
+
     def __init__(
         self,
         typ: core.QOperatingSystemVersion.OSType | str,

@@ -18,6 +18,8 @@ JSON_FORMAT: bidict[JsonFormatStr, core.QJsonDocument.JsonFormat] = bidict(
 
 
 class JsonDocument(core.QJsonDocument):
+    """Way to read and write JSON documents."""
+
     def __str__(self):
         return str(self.toVariant())
 

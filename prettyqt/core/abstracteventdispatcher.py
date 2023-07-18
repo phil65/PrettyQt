@@ -4,4 +4,4 @@ from prettyqt import core
 
 
 class AbstractEventDispatcher(core.ObjectMixin, core.QAbstractEventDispatcher):
-    pass
+    """Interface to manage Qt's event queue."""

@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class JsonValue(QtCore.QJsonValue):
+    """Encapsulates a value in JSON."""
+
     def __str__(self):
         return str(self.toVariant())
 

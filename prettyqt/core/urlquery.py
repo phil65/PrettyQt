@@ -10,6 +10,8 @@ from prettyqt.utils import datatypes, get_repr
 
 
 class UrlQuery(QtCore.QUrlQuery, MutableMapping, metaclass=datatypes.QABCMeta):
+    """Way to manipulate a key-value pairs in a URL's query."""
+
     def __repr__(self):
         return get_repr(self, self.toString())
 

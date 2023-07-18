@@ -4,6 +4,8 @@ from prettyqt import core
 
 
 class SequentialAnimationGroup(core.AnimationGroupMixin, core.QSequentialAnimationGroup):
+    """Sequential group of animations."""
+
     def reverse(self):
         """Reverse animation in-place by switching start and end values."""
         for anim in reversed(list(self)):

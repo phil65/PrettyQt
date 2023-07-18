@@ -8,4 +8,4 @@ class AbstractListModelMixin(core.AbstractItemModelMixin):
 
 
 class AbstractListModel(AbstractListModelMixin, core.QAbstractListModel):
-    pass
+    """Abstract model that can be subclassed to create one-dimensional list models."""

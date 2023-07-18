@@ -5,6 +5,8 @@ from prettyqt.utils import get_repr
 
 
 class ByteArrayMatcher(QtCore.QByteArrayMatcher):
+    """Holds a sequence of bytes that can be quickly matched in a byte array."""
+
     def __repr__(self):
         return get_repr(self, self.get_pattern())
 

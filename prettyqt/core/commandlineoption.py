@@ -15,4 +15,4 @@ FLAGS: bidict[FlagStr, core.QCommandLineOption.Flag] = bidict(
 
 
 class CommandLineOption(core.QCommandLineOption):
-    pass
+    """Defines a possible command-line option."""
