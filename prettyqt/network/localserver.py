@@ -18,6 +18,8 @@ SocketOptionStr = Literal["none", "user", "group", "other", "world"]
 
 
 class LocalServer(core.ObjectMixin, network.QLocalServer):
+    """Local socket based server."""
+
     def get_server_error(self) -> network.abstractsocket.SocketErrorStr:
         return network.abstractsocket.SOCKET_ERROR.inverse[self.serverError()]
 

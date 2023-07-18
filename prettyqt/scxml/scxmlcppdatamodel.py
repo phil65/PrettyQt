@@ -6,4 +6,4 @@ from prettyqt import scxml
 class ScxmlCppDataModel(
     scxml.scxmldatamodel.ScxmlDataModelMixin, scxml.QScxmlCppDataModel
 ):
-    pass
+    """C++ data model for a Qt SCXML state machine."""

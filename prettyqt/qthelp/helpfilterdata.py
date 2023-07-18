@@ -13,6 +13,8 @@ class HelpFilterDataMixin:
 
 
 class HelpFilterData(HelpFilterDataMixin):
+    """Details for the filters used by QHelpFilterEngine."""
+
     def __init__(self, item: QtHelp.QHelpFilterData):
         self.item = item
 

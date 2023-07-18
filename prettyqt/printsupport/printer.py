@@ -65,6 +65,8 @@ PrinterStateStr = Literal["idle", "active", "aborted", "error"]
 
 
 class Printer(gui.PagedPaintDeviceMixin, QtPrintSupport.QPrinter):
+    """Paint device that paints on a printer."""
+
     # def get_source(self) -> pathlib.Path:
     #     return pathlib.Path(self.source().toLocalFile())
 

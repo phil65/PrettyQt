@@ -9,4 +9,4 @@ class ScxmlDataModelMixin(core.ObjectMixin):
 
 
 class ScxmlDataModel(ScxmlDataModelMixin, QtScxml.QScxmlDataModel):
-    pass
+    """The data model base class for a Qt SCXML state machine."""

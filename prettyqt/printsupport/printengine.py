@@ -48,5 +48,7 @@ PrintEnginePropertyKeyStr = Literal["none", "auto", "long_side", "short_side"]
 
 
 class PrintEngine(printsupport.QPrintEngine):
+    """Defines an interface for how QPrinter interacts with a given printing subsystem."""
+
     def get_printer_state(self) -> PrintEnginePropertyKeyStr:
         return printsupport.printer.PRINTER_STATE.inverse[self.printerState()]

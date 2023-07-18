@@ -4,6 +4,8 @@ from prettyqt import core, qthelp
 
 
 class HelpFilterEngine(core.ObjectMixin):
+    """Filtered view of the help contents."""
+
     def __init__(self, item: qthelp.QHelpFilterEngine):
         self.item = item
 

@@ -5,4 +5,4 @@ from prettyqt.qt import QtScxml
 
 
 class ScxmlStateMachine(core.ObjectMixin, QtScxml.QScxmlStateMachine):
-    pass
+    """Interface to the state machines created from SCXML files."""

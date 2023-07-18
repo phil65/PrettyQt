@@ -5,7 +5,7 @@ from prettyqt.qt import QtQuick
 
 
 class QuickTextDocument(core.ObjectMixin, QtQuick.QQuickTextDocument):
-    pass
+    """Access to the QTextDocument of QQuickTextEdit."""
 
 
 if __name__ == "__main__":

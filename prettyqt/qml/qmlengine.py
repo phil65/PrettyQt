@@ -65,4 +65,4 @@ class QmlEngineMixin(qml.JSEngineMixin):
 
 
 class QmlEngine(QmlEngineMixin, qml.QQmlEngine):
-    pass
+    """Environment for instantiating QML components."""

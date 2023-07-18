@@ -18,6 +18,8 @@ LOOPS: bidict[LoopsStr, QtSpatialAudio.QAmbientSound.Loops] = bidict(
 
 
 class AmbientSound(core.ObjectMixin, QtSpatialAudio.QAmbientSound):
+    """A stereo overlay sound."""
+
     def set_source(self, source: datatypes.UrlType):
         self.setSource(datatypes.to_local_url(source))
 

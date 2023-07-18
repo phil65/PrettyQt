@@ -81,6 +81,8 @@ WALL: bidict[WallStr, QtSpatialAudio.QAudioRoom.Wall] = bidict(
 
 
 class AudioRoom(core.ObjectMixin, QtSpatialAudio.QAudioRoom):
+    """Represents a room with its acoustic properties."""
+
     def set_wall_material(
         self,
         wall: WallStr | QtSpatialAudio.QAudioRoom.Wall,

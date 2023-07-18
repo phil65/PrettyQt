@@ -62,6 +62,8 @@ NodeTypeStr = Literal[
 
 
 class SGNode(QtQuick.QSGNode):
+    """The base class for all nodes in the scene graph."""
+
     def __getitem__(self, index: int) -> QtQuick.QSGNode:
         return self.childAtIndex(index)
 

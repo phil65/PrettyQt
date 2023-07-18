@@ -5,6 +5,8 @@ from prettyqt.qt import QtHelp
 
 
 class HelpLink:
+    """Struct provides the data associated with a help link."""
+
     def __init__(self, item: QtHelp.QHelpLink):
         self.item = item
 

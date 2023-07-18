@@ -26,6 +26,8 @@ TYPE = bidict(
 
 
 class QmlProperty(QtQml.QQmlProperty):
+    """Abstracts accessing properties on objects created from QML."""
+
     def __repr__(self):
         return get_repr(self, self.object())
 

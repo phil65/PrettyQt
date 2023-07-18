@@ -4,6 +4,8 @@ from prettyqt import core, qthelp
 
 
 class HelpSearchEngine(core.ObjectMixin, qthelp.QHelpSearchEngine):
+    """Access to widgets reusable to integrate fulltext search."""
+
     def search_results(self, start: int, end: int) -> list[qthelp.HelpSearchResult]:
         return [qthelp.HelpSearchResult(i) for i in self.searchResults(start, end)]
 

@@ -5,6 +5,8 @@ from prettyqt.utils import datatypes
 
 
 class HelpSearchResultWidget(widgets.WidgetMixin):  # , qthelp.QHelpSearchResultWidget):
+    """Text browser to display search results."""
+
     def __init__(self, item: qthelp.QHelpSearchResultWidget):
         self.item = item
 

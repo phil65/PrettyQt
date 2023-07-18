@@ -18,6 +18,8 @@ DNS_ELIGIBILITY_STATUS: bidict[
 
 
 class NetworkAddressEntry(network.QNetworkAddressEntry):
+    """Stores one IP address supported by a network interface."""
+
     def get_dns_eligibility(self) -> DnsEligibilityStatusStr:
         """Return whether this address is eligible for publication in the DNS.
 

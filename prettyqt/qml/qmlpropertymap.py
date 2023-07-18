@@ -17,6 +17,8 @@ class QmlPropertyMap(
     MutableMapping,
     metaclass=datatypes.QABCMeta,
 ):
+    """Allows you to set key-value pairs that can be used in QML bindings."""
+
     def __repr__(self):
         return get_repr(self, dict(self))
 

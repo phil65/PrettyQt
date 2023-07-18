@@ -60,6 +60,8 @@ InterfaceTypeStr = Literal[
 
 
 class NetworkInterface(network.QNetworkInterface):
+    """Listing of the host's IP addresses and network interfaces."""
+
     # def __bool__(self):
     #     return self.isValid()
 

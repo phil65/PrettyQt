@@ -5,4 +5,4 @@ from prettyqt.qt import QtHelp
 
 
 class HelpIndexModel(core.StringListModelMixin, QtHelp.QHelpIndexModel):
-    pass
+    """Model that supplies index keywords to views."""

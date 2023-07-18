@@ -241,4 +241,4 @@ class AbstractSocketMixin(core.IODeviceMixin):
 
 
 class AbstractSocket(AbstractSocketMixin, network.QAbstractSocket):
-    pass
+    """The base functionality common to all socket types."""

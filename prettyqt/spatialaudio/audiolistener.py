@@ -6,5 +6,7 @@ from prettyqt.utils import datatypes
 
 
 class AudioListener(core.ObjectMixin, QtSpatialAudio.QAudioListener):
+    """Defines the position and orientation of the person listening to a sound field."""
+
     def set_position(self, position: datatypes.Vector3DType):
         self.setPosition(datatypes.to_vector3d(position))

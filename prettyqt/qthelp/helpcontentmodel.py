@@ -4,6 +4,8 @@ from prettyqt import core, qthelp
 
 
 class HelpContentModel(core.AbstractItemModelMixin):
+    """Model that supplies content to views."""
+
     def __init__(self, item: qthelp.QHelpContentModel):
         self.item = item
 

@@ -5,7 +5,7 @@ from prettyqt.qt import QtQuick
 
 
 class QuickImageResponse(core.ObjectMixin, QtQuick.QQuickImageResponse):
-    pass
+    """Interface for asynchronous image loading in QQuickAsyncImageProvider."""
 
 
 if __name__ == "__main__":

@@ -30,6 +30,8 @@ LOOPS: bidict[LoopsStr, QtSpatialAudio.QSpatialSound.Loops] = bidict(
 
 
 class SpatialSound(core.ObjectMixin, QtSpatialAudio.QSpatialSound):
+    """A sound object in 3D space."""
+
     def set_distance_model(
         self, model: DistanceModelStr | QtSpatialAudio.QSpatialSound.DistanceModel
     ):

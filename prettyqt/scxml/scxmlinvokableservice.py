@@ -5,4 +5,4 @@ from prettyqt.qt import QtScxml
 
 
 class ScxmlInvokableService(core.ObjectMixin, QtScxml.QScxmlInvokableService):
-    pass
+    """The base class for services called from state machines."""

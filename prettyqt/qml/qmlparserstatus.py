@@ -8,4 +8,4 @@ class QmlParserStatusMixin:
 
 
 class QmlParserStatus(QmlParserStatusMixin, QtQml.QQmlParserStatus):
-    pass
+    """Updates on the QML parser state."""

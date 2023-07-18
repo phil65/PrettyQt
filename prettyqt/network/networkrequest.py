@@ -168,6 +168,8 @@ CACHE_LOAD_CONTROL: bidict[CacheLoadControlStr, Req.CacheLoadControl] = bidict(
 
 
 class NetworkRequest(QtNetwork.QNetworkRequest):
+    """Holds a request to be sent with QNetworkAccessManager."""
+
     def __init__(self, obj: datatypes.UrlType | QtNetwork.QNetworkRequest | None = None):
         if isinstance(obj, QtNetwork.QNetworkRequest):
             super().__init__(obj)

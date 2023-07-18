@@ -26,6 +26,8 @@ ERROR_TYPES = bidict(
 
 
 class JSValue(qml.QJSValue):
+    """Acts as a container for Qt/JavaScript data types."""
+
     def __repr__(self):
         return get_repr(self, self.toVariant())
 

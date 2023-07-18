@@ -19,6 +19,8 @@ STATUS = bidict(
 
 
 class QmlComponent(core.ObjectMixin, QtQml.QQmlComponent):
+    """Encapsulates a QML component definition."""
+
     def get_status(self) -> str:
         return STATUS.inverse[self.status()]
 

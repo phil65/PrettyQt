@@ -6,6 +6,8 @@ from prettyqt.utils import datatypes
 
 
 class HelpContentWidget(widgets.TreeViewMixin, QtHelp.QHelpContentWidget):
+    """Tree view for displaying help content model items."""
+
     def index_of(self, url: datatypes.UrlType) -> QtCore.QModelIndex | None:
         if isinstance(url, str):
             url = QtCore.QUrl(url)

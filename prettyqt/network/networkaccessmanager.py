@@ -19,6 +19,8 @@ OPERATION: bidict[OperationStr, network.QNetworkAccessManager.Operation] = bidic
 
 
 class NetworkAccessManager(core.ObjectMixin, network.QNetworkAccessManager):
+    """Allows the application to send network requests and receive replies."""
+
     # def request(
     #     self,
     #     method,

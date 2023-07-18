@@ -24,4 +24,4 @@ class QmlImageProviderBaseMixin:
 
 
 class QmlImageProviderBase(QmlImageProviderBaseMixin, QtQml.QQmlImageProviderBase):
-    pass
+    """Used to register image providers in the QML engine."""

@@ -7,7 +7,7 @@ from prettyqt.qt import QtDesigner
 class DesignerFormEditorInterface(
     core.ObjectMixin, QtDesigner.QDesignerFormEditorInterface
 ):
-    pass
+    """Allows you to access Qt Designer's various components."""
 
 
 if __name__ == "__main__":

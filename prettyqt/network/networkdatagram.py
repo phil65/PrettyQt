@@ -5,6 +5,8 @@ from prettyqt.qt import QtCore
 
 
 class NetworkDatagram(network.QNetworkDatagram):
+    """The data and metadata of a UDP datagram."""
+
     def get_destination_address(self) -> network.HostAddress:
         return network.HostAddress(self.destinationAddress())
 

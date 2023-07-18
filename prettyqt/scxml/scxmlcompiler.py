@@ -6,6 +6,8 @@ from prettyqt.qt import QtScxml
 
 
 class ScxmlCompiler(QtScxml.QScxmlCompiler):
+    """Compiler for SCXML files."""
+
     def get_file_name(self) -> pathlib.Path:
         return pathlib.Path(self.fileName())
 

@@ -24,6 +24,8 @@ RENDER_TARGET: bidict[RenderTargetStr, mod.RenderTarget] = bidict(
 
 
 class QuickPaintedItem(quick.QuickItemMixin, quick.QQuickPaintedItem):
+    """Way to use the QPainter API in the QML Scene Graph."""
+
     def get_fill_color(self) -> gui.Color:
         return gui.Color(self.fillColor())
 

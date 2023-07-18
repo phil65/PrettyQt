@@ -35,6 +35,8 @@ NetworkLayerProtocolStr = Literal["ipv4", "ipv6", "any_ip", "unknown"]
 
 
 class HostAddress(network.QHostAddress):
+    """IP address."""
+
     def __repr__(self):
         return get_repr(self, self.toString())
 

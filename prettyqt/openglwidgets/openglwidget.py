@@ -24,6 +24,8 @@ UpdateBehaviorStr = Literal["no_partial", "partial"]
 
 
 class OpenGLWidget(widgets.WidgetMixin, QtOpenGLWidgets.QOpenGLWidget):
+    """Widget for rendering OpenGL graphics."""
+
     def set_update_behavior(
         self, behavior: UpdateBehaviorStr | QtOpenGLWidgets.QOpenGLWidget.UpdateBehavior
     ):

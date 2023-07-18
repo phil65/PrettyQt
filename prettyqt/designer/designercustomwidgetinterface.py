@@ -4,7 +4,7 @@ from prettyqt.qt import QtDesigner
 
 
 class DesignerCustomWidgetInterface(QtDesigner.QDesignerCustomWidgetInterface):
-    pass
+    """Enables Qt Designer to access and construct custom widgets."""
 
 
 if __name__ == "__main__":

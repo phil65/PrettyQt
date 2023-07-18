@@ -9,4 +9,4 @@ class QuickImageProviderMixin(qml.QmlImageProviderBaseMixin):
 
 
 class QuickImageProvider(QuickImageProviderMixin, QtQuick.QQuickImageProvider):
-    pass
+    """Interface for supporting pixmaps and threaded image requests in QML."""

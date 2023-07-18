@@ -5,6 +5,8 @@ from prettyqt.qt import QtHelp
 
 
 class HelpContentItem:
+    """Item for use with QHelpContentModel."""
+
     def __init__(self, item: QtHelp.QHelpContentItem):
         self.item = item
 

@@ -4,6 +4,8 @@ from prettyqt import core, network
 
 
 class TcpServer(core.ObjectMixin, network.QTcpServer):
+    """TCP-based server."""
+
     def listen(  # type: ignore
         self, address: str | network.QHostAddress, port: int = 0
     ) -> bool:

@@ -8,6 +8,8 @@ from prettyqt.utils import datatypes, get_repr
 
 
 class NetworkCookieJar(core.ObjectMixin, QtNetwork.QNetworkCookieJar):
+    """Implements a simple jar of QNetworkCookie objects."""
+
     def __add__(self, other: QtNetwork.QNetworkCookie):
         self.insertCookie(other)
         return self

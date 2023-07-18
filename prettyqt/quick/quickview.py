@@ -26,6 +26,8 @@ STATUS: bidict[StatusStr, quick.QQuickView.Status] = bidict(
 
 
 class QuickView(quick.quickwindow.QuickWindowMixin, quick.QQuickView):
+    """Window for displaying a Qt Quick user interface."""
+
     def set_source(self, source: datatypes.UrlType | datatypes.PathType):
         self.setSource(datatypes.to_local_url(source))
 

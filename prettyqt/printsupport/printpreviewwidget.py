@@ -29,6 +29,8 @@ ZOOM_MODE: bidict[ZoomModeStr, QtPrintSupport.QPrintPreviewWidget.ZoomMode] = bi
 
 
 class PrintPreviewWidget(widgets.WidgetMixin, QtPrintSupport.QPrintPreviewWidget):
+    """Widget for previewing page layouts for printer output."""
+
     def get_view_mode(self) -> ViewModeStr:
         return VIEW_MODE.inverse[self.viewMode()]
 

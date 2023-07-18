@@ -6,4 +6,4 @@ from prettyqt import scxml
 class ScxmlNullDataModel(
     scxml.scxmldatamodel.ScxmlDataModelMixin, scxml.QScxmlNullDataModel
 ):
-    pass
+    """The null data model for a Qt SCXML stateMachine."""

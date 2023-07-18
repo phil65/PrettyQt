@@ -53,6 +53,8 @@ LOCAL_SOCKET_STATE: bidict[LocalSocketStateStr, mod.LocalSocketState] = bidict(
 
 
 class LocalSocket(core.IODeviceMixin, QtNetwork.QLocalSocket):
+    """Local socket."""
+
     def __bool__(self):
         return self.isValid()
 

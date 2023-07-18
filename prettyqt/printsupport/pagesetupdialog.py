@@ -5,6 +5,8 @@ from prettyqt.qt import QtPrintSupport
 
 
 class PageSetupDialog(widgets.DialogMixin, QtPrintSupport.QPageSetupDialog):
+    """Configuration dialog for the page-related options on a printer."""
+
     @classmethod
     def setup_example(cls):
         return None

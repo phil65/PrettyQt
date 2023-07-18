@@ -7,6 +7,8 @@ from prettyqt.qt import QtQuick
 
 
 class QuickRenderControl(core.ObjectMixin, QtQuick.QQuickRenderControl):
+    """Mechanism for rendering the Qt Quick scenegraph onto an offscreen render target."""
+
     @contextlib.contextmanager
     def edit_frame(self):
         self.beginFrame()

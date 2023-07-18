@@ -18,6 +18,8 @@ CONTENT_TYPES: bidict[ContentTypeStr, QtNetwork.QHttpMultiPart.ContentType] = bi
 
 
 class HttpMultiPart(core.ObjectMixin, QtNetwork.QHttpMultiPart):
+    """Resembles a MIME multipart message to be sent over HTTP."""
+
     def __add__(self, other: QtNetwork.QHttpPart):
         self.append(other)
         return self

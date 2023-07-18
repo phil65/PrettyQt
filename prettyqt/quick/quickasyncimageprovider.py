@@ -7,4 +7,4 @@ from prettyqt.qt import QtQuick
 class QuickAsyncImageProvider(
     quick.QuickImageProviderMixin, QtQuick.QQuickAsyncImageProvider
 ):
-    pass
+    """Interface for asynchronous control of QML image requests."""

@@ -4,7 +4,7 @@ from prettyqt.qt import QtDesigner
 
 
 class AbstractExtensionFactory(QtDesigner.QAbstractExtensionFactory):
-    pass
+    """Interface for extension factories in Qt Designer."""
 
 
 if __name__ == "__main__":

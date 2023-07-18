@@ -9,6 +9,8 @@ from prettyqt.utils import datatypes
 
 
 class QmlApplicationEngine(qml.QmlEngineMixin, qml.QQmlApplicationEngine):
+    """Convenient way to load an application from a single QML file."""
+
     def __iter__(self) -> Iterator[QtCore.QObject]:
         return iter(self.rootObjects())
 

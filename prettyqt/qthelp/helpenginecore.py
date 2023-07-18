@@ -5,6 +5,8 @@ from prettyqt.utils import datatypes
 
 
 class HelpEngineCoreMixin(core.ObjectMixin):
+    """The core functionality of the help system."""
+
     def get_file_data(self, url: core.QUrl) -> bytes:
         return self.fileData(url).data()
 

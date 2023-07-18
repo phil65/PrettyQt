@@ -27,7 +27,7 @@ class JSEngineMixin(core.ObjectMixin):
 
 
 class JSEngine(JSEngineMixin, qml.QJSEngine):
-    pass
+    """Environment for evaluating JavaScript code."""
 
 
 if __name__ == "__main__":

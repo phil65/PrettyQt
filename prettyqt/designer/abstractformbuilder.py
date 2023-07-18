@@ -8,7 +8,7 @@ class AbstractFormBuilderMixin:
 
 
 class AbstractFormBuilder(AbstractFormBuilderMixin, QtDesigner.QAbstractFormBuilder):
-    pass
+    """Default implementation for classes that create user interfaces at run-time."""
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ from prettyqt import designer
 class FormBuilder(
     designer.abstractformbuilder.AbstractFormBuilderMixin, designer.QFormBuilder
 ):
-    pass
+    """Used to dynamically construct user interfaces from UI files at run-time."""
 
 
 if __name__ == "__main__":

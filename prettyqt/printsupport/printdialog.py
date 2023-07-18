@@ -4,6 +4,8 @@ from prettyqt import printsupport
 
 
 class PrintDialog(printsupport.AbstractPrintDialogMixin, printsupport.QPrintDialog):
+    """Dialog for specifying the printer's configuration."""
+
     @classmethod
     def setup_example(cls):
         return None

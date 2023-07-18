@@ -4,6 +4,8 @@ from prettyqt.qt import QtQml
 
 
 class JSValueIterator(QtQml.QJSValueIterator):
+    """Java-style iterator for JSValue."""
+
     def __iter__(self):
         return self
 

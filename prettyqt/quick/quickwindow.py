@@ -104,7 +104,7 @@ class QuickWindowMixin(gui.WindowMixin):
 
 
 class QuickWindow(QuickWindowMixin, QtQuick.QQuickWindow):
-    pass
+    """The window for displaying a graphical QML scene."""
 
 
 if __name__ == "__main__":

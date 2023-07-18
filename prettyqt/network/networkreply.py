@@ -82,6 +82,8 @@ NetworkErrorStr = Literal[
 
 
 class NetworkReply:
+    """Contains the data and headers for a request sent with QNetworkAccessManager."""
+
     def __init__(self, reply: QtNetwork.QNetworkReply):
         self.item = reply
 

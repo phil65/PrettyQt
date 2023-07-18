@@ -6,6 +6,8 @@ from prettyqt import core, qml
 
 
 class QmlExpression(core.ObjectMixin, qml.QQmlExpression):
+    """Evaluates JavaScript in a QML context."""
+
     def get_source_file(self) -> pathlib.Path | None:
         return pathlib.Path(source) if (source := self.sourceFile()) else None
 

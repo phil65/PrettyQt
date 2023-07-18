@@ -117,7 +117,7 @@ class QuickItemMixin(core.ObjectMixin, qml.QmlParserStatusMixin):
 
 
 class QuickItem(QuickItemMixin, QtQuick.QQuickItem):
-    pass
+    """The most basic of all visual items in Qt Quick."""
 
 
 if __name__ == "__main__":

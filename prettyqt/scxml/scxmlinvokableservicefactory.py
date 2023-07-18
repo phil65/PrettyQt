@@ -7,4 +7,4 @@ from prettyqt.qt import QtScxml
 class ScxmlInvokableServiceFactory(
     core.ObjectMixin, QtScxml.QScxmlInvokableServiceFactory
 ):
-    pass
+    """Creates invokable service instances."""

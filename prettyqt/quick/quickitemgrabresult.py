@@ -5,6 +5,8 @@ from prettyqt.qt import QtQuick
 
 
 class QuickItemGrabResult(core.ObjectMixin):
+    """Contains the result from QQuickItem::grabToImage()."""
+
     def __init__(self, item: QtQuick.QQuickItemGrabResult):
         self.item = item
 

@@ -15,6 +15,8 @@ RAW_FORMS: bidict[RawFormStr, QtNetwork.QNetworkCookie.RawForm] = bidict(
 
 
 class NetworkCookie(QtNetwork.QNetworkCookie):
+    """Holds one network cookie."""
+
     def __repr__(self):
         return get_repr(self, self.name(), self.value())
 

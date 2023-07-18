@@ -47,6 +47,8 @@ PROXY_TYPES: bidict[ProxyTypeStr, network.QNetworkProxy.ProxyType] = bidict(
 
 
 class NetworkProxy(network.QNetworkProxy):
+    """Network layer proxy."""
+
     def get_capabilities(self) -> list[CapabilityStr]:
         return CAPABILITIES.get_list(self.capabilities())
 

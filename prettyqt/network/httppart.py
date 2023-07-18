@@ -6,6 +6,8 @@ from prettyqt.utils import datatypes
 
 
 class HttpPart(network.QHttpPart):
+    """Holds a body part to be used inside a HTTP multipart MIME message."""
+
     def set_body(self, body: datatypes.ByteArrayType):
         body = datatypes.to_bytearray(body)
         self.setBody(body)

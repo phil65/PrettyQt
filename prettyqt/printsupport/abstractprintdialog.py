@@ -51,4 +51,4 @@ class AbstractPrintDialogMixin(widgets.DialogMixin):
 
 
 class AbstractPrintDialog(AbstractPrintDialogMixin, QtPrintSupport.QAbstractPrintDialog):
-    pass
+    """Base implementation for print dialogs used to configure printers."""

@@ -17,6 +17,8 @@ OUTPUT_MODE: bidict[OutputModeStr, QtSpatialAudio.QAudioEngine.OutputMode] = bid
 
 
 class AudioEngine(core.ObjectMixin, QtSpatialAudio.QAudioEngine):
+    """Manages a three dimensional sound field."""
+
     def set_output_mode(
         self, mode: OutputModeStr | QtSpatialAudio.QAudioEngine.OutputMode
     ):
