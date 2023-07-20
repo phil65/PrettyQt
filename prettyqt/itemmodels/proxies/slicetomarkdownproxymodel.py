@@ -1,9 +1,27 @@
 from __future__ import annotations
 
 import logging
+import re
 
 from prettyqt import constants, core, gui, itemmodels
-from prettyqt.utils import markdownizer
+
+
+def escaped(text: str, entity_type: str | None = None) -> str:
+    """Helper function to escape telegram markup symbols.
+
+    Args:
+        text: The text.
+        entity_type: For the entity types ``PRE``, ``CODE`` and the link
+                     part of ``TEXT_LINKS``, only certain characters need to be escaped.
+    """
+    if entity_type in ["pre", "code"]:
+        escape_chars = r"\`"
+    elif entity_type == "text_link":
+        escape_chars = r"\)"
+    else:
+        escape_chars = r"_*[]()~`>#+-=|{}.!"
+
+    return re.sub(f"([{re.escape(escape_chars)}])", r"\\\1", text)
 
 
 logger = logging.getLogger(__name__)
@@ -38,7 +56,7 @@ class SliceToMarkdownProxyModel(itemmodels.SliceIdentityProxyModel):
         checkstate = super().data(index, constants.CHECKSTATE_ROLE)
         # if not label and checkstate is None:
         #     return ""
-        label = markdownizer.escaped(str(label) if label is not None else "")
+        label = escaped(str(label) if label is not None else "")
         if label:
             # background = super().data(index, constants.BACKGROUND_ROLE)
             foreground = super().data(index, constants.FOREGROUND_ROLE)
