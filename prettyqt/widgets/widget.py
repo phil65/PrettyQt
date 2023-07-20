@@ -37,7 +37,7 @@ PositionPossibilityType = (
 )
 
 
-class WidgetMixin(core.ObjectMixin):
+class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
     def __init__(self, *args, margin: int | None = None, **kwargs):
         super().__init__(*args, **kwargs)
         self.fx = animations.Fx(self)
