@@ -53,7 +53,7 @@ def to_module(
     """Returns a module for given module path. If module is given, just return it.
 
     Arguments:
-        module: A ModuleType, str or sequence.
+        module: A ModuleType, "module.submodule[...]" or ["module", "submodule", [...]]
         return_none: In case module cant get imported, return None.
                      If False, Exception is thrown.
     """

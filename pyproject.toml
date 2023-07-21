@@ -110,9 +110,6 @@ pyside6 = ["pyside6"]
 regexeditor = "prettyqt.custom_widgets.regexeditor.__main__:run"
 iconbrowser = "prettyqt.custom_widgets.iconbrowser:run"
 
-[project.entry-points."mkdocs.plugins"]
-linkreplacer = "prettyqt.__linkreplacer:LinkReplacerPlugin"
-
 [project.entry-points.pyinstaller40]
 hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
 
@@ -151,8 +148,10 @@ test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg -
 
 
 
+
 [tool.hatch.envs.default.scripts]
 test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg --cov=tests'
+
 
 
 
@@ -162,6 +161,7 @@ test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg -
 [tool.hatch.envs.docs.scripts]
 build = "mkdocs build --clean"
 serve = "mkdocs serve --dirtyreload"
+
 
 
 
@@ -213,10 +213,6 @@ iconbrowser = "prettyqt.custom_widgets.iconbrowser:run"
 
 [tool.poetry.plugins."pyinstaller40"]
 hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
-
-[tool.poetry.plugins."mkdocs.plugins"]
-linkreplacer = "prettyqt.__linkreplacer:LinkReplacerPlugin"
-
 
 # [tool.poetry.plugins."pytest11"]
 # pytest-qt = "prettyqt.prettyqtest.plugin"
@@ -282,6 +278,7 @@ pymdown-extensions = "^10"
 black = "^23"
 devtools = "^0"
 commitizen = "^3"
+mknodes = {path = "../mknodes", develop = true}
 
 
 [tool.pytest.ini_options]
