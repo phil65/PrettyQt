@@ -43,7 +43,7 @@ class WidgetScreenShot(mknodes.MkBinaryImage):
 
 
 if __name__ == "__main__":
-    doc = mknodes.MkPage([], True, True)
+    doc = mknodes.MkPage([])
     doc += mknodes.MkAdmonition("info", "etst")
     doc += mknodes.MkTable(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
     doc += prettyqtmarkdown.PropertyTable(core.StringListModel)

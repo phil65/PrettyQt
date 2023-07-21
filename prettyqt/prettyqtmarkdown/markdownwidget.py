@@ -39,3 +39,5 @@ if __name__ == "__main__":
     page += mknodes.MkDocStrings(helpers, header="DocStrings")
     widget = MarkdownWidget()
     widget.set_markdown(page)
+    widget.show()
+    app.exec()

@@ -15,7 +15,7 @@ class MarkdownModel(itemmodels.TreeModel):
     class Roles:
         MarkdownRole = constants.USER_ROLE + 5325
 
-    def columnCount(self, index: core.ModelIndex) -> int:
+    def columnCount(self, index: core.ModelIndex | None = None) -> int:
         return 3
 
     def data(
