@@ -41,7 +41,7 @@ class FilterHeader(widgets.HeaderView):
         widget = cls(parent=w)
         return widget
 
-    def editors_visible(self) -> bool:
+    def are_editors_visible(self) -> bool:
         return self._editors_visible
 
     def set_editors_visible(self, visible: bool):
@@ -146,7 +146,12 @@ class FilterHeader(widgets.HeaderView):
         for editor in self._editors:
             editor.clear()
 
-    editors_visible = core.Property(bool, editors_visible, set_editors_visible)
+    editors_visible = core.Property(
+        bool,
+        are_editors_visible,
+        set_editors_visible,
+        doc="Whether the filter widgets are visible",
+    )
 
 
 if __name__ == "__main__":
