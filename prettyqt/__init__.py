@@ -88,6 +88,7 @@ __all__ = [
     "pdf",
     "pdfwidgets",
     "positioning",
+    "prettyqtmarkdown",
     "printsupport",
     "qml",
     "qthelp",
