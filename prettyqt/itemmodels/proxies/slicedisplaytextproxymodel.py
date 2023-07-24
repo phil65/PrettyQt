@@ -104,11 +104,36 @@ class SliceDisplayTextProxyModel(itemmodels.SliceIdentityProxyModel):
     def get_time_format(self, fmt) -> str:
         return self._time_format
 
-    int_format = core.Property(str, get_int_format, set_int_format)
-    float_format = core.Property(str, get_float_format, set_float_format)
-    datetime_format = core.Property(str, get_datetime_format, set_datetime_format)
-    date_format = core.Property(str, get_date_format, set_date_format)
-    time_format = core.Property(str, get_time_format, set_time_format)
+    int_format = core.Property(
+        str,
+        get_int_format,
+        set_int_format,
+        doc="String format for integers",
+    )
+    float_format = core.Property(
+        str,
+        get_float_format,
+        set_float_format,
+        doc="String format for floats",
+    )
+    datetime_format = core.Property(
+        str,
+        get_datetime_format,
+        set_datetime_format,
+        doc="String format for datetime objects",
+    )
+    date_format = core.Property(
+        str,
+        get_date_format,
+        set_date_format,
+        doc="String format for date objects",
+    )
+    time_format = core.Property(
+        str,
+        get_time_format,
+        set_time_format,
+        doc="String format for time objects",
+    )
 
 
 if __name__ == "__main__":

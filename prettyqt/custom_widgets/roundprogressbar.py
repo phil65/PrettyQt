@@ -296,7 +296,12 @@ class RoundProgressBar(widgets.Widget):
         with self.edit_palette() as palette:
             palette.set_brush("highlight", data_brush)
 
-    nullPosition = core.Property(enum.Enum, get_null_position, set_null_position)
+    nullPosition = core.Property(
+        enum.Enum,
+        get_null_position,
+        set_null_position,
+        doc="Position for value = 0",
+    )
 
 
 if __name__ == "__main__":

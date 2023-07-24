@@ -46,8 +46,18 @@ class TextLengthValidator(gui.Validator):
             return self.State.Intermediate, text, len(text)
         return self.State.Invalid, text, len(text)
 
-    minimum = core.Property(int, get_minimum, set_minimum)
-    maximum = core.Property(int, get_maximum, set_maximum)
+    minimum = core.Property(
+        int,
+        get_minimum,
+        set_minimum,
+        doc="Minimum text length",
+    )
+    maximum = core.Property(
+        int,
+        get_maximum,
+        set_maximum,
+        doc="Maximum text length",
+    )
 
 
 if __name__ == "__main__":

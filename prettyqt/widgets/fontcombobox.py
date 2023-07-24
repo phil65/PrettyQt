@@ -60,7 +60,13 @@ class FontComboBox(widgets.ComboBoxMixin, widgets.QFontComboBox):
 
     # without this, the user property would be currentText, which is not what we want.
     # PyQt6 doesnt like gui.Font here.
-    value = core.Property(gui.QFont, get_value, set_value, user=True)
+    value = core.Property(
+        gui.QFont,
+        get_value,
+        set_value,
+        user=True,
+        doc="Currently chosen font",
+    )
 
 
 if __name__ == "__main__":

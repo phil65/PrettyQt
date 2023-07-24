@@ -216,7 +216,10 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         return self._current_line_color
 
     current_line_color = core.Property(
-        gui.QColor, get_current_line_color, set_current_line_color
+        gui.QColor,
+        get_current_line_color,
+        set_current_line_color,
+        doc="Color to use for current line highlighting",
     )
 
     def get_visible_line_span(self) -> tuple[int, int]:
@@ -233,7 +236,10 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         return widget_margins.top() + doc_height + widget_margins.bottom()
 
     validation_color = core.Property(
-        gui.QColor, get_validation_color, set_validation_color
+        gui.QColor,
+        get_validation_color,
+        set_validation_color,
+        doc="Color to use for invalid text",
     )
 
 

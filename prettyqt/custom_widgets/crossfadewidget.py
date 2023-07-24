@@ -75,7 +75,12 @@ class CrossFadeWidget(widgets.Widget):
                 p.setOpacity(factor)
                 p.drawPixmap(core.Point(0, 0), self.pixmap_2)
 
-    blend_factor = core.Property(float, get_blend_factor, set_blend_factor)
+    blend_factor = core.Property(
+        float,
+        get_blend_factor,
+        set_blend_factor,
+        doc="Blend factor between the two pixmaps.",
+    )
 
 
 if __name__ == "__main__":

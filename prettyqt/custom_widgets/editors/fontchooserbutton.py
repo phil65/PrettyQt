@@ -53,7 +53,13 @@ class FontChooserButton(widgets.Widget):
     def get_value(self) -> gui.QFont:
         return gui.QFont(self._current_font)
 
-    current_font = core.Property(gui.QFont, get_value, set_value, user=True)
+    current_font = core.Property(
+        gui.QFont,
+        get_value,
+        set_value,
+        user=True,
+        doc="Currently chosen font",
+    )
 
 
 if __name__ == "__main__":

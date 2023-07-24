@@ -206,7 +206,12 @@ class ParentClassTreeModel(BaseClassTreeModel):
         """Returns True if mro mode is turned on."""
         return self._show_mro
 
-    show_mro = core.Property(bool, get_show_mro, set_show_mro)
+    show_mro = core.Property(
+        bool,
+        get_show_mro,
+        set_show_mro,
+        doc="Whether children items should be the ordered mro.",
+    )
 
 
 if __name__ == "__main__":

@@ -132,7 +132,12 @@ class ModelIndexModel(itemmodels.ListMixin, core.AbstractTableModel):
     def is_using_model_roles(self) -> bool:
         return self._use_model_roles
 
-    use_model_roles = core.Property(bool, is_using_model_roles, set_use_model_roles)
+    use_model_roles = core.Property(
+        bool,
+        is_using_model_roles,
+        set_use_model_roles,
+        doc="Whether to use model.roleNames() for the columns.",
+    )
 
 
 if __name__ == "__main__":

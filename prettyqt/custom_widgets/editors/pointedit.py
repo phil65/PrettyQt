@@ -37,7 +37,13 @@ class PointEdit(widgets.Widget):
         self.spinbox_x.set_value(value.x())
         self.spinbox_y.set_value(value.y())
 
-    value = core.Property(core.Point, get_value, set_value, user=True)
+    value = core.Property(
+        core.Point,
+        get_value,
+        set_value,
+        user=True,
+        doc="Current value",
+    )
 
 
 if __name__ == "__main__":

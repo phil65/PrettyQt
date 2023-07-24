@@ -55,7 +55,13 @@ class BrushEdit(widgets.Widget):
     def set_value(self, value: datatypes.ColorType):
         self.set_current_brush(value)
 
-    current_brush = core.Property(gui.QBrush, get_value, set_value, user=True)
+    current_brush = core.Property(
+        gui.QBrush,
+        get_value,
+        set_value,
+        user=True,
+        doc="Currently selected Brush",
+    )
 
 
 if __name__ == "__main__":

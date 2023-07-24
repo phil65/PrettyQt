@@ -19,7 +19,13 @@ class IconEdit(widgets.Widget):
     def set_value(self, value: gui.Icon):
         self._value = value
 
-    value = core.Property(gui.Icon, get_value, set_value, user=True)
+    value = core.Property(
+        gui.Icon,
+        get_value,
+        set_value,
+        user=True,
+        doc="Currently chosen icon",
+    )
 
 
 if __name__ == "__main__":

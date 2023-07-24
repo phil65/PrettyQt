@@ -49,7 +49,13 @@ class SizePolicyEdit(widgets.Widget):
             widgets.sizepolicy.CONTROL_TYPE.inverse[value.controlType()]
         )
 
-    value = core.Property(widgets.QSizePolicy, get_value, set_value, user=True)
+    value = core.Property(
+        widgets.QSizePolicy,
+        get_value,
+        set_value,
+        user=True,
+        doc="Current value",
+    )
 
 
 if __name__ == "__main__":

@@ -181,15 +181,29 @@ class AppearanceProxyModel(core.IdentityProxyModel):
     def get_alignment_default(self) -> constants.AlignmentFlag:
         return self._alignment_default
 
-    font_default = core.Property(QtGui.QFont, get_font_default, set_font_default)
+    font_default = core.Property(
+        QtGui.QFont,
+        get_font_default,
+        set_font_default,
+        doc="Default font for whole table",
+    )
     foreground_default = core.Property(
-        object, get_foreground_default, set_foreground_default
+        object,
+        get_foreground_default,
+        set_foreground_default,
+        doc="Default foreground for whole table",
     )
     background_default = core.Property(
-        object, get_background_default, set_background_default
+        object,
+        get_background_default,
+        set_background_default,
+        doc="Default background for whole table",
     )
     alignment_default = core.Property(
-        constants.AlignmentFlag, get_alignment_default, set_alignment_default
+        constants.AlignmentFlag,
+        get_alignment_default,
+        set_alignment_default,
+        doc="Default alignment for whole table",
     )
 
 

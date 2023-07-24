@@ -128,7 +128,10 @@ class PandasDataFrameModel(core.AbstractTableModel):
         self.update_all()
 
     multiindex_separator = core.Property(
-        str, get_multiindex_separator, set_multiindex_separator
+        str,
+        get_multiindex_separator,
+        set_multiindex_separator,
+        doc="Separator to use for MultiIndexes",
     )
 
 

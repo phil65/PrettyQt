@@ -161,9 +161,24 @@ class MeltProxyModel(core.AbstractProxyModel):
         section = self.columnCount() - 1
         self.headerDataChanged.emit(constants.HORIZONTAL, section, section)
 
-    id_columns = core.Property(list, get_id_columns, set_id_columns)
-    var_name = core.Property(str, get_var_name, set_var_name)
-    value_name = core.Property(str, get_value_name, set_value_name)
+    id_columns = core.Property(
+        list,
+        get_id_columns,
+        set_id_columns,
+        doc="Columns to use as identifier variables",
+    )
+    var_name = core.Property(
+        str,
+        get_var_name,
+        set_var_name,
+        doc="Header for variable column",
+    )
+    value_name = core.Property(
+        str,
+        get_value_name,
+        set_value_name,
+        doc="Header for value column",
+    )
 
 
 if __name__ == "__main__":

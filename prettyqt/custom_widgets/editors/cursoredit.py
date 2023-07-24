@@ -22,7 +22,13 @@ class CursorEdit(custom_widgets.EnumComboBox):
     def set_value(self, value: gui.Cursor):
         super().set_value(value.shape())
 
-    value = core.Property(gui.Cursor, get_value, set_value, user=True)
+    value = core.Property(
+        gui.Cursor,
+        get_value,
+        set_value,
+        user=True,
+        doc="Currently selected cursor",
+    )
 
 
 if __name__ == "__main__":

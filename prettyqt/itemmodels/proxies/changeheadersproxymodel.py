@@ -86,7 +86,12 @@ class ChangeHeadersProxyModel(core.IdentityProxyModel):
                 return self._header[section]
         return self.sourceModel().headerData(section, orientation, role)
 
-    header = core.Property(object, get_header, set_header)
+    header = core.Property(
+        object,
+        get_header,
+        set_header,
+        doc="New headers (dict / list)",
+    )
 
 
 if __name__ == "__main__":

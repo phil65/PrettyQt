@@ -53,8 +53,18 @@ class IntegerValidator(gui.Validator):
                 return self.State.Acceptable, text, len(text)
         return self.State.Invalid, text, len(text)
 
-    bottom = core.Property(int, get_bottom, set_bottom)
-    top = core.Property(int, get_top, set_top)
+    bottom = core.Property(
+        int,
+        get_bottom,
+        set_bottom,
+        doc="Minimum value",
+    )
+    top = core.Property(
+        int,
+        get_top,
+        set_top,
+        doc="Maximum value",
+    )
 
 
 if __name__ == "__main__":

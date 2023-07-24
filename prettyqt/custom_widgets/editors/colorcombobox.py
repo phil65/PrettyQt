@@ -46,7 +46,13 @@ class ColorComboBox(widgets.ComboBox):
     def set_value(self, value: datatypes.ColorType):
         self.set_current_color(value)
 
-    current_color = core.Property(gui.QColor, get_value, set_value, user=True)
+    current_color = core.Property(
+        gui.QColor,
+        get_value,
+        set_value,
+        user=True,
+        doc="Currently selected color",
+    )
 
 
 if __name__ == "__main__":

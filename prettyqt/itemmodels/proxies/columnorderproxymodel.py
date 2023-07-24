@@ -129,7 +129,12 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
         source_parent = self.mapToSource(index).sibling(index.row(), 0)
         return self.sourceModel().rowCount(source_parent)
 
-    order = core.Property(list, get_column_order, set_column_order)
+    order = core.Property(
+        list,
+        get_column_order,
+        set_column_order,
+        doc="Column order",
+    )
 
 
 if __name__ == "__main__":

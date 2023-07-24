@@ -47,7 +47,13 @@ class LocaleEdit(widgets.ComboBox):
     def set_value(self, value: core.QLocale | str):
         self.set_current_locale(value)
 
-    value = core.Property(core.QLocale, get_value, set_value, user=True)
+    value = core.Property(
+        core.QLocale,
+        get_value,
+        set_value,
+        user=True,
+        doc="Currently chosen locale",
+    )
 
 
 if __name__ == "__main__":

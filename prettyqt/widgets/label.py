@@ -283,7 +283,12 @@ class Label(widgets.FrameMixin, widgets.QLabel):
         label.resize(pixmap.width(), pixmap.height())
         return label
 
-    elideMode = core.Property(str, get_elide_mode, set_elide_mode)
+    elideMode = core.Property(
+        str,
+        get_elide_mode,
+        set_elide_mode,
+        doc="Text Elide style",
+    )
 
 
 if __name__ == "__main__":

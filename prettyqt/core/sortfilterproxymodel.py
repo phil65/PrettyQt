@@ -193,7 +193,11 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, core.QSortFilterProxyMo
         self.filter_mode_changed.emit(mode)
 
     filterMode = core.Property(
-        str, get_filter_mode, set_filter_mode, notify=filter_mode_changed
+        str,
+        get_filter_mode,
+        set_filter_mode,
+        notify=filter_mode_changed,
+        doc="Mode to use for filtering",
     )
 
 

@@ -218,19 +218,53 @@ class BaseWaitingSpinner(widgets.Widget):
             color.setAlphaF(result_alpha)
         return color
 
-    color = core.Property(gui.Color, get_color, set_color)
-    roundness = core.Property(float, get_roundness, set_roundness)
-    line_num = core.Property(int, get_line_num, set_line_num)
-    line_length = core.Property(int, get_line_length, set_line_length)
-    line_width = core.Property(int, get_line_width, set_line_width)
+    color = core.Property(
+        gui.Color,
+        get_color,
+        set_color,
+        doc="",
+    )
+    roundness = core.Property(
+        float,
+        get_roundness,
+        set_roundness,
+        doc="Roundness value",
+    )
+    line_num = core.Property(
+        int,
+        get_line_num,
+        set_line_num,
+        doc="Number of lines for the spinner",
+    )
+    line_length = core.Property(
+        int,
+        get_line_length,
+        set_line_length,
+        doc="Length of the spinner lines",
+    )
+    line_width = core.Property(
+        int,
+        get_line_width,
+        set_line_width,
+        doc="Width of the spinner lines",
+    )
     minimum_trail_opacity = core.Property(
-        float, get_minimum_trail_opacity, set_minimum_trail_opacity
+        float,
+        get_minimum_trail_opacity,
+        set_minimum_trail_opacity,
+        doc="Minimum opacity of the Trail",
     )
     revolutions_per_second = core.Property(
-        float, get_revolutions_per_second, set_revolutions_per_second
+        float,
+        get_revolutions_per_second,
+        set_revolutions_per_second,
+        doc="Rotation speed of the spinner",
     )
     trail_fade_percentage = core.Property(
-        float, get_trail_fade_percentage, set_trail_fade_percentage
+        float,
+        get_trail_fade_percentage,
+        set_trail_fade_percentage,
+        doc="Trail fade percentage",
     )
 
 

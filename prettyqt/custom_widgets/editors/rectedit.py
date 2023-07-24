@@ -63,7 +63,13 @@ class RectEdit(BaseRectEdit):
     def get_value(self) -> core.Rect:
         return super().get_value()
 
-    value = core.Property(core.QRect, get_value, set_value, user=True)
+    value = core.Property(
+        core.QRect,
+        get_value,
+        set_value,
+        user=True,
+        doc="Current value",
+    )
 
 
 class RectFEdit(BaseRectEdit):
@@ -77,7 +83,13 @@ class RectFEdit(BaseRectEdit):
     def get_value(self) -> core.RectF:
         return super().get_value()
 
-    value = core.Property(core.QRectF, get_value, set_value, user=True)
+    value = core.Property(
+        core.QRectF,
+        get_value,
+        set_value,
+        user=True,
+        doc="Current value",
+    )
 
 
 class RegionEdit(BaseRectEdit):
@@ -103,7 +115,13 @@ class RegionEdit(BaseRectEdit):
         self.spinbox_width.set_value(bounding_rect.width())
         self.spinbox_height.set_value(bounding_rect.height())
 
-    value = core.Property(gui.Region, get_value, set_value, user=True)
+    value = core.Property(
+        gui.Region,
+        get_value,
+        set_value,
+        user=True,
+        doc="Current value",
+    )
 
 
 if __name__ == "__main__":

@@ -127,7 +127,12 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
         self.code_executed.emit(source)
         return None
 
-    completion_mode = core.Property(str, get_completion_mode, set_completion_mode)
+    completion_mode = core.Property(
+        str,
+        get_completion_mode,
+        set_completion_mode,
+        doc="Completion mode for the widget",
+    )
 
 
 if __name__ == "__main__":

@@ -19,7 +19,12 @@ class IntLineEdit(widgets.LineEdit):
     def set_value(self, value: int | str):
         super().set_value(str(value))
 
-    value = core.Property(int, get_value, set_value)
+    value = core.Property(
+        int,
+        get_value,
+        set_value,
+        doc="Current Value as integer",
+    )
 
 
 class FloatLineEdit(widgets.LineEdit):
@@ -39,7 +44,12 @@ class FloatLineEdit(widgets.LineEdit):
     def set_value(self, value: float | str):
         super().set_value(str(value))
 
-    value = core.Property(float, get_value, set_value)
+    value = core.Property(
+        float,
+        get_value,
+        set_value,
+        doc="Current Value as float",
+    )
 
 
 class UrlLineEdit(widgets.LineEdit):
@@ -56,7 +66,12 @@ class UrlLineEdit(widgets.LineEdit):
     def set_value(self, value: core.QUrl | str):
         super().set_value(value.toString() if isinstance(value, core.QUrl) else value)
 
-    value = core.Property(core.QUrl, get_value, set_value)
+    value = core.Property(
+        core.QUrl,
+        get_value,
+        set_value,
+        doc="Current Value as QUrl",
+    )
 
 
 class StringListEdit(widgets.LineEdit):
@@ -76,7 +91,12 @@ class StringListEdit(widgets.LineEdit):
     def set_value(self, value: Sequence[str]):
         super().set_value(",".join(value))
 
-    value = core.Property(list, get_value, set_value)
+    value = core.Property(
+        list,
+        get_value,
+        set_value,
+        doc="Current Value as list",
+    )
 
 
 if __name__ == "__main__":

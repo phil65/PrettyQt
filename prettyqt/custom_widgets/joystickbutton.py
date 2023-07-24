@@ -55,8 +55,6 @@ class JoystickButton(widgets.PushButton):
         self._state = state
         self.state_changed.emit(self._state)
 
-    state = core.Property(tuple, get_state, set_state)
-
     def paintEvent(self, ev):
         super().paintEvent(ev)
         p = gui.QPainter(self)
@@ -66,6 +64,13 @@ class JoystickButton(widgets.PushButton):
     def resizeEvent(self, ev):
         self.set_state(self._state)
         super().resizeEvent(ev)
+
+    state = core.Property(
+        tuple,
+        get_state,
+        set_state,
+        doc="Button state.",
+    )
 
 
 if __name__ == "__main__":

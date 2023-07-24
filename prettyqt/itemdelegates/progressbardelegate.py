@@ -49,8 +49,18 @@ class ProgressBarDelegate(widgets.StyledItemDelegate):
     def get_role(self) -> constants.ItemDataRole:
         return self._role
 
-    total = core.Property(int, get_total, set_total)
-    role = core.Property(constants.ItemDataRole, get_role, set_role)
+    total = core.Property(
+        int,
+        get_total,
+        set_total,
+        doc="Total value for the progress bar",
+    )
+    role = core.Property(
+        constants.ItemDataRole,
+        get_role,
+        set_role,
+        doc="Role to use for the progress bar value",
+    )
 
 
 if __name__ == "__main__":

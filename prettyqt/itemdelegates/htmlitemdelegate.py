@@ -89,7 +89,12 @@ class MarkdownItemDelegate(BaseMarkupDelegate):
     def set_markup_mode(self, mode: str):
         self._mode = mode
 
-    markup_mode = core.Property(str, get_markup_mode, set_markup_mode)
+    markup_mode = core.Property(
+        str,
+        get_markup_mode,
+        set_markup_mode,
+        doc="Which markdown dialect to use.",
+    )
 
 
 if __name__ == "__main__":

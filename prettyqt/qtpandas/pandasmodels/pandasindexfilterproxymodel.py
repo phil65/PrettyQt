@@ -182,12 +182,42 @@ class PandasStringColumnFilterProxyModel(BasePandasIndexFilterProxyModel):
     def get_na_value(self) -> bool:
         return self._na_value
 
-    search_term = core.Property(str, get_search_term, set_search_term)
-    filter_column = core.Property(int, get_filter_column, set_filter_column)
-    filter_mode = core.Property(str, get_filter_mode, set_filter_mode)
-    case_sensitive = core.Property(bool, is_case_sensitive, set_case_sensitive)
-    re_flags = core.Property(int, get_flags, set_flags)
-    na_value = core.Property(bool, get_na_value, set_na_value)
+    search_term = core.Property(
+        str,
+        get_search_term,
+        set_search_term,
+        doc="Term to use for filtering",
+    )
+    filter_column = core.Property(
+        int,
+        get_filter_column,
+        set_filter_column,
+        doc="Column to use for filtering",
+    )
+    filter_mode = core.Property(
+        str,
+        get_filter_mode,
+        set_filter_mode,
+        doc="Filter mode",
+    )
+    case_sensitive = core.Property(
+        bool,
+        is_case_sensitive,
+        set_case_sensitive,
+        doc="Case sensitivity of the filter. Does not apply to start/endswith.",
+    )
+    re_flags = core.Property(
+        int,
+        get_flags,
+        set_flags,
+        doc="Regex Flags for match and contains mode",
+    )
+    na_value = core.Property(
+        bool,
+        get_na_value,
+        set_na_value,
+        doc="NA value",
+    )
 
 
 class PandasEvalFilterProxyModel(BasePandasIndexFilterProxyModel):
@@ -215,7 +245,12 @@ class PandasEvalFilterProxyModel(BasePandasIndexFilterProxyModel):
     def get_expression(self) -> str:
         return self._expression
 
-    expression = core.Property(str, get_expression, set_expression)
+    expression = core.Property(
+        str,
+        get_expression,
+        set_expression,
+        doc="Expression to use for filtering",
+    )
 
 
 class PandasMultiStringColumnFilterProxyModel(BasePandasIndexFilterProxyModel):
@@ -241,7 +276,12 @@ class PandasMultiStringColumnFilterProxyModel(BasePandasIndexFilterProxyModel):
     def get_filters(self) -> dict[str, str]:
         return self._filters
 
-    filters = core.Property(dict, get_filters, set_filters)
+    filters = core.Property(
+        dict,
+        get_filters,
+        set_filters,
+        doc="Dictionary containing a Column->EvalStr mapping",
+    )
 
 
 if __name__ == "__main__":

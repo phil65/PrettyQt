@@ -41,7 +41,12 @@ class PathValidator(gui.Validator):
     def get_mode(self) -> ModeStr:
         return self._mode
 
-    mode = core.Property(str, get_mode, set_mode)
+    mode = core.Property(
+        str,
+        get_mode,
+        set_mode,
+        doc="Whether text can be any, an existing file or an existing folder",
+    )
 
 
 if __name__ == "__main__":

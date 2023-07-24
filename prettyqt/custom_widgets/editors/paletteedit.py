@@ -21,7 +21,13 @@ class PaletteEdit(widgets.Widget):
     def set_value(self, value: gui.Palette):
         self._value = value
 
-    value = core.Property(gui.Palette, get_value, set_value, user=True)
+    value = core.Property(
+        gui.Palette,
+        get_value,
+        set_value,
+        user=True,
+        doc="Currently chosen palette",
+    )
 
 
 if __name__ == "__main__":

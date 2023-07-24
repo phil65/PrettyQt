@@ -37,7 +37,13 @@ class SizeEdit(widgets.Widget):
         self.spinbox_width.set_value(value.width())
         self.spinbox_height.set_value(value.height())
 
-    value = core.Property(core.Size, get_value, set_value, user=True)
+    value = core.Property(
+        core.Size,
+        get_value,
+        set_value,
+        user=True,
+        doc="Current value",
+    )
 
 
 if __name__ == "__main__":

@@ -72,8 +72,18 @@ class SelectedWordHighlighter(gui.SyntaxHighlighter):
         term = current_selection if current_selection == tc.selectedText() else ""
         self.set_selection_term(term)
 
-    selectionTerm = core.Property(str, get_selection_term, set_selection_term)
-    selectionMode = core.Property(str, get_selection_mode, set_selection_mode)
+    selectionTerm = core.Property(
+        str,
+        get_selection_term,
+        set_selection_term,
+        doc="String to highlight in the document",
+    )
+    selectionMode = core.Property(
+        str,
+        get_selection_mode,
+        set_selection_mode,
+        doc="Selection mode",
+    )
 
 
 if __name__ == "__main__":

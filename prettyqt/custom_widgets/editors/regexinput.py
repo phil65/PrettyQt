@@ -118,7 +118,13 @@ class RegexInput(widgets.Widget):
     def is_valid(self) -> bool:
         return self.lineedit.is_valid()
 
-    pattern = core.Property(str, get_pattern, set_pattern, user=True)
+    pattern = core.Property(
+        str,
+        get_pattern,
+        set_pattern,
+        user=True,
+        doc="Current pattern as text",
+    )
     # flags = core.Property(Flags, get_flags, set_flags)
 
 

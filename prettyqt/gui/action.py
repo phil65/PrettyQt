@@ -224,7 +224,11 @@ class ActionMixin(core.ObjectMixin):
     def show_shortcut_in_contextmenu(self, state: bool = True):
         self.setShortcutVisibleInContextMenu(state)
 
-    usage_count = core.Property(int, get_usage_count)
+    usage_count = core.Property(
+        int,
+        get_usage_count,
+        doc="How often the action was triggered",
+    )
 
 
 class Action(ActionMixin, gui.QAction):

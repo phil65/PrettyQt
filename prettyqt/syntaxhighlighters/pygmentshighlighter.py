@@ -295,7 +295,12 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         document.setHtml(html)
         return gui.TextCursor(document).charFormat()
 
-    style = core.Property(str, get_style, set_style)
+    style = core.Property(
+        str,
+        get_style,
+        set_style,
+        doc="Pygments style for the highlighter",
+    )
 
 
 if __name__ == "__main__":

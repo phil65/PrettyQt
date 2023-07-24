@@ -90,8 +90,18 @@ class ScrollAreaTocModel(itemmodels.TreeModel):
     def get_header_property(self) -> str:
         return self._header_property
 
-    highlight_font = core.Property(gui.QFont, get_highlight_font, set_highlight_font)
-    header_property = core.Property(str, get_header_property, set_header_property)
+    highlight_font = core.Property(
+        gui.QFont,
+        get_highlight_font,
+        set_highlight_font,
+        doc="Font to use for highlighting",
+    )
+    header_property = core.Property(
+        str,
+        get_header_property,
+        set_header_property,
+        doc="Property to use for the list labels",
+    )
 
 
 class ScrollMode(enum.Enum):
@@ -322,8 +332,18 @@ class ScrollAreaTocWidget(widgets.TreeView):
     def set_always_expanded(self, always_expanded: bool):
         self._always_expanded = always_expanded
 
-    scrollMode = core.Property(enum.Enum, _scrollMode, set_scroll_mode)
-    always_expanded = core.Property(bool, is_always_expanded, set_always_expanded)
+    scrollMode = core.Property(
+        enum.Enum,
+        _scrollMode,
+        set_scroll_mode,
+        doc="Scrolling mode",
+    )
+    always_expanded = core.Property(
+        bool,
+        is_always_expanded,
+        set_always_expanded,
+        doc="Whether the tree is always expanded.",
+    )
 
 
 if __name__ == "__main__":

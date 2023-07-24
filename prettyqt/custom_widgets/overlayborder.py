@@ -58,8 +58,18 @@ class BaseOverlayWidget(widgets.Widget):
         parent = self.parent()
         self.setGeometry(0, 0, parent.width(), parent.height())
 
-    border_color = core.Property(gui.QColor, get_border_color, set_border_color)
-    fill_color = core.Property(gui.QColor, get_fill_color, set_border_color)
+    border_color = core.Property(
+        gui.QColor,
+        get_border_color,
+        set_border_color,
+        doc="Color to use for the border",
+    )
+    fill_color = core.Property(
+        gui.QColor,
+        get_fill_color,
+        set_border_color,
+        doc="Color to use for filling",
+    )
 
 
 class OverlayBorder(BaseOverlayWidget):

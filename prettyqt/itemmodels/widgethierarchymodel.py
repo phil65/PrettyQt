@@ -180,7 +180,12 @@ class BaseHierarchyModel(itemmodels.TreeModel):
         default = super().flags(index)
         return (default | flag) if prop.isWritable() else default
 
-    base_class_name = core.Property(str, get_base_class_name, set_base_class)
+    base_class_name = core.Property(
+        str,
+        get_base_class_name,
+        set_base_class,
+        doc="Class to use for the columns.",
+    )
     # base_class = core.Property(type, get_base_class, set_base_class, stored=False)
 
 

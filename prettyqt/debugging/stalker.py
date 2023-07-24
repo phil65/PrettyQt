@@ -181,7 +181,12 @@ class Stalker(core.Object):
         widget.set_logger(logger, level=self.log_level)
         widget.show()
 
-    log_level = core.Property(int, get_log_level, set_log_level)
+    log_level = core.Property(
+        int,
+        get_log_level,
+        set_log_level,
+        doc="Level to use for logging",
+    )
 
 
 if __name__ == "__main__":

@@ -633,7 +633,12 @@ class FSSpecTreeModel(
     def filter(self):
         return NotImplemented
 
-    readOnly = core.Property(bool, isReadOnly, setReadOnly)
+    readOnly = core.Property(
+        bool,
+        isReadOnly,
+        setReadOnly,
+        doc="Used to set model to read-only",
+    )
 
 
 if __name__ == "__main__":

@@ -198,7 +198,12 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
     def get_window_icon_color(self):
         return self._window_icon_color
 
-    window_icon_color = core.Property(str, get_window_icon_color, set_window_icon_color)
+    window_icon_color = core.Property(
+        str,
+        get_window_icon_color,
+        set_window_icon_color,
+        doc="Global window icon color",
+    )
 
 
 class GuiApplication(GuiApplicationMixin, gui.QGuiApplication):

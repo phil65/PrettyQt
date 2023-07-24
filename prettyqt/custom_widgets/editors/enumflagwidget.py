@@ -82,7 +82,13 @@ class EnumFlagWidget(widgets.ToolButton):
         text = " | ".join(i.name for i in values) if values else self._enum_class(0).name
         self.set_text(text)
 
-    value = core.Property(enum.Flag, get_value, set_value, user=True)
+    value = core.Property(
+        enum.Flag,
+        get_value,
+        set_value,
+        user=True,
+        doc="Currently chosen value",
+    )
     # enumClass = core.Property(type(enum.Flag), get_enum_class, set_enum_class)
 
 
