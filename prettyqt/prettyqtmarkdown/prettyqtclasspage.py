@@ -4,7 +4,7 @@ import logging
 
 import mknodes
 
-from mknodes import utils
+from mknodes.utils import helpers
 
 from prettyqt import core, gui, itemmodels, prettyqtmarkdown, widgets
 from prettyqt.utils import classhelpers
@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 class PrettyQtClassPage(mknodes.MkClassPage):
     def _build(self):
         if qt_parent := classhelpers.get_qt_parent_class(self.klass):
-            self.append(f"Qt Base Class: {utils.link_for_class(qt_parent)}")
+            self.append(f"Qt Base Class: {helpers.link_for_class(qt_parent)}")
             self.append(f"Signature: `{qt_parent.__doc__}`")
         super()._build()
         if issubclass(self.klass, itemmodels.SliceIdentityProxyModel):

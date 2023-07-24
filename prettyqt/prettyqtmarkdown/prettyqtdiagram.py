@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 
-from mknodes import connectionbuilder
+from mknodes.utils import connectionbuilder
 
 from prettyqt import constants, core
 

@@ -8,7 +8,6 @@ from typing import Any
 import mknodes
 
 from prettyqt import core, itemmodels
-from prettyqt.utils import helpers
 
 
 logger = logging.getLogger(__name__)
@@ -52,8 +51,5 @@ class DependencyTable(ItemModelTable):
 
 
 if __name__ == "__main__":
-    page = mknodes.MkPage([])
-    page += mknodes.MkAdmonition("test")
-    page += mknodes.MkTable(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
-    page += mknodes.MkDocStrings(helpers, header="DocStrings")
-    page += DependencyTable("prettyqt")
+    table = DependencyTable("prettyqt")
+    print(table)
