@@ -20,29 +20,26 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 QT_MODULE_ATTR = "QT_MODULE"
 
 prettyqt.import_all()
-
+# import os
+# os.chdir(".docs/")
+# root_nav = mknodes.MkNav.from_file("SUMMARY.md", section=None
 root_nav = mknodes.MkNav(filename="somethingelse.md")
-qt_docs = root_nav.add_documentation(prettyqt, section_name="Qt Modules")
+qt_docs = root_nav.add_doc(prettyqt, section_name="qt_modules")
 # page = qt_docs.add_page("index")
 # table = mknodes.MkModuleTable(module=prettyqt, predicate=lambda x: hasattr(x, QT_MODULE_ATTR))
 # page += table
-extra_docs = root_nav.add_documentation(prettyqt, section_name="Additional Modules")
-extra_docs.add_module_overview()
+extra_docs = root_nav.add_doc(prettyqt, section_name="additional_modules")
 
 for submod in qt_docs.iter_modules(predicate=lambda x: hasattr(x, QT_MODULE_ATTR)):
-    subdoc = qt_docs.add_documentation(
-        submod, class_page=prettyqtmarkdown.PrettyQtClassPage
+    subdoc = qt_docs.add_doc(
+        submod, class_page=prettyqtmarkdown.PrettyQtClassPage, flatten_nav=True
     )
-    subdoc.add_module_overview()
-    for klass in subdoc.iter_classes():
-        subdoc.add_class_page(klass=klass, flatten=True)
+    subdoc.collect_classes()
 for submod in extra_docs.iter_modules(predicate=lambda x: not hasattr(x, QT_MODULE_ATTR)):
-    subdoc = extra_docs.add_documentation(
-        submod, class_page=prettyqtmarkdown.PrettyQtClassPage
+    subdoc = extra_docs.add_doc(
+        submod, class_page=prettyqtmarkdown.PrettyQtClassPage, flatten_nav=True
     )
-    subdoc.add_module_overview()
-    for klass in subdoc.iter_classes():
-        subdoc.add_class_page(klass=klass, flatten=True)
+    subdoc.collect_classes()
 
 # extra_docs.pretty_print()
 
