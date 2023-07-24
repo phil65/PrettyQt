@@ -28,14 +28,10 @@ class PropertyTable(mknodes.MkTable):
             if prop.get_name() == user_prop_name:
                 property_name += " *(User property)*"
             # if (flag := prop.get_enumerator()):
-
             meta_type = prop.get_meta_type()
-            property_type = f"**{(meta_type.get_name() or '').rstrip('*')}**"
-            sections: list[str] = [
-                property_name,
-                property_type,
-                "x" if prop.get_name() == user_prop_name else "",
-            ]
+            label = (meta_type.get_name() or "").rstrip("*")
+            mark = "x" if prop.get_name() == user_prop_name else ""
+            sections = [property_name, f"**{label}**", mark]
             lines.append(sections)
         super().__init__(columns=headers, data=list(zip(*lines)), header=header)
 
