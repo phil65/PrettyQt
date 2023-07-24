@@ -112,7 +112,7 @@ class SpanSlider(widgets.Slider):
         # pick the preferred handle on the first movement
         if self._first_movement:
             if self.lower_val == self.upper_val:
-                if new_pos < self.lower_value:
+                if new_pos < self.get_lower_value():
                     self._swap_controls()
                     self._first_movement = False
             else:
@@ -129,10 +129,10 @@ class SpanSlider(widgets.Slider):
                 self._swap_controls()
                 self.set_upper_pos(new_pos)
             case self.upper_pressed, "no_crossing":
-                new_pos = max(new_pos, self.lower_value)
+                new_pos = max(new_pos, self.get_lower_value())
                 self.set_upper_pos(new_pos)
             case self.upper_pressed, "no_overlap":
-                new_pos = max(new_pos, self.lower_value + 1)
+                new_pos = max(new_pos, self.get_lower_value() + 1)
                 self.set_upper_pos(new_pos)
             case self.upper_pressed, "free" if new_pos < self.lower_val:
                 self._swap_controls()
@@ -186,15 +186,13 @@ class SpanSlider(widgets.Slider):
             self.draw_handle(painter, "lower")
             self.draw_handle(painter, "upper")
 
-    @core.Property(float)
-    def lower_value(self) -> float:
+    def get_lower_value(self) -> float:
         return min(self.lower_val, self.upper_val)
 
     def set_lower_value(self, lower: float):
         self.set_span(lower, self.upper_val)
 
-    @core.Property(float)
-    def upper_value(self) -> float:
+    def get_upper_value(self) -> float:
         return max(self.lower_val, self.upper_val)
 
     def set_upper_value(self, upper: float):
@@ -469,6 +467,19 @@ class SpanSlider(widgets.Slider):
             slider_end - len_slider + 1 - slider_min,
             opt.upsideDown,
         )
+
+    lower_value = core.Property(
+        float,
+        get_lower_value,
+        set_lower_value,
+        doc="Lower value",
+    )
+    upper_value = core.Property(
+        float,
+        get_upper_value,
+        set_upper_value,
+        doc="Upper value",
+    )
 
 
 class SpanSliderWidget(widgets.Widget):
