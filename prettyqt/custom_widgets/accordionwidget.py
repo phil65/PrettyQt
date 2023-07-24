@@ -11,7 +11,7 @@ class AccordionItem(widgets.GroupBox):
         layout = self.set_layout("vertical", spacing=0, margin=6)
         layout.addWidget(widget)
         self._rollout_style = 2
-        self._drag_drop_mode = 0
+        self._dragdrop_enabled = False
         self.customContextMenuRequested.connect(self.show_menu)
         self._widget = widget
         self._collapsed = False
@@ -19,7 +19,7 @@ class AccordionItem(widgets.GroupBox):
         self._clicked = False
 
     def dragEnterEvent(self, event):
-        if not self._drag_drop_mode:
+        if not self._dragdrop_enabled:
             return
 
         source = event.source()
@@ -33,11 +33,11 @@ class AccordionItem(widgets.GroupBox):
     def get_drag_drop_rect(self) -> core.Rect:
         return core.Rect(self.width() - 25, 7, 10, 6)
 
-    def get_drag_drop_mode(self) -> AccordionWidget.RolloutStyle:
-        return self._drag_drop_mode
+    def is_dragdrop_enabled(self) -> bool:
+        return self._dragdrop_enabled
 
     def dragMoveEvent(self, event):
-        if not self._drag_drop_mode:
+        if not self._dragdrop_enabled:
             return
 
         source = event.source()
@@ -266,7 +266,7 @@ class AccordionItem(widgets.GroupBox):
                     self.title(),
                 )
 
-            if self.get_drag_drop_mode():
+            if self.is_dragdrop_enabled():
                 rect = self.get_drag_drop_rect()
 
                 # draw the lines
@@ -297,8 +297,8 @@ class AccordionItem(widgets.GroupBox):
     def setCollapsible(self, state: bool = True):
         self._collapsible = state
 
-    def set_drag_drop_mode(self, mode):
-        self._drag_drop_mode = mode
+    def set_dragdrop_enabled(self, mode):
+        self._dragdrop_enabled = mode
 
     def set_rollout_style(self, style):
         self._rollout_style = style
@@ -334,12 +334,6 @@ class AccordionWidget(widgets.ScrollArea):
         Square = 3
         Maya = 4
 
-    class DragDropMode(enum.IntEnum):
-        """Drag drop mode for the widget."""
-
-        NoDragDrop = 0
-        InternalMove = 1
-
     def __init__(self, *args, **kwargs):
         super().__init__(
             *args,
@@ -353,7 +347,7 @@ class AccordionWidget(widgets.ScrollArea):
         widget = widgets.Widget(self)
         # define custom properties
         self._rollout_style = self.RolloutStyle.Rounded
-        self._drag_drop_mode = self.DragDropMode.InternalMove
+        self._dragdrop_enabled = True
         self._scrolling = False
         self._scroll_init_y = 0
         self._scroll_init_val = 0
@@ -376,7 +370,7 @@ class AccordionWidget(widgets.ScrollArea):
         with self.updates_off():
             item = self._ItemClass(widget, title=title, parent=self)
             item.set_rollout_style(self.get_rollout_style())
-            item.set_drag_drop_mode(self.get_drag_drop_mode())
+            item.set_dragdrop_enabled(self.is_dragdrop_enabled())
             layout = self.widget().layout()
             if index is None:  # append if not specified index
                 index = layout.count() - 1
@@ -411,8 +405,8 @@ class AccordionWidget(widgets.ScrollArea):
     def count(self):
         return self.widget().layout().count() - 1
 
-    def get_drag_drop_mode(self) -> DragDropMode:
-        return self._drag_drop_mode
+    def is_dragdrop_enabled(self) -> bool:
+        return self._dragdrop_enabled
 
     def indexOf(self, widget):
         layout = self.widget().layout()
@@ -492,11 +486,11 @@ class AccordionWidget(widgets.ScrollArea):
             widget = layout.takeAt(index).widget()
             layout.insertWidget(index - 1, widget)
 
-    def set_drag_drop_mode(self, mode: DragDropMode):
-        self._drag_drop_mode = mode
+    def set_dragdrop_enabled(self, mode: bool):
+        self._dragdrop_enabled = mode
 
         for item in self.findChildren(AccordionItem):
-            item.set_drag_drop_mode(self._drag_drop_mode)
+            item.set_dragdrop_enabled(self._dragdrop_enabled)
 
     def set_item_class(self, item_class):
         self._ItemClass = item_class
@@ -521,8 +515,18 @@ class AccordionWidget(widgets.ScrollArea):
     def widgetAt(self, index):
         return item.widget() if (item := self.itemAt(index)) else None
 
-    rollout_style = core.Property(int, get_rollout_style, set_rollout_style)
-    dragdrop_mode = core.Property(int, get_drag_drop_mode, set_drag_drop_mode)
+    rollout_style = core.Property(
+        int,
+        get_rollout_style,
+        set_rollout_style,
+        doc="Rollout style",
+    )
+    dragdrop_enabled = core.Property(
+        bool,
+        is_dragdrop_enabled,
+        set_dragdrop_enabled,
+        doc="Whether drag&drop is possible.",
+    )
 
 
 if __name__ == "__main__":
