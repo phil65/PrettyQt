@@ -13,7 +13,7 @@ from prettyqt.qt.QtCore import (
     qInstallMessageHandler as install_message_handler,
     QtMsgType as MsgType,
     Signal,
-    Property,
+    # Property,
     QEnum as Enum,
     QPoint as Point,
     QPointF as PointF,
@@ -31,7 +31,7 @@ from prettyqt.qt.QtCore import (
 from .event import Event
 from .slot import Slot
 
-# from .property import Property
+from .property import Property
 from .loggingcategory import LoggingCategory
 from .timezone import TimeZone
 from .date import Date
