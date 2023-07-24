@@ -1,3 +1,17 @@
+## v1.56.0 (2023-07-25)
+
+### Feat
+
+- use Property info for docs
+- Globber for ItemModels
+- add TupleTreeModel
+- **ProgressBarDelegate**: make total and role a Property
+
+### Fix
+
+- **FilterHeader**: prevent name clash
+- **Widget**: add missing Mixin
+
 ## v1.55.0 (2023-07-13)
 
 ### Feat
