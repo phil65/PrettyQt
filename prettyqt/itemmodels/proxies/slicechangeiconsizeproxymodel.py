@@ -62,7 +62,12 @@ class SliceChangeIconSizeProxyModel(itemmodels.SliceIdentityProxyModel):
     def get_icon_size(self) -> core.QSize:
         return self._size
 
-    icon_size = core.Property(core.QSize, get_icon_size, set_icon_size)
+    icon_size = core.Property(
+        core.QSize,
+        get_icon_size,
+        set_icon_size,
+        doc="New icon size",
+    )
 
 
 if __name__ == "__main__":

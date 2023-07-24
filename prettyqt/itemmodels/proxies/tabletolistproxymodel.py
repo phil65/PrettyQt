@@ -80,7 +80,12 @@ class TableToListProxyModel(core.IdentityProxyModel):
     def get_header_title(self) -> str:
         return self._header_title
 
-    header_title = core.Property(str, get_header_title, set_header_title)
+    header_title = core.Property(
+        str,
+        get_header_title,
+        set_header_title,
+        doc="Column header for resulting column",
+    )
 
 
 if __name__ == "__main__":

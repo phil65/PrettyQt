@@ -88,10 +88,23 @@ class AnnotatedScrollBar(widgets.ScrollBar):
         return self._document_length
 
     annotation_color = core.Property(
-        gui.QColor, get_annotation_color, set_annotation_color
+        gui.QColor,
+        get_annotation_color,
+        set_annotation_color,
+        doc="Color for the annotated regions",
     )
-    annotations = core.Property(list, get_annotations, set_annotations)
-    document_length = core.Property(int, get_document_length, set_document_length)
+    annotations = core.Property(
+        list,
+        get_annotations,
+        set_annotations,
+        doc="Current set of annotations",
+    )
+    document_length = core.Property(
+        int,
+        get_document_length,
+        set_document_length,
+        doc="Total document length",
+    )
 
 
 if __name__ == "__main__":

@@ -53,9 +53,17 @@ class SliceChangeFlagsProxyModel(itemmodels.SliceIdentityProxyModel):
     def get_flags_to_remove(self) -> constants.ItemFlag:
         return self._flags_to_remove
 
-    flags_to_add = core.Property(constants.ItemFlag, get_flags_to_add, set_flags_to_add)
+    flags_to_add = core.Property(
+        constants.ItemFlag,
+        get_flags_to_add,
+        set_flags_to_add,
+        doc="Flags to set",
+    )
     flags_to_remove = core.Property(
-        constants.ItemFlag, get_flags_to_remove, set_flags_to_remove
+        constants.ItemFlag,
+        get_flags_to_remove,
+        set_flags_to_remove,
+        doc="Flags to unset",
     )
 
 

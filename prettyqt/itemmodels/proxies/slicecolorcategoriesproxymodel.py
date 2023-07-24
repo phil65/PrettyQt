@@ -103,10 +103,20 @@ class SliceColorCategoriesProxyModel(itemmodels.SliceIdentityProxyModel):
             self.color_generator = itertools.cycle(gui.Palette().iter_colors())
             self._cast_to_str = val
 
-    color_none = core.Property(bool, is_none_colored, set_none_colored)
+    color_none = core.Property(
+        bool,
+        is_none_colored,
+        set_none_colored,
+        doc="Whether None-values should also get colored",
+    )
     """Color ItemData with value `None`."""
 
-    cast_to_str = core.Property(bool, is_casted_to_str, set_cast_to_str)
+    cast_to_str = core.Property(
+        bool,
+        is_casted_to_str,
+        set_cast_to_str,
+        doc="Cast values to string in order to color / group them",
+    )
     """Cast all values to a string for deciding whether cells are in same category."""
 
 

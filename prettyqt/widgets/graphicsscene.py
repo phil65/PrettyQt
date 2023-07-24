@@ -361,9 +361,24 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
         """
         return ITEM_INDEX_METHOD.inverse[self.itemIndexMethod()]
 
-    bg_color = core.Property(gui.QColor, get_background_color, set_background_color)
-    grid_color = core.Property(gui.QColor, get_grid_color, set_grid_color)
-    grid_mode = core.Property(int, get_grid_mode, set_grid_mode)
+    bg_color = core.Property(
+        gui.QColor,
+        get_background_color,
+        set_background_color,
+        doc="Color for the scene background",
+    )
+    grid_color = core.Property(
+        gui.QColor,
+        get_grid_color,
+        set_grid_color,
+        doc="Color for the grid",
+    )
+    grid_mode = core.Property(
+        int,
+        get_grid_mode,
+        set_grid_mode,
+        doc="Grid mode",
+    )
 
 
 if __name__ == "__main__":

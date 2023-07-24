@@ -42,7 +42,13 @@ class ValueFilterProxyModel(core.SortFilterProxyModel):
         """Get the filter value."""
         return self._filter_value
 
-    filter_value = core.Property(object, get_filter_value, set_filter_value, user=True)
+    filter_value = core.Property(
+        object,
+        get_filter_value,
+        set_filter_value,
+        user=True,
+        doc="Value to use for filtering",
+    )
 
 
 if __name__ == "__main__":

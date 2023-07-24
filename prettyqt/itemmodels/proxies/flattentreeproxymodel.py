@@ -142,8 +142,18 @@ class FlattenTreeProxyModel(core.AbstractProxyModel):
         with self.reset_model():
             self._update_mapping()
 
-    leaves_only = core.Property(bool, is_leaves_only, set_leaves_only)
-    show_path = core.Property(bool, is_path_shown, set_show_path)
+    leaves_only = core.Property(
+        bool,
+        is_leaves_only,
+        set_leaves_only,
+        doc="Whether to only show the tree leaves",
+    )
+    show_path = core.Property(
+        bool,
+        is_path_shown,
+        set_show_path,
+        doc="Show the complete path in first column",
+    )
 
 
 if __name__ == "__main__":

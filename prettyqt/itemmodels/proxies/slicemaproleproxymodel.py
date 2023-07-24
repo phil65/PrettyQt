@@ -62,7 +62,12 @@ class SliceMapRoleProxyModel(itemmodels.SliceIdentityProxyModel):
     def get_mapping(self) -> Mapping[constants.ItemDataRole, constants.ItemDataRole]:
         return self._mapping
 
-    mapping = core.Property(dict, get_mapping, set_mapping)
+    mapping = core.Property(
+        dict,
+        get_mapping,
+        set_mapping,
+        doc="Mapping of ItemRoles",
+    )
 
 
 if __name__ == "__main__":

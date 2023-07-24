@@ -97,10 +97,30 @@ class SliceAppearanceProxyModel(itemmodels.SliceIdentityProxyModel):
     def get_alignment(self) -> constants.AlignmentFlag:
         return self._alignment
 
-    font_value = core.Property(gui.QFont, get_font, set_font)
-    foreground_value = core.Property(gui.QColor, get_foreground, set_foreground)
-    background_value = core.Property(gui.QColor, get_background, set_background)
-    alignment_value = core.Property(constants.AlignmentFlag, get_alignment, set_alignment)
+    font_value = core.Property(
+        gui.QFont,
+        get_font,
+        set_font,
+        doc="Font to use for overriding",
+    )
+    foreground_value = core.Property(
+        gui.QColor,
+        get_foreground,
+        set_foreground,
+        doc="Foreground to use for overriding",
+    )
+    background_value = core.Property(
+        gui.QColor,
+        get_background,
+        set_background,
+        doc="Background to use for overriding",
+    )
+    alignment_value = core.Property(
+        constants.AlignmentFlag,
+        get_alignment,
+        set_alignment,
+        doc="Alignment to use for overriding",
+    )
 
 
 if __name__ == "__main__":

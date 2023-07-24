@@ -149,9 +149,24 @@ class SliceColorValuesProxyModel(itemmodels.SliceIdentityProxyModel):
     def get_color_mode(self) -> SliceColorValuesProxyModel.ColorMode:
         return self._mode
 
-    color_mode = core.Property(ColorMode, get_color_mode, set_color_mode)
-    low_color = core.Property(gui.QColor, get_low_color, set_low_color)
-    high_color = core.Property(gui.QColor, get_high_color, set_high_color)
+    color_mode = core.Property(
+        ColorMode,
+        get_color_mode,
+        set_color_mode,
+        doc="Mode to use for coloring",
+    )
+    low_color = core.Property(
+        gui.QColor,
+        get_low_color,
+        set_low_color,
+        doc="Color for lower end of color spectrum",
+    )
+    high_color = core.Property(
+        gui.QColor,
+        get_high_color,
+        set_high_color,
+        doc="Color for upper end of color spectrum",
+    )
 
 
 if __name__ == "__main__":

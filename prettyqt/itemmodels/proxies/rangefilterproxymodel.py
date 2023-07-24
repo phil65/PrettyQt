@@ -50,8 +50,18 @@ class RangeFilterProxyModel(core.SortFilterProxyModel):
     def get_range(self) -> tuple[float | int | None, float | int | None]:
         return (self._min_value, self._max_value)
 
-    min_value = core.Property(float, get_min_value, set_min_value)
-    max_value = core.Property(float, get_max_value, set_max_value)
+    min_value = core.Property(
+        float,
+        get_min_value,
+        set_min_value,
+        doc="Minimum allowed value",
+    )
+    max_value = core.Property(
+        float,
+        get_max_value,
+        set_max_value,
+        doc="Maximum allowed value",
+    )
 
 
 if __name__ == "__main__":

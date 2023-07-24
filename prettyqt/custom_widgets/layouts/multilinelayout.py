@@ -97,7 +97,12 @@ class MultiLineLayout(widgets.BoxLayout):
     def get_sub_layout_type(self) -> str:
         return self._sub_layout_type
 
-    sub_layout_type = core.Property(str, get_sub_layout_type, set_sub_layout_type)
+    sub_layout_type = core.Property(
+        str,
+        get_sub_layout_type,
+        set_sub_layout_type,
+        doc="Layout for the sub layouts",
+    )
 
 
 if __name__ == "__main__":

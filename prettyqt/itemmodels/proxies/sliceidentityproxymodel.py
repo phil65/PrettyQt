@@ -168,8 +168,18 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
         sl = self.get_row_slice()
         return (sl.start, sl.stop, sl.step)
 
-    column_slice = core.Property(list, get_column_tuple, set_column_slice)
-    row_slice = core.Property(list, get_row_tuple, set_column_slice)
+    column_slice = core.Property(
+        list,
+        get_column_tuple,
+        set_column_slice,
+        doc="Column slice to include for the proxy",
+    )
+    row_slice = core.Property(
+        list,
+        get_row_tuple,
+        set_column_slice,
+        doc="Row slice to include for the proxy",
+    )
 
 
 if __name__ == "__main__":

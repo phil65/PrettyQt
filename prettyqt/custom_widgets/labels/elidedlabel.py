@@ -27,8 +27,6 @@ class ElidedLabel(widgets.Frame):
     def get_text(self) -> str:
         return self._text
 
-    elided_text = core.Property(str, get_text, set_text)
-
     def paintEvent(self, event):
         super().paintEvent(event)
         with gui.Painter(self) as painter:
@@ -62,6 +60,8 @@ class ElidedLabel(widgets.Frame):
             if did_elide != self.elided:
                 self.elided = did_elide
                 self.elision_changed.emit(did_elide)
+
+    elided_text = core.Property(str, get_text, set_text, doc="Unelided text")
 
     # def paintEvent(self, event):
     #     painter = gui.Painter(self)

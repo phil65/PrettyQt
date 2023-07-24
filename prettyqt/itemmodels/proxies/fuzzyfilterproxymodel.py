@@ -112,8 +112,18 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
             case _, _:
                 return super().data(index, role)
 
-    search_term = core.Property(str, get_search_term, set_search_term)
-    match_color = core.Property(gui.QColor, get_match_color, set_match_color)
+    search_term = core.Property(
+        str,
+        get_search_term,
+        set_search_term,
+        doc="Current search term",
+    )
+    match_color = core.Property(
+        gui.QColor,
+        get_match_color,
+        set_match_color,
+        doc="Color to use for match coloring",
+    )
 
 
 if __name__ == "__main__":

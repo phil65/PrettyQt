@@ -126,13 +126,36 @@ class SliceHighlightCurrentProxyModel(itemmodels.SliceIdentityProxyModel):
             return self._highlight_color
         return super().data(index, role)
 
-    highlightMode = core.Property(str, get_highlight_mode, set_highlight_mode)
-    highlightColor = core.Property(QtGui.QColor, get_highlight_color, set_highlight_color)
-    highlightRole = core.Property(
-        constants.ItemDataRole, get_highlight_role, set_highlight_role
+    highlightMode = core.Property(
+        str,
+        get_highlight_mode,
+        set_highlight_mode,
+        doc="Highlight mode",
     )
-    highlight_column = core.Property(int, get_highlight_column, set_highlight_column)
-    highlight_row = core.Property(int, get_highlight_row, set_highlight_row)
+    highlightColor = core.Property(
+        QtGui.QColor,
+        get_highlight_color,
+        set_highlight_color,
+        doc="Color to use for highlighting",
+    )
+    highlightRole = core.Property(
+        constants.ItemDataRole,
+        get_highlight_role,
+        set_highlight_role,
+        doc="ItemRole to use for highlighting",
+    )
+    highlight_column = core.Property(
+        int,
+        get_highlight_column,
+        set_highlight_column,
+        doc="Currently highlighted column",
+    )
+    highlight_row = core.Property(
+        int,
+        get_highlight_row,
+        set_highlight_row,
+        doc="Currently highlighted row",
+    )
 
 
 if __name__ == "__main__":
