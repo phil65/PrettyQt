@@ -3,7 +3,7 @@ name = "PrettyQt"
 version = "1.55.0"
 description = "A pythonic layer on top of PyQt6 / PySide6"
 readme = 'docs/index.md'
-python-requires = ">=3.10"
+requires-python = ">=3.10"
 license = "MIT"
 authors = [
   { name = "Philipp Temminghoff", email = "philipptemminghoff@gmail.com" },
