@@ -10,3 +10,6 @@ RE_LEXER_PATH = (
     ROOT_PATH / "syntaxhighlighters" / "pygments" / "regularexpressionlexer.py"
 )
 ICON_FONT_PATH = ROOT_PATH / "iconprovider" / "fonts"
+
+DOCS_PATH = ROOT_PATH.parent / "docs"
+INV_FILE = DOCS_PATH / "qt6.inv"
