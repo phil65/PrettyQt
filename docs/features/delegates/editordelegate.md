@@ -1,1 +1,0 @@
-::: prettyqt.itemdelegates.EditorDelegate

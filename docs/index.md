@@ -110,9 +110,38 @@ The aim is to support the last two released Python versions as well as keeping s
 
 ## Covered Qt modules
 
-{%
-   include-markdown "module_overview.md"
-%}
+| Qt Module           | PrettyQt module            |
+|---------------------|----------------------------|
+| QtBluetooth         | [prettyqt.bluetooth](bluetooth.md)         |
+| QtCharts            | [prettyqt.charts](charts.md)            |
+| QtCore              | [prettyqt.core](core.md)              |
+| QtDesigner          | [prettyqt.designer](designer.md)          |
+| QtGui               | [prettyqt.gui](gui.md)               |
+| QtLocation          | [prettyqt.location](location.md)          |
+| QtMultimedia        | [prettyqt.multimedia](multimedia.md)        |
+| QtMultimediaWidgets | [prettyqt.multimediawidgets](multimediawidgets.md) |
+| QtNetwork           | [prettyqt.network](network.md)           |
+| QtOpenGLWidgets     | [prettyqt.openglwidgets](openglwidgets.md)     |
+| QtPdf               | [prettyqt.pdf](pdf.md)               |
+| QtPdfWidgets        | [prettyqt.pdfwidgets](pdfwidgets.md)        |
+| QtPositioning       | [prettyqt.positioning](positioning.md)       |
+| QtPrintSupport      | [prettyqt.printsupport](printsupport.md)      |
+| QtQml               | [prettyqt.qml](qml.md)               |
+| QtHelp              | [prettyqt.qthelp](qthelp.md)            |
+| QtQuick             | [prettyqt.quick](quick.md)             |
+| QtQuickWidgets      | [prettyqt.quickwidgets](quickwidgets.md)      |
+| QScintilla          | [prettyqt.scintilla](scintilla.md)         |
+| QtScXml             | [prettyqt.scxml](scxml.md)             |
+| QtSpatialAudio      | [prettyqt.spatialaudio](spatialaudio.md)      |
+| QtStateMachine      | [prettyqt.statemachine](statemachine.md)      |
+| QtSvg               | [prettyqt.svg](svg.md)               |
+| QtSvgWidgets        | [prettyqt.svgwidgets](svgwidgets.md)        |
+| QtTest              | [prettyqt.test](test.md)              |
+| QtTextToSpeech      | [prettyqt.texttospeech](texttospeech.md)      |
+| QtWebChannel        | [prettyqt.webchannel](webchannel.md)        |
+| QtWebEngineCore     | [prettyqt.webenginecore](webenginecore.md)     |
+| QtWebEngineWidgets  | [prettyqt.webenginewidgets](webenginewidgets.md)  |
+| QtWidgets           | [prettyqt.widgets](api/widgets.md)           |
 
 [Read more](general.md) about the general API design.
 
