@@ -13,6 +13,48 @@ class SliceChangeIconSizeProxyModel(itemmodels.SliceIdentityProxyModel):
     """Proxy model which changes the icon size of the Decoration role.
 
     Supports QColors, QPixmaps and QIcons in DecorationRole.
+
+    ### Example
+
+    ```py
+    model = MyModel()
+    table = widgets.TreeView()
+    table.set_model(model)
+    table[0].proxify.change_icon_size(size=20)
+    table.show()
+    # or
+    proxy = itemmodels.SliceFilterProxyModel(indexer=0, size=20)
+    proxy.set_source_model(model)
+    table.set_model(proxy)
+    table.show()
+    ```
+
+    === "Without proxy"
+
+        ```py
+        table = widgets.TreeView()
+        source_model = widgets.FileSystemModel()
+        ...
+        table.set_model(source_model)
+        # table.proxifier.change_icon_size(size=(30, 30))
+        ```
+        <figure markdown>
+          ![Image title](../../images/slicechangeiconsizeproxymodel_before.png)
+        </figure>
+
+    === "With proxy"
+
+        ```py
+        table = widgets.TreeView()
+        source_model = widgets.FileSystemModel()
+        ...
+        table.set_model(source_model)
+        table.proxifier.change_icon_size(size=(30, 30))
+        ```
+        <figure markdown>
+          ![Image title](../../images/slicechangeiconsizeproxymodel_after.png)
+        </figure>
+
     """
 
     ID = "change_icon_size"

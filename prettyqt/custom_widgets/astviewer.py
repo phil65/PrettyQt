@@ -10,6 +10,21 @@ logger = logging.getLogger(__name__)
 
 
 class AstViewer(widgets.Splitter):
+    """Widget which displays an AST Tree next to the corresponding source code.
+
+    Selecting a node in the tree will highlight the corresponing text section in source.
+
+    ``` py
+    widget = custom_widgets.AstViewer()
+    widget.show()
+    ```
+
+    <figure markdown>
+      ![Image title](../../images/astviewer.png)
+      <figcaption>AstViewer widget</figcaption>
+    </figure>
+    """
+
     def __init__(
         self,
         object_name="ast_viewer",

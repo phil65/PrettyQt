@@ -17,6 +17,10 @@ class SubsetFilterProxyModel(core.SortFilterProxyModel):
     table.set_model(proxy)
     table.show()
     ```
+
+    !!! note
+        If you only need filtering based on slices or a single column / row,
+        the SliceFilterProxymodel should be preferred for performance reasons.
     """
 
     ID = "subset"

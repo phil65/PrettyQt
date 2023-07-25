@@ -9,7 +9,81 @@ logger = logging.getLogger(__name__)
 
 
 class SliceChangeFlagsProxyModel(itemmodels.SliceIdentityProxyModel):
-    """Proxy model to selectively change the ItemFlags of the source model."""
+    """Proxy model to selectively change the ItemFlags of the source model.
+
+    === "Without proxy"
+
+        ```py
+        table = widgets.TreeView()
+        data = dict(
+            first=["John", "Mary"],
+            last=["Doe", "Bo"],
+            height=[5.5, 6.0],
+            weight=[130, 150],
+        )
+        source_model = gui.StandardItemModel.from_dict(data)
+        table.set_model(source_model)
+        # table.proxifier.change_flags(enabled=False)
+        ```
+        <figure markdown>
+          ![Image title](../../images/slicechangeflagsproxymodel_before.png)
+        </figure>
+
+    === "With proxy"
+
+        ```py
+        table = widgets.TreeView()
+        data = dict(
+            first=["John", "Mary"],
+            last=["Doe", "Bo"],
+            height=[5.5, 6.0],
+            weight=[130, 150],
+        )
+        source_model = gui.StandardItemModel.from_dict(data)
+        table.set_model(source_model)
+        table.proxifier.change_flags(enabled=False)
+        ```
+        <figure markdown>
+          ![Image title](../../images/slicechangeflagsproxymodel_after.png)
+        </figure>
+
+
+    Supports changing all ItemRoles by passing keyword arguments.
+
+    Possible keyword arguments:
+
+    * `selectable`: ItemFlag.ItemIsSelectable,
+    * `editable`: ItemFlag.ItemIsEditable,
+    * `drag_enabled`: ItemFlag.ItemIsDragEnabled,
+    * `drop_enabled`: ItemFlag.ItemIsDropEnabled,
+    * `user_checkable`: ItemFlag.ItemIsUserCheckable,
+    * `enabled`: ItemFlag.ItemIsEnabled,
+    * `auto_tristate`: ItemFlag.ItemIsAutoTristate,
+    * `never_has_children`: ItemFlag.ItemNeverHasChildren,
+    * `user_tristate`: ItemFlag.ItemIsUserTristate,
+
+
+
+    ### Example
+
+    ```py
+    model = MyModel()
+    table = widgets.TableView()
+    table.set_model(model)
+    table.proxifier[::2, 2:].change_flags(readable=False)
+    table.show()
+    ```
+
+    or
+
+    ```py
+    indexer = (slice(None, None, 2), slice(2, None))
+    proxy = itemmodels.SliceChangeFlagsProxyModel(indexer=indexer, readable=False)
+    proxy.set_source_model(model)
+    table.set_model(proxy)
+    table.show()
+    ```
+    """
 
     ID = "change_flags"
     ICON = "mdi.flag"

@@ -136,39 +136,37 @@ class SubClassTreeModel(BaseClassTreeModel):
 class ParentClassTreeModel(BaseClassTreeModel):
     """Tree model to display the parent class tree of a python class.
 
-    !!! Example "Class hierarchy example"
+    === "Parentclass tree"
 
-        === "Parentclass tree"
+        ```py
+        from prettyqt import itemmodels, widgets
 
-            ```py
-            from prettyqt import itemmodels, widgets
+        app = widgets.app()
+        widget = widgets.TreeView()
+        model = itemmodels.ParentClassTreeModel(widgets.TreeWidget)
+        widget.set_model(model)
+        widget.show()
+        ```
 
-            app = widgets.app()
-            widget = widgets.TreeView()
-            model = itemmodels.ParentClassTreeModel(widgets.TreeWidget)
-            widget.set_model(model)
-            widget.show()
-            ```
+        <figure markdown>
+          ![Image title](treewidget_parentclasses.png)
+        </figure>
 
-            <figure markdown>
-              ![Image title](treewidget_parentclasses.png)
-            </figure>
+    === "MRO tree"
 
-        === "MRO tree"
+        ```py
+        from prettyqt import itemmodels, widgets
 
-            ```py
-            from prettyqt import itemmodels, widgets
+        app = widgets.app()
+        widget = widgets.TreeView()
+        model = itemmodels.ParentClassTreeModel(widgets.TreeWidget, mro=True)
+        widget.set_model(model)
+        widget.show()
+        ```
 
-            app = widgets.app()
-            widget = widgets.TreeView()
-            model = itemmodels.ParentClassTreeModel(widgets.TreeWidget, mro=True)
-            widget.set_model(model)
-            widget.show()
-            ```
-
-            <figure markdown>
-              ![Image title](treewidget_mro.png)
-            </figure>
+        <figure markdown>
+          ![Image title](treewidget_mro.png)
+        </figure>
     """
 
     SUPPORTS = type

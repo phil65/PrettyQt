@@ -28,6 +28,10 @@ class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
     based on several columns. That way it is less demanding since filtering
     for all columns is done in one go.
 
+    This model is used by the [FilterHeader](filterheader.md) widget in order to filter
+    a table in one go, avoiding the need to layer multiple proxy models.
+
+
     ### Example
 
     ```py

@@ -11,7 +11,9 @@ from prettyqt.utils import classhelpers
 
 
 SLICE_PROXY_INFO = """This is a [slice proxy](SliceIdentityProxyModel.md)
-and can be selectively applied to a model."""
+and can be selectively applied to a model. Read more about
+ [slices](https://docs.python.org/3/library/functions.html#slice)."""
+
 RECURSIVE_MODEL_INFO = "Model can be recursive, so be careful with iterating whole tree."
 
 logger = logging.getLogger(__name__)

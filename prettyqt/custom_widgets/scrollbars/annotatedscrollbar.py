@@ -9,7 +9,19 @@ SubControl = widgets.QStyle.SubControl
 
 
 class AnnotatedScrollBar(widgets.ScrollBar):
-    """ScrollBar which can highlight user-defined ranges."""
+    r"""ScrollBar which can highlight user-defined ranges.
+
+    ``` py
+    widget = widgets.PlainTextEdit("\n".join(str(i) for i in range(1000)))
+    widget.v_scrollbar = AnnotatedScrollBar(constants.VERTICAL)
+    widget.v_scrollbar.set_annotations([(10, 20), (50, 60), (82, 85)])
+    ```
+
+    <figure markdown>
+      ![Image title](../../images/annotatedscrollbar.png)
+      <figcaption>Annotated ScrollBar</figcaption>
+    </figure>
+    """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

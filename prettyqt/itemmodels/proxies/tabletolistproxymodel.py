@@ -9,6 +9,46 @@ class TableToListProxyModel(core.IdentityProxyModel):
     Reshapes a table by concatenating all columns into one large column,
     so that the new rowCount equals to sourceModel rowCount * sourceModel columnCount.
     If a verticalHeader is available, it will show the original position of the cell.
+
+    === "Without proxy"
+
+        ```py
+        data = dict(
+            first=["John", "Mary"],
+            last=["Doe", "Bo"],
+            height=[5.5, 6.0],
+            weight=[130, 150],
+        )
+        model = gui.StandardItemModel.from_dict(data)
+        table = widgets.TableView()
+        table.set_model(model)
+        # table.proxifier.to_list()
+        table.show()
+
+        ```
+        <figure markdown>
+          ![Image title](../../images/tabletolistproxymodel_before.png)
+        </figure>
+
+    === "With proxy"
+
+        ```py
+        data = dict(
+            first=["John", "Mary"],
+            last=["Doe", "Bo"],
+            height=[5.5, 6.0],
+            weight=[130, 150],
+        )
+        model = gui.StandardItemModel.from_dict(data)
+        table = widgets.TableView()
+        table.set_model(model)
+        table.proxifier.to_list()
+        table.show()
+        ```
+        <figure markdown>
+          ![Image title](../../images/tabletolistproxymodel_after.png)
+        </figure>
+
     """
 
     ID = "table_to_list"

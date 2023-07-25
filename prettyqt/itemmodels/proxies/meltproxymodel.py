@@ -12,6 +12,55 @@ class MeltProxyModel(core.AbstractProxyModel):
     """Proxy model to unpivot a table from wide format to long format.
 
     Works same way as [pandas.melt](https://shorturl.at/bhGI3).
+
+    === "Without proxy"
+
+        ```py
+        app = widgets.app()
+        data = dict(
+            first=["John", "Mary"],
+            last=["Doe", "Bo"],
+            height=[5.5, 6.0],
+            weight=[130, 150],
+        )
+        model = gui.StandardItemModel.from_dict(data)
+        table = widgets.TableView()
+        table.set_model(model)
+        # table.proxifier.melt(id_columns=[0, 1])
+        table.show()
+
+        ```
+        <figure markdown>
+          ![Image title](../../images/meltproxymodel_before.png)
+        </figure>
+
+    === "With proxy"
+
+        ```py
+        app = widgets.app()
+        data = dict(
+            first=["John", "Mary"],
+            last=["Doe", "Bo"],
+            height=[5.5, 6.0],
+            weight=[130, 150],
+        )
+        model = gui.StandardItemModel.from_dict(data)
+        table = widgets.TableView()
+        table.set_model(model)
+        table.proxifier.melt(id_columns=[0, 1])
+        table.show()
+        ```
+        <figure markdown>
+          ![Image title](../../images/meltproxymodel_after.png)
+        </figure>
+
+    ```py
+    table.proxifier.melt(id_columns=[0, 1])
+    # equals
+    proxy = itemmodels.MeltProxyModel(id_columns=[0, 1])
+    proxy.set_source_model(table.model())
+    table.set_model(proxy)
+    ```
     """
 
     ID = "melt"
