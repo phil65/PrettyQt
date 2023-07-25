@@ -140,9 +140,11 @@ pip install prettyqt
 
 ## Dependencies
 
-{%
-   include-markdown "dependency_table.md"
-%}
+```python exec="on"
+from prettyqt import prettyqtmarkdown
+table = prettyqtmarkdown.DependencyTable("prettyqt")
+print(table)
+```
 
 ## Installation from sources
 

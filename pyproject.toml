@@ -83,7 +83,8 @@ docs = [
     "mkdocs-glightbox",
     "mkdocs-section-index",
     "mkdocs-gen-files",
-    "mkdocs-macros-plugin",
+    "markdown-exec",
+    # "mkdocs-macros-plugin",
 ]
 
 addons = [
@@ -134,10 +135,11 @@ dependencies = [
     "pymdown-extensions",
     "mkdocs-glightbox",
     # "mkdocs-autorefs",
+    "markdown-exec",
     "mkdocs-include-markdown-plugin",
     "mkdocs-section-index",
     "mkdocs-gen-files",
-    "mkdocs-macros-plugin",
+    # "mkdocs-macros-plugin",
 ]
 
 [envs.default.scripts]
@@ -276,7 +278,8 @@ mkdocstrings = {version = "^0", extras = ["python"]}
 mkdocs-glightbox = "*"
 mkdocs-include-markdown-plugin = {version = "^4", python = "<3.12"}
 mkdocs-section-index = "^0.3.5"
-mkdocs-macros-plugin = "^1"
+# mkdocs-macros-plugin = "^1"
+markdown-exec = "*"
 mkdocs-literate-nav = "^0.6.0"
 mkdocs-gen-files = "^0.5.0"
 
