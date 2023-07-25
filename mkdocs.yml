@@ -67,6 +67,8 @@ plugins:
           domains: [std, py]
         - url: https://docs.python-requests.org/en/master/objects.inv
           domains: [std, py]
+        - url: https://phil65.github.io/mknodes/objects.inv
+          domains: [std, py]
         options:
           # https://mkdocstrings.github.io/python/usage/
           show_docstring_returns: false
