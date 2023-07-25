@@ -1,3 +1,9 @@
+## v1.56.2 (2023-07-25)
+
+### Fix
+
+- longer timeout when building docs
+
 ## v1.56.1 (2023-07-25)
 
 ### Fix
