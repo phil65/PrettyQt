@@ -26,6 +26,10 @@ class FaderWidget(widgets.Widget):
         self.resize(new_widget.size())
         self.show()
 
+    @classmethod
+    def setup_example(cls):
+        return None
+
     def paintEvent(self, event):
         with gui.Painter(self) as painter:
             painter.setOpacity(self.pixmap_opacity)
