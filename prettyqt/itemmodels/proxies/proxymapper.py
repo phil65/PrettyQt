@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 
 from prettyqt import core
+from prettyqt.utils import modelhelpers
 
 
 logger = logging.getLogger(__name__)
@@ -24,14 +25,6 @@ MERMAID = """
       }
     ```
 """
-
-
-def get_proxy_chain(model: core.QAbstractItemModel) -> list[core.QAbstractItemModel]:
-    models = [model]
-    while isinstance(model, core.QAbstractProxyModel):
-        model = model.sourceModel()
-        models.append(model)
-    return models
 
 
 class ProxyMapper(core.Object):
@@ -64,7 +57,7 @@ class ProxyMapper(core.Object):
         **kwargs,
     ):
         super().__init__(**kwargs)
-        chains = [get_proxy_chain(proxy) for proxy in proxies]
+        chains = [modelhelpers.get_proxy_chain(proxy) for proxy in proxies]
         common_list = [
             element
             for element in chains[0]

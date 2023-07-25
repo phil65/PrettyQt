@@ -51,6 +51,14 @@ def get_parent_indexes(index: core.ModelIndex) -> list[core.ModelIndex]:
     return indexes
 
 
+def get_proxy_chain(model: core.QAbstractItemModel) -> list[core.QAbstractItemModel]:
+    models = [model]
+    while isinstance(model, core.QAbstractProxyModel):
+        model = model.sourceModel()
+        models.append(model)
+    return models
+
+
 def index_from_key(
     model: core.QAbstractItemModel,
     key_path: Sequence[tuple[int, int] | int],
