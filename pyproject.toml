@@ -281,7 +281,7 @@ pymdown-extensions = "^10"
 black = "^23"
 devtools = "^0"
 commitizen = "^3"
-mknodes = {path = "../mknodes", develop = true}
+mknodes = "*"
 
 
 [tool.pytest.ini_options]
