@@ -1,3 +1,9 @@
+## v1.56.1 (2023-07-25)
+
+### Fix
+
+- use pypi mknodes version
+
 ## v1.56.0 (2023-07-25)
 
 ### Feat
