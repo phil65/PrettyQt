@@ -37,6 +37,20 @@ def is_descendent_of(
             raise TypeError(indexes)
 
 
+def find_root_index(index: core.ModelIndex) -> core.ModelIndex:
+    while index.parent().isValid():
+        index = index.parent()
+    return index
+
+
+def get_parent_indexes(index: core.ModelIndex) -> list[core.ModelIndex]:
+    indexes = []
+    while index.isValid():
+        indexes.insert(0, index)
+        index = index.parent()
+    return indexes
+
+
 def index_from_key(
     model: core.QAbstractItemModel,
     key_path: Sequence[tuple[int, int] | int],

@@ -45,7 +45,7 @@ def debug():
 
 
 def show(item):
-    from prettyqt import core, debugging, widgets, itemmodels, qtpandas  # noqa
+    from prettyqt import core, debugging, widgets, itemmodels  # noqa
     from prettyqt.utils import classhelpers
 
     debug.app = widgets.app(organization_name="phil65", application_name="Prettyqt")
@@ -92,7 +92,6 @@ __all__ = [
     "printsupport",
     "qml",
     "qthelp",
-    "qtpandas",
     "quick",
     "quickwidgets",
     "scintilla",

@@ -110,8 +110,6 @@ def example_tree(flatten: bool = False):
 
 
 def example_table(flatten: bool = False):
-    import pandas as pd
-
     from prettyqt import gui, widgets
 
     data = dict(
@@ -132,25 +130,6 @@ def example_table(flatten: bool = False):
     table = widgets.TableView()
     table.set_model(model)
     return table
-
-
-def example_multiindex_df():
-    import numpy as np
-    import pandas as pd
-
-    tuples = [
-        ("bar", "one", "q"),
-        ("bar", "two", "q"),
-        ("baz", "one", "q"),
-        ("baz", "two", "q"),
-        ("foo", "one", "q"),
-        ("foo", "two", "q"),
-        ("qux", "one", "q"),
-        ("qux", "two", "q"),
-    ] * 10
-    dim = len(tuples)
-    index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
-    return pd.DataFrame(np.random.randn(dim, dim), index=index, columns=index)
 
 
 def example_widget():

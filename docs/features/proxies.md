@@ -24,13 +24,6 @@ The following section will give an overview about the included proxies and how t
    include-markdown "reshapeproxies.md"
 %}
 
-
-## Proxies for pandas models
-
-{%
-   include-markdown "pandasproxies.md"
-%}
-
 ## Other Proxies
 
 | Proxy                                                  | Description                                          |

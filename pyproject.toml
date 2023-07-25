@@ -94,7 +94,6 @@ addons = [
     "numpy",
     "qtconsole",
     "ipython",
-    "pandas",
     "lxml",
 ]
 
@@ -220,7 +219,6 @@ pillow = {version = "^10", optional=true}
 numpy = {version = "^1", optional=true}
 qtconsole = {version = "^5", optional=true}
 ipython = {version = "^8", optional=true}
-pandas = {version = "^2.0.2", optional = true}
 attrs = {version = "*", optional = true}
 lxml = {version = "*", optional = true}
 
@@ -238,7 +236,7 @@ pyside6 = {version = "^6.5", python = "<3.12", optional=true}
 [tool.poetry.extras]
 pyside6 = ["pyside6", "PySide6-QtAds"]
 pyqt6 = ["pyqt6", "PyQt6-Charts", "PyQt6-WebEngine", "PyQt6-QScintilla", "PyQtAds"]
-addons = ["orjson", "fsspec", "pillow", "numpy", "qtconsole", "ipython", "pandas", "attrs", "lxml"]
+addons = ["orjson", "fsspec", "pillow", "numpy", "qtconsole", "ipython", "attrs", "lxml"]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7"
@@ -254,7 +252,9 @@ types-requests = "^2.31.0.1"
 pylint = "^2.5"
 pytest-xvfb = {version = "^2", markers = "sys_platform == 'linux'"}
 coverage = "^7"
+
 mkdocs = "^1"
+mknodes = "*"
 mkdocs-material = "^9"
 mkdocstrings = {version = "^0", extras = ["python"]}
 mkdocs-glightbox = "*"
@@ -264,12 +264,11 @@ mkdocs-section-index = "^0.3.5"
 markdown-exec = "*"
 mkdocs-literate-nav = "^0.6.0"
 mkdocs-gen-files = "^0.5.0"
-
 pymdown-extensions = "^10"
+
 black = "^23"
 devtools = "^0"
 commitizen = "^3"
-mknodes = "*"
 
 
 [tool.pytest.ini_options]

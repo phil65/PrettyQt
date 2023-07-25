@@ -75,7 +75,6 @@ from .timeline import Timeline, VideoSample
 from .standardiconswidget import StandardIconsWidget
 
 from .itemviews.filetree import FileTree
-from .itemviews.hierarchicalheaderview import HierarchicalHeaderView
 from .itemviews.filterheader import FilterHeader
 
 
@@ -104,7 +103,6 @@ __all__ = [
     "QObjectHierarchyTreeView",
     "LogRecordTableView",
     "FilterHeader",
-    "HierarchicalHeaderView",
     "KeyCombinationEdit",
     "SingleLineTextEdit",
     "RegexLineEdit",

@@ -104,12 +104,6 @@ def test_flagselectionwidget(qtbot):
     assert widget.get_value() == 0
 
 
-def test_hiearchicalheaderview(qtbot):
-    widget = widgets.TableView()
-    view = custom_widgets.HierarchicalHeaderView("horizontal", widget)
-    assert view is not None
-
-
 def test_iconbrowser(qtbot):
     browser = custom_widgets.IconBrowser()
     qtbot.addWidget(browser)

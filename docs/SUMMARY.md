@@ -35,10 +35,6 @@
             * [RangeFilterProxyModel](features/proxymodels/rangefilterproxymodel.md)
             * [ValueFilterProxyModel](features/proxymodels/valuefilterproxymodel.md)
             * [PredicateFilterProxyModel](features/proxymodels/predicatefilterproxymodel.md)
-        * [Pandas proxies](features/pandasproxies.md)
-            * [PandasStringColumnFilterProxyModel](features/proxymodels/pandasstringcolumnfilterproxymodel.md)
-            * [PandasEvalFilterProxyModel](features/proxymodels/pandasevalfilterproxymodel.md)
-            * [PandasMultiStringColumnFilterProxyModel](features/proxymodels/pandasmultistringcolumnfilterproxymodel.md)
         * Misc proxies
             * [HighlightMouseProxyModel](features/proxymodels/highlightmouseproxymodel.md)
     * [Tools](features/tools.md)
@@ -59,7 +55,6 @@
         * [Editors](features/widgets/editors.md)
     * [Animating](features/animating.md)
     * [Validators](features/validators.md)
-    * [Pandas](features/pandas.md)
 * [Qt Modules](qt_modules/)
 * [Additional modules](additional_modules/)
 * [Changelog](changelog.md)
