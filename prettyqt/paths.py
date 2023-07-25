@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from importlib import resources
 import pathlib
 
@@ -5,7 +7,7 @@ import pathlib
 ROOT_PATH = pathlib.Path(resources.files("prettyqt"))  # type: ignore
 
 LOCALIZATION_PATH = ROOT_PATH / "localization"
-THEMES_PATH = ROOT_PATH / "themes"
+THEMES_PATH = ROOT_PATH / "resources" / "themes"
 RE_LEXER_PATH = (
     ROOT_PATH / "syntaxhighlighters" / "pygments" / "regularexpressionlexer.py"
 )
