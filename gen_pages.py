@@ -7,36 +7,48 @@ import logging
 import sys
 
 import prettyqt
+from prettyqt import prettyqtmarkdown
+import mknodes
 
-from prettyqt.utils import classhelpers, markdownizer
+# from prettyqt.utils import classhelpers
+# from prettyqt import prettyqtmarkdown
 
 logger = logging.getLogger(__name__)
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
+QT_MODULE_ATTR = "QT_MODULE"
+
 prettyqt.import_all()
+# import os
+# os.chdir(".docs/")
+# root_nav = mknodes.MkNav.from_file("SUMMARY.md", section=None
+root_nav = mknodes.MkNav(filename="somethingelse.md")
+qt_docs = root_nav.add_doc(prettyqt, section_name="qt_modules")
+# page = qt_docs.add_page("index")
+# table = mknodes.MkModuleTable(module=prettyqt, predicate=lambda x: hasattr(x, QT_MODULE_ATTR))
+# page += table
+extra_docs = root_nav.add_doc(prettyqt, section_name="additional_modules")
 
-docs = markdownizer.Docs(module_name="prettyqt", exclude_modules=["qt"])
-nav = docs.create_nav(section="qt_modules")
-nav2 = docs.create_nav(section="additional_modules")
-
-for path in docs.iter_files("*/__init__.py"):
-    doc_path = path.with_suffix(".md")
-    module_path = ".".join(path.with_suffix("").parts)
-    complete_module_path = f"prettyqt.{module_path}"
-    module = classhelpers.to_module(complete_module_path)
-    klasses = list(
-        docs.iter_classes_for_module(complete_module_path, filter_by___all__=True)
+for submod in qt_docs.iter_modules(predicate=lambda x: hasattr(x, QT_MODULE_ATTR)):
+    subdoc = qt_docs.add_doc(
+        submod, class_page=prettyqtmarkdown.PrettyQtClassPage, flatten_nav=True
     )
-    if module and hasattr(module, "QT_MODULE"):
-        for klass in klasses:
-            nav.add_class_page(klass=klass, path=doc_path)
-        if klasses:
-            nav.add_module_page(module=module_path, path=doc_path)
-    else:
-        for klass in klasses:
-            nav2.add_class_page(klass=klass, path=doc_path)
-        if klasses:
-            nav2.add_module_page(module=module_path, path=doc_path)
+    subdoc.collect_classes()
+for submod in extra_docs.iter_modules(predicate=lambda x: not hasattr(x, QT_MODULE_ATTR)):
+    subdoc = extra_docs.add_doc(
+        submod, class_page=prettyqtmarkdown.PrettyQtClassPage, flatten_nav=True
+    )
+    subdoc.collect_classes()
 
-docs.write()
+# extra_docs.pretty_print()
+
+root_nav.write()
+
+# from prettyqt import widgets
+
+# app = widgets.app()
+# table = mknodes.MarkdownWidget()
+# table.set_markdown(additional_nav)
+# table.show()
+# app.exec()
