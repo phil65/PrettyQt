@@ -95,7 +95,7 @@ class CommandPalette(widgets.Widget):
         layout = self.set_layout("vertical")
         layout.addWidget(self._line)
         layout.addWidget(self._table)
-        self.add_shortcut("Ctrl+P", self.close)
+        self.add_shortcut("Ctrl+P", callback=self.close)
         self._line.installEventFilter(self)
 
         # self._line.textChanged.connect(self._on_text_changed)
