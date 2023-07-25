@@ -6,8 +6,6 @@
 * Features
     * [Proxy models](features/proxies.md)
     * [Tools](features/tools.md)
-        * [ProxyMapper](features/tools/proxymapper.md)
-        * [LinkedSelectionModel](features/tools/linkedselectionmodel.md)
     * [Widgets](features/widgets.md)
     * [Layouts](features/layouts.md)
     * [Delegates](features/delegates.md)

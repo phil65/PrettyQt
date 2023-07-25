@@ -141,7 +141,7 @@ The aim is to support the last two released Python versions as well as keeping s
 | QtWebChannel        | [prettyqt.webchannel](webchannel.md)        |
 | QtWebEngineCore     | [prettyqt.webenginecore](webenginecore.md)     |
 | QtWebEngineWidgets  | [prettyqt.webenginewidgets](webenginewidgets.md)  |
-| QtWidgets           | [prettyqt.widgets](api/widgets.md)           |
+| QtWidgets           | [prettyqt.widgets](widgets.md)           |
 
 [Read more](general.md) about the general API design.
 

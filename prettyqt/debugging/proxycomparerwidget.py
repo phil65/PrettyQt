@@ -11,7 +11,13 @@ logger = logging.getLogger(__name__)
 
 
 class ProxyComparerWidget(widgets.Splitter):
-    """Splitter widget showing a comparison view between a proxy and its sourceModels."""
+    """Splitter widget showing a comparison view between a proxy and its sourceModels.
+
+    <figure markdown>
+      ![Image title](../../images/proxycomparerwidget.png)
+      <figcaption>ProxyComparerWidget</figcaption>
+    </figure>
+    """
 
     def __init__(
         self,

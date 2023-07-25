@@ -9,6 +9,8 @@ logger = logging.getLogger(__name__)
 
 
 class LinkedSelectionModel(core.ItemSelectionModel):
+    """An ItemSelectionModel which link selections between item models."""
+
     # TODO: atm this doesnt need to inherit from ItemSelectionModel.
     # Not sure if there is any advantage in doing so...
     # Otherwise we could rename to SelectionLinker and just inherit from

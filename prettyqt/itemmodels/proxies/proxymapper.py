@@ -8,6 +8,24 @@ from prettyqt import core
 logger = logging.getLogger(__name__)
 
 
+MERMAID = """
+    ``` mermaid
+    classDiagram
+      Shared_proxy <|-- Proxy_1_1
+      Shared_proxy <|-- Proxy_2_1
+      Proxy_1_1 <|-- Proxy_1_2
+      Proxy_2_1 <|-- Proxy_2_2
+      Root_model <-- Shared_proxy
+      class Proxy_1_1{
+      }
+      class Proxy_2_1{
+      }
+      class Root_model{
+      }
+    ```
+"""
+
+
 def get_proxy_chain(model: core.QAbstractItemModel) -> list[core.QAbstractItemModel]:
     models = [model]
     while isinstance(model, core.QAbstractProxyModel):
@@ -32,6 +50,12 @@ class ProxyMapper(core.Object):
     When mapping from 1_2 to 2_2, it will find the closest parent ("shared proxy" here),
     use mapToSource / mapSelectionFromSource until it gets there,
     and then mapFromSource / mapSelectionFromSource to get down to 2_2.
+    ``` py
+    mapper = ProxyMapper(proxy_1_2, proxy_2_1)
+    index = proxy_1_2.index(0, 0)
+    mapped_index = mapper.map_index(source=0, target=1, index)
+    ```
+
     """
 
     def __init__(
