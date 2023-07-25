@@ -4,8 +4,8 @@ import logging
 
 import mknodes
 
-from prettyqt import constants, core, prettyqtmarkdown, widgets
-from prettyqt.utils import datatypes, helpers
+from prettyqt import constants, core, widgets
+from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -17,12 +17,14 @@ class WidgetScreenShot(mknodes.MkBinaryImage):
     def __init__(
         self,
         widget: widgets.QWidget,
-        path: str,
         caption: str = "",
+        path: str | None = None,
         title: str = "Image title",
         header: str = "",
         resize_to: datatypes.SizeType | None = None,
     ):
+        if path is None:
+            path = f"{widget.__klass__.__name__}_screenshot.png"
         logger.info(f"Screenshot for {widget}")
         widget.setAttribute(constants.WidgetAttribute.WA_DontShowOnScreen)
         widget.show()
@@ -45,12 +47,9 @@ class WidgetScreenShot(mknodes.MkBinaryImage):
 
 
 if __name__ == "__main__":
-    doc = mknodes.MkPage([])
-    doc += mknodes.MkAdmonition("info", "etst")
-    doc += mknodes.MkTable(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
-    doc += prettyqtmarkdown.PropertyTable(core.StringListModel)
-    doc += mknodes.MkDocStrings(helpers, header="DocStrings")
-    doc += prettyqtmarkdown.DependencyTable("prettyqt")
-    doc += mknodes.MkClassDiagram(mknodes.MkTable, header="Mermaid diagram")
+    app = widgets.app()
 
-    print(doc.to_markdown())
+    w = widgets.PushButton("Test")
+    page = mknodes.MkPage()
+    page += WidgetScreenShot(w, "test.png")
+    print(page.to_markdown())
