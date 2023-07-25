@@ -18,6 +18,8 @@ logger = logging.getLogger(__name__)
 
 
 class PrettyQtClassPage(mknodes.MkClassPage):
+    """A ClassPage specifically for Qt-based classes."""
+
     def _build(self):
         if qt_parent := classhelpers.get_qt_parent_class(self.klass):
             self.append(f"Qt Base Class: {helpers.link_for_class(qt_parent)}")

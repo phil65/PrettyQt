@@ -12,6 +12,8 @@ logger = logging.getLogger(__name__)
 
 
 class MarkdownWidget(widgets.Widget):
+    """A widget used for displaying a preview of a generated mknodes tree."""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.tree = widgets.TreeView()

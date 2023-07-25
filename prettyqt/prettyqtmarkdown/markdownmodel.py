@@ -12,6 +12,8 @@ logger = logging.getLogger(__name__)
 
 
 class MarkdownModel(itemmodels.TreeModel):
+    """An ItemModel for displaying a mknodes tree."""
+
     class Roles:
         MarkdownRole = constants.USER_ROLE + 5325
 

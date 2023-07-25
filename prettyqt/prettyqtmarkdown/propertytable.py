@@ -11,6 +11,8 @@ logger = logging.getLogger(__name__)
 
 
 class PropertyTable(mknodes.MkTable):
+    """A table containing info about Qt properties."""
+
     def __init__(
         self,
         qobject: type[core.QObject],

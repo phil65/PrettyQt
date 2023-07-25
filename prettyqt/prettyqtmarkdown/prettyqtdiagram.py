@@ -12,7 +12,10 @@ logger = logging.getLogger(__name__)
 
 class IndexConnectionBuilder(connectionbuilder.ConnectionBuilder):
     def __init__(
-        self, index: core.ModelIndex, fetch_more: bool = True, attribute_roles=None
+        self,
+        index: core.ModelIndex,
+        fetch_more: bool = True,
+        attribute_roles=None,
     ):
         self.fetch_more = fetch_more
         self.attribute_roles = attribute_roles or []
