@@ -7,7 +7,6 @@ from prettyqt import (
     core,
     custom_widgets,
     debugging,
-    ipython,
     widgets,
 )
 
@@ -64,6 +63,8 @@ class QObjectDetailsDialog(widgets.MainWindow):
         object_name="qobject_details_dialog",
         **kwargs,
     ):
+        from prettyqt import ipython
+
         super().__init__(*args, object_name=object_name, **kwargs)
         self.qobject = qobject
         self.console = ipython.InProcessIPythonWidget(self)
@@ -132,11 +133,6 @@ class QObjectDetailsDialog(widgets.MainWindow):
     def _on_widget_click(self, widget):
         logger.info(repr(widget))
         self.hierarchyview.select_object(widget)
-
-    @classmethod
-    def setup_example(cls):
-        w = widgets.PlainTextEdit()
-        return cls(w)
 
 
 if __name__ == "__main__":
