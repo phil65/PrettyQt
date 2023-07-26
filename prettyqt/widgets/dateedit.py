@@ -21,11 +21,17 @@ class DateEdit(widgets.DateTimeEditMixin, widgets.QDateEdit):
     def get_value(self) -> datetime.date:
         return self.get_date()
 
+    @classmethod
+    def setup_example(cls):
+        widget = cls()
+        widget.set_value("01.03.1998")
+        return widget
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    widget = DateEdit()
+    widget = DateEdit.setup_example()
     widget.show()
     app.exec()
