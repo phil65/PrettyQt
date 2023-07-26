@@ -94,14 +94,14 @@ class AstViewer(widgets.Splitter):
                 if isinstance(j, ast.AST):
                     self.rename_variable(j, old, new, ignore, s)
 
-    @classmethod
-    def setup_example(cls):
-        import pathlib
+    # @classmethod
+    # def setup_example(cls):
+    #     import pathlib
 
-        widget = cls()
-        code = pathlib.Path(__file__).read_text()
-        widget.set_ast(code)
-        return widget
+    #     widget = cls()
+    #     code = pathlib.Path(__file__).read_text()
+    #     widget.set_ast(code)
+    #     return widget
 
 
 if __name__ == "__main__":
