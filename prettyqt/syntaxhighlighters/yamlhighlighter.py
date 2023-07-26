@@ -77,7 +77,7 @@ class Xml(Rule):
     color = "lightgray"
 
 
-class YamlHighlighter(gui.SyntaxHighlighter):
+class YamlHighlighter(syntaxhighlighters.BaseRuleSyntaxHighlighter):
     RULES = Rule.__subclasses__()
 
     def highlightBlock(self, text: str):

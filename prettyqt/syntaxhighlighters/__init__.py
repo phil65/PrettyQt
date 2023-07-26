@@ -4,6 +4,7 @@ contains some custom syntax highlighers
 """
 
 from .highlightrule import HighlightRule
+from .baserulesyntaxhighlighter import BaseRuleSyntaxHighlighter
 from .jsonhighlighter import JsonHighlighter
 from .markdownhighlighter import MarkdownHighlighter
 from .pygmentshighlighter import PygmentsHighlighter
@@ -15,6 +16,7 @@ from .yamlhighlighter import YamlHighlighter
 
 __all__ = [
     "HighlightRule",
+    "BaseRuleSyntaxHighlighter",
     "SelectedWordHighlighter",
     "JsonHighlighter",
     "YamlHighlighter",

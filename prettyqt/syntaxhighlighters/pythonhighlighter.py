@@ -137,7 +137,7 @@ TRI_SINGLE = (core.RegularExpression("'''"), 1, fmt)
 TRI_DOUBLE = (core.RegularExpression('"""'), 2, fmt)
 
 
-class PythonHighlighter(gui.SyntaxHighlighter):
+class PythonHighlighter(syntaxhighlighters.BaseRuleSyntaxHighlighter):
     """Syntax highlighter for the Python language."""
 
     RULES = Rule.__subclasses__()
