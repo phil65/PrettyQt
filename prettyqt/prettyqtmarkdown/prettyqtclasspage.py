@@ -60,6 +60,7 @@ class PrettyQtClassPage(mknodes.MkClassPage):
             and not self.klass.__name__.endswith("Mixin")
         ):
             if widget := self.klass.setup_example():
+                self += mknodes.MkCode.for_object(self.klass.setup_example)
                 self += prettyqtmarkdown.WidgetScreenShot(widget, header="🖼 Screenshot")
 
 
