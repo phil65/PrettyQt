@@ -10,6 +10,9 @@
 
 **PrettyQt** is a Python package that provides a pythonic layer on top of the GUI frameworks PyQt6 / PySide6.
 
+## Documentation
+The official documentation is hosted on Github Pages: https://phil65.github.io/PrettyQt/
+
 ## Main Features
   - Subclasses for almost all Qt classes, enriched with helper and __dunder__ methods to give a feel of a native GUI library.
   - more than 80 pre-defined widgets and layouts for common use cases
@@ -18,81 +21,6 @@
   - 10 ItemDelegates for different purposes
   - 20 different Validators
   - much, much more.
-
-PrettyQt basically is a wrapper for the whole Qt API (either on top of PySide6 or PyQt6).
-Perhaps it can be seen as a small Python equivalent of KDE.
-
-The library contains a tree of mixins, with one mixin for each Qt class.
-These mixins also inherit from each other and are applied to the Qt classes.
-That way each class gets all helper methods from all sub-mixins.
-
-Main objective is to make Qt feel "pythonic". Qt is originally a C++ Framework,
-and using it can be quite cumbersome for Python developers. (very restrictive when it comes to types,
-very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to improve this by:
-
-- adding more powerful methods to the classes, which accept more types and have more options (in form of keyword arguments)
-- doing conversions for method parameters to lessen the strictness for types. (Example: points, sizes and rectangles can also be passed to Qt methods as tuples.)
-- raising Exceptions or returning None instead of returning -1 or invalid objects.
-- all enum getters/setters also work with strings. Everything typed with Literals for an excellent IDE experience. (Example: )
-- adding a lot of __dunder__ methods to the classes to make them behave like good python citizens.
-
-
-Apart from the 3D related modules (Qt3D, QtDataVizualization), QtXml and QtSql,
-almost every class from Qt is covered.
-
-## Covered Qt modules
-
-| Qt Module           | PrettyQt module            |
-|---------------------|----------------------------|
-| QtBluetooth         | prettyqt.bluetooth         |
-| QtCharts            | prettyqt.charts            |
-| QtCore              | prettyqt.core              |
-| QtDesigner          | prettyqt.designer          |
-| QtGui               | prettyqt.gui               |
-| QtLocation          | prettyqt.location          |
-| QtMultimedia        | prettyqt.multimedia        |
-| QtMultimediaWidgets | prettyqt.multimediawidgets |
-| QtNetwork           | prettyqt.network           |
-| QtOpenGLWidgets     | prettyqt.openglwidgets     |
-| QtPdf               | prettyqt.pdf               |
-| QtPdfWidgets        | prettyqt.pdfwidgets        |
-| QtPositioning       | prettyqt.positioning       |
-| QtPrintSupport      | prettyqt.printsupport      |
-| QtQml               | prettyqt.qml               |
-| QtHelp              | prettyqt.qthelp            |
-| QtQuick             | prettyqt.quick             |
-| QtQuickWidgets      | prettyqt.quickwidgets      |
-| QScintilla          | prettyqt.scintilla         |
-| QtScXml             | prettyqt.scxml             |
-| QtSpatialAudio      | prettyqt.spatialaudio      |
-| QtStateMachine      | prettyqt.statemachine      |
-| QtSvg               | prettyqt.svg               |
-| QtSvgWidgets        | prettyqt.svgwidgets        |
-| QtTest              | prettyqt.test              |
-| QtTextToSpeech      | prettyqt.texttospeech      |
-| QtWebChannel        | prettyqt.webchannel        |
-| QtWebEngineCore     | prettyqt.webenginecore     |
-| QtWebEngineWidgets  | prettyqt.webenginewidgets  |
-| QtWidgets           | prettyqt.widgets           |
-
-
-All subclassed Qt classes in mentioned modules are called exactly like the
-Qt-Counterpart, except that the leading Q is missing.
-
-### Examples:
-
-- QtWidgets.QWidget -> widgets.Widget
-- QtCore.QObject -> core.Object
-
-Apart from the mentioned mixin tree and the corresponding classes, this library also
-contains a lot of custom widgets, delegates, eventfilters, validators,
-syntaxhighlighters, layouts, models, proxy models and much more.
-
-Converting to PrettyQt should be very straightforward since the original behaviour of the
-Qt classes didnt change for the largest parts and all methods from base Qt modules
-are still available. (There might be a few constructors with slightly different behaviour though.)
-
-Interested? Take a look at the documentation! (even though it totally sucks in its current state.)
 
 ## Where to get it
 The source code is currently hosted on GitHub at:
@@ -105,43 +33,3 @@ package index](https://pypi.org/project/prettyqt).
 # or PyPI
 pip install prettyqt
 ```
-
-## Required dependencies
-- [bidict](https://pypi.org/project/bidict)
-- [pygments](https://pypi.org/project/pygments)
-- [qstylizer](https://pypi.org/project/qstylizer)
-- [typing_extensions](https://pypi.org/project/typing_extensions)
-
-# And one of...
-- [pyside6](https://pypi.org/project/pyside6)
-- [pyqt6](https://pypi.org/project/pyqt6)
-
-Note: Only Qt 6.5+ is supported.
-
-## Optional dependencies
-- [orjson](https://pypi.org/project/orjson)
-- [numpy](https://pypi.org/project/numpy)
-- [ipython](https://pypi.org/project/ipython)
-- [qtconsole](https://pypi.org/project/qtconsole)
-- [pillow](https://pypi.org/project/pillow)
-- [fsspec](https://pypi.org/project/fsspec)
-
-
-## Installation from sources
-
-This project uses poetry for dependency management and packaging. Install this first.
-In the `prettyqt` directory (same one where you found this file after
-cloning the git repo), execute:
-
-```sh
-poetry install
-```
-
-## Documentation
-The official documentation is hosted on Github Pages: https://phil65.github.io/PrettyQt/
-
-## Contributing to prettyqt [![Open Source Helpers](https://www.codetriage.com/phil65/prettyqt/badges/users.svg)](https://www.codetriage.com/phil65/prettyqt)
-
-All contributions, bug reports, bug fixes, documentation improvements, enhancements, and ideas are welcome.
-
-Or maybe through using PrettyQt you have an idea of your own or are looking for something in the documentation and thinking ‘this can be improved’...you can do something about it!
