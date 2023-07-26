@@ -684,7 +684,8 @@ def to_date(value: DateType):
         case (int(), int(), int()):
             return QtCore.QDate(*value)
         case str():
-            return QtCore.QDate.fromString(value)
+            date = dateutil.parser.parse(value).date()
+            return QtCore.QDate(date)
         case QtCore.QDate() | datetime.date():
             return value
         case _:
