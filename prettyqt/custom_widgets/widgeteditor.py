@@ -12,16 +12,17 @@ logger = logging.getLogger(__name__)
 class WidgetEditor(widgets.Widget):
     value_changed = core.Signal(object)
 
-    def __init__(self, qobject: core.QObject, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, qobject: core.QObject, connect: bool = True, **kwargs):
+        super().__init__(**kwargs)
         self.set_layout("form")
         self._qobject = qobject
         self._initial_prop_values = {}
         self.event_catcher = eventfilters.EventCatcher(
             include=["resize", "move"], parent=self._qobject
         )
-        self.event_catcher.caught.connect(self._update_editors)
-        self._qobject.installEventFilter(self.event_catcher)
+        if connect:
+            self.event_catcher.caught.connect(self._update_editors)
+            self._qobject.installEventFilter(self.event_catcher)
         self.set_minimum_size(800, 1000)
         self._editors = bidict()
         self._metaobj = core.MetaObject(self._qobject.metaObject())
@@ -42,7 +43,7 @@ class WidgetEditor(widgets.Widget):
             self.box[i, "right"] = widget
             self._initial_prop_values[name] = value
             self._editors[name] = widget
-            if prop.hasNotifySignal():
+            if prop.hasNotifySignal() and connect:
                 notify_signal = prop.get_notify_signal()
                 signal_name = notify_signal.get_name()
                 signal = self._qobject.__getattribute__(signal_name)
@@ -51,7 +52,7 @@ class WidgetEditor(widgets.Widget):
     @classmethod
     def setup_example(cls):
         scrollarea = widgets.ScrollArea()
-        return cls(scrollarea)
+        return cls(scrollarea, connect=False)
 
     def _on_value_change(self):
         editor = self.sender()
