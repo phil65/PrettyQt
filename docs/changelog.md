@@ -1,3 +1,10 @@
+## v1.56.3 (2023-07-26)
+
+### Fix
+
+- **WidgetScreenshot**: typo
+- **CommandPalette**: adjust to kwarg-only
+
 ## v1.56.2 (2023-07-25)
 
 ### Fix
