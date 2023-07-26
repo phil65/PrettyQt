@@ -50,9 +50,9 @@ class ErrorMessageBox(widgets.MessageBox):
             case widgets.MessageBox.StandardButton.Ok:
                 return True
 
-    @classmethod
-    def setup_example(cls):
-        return cls("Title", "Test message")
+    # @classmethod
+    # def setup_example(cls):
+    #     return cls("Title", "Test message")
 
     @classmethod
     def from_exc(cls, e: Exception, parent=None):

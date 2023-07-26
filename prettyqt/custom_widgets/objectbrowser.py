@@ -147,9 +147,9 @@ class ObjectBrowser(widgets.MainWindow):
         self._refresh_timer.timeout.connect(self._tree_model.refresh_tree)
         self.toggle_auto_refresh_action.setChecked(self._auto_refresh)
 
-    @classmethod
-    def setup_example(cls):
-        return cls(obj=["a", "b", "c"])
+    # @classmethod
+    # def setup_example(cls):
+    #     return cls(obj=["a", "b", "c"])
 
     @core.Slot(core.ModelIndex, core.ModelIndex)
     def _update_details(

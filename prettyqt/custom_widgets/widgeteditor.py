@@ -49,10 +49,10 @@ class WidgetEditor(widgets.Widget):
                 signal = self._qobject.__getattribute__(signal_name)
                 signal.connect(self._update_editors)
 
-    @classmethod
-    def setup_example(cls):
-        scrollarea = widgets.ScrollArea()
-        return cls(scrollarea, connect=False)
+    # @classmethod
+    # def setup_example(cls):
+    #     scrollarea = widgets.ScrollArea()
+    #     return cls(scrollarea, connect=False)
 
     def _on_value_change(self):
         editor = self.sender()

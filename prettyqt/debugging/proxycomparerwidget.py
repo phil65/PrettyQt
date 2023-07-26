@@ -74,23 +74,27 @@ class ProxyComparerWidget(widgets.Splitter):
         if link_selections:
             self.linker = itemmodels.LinkedSelectionModel(*self.model_itemviews)
 
-    @classmethod
-    def setup_example(cls):
-        from prettyqt import debugging
+    # @classmethod
+    # def setup_example(cls):
+    #     from prettyqt import gui
 
-        table = debugging.example_table()
-        table.proxifier.transpose()
-        table.proxifier.to_list()
-        return cls(table.model())
+    #     dct = dict(
+    #         a=["a", "a", "a", "a"],
+    #         b=["b", "b", "b", "b"],
+    #         c=["c", "c", "c", "c"],
+    #     )
+    #     model = gui.StandardItemModel.from_dict(dct)
+    #     proxy = core.TransposeProxyModel(source_model=model)
+    #     return cls(proxy)
 
 
 if __name__ == "__main__":
-    from prettyqt import debugging, widgets
+    from prettyqt import widgets
 
     app = widgets.app()
-    table = debugging.example_table()
-    table.proxifier.transpose()
-    table.proxifier.to_list()
-    splitter = ProxyComparerWidget(table.model())
+    # table = debugging.example_table()
+    # table.proxifier.transpose()
+    # table.proxifier.to_list()
+    splitter = ProxyComparerWidget.setup_example()
     splitter.show()
     app.exec()

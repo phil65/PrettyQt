@@ -55,7 +55,7 @@ class PrettyQtClassPage(mknodes.MkClassPage):
         ):
             self.append(f"\n\nDelegate ID: **{self.klass.ID}**\n\n")
         if (
-            hasattr(self.klass, "setup_example")
+            "setup_example" in self.klass.__dict__
             and "Abstract" not in self.klass.__name__
             and not self.klass.__name__.endswith("Mixin")
         ):

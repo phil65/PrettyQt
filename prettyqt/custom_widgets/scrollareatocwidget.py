@@ -207,12 +207,12 @@ class ScrollAreaTocWidget(widgets.TreeView):
         super().showEvent(event)
         self._on_scroll()
 
-    @classmethod
-    def setup_example(cls):
-        scrollarea = widgets.ScrollArea()
-        w = widgets.Widget()
-        scrollarea.set_widget(w)
-        return cls(scrollarea)
+    # @classmethod
+    # def setup_example(cls):
+    #     scrollarea = widgets.ScrollArea()
+    #     w = widgets.Widget()
+    #     scrollarea.set_widget(w)
+    #     return cls(scrollarea)
 
     def set_widget(self, widget: widgets.QScrollArea):
         """Set the ScrollArea widget to follow."""
