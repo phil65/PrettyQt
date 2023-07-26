@@ -120,7 +120,11 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
 
 
 class DateTimeEdit(DateTimeEditMixin, widgets.QDateTimeEdit):
-    pass
+    @classmethod
+    def setup_example(cls):
+        widget = DateTimeEdit()
+        widget.set_value("01.03.1998 02:11")
+        return widget
 
 
 if __name__ == "__main__":
