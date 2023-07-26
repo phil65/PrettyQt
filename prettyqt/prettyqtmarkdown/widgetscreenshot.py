@@ -32,6 +32,7 @@ class WidgetScreenShot(mknodes.MkBinaryImage):
         widgets.app().processEvents()
         pixmap = widget.grab()
         widget.hide()
+        widget.deleteLater()
         widgets.app().processEvents()
         ba = core.ByteArray()
         buffer = core.QBuffer(ba)
