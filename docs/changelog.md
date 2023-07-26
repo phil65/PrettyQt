@@ -1,3 +1,9 @@
+## v1.56.4 (2023-07-27)
+
+### Fix
+
+- **HelpFilterSettingsWidget**: used wrong class as Mixin
+
 ## v1.56.3 (2023-07-26)
 
 ### Fix
