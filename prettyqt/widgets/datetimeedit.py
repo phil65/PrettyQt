@@ -88,8 +88,8 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
     def get_value(self) -> datetime.datetime:
         return self.get_datetime()
 
-    def set_value(self, value: datetime.datetime | core.DateTime):
-        self.setDateTime(value)
+    def set_value(self, value: datatypes.DateTimeType):
+        self.setDateTime(datatypes.to_datetime(value))
 
     def get_datetime(self) -> datetime.datetime:
         return self.dateTime().toPython()  # type: ignore
