@@ -48,7 +48,8 @@ root_nav.write()
 # from prettyqt import widgets
 
 # app = widgets.app()
-# table = mknodes.MarkdownWidget()
-# table.set_markdown(additional_nav)
+# print(root_nav)
+# table = prettyqtmarkdown.MarkdownWidget()
+# table.set_markdown(root_nav)
 # table.show()
 # app.exec()

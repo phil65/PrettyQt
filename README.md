@@ -137,9 +137,6 @@ cloning the git repo), execute:
 poetry install
 ```
 
-## License
-[MIT](LICENSE)
-
 ## Documentation
 The official documentation is hosted on Github Pages: https://phil65.github.io/PrettyQt/
 
