@@ -56,16 +56,20 @@ class AstViewer(widgets.Splitter):
                 (node.end_lineno - 1, node.end_col_offset),
             )
 
-    def set_ast(self, ast_tree: str):
+    def set_ast(self, ast_or_str: str | ast.AST):
         if self.tree.model() is None:
-            model = itemmodels.AstModel(ast_tree, show_root=True, parent=self.tree)
+            model = itemmodels.AstModel(ast_or_str, show_root=True, parent=self.tree)
             self.tree.set_model(model)
             self.tree.selectionModel().currentChanged.connect(self._on_current_change)
         else:
-            self.tree.model().set_ast(ast_tree)
+            self.tree.model().set_ast(ast_or_str)
         self.tree.show_root(False)
         self.tree.expandAll()
-        dumped = ast.dump(self.tree.model().ast_tree, indent=4)
+        ast_tree = self.tree.get_model(skip_proxies=True).ast_tree
+        text = ast_or_str if isinstance(ast_or_str, str) else ast.unparse(ast_or_str)
+        with self.textedit.signals_blocked():
+            self.textedit.set_text(text)
+        dumped = ast.dump(ast_tree, indent=4)
         self.ast_textedit.set_text(dumped)
 
     def rename_variable(
@@ -79,7 +83,7 @@ class AstViewer(widgets.Splitter):
             scope = ["main"]
         if ignore is None:
             ignore = []
-        tree = self.tree.model().ast_tree
+        tree = self.tree.get_model(skip_proxies=True).ast_tree
         for i in ast.iter_fields(tree):
             if not isinstance(a := getattr(tree, i), list):
                 if a == old and not {*scope} & {*ignore}:
@@ -90,10 +94,19 @@ class AstViewer(widgets.Splitter):
                 if isinstance(j, ast.AST):
                     self.rename_variable(j, old, new, ignore, s)
 
+    @classmethod
+    def setup_example(cls):
+        import pathlib
+
+        widget = cls()
+        code = pathlib.Path(__file__).read_text()
+        widget.set_ast(code)
+        return widget
+
 
 if __name__ == "__main__":
     app = widgets.app()
-    w = AstViewer()
+    w = AstViewer.setup_example()
     w.show()
     with app.debug_mode():
         app.exec()

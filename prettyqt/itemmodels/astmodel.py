@@ -79,7 +79,7 @@ class AstModel(itemmodels.TreeModel):
         "Docstring",
     ]
 
-    def __init__(self, ast_tree, **kwargs):
+    def __init__(self, ast_tree: ast.AST | str, **kwargs):
         super().__init__(None, **kwargs)
         self.ast_tree = None
         self.code = ""
