@@ -4,7 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtHelp
 
 
-class HelpFilterSettingsWidget(widgets.Widget, QtHelp.QHelpFilterSettingsWidget):
+class HelpFilterSettingsWidget(widgets.WidgetMixin, QtHelp.QHelpFilterSettingsWidget):
     """Widget that allows for creating, editing and removing filters."""
 
 
