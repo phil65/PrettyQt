@@ -9,7 +9,7 @@ authors = [
   { name = "Philipp Temminghoff", email = "philipptemminghoff@gmail.com" },
 ]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Environment :: X11 Applications :: Qt",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
