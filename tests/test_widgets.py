@@ -514,6 +514,7 @@ def test_groupbox(qtbot):
     widget.set_enabled(False)
 
 
+@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_headerview(qtbot):
     def test():
         pass
