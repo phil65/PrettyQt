@@ -178,6 +178,7 @@ def test_filechooserbutton(qtbot):
     btn.get_value()
 
 
+# Segfault with PySide6
 # def test_objectbrowser(qtbot):
 #     struct = dict(a={1, 2, frozenset([1, 2])})
 #     browser = custom_widgets.ObjectBrowser(struct)
@@ -185,6 +186,7 @@ def test_filechooserbutton(qtbot):
 #     browser.close()
 
 
+# Segfault with PySide6
 # def test_fontchooserbutton(qtbot):
 #     btn = custom_widgets.FontChooserButton()
 #     qtbot.addWidget(btn)
