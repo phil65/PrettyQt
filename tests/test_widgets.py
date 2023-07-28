@@ -520,7 +520,7 @@ def test_headerview(qtbot):
 
     table = widgets.TableView()
     qtbot.addWidget(table)
-    model = widgets.FileSystemModel()
+    model = gui.StandardItemModel.from_dict(dict(a=[1, 2, 3]))
     table.set_model(model)
     header = widgets.HeaderView("horizontal", parent=table)
     table.setHorizontalHeader(header)
