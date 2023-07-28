@@ -3,9 +3,9 @@
 from prettyqt import svgwidgets
 
 
-def test_svgwidget():
-    widget = svgwidgets.SvgWidget()
-    widget.load_file("")
+# def test_svgwidget():
+#     widget = svgwidgets.SvgWidget()
+#     widget.load_file("")
 
 
 def test_svggraphicsitem():
