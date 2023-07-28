@@ -5,7 +5,7 @@ from prettyqt.utils import get_repr
 
 
 class FontChooserButton(widgets.Widget):
-    value_changed = core.Signal(gui.Font)
+    value_changed = core.Signal(gui.QFont)
 
     def __init__(
         self,
@@ -35,7 +35,7 @@ class FontChooserButton(widgets.Widget):
 
         if dlg.exec():
             self.set_current_font(dlg.current_font())
-            self.value_changed.emit(dlg.current_font())
+            self.value_changed.emit(gui.QFont(dlg.current_font()))
 
     def set_current_font(self, font: str | gui.QFont | None):
         match font:
