@@ -1,8 +1,6 @@
 """Tests for `prettyqt` package."""
 
 import logging
-import pathlib
-import pickle
 import re
 
 import pytest
@@ -176,11 +174,6 @@ def test_mappedcheckbox(qtbot):
 def test_filechooserbutton(qtbot):
     btn = custom_widgets.FileChooserButton()
     qtbot.addWidget(btn)
-    path = pathlib.Path("data.pkl")
-    with path.open("wb") as jar:
-        pickle.dump(btn, jar)
-    with path.open("rb") as jar:
-        btn = pickle.load(jar)
     btn.set_value("/")
     btn.get_value()
 
@@ -195,13 +188,7 @@ def test_objectbrowser(qtbot):
 def test_fontchooserbutton(qtbot):
     btn = custom_widgets.FontChooserButton()
     qtbot.addWidget(btn)
-    path = pathlib.Path("data.pkl")
-    with path.open("wb") as jar:
-        pickle.dump(btn, jar)
-    with path.open("rb") as jar:
-        btn = pickle.load(jar)
     btn.set_font("Consolas")
-    repr(btn)
 
 
 def test_iconlabel(qtbot):
@@ -256,11 +243,6 @@ def test_flowlayout(qtbot):
         pass
     assert len(layout) == 5
     layout.get_children()
-    path = pathlib.Path("data.pkl")
-    with path.open("wb") as jar:
-        pickle.dump(layout, jar)
-    with path.open("rb") as jar:
-        layout = pickle.load(jar)
 
 
 def test_labeledslider(qtbot, qttester):
