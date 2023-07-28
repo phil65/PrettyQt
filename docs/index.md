@@ -171,7 +171,7 @@ pip install prettyqt
 
 ```python exec="on"
 from prettyqt import prettyqtmarkdown
-table = prettyqtmarkdown.DependencyTable("prettyqt")
+table = prettyqtmarkdown.MkDependencyTable("prettyqt")
 print(table)
 ```
 
@@ -184,9 +184,6 @@ cloning the git repo), execute:
 ```sh
 poetry install
 ```
-
-## License
-[MIT](LICENSE)
 
 ## Contributing to prettyqt [![Open Source Helpers](https://www.codetriage.com/phil65/prettyqt/badges/users.svg)](https://www.codetriage.com/phil65/prettyqt)
 
