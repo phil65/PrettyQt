@@ -403,7 +403,7 @@ def test_graphicspixmapitem(qtbot):
     assert item.get_pixmap() is None
 
 
-# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_graphicsscene(qtbot):
     scene = widgets.GraphicsScene()
     icon = iconprovider.get_icon("mdi.help-circle-outline")
