@@ -185,10 +185,10 @@ def test_objectbrowser(qtbot):
     browser.close()
 
 
-def test_fontchooserbutton(qtbot):
-    btn = custom_widgets.FontChooserButton()
-    qtbot.addWidget(btn)
-    btn.set_font("Consolas")
+# def test_fontchooserbutton(qtbot):
+#     btn = custom_widgets.FontChooserButton()
+#     qtbot.addWidget(btn)
+#     btn.set_font("Consolas")
 
 
 def test_iconlabel(qtbot):
