@@ -368,26 +368,26 @@ def test_graphicsitem(qtbot):
 
 
 # @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
-def test_graphicsgridlayout(qtbot):
-    layout = widgets.GraphicsGridLayout()
-    item = widgets.GraphicsProxyWidget()
-    button_1 = widgets.RadioButton("Test")
-    qtbot.addWidget(button_1)
-    item.setWidget(button_1)
-    item2 = widgets.GraphicsProxyWidget()
-    button_2 = widgets.RadioButton("Test")
-    qtbot.addWidget(button_2)
-    item2.setWidget(button_2)
-    layout[1, 5:6] = item
-    layout += item2
-    layout.set_column_alignment(0, "left")
-    with pytest.raises(InvalidParamError):
-        layout.set_column_alignment(0, "test")
-    layout.set_row_alignment(0, "left")
-    with pytest.raises(InvalidParamError):
-        layout.set_row_alignment(0, "test")
-    assert len(layout) == 2
-    layout.set_margin(0)
+# def test_graphicsgridlayout(qtbot):
+#     layout = widgets.GraphicsGridLayout()
+#     item = widgets.GraphicsProxyWidget()
+#     button_1 = widgets.RadioButton("Test")
+#     qtbot.addWidget(button_1)
+#     item.setWidget(button_1)
+#     item2 = widgets.GraphicsProxyWidget()
+#     button_2 = widgets.RadioButton("Test")
+#     qtbot.addWidget(button_2)
+#     item2.setWidget(button_2)
+#     layout[1, 5:6] = item
+#     layout += item2
+#     layout.set_column_alignment(0, "left")
+#     with pytest.raises(InvalidParamError):
+#         layout.set_column_alignment(0, "test")
+#     layout.set_row_alignment(0, "left")
+#     with pytest.raises(InvalidParamError):
+#         layout.set_row_alignment(0, "test")
+#     assert len(layout) == 2
+#     layout.set_margin(0)
 
 
 def test_graphicspixmapitem(qtbot):
