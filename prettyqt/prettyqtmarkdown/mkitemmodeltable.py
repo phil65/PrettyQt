@@ -13,7 +13,7 @@ from prettyqt import core, itemmodels
 logger = logging.getLogger(__name__)
 
 
-class ItemModelTable(mknodes.MkTable):
+class MkItemModelTable(mknodes.MkTable):
     """Table which can display Qt ItemModels.
 
     The given ItemModel will get proxied with a ProxyModel which translates
@@ -40,7 +40,7 @@ class ItemModelTable(mknodes.MkTable):
         super().__init__(data, columns=h_header)
 
 
-class DependencyTable(ItemModelTable):
+class MkDependencyTable(MkItemModelTable):
     def __init__(self, distribution: str | metadata.Distribution = "prettyqt"):
         model = itemmodels.ImportlibTreeModel(distribution)
         proxy = itemmodels.ColumnOrderProxyModel(
@@ -51,5 +51,5 @@ class DependencyTable(ItemModelTable):
 
 
 if __name__ == "__main__":
-    table = DependencyTable("prettyqt")
+    table = MkDependencyTable("prettyqt")
     print(table)

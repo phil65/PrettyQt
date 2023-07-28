@@ -38,19 +38,12 @@ class IndexConnectionBuilder(connectionbuilder.ConnectionBuilder):
         return [model.index(i, 0, item) for i in range(model.rowCount(item))]
 
 
-class PrettyQtDiagram:
+class MkPrettyQtDiagram:
     pass
 
 
 if __name__ == "__main__":
     import mknodes
 
-    from prettyqt import prettyqtmarkdown
-
     page = mknodes.MkPage([])
     page += mknodes.MkAdmonition("test")
-    page += mknodes.MkTable(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
-    page += mknodes.MkDocStrings(core, header="DocStrings")
-    model = prettyqtmarkdown.MarkdownModel(page)
-    builder = IndexConnectionBuilder(model.index(0, 0, core.ModelIndex()))
-    print(builder.connections)

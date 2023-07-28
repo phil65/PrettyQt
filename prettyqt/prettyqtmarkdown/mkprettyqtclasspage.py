@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 app = widgets.app()
 
 
-class PrettyQtClassPage(mknodes.MkClassPage):
+class MkPrettyQtClassPage(mknodes.MkClassPage):
     """A ClassPage specifically for Qt-based classes."""
 
     def _build(self):
@@ -46,7 +46,8 @@ class PrettyQtClassPage(mknodes.MkClassPage):
         ):
             self.add_admonition(f"Supported data type: `{self.klass.SUPPORTS}`")
         if issubclass(self.klass, core.QObject):
-            table = prettyqtmarkdown.PropertyTable(self.klass, header="⌗ Property table")
+            header = "⌗ Property table"
+            table = prettyqtmarkdown.MkPropertyTable(self.klass, header=header)
             self.append(table)
         if hasattr(self.klass, "ID") and issubclass(self.klass, gui.Validator):
             self.append(f"\n\nValidator ID: **{self.klass.ID}**\n\n")
@@ -61,9 +62,10 @@ class PrettyQtClassPage(mknodes.MkClassPage):
         ):
             if widget := self.klass.setup_example():
                 self += mknodes.MkCode.for_object(self.klass.setup_example)
-                self += prettyqtmarkdown.WidgetScreenShot(widget, header="🖼 Screenshot")
+                header = "🖼 Screenshot"
+                self += prettyqtmarkdown.MkWidgetScreenShot(widget, header=header)
 
 
 if __name__ == "__main__":
-    page = PrettyQtClassPage(klass=core.StringListModel)
+    page = MkPrettyQtClassPage(klass=core.StringListModel)
     print(page.to_markdown())

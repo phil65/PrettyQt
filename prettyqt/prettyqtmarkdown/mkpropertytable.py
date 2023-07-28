@@ -10,7 +10,7 @@ from prettyqt import core
 logger = logging.getLogger(__name__)
 
 
-class PropertyTable(mknodes.MkTable):
+class MkPropertyTable(mknodes.MkTable):
     """A table containing info about Qt properties."""
 
     def __init__(
@@ -38,7 +38,7 @@ class PropertyTable(mknodes.MkTable):
 
 
 if __name__ == "__main__":
-    table = PropertyTable(core.StringListModel)
+    table = MkPropertyTable(core.StringListModel)
     dct = core.Property.get_doc_dict(core.StringListModel)
     print(dct)
     # print(table.to_markdown())

@@ -1,29 +1,29 @@
 """Module containing stuff to help buidling docs.
 
 This module builds on mknodes and contains some new nodes to help building documentation,
-an ItemModelTable to easily display Qt ItemModels as Markdown Tables
+an MkItemModelTable to easily display Qt ItemModels as Markdown Tables
 as well as a model + widget to preview a generated mknodes tree.
 
 """
 
 from __future__ import annotations
 
-from .itemmodeltable import DependencyTable, ItemModelTable
 from .markdownmodel import MarkdownModel
 from .markdownwidget import MarkdownWidget
-from .prettyqtclasspage import PrettyQtClassPage
-from .prettyqtdiagram import PrettyQtDiagram
-from .propertytable import PropertyTable
-from .widgetscreenshot import WidgetScreenShot
+from .mkitemmodeltable import MkDependencyTable, MkItemModelTable
+from .mkprettyqtclasspage import MkPrettyQtClassPage
+from .mkprettyqtdiagram import MkPrettyQtDiagram
+from .mkpropertytable import MkPropertyTable
+from .mkwidgetscreenshot import MkWidgetScreenShot
 
 
 __all__ = [
-    "ItemModelTable",
-    "DependencyTable",
+    "MkItemModelTable",
+    "MkDependencyTable",
     "MarkdownModel",
     "MarkdownWidget",
-    "PrettyQtClassPage",
-    "PrettyQtDiagram",
-    "PropertyTable",
-    "WidgetScreenShot",
+    "MkPrettyQtClassPage",
+    "MkPrettyQtDiagram",
+    "MkPropertyTable",
+    "MkWidgetScreenShot",
 ]

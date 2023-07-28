@@ -32,12 +32,12 @@ extra_docs = root_nav.add_doc(prettyqt, section_name="additional_modules")
 
 for submod in qt_docs.iter_modules(predicate=lambda x: hasattr(x, QT_MODULE_ATTR)):
     subdoc = qt_docs.add_doc(
-        submod, class_page=prettyqtmarkdown.PrettyQtClassPage, flatten_nav=True
+        submod, class_page=prettyqtmarkdown.MkPrettyQtClassPage, flatten_nav=True
     )
     subdoc.collect_classes()
 for submod in extra_docs.iter_modules(predicate=lambda x: not hasattr(x, QT_MODULE_ATTR)):
     subdoc = extra_docs.add_doc(
-        submod, class_page=prettyqtmarkdown.PrettyQtClassPage, flatten_nav=True
+        submod, class_page=prettyqtmarkdown.MkPrettyQtClassPage, flatten_nav=True
     )
     subdoc.collect_classes()
 

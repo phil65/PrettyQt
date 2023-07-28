@@ -11,7 +11,7 @@ from prettyqt.utils import datatypes
 logger = logging.getLogger(__name__)
 
 
-class WidgetScreenShot(mknodes.MkBinaryImage):
+class MkWidgetScreenShot(mknodes.MkBinaryImage):
     """Node to easily create and embed a widget screenshot into docs."""
 
     def __init__(
@@ -52,5 +52,5 @@ if __name__ == "__main__":
 
     w = widgets.PushButton("Test")
     page = mknodes.MkPage()
-    page += WidgetScreenShot(w, "test.png")
+    page += MkWidgetScreenShot(w, "test.png")
     print(page.to_markdown())
