@@ -1388,7 +1388,7 @@ def test_treeview(qtbot):
     widget = widgets.TreeView()
     qtbot.addWidget(widget)
     assert len(widget) == 0
-    model = widgets.FileSystemModel()
+    model = gui.StandardItemModel.from_dict(dict(a=[1, 2, 3], b=["d", "e", "f"]))
     widget.set_model(model)
     widget.selectAll()
     assert widget.v_scrollbar
