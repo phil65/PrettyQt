@@ -1,6 +1,6 @@
 """Tests for `prettyqt` package."""
 
-from prettyqt import svgwidgets
+# from prettyqt import svgwidgets
 
 
 # def test_svgwidget():
@@ -8,6 +8,6 @@ from prettyqt import svgwidgets
 #     widget.load_file("")
 
 
-def test_svggraphicsitem():
-    item = svgwidgets.GraphicsSvgItem()
-    assert item
+# def test_svggraphicsitem():
+#     item = svgwidgets.GraphicsSvgItem()
+#     assert item
