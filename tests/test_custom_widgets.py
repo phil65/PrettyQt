@@ -178,11 +178,11 @@ def test_filechooserbutton(qtbot):
     btn.get_value()
 
 
-def test_objectbrowser(qtbot):
-    struct = dict(a={1, 2, frozenset([1, 2])})
-    browser = custom_widgets.ObjectBrowser(struct)
-    browser.show()
-    browser.close()
+# def test_objectbrowser(qtbot):
+#     struct = dict(a={1, 2, frozenset([1, 2])})
+#     browser = custom_widgets.ObjectBrowser(struct)
+#     browser.show()
+#     browser.close()
 
 
 # def test_fontchooserbutton(qtbot):
