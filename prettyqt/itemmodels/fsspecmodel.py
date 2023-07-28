@@ -25,20 +25,6 @@ class FsSpecCompleter(widgets.Completer):
         return path.split(self.model().fs.sep)
 
 
-# class FolderInfo(TypedDict):
-#     name: str
-#     size: int
-#     type: str
-#     created: float
-#     islink: bool  # symbolic link
-#     mode: int  # Inode protection mode.
-#     uid: int  # user id of owner
-#     gid: int  # group id of owner
-#     mtime: float
-#     ino: int  # Inode number.
-#     nlink: int  # Number of links to the inode.
-
-
 _icon_provider = widgets.FileIconProvider()
 
 
