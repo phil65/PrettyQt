@@ -12,7 +12,7 @@ import tempfile
 import pytest
 
 # import prettyqt
-from prettyqt import constants, core, gui, iconprovider, widgets
+from prettyqt import constants, core, gui, iconprovider, qt, widgets
 from prettyqt.utils import InvalidParamError
 
 
@@ -403,7 +403,7 @@ def test_graphicspixmapitem(qtbot):
     assert item.get_pixmap() is None
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+@pytest.mark.skipif(qt.API == "pyside6", reason="Segfault")
 def test_graphicsscene(qtbot):
     scene = widgets.GraphicsScene()
     icon = iconprovider.get_icon("mdi.help-circle-outline")
