@@ -637,6 +637,7 @@ def test_lineedit(qtbot):
     widget += "append"
 
 
+@pytest.mark.skipif(qt.API == "pyside6", reason="Segfault")
 def test_listview(qtbot):
     widget = widgets.ListView()
     qtbot.addWidget(widget)

@@ -7,7 +7,7 @@ import pytest
 from prettyqt import gui, qt, syntaxhighlighters
 
 
-@pytest.mark.skipif(qt.API == "pyside6", reason="X11 connection break")
+@pytest.mark.skipif(qt.API == "pyside6", reason="Segfault")
 def test_jsonhighlighter():
     doc = gui.QTextDocument()
     highlighter = syntaxhighlighters.JsonHighlighter(doc)
