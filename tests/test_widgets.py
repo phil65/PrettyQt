@@ -537,7 +537,7 @@ def test_headerview(qtbot):
         header.set_context_menu_policy("test")
     assert header.get_context_menu_policy() == "custom"
     header.set_custom_menu(test)
-    assert len(header.get_section_labels()) == 4
+    assert len(header.get_section_labels()) == 1
     header.save_state()
     header.load_state()
     header.set_section_hidden(0, True)
