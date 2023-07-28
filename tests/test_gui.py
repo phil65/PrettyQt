@@ -754,7 +754,8 @@ def test_regularexpressionvalidator():
 
 
 def test_syntaxhighlighter():
-    gui.SyntaxHighlighter(None)
+    doc = gui.TextDocument()
+    gui.SyntaxHighlighter(doc)
 
 
 def test_textcharformat():

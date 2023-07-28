@@ -2,31 +2,36 @@
 
 import re
 
-from prettyqt import syntaxhighlighters
+from prettyqt import gui, syntaxhighlighters
 
 
 def test_jsonhighlighter():
-    highlighter = syntaxhighlighters.JsonHighlighter()
+    doc = gui.TextDocument()
+    highlighter = syntaxhighlighters.JsonHighlighter(doc)
     highlighter.highlightBlock('{"a": "b"}')
 
 
 def test_pythonhighlighter():
-    highlighter = syntaxhighlighters.PythonHighlighter()
+    doc = gui.TextDocument()
+    highlighter = syntaxhighlighters.PythonHighlighter(doc)
     highlighter.highlightBlock("def test(): pass")
 
 
 def test_yamlhighlighter():
-    highlighter = syntaxhighlighters.YamlHighlighter()
+    doc = gui.TextDocument()
+    highlighter = syntaxhighlighters.YamlHighlighter(doc)
     highlighter.highlightBlock("---\ntest:\n  - hallo")
 
 
 def test_markdownhighlighter():
-    highlighter = syntaxhighlighters.MarkdownHighlighter()
+    doc = gui.TextDocument()
+    highlighter = syntaxhighlighters.MarkdownHighlighter(doc)
     highlighter.highlightBlock("### Headline")
 
 
 def test_regexmatchhighlighter():
-    highlighter = syntaxhighlighters.RegexMatchHighlighter()
+    doc = gui.TextDocument()
+    highlighter = syntaxhighlighters.RegexMatchHighlighter(doc)
     text = "a123"
     prog = re.compile("[0-9]")
     spans = [m.span() for m in prog.finditer(text)]
