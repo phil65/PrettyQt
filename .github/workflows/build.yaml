@@ -43,7 +43,7 @@ jobs:
           poetry run pytest
     - name: Test with pytest (PySide6)
       uses: coactions/setup-xvfb@v1
-      if: runner.os == 'Linux'
+      # if: runner.os == 'Linux'
       timeout-minutes: 5
       with:
         run: |
