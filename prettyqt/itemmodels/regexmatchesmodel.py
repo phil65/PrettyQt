@@ -6,6 +6,8 @@ from prettyqt import constants, core
 
 
 class RegexMatchesModel(core.AbstractTableModel):
+    """Model to display a list of re.Matches."""
+
     HEADER = ["Start", "End", "Value", "Groups"]
     SUPPORTS = list[re.Match]
 

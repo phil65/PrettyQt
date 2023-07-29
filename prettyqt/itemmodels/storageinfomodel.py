@@ -110,6 +110,8 @@ class ValidColumn(itemmodels.ColumnItem):
 
 
 class StorageInfoModel(itemmodels.ColumnTableModel):
+    """Model to display a list of core.QStorageInfos."""
+
     COLUMNS = [
         RootPathColumn,
         VolumeNameColumn,

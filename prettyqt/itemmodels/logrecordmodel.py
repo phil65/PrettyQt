@@ -150,6 +150,8 @@ class MessageColumn(itemmodels.ColumnItem):
 
 
 class LogRecordModel(itemmodels.ColumnTableModel):
+    """Model to display a list of logging.LogRecords."""
+
     COLUMNS = [
         LevelNameColumn,
         FileNameColumn,

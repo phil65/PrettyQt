@@ -106,6 +106,8 @@ class ParentColumn(itemmodels.ColumnItem):
 
 
 class ShortcutsModel(itemmodels.ColumnTableModel):
+    """Model to display a list of gui.QShortcuts."""
+
     COLUMNS = [
         WhatsThisColumn,
         EnabledColumn,

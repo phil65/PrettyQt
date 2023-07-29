@@ -13,6 +13,8 @@ SOURCE_FONT = gui.Font.mono(as_qt=True)
 
 
 class FrameInfoModel(itemmodels.ListMixin, core.AbstractTableModel):
+    """Model to display a list of inspect.Frameinfos / inspect.Tracebacks."""
+
     HEADER = ["Filename", "Line number", "Function", "Code context", "Index", "Positions"]
     SUPPORTS = Sequence[inspect.FrameInfo | inspect.Traceback]
 
