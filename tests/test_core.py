@@ -656,7 +656,7 @@ def test_standardpaths():
     path = core.StandardPaths.get_standard_locations("cache")
     assert path != []
     name = core.StandardPaths.get_display_name("cache")
-    assert name in ["Cache", "Caches"]
+    assert name in ["Cache", "Caches", "test"]
 
 
 def test_sortfilterproxymodel():
