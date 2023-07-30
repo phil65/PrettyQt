@@ -35,7 +35,7 @@ class MarkdownWidget(widgets.Widget):
 
 if __name__ == "__main__":
     app = widgets.app()
-    page = mknodes.MkPage([])
+    page = mknodes.MkPage()
     page += mknodes.MkAdmonition("test")
     page += mknodes.MkTable(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
     page += mknodes.MkDocStrings(helpers, header="DocStrings")

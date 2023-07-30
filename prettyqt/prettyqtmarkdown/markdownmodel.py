@@ -18,7 +18,7 @@ class MarkdownModel(itemmodels.TreeModel):
         MarkdownRole = constants.USER_ROLE + 5325
 
     def columnCount(self, index: core.ModelIndex | None = None) -> int:
-        return 3
+        return 2
 
     def data(
         self,
@@ -30,7 +30,7 @@ class MarkdownModel(itemmodels.TreeModel):
             case constants.DISPLAY_ROLE, 0:
                 return repr(data)
             case constants.DISPLAY_ROLE, 1:
-                return data.to_markdown().count("\n")
+                return data._to_markdown().count("\n")
             # case constants.DISPLAY_ROLE, 2:
             #     return data.to_markdown()
             case self.Roles.MarkdownRole, _:
@@ -44,7 +44,7 @@ class MarkdownModel(itemmodels.TreeModel):
 
 
 if __name__ == "__main__":
-    page = mknodes.MkPage([])
+    page = mknodes.MkPage()
     page += mknodes.MkAdmonition("test")
     page += mknodes.MkTable(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
     page += mknodes.MkDocStrings(helpers, header="DocStrings")

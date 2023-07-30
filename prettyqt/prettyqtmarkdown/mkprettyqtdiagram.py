@@ -45,5 +45,5 @@ class MkPrettyQtDiagram:
 if __name__ == "__main__":
     import mknodes
 
-    page = mknodes.MkPage([])
+    page = mknodes.MkPage()
     page += mknodes.MkAdmonition("test")
