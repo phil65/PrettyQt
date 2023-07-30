@@ -2,7 +2,7 @@
 name = "PrettyQt"
 version = "1.56.5"
 description = "A pythonic layer on top of PyQt6 / PySide6"
-readme = 'docs/index.md'
+readme = 'README.md'
 requires-python = ">=3.10"
 license = "MIT"
 authors = [
@@ -195,7 +195,7 @@ dependencies = [
 name = "PrettyQt"
 version = "1.56.5"
 description = "A pythonic layer on top of PyQt6 / PySide6"
-readme = 'docs/index.md'
+readme = 'README.md'
 repository = "https://github.com/phil65/prettyqt"
 homepage = "https://github.com/phil65/prettyqt"
 authors = ["phil65 <philipptemminghoff@googlemail.com>"]
