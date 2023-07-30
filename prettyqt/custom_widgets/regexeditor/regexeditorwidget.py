@@ -18,6 +18,9 @@ from prettyqt import constants, core, custom_widgets, itemmodels, widgets
 from prettyqt.syntaxhighlighters import RegexMatchHighlighter
 
 
+REF_HTML_FILE = pathlib.Path(__file__).parent / "ref.html"
+
+
 class RegexEditorWidget(widgets.Widget):
     quick_ref_requested = core.Signal(int)
 
@@ -39,16 +42,16 @@ class RegexEditorWidget(widgets.Widget):
         self.textedit_sub = widgets.PlainTextEdit(read_only=True, minimum_width=400)
         self.table_matches = widgets.TableView()
         self.table_matches.setup_list_style()
-        self.textedit_quickref = widgets.TextEdit(
+        textedit_quickref = widgets.TextEdit(
             parent=self,
             read_only=True,
             object_name="textedit_quickref",
-            html=(pathlib.Path(__file__).parent / "ref.html").read_text(),
+            html=REF_HTML_FILE.read_text(),
         )
-        self.cb_quickref = widgets.CheckBox(
+        cb_quickref = widgets.CheckBox(
             "Show Regular Expression Quick Reference",
             checked=True,
-            state_changed=self.textedit_quickref.setVisible,
+            state_changed=textedit_quickref.setVisible,
         )
         model = itemmodels.RegexMatchesModel()
         self.table_matches.set_model(model)
@@ -79,11 +82,12 @@ class RegexEditorWidget(widgets.Widget):
             layout.add(groupbox)
             layout.add(groupbox_teststring)
             layout.add(groupbox_sub)
-            layout.add(self.cb_quickref)
-        with layout.get_sub_layout("vertical") as layout:
-            layout.add(self.label_num_matches)
-            layout.add(self.table_matches)
-        layout.add(self.textedit_quickref)
+            layout.add(cb_quickref)
+        sub_layout = widgets.VBoxLayout()
+        layout.add(sub_layout)
+        sub_layout.add(self.label_num_matches)
+        sub_layout.add(self.table_matches)
+        layout.add(textedit_quickref)
         self._update_view()
 
     def on_match_list_current_change(self, index_new, index_old):
@@ -132,8 +136,6 @@ class RegexEditorWidget(widgets.Widget):
 
 if __name__ == "__main__":
     app = widgets.app()
-    app.setApplicationName("Test")
-    app.setOrganizationName("Test")
     teststring = "aa356aa356aa356aa356aa356aa356aa356aa3a356aa356"
     widget = RegexEditorWidget(regex="aa[0-9]", teststring=teststring)
     widget.show()

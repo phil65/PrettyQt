@@ -89,8 +89,6 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
 
     def __getitem__(self, index: int | str) -> HeaderWrapper:
         match index:
-            case int() if index >= self.count() or index < 0:
-                raise IndexError(index)
             case int():
                 idx = self.count() - index if index < 0 else index
                 if idx >= self.count() or idx < 0:
