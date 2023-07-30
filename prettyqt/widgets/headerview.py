@@ -87,12 +87,15 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         self.setResizeContentsPrecision(100)
         self._widget_name = parent.objectName() if parent is not None else ""
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: int | str) -> HeaderWrapper:
         match index:
             case int() if index >= self.count() or index < 0:
                 raise IndexError(index)
             case int():
-                return HeaderWrapper(index, self)
+                idx = self.count() - index if index < 0 else index
+                if idx >= self.count() or idx < 0:
+                    raise IndexError(index)
+                return HeaderWrapper(idx, self)
             case str():
                 index = self.get_section_for_label(index)
                 return HeaderWrapper(index, self)
