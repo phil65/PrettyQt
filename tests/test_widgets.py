@@ -257,19 +257,21 @@ def test_filedialog(qtbot):
 
 
 # Segfault with PySide6
-# def test_filesystemmodel(qttester):
-#     model = widgets.FileSystemModel()
-#     model.set_root_path("/")
-#     idx = model.index(0, 0)
-#     model.get_paths([idx])
-#     model.data(idx, model.Roles.FilePathRole)
-#     model.watch_for_changes(False)
-#     model.use_custom_icons(False)
-#     model.resolve_sym_links(False)
-#     model.set_name_filters(["test"], hide=True)
-#     model.set_filter("drives")
-#     with pytest.raises(InvalidParamError):
-#         model.set_filter("test")
+def test_filesystemmodel(qttester):
+    model = widgets.FileSystemModel()
+    model.set_root_path("/")
+    idx = model.index(0, 0)
+    model.get_paths([idx])
+    model.data(idx, model.Roles.FilePathRole)
+    model.watch_for_changes(False)
+    model.use_custom_icons(False)
+    model.resolve_sym_links(False)
+    model.set_name_filters(["test"], hide=True)
+    model.set_filter("drives")
+    with pytest.raises(InvalidParamError):
+        model.set_filter("test")
+
+
 # modeltest.ModelTest(model)
 # qttester.test_model(model, force_py=True)
 
@@ -291,33 +293,33 @@ def test_fontdialog(qtbot):
     dlg.get_current_font()
 
 
-# def test_formlayout(qtbot):
-#     layout = widgets.FormLayout()
-#     layout.set_size_constraint("maximum")
-#     with pytest.raises(InvalidParamError):
-#         layout.set_size_constraint("bla")
-#     layout[0, "left"] = "0, left"
-#     button_1 = widgets.RadioButton("1, left")
-#     layout[1, "left"] = button_1
-#     layout[0, "right"] = "label 1 right"
-#     button_2 = widgets.RadioButton("1, right")
-#     layout[1, "right"] = button_2
-#     layout[2] = "by str"
-#     button_3 = widgets.RadioButton("widget[3]")
-#     layout[3] = button_3
-#     button_4 = widgets.RadioButton("added with +=")
-#     layout += button_4
-#     button_5 = widgets.RadioButton("tuple")
-#     layout += ("added with +=", button_5)
-#     assert len(layout) == 6
-#     layout.set_row_wrap_policy("wrap_long")
-#     assert layout.get_row_wrap_policy() == "wrap_long"
-#     with pytest.raises(InvalidParamError):
-#         layout.set_row_wrap_policy("test")
-#     layout.set_field_growth_policy("expanding_fields_grow")
-#     assert layout.get_field_growth_policy() == "expanding_fields_grow"
-#     with pytest.raises(InvalidParamError):
-#         layout.set_field_growth_policy("test")
+def test_formlayout(qtbot):
+    layout = widgets.FormLayout()
+    layout.set_size_constraint("maximum")
+    with pytest.raises(InvalidParamError):
+        layout.set_size_constraint("bla")
+    layout[0, "left"] = "0, left"
+    button_1 = widgets.RadioButton("1, left")
+    layout[1, "left"] = button_1
+    layout[0, "right"] = "label 1 right"
+    button_2 = widgets.RadioButton("1, right")
+    layout[1, "right"] = button_2
+    layout[2] = "by str"
+    button_3 = widgets.RadioButton("widget[3]")
+    layout[3] = button_3
+    button_4 = widgets.RadioButton("added with +=")
+    layout += button_4
+    button_5 = widgets.RadioButton("tuple")
+    layout += ("added with +=", button_5)
+    assert len(layout) == 6
+    layout.set_row_wrap_policy("wrap_long")
+    assert layout.get_row_wrap_policy() == "wrap_long"
+    with pytest.raises(InvalidParamError):
+        layout.set_row_wrap_policy("test")
+    layout.set_field_growth_policy("expanding_fields_grow")
+    assert layout.get_field_growth_policy() == "expanding_fields_grow"
+    with pytest.raises(InvalidParamError):
+        layout.set_field_growth_policy("test")
 
 
 def test_frame(qtbot):
@@ -368,26 +370,26 @@ def test_graphicsitem(qtbot):
 
 
 # @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
-# def test_graphicsgridlayout(qtbot):
-#     layout = widgets.GraphicsGridLayout()
-#     item = widgets.GraphicsProxyWidget()
-#     button_1 = widgets.RadioButton("Test")
-#     qtbot.addWidget(button_1)
-#     item.setWidget(button_1)
-#     item2 = widgets.GraphicsProxyWidget()
-#     button_2 = widgets.RadioButton("Test")
-#     qtbot.addWidget(button_2)
-#     item2.setWidget(button_2)
-#     layout[1, 5:6] = item
-#     layout += item2
-#     layout.set_column_alignment(0, "left")
-#     with pytest.raises(InvalidParamError):
-#         layout.set_column_alignment(0, "test")
-#     layout.set_row_alignment(0, "left")
-#     with pytest.raises(InvalidParamError):
-#         layout.set_row_alignment(0, "test")
-#     assert len(layout) == 2
-#     layout.set_margin(0)
+def test_graphicsgridlayout(qtbot):
+    layout = widgets.GraphicsGridLayout()
+    item = widgets.GraphicsProxyWidget()
+    button_1 = widgets.RadioButton("Test")
+    qtbot.addWidget(button_1)
+    item.setWidget(button_1)
+    item2 = widgets.GraphicsProxyWidget()
+    button_2 = widgets.RadioButton("Test")
+    qtbot.addWidget(button_2)
+    item2.setWidget(button_2)
+    layout[1, 5:6] = item
+    layout += item2
+    layout.set_column_alignment(0, "left")
+    with pytest.raises(InvalidParamError):
+        layout.set_column_alignment(0, "test")
+    layout.set_row_alignment(0, "left")
+    with pytest.raises(InvalidParamError):
+        layout.set_row_alignment(0, "test")
+    assert len(layout) == 2
+    layout.set_margin(0)
 
 
 def test_graphicspixmapitem(qtbot):
