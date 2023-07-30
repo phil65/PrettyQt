@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import contextlib
 import logging
 
 import mknodes
@@ -30,7 +31,8 @@ class MarkdownModel(itemmodels.TreeModel):
             case constants.DISPLAY_ROLE, 0:
                 return repr(data)
             case constants.DISPLAY_ROLE, 1:
-                return data._to_markdown().count("\n")
+                with contextlib.suppress(AttributeError):
+                    return data._to_markdown().count("\n")
             # case constants.DISPLAY_ROLE, 2:
             #     return data.to_markdown()
             case self.Roles.MarkdownRole, _:

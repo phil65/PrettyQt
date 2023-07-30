@@ -14,7 +14,7 @@ build_index.build_index(page)
 build_root.build_root(root_nav)
 root_nav.write()
 
-# from prettyqt import widgets
+# from prettyqt import prettyqtmarkdown, widgets
 # app = widgets.app()
 # print(root_nav)
 # table = prettyqtmarkdown.MarkdownWidget()
