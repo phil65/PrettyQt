@@ -86,6 +86,7 @@ class RegexEditorWidget(widgets.Widget):
         sub_layout = widgets.VBoxLayout()
         layout.add(sub_layout)
         sub_layout.add(self.label_num_matches)
+        # TODO: adding table to layout weirdly breaks tests
         sub_layout.add(self.table_matches)
         layout.add(textedit_quickref)
         self._update_view()
