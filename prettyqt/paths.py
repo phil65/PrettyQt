@@ -9,7 +9,7 @@ ROOT_PATH = pathlib.Path(resources.files("prettyqt"))  # type: ignore
 LOCALIZATION_PATH = ROOT_PATH / "localization"
 THEMES_PATH = ROOT_PATH / "resources" / "themes"
 RE_LEXER_PATH = (
-    ROOT_PATH / "syntaxhighlighters" / "pygments" / "regularexpressionlexer.py"
+    ROOT_PATH / "syntaxhighlighters" / "custom_highlighters" / "regularexpressionlexer.py"
 )
 ICON_FONT_PATH = ROOT_PATH / "iconprovider" / "fonts"
 
