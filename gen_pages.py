@@ -1,52 +1,20 @@
-"""Generate the code reference pages and navigation."""
-
-
 from __future__ import annotations
 
-import logging
-import sys
+import pathlib
 
-import prettyqt
-from prettyqt import prettyqtmarkdown
 import mknodes
+from docs import build_root, build_index
 
-# from prettyqt.utils import classhelpers
-# from prettyqt import prettyqtmarkdown
-
-logger = logging.getLogger(__name__)
-
-logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-
-QT_MODULE_ATTR = "QT_MODULE"
-
-prettyqt.import_all()
-# import os
-# os.chdir(".docs/")
-# root_nav = mknodes.MkNav.from_file("SUMMARY.md", section=None
-root_nav = mknodes.MkNav(filename="somethingelse.md")
-qt_docs = root_nav.add_doc(prettyqt, section_name="qt_modules")
-# page = qt_docs.add_page("index")
-# table = mknodes.MkModuleTable(module=prettyqt, predicate=lambda x: hasattr(x, QT_MODULE_ATTR))
-# page += table
-extra_docs = root_nav.add_doc(prettyqt, section_name="additional_modules")
-
-for submod in qt_docs.iter_modules(predicate=lambda x: hasattr(x, QT_MODULE_ATTR)):
-    subdoc = qt_docs.add_doc(
-        submod, class_page=prettyqtmarkdown.PrettyQtClassPage, flatten_nav=True
-    )
-    subdoc.collect_classes()
-for submod in extra_docs.iter_modules(predicate=lambda x: not hasattr(x, QT_MODULE_ATTR)):
-    subdoc = extra_docs.add_doc(
-        submod, class_page=prettyqtmarkdown.PrettyQtClassPage, flatten_nav=True
-    )
-    subdoc.collect_classes()
-
-# extra_docs.pretty_print()
-
+# load our existing SUMMARY.md and static content...
+nav_file = pathlib.Path(__file__).parent / "SUMMARY.md"
+root_nav = mknodes.MkNav.from_file(nav_file, section=None)
+page = root_nav.add_index_page("Home", hide_nav=True)
+build_index.build_index(page)
+# and extend it with generated documentation.
+build_root.build_root(root_nav)
 root_nav.write()
 
 # from prettyqt import widgets
-
 # app = widgets.app()
 # print(root_nav)
 # table = prettyqtmarkdown.MarkdownWidget()
