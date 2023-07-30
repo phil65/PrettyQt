@@ -12,7 +12,7 @@ import tempfile
 import pytest
 
 # import prettyqt
-from prettyqt import constants, core, gui, iconprovider, qt, widgets
+from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.utils import InvalidParamError
 
 
@@ -170,7 +170,6 @@ def test_datetimeedit(qtbot):
     widget.get_displayed_sections()
 
 
-# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_dialog(qtbot, qttester):
     dlg = widgets.Dialog()
     dlg.set_layout("horizontal")
@@ -213,7 +212,6 @@ def test_dialogbuttonbox(qtbot):
     btn = box.add_default_buttons(["ok"])
 
 
-# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_dockwidget(qtbot):
     widget = widgets.DockWidget()
     qtbot.addWidget(widget)
@@ -369,7 +367,6 @@ def test_graphicsitem(qtbot):
     # item.get_shape()
 
 
-# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_graphicsgridlayout(qtbot):
     layout = widgets.GraphicsGridLayout()
     item = widgets.GraphicsProxyWidget()
@@ -405,7 +402,6 @@ def test_graphicspixmapitem(qtbot):
     assert item.get_pixmap() is None
 
 
-@pytest.mark.skipif(qt.API == "pyside6", reason="Segfault")
 def test_graphicsscene(qtbot):
     scene = widgets.GraphicsScene()
     icon = iconprovider.get_icon("mdi.help-circle-outline")
@@ -639,7 +635,6 @@ def test_lineedit(qtbot):
     widget += "append"
 
 
-@pytest.mark.skipif(qt.API == "pyside6", reason="Segfault")
 def test_listview(qtbot):
     widget = widgets.ListView()
     qtbot.addWidget(widget)
@@ -707,7 +702,6 @@ def test_listwidgetitem(qtbot):
     bytes(item)
 
 
-# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_mainwindow(qtbot):
     window = widgets.MainWindow()
     qtbot.addWidget(window)
@@ -815,7 +809,6 @@ def test_menubar(qtbot):
     menu.add_menu("test_menubar")
 
 
-# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_messagebox(qtbot):
     widget = widgets.MessageBox(buttons=["reset"])
     widget.set_icon("warning")
@@ -1022,7 +1015,6 @@ def test_statusbar(qtbot):
     status_bar.add_widget(widgets.Widget(), permanent=True)
 
 
-# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_stackedlayout(qtbot):
     layout = widgets.StackedLayout()
     widget = widgets.RadioButton("test_stackedlayout")
@@ -1071,7 +1063,6 @@ def test_spinbox(qtbot):
     assert widget.get_value() == 10
 
 
-# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_splashscreen(qtbot):
     pixmap = gui.Pixmap.create_dot()
     scr = widgets.SplashScreen(pixmap)
@@ -1267,7 +1258,6 @@ def test_toolbutton(qtbot):
     assert widget["test"] == act
 
 
-# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_tooltip(qtbot):
     widgets.ToolTip.show_text(text="test")
 
@@ -1336,7 +1326,6 @@ def test_tableview(qtbot):
     assert widget.v_header is not None
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="Only supported on windows")
 def test_tablewidget(qtbot, tablewidget):
     # qtbot.addWidget(tablewidget)
     tablewidget.sort()
@@ -1495,13 +1484,11 @@ def test_undoview(qtbot):
     assert view[0] == cmd
 
 
-# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_whatsthis(qtbot):
     with widgets.WhatsThis.enter_mode():
         pass
 
 
-# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_widget(qtbot):
     widget = widgets.Widget()
     qtbot.addWidget(widget)
