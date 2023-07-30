@@ -83,7 +83,6 @@ docs = [
     "mkdocs-section-index",
     "mkdocs-gen-files",
     "markdown-exec",
-    # "mkdocs-macros-plugin",
 ]
 
 addons = [
@@ -136,36 +135,17 @@ dependencies = [
     "markdown-exec",
     "mkdocs-section-index",
     "mkdocs-gen-files",
-    # "mkdocs-macros-plugin",
 ]
 
 [envs.default.scripts]
 test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg --cov=tests'
 
-
-
-
-
-
-
 [tool.hatch.envs.default.scripts]
 test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg --cov=tests'
-
-
-
-
-
-
 
 [tool.hatch.envs.docs.scripts]
 build = "mkdocs build --clean"
 serve = "mkdocs serve --dirtyreload"
-
-
-
-
-
-
 
 [tool.hatch.build]
 sources = ["prettyqt"]
@@ -269,7 +249,6 @@ mkdocs-material = "^9"
 mkdocstrings = {version = "^0", extras = ["python"]}
 mkdocs-glightbox = "*"
 mkdocs-section-index = "^0.3.5"
-# mkdocs-macros-plugin = "^1"
 markdown-exec = "*"
 mkdocs-literate-nav = "^0.6.0"
 mkdocs-gen-files = "^0.5.0"
