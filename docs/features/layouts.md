@@ -1,4 +1,4 @@
-### Context manager to build layouts
+## Context manager to build layouts
 
 ```py
 from prettyqt import widgets
@@ -30,7 +30,7 @@ with layout.get_sub_layout("horizontal") as layout:
         layout += widgets.RadioButton("Flow 4")
 ```
 
-### Setting a layout
+## Setting a layout
 
 Layouts can be also be set by an identifier:
 
@@ -64,7 +64,7 @@ Available layouts:
     class MyLayoutSubClass(widgets.BoxLayout):  # BoxLayout inherits from LayoutMixin
         ID = "some_identifier"   # this one will be usable for set_layout.
     ```
-### Accessing widgets inside a layout
+## Accessing widgets inside a layout
 
 All layouts support slicing, including the possibility to apply batch operations:
 

@@ -434,9 +434,9 @@ name = "cz_conventional_commits"
 github_repo = "phil65/PrettyQt"
 version = "1.56.5"
 tag_format = "v$version"
-update_changelog_on_bump = true
+update_changelog_on_bump = false
 changelog_start_rev = "v1.40.0"
-changelog_file = "docs/changelog.md"
+changelog_file = "changelog.md"
 version_files = [
     "prettyqt/__init__.py:__version__",
     "pyproject.toml:version",

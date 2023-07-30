@@ -1,3 +1,8 @@
+---
+hide:
+- toc
+---
+
 PrettyQt loosens type restrictions for the Qt API calls. Here is a short list how support for types is extended:
 
 

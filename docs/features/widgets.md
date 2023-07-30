@@ -65,17 +65,3 @@ widths = layout[::2].width()
 # trigger a fade-in animation for first 3 widgets
 layout[:3].fx.fade_in(duration=1000)
 ```
-
-Validators:
-
-PrettyQt ships a large number of predefined validators.
-
-
-    # Validators can also be combined. The resulting CompositeValidator checks if all containing validators accept the input.
-
-    # set_validator also gained a non-strict mode.
-    # That way the "lowest" result of the validator becomes "Intermediate", since the Qt behaviour of ignoring keypresses when state goes to invalid might not be wanted.
-
-
-
-

@@ -1,16 +1,9 @@
-* [Home](index.md)
 * Usage
     * [General](api_guidelines/general.md)
     * [Types](api_guidelines/types.md)
     * [Bindings](api_guidelines/bindings.md)
 * Features
     * [Proxy models](features/proxies.md)
-    * [Tools](features/tools.md)
     * [Widgets](features/widgets.md)
     * [Layouts](features/layouts.md)
-    * [Delegates](features/delegates.md)
     * [Animating](features/animating.md)
-    * [Validators](features/validators.md)
-* [Qt Modules](qt_modules/)
-* [Additional modules](additional_modules/)
-* [Changelog](changelog.md)

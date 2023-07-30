@@ -56,19 +56,15 @@ table.proxifier[:, :].style(background="green")
 
 Here is a short overview of the included slice proxies:
 
-| Proxy                                                                  | Description                                              |
-| -----------------------------------------------------------------------|----------------------------------------------------------|
-|[SliceFilterProxyModel](slicefilterproxymodel.md)                          | Show only selected slice of given source model.|
-|[SliceAppearanceProxyModel](sliceappearanceproxymodel.md)                  | Applies styling to given slice by overriding font, color and alignment roles.|
-|[SliceChangeFlagsProxyModel](slicechangeflagsproxymodel.md)                | Selectively change the ItemFlags of the model|
-|[SliceChangeIconSizeProxymodel](slicechangeiconsizeproxymodel.md)          | Allows to change the size of the Icon / Pixmap shown for DecorationRole.|
-|[SliceCheckableProxyModel](slicecheckableproxymodel.md)                    | Makes an area of the table checkable and triggers a callback on checkstate change.|
-|[SliceCheckableTreeProxyModel](slicecheckabletreeproxymodel.md)            | Makes an area of a tree checkable and triggers a callback on checkstate change.|
-|[SliceColorValuesProxyModel](slicecolorvaluesproxymodel.md)                | Color an area with numerical values based on their value.|
-|[SliceDisplayTextProxyModel](slicedisplaytextproxymodel.md)                | Format non-str DisplayRole values according to formatter strings.|
-|[SliceMapRoleProxyModel](slicemaproleproxymodel.md)                        | Map an ItemDataRole to another.|
-|[SliceValueTransformationProxyModel](slicevaluetransformationproxymodel.md)| Changes the values of any data role of given slice area based on a callback.|
+```python exec="on"
+import mknodes
+from prettyqt import itemmodels
+from prettyqt.utils import classhelpers
 
+SliceProxies = classhelpers.get_subclasses(itemmodels.SliceIdentityProxyModel)
+table = mknodes.MkClassTable(klasses=list(SliceProxies))
+print(table)
+```
 
 ## Sort/Filter proxies.
 
@@ -77,15 +73,15 @@ several proxies based on QSortFilterProxyModel. These can be more powerful
 than the mentioned [SliceFilterProxyModel](slicefilterproxymodel.md), but scale with O(1) in respect to row / column count. (meaning that things might get slower for very large tables or when several proxies are layered on top of each other.)
 Some of these proxies might partly overlap in functionality, but theres always a best one one for each use case to pick.
 
-| Proxy                                            | Description                                              |
-| -------------------------------------------------|----------------------------------------------------------|
-|[FuzzyFilterProxyModel](fuzzyfilterproxymodel.md) |Model for implementing a CommandPalette a la SubimeText.  |
-|[ValueFilterProxymodel](valuefilterproxymodel.md)         |Similar to QSortFilterProxyModel, but also works with non-str values.|
-|[SubsetFilterProxyModel](subsetfilterproxymodel.md)        |Filter based on slices, index, a filter function, a list of indexes (like columns [0, 3, 7])
-|[PredicateFilterProxyModel](predicatefilterproxymodel.md)     |Filter based on predicates.|
-|[RangeFilterProxyModel](rangefilterproxymodel.md)         |Filter based on min/max values of a numerical column.|
-|[MulticolumnFilterProxyModel](multicolumnfilterproxymodel.md)   | can take a seperate search term / value for each column.|
-                      |
+```python exec="on"
+import mknodes
+from prettyqt import core, itemmodels
+from prettyqt.utils import classhelpers
+
+SortFilterProxies = classhelpers.get_subclasses(core.SortFilterProxyModel)
+table = mknodes.MkClassTable(klasses=list(SortFilterProxies))
+print(table)
+```
 
 ## Reshape / Styling proxies
 
