@@ -7,7 +7,7 @@ from docs import build_root, build_index
 
 # load our existing SUMMARY.md and static content...
 nav_file = pathlib.Path(__file__).parent / "SUMMARY.md"
-root_nav = mknodes.MkNav.from_file(nav_file)
+root_nav = mknodes.MkNav.from_file(nav_file, section=None)
 page = root_nav.add_index_page("Home", hide_nav=True)
 build_index.build_index(page)
 # and extend it with generated documentation.
