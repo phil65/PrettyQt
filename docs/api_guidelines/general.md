@@ -1,3 +1,8 @@
+---
+hide:
+- toc
+---
+
 To allow for an easy switch, the API layer provided by PrettyQt should be consistent and predictable. When knowing the following guidelines, it should be easy to guess how PrettyQt can be used:
 
 * Every Qt namespace has an equivalent module, named lowerase and with the "Qt"-prefix removed.
