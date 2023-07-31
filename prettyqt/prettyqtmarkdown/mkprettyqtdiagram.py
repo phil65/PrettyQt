@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 
-from mknodes.utils import connectionbuilder
+from mknodes.utils import connector
 
 from prettyqt import constants, core
 
@@ -10,7 +10,7 @@ from prettyqt import constants, core
 logger = logging.getLogger(__name__)
 
 
-class IndexConnectionBuilder(connectionbuilder.ConnectionBuilder):
+class IndexConnector(connector.Connector):
     def __init__(
         self,
         index: core.ModelIndex,

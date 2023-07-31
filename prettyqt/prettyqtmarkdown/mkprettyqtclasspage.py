@@ -34,7 +34,7 @@ class MkPrettyQtClassPage(mknodes.MkClassPage):
             issubclass(self.klass, core.AbstractItemModelMixin)
             and self.klass.IS_RECURSIVE
         ):
-            self.add_admonition(RECURSIVE_MODEL_INFO, "warning")
+            self.add_admonition(RECURSIVE_MODEL_INFO, typ="warning")
         if (
             issubclass(self.klass, core.AbstractItemModelMixin)
             and self.klass.DELEGATE_DEFAULT is not None
