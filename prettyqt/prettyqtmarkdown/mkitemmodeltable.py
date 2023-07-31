@@ -19,11 +19,6 @@ class MkItemModelTable(mknodes.MkTable):
     The given ItemModel will get proxied with a ProxyModel which translates
     data from some of the ItemRoles to Markup styling, and afterwords converted
     to a Markup table.
-
-    Arguments:
-        model: The ItemModel to display.
-        use_checkstate_role: whether to display the CheckStateRole value if available.
-        kwargs: Keyword arguments passed to get_table_data.
     """
 
     def __init__(
@@ -32,6 +27,13 @@ class MkItemModelTable(mknodes.MkTable):
         use_checkstate_role: bool = True,
         **kwargs: Any,
     ):
+        """Constructor.
+
+        Arguments:
+            model: The ItemModel to display.
+            use_checkstate_role: whether to display the CheckStateRole value if available.
+            kwargs: Keyword arguments passed to get_table_data.
+        """
         proxy = itemmodels.SliceToMarkdownProxyModel(None, source_model=model)
         data, h_header, _ = proxy.get_table_data(
             use_checkstate_role=use_checkstate_role, **kwargs
@@ -41,7 +43,17 @@ class MkItemModelTable(mknodes.MkTable):
 
 
 class MkDependencyTable(MkItemModelTable):
-    def __init__(self, distribution: str | metadata.Distribution = "prettyqt"):
+    """MkTable subclass to display a dependency table."""
+
+    def __init__(
+        self,
+        distribution: str | metadata.Distribution = "prettyqt",
+    ):
+        """Constructor.
+
+        Arguments:
+            distribution: distribution to show dependency table for.
+        """
         model = itemmodels.ImportlibTreeModel(distribution)
         proxy = itemmodels.ColumnOrderProxyModel(
             order=["Name", "Constraints", "Extra", "Summary", "Homepage"],

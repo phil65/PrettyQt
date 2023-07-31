@@ -23,6 +23,16 @@ class MkWidgetScreenShot(mknodes.MkBinaryImage):
         header: str = "",
         resize_to: datatypes.SizeType | None = None,
     ):
+        """Constructor.
+
+        Arguments:
+            widget: Widget to make a screenshot from
+            caption: Image caption
+            path: Image path
+            title: Image title
+            header: Section header
+            resize_to: widget screenshot size
+        """
         if path is None:
             path = f"{widget.__class__.__name__}_screenshot.png"
         logger.info(f"Screenshot for {widget}")

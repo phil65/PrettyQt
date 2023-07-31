@@ -71,6 +71,7 @@ __all__ = [
     "animations",
     "itemdelegates",
     "itemmodels",
+    "docs",
     "custom_network",
     "validators",
     "custom_widgets",

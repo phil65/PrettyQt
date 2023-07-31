@@ -21,6 +21,7 @@ PrettyQt aims to improve this by:
 * adding a lot of `__dunder__` methods to the classes to make them behave like good python citizens.
 """
 
+
 def build_index(page):
     Proxies = classhelpers.get_subclasses(core.AbstractProxyModelMixin)
     Delegates = classhelpers.get_subclasses(widgets.StyledItemDelegate)
@@ -48,6 +49,6 @@ def build_index(page):
 
 
 if __name__ == "__main__":
-    page =mknodes.MkPage()
+    page = mknodes.MkPage()
     build_index(page)
     print(page)

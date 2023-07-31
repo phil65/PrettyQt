@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import pathlib
 import sys
 
 import prettyqt
@@ -18,7 +19,9 @@ def is_qt_module(module):
     return hasattr(module, "QT_MODULE")
 
 
-def build_root(root_nav: mknodes.MkNav):
+def build_root():
+    nav_file = pathlib.Path(__file__).parent / "SUMMARY.md"
+    root_nav = mknodes.MkNav.from_file(nav_file, section=None)
     qt_docs = root_nav.add_doc(prettyqt, section_name="Qt-based modules")
     extra_docs = root_nav.add_doc(prettyqt, section_name="Additional modules")
     populate_docs(qt_docs, is_qt_module)
@@ -26,6 +29,7 @@ def build_root(root_nav: mknodes.MkNav):
 
     dev_nav = root_nav.add_nav("Development")
     populate_dev_section(dev_nav)
+    return root_nav
 
 
 def populate_docs(doc_nav: mknodes.MkDoc, predicate):
