@@ -248,7 +248,7 @@ coverage = "^7"
 
 mkdocs = "^1"
 mknodes = "*"
-mkdocs-material = "^9"
+mkdocs-material = {version = "^9", allow-prereleases=true}
 mkdocstrings = {version = "^0", extras = ["python"]}
 mkdocs-glightbox = "*"
 mkdocs-section-index = "^0.3.5"
