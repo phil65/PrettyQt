@@ -23,7 +23,9 @@ def build_root():
     nav_file = pathlib.Path(__file__).parent / "SUMMARY.md"
     root_nav = mknodes.MkNav.from_file(nav_file, section=None)
     qt_docs = root_nav.add_doc(prettyqt, section_name="Qt-based modules")
+    # simple/qt
     extra_docs = root_nav.add_doc(prettyqt, section_name="Additional modules")
+    # octicons/plus-16
     populate_docs(qt_docs, is_qt_module)
     populate_docs(extra_docs, lambda x: not is_qt_module(x))
 

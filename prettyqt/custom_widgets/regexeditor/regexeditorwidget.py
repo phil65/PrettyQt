@@ -19,6 +19,7 @@ from prettyqt.syntaxhighlighters import RegexMatchHighlighter
 
 
 REF_HTML_FILE = pathlib.Path(__file__).parent / "ref.html"
+URL = "https://jex.im/regulex/#!embed=true&flags=&re={ESCAPED_REGEX}"
 
 
 class RegexEditorWidget(widgets.Widget):
