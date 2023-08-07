@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [macos-latest, windows-latest, ubuntu-22.04]
-        python-version: ["3.10", "3.11"]
+        python-version: ["3.11"]
     runs-on: ${{ matrix.platform }}
     env:
       DISPLAY: ':99.0'
@@ -57,7 +57,7 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
     - name: Create documentation
       # combine test coverage with --cov-append?
-      # if: matrix.python-version == '3.10' && runner.os == 'Linux'
+      # if: matrix.python-version == '3.11' && runner.os == 'Linux'
       uses: coactions/setup-xvfb@v1
       timeout-minutes: 10
       with:
@@ -65,12 +65,12 @@ jobs:
           poetry install -E pyside6 -E addons
           poetry run mkdocs build
     # - name: Build and publish
-    #   if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.10' && runner.os == 'Linux'
+    #   if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.11' && runner.os == 'Linux'
     #   run: |
     #     poetry config pypi-token.pypi ${{ secrets.PYPI_SECRET }}
     #     poetry publish --build
     # - name: Deploy docs
-    #   if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.10' && runner.os == 'Linux'
+    #   if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.11' && runner.os == 'Linux'
     #   uses: peaceiris/actions-gh-pages@v3
     #   with:
     #     github_token: ${{ secrets.GITHUB_TOKEN }}
