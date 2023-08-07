@@ -1,5 +1,5 @@
 default_language_version:
-    python: python3.10
+    python: python3.11
 default_stages: [commit]
 repos:
 - repo: local
@@ -28,7 +28,7 @@ repos:
     # - id: check-added-large-files
 # https://pre-commit.com/hooks.html
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: 3.5.4
+  rev: 3.6.0
   hooks:
     - id: commitizen
       stages: [commit-msg]
@@ -48,6 +48,6 @@ repos:
 #       exclude: '(sciscintilla)\.py'
 
 - repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.0.280
+  rev: v0.0.282
   hooks:
     - id: ruff
