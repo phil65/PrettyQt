@@ -4,7 +4,7 @@ import logging
 
 import mknodes
 
-from mknodes.templatenodes import processors
+from mknodes.pages import processors
 from mknodes.utils import helpers
 
 from prettyqt import core, gui, itemmodels, prettyqtmarkdown, widgets
@@ -60,19 +60,19 @@ class QtPageProcessor(processors.PageProcessor):
 
     def append_block(self, page: mknodes.MkPage):
         if issubclass(self.item, itemmodels.SliceIdentityProxyModel):
-            page.add_admonition(SLICE_PROXY_INFO)
+            page += mknodes.MkAdmonition(SLICE_PROXY_INFO)
         if issubclass(self.item, core.AbstractItemModelMixin) and self.item.IS_RECURSIVE:
-            page.add_admonition(RECURSIVE_MODEL_INFO, typ="warning")
+            page += mknodes.MkAdmonition(RECURSIVE_MODEL_INFO, typ="warning")
         if (
             issubclass(self.item, core.AbstractItemModelMixin)
             and self.item.DELEGATE_DEFAULT is not None
         ):
             msg = f"Recommended delegate: {self.item.DELEGATE_DEFAULT!r}"
-            page.add_admonition(msg)
+            page += mknodes.MkAdmonition(msg)
         if issubclass(self.item, core.AbstractItemModelMixin) and hasattr(
             self.item, "SUPPORTS"
         ):
-            page.add_admonition(f"Supported data type: `{self.item.SUPPORTS}`")
+            page += mknodes.MkAdmonition(f"Supported data type: `{self.item.SUPPORTS}`")
         if issubclass(self.item, core.QObject):
             header = "⌗ Property table"
             table = prettyqtmarkdown.MkPropertyTable(self.item, header=header)
