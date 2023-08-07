@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
     root_nav = mknodes.MkNav()
-    build_root(root_nav)
+    root_nav = build_root()
     table = prettyqtmarkdown.MarkdownWidget()
     table.set_markdown(root_nav)
     table.show()

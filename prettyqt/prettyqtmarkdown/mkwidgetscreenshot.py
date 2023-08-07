@@ -36,6 +36,7 @@ class MkWidgetScreenShot(mknodes.MkBinaryImage):
         if path is None:
             path = f"{widget.__class__.__name__}_screenshot.png"
         logger.info(f"Screenshot for {widget}")
+        self.widget = widget
         widget.setAttribute(constants.WidgetAttribute.WA_DontShowOnScreen)
         widget.show()
         widget.adjustSize()
