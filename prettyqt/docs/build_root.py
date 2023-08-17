@@ -19,9 +19,12 @@ def is_qt_module(module):
     return hasattr(module, "QT_MODULE")
 
 
-def build_root():
+def build_root(project: mknodes.Project):
+    project.module = prettyqt
     nav_file = pathlib.Path(__file__).parent / "SUMMARY.md"
     root_nav = mknodes.MkNav.from_file(nav_file, section=None)
+    project._root = root_nav
+    root_nav._associated_project = project
     qt_docs = root_nav.add_doc(prettyqt, section_name="Qt-based modules")
     # simple/qt
     extra_docs = root_nav.add_doc(prettyqt, section_name="Additional modules")
