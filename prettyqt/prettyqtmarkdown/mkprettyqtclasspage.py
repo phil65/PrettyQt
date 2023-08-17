@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 app = widgets.app()
 
 
-class QtParentPageProcessor(processors.PageProcessor):
+class QtParentContainerProcessor(processors.ContainerProcessor):
     ID = "qt_signature"
 
     def append_block(self, page: mknodes.MkPage):
@@ -36,7 +36,7 @@ class QtParentPageProcessor(processors.PageProcessor):
         return bool(classhelpers.get_qt_parent_class(self.item))
 
 
-class QtScreenshotPageProcessor(processors.PageProcessor):
+class QtScreenshotContainerProcessor(processors.ContainerProcessor):
     ID = "qt_signature"
 
     def append_block(self, page: mknodes.MkPage):
@@ -55,7 +55,7 @@ class QtScreenshotPageProcessor(processors.PageProcessor):
         )
 
 
-class QtPageProcessor(processors.PageProcessor):
+class QtContainerProcessor(processors.ContainerProcessor):
     ID = "qt"
 
     def append_block(self, page: mknodes.MkPage):
@@ -94,10 +94,10 @@ class MkPrettyQtClassPage(mknodes.MkClassPage):
     def get_processors(self):
         processors = super().get_processors()
         return [
-            QtParentPageProcessor(self.klass),
+            QtParentContainerProcessor(self.klass),
             *processors,
-            QtPageProcessor(self.klass),
-            QtScreenshotPageProcessor(self.klass),
+            QtContainerProcessor(self.klass),
+            QtScreenshotContainerProcessor(self.klass),
         ]
 
 
