@@ -91,8 +91,8 @@ class QtContainerProcessor(processors.ContainerProcessor):
 class MkPrettyQtClassPage(mknodes.MkClassPage):
     """A ClassPage specifically for Qt-based classes."""
 
-    def get_processors(self):
-        processors = super().get_processors()
+    def get_pageprocessors(self):
+        processors = super().get_pageprocessors()
         return [
             QtParentContainerProcessor(self.klass),
             *processors,
