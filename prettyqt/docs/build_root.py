@@ -7,6 +7,7 @@ import sys
 import prettyqt
 from prettyqt import prettyqtmarkdown
 import mknodes
+from mknodes.utils import linkprovider
 
 
 logger = logging.getLogger(__name__)
@@ -21,6 +22,8 @@ def is_qt_module(module):
 
 def build_root(project: mknodes.Project):
     project.module = prettyqt
+    project.linkprovider = prettyqtmarkdown.QtLinkProvider()
+    project.linkprovider.add_inv_file("docs/qt6.inv", "https://doc.qt.io/qtforpython/")
     nav_file = pathlib.Path(__file__).parent / "SUMMARY.md"
     root_nav = mknodes.MkNav.from_file(nav_file, section=None)
     project._root = root_nav

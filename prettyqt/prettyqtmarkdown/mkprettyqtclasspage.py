@@ -5,7 +5,6 @@ import logging
 import mknodes
 
 from mknodes.pages import processors
-from mknodes.utils import helpers
 
 from prettyqt import core, gui, itemmodels, prettyqtmarkdown, widgets
 from prettyqt.utils import classhelpers
@@ -26,7 +25,11 @@ class QtParentContainerProcessor(processors.ContainerProcessor):
 
     def append_block(self, page: mknodes.MkPage):
         qt_parent = classhelpers.get_qt_parent_class(self.item)
-        page += f"Qt Base Class: {helpers.link_for_class(qt_parent)}"
+        if page.associated_project:
+            provider = page.associated_project.linkprovider
+        else:
+            provider = prettyqtmarkdown.QtLinkProvider()
+        page += f"Qt Base Class: {provider.link_for_klass(qt_parent)}"
         page += f"Signature: `{qt_parent.__doc__}`"
 
     def get_default_header(self, page: mknodes.MkPage):

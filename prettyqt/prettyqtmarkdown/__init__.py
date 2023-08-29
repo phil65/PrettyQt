@@ -8,6 +8,7 @@ as well as a model + widget to preview a generated mknodes tree.
 
 from __future__ import annotations
 
+from .qtlinkprovider import QtLinkProvider
 from .markdownmodel import MarkdownModel
 from .markdownwidget import MarkdownWidget
 from .mkitemmodeltable import MkItemModelTable
@@ -25,4 +26,5 @@ __all__ = [
     "MkPrettyQtDiagram",
     "MkPropertyTable",
     "MkWidgetScreenShot",
+    "QtLinkProvider",
 ]
