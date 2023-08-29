@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from .markdownmodel import MarkdownModel
 from .markdownwidget import MarkdownWidget
-from .mkitemmodeltable import MkDependencyTable, MkItemModelTable
+from .mkitemmodeltable import MkItemModelTable
 from .mkprettyqtclasspage import MkPrettyQtClassPage
 from .mkprettyqtdiagram import MkPrettyQtDiagram
 from .mkpropertytable import MkPropertyTable
@@ -19,7 +19,6 @@ from .mkwidgetscreenshot import MkWidgetScreenShot
 
 __all__ = [
     "MkItemModelTable",
-    "MkDependencyTable",
     "MarkdownModel",
     "MarkdownWidget",
     "MkPrettyQtClassPage",
