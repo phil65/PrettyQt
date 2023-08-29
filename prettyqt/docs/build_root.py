@@ -44,19 +44,34 @@ def populate_docs(doc_nav: mknodes.MkDoc, predicate):
         subdoc.collect_classes()
 
 
-def populate_dev_section(dev_nav: mknodes.MkNav):
-    changelog_page = dev_nav.add_page("Changelog")
-    changelog_page += mknodes.MkChangelog()
-    dep_page = dev_nav.add_page("Dependencies", hide_toc=True)
-    dep_page += prettyqtmarkdown.MkDependencyTable("prettyqt")
+def populate_dev_section(nav: mknodes.MkNav):
+    page = nav.add_page("Changelog")
+    page += mknodes.MkChangelog()
+
+    page = nav.add_page("Dependencies", hide_toc=True)
+    page += mknodes.MkDependencyTable()
+
+    page = nav.add_page("Code of conduct")
+    page += mknodes.MkCodeOfConduct()
+
+    page = nav.add_page("Contributing")
+    page += mknodes.MkCommitConventions()
+    page += mknodes.MkPullRequestGuidelines()
+
+    page = nav.add_page("Setting up the environment")
+    page += mknodes.MkDevEnvSetup()
+
+    node = mknodes.MkLicense()
+    page = nav.add_page("License", hide_toc=True)
+    page += node
 
 
 if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    root_nav = mknodes.MkNav()
-    root_nav = build_root()
+    nav_file = pathlib.Path(__file__).parent / "SUMMARY.md"
+    root_nav = mknodes.MkNav.from_file(nav_file, section=None)
     table = prettyqtmarkdown.MarkdownWidget()
     table.set_markdown(root_nav)
     table.show()
