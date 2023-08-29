@@ -1,5 +1,5 @@
 Every class containing the AbstractItemViewMixin (`widgets.TreeView`, `widgets.TableView`, ...)
-has quick access to proxy superpowers hidden behind the "[proxifier](proxifier.md)" attribute.
+has quick access to proxy superpowers hidden behind the "[proxifier](Proxifier.md)" attribute.
 The following section will give an overview about the included proxies and how to apply them.
 
 
@@ -7,7 +7,7 @@ The following section will give an overview about the included proxies and how t
 
 PrettyQt introduces a base proxy model which allows its subclasses to be selectively applied to
 the source model by using python slicing syntax.
-They can get quickly set up via our [Proxifier](proxifier.md).
+They can get quickly set up via our [Proxifier](Proxifier.md).
 
 
 Example:
@@ -70,7 +70,7 @@ print(table)
 
 In addition to the mentioned SliceFilterProxyModel, PrettyQt also contains
 several proxies based on QSortFilterProxyModel. These can be more powerful
-than the mentioned [SliceFilterProxyModel](slicefilterproxymodel.md), but scale with O(1) in respect to row / column count. (meaning that things might get slower for very large tables or when several proxies are layered on top of each other.)
+than the mentioned [SliceFilterProxyModel](SliceFilterProxyModel.md), but scale with O(1) in respect to row / column count. (meaning that things might get slower for very large tables or when several proxies are layered on top of each other.)
 Some of these proxies might partly overlap in functionality, but theres always a best one one for each use case to pick.
 
 ```python exec="on"

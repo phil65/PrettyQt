@@ -172,7 +172,7 @@ class ScrollAreaTocWidget(widgets.TreeView):
         1) ExpandAll: All subsections are always expanded.
         2) on_focus: Only the section containing the focused item is expanded.
 
-        This widget is used by [ConfigWidget](configwidget.md).
+        This widget is used by [ConfigWidget](ConfigWidget.md).
         """
         # TODO: not sure if parent should always equal scrollarea..."""
         self._WidgetClass = widget_class
