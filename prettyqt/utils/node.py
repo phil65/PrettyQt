@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Callable, Iterable, Iterator, Sequence
 import logging
 
-from typing_extensions import Self
+from typing import Self
 
 from prettyqt.utils import baseresolver, get_repr
 
@@ -234,10 +234,8 @@ def preorder_iter(
             Stops iteration if condition evaluates to `True`
         max_depth: maximum depth of iteration, based on `depth` attribute, optional
     """
-    if (
-        tree
-        and (not max_depth or tree.depth <= max_depth)
-        and (not stop_condition or not stop_condition(tree))
+    if (not max_depth or tree.depth <= max_depth) and (
+        not stop_condition or not stop_condition(tree)
     ):
         if not filter_condition or filter_condition(tree):
             yield tree
