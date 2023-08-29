@@ -2,11 +2,12 @@ site_name: PrettyQt
 site_description: "Python wrapper for PySide6 / PyQt6."
 repo_url: "https://github.com/phil65/prettyqt"
 site_url: https://phil65.github.io/PrettyQt/
-watch: [mkdocs.yml, README.md, CHANGELOG.md, prettyqt/]
+watch: [mkdocs.yml, README.md, CHANGELOG.md]
 copyright: Copyright &copy; 2023 Philipp Temminghoff
 
 theme:
   name: material
+  custom_dir: docs/overrides
   palette:
   # Palette toggle for light mode
   - media: "(prefers-color-scheme: light)"
@@ -116,7 +117,7 @@ markdown_extensions:
     alternate_style: true
 - toc:
     toc_depth: 2
-use_directory_urls: false
+use_directory_urls: true
 
 extra_javascript:
   - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
