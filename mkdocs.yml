@@ -4,6 +4,7 @@ repo_url: "https://github.com/phil65/prettyqt"
 site_url: https://phil65.github.io/PrettyQt/
 watch: [mkdocs.yml, README.md, CHANGELOG.md]
 copyright: Copyright &copy; 2023 Philipp Temminghoff
+use_directory_urls: true
 
 theme:
   name: material
@@ -40,20 +41,17 @@ theme:
   # - toc.integrate  # integrates toc into left menu
   - navigation.top  # adds back-to-top button
   # - navigation.sections # top-level sections are rendered as groups
+
 plugins:
 - search
 # - social  # this one has dependency which is not on pypi for windows. (cairocffi)
 - tags
 - section-index  # clickable sections leading to index page (https://github.com/oprypin/mkdocs-section-index)
 - glightbox  # better image support
-# - macros
 - markdown-exec
-- literate-nav:  # move nav out of mkdocs.yml
-    nav_file: SUMMARY.md
-    # implicit_index: true
-# - autorefs  # allows linking to any header
+- literate-nav
 - mknodes:
-    path: docs/gen_pages.py
+    path: docs/gen_pages.py:build
 - mkdocstrings:
     default_handler: python
     handlers:
@@ -82,55 +80,23 @@ plugins:
           signature_crossrefs: true
           # separate_signature: true
           line_length: 90
+
 markdown_extensions:
-- codehilite
-- admonition
-- def_list
-- attr_list
-- abbr
-- md_in_html
-- tables
-- footnotes
-- pymdownx.critic
-- pymdownx.caret
-- pymdownx.keys
-- pymdownx.mark
-- pymdownx.tilde
-- pymdownx.details
-- pymdownx.magiclink # auto-convert links
-# - pymdownx.saneheaders # require a whitespace after header #
-- pymdownx.tasklist:
-    custom_checkbox: true
-- pymdownx.highlight:  # syntax highlighting
-    anchor_linenums: true
-    line_spans: __span
-    pygments_lang_class: true
-    # linenums: true
-- pymdownx.inlinehilite  # syntax highlighting inside line (`#!py mycode`)
-- pymdownx.snippets  # syntax highlighting
-- pymdownx.superfences:  # syntax highlighting
-    custom_fences:
-    - name: mermaid
-      class: mermaid
-      format: !!python/name:pymdownx.superfences.fence_code_format
-- pymdownx.tabbed:
-    alternate_style: true
 - toc:
     toc_depth: 2
-use_directory_urls: true
 
 extra_javascript:
   - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
   - javascripts/tablesort.js
 
-extra:
-  social:
-  - icon: fontawesome/brands/github
-    link: https://github.com/phil65
-  - icon: fontawesome/brands/gitter
-    link: https://matrix.to/#/#prettyqt:gitter.im
-  - icon: fontawesome/brands/python
-    link: https://pypi.org/project/prettyqt/
+# extra:
+#   social:
+#   - icon: fontawesome/brands/github
+#     link: https://github.com/phil65
+#   - icon: fontawesome/brands/gitter
+#     link: https://matrix.to/#/#prettyqt:gitter.im
+#   - icon: fontawesome/brands/python
+#     link: https://pypi.org/project/prettyqt/
   # generator: false disable "made with Material"
   # version:  # multiple doc versions
   #   provider: mike
