@@ -1,6 +1,6 @@
 [project]
 name = "PrettyQt"
-version = "1.57.2"
+version = "1.57.3"
 description = "A pythonic layer on top of PyQt6 / PySide6"
 readme = 'README.md'
 requires-python = ">=3.11"
@@ -142,14 +142,17 @@ test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg -
 
 
 
+
 [tool.hatch.envs.default.scripts]
 test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg --cov=tests'
+
 
 
 
 [tool.hatch.envs.docs.scripts]
 build = "mkdocs build --clean"
 serve = "mkdocs serve --dirtyreload"
+
 
 
 
@@ -182,7 +185,7 @@ dependencies = [
 
 [tool.poetry]
 name = "PrettyQt"
-version = "1.57.2"
+version = "1.57.3"
 description = "A pythonic layer on top of PyQt6 / PySide6"
 readme = 'README.md'
 license = "MIT"
@@ -445,7 +448,7 @@ exclude = '''
 [tool.commitizen]
 name = "cz_conventional_commits"
 github_repo = "phil65/PrettyQt"
-version = "1.57.2"
+version = "1.57.3"
 tag_format = "v$version"
 update_changelog_on_bump = false
 changelog_start_rev = "v1.40.0"
