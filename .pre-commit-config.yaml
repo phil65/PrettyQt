@@ -28,13 +28,13 @@ repos:
     # - id: check-added-large-files
 # https://pre-commit.com/hooks.html
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: 3.7.1
+  rev: 3.9.0
   hooks:
     - id: commitizen
       stages: [commit-msg]
       additional_dependencies: [typing-extensions] # cz-github-convention]
-- repo: https://github.com/ambv/black
-  rev: 23.7.0
+- repo: https://github.com/psf/black-pre-commit-mirror
+  rev: 23.9.1
   hooks:
     - id: black
       args: [--preview]
@@ -48,6 +48,6 @@ repos:
 #       exclude: '(sciscintilla)\.py'
 
 - repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.0.287
+  rev: v0.0.290
   hooks:
     - id: ruff
