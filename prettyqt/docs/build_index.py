@@ -45,7 +45,7 @@ def build_index(page):
     page += mknodes.MkTabbed(tabs=table_tabs, header="Features")
     page += DESCRIPTION
     page += "[Read more](general.md) about the general API design."
-    page += mknodes.MkInstallGuide(project="prettyqt", header="Where to get it")
+    page += mknodes.MkInstallGuide(distribution="prettyqt", header="Where to get it")
 
 
 if __name__ == "__main__":

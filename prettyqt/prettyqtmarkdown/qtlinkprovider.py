@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 
-from mknodes.utils import linkprovider
+from mknodes.info import linkprovider
 
 
 logger = logging.getLogger(__name__)

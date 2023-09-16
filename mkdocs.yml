@@ -51,7 +51,7 @@ plugins:
 - markdown-exec
 - literate-nav
 - mknodes:
-    path: docs/gen_pages.py:build
+    build_fn: docs/gen_pages.py:build
 - mkdocstrings:
     default_handler: python
     handlers:

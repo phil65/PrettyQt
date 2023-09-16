@@ -28,9 +28,9 @@ def build_root(project: mknodes.Project):
     project.linkprovider = provider
     project.theme.announcement_bar = mknodes.MkMetadataBadges("dependencies")
     nav_file = pathlib.Path(__file__).parent / "SUMMARY.md"
-    root_nav = mknodes.MkNav.from_file(nav_file, section=None)
+    root_nav = mknodes.MkNav.from_file(nav_file)
     project._root = root_nav
-    root_nav._associated_project = project
+    root_nav.associated_project = project
     qt_docs = root_nav.add_doc(prettyqt, section_name="Qt-based modules")
     # simple/qt
     extra_docs = root_nav.add_doc(prettyqt, section_name="Additional modules")
