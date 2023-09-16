@@ -1,0 +1,68 @@
+Qt Base Class: [QValidator](https://doc.qt.io/qtforpython/PySide6/QtGui/QValidator.html#PySide6.QtGui.PySide6.QtGui.QValidator)
+
+Signature: `QValidator(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                      | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Inherits                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[ValidatorMixin](ValidatorMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.validator</font>*<br>                                                                                                                                                       | <ul><li>[Validator](Validator.md)</li><li>[RegularExpressionValidator](RegularExpressionValidator.md)</li><li>[IntValidator](IntValidator.md)</li><li>[DoubleValidator](DoubleValidator.md)</li></ul>                                                                                                                                                                                                                                                                                                | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                              |
+| **<font size='4'>[QValidator](https://doc.qt.io/qtforpython/PySide6/QtGui/QValidator.html#PySide6.QtGui.PySide6.QtGui.QValidator)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QValidator\(self, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[QRegularExpressionValidator](https://doc.qt.io/qtforpython/PySide6/QtGui/QRegularExpressionValidator.html#PySide6.QtGui.PySide6.QtGui.QRegularExpressionValidator)</li><li>[QIntValidator](https://doc.qt.io/qtforpython/PySide6/QtGui/QIntValidator.html#PySide6.QtGui.PySide6.QtGui.QIntValidator)</li><li>[QDoubleValidator](https://doc.qt.io/qtforpython/PySide6/QtGui/QDoubleValidator.html#PySide6.QtGui.PySide6.QtGui.QDoubleValidator)</li><li>[Validator](Validator.md)</li></ul> | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li></ul> |
+
+
+## Subclasses
+
+| Class                                                 | Module                                     | Description |
+| ----------------------------------------------------- | ------------------------------------------ | ----------- |
+| [AlphaNumericValidator](AlphaNumericValidator.md)     | prettyqt.validators.alphanumericvalidator  |             |
+| [BlacklistValidator](BlacklistValidator.md)           | prettyqt.validators.blacklistvalidator     |             |
+| [ColorValidator](ColorValidator.md)                   | prettyqt.validators.colorvalidator         |             |
+| [CompositeValidator](CompositeValidator.md)           | prettyqt.validators.compositevalidator     |             |
+| [FunctionValidator](FunctionValidator.md)             | prettyqt.validators.functionvalidator      |             |
+| [HexValidator](HexValidator.md)                       | prettyqt.validators.hexvalidator           |             |
+| [IntegerValidator](IntegerValidator.md)               | prettyqt.validators.integervalidator       |             |
+| [JsonValidator](JsonValidator.md)                     | prettyqt.validators.jsonvalidator          |             |
+| [MonotonicListValidator](MonotonicListValidator.md)   | prettyqt.validators.monotoniclistvalidator |             |
+| [NotStrictValidator](NotStrictValidator.md)           | prettyqt.validators.notstrictvalidator     |             |
+| [PathValidator](PathValidator.md)                     | prettyqt.validators.pathvalidator          |             |
+| [PythonCodeValidator](PythonCodeValidator.md)         | prettyqt.validators.pythoncodevalidator    |             |
+| [QssValidator](QssValidator.md)                       | prettyqt.validators.qssvalidator           |             |
+| [RegexPatternValidator](RegexPatternValidator.md)     | prettyqt.validators.regexpatternvalidator  |             |
+| [BaseRegexValidator](BaseRegexValidator.md)           | prettyqt.validators.regexvalidators        |             |
+| [BaseScientificValidator](BaseScientificValidator.md) | prettyqt.validators.scientificvalidators   |             |
+| [TextLengthValidator](TextLengthValidator.md)         | prettyqt.validators.textlengthvalidator    |             |
+| [WhitelistValidator](WhitelistValidator.md)           | prettyqt.validators.whitelistvalidator     |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245568976["gui.Validator"]
+  1473245536768["gui.ValidatorMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473289208592["QtGui.QValidator"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473245536768 --> 1473245568976
+  1473299815024 --> 1473245536768
+  140713234304496 --> 1473299815024
+  1473289208592 --> 1473245568976
+  1473288842240 --> 1473289208592
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.validator.Validator
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

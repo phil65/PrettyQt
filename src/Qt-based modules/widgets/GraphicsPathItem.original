@@ -1,0 +1,40 @@
+Qt Base Class: [QGraphicsPathItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsPathItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsPathItem)
+
+Signature: `QGraphicsPathItem(self, parent: Optional[PySide6.QtWidgets.QGraphicsItem] = None) -> None
+QGraphicsPathItem(self, path: PySide6.QtGui.QPainterPath, parent: Optional[PySide6.QtWidgets.QGraphicsItem] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                           | Children                                                                                                                                                                                                                                                                                                                                            | Inherits                                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[AbstractGraphicsShapeItemMixin](AbstractGraphicsShapeItemMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.abstractgraphicsshapeitem</font>*<br>                                                                                                                                                        | <ul><li>[AbstractGraphicsShapeItem](AbstractGraphicsShapeItem.md)</li><li>[GraphicsRectItem](GraphicsRectItem.md)</li><li>[GraphicsSimpleTextItem](GraphicsSimpleTextItem.md)</li><li>[GraphicsPolygonItem](GraphicsPolygonItem.md)</li><li>[GraphicsEllipseItem](GraphicsEllipseItem.md)</li><li>[GraphicsPathItem](GraphicsPathItem.md)</li></ul> | <ul><li>[GraphicsItemMixin](GraphicsItemMixin.md)</li></ul>                                                                                                                                    |
+| **<font size='4'>[QGraphicsPathItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsPathItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsPathItem)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QGraphicsPathItem\(self, parent: Optional\[PySide6\.QtWidgets\.QGraphicsItem\] \= None\) \-\> None | <ul><li>[GraphicsPathItem](GraphicsPathItem.md)</li></ul>                                                                                                                                                                                                                                                                                           | <ul><li>[QAbstractGraphicsShapeItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QAbstractGraphicsShapeItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QAbstractGraphicsShapeItem)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296165120["widgets.GraphicsPathItem"]
+  1473293714592["widgets.AbstractGraphicsShapeItemMixin"]
+  1473293706784["widgets.GraphicsItemMixin"]
+  140713234304496["builtins.object"]
+  1473290844800["QtWidgets.QGraphicsPathItem"]
+  1473290838944["QtWidgets.QAbstractGraphicsShapeItem"]
+  1473290795024["QtWidgets.QGraphicsItem"]
+  1473291690208["Shiboken.Object"]
+  1473293714592 --> 1473296165120
+  1473293706784 --> 1473293714592
+  140713234304496 --> 1473293706784
+  1473290844800 --> 1473296165120
+  1473290838944 --> 1473290844800
+  1473290795024 --> 1473290838944
+  1473291690208 --> 1473290795024
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicspathitem.GraphicsPathItem
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,30 @@
+Qt Base Class: [QPlaceSearchRequest](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceSearchRequest.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceSearchRequest)
+
+Signature: `QPlaceSearchRequest(self) -> None
+QPlaceSearchRequest(self, other: PySide6.QtLocation.QPlaceSearchRequest) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                        | Children                                                      | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QPlaceSearchRequest](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceSearchRequest.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceSearchRequest)</font>**<br>*<font size='1'>PySide6.QtLocation</font>*<br>QPlaceSearchRequest\(self\) \-\> None | <ul><li>[PlaceSearchRequest](PlaceSearchRequest.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573493184["location.PlaceSearchRequest"]
+  1473573377040["QtLocation.QPlaceSearchRequest"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473573377040 --> 1473573493184
+  1473291690208 --> 1473573377040
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.location.placesearchrequest.PlaceSearchRequest
+    options:
+      show_root_toc_entry: False

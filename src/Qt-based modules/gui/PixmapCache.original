@@ -1,0 +1,29 @@
+Qt Base Class: [QPixmapCache](https://doc.qt.io/qtforpython/PySide6/QtGui/QPixmapCache.html#PySide6.QtGui.PySide6.QtGui.QPixmapCache)
+
+Signature: `QPixmapCache(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                        | Children                                        | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QPixmapCache](https://doc.qt.io/qtforpython/PySide6/QtGui/QPixmapCache.html#PySide6.QtGui.PySide6.QtGui.QPixmapCache)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QPixmapCache\(self\) \-\> None | <ul><li>[PixmapCache](PixmapCache.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245535792["gui.PixmapCache"]
+  1473300042352["QtGui.QPixmapCache"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473300042352 --> 1473245535792
+  1473291690208 --> 1473300042352
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.pixmapcache.PixmapCache
+    options:
+      show_root_toc_entry: False

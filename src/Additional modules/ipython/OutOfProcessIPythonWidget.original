@@ -1,0 +1,141 @@
+Qt Base Class: [QWidget](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidget)
+
+Signature: `QWidget(self, parent: Optional[PySide6.QtWidgets.QWidget] = None, f: PySide6.QtCore.Qt.WindowType = Default(Qt.WindowFlags)) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                | Children                                                                                                                                | Inherits                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **<font size='4'>[BaseIPythonWidget](BaseIPythonWidget.md)</font>**<br>*<font size='1'>prettyqt.ipython.baseipythonwidget</font>*<br>Convenience class for a live IPython console widget running out\-of\-process\. | <ul><li>[InProcessIPythonWidget](InProcessIPythonWidget.md)</li><li>[OutOfProcessIPythonWidget](OutOfProcessIPythonWidget.md)</li></ul> | <ul><li>[RichJupyterWidget](http://jupyter.org)</li><li>[WidgetMixin](WidgetMixin.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573306768["ipython.OutOfProcessIPythonWidget"]
+  1473572106368["ipython.BaseIPythonWidget"]
+  1473572135648["rich_jupyter_widget.RichJupyterWidget"]
+  1473572112224["rich_jupyter_widget.RichIPythonWidget"]
+  1473572108320["jupyter_widget.JupyterWidget"]
+  1473572131744["jupyter_widget.IPythonWidget"]
+  1473572128816["frontend_widget.FrontendWidget"]
+  1473572122960["history_console_widget.HistoryConsoleWidget"]
+  1473572121008["console_widget.ConsoleWidget"]
+  1473572116128["util.NewBase"]
+  1473369459712["configurable.LoggingConfigurable"]
+  1473369470448["configurable.Configurable"]
+  1473369367968["traitlets.HasTraits"]
+  1473369366992["traitlets.HasDescriptors"]
+  140713234304496["builtins.object"]
+  1473572123936["util.SuperQClass"]
+  1473290849680["QtWidgets.QWidget"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473572040000["base_frontend_mixin.BaseFrontendMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473572106368 --> 1473573306768
+  1473572135648 --> 1473572106368
+  1473572112224 --> 1473572135648
+  1473572108320 --> 1473572112224
+  1473572131744 --> 1473572108320
+  1473572128816 --> 1473572131744
+  1473572122960 --> 1473572128816
+  1473572121008 --> 1473572122960
+  1473572116128 --> 1473572121008
+  1473369459712 --> 1473572116128
+  1473369470448 --> 1473369459712
+  1473369367968 --> 1473369470448
+  1473369366992 --> 1473369367968
+  140713234304496 --> 1473369366992
+  1473572123936 --> 1473572116128
+  1473290849680 --> 1473572123936
+  1473288842240 --> 1473290849680
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300082368 --> 1473290849680
+  1473291690208 --> 1473300082368
+  1473572040000 --> 1473572128816
+  140713234304496 --> 1473572040000
+  1473293688240 --> 1473572106368
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.ipython.outofprocessipythonwidget.OutOfProcessIPythonWidget
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property             | Type                            | Doc                            |
+| ----------------------- | ------------------------------- | ------------------------------ |
+| `objectName`            | **QString**                     |                                |
+| `modal`                 | **bool**                        |                                |
+| `windowModality`        | **Qt::WindowModality**          |                                |
+| `enabled`               | **bool**                        |                                |
+| `geometry`              | **QRect**                       |                                |
+| `frameGeometry`         | **QRect**                       |                                |
+| `normalGeometry`        | **QRect**                       |                                |
+| `x`                     | **int**                         |                                |
+| `y`                     | **int**                         |                                |
+| `pos`                   | **QPoint**                      |                                |
+| `frameSize`             | **QSize**                       |                                |
+| `size`                  | **QSize**                       |                                |
+| `width`                 | **int**                         |                                |
+| `height`                | **int**                         |                                |
+| `rect`                  | **QRect**                       |                                |
+| `childrenRect`          | **QRect**                       |                                |
+| `childrenRegion`        | **QRegion**                     |                                |
+| `sizePolicy`            | **QSizePolicy**                 |                                |
+| `minimumSize`           | **QSize**                       |                                |
+| `maximumSize`           | **QSize**                       |                                |
+| `minimumWidth`          | **int**                         |                                |
+| `minimumHeight`         | **int**                         |                                |
+| `maximumWidth`          | **int**                         |                                |
+| `maximumHeight`         | **int**                         |                                |
+| `sizeIncrement`         | **QSize**                       |                                |
+| `baseSize`              | **QSize**                       |                                |
+| `palette`               | **QPalette**                    |                                |
+| `font`                  | **QFont**                       |                                |
+| `cursor`                | **QCursor**                     |                                |
+| `mouseTracking`         | **bool**                        |                                |
+| `tabletTracking`        | **bool**                        |                                |
+| `isActiveWindow`        | **bool**                        |                                |
+| `focusPolicy`           | **Qt::FocusPolicy**             |                                |
+| `focus`                 | **bool**                        |                                |
+| `contextMenuPolicy`     | **Qt::ContextMenuPolicy**       |                                |
+| `updatesEnabled`        | **bool**                        |                                |
+| `visible`               | **bool**                        |                                |
+| `minimized`             | **bool**                        |                                |
+| `maximized`             | **bool**                        |                                |
+| `fullScreen`            | **bool**                        |                                |
+| `sizeHint`              | **QSize**                       |                                |
+| `minimumSizeHint`       | **QSize**                       |                                |
+| `acceptDrops`           | **bool**                        |                                |
+| `windowTitle`           | **QString**                     |                                |
+| `windowIcon`            | **QIcon**                       |                                |
+| `windowIconText`        | **QString**                     |                                |
+| `windowOpacity`         | **double**                      |                                |
+| `windowModified`        | **bool**                        |                                |
+| `toolTip`               | **QString**                     |                                |
+| `toolTipDuration`       | **int**                         |                                |
+| `statusTip`             | **QString**                     |                                |
+| `whatsThis`             | **QString**                     |                                |
+| `accessibleName`        | **QString**                     |                                |
+| `accessibleDescription` | **QString**                     |                                |
+| `layoutDirection`       | **Qt::LayoutDirection**         |                                |
+| `autoFillBackground`    | **bool**                        |                                |
+| `styleSheet`            | **QString**                     |                                |
+| `locale`                | **QLocale**                     |                                |
+| `windowFilePath`        | **QString**                     |                                |
+| `inputMethodHints`      | **QFlags<Qt::InputMethodHint>** |                                |
+| `completion_mode`       | **QString**                     | Completion mode for the widget |

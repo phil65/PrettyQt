@@ -1,0 +1,30 @@
+Qt Base Class: [QPlace](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlace.html#PySide6.QtLocation.PySide6.QtLocation.QPlace)
+
+Signature: `QPlace(self) -> None
+QPlace(self, other: PySide6.QtLocation.QPlace) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                    | Children                            | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------- |
+| **<font size='4'>[QPlace](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlace.html#PySide6.QtLocation.PySide6.QtLocation.QPlace)</font>**<br>*<font size='1'>PySide6.QtLocation</font>*<br>QPlace\(self\) \-\> None | <ul><li>[Place](Place.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573480496["location.Place"]
+  1473573365328["QtLocation.QPlace"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473573365328 --> 1473573480496
+  1473291690208 --> 1473573365328
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.location.place.Place
+    options:
+      show_root_toc_entry: False

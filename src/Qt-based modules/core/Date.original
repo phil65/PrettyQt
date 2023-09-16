@@ -1,0 +1,32 @@
+Qt Base Class: [QDate](https://doc.qt.io/qtforpython/PySide6/QtCore/QDate.html#PySide6.QtCore.PySide6.QtCore.QDate)
+
+Signature: `QDate(self) -> None
+QDate(self, QDate: PySide6.QtCore.QDate) -> None
+QDate(self, y: int, m: int, d: int) -> None
+QDate(self, y: int, m: int, d: int, cal: PySide6.QtCore.QCalendar) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                | Children                          | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------------------------------- |
+| **<font size='4'>[QDate](https://doc.qt.io/qtforpython/PySide6/QtCore/QDate.html#PySide6.QtCore.PySide6.QtCore.QDate)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QDate\(self\) \-\> None | <ul><li>[Date](Date.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299792576["core.Date"]
+  1473289004256["QtCore.QDate"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473289004256 --> 1473299792576
+  1473291690208 --> 1473289004256
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.date.Date
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,33 @@
+Qt Base Class: [QPageSize](https://doc.qt.io/qtforpython/PySide6/QtGui/QPageSize.html#PySide6.QtGui.PySide6.QtGui.QPageSize)
+
+Signature: `QPageSize(self) -> None
+QPageSize(self, other: Union[PySide6.QtGui.QPageSize, PySide6.QtGui.QPageSize.PageSizeId, PySide6.QtCore.QSize]) -> None
+QPageSize(self, pageSizeId: PySide6.QtGui.QPageSize.PageSizeId) -> None
+QPageSize(self, pointSize: PySide6.QtCore.QSize, name: str = '', matchPolicy: PySide6.QtGui.QPageSize.SizeMatchPolicy = Instance(QPageSize.SizeMatchPolicy.FuzzyMatch)) -> None
+QPageSize(self, size: Union[PySide6.QtCore.QSizeF, PySide6.QtCore.QSize], units: PySide6.QtGui.QPageSize.Unit, name: str = '', matchPolicy: PySide6.QtGui.QPageSize.SizeMatchPolicy = Instance(QPageSize.SizeMatchPolicy.FuzzyMatch)) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                            | Children                                  | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QPageSize](https://doc.qt.io/qtforpython/PySide6/QtGui/QPageSize.html#PySide6.QtGui.PySide6.QtGui.QPageSize)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QPageSize\(self\) \-\> None | <ul><li>[PageSize](PageSize.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245572880["gui.PageSize"]
+  1473300091152["QtGui.QPageSize"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473300091152 --> 1473245572880
+  1473291690208 --> 1473300091152
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.pagesize.PageSize
+    options:
+      show_root_toc_entry: False

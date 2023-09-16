@@ -1,0 +1,23 @@
+## Subclasses
+
+| Class                                                     | Module                                      | Description |
+| --------------------------------------------------------- | ------------------------------------------- | ----------- |
+| [PlaceSearchResult](PlaceSearchResult.md)                 | prettyqt.location.placesearchresult         |             |
+| [PlaceResult](PlaceResult.md)                             | prettyqt.location.placeresult               |             |
+| [PlaceProposedSearchResult](PlaceProposedSearchResult.md) | prettyqt.location.placeproposedsearchresult |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573478544["location.PlaceSearchResultMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473573478544
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.location.placesearchresult.PlaceSearchResultMixin
+    options:
+      show_root_toc_entry: False

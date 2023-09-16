@@ -1,0 +1,33 @@
+## Base classes
+
+| Name                                                                                                        | Children                                                                            | Inherits                                        |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **<font size='4'>[StyleMixin](StyleMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.style</font>*<br> | <ul><li>[Style](Style.md)</li><li>[CommonStyleMixin](CommonStyleMixin.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul> |
+
+
+## Subclasses
+
+| Class                         | Module                       | Description |
+| ----------------------------- | ---------------------------- | ----------- |
+| [CommonStyle](CommonStyle.md) | prettyqt.widgets.commonstyle |             |
+| [ProxyStyle](ProxyStyle.md)   | prettyqt.widgets.proxystyle  |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293669696["widgets.CommonStyleMixin"]
+  1473293684336["widgets.StyleMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473293684336 --> 1473293669696
+  1473299815024 --> 1473293684336
+  140713234304496 --> 1473299815024
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.commonstyle.CommonStyleMixin
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,37 @@
+Qt Base Class: [QStandardItem](https://doc.qt.io/qtforpython/PySide6/QtGui/QStandardItem.html#PySide6.QtGui.PySide6.QtGui.QStandardItem)
+
+Signature: `QStandardItem(self) -> None
+QStandardItem(self, icon: Union[PySide6.QtGui.QIcon, PySide6.QtGui.QPixmap], text: str) -> None
+QStandardItem(self, other: PySide6.QtGui.QStandardItem) -> None
+QStandardItem(self, rows: int, columns: int = 1) -> None
+QStandardItem(self, text: str) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                            | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[SerializeMixin](SerializeMixin.md)</font>**<br>*<font size='1'>prettyqt.utils.serializemixin</font>*<br>                                                                                                      | <ul><li>[EasingCurve](EasingCurve.md)</li><li>[Url](Url.md)</li><li>[KeyCombination](KeyCombination.md)</li><li>[Icon](Icon.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[IconEngine](IconEngine.md)</li><li>[Image](Image.md)</li><li>[Brush](Brush.md)</li><li>[Region](Region.md)</li><li>[Transform](Transform.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QStandardItem](https://doc.qt.io/qtforpython/PySide6/QtGui/QStandardItem.html#PySide6.QtGui.PySide6.QtGui.QStandardItem)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QStandardItem\(self\) \-\> None | <ul><li>[StandardItem](StandardItem.md)</li></ul>                                                                                                                                                                                                                                                                                                 | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245634368["gui.StandardItem"]
+  1473299806240["utils.SerializeMixin"]
+  140713234304496["builtins.object"]
+  1473300039424["QtGui.QStandardItem"]
+  1473291690208["Shiboken.Object"]
+  1473299806240 --> 1473245634368
+  140713234304496 --> 1473299806240
+  1473300039424 --> 1473245634368
+  1473291690208 --> 1473300039424
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.standarditem.StandardItem
+    options:
+      show_root_toc_entry: False

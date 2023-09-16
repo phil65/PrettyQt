@@ -1,0 +1,136 @@
+Qt Base Class: [QLabel](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QLabel.html#PySide6.QtWidgets.PySide6.QtWidgets.QLabel)
+
+Signature: `QLabel(self, parent: Optional[PySide6.QtWidgets.QWidget] = None, f: PySide6.QtCore.Qt.WindowType = Default(Qt.WindowFlags)) -> None
+QLabel(self, text: str, parent: Optional[PySide6.QtWidgets.QWidget] = None, f: PySide6.QtCore.Qt.WindowType = Default(Qt.WindowFlags)) -> None`
+
+## Base classes
+
+| Name                                                                                              | Children                                                                                                                                  | Inherits                                                                                                                                                               |
+| ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[Label](Label.md)</font>**<br>*<font size='1'>prettyqt.widgets.label</font>*<br> | <ul><li>[CPAlphaShowLabel](CPAlphaShowLabel.md)</li><li>[ClickableLabel](ClickableLabel.md)</li><li>[IconWidget](IconWidget.md)</li></ul> | <ul><li>[FrameMixin](FrameMixin.md)</li><li>[QLabel](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QLabel.html#PySide6.QtWidgets.PySide6.QtWidgets.QLabel)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367039408["custom_widgets.ClickableLabel"]
+  1473296213920["widgets.Label"]
+  1473293662864["widgets.FrameMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473290630080["QtWidgets.QLabel"]
+  1473290626176["QtWidgets.QFrame"]
+  1473290849680["QtWidgets.QWidget"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473296213920 --> 1473367039408
+  1473293662864 --> 1473296213920
+  1473293688240 --> 1473293662864
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+  1473290630080 --> 1473296213920
+  1473290626176 --> 1473290630080
+  1473290849680 --> 1473290626176
+  1473288842240 --> 1473290849680
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300082368 --> 1473290849680
+  1473291690208 --> 1473300082368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.custom_widgets.labels.clickablelabel.ClickableLabel
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property             | Type                                | Doc              |
+| ----------------------- | ----------------------------------- | ---------------- |
+| `objectName`            | **QString**                         |                  |
+| `modal`                 | **bool**                            |                  |
+| `windowModality`        | **Qt::WindowModality**              |                  |
+| `enabled`               | **bool**                            |                  |
+| `geometry`              | **QRect**                           |                  |
+| `frameGeometry`         | **QRect**                           |                  |
+| `normalGeometry`        | **QRect**                           |                  |
+| `x`                     | **int**                             |                  |
+| `y`                     | **int**                             |                  |
+| `pos`                   | **QPoint**                          |                  |
+| `frameSize`             | **QSize**                           |                  |
+| `size`                  | **QSize**                           |                  |
+| `width`                 | **int**                             |                  |
+| `height`                | **int**                             |                  |
+| `rect`                  | **QRect**                           |                  |
+| `childrenRect`          | **QRect**                           |                  |
+| `childrenRegion`        | **QRegion**                         |                  |
+| `sizePolicy`            | **QSizePolicy**                     |                  |
+| `minimumSize`           | **QSize**                           |                  |
+| `maximumSize`           | **QSize**                           |                  |
+| `minimumWidth`          | **int**                             |                  |
+| `minimumHeight`         | **int**                             |                  |
+| `maximumWidth`          | **int**                             |                  |
+| `maximumHeight`         | **int**                             |                  |
+| `sizeIncrement`         | **QSize**                           |                  |
+| `baseSize`              | **QSize**                           |                  |
+| `palette`               | **QPalette**                        |                  |
+| `font`                  | **QFont**                           |                  |
+| `cursor`                | **QCursor**                         |                  |
+| `mouseTracking`         | **bool**                            |                  |
+| `tabletTracking`        | **bool**                            |                  |
+| `isActiveWindow`        | **bool**                            |                  |
+| `focusPolicy`           | **Qt::FocusPolicy**                 |                  |
+| `focus`                 | **bool**                            |                  |
+| `contextMenuPolicy`     | **Qt::ContextMenuPolicy**           |                  |
+| `updatesEnabled`        | **bool**                            |                  |
+| `visible`               | **bool**                            |                  |
+| `minimized`             | **bool**                            |                  |
+| `maximized`             | **bool**                            |                  |
+| `fullScreen`            | **bool**                            |                  |
+| `sizeHint`              | **QSize**                           |                  |
+| `minimumSizeHint`       | **QSize**                           |                  |
+| `acceptDrops`           | **bool**                            |                  |
+| `windowTitle`           | **QString**                         |                  |
+| `windowIcon`            | **QIcon**                           |                  |
+| `windowIconText`        | **QString**                         |                  |
+| `windowOpacity`         | **double**                          |                  |
+| `windowModified`        | **bool**                            |                  |
+| `toolTip`               | **QString**                         |                  |
+| `toolTipDuration`       | **int**                             |                  |
+| `statusTip`             | **QString**                         |                  |
+| `whatsThis`             | **QString**                         |                  |
+| `accessibleName`        | **QString**                         |                  |
+| `accessibleDescription` | **QString**                         |                  |
+| `layoutDirection`       | **Qt::LayoutDirection**             |                  |
+| `autoFillBackground`    | **bool**                            |                  |
+| `styleSheet`            | **QString**                         |                  |
+| `locale`                | **QLocale**                         |                  |
+| `windowFilePath`        | **QString**                         |                  |
+| `inputMethodHints`      | **QFlags<Qt::InputMethodHint>**     |                  |
+| `frameShape`            | **QFrame::Shape**                   |                  |
+| `frameShadow`           | **QFrame::Shadow**                  |                  |
+| `lineWidth`             | **int**                             |                  |
+| `midLineWidth`          | **int**                             |                  |
+| `frameWidth`            | **int**                             |                  |
+| `frameRect`             | **QRect**                           |                  |
+| `text`                  | **QString**                         |                  |
+| `textFormat`            | **Qt::TextFormat**                  |                  |
+| `pixmap`                | **QPixmap**                         |                  |
+| `scaledContents`        | **bool**                            |                  |
+| `alignment`             | **QFlags<Qt::AlignmentFlag>**       |                  |
+| `wordWrap`              | **bool**                            |                  |
+| `margin`                | **int**                             |                  |
+| `indent`                | **int**                             |                  |
+| `openExternalLinks`     | **bool**                            |                  |
+| `textInteractionFlags`  | **QFlags<Qt::TextInteractionFlag>** |                  |
+| `hasSelectedText`       | **bool**                            |                  |
+| `selectedText`          | **QString**                         |                  |
+| `elideMode`             | **QString**                         | Text Elide style |

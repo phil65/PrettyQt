@@ -1,0 +1,116 @@
+Qt Base Class: [QQuickWidget](https://doc.qt.io/qtforpython/PySide6/QtQuickWidgets/QQuickWidget.html#PySide6.QtQuickWidgets.PySide6.QtQuickWidgets.QQuickWidget)
+
+Signature: `QQuickWidget(self, engine: PySide6.QtQml.QQmlEngine, parent: PySide6.QtWidgets.QWidget) -> None
+QQuickWidget(self, parent: Optional[PySide6.QtWidgets.QWidget] = None) -> None
+QQuickWidget(self, source: Union[PySide6.QtCore.QUrl, str], parent: Optional[PySide6.QtWidgets.QWidget] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                     | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[WidgetMixin](WidgetMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.widget</font>*<br>                                                                                                                                                                                                                           | <ul><li>[Widget](Widget.md)</li><li>[FrameMixin](FrameMixin.md)</li><li>[FocusFrame](FocusFrame.md)</li><li>[AbstractSliderMixin](AbstractSliderMixin.md)</li><li>[AbstractButtonMixin](AbstractButtonMixin.md)</li><li>[LineEdit](LineEdit.md)</li><li>[AbstractSpinBoxMixin](AbstractSpinBoxMixin.md)</li><li>[RubberBandMixin](RubberBandMixin.md)</li><li>[DialogButtonBox](DialogButtonBox.md)</li><li>[DialogMixin](DialogMixin.md)</li><li>...</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[PaintDeviceMixin](PaintDeviceMixin.md)</li></ul>                                       |
+| **<font size='4'>[QQuickWidget](https://doc.qt.io/qtforpython/PySide6/QtQuickWidgets/QQuickWidget.html#PySide6.QtQuickWidgets.PySide6.QtQuickWidgets.QQuickWidget)</font>**<br>*<font size='1'>PySide6.QtQuickWidgets</font>*<br>QQuickWidget\(self, engine: PySide6\.QtQml\.QQmlEngine, parent: PySide6\.QtWidgets\.QWidget\) \-\> None | <ul><li>[QuickWidget](QuickWidget.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                 | <ul><li>[QWidget](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidget)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473374466224["quickwidgets.QuickWidget"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473374468176["QtQuickWidgets.QQuickWidget"]
+  1473290849680["QtWidgets.QWidget"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473293688240 --> 1473374466224
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+  1473374468176 --> 1473374466224
+  1473290849680 --> 1473374468176
+  1473288842240 --> 1473290849680
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300082368 --> 1473290849680
+  1473291690208 --> 1473300082368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.quickwidgets.quickwidget.QuickWidget
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property             | Type                            | Doc |
+| ----------------------- | ------------------------------- | --- |
+| `objectName`            | **QString**                     |     |
+| `modal`                 | **bool**                        |     |
+| `windowModality`        | **Qt::WindowModality**          |     |
+| `enabled`               | **bool**                        |     |
+| `geometry`              | **QRect**                       |     |
+| `frameGeometry`         | **QRect**                       |     |
+| `normalGeometry`        | **QRect**                       |     |
+| `x`                     | **int**                         |     |
+| `y`                     | **int**                         |     |
+| `pos`                   | **QPoint**                      |     |
+| `frameSize`             | **QSize**                       |     |
+| `size`                  | **QSize**                       |     |
+| `width`                 | **int**                         |     |
+| `height`                | **int**                         |     |
+| `rect`                  | **QRect**                       |     |
+| `childrenRect`          | **QRect**                       |     |
+| `childrenRegion`        | **QRegion**                     |     |
+| `sizePolicy`            | **QSizePolicy**                 |     |
+| `minimumSize`           | **QSize**                       |     |
+| `maximumSize`           | **QSize**                       |     |
+| `minimumWidth`          | **int**                         |     |
+| `minimumHeight`         | **int**                         |     |
+| `maximumWidth`          | **int**                         |     |
+| `maximumHeight`         | **int**                         |     |
+| `sizeIncrement`         | **QSize**                       |     |
+| `baseSize`              | **QSize**                       |     |
+| `palette`               | **QPalette**                    |     |
+| `font`                  | **QFont**                       |     |
+| `cursor`                | **QCursor**                     |     |
+| `mouseTracking`         | **bool**                        |     |
+| `tabletTracking`        | **bool**                        |     |
+| `isActiveWindow`        | **bool**                        |     |
+| `focusPolicy`           | **Qt::FocusPolicy**             |     |
+| `focus`                 | **bool**                        |     |
+| `contextMenuPolicy`     | **Qt::ContextMenuPolicy**       |     |
+| `updatesEnabled`        | **bool**                        |     |
+| `visible`               | **bool**                        |     |
+| `minimized`             | **bool**                        |     |
+| `maximized`             | **bool**                        |     |
+| `fullScreen`            | **bool**                        |     |
+| `sizeHint`              | **QSize**                       |     |
+| `minimumSizeHint`       | **QSize**                       |     |
+| `acceptDrops`           | **bool**                        |     |
+| `windowTitle`           | **QString**                     |     |
+| `windowIcon`            | **QIcon**                       |     |
+| `windowIconText`        | **QString**                     |     |
+| `windowOpacity`         | **double**                      |     |
+| `windowModified`        | **bool**                        |     |
+| `toolTip`               | **QString**                     |     |
+| `toolTipDuration`       | **int**                         |     |
+| `statusTip`             | **QString**                     |     |
+| `whatsThis`             | **QString**                     |     |
+| `accessibleName`        | **QString**                     |     |
+| `accessibleDescription` | **QString**                     |     |
+| `layoutDirection`       | **Qt::LayoutDirection**         |     |
+| `autoFillBackground`    | **bool**                        |     |
+| `styleSheet`            | **QString**                     |     |
+| `locale`                | **QLocale**                     |     |
+| `windowFilePath`        | **QString**                     |     |
+| `inputMethodHints`      | **QFlags<Qt::InputMethodHint>** |     |
+| `resizeMode`            | **QQuickWidget::ResizeMode**    |     |
+| `status`                | **QQuickWidget::Status**        |     |
+| `source`                | **QUrl**                        |     |

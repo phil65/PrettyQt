@@ -1,0 +1,43 @@
+Qt Base Class: [QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)
+
+Signature: `QObject(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                 | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[BaseEventFilter](BaseEventFilter.md)</font>**<br>*<font size='1'>prettyqt.eventfilters.baseeventfilter</font>*<br> | <ul><li>[AnimatedToolTipEventFilter](AnimatedToolTipEventFilter.md)</li><li>[AutoSizeColumnsEventFilter](AutoSizeColumnsEventFilter.md)</li><li>[EventCatcher](EventCatcher.md)</li><li>[HoverIconEventFilter](HoverIconEventFilter.md)</li><li>[ListViewGridResizeEventFilter](ListViewGridResizeEventFilter.md)</li><li>[SectionAutoSpanEventFilter](SectionAutoSpanEventFilter.md)</li><li>[SliderMoveToMouseClickEventFilter](SliderMoveToMouseClickEventFilter.md)</li><li>[TextUpdateEventFilter](TextUpdateEventFilter.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367058928["eventfilters.SectionAutoSpanEventFilter"]
+  1473367044288["eventfilters.BaseEventFilter"]
+  1473299782816["core.Object"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473367044288 --> 1473367058928
+  1473299782816 --> 1473367044288
+  1473299815024 --> 1473299782816
+  140713234304496 --> 1473299815024
+  1473288842240 --> 1473299782816
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.eventfilters.sectionautospaneventfilter.SectionAutoSpanEventFilter
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

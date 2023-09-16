@@ -1,0 +1,28 @@
+## Subclasses
+
+| Class                                               | Module                         | Description                                                         |
+| --------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------- |
+| [PaintDevice](PaintDevice.md)                       | prettyqt.gui.paintdevice       |                                                                     |
+| [PaintDeviceWindowMixin](PaintDeviceWindowMixin.md) | prettyqt.gui.paintdevicewindow |                                                                     |
+| [PixmapMixin](PixmapMixin.md)                       | prettyqt.gui.pixmap            | Off-screen image representation that can be used as a paint device. |
+| [Image](Image.md)                                   | prettyqt.gui.image             |                                                                     |
+| [PagedPaintDeviceMixin](PagedPaintDeviceMixin.md)   | prettyqt.gui.pagedpaintdevice  |                                                                     |
+| [Picture](Picture.md)                               | prettyqt.gui.picture           |                                                                     |
+| [WidgetMixin](WidgetMixin.md)                       | prettyqt.widgets.widget        |                                                                     |
+| [SvgGenerator](SvgGenerator.md)                     | prettyqt.svg.svggenerator      |                                                                     |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245548480["gui.PaintDeviceMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473245548480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.paintdevice.PaintDeviceMixin
+    options:
+      show_root_toc_entry: False

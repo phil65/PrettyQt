@@ -1,0 +1,25 @@
+## Subclasses
+
+| Class                                           | Module                       | Description |
+| ----------------------------------------------- | ---------------------------- | ----------- |
+| [TextFormat](TextFormat.md)                     | prettyqt.gui.textformat      |             |
+| [TextFrameFormatMixin](TextFrameFormatMixin.md) | prettyqt.gui.textframeformat |             |
+| [TextBlockFormat](TextBlockFormat.md)           | prettyqt.gui.textblockformat |             |
+| [TextCharFormatMixin](TextCharFormatMixin.md)   | prettyqt.gui.textcharformat  |             |
+| [TextListFormat](TextListFormat.md)             | prettyqt.gui.textlistformat  |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245646080["gui.TextFormatMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473245646080
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textformat.TextFormatMixin
+    options:
+      show_root_toc_entry: False

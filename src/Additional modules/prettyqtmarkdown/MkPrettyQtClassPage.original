@@ -1,0 +1,33 @@
+## Base classes
+
+| Name                                                                                                                                                                        | Children                                                        | Inherits                                                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **<font size='4'>[MkClassPage](https://phil65.github.io/mknodes/)</font>**<br>*<font size='1'>mknodes.pages.mkclasspage</font>*<br>Page showing information about a class\. | <ul><li>[MkPrettyQtClassPage](MkPrettyQtClassPage.md)</li></ul> | <ul><li>[MkTemplatePage](https://phil65.github.io/mknodes/)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367165312["prettyqtmarkdown.MkPrettyQtClassPage"]
+  1473242232000["mkclasspage.MkClassPage"]
+  1473242214432["mktemplatepage.MkTemplatePage"]
+  1473287621248["mkpage.MkPage"]
+  1473287555856["mkcontainer.MkContainer"]
+  1473287579280["mknode.MkNode"]
+  1473287420192["node.Node"]
+  140713234304496["builtins.object"]
+  1473242232000 --> 1473367165312
+  1473242214432 --> 1473242232000
+  1473287621248 --> 1473242214432
+  1473287555856 --> 1473287621248
+  1473287579280 --> 1473287555856
+  1473287420192 --> 1473287579280
+  140713234304496 --> 1473287420192
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.prettyqtmarkdown.mkprettyqtclasspage.MkPrettyQtClassPage
+    options:
+      show_root_toc_entry: False

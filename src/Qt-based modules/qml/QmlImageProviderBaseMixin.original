@@ -1,0 +1,22 @@
+## Subclasses
+
+| Class                                                 | Module                            | Description |
+| ----------------------------------------------------- | --------------------------------- | ----------- |
+| [QmlImageProviderBase](QmlImageProviderBase.md)       | prettyqt.qml.qmlimageproviderbase |             |
+| [QuickImageProviderMixin](QuickImageProviderMixin.md) | prettyqt.quick.quickimageprovider |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572340368["qml.QmlImageProviderBaseMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473572340368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qml.qmlimageproviderbase.QmlImageProviderBaseMixin
+    options:
+      show_root_toc_entry: False

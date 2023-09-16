@@ -1,0 +1,60 @@
+Qt Base Class: [QStringListModel](https://doc.qt.io/qtforpython/PySide6/QtCore/QStringListModel.html#PySide6.QtCore.PySide6.QtCore.QStringListModel)
+
+Signature: `QStringListModel(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QStringListModel(self, strings: Sequence[str], parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                  | Children                                                                                                                                                                                           | Inherits                                                                                                                                                      |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[StringListModelMixin](StringListModelMixin.md)</font>**<br>*<font size='1'>prettyqt.core.stringlistmodel</font>*<br>                                                                                                                                                                | <ul><li>[StringListModel](StringListModel.md)</li><li>[HelpIndexModel](HelpIndexModel.md)</li></ul>                                                                                                | <ul><li>[AbstractListModelMixin](AbstractListModelMixin.md)</li></ul>                                                                                         |
+| **<font size='4'>[QStringListModel](https://doc.qt.io/qtforpython/PySide6/QtCore/QStringListModel.html#PySide6.QtCore.PySide6.QtCore.QStringListModel)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QStringListModel\(self, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[StringListModel](StringListModel.md)</li><li>[QHelpIndexModel](https://doc.qt.io/qtforpython/PySide6/QtHelp/QHelpIndexModel.html#PySide6.QtHelp.PySide6.QtHelp.QHelpIndexModel)</li></ul> | <ul><li>[QAbstractListModel](https://doc.qt.io/qtforpython/PySide6/QtCore/QAbstractListModel.html#PySide6.QtCore.PySide6.QtCore.QAbstractListModel)</li></ul> |
+
+
+## Subclasses
+
+| Class                     | Module                              | Description |
+| ------------------------- | ----------------------------------- | ----------- |
+| [IconModel](IconModel.md) | prettyqt.custom_widgets.iconbrowser |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299897008["core.StringListModel"]
+  1473299896032["core.StringListModelMixin"]
+  1473299894080["core.AbstractListModelMixin"]
+  1473299890176["core.AbstractItemModelMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473289051104["QtCore.QStringListModel"]
+  1473289043296["QtCore.QAbstractListModel"]
+  1473289050128["QtCore.QAbstractItemModel"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473299896032 --> 1473299897008
+  1473299894080 --> 1473299896032
+  1473299890176 --> 1473299894080
+  1473299815024 --> 1473299890176
+  140713234304496 --> 1473299815024
+  1473289051104 --> 1473299897008
+  1473289043296 --> 1473289051104
+  1473289050128 --> 1473289043296
+  1473288842240 --> 1473289050128
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.stringlistmodel.StringListModel
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

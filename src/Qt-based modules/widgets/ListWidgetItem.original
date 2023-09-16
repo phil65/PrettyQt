@@ -1,0 +1,36 @@
+Qt Base Class: [QListWidgetItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QListWidgetItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QListWidgetItem)
+
+Signature: `QListWidgetItem(self, icon: Union[PySide6.QtGui.QIcon, PySide6.QtGui.QPixmap], text: str, listview: Optional[PySide6.QtWidgets.QListWidget] = None, type: int = <ItemType.Type: 0>) -> None
+QListWidgetItem(self, listview: Optional[PySide6.QtWidgets.QListWidget] = None, type: int = <ItemType.Type: 0>) -> None
+QListWidgetItem(self, other: PySide6.QtWidgets.QListWidgetItem) -> None
+QListWidgetItem(self, text: str, listview: Optional[PySide6.QtWidgets.QListWidget] = None, type: int = <ItemType.Type: 0>) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                                                                                                | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[SerializeMixin](SerializeMixin.md)</font>**<br>*<font size='1'>prettyqt.utils.serializemixin</font>*<br>                                                                                                                                                                                                                                                                                                          | <ul><li>[EasingCurve](EasingCurve.md)</li><li>[Url](Url.md)</li><li>[KeyCombination](KeyCombination.md)</li><li>[Icon](Icon.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[IconEngine](IconEngine.md)</li><li>[Image](Image.md)</li><li>[Brush](Brush.md)</li><li>[Region](Region.md)</li><li>[Transform](Transform.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QListWidgetItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QListWidgetItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QListWidgetItem)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QListWidgetItem\(self, icon: Union\[PySide6\.QtGui\.QIcon, PySide6\.QtGui\.QPixmap\], text: str, listview: Optional\[PySide6\.QtWidgets\.QListWidget\] \= None, type: int \= <ItemType\.Type: 0\>\) \-\> None | <ul><li>[ListWidgetItem](ListWidgetItem.md)</li></ul>                                                                                                                                                                                                                                                                                             | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296240272["widgets.ListWidgetItem"]
+  1473299806240["utils.SerializeMixin"]
+  140713234304496["builtins.object"]
+  1473290811616["QtWidgets.QListWidgetItem"]
+  1473291690208["Shiboken.Object"]
+  1473299806240 --> 1473296240272
+  140713234304496 --> 1473299806240
+  1473290811616 --> 1473296240272
+  1473291690208 --> 1473290811616
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.listwidgetitem.ListWidgetItem
+    options:
+      show_root_toc_entry: False

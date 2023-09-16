@@ -1,0 +1,32 @@
+## Base classes
+
+| Name                                                                                                                   | Children                                                                                                                                                                                                                                              | Inherits                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[TextFormatMixin](TextFormatMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.textformat</font>*<br> | <ul><li>[TextFormat](TextFormat.md)</li><li>[TextFrameFormatMixin](TextFrameFormatMixin.md)</li><li>[TextBlockFormat](TextBlockFormat.md)</li><li>[TextCharFormatMixin](TextCharFormatMixin.md)</li><li>[TextListFormat](TextListFormat.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+
+
+## Subclasses
+
+| Class                                         | Module                           | Description |
+| --------------------------------------------- | -------------------------------- | ----------- |
+| [TextCharFormat](TextCharFormat.md)           | prettyqt.gui.textcharformat      |             |
+| [TextImageFormat](TextImageFormat.md)         | prettyqt.gui.textimageformat     |             |
+| [TextTableCellFormat](TextTableCellFormat.md) | prettyqt.gui.texttablecellformat |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245667552["gui.TextCharFormatMixin"]
+  1473245646080["gui.TextFormatMixin"]
+  140713234304496["builtins.object"]
+  1473245646080 --> 1473245667552
+  140713234304496 --> 1473245646080
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textcharformat.TextCharFormatMixin
+    options:
+      show_root_toc_entry: False

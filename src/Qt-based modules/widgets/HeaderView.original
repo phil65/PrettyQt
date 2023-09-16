@@ -1,0 +1,167 @@
+Qt Base Class: [QHeaderView](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QHeaderView.html#PySide6.QtWidgets.PySide6.QtWidgets.QHeaderView)
+
+Signature: `QHeaderView(self, orientation: PySide6.QtCore.Qt.Orientation, parent: Optional[PySide6.QtWidgets.QWidget] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                            | Children                                      | Inherits                                                                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[HeaderViewMixin](HeaderViewMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.headerview</font>*<br>                                                                                                                                                                                                                      | <ul><li>[HeaderView](HeaderView.md)</li></ul> | <ul><li>[AbstractItemViewMixin](AbstractItemViewMixin.md)</li></ul>                                                                                                 |
+| **<font size='4'>[QHeaderView](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QHeaderView.html#PySide6.QtWidgets.PySide6.QtWidgets.QHeaderView)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QHeaderView\(self, orientation: PySide6\.QtCore\.Qt\.Orientation, parent: Optional\[PySide6\.QtWidgets\.QWidget\] \= None\) \-\> None | <ul><li>[HeaderView](HeaderView.md)</li></ul> | <ul><li>[QAbstractItemView](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QAbstractItemView.html#PySide6.QtWidgets.PySide6.QtWidgets.QAbstractItemView)</li></ul> |
+
+
+## Subclasses
+
+| Class                           | Module                                         | Description |
+| ------------------------------- | ---------------------------------------------- | ----------- |
+| [FilterHeader](FilterHeader.md) | prettyqt.custom_widgets.itemviews.filterheader |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296214896["widgets.HeaderView"]
+  1473296228560["widgets.HeaderViewMixin"]
+  1473293692144["widgets.AbstractItemViewMixin"]
+  1473293679456["widgets.AbstractScrollAreaMixin"]
+  1473293662864["widgets.FrameMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473241471584["QtWidgets.QHeaderView"]
+  1473241438400["QtWidgets.QAbstractItemView"]
+  1473290616416["QtWidgets.QAbstractScrollArea"]
+  1473290626176["QtWidgets.QFrame"]
+  1473290849680["QtWidgets.QWidget"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473296228560 --> 1473296214896
+  1473293692144 --> 1473296228560
+  1473293679456 --> 1473293692144
+  1473293662864 --> 1473293679456
+  1473293688240 --> 1473293662864
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+  1473241471584 --> 1473296214896
+  1473241438400 --> 1473241471584
+  1473290616416 --> 1473241438400
+  1473290626176 --> 1473290616416
+  1473290849680 --> 1473290626176
+  1473288842240 --> 1473290849680
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300082368 --> 1473290849680
+  1473291690208 --> 1473300082368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.headerview.HeaderView
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property                 | Type                                       | Doc |
+| --------------------------- | ------------------------------------------ | --- |
+| `objectName`                | **QString**                                |     |
+| `modal`                     | **bool**                                   |     |
+| `windowModality`            | **Qt::WindowModality**                     |     |
+| `enabled`                   | **bool**                                   |     |
+| `geometry`                  | **QRect**                                  |     |
+| `frameGeometry`             | **QRect**                                  |     |
+| `normalGeometry`            | **QRect**                                  |     |
+| `x`                         | **int**                                    |     |
+| `y`                         | **int**                                    |     |
+| `pos`                       | **QPoint**                                 |     |
+| `frameSize`                 | **QSize**                                  |     |
+| `size`                      | **QSize**                                  |     |
+| `width`                     | **int**                                    |     |
+| `height`                    | **int**                                    |     |
+| `rect`                      | **QRect**                                  |     |
+| `childrenRect`              | **QRect**                                  |     |
+| `childrenRegion`            | **QRegion**                                |     |
+| `sizePolicy`                | **QSizePolicy**                            |     |
+| `minimumSize`               | **QSize**                                  |     |
+| `maximumSize`               | **QSize**                                  |     |
+| `minimumWidth`              | **int**                                    |     |
+| `minimumHeight`             | **int**                                    |     |
+| `maximumWidth`              | **int**                                    |     |
+| `maximumHeight`             | **int**                                    |     |
+| `sizeIncrement`             | **QSize**                                  |     |
+| `baseSize`                  | **QSize**                                  |     |
+| `palette`                   | **QPalette**                               |     |
+| `font`                      | **QFont**                                  |     |
+| `cursor`                    | **QCursor**                                |     |
+| `mouseTracking`             | **bool**                                   |     |
+| `tabletTracking`            | **bool**                                   |     |
+| `isActiveWindow`            | **bool**                                   |     |
+| `focusPolicy`               | **Qt::FocusPolicy**                        |     |
+| `focus`                     | **bool**                                   |     |
+| `contextMenuPolicy`         | **Qt::ContextMenuPolicy**                  |     |
+| `updatesEnabled`            | **bool**                                   |     |
+| `visible`                   | **bool**                                   |     |
+| `minimized`                 | **bool**                                   |     |
+| `maximized`                 | **bool**                                   |     |
+| `fullScreen`                | **bool**                                   |     |
+| `sizeHint`                  | **QSize**                                  |     |
+| `minimumSizeHint`           | **QSize**                                  |     |
+| `acceptDrops`               | **bool**                                   |     |
+| `windowTitle`               | **QString**                                |     |
+| `windowIcon`                | **QIcon**                                  |     |
+| `windowIconText`            | **QString**                                |     |
+| `windowOpacity`             | **double**                                 |     |
+| `windowModified`            | **bool**                                   |     |
+| `toolTip`                   | **QString**                                |     |
+| `toolTipDuration`           | **int**                                    |     |
+| `statusTip`                 | **QString**                                |     |
+| `whatsThis`                 | **QString**                                |     |
+| `accessibleName`            | **QString**                                |     |
+| `accessibleDescription`     | **QString**                                |     |
+| `layoutDirection`           | **Qt::LayoutDirection**                    |     |
+| `autoFillBackground`        | **bool**                                   |     |
+| `styleSheet`                | **QString**                                |     |
+| `locale`                    | **QLocale**                                |     |
+| `windowFilePath`            | **QString**                                |     |
+| `inputMethodHints`          | **QFlags<Qt::InputMethodHint>**            |     |
+| `frameShape`                | **QFrame::Shape**                          |     |
+| `frameShadow`               | **QFrame::Shadow**                         |     |
+| `lineWidth`                 | **int**                                    |     |
+| `midLineWidth`              | **int**                                    |     |
+| `frameWidth`                | **int**                                    |     |
+| `frameRect`                 | **QRect**                                  |     |
+| `verticalScrollBarPolicy`   | **Qt::ScrollBarPolicy**                    |     |
+| `horizontalScrollBarPolicy` | **Qt::ScrollBarPolicy**                    |     |
+| `sizeAdjustPolicy`          | **QAbstractScrollArea::SizeAdjustPolicy**  |     |
+| `autoScroll`                | **bool**                                   |     |
+| `autoScrollMargin`          | **int**                                    |     |
+| `editTriggers`              | **QFlags<QAbstractItemView::EditTrigger>** |     |
+| `tabKeyNavigation`          | **bool**                                   |     |
+| `showDropIndicator`         | **bool**                                   |     |
+| `dragEnabled`               | **bool**                                   |     |
+| `dragDropOverwriteMode`     | **bool**                                   |     |
+| `dragDropMode`              | **QAbstractItemView::DragDropMode**        |     |
+| `defaultDropAction`         | **Qt::DropAction**                         |     |
+| `alternatingRowColors`      | **bool**                                   |     |
+| `selectionMode`             | **QAbstractItemView::SelectionMode**       |     |
+| `selectionBehavior`         | **QAbstractItemView::SelectionBehavior**   |     |
+| `iconSize`                  | **QSize**                                  |     |
+| `textElideMode`             | **Qt::TextElideMode**                      |     |
+| `verticalScrollMode`        | **QAbstractItemView::ScrollMode**          |     |
+| `horizontalScrollMode`      | **QAbstractItemView::ScrollMode**          |     |
+| `firstSectionMovable`       | **bool**                                   |     |
+| `showSortIndicator`         | **bool**                                   |     |
+| `highlightSections`         | **bool**                                   |     |
+| `stretchLastSection`        | **bool**                                   |     |
+| `cascadingSectionResizes`   | **bool**                                   |     |
+| `defaultSectionSize`        | **int**                                    |     |
+| `minimumSectionSize`        | **int**                                    |     |
+| `maximumSectionSize`        | **int**                                    |     |
+| `defaultAlignment`          | **QFlags<Qt::AlignmentFlag>**              |     |
+| `sortIndicatorClearable`    | **bool**                                   |     |

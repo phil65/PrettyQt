@@ -1,0 +1,16 @@
+---
+hide:
+- toc
+---
+
+## Classes
+
+| Name                                                                                                                                             | Children | Inherits                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------- |
+| **<font size='4'>[TracebackDialog](TracebackDialog.md)</font>**<br>*<font size='1'>prettyqt.debugging.tracebackdialog</font>*<br>                |          | <ul><li>[Dialog](Dialog.md)</li></ul>                                                       |
+| **<font size='4'>[QObjectDetailsDialog](QObjectDetailsDialog.md)</font>**<br>*<font size='1'>prettyqt.debugging.qobjectdetailsdialog</font>*<br> |          | <ul><li>[MainWindow](MainWindow.md)</li></ul>                                               |
+| **<font size='4'>[MessageHandler](MessageHandler.md)</font>**<br>*<font size='1'>prettyqt.debugging.messagehandler</font>*<br>                   |          | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>         |
+| **<font size='4'>[QtLogger](QtLogger.md)</font>**<br>*<font size='1'>prettyqt.debugging</font>*<br>                                              |          | <ul><li>[Handler](https://docs.python.org/3/library/logging.html#logging.Handler)</li></ul> |
+| **<font size='4'>[Stalker](Stalker.md)</font>**<br>*<font size='1'>prettyqt.debugging.stalker</font>*<br>                                        |          | <ul><li>[Object](Object.md)</li></ul>                                                       |
+| **<font size='4'>[ProxyComparerWidget](ProxyComparerWidget.md)</font>**<br>*<font size='1'>prettyqt.debugging.proxycomparerwidget</font>*<br>    |          | <ul><li>[Splitter](Splitter.md)</li></ul>                                                   |
+| **<font size='4'>[ErrorMessageBox](ErrorMessageBox.md)</font>**<br>*<font size='1'>prettyqt.debugging.errormessagebox</font>*<br>                |          | <ul><li>[MessageBox](MessageBox.md)</li></ul>                                               |

@@ -1,0 +1,158 @@
+Qt Base Class: [QPlainTextEdit](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QPlainTextEdit.html#PySide6.QtWidgets.PySide6.QtWidgets.QPlainTextEdit)
+
+Signature: `QPlainTextEdit(self, parent: Optional[PySide6.QtWidgets.QWidget] = None) -> None
+QPlainTextEdit(self, text: str, parent: Optional[PySide6.QtWidgets.QWidget] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                         | Children                                            | Inherits                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[PlainTextEditMixin](PlainTextEditMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.plaintextedit</font>*<br>                                                                                                                                                                          | <ul><li>[PlainTextEdit](PlainTextEdit.md)</li></ul> | <ul><li>[AbstractScrollAreaMixin](AbstractScrollAreaMixin.md)</li></ul>                                                                                                   |
+| **<font size='4'>[QPlainTextEdit](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QPlainTextEdit.html#PySide6.QtWidgets.PySide6.QtWidgets.QPlainTextEdit)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QPlainTextEdit\(self, parent: Optional\[PySide6\.QtWidgets\.QWidget\] \= None\) \-\> None | <ul><li>[PlainTextEdit](PlainTextEdit.md)</li></ul> | <ul><li>[QAbstractScrollArea](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QAbstractScrollArea.html#PySide6.QtWidgets.PySide6.QtWidgets.QAbstractScrollArea)</li></ul> |
+
+
+## Subclasses
+
+| Class                                                 | Module                                             | Description |
+| ----------------------------------------------------- | -------------------------------------------------- | ----------- |
+| [AutoResizePlainTextEdit](AutoResizePlainTextEdit.md) | prettyqt.custom_widgets.autoresizingtextedit       |             |
+| [SingleLineTextEdit](SingleLineTextEdit.md)           | prettyqt.custom_widgets.editors.singlelinetextedit |             |
+| [LogTextEdit](LogTextEdit.md)                         | prettyqt.custom_widgets.logtextedit                |             |
+| [CodeEditor](CodeEditor.md)                           | prettyqt.custom_widgets.codeeditor                 |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296323232["widgets.PlainTextEdit"]
+  1473296321280["widgets.PlainTextEditMixin"]
+  1473293679456["widgets.AbstractScrollAreaMixin"]
+  1473293662864["widgets.FrameMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473290657408["QtWidgets.QPlainTextEdit"]
+  1473290616416["QtWidgets.QAbstractScrollArea"]
+  1473290626176["QtWidgets.QFrame"]
+  1473290849680["QtWidgets.QWidget"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473296321280 --> 1473296323232
+  1473293679456 --> 1473296321280
+  1473293662864 --> 1473293679456
+  1473293688240 --> 1473293662864
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+  1473290657408 --> 1473296323232
+  1473290616416 --> 1473290657408
+  1473290626176 --> 1473290616416
+  1473290849680 --> 1473290626176
+  1473288842240 --> 1473290849680
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300082368 --> 1473290849680
+  1473291690208 --> 1473300082368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.plaintextedit.PlainTextEdit
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property                 | Type                                      | Doc                                        |
+| --------------------------- | ----------------------------------------- | ------------------------------------------ |
+| `objectName`                | **QString**                               |                                            |
+| `modal`                     | **bool**                                  |                                            |
+| `windowModality`            | **Qt::WindowModality**                    |                                            |
+| `enabled`                   | **bool**                                  |                                            |
+| `geometry`                  | **QRect**                                 |                                            |
+| `frameGeometry`             | **QRect**                                 |                                            |
+| `normalGeometry`            | **QRect**                                 |                                            |
+| `x`                         | **int**                                   |                                            |
+| `y`                         | **int**                                   |                                            |
+| `pos`                       | **QPoint**                                |                                            |
+| `frameSize`                 | **QSize**                                 |                                            |
+| `size`                      | **QSize**                                 |                                            |
+| `width`                     | **int**                                   |                                            |
+| `height`                    | **int**                                   |                                            |
+| `rect`                      | **QRect**                                 |                                            |
+| `childrenRect`              | **QRect**                                 |                                            |
+| `childrenRegion`            | **QRegion**                               |                                            |
+| `sizePolicy`                | **QSizePolicy**                           |                                            |
+| `minimumSize`               | **QSize**                                 |                                            |
+| `maximumSize`               | **QSize**                                 |                                            |
+| `minimumWidth`              | **int**                                   |                                            |
+| `minimumHeight`             | **int**                                   |                                            |
+| `maximumWidth`              | **int**                                   |                                            |
+| `maximumHeight`             | **int**                                   |                                            |
+| `sizeIncrement`             | **QSize**                                 |                                            |
+| `baseSize`                  | **QSize**                                 |                                            |
+| `palette`                   | **QPalette**                              |                                            |
+| `font`                      | **QFont**                                 |                                            |
+| `cursor`                    | **QCursor**                               |                                            |
+| `mouseTracking`             | **bool**                                  |                                            |
+| `tabletTracking`            | **bool**                                  |                                            |
+| `isActiveWindow`            | **bool**                                  |                                            |
+| `focusPolicy`               | **Qt::FocusPolicy**                       |                                            |
+| `focus`                     | **bool**                                  |                                            |
+| `contextMenuPolicy`         | **Qt::ContextMenuPolicy**                 |                                            |
+| `updatesEnabled`            | **bool**                                  |                                            |
+| `visible`                   | **bool**                                  |                                            |
+| `minimized`                 | **bool**                                  |                                            |
+| `maximized`                 | **bool**                                  |                                            |
+| `fullScreen`                | **bool**                                  |                                            |
+| `sizeHint`                  | **QSize**                                 |                                            |
+| `minimumSizeHint`           | **QSize**                                 |                                            |
+| `acceptDrops`               | **bool**                                  |                                            |
+| `windowTitle`               | **QString**                               |                                            |
+| `windowIcon`                | **QIcon**                                 |                                            |
+| `windowIconText`            | **QString**                               |                                            |
+| `windowOpacity`             | **double**                                |                                            |
+| `windowModified`            | **bool**                                  |                                            |
+| `toolTip`                   | **QString**                               |                                            |
+| `toolTipDuration`           | **int**                                   |                                            |
+| `statusTip`                 | **QString**                               |                                            |
+| `whatsThis`                 | **QString**                               |                                            |
+| `accessibleName`            | **QString**                               |                                            |
+| `accessibleDescription`     | **QString**                               |                                            |
+| `layoutDirection`           | **Qt::LayoutDirection**                   |                                            |
+| `autoFillBackground`        | **bool**                                  |                                            |
+| `styleSheet`                | **QString**                               |                                            |
+| `locale`                    | **QLocale**                               |                                            |
+| `windowFilePath`            | **QString**                               |                                            |
+| `inputMethodHints`          | **QFlags<Qt::InputMethodHint>**           |                                            |
+| `frameShape`                | **QFrame::Shape**                         |                                            |
+| `frameShadow`               | **QFrame::Shadow**                        |                                            |
+| `lineWidth`                 | **int**                                   |                                            |
+| `midLineWidth`              | **int**                                   |                                            |
+| `frameWidth`                | **int**                                   |                                            |
+| `frameRect`                 | **QRect**                                 |                                            |
+| `verticalScrollBarPolicy`   | **Qt::ScrollBarPolicy**                   |                                            |
+| `horizontalScrollBarPolicy` | **Qt::ScrollBarPolicy**                   |                                            |
+| `sizeAdjustPolicy`          | **QAbstractScrollArea::SizeAdjustPolicy** |                                            |
+| `tabChangesFocus`           | **bool**                                  |                                            |
+| `documentTitle`             | **QString**                               |                                            |
+| `undoRedoEnabled`           | **bool**                                  |                                            |
+| `lineWrapMode`              | **QPlainTextEdit::LineWrapMode**          |                                            |
+| `readOnly`                  | **bool**                                  |                                            |
+| `plainText`                 | **QString**                               |                                            |
+| `overwriteMode`             | **bool**                                  |                                            |
+| `tabStopDistance`           | **double**                                |                                            |
+| `cursorWidth`               | **int**                                   |                                            |
+| `textInteractionFlags`      | **QFlags<Qt::TextInteractionFlag>**       |                                            |
+| `blockCount`                | **int**                                   |                                            |
+| `maximumBlockCount`         | **int**                                   |                                            |
+| `backgroundVisible`         | **bool**                                  |                                            |
+| `centerOnScroll`            | **bool**                                  |                                            |
+| `placeholderText`           | **QString**                               |                                            |
+| `current_line_color`        | **QColor**                                | Color to use for current line highlighting |
+| `validation_color`          | **QColor**                                | Color to use for invalid text              |

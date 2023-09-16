@@ -1,0 +1,131 @@
+Qt Base Class: [QToolButton](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QToolButton.html#PySide6.QtWidgets.PySide6.QtWidgets.QToolButton)
+
+Signature: `QToolButton(self, parent: Optional[PySide6.QtWidgets.QWidget] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                             | Children                                                                                                  | Inherits                                                                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[ToolButton](ToolButton.md)</font>**<br>*<font size='1'>prettyqt.widgets.toolbutton</font>*<br> | <ul><li>[BoolDictToolButton](BoolDictToolButton.md)</li><li>[EnumFlagWidget](EnumFlagWidget.md)</li></ul> | <ul><li>[AbstractButtonMixin](AbstractButtonMixin.md)</li><li>[QToolButton](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QToolButton.html#PySide6.QtWidgets.PySide6.QtWidgets.QToolButton)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367050144["custom_widgets.BoolDictToolButton"]
+  1473296219776["widgets.ToolButton"]
+  1473293689216["widgets.AbstractButtonMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473365429552["QtWidgets.QToolButton"]
+  1473365432480["QtWidgets.QAbstractButton"]
+  1473290849680["QtWidgets.QWidget"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473296219776 --> 1473367050144
+  1473293689216 --> 1473296219776
+  1473293688240 --> 1473293689216
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+  1473365429552 --> 1473296219776
+  1473365432480 --> 1473365429552
+  1473290849680 --> 1473365432480
+  1473288842240 --> 1473290849680
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300082368 --> 1473290849680
+  1473291690208 --> 1473300082368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.custom_widgets.booldicttoolbutton.BoolDictToolButton
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property             | Type                                 | Doc |
+| ----------------------- | ------------------------------------ | --- |
+| `objectName`            | **QString**                          |     |
+| `modal`                 | **bool**                             |     |
+| `windowModality`        | **Qt::WindowModality**               |     |
+| `enabled`               | **bool**                             |     |
+| `geometry`              | **QRect**                            |     |
+| `frameGeometry`         | **QRect**                            |     |
+| `normalGeometry`        | **QRect**                            |     |
+| `x`                     | **int**                              |     |
+| `y`                     | **int**                              |     |
+| `pos`                   | **QPoint**                           |     |
+| `frameSize`             | **QSize**                            |     |
+| `size`                  | **QSize**                            |     |
+| `width`                 | **int**                              |     |
+| `height`                | **int**                              |     |
+| `rect`                  | **QRect**                            |     |
+| `childrenRect`          | **QRect**                            |     |
+| `childrenRegion`        | **QRegion**                          |     |
+| `sizePolicy`            | **QSizePolicy**                      |     |
+| `minimumSize`           | **QSize**                            |     |
+| `maximumSize`           | **QSize**                            |     |
+| `minimumWidth`          | **int**                              |     |
+| `minimumHeight`         | **int**                              |     |
+| `maximumWidth`          | **int**                              |     |
+| `maximumHeight`         | **int**                              |     |
+| `sizeIncrement`         | **QSize**                            |     |
+| `baseSize`              | **QSize**                            |     |
+| `palette`               | **QPalette**                         |     |
+| `font`                  | **QFont**                            |     |
+| `cursor`                | **QCursor**                          |     |
+| `mouseTracking`         | **bool**                             |     |
+| `tabletTracking`        | **bool**                             |     |
+| `isActiveWindow`        | **bool**                             |     |
+| `focusPolicy`           | **Qt::FocusPolicy**                  |     |
+| `focus`                 | **bool**                             |     |
+| `contextMenuPolicy`     | **Qt::ContextMenuPolicy**            |     |
+| `updatesEnabled`        | **bool**                             |     |
+| `visible`               | **bool**                             |     |
+| `minimized`             | **bool**                             |     |
+| `maximized`             | **bool**                             |     |
+| `fullScreen`            | **bool**                             |     |
+| `sizeHint`              | **QSize**                            |     |
+| `minimumSizeHint`       | **QSize**                            |     |
+| `acceptDrops`           | **bool**                             |     |
+| `windowTitle`           | **QString**                          |     |
+| `windowIcon`            | **QIcon**                            |     |
+| `windowIconText`        | **QString**                          |     |
+| `windowOpacity`         | **double**                           |     |
+| `windowModified`        | **bool**                             |     |
+| `toolTip`               | **QString**                          |     |
+| `toolTipDuration`       | **int**                              |     |
+| `statusTip`             | **QString**                          |     |
+| `whatsThis`             | **QString**                          |     |
+| `accessibleName`        | **QString**                          |     |
+| `accessibleDescription` | **QString**                          |     |
+| `layoutDirection`       | **Qt::LayoutDirection**              |     |
+| `autoFillBackground`    | **bool**                             |     |
+| `styleSheet`            | **QString**                          |     |
+| `locale`                | **QLocale**                          |     |
+| `windowFilePath`        | **QString**                          |     |
+| `inputMethodHints`      | **QFlags<Qt::InputMethodHint>**      |     |
+| `text`                  | **QString**                          |     |
+| `icon`                  | **QIcon**                            |     |
+| `iconSize`              | **QSize**                            |     |
+| `shortcut`              | **QKeySequence**                     |     |
+| `checkable`             | **bool**                             |     |
+| `checked`               | **bool**                             |     |
+| `autoRepeat`            | **bool**                             |     |
+| `autoExclusive`         | **bool**                             |     |
+| `autoRepeatDelay`       | **int**                              |     |
+| `autoRepeatInterval`    | **int**                              |     |
+| `down`                  | **bool**                             |     |
+| `popupMode`             | **QToolButton::ToolButtonPopupMode** |     |
+| `toolButtonStyle`       | **Qt::ToolButtonStyle**              |     |
+| `autoRaise`             | **bool**                             |     |
+| `arrowType`             | **Qt::ArrowType**                    |     |

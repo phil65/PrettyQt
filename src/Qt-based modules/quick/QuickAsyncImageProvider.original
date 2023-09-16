@@ -1,0 +1,48 @@
+Qt Base Class: [QQuickAsyncImageProvider](https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickAsyncImageProvider.html#PySide6.QtQuick.PySide6.QtQuick.QQuickAsyncImageProvider)
+
+Signature: `QQuickAsyncImageProvider(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                | Children                                                                                                                    | Inherits                                                                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[QuickImageProviderMixin](QuickImageProviderMixin.md)</font>**<br>*<font size='1'>prettyqt.quick.quickimageprovider</font>*<br>                                                                                                                                    | <ul><li>[QuickImageProvider](QuickImageProvider.md)</li><li>[QuickAsyncImageProvider](QuickAsyncImageProvider.md)</li></ul> | <ul><li>[QmlImageProviderBaseMixin](QmlImageProviderBaseMixin.md)</li></ul>                                                                                         |
+| **<font size='4'>[QQuickAsyncImageProvider](https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickAsyncImageProvider.html#PySide6.QtQuick.PySide6.QtQuick.QQuickAsyncImageProvider)</font>**<br>*<font size='1'>PySide6.QtQuick</font>*<br>QQuickAsyncImageProvider\(self\) \-\> None | <ul><li>[QuickAsyncImageProvider](QuickAsyncImageProvider.md)</li></ul>                                                     | <ul><li>[QQuickImageProvider](https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickImageProvider.html#PySide6.QtQuick.PySide6.QtQuick.QQuickImageProvider)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473374477936["quick.QuickAsyncImageProvider"]
+  1473374464272["quick.QuickImageProviderMixin"]
+  1473572340368["qml.QmlImageProviderBaseMixin"]
+  140713234304496["builtins.object"]
+  1473374438896["QtQuick.QQuickAsyncImageProvider"]
+  1473374434992["QtQuick.QQuickImageProvider"]
+  1473572278880["QtQml.QQmlImageProviderBase"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473374464272 --> 1473374477936
+  1473572340368 --> 1473374464272
+  140713234304496 --> 1473572340368
+  1473374438896 --> 1473374477936
+  1473374434992 --> 1473374438896
+  1473572278880 --> 1473374434992
+  1473288842240 --> 1473572278880
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.quick.quickasyncimageprovider.QuickAsyncImageProvider
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

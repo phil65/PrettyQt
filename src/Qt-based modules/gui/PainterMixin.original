@@ -1,0 +1,22 @@
+## Subclasses
+
+| Class                           | Module                        | Description |
+| ------------------------------- | ----------------------------- | ----------- |
+| [Painter](Painter.md)           | prettyqt.gui.painter          |             |
+| [StylePainter](StylePainter.md) | prettyqt.widgets.stylepainter |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245613872["gui.PainterMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473245613872
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.painter.PainterMixin
+    options:
+      show_root_toc_entry: False

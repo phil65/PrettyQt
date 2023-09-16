@@ -1,0 +1,22 @@
+## Subclasses
+
+| Class                                                   | Module                                | Description |
+| ------------------------------------------------------- | ------------------------------------- | ----------- |
+| [AbstractFileIconProvider](AbstractFileIconProvider.md) | prettyqt.gui.abstractfileiconprovider |             |
+| [FileIconProvider](FileIconProvider.md)                 | prettyqt.widgets.fileiconprovider     |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245651936["gui.AbstractFileIconProviderMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473245651936
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.abstractfileiconprovider.AbstractFileIconProviderMixin
+    options:
+      show_root_toc_entry: False

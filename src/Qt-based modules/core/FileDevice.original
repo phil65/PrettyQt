@@ -1,0 +1,52 @@
+Qt Base Class: [QFileDevice](https://doc.qt.io/qtforpython/PySide6/QtCore/QFileDevice.html#PySide6.QtCore.PySide6.QtCore.QFileDevice)
+
+Signature: `QFileDevice(self) -> None
+QFileDevice(self, parent: PySide6.QtCore.QObject) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                        | Children                                                                                                                                                                                                                                                                            | Inherits                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[FileDeviceMixin](FileDeviceMixin.md)</font>**<br>*<font size='1'>prettyqt.core.filedevice</font>*<br>Interface for reading from and writing to open files\.                                               | <ul><li>[FileDevice](FileDevice.md)</li><li>[FileMixin](FileMixin.md)</li><li>[SaveFile](SaveFile.md)</li></ul>                                                                                                                                                                     | <ul><li>[IODeviceMixin](IODeviceMixin.md)</li></ul>                                                                                |
+| **<font size='4'>[QFileDevice](https://doc.qt.io/qtforpython/PySide6/QtCore/QFileDevice.html#PySide6.QtCore.PySide6.QtCore.QFileDevice)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QFileDevice\(self\) \-\> None | <ul><li>[QSaveFile](https://doc.qt.io/qtforpython/PySide6/QtCore/QSaveFile.html#PySide6.QtCore.PySide6.QtCore.QSaveFile)</li><li>[QFile](https://doc.qt.io/qtforpython/PySide6/QtCore/QFile.html#PySide6.QtCore.PySide6.QtCore.QFile)</li><li>[FileDevice](FileDevice.md)</li></ul> | <ul><li>[QIODevice](https://doc.qt.io/qtforpython/PySide6/QtCore/QIODevice.html#PySide6.QtCore.PySide6.QtCore.QIODevice)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299858944["core.FileDevice"]
+  1473299857968["core.FileDeviceMixin"]
+  1473299871632["core.IODeviceMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473288918368["QtCore.QFileDevice"]
+  1473288885184["QtCore.QIODevice"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473243629040["QtCore.QIODeviceBase"]
+  1473299857968 --> 1473299858944
+  1473299871632 --> 1473299857968
+  1473299815024 --> 1473299871632
+  140713234304496 --> 1473299815024
+  1473288918368 --> 1473299858944
+  1473288885184 --> 1473288918368
+  1473288842240 --> 1473288885184
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473243629040 --> 1473288885184
+  1473291690208 --> 1473243629040
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.filedevice.FileDevice
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

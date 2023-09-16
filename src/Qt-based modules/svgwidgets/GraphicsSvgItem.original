@@ -1,0 +1,70 @@
+Qt Base Class: [QGraphicsSvgItem](https://doc.qt.io/qtforpython/PySide6/QtSvgWidgets/QGraphicsSvgItem.html#PySide6.QtSvgWidgets.PySide6.QtSvgWidgets.QGraphicsSvgItem)
+
+Signature: `QGraphicsSvgItem(self, fileName: str, parentItem: Optional[PySide6.QtWidgets.QGraphicsItem] = None) -> None
+QGraphicsSvgItem(self, parentItem: Optional[PySide6.QtWidgets.QGraphicsItem] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                      | Children                                                                                                                                                                                                                                                    | Inherits                                                                                                                                                      |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GraphicsObjectMixin](GraphicsObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicsobject</font>*<br>                                                                                                                                                                                                                    | <ul><li>[GraphicsObject](GraphicsObject.md)</li><li>[GraphicsTextItem](GraphicsTextItem.md)</li><li>[GraphicsWidgetMixin](GraphicsWidgetMixin.md)</li><li>[GraphicsVideoItem](GraphicsVideoItem.md)</li><li>[GraphicsSvgItem](GraphicsSvgItem.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[GraphicsItemMixin](GraphicsItemMixin.md)</li></ul>                                                             |
+| **<font size='4'>[QGraphicsSvgItem](https://doc.qt.io/qtforpython/PySide6/QtSvgWidgets/QGraphicsSvgItem.html#PySide6.QtSvgWidgets.PySide6.QtSvgWidgets.QGraphicsSvgItem)</font>**<br>*<font size='1'>PySide6.QtSvgWidgets</font>*<br>QGraphicsSvgItem\(self, fileName: str, parentItem: Optional\[PySide6\.QtWidgets\.QGraphicsItem\] \= None\) \-\> None | <ul><li>[GraphicsSvgItem](GraphicsSvgItem.md)</li></ul>                                                                                                                                                                                                     | <ul><li>[QGraphicsObject](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsObject.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsObject)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473374545280["svgwidgets.GraphicsSvgItem"]
+  1473293697024["widgets.GraphicsObjectMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473293706784["widgets.GraphicsItemMixin"]
+  1473374542352["QtSvgWidgets.QGraphicsSvgItem"]
+  1473365816752["QtWidgets.QGraphicsObject"]
+  1473290795024["QtWidgets.QGraphicsItem"]
+  1473291690208["Shiboken.Object"]
+  1473288842240["QtCore.QObject"]
+  1473293697024 --> 1473374545280
+  1473299815024 --> 1473293697024
+  140713234304496 --> 1473299815024
+  1473293706784 --> 1473293697024
+  140713234304496 --> 1473293706784
+  1473374542352 --> 1473374545280
+  1473365816752 --> 1473374542352
+  1473290795024 --> 1473365816752
+  1473291690208 --> 1473290795024
+  140713234304496 --> 1473291690208
+  1473288842240 --> 1473365816752
+  1473291690208 --> 1473288842240
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.svgwidgets.graphicssvgitem.GraphicsSvgItem
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property            | Type                                          | Doc |
+| ---------------------- | --------------------------------------------- | --- |
+| `objectName`           | **QString**                                   |     |
+| `parent`               | **QGraphicsObject**                           |     |
+| `opacity`              | **double**                                    |     |
+| `enabled`              | **bool**                                      |     |
+| `visible`              | **bool**                                      |     |
+| `pos`                  | **QPointF**                                   |     |
+| `x`                    | **double**                                    |     |
+| `y`                    | **double**                                    |     |
+| `z`                    | **double**                                    |     |
+| `rotation`             | **double**                                    |     |
+| `scale`                | **double**                                    |     |
+| `transformOriginPoint` | **QPointF**                                   |     |
+| `effect`               | **QGraphicsEffect**                           |     |
+| `children`             | **QDeclarativeListProperty<QGraphicsObject>** |     |
+| `width`                | **double**                                    |     |
+| `height`               | **double**                                    |     |
+| `elementId`            | **QString**                                   |     |
+| `maximumCacheSize`     | **QSize**                                     |     |

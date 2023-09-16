@@ -1,0 +1,68 @@
+Qt Base Class: [QCamera](https://doc.qt.io/qtforpython/PySide6/QtMultimedia/QCamera.html#PySide6.QtMultimedia.PySide6.QtMultimedia.QCamera)
+
+Signature: `QCamera(self, cameraDevice: PySide6.QtMultimedia.QCameraDevice, parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QCamera(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QCamera(self, position: PySide6.QtMultimedia.QCameraDevice.Position, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                          | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[ObjectMixin](ObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.core.object</font>*<br>                                                                                                                                                                                                                                   | <ul><li>[Object](Object.md)</li><li>[SocketNotifier](SocketNotifier.md)</li><li>[SharedMemory](SharedMemory.md)</li><li>[SignalMapper](SignalMapper.md)</li><li>[TimeLine](TimeLine.md)</li><li>[AbstractEventDispatcher](AbstractEventDispatcher.md)</li><li>[EventLoop](EventLoop.md)</li><li>[AbstractAnimationMixin](AbstractAnimationMixin.md)</li><li>[TranslatorMixin](TranslatorMixin.md)</li><li>[CoreApplicationMixin](CoreApplicationMixin.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                          |
+| **<font size='4'>[QCamera](https://doc.qt.io/qtforpython/PySide6/QtMultimedia/QCamera.html#PySide6.QtMultimedia.PySide6.QtMultimedia.QCamera)</font>**<br>*<font size='1'>PySide6.QtMultimedia</font>*<br>QCamera\(self, cameraDevice: PySide6\.QtMultimedia\.QCameraDevice, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[Camera](Camera.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                           | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473574001712["multimedia.Camera"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473573952912["QtMultimedia.QCamera"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473299815024 --> 1473574001712
+  140713234304496 --> 1473299815024
+  1473573952912 --> 1473574001712
+  1473288842240 --> 1473573952912
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.multimedia.camera.Camera
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property            | Type                          | Doc |
+| ---------------------- | ----------------------------- | --- |
+| `objectName`           | **QString**                   |     |
+| `active`               | **bool**                      |     |
+| `cameraDevice`         | **QCameraDevice**             |     |
+| `error`                | **QCamera::Error**            |     |
+| `errorString`          | **QString**                   |     |
+| `cameraFormat`         | **QCameraFormat**             |     |
+| `focusMode`            | **QCamera::FocusMode**        |     |
+| `focusPoint`           | **QPointF**                   |     |
+| `customFocusPoint`     | **QPointF**                   |     |
+| `focusDistance`        | **float**                     |     |
+| `minimumZoomFactor`    | **float**                     |     |
+| `maximumZoomFactor`    | **float**                     |     |
+| `zoomFactor`           | **float**                     |     |
+| `exposureTime`         | **float**                     |     |
+| `manualExposureTime`   | **int**                       |     |
+| `isoSensitivity`       | **int**                       |     |
+| `manualIsoSensitivity` | **int**                       |     |
+| `exposureCompensation` | **float**                     |     |
+| `exposureMode`         | **QCamera::ExposureMode**     |     |
+| `flashReady`           | **bool**                      |     |
+| `flashMode`            | **QCamera::FlashMode**        |     |
+| `torchMode`            | **QCamera::TorchMode**        |     |
+| `whiteBalanceMode`     | **QCamera::WhiteBalanceMode** |     |
+| `colorTemperature`     | **int**                       |     |
+| `supportedFeatures`    | **QFlags<QCamera::Feature>**  |     |

@@ -1,0 +1,55 @@
+Qt Base Class: [QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)
+
+Signature: `QObject(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                              | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[ObjectMixin](ObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.core.object</font>*<br>                                                                                                                                                       | <ul><li>[Object](Object.md)</li><li>[SocketNotifier](SocketNotifier.md)</li><li>[SharedMemory](SharedMemory.md)</li><li>[SignalMapper](SignalMapper.md)</li><li>[TimeLine](TimeLine.md)</li><li>[AbstractEventDispatcher](AbstractEventDispatcher.md)</li><li>[EventLoop](EventLoop.md)</li><li>[AbstractAnimationMixin](AbstractAnimationMixin.md)</li><li>[TranslatorMixin](TranslatorMixin.md)</li><li>[CoreApplicationMixin](CoreApplicationMixin.md)</li><li>...</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QObject\(self, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[QWinEventNotifier](https://www.pyside.org)</li><li>[QTranslator](https://doc.qt.io/qtforpython/PySide6/QtCore/QTranslator.html#PySide6.QtCore.PySide6.QtCore.QTranslator)</li><li>[QTimer](https://doc.qt.io/qtforpython/PySide6/QtCore/QTimer.html#PySide6.QtCore.PySide6.QtCore.QTimer)</li><li>[QTimeLine](https://doc.qt.io/qtforpython/PySide6/QtCore/QTimeLine.html#PySide6.QtCore.PySide6.QtCore.QTimeLine)</li><li>[QThreadPool](https://doc.qt.io/qtforpython/PySide6/QtCore/QThreadPool.html#PySide6.QtCore.PySide6.QtCore.QThreadPool)</li><li>[QSocketNotifier](https://doc.qt.io/qtforpython/PySide6/QtCore/QSocketNotifier.html#PySide6.QtCore.PySide6.QtCore.QSocketNotifier)</li><li>[QSignalMapper](https://doc.qt.io/qtforpython/PySide6/QtCore/QSignalMapper.html#PySide6.QtCore.PySide6.QtCore.QSignalMapper)</li><li>[QSharedMemory](https://doc.qt.io/qtforpython/PySide6/QtCore/QSharedMemory.html#PySide6.QtCore.PySide6.QtCore.QSharedMemory)</li><li>[QSettings](https://doc.qt.io/qtforpython/PySide6/QtCore/QSettings.html#PySide6.QtCore.PySide6.QtCore.QSettings)</li><li>[QPluginLoader](https://doc.qt.io/qtforpython/PySide6/QtCore/QPluginLoader.html#PySide6.QtCore.PySide6.QtCore.QPluginLoader)</li><li>...</li></ul> | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## Subclasses
+
+| Class                                           | Module                                  | Description |
+| ----------------------------------------------- | --------------------------------------- | ----------- |
+| [Signals](Signals.md)                           | prettyqt.core.threadpool                |             |
+| [ProxyMapper](ProxyMapper.md)                   | prettyqt.itemmodels.proxies.proxymapper |             |
+| [Animator](Animator.md)                         | prettyqt.animations.animator            |             |
+| [BaseEventFilter](BaseEventFilter.md)           | prettyqt.eventfilters.baseeventfilter   |             |
+| [Signals](Signals.md)                           | prettyqt.utils.signallogger             |             |
+| [_FutureDoneSignaller](_FutureDoneSignaller.md) | prettyqt.utils.asyncrunner              |             |
+| [EventSignaller](EventSignaller.md)             | prettyqt.debugging.stalker              |             |
+| [Stalker](Stalker.md)                           | prettyqt.debugging.stalker              |             |
+| [PlaceManager](PlaceManager.md)                 | prettyqt.location.placemanager          |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299782816["core.Object"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473299815024 --> 1473299782816
+  140713234304496 --> 1473299815024
+  1473288842240 --> 1473299782816
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.object.Object
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

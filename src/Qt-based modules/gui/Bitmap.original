@@ -1,0 +1,47 @@
+Qt Base Class: [QBitmap](https://doc.qt.io/qtforpython/PySide6/QtGui/QBitmap.html#PySide6.QtGui.PySide6.QtGui.QBitmap)
+
+Signature: `QBitmap(self) -> None
+QBitmap(self, QBitmap: Union[PySide6.QtGui.QBitmap, str]) -> None
+QBitmap(self, arg__1: PySide6.QtCore.QSize) -> None
+QBitmap(self, arg__1: Union[PySide6.QtGui.QPixmap, PySide6.QtGui.QImage, str]) -> None
+QBitmap(self, fileName: str, format: Optional[bytes] = None) -> None
+QBitmap(self, w: int, h: int) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                    | Children                                                          | Inherits                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[PixmapMixin](PixmapMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.pixmap</font>*<br>Off\-screen image representation that can be used as a paint device\.                         | <ul><li>[Pixmap](Pixmap.md)</li><li>[Bitmap](Bitmap.md)</li></ul> | <ul><li>[SerializeMixin](SerializeMixin.md)</li><li>[PaintDeviceMixin](PaintDeviceMixin.md)</li></ul>                     |
+| **<font size='4'>[QBitmap](https://doc.qt.io/qtforpython/PySide6/QtGui/QBitmap.html#PySide6.QtGui.PySide6.QtGui.QBitmap)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QBitmap\(self\) \-\> None | <ul><li>[Bitmap](Bitmap.md)</li></ul>                             | <ul><li>[QPixmap](https://doc.qt.io/qtforpython/PySide6/QtGui/QPixmap.html#PySide6.QtGui.PySide6.QtGui.QPixmap)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245544576["gui.Bitmap"]
+  1473245529936["gui.PixmapMixin"]
+  1473299806240["utils.SerializeMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473299974032["QtGui.QBitmap"]
+  1473299975984["QtGui.QPixmap"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473291690208["Shiboken.Object"]
+  1473245529936 --> 1473245544576
+  1473299806240 --> 1473245529936
+  140713234304496 --> 1473299806240
+  1473245548480 --> 1473245529936
+  140713234304496 --> 1473245548480
+  1473299974032 --> 1473245544576
+  1473299975984 --> 1473299974032
+  1473300082368 --> 1473299975984
+  1473291690208 --> 1473300082368
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.bitmap.Bitmap
+    options:
+      show_root_toc_entry: False

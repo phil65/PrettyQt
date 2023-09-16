@@ -1,0 +1,39 @@
+## Base classes
+
+| Name                                                                                                                                      | Children                                                                                                                                                                          | Inherits                                        |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **<font size='4'>[AbstractSpinBoxMixin](AbstractSpinBoxMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.abstractspinbox</font>*<br> | <ul><li>[AbstractSpinBox](AbstractSpinBox.md)</li><li>[SpinBox](SpinBox.md)</li><li>[DoubleSpinBox](DoubleSpinBox.md)</li><li>[DateTimeEditMixin](DateTimeEditMixin.md)</li></ul> | <ul><li>[WidgetMixin](WidgetMixin.md)</li></ul> |
+
+
+## Subclasses
+
+| Class                           | Module                        | Description |
+| ------------------------------- | ----------------------------- | ----------- |
+| [DateTimeEdit](DateTimeEdit.md) | prettyqt.widgets.datetimeedit |             |
+| [DateEdit](DateEdit.md)         | prettyqt.widgets.dateedit     |             |
+| [TimeEdit](TimeEdit.md)         | prettyqt.widgets.timeedit     |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296246128["widgets.DateTimeEditMixin"]
+  1473293702880["widgets.AbstractSpinBoxMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473293702880 --> 1473296246128
+  1473293688240 --> 1473293702880
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.datetimeedit.DateTimeEditMixin
+    options:
+      show_root_toc_entry: False

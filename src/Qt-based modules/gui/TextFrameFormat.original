@@ -1,0 +1,39 @@
+Qt Base Class: [QTextFrameFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextFrameFormat.html#PySide6.QtGui.PySide6.QtGui.QTextFrameFormat)
+
+Signature: `QTextFrameFormat(self) -> None
+QTextFrameFormat(self, QTextFrameFormat: PySide6.QtGui.QTextFrameFormat) -> None
+QTextFrameFormat(self, fmt: PySide6.QtGui.QTextFormat) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                        | Children                                                                                                                                                                                           | Inherits                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[TextFrameFormatMixin](TextFrameFormatMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.textframeformat</font>*<br>                                                                                                       | <ul><li>[TextFrameFormat](TextFrameFormat.md)</li><li>[TextTableFormat](TextTableFormat.md)</li></ul>                                                                                              | <ul><li>[TextFormatMixin](TextFormatMixin.md)</li></ul>                                                                               |
+| **<font size='4'>[QTextFrameFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextFrameFormat.html#PySide6.QtGui.PySide6.QtGui.QTextFrameFormat)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextFrameFormat\(self\) \-\> None | <ul><li>[QTextTableFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextTableFormat.html#PySide6.QtGui.PySide6.QtGui.QTextTableFormat)</li><li>[TextFrameFormat](TextFrameFormat.md)</li></ul> | <ul><li>[QTextFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextFormat.html#PySide6.QtGui.PySide6.QtGui.QTextFormat)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245615824["gui.TextFrameFormat"]
+  1473245648032["gui.TextFrameFormatMixin"]
+  1473245646080["gui.TextFormatMixin"]
+  140713234304496["builtins.object"]
+  1473299696928["QtGui.QTextFrameFormat"]
+  1473299700832["QtGui.QTextFormat"]
+  1473291690208["Shiboken.Object"]
+  1473245648032 --> 1473245615824
+  1473245646080 --> 1473245648032
+  140713234304496 --> 1473245646080
+  1473299696928 --> 1473245615824
+  1473299700832 --> 1473299696928
+  1473291690208 --> 1473299700832
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textframeformat.TextFrameFormat
+    options:
+      show_root_toc_entry: False

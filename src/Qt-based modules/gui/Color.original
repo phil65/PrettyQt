@@ -1,0 +1,36 @@
+Qt Base Class: [QColor](https://doc.qt.io/qtforpython/PySide6/QtGui/QColor.html#PySide6.QtGui.PySide6.QtGui.QColor)
+
+Signature: `QColor(self) -> None
+QColor(self, arg__1: Any) -> None
+QColor(self, color: PySide6.QtCore.Qt.GlobalColor) -> None
+QColor(self, name: str) -> None
+QColor(self, r: int, g: int, b: int, a: int = 255) -> None
+QColor(self, rgb: int) -> None
+QColor(self, rgba64: PySide6.QtGui.QRgba64) -> None
+QColor(self, spec: PySide6.QtGui.QColor.Spec, a1: int, a2: int, a3: int, a4: int, a5: int = 0) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                | Children                            | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------- |
+| **<font size='4'>[QColor](https://doc.qt.io/qtforpython/PySide6/QtGui/QColor.html#PySide6.QtGui.PySide6.QtGui.QColor)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QColor\(self\) \-\> None | <ul><li>[Color](Color.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245596304["gui.Color"]
+  1473300180944["QtGui.QColor"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473300180944 --> 1473245596304
+  1473291690208 --> 1473300180944
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.color.Color
+    options:
+      show_root_toc_entry: False

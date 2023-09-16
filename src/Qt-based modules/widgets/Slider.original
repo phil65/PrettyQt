@@ -1,0 +1,136 @@
+Qt Base Class: [QSlider](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QSlider.html#PySide6.QtWidgets.PySide6.QtWidgets.QSlider)
+
+Signature: `QSlider(self, orientation: PySide6.QtCore.Qt.Orientation, parent: Optional[PySide6.QtWidgets.QWidget] = None) -> None
+QSlider(self, parent: Optional[PySide6.QtWidgets.QWidget] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                            | Children                                                                                                                                              | Inherits                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[AbstractSliderMixin](AbstractSliderMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.abstractslider</font>*<br>                                                                                                                                                                                          | <ul><li>[AbstractSlider](AbstractSlider.md)</li><li>[ScrollBarMixin](ScrollBarMixin.md)</li><li>[Slider](Slider.md)</li><li>[Dial](Dial.md)</li></ul> | <ul><li>[WidgetMixin](WidgetMixin.md)</li></ul>                                                                                                               |
+| **<font size='4'>[QSlider](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QSlider.html#PySide6.QtWidgets.PySide6.QtWidgets.QSlider)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QSlider\(self, orientation: PySide6\.QtCore\.Qt\.Orientation, parent: Optional\[PySide6\.QtWidgets\.QWidget\] \= None\) \-\> None | <ul><li>[Slider](Slider.md)</li></ul>                                                                                                                 | <ul><li>[QAbstractSlider](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QAbstractSlider.html#PySide6.QtWidgets.PySide6.QtWidgets.QAbstractSlider)</li></ul> |
+
+
+## Subclasses
+
+| Class                       | Module                                     | Description |
+| --------------------------- | ------------------------------------------ | ----------- |
+| [SpanSlider](SpanSlider.md) | prettyqt.custom_widgets.editors.spanslider |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296205136["widgets.Slider"]
+  1473293701904["widgets.AbstractSliderMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473365411008["QtWidgets.QSlider"]
+  1473365440288["QtWidgets.QAbstractSlider"]
+  1473290849680["QtWidgets.QWidget"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473293701904 --> 1473296205136
+  1473293688240 --> 1473293701904
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+  1473365411008 --> 1473296205136
+  1473365440288 --> 1473365411008
+  1473290849680 --> 1473365440288
+  1473288842240 --> 1473290849680
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300082368 --> 1473290849680
+  1473291690208 --> 1473300082368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.slider.Slider
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property             | Type                            | Doc |
+| ----------------------- | ------------------------------- | --- |
+| `objectName`            | **QString**                     |     |
+| `modal`                 | **bool**                        |     |
+| `windowModality`        | **Qt::WindowModality**          |     |
+| `enabled`               | **bool**                        |     |
+| `geometry`              | **QRect**                       |     |
+| `frameGeometry`         | **QRect**                       |     |
+| `normalGeometry`        | **QRect**                       |     |
+| `x`                     | **int**                         |     |
+| `y`                     | **int**                         |     |
+| `pos`                   | **QPoint**                      |     |
+| `frameSize`             | **QSize**                       |     |
+| `size`                  | **QSize**                       |     |
+| `width`                 | **int**                         |     |
+| `height`                | **int**                         |     |
+| `rect`                  | **QRect**                       |     |
+| `childrenRect`          | **QRect**                       |     |
+| `childrenRegion`        | **QRegion**                     |     |
+| `sizePolicy`            | **QSizePolicy**                 |     |
+| `minimumSize`           | **QSize**                       |     |
+| `maximumSize`           | **QSize**                       |     |
+| `minimumWidth`          | **int**                         |     |
+| `minimumHeight`         | **int**                         |     |
+| `maximumWidth`          | **int**                         |     |
+| `maximumHeight`         | **int**                         |     |
+| `sizeIncrement`         | **QSize**                       |     |
+| `baseSize`              | **QSize**                       |     |
+| `palette`               | **QPalette**                    |     |
+| `font`                  | **QFont**                       |     |
+| `cursor`                | **QCursor**                     |     |
+| `mouseTracking`         | **bool**                        |     |
+| `tabletTracking`        | **bool**                        |     |
+| `isActiveWindow`        | **bool**                        |     |
+| `focusPolicy`           | **Qt::FocusPolicy**             |     |
+| `focus`                 | **bool**                        |     |
+| `contextMenuPolicy`     | **Qt::ContextMenuPolicy**       |     |
+| `updatesEnabled`        | **bool**                        |     |
+| `visible`               | **bool**                        |     |
+| `minimized`             | **bool**                        |     |
+| `maximized`             | **bool**                        |     |
+| `fullScreen`            | **bool**                        |     |
+| `sizeHint`              | **QSize**                       |     |
+| `minimumSizeHint`       | **QSize**                       |     |
+| `acceptDrops`           | **bool**                        |     |
+| `windowTitle`           | **QString**                     |     |
+| `windowIcon`            | **QIcon**                       |     |
+| `windowIconText`        | **QString**                     |     |
+| `windowOpacity`         | **double**                      |     |
+| `windowModified`        | **bool**                        |     |
+| `toolTip`               | **QString**                     |     |
+| `toolTipDuration`       | **int**                         |     |
+| `statusTip`             | **QString**                     |     |
+| `whatsThis`             | **QString**                     |     |
+| `accessibleName`        | **QString**                     |     |
+| `accessibleDescription` | **QString**                     |     |
+| `layoutDirection`       | **Qt::LayoutDirection**         |     |
+| `autoFillBackground`    | **bool**                        |     |
+| `styleSheet`            | **QString**                     |     |
+| `locale`                | **QLocale**                     |     |
+| `windowFilePath`        | **QString**                     |     |
+| `inputMethodHints`      | **QFlags<Qt::InputMethodHint>** |     |
+| `minimum`               | **int**                         |     |
+| `maximum`               | **int**                         |     |
+| `singleStep`            | **int**                         |     |
+| `pageStep`              | **int**                         |     |
+| `value`                 | **int**                         |     |
+| `sliderPosition`        | **int**                         |     |
+| `tracking`              | **bool**                        |     |
+| `orientation`           | **Qt::Orientation**             |     |
+| `invertedAppearance`    | **bool**                        |     |
+| `invertedControls`      | **bool**                        |     |
+| `sliderDown`            | **bool**                        |     |
+| `tickPosition`          | **QSlider::TickPosition**       |     |
+| `tickInterval`          | **int**                         |     |

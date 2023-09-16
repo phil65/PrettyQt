@@ -1,0 +1,60 @@
+Qt Base Class: [QQmlPropertyMap](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlPropertyMap.html#PySide6.QtQml.PySide6.QtQml.QQmlPropertyMap)
+
+Signature: `QQmlPropertyMap(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                          | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Inherits                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[QmlPropertyMapMixin](QmlPropertyMapMixin.md)</font>**<br>*<font size='1'>prettyqt.qml.qmlpropertymap</font>*<br>                                                                                                                                                            | <ul><li>[QmlPropertyMap](QmlPropertyMap.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                              |
+| **<font size='4'>[QQmlPropertyMap](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlPropertyMap.html#PySide6.QtQml.PySide6.QtQml.QQmlPropertyMap)</font>**<br>*<font size='1'>PySide6.QtQml</font>*<br>QQmlPropertyMap\(self, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[QmlPropertyMap](QmlPropertyMap.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li></ul> |
+| **<font size='4'>[MutableMapping](https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableMapping)</font>**<br>*<font size='1'>collections.abc</font>*<br>A MutableMapping is a generic container for associating                                                       | <ul><li>[_Environ](_Environ.md)</li><li>[ChainMap](https://docs.python.org/3/library/collections.html#collections.ChainMap)</li><li>[UserDict](https://docs.python.org/3/library/collections.html#collections.UserDict)</li><li>[WeakValueDictionary](https://docs.python.org/3/library/weakref.html#weakref.WeakValueDictionary)</li><li>[WeakKeyDictionary](https://docs.python.org/3/library/weakref.html#weakref.WeakKeyDictionary)</li><li>[PluginCollection](https://www.mkdocs.org/)</li><li>[LocaleDataDict](https://babel.pocoo.org/)</li><li>[SignalDict](SignalDict.md)</li><li>[Theme](https://www.mkdocs.org/)</li><li>[RawConfigParser](https://docs.python.org/3/library/configparser.html#configparser.RawConfigParser)</li><li>...</li></ul> | <ul><li>[Mapping](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)</li></ul>                  |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572311088["qml.QmlPropertyMap"]
+  1473572324752["qml.QmlPropertyMapMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473572260336["QtQml.QQmlPropertyMap"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473222543776["abc.MutableMapping"]
+  1473222540848["abc.Mapping"]
+  1473222211728["abc.Collection"]
+  1473222226368["abc.Sized"]
+  1473222223440["abc.Iterable"]
+  1473222220512["abc.Container"]
+  1473572324752 --> 1473572311088
+  1473299815024 --> 1473572324752
+  140713234304496 --> 1473299815024
+  1473572260336 --> 1473572311088
+  1473288842240 --> 1473572260336
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473222543776 --> 1473572311088
+  1473222540848 --> 1473222543776
+  1473222211728 --> 1473222540848
+  1473222226368 --> 1473222211728
+  140713234304496 --> 1473222226368
+  1473222223440 --> 1473222211728
+  140713234304496 --> 1473222223440
+  1473222220512 --> 1473222211728
+  140713234304496 --> 1473222220512
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qml.qmlpropertymap.QmlPropertyMap
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

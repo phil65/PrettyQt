@@ -1,0 +1,29 @@
+Qt Base Class: [QTextBlockUserData](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextBlockUserData.html#PySide6.QtGui.PySide6.QtGui.QTextBlockUserData)
+
+Signature: `QTextBlockUserData(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                | Children                                                                                                                                        | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QTextBlockUserData](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextBlockUserData.html#PySide6.QtGui.PySide6.QtGui.QTextBlockUserData)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextBlockUserData\(self\) \-\> None | <ul><li>[UserData](UserData.md)</li><li>[TextBlockUserData](TextBlockUserData.md)</li><li>[PygmentsBlockUserData](http://jupyter.org)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245604112["gui.TextBlockUserData"]
+  1473300021856["QtGui.QTextBlockUserData"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473300021856 --> 1473245604112
+  1473291690208 --> 1473300021856
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textblockuserdata.TextBlockUserData
+    options:
+      show_root_toc_entry: False

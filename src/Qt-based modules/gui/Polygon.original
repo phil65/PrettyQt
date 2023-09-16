@@ -1,0 +1,36 @@
+Qt Base Class: [QPolygon](https://doc.qt.io/qtforpython/PySide6/QtGui/QPolygon.html#PySide6.QtGui.PySide6.QtGui.QPolygon)
+
+Signature: `QPolygon(self) -> None
+QPolygon(self, QPolygon: Union[PySide6.QtGui.QPolygon, Sequence[PySide6.QtCore.QPoint], PySide6.QtCore.QRect]) -> None
+QPolygon(self, r: PySide6.QtCore.QRect, closed: bool = False) -> None
+QPolygon(self, v: Sequence[PySide6.QtCore.QPoint]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                        | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[SerializeMixin](SerializeMixin.md)</font>**<br>*<font size='1'>prettyqt.utils.serializemixin</font>*<br>                                                                                  | <ul><li>[EasingCurve](EasingCurve.md)</li><li>[Url](Url.md)</li><li>[KeyCombination](KeyCombination.md)</li><li>[Icon](Icon.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[IconEngine](IconEngine.md)</li><li>[Image](Image.md)</li><li>[Brush](Brush.md)</li><li>[Region](Region.md)</li><li>[Transform](Transform.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QPolygon](https://doc.qt.io/qtforpython/PySide6/QtGui/QPolygon.html#PySide6.QtGui.PySide6.QtGui.QPolygon)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QPolygon\(self\) \-\> None | <ul><li>[Polygon](Polygon.md)</li></ul>                                                                                                                                                                                                                                                                                                           | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245644128["gui.Polygon"]
+  1473299806240["utils.SerializeMixin"]
+  140713234304496["builtins.object"]
+  1473300041376["QtGui.QPolygon"]
+  1473291690208["Shiboken.Object"]
+  1473299806240 --> 1473245644128
+  140713234304496 --> 1473299806240
+  1473300041376 --> 1473245644128
+  1473291690208 --> 1473300041376
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.polygon.Polygon
+    options:
+      show_root_toc_entry: False

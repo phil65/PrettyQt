@@ -1,0 +1,24 @@
+## Subclasses
+
+| Class                                 | Module                       | Description |
+| ------------------------------------- | ---------------------------- | ----------- |
+| [Gradient](Gradient.md)               | prettyqt.gui.gradient        |             |
+| [LinearGradient](LinearGradient.md)   | prettyqt.gui.lineargradient  |             |
+| [RadialGradient](RadialGradient.md)   | prettyqt.gui.radialgradient  |             |
+| [ConicalGradient](ConicalGradient.md) | prettyqt.gui.conicalgradient |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245598256["gui.GradientMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473245598256
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.gradient.GradientMixin
+    options:
+      show_root_toc_entry: False

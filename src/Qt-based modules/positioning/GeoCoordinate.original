@@ -1,0 +1,32 @@
+Qt Base Class: [QGeoCoordinate](https://doc.qt.io/qtforpython/PySide6/QtPositioning/QGeoCoordinate.html#PySide6.QtPositioning.PySide6.QtPositioning.QGeoCoordinate)
+
+Signature: `QGeoCoordinate(self) -> None
+QGeoCoordinate(self, latitude: float, longitude: float) -> None
+QGeoCoordinate(self, latitude: float, longitude: float, altitude: float) -> None
+QGeoCoordinate(self, other: PySide6.QtPositioning.QGeoCoordinate) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                | Children                                            | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QGeoCoordinate](https://doc.qt.io/qtforpython/PySide6/QtPositioning/QGeoCoordinate.html#PySide6.QtPositioning.PySide6.QtPositioning.QGeoCoordinate)</font>**<br>*<font size='1'>PySide6.QtPositioning</font>*<br>QGeoCoordinate\(self\) \-\> None | <ul><li>[GeoCoordinate](GeoCoordinate.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573425840["positioning.GeoCoordinate"]
+  1473573340928["QtPositioning.QGeoCoordinate"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473573340928 --> 1473573425840
+  1473291690208 --> 1473573340928
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.positioning.geocoordinate.GeoCoordinate
+    options:
+      show_root_toc_entry: False

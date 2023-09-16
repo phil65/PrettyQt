@@ -1,0 +1,31 @@
+Qt Base Class: [QFontMetrics](https://doc.qt.io/qtforpython/PySide6/QtGui/QFontMetrics.html#PySide6.QtGui.PySide6.QtGui.QFontMetrics)
+
+Signature: `QFontMetrics(self, arg__1: PySide6.QtGui.QFontMetrics) -> None
+QFontMetrics(self, arg__1: Union[PySide6.QtGui.QFont, str, Sequence[str]]) -> None
+QFontMetrics(self, font: Union[PySide6.QtGui.QFont, str, Sequence[str]], pd: PySide6.QtGui.QPaintDevice) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                | Children                                        | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QFontMetrics](https://doc.qt.io/qtforpython/PySide6/QtGui/QFontMetrics.html#PySide6.QtGui.PySide6.QtGui.QFontMetrics)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QFontMetrics\(self, arg\_\_1: PySide6\.QtGui\.QFontMetrics\) \-\> None | <ul><li>[FontMetrics](FontMetrics.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245608016["gui.FontMetrics"]
+  1473300148736["QtGui.QFontMetrics"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473300148736 --> 1473245608016
+  1473291690208 --> 1473300148736
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.fontmetrics.FontMetrics
+    options:
+      show_root_toc_entry: False

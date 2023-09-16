@@ -1,0 +1,31 @@
+## Base classes
+
+| Name                                                                                                                                                                  | Children                                                                                                                                                                                                                                                                                    | Inherits                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| **<font size='4'>[MkTable](https://phil65.github.io/mknodes/)</font>**<br>*<font size='1'>mknodes.basenodes.mktable</font>*<br>Class representing a formatted table\. | <ul><li>[MkClassTable](https://phil65.github.io/mknodes/)</li><li>[MkModuleTable](https://phil65.github.io/mknodes/)</li><li>[MkDependencyTable](https://phil65.github.io/mknodes/)</li><li>[MkItemModelTable](MkItemModelTable.md)</li><li>[MkPropertyTable](MkPropertyTable.md)</li></ul> | <ul><li>[MkBaseTable](https://phil65.github.io/mknodes/)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367167264["prettyqtmarkdown.MkPropertyTable"]
+  1473287562688["mktable.MkTable"]
+  1473287594896["mkbasetable.MkBaseTable"]
+  1473287555856["mkcontainer.MkContainer"]
+  1473287579280["mknode.MkNode"]
+  1473287420192["node.Node"]
+  140713234304496["builtins.object"]
+  1473287562688 --> 1473367167264
+  1473287594896 --> 1473287562688
+  1473287555856 --> 1473287594896
+  1473287579280 --> 1473287555856
+  1473287420192 --> 1473287579280
+  140713234304496 --> 1473287420192
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.prettyqtmarkdown.mkpropertytable.MkPropertyTable
+    options:
+      show_root_toc_entry: False

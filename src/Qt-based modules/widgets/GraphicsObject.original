@@ -1,0 +1,65 @@
+Qt Base Class: [QGraphicsObject](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsObject.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsObject)
+
+Signature: `QGraphicsObject(self, parent: Optional[PySide6.QtWidgets.QGraphicsItem] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                   | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Inherits                                                                                                                                                                                                                                                                   |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GraphicsObjectMixin](GraphicsObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicsobject</font>*<br>                                                                                                                                                                                 | <ul><li>[GraphicsObject](GraphicsObject.md)</li><li>[GraphicsTextItem](GraphicsTextItem.md)</li><li>[GraphicsWidgetMixin](GraphicsWidgetMixin.md)</li><li>[GraphicsVideoItem](GraphicsVideoItem.md)</li><li>[GraphicsSvgItem](GraphicsSvgItem.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[GraphicsItemMixin](GraphicsItemMixin.md)</li></ul>                                                                                                                                                                          |
+| **<font size='4'>[QGraphicsObject](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsObject.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsObject)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QGraphicsObject\(self, parent: Optional\[PySide6\.QtWidgets\.QGraphicsItem\] \= None\) \-\> None | <ul><li>[QGraphicsWidget](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsWidget)</li><li>[QGraphicsTextItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsTextItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsTextItem)</li><li>[GraphicsObject](GraphicsObject.md)</li><li>[QGraphicsVideoItem](https://doc.qt.io/qtforpython/PySide6/QtMultimediaWidgets/QGraphicsVideoItem.html#PySide6.QtMultimediaWidgets.PySide6.QtMultimediaWidgets.QGraphicsVideoItem)</li><li>[QGraphicsSvgItem](https://doc.qt.io/qtforpython/PySide6/QtSvgWidgets/QGraphicsSvgItem.html#PySide6.QtSvgWidgets.PySide6.QtSvgWidgets.QGraphicsSvgItem)</li></ul> | <ul><li>[QGraphicsItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsItem)</li><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293709712["widgets.GraphicsObject"]
+  1473293697024["widgets.GraphicsObjectMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473293706784["widgets.GraphicsItemMixin"]
+  1473365816752["QtWidgets.QGraphicsObject"]
+  1473290795024["QtWidgets.QGraphicsItem"]
+  1473291690208["Shiboken.Object"]
+  1473288842240["QtCore.QObject"]
+  1473293697024 --> 1473293709712
+  1473299815024 --> 1473293697024
+  140713234304496 --> 1473299815024
+  1473293706784 --> 1473293697024
+  140713234304496 --> 1473293706784
+  1473365816752 --> 1473293709712
+  1473290795024 --> 1473365816752
+  1473291690208 --> 1473290795024
+  140713234304496 --> 1473291690208
+  1473288842240 --> 1473365816752
+  1473291690208 --> 1473288842240
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicsobject.GraphicsObject
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property            | Type                                          | Doc |
+| ---------------------- | --------------------------------------------- | --- |
+| `objectName`           | **QString**                                   |     |
+| `parent`               | **QGraphicsObject**                           |     |
+| `opacity`              | **double**                                    |     |
+| `enabled`              | **bool**                                      |     |
+| `visible`              | **bool**                                      |     |
+| `pos`                  | **QPointF**                                   |     |
+| `x`                    | **double**                                    |     |
+| `y`                    | **double**                                    |     |
+| `z`                    | **double**                                    |     |
+| `rotation`             | **double**                                    |     |
+| `scale`                | **double**                                    |     |
+| `transformOriginPoint` | **QPointF**                                   |     |
+| `effect`               | **QGraphicsEffect**                           |     |
+| `children`             | **QDeclarativeListProperty<QGraphicsObject>** |     |
+| `width`                | **double**                                    |     |
+| `height`               | **double**                                    |     |

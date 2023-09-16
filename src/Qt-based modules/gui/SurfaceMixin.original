@@ -1,0 +1,22 @@
+## Subclasses
+
+| Class                         | Module               | Description |
+| ----------------------------- | -------------------- | ----------- |
+| [Surface](Surface.md)         | prettyqt.gui.surface |             |
+| [WindowMixin](WindowMixin.md) | prettyqt.gui.window  |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245537744["gui.SurfaceMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473245537744
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.surface.SurfaceMixin
+    options:
+      show_root_toc_entry: False

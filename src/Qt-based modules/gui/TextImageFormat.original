@@ -1,0 +1,41 @@
+Qt Base Class: [QTextImageFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextImageFormat.html#PySide6.QtGui.PySide6.QtGui.QTextImageFormat)
+
+Signature: `QTextImageFormat(self) -> None
+QTextImageFormat(self, QTextImageFormat: PySide6.QtGui.QTextImageFormat) -> None
+QTextImageFormat(self, format: PySide6.QtGui.QTextFormat) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                        | Children                                                                                                                                                  | Inherits                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[TextCharFormatMixin](TextCharFormatMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.textcharformat</font>*<br>                                                                                                          | <ul><li>[TextCharFormat](TextCharFormat.md)</li><li>[TextImageFormat](TextImageFormat.md)</li><li>[TextTableCellFormat](TextTableCellFormat.md)</li></ul> | <ul><li>[TextFormatMixin](TextFormatMixin.md)</li></ul>                                                                                           |
+| **<font size='4'>[QTextImageFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextImageFormat.html#PySide6.QtGui.PySide6.QtGui.QTextImageFormat)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextImageFormat\(self\) \-\> None | <ul><li>[TextImageFormat](TextImageFormat.md)</li></ul>                                                                                                   | <ul><li>[QTextCharFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextCharFormat.html#PySide6.QtGui.PySide6.QtGui.QTextCharFormat)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245616800["gui.TextImageFormat"]
+  1473245667552["gui.TextCharFormatMixin"]
+  1473245646080["gui.TextFormatMixin"]
+  140713234304496["builtins.object"]
+  1473300017952["QtGui.QTextImageFormat"]
+  1473299992576["QtGui.QTextCharFormat"]
+  1473299700832["QtGui.QTextFormat"]
+  1473291690208["Shiboken.Object"]
+  1473245667552 --> 1473245616800
+  1473245646080 --> 1473245667552
+  140713234304496 --> 1473245646080
+  1473300017952 --> 1473245616800
+  1473299992576 --> 1473300017952
+  1473299700832 --> 1473299992576
+  1473291690208 --> 1473299700832
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textimageformat.TextImageFormat
+    options:
+      show_root_toc_entry: False

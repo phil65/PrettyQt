@@ -1,0 +1,33 @@
+Qt Base Class: [QGraphicsLayoutItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsLayoutItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsLayoutItem)
+
+Signature: `QGraphicsLayoutItem(self, parent: Optional[PySide6.QtWidgets.QGraphicsLayoutItem] = None, isLayout: bool = False) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                                  | Children                                                                                                                                                                                                                                                                                                                                                              | Inherits                                                                            |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[GraphicsLayoutItemMixin](GraphicsLayoutItemMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicslayoutitem</font>*<br>                                                                                                                                                                                                                    | <ul><li>[GraphicsLayoutItem](GraphicsLayoutItem.md)</li><li>[GraphicsLayoutMixin](GraphicsLayoutMixin.md)</li><li>[GraphicsWidgetMixin](GraphicsWidgetMixin.md)</li></ul>                                                                                                                                                                                             | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QGraphicsLayoutItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsLayoutItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsLayoutItem)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QGraphicsLayoutItem\(self, parent: Optional\[PySide6\.QtWidgets\.QGraphicsLayoutItem\] \= None, isLayout: bool \= False\) \-\> None | <ul><li>[QGraphicsLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsLayout)</li><li>[QGraphicsWidget](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsWidget)</li><li>[GraphicsLayoutItem](GraphicsLayoutItem.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293713616["widgets.GraphicsLayoutItem"]
+  1473293712640["widgets.GraphicsLayoutItemMixin"]
+  140713234304496["builtins.object"]
+  1473290825280["QtWidgets.QGraphicsLayoutItem"]
+  1473291690208["Shiboken.Object"]
+  1473293712640 --> 1473293713616
+  140713234304496 --> 1473293712640
+  1473290825280 --> 1473293713616
+  1473291690208 --> 1473290825280
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicslayoutitem.GraphicsLayoutItem
+    options:
+      show_root_toc_entry: False

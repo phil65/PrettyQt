@@ -1,0 +1,32 @@
+Qt Base Class: [QFontMetricsF](https://doc.qt.io/qtforpython/PySide6/QtGui/QFontMetricsF.html#PySide6.QtGui.PySide6.QtGui.QFontMetricsF)
+
+Signature: `QFontMetricsF(self, arg__1: PySide6.QtGui.QFontMetrics) -> None
+QFontMetricsF(self, arg__1: Union[PySide6.QtGui.QFontMetricsF, PySide6.QtGui.QFontMetrics]) -> None
+QFontMetricsF(self, font: Union[PySide6.QtGui.QFont, str, Sequence[str]]) -> None
+QFontMetricsF(self, font: Union[PySide6.QtGui.QFont, str, Sequence[str]], pd: PySide6.QtGui.QPaintDevice) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                    | Children                                          | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QFontMetricsF](https://doc.qt.io/qtforpython/PySide6/QtGui/QFontMetricsF.html#PySide6.QtGui.PySide6.QtGui.QFontMetricsF)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QFontMetricsF\(self, arg\_\_1: PySide6\.QtGui\.QFontMetrics\) \-\> None | <ul><li>[FontMetricsF](FontMetricsF.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245608992["gui.FontMetricsF"]
+  1473300127264["QtGui.QFontMetricsF"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473300127264 --> 1473245608992
+  1473291690208 --> 1473300127264
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.fontmetricsf.FontMetricsF
+    options:
+      show_root_toc_entry: False

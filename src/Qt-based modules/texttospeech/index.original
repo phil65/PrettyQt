@@ -1,0 +1,17 @@
+---
+hide:
+- toc
+---
+
+## Docs
+
+TextToSpeech module.
+
+Contains QtTextToSpeech-based classes
+
+## Classes
+
+| Name                                                                                                                        | Children | Inherits                                                                                                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **<font size='4'>[Voice](Voice.md)</font>**<br>*<font size='1'>prettyqt.texttospeech.voice</font>*<br>                      |          | <ul><li>[QVoice](https://doc.qt.io/qtforpython/PySide6/QtTextToSpeech/QVoice.html#PySide6.QtTextToSpeech.PySide6.QtTextToSpeech.QVoice)</li></ul>                                                            |
+| **<font size='4'>[TextToSpeech](TextToSpeech.md)</font>**<br>*<font size='1'>prettyqt.texttospeech.texttospeech</font>*<br> |          | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[QTextToSpeech](https://doc.qt.io/qtforpython/PySide6/QtTextToSpeech/QTextToSpeech.html#PySide6.QtTextToSpeech.PySide6.QtTextToSpeech.QTextToSpeech)</li></ul> |

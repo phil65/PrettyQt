@@ -1,0 +1,45 @@
+## Base classes
+
+| Name                                                                                                           | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                                        |
+| -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **<font size='4'>[WidgetMixin](WidgetMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.widget</font>*<br> | <ul><li>[Widget](Widget.md)</li><li>[FrameMixin](FrameMixin.md)</li><li>[FocusFrame](FocusFrame.md)</li><li>[AbstractSliderMixin](AbstractSliderMixin.md)</li><li>[AbstractButtonMixin](AbstractButtonMixin.md)</li><li>[LineEdit](LineEdit.md)</li><li>[AbstractSpinBoxMixin](AbstractSpinBoxMixin.md)</li><li>[RubberBandMixin](RubberBandMixin.md)</li><li>[DialogButtonBox](DialogButtonBox.md)</li><li>[DialogMixin](DialogMixin.md)</li><li>...</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[PaintDeviceMixin](PaintDeviceMixin.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572357936["qthelp.HelpSearchResultWidget"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473293688240 --> 1473572357936
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qthelp.helpsearchresultwidget.HelpSearchResultWidget
+    options:
+      show_root_toc_entry: False
+
+
+## 🖼 Screenshot
+
+``` py title='prettyqt.qthelp.helpsearchresultwidget.HelpSearchResultWidget.setup_example' linenums="16"
+@classmethod
+def setup_example(self):
+    core_engine = qthelp.HelpEngineCore("test")
+    engine = qthelp.HelpSearchEngine(core_engine)
+    widget = engine.get_result_widget()
+    widget.engine = engine
+    widget.core_engine = core_engine
+    return widget
+
+```
+
+![Image title](HelpSearchResultWidget_screenshot.png)

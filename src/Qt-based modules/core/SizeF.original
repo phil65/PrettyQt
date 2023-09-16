@@ -1,0 +1,32 @@
+Qt Base Class: [QSizeF](https://doc.qt.io/qtforpython/PySide6/QtCore/QSizeF.html#PySide6.QtCore.PySide6.QtCore.QSizeF)
+
+Signature: `QSizeF(self) -> None
+QSizeF(self, QSizeF: Union[PySide6.QtCore.QSizeF, PySide6.QtCore.QSize]) -> None
+QSizeF(self, sz: PySide6.QtCore.QSize) -> None
+QSizeF(self, w: float, h: float) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                    | Children                            | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------- |
+| **<font size='4'>[QSizeF](https://doc.qt.io/qtforpython/PySide6/QtCore/QSizeF.html#PySide6.QtCore.PySide6.QtCore.QSizeF)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QSizeF\(self\) \-\> None | <ul><li>[SizeF](SizeF.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299876512["core.SizeF"]
+  1473243785200["QtCore.QSizeF"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473243785200 --> 1473299876512
+  1473291690208 --> 1473243785200
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.sizef.SizeF
+    options:
+      show_root_toc_entry: False

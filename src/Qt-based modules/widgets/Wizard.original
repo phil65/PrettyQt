@@ -1,0 +1,125 @@
+Qt Base Class: [QWizard](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWizard.html#PySide6.QtWidgets.PySide6.QtWidgets.QWizard)
+
+Signature: `QWizard(self, parent: Optional[PySide6.QtWidgets.QWidget] = None, flags: PySide6.QtCore.Qt.WindowType = Default(Qt.WindowFlags)) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                   | Children                              | Inherits                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[WizardMixin](WizardMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.wizard</font>*<br>                                                                                                                                                                                                                                         | <ul><li>[Wizard](Wizard.md)</li></ul> | <ul><li>[DialogMixin](DialogMixin.md)</li></ul>                                                                                       |
+| **<font size='4'>[QWizard](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWizard.html#PySide6.QtWidgets.PySide6.QtWidgets.QWizard)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QWizard\(self, parent: Optional\[PySide6\.QtWidgets\.QWidget\] \= None, flags: PySide6\.QtCore\.Qt\.WindowType \= Default\(Qt\.WindowFlags\)\) \-\> None | <ul><li>[Wizard](Wizard.md)</li></ul> | <ul><li>[QDialog](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QDialog.html#PySide6.QtWidgets.PySide6.QtWidgets.QDialog)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296385696["widgets.Wizard"]
+  1473296375936["widgets.WizardMixin"]
+  1473296195376["widgets.DialogMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473241381792["QtWidgets.QWizard"]
+  1473241356416["QtWidgets.QDialog"]
+  1473290849680["QtWidgets.QWidget"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473296375936 --> 1473296385696
+  1473296195376 --> 1473296375936
+  1473293688240 --> 1473296195376
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+  1473241381792 --> 1473296385696
+  1473241356416 --> 1473241381792
+  1473290849680 --> 1473241356416
+  1473288842240 --> 1473290849680
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300082368 --> 1473290849680
+  1473291690208 --> 1473300082368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.wizard.Wizard
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property             | Type                              | Doc |
+| ----------------------- | --------------------------------- | --- |
+| `objectName`            | **QString**                       |     |
+| `modal`                 | **bool**                          |     |
+| `windowModality`        | **Qt::WindowModality**            |     |
+| `enabled`               | **bool**                          |     |
+| `geometry`              | **QRect**                         |     |
+| `frameGeometry`         | **QRect**                         |     |
+| `normalGeometry`        | **QRect**                         |     |
+| `x`                     | **int**                           |     |
+| `y`                     | **int**                           |     |
+| `pos`                   | **QPoint**                        |     |
+| `frameSize`             | **QSize**                         |     |
+| `size`                  | **QSize**                         |     |
+| `width`                 | **int**                           |     |
+| `height`                | **int**                           |     |
+| `rect`                  | **QRect**                         |     |
+| `childrenRect`          | **QRect**                         |     |
+| `childrenRegion`        | **QRegion**                       |     |
+| `sizePolicy`            | **QSizePolicy**                   |     |
+| `minimumSize`           | **QSize**                         |     |
+| `maximumSize`           | **QSize**                         |     |
+| `minimumWidth`          | **int**                           |     |
+| `minimumHeight`         | **int**                           |     |
+| `maximumWidth`          | **int**                           |     |
+| `maximumHeight`         | **int**                           |     |
+| `sizeIncrement`         | **QSize**                         |     |
+| `baseSize`              | **QSize**                         |     |
+| `palette`               | **QPalette**                      |     |
+| `font`                  | **QFont**                         |     |
+| `cursor`                | **QCursor**                       |     |
+| `mouseTracking`         | **bool**                          |     |
+| `tabletTracking`        | **bool**                          |     |
+| `isActiveWindow`        | **bool**                          |     |
+| `focusPolicy`           | **Qt::FocusPolicy**               |     |
+| `focus`                 | **bool**                          |     |
+| `contextMenuPolicy`     | **Qt::ContextMenuPolicy**         |     |
+| `updatesEnabled`        | **bool**                          |     |
+| `visible`               | **bool**                          |     |
+| `minimized`             | **bool**                          |     |
+| `maximized`             | **bool**                          |     |
+| `fullScreen`            | **bool**                          |     |
+| `sizeHint`              | **QSize**                         |     |
+| `minimumSizeHint`       | **QSize**                         |     |
+| `acceptDrops`           | **bool**                          |     |
+| `windowTitle`           | **QString**                       |     |
+| `windowIcon`            | **QIcon**                         |     |
+| `windowIconText`        | **QString**                       |     |
+| `windowOpacity`         | **double**                        |     |
+| `windowModified`        | **bool**                          |     |
+| `toolTip`               | **QString**                       |     |
+| `toolTipDuration`       | **int**                           |     |
+| `statusTip`             | **QString**                       |     |
+| `whatsThis`             | **QString**                       |     |
+| `accessibleName`        | **QString**                       |     |
+| `accessibleDescription` | **QString**                       |     |
+| `layoutDirection`       | **Qt::LayoutDirection**           |     |
+| `autoFillBackground`    | **bool**                          |     |
+| `styleSheet`            | **QString**                       |     |
+| `locale`                | **QLocale**                       |     |
+| `windowFilePath`        | **QString**                       |     |
+| `inputMethodHints`      | **QFlags<Qt::InputMethodHint>**   |     |
+| `sizeGripEnabled`       | **bool**                          |     |
+| `modal`                 | **bool**                          |     |
+| `wizardStyle`           | **QWizard::WizardStyle**          |     |
+| `options`               | **QFlags<QWizard::WizardOption>** |     |
+| `titleFormat`           | **Qt::TextFormat**                |     |
+| `subTitleFormat`        | **Qt::TextFormat**                |     |
+| `startId`               | **int**                           |     |
+| `currentId`             | **int**                           |     |

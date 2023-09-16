@@ -1,0 +1,29 @@
+Qt Base Class: [QWhatsThis](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWhatsThis.html#PySide6.QtWidgets.PySide6.QtWidgets.QWhatsThis)
+
+Signature: `None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                    | Children                                    | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QWhatsThis](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWhatsThis.html#PySide6.QtWidgets.PySide6.QtWidgets.QWhatsThis)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br> | <ul><li>[WhatsThis](WhatsThis.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296218800["widgets.WhatsThis"]
+  1473290732560["QtWidgets.QWhatsThis"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473290732560 --> 1473296218800
+  1473291690208 --> 1473290732560
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.whatsthis.WhatsThis
+    options:
+      show_root_toc_entry: False

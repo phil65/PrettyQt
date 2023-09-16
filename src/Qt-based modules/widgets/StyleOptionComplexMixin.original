@@ -1,0 +1,33 @@
+## Base classes
+
+| Name                                                                                                                          | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[StyleOptionMixin](StyleOptionMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.styleoption</font>*<br> | <ul><li>[StyleOption](StyleOption.md)</li><li>[StyleOptionButton](StyleOptionButton.md)</li><li>[StyleOptionComplexMixin](StyleOptionComplexMixin.md)</li><li>[StyleOptionDockWidget](StyleOptionDockWidget.md)</li><li>[StyleOptionFocusRect](StyleOptionFocusRect.md)</li><li>[StyleOptionFrame](StyleOptionFrame.md)</li><li>[StyleOptionGraphicsItem](StyleOptionGraphicsItem.md)</li><li>[StyleOptionHeader](StyleOptionHeader.md)</li><li>[StyleOptionMenuItem](StyleOptionMenuItem.md)</li><li>[StyleOptionProgressBar](StyleOptionProgressBar.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+
+
+## Subclasses
+
+| Class                                         | Module                               | Description |
+| --------------------------------------------- | ------------------------------------ | ----------- |
+| [StyleOptionComplex](StyleOptionComplex.md)   | prettyqt.widgets.styleoptioncomplex  |             |
+| [StyleOptionComboBox](StyleOptionComboBox.md) | prettyqt.widgets.styleoptioncombobox |             |
+| [StyleOptionSizeGrip](StyleOptionSizeGrip.md) | prettyqt.widgets.styleoptionsizegrip |             |
+| [StyleOptionSlider](StyleOptionSlider.md)     | prettyqt.widgets.styleoptionslider   |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296178784["widgets.StyleOptionComplexMixin"]
+  1473296150480["widgets.StyleOptionMixin"]
+  140713234304496["builtins.object"]
+  1473296150480 --> 1473296178784
+  140713234304496 --> 1473296150480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.styleoptioncomplex.StyleOptionComplexMixin
+    options:
+      show_root_toc_entry: False

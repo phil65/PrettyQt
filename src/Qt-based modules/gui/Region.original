@@ -1,0 +1,38 @@
+Qt Base Class: [QRegion](https://doc.qt.io/qtforpython/PySide6/QtGui/QRegion.html#PySide6.QtGui.PySide6.QtGui.QRegion)
+
+Signature: `QRegion(self) -> None
+QRegion(self, bitmap: Union[PySide6.QtGui.QBitmap, str]) -> None
+QRegion(self, pa: Union[PySide6.QtGui.QPolygon, Sequence[PySide6.QtCore.QPoint], PySide6.QtCore.QRect], fillRule: PySide6.QtCore.Qt.FillRule = Instance(Qt.OddEvenFill)) -> None
+QRegion(self, r: PySide6.QtCore.QRect, t: PySide6.QtGui.QRegion.RegionType = Instance(PySide6.QtGui.QRegion.RegionType.Rectangle)) -> None
+QRegion(self, region: Union[PySide6.QtGui.QRegion, PySide6.QtGui.QBitmap, PySide6.QtGui.QPolygon, PySide6.QtCore.QRect]) -> None
+QRegion(self, x: int, y: int, w: int, h: int, t: PySide6.QtGui.QRegion.RegionType = Instance(PySide6.QtGui.QRegion.RegionType.Rectangle)) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                    | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[SerializeMixin](SerializeMixin.md)</font>**<br>*<font size='1'>prettyqt.utils.serializemixin</font>*<br>                                                                              | <ul><li>[EasingCurve](EasingCurve.md)</li><li>[Url](Url.md)</li><li>[KeyCombination](KeyCombination.md)</li><li>[Icon](Icon.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[IconEngine](IconEngine.md)</li><li>[Image](Image.md)</li><li>[Brush](Brush.md)</li><li>[Region](Region.md)</li><li>[Transform](Transform.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QRegion](https://doc.qt.io/qtforpython/PySide6/QtGui/QRegion.html#PySide6.QtGui.PySide6.QtGui.QRegion)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QRegion\(self\) \-\> None | <ul><li>[Region](Region.md)</li></ul>                                                                                                                                                                                                                                                                                                             | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245611920["gui.Region"]
+  1473299806240["utils.SerializeMixin"]
+  140713234304496["builtins.object"]
+  1473300026736["QtGui.QRegion"]
+  1473291690208["Shiboken.Object"]
+  1473299806240 --> 1473245611920
+  140713234304496 --> 1473299806240
+  1473300026736 --> 1473245611920
+  1473291690208 --> 1473300026736
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.region.Region
+    options:
+      show_root_toc_entry: False

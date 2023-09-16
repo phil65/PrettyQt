@@ -1,0 +1,31 @@
+Qt Base Class: [QItemSelection](https://doc.qt.io/qtforpython/PySide6/QtCore/QItemSelection.html#PySide6.QtCore.PySide6.QtCore.QItemSelection)
+
+Signature: `QItemSelection(self) -> PySide6.QtCore.QItemSelection
+QItemSelection(self, QItemSelection: PySide6.QtCore.QItemSelection) -> None
+QItemSelection(self, topLeft: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex], bottomRight: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                               | Children                                            | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QItemSelection](https://doc.qt.io/qtforpython/PySide6/QtCore/QItemSelection.html#PySide6.QtCore.PySide6.QtCore.QItemSelection)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QItemSelection\(self\) \-\> PySide6\.QtCore\.QItemSelection | <ul><li>[ItemSelection](ItemSelection.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299899936["core.ItemSelection"]
+  1473243630016["QtCore.QItemSelection"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473243630016 --> 1473299899936
+  1473291690208 --> 1473243630016
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.itemselection.ItemSelection
+    options:
+      show_root_toc_entry: False

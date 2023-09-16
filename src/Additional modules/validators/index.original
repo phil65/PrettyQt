@@ -1,0 +1,65 @@
+---
+hide:
+- toc
+---
+
+## Docs
+
+PrettyQt Validators
+
+PrettyQt ships a large number of predefined validators.
+
+Apart from LineEdits, ComboBoxes and SpinBoxes, PlainTextEdits also gained the ability to take a validator.
+
+The set_validator method also gained a "strict" keyword argument, which wraps the passed
+validator into a NotStrictValidator, effectively removing the "Invalid" state. That way
+there never is a situation where the user input is ignored, which might be preferred in a lot of situations.
+
+The acceptance of "" may also be overriden explicitely by setting the "allow_empty" keyword argument.
+
+Validators can also be combined. The resulting CompositeValidator checks if all containing validators accept the input.
+
+
+Example:
+```py
+val_1 = BlackListValidator(["Blacklisted word"])
+val_2 = AlphanumericValidator()
+and_validator = val_1 & val_2  # returns an AndValidator
+
+val_1 = AlphanumericValidator()
+val_2 = RegularExpressionValidator("some_regex")
+or_val = val_1 | val_2 # returns an OrValidator
+```
+Validators can also be set by an id. Since everything is typed with Literals, the possible ids should be shown by your IDE.
+```py
+lineedit.set_validator("float")
+```
+
+## Classes
+
+| Name                                                                                                                                                          | Children                                                                                                    | Inherits                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| **<font size='4'>[NotStrictValidator](NotStrictValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.notstrictvalidator</font>*<br>                   |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[BlacklistValidator](BlacklistValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.blacklistvalidator</font>*<br>                   | <ul><li>[NotZeroValidator](NotZeroValidator.md)</li><li>[NotEmptyValidator](NotEmptyValidator.md)</li></ul> | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[FloatListValidator](FloatListValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.regexvalidators</font>*<br>                      |                                                                                                             | <ul><li>[BaseRegexValidator](BaseRegexValidator.md)</li></ul>           |
+| **<font size='4'>[IntegerValidator](IntegerValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.integervalidator</font>*<br>                         |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[TextLengthValidator](TextLengthValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.textlengthvalidator</font>*<br>                |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[JsonValidator](JsonValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.jsonvalidator</font>*<br>                                  |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[NotEmptyValidator](NotEmptyValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.blacklistvalidator</font>*<br>                     |                                                                                                             | <ul><li>[BlacklistValidator](BlacklistValidator.md)</li></ul>           |
+| **<font size='4'>[EmptyValidator](EmptyValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.whitelistvalidator</font>*<br>                           |                                                                                                             | <ul><li>[WhitelistValidator](WhitelistValidator.md)</li></ul>           |
+| **<font size='4'>[PythonCodeValidator](PythonCodeValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.pythoncodevalidator</font>*<br>                |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[WhitelistValidator](WhitelistValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.whitelistvalidator</font>*<br>                   | <ul><li>[EmptyValidator](EmptyValidator.md)</li></ul>                                                       | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[HexValidator](HexValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.hexvalidator</font>*<br>                                     |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[RegexPatternValidator](RegexPatternValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.regexpatternvalidator</font>*<br>          |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[ColorValidator](ColorValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.colorvalidator</font>*<br>                               |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[MonotonicListValidator](MonotonicListValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.monotoniclistvalidator</font>*<br>       |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[QssValidator](QssValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.qssvalidator</font>*<br>                                     |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[IntListValidator](IntListValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.regexvalidators</font>*<br>                          |                                                                                                             | <ul><li>[BaseRegexValidator](BaseRegexValidator.md)</li></ul>           |
+| **<font size='4'>[FunctionValidator](FunctionValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.functionvalidator</font>*<br>                      |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[OrValidator](OrValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.compositevalidator</font>*<br>                                 |                                                                                                             | <ul><li>[CompositeValidator](CompositeValidator.md)</li></ul>           |
+| **<font size='4'>[NotZeroValidator](NotZeroValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.blacklistvalidator</font>*<br>                       |                                                                                                             | <ul><li>[BlacklistValidator](BlacklistValidator.md)</li></ul>           |
+| **<font size='4'>[ScientificFloatValidator](ScientificFloatValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.scientificvalidators</font>*<br>     |                                                                                                             | <ul><li>[BaseScientificValidator](BaseScientificValidator.md)</li></ul> |
+| **<font size='4'>[PathValidator](PathValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.pathvalidator</font>*<br>                                  |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |
+| **<font size='4'>[ScientificIntegerValidator](ScientificIntegerValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.scientificvalidators</font>*<br> |                                                                                                             | <ul><li>[BaseScientificValidator](BaseScientificValidator.md)</li></ul> |
+| **<font size='4'>[AndValidator](AndValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.compositevalidator</font>*<br>                               |                                                                                                             | <ul><li>[CompositeValidator](CompositeValidator.md)</li></ul>           |
+| **<font size='4'>[AlphaNumericValidator](AlphaNumericValidator.md)</font>**<br>*<font size='1'>prettyqt.validators.alphanumericvalidator</font>*<br>          |                                                                                                             | <ul><li>[Validator](Validator.md)</li></ul>                             |

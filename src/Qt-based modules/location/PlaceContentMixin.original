@@ -1,0 +1,21 @@
+## Subclasses
+
+| Class                           | Module                         | Description |
+| ------------------------------- | ------------------------------ | ----------- |
+| [PlaceContent](PlaceContent.md) | prettyqt.location.placecontent |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573468784["location.PlaceContentMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473573468784
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.location.placecontent.PlaceContentMixin
+    options:
+      show_root_toc_entry: False

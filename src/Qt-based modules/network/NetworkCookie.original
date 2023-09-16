@@ -1,0 +1,30 @@
+Qt Base Class: [QNetworkCookie](https://doc.qt.io/qtforpython/PySide6/QtNetwork/QNetworkCookie.html#PySide6.QtNetwork.PySide6.QtNetwork.QNetworkCookie)
+
+Signature: `QNetworkCookie(self, name: Union[PySide6.QtCore.QByteArray, bytes] = Default(QByteArray), value: Union[PySide6.QtCore.QByteArray, bytes] = Default(QByteArray)) -> None
+QNetworkCookie(self, other: PySide6.QtNetwork.QNetworkCookie) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                                                                         | Children                                            | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QNetworkCookie](https://doc.qt.io/qtforpython/PySide6/QtNetwork/QNetworkCookie.html#PySide6.QtNetwork.PySide6.QtNetwork.QNetworkCookie)</font>**<br>*<font size='1'>PySide6.QtNetwork</font>*<br>QNetworkCookie\(self, name: Union\[PySide6\.QtCore\.QByteArray, bytes\] \= Default\(QByteArray\), value: Union\[PySide6\.QtCore\.QByteArray, bytes\] \= Default\(QByteArray\)\) \-\> None | <ul><li>[NetworkCookie](NetworkCookie.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573994880["network.NetworkCookie"]
+  1473573868976["QtNetwork.QNetworkCookie"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473573868976 --> 1473573994880
+  1473291690208 --> 1473573868976
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.network.networkcookie.NetworkCookie
+    options:
+      show_root_toc_entry: False

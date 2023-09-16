@@ -1,0 +1,91 @@
+Qt Base Class: [QGraphicsProxyWidget](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsProxyWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsProxyWidget)
+
+Signature: `QGraphicsProxyWidget(self, parent: Optional[PySide6.QtWidgets.QGraphicsItem] = None, wFlags: PySide6.QtCore.Qt.WindowType = Default(Qt.WindowFlags)) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                                                                              | Children                                                                                                                                                                    | Inherits                                                                                                                                                      |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GraphicsWidgetMixin](GraphicsWidgetMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicswidget</font>*<br>                                                                                                                                                                                                                                                                            | <ul><li>[GraphicsWidget](GraphicsWidget.md)</li><li>[GraphicsProxyWidget](GraphicsProxyWidget.md)</li><li>[Legend](Legend.md)</li><li>[ChartMixin](ChartMixin.md)</li></ul> | <ul><li>[GraphicsObjectMixin](GraphicsObjectMixin.md)</li><li>[GraphicsLayoutItemMixin](GraphicsLayoutItemMixin.md)</li></ul>                                 |
+| **<font size='4'>[QGraphicsProxyWidget](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsProxyWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsProxyWidget)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QGraphicsProxyWidget\(self, parent: Optional\[PySide6\.QtWidgets\.QGraphicsItem\] \= None, wFlags: PySide6\.QtCore\.Qt\.WindowType \= Default\(Qt\.WindowFlags\)\) \-\> None | <ul><li>[GraphicsProxyWidget](GraphicsProxyWidget.md)</li></ul>                                                                                                             | <ul><li>[QGraphicsWidget](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsWidget)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296162192["widgets.GraphicsProxyWidget"]
+  1473296164144["widgets.GraphicsWidgetMixin"]
+  1473293697024["widgets.GraphicsObjectMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473293706784["widgets.GraphicsItemMixin"]
+  1473293712640["widgets.GraphicsLayoutItemMixin"]
+  1473365817728["QtWidgets.QGraphicsProxyWidget"]
+  1473365806992["QtWidgets.QGraphicsWidget"]
+  1473365816752["QtWidgets.QGraphicsObject"]
+  1473290795024["QtWidgets.QGraphicsItem"]
+  1473291690208["Shiboken.Object"]
+  1473288842240["QtCore.QObject"]
+  1473290825280["QtWidgets.QGraphicsLayoutItem"]
+  1473296164144 --> 1473296162192
+  1473293697024 --> 1473296164144
+  1473299815024 --> 1473293697024
+  140713234304496 --> 1473299815024
+  1473293706784 --> 1473293697024
+  140713234304496 --> 1473293706784
+  1473293712640 --> 1473296164144
+  140713234304496 --> 1473293712640
+  1473365817728 --> 1473296162192
+  1473365806992 --> 1473365817728
+  1473365816752 --> 1473365806992
+  1473290795024 --> 1473365816752
+  1473291690208 --> 1473290795024
+  140713234304496 --> 1473291690208
+  1473288842240 --> 1473365816752
+  1473291690208 --> 1473288842240
+  1473290825280 --> 1473365806992
+  1473291690208 --> 1473290825280
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicsproxywidget.GraphicsProxyWidget
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property            | Type                                          | Doc |
+| ---------------------- | --------------------------------------------- | --- |
+| `objectName`           | **QString**                                   |     |
+| `parent`               | **QGraphicsObject**                           |     |
+| `opacity`              | **double**                                    |     |
+| `enabled`              | **bool**                                      |     |
+| `visible`              | **bool**                                      |     |
+| `pos`                  | **QPointF**                                   |     |
+| `x`                    | **double**                                    |     |
+| `y`                    | **double**                                    |     |
+| `z`                    | **double**                                    |     |
+| `rotation`             | **double**                                    |     |
+| `scale`                | **double**                                    |     |
+| `transformOriginPoint` | **QPointF**                                   |     |
+| `effect`               | **QGraphicsEffect**                           |     |
+| `children`             | **QDeclarativeListProperty<QGraphicsObject>** |     |
+| `width`                | **double**                                    |     |
+| `height`               | **double**                                    |     |
+| `palette`              | **QPalette**                                  |     |
+| `font`                 | **QFont**                                     |     |
+| `layoutDirection`      | **Qt::LayoutDirection**                       |     |
+| `size`                 | **QSizeF**                                    |     |
+| `minimumSize`          | **QSizeF**                                    |     |
+| `preferredSize`        | **QSizeF**                                    |     |
+| `maximumSize`          | **QSizeF**                                    |     |
+| `sizePolicy`           | **QSizePolicy**                               |     |
+| `focusPolicy`          | **Qt::FocusPolicy**                           |     |
+| `windowFlags`          | **QFlags<Qt::WindowType>**                    |     |
+| `windowTitle`          | **QString**                                   |     |
+| `geometry`             | **QRectF**                                    |     |
+| `autoFillBackground`   | **bool**                                      |     |
+| `layout`               | **QGraphicsLayout**                           |     |

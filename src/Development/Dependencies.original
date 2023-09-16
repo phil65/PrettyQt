@@ -1,0 +1,23 @@
+---
+hide:
+- toc
+title: Dependencies
+---
+
+| Name                                                                                     | Summary                                                                                            | Markers                                            |
+| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| **<font size='3'>[Pillow](https://python-pillow.org)</font>**                            | *Python Imaging Library (Fork)*                                                                    | `extra == "addons"`                                |
+| **<font size='3'>[orjson](https://github.com/ijl/orjson)</font>**                        | *Fast, correct Python JSON library supporting dataclasses, datetimes, and numpy*                   | `python_version < "3.12"` and `extra == "addons"`  |
+| **<font size='3'>[Pygments](https://pygments.org)</font>**                               | *Pygments is a syntax highlighting package written in Python.*                                     |                                                    |
+| **<font size='3'>[PySide6](https://www.pyside.org)</font>**                              | *Python bindings for the Qt cross-platform application and UI framework*                           | `python_version < "3.12"` and `extra == "pyside6"` |
+| **<font size='3'>[fsspec](http://github.com/fsspec/filesystem_spec)</font>**             | *File-system specification*                                                                        | `extra == "addons"`                                |
+| **<font size='3'>[comtypes](https://github.com/enthought/comtypes)</font>**              | *Pure Python COM package*                                                                          | `sys_platform == "win32"`                          |
+| **<font size='3'>[attrs](https://www.attrs.org/)</font>**                                | *Classes Without Boilerplate*                                                                      | `extra == "addons"`                                |
+| **<font size='3'>[numpy](https://www.numpy.org)</font>**                                 | *Fundamental package for array computing in Python*                                                | `extra == "addons"`                                |
+| **<font size='3'>[bidict](https://bidict.readthedocs.io)</font>**                        | *The bidirectional mapping library for Python.*                                                    |                                                    |
+| **<font size='3'>[typing_extensions](https://typing-extensions.readthedocs.io/)</font>** | *Backported and Experimental Type Hints for Python 3.7+*                                           |                                                    |
+| **<font size='3'>[qtconsole](http://jupyter.org)</font>**                                | *Jupyter Qt console*                                                                               | `extra == "addons"`                                |
+| **<font size='3'>[pywin32](https://github.com/mhammond/pywin32)</font>**                 | *Python for Window Extensions*                                                                     | `sys_platform == "win32"`                          |
+| **<font size='3'>[lxml](https://lxml.de/)</font>**                                       | *Powerful and Pythonic XML processing library combining libxml2/libxslt with the ElementTree API.* | `extra == "addons"`                                |
+| **<font size='3'>[ipython](https://ipython.org)</font>**                                 | *IPython: Productive Interactive Computing*                                                        | `extra == "addons"`                                |
+| **<font size='3'>[qstylizer](https://github.com/blambright/qstylizer)</font>**           | *Stylesheet Generator for PyQt{4-5}/PySide{1-2}*                                                   |                                                    |

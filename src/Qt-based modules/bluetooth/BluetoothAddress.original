@@ -1,0 +1,32 @@
+Qt Base Class: [QBluetoothAddress](https://doc.qt.io/qtforpython/PySide6/QtBluetooth/QBluetoothAddress.html#PySide6.QtBluetooth.PySide6.QtBluetooth.QBluetoothAddress)
+
+Signature: `QBluetoothAddress(self) -> None
+QBluetoothAddress(self, address: str) -> None
+QBluetoothAddress(self, address: int) -> None
+QBluetoothAddress(self, other: PySide6.QtBluetooth.QBluetoothAddress) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                    | Children                                                  | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QBluetoothAddress](https://doc.qt.io/qtforpython/PySide6/QtBluetooth/QBluetoothAddress.html#PySide6.QtBluetooth.PySide6.QtBluetooth.QBluetoothAddress)</font>**<br>*<font size='1'>PySide6.QtBluetooth</font>*<br>QBluetoothAddress\(self\) \-\> None | <ul><li>[BluetoothAddress](BluetoothAddress.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367550240["bluetooth.BluetoothAddress"]
+  1473367536576["QtBluetooth.QBluetoothAddress"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473367536576 --> 1473367550240
+  1473291690208 --> 1473367536576
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.bluetooth.bluetoothaddress.BluetoothAddress
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,14 @@
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299794528["core.MetaProperty"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473299794528
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.metaproperty.MetaProperty
+    options:
+      show_root_toc_entry: False

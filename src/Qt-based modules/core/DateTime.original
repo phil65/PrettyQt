@@ -1,0 +1,36 @@
+Qt Base Class: [QDateTime](https://doc.qt.io/qtforpython/PySide6/QtCore/QDateTime.html#PySide6.QtCore.PySide6.QtCore.QDateTime)
+
+Signature: `QDateTime(self) -> None
+QDateTime(self, arg__1: int, arg__2: int, arg__3: int, arg__4: int, arg__5: int, arg__6: int) -> None
+QDateTime(self, arg__1: int, arg__2: int, arg__3: int, arg__4: int, arg__5: int, arg__6: int, arg__7: int, arg__8: PySide6.QtCore.Qt.TimeSpec = Instance(Qt.LocalTime)) -> None
+QDateTime(self, arg__1: int, arg__2: int, arg__3: int, arg__4: int, arg__5: int, arg__6: int, arg__7: int, arg__8: int = Instance(Qt.LocalTime)) -> None
+QDateTime(self, date: PySide6.QtCore.QDate, time: PySide6.QtCore.QTime) -> None
+QDateTime(self, date: PySide6.QtCore.QDate, time: PySide6.QtCore.QTime, spec: PySide6.QtCore.Qt.TimeSpec, offsetSeconds: int = 0) -> None
+QDateTime(self, date: PySide6.QtCore.QDate, time: PySide6.QtCore.QTime, timeZone: Union[PySide6.QtCore.QTimeZone, PySide6.QtCore.QTimeZone.Initialization]) -> None
+QDateTime(self, other: PySide6.QtCore.QDateTime) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                | Children                                  | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QDateTime](https://doc.qt.io/qtforpython/PySide6/QtCore/QDateTime.html#PySide6.QtCore.PySide6.QtCore.QDateTime)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QDateTime\(self\) \-\> None | <ul><li>[DateTime](DateTime.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299721328["core.DateTime"]
+  1473289002304["QtCore.QDateTime"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473289002304 --> 1473299721328
+  1473291690208 --> 1473289002304
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core._datetime.DateTime
+    options:
+      show_root_toc_entry: False

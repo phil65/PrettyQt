@@ -1,0 +1,36 @@
+Qt Base Class: [QTransform](https://doc.qt.io/qtforpython/PySide6/QtGui/QTransform.html#PySide6.QtGui.PySide6.QtGui.QTransform)
+
+Signature: `QTransform(self) -> None
+QTransform(self, h11: float, h12: float, h13: float, h21: float, h22: float, h23: float, h31: float, h32: float, h33: float) -> None
+QTransform(self, h11: float, h12: float, h21: float, h22: float, dx: float, dy: float) -> None
+QTransform(self, other: PySide6.QtGui.QTransform) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[SerializeMixin](SerializeMixin.md)</font>**<br>*<font size='1'>prettyqt.utils.serializemixin</font>*<br>                                                                                          | <ul><li>[EasingCurve](EasingCurve.md)</li><li>[Url](Url.md)</li><li>[KeyCombination](KeyCombination.md)</li><li>[Icon](Icon.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[IconEngine](IconEngine.md)</li><li>[Image](Image.md)</li><li>[Brush](Brush.md)</li><li>[Region](Region.md)</li><li>[Transform](Transform.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QTransform](https://doc.qt.io/qtforpython/PySide6/QtGui/QTransform.html#PySide6.QtGui.PySide6.QtGui.QTransform)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTransform\(self\) \-\> None | <ul><li>[Transform](Transform.md)</li></ul>                                                                                                                                                                                                                                                                                                       | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245626560["gui.Transform"]
+  1473299806240["utils.SerializeMixin"]
+  140713234304496["builtins.object"]
+  1473299675456["QtGui.QTransform"]
+  1473291690208["Shiboken.Object"]
+  1473299806240 --> 1473245626560
+  140713234304496 --> 1473299806240
+  1473299675456 --> 1473245626560
+  1473291690208 --> 1473299675456
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.transform.Transform
+    options:
+      show_root_toc_entry: False

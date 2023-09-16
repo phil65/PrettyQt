@@ -1,0 +1,14 @@
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245641200["iconprovider.IconicFont"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473245641200
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.iconprovider.iconic_font.IconicFont
+    options:
+      show_root_toc_entry: False

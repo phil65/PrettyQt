@@ -1,0 +1,11 @@
+---
+hide:
+- toc
+---
+
+## Classes
+
+| Name                                                                                                                                            | Children | Inherits                                                                                                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[VideoWidget](VideoWidget.md)</font>**<br>*<font size='1'>prettyqt.multimediawidgets.videowidget</font>*<br>                   |          | <ul><li>[WidgetMixin](WidgetMixin.md)</li><li>[QVideoWidget](https://doc.qt.io/qtforpython/PySide6/QtMultimediaWidgets/QVideoWidget.html#PySide6.QtMultimediaWidgets.PySide6.QtMultimediaWidgets.QVideoWidget)</li></ul>                                   |
+| **<font size='4'>[GraphicsVideoItem](GraphicsVideoItem.md)</font>**<br>*<font size='1'>prettyqt.multimediawidgets.graphicsvideoitem</font>*<br> |          | <ul><li>[GraphicsObjectMixin](GraphicsObjectMixin.md)</li><li>[QGraphicsVideoItem](https://doc.qt.io/qtforpython/PySide6/QtMultimediaWidgets/QGraphicsVideoItem.html#PySide6.QtMultimediaWidgets.PySide6.QtMultimediaWidgets.QGraphicsVideoItem)</li></ul> |

@@ -1,0 +1,37 @@
+Qt Base Class: [QAbstractGraphicsShapeItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QAbstractGraphicsShapeItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QAbstractGraphicsShapeItem)
+
+Signature: `QAbstractGraphicsShapeItem(self, parent: Optional[PySide6.QtWidgets.QGraphicsItem] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                               | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[AbstractGraphicsShapeItemMixin](AbstractGraphicsShapeItemMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.abstractgraphicsshapeitem</font>*<br>                                                                                                                                                                                            | <ul><li>[AbstractGraphicsShapeItem](AbstractGraphicsShapeItem.md)</li><li>[GraphicsRectItem](GraphicsRectItem.md)</li><li>[GraphicsSimpleTextItem](GraphicsSimpleTextItem.md)</li><li>[GraphicsPolygonItem](GraphicsPolygonItem.md)</li><li>[GraphicsEllipseItem](GraphicsEllipseItem.md)</li><li>[GraphicsPathItem](GraphicsPathItem.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | <ul><li>[GraphicsItemMixin](GraphicsItemMixin.md)</li></ul>                                                                                             |
+| **<font size='4'>[QAbstractGraphicsShapeItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QAbstractGraphicsShapeItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QAbstractGraphicsShapeItem)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QAbstractGraphicsShapeItem\(self, parent: Optional\[PySide6\.QtWidgets\.QGraphicsItem\] \= None\) \-\> None | <ul><li>[QGraphicsSimpleTextItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsSimpleTextItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsSimpleTextItem)</li><li>[QGraphicsRectItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsRectItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsRectItem)</li><li>[QGraphicsPolygonItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsPolygonItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsPolygonItem)</li><li>[QGraphicsPathItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsPathItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsPathItem)</li><li>[QGraphicsEllipseItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsEllipseItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsEllipseItem)</li><li>[AbstractGraphicsShapeItem](AbstractGraphicsShapeItem.md)</li></ul> | <ul><li>[QGraphicsItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsItem)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293715568["widgets.AbstractGraphicsShapeItem"]
+  1473293714592["widgets.AbstractGraphicsShapeItemMixin"]
+  1473293706784["widgets.GraphicsItemMixin"]
+  140713234304496["builtins.object"]
+  1473290838944["QtWidgets.QAbstractGraphicsShapeItem"]
+  1473290795024["QtWidgets.QGraphicsItem"]
+  1473291690208["Shiboken.Object"]
+  1473293714592 --> 1473293715568
+  1473293706784 --> 1473293714592
+  140713234304496 --> 1473293706784
+  1473290838944 --> 1473293715568
+  1473290795024 --> 1473290838944
+  1473291690208 --> 1473290795024
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.abstractgraphicsshapeitem.AbstractGraphicsShapeItem
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,35 @@
+Qt Base Class: [QFileIconProvider](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QFileIconProvider.html#PySide6.QtWidgets.PySide6.QtWidgets.QFileIconProvider)
+
+Signature: `QFileIconProvider(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                            | Children                                                                                                                  | Inherits                                                                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[AbstractFileIconProviderMixin](AbstractFileIconProviderMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.abstractfileiconprovider</font>*<br>                                                                                                | <ul><li>[AbstractFileIconProvider](AbstractFileIconProvider.md)</li><li>[FileIconProvider](FileIconProvider.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                                                             |
+| **<font size='4'>[QFileIconProvider](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QFileIconProvider.html#PySide6.QtWidgets.PySide6.QtWidgets.QFileIconProvider)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QFileIconProvider\(self\) \-\> None | <ul><li>[FileIconProvider](FileIconProvider.md)</li></ul>                                                                 | <ul><li>[QAbstractFileIconProvider](https://doc.qt.io/qtforpython/PySide6/QtGui/QAbstractFileIconProvider.html#PySide6.QtGui.PySide6.QtGui.QAbstractFileIconProvider)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296199280["widgets.FileIconProvider"]
+  1473245651936["gui.AbstractFileIconProviderMixin"]
+  140713234304496["builtins.object"]
+  1473290824304["QtWidgets.QFileIconProvider"]
+  1473299927184["QtGui.QAbstractFileIconProvider"]
+  1473291690208["Shiboken.Object"]
+  1473245651936 --> 1473296199280
+  140713234304496 --> 1473245651936
+  1473290824304 --> 1473296199280
+  1473299927184 --> 1473290824304
+  1473291690208 --> 1473299927184
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.fileiconprovider.FileIconProvider
+    options:
+      show_root_toc_entry: False

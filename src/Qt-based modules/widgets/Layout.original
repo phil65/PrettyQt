@@ -1,0 +1,61 @@
+Qt Base Class: [QLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QLayout)
+
+Signature: `QLayout(self, parent: Optional[PySide6.QtWidgets.QWidget] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                             | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Inherits                                                                                                                                                                                                                                                             |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[LayoutMixin](LayoutMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.layout</font>*<br>                                                                                                                                                                   | <ul><li>[Layout](Layout.md)</li><li>[FormLayout](FormLayout.md)</li><li>[BoxLayoutMixin](BoxLayoutMixin.md)</li><li>[StackedLayout](StackedLayout.md)</li><li>[GridLayout](GridLayout.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                         | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[LayoutItemMixin](LayoutItemMixin.md)</li></ul>                                                                                                                                                                        |
+| **<font size='4'>[QLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QLayout)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QLayout\(self, parent: Optional\[PySide6\.QtWidgets\.QWidget\] \= None\) \-\> None | <ul><li>[QStackedLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStackedLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QStackedLayout)</li><li>[QGridLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGridLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QGridLayout)</li><li>[QFormLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QFormLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QFormLayout)</li><li>[QBoxLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QBoxLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QBoxLayout)</li><li>[Layout](Layout.md)</li></ul> | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li><li>[QLayoutItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QLayoutItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QLayoutItem)</li></ul> |
+
+
+## Subclasses
+
+| Class                           | Module                                       | Description |
+| ------------------------------- | -------------------------------------------- | ----------- |
+| [FlowLayout](FlowLayout.md)     | prettyqt.custom_widgets.layouts.flowlayout   |             |
+| [BorderLayout](BorderLayout.md) | prettyqt.custom_widgets.layouts.borderlayout |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296341776["widgets.Layout"]
+  1473296333968["widgets.LayoutMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473296346656["widgets.LayoutItemMixin"]
+  1473365768928["QtWidgets.QLayout"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473290791120["QtWidgets.QLayoutItem"]
+  1473296333968 --> 1473296341776
+  1473299815024 --> 1473296333968
+  140713234304496 --> 1473299815024
+  1473296346656 --> 1473296333968
+  140713234304496 --> 1473296346656
+  1473365768928 --> 1473296341776
+  1473288842240 --> 1473365768928
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473290791120 --> 1473365768928
+  1473291690208 --> 1473290791120
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.layout.Layout
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property       | Type                        | Doc |
+| ----------------- | --------------------------- | --- |
+| `objectName`      | **QString**                 |     |
+| `spacing`         | **int**                     |     |
+| `contentsMargins` | **QMargins**                |     |
+| `sizeConstraint`  | **QLayout::SizeConstraint** |     |

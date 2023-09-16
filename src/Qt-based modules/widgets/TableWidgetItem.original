@@ -1,0 +1,32 @@
+Qt Base Class: [QTableWidgetItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QTableWidgetItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QTableWidgetItem)
+
+Signature: `QTableWidgetItem(self, icon: Union[PySide6.QtGui.QIcon, PySide6.QtGui.QPixmap], text: str, type: int = <ItemType.Type: 0>) -> None
+QTableWidgetItem(self, other: PySide6.QtWidgets.QTableWidgetItem) -> None
+QTableWidgetItem(self, text: str, type: int = <ItemType.Type: 0>) -> None
+QTableWidgetItem(self, type: int = <ItemType.Type: 0>) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                                     | Children                                                | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QTableWidgetItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QTableWidgetItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QTableWidgetItem)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QTableWidgetItem\(self, icon: Union\[PySide6\.QtGui\.QIcon, PySide6\.QtGui\.QPixmap\], text: str, type: int \= <ItemType\.Type: 0\>\) \-\> None | <ul><li>[TableWidgetItem](TableWidgetItem.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296347632["widgets.TableWidgetItem"]
+  1473290736464["QtWidgets.QTableWidgetItem"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473290736464 --> 1473296347632
+  1473291690208 --> 1473290736464
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.tablewidgetitem.TableWidgetItem
+    options:
+      show_root_toc_entry: False

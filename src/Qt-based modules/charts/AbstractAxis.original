@@ -1,0 +1,73 @@
+Qt Base Class: [QAbstractAxis](https://doc.qt.io/qtforpython/PySide6/QtCharts/QAbstractAxis.html#PySide6.QtCharts.PySide6.QtCharts.QAbstractAxis)
+
+Signature: `None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                         | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Inherits                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[AbstractAxisMixin](AbstractAxisMixin.md)</font>**<br>*<font size='1'>prettyqt.charts.abstractaxis</font>*<br>                                                                              | <ul><li>[AbstractAxis](AbstractAxis.md)</li><li>[ValueAxisMixin](ValueAxisMixin.md)</li><li>[DateTimeAxis](DateTimeAxis.md)</li><li>[LogValueAxis](LogValueAxis.md)</li><li>[BarCategoryAxis](BarCategoryAxis.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                   | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                              |
+| **<font size='4'>[QAbstractAxis](https://doc.qt.io/qtforpython/PySide6/QtCharts/QAbstractAxis.html#PySide6.QtCharts.PySide6.QtCharts.QAbstractAxis)</font>**<br>*<font size='1'>PySide6.QtCharts</font>*<br> | <ul><li>[QValueAxis](https://doc.qt.io/qtforpython/PySide6/QtCharts/QValueAxis.html#PySide6.QtCharts.PySide6.QtCharts.QValueAxis)</li><li>[QLogValueAxis](https://doc.qt.io/qtforpython/PySide6/QtCharts/QLogValueAxis.html#PySide6.QtCharts.PySide6.QtCharts.QLogValueAxis)</li><li>[QDateTimeAxis](https://doc.qt.io/qtforpython/PySide6/QtCharts/QDateTimeAxis.html#PySide6.QtCharts.PySide6.QtCharts.QDateTimeAxis)</li><li>[QBarCategoryAxis](https://doc.qt.io/qtforpython/PySide6/QtCharts/QBarCategoryAxis.html#PySide6.QtCharts.PySide6.QtCharts.QBarCategoryAxis)</li><li>[AbstractAxis](AbstractAxis.md)</li></ul> | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367641984["charts.AbstractAxis"]
+  1473367646864["charts.AbstractAxisMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473367634176["QtCharts.QAbstractAxis"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473367646864 --> 1473367641984
+  1473299815024 --> 1473367646864
+  140713234304496 --> 1473299815024
+  1473367634176 --> 1473367641984
+  1473288842240 --> 1473367634176
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.charts.abstractaxis.AbstractAxis
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property          | Type                          | Doc |
+| -------------------- | ----------------------------- | --- |
+| `objectName`         | **QString**                   |     |
+| `visible`            | **bool**                      |     |
+| `lineVisible`        | **bool**                      |     |
+| `linePen`            | **QPen**                      |     |
+| `color`              | **QColor**                    |     |
+| `labelsVisible`      | **bool**                      |     |
+| `labelsBrush`        | **QBrush**                    |     |
+| `labelsAngle`        | **int**                       |     |
+| `labelsFont`         | **QFont**                     |     |
+| `labelsColor`        | **QColor**                    |     |
+| `labelsTruncated`    | **bool**                      |     |
+| `truncateLabels`     | **bool**                      |     |
+| `gridVisible`        | **bool**                      |     |
+| `gridLinePen`        | **QPen**                      |     |
+| `minorGridVisible`   | **bool**                      |     |
+| `minorGridLinePen`   | **QPen**                      |     |
+| `gridLineColor`      | **QColor**                    |     |
+| `minorGridLineColor` | **QColor**                    |     |
+| `shadesVisible`      | **bool**                      |     |
+| `shadesColor`        | **QColor**                    |     |
+| `shadesBorderColor`  | **QColor**                    |     |
+| `shadesPen`          | **QPen**                      |     |
+| `shadesBrush`        | **QBrush**                    |     |
+| `titleText`          | **QString**                   |     |
+| `titleBrush`         | **QBrush**                    |     |
+| `titleVisible`       | **bool**                      |     |
+| `titleFont`          | **QFont**                     |     |
+| `orientation`        | **Qt::Orientation**           |     |
+| `alignment`          | **QFlags<Qt::AlignmentFlag>** |     |
+| `reverse`            | **bool**                      |     |

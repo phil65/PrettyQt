@@ -1,0 +1,29 @@
+Qt Base Class: [QAbstractExtensionFactory](https://doc.qt.io/qtforpython/PySide6/QtDesigner/QAbstractExtensionFactory.html#PySide6.QtDesigner.PySide6.QtDesigner.QAbstractExtensionFactory)
+
+Signature: `QAbstractExtensionFactory(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                | Children                                                                                                                      | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QAbstractExtensionFactory](https://doc.qt.io/qtforpython/PySide6/QtDesigner/QAbstractExtensionFactory.html#PySide6.QtDesigner.PySide6.QtDesigner.QAbstractExtensionFactory)</font>**<br>*<font size='1'>PySide6.QtDesigner</font>*<br>QAbstractExtensionFactory\(self\) \-\> None | <ul><li>[QExtensionFactory](https://www.pyside.org)</li><li>[AbstractExtensionFactory](AbstractExtensionFactory.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367731776["designer.AbstractExtensionFactory"]
+  1473367692736["QtDesigner.QAbstractExtensionFactory"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473367692736 --> 1473367731776
+  1473291690208 --> 1473367692736
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.designer.abstractextensionfactory.AbstractExtensionFactory
+    options:
+      show_root_toc_entry: False

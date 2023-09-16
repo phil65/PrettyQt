@@ -1,0 +1,14 @@
+---
+hide:
+- toc
+---
+
+## Docs
+
+Provides a widget class for displaying a Qt Quick user interface.
+
+## Classes
+
+| Name                                                                                                                     | Children | Inherits                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[QuickWidget](QuickWidget.md)</font>**<br>*<font size='1'>prettyqt.quickwidgets.quickwidget</font>*<br> |          | <ul><li>[WidgetMixin](WidgetMixin.md)</li><li>[QQuickWidget](https://doc.qt.io/qtforpython/PySide6/QtQuickWidgets/QQuickWidget.html#PySide6.QtQuickWidgets.PySide6.QtQuickWidgets.QQuickWidget)</li></ul> |

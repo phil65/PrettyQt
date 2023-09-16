@@ -1,0 +1,32 @@
+Qt Base Class: [QBluetoothDeviceInfo](https://doc.qt.io/qtforpython/PySide6/QtBluetooth/QBluetoothDeviceInfo.html#PySide6.QtBluetooth.PySide6.QtBluetooth.QBluetoothDeviceInfo)
+
+Signature: `QBluetoothDeviceInfo(self) -> None
+QBluetoothDeviceInfo(self, address: PySide6.QtBluetooth.QBluetoothAddress, name: str, classOfDevice: int) -> None
+QBluetoothDeviceInfo(self, other: PySide6.QtBluetooth.QBluetoothDeviceInfo) -> None
+QBluetoothDeviceInfo(self, uuid: Union[PySide6.QtBluetooth.QBluetoothUuid, PySide6.QtBluetooth.QBluetoothUuid.CharacteristicType, PySide6.QtBluetooth.QBluetoothUuid.DescriptorType, PySide6.QtBluetooth.QBluetoothUuid.ProtocolUuid, PySide6.QtBluetooth.QBluetoothUuid.ServiceClassUuid, PySide6.QtCore.QUuid], name: str, classOfDevice: int) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                | Children                                                        | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QBluetoothDeviceInfo](https://doc.qt.io/qtforpython/PySide6/QtBluetooth/QBluetoothDeviceInfo.html#PySide6.QtBluetooth.PySide6.QtBluetooth.QBluetoothDeviceInfo)</font>**<br>*<font size='1'>PySide6.QtBluetooth</font>*<br>QBluetoothDeviceInfo\(self\) \-\> None | <ul><li>[BluetoothDeviceInfo](BluetoothDeviceInfo.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367534624["bluetooth.BluetoothDeviceInfo"]
+  1473367233632["QtBluetooth.QBluetoothDeviceInfo"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473367233632 --> 1473367534624
+  1473291690208 --> 1473367233632
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.bluetooth.bluetoothdeviceinfo.BluetoothDeviceInfo
+    options:
+      show_root_toc_entry: False

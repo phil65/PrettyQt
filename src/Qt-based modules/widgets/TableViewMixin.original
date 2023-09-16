@@ -1,0 +1,42 @@
+## Base classes
+
+| Name                                                                                                                                         | Children                                                                                                                                                                                                                                                                    | Inherits                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| **<font size='4'>[AbstractItemViewMixin](AbstractItemViewMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.abstractitemview</font>*<br> | <ul><li>[AbstractItemView](AbstractItemView.md)</li><li>[HeaderViewMixin](HeaderViewMixin.md)</li><li>[ColumnView](ColumnView.md)</li><li>[ListViewMixin](ListViewMixin.md)</li><li>[TreeViewMixin](TreeViewMixin.md)</li><li>[TableViewMixin](TableViewMixin.md)</li></ul> | <ul><li>[AbstractScrollAreaMixin](AbstractScrollAreaMixin.md)</li></ul> |
+
+
+## Subclasses
+
+| Class                                   | Module                       | Description |
+| --------------------------------------- | ---------------------------- | ----------- |
+| [TableView](TableView.md)               | prettyqt.widgets.tableview   |             |
+| [TableWidgetMixin](TableWidgetMixin.md) | prettyqt.widgets.tablewidget |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296352512["widgets.TableViewMixin"]
+  1473293692144["widgets.AbstractItemViewMixin"]
+  1473293679456["widgets.AbstractScrollAreaMixin"]
+  1473293662864["widgets.FrameMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473293692144 --> 1473296352512
+  1473293679456 --> 1473293692144
+  1473293662864 --> 1473293679456
+  1473293688240 --> 1473293662864
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.tableview.TableViewMixin
+    options:
+      show_root_toc_entry: False

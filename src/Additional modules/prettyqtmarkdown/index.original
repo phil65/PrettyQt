@@ -1,0 +1,25 @@
+---
+hide:
+- toc
+---
+
+## Docs
+
+Module containing stuff to help buidling docs.
+
+This module builds on mknodes and contains some new nodes to help building documentation,
+an MkItemModelTable to easily display Qt ItemModels as Markdown Tables
+as well as a model + widget to preview a generated mknodes tree.
+
+## Classes
+
+| Name                                                                                                                                                                                                             | Children | Inherits                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[MarkdownWidget](MarkdownWidget.md)</font>**<br>*<font size='1'>prettyqt.prettyqtmarkdown.markdownwidget</font>*<br>                                                                            |          | <ul><li>[Widget](Widget.md)</li></ul>                                               |
+| **<font size='4'>[MkItemModelTable](MkItemModelTable.md)</font>**<br>*<font size='1'>prettyqt.prettyqtmarkdown.mkitemmodeltable</font>*<br>Table which can display Qt ItemModels\.                               |          | <ul><li>[MkTable](https://phil65.github.io/mknodes/)</li></ul>                      |
+| **<font size='4'>[MarkdownModel](MarkdownModel.md)</font>**<br>*<font size='1'>prettyqt.prettyqtmarkdown.markdownmodel</font>*<br>                                                                               |          | <ul><li>[TreeModel](TreeModel.md)</li></ul>                                         |
+| **<font size='4'>[QtLinkProvider](QtLinkProvider.md)</font>**<br>*<font size='1'>prettyqt.prettyqtmarkdown.qtlinkprovider</font>*<br>                                                                            |          | <ul><li>[LinkProvider](https://phil65.github.io/mknodes/)</li></ul>                 |
+| **<font size='4'>[MkPropertyTable](MkPropertyTable.md)</font>**<br>*<font size='1'>prettyqt.prettyqtmarkdown.mkpropertytable</font>*<br>A table containing info about Qt properties\.                            |          | <ul><li>[MkTable](https://phil65.github.io/mknodes/)</li></ul>                      |
+| **<font size='4'>[MkPrettyQtDiagram](MkPrettyQtDiagram.md)</font>**<br>*<font size='1'>prettyqt.prettyqtmarkdown.mkprettyqtdiagram</font>*<br>                                                                   |          | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[MkWidgetScreenShot](MkWidgetScreenShot.md)</font>**<br>*<font size='1'>prettyqt.prettyqtmarkdown.mkwidgetscreenshot</font>*<br>Node to easily create and embed a widget screenshot into docs\. |          | <ul><li>[MkBinaryImage](https://phil65.github.io/mknodes/)</li></ul>                |
+| **<font size='4'>[MkPrettyQtClassPage](MkPrettyQtClassPage.md)</font>**<br>*<font size='1'>prettyqt.prettyqtmarkdown.mkprettyqtclasspage</font>*<br>A ClassPage specifically for Qt\-based classes\.             |          | <ul><li>[MkClassPage](https://phil65.github.io/mknodes/)</li></ul>                  |

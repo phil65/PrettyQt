@@ -1,0 +1,44 @@
+Qt Base Class: [QBluetoothUuid](https://doc.qt.io/qtforpython/PySide6/QtBluetooth/QBluetoothUuid.html#PySide6.QtBluetooth.PySide6.QtBluetooth.QBluetoothUuid)
+
+Signature: `QBluetoothUuid(self) -> None
+QBluetoothUuid(self, uuid: PySide6.QtBluetooth.QBluetoothUuid.CharacteristicType) -> None
+QBluetoothUuid(self, uuid: PySide6.QtBluetooth.QBluetoothUuid.DescriptorType) -> None
+QBluetoothUuid(self, uuid: PySide6.QtBluetooth.QBluetoothUuid.ProtocolUuid) -> None
+QBluetoothUuid(self, uuid: PySide6.QtBluetooth.QBluetoothUuid.ServiceClassUuid) -> None
+QBluetoothUuid(self, uuid: PySide6.QtCore.QUuid) -> None
+QBluetoothUuid(self, uuid: str) -> None
+QBluetoothUuid(self, uuid: int) -> None
+QBluetoothUuid(self, uuid: int) -> None
+QBluetoothUuid(self, uuid: Union[PySide6.QtBluetooth.QBluetoothUuid, PySide6.QtBluetooth.QBluetoothUuid.CharacteristicType, PySide6.QtBluetooth.QBluetoothUuid.DescriptorType, PySide6.QtBluetooth.QBluetoothUuid.ProtocolUuid, PySide6.QtBluetooth.QBluetoothUuid.ServiceClassUuid, PySide6.QtCore.QUuid]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                        | Children                                                                    | Inherits                                                                                                               |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[UuidMixin](UuidMixin.md)</font>**<br>*<font size='1'>prettyqt.core.uuid</font>*<br>                                                                                                                                                       | <ul><li>[Uuid](Uuid.md)</li><li>[BluetoothUuid](BluetoothUuid.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                    |
+| **<font size='4'>[QBluetoothUuid](https://doc.qt.io/qtforpython/PySide6/QtBluetooth/QBluetoothUuid.html#PySide6.QtBluetooth.PySide6.QtBluetooth.QBluetoothUuid)</font>**<br>*<font size='1'>PySide6.QtBluetooth</font>*<br>QBluetoothUuid\(self\) \-\> None | <ul><li>[BluetoothUuid](BluetoothUuid.md)</li></ul>                         | <ul><li>[QUuid](https://doc.qt.io/qtforpython/PySide6/QtCore/QUuid.html#PySide6.QtCore.PySide6.QtCore.QUuid)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367541456["bluetooth.BluetoothUuid"]
+  1473299804288["core.UuidMixin"]
+  140713234304496["builtins.object"]
+  1473367198496["QtBluetooth.QBluetoothUuid"]
+  1473243708096["QtCore.QUuid"]
+  1473291690208["Shiboken.Object"]
+  1473299804288 --> 1473367541456
+  140713234304496 --> 1473299804288
+  1473367198496 --> 1473367541456
+  1473243708096 --> 1473367198496
+  1473291690208 --> 1473243708096
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.bluetooth.bluetoothuuid.BluetoothUuid
+    options:
+      show_root_toc_entry: False

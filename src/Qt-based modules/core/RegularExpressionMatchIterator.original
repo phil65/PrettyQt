@@ -1,0 +1,30 @@
+Qt Base Class: [QRegularExpressionMatchIterator](https://doc.qt.io/qtforpython/PySide6/QtCore/QRegularExpressionMatchIterator.html#PySide6.QtCore.PySide6.QtCore.QRegularExpressionMatchIterator)
+
+Signature: `QRegularExpressionMatchIterator(self) -> None
+QRegularExpressionMatchIterator(self, iterator: PySide6.QtCore.QRegularExpressionMatchIterator) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                        | Children                                                                              | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QRegularExpressionMatchIterator](https://doc.qt.io/qtforpython/PySide6/QtCore/QRegularExpressionMatchIterator.html#PySide6.QtCore.PySide6.QtCore.QRegularExpressionMatchIterator)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QRegularExpressionMatchIterator\(self\) \-\> None | <ul><li>[RegularExpressionMatchIterator](RegularExpressionMatchIterator.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299879440["core.RegularExpressionMatchIterator"]
+  1473243799840["QtCore.QRegularExpressionMatchIterator"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473243799840 --> 1473299879440
+  1473291690208 --> 1473243799840
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.regularexpressionmatchiterator.RegularExpressionMatchIterator
+    options:
+      show_root_toc_entry: False

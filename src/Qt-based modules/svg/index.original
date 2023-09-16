@@ -1,0 +1,15 @@
+---
+hide:
+- toc
+---
+
+## Docs
+
+Classes for displaying the contents of SVG files.
+
+## Classes
+
+| Name                                                                                                               | Children | Inherits                                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[SvgRenderer](SvgRenderer.md)</font>**<br>*<font size='1'>prettyqt.svg.svgrenderer</font>*<br>    |          | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[QSvgRenderer](https://doc.qt.io/qtforpython/PySide6/QtSvg/QSvgRenderer.html#PySide6.QtSvg.PySide6.QtSvg.QSvgRenderer)</li></ul>              |
+| **<font size='4'>[SvgGenerator](SvgGenerator.md)</font>**<br>*<font size='1'>prettyqt.svg.svggenerator</font>*<br> |          | <ul><li>[PaintDeviceMixin](PaintDeviceMixin.md)</li><li>[QSvgGenerator](https://doc.qt.io/qtforpython/PySide6/QtSvg/QSvgGenerator.html#PySide6.QtSvg.PySide6.QtSvg.QSvgGenerator)</li></ul> |

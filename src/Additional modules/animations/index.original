@@ -1,0 +1,55 @@
+---
+hide:
+- toc
+---
+
+## Docs
+
+Package containing stuff related to animating widgets.
+
+
+```py
+# a lot of animations depend on current geometry.
+# It´s advisable to show widget first so that it gets layouted.
+widget = widget.Label("I will get animated.")
+widget.show()
+
+# start a general fade animation with fixed start/end
+widget.fx["windowOpacity"].animate(start=0, end=1, duration=1000)
+
+# Transition widget size from current value to (500, 500)
+widget.fx["size"].transition_to((500, 500), duration=1000)
+
+# Transition widget size from current value to (500, 500)
+widget.fx["pos"].transition_from((0, -100), duration=1000)
+
+# fade-in when widget gets clicked
+widget.fx["windowOpacity"].animate_on_event("mouse_button_press", start=0, end=1)
+
+# convenience method for mentioned fade-in
+widget.fx.fade_in(start=0, end=1, start=500)
+
+# start a zoom animation
+widget.fx.zoom(start=1, end=1.5, duration=400)
+
+# start a slide animation 100px to the right
+widget.fx.slide(start=(0, 0), end=(100, 0), duration=400)
+```
+
+PrettyQt makes it easy to animate your widgets.
+All animation-related methods are available via the Widget.fx attribute.
+
+Animating stylesheet values is also possible easily.
+
+TODO.
+
+## Classes
+
+| Name                                                                                                                                                           | Children | Inherits                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[Fx](Fx.md)</font>**<br>*<font size='1'>prettyqt.animations.fx</font>*<br>Fx delegator which allows a quick and easy way to animate widgets\. |          | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[CursorMoveAnimation](CursorMoveAnimation.md)</font>**<br>*<font size='1'>prettyqt.animations.cursormoveanimation</font>*<br>                 |          | <ul><li>[VariantAnimation](VariantAnimation.md)</li></ul>                           |
+| **<font size='4'>[TextAnimation](TextAnimation.md)</font>**<br>*<font size='1'>prettyqt.animations.textanimation</font>*<br>                                   |          | <ul><li>[PropertyAnimation](PropertyAnimation.md)</li></ul>                         |
+| **<font size='4'>[ZoomAnimation](ZoomAnimation.md)</font>**<br>*<font size='1'>prettyqt.animations.zoomanimation</font>*<br>                                   |          | <ul><li>[ParallelAnimationGroup](ParallelAnimationGroup.md)</li></ul>               |
+| **<font size='4'>[Animator](Animator.md)</font>**<br>*<font size='1'>prettyqt.animations.animator</font>*<br>                                                  |          | <ul><li>[Object](Object.md)</li></ul>                                               |
+| **<font size='4'>[SlideAnimation](SlideAnimation.md)</font>**<br>*<font size='1'>prettyqt.animations.slideanimation</font>*<br>                                |          | <ul><li>[PropertyAnimation](PropertyAnimation.md)</li></ul>                         |

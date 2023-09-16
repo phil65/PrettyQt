@@ -1,0 +1,37 @@
+Qt Base Class: [QGraphicsLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsLayout)
+
+Signature: `QGraphicsLayout(self, parent: Optional[PySide6.QtWidgets.QGraphicsLayoutItem] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                         | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GraphicsLayoutMixin](GraphicsLayoutMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicslayout</font>*<br>                                                                                                                                                                                       | <ul><li>[GraphicsLayout](GraphicsLayout.md)</li><li>[GraphicsGridLayout](GraphicsGridLayout.md)</li><li>[GraphicsLinearLayout](GraphicsLinearLayout.md)</li><li>[GraphicsAnchorLayout](GraphicsAnchorLayout.md)</li></ul>                                                                                                                                                                                                                                                                                                                                         | <ul><li>[GraphicsLayoutItemMixin](GraphicsLayoutItemMixin.md)</li></ul>                                                                                                   |
+| **<font size='4'>[QGraphicsLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsLayout)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QGraphicsLayout\(self, parent: Optional\[PySide6\.QtWidgets\.QGraphicsLayoutItem\] \= None\) \-\> None | <ul><li>[QGraphicsLinearLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsLinearLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsLinearLayout)</li><li>[QGraphicsGridLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsGridLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsGridLayout)</li><li>[QGraphicsAnchorLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsAnchorLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsAnchorLayout)</li><li>[GraphicsLayout](GraphicsLayout.md)</li></ul> | <ul><li>[QGraphicsLayoutItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsLayoutItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsLayoutItem)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293717520["widgets.GraphicsLayout"]
+  1473293716544["widgets.GraphicsLayoutMixin"]
+  1473293712640["widgets.GraphicsLayoutItemMixin"]
+  140713234304496["builtins.object"]
+  1473290826256["QtWidgets.QGraphicsLayout"]
+  1473290825280["QtWidgets.QGraphicsLayoutItem"]
+  1473291690208["Shiboken.Object"]
+  1473293716544 --> 1473293717520
+  1473293712640 --> 1473293716544
+  140713234304496 --> 1473293712640
+  1473290826256 --> 1473293717520
+  1473290825280 --> 1473290826256
+  1473291690208 --> 1473290825280
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicslayout.GraphicsLayout
+    options:
+      show_root_toc_entry: False

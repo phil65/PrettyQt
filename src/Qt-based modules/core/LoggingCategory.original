@@ -1,0 +1,29 @@
+Qt Base Class: [QLoggingCategory](https://doc.qt.io/qtforpython/PySide6/QtCore/QLoggingCategory.html#PySide6.QtCore.PySide6.QtCore.QLoggingCategory)
+
+Signature: `QLoggingCategory(self, category: bytes, severityLevel: PySide6.QtCore.QtMsgType = Instance(PySide6.QtCore.QtMsgType.QtDebugMsg)) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                              | Children                                                | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QLoggingCategory](https://doc.qt.io/qtforpython/PySide6/QtCore/QLoggingCategory.html#PySide6.QtCore.PySide6.QtCore.QLoggingCategory)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QLoggingCategory\(self, category: bytes, severityLevel: PySide6\.QtCore\.QtMsgType \= Instance\(PySide6\.QtCore\.QtMsgType\.QtDebugMsg\)\) \-\> None | <ul><li>[LoggingCategory](LoggingCategory.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299719376["core.LoggingCategory"]
+  1473243837904["QtCore.QLoggingCategory"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473243837904 --> 1473299719376
+  1473291690208 --> 1473243837904
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.loggingcategory.LoggingCategory
+    options:
+      show_root_toc_entry: False

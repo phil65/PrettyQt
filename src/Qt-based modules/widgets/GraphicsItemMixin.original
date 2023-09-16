@@ -1,0 +1,26 @@
+## Subclasses
+
+| Class                                                               | Module                                     | Description |
+| ------------------------------------------------------------------- | ------------------------------------------ | ----------- |
+| [GraphicsItem](GraphicsItem.md)                                     | prettyqt.widgets.graphicsitem              |             |
+| [GraphicsItemGroup](GraphicsItemGroup.md)                           | prettyqt.widgets.graphicsitemgroup         |             |
+| [AbstractGraphicsShapeItemMixin](AbstractGraphicsShapeItemMixin.md) | prettyqt.widgets.abstractgraphicsshapeitem |             |
+| [GraphicsPixmapItem](GraphicsPixmapItem.md)                         | prettyqt.widgets.graphicspixmapitem        |             |
+| [GraphicsObjectMixin](GraphicsObjectMixin.md)                       | prettyqt.widgets.graphicsobject            |             |
+| [GraphicsLineItem](GraphicsLineItem.md)                             | prettyqt.widgets.graphicslineitem          |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293706784["widgets.GraphicsItemMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473293706784
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicsitem.GraphicsItemMixin
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,33 @@
+Qt Base Class: [QPaintDevice](https://doc.qt.io/qtforpython/PySide6/QtGui/QPaintDevice.html#PySide6.QtGui.PySide6.QtGui.QPaintDevice)
+
+Signature: `QPaintDevice(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                        | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Inherits                                                                            |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[PaintDeviceMixin](PaintDeviceMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.paintdevice</font>*<br>                                                                                                   | <ul><li>[PaintDevice](PaintDevice.md)</li><li>[PaintDeviceWindowMixin](PaintDeviceWindowMixin.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[Image](Image.md)</li><li>[PagedPaintDeviceMixin](PagedPaintDeviceMixin.md)</li><li>[Picture](Picture.md)</li><li>[WidgetMixin](WidgetMixin.md)</li><li>[SvgGenerator](SvgGenerator.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QPaintDevice](https://doc.qt.io/qtforpython/PySide6/QtGui/QPaintDevice.html#PySide6.QtGui.PySide6.QtGui.QPaintDevice)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QPaintDevice\(self\) \-\> None | <ul><li>[QPicture](https://doc.qt.io/qtforpython/PySide6/QtGui/QPicture.html#PySide6.QtGui.PySide6.QtGui.QPicture)</li><li>[QPagedPaintDevice](https://doc.qt.io/qtforpython/PySide6/QtGui/QPagedPaintDevice.html#PySide6.QtGui.PySide6.QtGui.QPagedPaintDevice)</li><li>[QPixmap](https://doc.qt.io/qtforpython/PySide6/QtGui/QPixmap.html#PySide6.QtGui.PySide6.QtGui.QPixmap)</li><li>[QImage](https://doc.qt.io/qtforpython/PySide6/QtGui/QImage.html#PySide6.QtGui.PySide6.QtGui.QImage)</li><li>[QPaintDeviceWindow](https://doc.qt.io/qtforpython/PySide6/QtGui/QPaintDeviceWindow.html#PySide6.QtGui.PySide6.QtGui.QPaintDeviceWindow)</li><li>[PaintDevice](PaintDevice.md)</li><li>[QWidget](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidget)</li><li>[QOpenGLPaintDevice](https://doc.qt.io/qtforpython/PySide6/QtOpenGL/QOpenGLPaintDevice.html#PySide6.QtOpenGL.PySide6.QtOpenGL.QOpenGLPaintDevice)</li><li>[QSvgGenerator](https://doc.qt.io/qtforpython/PySide6/QtSvg/QSvgGenerator.html#PySide6.QtSvg.PySide6.QtSvg.QSvgGenerator)</li></ul> | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245542624["gui.PaintDevice"]
+  1473245548480["gui.PaintDeviceMixin"]
+  140713234304496["builtins.object"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473291690208["Shiboken.Object"]
+  1473245548480 --> 1473245542624
+  140713234304496 --> 1473245548480
+  1473300082368 --> 1473245542624
+  1473291690208 --> 1473300082368
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.paintdevice.PaintDevice
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,37 @@
+Qt Base Class: [QStylePainter](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStylePainter.html#PySide6.QtWidgets.PySide6.QtWidgets.QStylePainter)
+
+Signature: `QStylePainter(self) -> None
+QStylePainter(self, pd: PySide6.QtGui.QPaintDevice, w: PySide6.QtWidgets.QWidget) -> None
+QStylePainter(self, w: PySide6.QtWidgets.QWidget) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                            | Children                                                                        | Inherits                                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[PainterMixin](PainterMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.painter</font>*<br>                                                                                                                                   | <ul><li>[Painter](Painter.md)</li><li>[StylePainter](StylePainter.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                          |
+| **<font size='4'>[QStylePainter](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStylePainter.html#PySide6.QtWidgets.PySide6.QtWidgets.QStylePainter)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QStylePainter\(self\) \-\> None | <ul><li>[StylePainter](StylePainter.md)</li></ul>                               | <ul><li>[QPainter](https://doc.qt.io/qtforpython/PySide6/QtGui/QPainter.html#PySide6.QtGui.PySide6.QtGui.QPainter)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296187568["widgets.StylePainter"]
+  1473245613872["gui.PainterMixin"]
+  140713234304496["builtins.object"]
+  1473290848704["QtWidgets.QStylePainter"]
+  1473299984768["QtGui.QPainter"]
+  1473291690208["Shiboken.Object"]
+  1473245613872 --> 1473296187568
+  140713234304496 --> 1473245613872
+  1473290848704 --> 1473296187568
+  1473299984768 --> 1473290848704
+  1473291690208 --> 1473299984768
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.stylepainter.StylePainter
+    options:
+      show_root_toc_entry: False

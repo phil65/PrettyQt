@@ -1,0 +1,34 @@
+## Base classes
+
+| Name                                                                                                                                                                     | Children                                                                                                                                                                                                                | Inherits                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **<font size='4'>[AbstractAnimationMixin](AbstractAnimationMixin.md)</font>**<br>*<font size='1'>prettyqt.core.abstractanimation</font>*<br>The base of all animations\. | <ul><li>[AbstractAnimation](AbstractAnimation.md)</li><li>[VariantAnimationMixin](VariantAnimationMixin.md)</li><li>[PauseAnimation](PauseAnimation.md)</li><li>[AnimationGroupMixin](AnimationGroupMixin.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul> |
+
+
+## Subclasses
+
+| Class                                                   | Module                                 | Description |
+| ------------------------------------------------------- | -------------------------------------- | ----------- |
+| [AnimationGroup](AnimationGroup.md)                     | prettyqt.core.animationgroup           |             |
+| [ParallelAnimationGroup](ParallelAnimationGroup.md)     | prettyqt.core.parallelanimationgroup   |             |
+| [SequentialAnimationGroup](SequentialAnimationGroup.md) | prettyqt.core.sequentialanimationgroup |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299826736["core.AnimationGroupMixin"]
+  1473299791600["core.AbstractAnimationMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473299791600 --> 1473299826736
+  1473299815024 --> 1473299791600
+  140713234304496 --> 1473299815024
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.animationgroup.AnimationGroupMixin
+    options:
+      show_root_toc_entry: False

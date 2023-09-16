@@ -1,0 +1,27 @@
+Qt Base Class: [Property](https://www.pyside.org)
+
+Signature: `<attribute '__doc__' of 'PySide6.QtCore.Property' objects>`
+
+## Base classes
+
+| Name                                                                                            | Children                                                                                 | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[Property](Property.md)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br> | <ul><li>[Property](Property.md)</li><li>[ListProperty](https://www.pyside.org)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299723280["core.Property"]
+  1473289088192["QtCore.Property"]
+  140713234304496["builtins.object"]
+  1473289088192 --> 1473299723280
+  140713234304496 --> 1473289088192
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.property.Property
+    options:
+      show_root_toc_entry: False

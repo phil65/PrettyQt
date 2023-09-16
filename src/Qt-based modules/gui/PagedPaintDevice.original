@@ -1,0 +1,37 @@
+Qt Base Class: [QPagedPaintDevice](https://doc.qt.io/qtforpython/PySide6/QtGui/QPagedPaintDevice.html#PySide6.QtGui.PySide6.QtGui.QPagedPaintDevice)
+
+Signature: `None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                         | Children                                                                                                                                                                                                                                                                                                                         | Inherits                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[PagedPaintDeviceMixin](PagedPaintDeviceMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.pagedpaintdevice</font>*<br>                                                                     | <ul><li>[PagedPaintDevice](PagedPaintDevice.md)</li><li>[PdfWriter](PdfWriter.md)</li><li>[Printer](Printer.md)</li></ul>                                                                                                                                                                                                        | <ul><li>[PaintDeviceMixin](PaintDeviceMixin.md)</li></ul>                                                                                |
+| **<font size='4'>[QPagedPaintDevice](https://doc.qt.io/qtforpython/PySide6/QtGui/QPagedPaintDevice.html#PySide6.QtGui.PySide6.QtGui.QPagedPaintDevice)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br> | <ul><li>[QPdfWriter](https://doc.qt.io/qtforpython/PySide6/QtGui/QPdfWriter.html#PySide6.QtGui.PySide6.QtGui.QPdfWriter)</li><li>[PagedPaintDevice](PagedPaintDevice.md)</li><li>[QPrinter](https://doc.qt.io/qtforpython/PySide6/QtPrintSupport/QPrinter.html#PySide6.QtPrintSupport.PySide6.QtPrintSupport.QPrinter)</li></ul> | <ul><li>[QPaintDevice](https://doc.qt.io/qtforpython/PySide6/QtGui/QPaintDevice.html#PySide6.QtGui.PySide6.QtGui.QPaintDevice)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245623632["gui.PagedPaintDevice"]
+  1473245618752["gui.PagedPaintDeviceMixin"]
+  1473245548480["gui.PaintDeviceMixin"]
+  140713234304496["builtins.object"]
+  1473300089200["QtGui.QPagedPaintDevice"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473291690208["Shiboken.Object"]
+  1473245618752 --> 1473245623632
+  1473245548480 --> 1473245618752
+  140713234304496 --> 1473245548480
+  1473300089200 --> 1473245623632
+  1473300082368 --> 1473300089200
+  1473291690208 --> 1473300082368
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.pagedpaintdevice.PagedPaintDevice
+    options:
+      show_root_toc_entry: False

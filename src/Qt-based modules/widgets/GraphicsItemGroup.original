@@ -1,0 +1,35 @@
+Qt Base Class: [QGraphicsItemGroup](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsItemGroup.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsItemGroup)
+
+Signature: `QGraphicsItemGroup(self, parent: Optional[PySide6.QtWidgets.QGraphicsItem] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                               | Children                                                                                                                                                                                                                                                                                                                                  | Inherits                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GraphicsItemMixin](GraphicsItemMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicsitem</font>*<br>                                                                                                                                                                                                   | <ul><li>[GraphicsItem](GraphicsItem.md)</li><li>[GraphicsItemGroup](GraphicsItemGroup.md)</li><li>[AbstractGraphicsShapeItemMixin](AbstractGraphicsShapeItemMixin.md)</li><li>[GraphicsPixmapItem](GraphicsPixmapItem.md)</li><li>[GraphicsObjectMixin](GraphicsObjectMixin.md)</li><li>[GraphicsLineItem](GraphicsLineItem.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                                     |
+| **<font size='4'>[QGraphicsItemGroup](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsItemGroup.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsItemGroup)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QGraphicsItemGroup\(self, parent: Optional\[PySide6\.QtWidgets\.QGraphicsItem\] \= None\) \-\> None | <ul><li>[GraphicsItemGroup](GraphicsItemGroup.md)</li></ul>                                                                                                                                                                                                                                                                               | <ul><li>[QGraphicsItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsItem)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293708736["widgets.GraphicsItemGroup"]
+  1473293706784["widgets.GraphicsItemMixin"]
+  140713234304496["builtins.object"]
+  1473290837968["QtWidgets.QGraphicsItemGroup"]
+  1473290795024["QtWidgets.QGraphicsItem"]
+  1473291690208["Shiboken.Object"]
+  1473293706784 --> 1473293708736
+  140713234304496 --> 1473293706784
+  1473290837968 --> 1473293708736
+  1473290795024 --> 1473290837968
+  1473291690208 --> 1473290795024
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicsitemgroup.GraphicsItemGroup
+    options:
+      show_root_toc_entry: False

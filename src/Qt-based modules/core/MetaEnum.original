@@ -1,0 +1,14 @@
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299786720["core.MetaEnum"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473299786720
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.metaenum.MetaEnum
+    options:
+      show_root_toc_entry: False

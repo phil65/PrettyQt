@@ -1,0 +1,33 @@
+Qt Base Class: [QVersionNumber](https://doc.qt.io/qtforpython/PySide6/QtCore/QVersionNumber.html#PySide6.QtCore.PySide6.QtCore.QVersionNumber)
+
+Signature: `QVersionNumber(self) -> None
+QVersionNumber(self, maj: int) -> None
+QVersionNumber(self, maj: int, min: int) -> None
+QVersionNumber(self, maj: int, min: int, mic: int) -> None
+QVersionNumber(self, seg: Sequence[int]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                    | Children                                            | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QVersionNumber](https://doc.qt.io/qtforpython/PySide6/QtCore/QVersionNumber.html#PySide6.QtCore.PySide6.QtCore.QVersionNumber)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QVersionNumber\(self\) \-\> None | <ul><li>[VersionNumber](VersionNumber.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299838448["core.VersionNumber"]
+  1473243740304["QtCore.QVersionNumber"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473243740304 --> 1473299838448
+  1473291690208 --> 1473243740304
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.versionnumber.VersionNumber
+    options:
+      show_root_toc_entry: False

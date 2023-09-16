@@ -1,0 +1,14 @@
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367668336["debugging.MessageHandler"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473367668336
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.debugging.messagehandler.MessageHandler
+    options:
+      show_root_toc_entry: False

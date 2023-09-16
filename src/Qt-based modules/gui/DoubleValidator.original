@@ -1,0 +1,51 @@
+Qt Base Class: [QDoubleValidator](https://doc.qt.io/qtforpython/PySide6/QtGui/QDoubleValidator.html#PySide6.QtGui.PySide6.QtGui.QDoubleValidator)
+
+Signature: `QDoubleValidator(self, bottom: float, top: float, decimals: int, parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QDoubleValidator(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                        | Children                                                                                                                                                                                              | Inherits                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[ValidatorMixin](ValidatorMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.validator</font>*<br>                                                                                                                                                                                                                         | <ul><li>[Validator](Validator.md)</li><li>[RegularExpressionValidator](RegularExpressionValidator.md)</li><li>[IntValidator](IntValidator.md)</li><li>[DoubleValidator](DoubleValidator.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                                    |
+| **<font size='4'>[QDoubleValidator](https://doc.qt.io/qtforpython/PySide6/QtGui/QDoubleValidator.html#PySide6.QtGui.PySide6.QtGui.QDoubleValidator)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QDoubleValidator\(self, bottom: float, top: float, decimals: int, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[DoubleValidator](DoubleValidator.md)</li></ul>                                                                                                                                               | <ul><li>[QValidator](https://doc.qt.io/qtforpython/PySide6/QtGui/QValidator.html#PySide6.QtGui.PySide6.QtGui.QValidator)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245595328["gui.DoubleValidator"]
+  1473245536768["gui.ValidatorMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473289214448["QtGui.QDoubleValidator"]
+  1473289208592["QtGui.QValidator"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473245536768 --> 1473245595328
+  1473299815024 --> 1473245536768
+  140713234304496 --> 1473299815024
+  1473289214448 --> 1473245595328
+  1473289208592 --> 1473289214448
+  1473288842240 --> 1473289208592
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.doublevalidator.DoubleValidator
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type                           | Doc |
+| ------------ | ------------------------------ | --- |
+| `objectName` | **QString**                    |     |
+| `bottom`     | **double**                     |     |
+| `top`        | **double**                     |     |
+| `decimals`   | **int**                        |     |
+| `notation`   | **QDoubleValidator::Notation** |     |

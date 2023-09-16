@@ -1,0 +1,25 @@
+## Base classes
+
+| Name                                                                                                                                                                                       | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Inherits                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[Exception](https://docs.python.org/3/library/exceptions.html#Exception)</font>**<br>*<font size='1'>builtins</font>*<br>Common base class for all non\-exit exceptions\. | <ul><li>[ArithmeticError](https://docs.python.org/3/library/exceptions.html#ArithmeticError)</li><li>[AssertionError](https://docs.python.org/3/library/exceptions.html#AssertionError)</li><li>[AttributeError](https://docs.python.org/3/library/exceptions.html#AttributeError)</li><li>[BufferError](https://docs.python.org/3/library/exceptions.html#BufferError)</li><li>[EOFError](https://docs.python.org/3/library/exceptions.html#EOFError)</li><li>[ImportError](https://docs.python.org/3/library/exceptions.html#ImportError)</li><li>[LookupError](https://docs.python.org/3/library/exceptions.html#LookupError)</li><li>[MemoryError](https://docs.python.org/3/library/exceptions.html#MemoryError)</li><li>[NameError](https://docs.python.org/3/library/exceptions.html#NameError)</li><li>[OSError](https://docs.python.org/3/library/exceptions.html#OSError)</li><li>...</li></ul> | <ul><li>[BaseException](https://docs.python.org/3/library/exceptions.html#BaseException)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245628512["iconprovider.FontError"]
+  140713234273136["builtins.Exception"]
+  140713234273968["builtins.BaseException"]
+  140713234304496["builtins.object"]
+  140713234273136 --> 1473245628512
+  140713234273968 --> 140713234273136
+  140713234304496 --> 140713234273968
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.iconprovider.iconic_font.FontError
+    options:
+      show_root_toc_entry: False

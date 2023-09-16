@@ -1,0 +1,31 @@
+Qt Base Class: [QWebEngineUrlScheme](https://doc.qt.io/qtforpython/PySide6/QtWebEngineCore/QWebEngineUrlScheme.html#PySide6.QtWebEngineCore.PySide6.QtWebEngineCore.QWebEngineUrlScheme)
+
+Signature: `QWebEngineUrlScheme(self) -> None
+QWebEngineUrlScheme(self, name: Union[PySide6.QtCore.QByteArray, bytes]) -> None
+QWebEngineUrlScheme(self, that: PySide6.QtWebEngineCore.QWebEngineUrlScheme) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                            | Children                                                      | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QWebEngineUrlScheme](https://doc.qt.io/qtforpython/PySide6/QtWebEngineCore/QWebEngineUrlScheme.html#PySide6.QtWebEngineCore.PySide6.QtWebEngineCore.QWebEngineUrlScheme)</font>**<br>*<font size='1'>PySide6.QtWebEngineCore</font>*<br>QWebEngineUrlScheme\(self\) \-\> None | <ul><li>[WebEngineUrlScheme](WebEngineUrlScheme.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473574732736["webenginecore.WebEngineUrlScheme"]
+  1473574592192["QtWebEngineCore.QWebEngineUrlScheme"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473574592192 --> 1473574732736
+  1473291690208 --> 1473574592192
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.webenginecore.webengineurlscheme.WebEngineUrlScheme
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,44 @@
+## Base classes
+
+| Name                                                                                                        | Children                                                                                                                                                                                                                                                                        | Inherits                                        |
+| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **<font size='4'>[FrameMixin](FrameMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.frame</font>*<br> | <ul><li>[Frame](Frame.md)</li><li>[AbstractScrollAreaMixin](AbstractScrollAreaMixin.md)</li><li>[Label](Label.md)</li><li>[LCDNumber](LCDNumber.md)</li><li>[ToolBox](ToolBox.md)</li><li>[SplitterMixin](SplitterMixin.md)</li><li>[StackedWidget](StackedWidget.md)</li></ul> | <ul><li>[WidgetMixin](WidgetMixin.md)</li></ul> |
+
+
+## Subclasses
+
+| Class                                             | Module                              | Description |
+| ------------------------------------------------- | ----------------------------------- | ----------- |
+| [AbstractScrollArea](AbstractScrollArea.md)       | prettyqt.widgets.abstractscrollarea |             |
+| [AbstractItemViewMixin](AbstractItemViewMixin.md) | prettyqt.widgets.abstractitemview   |             |
+| [ScrollArea](ScrollArea.md)                       | prettyqt.widgets.scrollarea         |             |
+| [GraphicsViewMixin](GraphicsViewMixin.md)         | prettyqt.widgets.graphicsview       |             |
+| [MdiArea](MdiArea.md)                             | prettyqt.widgets.mdiarea            |             |
+| [TextEditMixin](TextEditMixin.md)                 | prettyqt.widgets.textedit           |             |
+| [PlainTextEditMixin](PlainTextEditMixin.md)       | prettyqt.widgets.plaintextedit      |             |
+| [PdfView](PdfView.md)                             | prettyqt.pdfwidgets.pdfview         |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293679456["widgets.AbstractScrollAreaMixin"]
+  1473293662864["widgets.FrameMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473293662864 --> 1473293679456
+  1473293688240 --> 1473293662864
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.abstractscrollarea.AbstractScrollAreaMixin
+    options:
+      show_root_toc_entry: False

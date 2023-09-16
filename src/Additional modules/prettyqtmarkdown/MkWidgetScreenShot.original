@@ -1,0 +1,29 @@
+## Base classes
+
+| Name                                                                                                                                                                           | Children                                                      | Inherits                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- | -------------------------------------------------------------- |
+| **<font size='4'>[MkBinaryImage](https://phil65.github.io/mknodes/)</font>**<br>*<font size='1'>mknodes.basenodes.mkbinaryimage</font>*<br>Image carrying the data by itself\. | <ul><li>[MkWidgetScreenShot](MkWidgetScreenShot.md)</li></ul> | <ul><li>[MkImage](https://phil65.github.io/mknodes/)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367135056["prettyqtmarkdown.MkWidgetScreenShot"]
+  1473287587088["mkbinaryimage.MkBinaryImage"]
+  1473287553904["mkimage.MkImage"]
+  1473287579280["mknode.MkNode"]
+  1473287420192["node.Node"]
+  140713234304496["builtins.object"]
+  1473287587088 --> 1473367135056
+  1473287553904 --> 1473287587088
+  1473287579280 --> 1473287553904
+  1473287420192 --> 1473287579280
+  140713234304496 --> 1473287420192
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.prettyqtmarkdown.mkwidgetscreenshot.MkWidgetScreenShot
+    options:
+      show_root_toc_entry: False

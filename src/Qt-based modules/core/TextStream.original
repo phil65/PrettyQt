@@ -1,0 +1,33 @@
+Qt Base Class: [QTextStream](https://doc.qt.io/qtforpython/PySide6/QtCore/QTextStream.html#PySide6.QtCore.PySide6.QtCore.QTextStream)
+
+Signature: `QTextStream(self) -> None
+QTextStream(self, array: Union[PySide6.QtCore.QByteArray, bytes], openMode: PySide6.QtCore.QIODeviceBase.OpenModeFlag = Instance(PySide6.QtCore.QIODeviceBase.OpenModeFlag.ReadWrite)) -> None
+QTextStream(self, device: PySide6.QtCore.QIODevice) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                        | Children                                      | Inherits                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[QTextStream](https://doc.qt.io/qtforpython/PySide6/QtCore/QTextStream.html#PySide6.QtCore.PySide6.QtCore.QTextStream)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QTextStream\(self\) \-\> None | <ul><li>[TextStream](TextStream.md)</li></ul> | <ul><li>[QIODeviceBase](https://doc.qt.io/qtforpython/PySide6/QtCore/QIODeviceBase.html#PySide6.QtCore.PySide6.QtCore.QIODeviceBase)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299822832["core.TextStream"]
+  1473243637824["QtCore.QTextStream"]
+  1473243629040["QtCore.QIODeviceBase"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473243637824 --> 1473299822832
+  1473243629040 --> 1473243637824
+  1473291690208 --> 1473243629040
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.textstream.TextStream
+    options:
+      show_root_toc_entry: False

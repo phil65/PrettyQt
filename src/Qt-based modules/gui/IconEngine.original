@@ -1,0 +1,41 @@
+Qt Base Class: [QIconEngine](https://doc.qt.io/qtforpython/PySide6/QtGui/QIconEngine.html#PySide6.QtGui.PySide6.QtGui.QIconEngine)
+
+Signature: `QIconEngine(self) -> None
+QIconEngine(self, other: PySide6.QtGui.QIconEngine) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                    | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[SerializeMixin](SerializeMixin.md)</font>**<br>*<font size='1'>prettyqt.utils.serializemixin</font>*<br>                                                                                              | <ul><li>[EasingCurve](EasingCurve.md)</li><li>[Url](Url.md)</li><li>[KeyCombination](KeyCombination.md)</li><li>[Icon](Icon.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[IconEngine](IconEngine.md)</li><li>[Image](Image.md)</li><li>[Brush](Brush.md)</li><li>[Region](Region.md)</li><li>[Transform](Transform.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QIconEngine](https://doc.qt.io/qtforpython/PySide6/QtGui/QIconEngine.html#PySide6.QtGui.PySide6.QtGui.QIconEngine)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QIconEngine\(self\) \-\> None | <ul><li>[IconEngine](IconEngine.md)</li></ul>                                                                                                                                                                                                                                                                                                     | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## Subclasses
+
+| Class                               | Module                               | Description |
+| ----------------------------------- | ------------------------------------ | ----------- |
+| [CharIconEngine](CharIconEngine.md) | prettyqt.iconprovider.chariconengine |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245547504["gui.IconEngine"]
+  1473299806240["utils.SerializeMixin"]
+  140713234304496["builtins.object"]
+  1473300116528["QtGui.QIconEngine"]
+  1473291690208["Shiboken.Object"]
+  1473299806240 --> 1473245547504
+  140713234304496 --> 1473299806240
+  1473300116528 --> 1473245547504
+  1473291690208 --> 1473300116528
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.iconengine.IconEngine
+    options:
+      show_root_toc_entry: False

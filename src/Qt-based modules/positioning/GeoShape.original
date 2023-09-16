@@ -1,0 +1,34 @@
+Qt Base Class: [QGeoShape](https://doc.qt.io/qtforpython/PySide6/QtPositioning/QGeoShape.html#PySide6.QtPositioning.PySide6.QtPositioning.QGeoShape)
+
+Signature: `QGeoShape(self) -> None
+QGeoShape(self, other: PySide6.QtPositioning.QGeoShape) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                            | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[GeoShapeMixin](GeoShapeMixin.md)</font>**<br>*<font size='1'>prettyqt.positioning.geoshape</font>*<br>                                                                                                                        | <ul><li>[GeoShape](GeoShape.md)</li><li>[GeoRectangle](GeoRectangle.md)</li><li>[GeoCircle](GeoCircle.md)</li><li>[GeoPath](GeoPath.md)</li><li>[GeoPolygon](GeoPolygon.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                               | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QGeoShape](https://doc.qt.io/qtforpython/PySide6/QtPositioning/QGeoShape.html#PySide6.QtPositioning.PySide6.QtPositioning.QGeoShape)</font>**<br>*<font size='1'>PySide6.QtPositioning</font>*<br>QGeoShape\(self\) \-\> None | <ul><li>[QGeoRectangle](https://doc.qt.io/qtforpython/PySide6/QtPositioning/QGeoRectangle.html#PySide6.QtPositioning.PySide6.QtPositioning.QGeoRectangle)</li><li>[QGeoPolygon](https://doc.qt.io/qtforpython/PySide6/QtPositioning/QGeoPolygon.html#PySide6.QtPositioning.PySide6.QtPositioning.QGeoPolygon)</li><li>[QGeoPath](https://doc.qt.io/qtforpython/PySide6/QtPositioning/QGeoPath.html#PySide6.QtPositioning.PySide6.QtPositioning.QGeoPath)</li><li>[QGeoCircle](https://doc.qt.io/qtforpython/PySide6/QtPositioning/QGeoCircle.html#PySide6.QtPositioning.PySide6.QtPositioning.QGeoCircle)</li><li>[GeoShape](GeoShape.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573453168["positioning.GeoShape"]
+  1473573419984["positioning.GeoShapeMixin"]
+  140713234304496["builtins.object"]
+  1473573320432["QtPositioning.QGeoShape"]
+  1473291690208["Shiboken.Object"]
+  1473573419984 --> 1473573453168
+  140713234304496 --> 1473573419984
+  1473573320432 --> 1473573453168
+  1473291690208 --> 1473573320432
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.positioning.geoshape.GeoShape
+    options:
+      show_root_toc_entry: False

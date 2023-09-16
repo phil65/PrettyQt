@@ -1,0 +1,58 @@
+Qt Base Class: [QProxyStyle](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QProxyStyle.html#PySide6.QtWidgets.PySide6.QtWidgets.QProxyStyle)
+
+Signature: `QProxyStyle(self, key: str) -> None
+QProxyStyle(self, style: Optional[PySide6.QtWidgets.QStyle] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                              | Children                                                                            | Inherits                                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[CommonStyleMixin](CommonStyleMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.commonstyle</font>*<br>                                                                                                                     | <ul><li>[CommonStyle](CommonStyle.md)</li><li>[ProxyStyle](ProxyStyle.md)</li></ul> | <ul><li>[StyleMixin](StyleMixin.md)</li></ul>                                                                                                        |
+| **<font size='4'>[QProxyStyle](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QProxyStyle.html#PySide6.QtWidgets.PySide6.QtWidgets.QProxyStyle)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QProxyStyle\(self, key: str\) \-\> None | <ul><li>[ProxyStyle](ProxyStyle.md)</li></ul>                                       | <ul><li>[QCommonStyle](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QCommonStyle.html#PySide6.QtWidgets.PySide6.QtWidgets.QCommonStyle)</li></ul> |
+
+
+## Subclasses
+
+| Class                                     | Module                  | Description |
+| ----------------------------------------- | ----------------------- | ----------- |
+| [HollowHandleStyle](HollowHandleStyle.md) | prettyqt.widgets.slider |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293666768["widgets.ProxyStyle"]
+  1473293669696["widgets.CommonStyleMixin"]
+  1473293684336["widgets.StyleMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473365765024["QtWidgets.QProxyStyle"]
+  1473365790400["QtWidgets.QCommonStyle"]
+  1473365886048["QtWidgets.QStyle"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473293669696 --> 1473293666768
+  1473293684336 --> 1473293669696
+  1473299815024 --> 1473293684336
+  140713234304496 --> 1473299815024
+  1473365765024 --> 1473293666768
+  1473365790400 --> 1473365765024
+  1473365886048 --> 1473365790400
+  1473288842240 --> 1473365886048
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.proxystyle.ProxyStyle
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

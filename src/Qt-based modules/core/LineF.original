@@ -1,0 +1,33 @@
+Qt Base Class: [QLineF](https://doc.qt.io/qtforpython/PySide6/QtCore/QLineF.html#PySide6.QtCore.PySide6.QtCore.QLineF)
+
+Signature: `QLineF(self) -> None
+QLineF(self, QLineF: Union[PySide6.QtCore.QLineF, PySide6.QtCore.QLine]) -> None
+QLineF(self, line: PySide6.QtCore.QLine) -> None
+QLineF(self, pt1: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint], pt2: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint]) -> None
+QLineF(self, x1: float, y1: float, x2: float, y2: float) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                    | Children                            | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------- |
+| **<font size='4'>[QLineF](https://doc.qt.io/qtforpython/PySide6/QtCore/QLineF.html#PySide6.QtCore.PySide6.QtCore.QLineF)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QLineF\(self\) \-\> None | <ul><li>[LineF](LineF.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299797456["core.LineF"]
+  1473243588048["QtCore.QLineF"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473243588048 --> 1473299797456
+  1473291690208 --> 1473243588048
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.linef.LineF
+    options:
+      show_root_toc_entry: False

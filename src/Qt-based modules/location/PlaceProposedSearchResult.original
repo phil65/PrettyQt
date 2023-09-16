@@ -1,0 +1,36 @@
+Qt Base Class: [QPlaceProposedSearchResult](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceProposedSearchResult.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceProposedSearchResult)
+
+Signature: `QPlaceProposedSearchResult(self) -> None
+QPlaceProposedSearchResult(self, other: PySide6.QtLocation.QPlaceSearchResult) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                    | Children                                                                                                                                                            | Inherits                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[PlaceSearchResultMixin](PlaceSearchResultMixin.md)</font>**<br>*<font size='1'>prettyqt.location.placesearchresult</font>*<br>                                                                                                                                                        | <ul><li>[PlaceSearchResult](PlaceSearchResult.md)</li><li>[PlaceResult](PlaceResult.md)</li><li>[PlaceProposedSearchResult](PlaceProposedSearchResult.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                                                       |
+| **<font size='4'>[QPlaceProposedSearchResult](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceProposedSearchResult.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceProposedSearchResult)</font>**<br>*<font size='1'>PySide6.QtLocation</font>*<br>QPlaceProposedSearchResult\(self\) \-\> None | <ul><li>[PlaceProposedSearchResult](PlaceProposedSearchResult.md)</li></ul>                                                                                         | <ul><li>[QPlaceSearchResult](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceSearchResult.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceSearchResult)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573490256["location.PlaceProposedSearchResult"]
+  1473573478544["location.PlaceSearchResultMixin"]
+  140713234304496["builtins.object"]
+  1473573357520["QtLocation.QPlaceProposedSearchResult"]
+  1473573376064["QtLocation.QPlaceSearchResult"]
+  1473291690208["Shiboken.Object"]
+  1473573478544 --> 1473573490256
+  140713234304496 --> 1473573478544
+  1473573357520 --> 1473573490256
+  1473573376064 --> 1473573357520
+  1473291690208 --> 1473573376064
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.location.placeproposedsearchresult.PlaceProposedSearchResult
+    options:
+      show_root_toc_entry: False

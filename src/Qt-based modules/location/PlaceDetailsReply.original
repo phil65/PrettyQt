@@ -1,0 +1,46 @@
+Qt Base Class: [QPlaceDetailsReply](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceDetailsReply.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceDetailsReply)
+
+Signature: `QPlaceDetailsReply(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                          | Children                                                                                                                                                                                                                                                                                | Inherits                                                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[PlaceReplyMixin](PlaceReplyMixin.md)</font>**<br>*<font size='1'>prettyqt.location.placereply</font>*<br>                                                                                                                                                                                                   | <ul><li>[PlaceReply](PlaceReply.md)</li><li>[PlaceSearchReply](PlaceSearchReply.md)</li><li>[PlaceContentReply](PlaceContentReply.md)</li><li>[PlaceDetailsReply](PlaceDetailsReply.md)</li><li>[PlaceMatchReply](PlaceMatchReply.md)</li><li>[PlaceIdReply](PlaceIdReply.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                                                      |
+| **<font size='4'>[QPlaceDetailsReply](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceDetailsReply.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceDetailsReply)</font>**<br>*<font size='1'>PySide6.QtLocation</font>*<br>QPlaceDetailsReply\(self, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[PlaceDetailsReply](PlaceDetailsReply.md)</li></ul>                                                                                                                                                                                                                             | <ul><li>[QPlaceReply](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceReply.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceReply)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573488304["location.PlaceDetailsReply"]
+  1473573486352["location.PlaceReplyMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473573415104["QtLocation.QPlaceDetailsReply"]
+  1473573399488["QtLocation.QPlaceReply"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473573486352 --> 1473573488304
+  1473299815024 --> 1473573486352
+  140713234304496 --> 1473299815024
+  1473573415104 --> 1473573488304
+  1473573399488 --> 1473573415104
+  1473288842240 --> 1473573399488
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.location.placedetailsreply.PlaceDetailsReply
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

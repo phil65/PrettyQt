@@ -1,0 +1,33 @@
+Qt Base Class: [QFont](https://doc.qt.io/qtforpython/PySide6/QtGui/QFont.html#PySide6.QtGui.PySide6.QtGui.QFont)
+
+Signature: `QFont(self) -> None
+QFont(self, families: Sequence[str], pointSize: int = -1, weight: int = -1, italic: bool = False) -> None
+QFont(self, family: str, pointSize: int = -1, weight: int = -1, italic: bool = False) -> None
+QFont(self, font: Union[PySide6.QtGui.QFont, str, Sequence[str]]) -> None
+QFont(self, font: Union[PySide6.QtGui.QFont, str, Sequence[str]], pd: PySide6.QtGui.QPaintDevice) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                            | Children                          | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------------------------------- |
+| **<font size='4'>[QFont](https://doc.qt.io/qtforpython/PySide6/QtGui/QFont.html#PySide6.QtGui.PySide6.QtGui.QFont)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QFont\(self\) \-\> None | <ul><li>[Font](Font.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245607040["gui.Font"]
+  1473300151664["QtGui.QFont"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473300151664 --> 1473245607040
+  1473291690208 --> 1473300151664
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.font.Font
+    options:
+      show_root_toc_entry: False

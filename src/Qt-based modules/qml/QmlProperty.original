@@ -1,0 +1,36 @@
+Qt Base Class: [QQmlProperty](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlProperty.html#PySide6.QtQml.PySide6.QtQml.QQmlProperty)
+
+Signature: `QQmlProperty(self) -> None
+QQmlProperty(self, arg__1: PySide6.QtCore.QObject) -> None
+QQmlProperty(self, arg__1: PySide6.QtCore.QObject, arg__2: PySide6.QtQml.QQmlContext) -> None
+QQmlProperty(self, arg__1: PySide6.QtCore.QObject, arg__2: PySide6.QtQml.QQmlEngine) -> None
+QQmlProperty(self, arg__1: PySide6.QtCore.QObject, arg__2: str) -> None
+QQmlProperty(self, arg__1: PySide6.QtCore.QObject, arg__2: str, arg__3: PySide6.QtQml.QQmlContext) -> None
+QQmlProperty(self, arg__1: PySide6.QtCore.QObject, arg__2: str, arg__3: PySide6.QtQml.QQmlEngine) -> None
+QQmlProperty(self, arg__1: Union[PySide6.QtQml.QQmlProperty, PySide6.QtCore.QObject]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                        | Children                                        | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QQmlProperty](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlProperty.html#PySide6.QtQml.PySide6.QtQml.QQmlProperty)</font>**<br>*<font size='1'>PySide6.QtQml</font>*<br>QQmlProperty\(self\) \-\> None | <ul><li>[QmlProperty](QmlProperty.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572336464["qml.QmlProperty"]
+  1473572227152["QtQml.QQmlProperty"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473572227152 --> 1473572336464
+  1473291690208 --> 1473572227152
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qml.qmlproperty.QmlProperty
+    options:
+      show_root_toc_entry: False

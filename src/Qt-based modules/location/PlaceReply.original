@@ -1,0 +1,44 @@
+Qt Base Class: [QPlaceReply](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceReply.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceReply)
+
+Signature: `QPlaceReply(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                              | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Inherits                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[PlaceReplyMixin](PlaceReplyMixin.md)</font>**<br>*<font size='1'>prettyqt.location.placereply</font>*<br>                                                                                                                                                                       | <ul><li>[PlaceReply](PlaceReply.md)</li><li>[PlaceSearchReply](PlaceSearchReply.md)</li><li>[PlaceContentReply](PlaceContentReply.md)</li><li>[PlaceDetailsReply](PlaceDetailsReply.md)</li><li>[PlaceMatchReply](PlaceMatchReply.md)</li><li>[PlaceIdReply](PlaceIdReply.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                              |
+| **<font size='4'>[QPlaceReply](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceReply.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceReply)</font>**<br>*<font size='1'>PySide6.QtLocation</font>*<br>QPlaceReply\(self, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[QPlaceSearchSuggestionReply](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceSearchSuggestionReply.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceSearchSuggestionReply)</li><li>[QPlaceSearchReply](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceSearchReply.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceSearchReply)</li><li>[QPlaceMatchReply](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceMatchReply.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceMatchReply)</li><li>[QPlaceIdReply](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceIdReply.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceIdReply)</li><li>[QPlaceDetailsReply](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceDetailsReply.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceDetailsReply)</li><li>[QPlaceContentReply](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceContentReply.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceContentReply)</li><li>[PlaceReply](PlaceReply.md)</li></ul> | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573491232["location.PlaceReply"]
+  1473573486352["location.PlaceReplyMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473573399488["QtLocation.QPlaceReply"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473573486352 --> 1473573491232
+  1473299815024 --> 1473573486352
+  140713234304496 --> 1473299815024
+  1473573399488 --> 1473573491232
+  1473288842240 --> 1473573399488
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.location.placereply.PlaceReply
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

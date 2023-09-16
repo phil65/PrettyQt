@@ -1,0 +1,38 @@
+## Base classes
+
+| Name                                                                                                                             | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[ObjectMixin](ObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.core.object</font>*<br>                      | <ul><li>[Object](Object.md)</li><li>[SocketNotifier](SocketNotifier.md)</li><li>[SharedMemory](SharedMemory.md)</li><li>[SignalMapper](SignalMapper.md)</li><li>[TimeLine](TimeLine.md)</li><li>[AbstractEventDispatcher](AbstractEventDispatcher.md)</li><li>[EventLoop](EventLoop.md)</li><li>[AbstractAnimationMixin](AbstractAnimationMixin.md)</li><li>[TranslatorMixin](TranslatorMixin.md)</li><li>[CoreApplicationMixin](CoreApplicationMixin.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[GraphicsItemMixin](GraphicsItemMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicsitem</font>*<br> | <ul><li>[GraphicsItem](GraphicsItem.md)</li><li>[GraphicsItemGroup](GraphicsItemGroup.md)</li><li>[AbstractGraphicsShapeItemMixin](AbstractGraphicsShapeItemMixin.md)</li><li>[GraphicsPixmapItem](GraphicsPixmapItem.md)</li><li>[GraphicsObjectMixin](GraphicsObjectMixin.md)</li><li>[GraphicsLineItem](GraphicsLineItem.md)</li></ul>                                                                                                                                       | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+
+
+## Subclasses
+
+| Class                                         | Module                                       | Description |
+| --------------------------------------------- | -------------------------------------------- | ----------- |
+| [GraphicsObject](GraphicsObject.md)           | prettyqt.widgets.graphicsobject              |             |
+| [GraphicsTextItem](GraphicsTextItem.md)       | prettyqt.widgets.graphicstextitem            |             |
+| [GraphicsWidgetMixin](GraphicsWidgetMixin.md) | prettyqt.widgets.graphicswidget              |             |
+| [GraphicsVideoItem](GraphicsVideoItem.md)     | prettyqt.multimediawidgets.graphicsvideoitem |             |
+| [GraphicsSvgItem](GraphicsSvgItem.md)         | prettyqt.svgwidgets.graphicssvgitem          |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293697024["widgets.GraphicsObjectMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473293706784["widgets.GraphicsItemMixin"]
+  1473299815024 --> 1473293697024
+  140713234304496 --> 1473299815024
+  1473293706784 --> 1473293697024
+  140713234304496 --> 1473293706784
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicsobject.GraphicsObjectMixin
+    options:
+      show_root_toc_entry: False

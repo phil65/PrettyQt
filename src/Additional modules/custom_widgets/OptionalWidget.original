@@ -1,0 +1,131 @@
+Qt Base Class: [QGroupBox](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGroupBox.html#PySide6.QtWidgets.PySide6.QtWidgets.QGroupBox)
+
+Signature: `QGroupBox(self, parent: Optional[PySide6.QtWidgets.QWidget] = None) -> None
+QGroupBox(self, title: str, parent: Optional[PySide6.QtWidgets.QWidget] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                       | Children                                                                                                                                                                                                          | Inherits                                                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GroupBox](GroupBox.md)</font>**<br>*<font size='1'>prettyqt.widgets.groupbox</font>*<br> | <ul><li>[OptionalWidget](OptionalWidget.md)</li><li>[FlagSelectionWidget](FlagSelectionWidget.md)</li><li>[StringOrNumberWidget](StringOrNumberWidget.md)</li><li>[SelectionWidget](SelectionWidget.md)</li></ul> | <ul><li>[WidgetMixin](WidgetMixin.md)</li><li>[QGroupBox](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGroupBox.html#PySide6.QtWidgets.PySide6.QtWidgets.QGroupBox)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367043312["custom_widgets.OptionalWidget"]
+  1473296374960["widgets.GroupBox"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473290638864["QtWidgets.QGroupBox"]
+  1473290849680["QtWidgets.QWidget"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473296374960 --> 1473367043312
+  1473293688240 --> 1473296374960
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+  1473290638864 --> 1473296374960
+  1473290849680 --> 1473290638864
+  1473288842240 --> 1473290849680
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300082368 --> 1473290849680
+  1473291690208 --> 1473300082368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.custom_widgets.optionalwidget.OptionalWidget
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property             | Type                            | Doc |
+| ----------------------- | ------------------------------- | --- |
+| `objectName`            | **QString**                     |     |
+| `modal`                 | **bool**                        |     |
+| `windowModality`        | **Qt::WindowModality**          |     |
+| `enabled`               | **bool**                        |     |
+| `geometry`              | **QRect**                       |     |
+| `frameGeometry`         | **QRect**                       |     |
+| `normalGeometry`        | **QRect**                       |     |
+| `x`                     | **int**                         |     |
+| `y`                     | **int**                         |     |
+| `pos`                   | **QPoint**                      |     |
+| `frameSize`             | **QSize**                       |     |
+| `size`                  | **QSize**                       |     |
+| `width`                 | **int**                         |     |
+| `height`                | **int**                         |     |
+| `rect`                  | **QRect**                       |     |
+| `childrenRect`          | **QRect**                       |     |
+| `childrenRegion`        | **QRegion**                     |     |
+| `sizePolicy`            | **QSizePolicy**                 |     |
+| `minimumSize`           | **QSize**                       |     |
+| `maximumSize`           | **QSize**                       |     |
+| `minimumWidth`          | **int**                         |     |
+| `minimumHeight`         | **int**                         |     |
+| `maximumWidth`          | **int**                         |     |
+| `maximumHeight`         | **int**                         |     |
+| `sizeIncrement`         | **QSize**                       |     |
+| `baseSize`              | **QSize**                       |     |
+| `palette`               | **QPalette**                    |     |
+| `font`                  | **QFont**                       |     |
+| `cursor`                | **QCursor**                     |     |
+| `mouseTracking`         | **bool**                        |     |
+| `tabletTracking`        | **bool**                        |     |
+| `isActiveWindow`        | **bool**                        |     |
+| `focusPolicy`           | **Qt::FocusPolicy**             |     |
+| `focus`                 | **bool**                        |     |
+| `contextMenuPolicy`     | **Qt::ContextMenuPolicy**       |     |
+| `updatesEnabled`        | **bool**                        |     |
+| `visible`               | **bool**                        |     |
+| `minimized`             | **bool**                        |     |
+| `maximized`             | **bool**                        |     |
+| `fullScreen`            | **bool**                        |     |
+| `sizeHint`              | **QSize**                       |     |
+| `minimumSizeHint`       | **QSize**                       |     |
+| `acceptDrops`           | **bool**                        |     |
+| `windowTitle`           | **QString**                     |     |
+| `windowIcon`            | **QIcon**                       |     |
+| `windowIconText`        | **QString**                     |     |
+| `windowOpacity`         | **double**                      |     |
+| `windowModified`        | **bool**                        |     |
+| `toolTip`               | **QString**                     |     |
+| `toolTipDuration`       | **int**                         |     |
+| `statusTip`             | **QString**                     |     |
+| `whatsThis`             | **QString**                     |     |
+| `accessibleName`        | **QString**                     |     |
+| `accessibleDescription` | **QString**                     |     |
+| `layoutDirection`       | **Qt::LayoutDirection**         |     |
+| `autoFillBackground`    | **bool**                        |     |
+| `styleSheet`            | **QString**                     |     |
+| `locale`                | **QLocale**                     |     |
+| `windowFilePath`        | **QString**                     |     |
+| `inputMethodHints`      | **QFlags<Qt::InputMethodHint>** |     |
+| `title`                 | **QString**                     |     |
+| `alignment`             | **QFlags<Qt::AlignmentFlag>**   |     |
+| `flat`                  | **bool**                        |     |
+| `checkable`             | **bool**                        |     |
+| `checked`               | **bool**                        |     |
+
+
+## 🖼 Screenshot
+
+``` py title='prettyqt.custom_widgets.optionalwidget.OptionalWidget.setup_example' linenums="38"
+@classmethod
+def setup_example(cls):
+    w = widgets.CheckBox("Example")
+    return cls(widget=w)
+
+```
+
+![Image title](OptionalWidget_screenshot.png)

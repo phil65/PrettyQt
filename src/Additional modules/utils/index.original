@@ -1,0 +1,15 @@
+---
+hide:
+- toc
+---
+
+## Docs
+
+Module containing helper functions.
+
+## Classes
+
+| Name                                                                                                                                                                   | Children | Inherits                                                                                     |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| **<font size='4'>[InvalidParamError](InvalidParamError.md)</font>**<br>*<font size='1'>prettyqt.utils</font>*<br>Exception raised for invalid params in method calls\. |          | <ul><li>[ValueError](https://docs.python.org/3/library/exceptions.html#ValueError)</li></ul> |
+| **<font size='4'>[bidict](bidict.md)</font>**<br>*<font size='1'>prettyqt.utils</font>*<br>                                                                            |          | <ul><li>[bidict](bidict.md)</li></ul>                                                        |

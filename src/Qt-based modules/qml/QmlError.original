@@ -1,0 +1,30 @@
+Qt Base Class: [QQmlError](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlError.html#PySide6.QtQml.PySide6.QtQml.QQmlError)
+
+Signature: `QQmlError(self) -> None
+QQmlError(self, arg__1: PySide6.QtQml.QQmlError) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                            | Children                                  | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QQmlError](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlError.html#PySide6.QtQml.PySide6.QtQml.QQmlError)</font>**<br>*<font size='1'>PySide6.QtQml</font>*<br>QQmlError\(self\) \-\> None | <ul><li>[QmlError](QmlError.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572320848["qml.QmlError"]
+  1473572252528["QtQml.QQmlError"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473572252528 --> 1473572320848
+  1473291690208 --> 1473572252528
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qml.qmlerror.QmlError
+    options:
+      show_root_toc_entry: False

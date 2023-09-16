@@ -1,0 +1,23 @@
+## Subclasses
+
+| Class           | Module                                          | Description |
+| --------------- | ----------------------------------------------- | ----------- |
+| [Rule](Rule.md) | prettyqt.syntaxhighlighters.markdownhighlighter |             |
+| [Rule](Rule.md) | prettyqt.syntaxhighlighters.pythonhighlighter   |             |
+| [Rule](Rule.md) | prettyqt.syntaxhighlighters.yamlhighlighter     |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296247104["syntaxhighlighters.HighlightRule"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473296247104
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.syntaxhighlighters.highlightrule.HighlightRule
+    options:
+      show_root_toc_entry: False

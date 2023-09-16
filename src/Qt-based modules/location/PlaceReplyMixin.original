@@ -1,0 +1,35 @@
+## Base classes
+
+| Name                                                                                                        | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[ObjectMixin](ObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.core.object</font>*<br> | <ul><li>[Object](Object.md)</li><li>[SocketNotifier](SocketNotifier.md)</li><li>[SharedMemory](SharedMemory.md)</li><li>[SignalMapper](SignalMapper.md)</li><li>[TimeLine](TimeLine.md)</li><li>[AbstractEventDispatcher](AbstractEventDispatcher.md)</li><li>[EventLoop](EventLoop.md)</li><li>[AbstractAnimationMixin](AbstractAnimationMixin.md)</li><li>[TranslatorMixin](TranslatorMixin.md)</li><li>[CoreApplicationMixin](CoreApplicationMixin.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+
+
+## Subclasses
+
+| Class                                     | Module                              | Description |
+| ----------------------------------------- | ----------------------------------- | ----------- |
+| [PlaceReply](PlaceReply.md)               | prettyqt.location.placereply        |             |
+| [PlaceSearchReply](PlaceSearchReply.md)   | prettyqt.location.placesearchreply  |             |
+| [PlaceContentReply](PlaceContentReply.md) | prettyqt.location.placecontentreply |             |
+| [PlaceDetailsReply](PlaceDetailsReply.md) | prettyqt.location.placedetailsreply |             |
+| [PlaceMatchReply](PlaceMatchReply.md)     | prettyqt.location.placematchreply   |             |
+| [PlaceIdReply](PlaceIdReply.md)           | prettyqt.location.placeidreply      |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573486352["location.PlaceReplyMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473299815024 --> 1473573486352
+  140713234304496 --> 1473299815024
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.location.placereply.PlaceReplyMixin
+    options:
+      show_root_toc_entry: False

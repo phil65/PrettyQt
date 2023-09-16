@@ -1,0 +1,38 @@
+Qt Base Class: [QLinearGradient](https://doc.qt.io/qtforpython/PySide6/QtGui/QLinearGradient.html#PySide6.QtGui.PySide6.QtGui.QLinearGradient)
+
+Signature: `QLinearGradient(self) -> None
+QLinearGradient(self, QLinearGradient: PySide6.QtGui.QLinearGradient) -> None
+QLinearGradient(self, start: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], finalStop: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element]) -> None
+QLinearGradient(self, xStart: float, yStart: float, xFinalStop: float, yFinalStop: float) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                    | Children                                                                                                                                                                        | Inherits                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GradientMixin](GradientMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.gradient</font>*<br>                                                                                                                        | <ul><li>[Gradient](Gradient.md)</li><li>[LinearGradient](LinearGradient.md)</li><li>[RadialGradient](RadialGradient.md)</li><li>[ConicalGradient](ConicalGradient.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                             |
+| **<font size='4'>[QLinearGradient](https://doc.qt.io/qtforpython/PySide6/QtGui/QLinearGradient.html#PySide6.QtGui.PySide6.QtGui.QLinearGradient)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QLinearGradient\(self\) \-\> None | <ul><li>[LinearGradient](LinearGradient.md)</li></ul>                                                                                                                           | <ul><li>[QGradient](https://doc.qt.io/qtforpython/PySide6/QtGui/QGradient.html#PySide6.QtGui.PySide6.QtGui.QGradient)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245600208["gui.LinearGradient"]
+  1473245598256["gui.GradientMixin"]
+  140713234304496["builtins.object"]
+  1473300123360["QtGui.QLinearGradient"]
+  1473300122384["QtGui.QGradient"]
+  1473291690208["Shiboken.Object"]
+  1473245598256 --> 1473245600208
+  140713234304496 --> 1473245598256
+  1473300123360 --> 1473245600208
+  1473300122384 --> 1473300123360
+  1473291690208 --> 1473300122384
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.lineargradient.LinearGradient
+    options:
+      show_root_toc_entry: False

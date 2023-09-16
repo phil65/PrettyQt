@@ -1,0 +1,45 @@
+Qt Base Class: [QGraphicsEffect](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsEffect.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsEffect)
+
+Signature: `QGraphicsEffect(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                          | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Inherits                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GraphicsEffectMixin](GraphicsEffectMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicseffect</font>*<br>                                                                                                                                                                        | <ul><li>[GraphicsEffect](GraphicsEffect.md)</li><li>[GraphicsBlurEffect](GraphicsBlurEffect.md)</li><li>[GraphicsColorizeEffect](GraphicsColorizeEffect.md)</li><li>[GraphicsDropShadowEffect](GraphicsDropShadowEffect.md)</li><li>[GraphicsOpacityEffect](GraphicsOpacityEffect.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                              | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                              |
+| **<font size='4'>[QGraphicsEffect](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsEffect.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsEffect)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QGraphicsEffect\(self, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[QGraphicsOpacityEffect](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsOpacityEffect.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsOpacityEffect)</li><li>[QGraphicsDropShadowEffect](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsDropShadowEffect.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsDropShadowEffect)</li><li>[QGraphicsColorizeEffect](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsColorizeEffect.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsColorizeEffect)</li><li>[QGraphicsBlurEffect](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsBlurEffect.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsBlurEffect)</li><li>[GraphicsEffect](GraphicsEffect.md)</li></ul> | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296172928["widgets.GraphicsEffect"]
+  1473296168048["widgets.GraphicsEffectMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473293738992["QtWidgets.QGraphicsEffect"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473296168048 --> 1473296172928
+  1473299815024 --> 1473296168048
+  140713234304496 --> 1473299815024
+  1473293738992 --> 1473296172928
+  1473288842240 --> 1473293738992
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicseffect.GraphicsEffect
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |
+| `enabled`    | **bool**    |     |

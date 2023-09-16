@@ -1,0 +1,16 @@
+---
+hide:
+- toc
+---
+
+## Docs
+
+Classes and functions for rendering PDF documents.
+
+## Classes
+
+| Name                                                                                                                           | Children | Inherits                                                                                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[PdfSearchModel](PdfSearchModel.md)</font>**<br>*<font size='1'>prettyqt.pdf.pdfsearchmodel</font>*<br>       |          | <ul><li>[AbstractItemModelMixin](AbstractItemModelMixin.md)</li><li>[QPdfSearchModel](https://doc.qt.io/qtforpython/PySide6/QtPdf/QPdfSearchModel.html#PySide6.QtPdf.PySide6.QtPdf.QPdfSearchModel)</li></ul>       |
+| **<font size='4'>[PdfBookmarkModel](PdfBookmarkModel.md)</font>**<br>*<font size='1'>prettyqt.pdf.pdfbookmarkmodel</font>*<br> |          | <ul><li>[AbstractItemModelMixin](AbstractItemModelMixin.md)</li><li>[QPdfBookmarkModel](https://doc.qt.io/qtforpython/PySide6/QtPdf/QPdfBookmarkModel.html#PySide6.QtPdf.PySide6.QtPdf.QPdfBookmarkModel)</li></ul> |
+| **<font size='4'>[PdfDocument](PdfDocument.md)</font>**<br>*<font size='1'>prettyqt.pdf.pdfdocument</font>*<br>                |          | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[QPdfDocument](https://doc.qt.io/qtforpython/PySide6/QtPdf/QPdfDocument.html#PySide6.QtPdf.PySide6.QtPdf.QPdfDocument)</li></ul>                                      |

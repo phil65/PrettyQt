@@ -1,0 +1,37 @@
+Qt Base Class: [QStyleOptionViewItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStyleOptionViewItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QStyleOptionViewItem)
+
+Signature: `QStyleOptionViewItem(self) -> None
+QStyleOptionViewItem(self, other: PySide6.QtWidgets.QStyleOptionViewItem) -> None
+QStyleOptionViewItem(self, version: int) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                        | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[StyleOptionMixin](StyleOptionMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.styleoption</font>*<br>                                                                                                                                               | <ul><li>[StyleOption](StyleOption.md)</li><li>[StyleOptionButton](StyleOptionButton.md)</li><li>[StyleOptionComplexMixin](StyleOptionComplexMixin.md)</li><li>[StyleOptionDockWidget](StyleOptionDockWidget.md)</li><li>[StyleOptionFocusRect](StyleOptionFocusRect.md)</li><li>[StyleOptionFrame](StyleOptionFrame.md)</li><li>[StyleOptionGraphicsItem](StyleOptionGraphicsItem.md)</li><li>[StyleOptionHeader](StyleOptionHeader.md)</li><li>[StyleOptionMenuItem](StyleOptionMenuItem.md)</li><li>[StyleOptionProgressBar](StyleOptionProgressBar.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                                  |
+| **<font size='4'>[QStyleOptionViewItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStyleOptionViewItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QStyleOptionViewItem)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QStyleOptionViewItem\(self\) \-\> None | <ul><li>[StyleOptionViewItem](StyleOptionViewItem.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | <ul><li>[QStyleOption](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStyleOption.html#PySide6.QtWidgets.PySide6.QtWidgets.QStyleOption)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296186592["widgets.StyleOptionViewItem"]
+  1473296150480["widgets.StyleOptionMixin"]
+  140713234304496["builtins.object"]
+  1473365415888["QtWidgets.QStyleOptionViewItem"]
+  1473365411984["QtWidgets.QStyleOption"]
+  1473291690208["Shiboken.Object"]
+  1473296150480 --> 1473296186592
+  140713234304496 --> 1473296150480
+  1473365415888 --> 1473296186592
+  1473365411984 --> 1473365415888
+  1473291690208 --> 1473365411984
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.styleoptionviewitem.StyleOptionViewItem
+    options:
+      show_root_toc_entry: False

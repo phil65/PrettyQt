@@ -1,0 +1,38 @@
+Qt Base Class: [QGeoCircle](https://doc.qt.io/qtforpython/PySide6/QtPositioning/QGeoCircle.html#PySide6.QtPositioning.PySide6.QtPositioning.QGeoCircle)
+
+Signature: `QGeoCircle(self) -> None
+QGeoCircle(self, center: PySide6.QtPositioning.QGeoCoordinate, radius: float = -1.0) -> None
+QGeoCircle(self, other: PySide6.QtPositioning.QGeoShape) -> None
+QGeoCircle(self, other: Union[PySide6.QtPositioning.QGeoCircle, PySide6.QtPositioning.QGeoCoordinate, PySide6.QtPositioning.QGeoShape]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                | Children                                                                                                                                                                              | Inherits                                                                                                                                                |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GeoShapeMixin](GeoShapeMixin.md)</font>**<br>*<font size='1'>prettyqt.positioning.geoshape</font>*<br>                                                                                                                            | <ul><li>[GeoShape](GeoShape.md)</li><li>[GeoRectangle](GeoRectangle.md)</li><li>[GeoCircle](GeoCircle.md)</li><li>[GeoPath](GeoPath.md)</li><li>[GeoPolygon](GeoPolygon.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                                     |
+| **<font size='4'>[QGeoCircle](https://doc.qt.io/qtforpython/PySide6/QtPositioning/QGeoCircle.html#PySide6.QtPositioning.PySide6.QtPositioning.QGeoCircle)</font>**<br>*<font size='1'>PySide6.QtPositioning</font>*<br>QGeoCircle\(self\) \-\> None | <ul><li>[GeoCircle](GeoCircle.md)</li></ul>                                                                                                                                           | <ul><li>[QGeoShape](https://doc.qt.io/qtforpython/PySide6/QtPositioning/QGeoShape.html#PySide6.QtPositioning.PySide6.QtPositioning.QGeoShape)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573455120["positioning.GeoCircle"]
+  1473573419984["positioning.GeoShapeMixin"]
+  140713234304496["builtins.object"]
+  1473573325312["QtPositioning.QGeoCircle"]
+  1473573320432["QtPositioning.QGeoShape"]
+  1473291690208["Shiboken.Object"]
+  1473573419984 --> 1473573455120
+  140713234304496 --> 1473573419984
+  1473573325312 --> 1473573455120
+  1473573320432 --> 1473573325312
+  1473291690208 --> 1473573320432
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.positioning.geocircle.GeoCircle
+    options:
+      show_root_toc_entry: False

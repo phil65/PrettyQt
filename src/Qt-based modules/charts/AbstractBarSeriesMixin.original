@@ -1,0 +1,38 @@
+## Base classes
+
+| Name                                                                                                                                  | Children                                                                                                                                                    | Inherits                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **<font size='4'>[AbstractSeriesMixin](AbstractSeriesMixin.md)</font>**<br>*<font size='1'>prettyqt.charts.abstractseries</font>*<br> | <ul><li>[AbstractSeries](AbstractSeries.md)</li><li>[AbstractBarSeriesMixin](AbstractBarSeriesMixin.md)</li><li>[XYSeriesMixin](XYSeriesMixin.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul> |
+
+
+## Subclasses
+
+| Class                                                       | Module                                     | Description |
+| ----------------------------------------------------------- | ------------------------------------------ | ----------- |
+| [AbstractBarSeries](AbstractBarSeries.md)                   | prettyqt.charts.abstractbarseries          |             |
+| [BarSeries](BarSeries.md)                                   | prettyqt.charts.barseries                  |             |
+| [PercentBarSeries](PercentBarSeries.md)                     | prettyqt.charts.percentbarseries           |             |
+| [HorizontalBarSeries](HorizontalBarSeries.md)               | prettyqt.charts.horizontalbarseries        |             |
+| [HorizontalPercentBarSeries](HorizontalPercentBarSeries.md) | prettyqt.charts.horizontalpercentbarseries |             |
+| [StackedBarSeries](StackedBarSeries.md)                     | prettyqt.charts.stackedbarseries           |             |
+| [HorizontalStackedBarSeries](HorizontalStackedBarSeries.md) | prettyqt.charts.horizontalstackedbarseries |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367682000["charts.AbstractBarSeriesMixin"]
+  1473367658576["charts.AbstractSeriesMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473367658576 --> 1473367682000
+  1473299815024 --> 1473367658576
+  140713234304496 --> 1473299815024
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.charts.abstractbarseries.AbstractBarSeriesMixin
+    options:
+      show_root_toc_entry: False

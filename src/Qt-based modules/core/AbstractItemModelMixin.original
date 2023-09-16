@@ -1,0 +1,39 @@
+## Base classes
+
+| Name                                                                                                        | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[ObjectMixin](ObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.core.object</font>*<br> | <ul><li>[Object](Object.md)</li><li>[SocketNotifier](SocketNotifier.md)</li><li>[SharedMemory](SharedMemory.md)</li><li>[SignalMapper](SignalMapper.md)</li><li>[TimeLine](TimeLine.md)</li><li>[AbstractEventDispatcher](AbstractEventDispatcher.md)</li><li>[EventLoop](EventLoop.md)</li><li>[AbstractAnimationMixin](AbstractAnimationMixin.md)</li><li>[TranslatorMixin](TranslatorMixin.md)</li><li>[CoreApplicationMixin](CoreApplicationMixin.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+
+
+## Subclasses
+
+| Class                                                         | Module                                    | Description                           |
+| ------------------------------------------------------------- | ----------------------------------------- | ------------------------------------- |
+| [AbstractItemModel](AbstractItemModel.md)                     | prettyqt.core.abstractitemmodel           |                                       |
+| [AbstractProxyModelMixin](AbstractProxyModelMixin.md)         | prettyqt.core.abstractproxymodel          |                                       |
+| [AbstractListModelMixin](AbstractListModelMixin.md)           | prettyqt.core.abstractlistmodel           |                                       |
+| [AbstractTableModelMixin](AbstractTableModelMixin.md)         | prettyqt.core.abstracttablemodel          |                                       |
+| [ConcatenateTablesProxyModel](ConcatenateTablesProxyModel.md) | prettyqt.core.concatenatetablesproxymodel |                                       |
+| [StandardItemModel](StandardItemModel.md)                     | prettyqt.gui.standarditemmodel            |                                       |
+| [FileSystemModel](FileSystemModel.md)                         | prettyqt.widgets.filesystemmodel          |                                       |
+| [PdfBookmarkModel](PdfBookmarkModel.md)                       | prettyqt.pdf.pdfbookmarkmodel             |                                       |
+| [PdfSearchModel](PdfSearchModel.md)                           | prettyqt.pdf.pdfsearchmodel               |                                       |
+| [HelpContentModel](HelpContentModel.md)                       | prettyqt.qthelp.helpcontentmodel          | Model that supplies content to views. |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299890176["core.AbstractItemModelMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473299815024 --> 1473299890176
+  140713234304496 --> 1473299815024
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.abstractitemmodel.AbstractItemModelMixin
+    options:
+      show_root_toc_entry: False

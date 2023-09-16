@@ -1,0 +1,30 @@
+Qt Base Class: [QPageRanges](https://doc.qt.io/qtforpython/PySide6/QtGui/QPageRanges.html#PySide6.QtGui.PySide6.QtGui.QPageRanges)
+
+Signature: `QPageRanges(self) -> None
+QPageRanges(self, other: PySide6.QtGui.QPageRanges) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                    | Children                                      | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QPageRanges](https://doc.qt.io/qtforpython/PySide6/QtGui/QPageRanges.html#PySide6.QtGui.PySide6.QtGui.QPageRanges)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QPageRanges\(self\) \-\> None | <ul><li>[PageRanges](PageRanges.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245522128["gui.PageRanges"]
+  1473300096032["QtGui.QPageRanges"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473300096032 --> 1473245522128
+  1473291690208 --> 1473300096032
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.pageranges.PageRanges
+    options:
+      show_root_toc_entry: False

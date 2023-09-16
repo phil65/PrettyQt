@@ -1,0 +1,48 @@
+Qt Base Class: [QAbstractTransition](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QAbstractTransition.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QAbstractTransition)
+
+Signature: `QAbstractTransition(self, sourceState: Optional[PySide6.QtStateMachine.QState] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                          | Children                                                                                                                                                                                                                                                                                                                                                                                                     | Inherits                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[AbstractTransitionMixin](AbstractTransitionMixin.md)</font>**<br>*<font size='1'>prettyqt.statemachine.abstracttransition</font>*<br>                                                                                                                                                                                                       | <ul><li>[AbstractTransition](AbstractTransition.md)</li><li>[EventTransition](EventTransition.md)</li><li>[SignalTransition](SignalTransition.md)</li></ul>                                                                                                                                                                                                                                                  | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                              |
+| **<font size='4'>[QAbstractTransition](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QAbstractTransition.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QAbstractTransition)</font>**<br>*<font size='1'>PySide6.QtStateMachine</font>*<br>QAbstractTransition\(self, sourceState: Optional\[PySide6\.QtStateMachine\.QState\] \= None\) \-\> None | <ul><li>[QSignalTransition](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QSignalTransition.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QSignalTransition)</li><li>[QEventTransition](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QEventTransition.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QEventTransition)</li><li>[AbstractTransition](AbstractTransition.md)</li></ul> | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473374534544["statemachine.AbstractTransition"]
+  1473374533568["statemachine.AbstractTransitionMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473374496480["QtStateMachine.QAbstractTransition"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473374533568 --> 1473374534544
+  1473299815024 --> 1473374533568
+  140713234304496 --> 1473299815024
+  1473374496480 --> 1473374534544
+  1473288842240 --> 1473374496480
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.statemachine.abstracttransition.AbstractTransition
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property      | Type                                    | Doc |
+| ---------------- | --------------------------------------- | --- |
+| `objectName`     | **QString**                             |     |
+| `sourceState`    | **QState**                              |     |
+| `targetState`    | **QAbstractState**                      |     |
+| `targetStates`   | **QList<QAbstractState*>**              |     |
+| `transitionType` | **QAbstractTransition::TransitionType** |     |

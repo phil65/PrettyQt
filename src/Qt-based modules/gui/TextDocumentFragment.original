@@ -1,0 +1,32 @@
+Qt Base Class: [QTextDocumentFragment](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextDocumentFragment.html#PySide6.QtGui.PySide6.QtGui.QTextDocumentFragment)
+
+Signature: `QTextDocumentFragment(self) -> None
+QTextDocumentFragment(self, document: PySide6.QtGui.QTextDocument) -> None
+QTextDocumentFragment(self, range: PySide6.QtGui.QTextCursor) -> None
+QTextDocumentFragment(self, rhs: PySide6.QtGui.QTextDocumentFragment) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                            | Children                                                          | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QTextDocumentFragment](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextDocumentFragment.html#PySide6.QtGui.PySide6.QtGui.QTextDocumentFragment)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextDocumentFragment\(self\) \-\> None | <ul><li>[TextDocumentFragment](TextDocumentFragment.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245602160["gui.TextDocumentFragment"]
+  1473299699856["QtGui.QTextDocumentFragment"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473299699856 --> 1473245602160
+  1473291690208 --> 1473299699856
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textdocumentfragment.TextDocumentFragment
+    options:
+      show_root_toc_entry: False

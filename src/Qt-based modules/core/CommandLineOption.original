@@ -1,0 +1,33 @@
+Qt Base Class: [QCommandLineOption](https://doc.qt.io/qtforpython/PySide6/QtCore/QCommandLineOption.html#PySide6.QtCore.PySide6.QtCore.QCommandLineOption)
+
+Signature: `QCommandLineOption(self, name: str) -> None
+QCommandLineOption(self, name: str, description: str, valueName: str = '', defaultValue: str = '') -> None
+QCommandLineOption(self, names: Sequence[str]) -> None
+QCommandLineOption(self, names: Sequence[str], description: str, valueName: str = '', defaultValue: str = '') -> None
+QCommandLineOption(self, other: PySide6.QtCore.QCommandLineOption) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                               | Children                                                    | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QCommandLineOption](https://doc.qt.io/qtforpython/PySide6/QtCore/QCommandLineOption.html#PySide6.QtCore.PySide6.QtCore.QCommandLineOption)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QCommandLineOption\(self, name: str\) \-\> None | <ul><li>[CommandLineOption](CommandLineOption.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299912624["core.CommandLineOption"]
+  1473288971072["QtCore.QCommandLineOption"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473288971072 --> 1473299912624
+  1473291690208 --> 1473288971072
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.commandlineoption.CommandLineOption
+    options:
+      show_root_toc_entry: False

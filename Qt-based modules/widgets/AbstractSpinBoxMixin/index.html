@@ -6,21 +6,23 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Python wrapper for PySide6 / PyQt6.">
+        <meta name="description" content="A pythonic layer on top of PyQt6 / PySide6">
       
+      
+        <meta name="author" content="philipptemminghoff@googlemail.com">
       
       
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/AbstractSpinBoxMixin/">
       
       
-        <link rel="prev" href="../VBoxLayout/">
+        <link rel="prev" href="../Widget/">
       
       
-        <link rel="next" href="../GraphicsLayoutItemMixin/">
+        <link rel="next" href="../DateEdit/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.7">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.3.1">
     
     
       
@@ -54,9 +56,9 @@
     
       <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../assets/mknodes_nodes.css">
-    
       <link rel="stylesheet" href="../../../assets/mknodes_theme.css">
+    
+      <link rel="stylesheet" href="../../../assets/mknodes_nodes.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -109,21 +111,21 @@
           <div class="md-banner__inner md-grid md-typeset">
             
             
-<body><a href='https://github.com/blambright/qstylizer'><svg xmlns="http://www.w3.org/2000/svg" width="105" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_1">        <rect width="105" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_1)">        <path fill="#555" d="M0 0h64v20H0z"/>        <path fill="#4051b5" d="M64 0h41v20H64z"/>        <path fill="url(#b)" d="M0 0h105v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="33.0" y="15" fill="#010101" fill-opacity=".3">qstylizer</text>        <text x="32.0" y="14">qstylizer</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="85.5" y="15" fill="#010101" fill-opacity=".3">0.2.2</text>        <text x="84.5" y="14">0.2.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://www.pyside.org'><svg xmlns="http://www.w3.org/2000/svg" width="97" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_2">        <rect width="97" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_2)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h41v20H56z"/>        <path fill="url(#b)" d="M0 0h97v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">PySide6</text>        <text x="28.0" y="14">PySide6</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="77.5" y="15" fill="#010101" fill-opacity=".3">6.5.2</text>        <text x="76.5" y="14">6.5.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://typing-extensions.readthedocs.io/'><svg xmlns="http://www.w3.org/2000/svg" width="160" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_3">        <rect width="160" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_3)">        <path fill="#555" d="M0 0h119v20H0z"/>        <path fill="#4051b5" d="M119 0h41v20H119z"/>        <path fill="url(#b)" d="M0 0h160v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="60.5" y="15" fill="#010101" fill-opacity=".3">typing_extensions</text>        <text x="59.5" y="14">typing_extensions</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="140.5" y="15" fill="#010101" fill-opacity=".3">4.7.1</text>        <text x="139.5" y="14">4.7.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://www.numpy.org'><svg xmlns="http://www.w3.org/2000/svg" width="96" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_4">        <rect width="96" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_4)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h48v20H48z"/>        <path fill="url(#b)" d="M0 0h96v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">numpy</text>        <text x="24.0" y="14">numpy</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="73.0" y="15" fill="#010101" fill-opacity=".3">1.25.2</text>        <text x="72.0" y="14">1.25.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://github.com/mhammond/pywin32'><svg xmlns="http://www.w3.org/2000/svg" width="87" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_5">        <rect width="87" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_5)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h31v20H56z"/>        <path fill="url(#b)" d="M0 0h87v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">pywin32</text>        <text x="28.0" y="14">pywin32</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="72.5" y="15" fill="#010101" fill-opacity=".3">306</text>        <text x="71.5" y="14">306</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://github.com/ijl/orjson'><svg xmlns="http://www.w3.org/2000/svg" width="89" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_6">        <rect width="89" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_6)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h41v20H48z"/>        <path fill="url(#b)" d="M0 0h89v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">orjson</text>        <text x="24.0" y="14">orjson</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.5" y="15" fill="#010101" fill-opacity=".3">3.9.5</text>        <text x="68.5" y="14">3.9.5</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://github.com/enthought/comtypes'><svg xmlns="http://www.w3.org/2000/svg" width="108" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_7">        <rect width="108" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_7)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h41v20H67z"/>        <path fill="url(#b)" d="M0 0h108v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">comtypes</text>        <text x="33.5" y="14">comtypes</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="88.5" y="15" fill="#010101" fill-opacity=".3">1.2.0</text>        <text x="87.5" y="14">1.2.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://bidict.readthedocs.io'><svg xmlns="http://www.w3.org/2000/svg" width="92" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_8">        <rect width="92" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_8)">        <path fill="#555" d="M0 0h44v20H0z"/>        <path fill="#4051b5" d="M44 0h48v20H44z"/>        <path fill="url(#b)" d="M0 0h92v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="23.0" y="15" fill="#010101" fill-opacity=".3">bidict</text>        <text x="22.0" y="14">bidict</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.0" y="15" fill="#010101" fill-opacity=".3">0.22.1</text>        <text x="68.0" y="14">0.22.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://python-pillow.org'><svg xmlns="http://www.w3.org/2000/svg" width="91" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_9">        <rect width="91" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_9)">        <path fill="#555" d="M0 0h43v20H0z"/>        <path fill="#4051b5" d="M43 0h48v20H43z"/>        <path fill="url(#b)" d="M0 0h91v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="22.5" y="15" fill="#010101" fill-opacity=".3">Pillow</text>        <text x="21.5" y="14">Pillow</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="68.0" y="15" fill="#010101" fill-opacity=".3">10.0.0</text>        <text x="67.0" y="14">10.0.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://pygments.org'><svg xmlns="http://www.w3.org/2000/svg" width="115" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_10">        <rect width="115" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_10)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h48v20H67z"/>        <path fill="url(#b)" d="M0 0h115v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">Pygments</text>        <text x="33.5" y="14">Pygments</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="92.0" y="15" fill="#010101" fill-opacity=".3">2.16.1</text>        <text x="91.0" y="14">2.16.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://ipython.org'><svg xmlns="http://www.w3.org/2000/svg" width="102" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_11">        <rect width="102" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_11)">        <path fill="#555" d="M0 0h54v20H0z"/>        <path fill="#4051b5" d="M54 0h48v20H54z"/>        <path fill="url(#b)" d="M0 0h102v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="28.0" y="15" fill="#010101" fill-opacity=".3">ipython</text>        <text x="27.0" y="14">ipython</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="79.0" y="15" fill="#010101" fill-opacity=".3">8.15.0</text>        <text x="78.0" y="14">8.15.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='http://github.com/fsspec/filesystem_spec'><svg xmlns="http://www.w3.org/2000/svg" width="112" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_12">        <rect width="112" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_12)">        <path fill="#555" d="M0 0h50v20H0z"/>        <path fill="#4051b5" d="M50 0h62v20H50z"/>        <path fill="url(#b)" d="M0 0h112v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="26.0" y="15" fill="#010101" fill-opacity=".3">fsspec</text>        <text x="25.0" y="14">fsspec</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="82.0" y="15" fill="#010101" fill-opacity=".3">2023.9.0</text>        <text x="81.0" y="14">2023.9.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://lxml.de/'><svg xmlns="http://www.w3.org/2000/svg" width="76" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_13">        <rect width="76" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_13)">        <path fill="#555" d="M0 0h35v20H0z"/>        <path fill="#4051b5" d="M35 0h41v20H35z"/>        <path fill="url(#b)" d="M0 0h76v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="18.5" y="15" fill="#010101" fill-opacity=".3">lxml</text>        <text x="17.5" y="14">lxml</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="56.5" y="15" fill="#010101" fill-opacity=".3">4.9.3</text>        <text x="55.5" y="14">4.9.3</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='http://jupyter.org'><svg xmlns="http://www.w3.org/2000/svg" width="109" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_14">        <rect width="109" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_14)">        <path fill="#555" d="M0 0h68v20H0z"/>        <path fill="#4051b5" d="M68 0h41v20H68z"/>        <path fill="url(#b)" d="M0 0h109v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="35.0" y="15" fill="#010101" fill-opacity=".3">qtconsole</text>        <text x="34.0" y="14">qtconsole</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="89.5" y="15" fill="#010101" fill-opacity=".3">5.4.4</text>        <text x="88.5" y="14">5.4.4</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://www.attrs.org/'><svg xmlns="http://www.w3.org/2000/svg" width="88" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_15">        <rect width="88" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_15)">        <path fill="#555" d="M0 0h40v20H0z"/>        <path fill="#4051b5" d="M40 0h48v20H40z"/>        <path fill="url(#b)" d="M0 0h88v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="21.0" y="15" fill="#010101" fill-opacity=".3">attrs</text>        <text x="20.0" y="14">attrs</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="65.0" y="15" fill="#010101" fill-opacity=".3">23.1.0</text>        <text x="64.0" y="14">23.1.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://python-pillow.org'><svg xmlns="http://www.w3.org/2000/svg" width="91" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_1">        <rect width="91" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_1)">        <path fill="#555" d="M0 0h43v20H0z"/>        <path fill="#4051b5" d="M43 0h48v20H43z"/>        <path fill="url(#b)" d="M0 0h91v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="22.5" y="15" fill="#010101" fill-opacity=".3">Pillow</text>        <text x="21.5" y="14">Pillow</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="68.0" y="15" fill="#010101" fill-opacity=".3">10.0.1</text>        <text x="67.0" y="14">10.0.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/ijl/orjson'><svg xmlns="http://www.w3.org/2000/svg" width="89" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_2">        <rect width="89" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_2)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h41v20H48z"/>        <path fill="url(#b)" d="M0 0h89v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">orjson</text>        <text x="24.0" y="14">orjson</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.5" y="15" fill="#010101" fill-opacity=".3">3.9.7</text>        <text x="68.5" y="14">3.9.7</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://pygments.org'><svg xmlns="http://www.w3.org/2000/svg" width="115" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_3">        <rect width="115" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_3)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h48v20H67z"/>        <path fill="url(#b)" d="M0 0h115v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">Pygments</text>        <text x="33.5" y="14">Pygments</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="92.0" y="15" fill="#010101" fill-opacity=".3">2.16.1</text>        <text x="91.0" y="14">2.16.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://www.pyside.org'><svg xmlns="http://www.w3.org/2000/svg" width="97" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_4">        <rect width="97" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_4)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h41v20H56z"/>        <path fill="url(#b)" d="M0 0h97v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">PySide6</text>        <text x="28.0" y="14">PySide6</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="77.5" y="15" fill="#010101" fill-opacity=".3">6.5.2</text>        <text x="76.5" y="14">6.5.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='http://github.com/fsspec/filesystem_spec'><svg xmlns="http://www.w3.org/2000/svg" width="112" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_5">        <rect width="112" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_5)">        <path fill="#555" d="M0 0h50v20H0z"/>        <path fill="#4051b5" d="M50 0h62v20H50z"/>        <path fill="url(#b)" d="M0 0h112v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="26.0" y="15" fill="#010101" fill-opacity=".3">fsspec</text>        <text x="25.0" y="14">fsspec</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="82.0" y="15" fill="#010101" fill-opacity=".3">2023.9.1</text>        <text x="81.0" y="14">2023.9.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/enthought/comtypes'><svg xmlns="http://www.w3.org/2000/svg" width="108" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_6">        <rect width="108" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_6)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h41v20H67z"/>        <path fill="url(#b)" d="M0 0h108v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">comtypes</text>        <text x="33.5" y="14">comtypes</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="88.5" y="15" fill="#010101" fill-opacity=".3">1.2.0</text>        <text x="87.5" y="14">1.2.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://www.attrs.org/'><svg xmlns="http://www.w3.org/2000/svg" width="88" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_7">        <rect width="88" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_7)">        <path fill="#555" d="M0 0h40v20H0z"/>        <path fill="#4051b5" d="M40 0h48v20H40z"/>        <path fill="url(#b)" d="M0 0h88v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="21.0" y="15" fill="#010101" fill-opacity=".3">attrs</text>        <text x="20.0" y="14">attrs</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="65.0" y="15" fill="#010101" fill-opacity=".3">23.1.0</text>        <text x="64.0" y="14">23.1.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://www.numpy.org'><svg xmlns="http://www.w3.org/2000/svg" width="96" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_8">        <rect width="96" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_8)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h48v20H48z"/>        <path fill="url(#b)" d="M0 0h96v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">numpy</text>        <text x="24.0" y="14">numpy</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="73.0" y="15" fill="#010101" fill-opacity=".3">1.25.2</text>        <text x="72.0" y="14">1.25.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://bidict.readthedocs.io'><svg xmlns="http://www.w3.org/2000/svg" width="92" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_9">        <rect width="92" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_9)">        <path fill="#555" d="M0 0h44v20H0z"/>        <path fill="#4051b5" d="M44 0h48v20H44z"/>        <path fill="url(#b)" d="M0 0h92v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="23.0" y="15" fill="#010101" fill-opacity=".3">bidict</text>        <text x="22.0" y="14">bidict</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.0" y="15" fill="#010101" fill-opacity=".3">0.22.1</text>        <text x="68.0" y="14">0.22.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://typing-extensions.readthedocs.io/'><svg xmlns="http://www.w3.org/2000/svg" width="160" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_10">        <rect width="160" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_10)">        <path fill="#555" d="M0 0h119v20H0z"/>        <path fill="#4051b5" d="M119 0h41v20H119z"/>        <path fill="url(#b)" d="M0 0h160v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="60.5" y="15" fill="#010101" fill-opacity=".3">typing_extensions</text>        <text x="59.5" y="14">typing_extensions</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="140.5" y="15" fill="#010101" fill-opacity=".3">4.7.1</text>        <text x="139.5" y="14">4.7.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='http://jupyter.org'><svg xmlns="http://www.w3.org/2000/svg" width="109" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_11">        <rect width="109" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_11)">        <path fill="#555" d="M0 0h68v20H0z"/>        <path fill="#4051b5" d="M68 0h41v20H68z"/>        <path fill="url(#b)" d="M0 0h109v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="35.0" y="15" fill="#010101" fill-opacity=".3">qtconsole</text>        <text x="34.0" y="14">qtconsole</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="89.5" y="15" fill="#010101" fill-opacity=".3">5.4.4</text>        <text x="88.5" y="14">5.4.4</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/mhammond/pywin32'><svg xmlns="http://www.w3.org/2000/svg" width="87" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_12">        <rect width="87" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_12)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h31v20H56z"/>        <path fill="url(#b)" d="M0 0h87v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">pywin32</text>        <text x="28.0" y="14">pywin32</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="72.5" y="15" fill="#010101" fill-opacity=".3">306</text>        <text x="71.5" y="14">306</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://lxml.de/'><svg xmlns="http://www.w3.org/2000/svg" width="76" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_13">        <rect width="76" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_13)">        <path fill="#555" d="M0 0h35v20H0z"/>        <path fill="#4051b5" d="M35 0h41v20H35z"/>        <path fill="url(#b)" d="M0 0h76v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="18.5" y="15" fill="#010101" fill-opacity=".3">lxml</text>        <text x="17.5" y="14">lxml</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="56.5" y="15" fill="#010101" fill-opacity=".3">4.9.3</text>        <text x="55.5" y="14">4.9.3</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://ipython.org'><svg xmlns="http://www.w3.org/2000/svg" width="102" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_14">        <rect width="102" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_14)">        <path fill="#555" d="M0 0h54v20H0z"/>        <path fill="#4051b5" d="M54 0h48v20H54z"/>        <path fill="url(#b)" d="M0 0h102v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="28.0" y="15" fill="#010101" fill-opacity=".3">ipython</text>        <text x="27.0" y="14">ipython</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="79.0" y="15" fill="#010101" fill-opacity=".3">8.15.0</text>        <text x="78.0" y="14">8.15.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/blambright/qstylizer'><svg xmlns="http://www.w3.org/2000/svg" width="105" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_15">        <rect width="105" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_15)">        <path fill="#555" d="M0 0h64v20H0z"/>        <path fill="#4051b5" d="M64 0h41v20H64z"/>        <path fill="url(#b)" d="M0 0h105v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="33.0" y="15" fill="#010101" fill-opacity=".3">qstylizer</text>        <text x="32.0" y="14">qstylizer</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="85.5" y="15" fill="#010101" fill-opacity=".3">0.2.2</text>        <text x="84.5" y="14">0.2.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 
 
           </div>
@@ -280,7 +282,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../Usage/prettyqt/docs/api_guidelines/general/" class="md-tabs__link">
+        <a href="../../../Usage/general/" class="md-tabs__link">
           
   
     
@@ -300,7 +302,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../Features/prettyqt/docs/features/proxies/" class="md-tabs__link">
+        <a href="../../../Features/proxies/" class="md-tabs__link">
           
   
     
@@ -321,8 +323,16 @@
   
     
     
+      
+  
+  
+    
+  
+  
+    
+    
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../" class="md-tabs__link">
+        <a href="../../bluetooth/" class="md-tabs__link">
           
   
     
@@ -334,6 +344,9 @@
     
   
 
+    
+  
+
       
         
   
@@ -341,8 +354,14 @@
   
     
     
+      
+  
+  
+  
+    
+    
       <li class="md-tabs__item">
-        <a href="../../../Additional%20modules/" class="md-tabs__link">
+        <a href="../../../Additional%20modules/animations/" class="md-tabs__link">
           
   
     
@@ -351,6 +370,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -463,7 +485,7 @@
         
   
   
-    <a href="../../../Usage/prettyqt/docs/api_guidelines/general/" class="md-nav__link">
+    <a href="../../../Usage/general/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -508,7 +530,7 @@
         
   
   
-    <a href="../../../Features/prettyqt/docs/features/proxies/" class="md-nav__link">
+    <a href="../../../Features/proxies/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -536,10 +558,6 @@
   
     
     
-      
-        
-          
-        
       
         
       
@@ -605,24 +623,16 @@
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
-              
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
     Qt-based modules
   </span>
   
 
-            </a>
-            
-              <label class="md-nav__link " for="__nav_4">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
@@ -630,8 +640,6 @@
             Qt-based modules
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
             
               
                 
@@ -3069,7 +3077,7 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_28" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_27" checked>
         
           
           
@@ -3084,14 +3092,14 @@
 
             </a>
             
-              <label class="md-nav__link " for="__nav_4_28">
+              <label class="md-nav__link " for="__nav_4_27">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_28_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4_28">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_27_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_27">
             <span class="md-nav__icon md-icon"></span>
             widgets
           </label>
@@ -3105,11 +3113,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../LineEdit/" class="md-nav__link">
+      <a href="../GraphicsObjectMixin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    LineEdit
+    GraphicsObjectMixin
   </span>
   
 
@@ -3125,11 +3133,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../GraphicsOpacityEffect/" class="md-nav__link">
+      <a href="../ToolBar/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    GraphicsOpacityEffect
+    ToolBar
   </span>
   
 
@@ -3145,11 +3153,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../WidgetAction/" class="md-nav__link">
+      <a href="../GridLayout/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    WidgetAction
+    GridLayout
   </span>
   
 
@@ -3165,11 +3173,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../HeaderView/" class="md-nav__link">
+      <a href="../StyleOption/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    HeaderView
+    StyleOption
   </span>
   
 
@@ -3185,11 +3193,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../Completer/" class="md-nav__link">
+      <a href="../Application/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Completer
+    Application
   </span>
   
 
@@ -3205,11 +3213,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../CommonStyleMixin/" class="md-nav__link">
+      <a href="../StylePainter/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    CommonStyleMixin
+    StylePainter
   </span>
   
 
@@ -3225,11 +3233,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../SpacerItem/" class="md-nav__link">
+      <a href="../GraphicsLayoutItem/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    SpacerItem
+    GraphicsLayoutItem
   </span>
   
 
@@ -3245,11 +3253,91 @@
   
   
     <li class="md-nav__item">
-      <a href="../AbstractScrollAreaMixin/" class="md-nav__link">
+      <a href="../GestureMixin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    AbstractScrollAreaMixin
+    GestureMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsPolygonItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsPolygonItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AbstractButtonMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AbstractButtonMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextEdit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TextEdit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ColumnView/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ColumnView
   </span>
   
 
@@ -3285,11 +3373,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../ToolTip/" class="md-nav__link">
+      <a href="../AbstractItemView/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    ToolTip
+    AbstractItemView
   </span>
   
 
@@ -3305,11 +3393,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../DateTimeEdit/" class="md-nav__link">
+      <a href="../MdiSubWindow/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    DateTimeEdit
+    MdiSubWindow
   </span>
   
 
@@ -3325,11 +3413,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../Wizard/" class="md-nav__link">
+      <a href="../TreeViewMixin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Wizard
+    TreeViewMixin
   </span>
   
 
@@ -3345,11 +3433,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../StyleOptionProgressBar/" class="md-nav__link">
+      <a href="../StyleOptionHeader/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    StyleOptionProgressBar
+    StyleOptionHeader
   </span>
   
 
@@ -3365,11 +3453,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../StyleOptionToolButton/" class="md-nav__link">
+      <a href="../GraphicsTransformMixin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    StyleOptionToolButton
+    GraphicsTransformMixin
   </span>
   
 
@@ -3385,11 +3473,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../ComboBoxMixin/" class="md-nav__link">
+      <a href="../StyleOptionSlider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    ComboBoxMixin
+    StyleOptionSlider
   </span>
   
 
@@ -3405,11 +3493,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../Layout/" class="md-nav__link">
+      <a href="../SpinBox/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Layout
+    SpinBox
   </span>
   
 
@@ -3425,11 +3513,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../GraphicsTransform/" class="md-nav__link">
+      <a href="../ListView/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    GraphicsTransform
+    ListView
   </span>
   
 
@@ -3445,11 +3533,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../GraphicsRectItem/" class="md-nav__link">
+      <a href="../TreeView/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    GraphicsRectItem
+    TreeView
   </span>
   
 
@@ -3465,31 +3553,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../ComboBox/" class="md-nav__link">
+      <a href="../StyleOptionButton/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    ComboBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../LayoutMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    LayoutMixin
+    StyleOptionButton
   </span>
   
 
@@ -3525,11 +3593,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../StyleOptionToolBar/" class="md-nav__link">
+      <a href="../MenuBar/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    StyleOptionToolBar
+    MenuBar
   </span>
   
 
@@ -3545,11 +3613,2251 @@
   
   
     <li class="md-nav__item">
-      <a href="../VBoxLayout/" class="md-nav__link">
+      <a href="../TextEditMixin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    VBoxLayout
+    TextEditMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ProgressDialog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ProgressDialog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SizeGrip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SizeGrip
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionFocusRect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionFocusRect
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleFactory/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleFactory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AbstractGraphicsShapeItemMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AbstractGraphicsShapeItemMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TableViewMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TableViewMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TapGesture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TapGesture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsWidgetMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsWidgetMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Slider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Slider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DateTimeEditMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DateTimeEditMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ListViewMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ListViewMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FontDialog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FontDialog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionFrame/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionFrame
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsItemMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsItemMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AbstractItemDelegateMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AbstractItemDelegateMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Wizard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wizard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsLineItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsLineItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Dialog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dialog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ItemDelegate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ItemDelegate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsEffect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsEffect
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Frame/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Frame
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AbstractSlider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AbstractSlider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Label/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Label
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LayoutItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LayoutItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PlainTextDocumentLayout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PlainTextDocumentLayout
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsDropShadowEffect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsDropShadowEffect
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionSizeGrip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionSizeGrip
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AbstractGraphicsShapeItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AbstractGraphicsShapeItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Menu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Menu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TableWidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TableWidget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Splitter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Splitter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsPathItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsPathItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LineEdit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LineEdit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionToolButton/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionToolButton
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FileDialog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FileDialog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ProxyStyle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ProxyStyle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionGraphicsItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionGraphicsItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RadioButton/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RadioButton
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ScrollerProperties/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ScrollerProperties
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WizardPage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WizardPage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsLinearLayout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsLinearLayout
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MessageBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MessageBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Style/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Style
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MdiArea/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MdiArea
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PlainTextEditMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PlainTextEditMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HBoxLayout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HBoxLayout
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsScene/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsScene
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HeaderView/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HeaderView
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FormLayout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FormLayout
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PanGesture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PanGesture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionRubberBand/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionRubberBand
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionGroupBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionGroupBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsLayoutMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsLayoutMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyledItemDelegate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyledItemDelegate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TapAndHoldGesture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TapAndHoldGesture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsRectItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsRectItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AbstractItemViewMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AbstractItemViewMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Dial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dial
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionTab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionTab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ComboBoxMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ComboBoxMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsItemGroup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsItemGroup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LayoutItemMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LayoutItemMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StackedWidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StackedWidget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionDockWidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionDockWidget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FileIconProvider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FileIconProvider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ListWidgetItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ListWidgetItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ToolBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ToolBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsViewMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsViewMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DoubleSpinBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DoubleSpinBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ScrollArea/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ScrollArea
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TreeWidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TreeWidget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PinchGesture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PinchGesture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CommonStyle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CommonStyle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionTitleBar/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionTitleBar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsLayout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsLayout
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BoxLayout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BoxLayout
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsWidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsWidget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ScrollBar/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ScrollBar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../InputDialog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    InputDialog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionTabBarBase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionTabBarBase
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsObject/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsObject
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TableWidgetItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TableWidgetItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UndoView/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    UndoView
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionMenuItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionMenuItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionSpinBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionSpinBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DockWidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DockWidget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PlainTextEdit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PlainTextEdit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsView/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsView
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AbstractSliderMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AbstractSliderMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StatusBar/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StatusBar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SystemTrayIcon/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemTrayIcon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsColorizeEffect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsColorizeEffect
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PushButtonMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PushButtonMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WidgetAction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WidgetAction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LCDNumber/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LCDNumber
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsEffectMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsEffectMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsTransform/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsTransform
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TreeWidgetItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TreeWidgetItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ColorDialog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ColorDialog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CommonStyleMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CommonStyleMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionTabWidgetFrame/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionTabWidgetFrame
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AbstractSpinBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AbstractSpinBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WidgetItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WidgetItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gesture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gesture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsAnchorLayout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsAnchorLayout
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TabBar/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TabBar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextBrowser/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TextBrowser
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AbstractItemDelegate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AbstractItemDelegate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Widget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Widget
   </span>
   
 
@@ -3691,3431 +5999,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../GraphicsLayoutItemMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsLayoutItemMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SpinBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SpinBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ColumnView/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ColumnView
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CommonStyle/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    CommonStyle
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FormLayout/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    FormLayout
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsSimpleTextItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsSimpleTextItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionDockWidget/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionDockWidget
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../DialogMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    DialogMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../UndoView/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    UndoView
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionToolBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionToolBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StylePainter/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StylePainter
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FontComboBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    FontComboBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TableWidgetItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TableWidgetItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Application/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Application
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SplitterHandle/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SplitterHandle
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../RubberBand/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    RubberBand
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsEllipseItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsEllipseItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FileSystemModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    FileSystemModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SplashScreen/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SplashScreen
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TreeWidget/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TreeWidget
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionViewItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionViewItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TableViewMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TableViewMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StackedWidget/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StackedWidget
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AbstractSpinBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AbstractSpinBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsGridLayout/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsGridLayout
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../DoubleSpinBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    DoubleSpinBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StackedLayout/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StackedLayout
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TextBrowser/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TextBrowser
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsPathItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsPathItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionFocusRect/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionFocusRect
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../DockWidget/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    DockWidget
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SizeGrip/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SizeGrip
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../WidgetMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    WidgetMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsLayoutMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsLayoutMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleFactory/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleFactory
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TextEdit/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TextEdit
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AbstractItemDelegate/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AbstractItemDelegate
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ScrollBar/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ScrollBar
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsBlurEffect/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsBlurEffect
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ProgressBar/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ProgressBar
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ProgressDialog/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ProgressDialog
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsLayout/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsLayout
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionGroupBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionGroupBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CommandLinkButton/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    CommandLinkButton
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TableView/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TableView
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Widget/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Widget
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GestureMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GestureMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsItemGroup/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsItemGroup
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../KeySequenceEdit/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    KeySequenceEdit
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GridLayout/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GridLayout
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ListViewMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ListViewMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsPixmapItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsPixmapItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionFrame/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionFrame
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Menu/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Menu
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Splitter/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Splitter
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FrameMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    FrameMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsViewMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsViewMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../PushButtonMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    PushButtonMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ScrollerProperties/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ScrollerProperties
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../PanGesture/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    PanGesture
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsRotation/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsRotation
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsDropShadowEffect/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsDropShadowEffect
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ErrorMessage/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ErrorMessage
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FontDialog/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    FontDialog
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ListWidget/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ListWidget
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsWidgetMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsWidgetMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionSizeGrip/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionSizeGrip
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ListWidgetItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ListWidgetItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../WidgetItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    WidgetItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ScrollArea/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ScrollArea
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsWidget/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsWidget
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StatusBar/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StatusBar
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TextEditMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TextEditMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ListView/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ListView
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ToolBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ToolBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsScene/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsScene
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionGraphicsItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionGraphicsItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../BoxLayout/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    BoxLayout
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../DataWidgetMapper/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    DataWidgetMapper
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Frame/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Frame
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsPolygonItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsPolygonItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../PushButton/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    PushButton
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TapAndHoldGesture/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TapAndHoldGesture
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsScale/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsScale
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsView/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsView
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Slider/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Slider
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CheckBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    CheckBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ColorDialog/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ColorDialog
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TreeViewMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TreeViewMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionHeader/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionHeader
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionSlider/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionSlider
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TreeWidgetItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TreeWidgetItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../LayoutItemMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    LayoutItemMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ItemEditorCreatorBase/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ItemEditorCreatorBase
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsTransformMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsTransformMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsLineItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsLineItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FileIconProvider/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    FileIconProvider
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../DateTimeEditMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    DateTimeEditMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../PlainTextEdit/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    PlainTextEdit
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TreeWidgetItemIterator/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TreeWidgetItemIterator
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsLayoutItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsLayoutItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionMenuItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionMenuItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Style/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Style
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../PlainTextDocumentLayout/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    PlainTextDocumentLayout
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FocusFrame/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    FocusFrame
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsEffectMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsEffectMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../DialogButtonBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    DialogButtonBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../MdiArea/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    MdiArea
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ProxyStyle/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ProxyStyle
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsItemMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsItemMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../WhatsThis/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    WhatsThis
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../InputDialog/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    InputDialog
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TreeView/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TreeView
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionRubberBand/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionRubberBand
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionSpinBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionSpinBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../MainWindow/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    MainWindow
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TableWidget/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TableWidget
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AbstractSliderMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AbstractSliderMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ItemEditorFactory/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ItemEditorFactory
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AbstractButtonMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AbstractButtonMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsObject/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsObject
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Dial/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Dial
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../DateEdit/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     DateEdit
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOption/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOption
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionTab/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionTab
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ToolButton/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ToolButton
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ButtonGroup/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ButtonGroup
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Gesture/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Gesture
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AbstractScrollArea/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AbstractScrollArea
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsLinearLayout/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsLinearLayout
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../MenuBar/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    MenuBar
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ItemDelegate/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ItemDelegate
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionButton/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionButton
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TabWidget/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TabWidget
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../LCDNumber/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    LCDNumber
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsProxyWidget/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsProxyWidget
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionComboBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionComboBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Label/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Label
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyledItemDelegate/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyledItemDelegate
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AbstractSlider/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AbstractSlider
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SwipeGesture/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SwipeGesture
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AbstractItemView/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AbstractItemView
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AbstractGraphicsShapeItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AbstractGraphicsShapeItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TimeEdit/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TimeEdit
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AbstractItemDelegateMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AbstractItemDelegateMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../PlainTextEditMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    PlainTextEditMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SizePolicy/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SizePolicy
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AbstractGraphicsShapeItemMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AbstractGraphicsShapeItemMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionTabBarBase/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionTabBarBase
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TabBar/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TabBar
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FileDialog/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    FileDialog
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TapGesture/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TapGesture
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AbstractButton/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AbstractButton
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsEffect/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsEffect
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Dialog/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Dialog
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../HBoxLayout/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    HBoxLayout
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../WizardPage/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    WizardPage
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AbstractItemViewMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AbstractItemViewMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionComplexMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionComplexMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../MessageBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    MessageBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GroupBox/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GroupBox
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsAnchorLayout/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsAnchorLayout
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StyleOptionTitleBar/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StyleOptionTitleBar
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../RadioButton/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    RadioButton
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../LayoutItem/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    LayoutItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../GraphicsObjectMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GraphicsObjectMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ToolBar/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ToolBar
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CalendarWidget/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    CalendarWidget
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SystemTrayIcon/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SystemTrayIcon
   </span>
   
 
@@ -7151,11 +6039,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../GraphicsColorizeEffect/" class="md-nav__link">
+      <a href="../SwipeGesture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    GraphicsColorizeEffect
+    SwipeGesture
   </span>
   
 
@@ -7171,11 +6059,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../StyleOptionTabWidgetFrame/" class="md-nav__link">
+      <a href="../StyleOptionToolBar/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    StyleOptionTabWidgetFrame
+    StyleOptionToolBar
   </span>
   
 
@@ -7191,11 +6079,851 @@
   
   
     <li class="md-nav__item">
-      <a href="../MdiSubWindow/" class="md-nav__link">
+      <a href="../AbstractButton/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    MdiSubWindow
+    AbstractButton
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PushButton/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PushButton
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ToolTip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ToolTip
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SplashScreen/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SplashScreen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsSimpleTextItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsSimpleTextItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FontComboBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FontComboBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsPixmapItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsPixmapItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ListWidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ListWidget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ButtonGroup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ButtonGroup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionToolBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionToolBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsRotation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsRotation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TabWidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TabWidget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CalendarWidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CalendarWidget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TreeWidgetItemIterator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TreeWidgetItemIterator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataWidgetMapper/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataWidgetMapper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionProgressBar/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionProgressBar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AbstractScrollArea/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AbstractScrollArea
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ErrorMessage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ErrorMessage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CheckBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CheckBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Completer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Completer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VBoxLayout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VBoxLayout
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FrameMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FrameMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsBlurEffect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsBlurEffect
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WhatsThis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WhatsThis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TimeEdit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TimeEdit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Layout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Layout
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ItemEditorCreatorBase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ItemEditorCreatorBase
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsGridLayout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsGridLayout
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AbstractScrollAreaMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AbstractScrollAreaMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DialogButtonBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DialogButtonBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CommandLinkButton/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CommandLinkButton
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SpacerItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SpacerItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsEllipseItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsEllipseItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../KeySequenceEdit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    KeySequenceEdit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RubberBand/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RubberBand
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DateTimeEdit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DateTimeEdit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LayoutMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LayoutMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GroupBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GroupBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SizePolicy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SizePolicy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionViewItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionViewItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsLayoutItemMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsLayoutItemMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MainWindow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MainWindow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ProgressBar/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ProgressBar
   </span>
   
 
@@ -7231,11 +6959,291 @@
   
   
     <li class="md-nav__item">
-      <a href="../PinchGesture/" class="md-nav__link">
+      <a href="../GraphicsProxyWidget/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    PinchGesture
+    GraphicsProxyWidget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FileSystemModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FileSystemModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WidgetMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WidgetMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StackedLayout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StackedLayout
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionComplexMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionComplexMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsScale/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsScale
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ToolButton/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ToolButton
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SplitterHandle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SplitterHandle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ItemEditorFactory/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ItemEditorFactory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StyleOptionComboBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StyleOptionComboBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DialogMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DialogMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FocusFrame/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FocusFrame
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ComboBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ComboBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TableView/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TableView
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GraphicsOpacityEffect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GraphicsOpacityEffect
   </span>
   
 
@@ -7267,10 +7275,6 @@
   
     
     
-      
-        
-          
-        
       
         
       
@@ -7316,7 +7320,10 @@
         
   
   
-    <a href="../../../Additional%20modules/" class="md-nav__link">
+    
+  
+  
+    <a href="../../../Additional%20modules/animations/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -7328,6 +7335,8 @@
         <span class="md-nav__icon md-icon"></span>
       
     </a>
+  
+
   
 
       
@@ -7548,18 +7557,17 @@
 </tbody>
 </table>
 <h2 id="inheritance-diagram">⋔ Inheritance diagram</h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>graph TD
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  2383882757072[&quot;widgets.AbstractSpinBoxMixin&quot;]
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  2383882750240[&quot;widgets.WidgetMixin&quot;]
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  2383886120864[&quot;core.ObjectMixin&quot;]
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  140724454067696[&quot;builtins.object&quot;]
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  2383886589664[&quot;gui.PaintDeviceMixin&quot;]
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  2383882750240 --&gt; 2383882757072
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  2383886120864 --&gt; 2383882750240
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  140724454067696 --&gt; 2383886120864
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  2383886589664 --&gt; 2383882750240
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  140724454067696 --&gt; 2383886589664
-</span></code></pre></div>
+<pre class="mermaid"><code>graph TD
+  1473293702880["widgets.AbstractSpinBoxMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473293688240 --&gt; 1473293702880
+  1473299815024 --&gt; 1473293688240
+  140713234304496 --&gt; 1473299815024
+  1473245548480 --&gt; 1473293688240
+  140713234304496 --&gt; 1473245548480</code></pre>
 <h2 id="docstrings">🛈 DocStrings</h2>
 
 
@@ -8099,7 +8107,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../VBoxLayout/" class="md-footer__link md-footer__link--prev" aria-label="Previous: VBoxLayout" rel="prev">
+          <a href="../Widget/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Widget" rel="prev">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -8109,20 +8117,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                VBoxLayout
+                Widget
               </div>
             </div>
           </a>
         
         
           
-          <a href="../GraphicsLayoutItemMixin/" class="md-footer__link md-footer__link--next" aria-label="Next: GraphicsLayoutItemMixin" rel="next">
+          <a href="../DateEdit/" class="md-footer__link md-footer__link--next" aria-label="Next: DateEdit" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                GraphicsLayoutItemMixin
+                DateEdit
               </div>
             </div>
             <div class="md-footer__button md-icon">

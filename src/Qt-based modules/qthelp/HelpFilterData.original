@@ -1,0 +1,23 @@
+## Base classes
+
+| Name                                                                                                                                  | Children                                              | Inherits                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[HelpFilterDataMixin](HelpFilterDataMixin.md)</font>**<br>*<font size='1'>prettyqt.qthelp.helpfilterdata</font>*<br> | <ul><li>[HelpFilterData](HelpFilterData.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572365744["qthelp.HelpFilterData"]
+  1473572314992["qthelp.HelpFilterDataMixin"]
+  140713234304496["builtins.object"]
+  1473572314992 --> 1473572365744
+  140713234304496 --> 1473572314992
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qthelp.helpfilterdata.HelpFilterData
+    options:
+      show_root_toc_entry: False

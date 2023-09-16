@@ -1,0 +1,42 @@
+Qt Base Class: [QRadialGradient](https://doc.qt.io/qtforpython/PySide6/QtGui/QRadialGradient.html#PySide6.QtGui.PySide6.QtGui.QRadialGradient)
+
+Signature: `QRadialGradient(self) -> None
+QRadialGradient(self, QRadialGradient: PySide6.QtGui.QRadialGradient) -> None
+QRadialGradient(self, center: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], centerRadius: float, focalPoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], focalRadius: float) -> None
+QRadialGradient(self, center: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], radius: float) -> None
+QRadialGradient(self, center: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], radius: float, focalPoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element]) -> None
+QRadialGradient(self, cx: float, cy: float, centerRadius: float, fx: float, fy: float, focalRadius: float) -> None
+QRadialGradient(self, cx: float, cy: float, radius: float) -> None
+QRadialGradient(self, cx: float, cy: float, radius: float, fx: float, fy: float) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                    | Children                                                                                                                                                                        | Inherits                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GradientMixin](GradientMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.gradient</font>*<br>                                                                                                                        | <ul><li>[Gradient](Gradient.md)</li><li>[LinearGradient](LinearGradient.md)</li><li>[RadialGradient](RadialGradient.md)</li><li>[ConicalGradient](ConicalGradient.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                             |
+| **<font size='4'>[QRadialGradient](https://doc.qt.io/qtforpython/PySide6/QtGui/QRadialGradient.html#PySide6.QtGui.PySide6.QtGui.QRadialGradient)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QRadialGradient\(self\) \-\> None | <ul><li>[RadialGradient](RadialGradient.md)</li></ul>                                                                                                                           | <ul><li>[QGradient](https://doc.qt.io/qtforpython/PySide6/QtGui/QGradient.html#PySide6.QtGui.PySide6.QtGui.QGradient)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245601184["gui.RadialGradient"]
+  1473245598256["gui.GradientMixin"]
+  140713234304496["builtins.object"]
+  1473300147760["QtGui.QRadialGradient"]
+  1473300122384["QtGui.QGradient"]
+  1473291690208["Shiboken.Object"]
+  1473245598256 --> 1473245601184
+  140713234304496 --> 1473245598256
+  1473300147760 --> 1473245601184
+  1473300122384 --> 1473300147760
+  1473291690208 --> 1473300122384
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.radialgradient.RadialGradient
+    options:
+      show_root_toc_entry: False

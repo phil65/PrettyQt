@@ -1,0 +1,37 @@
+## Subclasses
+
+| Class                                                     | Module                                     | Description |
+| --------------------------------------------------------- | ------------------------------------------ | ----------- |
+| [StyleOption](StyleOption.md)                             | prettyqt.widgets.styleoption               |             |
+| [StyleOptionButton](StyleOptionButton.md)                 | prettyqt.widgets.styleoptionbutton         |             |
+| [StyleOptionComplexMixin](StyleOptionComplexMixin.md)     | prettyqt.widgets.styleoptioncomplex        |             |
+| [StyleOptionDockWidget](StyleOptionDockWidget.md)         | prettyqt.widgets.styleoptiondockwidget     |             |
+| [StyleOptionFocusRect](StyleOptionFocusRect.md)           | prettyqt.widgets.styleoptionfocusrect      |             |
+| [StyleOptionFrame](StyleOptionFrame.md)                   | prettyqt.widgets.styleoptionframe          |             |
+| [StyleOptionGraphicsItem](StyleOptionGraphicsItem.md)     | prettyqt.widgets.styleoptiongraphicsitem   |             |
+| [StyleOptionHeader](StyleOptionHeader.md)                 | prettyqt.widgets.styleoptionheader         |             |
+| [StyleOptionMenuItem](StyleOptionMenuItem.md)             | prettyqt.widgets.styleoptionmenuitem       |             |
+| [StyleOptionProgressBar](StyleOptionProgressBar.md)       | prettyqt.widgets.styleoptionprogressbar    |             |
+| [StyleOptionRubberBand](StyleOptionRubberBand.md)         | prettyqt.widgets.styleoptionrubberband     |             |
+| [StyleOptionTab](StyleOptionTab.md)                       | prettyqt.widgets.styleoptiontab            |             |
+| [StyleOptionTabBarBase](StyleOptionTabBarBase.md)         | prettyqt.widgets.styleoptiontabbarbase     |             |
+| [StyleOptionTabWidgetFrame](StyleOptionTabWidgetFrame.md) | prettyqt.widgets.styleoptiontabwidgetframe |             |
+| [StyleOptionToolBar](StyleOptionToolBar.md)               | prettyqt.widgets.styleoptiontoolbar        |             |
+| [StyleOptionToolBox](StyleOptionToolBox.md)               | prettyqt.widgets.styleoptiontoolbox        |             |
+| [StyleOptionViewItem](StyleOptionViewItem.md)             | prettyqt.widgets.styleoptionviewitem       |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296150480["widgets.StyleOptionMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473296150480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.styleoption.StyleOptionMixin
+    options:
+      show_root_toc_entry: False

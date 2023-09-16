@@ -1,0 +1,23 @@
+## Base classes
+
+| Name                                                                                                                 | Children                                                                                            | Inherits                                                                            |
+| -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[BaseResolver](BaseResolver.md)</font>**<br>*<font size='1'>prettyqt.utils.baseresolver</font>*<br> | <ul><li>[NodeResolver](NodeResolver.md)</li><li>[ItemModelResolver](ItemModelResolver.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473290762816["itemmodels.ItemModelResolver"]
+  1473299906768["utils.BaseResolver"]
+  140713234304496["builtins.object"]
+  1473299906768 --> 1473290762816
+  140713234304496 --> 1473299906768
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.itemmodels.itemmodelresolver.ItemModelResolver
+    options:
+      show_root_toc_entry: False

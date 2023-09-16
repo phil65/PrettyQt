@@ -1,0 +1,33 @@
+## Base classes
+
+| Name                                                                                                                                                                     | Children                                                                                                                                                                                                                | Inherits                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **<font size='4'>[AbstractAnimationMixin](AbstractAnimationMixin.md)</font>**<br>*<font size='1'>prettyqt.core.abstractanimation</font>*<br>The base of all animations\. | <ul><li>[AbstractAnimation](AbstractAnimation.md)</li><li>[VariantAnimationMixin](VariantAnimationMixin.md)</li><li>[PauseAnimation](PauseAnimation.md)</li><li>[AnimationGroupMixin](AnimationGroupMixin.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul> |
+
+
+## Subclasses
+
+| Class                                     | Module                          | Description |
+| ----------------------------------------- | ------------------------------- | ----------- |
+| [VariantAnimation](VariantAnimation.md)   | prettyqt.core.variantanimation  |             |
+| [PropertyAnimation](PropertyAnimation.md) | prettyqt.core.propertyanimation |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299835520["core.VariantAnimationMixin"]
+  1473299791600["core.AbstractAnimationMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473299791600 --> 1473299835520
+  1473299815024 --> 1473299791600
+  140713234304496 --> 1473299815024
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.variantanimation.VariantAnimationMixin
+    options:
+      show_root_toc_entry: False

@@ -6,21 +6,23 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Python wrapper for PySide6 / PyQt6.">
+        <meta name="description" content="A pythonic layer on top of PyQt6 / PySide6">
       
+      
+        <meta name="author" content="philipptemminghoff@googlemail.com">
       
       
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/Additional%20modules/itemmodels/ImportlibTreeModel/">
       
       
-        <link rel="prev" href="../AppearanceProxyModel/">
+        <link rel="prev" href="../ParentClassTreeModel/">
       
       
-        <link rel="next" href="../SliceFilterProxyModel/">
+        <link rel="next" href="../RegexMatchesModel/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.7">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.3.1">
     
     
       
@@ -54,9 +56,9 @@
     
       <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../assets/mknodes_nodes.css">
-    
       <link rel="stylesheet" href="../../../assets/mknodes_theme.css">
+    
+      <link rel="stylesheet" href="../../../assets/mknodes_nodes.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -109,21 +111,21 @@
           <div class="md-banner__inner md-grid md-typeset">
             
             
-<body><a href='https://github.com/blambright/qstylizer'><svg xmlns="http://www.w3.org/2000/svg" width="105" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_1">        <rect width="105" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_1)">        <path fill="#555" d="M0 0h64v20H0z"/>        <path fill="#4051b5" d="M64 0h41v20H64z"/>        <path fill="url(#b)" d="M0 0h105v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="33.0" y="15" fill="#010101" fill-opacity=".3">qstylizer</text>        <text x="32.0" y="14">qstylizer</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="85.5" y="15" fill="#010101" fill-opacity=".3">0.2.2</text>        <text x="84.5" y="14">0.2.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://www.pyside.org'><svg xmlns="http://www.w3.org/2000/svg" width="97" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_2">        <rect width="97" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_2)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h41v20H56z"/>        <path fill="url(#b)" d="M0 0h97v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">PySide6</text>        <text x="28.0" y="14">PySide6</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="77.5" y="15" fill="#010101" fill-opacity=".3">6.5.2</text>        <text x="76.5" y="14">6.5.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://typing-extensions.readthedocs.io/'><svg xmlns="http://www.w3.org/2000/svg" width="160" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_3">        <rect width="160" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_3)">        <path fill="#555" d="M0 0h119v20H0z"/>        <path fill="#4051b5" d="M119 0h41v20H119z"/>        <path fill="url(#b)" d="M0 0h160v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="60.5" y="15" fill="#010101" fill-opacity=".3">typing_extensions</text>        <text x="59.5" y="14">typing_extensions</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="140.5" y="15" fill="#010101" fill-opacity=".3">4.7.1</text>        <text x="139.5" y="14">4.7.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://www.numpy.org'><svg xmlns="http://www.w3.org/2000/svg" width="96" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_4">        <rect width="96" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_4)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h48v20H48z"/>        <path fill="url(#b)" d="M0 0h96v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">numpy</text>        <text x="24.0" y="14">numpy</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="73.0" y="15" fill="#010101" fill-opacity=".3">1.25.2</text>        <text x="72.0" y="14">1.25.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://github.com/mhammond/pywin32'><svg xmlns="http://www.w3.org/2000/svg" width="87" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_5">        <rect width="87" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_5)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h31v20H56z"/>        <path fill="url(#b)" d="M0 0h87v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">pywin32</text>        <text x="28.0" y="14">pywin32</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="72.5" y="15" fill="#010101" fill-opacity=".3">306</text>        <text x="71.5" y="14">306</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://github.com/ijl/orjson'><svg xmlns="http://www.w3.org/2000/svg" width="89" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_6">        <rect width="89" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_6)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h41v20H48z"/>        <path fill="url(#b)" d="M0 0h89v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">orjson</text>        <text x="24.0" y="14">orjson</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.5" y="15" fill="#010101" fill-opacity=".3">3.9.5</text>        <text x="68.5" y="14">3.9.5</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://github.com/enthought/comtypes'><svg xmlns="http://www.w3.org/2000/svg" width="108" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_7">        <rect width="108" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_7)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h41v20H67z"/>        <path fill="url(#b)" d="M0 0h108v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">comtypes</text>        <text x="33.5" y="14">comtypes</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="88.5" y="15" fill="#010101" fill-opacity=".3">1.2.0</text>        <text x="87.5" y="14">1.2.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://bidict.readthedocs.io'><svg xmlns="http://www.w3.org/2000/svg" width="92" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_8">        <rect width="92" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_8)">        <path fill="#555" d="M0 0h44v20H0z"/>        <path fill="#4051b5" d="M44 0h48v20H44z"/>        <path fill="url(#b)" d="M0 0h92v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="23.0" y="15" fill="#010101" fill-opacity=".3">bidict</text>        <text x="22.0" y="14">bidict</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.0" y="15" fill="#010101" fill-opacity=".3">0.22.1</text>        <text x="68.0" y="14">0.22.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://python-pillow.org'><svg xmlns="http://www.w3.org/2000/svg" width="91" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_9">        <rect width="91" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_9)">        <path fill="#555" d="M0 0h43v20H0z"/>        <path fill="#4051b5" d="M43 0h48v20H43z"/>        <path fill="url(#b)" d="M0 0h91v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="22.5" y="15" fill="#010101" fill-opacity=".3">Pillow</text>        <text x="21.5" y="14">Pillow</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="68.0" y="15" fill="#010101" fill-opacity=".3">10.0.0</text>        <text x="67.0" y="14">10.0.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://pygments.org'><svg xmlns="http://www.w3.org/2000/svg" width="115" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_10">        <rect width="115" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_10)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h48v20H67z"/>        <path fill="url(#b)" d="M0 0h115v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">Pygments</text>        <text x="33.5" y="14">Pygments</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="92.0" y="15" fill="#010101" fill-opacity=".3">2.16.1</text>        <text x="91.0" y="14">2.16.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://ipython.org'><svg xmlns="http://www.w3.org/2000/svg" width="102" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_11">        <rect width="102" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_11)">        <path fill="#555" d="M0 0h54v20H0z"/>        <path fill="#4051b5" d="M54 0h48v20H54z"/>        <path fill="url(#b)" d="M0 0h102v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="28.0" y="15" fill="#010101" fill-opacity=".3">ipython</text>        <text x="27.0" y="14">ipython</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="79.0" y="15" fill="#010101" fill-opacity=".3">8.15.0</text>        <text x="78.0" y="14">8.15.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='http://github.com/fsspec/filesystem_spec'><svg xmlns="http://www.w3.org/2000/svg" width="112" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_12">        <rect width="112" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_12)">        <path fill="#555" d="M0 0h50v20H0z"/>        <path fill="#4051b5" d="M50 0h62v20H50z"/>        <path fill="url(#b)" d="M0 0h112v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="26.0" y="15" fill="#010101" fill-opacity=".3">fsspec</text>        <text x="25.0" y="14">fsspec</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="82.0" y="15" fill="#010101" fill-opacity=".3">2023.9.0</text>        <text x="81.0" y="14">2023.9.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://lxml.de/'><svg xmlns="http://www.w3.org/2000/svg" width="76" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_13">        <rect width="76" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_13)">        <path fill="#555" d="M0 0h35v20H0z"/>        <path fill="#4051b5" d="M35 0h41v20H35z"/>        <path fill="url(#b)" d="M0 0h76v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="18.5" y="15" fill="#010101" fill-opacity=".3">lxml</text>        <text x="17.5" y="14">lxml</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="56.5" y="15" fill="#010101" fill-opacity=".3">4.9.3</text>        <text x="55.5" y="14">4.9.3</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='http://jupyter.org'><svg xmlns="http://www.w3.org/2000/svg" width="109" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_14">        <rect width="109" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_14)">        <path fill="#555" d="M0 0h68v20H0z"/>        <path fill="#4051b5" d="M68 0h41v20H68z"/>        <path fill="url(#b)" d="M0 0h109v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="35.0" y="15" fill="#010101" fill-opacity=".3">qtconsole</text>        <text x="34.0" y="14">qtconsole</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="89.5" y="15" fill="#010101" fill-opacity=".3">5.4.4</text>        <text x="88.5" y="14">5.4.4</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://www.attrs.org/'><svg xmlns="http://www.w3.org/2000/svg" width="88" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_15">        <rect width="88" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_15)">        <path fill="#555" d="M0 0h40v20H0z"/>        <path fill="#4051b5" d="M40 0h48v20H40z"/>        <path fill="url(#b)" d="M0 0h88v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="21.0" y="15" fill="#010101" fill-opacity=".3">attrs</text>        <text x="20.0" y="14">attrs</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="65.0" y="15" fill="#010101" fill-opacity=".3">23.1.0</text>        <text x="64.0" y="14">23.1.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://python-pillow.org'><svg xmlns="http://www.w3.org/2000/svg" width="91" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_1">        <rect width="91" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_1)">        <path fill="#555" d="M0 0h43v20H0z"/>        <path fill="#4051b5" d="M43 0h48v20H43z"/>        <path fill="url(#b)" d="M0 0h91v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="22.5" y="15" fill="#010101" fill-opacity=".3">Pillow</text>        <text x="21.5" y="14">Pillow</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="68.0" y="15" fill="#010101" fill-opacity=".3">10.0.1</text>        <text x="67.0" y="14">10.0.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/ijl/orjson'><svg xmlns="http://www.w3.org/2000/svg" width="89" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_2">        <rect width="89" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_2)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h41v20H48z"/>        <path fill="url(#b)" d="M0 0h89v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">orjson</text>        <text x="24.0" y="14">orjson</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.5" y="15" fill="#010101" fill-opacity=".3">3.9.7</text>        <text x="68.5" y="14">3.9.7</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://pygments.org'><svg xmlns="http://www.w3.org/2000/svg" width="115" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_3">        <rect width="115" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_3)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h48v20H67z"/>        <path fill="url(#b)" d="M0 0h115v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">Pygments</text>        <text x="33.5" y="14">Pygments</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="92.0" y="15" fill="#010101" fill-opacity=".3">2.16.1</text>        <text x="91.0" y="14">2.16.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://www.pyside.org'><svg xmlns="http://www.w3.org/2000/svg" width="97" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_4">        <rect width="97" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_4)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h41v20H56z"/>        <path fill="url(#b)" d="M0 0h97v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">PySide6</text>        <text x="28.0" y="14">PySide6</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="77.5" y="15" fill="#010101" fill-opacity=".3">6.5.2</text>        <text x="76.5" y="14">6.5.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='http://github.com/fsspec/filesystem_spec'><svg xmlns="http://www.w3.org/2000/svg" width="112" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_5">        <rect width="112" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_5)">        <path fill="#555" d="M0 0h50v20H0z"/>        <path fill="#4051b5" d="M50 0h62v20H50z"/>        <path fill="url(#b)" d="M0 0h112v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="26.0" y="15" fill="#010101" fill-opacity=".3">fsspec</text>        <text x="25.0" y="14">fsspec</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="82.0" y="15" fill="#010101" fill-opacity=".3">2023.9.1</text>        <text x="81.0" y="14">2023.9.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/enthought/comtypes'><svg xmlns="http://www.w3.org/2000/svg" width="108" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_6">        <rect width="108" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_6)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h41v20H67z"/>        <path fill="url(#b)" d="M0 0h108v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">comtypes</text>        <text x="33.5" y="14">comtypes</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="88.5" y="15" fill="#010101" fill-opacity=".3">1.2.0</text>        <text x="87.5" y="14">1.2.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://www.attrs.org/'><svg xmlns="http://www.w3.org/2000/svg" width="88" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_7">        <rect width="88" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_7)">        <path fill="#555" d="M0 0h40v20H0z"/>        <path fill="#4051b5" d="M40 0h48v20H40z"/>        <path fill="url(#b)" d="M0 0h88v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="21.0" y="15" fill="#010101" fill-opacity=".3">attrs</text>        <text x="20.0" y="14">attrs</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="65.0" y="15" fill="#010101" fill-opacity=".3">23.1.0</text>        <text x="64.0" y="14">23.1.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://www.numpy.org'><svg xmlns="http://www.w3.org/2000/svg" width="96" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_8">        <rect width="96" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_8)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h48v20H48z"/>        <path fill="url(#b)" d="M0 0h96v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">numpy</text>        <text x="24.0" y="14">numpy</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="73.0" y="15" fill="#010101" fill-opacity=".3">1.25.2</text>        <text x="72.0" y="14">1.25.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://bidict.readthedocs.io'><svg xmlns="http://www.w3.org/2000/svg" width="92" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_9">        <rect width="92" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_9)">        <path fill="#555" d="M0 0h44v20H0z"/>        <path fill="#4051b5" d="M44 0h48v20H44z"/>        <path fill="url(#b)" d="M0 0h92v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="23.0" y="15" fill="#010101" fill-opacity=".3">bidict</text>        <text x="22.0" y="14">bidict</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.0" y="15" fill="#010101" fill-opacity=".3">0.22.1</text>        <text x="68.0" y="14">0.22.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://typing-extensions.readthedocs.io/'><svg xmlns="http://www.w3.org/2000/svg" width="160" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_10">        <rect width="160" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_10)">        <path fill="#555" d="M0 0h119v20H0z"/>        <path fill="#4051b5" d="M119 0h41v20H119z"/>        <path fill="url(#b)" d="M0 0h160v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="60.5" y="15" fill="#010101" fill-opacity=".3">typing_extensions</text>        <text x="59.5" y="14">typing_extensions</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="140.5" y="15" fill="#010101" fill-opacity=".3">4.7.1</text>        <text x="139.5" y="14">4.7.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='http://jupyter.org'><svg xmlns="http://www.w3.org/2000/svg" width="109" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_11">        <rect width="109" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_11)">        <path fill="#555" d="M0 0h68v20H0z"/>        <path fill="#4051b5" d="M68 0h41v20H68z"/>        <path fill="url(#b)" d="M0 0h109v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="35.0" y="15" fill="#010101" fill-opacity=".3">qtconsole</text>        <text x="34.0" y="14">qtconsole</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="89.5" y="15" fill="#010101" fill-opacity=".3">5.4.4</text>        <text x="88.5" y="14">5.4.4</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/mhammond/pywin32'><svg xmlns="http://www.w3.org/2000/svg" width="87" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_12">        <rect width="87" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_12)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h31v20H56z"/>        <path fill="url(#b)" d="M0 0h87v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">pywin32</text>        <text x="28.0" y="14">pywin32</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="72.5" y="15" fill="#010101" fill-opacity=".3">306</text>        <text x="71.5" y="14">306</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://lxml.de/'><svg xmlns="http://www.w3.org/2000/svg" width="76" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_13">        <rect width="76" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_13)">        <path fill="#555" d="M0 0h35v20H0z"/>        <path fill="#4051b5" d="M35 0h41v20H35z"/>        <path fill="url(#b)" d="M0 0h76v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="18.5" y="15" fill="#010101" fill-opacity=".3">lxml</text>        <text x="17.5" y="14">lxml</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="56.5" y="15" fill="#010101" fill-opacity=".3">4.9.3</text>        <text x="55.5" y="14">4.9.3</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://ipython.org'><svg xmlns="http://www.w3.org/2000/svg" width="102" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_14">        <rect width="102" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_14)">        <path fill="#555" d="M0 0h54v20H0z"/>        <path fill="#4051b5" d="M54 0h48v20H54z"/>        <path fill="url(#b)" d="M0 0h102v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="28.0" y="15" fill="#010101" fill-opacity=".3">ipython</text>        <text x="27.0" y="14">ipython</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="79.0" y="15" fill="#010101" fill-opacity=".3">8.15.0</text>        <text x="78.0" y="14">8.15.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/blambright/qstylizer'><svg xmlns="http://www.w3.org/2000/svg" width="105" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_15">        <rect width="105" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_15)">        <path fill="#555" d="M0 0h64v20H0z"/>        <path fill="#4051b5" d="M64 0h41v20H64z"/>        <path fill="url(#b)" d="M0 0h105v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="33.0" y="15" fill="#010101" fill-opacity=".3">qstylizer</text>        <text x="32.0" y="14">qstylizer</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="85.5" y="15" fill="#010101" fill-opacity=".3">0.2.2</text>        <text x="84.5" y="14">0.2.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 
 
           </div>
@@ -280,7 +282,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../Usage/prettyqt/docs/api_guidelines/general/" class="md-tabs__link">
+        <a href="../../../Usage/general/" class="md-tabs__link">
           
   
     
@@ -300,7 +302,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../Features/prettyqt/docs/features/proxies/" class="md-tabs__link">
+        <a href="../../../Features/proxies/" class="md-tabs__link">
           
   
     
@@ -319,8 +321,14 @@
   
     
     
+      
+  
+  
+  
+    
+    
       <li class="md-tabs__item">
-        <a href="../../../Qt-based%20modules/" class="md-tabs__link">
+        <a href="../../../Qt-based%20modules/bluetooth/" class="md-tabs__link">
           
   
     
@@ -329,6 +337,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -341,8 +352,16 @@
   
     
     
+      
+  
+  
+    
+  
+  
+    
+    
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../" class="md-tabs__link">
+        <a href="../../animations/" class="md-tabs__link">
           
   
     
@@ -351,6 +370,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -463,7 +485,7 @@
         
   
   
-    <a href="../../../Usage/prettyqt/docs/api_guidelines/general/" class="md-nav__link">
+    <a href="../../../Usage/general/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -508,7 +530,7 @@
         
   
   
-    <a href="../../../Features/prettyqt/docs/features/proxies/" class="md-nav__link">
+    <a href="../../../Features/proxies/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -534,10 +556,6 @@
   
     
     
-      
-        
-          
-        
       
         
       
@@ -603,7 +621,10 @@
         
   
   
-    <a href="../../../Qt-based%20modules/" class="md-nav__link">
+    
+  
+  
+    <a href="../../../Qt-based%20modules/bluetooth/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -615,6 +636,8 @@
         <span class="md-nav__icon md-icon"></span>
       
     </a>
+  
+
   
 
       
@@ -631,10 +654,6 @@
   
     
     
-      
-        
-          
-        
       
         
       
@@ -680,24 +699,16 @@
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
-              
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
     Additional modules
   </span>
   
 
-            </a>
-            
-              <label class="md-nav__link " for="__nav_5">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
@@ -705,8 +716,6 @@
             Additional modules
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
             
               
                 
@@ -1498,7 +1507,7 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_12" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_11" checked>
         
           
           
@@ -1513,14 +1522,14 @@
 
             </a>
             
-              <label class="md-nav__link " for="__nav_5_12">
+              <label class="md-nav__link " for="__nav_5_11">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_12_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5_12">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_11">
             <span class="md-nav__icon md-icon"></span>
             itemmodels
           </label>
@@ -1534,11 +1543,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../SubClassTreeModel/" class="md-nav__link">
+      <a href="../ListMixin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    SubClassTreeModel
+    ListMixin
   </span>
   
 
@@ -1574,11 +1583,291 @@
   
   
     <li class="md-nav__item">
+      <a href="../ModuleInfoModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ModuleInfoModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WidgetsDetailsModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WidgetsDetailsModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TableToListProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TableToListProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../XmlModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    XmlModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SliceColorValuesProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SliceColorValuesProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LogRecordModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LogRecordModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ModelMixin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     ModelMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataClassFieldsModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataClassFieldsModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HighlightMouseProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HighlightMouseProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ColumnTableModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ColumnTableModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BaseDataclassModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BaseDataclassModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SliceCheckableProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SliceCheckableProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ProxyMapper/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ProxyMapper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SliceHighlightCurrentProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SliceHighlightCurrentProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StorageInfoModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    StorageInfoModel
   </span>
   
 
@@ -1614,11 +1903,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../SliceToMarkdownProxyModel/" class="md-nav__link">
+      <a href="../SliceMapRoleProxyModel/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    SliceToMarkdownProxyModel
+    SliceMapRoleProxyModel
   </span>
   
 
@@ -1634,11 +1923,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../JsonModel/" class="md-nav__link">
+      <a href="../ItemModelResolver/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    JsonModel
+    ItemModelResolver
   </span>
   
 
@@ -1654,31 +1943,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../PythonObjectTreeModel/" class="md-nav__link">
+      <a href="../ParentClassTreeModel/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    PythonObjectTreeModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AppearanceProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AppearanceProxyModel
+    ParentClassTreeModel
   </span>
   
 
@@ -1785,351 +2054,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../SliceFilterProxyModel/" class="md-nav__link">
+      <a href="../RegexMatchesModel/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    SliceFilterProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ItemModelResolver/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ItemModelResolver
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../HighlightMouseProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    HighlightMouseProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../LogRecordModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    LogRecordModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TupleTreeModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TupleTreeModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SliceColorCategoriesProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SliceColorCategoriesProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ColumnJoinerProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ColumnJoinerProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ListMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ListMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../StorageInfoModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    StorageInfoModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SliceDisplayTextProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SliceDisplayTextProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ColumnItemModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ColumnItemModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FuzzyFilterProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    FuzzyFilterProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../AstModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    AstModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../BaseDataclassModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    BaseDataclassModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../NestedModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    NestedModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ModuleInfoModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ModuleInfoModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ProxyMapper/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ProxyMapper
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SelectionMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SelectionMixin
+    RegexMatchesModel
   </span>
   
 
@@ -2165,411 +2094,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../ColumnItem/" class="md-nav__link">
+      <a href="../NestedItem/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    ColumnItem
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ParentClassTreeModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ParentClassTreeModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SubsetFilterProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SubsetFilterProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../WidgetsDetailsModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    WidgetsDetailsModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ColumnTableModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ColumnTableModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ChangeHeadersProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ChangeHeadersProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../MeltProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    MeltProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ValueFilterProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ValueFilterProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ModelIndexModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ModelIndexModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../QObjectPropertiesModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    QObjectPropertiesModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../WidgetHierarchyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    WidgetHierarchyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../PredicateFilterProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    PredicateFilterProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TreeModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TreeModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ShortcutsModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ShortcutsModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SliceColorValuesProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SliceColorValuesProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SliceChangeIconSizeProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SliceChangeIconSizeProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TableToListProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    TableToListProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../MultiColumnFilterProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    MultiColumnFilterProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SliceMapRoleProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SliceMapRoleProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SliceHighlightCurrentProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SliceHighlightCurrentProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SliceValueTransformationProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SliceValueTransformationProxyModel
+    NestedItem
   </span>
   
 
@@ -2605,231 +2134,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../DataClassFieldsModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    DataClassFieldsModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../LinkedSelectionModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    LinkedSelectionModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../XmlModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    XmlModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../RegexMatchesModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    RegexMatchesModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../RangeFilterProxyModel/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     RangeFilterProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../BaseFieldsModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    BaseFieldsModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SliceIdentityProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SliceIdentityProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SliceChangeFlagsProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SliceChangeFlagsProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SliceCheckableProxyModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SliceCheckableProxyModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FrameInfoModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    FrameInfoModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../BaseXmlModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    BaseXmlModel
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ActionsModel/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ActionsModel
   </span>
   
 
@@ -2865,11 +2174,531 @@
   
   
     <li class="md-nav__item">
-      <a href="../NestedItem/" class="md-nav__link">
+      <a href="../NestedModel/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    NestedItem
+    NestedModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TreeModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TreeModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WidgetHierarchyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WidgetHierarchyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ModelIndexModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ModelIndexModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SliceChangeIconSizeProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SliceChangeIconSizeProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BaseFieldsModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BaseFieldsModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SliceDisplayTextProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SliceDisplayTextProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SliceValueTransformationProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SliceValueTransformationProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ValueFilterProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ValueFilterProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BaseXmlModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BaseXmlModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FrameInfoModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FrameInfoModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FuzzyFilterProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FuzzyFilterProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QObjectPropertiesModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QObjectPropertiesModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ShortcutsModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ShortcutsModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PredicateFilterProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PredicateFilterProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AstModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AstModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SubsetFilterProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SubsetFilterProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ActionsModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ActionsModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AppearanceProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AppearanceProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LinkedSelectionModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LinkedSelectionModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ColumnItem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ColumnItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../JsonModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JsonModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MultiColumnFilterProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MultiColumnFilterProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ColumnJoinerProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ColumnJoinerProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SliceChangeFlagsProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SliceChangeFlagsProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SelectionMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SelectionMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SliceFilterProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SliceFilterProxyModel
   </span>
   
 
@@ -2905,11 +2734,191 @@
   
   
     <li class="md-nav__item">
+      <a href="../ColumnItemModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ColumnItemModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SliceIdentityProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SliceIdentityProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../MappingModel/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     MappingModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SliceToMarkdownProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SliceToMarkdownProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PythonObjectTreeModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PythonObjectTreeModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SubClassTreeModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SubClassTreeModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MeltProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MeltProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SliceColorCategoriesProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SliceColorCategoriesProxyModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TupleTreeModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TupleTreeModel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ChangeHeadersProxyModel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ChangeHeadersProxyModel
   </span>
   
 
@@ -3398,31 +3407,30 @@
 </tbody>
 </table>
 <h2 id="inheritance-diagram">⋔ Inheritance diagram</h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>graph TD
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  2383872043344[&quot;itemmodels.ImportlibTreeModel&quot;]
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  2383872057984[&quot;itemmodels.ColumnItemModel&quot;]
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  2383872033584[&quot;itemmodels.ColumnItemModelMixin&quot;]
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  140724454067696[&quot;builtins.object&quot;]
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  2383886238960[&quot;itemmodels.TreeModel&quot;]
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  2383886228224[&quot;core.AbstractItemModel&quot;]
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  2383886221392[&quot;core.AbstractItemModelMixin&quot;]
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  2383886120864[&quot;core.ObjectMixin&quot;]
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  2383885225440[&quot;QtCore.QAbstractItemModel&quot;]
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  2383879347680[&quot;QtCore.QObject&quot;]
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  2383873487840[&quot;Shiboken.Object&quot;]
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  2383872057984 --&gt; 2383872043344
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  2383872033584 --&gt; 2383872057984
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  140724454067696 --&gt; 2383872033584
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>  2383886238960 --&gt; 2383872057984
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>  2383886228224 --&gt; 2383886238960
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>  2383886221392 --&gt; 2383886228224
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>  2383886120864 --&gt; 2383886221392
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>  140724454067696 --&gt; 2383886120864
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>  2383885225440 --&gt; 2383886228224
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>  2383879347680 --&gt; 2383885225440
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>  2383873487840 --&gt; 2383879347680
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>  140724454067696 --&gt; 2383873487840
-</span></code></pre></div>
+<pre class="mermaid"><code>graph TD
+  1473245450880["itemmodels.ImportlibTreeModel"]
+  1473245677312["itemmodels.ColumnItemModel"]
+  1473245682192["itemmodels.ColumnItemModelMixin"]
+  140713234304496["builtins.object"]
+  1473299686192["itemmodels.TreeModel"]
+  1473299893104["core.AbstractItemModel"]
+  1473299890176["core.AbstractItemModelMixin"]
+  1473299815024["core.ObjectMixin"]
+  1473289050128["QtCore.QAbstractItemModel"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473245677312 --&gt; 1473245450880
+  1473245682192 --&gt; 1473245677312
+  140713234304496 --&gt; 1473245682192
+  1473299686192 --&gt; 1473245677312
+  1473299893104 --&gt; 1473299686192
+  1473299890176 --&gt; 1473299893104
+  1473299815024 --&gt; 1473299890176
+  140713234304496 --&gt; 1473299815024
+  1473289050128 --&gt; 1473299893104
+  1473288842240 --&gt; 1473289050128
+  1473291690208 --&gt; 1473288842240
+  140713234304496 --&gt; 1473291690208</code></pre>
 <h2 id="docstrings">🛈 DocStrings</h2>
 
 
@@ -3618,25 +3626,25 @@
 </tbody>
 </table>
 <h2 id="screenshot">🖼 Screenshot</h2>
-<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">prettyqt.itemmodels.importlibdistributionmodel.ImportlibTreeModel.setup_example</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-218">218</a></span>
-<span class="normal"><a href="#__codelineno-1-219">219</a></span>
-<span class="normal"><a href="#__codelineno-1-220">220</a></span>
-<span class="normal"><a href="#__codelineno-1-221">221</a></span>
-<span class="normal"><a href="#__codelineno-1-222">222</a></span>
-<span class="normal"><a href="#__codelineno-1-223">223</a></span>
-<span class="normal"><a href="#__codelineno-1-224">224</a></span>
-<span class="normal"><a href="#__codelineno-1-225">225</a></span>
-<span class="normal"><a href="#__codelineno-1-226">226</a></span>
-<span class="normal"><a href="#__codelineno-1-227">227</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-218"><a id="__codelineno-1-218" name="__codelineno-1-218"></a><span class="nd">@classmethod</span>
-</span><span id="__span-1-219"><a id="__codelineno-1-219" name="__codelineno-1-219"></a><span class="k">def</span> <span class="nf">setup_example</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-</span><span id="__span-1-220"><a id="__codelineno-1-220" name="__codelineno-1-220"></a>    <span class="kn">from</span> <span class="nn">prettyqt</span> <span class="kn">import</span> <span class="n">widgets</span>
-</span><span id="__span-1-221"><a id="__codelineno-1-221" name="__codelineno-1-221"></a>
-</span><span id="__span-1-222"><a id="__codelineno-1-222" name="__codelineno-1-222"></a>    <span class="n">model</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="s2">&quot;prettyqt&quot;</span><span class="p">)</span>
-</span><span id="__span-1-223"><a id="__codelineno-1-223" name="__codelineno-1-223"></a>    <span class="n">table</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">TreeView</span><span class="p">(</span><span class="n">word_wrap</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="__span-1-224"><a id="__codelineno-1-224" name="__codelineno-1-224"></a>    <span class="n">table</span><span class="o">.</span><span class="n">set_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-</span><span id="__span-1-225"><a id="__codelineno-1-225" name="__codelineno-1-225"></a>    <span class="n">table</span><span class="o">.</span><span class="n">set_delegate</span><span class="p">(</span><span class="s2">&quot;render_link&quot;</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-</span><span id="__span-1-226"><a id="__codelineno-1-226" name="__codelineno-1-226"></a>    <span class="n">table</span><span class="o">.</span><span class="n">expand_all</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-</span><span id="__span-1-227"><a id="__codelineno-1-227" name="__codelineno-1-227"></a>    <span class="k">return</span> <span class="n">table</span>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">prettyqt.itemmodels.importlibdistributionmodel.ImportlibTreeModel.setup_example</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-218">218</a></span>
+<span class="normal"><a href="#__codelineno-0-219">219</a></span>
+<span class="normal"><a href="#__codelineno-0-220">220</a></span>
+<span class="normal"><a href="#__codelineno-0-221">221</a></span>
+<span class="normal"><a href="#__codelineno-0-222">222</a></span>
+<span class="normal"><a href="#__codelineno-0-223">223</a></span>
+<span class="normal"><a href="#__codelineno-0-224">224</a></span>
+<span class="normal"><a href="#__codelineno-0-225">225</a></span>
+<span class="normal"><a href="#__codelineno-0-226">226</a></span>
+<span class="normal"><a href="#__codelineno-0-227">227</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-218"><a id="__codelineno-0-218" name="__codelineno-0-218"></a><span class="nd">@classmethod</span>
+</span><span id="__span-0-219"><a id="__codelineno-0-219" name="__codelineno-0-219"></a><span class="k">def</span> <span class="nf">setup_example</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+</span><span id="__span-0-220"><a id="__codelineno-0-220" name="__codelineno-0-220"></a>    <span class="kn">from</span> <span class="nn">prettyqt</span> <span class="kn">import</span> <span class="n">widgets</span>
+</span><span id="__span-0-221"><a id="__codelineno-0-221" name="__codelineno-0-221"></a>
+</span><span id="__span-0-222"><a id="__codelineno-0-222" name="__codelineno-0-222"></a>    <span class="n">model</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="s2">&quot;prettyqt&quot;</span><span class="p">)</span>
+</span><span id="__span-0-223"><a id="__codelineno-0-223" name="__codelineno-0-223"></a>    <span class="n">table</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">TreeView</span><span class="p">(</span><span class="n">word_wrap</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-0-224"><a id="__codelineno-0-224" name="__codelineno-0-224"></a>    <span class="n">table</span><span class="o">.</span><span class="n">set_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span><span id="__span-0-225"><a id="__codelineno-0-225" name="__codelineno-0-225"></a>    <span class="n">table</span><span class="o">.</span><span class="n">set_delegate</span><span class="p">(</span><span class="s2">&quot;render_link&quot;</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</span><span id="__span-0-226"><a id="__codelineno-0-226" name="__codelineno-0-226"></a>    <span class="n">table</span><span class="o">.</span><span class="n">expand_all</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</span><span id="__span-0-227"><a id="__codelineno-0-227" name="__codelineno-0-227"></a>    <span class="k">return</span> <span class="n">table</span>
 </span></code></pre></div></td></tr></table></div>
 <p><a class="glightbox" href="../TreeView_screenshot.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../TreeView_screenshot.png" /></a></p>
 
@@ -3666,7 +3674,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../AppearanceProxyModel/" class="md-footer__link md-footer__link--prev" aria-label="Previous: AppearanceProxyModel" rel="prev">
+          <a href="../ParentClassTreeModel/" class="md-footer__link md-footer__link--prev" aria-label="Previous: ParentClassTreeModel" rel="prev">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -3676,20 +3684,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                AppearanceProxyModel
+                ParentClassTreeModel
               </div>
             </div>
           </a>
         
         
           
-          <a href="../SliceFilterProxyModel/" class="md-footer__link md-footer__link--next" aria-label="Next: SliceFilterProxyModel" rel="next">
+          <a href="../RegexMatchesModel/" class="md-footer__link md-footer__link--next" aria-label="Next: RegexMatchesModel" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                SliceFilterProxyModel
+                RegexMatchesModel
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -1,0 +1,21 @@
+## Subclasses
+
+| Class                         | Module                          | Description |
+| ----------------------------- | ------------------------------- | ----------- |
+| [NestedModel](NestedModel.md) | prettyqt.itemmodels.nestedmodel |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245686096["itemmodels.ModelMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473245686096
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.itemmodels.modelmixin.ModelMixin
+    options:
+      show_root_toc_entry: False

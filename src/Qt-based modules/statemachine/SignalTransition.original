@@ -1,0 +1,54 @@
+Qt Base Class: [QSignalTransition](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QSignalTransition.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QSignalTransition)
+
+Signature: `QSignalTransition(self, arg__1: object, arg__2: Optional[PySide6.QtStateMachine.QState] = None) -> PySide6.QtStateMachine.QSignalTransition
+QSignalTransition(self, sender: PySide6.QtCore.QObject, signal: bytes, sourceState: Optional[PySide6.QtStateMachine.QState] = None) -> None
+QSignalTransition(self, sourceState: Optional[PySide6.QtStateMachine.QState] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                                                                       | Children                                                                                                                                                    | Inherits                                                                                                                                                                                 |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[AbstractTransitionMixin](AbstractTransitionMixin.md)</font>**<br>*<font size='1'>prettyqt.statemachine.abstracttransition</font>*<br>                                                                                                                                                                                                                                                    | <ul><li>[AbstractTransition](AbstractTransition.md)</li><li>[EventTransition](EventTransition.md)</li><li>[SignalTransition](SignalTransition.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                                                                                          |
+| **<font size='4'>[QSignalTransition](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QSignalTransition.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QSignalTransition)</font>**<br>*<font size='1'>PySide6.QtStateMachine</font>*<br>QSignalTransition\(self, arg\_\_1: object, arg\_\_2: Optional\[PySide6\.QtStateMachine\.QState\] \= None\) \-\> PySide6\.QtStateMachine\.QSignalTransition | <ul><li>[SignalTransition](SignalTransition.md)</li></ul>                                                                                                   | <ul><li>[QAbstractTransition](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QAbstractTransition.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QAbstractTransition)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473374537472["statemachine.SignalTransition"]
+  1473374533568["statemachine.AbstractTransitionMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473374509168["QtStateMachine.QSignalTransition"]
+  1473374496480["QtStateMachine.QAbstractTransition"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473374533568 --> 1473374537472
+  1473299815024 --> 1473374533568
+  140713234304496 --> 1473299815024
+  1473374509168 --> 1473374537472
+  1473374496480 --> 1473374509168
+  1473288842240 --> 1473374496480
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.statemachine.signaltransition.SignalTransition
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property      | Type                                    | Doc |
+| ---------------- | --------------------------------------- | --- |
+| `objectName`     | **QString**                             |     |
+| `sourceState`    | **QState**                              |     |
+| `targetState`    | **QAbstractState**                      |     |
+| `targetStates`   | **QList<QAbstractState*>**              |     |
+| `transitionType` | **QAbstractTransition::TransitionType** |     |
+| `senderObject`   | **const QObject**                       |     |
+| `signal`         | **QByteArray**                          |     |

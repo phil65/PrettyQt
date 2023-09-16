@@ -1,0 +1,59 @@
+Qt Base Class: [QTextDocument](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextDocument.html#PySide6.QtGui.PySide6.QtGui.QTextDocument)
+
+Signature: `QTextDocument(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QTextDocument(self, text: str, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                  | Children                                          | Inherits                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[TextDocumentMixin](TextDocumentMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.textdocument</font>*<br>                                                                                                                                                          | <ul><li>[TextDocument](TextDocument.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                              |
+| **<font size='4'>[QTextDocument](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextDocument.html#PySide6.QtGui.PySide6.QtGui.QTextDocument)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextDocument\(self, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[TextDocument](TextDocument.md)</li></ul> | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245580688["gui.TextDocument"]
+  1473245579712["gui.TextDocumentMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473289221280["QtGui.QTextDocument"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473245579712 --> 1473245580688
+  1473299815024 --> 1473245579712
+  140713234304496 --> 1473299815024
+  1473289221280 --> 1473245580688
+  1473288842240 --> 1473289221280
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textdocument.TextDocument
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property         | Type        | Doc |
+| ------------------- | ----------- | --- |
+| `objectName`        | **QString** |     |
+| `undoRedoEnabled`   | **bool**    |     |
+| `modified`          | **bool**    |     |
+| `pageSize`          | **QSizeF**  |     |
+| `defaultFont`       | **QFont**   |     |
+| `useDesignMetrics`  | **bool**    |     |
+| `layoutEnabled`     | **bool**    |     |
+| `size`              | **QSizeF**  |     |
+| `textWidth`         | **double**  |     |
+| `blockCount`        | **int**     |     |
+| `indentWidth`       | **double**  |     |
+| `defaultStyleSheet` | **QString** |     |
+| `maximumBlockCount` | **int**     |     |
+| `documentMargin`    | **double**  |     |
+| `baseUrl`           | **QUrl**    |     |

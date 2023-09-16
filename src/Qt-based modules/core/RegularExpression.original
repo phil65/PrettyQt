@@ -1,0 +1,31 @@
+Qt Base Class: [QRegularExpression](https://doc.qt.io/qtforpython/PySide6/QtCore/QRegularExpression.html#PySide6.QtCore.PySide6.QtCore.QRegularExpression)
+
+Signature: `QRegularExpression(self) -> None
+QRegularExpression(self, pattern: str, options: PySide6.QtCore.QRegularExpression.PatternOption = Instance(PySide6.QtCore.QRegularExpression.PatternOption.NoPatternOption)) -> None
+QRegularExpression(self, re: Union[PySide6.QtCore.QRegularExpression, str]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                    | Children                                                    | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QRegularExpression](https://doc.qt.io/qtforpython/PySide6/QtCore/QRegularExpression.html#PySide6.QtCore.PySide6.QtCore.QRegularExpression)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QRegularExpression\(self\) \-\> None | <ul><li>[RegularExpression](RegularExpression.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299880416["core.RegularExpression"]
+  1473243786176["QtCore.QRegularExpression"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473243786176 --> 1473299880416
+  1473291690208 --> 1473243786176
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.regularexpression.RegularExpression
+    options:
+      show_root_toc_entry: False

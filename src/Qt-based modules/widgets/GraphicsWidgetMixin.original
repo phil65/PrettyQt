@@ -1,0 +1,42 @@
+## Base classes
+
+| Name                                                                                                                                               | Children                                                                                                                                                                                                                                                    | Inherits                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GraphicsObjectMixin](GraphicsObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicsobject</font>*<br>             | <ul><li>[GraphicsObject](GraphicsObject.md)</li><li>[GraphicsTextItem](GraphicsTextItem.md)</li><li>[GraphicsWidgetMixin](GraphicsWidgetMixin.md)</li><li>[GraphicsVideoItem](GraphicsVideoItem.md)</li><li>[GraphicsSvgItem](GraphicsSvgItem.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[GraphicsItemMixin](GraphicsItemMixin.md)</li></ul> |
+| **<font size='4'>[GraphicsLayoutItemMixin](GraphicsLayoutItemMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicslayoutitem</font>*<br> | <ul><li>[GraphicsLayoutItem](GraphicsLayoutItem.md)</li><li>[GraphicsLayoutMixin](GraphicsLayoutMixin.md)</li><li>[GraphicsWidgetMixin](GraphicsWidgetMixin.md)</li></ul>                                                                                   | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>               |
+
+
+## Subclasses
+
+| Class                                         | Module                               | Description |
+| --------------------------------------------- | ------------------------------------ | ----------- |
+| [GraphicsWidget](GraphicsWidget.md)           | prettyqt.widgets.graphicswidget      |             |
+| [GraphicsProxyWidget](GraphicsProxyWidget.md) | prettyqt.widgets.graphicsproxywidget |             |
+| [Legend](Legend.md)                           | prettyqt.charts.legend               |             |
+| [ChartMixin](ChartMixin.md)                   | prettyqt.charts.chart                |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296164144["widgets.GraphicsWidgetMixin"]
+  1473293697024["widgets.GraphicsObjectMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473293706784["widgets.GraphicsItemMixin"]
+  1473293712640["widgets.GraphicsLayoutItemMixin"]
+  1473293697024 --> 1473296164144
+  1473299815024 --> 1473293697024
+  140713234304496 --> 1473299815024
+  1473293706784 --> 1473293697024
+  140713234304496 --> 1473293706784
+  1473293712640 --> 1473296164144
+  140713234304496 --> 1473293712640
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicswidget.GraphicsWidgetMixin
+    options:
+      show_root_toc_entry: False

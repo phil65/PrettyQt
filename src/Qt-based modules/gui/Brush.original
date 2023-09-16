@@ -1,0 +1,42 @@
+Qt Base Class: [QBrush](https://doc.qt.io/qtforpython/PySide6/QtGui/QBrush.html#PySide6.QtGui.PySide6.QtGui.QBrush)
+
+Signature: `QBrush(self) -> None
+QBrush(self, brush: Union[PySide6.QtGui.QBrush, PySide6.QtCore.Qt.BrushStyle, PySide6.QtCore.Qt.GlobalColor, PySide6.QtGui.QColor, PySide6.QtGui.QGradient, PySide6.QtGui.QImage, PySide6.QtGui.QPixmap]) -> None
+QBrush(self, bs: PySide6.QtCore.Qt.BrushStyle) -> None
+QBrush(self, color: PySide6.QtCore.Qt.GlobalColor, bs: PySide6.QtCore.Qt.BrushStyle = Instance(Qt.SolidPattern)) -> None
+QBrush(self, color: PySide6.QtCore.Qt.GlobalColor, pixmap: Union[PySide6.QtGui.QPixmap, PySide6.QtGui.QImage, str]) -> None
+QBrush(self, color: Union[PySide6.QtGui.QColor, PySide6.QtGui.QRgba64, Any, PySide6.QtCore.Qt.GlobalColor, str, int], bs: PySide6.QtCore.Qt.BrushStyle = Instance(Qt.SolidPattern)) -> None
+QBrush(self, color: Union[PySide6.QtGui.QColor, PySide6.QtGui.QRgba64, Any, PySide6.QtCore.Qt.GlobalColor, str, int], pixmap: Union[PySide6.QtGui.QPixmap, PySide6.QtGui.QImage, str]) -> None
+QBrush(self, gradient: Union[PySide6.QtGui.QGradient, PySide6.QtGui.QGradient.Preset]) -> None
+QBrush(self, image: Union[PySide6.QtGui.QImage, str]) -> None
+QBrush(self, pixmap: Union[PySide6.QtGui.QPixmap, PySide6.QtGui.QImage, str]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                            |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[SerializeMixin](SerializeMixin.md)</font>**<br>*<font size='1'>prettyqt.utils.serializemixin</font>*<br>                                                                          | <ul><li>[EasingCurve](EasingCurve.md)</li><li>[Url](Url.md)</li><li>[KeyCombination](KeyCombination.md)</li><li>[Icon](Icon.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[IconEngine](IconEngine.md)</li><li>[Image](Image.md)</li><li>[Brush](Brush.md)</li><li>[Region](Region.md)</li><li>[Transform](Transform.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QBrush](https://doc.qt.io/qtforpython/PySide6/QtGui/QBrush.html#PySide6.QtGui.PySide6.QtGui.QBrush)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QBrush\(self\) \-\> None | <ul><li>[Brush](Brush.md)</li></ul>                                                                                                                                                                                                                                                                                                               | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245597280["gui.Brush"]
+  1473299806240["utils.SerializeMixin"]
+  140713234304496["builtins.object"]
+  1473300183872["QtGui.QBrush"]
+  1473291690208["Shiboken.Object"]
+  1473299806240 --> 1473245597280
+  140713234304496 --> 1473299806240
+  1473300183872 --> 1473245597280
+  1473291690208 --> 1473300183872
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.brush.Brush
+    options:
+      show_root_toc_entry: False

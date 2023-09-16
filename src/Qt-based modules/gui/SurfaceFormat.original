@@ -1,0 +1,35 @@
+Qt Base Class: [QSurfaceFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QSurfaceFormat.html#PySide6.QtGui.PySide6.QtGui.QSurfaceFormat)
+
+Signature: `QSurfaceFormat(self) -> None
+QSurfaceFormat(self, options: PySide6.QtGui.QSurfaceFormat.FormatOption) -> None
+QSurfaceFormat(self, other: Union[PySide6.QtGui.QSurfaceFormat, PySide6.QtGui.QSurfaceFormat.FormatOption]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                | Children                                            | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[SurfaceFormatMixin](SurfaceFormatMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.surfaceformat</font>*<br>                                                                                                     | <ul><li>[SurfaceFormat](SurfaceFormat.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QSurfaceFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QSurfaceFormat.html#PySide6.QtGui.PySide6.QtGui.QSurfaceFormat)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QSurfaceFormat\(self\) \-\> None | <ul><li>[SurfaceFormat](SurfaceFormat.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245545552["gui.SurfaceFormat"]
+  1473245541648["gui.SurfaceFormatMixin"]
+  140713234304496["builtins.object"]
+  1473300008192["QtGui.QSurfaceFormat"]
+  1473291690208["Shiboken.Object"]
+  1473245541648 --> 1473245545552
+  140713234304496 --> 1473245541648
+  1473300008192 --> 1473245545552
+  1473291690208 --> 1473300008192
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.surfaceformat.SurfaceFormat
+    options:
+      show_root_toc_entry: False

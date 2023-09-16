@@ -1,0 +1,25 @@
+## Base classes
+
+| Name                                                                                                                                                                                                           | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Inherits                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| **<font size='4'>[Handler](https://docs.python.org/3/library/logging.html#logging.Handler)</font>**<br>*<font size='1'>logging</font>*<br>Handler instances dispatch logging events to specific destinations\. | <ul><li>[StreamHandler](https://docs.python.org/3/library/logging.handlers.html#logging.StreamHandler)</li><li>[NullHandler](https://docs.python.org/3/library/logging.handlers.html#logging.NullHandler)</li><li>[NullHandler](https://github.com/gitpython-developers/GitPython)</li><li>[SignalLogger](SignalLogger.md)</li><li>[QtLogger](QtLogger.md)</li><li>[SocketHandler](https://docs.python.org/3/library/logging.handlers.html#logging.handlers.SocketHandler)</li><li>[SysLogHandler](https://docs.python.org/3/library/logging.handlers.html#logging.handlers.SysLogHandler)</li><li>[SMTPHandler](https://docs.python.org/3/library/logging.handlers.html#logging.handlers.SMTPHandler)</li><li>[NTEventLogHandler](https://docs.python.org/3/library/logging.handlers.html#logging.handlers.NTEventLogHandler)</li><li>[HTTPHandler](https://docs.python.org/3/library/logging.handlers.html#logging.handlers.HTTPHandler)</li><li>...</li></ul> | <ul><li>[Filterer](Filterer.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367688832["debugging.QtLogger"]
+  1473227233056["logging.Handler"]
+  1473227232080["logging.Filterer"]
+  140713234304496["builtins.object"]
+  1473227233056 --> 1473367688832
+  1473227232080 --> 1473227233056
+  140713234304496 --> 1473227232080
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.debugging.QtLogger
+    options:
+      show_root_toc_entry: False

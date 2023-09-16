@@ -1,0 +1,32 @@
+## Base classes
+
+| Name                                                                                                                      | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[PaintDeviceMixin](PaintDeviceMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.paintdevice</font>*<br> | <ul><li>[PaintDevice](PaintDevice.md)</li><li>[PaintDeviceWindowMixin](PaintDeviceWindowMixin.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[Image](Image.md)</li><li>[PagedPaintDeviceMixin](PagedPaintDeviceMixin.md)</li><li>[Picture](Picture.md)</li><li>[WidgetMixin](WidgetMixin.md)</li><li>[SvgGenerator](SvgGenerator.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+
+
+## Subclasses
+
+| Class                                   | Module                        | Description |
+| --------------------------------------- | ----------------------------- | ----------- |
+| [PagedPaintDevice](PagedPaintDevice.md) | prettyqt.gui.pagedpaintdevice |             |
+| [PdfWriter](PdfWriter.md)               | prettyqt.gui.pdfwriter        |             |
+| [Printer](Printer.md)                   | prettyqt.printsupport.printer |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245618752["gui.PagedPaintDeviceMixin"]
+  1473245548480["gui.PaintDeviceMixin"]
+  140713234304496["builtins.object"]
+  1473245548480 --> 1473245618752
+  140713234304496 --> 1473245548480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.pagedpaintdevice.PagedPaintDeviceMixin
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,33 @@
+Qt Base Class: [QQmlParserStatus](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlParserStatus.html#PySide6.QtQml.PySide6.QtQml.QQmlParserStatus)
+
+Signature: `QQmlParserStatus(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                        | Children                                                                                                                                                                                                                                    | Inherits                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[QmlParserStatusMixin](QmlParserStatusMixin.md)</font>**<br>*<font size='1'>prettyqt.qml.qmlparserstatus</font>*<br>                                                                                                       | <ul><li>[QmlParserStatus](QmlParserStatus.md)</li><li>[QuickItemMixin](QuickItemMixin.md)</li></ul>                                                                                                                                         | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QQmlParserStatus](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlParserStatus.html#PySide6.QtQml.PySide6.QtQml.QQmlParserStatus)</font>**<br>*<font size='1'>PySide6.QtQml</font>*<br>QQmlParserStatus\(self\) \-\> None | <ul><li>[QPyQmlParserStatus](https://www.pyside.org)</li><li>[QmlParserStatus](QmlParserStatus.md)</li><li>[QQuickItem](https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickItem.html#PySide6.QtQuick.PySide6.QtQuick.QQuickItem)</li></ul> | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572316944["qml.QmlParserStatus"]
+  1473572323776["qml.QmlParserStatusMixin"]
+  140713234304496["builtins.object"]
+  1473572235936["QtQml.QQmlParserStatus"]
+  1473291690208["Shiboken.Object"]
+  1473572323776 --> 1473572316944
+  140713234304496 --> 1473572323776
+  1473572235936 --> 1473572316944
+  1473291690208 --> 1473572235936
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qml.qmlparserstatus.QmlParserStatus
+    options:
+      show_root_toc_entry: False

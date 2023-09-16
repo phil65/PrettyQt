@@ -1,0 +1,22 @@
+## Subclasses
+
+| Class                                 | Module                       | Description |
+| ------------------------------------- | ---------------------------- | ----------- |
+| [QmlParserStatus](QmlParserStatus.md) | prettyqt.qml.qmlparserstatus |             |
+| [QuickItemMixin](QuickItemMixin.md)   | prettyqt.quick.quickitem     |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572323776["qml.QmlParserStatusMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473572323776
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qml.qmlparserstatus.QmlParserStatusMixin
+    options:
+      show_root_toc_entry: False

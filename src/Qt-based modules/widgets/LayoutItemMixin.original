@@ -1,0 +1,24 @@
+## Subclasses
+
+| Class                         | Module                      | Description |
+| ----------------------------- | --------------------------- | ----------- |
+| [LayoutItem](LayoutItem.md)   | prettyqt.widgets.layoutitem |             |
+| [WidgetItem](WidgetItem.md)   | prettyqt.widgets.widgetitem |             |
+| [LayoutMixin](LayoutMixin.md) | prettyqt.widgets.layout     |             |
+| [SpacerItem](SpacerItem.md)   | prettyqt.widgets.spaceritem |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296346656["widgets.LayoutItemMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473296346656
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.layoutitem.LayoutItemMixin
+    options:
+      show_root_toc_entry: False

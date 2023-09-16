@@ -1,0 +1,35 @@
+Qt Base Class: [QFormBuilder](https://doc.qt.io/qtforpython/PySide6/QtDesigner/QFormBuilder.html#PySide6.QtDesigner.PySide6.QtDesigner.QFormBuilder)
+
+Signature: `QFormBuilder(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                            | Children                                                                                              | Inherits                                                                                                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[AbstractFormBuilderMixin](AbstractFormBuilderMixin.md)</font>**<br>*<font size='1'>prettyqt.designer.abstractformbuilder</font>*<br>                                                                                          | <ul><li>[AbstractFormBuilder](AbstractFormBuilder.md)</li><li>[FormBuilder](FormBuilder.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                                                             |
+| **<font size='4'>[QFormBuilder](https://doc.qt.io/qtforpython/PySide6/QtDesigner/QFormBuilder.html#PySide6.QtDesigner.PySide6.QtDesigner.QFormBuilder)</font>**<br>*<font size='1'>PySide6.QtDesigner</font>*<br>QFormBuilder\(self\) \-\> None | <ul><li>[FormBuilder](FormBuilder.md)</li></ul>                                                       | <ul><li>[QAbstractFormBuilder](https://doc.qt.io/qtforpython/PySide6/QtDesigner/QAbstractFormBuilder.html#PySide6.QtDesigner.PySide6.QtDesigner.QAbstractFormBuilder)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367757152["designer.FormBuilder"]
+  1473367732752["designer.AbstractFormBuilderMixin"]
+  140713234304496["builtins.object"]
+  1473367708352["QtDesigner.QFormBuilder"]
+  1473367718112["QtDesigner.QAbstractFormBuilder"]
+  1473291690208["Shiboken.Object"]
+  1473367732752 --> 1473367757152
+  140713234304496 --> 1473367732752
+  1473367708352 --> 1473367757152
+  1473367718112 --> 1473367708352
+  1473291690208 --> 1473367718112
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.designer.formbuilder.FormBuilder
+    options:
+      show_root_toc_entry: False

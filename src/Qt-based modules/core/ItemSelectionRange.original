@@ -1,0 +1,32 @@
+Qt Base Class: [QItemSelectionRange](https://doc.qt.io/qtforpython/PySide6/QtCore/QItemSelectionRange.html#PySide6.QtCore.PySide6.QtCore.QItemSelectionRange)
+
+Signature: `QItemSelectionRange(self) -> None
+QItemSelectionRange(self, QItemSelectionRange: PySide6.QtCore.QItemSelectionRange) -> None
+QItemSelectionRange(self, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -> None
+QItemSelectionRange(self, topL: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex], bottomR: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                        | Children                                                      | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QItemSelectionRange](https://doc.qt.io/qtforpython/PySide6/QtCore/QItemSelectionRange.html#PySide6.QtCore.PySide6.QtCore.QItemSelectionRange)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QItemSelectionRange\(self\) \-\> None | <ul><li>[ItemSelectionRange](ItemSelectionRange.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299888224["core.ItemSelectionRange"]
+  1473243634896["QtCore.QItemSelectionRange"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473243634896 --> 1473299888224
+  1473291690208 --> 1473243634896
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.itemselectionrange.ItemSelectionRange
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,32 @@
+Qt Base Class: [QMatrix4x4](https://doc.qt.io/qtforpython/PySide6/QtGui/QMatrix4x4.html#PySide6.QtGui.PySide6.QtGui.QMatrix4x4)
+
+Signature: `QMatrix4x4(self) -> None
+QMatrix4x4(self, m11: float, m12: float, m13: float, m14: float, m21: float, m22: float, m23: float, m24: float, m31: float, m32: float, m33: float, m34: float, m41: float, m42: float, m43: float, m44: float) -> None
+QMatrix4x4(self, transform: PySide6.QtGui.QTransform) -> None
+QMatrix4x4(self, values: Iterable) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                | Children                                    | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QMatrix4x4](https://doc.qt.io/qtforpython/PySide6/QtGui/QMatrix4x4.html#PySide6.QtGui.PySide6.QtGui.QMatrix4x4)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QMatrix4x4\(self\) \-\> None | <ul><li>[Matrix4x4](Matrix4x4.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245625584["gui.Matrix4x4"]
+  1473300100912["QtGui.QMatrix4x4"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473300100912 --> 1473245625584
+  1473291690208 --> 1473300100912
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.matrix4x4.Matrix4x4
+    options:
+      show_root_toc_entry: False

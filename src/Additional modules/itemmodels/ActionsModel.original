@@ -1,0 +1,58 @@
+Qt Base Class: [QAbstractTableModel](https://doc.qt.io/qtforpython/PySide6/QtCore/QAbstractTableModel.html#PySide6.QtCore.PySide6.QtCore.QAbstractTableModel)
+
+Signature: `QAbstractTableModel(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                 | Children                                                                                                                                                                                  | Inherits                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[ColumnTableModel](ColumnTableModel.md)</font>**<br>*<font size='1'>prettyqt.itemmodels.columnitemmodel</font>*<br> | <ul><li>[LogRecordModel](LogRecordModel.md)</li><li>[ActionsModel](ActionsModel.md)</li><li>[StorageInfoModel](StorageInfoModel.md)</li><li>[ShortcutsModel](ShortcutsModel.md)</li></ul> | <ul><li>[ColumnItemModelMixin](ColumnItemModelMixin.md)</li><li>[AbstractTableModel](AbstractTableModel.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473290702304["itemmodels.ActionsModel"]
+  1473245684144["itemmodels.ColumnTableModel"]
+  1473245682192["itemmodels.ColumnItemModelMixin"]
+  140713234304496["builtins.object"]
+  1473299901888["core.AbstractTableModel"]
+  1473299900912["core.AbstractTableModelMixin"]
+  1473299890176["core.AbstractItemModelMixin"]
+  1473299815024["core.ObjectMixin"]
+  1473289054032["QtCore.QAbstractTableModel"]
+  1473289050128["QtCore.QAbstractItemModel"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473245684144 --> 1473290702304
+  1473245682192 --> 1473245684144
+  140713234304496 --> 1473245682192
+  1473299901888 --> 1473245684144
+  1473299900912 --> 1473299901888
+  1473299890176 --> 1473299900912
+  1473299815024 --> 1473299890176
+  140713234304496 --> 1473299815024
+  1473289054032 --> 1473299901888
+  1473289050128 --> 1473289054032
+  1473288842240 --> 1473289050128
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.itemmodels.actionsmodel.ActionsModel
+    options:
+      show_root_toc_entry: False
+
+
+!!! info
+    Supported data type: `collections.abc.Sequence[PySide6.QtGui.QAction]`
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

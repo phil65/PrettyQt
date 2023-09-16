@@ -1,0 +1,21 @@
+## Subclasses
+
+| Class                   | Module                     | Description |
+| ----------------------- | -------------------------- | ----------- |
+| [GeoRoute](GeoRoute.md) | prettyqt.location.georoute |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573477568["location.GeoRouteMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473573477568
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.location.georoute.GeoRouteMixin
+    options:
+      show_root_toc_entry: False

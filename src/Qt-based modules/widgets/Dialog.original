@@ -1,0 +1,123 @@
+Qt Base Class: [QDialog](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QDialog.html#PySide6.QtWidgets.PySide6.QtWidgets.QDialog)
+
+Signature: `QDialog(self, parent: Optional[PySide6.QtWidgets.QWidget] = None, f: PySide6.QtCore.Qt.WindowType = Default(Qt.WindowFlags)) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                               | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Inherits                                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[DialogMixin](DialogMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.dialog</font>*<br>                                                                                                                                                                                                                                     | <ul><li>[Dialog](Dialog.md)</li><li>[MessageBox](MessageBox.md)</li><li>[ErrorMessage](ErrorMessage.md)</li><li>[ProgressDialog](ProgressDialog.md)</li><li>[FontDialog](FontDialog.md)</li><li>[FileDialog](FileDialog.md)</li><li>[ColorDialog](ColorDialog.md)</li><li>[InputDialog](InputDialog.md)</li><li>[WizardMixin](WizardMixin.md)</li><li>[AbstractPrintDialogMixin](AbstractPrintDialogMixin.md)</li><li>...</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <ul><li>[WidgetMixin](WidgetMixin.md)</li></ul>                                                                                       |
+| **<font size='4'>[QDialog](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QDialog.html#PySide6.QtWidgets.PySide6.QtWidgets.QDialog)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QDialog\(self, parent: Optional\[PySide6\.QtWidgets\.QWidget\] \= None, f: PySide6\.QtCore\.Qt\.WindowType \= Default\(Qt\.WindowFlags\)\) \-\> None | <ul><li>[QWizard](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWizard.html#PySide6.QtWidgets.PySide6.QtWidgets.QWizard)</li><li>[QProgressDialog](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QProgressDialog.html#PySide6.QtWidgets.PySide6.QtWidgets.QProgressDialog)</li><li>[QMessageBox](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QMessageBox.html#PySide6.QtWidgets.PySide6.QtWidgets.QMessageBox)</li><li>[QInputDialog](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QInputDialog.html#PySide6.QtWidgets.PySide6.QtWidgets.QInputDialog)</li><li>[QFontDialog](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QFontDialog.html#PySide6.QtWidgets.PySide6.QtWidgets.QFontDialog)</li><li>[QErrorMessage](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QErrorMessage.html#PySide6.QtWidgets.PySide6.QtWidgets.QErrorMessage)</li><li>[QColorDialog](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QColorDialog.html#PySide6.QtWidgets.PySide6.QtWidgets.QColorDialog)</li><li>[QFileDialog](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QFileDialog.html#PySide6.QtWidgets.PySide6.QtWidgets.QFileDialog)</li><li>[Dialog](Dialog.md)</li><li>[QPrintPreviewDialog](https://doc.qt.io/qtforpython/PySide6/QtPrintSupport/QPrintPreviewDialog.html#PySide6.QtPrintSupport.PySide6.QtPrintSupport.QPrintPreviewDialog)</li><li>...</li></ul> | <ul><li>[QWidget](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidget)</li></ul> |
+
+
+## Subclasses
+
+| Class                                 | Module                             | Description |
+| ------------------------------------- | ---------------------------------- | ----------- |
+| [PopupInfo](PopupInfo.md)             | prettyqt.custom_widgets.popupinfo  |             |
+| [TracebackDialog](TracebackDialog.md) | prettyqt.debugging.tracebackdialog |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296197328["widgets.Dialog"]
+  1473296195376["widgets.DialogMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473241356416["QtWidgets.QDialog"]
+  1473290849680["QtWidgets.QWidget"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473296195376 --> 1473296197328
+  1473293688240 --> 1473296195376
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+  1473241356416 --> 1473296197328
+  1473290849680 --> 1473241356416
+  1473288842240 --> 1473290849680
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300082368 --> 1473290849680
+  1473291690208 --> 1473300082368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.dialog.Dialog
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property             | Type                            | Doc |
+| ----------------------- | ------------------------------- | --- |
+| `objectName`            | **QString**                     |     |
+| `modal`                 | **bool**                        |     |
+| `windowModality`        | **Qt::WindowModality**          |     |
+| `enabled`               | **bool**                        |     |
+| `geometry`              | **QRect**                       |     |
+| `frameGeometry`         | **QRect**                       |     |
+| `normalGeometry`        | **QRect**                       |     |
+| `x`                     | **int**                         |     |
+| `y`                     | **int**                         |     |
+| `pos`                   | **QPoint**                      |     |
+| `frameSize`             | **QSize**                       |     |
+| `size`                  | **QSize**                       |     |
+| `width`                 | **int**                         |     |
+| `height`                | **int**                         |     |
+| `rect`                  | **QRect**                       |     |
+| `childrenRect`          | **QRect**                       |     |
+| `childrenRegion`        | **QRegion**                     |     |
+| `sizePolicy`            | **QSizePolicy**                 |     |
+| `minimumSize`           | **QSize**                       |     |
+| `maximumSize`           | **QSize**                       |     |
+| `minimumWidth`          | **int**                         |     |
+| `minimumHeight`         | **int**                         |     |
+| `maximumWidth`          | **int**                         |     |
+| `maximumHeight`         | **int**                         |     |
+| `sizeIncrement`         | **QSize**                       |     |
+| `baseSize`              | **QSize**                       |     |
+| `palette`               | **QPalette**                    |     |
+| `font`                  | **QFont**                       |     |
+| `cursor`                | **QCursor**                     |     |
+| `mouseTracking`         | **bool**                        |     |
+| `tabletTracking`        | **bool**                        |     |
+| `isActiveWindow`        | **bool**                        |     |
+| `focusPolicy`           | **Qt::FocusPolicy**             |     |
+| `focus`                 | **bool**                        |     |
+| `contextMenuPolicy`     | **Qt::ContextMenuPolicy**       |     |
+| `updatesEnabled`        | **bool**                        |     |
+| `visible`               | **bool**                        |     |
+| `minimized`             | **bool**                        |     |
+| `maximized`             | **bool**                        |     |
+| `fullScreen`            | **bool**                        |     |
+| `sizeHint`              | **QSize**                       |     |
+| `minimumSizeHint`       | **QSize**                       |     |
+| `acceptDrops`           | **bool**                        |     |
+| `windowTitle`           | **QString**                     |     |
+| `windowIcon`            | **QIcon**                       |     |
+| `windowIconText`        | **QString**                     |     |
+| `windowOpacity`         | **double**                      |     |
+| `windowModified`        | **bool**                        |     |
+| `toolTip`               | **QString**                     |     |
+| `toolTipDuration`       | **int**                         |     |
+| `statusTip`             | **QString**                     |     |
+| `whatsThis`             | **QString**                     |     |
+| `accessibleName`        | **QString**                     |     |
+| `accessibleDescription` | **QString**                     |     |
+| `layoutDirection`       | **Qt::LayoutDirection**         |     |
+| `autoFillBackground`    | **bool**                        |     |
+| `styleSheet`            | **QString**                     |     |
+| `locale`                | **QLocale**                     |     |
+| `windowFilePath`        | **QString**                     |     |
+| `inputMethodHints`      | **QFlags<Qt::InputMethodHint>** |     |
+| `sizeGripEnabled`       | **bool**                        |     |
+| `modal`                 | **bool**                        |     |

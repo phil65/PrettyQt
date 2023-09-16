@@ -1,0 +1,46 @@
+Qt Base Class: [QJSEngine](https://doc.qt.io/qtforpython/PySide6/QtQml/QJSEngine.html#PySide6.QtQml.PySide6.QtQml.QJSEngine)
+
+Signature: `QJSEngine(self) -> None
+QJSEngine(self, parent: PySide6.QtCore.QObject) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                            | Children                                                                                                                                                           | Inherits                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[JSEngineMixin](JSEngineMixin.md)</font>**<br>*<font size='1'>prettyqt.qml.jsengine</font>*<br>                                                                                                | <ul><li>[JSEngine](JSEngine.md)</li><li>[QmlEngineMixin](QmlEngineMixin.md)</li></ul>                                                                              | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                              |
+| **<font size='4'>[QJSEngine](https://doc.qt.io/qtforpython/PySide6/QtQml/QJSEngine.html#PySide6.QtQml.PySide6.QtQml.QJSEngine)</font>**<br>*<font size='1'>PySide6.QtQml</font>*<br>QJSEngine\(self\) \-\> None | <ul><li>[QQmlEngine](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlEngine.html#PySide6.QtQml.PySide6.QtQml.QQmlEngine)</li><li>[JSEngine](JSEngine.md)</li></ul> | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572321824["qml.JSEngine"]
+  1473572333536["qml.JSEngineMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473572290592["QtQml.QJSEngine"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473572333536 --> 1473572321824
+  1473299815024 --> 1473572333536
+  140713234304496 --> 1473299815024
+  1473572290592 --> 1473572321824
+  1473288842240 --> 1473572290592
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qml.jsengine.JSEngine
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |
+| `uiLanguage` | **QString** |     |

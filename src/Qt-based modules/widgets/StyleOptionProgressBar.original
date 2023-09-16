@@ -1,0 +1,37 @@
+Qt Base Class: [QStyleOptionProgressBar](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStyleOptionProgressBar.html#PySide6.QtWidgets.PySide6.QtWidgets.QStyleOptionProgressBar)
+
+Signature: `QStyleOptionProgressBar(self) -> None
+QStyleOptionProgressBar(self, other: PySide6.QtWidgets.QStyleOptionProgressBar) -> None
+QStyleOptionProgressBar(self, version: int) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                    | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[StyleOptionMixin](StyleOptionMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.styleoption</font>*<br>                                                                                                                                                           | <ul><li>[StyleOption](StyleOption.md)</li><li>[StyleOptionButton](StyleOptionButton.md)</li><li>[StyleOptionComplexMixin](StyleOptionComplexMixin.md)</li><li>[StyleOptionDockWidget](StyleOptionDockWidget.md)</li><li>[StyleOptionFocusRect](StyleOptionFocusRect.md)</li><li>[StyleOptionFrame](StyleOptionFrame.md)</li><li>[StyleOptionGraphicsItem](StyleOptionGraphicsItem.md)</li><li>[StyleOptionHeader](StyleOptionHeader.md)</li><li>[StyleOptionMenuItem](StyleOptionMenuItem.md)</li><li>[StyleOptionProgressBar](StyleOptionProgressBar.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                                  |
+| **<font size='4'>[QStyleOptionProgressBar](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStyleOptionProgressBar.html#PySide6.QtWidgets.PySide6.QtWidgets.QStyleOptionProgressBar)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QStyleOptionProgressBar\(self\) \-\> None | <ul><li>[StyleOptionProgressBar](StyleOptionProgressBar.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | <ul><li>[QStyleOption](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStyleOption.html#PySide6.QtWidgets.PySide6.QtWidgets.QStyleOption)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296161216["widgets.StyleOptionProgressBar"]
+  1473296150480["widgets.StyleOptionMixin"]
+  140713234304496["builtins.object"]
+  1473365474448["QtWidgets.QStyleOptionProgressBar"]
+  1473365411984["QtWidgets.QStyleOption"]
+  1473291690208["Shiboken.Object"]
+  1473296150480 --> 1473296161216
+  140713234304496 --> 1473296150480
+  1473365474448 --> 1473296161216
+  1473365411984 --> 1473365474448
+  1473291690208 --> 1473365411984
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.styleoptionprogressbar.StyleOptionProgressBar
+    options:
+      show_root_toc_entry: False

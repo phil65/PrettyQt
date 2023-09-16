@@ -1,0 +1,30 @@
+Qt Base Class: [QScrollerProperties](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QScrollerProperties.html#PySide6.QtWidgets.PySide6.QtWidgets.QScrollerProperties)
+
+Signature: `QScrollerProperties(self) -> None
+QScrollerProperties(self, sp: PySide6.QtWidgets.QScrollerProperties) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                    | Children                                                      | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QScrollerProperties](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QScrollerProperties.html#PySide6.QtWidgets.PySide6.QtWidgets.QScrollerProperties)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QScrollerProperties\(self\) \-\> None | <ul><li>[ScrollerProperties](ScrollerProperties.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296345680["widgets.ScrollerProperties"]
+  1473290819424["QtWidgets.QScrollerProperties"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473290819424 --> 1473296345680
+  1473291690208 --> 1473290819424
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.scrollerproperties.ScrollerProperties
+    options:
+      show_root_toc_entry: False

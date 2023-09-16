@@ -1,0 +1,34 @@
+## Base classes
+
+| Name                                                                                                              | Children                                                                                                                                                                                                                                                                                    | Inherits                                        |
+| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **<font size='4'>[IODeviceMixin](IODeviceMixin.md)</font>**<br>*<font size='1'>prettyqt.core.iodevice</font>*<br> | <ul><li>[IODevice](IODevice.md)</li><li>[FileDeviceMixin](FileDeviceMixin.md)</li><li>[Buffer](Buffer.md)</li><li>[Process](Process.md)</li><li>[BluetoothSocket](BluetoothSocket.md)</li><li>[AbstractSocketMixin](AbstractSocketMixin.md)</li><li>[LocalSocket](LocalSocket.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul> |
+
+
+## Subclasses
+
+| Class                       | Module                   | Description |
+| --------------------------- | ------------------------ | ----------- |
+| [FileDevice](FileDevice.md) | prettyqt.core.filedevice |             |
+| [FileMixin](FileMixin.md)   | prettyqt.core.file       |             |
+| [SaveFile](SaveFile.md)     | prettyqt.core.savefile   |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299857968["core.FileDeviceMixin"]
+  1473299871632["core.IODeviceMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473299871632 --> 1473299857968
+  1473299815024 --> 1473299871632
+  140713234304496 --> 1473299815024
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.filedevice.FileDeviceMixin
+    options:
+      show_root_toc_entry: False

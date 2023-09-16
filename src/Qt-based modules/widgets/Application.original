@@ -1,0 +1,74 @@
+Qt Base Class: [QApplication](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QApplication.html#PySide6.QtWidgets.PySide6.QtWidgets.QApplication)
+
+Signature: `QApplication(self) -> None
+QApplication(self, arg__1: Sequence[str]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                        | Children                                        | Inherits                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[ApplicationMixin](ApplicationMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.application</font>*<br>                                                                                                               | <ul><li>[Application](Application.md)</li></ul> | <ul><li>[GuiApplicationMixin](GuiApplicationMixin.md)</li></ul>                                                                                   |
+| **<font size='4'>[QApplication](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QApplication.html#PySide6.QtWidgets.PySide6.QtWidgets.QApplication)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QApplication\(self\) \-\> None | <ul><li>[Application](Application.md)</li></ul> | <ul><li>[QGuiApplication](https://doc.qt.io/qtforpython/PySide6/QtGui/QGuiApplication.html#PySide6.QtGui.PySide6.QtGui.QGuiApplication)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293672624["widgets.Application"]
+  1473293670672["widgets.ApplicationMixin"]
+  1473245637296["gui.GuiApplicationMixin"]
+  1473299836496["core.CoreApplicationMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473293779984["QtWidgets.QApplication"]
+  1473245518224["QtGui.QGuiApplication"]
+  1473288981808["QtCore.QCoreApplication"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473293670672 --> 1473293672624
+  1473245637296 --> 1473293670672
+  1473299836496 --> 1473245637296
+  1473299815024 --> 1473299836496
+  140713234304496 --> 1473299815024
+  1473293779984 --> 1473293672624
+  1473245518224 --> 1473293779984
+  1473288981808 --> 1473245518224
+  1473288842240 --> 1473288981808
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.application.Application
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property              | Type                    | Doc                      |
+| ------------------------ | ----------------------- | ------------------------ |
+| `objectName`             | **QString**             |                          |
+| `applicationName`        | **QString**             |                          |
+| `applicationVersion`     | **QString**             |                          |
+| `organizationName`       | **QString**             |                          |
+| `organizationDomain`     | **QString**             |                          |
+| `quitLockEnabled`        | **bool**                |                          |
+| `windowIcon`             | **QIcon**               |                          |
+| `applicationDisplayName` | **QString**             |                          |
+| `desktopFileName`        | **QString**             |                          |
+| `layoutDirection`        | **Qt::LayoutDirection** |                          |
+| `platformName`           | **QString**             |                          |
+| `quitOnLastWindowClosed` | **bool**                |                          |
+| `primaryScreen`          | **QScreen**             |                          |
+| `cursorFlashTime`        | **int**                 |                          |
+| `doubleClickInterval`    | **int**                 |                          |
+| `keyboardInputInterval`  | **int**                 |                          |
+| `wheelScrollLines`       | **int**                 |                          |
+| `startDragTime`          | **int**                 |                          |
+| `startDragDistance`      | **int**                 |                          |
+| `styleSheet`             | **QString**             |                          |
+| `autoSipEnabled`         | **bool**                |                          |
+| `window_icon_color`      | **QString**             | Global window icon color |

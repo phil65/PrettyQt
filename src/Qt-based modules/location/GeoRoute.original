@@ -1,0 +1,34 @@
+Qt Base Class: [QGeoRoute](https://doc.qt.io/qtforpython/PySide6/QtLocation/QGeoRoute.html#PySide6.QtLocation.PySide6.QtLocation.QGeoRoute)
+
+Signature: `QGeoRoute(self) -> None
+QGeoRoute(self, other: PySide6.QtLocation.QGeoRoute) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                | Children                                  | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[GeoRouteMixin](GeoRouteMixin.md)</font>**<br>*<font size='1'>prettyqt.location.georoute</font>*<br>                                                                                                               | <ul><li>[GeoRoute](GeoRoute.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QGeoRoute](https://doc.qt.io/qtforpython/PySide6/QtLocation/QGeoRoute.html#PySide6.QtLocation.PySide6.QtLocation.QGeoRoute)</font>**<br>*<font size='1'>PySide6.QtLocation</font>*<br>QGeoRoute\(self\) \-\> None | <ul><li>[GeoRoute](GeoRoute.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573484400["location.GeoRoute"]
+  1473573477568["location.GeoRouteMixin"]
+  140713234304496["builtins.object"]
+  1473573408272["QtLocation.QGeoRoute"]
+  1473291690208["Shiboken.Object"]
+  1473573477568 --> 1473573484400
+  140713234304496 --> 1473573477568
+  1473573408272 --> 1473573484400
+  1473291690208 --> 1473573408272
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.location.georoute.GeoRoute
+    options:
+      show_root_toc_entry: False

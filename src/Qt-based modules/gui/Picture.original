@@ -1,0 +1,40 @@
+Qt Base Class: [QPicture](https://doc.qt.io/qtforpython/PySide6/QtGui/QPicture.html#PySide6.QtGui.PySide6.QtGui.QPicture)
+
+Signature: `QPicture(self, arg__1: Union[PySide6.QtGui.QPicture, int]) -> None
+QPicture(self, formatVersion: int = -1) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                          | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[SerializeMixin](SerializeMixin.md)</font>**<br>*<font size='1'>prettyqt.utils.serializemixin</font>*<br>                                                                                                                                    | <ul><li>[EasingCurve](EasingCurve.md)</li><li>[Url](Url.md)</li><li>[KeyCombination](KeyCombination.md)</li><li>[Icon](Icon.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[IconEngine](IconEngine.md)</li><li>[Image](Image.md)</li><li>[Brush](Brush.md)</li><li>[Region](Region.md)</li><li>[Transform](Transform.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                      |
+| **<font size='4'>[PaintDeviceMixin](PaintDeviceMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.paintdevice</font>*<br>                                                                                                                                     | <ul><li>[PaintDevice](PaintDevice.md)</li><li>[PaintDeviceWindowMixin](PaintDeviceWindowMixin.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[Image](Image.md)</li><li>[PagedPaintDeviceMixin](PagedPaintDeviceMixin.md)</li><li>[Picture](Picture.md)</li><li>[WidgetMixin](WidgetMixin.md)</li><li>[SvgGenerator](SvgGenerator.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                      |
+| **<font size='4'>[QPicture](https://doc.qt.io/qtforpython/PySide6/QtGui/QPicture.html#PySide6.QtGui.PySide6.QtGui.QPicture)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QPicture\(self, arg\_\_1: Union\[PySide6\.QtGui\.QPicture, int\]\) \-\> None | <ul><li>[Picture](Picture.md)</li></ul>                                                                                                                                                                                                                                                                                                           | <ul><li>[QPaintDevice](https://doc.qt.io/qtforpython/PySide6/QtGui/QPaintDevice.html#PySide6.QtGui.PySide6.QtGui.QPaintDevice)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245619728["gui.Picture"]
+  1473299806240["utils.SerializeMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473300088224["QtGui.QPicture"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473291690208["Shiboken.Object"]
+  1473299806240 --> 1473245619728
+  140713234304496 --> 1473299806240
+  1473245548480 --> 1473245619728
+  140713234304496 --> 1473245548480
+  1473300088224 --> 1473245619728
+  1473300082368 --> 1473300088224
+  1473291690208 --> 1473300082368
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.picture.Picture
+    options:
+      show_root_toc_entry: False

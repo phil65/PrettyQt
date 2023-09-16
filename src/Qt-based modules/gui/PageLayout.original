@@ -1,0 +1,31 @@
+Qt Base Class: [QPageLayout](https://doc.qt.io/qtforpython/PySide6/QtGui/QPageLayout.html#PySide6.QtGui.PySide6.QtGui.QPageLayout)
+
+Signature: `QPageLayout(self) -> None
+QPageLayout(self, other: PySide6.QtGui.QPageLayout) -> None
+QPageLayout(self, pageSize: Union[PySide6.QtGui.QPageSize, PySide6.QtGui.QPageSize.PageSizeId, PySide6.QtCore.QSize], orientation: PySide6.QtGui.QPageLayout.Orientation, margins: Union[PySide6.QtCore.QMarginsF, PySide6.QtCore.QMargins], units: PySide6.QtGui.QPageLayout.Unit = Instance(QPageLayout.Unit.Point), minMargins: Union[PySide6.QtCore.QMarginsF, PySide6.QtCore.QMargins] = Instance(QMarginsF(0, 0, 0, 0))) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                    | Children                                      | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QPageLayout](https://doc.qt.io/qtforpython/PySide6/QtGui/QPageLayout.html#PySide6.QtGui.PySide6.QtGui.QPageLayout)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QPageLayout\(self\) \-\> None | <ul><li>[PageLayout](PageLayout.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245606064["gui.PageLayout"]
+  1473289190048["QtGui.QPageLayout"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473289190048 --> 1473245606064
+  1473291690208 --> 1473289190048
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.pagelayout.PageLayout
+    options:
+      show_root_toc_entry: False

@@ -6,21 +6,23 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Python wrapper for PySide6 / PyQt6.">
+        <meta name="description" content="A pythonic layer on top of PyQt6 / PySide6">
       
+      
+        <meta name="author" content="philipptemminghoff@googlemail.com">
       
       
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/Qt-based%20modules/quick/">
       
       
-        <link rel="prev" href="../qthelp/HelpEngineCoreMixin/">
+        <link rel="prev" href="../qthelp/HelpFilterData/">
       
       
-        <link rel="next" href="QuickView/">
+        <link rel="next" href="QuickItemGrabResult/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.7">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.3.1">
     
     
       
@@ -54,9 +56,9 @@
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../assets/mknodes_nodes.css">
-    
       <link rel="stylesheet" href="../../assets/mknodes_theme.css">
+    
+      <link rel="stylesheet" href="../../assets/mknodes_nodes.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -109,21 +111,21 @@
           <div class="md-banner__inner md-grid md-typeset">
             
             
-<body><a href='https://github.com/blambright/qstylizer'><svg xmlns="http://www.w3.org/2000/svg" width="105" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_1">        <rect width="105" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_1)">        <path fill="#555" d="M0 0h64v20H0z"/>        <path fill="#4051b5" d="M64 0h41v20H64z"/>        <path fill="url(#b)" d="M0 0h105v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="33.0" y="15" fill="#010101" fill-opacity=".3">qstylizer</text>        <text x="32.0" y="14">qstylizer</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="85.5" y="15" fill="#010101" fill-opacity=".3">0.2.2</text>        <text x="84.5" y="14">0.2.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://www.pyside.org'><svg xmlns="http://www.w3.org/2000/svg" width="97" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_2">        <rect width="97" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_2)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h41v20H56z"/>        <path fill="url(#b)" d="M0 0h97v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">PySide6</text>        <text x="28.0" y="14">PySide6</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="77.5" y="15" fill="#010101" fill-opacity=".3">6.5.2</text>        <text x="76.5" y="14">6.5.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://typing-extensions.readthedocs.io/'><svg xmlns="http://www.w3.org/2000/svg" width="160" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_3">        <rect width="160" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_3)">        <path fill="#555" d="M0 0h119v20H0z"/>        <path fill="#4051b5" d="M119 0h41v20H119z"/>        <path fill="url(#b)" d="M0 0h160v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="60.5" y="15" fill="#010101" fill-opacity=".3">typing_extensions</text>        <text x="59.5" y="14">typing_extensions</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="140.5" y="15" fill="#010101" fill-opacity=".3">4.7.1</text>        <text x="139.5" y="14">4.7.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://www.numpy.org'><svg xmlns="http://www.w3.org/2000/svg" width="96" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_4">        <rect width="96" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_4)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h48v20H48z"/>        <path fill="url(#b)" d="M0 0h96v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">numpy</text>        <text x="24.0" y="14">numpy</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="73.0" y="15" fill="#010101" fill-opacity=".3">1.25.2</text>        <text x="72.0" y="14">1.25.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://github.com/mhammond/pywin32'><svg xmlns="http://www.w3.org/2000/svg" width="87" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_5">        <rect width="87" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_5)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h31v20H56z"/>        <path fill="url(#b)" d="M0 0h87v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">pywin32</text>        <text x="28.0" y="14">pywin32</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="72.5" y="15" fill="#010101" fill-opacity=".3">306</text>        <text x="71.5" y="14">306</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://github.com/ijl/orjson'><svg xmlns="http://www.w3.org/2000/svg" width="89" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_6">        <rect width="89" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_6)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h41v20H48z"/>        <path fill="url(#b)" d="M0 0h89v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">orjson</text>        <text x="24.0" y="14">orjson</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.5" y="15" fill="#010101" fill-opacity=".3">3.9.5</text>        <text x="68.5" y="14">3.9.5</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://github.com/enthought/comtypes'><svg xmlns="http://www.w3.org/2000/svg" width="108" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_7">        <rect width="108" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_7)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h41v20H67z"/>        <path fill="url(#b)" d="M0 0h108v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">comtypes</text>        <text x="33.5" y="14">comtypes</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="88.5" y="15" fill="#010101" fill-opacity=".3">1.2.0</text>        <text x="87.5" y="14">1.2.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://bidict.readthedocs.io'><svg xmlns="http://www.w3.org/2000/svg" width="92" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_8">        <rect width="92" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_8)">        <path fill="#555" d="M0 0h44v20H0z"/>        <path fill="#4051b5" d="M44 0h48v20H44z"/>        <path fill="url(#b)" d="M0 0h92v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="23.0" y="15" fill="#010101" fill-opacity=".3">bidict</text>        <text x="22.0" y="14">bidict</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.0" y="15" fill="#010101" fill-opacity=".3">0.22.1</text>        <text x="68.0" y="14">0.22.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://python-pillow.org'><svg xmlns="http://www.w3.org/2000/svg" width="91" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_9">        <rect width="91" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_9)">        <path fill="#555" d="M0 0h43v20H0z"/>        <path fill="#4051b5" d="M43 0h48v20H43z"/>        <path fill="url(#b)" d="M0 0h91v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="22.5" y="15" fill="#010101" fill-opacity=".3">Pillow</text>        <text x="21.5" y="14">Pillow</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="68.0" y="15" fill="#010101" fill-opacity=".3">10.0.0</text>        <text x="67.0" y="14">10.0.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://pygments.org'><svg xmlns="http://www.w3.org/2000/svg" width="115" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_10">        <rect width="115" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_10)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h48v20H67z"/>        <path fill="url(#b)" d="M0 0h115v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">Pygments</text>        <text x="33.5" y="14">Pygments</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="92.0" y="15" fill="#010101" fill-opacity=".3">2.16.1</text>        <text x="91.0" y="14">2.16.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://ipython.org'><svg xmlns="http://www.w3.org/2000/svg" width="102" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_11">        <rect width="102" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_11)">        <path fill="#555" d="M0 0h54v20H0z"/>        <path fill="#4051b5" d="M54 0h48v20H54z"/>        <path fill="url(#b)" d="M0 0h102v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="28.0" y="15" fill="#010101" fill-opacity=".3">ipython</text>        <text x="27.0" y="14">ipython</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="79.0" y="15" fill="#010101" fill-opacity=".3">8.15.0</text>        <text x="78.0" y="14">8.15.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='http://github.com/fsspec/filesystem_spec'><svg xmlns="http://www.w3.org/2000/svg" width="112" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_12">        <rect width="112" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_12)">        <path fill="#555" d="M0 0h50v20H0z"/>        <path fill="#4051b5" d="M50 0h62v20H50z"/>        <path fill="url(#b)" d="M0 0h112v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="26.0" y="15" fill="#010101" fill-opacity=".3">fsspec</text>        <text x="25.0" y="14">fsspec</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="82.0" y="15" fill="#010101" fill-opacity=".3">2023.9.0</text>        <text x="81.0" y="14">2023.9.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://lxml.de/'><svg xmlns="http://www.w3.org/2000/svg" width="76" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_13">        <rect width="76" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_13)">        <path fill="#555" d="M0 0h35v20H0z"/>        <path fill="#4051b5" d="M35 0h41v20H35z"/>        <path fill="url(#b)" d="M0 0h76v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="18.5" y="15" fill="#010101" fill-opacity=".3">lxml</text>        <text x="17.5" y="14">lxml</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="56.5" y="15" fill="#010101" fill-opacity=".3">4.9.3</text>        <text x="55.5" y="14">4.9.3</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='http://jupyter.org'><svg xmlns="http://www.w3.org/2000/svg" width="109" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_14">        <rect width="109" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_14)">        <path fill="#555" d="M0 0h68v20H0z"/>        <path fill="#4051b5" d="M68 0h41v20H68z"/>        <path fill="url(#b)" d="M0 0h109v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="35.0" y="15" fill="#010101" fill-opacity=".3">qtconsole</text>        <text x="34.0" y="14">qtconsole</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="89.5" y="15" fill="#010101" fill-opacity=".3">5.4.4</text>        <text x="88.5" y="14">5.4.4</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://www.attrs.org/'><svg xmlns="http://www.w3.org/2000/svg" width="88" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_15">        <rect width="88" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_15)">        <path fill="#555" d="M0 0h40v20H0z"/>        <path fill="#4051b5" d="M40 0h48v20H40z"/>        <path fill="url(#b)" d="M0 0h88v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="21.0" y="15" fill="#010101" fill-opacity=".3">attrs</text>        <text x="20.0" y="14">attrs</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="65.0" y="15" fill="#010101" fill-opacity=".3">23.1.0</text>        <text x="64.0" y="14">23.1.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://python-pillow.org'><svg xmlns="http://www.w3.org/2000/svg" width="91" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_1">        <rect width="91" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_1)">        <path fill="#555" d="M0 0h43v20H0z"/>        <path fill="#4051b5" d="M43 0h48v20H43z"/>        <path fill="url(#b)" d="M0 0h91v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="22.5" y="15" fill="#010101" fill-opacity=".3">Pillow</text>        <text x="21.5" y="14">Pillow</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="68.0" y="15" fill="#010101" fill-opacity=".3">10.0.1</text>        <text x="67.0" y="14">10.0.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/ijl/orjson'><svg xmlns="http://www.w3.org/2000/svg" width="89" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_2">        <rect width="89" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_2)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h41v20H48z"/>        <path fill="url(#b)" d="M0 0h89v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">orjson</text>        <text x="24.0" y="14">orjson</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.5" y="15" fill="#010101" fill-opacity=".3">3.9.7</text>        <text x="68.5" y="14">3.9.7</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://pygments.org'><svg xmlns="http://www.w3.org/2000/svg" width="115" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_3">        <rect width="115" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_3)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h48v20H67z"/>        <path fill="url(#b)" d="M0 0h115v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">Pygments</text>        <text x="33.5" y="14">Pygments</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="92.0" y="15" fill="#010101" fill-opacity=".3">2.16.1</text>        <text x="91.0" y="14">2.16.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://www.pyside.org'><svg xmlns="http://www.w3.org/2000/svg" width="97" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_4">        <rect width="97" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_4)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h41v20H56z"/>        <path fill="url(#b)" d="M0 0h97v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">PySide6</text>        <text x="28.0" y="14">PySide6</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="77.5" y="15" fill="#010101" fill-opacity=".3">6.5.2</text>        <text x="76.5" y="14">6.5.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='http://github.com/fsspec/filesystem_spec'><svg xmlns="http://www.w3.org/2000/svg" width="112" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_5">        <rect width="112" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_5)">        <path fill="#555" d="M0 0h50v20H0z"/>        <path fill="#4051b5" d="M50 0h62v20H50z"/>        <path fill="url(#b)" d="M0 0h112v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="26.0" y="15" fill="#010101" fill-opacity=".3">fsspec</text>        <text x="25.0" y="14">fsspec</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="82.0" y="15" fill="#010101" fill-opacity=".3">2023.9.1</text>        <text x="81.0" y="14">2023.9.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/enthought/comtypes'><svg xmlns="http://www.w3.org/2000/svg" width="108" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_6">        <rect width="108" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_6)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h41v20H67z"/>        <path fill="url(#b)" d="M0 0h108v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">comtypes</text>        <text x="33.5" y="14">comtypes</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="88.5" y="15" fill="#010101" fill-opacity=".3">1.2.0</text>        <text x="87.5" y="14">1.2.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://www.attrs.org/'><svg xmlns="http://www.w3.org/2000/svg" width="88" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_7">        <rect width="88" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_7)">        <path fill="#555" d="M0 0h40v20H0z"/>        <path fill="#4051b5" d="M40 0h48v20H40z"/>        <path fill="url(#b)" d="M0 0h88v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="21.0" y="15" fill="#010101" fill-opacity=".3">attrs</text>        <text x="20.0" y="14">attrs</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="65.0" y="15" fill="#010101" fill-opacity=".3">23.1.0</text>        <text x="64.0" y="14">23.1.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://www.numpy.org'><svg xmlns="http://www.w3.org/2000/svg" width="96" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_8">        <rect width="96" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_8)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h48v20H48z"/>        <path fill="url(#b)" d="M0 0h96v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">numpy</text>        <text x="24.0" y="14">numpy</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="73.0" y="15" fill="#010101" fill-opacity=".3">1.25.2</text>        <text x="72.0" y="14">1.25.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://bidict.readthedocs.io'><svg xmlns="http://www.w3.org/2000/svg" width="92" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_9">        <rect width="92" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_9)">        <path fill="#555" d="M0 0h44v20H0z"/>        <path fill="#4051b5" d="M44 0h48v20H44z"/>        <path fill="url(#b)" d="M0 0h92v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="23.0" y="15" fill="#010101" fill-opacity=".3">bidict</text>        <text x="22.0" y="14">bidict</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.0" y="15" fill="#010101" fill-opacity=".3">0.22.1</text>        <text x="68.0" y="14">0.22.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://typing-extensions.readthedocs.io/'><svg xmlns="http://www.w3.org/2000/svg" width="160" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_10">        <rect width="160" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_10)">        <path fill="#555" d="M0 0h119v20H0z"/>        <path fill="#4051b5" d="M119 0h41v20H119z"/>        <path fill="url(#b)" d="M0 0h160v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="60.5" y="15" fill="#010101" fill-opacity=".3">typing_extensions</text>        <text x="59.5" y="14">typing_extensions</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="140.5" y="15" fill="#010101" fill-opacity=".3">4.7.1</text>        <text x="139.5" y="14">4.7.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='http://jupyter.org'><svg xmlns="http://www.w3.org/2000/svg" width="109" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_11">        <rect width="109" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_11)">        <path fill="#555" d="M0 0h68v20H0z"/>        <path fill="#4051b5" d="M68 0h41v20H68z"/>        <path fill="url(#b)" d="M0 0h109v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="35.0" y="15" fill="#010101" fill-opacity=".3">qtconsole</text>        <text x="34.0" y="14">qtconsole</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="89.5" y="15" fill="#010101" fill-opacity=".3">5.4.4</text>        <text x="88.5" y="14">5.4.4</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/mhammond/pywin32'><svg xmlns="http://www.w3.org/2000/svg" width="87" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_12">        <rect width="87" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_12)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h31v20H56z"/>        <path fill="url(#b)" d="M0 0h87v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">pywin32</text>        <text x="28.0" y="14">pywin32</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="72.5" y="15" fill="#010101" fill-opacity=".3">306</text>        <text x="71.5" y="14">306</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://lxml.de/'><svg xmlns="http://www.w3.org/2000/svg" width="76" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_13">        <rect width="76" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_13)">        <path fill="#555" d="M0 0h35v20H0z"/>        <path fill="#4051b5" d="M35 0h41v20H35z"/>        <path fill="url(#b)" d="M0 0h76v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="18.5" y="15" fill="#010101" fill-opacity=".3">lxml</text>        <text x="17.5" y="14">lxml</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="56.5" y="15" fill="#010101" fill-opacity=".3">4.9.3</text>        <text x="55.5" y="14">4.9.3</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://ipython.org'><svg xmlns="http://www.w3.org/2000/svg" width="102" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_14">        <rect width="102" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_14)">        <path fill="#555" d="M0 0h54v20H0z"/>        <path fill="#4051b5" d="M54 0h48v20H54z"/>        <path fill="url(#b)" d="M0 0h102v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="28.0" y="15" fill="#010101" fill-opacity=".3">ipython</text>        <text x="27.0" y="14">ipython</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="79.0" y="15" fill="#010101" fill-opacity=".3">8.15.0</text>        <text x="78.0" y="14">8.15.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/blambright/qstylizer'><svg xmlns="http://www.w3.org/2000/svg" width="105" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_15">        <rect width="105" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_15)">        <path fill="#555" d="M0 0h64v20H0z"/>        <path fill="#4051b5" d="M64 0h41v20H64z"/>        <path fill="url(#b)" d="M0 0h105v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="33.0" y="15" fill="#010101" fill-opacity=".3">qstylizer</text>        <text x="32.0" y="14">qstylizer</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="85.5" y="15" fill="#010101" fill-opacity=".3">0.2.2</text>        <text x="84.5" y="14">0.2.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 
 
           </div>
@@ -280,7 +282,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../Usage/prettyqt/docs/api_guidelines/general/" class="md-tabs__link">
+        <a href="../../Usage/general/" class="md-tabs__link">
           
   
     
@@ -300,7 +302,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../Features/prettyqt/docs/features/proxies/" class="md-tabs__link">
+        <a href="../../Features/proxies/" class="md-tabs__link">
           
   
     
@@ -321,8 +323,16 @@
   
     
     
+      
+  
+  
+    
+  
+  
+    
+    
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        <a href="../bluetooth/" class="md-tabs__link">
           
   
     
@@ -334,6 +344,9 @@
     
   
 
+    
+  
+
       
         
   
@@ -341,8 +354,14 @@
   
     
     
+      
+  
+  
+  
+    
+    
       <li class="md-tabs__item">
-        <a href="../../Additional%20modules/" class="md-tabs__link">
+        <a href="../../Additional%20modules/animations/" class="md-tabs__link">
           
   
     
@@ -351,6 +370,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -465,7 +487,7 @@
         
   
   
-    <a href="../../Usage/prettyqt/docs/api_guidelines/general/" class="md-nav__link">
+    <a href="../../Usage/general/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -510,7 +532,7 @@
         
   
   
-    <a href="../../Features/prettyqt/docs/features/proxies/" class="md-nav__link">
+    <a href="../../Features/proxies/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -538,10 +560,6 @@
   
     
     
-      
-        
-          
-        
       
         
       
@@ -607,24 +625,16 @@
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
-              
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
     Qt-based modules
   </span>
   
 
-            </a>
-            
-              <label class="md-nav__link " for="__nav_4">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
@@ -632,8 +642,6 @@
             Qt-based modules
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
             
               
                 
@@ -2175,7 +2183,7 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_18" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_17" checked>
         
           
           
@@ -2190,119 +2198,19 @@
 
             </a>
             
-              <label class="md-nav__link md-nav__link--active" for="__nav_4_18">
+              <label class="md-nav__link md-nav__link--active" for="__nav_4_17">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_18_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4_18">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_17_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_17">
             <span class="md-nav__icon md-icon"></span>
             quick
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="QuickView/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    QuickView
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="QuickRenderControl/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    QuickRenderControl
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="QuickTextDocument/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    QuickTextDocument
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="QuickItemMixin/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    QuickItemMixin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="QuickWindow/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    QuickWindow
-  </span>
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -2351,11 +2259,11 @@
   
   
     <li class="md-nav__item">
-      <a href="QuickImageResponse/" class="md-nav__link">
+      <a href="QuickRenderControl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    QuickImageResponse
+    QuickRenderControl
   </span>
   
 
@@ -2391,26 +2299,6 @@
   
   
     <li class="md-nav__item">
-      <a href="SGNode/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SGNode
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
       <a href="QuickImageProviderMixin/" class="md-nav__link">
         
   
@@ -2431,11 +2319,131 @@
   
   
     <li class="md-nav__item">
+      <a href="QuickItemMixin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QuickItemMixin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="QuickImageResponse/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QuickImageResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="SGNode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SGNode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="QuickView/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QuickView
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="QuickTextDocument/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QuickTextDocument
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
       <a href="QuickItem/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     QuickItem
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="QuickWindow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QuickWindow
   </span>
   
 
@@ -3385,10 +3393,6 @@
     
       
         
-          
-        
-      
-        
       
         
       
@@ -3432,7 +3436,10 @@
         
   
   
-    <a href="../../Additional%20modules/" class="md-nav__link">
+    
+  
+  
+    <a href="../../Additional%20modules/animations/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -3444,6 +3451,8 @@
         <span class="md-nav__icon md-icon"></span>
       
     </a>
+  
+
   
 
       
@@ -3573,31 +3582,6 @@
 </thead>
 <tbody>
 <tr>
-<td><strong><font size='4'><a href="QuickView/">QuickView</a></font></strong><br><em><font size='1'>prettyqt.quick.quickview</font></em><br></td>
-<td></td>
-<td><ul><li><code>QuickWindowMixin</code></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickView.html#PySide6.QtQuick.PySide6.QtQuick.QQuickView">QQuickView</a></li></ul></td>
-</tr>
-<tr>
-<td><strong><font size='4'><a href="QuickRenderControl/">QuickRenderControl</a></font></strong><br><em><font size='1'>prettyqt.quick.quickrendercontrol</font></em><br></td>
-<td></td>
-<td><ul><li><a href="../core/ObjectMixin/">ObjectMixin</a></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickRenderControl.html#PySide6.QtQuick.PySide6.QtQuick.QQuickRenderControl">QQuickRenderControl</a></li></ul></td>
-</tr>
-<tr>
-<td><strong><font size='4'><a href="QuickTextDocument/">QuickTextDocument</a></font></strong><br><em><font size='1'>prettyqt.quick.quicktextdocument</font></em><br></td>
-<td></td>
-<td><ul><li><a href="../core/ObjectMixin/">ObjectMixin</a></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickTextDocument.html#PySide6.QtQuick.PySide6.QtQuick.QQuickTextDocument">QQuickTextDocument</a></li></ul></td>
-</tr>
-<tr>
-<td><strong><font size='4'><a href="QuickItemMixin/">QuickItemMixin</a></font></strong><br><em><font size='1'>prettyqt.quick.quickitem</font></em><br></td>
-<td><ul><li><a href="QuickItem/">QuickItem</a></li><li><a href="QuickPaintedItem/">QuickPaintedItem</a></li></ul></td>
-<td><ul><li><a href="../core/ObjectMixin/">ObjectMixin</a></li><li><a href="../qml/QmlParserStatusMixin/">QmlParserStatusMixin</a></li></ul></td>
-</tr>
-<tr>
-<td><strong><font size='4'><a href="QuickWindow/">QuickWindow</a></font></strong><br><em><font size='1'>prettyqt.quick.quickwindow</font></em><br></td>
-<td></td>
-<td><ul><li><code>QuickWindowMixin</code></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickWindow.html#PySide6.QtQuick.PySide6.QtQuick.QQuickWindow">QQuickWindow</a></li></ul></td>
-</tr>
-<tr>
 <td><strong><font size='4'><a href="QuickItemGrabResult/">QuickItemGrabResult</a></font></strong><br><em><font size='1'>prettyqt.quick.quickitemgrabresult</font></em><br>Contains the result from QQuickItem::grabToImage().</td>
 <td></td>
 <td><ul><li><a href="../core/ObjectMixin/">ObjectMixin</a></li></ul></td>
@@ -3608,9 +3592,9 @@
 <td><ul><li><a href="QuickImageProviderMixin/">QuickImageProviderMixin</a></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickAsyncImageProvider.html#PySide6.QtQuick.PySide6.QtQuick.QQuickAsyncImageProvider">QQuickAsyncImageProvider</a></li></ul></td>
 </tr>
 <tr>
-<td><strong><font size='4'><a href="QuickImageResponse/">QuickImageResponse</a></font></strong><br><em><font size='1'>prettyqt.quick.quickimageresponse</font></em><br></td>
+<td><strong><font size='4'><a href="QuickRenderControl/">QuickRenderControl</a></font></strong><br><em><font size='1'>prettyqt.quick.quickrendercontrol</font></em><br></td>
 <td></td>
-<td><ul><li><a href="../core/ObjectMixin/">ObjectMixin</a></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickImageResponse.html#PySide6.QtQuick.PySide6.QtQuick.QQuickImageResponse">QQuickImageResponse</a></li></ul></td>
+<td><ul><li><a href="../core/ObjectMixin/">ObjectMixin</a></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickRenderControl.html#PySide6.QtQuick.PySide6.QtQuick.QQuickRenderControl">QQuickRenderControl</a></li></ul></td>
 </tr>
 <tr>
 <td><strong><font size='4'><a href="QuickImageProvider/">QuickImageProvider</a></font></strong><br><em><font size='1'>prettyqt.quick.quickimageprovider</font></em><br></td>
@@ -3618,19 +3602,44 @@
 <td><ul><li><a href="QuickImageProviderMixin/">QuickImageProviderMixin</a></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickImageProvider.html#PySide6.QtQuick.PySide6.QtQuick.QQuickImageProvider">QQuickImageProvider</a></li></ul></td>
 </tr>
 <tr>
-<td><strong><font size='4'><a href="SGNode/">SGNode</a></font></strong><br><em><font size='1'>prettyqt.quick.sgnode</font></em><br></td>
-<td></td>
-<td><ul><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QSGNode.html#PySide6.QtQuick.PySide6.QtQuick.QSGNode">QSGNode</a></li></ul></td>
-</tr>
-<tr>
 <td><strong><font size='4'><a href="QuickImageProviderMixin/">QuickImageProviderMixin</a></font></strong><br><em><font size='1'>prettyqt.quick.quickimageprovider</font></em><br></td>
 <td><ul><li><a href="QuickImageProvider/">QuickImageProvider</a></li><li><a href="QuickAsyncImageProvider/">QuickAsyncImageProvider</a></li></ul></td>
 <td><ul><li><a href="../qml/QmlImageProviderBaseMixin/">QmlImageProviderBaseMixin</a></li></ul></td>
 </tr>
 <tr>
+<td><strong><font size='4'><a href="QuickItemMixin/">QuickItemMixin</a></font></strong><br><em><font size='1'>prettyqt.quick.quickitem</font></em><br></td>
+<td><ul><li><a href="QuickItem/">QuickItem</a></li><li><a href="QuickPaintedItem/">QuickPaintedItem</a></li></ul></td>
+<td><ul><li><a href="../core/ObjectMixin/">ObjectMixin</a></li><li><a href="../qml/QmlParserStatusMixin/">QmlParserStatusMixin</a></li></ul></td>
+</tr>
+<tr>
+<td><strong><font size='4'><a href="QuickImageResponse/">QuickImageResponse</a></font></strong><br><em><font size='1'>prettyqt.quick.quickimageresponse</font></em><br></td>
+<td></td>
+<td><ul><li><a href="../core/ObjectMixin/">ObjectMixin</a></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickImageResponse.html#PySide6.QtQuick.PySide6.QtQuick.QQuickImageResponse">QQuickImageResponse</a></li></ul></td>
+</tr>
+<tr>
+<td><strong><font size='4'><a href="SGNode/">SGNode</a></font></strong><br><em><font size='1'>prettyqt.quick.sgnode</font></em><br></td>
+<td></td>
+<td><ul><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QSGNode.html#PySide6.QtQuick.PySide6.QtQuick.QSGNode">QSGNode</a></li></ul></td>
+</tr>
+<tr>
+<td><strong><font size='4'><a href="QuickView/">QuickView</a></font></strong><br><em><font size='1'>prettyqt.quick.quickview</font></em><br></td>
+<td></td>
+<td><ul><li><code>QuickWindowMixin</code></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickView.html#PySide6.QtQuick.PySide6.QtQuick.QQuickView">QQuickView</a></li></ul></td>
+</tr>
+<tr>
+<td><strong><font size='4'><a href="QuickTextDocument/">QuickTextDocument</a></font></strong><br><em><font size='1'>prettyqt.quick.quicktextdocument</font></em><br></td>
+<td></td>
+<td><ul><li><a href="../core/ObjectMixin/">ObjectMixin</a></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickTextDocument.html#PySide6.QtQuick.PySide6.QtQuick.QQuickTextDocument">QQuickTextDocument</a></li></ul></td>
+</tr>
+<tr>
 <td><strong><font size='4'><a href="QuickItem/">QuickItem</a></font></strong><br><em><font size='1'>prettyqt.quick.quickitem</font></em><br></td>
 <td></td>
 <td><ul><li><a href="QuickItemMixin/">QuickItemMixin</a></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickItem.html#PySide6.QtQuick.PySide6.QtQuick.QQuickItem">QQuickItem</a></li></ul></td>
+</tr>
+<tr>
+<td><strong><font size='4'><a href="QuickWindow/">QuickWindow</a></font></strong><br><em><font size='1'>prettyqt.quick.quickwindow</font></em><br></td>
+<td></td>
+<td><ul><li><code>QuickWindowMixin</code></li><li><a href="https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickWindow.html#PySide6.QtQuick.PySide6.QtQuick.QQuickWindow">QQuickWindow</a></li></ul></td>
 </tr>
 <tr>
 <td><strong><font size='4'><a href="QuickPaintedItem/">QuickPaintedItem</a></font></strong><br><em><font size='1'>prettyqt.quick.quickpainteditem</font></em><br></td>
@@ -3670,7 +3679,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../qthelp/HelpEngineCoreMixin/" class="md-footer__link md-footer__link--prev" aria-label="Previous: HelpEngineCoreMixin" rel="prev">
+          <a href="../qthelp/HelpFilterData/" class="md-footer__link md-footer__link--prev" aria-label="Previous: HelpFilterData" rel="prev">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -3680,20 +3689,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                HelpEngineCoreMixin
+                HelpFilterData
               </div>
             </div>
           </a>
         
         
           
-          <a href="QuickView/" class="md-footer__link md-footer__link--next" aria-label="Next: QuickView" rel="next">
+          <a href="QuickItemGrabResult/" class="md-footer__link md-footer__link--next" aria-label="Next: QuickItemGrabResult" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                QuickView
+                QuickItemGrabResult
               </div>
             </div>
             <div class="md-footer__button md-icon">

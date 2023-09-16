@@ -1,0 +1,35 @@
+## Base classes
+
+| Name                                                                                                                                                                          | Children                                                                                                        | Inherits                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| **<font size='4'>[FileDeviceMixin](FileDeviceMixin.md)</font>**<br>*<font size='1'>prettyqt.core.filedevice</font>*<br>Interface for reading from and writing to open files\. | <ul><li>[FileDevice](FileDevice.md)</li><li>[FileMixin](FileMixin.md)</li><li>[SaveFile](SaveFile.md)</li></ul> | <ul><li>[IODeviceMixin](IODeviceMixin.md)</li></ul> |
+
+
+## Subclasses
+
+| Class                             | Module                      | Description |
+| --------------------------------- | --------------------------- | ----------- |
+| [File](File.md)                   | prettyqt.core.file          |             |
+| [TemporaryFile](TemporaryFile.md) | prettyqt.core.temporaryfile |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299847232["core.FileMixin"]
+  1473299857968["core.FileDeviceMixin"]
+  1473299871632["core.IODeviceMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473299857968 --> 1473299847232
+  1473299871632 --> 1473299857968
+  1473299815024 --> 1473299871632
+  140713234304496 --> 1473299815024
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.file.FileMixin
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,40 @@
+Qt Base Class: [QPrinter](https://doc.qt.io/qtforpython/PySide6/QtPrintSupport/QPrinter.html#PySide6.QtPrintSupport.PySide6.QtPrintSupport.QPrinter)
+
+Signature: `QPrinter(self, mode: PySide6.QtPrintSupport.QPrinter.PrinterMode = Instance(PySide6.QtPrintSupport.QPrinter.PrinterMode.ScreenResolution)) -> None
+QPrinter(self, printer: PySide6.QtPrintSupport.QPrinterInfo, mode: PySide6.QtPrintSupport.QPrinter.PrinterMode = Instance(PySide6.QtPrintSupport.QPrinter.PrinterMode.ScreenResolution)) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                                                  | Children                                                                                                                  | Inherits                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[PagedPaintDeviceMixin](PagedPaintDeviceMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.pagedpaintdevice</font>*<br>                                                                                                                                                                                                                                              | <ul><li>[PagedPaintDevice](PagedPaintDevice.md)</li><li>[PdfWriter](PdfWriter.md)</li><li>[Printer](Printer.md)</li></ul> | <ul><li>[PaintDeviceMixin](PaintDeviceMixin.md)</li></ul>                                                                                               |
+| **<font size='4'>[QPrinter](https://doc.qt.io/qtforpython/PySide6/QtPrintSupport/QPrinter.html#PySide6.QtPrintSupport.PySide6.QtPrintSupport.QPrinter)</font>**<br>*<font size='1'>PySide6.QtPrintSupport</font>*<br>QPrinter\(self, mode: PySide6\.QtPrintSupport\.QPrinter\.PrinterMode \= Instance\(PySide6\.QtPrintSupport\.QPrinter\.PrinterMode\.ScreenResolution\)\) \-\> None | <ul><li>[Printer](Printer.md)</li></ul>                                                                                   | <ul><li>[QPagedPaintDevice](https://doc.qt.io/qtforpython/PySide6/QtGui/QPagedPaintDevice.html#PySide6.QtGui.PySide6.QtGui.QPagedPaintDevice)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572238864["printsupport.Printer"]
+  1473245618752["gui.PagedPaintDeviceMixin"]
+  1473245548480["gui.PaintDeviceMixin"]
+  140713234304496["builtins.object"]
+  1473572059520["QtPrintSupport.QPrinter"]
+  1473300089200["QtGui.QPagedPaintDevice"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473291690208["Shiboken.Object"]
+  1473245618752 --> 1473572238864
+  1473245548480 --> 1473245618752
+  140713234304496 --> 1473245548480
+  1473572059520 --> 1473572238864
+  1473300089200 --> 1473572059520
+  1473300082368 --> 1473300089200
+  1473291690208 --> 1473300082368
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.printsupport.printer.Printer
+    options:
+      show_root_toc_entry: False

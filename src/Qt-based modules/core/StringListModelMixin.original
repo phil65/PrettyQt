@@ -1,0 +1,35 @@
+## Base classes
+
+| Name                                                                                                                                         | Children                                                                                                            | Inherits                                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **<font size='4'>[AbstractListModelMixin](AbstractListModelMixin.md)</font>**<br>*<font size='1'>prettyqt.core.abstractlistmodel</font>*<br> | <ul><li>[AbstractListModel](AbstractListModel.md)</li><li>[StringListModelMixin](StringListModelMixin.md)</li></ul> | <ul><li>[AbstractItemModelMixin](AbstractItemModelMixin.md)</li></ul> |
+
+
+## Subclasses
+
+| Class                                 | Module                         | Description |
+| ------------------------------------- | ------------------------------ | ----------- |
+| [StringListModel](StringListModel.md) | prettyqt.core.stringlistmodel  |             |
+| [HelpIndexModel](HelpIndexModel.md)   | prettyqt.qthelp.helpindexmodel |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299896032["core.StringListModelMixin"]
+  1473299894080["core.AbstractListModelMixin"]
+  1473299890176["core.AbstractItemModelMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473299894080 --> 1473299896032
+  1473299890176 --> 1473299894080
+  1473299815024 --> 1473299890176
+  140713234304496 --> 1473299815024
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.stringlistmodel.StringListModelMixin
+    options:
+      show_root_toc_entry: False

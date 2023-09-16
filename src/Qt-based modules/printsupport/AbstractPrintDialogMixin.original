@@ -1,0 +1,38 @@
+## Base classes
+
+| Name                                                                                                           | Children                                                                                                                                                                                                                                                                                                                                                                                                                            | Inherits                                        |
+| -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **<font size='4'>[DialogMixin](DialogMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.dialog</font>*<br> | <ul><li>[Dialog](Dialog.md)</li><li>[MessageBox](MessageBox.md)</li><li>[ErrorMessage](ErrorMessage.md)</li><li>[ProgressDialog](ProgressDialog.md)</li><li>[FontDialog](FontDialog.md)</li><li>[FileDialog](FileDialog.md)</li><li>[ColorDialog](ColorDialog.md)</li><li>[InputDialog](InputDialog.md)</li><li>[WizardMixin](WizardMixin.md)</li><li>[AbstractPrintDialogMixin](AbstractPrintDialogMixin.md)</li><li>...</li></ul> | <ul><li>[WidgetMixin](WidgetMixin.md)</li></ul> |
+
+
+## Subclasses
+
+| Class                                         | Module                                    | Description |
+| --------------------------------------------- | ----------------------------------------- | ----------- |
+| [AbstractPrintDialog](AbstractPrintDialog.md) | prettyqt.printsupport.abstractprintdialog |             |
+| [PrintDialog](PrintDialog.md)                 | prettyqt.printsupport.printdialog         |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572221296["printsupport.AbstractPrintDialogMixin"]
+  1473296195376["widgets.DialogMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473296195376 --> 1473572221296
+  1473293688240 --> 1473296195376
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.printsupport.abstractprintdialog.AbstractPrintDialogMixin
+    options:
+      show_root_toc_entry: False

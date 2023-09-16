@@ -1,0 +1,29 @@
+Qt Base Class: [QTextLine](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextLine.html#PySide6.QtGui.PySide6.QtGui.QTextLine)
+
+Signature: `QTextLine(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                            | Children                                  | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QTextLine](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextLine.html#PySide6.QtGui.PySide6.QtGui.QTextLine)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextLine\(self\) \-\> None | <ul><li>[TextLine](TextLine.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245553360["gui.TextLine"]
+  1473299676432["QtGui.QTextLine"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473299676432 --> 1473245553360
+  1473291690208 --> 1473299676432
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textline.TextLine
+    options:
+      show_root_toc_entry: False

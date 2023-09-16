@@ -1,0 +1,54 @@
+Qt Base Class: [QPdfWriter](https://doc.qt.io/qtforpython/PySide6/QtGui/QPdfWriter.html#PySide6.QtGui.PySide6.QtGui.QPdfWriter)
+
+Signature: `QPdfWriter(self, device: PySide6.QtCore.QIODevice) -> None
+QPdfWriter(self, filename: str) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                    | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                                                                                                                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[ObjectMixin](ObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.core.object</font>*<br>                                                                                                                                             | <ul><li>[Object](Object.md)</li><li>[SocketNotifier](SocketNotifier.md)</li><li>[SharedMemory](SharedMemory.md)</li><li>[SignalMapper](SignalMapper.md)</li><li>[TimeLine](TimeLine.md)</li><li>[AbstractEventDispatcher](AbstractEventDispatcher.md)</li><li>[EventLoop](EventLoop.md)</li><li>[AbstractAnimationMixin](AbstractAnimationMixin.md)</li><li>[TranslatorMixin](TranslatorMixin.md)</li><li>[CoreApplicationMixin](CoreApplicationMixin.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                                                                                                                                                        |
+| **<font size='4'>[PagedPaintDeviceMixin](PagedPaintDeviceMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.pagedpaintdevice</font>*<br>                                                                                                                | <ul><li>[PagedPaintDevice](PagedPaintDevice.md)</li><li>[PdfWriter](PdfWriter.md)</li><li>[Printer](Printer.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                       | <ul><li>[PaintDeviceMixin](PaintDeviceMixin.md)</li></ul>                                                                                                                                                                                                                  |
+| **<font size='4'>[QPdfWriter](https://doc.qt.io/qtforpython/PySide6/QtGui/QPdfWriter.html#PySide6.QtGui.PySide6.QtGui.QPdfWriter)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QPdfWriter\(self, device: PySide6\.QtCore\.QIODevice\) \-\> None | <ul><li>[PdfWriter](PdfWriter.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                     | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li><li>[QPagedPaintDevice](https://doc.qt.io/qtforpython/PySide6/QtGui/QPagedPaintDevice.html#PySide6.QtGui.PySide6.QtGui.QPagedPaintDevice)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245643152["gui.PdfWriter"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245618752["gui.PagedPaintDeviceMixin"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473289236896["QtGui.QPdfWriter"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300089200["QtGui.QPagedPaintDevice"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473299815024 --> 1473245643152
+  140713234304496 --> 1473299815024
+  1473245618752 --> 1473245643152
+  1473245548480 --> 1473245618752
+  140713234304496 --> 1473245548480
+  1473289236896 --> 1473245643152
+  1473288842240 --> 1473289236896
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300089200 --> 1473289236896
+  1473300082368 --> 1473300089200
+  1473291690208 --> 1473300082368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.pdfwriter.PdfWriter
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

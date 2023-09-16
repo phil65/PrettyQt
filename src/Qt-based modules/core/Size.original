@@ -1,0 +1,31 @@
+Qt Base Class: [QSize](https://doc.qt.io/qtforpython/PySide6/QtCore/QSize.html#PySide6.QtCore.PySide6.QtCore.QSize)
+
+Signature: `QSize(self) -> None
+QSize(self, QSize: PySide6.QtCore.QSize) -> None
+QSize(self, w: int, h: int) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                | Children                          | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------------------------------- |
+| **<font size='4'>[QSize](https://doc.qt.io/qtforpython/PySide6/QtCore/QSize.html#PySide6.QtCore.PySide6.QtCore.QSize)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QSize\(self\) \-\> None | <ul><li>[Size](Size.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299861872["core.Size"]
+  1473243794960["QtCore.QSize"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473243794960 --> 1473299861872
+  1473291690208 --> 1473243794960
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.size.Size
+    options:
+      show_root_toc_entry: False

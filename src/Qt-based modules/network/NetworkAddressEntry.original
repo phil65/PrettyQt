@@ -1,0 +1,30 @@
+Qt Base Class: [QNetworkAddressEntry](https://doc.qt.io/qtforpython/PySide6/QtNetwork/QNetworkAddressEntry.html#PySide6.QtNetwork.PySide6.QtNetwork.QNetworkAddressEntry)
+
+Signature: `QNetworkAddressEntry(self) -> None
+QNetworkAddressEntry(self, other: PySide6.QtNetwork.QNetworkAddressEntry) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                        | Children                                                        | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QNetworkAddressEntry](https://doc.qt.io/qtforpython/PySide6/QtNetwork/QNetworkAddressEntry.html#PySide6.QtNetwork.PySide6.QtNetwork.QNetworkAddressEntry)</font>**<br>*<font size='1'>PySide6.QtNetwork</font>*<br>QNetworkAddressEntry\(self\) \-\> None | <ul><li>[NetworkAddressEntry](NetworkAddressEntry.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473574012448["network.NetworkAddressEntry"]
+  1473573771376["QtNetwork.QNetworkAddressEntry"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473573771376 --> 1473574012448
+  1473291690208 --> 1473573771376
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.network.networkaddressentry.NetworkAddressEntry
+    options:
+      show_root_toc_entry: False

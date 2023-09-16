@@ -1,0 +1,49 @@
+Qt Base Class: [QGraphicsRotation](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsRotation.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsRotation)
+
+Signature: `QGraphicsRotation(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                  | Children                                                                                                                                              | Inherits                                                                                                                                                               |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GraphicsTransformMixin](GraphicsTransformMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicstransform</font>*<br>                                                                                                                                                                       | <ul><li>[GraphicsTransform](GraphicsTransform.md)</li><li>[GraphicsRotation](GraphicsRotation.md)</li><li>[GraphicsScale](GraphicsScale.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                                                                        |
+| **<font size='4'>[QGraphicsRotation](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsRotation.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsRotation)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QGraphicsRotation\(self, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[GraphicsRotation](GraphicsRotation.md)</li></ul>                                                                                             | <ul><li>[QGraphicsTransform](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsTransform.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsTransform)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293711664["widgets.GraphicsRotation"]
+  1473293681408["widgets.GraphicsTransformMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473365803088["QtWidgets.QGraphicsRotation"]
+  1473365800160["QtWidgets.QGraphicsTransform"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473293681408 --> 1473293711664
+  1473299815024 --> 1473293681408
+  140713234304496 --> 1473299815024
+  1473365803088 --> 1473293711664
+  1473365800160 --> 1473365803088
+  1473288842240 --> 1473365800160
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicsrotation.GraphicsRotation
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type          | Doc |
+| ------------ | ------------- | --- |
+| `objectName` | **QString**   |     |
+| `origin`     | **QVector3D** |     |
+| `angle`      | **double**    |     |
+| `axis`       | **QVector3D** |     |

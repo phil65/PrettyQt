@@ -1,0 +1,41 @@
+Qt Base Class: [QTextTableCellFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextTableCellFormat.html#PySide6.QtGui.PySide6.QtGui.QTextTableCellFormat)
+
+Signature: `QTextTableCellFormat(self) -> None
+QTextTableCellFormat(self, QTextTableCellFormat: PySide6.QtGui.QTextTableCellFormat) -> None
+QTextTableCellFormat(self, fmt: PySide6.QtGui.QTextFormat) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                        | Children                                                                                                                                                  | Inherits                                                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[TextCharFormatMixin](TextCharFormatMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.textcharformat</font>*<br>                                                                                                                          | <ul><li>[TextCharFormat](TextCharFormat.md)</li><li>[TextImageFormat](TextImageFormat.md)</li><li>[TextTableCellFormat](TextTableCellFormat.md)</li></ul> | <ul><li>[TextFormatMixin](TextFormatMixin.md)</li></ul>                                                                                           |
+| **<font size='4'>[QTextTableCellFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextTableCellFormat.html#PySide6.QtGui.PySide6.QtGui.QTextTableCellFormat)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextTableCellFormat\(self\) \-\> None | <ul><li>[TextTableCellFormat](TextTableCellFormat.md)</li></ul>                                                                                           | <ul><li>[QTextCharFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextCharFormat.html#PySide6.QtGui.PySide6.QtGui.QTextCharFormat)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245649984["gui.TextTableCellFormat"]
+  1473245667552["gui.TextCharFormatMixin"]
+  1473245646080["gui.TextFormatMixin"]
+  140713234304496["builtins.object"]
+  1473299997456["QtGui.QTextTableCellFormat"]
+  1473299992576["QtGui.QTextCharFormat"]
+  1473299700832["QtGui.QTextFormat"]
+  1473291690208["Shiboken.Object"]
+  1473245667552 --> 1473245649984
+  1473245646080 --> 1473245667552
+  140713234304496 --> 1473245646080
+  1473299997456 --> 1473245649984
+  1473299992576 --> 1473299997456
+  1473299700832 --> 1473299992576
+  1473291690208 --> 1473299700832
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.texttablecellformat.TextTableCellFormat
+    options:
+      show_root_toc_entry: False

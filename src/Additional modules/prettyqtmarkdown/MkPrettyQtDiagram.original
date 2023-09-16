@@ -1,0 +1,14 @@
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367166288["prettyqtmarkdown.MkPrettyQtDiagram"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473367166288
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.prettyqtmarkdown.mkprettyqtdiagram.MkPrettyQtDiagram
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,30 @@
+Qt Base Class: [QRegularExpressionMatch](https://doc.qt.io/qtforpython/PySide6/QtCore/QRegularExpressionMatch.html#PySide6.QtCore.PySide6.QtCore.QRegularExpressionMatch)
+
+Signature: `QRegularExpressionMatch(self) -> None
+QRegularExpressionMatch(self, match: PySide6.QtCore.QRegularExpressionMatch) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                        | Children                                                              | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QRegularExpressionMatch](https://doc.qt.io/qtforpython/PySide6/QtCore/QRegularExpressionMatch.html#PySide6.QtCore.PySide6.QtCore.QRegularExpressionMatch)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QRegularExpressionMatch\(self\) \-\> None | <ul><li>[RegularExpressionMatch](RegularExpressionMatch.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299846256["core.RegularExpressionMatch"]
+  1473243789104["QtCore.QRegularExpressionMatch"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473243789104 --> 1473299846256
+  1473291690208 --> 1473243789104
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.regularexpressionmatch.RegularExpressionMatch
+    options:
+      show_root_toc_entry: False

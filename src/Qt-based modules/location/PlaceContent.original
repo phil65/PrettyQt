@@ -1,0 +1,34 @@
+Qt Base Class: [QPlaceContent](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceContent.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceContent)
+
+Signature: `QPlaceContent(self, other: Union[PySide6.QtLocation.QPlaceContent, PySide6.QtLocation.QPlaceContent.Type]) -> None
+QPlaceContent(self, type: PySide6.QtLocation.QPlaceContent.Type = Instance(PySide6.QtLocation.QPlaceContent.Type.NoType)) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                              | Children                                          | Inherits                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[PlaceContentMixin](PlaceContentMixin.md)</font>**<br>*<font size='1'>prettyqt.location.placecontent</font>*<br>                                                                                                                                                                                                                 | <ul><li>[PlaceContent](PlaceContent.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QPlaceContent](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceContent.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceContent)</font>**<br>*<font size='1'>PySide6.QtLocation</font>*<br>QPlaceContent\(self, other: Union\[PySide6\.QtLocation\.QPlaceContent, PySide6\.QtLocation\.QPlaceContent\.Type\]\) \-\> None | <ul><li>[PlaceContent](PlaceContent.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573469760["location.PlaceContent"]
+  1473573468784["location.PlaceContentMixin"]
+  140713234304496["builtins.object"]
+  1473573374112["QtLocation.QPlaceContent"]
+  1473291690208["Shiboken.Object"]
+  1473573468784 --> 1473573469760
+  140713234304496 --> 1473573468784
+  1473573374112 --> 1473573469760
+  1473291690208 --> 1473573374112
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.location.placecontent.PlaceContent
+    options:
+      show_root_toc_entry: False

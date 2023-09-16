@@ -1,0 +1,31 @@
+Qt Base Class: [QImageWriter](https://doc.qt.io/qtforpython/PySide6/QtGui/QImageWriter.html#PySide6.QtGui.PySide6.QtGui.QImageWriter)
+
+Signature: `QImageWriter(self) -> None
+QImageWriter(self, device: PySide6.QtCore.QIODevice, format: Union[PySide6.QtCore.QByteArray, bytes]) -> None
+QImageWriter(self, fileName: str, format: Union[PySide6.QtCore.QByteArray, bytes] = Default(QByteArray)) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                        | Children                                        | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QImageWriter](https://doc.qt.io/qtforpython/PySide6/QtGui/QImageWriter.html#PySide6.QtGui.PySide6.QtGui.QImageWriter)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QImageWriter\(self\) \-\> None | <ul><li>[ImageWriter](ImageWriter.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245612896["gui.ImageWriter"]
+  1473245499680["QtGui.QImageWriter"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473245499680 --> 1473245612896
+  1473291690208 --> 1473245499680
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.imagewriter.ImageWriter
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,37 @@
+Qt Base Class: [QCursor](https://doc.qt.io/qtforpython/PySide6/QtGui/QCursor.html#PySide6.QtGui.PySide6.QtGui.QCursor)
+
+Signature: `QCursor(self) -> None
+QCursor(self, bitmap: Union[PySide6.QtGui.QBitmap, str], mask: Union[PySide6.QtGui.QBitmap, str], hotX: int = -1, hotY: int = -1) -> None
+QCursor(self, cursor: Union[PySide6.QtGui.QCursor, PySide6.QtCore.Qt.CursorShape, PySide6.QtGui.QPixmap]) -> None
+QCursor(self, pixmap: Union[PySide6.QtGui.QPixmap, PySide6.QtGui.QImage, str], hotX: int = -1, hotY: int = -1) -> None
+QCursor(self, shape: PySide6.QtCore.Qt.CursorShape) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                    | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[SerializeMixin](SerializeMixin.md)</font>**<br>*<font size='1'>prettyqt.utils.serializemixin</font>*<br>                                                                              | <ul><li>[EasingCurve](EasingCurve.md)</li><li>[Url](Url.md)</li><li>[KeyCombination](KeyCombination.md)</li><li>[Icon](Icon.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[IconEngine](IconEngine.md)</li><li>[Image](Image.md)</li><li>[Brush](Brush.md)</li><li>[Region](Region.md)</li><li>[Transform](Transform.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QCursor](https://doc.qt.io/qtforpython/PySide6/QtGui/QCursor.html#PySide6.QtGui.PySide6.QtGui.QCursor)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QCursor\(self\) \-\> None | <ul><li>[Cursor](Cursor.md)</li></ul>                                                                                                                                                                                                                                                                                                             | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245640224["gui.Cursor"]
+  1473299806240["utils.SerializeMixin"]
+  140713234304496["builtins.object"]
+  1473300169232["QtGui.QCursor"]
+  1473291690208["Shiboken.Object"]
+  1473299806240 --> 1473245640224
+  140713234304496 --> 1473299806240
+  1473300169232 --> 1473245640224
+  1473291690208 --> 1473300169232
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.cursor.Cursor
+    options:
+      show_root_toc_entry: False

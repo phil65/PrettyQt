@@ -1,0 +1,49 @@
+Qt Base Class: [QSvgRenderer](https://doc.qt.io/qtforpython/PySide6/QtSvg/QSvgRenderer.html#PySide6.QtSvg.PySide6.QtSvg.QSvgRenderer)
+
+Signature: `QSvgRenderer(self, contents: PySide6.QtCore.QXmlStreamReader, parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QSvgRenderer(self, contents: Union[PySide6.QtCore.QByteArray, bytes], parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QSvgRenderer(self, filename: str, parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QSvgRenderer(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                           | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[ObjectMixin](ObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.core.object</font>*<br>                                                                                                                                                                                                                    | <ul><li>[Object](Object.md)</li><li>[SocketNotifier](SocketNotifier.md)</li><li>[SharedMemory](SharedMemory.md)</li><li>[SignalMapper](SignalMapper.md)</li><li>[TimeLine](TimeLine.md)</li><li>[AbstractEventDispatcher](AbstractEventDispatcher.md)</li><li>[EventLoop](EventLoop.md)</li><li>[AbstractAnimationMixin](AbstractAnimationMixin.md)</li><li>[TranslatorMixin](TranslatorMixin.md)</li><li>[CoreApplicationMixin](CoreApplicationMixin.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                          |
+| **<font size='4'>[QSvgRenderer](https://doc.qt.io/qtforpython/PySide6/QtSvg/QSvgRenderer.html#PySide6.QtSvg.PySide6.QtSvg.QSvgRenderer)</font>**<br>*<font size='1'>PySide6.QtSvg</font>*<br>QSvgRenderer\(self, contents: PySide6\.QtCore\.QXmlStreamReader, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[SvgRenderer](SvgRenderer.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                 | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473374544304["svg.SvgRenderer"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473369403104["QtSvg.QSvgRenderer"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473299815024 --> 1473374544304
+  140713234304496 --> 1473299815024
+  1473369403104 --> 1473374544304
+  1473288842240 --> 1473369403104
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.svg.svgrenderer.SvgRenderer
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property       | Type                    | Doc |
+| ----------------- | ----------------------- | --- |
+| `objectName`      | **QString**             |     |
+| `viewBox`         | **QRectF**              |     |
+| `framesPerSecond` | **int**                 |     |
+| `currentFrame`    | **int**                 |     |
+| `aspectRatioMode` | **Qt::AspectRatioMode** |     |

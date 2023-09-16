@@ -1,0 +1,16 @@
+---
+hide:
+- toc
+---
+
+## Docs
+
+Webenginewidgets module.
+
+contains QtWebEngineWidgets-based classes
+
+## Classes
+
+| Name                                                                                                                               | Children | Inherits                                                                                                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[WebEngineView](WebEngineView.md)</font>**<br>*<font size='1'>prettyqt.webenginewidgets.webengineview</font>*<br> |          | <ul><li>[WidgetMixin](WidgetMixin.md)</li><li>[QWebEngineView](https://doc.qt.io/qtforpython/PySide6/QtWebEngineWidgets/QWebEngineView.html#PySide6.QtWebEngineWidgets.PySide6.QtWebEngineWidgets.QWebEngineView)</li></ul> |

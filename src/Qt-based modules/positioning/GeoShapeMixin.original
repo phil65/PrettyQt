@@ -1,0 +1,25 @@
+## Subclasses
+
+| Class                           | Module                            | Description |
+| ------------------------------- | --------------------------------- | ----------- |
+| [GeoShape](GeoShape.md)         | prettyqt.positioning.geoshape     |             |
+| [GeoRectangle](GeoRectangle.md) | prettyqt.positioning.georectangle |             |
+| [GeoCircle](GeoCircle.md)       | prettyqt.positioning.geocircle    |             |
+| [GeoPath](GeoPath.md)           | prettyqt.positioning.geopath      |             |
+| [GeoPolygon](GeoPolygon.md)     | prettyqt.positioning.geopolygon   |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573419984["positioning.GeoShapeMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473573419984
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.positioning.geoshape.GeoShapeMixin
+    options:
+      show_root_toc_entry: False

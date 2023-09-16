@@ -1,0 +1,41 @@
+Qt Base Class: [QStyleOptionSlider](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStyleOptionSlider.html#PySide6.QtWidgets.PySide6.QtWidgets.QStyleOptionSlider)
+
+Signature: `QStyleOptionSlider(self) -> None
+QStyleOptionSlider(self, other: PySide6.QtWidgets.QStyleOptionSlider) -> None
+QStyleOptionSlider(self, version: int) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                | Children                                                                                                                                                                                                                    | Inherits                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[StyleOptionComplexMixin](StyleOptionComplexMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.styleoptioncomplex</font>*<br>                                                                                                                  | <ul><li>[StyleOptionComplex](StyleOptionComplex.md)</li><li>[StyleOptionComboBox](StyleOptionComboBox.md)</li><li>[StyleOptionSizeGrip](StyleOptionSizeGrip.md)</li><li>[StyleOptionSlider](StyleOptionSlider.md)</li></ul> | <ul><li>[StyleOptionMixin](StyleOptionMixin.md)</li></ul>                                                                                                                 |
+| **<font size='4'>[QStyleOptionSlider](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStyleOptionSlider.html#PySide6.QtWidgets.PySide6.QtWidgets.QStyleOptionSlider)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QStyleOptionSlider\(self\) \-\> None | <ul><li>[StyleOptionSlider](StyleOptionSlider.md)</li></ul>                                                                                                                                                                 | <ul><li>[QStyleOptionComplex](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStyleOptionComplex.html#PySide6.QtWidgets.PySide6.QtWidgets.QStyleOptionComplex)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296196352["widgets.StyleOptionSlider"]
+  1473296178784["widgets.StyleOptionComplexMixin"]
+  1473296150480["widgets.StyleOptionMixin"]
+  140713234304496["builtins.object"]
+  1473365827488["QtWidgets.QStyleOptionSlider"]
+  1473365836272["QtWidgets.QStyleOptionComplex"]
+  1473365411984["QtWidgets.QStyleOption"]
+  1473291690208["Shiboken.Object"]
+  1473296178784 --> 1473296196352
+  1473296150480 --> 1473296178784
+  140713234304496 --> 1473296150480
+  1473365827488 --> 1473296196352
+  1473365836272 --> 1473365827488
+  1473365411984 --> 1473365836272
+  1473291690208 --> 1473365411984
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.styleoptionslider.StyleOptionSlider
+    options:
+      show_root_toc_entry: False

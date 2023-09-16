@@ -1,0 +1,18 @@
+---
+hide:
+- toc
+---
+
+## Docs
+
+Create sound scenes in 3D space containing different sound sources.
+
+## Classes
+
+| Name                                                                                                                           | Children | Inherits                                                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[SpatialSound](SpatialSound.md)</font>**<br>*<font size='1'>prettyqt.spatialaudio.spatialsound</font>*<br>    |          | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[QSpatialSound](https://doc.qt.io/qtforpython/PySide6/QtSpatialAudio/QSpatialSound.html#PySide6.QtSpatialAudio.PySide6.QtSpatialAudio.QSpatialSound)</li></ul>    |
+| **<font size='4'>[AudioListener](AudioListener.md)</font>**<br>*<font size='1'>prettyqt.spatialaudio.audiolistener</font>*<br> |          | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[QAudioListener](https://doc.qt.io/qtforpython/PySide6/QtSpatialAudio/QAudioListener.html#PySide6.QtSpatialAudio.PySide6.QtSpatialAudio.QAudioListener)</li></ul> |
+| **<font size='4'>[AudioEngine](AudioEngine.md)</font>**<br>*<font size='1'>prettyqt.spatialaudio.audioengine</font>*<br>       |          | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[QAudioEngine](https://doc.qt.io/qtforpython/PySide6/QtSpatialAudio/QAudioEngine.html#PySide6.QtSpatialAudio.PySide6.QtSpatialAudio.QAudioEngine)</li></ul>       |
+| **<font size='4'>[AudioRoom](AudioRoom.md)</font>**<br>*<font size='1'>prettyqt.spatialaudio.audioroom</font>*<br>             |          | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[QAudioRoom](https://doc.qt.io/qtforpython/PySide6/QtSpatialAudio/QAudioRoom.html#PySide6.QtSpatialAudio.PySide6.QtSpatialAudio.QAudioRoom)</li></ul>             |
+| **<font size='4'>[AmbientSound](AmbientSound.md)</font>**<br>*<font size='1'>prettyqt.spatialaudio.ambientsound</font>*<br>    |          | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[QAmbientSound](https://doc.qt.io/qtforpython/PySide6/QtSpatialAudio/QAmbientSound.html#PySide6.QtSpatialAudio.PySide6.QtSpatialAudio.QAmbientSound)</li></ul>    |

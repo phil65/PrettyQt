@@ -1,0 +1,29 @@
+Qt Base Class: [QBackingStore](https://doc.qt.io/qtforpython/PySide6/QtGui/QBackingStore.html#PySide6.QtGui.PySide6.QtGui.QBackingStore)
+
+Signature: `QBackingStore(self, window: PySide6.QtGui.QWindow) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                             | Children                                          | Inherits                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QBackingStore](https://doc.qt.io/qtforpython/PySide6/QtGui/QBackingStore.html#PySide6.QtGui.PySide6.QtGui.QBackingStore)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QBackingStore\(self, window: PySide6\.QtGui\.QWindow\) \-\> None | <ul><li>[BackingStore](BackingStore.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245516272["gui.BackingStore"]
+  1473289206640["QtGui.QBackingStore"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473289206640 --> 1473245516272
+  1473291690208 --> 1473289206640
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.backingstore.BackingStore
+    options:
+      show_root_toc_entry: False

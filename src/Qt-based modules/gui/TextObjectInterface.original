@@ -1,0 +1,29 @@
+Qt Base Class: [QTextObjectInterface](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextObjectInterface.html#PySide6.QtGui.PySide6.QtGui.QTextObjectInterface)
+
+Signature: `QTextObjectInterface(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                        | Children                                                                                                        | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QTextObjectInterface](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextObjectInterface.html#PySide6.QtGui.PySide6.QtGui.QTextObjectInterface)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextObjectInterface\(self\) \-\> None | <ul><li>[QPyTextObject](https://www.pyside.org)</li><li>[TextObjectInterface](TextObjectInterface.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245524080["gui.TextObjectInterface"]
+  1473299690096["QtGui.QTextObjectInterface"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473299690096 --> 1473245524080
+  1473291690208 --> 1473299690096
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textobjectinterface.TextObjectInterface
+    options:
+      show_root_toc_entry: False

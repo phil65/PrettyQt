@@ -1,0 +1,30 @@
+Qt Base Class: [QFontDatabase](https://doc.qt.io/qtforpython/PySide6/QtGui/QFontDatabase.html#PySide6.QtGui.PySide6.QtGui.QFontDatabase)
+
+Signature: `QFontDatabase(self) -> None
+QFontDatabase(self, QFontDatabase: PySide6.QtGui.QFontDatabase) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                            | Children                                          | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QFontDatabase](https://doc.qt.io/qtforpython/PySide6/QtGui/QFontDatabase.html#PySide6.QtGui.PySide6.QtGui.QFontDatabase)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QFontDatabase\(self\) \-\> None | <ul><li>[FontDatabase](FontDatabase.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245610944["gui.FontDatabase"]
+  1473300149712["QtGui.QFontDatabase"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473300149712 --> 1473245610944
+  1473291690208 --> 1473300149712
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.fontdatabase.FontDatabase
+    options:
+      show_root_toc_entry: False

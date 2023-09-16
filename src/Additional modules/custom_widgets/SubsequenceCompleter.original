@@ -1,0 +1,54 @@
+Qt Base Class: [QCompleter](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QCompleter.html#PySide6.QtWidgets.PySide6.QtWidgets.QCompleter)
+
+Signature: `QCompleter(self, completions: Sequence[str], parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QCompleter(self, model: PySide6.QtCore.QAbstractItemModel, parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QCompleter(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                          | Children                                                          | Inherits                                                                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **<font size='4'>[Completer](Completer.md)</font>**<br>*<font size='1'>prettyqt.widgets.completer</font>*<br> | <ul><li>[SubsequenceCompleter](SubsequenceCompleter.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[QCompleter](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QCompleter.html#PySide6.QtWidgets.PySide6.QtWidgets.QCompleter)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367158480["custom_widgets.SubsequenceCompleter"]
+  1473296325184["widgets.Completer"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473293754608["QtWidgets.QCompleter"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473296325184 --> 1473367158480
+  1473299815024 --> 1473296325184
+  140713234304496 --> 1473299815024
+  1473293754608 --> 1473296325184
+  1473288842240 --> 1473293754608
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.custom_widgets.subsequencecompleter.SubsequenceCompleter
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property        | Type                           | Doc |
+| ------------------ | ------------------------------ | --- |
+| `objectName`       | **QString**                    |     |
+| `completionPrefix` | **QString**                    |     |
+| `modelSorting`     | **QCompleter::ModelSorting**   |     |
+| `filterMode`       | **QFlags<Qt::MatchFlag>**      |     |
+| `completionMode`   | **QCompleter::CompletionMode** |     |
+| `completionColumn` | **int**                        |     |
+| `completionRole`   | **int**                        |     |
+| `maxVisibleItems`  | **int**                        |     |
+| `caseSensitivity`  | **Qt::CaseSensitivity**        |     |
+| `wrapAround`       | **bool**                       |     |

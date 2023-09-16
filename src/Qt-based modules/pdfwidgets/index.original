@@ -1,0 +1,10 @@
+---
+hide:
+- toc
+---
+
+## Classes
+
+| Name                                                                                                       | Children | Inherits                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[PdfView](PdfView.md)</font>**<br>*<font size='1'>prettyqt.pdfwidgets.pdfview</font>*<br> |          | <ul><li>[AbstractScrollAreaMixin](AbstractScrollAreaMixin.md)</li><li>[QPdfView](https://doc.qt.io/qtforpython/PySide6/QtPdfWidgets/QPdfView.html#PySide6.QtPdfWidgets.PySide6.QtPdfWidgets.QPdfView)</li></ul> |

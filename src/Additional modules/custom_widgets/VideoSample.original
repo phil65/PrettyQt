@@ -1,0 +1,14 @@
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367139936["custom_widgets.VideoSample"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473367139936
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.custom_widgets.timeline.VideoSample
+    options:
+      show_root_toc_entry: False

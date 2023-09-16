@@ -1,0 +1,60 @@
+Qt Base Class: [QVariantAnimation](https://doc.qt.io/qtforpython/PySide6/QtCore/QVariantAnimation.html#PySide6.QtCore.PySide6.QtCore.QVariantAnimation)
+
+Signature: `QVariantAnimation(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                            | Children                                                        | Inherits                                                                                                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[VariantAnimation](VariantAnimation.md)</font>**<br>*<font size='1'>prettyqt.core.variantanimation</font>*<br> | <ul><li>[CursorMoveAnimation](CursorMoveAnimation.md)</li></ul> | <ul><li>[VariantAnimationMixin](VariantAnimationMixin.md)</li><li>[QVariantAnimation](https://doc.qt.io/qtforpython/PySide6/QtCore/QVariantAnimation.html#PySide6.QtCore.PySide6.QtCore.QVariantAnimation)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293685312["animations.CursorMoveAnimation"]
+  1473299837472["core.VariantAnimation"]
+  1473299835520["core.VariantAnimationMixin"]
+  1473299791600["core.AbstractAnimationMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473289069648["QtCore.QVariantAnimation"]
+  1473289055008["QtCore.QAbstractAnimation"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473299837472 --> 1473293685312
+  1473299835520 --> 1473299837472
+  1473299791600 --> 1473299835520
+  1473299815024 --> 1473299791600
+  140713234304496 --> 1473299815024
+  1473289069648 --> 1473299837472
+  1473289055008 --> 1473289069648
+  1473288842240 --> 1473289055008
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.animations.cursormoveanimation.CursorMoveAnimation
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property    | Type                              | Doc |
+| -------------- | --------------------------------- | --- |
+| `objectName`   | **QString**                       |     |
+| `state`        | **QAbstractAnimation::State**     |     |
+| `loopCount`    | **int**                           |     |
+| `currentTime`  | **int**                           |     |
+| `currentLoop`  | **int**                           |     |
+| `direction`    | **QAbstractAnimation::Direction** |     |
+| `duration`     | **int**                           |     |
+| `startValue`   | **QVariant**                      |     |
+| `endValue`     | **QVariant**                      |     |
+| `currentValue` | **QVariant**                      |     |
+| `duration`     | **int**                           |     |
+| `easingCurve`  | **QEasingCurve**                  |     |

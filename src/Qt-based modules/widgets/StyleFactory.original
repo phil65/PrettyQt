@@ -1,0 +1,29 @@
+Qt Base Class: [QStyleFactory](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStyleFactory.html#PySide6.QtWidgets.PySide6.QtWidgets.QStyleFactory)
+
+Signature: `QStyleFactory(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                            | Children                                          | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QStyleFactory](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStyleFactory.html#PySide6.QtWidgets.PySide6.QtWidgets.QStyleFactory)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QStyleFactory\(self\) \-\> None | <ul><li>[StyleFactory](StyleFactory.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296188544["widgets.StyleFactory"]
+  1473290785264["QtWidgets.QStyleFactory"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473290785264 --> 1473296188544
+  1473291690208 --> 1473290785264
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.stylefactory.StyleFactory
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,48 @@
+Qt Base Class: [QImage](https://doc.qt.io/qtforpython/PySide6/QtGui/QImage.html#PySide6.QtGui.PySide6.QtGui.QImage)
+
+Signature: `QImage(self) -> None
+QImage(self, arg__1: str, arg__2: int, arg__3: int, arg__4: PySide6.QtGui.QImage.Format) -> None
+QImage(self, arg__1: str, arg__2: int, arg__3: int, arg__4: int, arg__5: PySide6.QtGui.QImage.Format) -> None
+QImage(self, arg__1: Union[PySide6.QtGui.QImage, str]) -> None
+QImage(self, data: bytes, width: int, height: int, bytesPerLine: int, format: PySide6.QtGui.QImage.Format, cleanupFunction: Optional[Callable] = None, cleanupInfo: Optional[int] = None) -> None
+QImage(self, data: bytes, width: int, height: int, format: PySide6.QtGui.QImage.Format, cleanupFunction: Optional[Callable] = None, cleanupInfo: Optional[int] = None) -> None
+QImage(self, fileName: Union[str, bytes, os.PathLike], format: Optional[bytes] = None) -> None
+QImage(self, size: PySide6.QtCore.QSize, format: PySide6.QtGui.QImage.Format) -> None
+QImage(self, width: int, height: int, format: PySide6.QtGui.QImage.Format) -> None
+QImage(self, xpm: Iterable) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[SerializeMixin](SerializeMixin.md)</font>**<br>*<font size='1'>prettyqt.utils.serializemixin</font>*<br>                                                                          | <ul><li>[EasingCurve](EasingCurve.md)</li><li>[Url](Url.md)</li><li>[KeyCombination](KeyCombination.md)</li><li>[Icon](Icon.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[IconEngine](IconEngine.md)</li><li>[Image](Image.md)</li><li>[Brush](Brush.md)</li><li>[Region](Region.md)</li><li>[Transform](Transform.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                      |
+| **<font size='4'>[PaintDeviceMixin](PaintDeviceMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.paintdevice</font>*<br>                                                                           | <ul><li>[PaintDevice](PaintDevice.md)</li><li>[PaintDeviceWindowMixin](PaintDeviceWindowMixin.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[Image](Image.md)</li><li>[PagedPaintDeviceMixin](PagedPaintDeviceMixin.md)</li><li>[Picture](Picture.md)</li><li>[WidgetMixin](WidgetMixin.md)</li><li>[SvgGenerator](SvgGenerator.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                      |
+| **<font size='4'>[QImage](https://doc.qt.io/qtforpython/PySide6/QtGui/QImage.html#PySide6.QtGui.PySide6.QtGui.QImage)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QImage\(self\) \-\> None | <ul><li>[Image](Image.md)</li></ul>                                                                                                                                                                                                                                                                                                               | <ul><li>[QPaintDevice](https://doc.qt.io/qtforpython/PySide6/QtGui/QPaintDevice.html#PySide6.QtGui.PySide6.QtGui.QPaintDevice)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245530912["gui.Image"]
+  1473299806240["utils.SerializeMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473299972080["QtGui.QImage"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473291690208["Shiboken.Object"]
+  1473299806240 --> 1473245530912
+  140713234304496 --> 1473299806240
+  1473245548480 --> 1473245530912
+  140713234304496 --> 1473245548480
+  1473299972080 --> 1473245530912
+  1473300082368 --> 1473299972080
+  1473291690208 --> 1473300082368
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.image.Image
+    options:
+      show_root_toc_entry: False

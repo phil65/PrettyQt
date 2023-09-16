@@ -1,0 +1,28 @@
+---
+title: Setting up the environment
+---
+
+## Setting up a development environment
+
+All development for this library happens in the
+[prettyqt](https://github.com/phil65/prettyqt.git) repo on GitHub.
+First, you'll need to download the source code and install an
+editable version of the Python package:
+
+``` md
+
+# Clone the repository
+git clone https://github.com/phil65/prettyqt.git
+cd prettyqt
+
+```
+
+## Build system
+
+Poetry is used as the build system.
+
+``` bash
+pip install poetry
+```
+
+[More information](https://python-poetry.org)

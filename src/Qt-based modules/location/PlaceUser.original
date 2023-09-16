@@ -1,0 +1,30 @@
+Qt Base Class: [QPlaceUser](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceUser.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceUser)
+
+Signature: `QPlaceUser(self) -> None
+QPlaceUser(self, other: PySide6.QtLocation.QPlaceUser) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                    | Children                                    | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QPlaceUser](https://doc.qt.io/qtforpython/PySide6/QtLocation/QPlaceUser.html#PySide6.QtLocation.PySide6.QtLocation.QPlaceUser)</font>**<br>*<font size='1'>PySide6.QtLocation</font>*<br>QPlaceUser\(self\) \-\> None | <ul><li>[PlaceUser](PlaceUser.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473573475616["location.PlaceUser"]
+  1473573372160["QtLocation.QPlaceUser"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473573372160 --> 1473573475616
+  1473291690208 --> 1473573372160
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.location.placeuser.PlaceUser
+    options:
+      show_root_toc_entry: False

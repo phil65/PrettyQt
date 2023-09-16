@@ -1,0 +1,38 @@
+Qt Base Class: [QJsonValue](https://doc.qt.io/qtforpython/PySide6/QtCore/QJsonValue.html#PySide6.QtCore.PySide6.QtCore.QJsonValue)
+
+Signature: `QJsonValue(self, a: PySide6.QtCore.QJsonArray) -> None
+QJsonValue(self, arg__1: PySide6.QtCore.QJsonValue.Type = Instance(PySide6.QtCore.QJsonValue.Type.Null)) -> None
+QJsonValue(self, b: bool) -> None
+QJsonValue(self, n: float) -> None
+QJsonValue(self, n: int) -> None
+QJsonValue(self, o: Dict[str, PySide6.QtCore.QJsonValue]) -> None
+QJsonValue(self, other: Union[PySide6.QtCore.QJsonValue, PySide6.QtCore.QJsonValue.Type, bool, PySide6.QtCore.QJsonArray, Dict[str, PySide6.QtCore.QJsonValue], str, bytes, float, int]) -> None
+QJsonValue(self, s: str) -> None
+QJsonValue(self, s: bytes) -> None
+QJsonValue(self, v: int) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                    | Children                                    | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QJsonValue](https://doc.qt.io/qtforpython/PySide6/QtCore/QJsonValue.html#PySide6.QtCore.PySide6.QtCore.QJsonValue)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QJsonValue\(self, a: PySide6\.QtCore\.QJsonArray\) \-\> None | <ul><li>[JsonValue](JsonValue.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299914576["core.JsonValue"]
+  1473243621232["QtCore.QJsonValue"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473243621232 --> 1473299914576
+  1473291690208 --> 1473243621232
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.jsonvalue.JsonValue
+    options:
+      show_root_toc_entry: False

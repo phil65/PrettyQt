@@ -1,0 +1,46 @@
+Qt Base Class: [QTextBlockGroup](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextBlockGroup.html#PySide6.QtGui.PySide6.QtGui.QTextBlockGroup)
+
+Signature: `QTextBlockGroup(self, doc: PySide6.QtGui.QTextDocument) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                        | Children                                                                                                                                                                    | Inherits                                                                                                                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[TextObjectMixin](TextObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.textobject</font>*<br>                                                                                                                                                      | <ul><li>[TextObject](TextObject.md)</li><li>[TextBlockGroup](TextBlockGroup.md)</li><li>[TextFrameMixin](TextFrameMixin.md)</li></ul>                                       | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                                       |
+| **<font size='4'>[QTextBlockGroup](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextBlockGroup.html#PySide6.QtGui.PySide6.QtGui.QTextBlockGroup)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextBlockGroup\(self, doc: PySide6\.QtGui\.QTextDocument\) \-\> None | <ul><li>[QTextList](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextList.html#PySide6.QtGui.PySide6.QtGui.QTextList)</li><li>[TextBlockGroup](TextBlockGroup.md)</li></ul> | <ul><li>[QTextObject](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextObject.html#PySide6.QtGui.PySide6.QtGui.QTextObject)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245665600["gui.TextBlockGroup"]
+  1473245670480["gui.TextObjectMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473289200784["QtGui.QTextBlockGroup"]
+  1473289218352["QtGui.QTextObject"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473245670480 --> 1473245665600
+  1473299815024 --> 1473245670480
+  140713234304496 --> 1473299815024
+  1473289200784 --> 1473245665600
+  1473289218352 --> 1473289200784
+  1473288842240 --> 1473289218352
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textblockgroup.TextBlockGroup
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

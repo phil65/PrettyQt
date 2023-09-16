@@ -1,0 +1,34 @@
+Qt Base Class: [QHostAddress](https://doc.qt.io/qtforpython/PySide6/QtNetwork/QHostAddress.html#PySide6.QtNetwork.PySide6.QtNetwork.QHostAddress)
+
+Signature: `QHostAddress(self) -> None
+QHostAddress(self, address: PySide6.QtNetwork.QHostAddress.SpecialAddress) -> None
+QHostAddress(self, address: str) -> None
+QHostAddress(self, copy: Union[PySide6.QtNetwork.QHostAddress, PySide6.QtNetwork.QHostAddress.SpecialAddress]) -> None
+QHostAddress(self, ip4Addr: int) -> None
+QHostAddress(self, ip6Addr: PySide6.QtNetwork.QIPv6Address) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                        | Children                                        | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QHostAddress](https://doc.qt.io/qtforpython/PySide6/QtNetwork/QHostAddress.html#PySide6.QtNetwork.PySide6.QtNetwork.QHostAddress)</font>**<br>*<font size='1'>PySide6.QtNetwork</font>*<br>QHostAddress\(self\) \-\> None | <ul><li>[HostAddress](HostAddress.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473574002688["network.HostAddress"]
+  1473573829936["QtNetwork.QHostAddress"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473573829936 --> 1473574002688
+  1473291690208 --> 1473573829936
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.network.hostaddress.HostAddress
+    options:
+      show_root_toc_entry: False

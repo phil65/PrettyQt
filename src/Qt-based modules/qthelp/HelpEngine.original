@@ -1,0 +1,50 @@
+Qt Base Class: [QHelpEngine](https://doc.qt.io/qtforpython/PySide6/QtHelp/QHelpEngine.html#PySide6.QtHelp.PySide6.QtHelp.QHelpEngine)
+
+Signature: `QHelpEngine(self, collectionFile: str, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                   | Children                                                                                  | Inherits                                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[HelpEngineCoreMixin](HelpEngineCoreMixin.md)</font>**<br>*<font size='1'>prettyqt.qthelp.helpenginecore</font>*<br>The core functionality of the help system\.                                                                                                                       | <ul><li>[HelpEngineCore](HelpEngineCore.md)</li><li>[HelpEngine](HelpEngine.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                                                      |
+| **<font size='4'>[QHelpEngine](https://doc.qt.io/qtforpython/PySide6/QtHelp/QHelpEngine.html#PySide6.QtHelp.PySide6.QtHelp.QHelpEngine)</font>**<br>*<font size='1'>PySide6.QtHelp</font>*<br>QHelpEngine\(self, collectionFile: str, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[HelpEngine](HelpEngine.md)</li></ul>                                             | <ul><li>[QHelpEngineCore](https://doc.qt.io/qtforpython/PySide6/QtHelp/QHelpEngineCore.html#PySide6.QtHelp.PySide6.QtHelp.QHelpEngineCore)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572368672["qthelp.HelpEngine"]
+  1473572363792["qthelp.HelpEngineCoreMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473572310112["QtHelp.QHelpEngine"]
+  1473572342320["QtHelp.QHelpEngineCore"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473572363792 --> 1473572368672
+  1473299815024 --> 1473572363792
+  140713234304496 --> 1473299815024
+  1473572310112 --> 1473572368672
+  1473572342320 --> 1473572310112
+  1473288842240 --> 1473572342320
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qthelp.helpengine.HelpEngine
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property      | Type        | Doc |
+| ---------------- | ----------- | --- |
+| `objectName`     | **QString** |     |
+| `autoSaveFilter` | **bool**    |     |
+| `collectionFile` | **QString** |     |
+| `readOnly`       | **bool**    |     |
+| `currentFilter`  | **QString** |     |

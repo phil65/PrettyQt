@@ -1,0 +1,65 @@
+Qt Base Class: [QLineSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QLineSeries.html#PySide6.QtCharts.PySide6.QtCharts.QLineSeries)
+
+Signature: `QLineSeries(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                      | Children                                                                                                                                                                                 | Inherits                                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[XYSeriesMixin](XYSeriesMixin.md)</font>**<br>*<font size='1'>prettyqt.charts.xyseries</font>*<br>                                                                                                                                                                       | <ul><li>[XYSeries](XYSeries.md)</li><li>[ScatterSeries](ScatterSeries.md)</li><li>[LineSeries](LineSeries.md)</li></ul>                                                                  | <ul><li>[AbstractSeriesMixin](AbstractSeriesMixin.md)</li></ul>                                                                          |
+| **<font size='4'>[QLineSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QLineSeries.html#PySide6.QtCharts.PySide6.QtCharts.QLineSeries)</font>**<br>*<font size='1'>PySide6.QtCharts</font>*<br>QLineSeries\(self, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[QSplineSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QSplineSeries.html#PySide6.QtCharts.PySide6.QtCharts.QSplineSeries)</li><li>[LineSeries](LineSeries.md)</li></ul> | <ul><li>[QXYSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QXYSeries.html#PySide6.QtCharts.PySide6.QtCharts.QXYSeries)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367667360["charts.LineSeries"]
+  1473367681024["charts.XYSeriesMixin"]
+  1473367658576["charts.AbstractSeriesMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473367627344["QtCharts.QLineSeries"]
+  1473367620512["QtCharts.QXYSeries"]
+  1473367617584["QtCharts.QAbstractSeries"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473367681024 --> 1473367667360
+  1473367658576 --> 1473367681024
+  1473299815024 --> 1473367658576
+  140713234304496 --> 1473299815024
+  1473367627344 --> 1473367667360
+  1473367620512 --> 1473367627344
+  1473367617584 --> 1473367620512
+  1473288842240 --> 1473367617584
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.charts.lineseries.LineSeries
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property           | Type                            | Doc |
+| --------------------- | ------------------------------- | --- |
+| `objectName`          | **QString**                     |     |
+| `name`                | **QString**                     |     |
+| `visible`             | **bool**                        |     |
+| `opacity`             | **double**                      |     |
+| `type`                | **QAbstractSeries::SeriesType** |     |
+| `useOpenGL`           | **bool**                        |     |
+| `pointsVisible`       | **bool**                        |     |
+| `color`               | **QColor**                      |     |
+| `selectedColor`       | **QColor**                      |     |
+| `pointLabelsFormat`   | **QString**                     |     |
+| `pointLabelsVisible`  | **bool**                        |     |
+| `pointLabelsFont`     | **QFont**                       |     |
+| `pointLabelsColor`    | **QColor**                      |     |
+| `pointLabelsClipping` | **bool**                        |     |
+| `bestFitLineVisible`  | **bool**                        |     |
+| `bestFitLineColor`    | **QColor**                      |     |

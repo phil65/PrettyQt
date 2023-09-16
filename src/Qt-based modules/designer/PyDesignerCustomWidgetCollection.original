@@ -1,0 +1,31 @@
+Qt Base Class: [QPyDesignerCustomWidgetCollection](https://www.pyside.org)
+
+Signature: `None`
+
+## Base classes
+
+| Name                                                                                                                                    | Children                                                                                  | Inherits                                                                                                                                                                                                                                    |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[QPyDesignerCustomWidgetCollection](https://www.pyside.org)</font>**<br>*<font size='1'>PySide6.QtDesigner</font>*<br> | <ul><li>[PyDesignerCustomWidgetCollection](PyDesignerCustomWidgetCollection.md)</li></ul> | <ul><li>[QDesignerCustomWidgetCollectionInterface](https://doc.qt.io/qtforpython/PySide6/QtDesigner/QDesignerCustomWidgetCollectionInterface.html#PySide6.QtDesigner.PySide6.QtDesigner.QDesignerCustomWidgetCollectionInterface)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367735680["designer.PyDesignerCustomWidgetCollection"]
+  1473367706400["QtDesigner.QPyDesignerCustomWidgetCollection"]
+  1473367715184["QtDesigner.QDesignerCustomWidgetCollectionInterface"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473367706400 --> 1473367735680
+  1473367715184 --> 1473367706400
+  1473291690208 --> 1473367715184
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.designer.pydesignercustomwidgetcollection.PyDesignerCustomWidgetCollection
+    options:
+      show_root_toc_entry: False

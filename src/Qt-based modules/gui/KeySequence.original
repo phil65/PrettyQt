@@ -1,0 +1,34 @@
+Qt Base Class: [QKeySequence](https://doc.qt.io/qtforpython/PySide6/QtGui/QKeySequence.html#PySide6.QtGui.PySide6.QtGui.QKeySequence)
+
+Signature: `QKeySequence(self) -> None
+QKeySequence(self, k1: int, k2: int = 0, k3: int = 0, k4: int = 0) -> None
+QKeySequence(self, k1: Union[PySide6.QtCore.QKeyCombination, PySide6.QtCore.Qt.KeyboardModifier, PySide6.QtCore.Qt.Key], k2: Union[PySide6.QtCore.QKeyCombination, PySide6.QtCore.Qt.KeyboardModifier, PySide6.QtCore.Qt.Key] = Instance(QKeyCombination.fromCombined(0)), k3: Union[PySide6.QtCore.QKeyCombination, PySide6.QtCore.Qt.KeyboardModifier, PySide6.QtCore.Qt.Key] = Instance(QKeyCombination.fromCombined(0)), k4: Union[PySide6.QtCore.QKeyCombination, PySide6.QtCore.Qt.KeyboardModifier, PySide6.QtCore.Qt.Key] = Instance(QKeyCombination.fromCombined(0))) -> None
+QKeySequence(self, key: PySide6.QtGui.QKeySequence.StandardKey) -> None
+QKeySequence(self, key: str, format: PySide6.QtGui.QKeySequence.SequenceFormat = Instance(PySide6.QtGui.QKeySequence.SequenceFormat.NativeText)) -> None
+QKeySequence(self, ks: Union[PySide6.QtGui.QKeySequence, PySide6.QtCore.QKeyCombination, PySide6.QtGui.QKeySequence.StandardKey, str, int]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                        | Children                                        | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QKeySequence](https://doc.qt.io/qtforpython/PySide6/QtGui/QKeySequence.html#PySide6.QtGui.PySide6.QtGui.QKeySequence)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QKeySequence\(self\) \-\> None | <ul><li>[KeySequence](KeySequence.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245539696["gui.KeySequence"]
+  1473289193952["QtGui.QKeySequence"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473289193952 --> 1473245539696
+  1473291690208 --> 1473289193952
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.keysequence.KeySequence
+    options:
+      show_root_toc_entry: False

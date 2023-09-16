@@ -1,0 +1,77 @@
+Qt Base Class: [QQuickWindow](https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickWindow.html#PySide6.QtQuick.PySide6.QtQuick.QQuickWindow)
+
+Signature: `QQuickWindow(self, parent: Optional[PySide6.QtGui.QWindow] = None) -> None
+QQuickWindow(self, renderControl: PySide6.QtQuick.QQuickRenderControl) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                     | Children                                                                                                                                                                       | Inherits                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[QuickWindowMixin](QuickWindowMixin.md)</font>**<br>*<font size='1'>prettyqt.quick.quickwindow</font>*<br>                                                                                                                                                              | <ul><li>[QuickWindow](QuickWindow.md)</li><li>[QuickView](QuickView.md)</li></ul>                                                                                              | <ul><li>[WindowMixin](WindowMixin.md)</li></ul>                                                                           |
+| **<font size='4'>[QQuickWindow](https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickWindow.html#PySide6.QtQuick.PySide6.QtQuick.QQuickWindow)</font>**<br>*<font size='1'>PySide6.QtQuick</font>*<br>QQuickWindow\(self, parent: Optional\[PySide6\.QtGui\.QWindow\] \= None\) \-\> None | <ul><li>[QQuickView](https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickView.html#PySide6.QtQuick.PySide6.QtQuick.QQuickView)</li><li>[QuickWindow](QuickWindow.md)</li></ul> | <ul><li>[QWindow](https://doc.qt.io/qtforpython/PySide6/QtGui/QWindow.html#PySide6.QtGui.PySide6.QtGui.QWindow)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473374481840["quick.QuickWindow"]
+  1473374469152["quick.QuickWindowMixin"]
+  1473245538720["gui.WindowMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245537744["gui.SurfaceMixin"]
+  1473374453536["QtQuick.QQuickWindow"]
+  1473289181264["QtGui.QWindow"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300006240["QtGui.QSurface"]
+  1473374469152 --> 1473374481840
+  1473245538720 --> 1473374469152
+  1473299815024 --> 1473245538720
+  140713234304496 --> 1473299815024
+  1473245537744 --> 1473245538720
+  140713234304496 --> 1473245537744
+  1473374453536 --> 1473374481840
+  1473289181264 --> 1473374453536
+  1473288842240 --> 1473289181264
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300006240 --> 1473289181264
+  1473291690208 --> 1473300006240
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.quick.quickwindow.QuickWindow
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property          | Type                          | Doc |
+| -------------------- | ----------------------------- | --- |
+| `objectName`         | **QString**                   |     |
+| `title`              | **QString**                   |     |
+| `modality`           | **Qt::WindowModality**        |     |
+| `flags`              | **QFlags<Qt::WindowType>**    |     |
+| `x`                  | **int**                       |     |
+| `y`                  | **int**                       |     |
+| `width`              | **int**                       |     |
+| `height`             | **int**                       |     |
+| `minimumWidth`       | **int**                       |     |
+| `minimumHeight`      | **int**                       |     |
+| `maximumWidth`       | **int**                       |     |
+| `maximumHeight`      | **int**                       |     |
+| `visible`            | **bool**                      |     |
+| `active`             | **bool**                      |     |
+| `visibility`         | **QWindow::Visibility**       |     |
+| `contentOrientation` | **Qt::ScreenOrientation**     |     |
+| `opacity`            | **double**                    |     |
+| `transientParent`    | **QWindow**                   |     |
+| `data`               | **QQmlListProperty<QObject>** |     |
+| `color`              | **QColor**                    |     |
+| `contentItem`        | **QQuickItem**                |     |
+| `activeFocusItem`    | **QQuickItem**                |     |
+| `palette`            | **QQuickPalette**             |     |

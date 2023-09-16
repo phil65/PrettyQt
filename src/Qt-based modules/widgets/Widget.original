@@ -1,0 +1,149 @@
+Qt Base Class: [QWidget](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidget)
+
+Signature: `QWidget(self, parent: Optional[PySide6.QtWidgets.QWidget] = None, f: PySide6.QtCore.Qt.WindowType = Default(Qt.WindowFlags)) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                               | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Inherits                                                                                                                                                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[WidgetMixin](WidgetMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.widget</font>*<br>                                                                                                                                                                                                                                     | <ul><li>[Widget](Widget.md)</li><li>[FrameMixin](FrameMixin.md)</li><li>[FocusFrame](FocusFrame.md)</li><li>[AbstractSliderMixin](AbstractSliderMixin.md)</li><li>[AbstractButtonMixin](AbstractButtonMixin.md)</li><li>[LineEdit](LineEdit.md)</li><li>[AbstractSpinBoxMixin](AbstractSpinBoxMixin.md)</li><li>[RubberBandMixin](RubberBandMixin.md)</li><li>[DialogButtonBox](DialogButtonBox.md)</li><li>[DialogMixin](DialogMixin.md)</li><li>...</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[PaintDeviceMixin](PaintDeviceMixin.md)</li></ul>                                                                                                                                                             |
+| **<font size='4'>[QWidget](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidget)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QWidget\(self, parent: Optional\[PySide6\.QtWidgets\.QWidget\] \= None, f: PySide6\.QtCore\.Qt\.WindowType \= Default\(Qt\.WindowFlags\)\) \-\> None | <ul><li>[QWizardPage](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWizardPage.html#PySide6.QtWidgets.PySide6.QtWidgets.QWizardPage)</li><li>[QToolBar](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QToolBar.html#PySide6.QtWidgets.PySide6.QtWidgets.QToolBar)</li><li>[QTabWidget](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QTabWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QTabWidget)</li><li>[QTabBar](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QTabBar.html#PySide6.QtWidgets.PySide6.QtWidgets.QTabBar)</li><li>[QStatusBar](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStatusBar.html#PySide6.QtWidgets.PySide6.QtWidgets.QStatusBar)</li><li>[QSplitterHandle](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QSplitterHandle.html#PySide6.QtWidgets.PySide6.QtWidgets.QSplitterHandle)</li><li>[QSplashScreen](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QSplashScreen.html#PySide6.QtWidgets.PySide6.QtWidgets.QSplashScreen)</li><li>[QSizeGrip](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QSizeGrip.html#PySide6.QtWidgets.PySide6.QtWidgets.QSizeGrip)</li><li>[QRubberBand](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QRubberBand.html#PySide6.QtWidgets.PySide6.QtWidgets.QRubberBand)</li><li>[QProgressBar](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QProgressBar.html#PySide6.QtWidgets.PySide6.QtWidgets.QProgressBar)</li><li>...</li></ul> | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li><li>[QPaintDevice](https://doc.qt.io/qtforpython/PySide6/QtGui/QPaintDevice.html#PySide6.QtGui.PySide6.QtGui.QPaintDevice)</li></ul> |
+
+
+## Subclasses
+
+| Class                                         | Module                                             | Description |
+| --------------------------------------------- | -------------------------------------------------- | ----------- |
+| [CustomTitleBar](CustomTitleBar.md)           | prettyqt.widgets.dockwidget                        |             |
+| [StarEditor](StarEditor.md)                   | prettyqt.itemdelegates.stardelegate                |             |
+| [Separator](Separator.md)                     | prettyqt.custom_widgets.layouts.flowlayout         |             |
+| [IconLabel](IconLabel.md)                     | prettyqt.custom_widgets.labels.iconlabel           |             |
+| [CrossFadeWidget](CrossFadeWidget.md)         | prettyqt.custom_widgets.crossfadewidget            |             |
+| [FaderWidget](FaderWidget.md)                 | prettyqt.custom_widgets.faderwidget                |             |
+| [ImageViewer](ImageViewer.md)                 | prettyqt.custom_widgets.imageviewer                |             |
+| [WidgetEditor](WidgetEditor.md)               | prettyqt.custom_widgets.widgeteditor               |             |
+| [CommandPalette](CommandPalette.md)           | prettyqt.custom_widgets.commandpalette             |             |
+| [BrushEdit](BrushEdit.md)                     | prettyqt.custom_widgets.editors.brushedit          |             |
+| [BaseRectEdit](BaseRectEdit.md)               | prettyqt.custom_widgets.editors.rectedit           |             |
+| [PaletteEdit](PaletteEdit.md)                 | prettyqt.custom_widgets.editors.paletteedit        |             |
+| [IconEdit](IconEdit.md)                       | prettyqt.custom_widgets.editors.iconedit           |             |
+| [PointEdit](PointEdit.md)                     | prettyqt.custom_widgets.editors.pointedit          |             |
+| [SizeEdit](SizeEdit.md)                       | prettyqt.custom_widgets.editors.sizeedit           |             |
+| [SizePolicyEdit](SizePolicyEdit.md)           | prettyqt.custom_widgets.editors.sizepolicyedit     |             |
+| [RegexInput](RegexInput.md)                   | prettyqt.custom_widgets.editors.regexinput         |             |
+| [SliceEdit](SliceEdit.md)                     | prettyqt.custom_widgets.editors.sliceedit          |             |
+| [RangeEdit](RangeEdit.md)                     | prettyqt.custom_widgets.editors.rangeedit          |             |
+| [ColorChooserButton](ColorChooserButton.md)   | prettyqt.custom_widgets.editors.colorchooserbutton |             |
+| [FileChooserButton](FileChooserButton.md)     | prettyqt.custom_widgets.editors.filechooserbutton  |             |
+| [FontChooserButton](FontChooserButton.md)     | prettyqt.custom_widgets.editors.fontchooserbutton  |             |
+| [InputAndSlider](InputAndSlider.md)           | prettyqt.custom_widgets.editors.inputandslider     |             |
+| [SpanSliderWidget](SpanSliderWidget.md)       | prettyqt.custom_widgets.editors.spanslider         |             |
+| [LabeledSlider](LabeledSlider.md)             | prettyqt.custom_widgets.labeledslider              |             |
+| [BaseWaitingSpinner](BaseWaitingSpinner.md)   | prettyqt.custom_widgets.waitingspinner             |             |
+| [NumFilterWidget](NumFilterWidget.md)         | prettyqt.custom_widgets.numfilterwidget            |             |
+| [LineNumberArea](LineNumberArea.md)           | prettyqt.custom_widgets.codeeditor                 |             |
+| [RoundProgressBar](RoundProgressBar.md)       | prettyqt.custom_widgets.roundprogressbar           |             |
+| [SectionWidget](SectionWidget.md)             | prettyqt.custom_widgets.scrollareatocwidget        |             |
+| [Timeline](Timeline.md)                       | prettyqt.custom_widgets.timeline                   |             |
+| [StandardIconsWidget](StandardIconsWidget.md) | prettyqt.custom_widgets.standardiconswidget        |             |
+| [FileExplorer](FileExplorer.md)               | prettyqt.custom_widgets.itemviews.filetree         |             |
+| [MarkdownWidget](MarkdownWidget.md)           | prettyqt.prettyqtmarkdown.markdownwidget           |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293661888["widgets.Widget"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473290849680["QtWidgets.QWidget"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473300082368["QtGui.QPaintDevice"]
+  1473293688240 --> 1473293661888
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+  1473290849680 --> 1473293661888
+  1473288842240 --> 1473290849680
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473300082368 --> 1473290849680
+  1473291690208 --> 1473300082368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.widget.Widget
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property             | Type                            | Doc |
+| ----------------------- | ------------------------------- | --- |
+| `objectName`            | **QString**                     |     |
+| `modal`                 | **bool**                        |     |
+| `windowModality`        | **Qt::WindowModality**          |     |
+| `enabled`               | **bool**                        |     |
+| `geometry`              | **QRect**                       |     |
+| `frameGeometry`         | **QRect**                       |     |
+| `normalGeometry`        | **QRect**                       |     |
+| `x`                     | **int**                         |     |
+| `y`                     | **int**                         |     |
+| `pos`                   | **QPoint**                      |     |
+| `frameSize`             | **QSize**                       |     |
+| `size`                  | **QSize**                       |     |
+| `width`                 | **int**                         |     |
+| `height`                | **int**                         |     |
+| `rect`                  | **QRect**                       |     |
+| `childrenRect`          | **QRect**                       |     |
+| `childrenRegion`        | **QRegion**                     |     |
+| `sizePolicy`            | **QSizePolicy**                 |     |
+| `minimumSize`           | **QSize**                       |     |
+| `maximumSize`           | **QSize**                       |     |
+| `minimumWidth`          | **int**                         |     |
+| `minimumHeight`         | **int**                         |     |
+| `maximumWidth`          | **int**                         |     |
+| `maximumHeight`         | **int**                         |     |
+| `sizeIncrement`         | **QSize**                       |     |
+| `baseSize`              | **QSize**                       |     |
+| `palette`               | **QPalette**                    |     |
+| `font`                  | **QFont**                       |     |
+| `cursor`                | **QCursor**                     |     |
+| `mouseTracking`         | **bool**                        |     |
+| `tabletTracking`        | **bool**                        |     |
+| `isActiveWindow`        | **bool**                        |     |
+| `focusPolicy`           | **Qt::FocusPolicy**             |     |
+| `focus`                 | **bool**                        |     |
+| `contextMenuPolicy`     | **Qt::ContextMenuPolicy**       |     |
+| `updatesEnabled`        | **bool**                        |     |
+| `visible`               | **bool**                        |     |
+| `minimized`             | **bool**                        |     |
+| `maximized`             | **bool**                        |     |
+| `fullScreen`            | **bool**                        |     |
+| `sizeHint`              | **QSize**                       |     |
+| `minimumSizeHint`       | **QSize**                       |     |
+| `acceptDrops`           | **bool**                        |     |
+| `windowTitle`           | **QString**                     |     |
+| `windowIcon`            | **QIcon**                       |     |
+| `windowIconText`        | **QString**                     |     |
+| `windowOpacity`         | **double**                      |     |
+| `windowModified`        | **bool**                        |     |
+| `toolTip`               | **QString**                     |     |
+| `toolTipDuration`       | **int**                         |     |
+| `statusTip`             | **QString**                     |     |
+| `whatsThis`             | **QString**                     |     |
+| `accessibleName`        | **QString**                     |     |
+| `accessibleDescription` | **QString**                     |     |
+| `layoutDirection`       | **Qt::LayoutDirection**         |     |
+| `autoFillBackground`    | **bool**                        |     |
+| `styleSheet`            | **QString**                     |     |
+| `locale`                | **QLocale**                     |     |
+| `windowFilePath`        | **QString**                     |     |
+| `inputMethodHints`      | **QFlags<Qt::InputMethodHint>** |     |

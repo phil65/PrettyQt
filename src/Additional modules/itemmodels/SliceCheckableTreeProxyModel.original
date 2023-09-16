@@ -1,0 +1,62 @@
+Qt Base Class: [QIdentityProxyModel](https://doc.qt.io/qtforpython/PySide6/QtCore/QIdentityProxyModel.html#PySide6.QtCore.PySide6.QtCore.QIdentityProxyModel)
+
+Signature: `QIdentityProxyModel(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                               | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| **<font size='4'>[SliceIdentityProxyModel](SliceIdentityProxyModel.md)</font>**<br>*<font size='1'>prettyqt.itemmodels.proxies.sliceidentityproxymodel</font>*<br> | <ul><li>[SliceDisplayTextProxyModel](SliceDisplayTextProxyModel.md)</li><li>[SliceChangeIconSizeProxyModel](SliceChangeIconSizeProxyModel.md)</li><li>[SliceFilterProxyModel](SliceFilterProxyModel.md)</li><li>[SliceCheckableProxyModel](SliceCheckableProxyModel.md)</li><li>[SliceCheckableTreeProxyModel](SliceCheckableTreeProxyModel.md)</li><li>[SliceAppearanceProxyModel](SliceAppearanceProxyModel.md)</li><li>[SliceChangeFlagsProxyModel](SliceChangeFlagsProxyModel.md)</li><li>[SliceColorValuesProxyModel](SliceColorValuesProxyModel.md)</li><li>[SliceColorCategoriesProxyModel](SliceColorCategoriesProxyModel.md)</li><li>[SliceValueTransformationProxyModel](SliceValueTransformationProxyModel.md)</li><li>...</li></ul> | <ul><li>[IdentityProxyModel](IdentityProxyModel.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473290717920["itemmodels.SliceCheckableTreeProxyModel"]
+  1473290716944["itemmodels.SliceIdentityProxyModel"]
+  1473299892128["core.IdentityProxyModel"]
+  1473299903840["core.AbstractProxyModelMixin"]
+  1473299890176["core.AbstractItemModelMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473289064768["QtCore.QIdentityProxyModel"]
+  1473289061840["QtCore.QAbstractProxyModel"]
+  1473289050128["QtCore.QAbstractItemModel"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473290716944 --> 1473290717920
+  1473299892128 --> 1473290716944
+  1473299903840 --> 1473299892128
+  1473299890176 --> 1473299903840
+  1473299815024 --> 1473299890176
+  140713234304496 --> 1473299815024
+  1473289064768 --> 1473299892128
+  1473289061840 --> 1473289064768
+  1473289050128 --> 1473289061840
+  1473288842240 --> 1473289050128
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.itemmodels.proxies.slicecheckableproxymodel.SliceCheckableTreeProxyModel
+    options:
+      show_root_toc_entry: False
+
+
+!!! info
+    This is a [slice proxy](SliceIdentityProxyModel.md)
+    and can be selectively applied to a model. Read more about
+     [slices](https://docs.python.org/3/library/functions.html#slice).
+
+
+## ⌗ Property table
+
+| Qt Property    | Type                   | Doc                                   |
+| -------------- | ---------------------- | ------------------------------------- |
+| `objectName`   | **QString**            |                                       |
+| `sourceModel`  | **QAbstractItemModel** |                                       |
+| `column_slice` | **QVariantList**       | Column slice to include for the proxy |
+| `row_slice`    | **QVariantList**       | Row slice to include for the proxy    |

@@ -1,0 +1,61 @@
+Qt Base Class: [QPieSlice](https://doc.qt.io/qtforpython/PySide6/QtCharts/QPieSlice.html#PySide6.QtCharts.PySide6.QtCharts.QPieSlice)
+
+Signature: `QPieSlice(self, label: str, value: float, parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QPieSlice(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                        | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[ObjectMixin](ObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.core.object</font>*<br>                                                                                                                                                                                                 | <ul><li>[Object](Object.md)</li><li>[SocketNotifier](SocketNotifier.md)</li><li>[SharedMemory](SharedMemory.md)</li><li>[SignalMapper](SignalMapper.md)</li><li>[TimeLine](TimeLine.md)</li><li>[AbstractEventDispatcher](AbstractEventDispatcher.md)</li><li>[EventLoop](EventLoop.md)</li><li>[AbstractAnimationMixin](AbstractAnimationMixin.md)</li><li>[TranslatorMixin](TranslatorMixin.md)</li><li>[CoreApplicationMixin](CoreApplicationMixin.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                          |
+| **<font size='4'>[QPieSlice](https://doc.qt.io/qtforpython/PySide6/QtCharts/QPieSlice.html#PySide6.QtCharts.PySide6.QtCharts.QPieSlice)</font>**<br>*<font size='1'>PySide6.QtCharts</font>*<br>QPieSlice\(self, label: str, value: float, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[PieSlice](PieSlice.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                       | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367653696["charts.PieSlice"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473367586352["QtCharts.QPieSlice"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473299815024 --> 1473367653696
+  140713234304496 --> 1473299815024
+  1473367586352 --> 1473367653696
+  1473288842240 --> 1473367586352
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.charts.pieslice.PieSlice
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property             | Type                         | Doc |
+| ----------------------- | ---------------------------- | --- |
+| `objectName`            | **QString**                  |     |
+| `label`                 | **QString**                  |     |
+| `value`                 | **double**                   |     |
+| `labelVisible`          | **bool**                     |     |
+| `labelPosition`         | **QPieSlice::LabelPosition** |     |
+| `exploded`              | **bool**                     |     |
+| `pen`                   | **QPen**                     |     |
+| `borderColor`           | **QColor**                   |     |
+| `borderWidth`           | **int**                      |     |
+| `brush`                 | **QBrush**                   |     |
+| `color`                 | **QColor**                   |     |
+| `labelBrush`            | **QBrush**                   |     |
+| `labelColor`            | **QColor**                   |     |
+| `labelFont`             | **QFont**                    |     |
+| `labelArmLengthFactor`  | **double**                   |     |
+| `explodeDistanceFactor` | **double**                   |     |
+| `percentage`            | **double**                   |     |
+| `startAngle`            | **double**                   |     |
+| `angleSpan`             | **double**                   |     |

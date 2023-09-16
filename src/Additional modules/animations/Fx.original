@@ -1,0 +1,14 @@
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293675552["animations.Fx"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473293675552
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.animations.fx.Fx
+    options:
+      show_root_toc_entry: False

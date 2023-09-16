@@ -1,0 +1,36 @@
+Qt Base Class: [QVector4D](https://doc.qt.io/qtforpython/PySide6/QtGui/QVector4D.html#PySide6.QtGui.PySide6.QtGui.QVector4D)
+
+Signature: `QVector4D(self) -> None
+QVector4D(self, point: PySide6.QtCore.QPoint) -> None
+QVector4D(self, point: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element]) -> None
+QVector4D(self, vector: PySide6.QtGui.QVector2D) -> None
+QVector4D(self, vector: PySide6.QtGui.QVector2D, zpos: float, wpos: float) -> None
+QVector4D(self, vector: PySide6.QtGui.QVector3D) -> None
+QVector4D(self, vector: PySide6.QtGui.QVector3D, wpos: float) -> None
+QVector4D(self, xpos: float, ypos: float, zpos: float, wpos: float) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                            | Children                                  | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QVector4D](https://doc.qt.io/qtforpython/PySide6/QtGui/QVector4D.html#PySide6.QtGui.PySide6.QtGui.QVector4D)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QVector4D\(self\) \-\> None | <ul><li>[Vector4D](Vector4D.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245620704["gui.Vector4D"]
+  1473299685216["QtGui.QVector4D"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473299685216 --> 1473245620704
+  1473291690208 --> 1473299685216
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.vector4d.Vector4D
+    options:
+      show_root_toc_entry: False

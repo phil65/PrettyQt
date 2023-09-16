@@ -1,0 +1,48 @@
+Qt Base Class: [QUrlQuery](https://doc.qt.io/qtforpython/PySide6/QtCore/QUrlQuery.html#PySide6.QtCore.PySide6.QtCore.QUrlQuery)
+
+Signature: `QUrlQuery(self) -> None
+QUrlQuery(self, other: PySide6.QtCore.QUrlQuery) -> None
+QUrlQuery(self, queryString: str) -> None
+QUrlQuery(self, url: Union[PySide6.QtCore.QUrl, str]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                    | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Inherits                                                                                                    |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[QUrlQuery](https://doc.qt.io/qtforpython/PySide6/QtCore/QUrlQuery.html#PySide6.QtCore.PySide6.QtCore.QUrlQuery)</font>**<br>*<font size='1'>PySide6.QtCore</font>*<br>QUrlQuery\(self\) \-\> None                     | <ul><li>[UrlQuery](UrlQuery.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | <ul><li>[Object](Object.md)</li></ul>                                                                       |
+| **<font size='4'>[MutableMapping](https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableMapping)</font>**<br>*<font size='1'>collections.abc</font>*<br>A MutableMapping is a generic container for associating | <ul><li>[_Environ](_Environ.md)</li><li>[ChainMap](https://docs.python.org/3/library/collections.html#collections.ChainMap)</li><li>[UserDict](https://docs.python.org/3/library/collections.html#collections.UserDict)</li><li>[WeakValueDictionary](https://docs.python.org/3/library/weakref.html#weakref.WeakValueDictionary)</li><li>[WeakKeyDictionary](https://docs.python.org/3/library/weakref.html#weakref.WeakKeyDictionary)</li><li>[PluginCollection](https://www.mkdocs.org/)</li><li>[LocaleDataDict](https://babel.pocoo.org/)</li><li>[SignalDict](SignalDict.md)</li><li>[Theme](https://www.mkdocs.org/)</li><li>[RawConfigParser](https://docs.python.org/3/library/configparser.html#configparser.RawConfigParser)</li><li>...</li></ul> | <ul><li>[Mapping](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299831616["core.UrlQuery"]
+  1473243721760["QtCore.QUrlQuery"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473222543776["abc.MutableMapping"]
+  1473222540848["abc.Mapping"]
+  1473222211728["abc.Collection"]
+  1473222226368["abc.Sized"]
+  1473222223440["abc.Iterable"]
+  1473222220512["abc.Container"]
+  1473243721760 --> 1473299831616
+  1473291690208 --> 1473243721760
+  140713234304496 --> 1473291690208
+  1473222543776 --> 1473299831616
+  1473222540848 --> 1473222543776
+  1473222211728 --> 1473222540848
+  1473222226368 --> 1473222211728
+  140713234304496 --> 1473222226368
+  1473222223440 --> 1473222211728
+  140713234304496 --> 1473222223440
+  1473222220512 --> 1473222211728
+  140713234304496 --> 1473222220512
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.urlquery.UrlQuery
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,60 @@
+Qt Base Class: [QAbstractBarSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QAbstractBarSeries.html#PySide6.QtCharts.PySide6.QtCharts.QAbstractBarSeries)
+
+Signature: `None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                        | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Inherits                                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[AbstractBarSeriesMixin](AbstractBarSeriesMixin.md)</font>**<br>*<font size='1'>prettyqt.charts.abstractbarseries</font>*<br>                                                                              | <ul><li>[AbstractBarSeries](AbstractBarSeries.md)</li><li>[BarSeries](BarSeries.md)</li><li>[PercentBarSeries](PercentBarSeries.md)</li><li>[HorizontalBarSeries](HorizontalBarSeries.md)</li><li>[HorizontalPercentBarSeries](HorizontalPercentBarSeries.md)</li><li>[StackedBarSeries](StackedBarSeries.md)</li><li>[HorizontalStackedBarSeries](HorizontalStackedBarSeries.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | <ul><li>[AbstractSeriesMixin](AbstractSeriesMixin.md)</li></ul>                                                                                            |
+| **<font size='4'>[QAbstractBarSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QAbstractBarSeries.html#PySide6.QtCharts.PySide6.QtCharts.QAbstractBarSeries)</font>**<br>*<font size='1'>PySide6.QtCharts</font>*<br> | <ul><li>[QStackedBarSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QStackedBarSeries.html#PySide6.QtCharts.PySide6.QtCharts.QStackedBarSeries)</li><li>[QPercentBarSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QPercentBarSeries.html#PySide6.QtCharts.PySide6.QtCharts.QPercentBarSeries)</li><li>[QHorizontalStackedBarSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QHorizontalStackedBarSeries.html#PySide6.QtCharts.PySide6.QtCharts.QHorizontalStackedBarSeries)</li><li>[QHorizontalPercentBarSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QHorizontalPercentBarSeries.html#PySide6.QtCharts.PySide6.QtCharts.QHorizontalPercentBarSeries)</li><li>[QHorizontalBarSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QHorizontalBarSeries.html#PySide6.QtCharts.PySide6.QtCharts.QHorizontalBarSeries)</li><li>[QBarSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QBarSeries.html#PySide6.QtCharts.PySide6.QtCharts.QBarSeries)</li><li>[AbstractBarSeries](AbstractBarSeries.md)</li></ul> | <ul><li>[QAbstractSeries](https://doc.qt.io/qtforpython/PySide6/QtCharts/QAbstractSeries.html#PySide6.QtCharts.PySide6.QtCharts.QAbstractSeries)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473367686880["charts.AbstractBarSeries"]
+  1473367682000["charts.AbstractBarSeriesMixin"]
+  1473367658576["charts.AbstractSeriesMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473367629296["QtCharts.QAbstractBarSeries"]
+  1473367617584["QtCharts.QAbstractSeries"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473367682000 --> 1473367686880
+  1473367658576 --> 1473367682000
+  1473299815024 --> 1473367658576
+  140713234304496 --> 1473299815024
+  1473367629296 --> 1473367686880
+  1473367617584 --> 1473367629296
+  1473288842240 --> 1473367617584
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.charts.abstractbarseries.AbstractBarSeries
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property       | Type                                   | Doc |
+| ----------------- | -------------------------------------- | --- |
+| `objectName`      | **QString**                            |     |
+| `name`            | **QString**                            |     |
+| `visible`         | **bool**                               |     |
+| `opacity`         | **double**                             |     |
+| `type`            | **QAbstractSeries::SeriesType**        |     |
+| `useOpenGL`       | **bool**                               |     |
+| `barWidth`        | **double**                             |     |
+| `count`           | **int**                                |     |
+| `labelsVisible`   | **bool**                               |     |
+| `labelsFormat`    | **QString**                            |     |
+| `labelsPosition`  | **QAbstractBarSeries::LabelsPosition** |     |
+| `labelsAngle`     | **double**                             |     |
+| `labelsPrecision` | **int**                                |     |

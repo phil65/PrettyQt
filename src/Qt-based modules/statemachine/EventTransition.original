@@ -1,0 +1,53 @@
+Qt Base Class: [QEventTransition](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QEventTransition.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QEventTransition)
+
+Signature: `QEventTransition(self, object: PySide6.QtCore.QObject, type: PySide6.QtCore.QEvent.Type, sourceState: Optional[PySide6.QtStateMachine.QState] = None) -> None
+QEventTransition(self, sourceState: Optional[PySide6.QtStateMachine.QState] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                                                                                     | Children                                                                                                                                                                                                                                                                                                                                                                                                                    | Inherits                                                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[AbstractTransitionMixin](AbstractTransitionMixin.md)</font>**<br>*<font size='1'>prettyqt.statemachine.abstracttransition</font>*<br>                                                                                                                                                                                                                                                                  | <ul><li>[AbstractTransition](AbstractTransition.md)</li><li>[EventTransition](EventTransition.md)</li><li>[SignalTransition](SignalTransition.md)</li></ul>                                                                                                                                                                                                                                                                 | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                                                                                          |
+| **<font size='4'>[QEventTransition](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QEventTransition.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QEventTransition)</font>**<br>*<font size='1'>PySide6.QtStateMachine</font>*<br>QEventTransition\(self, object: PySide6\.QtCore\.QObject, type: PySide6\.QtCore\.QEvent\.Type, sourceState: Optional\[PySide6\.QtStateMachine\.QState\] \= None\) \-\> None | <ul><li>[QMouseEventTransition](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QMouseEventTransition.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QMouseEventTransition)</li><li>[QKeyEventTransition](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QKeyEventTransition.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QKeyEventTransition)</li><li>[EventTransition](EventTransition.md)</li></ul> | <ul><li>[QAbstractTransition](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QAbstractTransition.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QAbstractTransition)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473374535520["statemachine.EventTransition"]
+  1473374533568["statemachine.AbstractTransitionMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473374489648["QtStateMachine.QEventTransition"]
+  1473374496480["QtStateMachine.QAbstractTransition"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473374533568 --> 1473374535520
+  1473299815024 --> 1473374533568
+  140713234304496 --> 1473299815024
+  1473374489648 --> 1473374535520
+  1473374496480 --> 1473374489648
+  1473288842240 --> 1473374496480
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.statemachine.eventtransition.EventTransition
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property      | Type                                    | Doc |
+| ---------------- | --------------------------------------- | --- |
+| `objectName`     | **QString**                             |     |
+| `sourceState`    | **QState**                              |     |
+| `targetState`    | **QAbstractState**                      |     |
+| `targetStates`   | **QList<QAbstractState*>**              |     |
+| `transitionType` | **QAbstractTransition::TransitionType** |     |
+| `eventSource`    | **QObject**                             |     |
+| `eventType`      | **QEvent::Type**                        |     |

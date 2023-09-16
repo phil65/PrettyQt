@@ -1,0 +1,32 @@
+Qt Base Class: [QTextLayout](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextLayout.html#PySide6.QtGui.PySide6.QtGui.QTextLayout)
+
+Signature: `QTextLayout(self) -> None
+QTextLayout(self, b: PySide6.QtGui.QTextBlock) -> None
+QTextLayout(self, text: str) -> None
+QTextLayout(self, text: str, font: Union[PySide6.QtGui.QFont, str, Sequence[str]], paintdevice: Optional[PySide6.QtGui.QPaintDevice] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                    | Children                                      | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QTextLayout](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextLayout.html#PySide6.QtGui.PySide6.QtGui.QTextLayout)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextLayout\(self\) \-\> None | <ul><li>[TextLayout](TextLayout.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245564096["gui.TextLayout"]
+  1473299965248["QtGui.QTextLayout"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473299965248 --> 1473245564096
+  1473291690208 --> 1473299965248
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textlayout.TextLayout
+    options:
+      show_root_toc_entry: False

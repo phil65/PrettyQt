@@ -1,0 +1,35 @@
+Qt Base Class: [QTextFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextFormat.html#PySide6.QtGui.PySide6.QtGui.QTextFormat)
+
+Signature: `QTextFormat(self) -> None
+QTextFormat(self, rhs: PySide6.QtGui.QTextFormat) -> None
+QTextFormat(self, type: int) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                    | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[TextFormatMixin](TextFormatMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.textformat</font>*<br>                                                                                                  | <ul><li>[TextFormat](TextFormat.md)</li><li>[TextFrameFormatMixin](TextFrameFormatMixin.md)</li><li>[TextBlockFormat](TextBlockFormat.md)</li><li>[TextCharFormatMixin](TextCharFormatMixin.md)</li><li>[TextListFormat](TextListFormat.md)</li></ul>                                                                                                                                                                                                                                                                                                                                                               | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QTextFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextFormat.html#PySide6.QtGui.PySide6.QtGui.QTextFormat)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextFormat\(self\) \-\> None | <ul><li>[QTextListFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextListFormat.html#PySide6.QtGui.PySide6.QtGui.QTextListFormat)</li><li>[QTextFrameFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextFrameFormat.html#PySide6.QtGui.PySide6.QtGui.QTextFrameFormat)</li><li>[QTextCharFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextCharFormat.html#PySide6.QtGui.PySide6.QtGui.QTextCharFormat)</li><li>[QTextBlockFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextBlockFormat.html#PySide6.QtGui.PySide6.QtGui.QTextBlockFormat)</li><li>[TextFormat](TextFormat.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245647056["gui.TextFormat"]
+  1473245646080["gui.TextFormatMixin"]
+  140713234304496["builtins.object"]
+  1473299700832["QtGui.QTextFormat"]
+  1473291690208["Shiboken.Object"]
+  1473245646080 --> 1473245647056
+  140713234304496 --> 1473245646080
+  1473299700832 --> 1473245647056
+  1473291690208 --> 1473299700832
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textformat.TextFormat
+    options:
+      show_root_toc_entry: False

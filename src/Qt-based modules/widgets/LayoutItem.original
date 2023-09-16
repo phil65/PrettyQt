@@ -1,0 +1,33 @@
+Qt Base Class: [QLayoutItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QLayoutItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QLayoutItem)
+
+Signature: `QLayoutItem(self, alignment: PySide6.QtCore.Qt.AlignmentFlag = Default(Qt.Alignment)) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                               | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Inherits                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[LayoutItemMixin](LayoutItemMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.layoutitem</font>*<br>                                                                                                                                                                                         | <ul><li>[LayoutItem](LayoutItem.md)</li><li>[WidgetItem](WidgetItem.md)</li><li>[LayoutMixin](LayoutMixin.md)</li><li>[SpacerItem](SpacerItem.md)</li></ul>                                                                                                                                                                                                                                                                                               | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QLayoutItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QLayoutItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QLayoutItem)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QLayoutItem\(self, alignment: PySide6\.QtCore\.Qt\.AlignmentFlag \= Default\(Qt\.Alignment\)\) \-\> None | <ul><li>[QSpacerItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QSpacerItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QSpacerItem)</li><li>[QWidgetItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidgetItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidgetItem)</li><li>[QLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QLayout)</li><li>[LayoutItem](LayoutItem.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296336896["widgets.LayoutItem"]
+  1473296346656["widgets.LayoutItemMixin"]
+  140713234304496["builtins.object"]
+  1473290791120["QtWidgets.QLayoutItem"]
+  1473291690208["Shiboken.Object"]
+  1473296346656 --> 1473296336896
+  140713234304496 --> 1473296346656
+  1473290791120 --> 1473296336896
+  1473291690208 --> 1473290791120
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.layoutitem.LayoutItem
+    options:
+      show_root_toc_entry: False

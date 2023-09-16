@@ -1,0 +1,31 @@
+Qt Base Class: [QTextOption](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextOption.html#PySide6.QtGui.PySide6.QtGui.QTextOption)
+
+Signature: `QTextOption(self) -> None
+QTextOption(self, alignment: PySide6.QtCore.Qt.AlignmentFlag) -> None
+QTextOption(self, o: Union[PySide6.QtGui.QTextOption, PySide6.QtCore.Qt.AlignmentFlag]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                    | Children                                      | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QTextOption](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextOption.html#PySide6.QtGui.PySide6.QtGui.QTextOption)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextOption\(self\) \-\> None | <ul><li>[TextOption](TextOption.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245563120["gui.TextOption"]
+  1473299662768["QtGui.QTextOption"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473299662768 --> 1473245563120
+  1473291690208 --> 1473299662768
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textoption.TextOption
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,29 @@
+Qt Base Class: [QItemEditorCreatorBase](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QItemEditorCreatorBase.html#PySide6.QtWidgets.PySide6.QtWidgets.QItemEditorCreatorBase)
+
+Signature: `QItemEditorCreatorBase(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                | Children                                                            | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QItemEditorCreatorBase](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QItemEditorCreatorBase.html#PySide6.QtWidgets.PySide6.QtWidgets.QItemEditorCreatorBase)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QItemEditorCreatorBase\(self\) \-\> None | <ul><li>[ItemEditorCreatorBase](ItemEditorCreatorBase.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296382768["widgets.ItemEditorCreatorBase"]
+  1473290792096["QtWidgets.QItemEditorCreatorBase"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473290792096 --> 1473296382768
+  1473291690208 --> 1473290792096
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.itemeditorcreatorbase.ItemEditorCreatorBase
+    options:
+      show_root_toc_entry: False

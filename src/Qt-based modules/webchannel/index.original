@@ -1,0 +1,16 @@
+---
+hide:
+- toc
+---
+
+## Docs
+
+Webenginewidgets module.
+
+contains QtWebEngineCore-based classes
+
+## Classes
+
+| Name                                                                                                                | Children | Inherits                                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **<font size='4'>[WebChannel](WebChannel.md)</font>**<br>*<font size='1'>prettyqt.webchannel.webchannel</font>*<br> |          | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[QWebChannel](https://doc.qt.io/qtforpython/PySide6/QtWebChannel/QWebChannel.html#PySide6.QtWebChannel.PySide6.QtWebChannel.QWebChannel)</li></ul> |

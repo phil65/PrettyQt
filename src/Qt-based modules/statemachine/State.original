@@ -1,0 +1,53 @@
+Qt Base Class: [QState](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QState.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QState)
+
+Signature: `QState(self, childMode: PySide6.QtStateMachine.QState.ChildMode, parent: Optional[PySide6.QtStateMachine.QState] = None) -> None
+QState(self, parent: Optional[PySide6.QtStateMachine.QState] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                        | Children                                                                                                                                                                                         | Inherits                                                                                                                                                                  |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[StateMixin](StateMixin.md)</font>**<br>*<font size='1'>prettyqt.statemachine.state</font>*<br>                                                                                                                                                                                                                                            | <ul><li>[State](State.md)</li><li>[StateMachine](StateMachine.md)</li></ul>                                                                                                                      | <ul><li>[AbstractStateMixin](AbstractStateMixin.md)</li></ul>                                                                                                             |
+| **<font size='4'>[QState](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QState.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QState)</font>**<br>*<font size='1'>PySide6.QtStateMachine</font>*<br>QState\(self, childMode: PySide6\.QtStateMachine\.QState\.ChildMode, parent: Optional\[PySide6\.QtStateMachine\.QState\] \= None\) \-\> None | <ul><li>[QStateMachine](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QStateMachine.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QStateMachine)</li><li>[State](State.md)</li></ul> | <ul><li>[QAbstractState](https://doc.qt.io/qtforpython/PySide6/QtStateMachine/QAbstractState.html#PySide6.QtStateMachine.PySide6.QtStateMachine.QAbstractState)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473374540400["statemachine.State"]
+  1473374539424["statemachine.StateMixin"]
+  1473374532592["statemachine.AbstractStateMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473374520880["QtStateMachine.QState"]
+  1473374523808["QtStateMachine.QAbstractState"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473374539424 --> 1473374540400
+  1473374532592 --> 1473374539424
+  1473299815024 --> 1473374532592
+  140713234304496 --> 1473299815024
+  1473374520880 --> 1473374540400
+  1473374523808 --> 1473374520880
+  1473288842240 --> 1473374523808
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.statemachine.state.State
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property    | Type                  | Doc |
+| -------------- | --------------------- | --- |
+| `objectName`   | **QString**           |     |
+| `active`       | **bool**              |     |
+| `initialState` | **QAbstractState**    |     |
+| `errorState`   | **QAbstractState**    |     |
+| `childMode`    | **QState::ChildMode** |     |

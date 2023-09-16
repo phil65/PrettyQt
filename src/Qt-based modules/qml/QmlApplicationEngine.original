@@ -1,0 +1,55 @@
+Qt Base Class: [QQmlApplicationEngine](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlApplicationEngine.html#PySide6.QtQml.PySide6.QtQml.QQmlApplicationEngine)
+
+Signature: `QQmlApplicationEngine(self, filePath: str, parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QQmlApplicationEngine(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QQmlApplicationEngine(self, uri: str, typeName: str, parent: Optional[PySide6.QtCore.QObject] = None) -> None
+QQmlApplicationEngine(self, url: Union[PySide6.QtCore.QUrl, str], parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                 | Children                                                                                            | Inherits                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[QmlEngineMixin](QmlEngineMixin.md)</font>**<br>*<font size='1'>prettyqt.qml.qmlengine</font>*<br>                                                                                                                                                                                                                  | <ul><li>[QmlEngine](QmlEngine.md)</li><li>[QmlApplicationEngine](QmlApplicationEngine.md)</li></ul> | <ul><li>[JSEngineMixin](JSEngineMixin.md)</li></ul>                                                                                |
+| **<font size='4'>[QQmlApplicationEngine](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlApplicationEngine.html#PySide6.QtQml.PySide6.QtQml.QQmlApplicationEngine)</font>**<br>*<font size='1'>PySide6.QtQml</font>*<br>QQmlApplicationEngine\(self, filePath: str, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[QmlApplicationEngine](QmlApplicationEngine.md)</li></ul>                                   | <ul><li>[QQmlEngine](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlEngine.html#PySide6.QtQml.PySide6.QtQml.QQmlEngine)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572331584["qml.QmlApplicationEngine"]
+  1473572315968["qml.QmlEngineMixin"]
+  1473572333536["qml.JSEngineMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473572296448["QtQml.QQmlApplicationEngine"]
+  1473572295472["QtQml.QQmlEngine"]
+  1473572290592["QtQml.QJSEngine"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473572315968 --> 1473572331584
+  1473572333536 --> 1473572315968
+  1473299815024 --> 1473572333536
+  140713234304496 --> 1473299815024
+  1473572296448 --> 1473572331584
+  1473572295472 --> 1473572296448
+  1473572290592 --> 1473572295472
+  1473288842240 --> 1473572290592
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qml.qmlapplicationengine.QmlApplicationEngine
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property          | Type        | Doc |
+| -------------------- | ----------- | --- |
+| `objectName`         | **QString** |     |
+| `uiLanguage`         | **QString** |     |
+| `offlineStoragePath` | **QString** |     |

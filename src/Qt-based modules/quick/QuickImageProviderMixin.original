@@ -1,0 +1,31 @@
+## Base classes
+
+| Name                                                                                                                                                 | Children                                                                                                                        | Inherits                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[QmlImageProviderBaseMixin](QmlImageProviderBaseMixin.md)</font>**<br>*<font size='1'>prettyqt.qml.qmlimageproviderbase</font>*<br> | <ul><li>[QmlImageProviderBase](QmlImageProviderBase.md)</li><li>[QuickImageProviderMixin](QuickImageProviderMixin.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+
+
+## Subclasses
+
+| Class                                                 | Module                                 | Description |
+| ----------------------------------------------------- | -------------------------------------- | ----------- |
+| [QuickImageProvider](QuickImageProvider.md)           | prettyqt.quick.quickimageprovider      |             |
+| [QuickAsyncImageProvider](QuickAsyncImageProvider.md) | prettyqt.quick.quickasyncimageprovider |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473374464272["quick.QuickImageProviderMixin"]
+  1473572340368["qml.QmlImageProviderBaseMixin"]
+  140713234304496["builtins.object"]
+  1473572340368 --> 1473374464272
+  140713234304496 --> 1473572340368
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.quick.quickimageprovider.QuickImageProviderMixin
+    options:
+      show_root_toc_entry: False

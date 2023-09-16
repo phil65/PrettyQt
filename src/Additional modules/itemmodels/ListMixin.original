@@ -1,0 +1,24 @@
+## Subclasses
+
+| Class                                 | Module                              | Description |
+| ------------------------------------- | ----------------------------------- | ----------- |
+| [NestedModel](NestedModel.md)         | prettyqt.itemmodels.nestedmodel     |             |
+| [FrameInfoModel](FrameInfoModel.md)   | prettyqt.itemmodels.frameinfomodel  |             |
+| [MappingModel](MappingModel.md)       | prettyqt.itemmodels.mappingmodel    |             |
+| [ModelIndexModel](ModelIndexModel.md) | prettyqt.itemmodels.modelindexmodel |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299910672["itemmodels.ListMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473299910672
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.itemmodels.listmixin.ListMixin
+    options:
+      show_root_toc_entry: False

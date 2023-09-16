@@ -1,0 +1,72 @@
+## Base classes
+
+| Name                                                                                                                      | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[ObjectMixin](ObjectMixin.md)</font>**<br>*<font size='1'>prettyqt.core.object</font>*<br>               | <ul><li>[Object](Object.md)</li><li>[SocketNotifier](SocketNotifier.md)</li><li>[SharedMemory](SharedMemory.md)</li><li>[SignalMapper](SignalMapper.md)</li><li>[TimeLine](TimeLine.md)</li><li>[AbstractEventDispatcher](AbstractEventDispatcher.md)</li><li>[EventLoop](EventLoop.md)</li><li>[AbstractAnimationMixin](AbstractAnimationMixin.md)</li><li>[TranslatorMixin](TranslatorMixin.md)</li><li>[CoreApplicationMixin](CoreApplicationMixin.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[PaintDeviceMixin](PaintDeviceMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.paintdevice</font>*<br> | <ul><li>[PaintDevice](PaintDevice.md)</li><li>[PaintDeviceWindowMixin](PaintDeviceWindowMixin.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[Image](Image.md)</li><li>[PagedPaintDeviceMixin](PagedPaintDeviceMixin.md)</li><li>[Picture](Picture.md)</li><li>[WidgetMixin](WidgetMixin.md)</li><li>[SvgGenerator](SvgGenerator.md)</li></ul>                                                                                                                               | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+
+
+## Subclasses
+
+| Class                                                   | Module                                             | Description                                                                   |
+| ------------------------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [Widget](Widget.md)                                     | prettyqt.widgets.widget                            |                                                                               |
+| [FrameMixin](FrameMixin.md)                             | prettyqt.widgets.frame                             |                                                                               |
+| [FocusFrame](FocusFrame.md)                             | prettyqt.widgets.focusframe                        |                                                                               |
+| [AbstractSliderMixin](AbstractSliderMixin.md)           | prettyqt.widgets.abstractslider                    |                                                                               |
+| [AbstractButtonMixin](AbstractButtonMixin.md)           | prettyqt.widgets.abstractbutton                    | Abstract button widget base class, providing functionality common to buttons. |
+| [LineEdit](LineEdit.md)                                 | prettyqt.widgets.lineedit                          |                                                                               |
+| [AbstractSpinBoxMixin](AbstractSpinBoxMixin.md)         | prettyqt.widgets.abstractspinbox                   |                                                                               |
+| [RubberBandMixin](RubberBandMixin.md)                   | prettyqt.widgets.rubberband                        |                                                                               |
+| [DialogButtonBox](DialogButtonBox.md)                   | prettyqt.widgets.dialogbuttonbox                   |                                                                               |
+| [DialogMixin](DialogMixin.md)                           | prettyqt.widgets.dialog                            |                                                                               |
+| [DockWidget](DockWidget.md)                             | prettyqt.widgets.dockwidget                        |                                                                               |
+| [MenuMixin](MenuMixin.md)                               | prettyqt.widgets.menu                              |                                                                               |
+| [MainWindow](MainWindow.md)                             | prettyqt.widgets.mainwindow                        |                                                                               |
+| [MenuBar](MenuBar.md)                                   | prettyqt.widgets.menubar                           |                                                                               |
+| [StatusBar](StatusBar.md)                               | prettyqt.widgets.statusbar                         |                                                                               |
+| [TabBarMixin](TabBarMixin.md)                           | prettyqt.widgets.tabbar                            |                                                                               |
+| [TabWidget](TabWidget.md)                               | prettyqt.widgets.tabwidget                         |                                                                               |
+| [MdiSubWindow](MdiSubWindow.md)                         | prettyqt.widgets.mdisubwindow                      |                                                                               |
+| [ToolBarMixin](ToolBarMixin.md)                         | prettyqt.widgets.toolbar                           |                                                                               |
+| [ComboBoxMixin](ComboBoxMixin.md)                       | prettyqt.widgets.combobox                          | Combobox that lets the user select a font family.                             |
+| [KeySequenceEdit](KeySequenceEdit.md)                   | prettyqt.widgets.keysequenceedit                   |                                                                               |
+| [CalendarWidget](CalendarWidget.md)                     | prettyqt.widgets.calendarwidget                    |                                                                               |
+| [ProgressBar](ProgressBar.md)                           | prettyqt.widgets.progressbar                       |                                                                               |
+| [SplashScreenMixin](SplashScreenMixin.md)               | prettyqt.widgets.splashscreen                      |                                                                               |
+| [GroupBox](GroupBox.md)                                 | prettyqt.widgets.groupbox                          |                                                                               |
+| [SplitterHandle](SplitterHandle.md)                     | prettyqt.widgets.splitterhandle                    |                                                                               |
+| [WizardPageMixin](WizardPageMixin.md)                   | prettyqt.widgets.wizardpage                        |                                                                               |
+| [SizeGrip](SizeGrip.md)                                 | prettyqt.widgets.sizegrip                          |                                                                               |
+| [KeyCombinationEdit](KeyCombinationEdit.md)             | prettyqt.custom_widgets.editors.keycombinationedit |                                                                               |
+| [BaseIPythonWidget](BaseIPythonWidget.md)               | prettyqt.ipython.baseipythonwidget                 | Convenience class for a live IPython console widget running out-of-process.   |
+| [VideoWidget](VideoWidget.md)                           | prettyqt.multimediawidgets.videowidget             |                                                                               |
+| [OpenGLWidget](OpenGLWidget.md)                         | prettyqt.openglwidgets.openglwidget                |                                                                               |
+| [PrintPreviewWidget](PrintPreviewWidget.md)             | prettyqt.printsupport.printpreviewwidget           |                                                                               |
+| [HelpSearchResultWidget](HelpSearchResultWidget.md)     | prettyqt.qthelp.helpsearchresultwidget             | Text browser to display search results.                                       |
+| [HelpSearchQueryWidget](HelpSearchQueryWidget.md)       | prettyqt.qthelp.helpsearchquerywidget              |                                                                               |
+| [HelpFilterSettingsWidget](HelpFilterSettingsWidget.md) | prettyqt.qthelp.helpfiltersettingswidget           |                                                                               |
+| [QuickWidget](QuickWidget.md)                           | prettyqt.quickwidgets.quickwidget                  |                                                                               |
+| [SvgWidget](SvgWidget.md)                               | prettyqt.svgwidgets.svgwidget                      |                                                                               |
+| [WebEngineView](WebEngineView.md)                       | prettyqt.webenginewidgets.webengineview            |                                                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.widget.WidgetMixin
+    options:
+      show_root_toc_entry: False

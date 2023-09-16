@@ -1,0 +1,15 @@
+---
+hide:
+- toc
+---
+
+## Docs
+
+Widgets for displaying SVG files.
+
+## Classes
+
+| Name                                                                                                                               | Children | Inherits                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GraphicsSvgItem](GraphicsSvgItem.md)</font>**<br>*<font size='1'>prettyqt.svgwidgets.graphicssvgitem</font>*<br> |          | <ul><li>[GraphicsObjectMixin](GraphicsObjectMixin.md)</li><li>[QGraphicsSvgItem](https://doc.qt.io/qtforpython/PySide6/QtSvgWidgets/QGraphicsSvgItem.html#PySide6.QtSvgWidgets.PySide6.QtSvgWidgets.QGraphicsSvgItem)</li></ul> |
+| **<font size='4'>[SvgWidget](SvgWidget.md)</font>**<br>*<font size='1'>prettyqt.svgwidgets.svgwidget</font>*<br>                   |          | <ul><li>[WidgetMixin](WidgetMixin.md)</li><li>[QSvgWidget](https://doc.qt.io/qtforpython/PySide6/QtSvgWidgets/QSvgWidget.html#PySide6.QtSvgWidgets.PySide6.QtSvgWidgets.QSvgWidget)</li></ul>                                   |

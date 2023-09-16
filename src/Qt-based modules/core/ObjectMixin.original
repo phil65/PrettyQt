@@ -1,0 +1,127 @@
+## Subclasses
+
+| Class                                                                 | Module                                            | Description                                                          |
+| --------------------------------------------------------------------- | ------------------------------------------------- | -------------------------------------------------------------------- |
+| [Object](Object.md)                                                   | prettyqt.core.object                              |                                                                      |
+| [SocketNotifier](SocketNotifier.md)                                   | prettyqt.core.socketnotifier                      |                                                                      |
+| [SharedMemory](SharedMemory.md)                                       | prettyqt.core.sharedmemory                        |                                                                      |
+| [SignalMapper](SignalMapper.md)                                       | prettyqt.core.signalmapper                        |                                                                      |
+| [TimeLine](TimeLine.md)                                               | prettyqt.core.timeline                            |                                                                      |
+| [AbstractEventDispatcher](AbstractEventDispatcher.md)                 | prettyqt.core.abstracteventdispatcher             |                                                                      |
+| [EventLoop](EventLoop.md)                                             | prettyqt.core.eventloop                           |                                                                      |
+| [AbstractAnimationMixin](AbstractAnimationMixin.md)                   | prettyqt.core.abstractanimation                   | The base of all animations.                                          |
+| [TranslatorMixin](TranslatorMixin.md)                                 | prettyqt.core.translator                          |                                                                      |
+| [CoreApplicationMixin](CoreApplicationMixin.md)                       | prettyqt.core.coreapplication                     |                                                                      |
+| [FileSystemWatcher](FileSystemWatcher.md)                             | prettyqt.core.filesystemwatcher                   |                                                                      |
+| [FileSelector](FileSelector.md)                                       | prettyqt.core.fileselector                        |                                                                      |
+| [IODeviceMixin](IODeviceMixin.md)                                     | prettyqt.core.iodevice                            |                                                                      |
+| [Settings_](Settings_.md)                                             | prettyqt.core.settings                            | Persistent platform-independent application settings.                |
+| [Timer](Timer.md)                                                     | prettyqt.core.timer                               |                                                                      |
+| [MimeData](MimeData.md)                                               | prettyqt.core.mimedata                            |                                                                      |
+| [ThreadPool](ThreadPool.md)                                           | prettyqt.core.threadpool                          |                                                                      |
+| [ItemSelectionModel](ItemSelectionModel.md)                           | prettyqt.core.itemselectionmodel                  |                                                                      |
+| [AbstractItemModelMixin](AbstractItemModelMixin.md)                   | prettyqt.core.abstractitemmodel                   |                                                                      |
+| [Library](Library.md)                                                 | prettyqt.core.library                             |                                                                      |
+| [PluginLoader](PluginLoader.md)                                       | prettyqt.core.pluginloader                        |                                                                      |
+| [StyleHintsMixin](StyleHintsMixin.md)                                 | prettyqt.gui.stylehints                           |                                                                      |
+| [Shortcut](Shortcut.md)                                               | prettyqt.gui.shortcut                             |                                                                      |
+| [Drag](Drag.md)                                                       | prettyqt.gui.drag                                 |                                                                      |
+| [WindowMixin](WindowMixin.md)                                         | prettyqt.gui.window                               |                                                                      |
+| [Clipboard](Clipboard.md)                                             | prettyqt.gui.clipboard                            | Access to the window system clipboard.                               |
+| [InputMethod](InputMethod.md)                                         | prettyqt.gui.inputmethod                          |                                                                      |
+| [SessionManager](SessionManager.md)                                   | prettyqt.gui.sessionmanager                       |                                                                      |
+| [ValidatorMixin](ValidatorMixin.md)                                   | prettyqt.gui.validator                            |                                                                      |
+| [TextDocumentMixin](TextDocumentMixin.md)                             | prettyqt.gui.textdocument                         |                                                                      |
+| [Movie](Movie.md)                                                     | prettyqt.gui.movie                                |                                                                      |
+| [PdfWriter](PdfWriter.md)                                             | prettyqt.gui.pdfwriter                            |                                                                      |
+| [TextObjectMixin](TextObjectMixin.md)                                 | prettyqt.gui.textobject                           |                                                                      |
+| [AbstractTextDocumentLayoutMixin](AbstractTextDocumentLayoutMixin.md) | prettyqt.gui.abstracttextdocumentlayout           |                                                                      |
+| [SyntaxHighlighterMixin](SyntaxHighlighterMixin.md)                   | prettyqt.gui.syntaxhighlighter                    |                                                                      |
+| [UndoStackMixin](UndoStackMixin.md)                                   | prettyqt.gui.undostack                            |                                                                      |
+| [UndoGroupMixin](UndoGroupMixin.md)                                   | prettyqt.gui.undogroup                            |                                                                      |
+| [ActionMixin](ActionMixin.md)                                         | prettyqt.gui.action                               |                                                                      |
+| [ActionGroup](ActionGroup.md)                                         | prettyqt.gui.actiongroup                          |                                                                      |
+| [StyleMixin](StyleMixin.md)                                           | prettyqt.widgets.style                            |                                                                      |
+| [WidgetMixin](WidgetMixin.md)                                         | prettyqt.widgets.widget                           |                                                                      |
+| [GraphicsTransformMixin](GraphicsTransformMixin.md)                   | prettyqt.widgets.graphicstransform                |                                                                      |
+| [GraphicsObjectMixin](GraphicsObjectMixin.md)                         | prettyqt.widgets.graphicsobject                   |                                                                      |
+| [GraphicsEffectMixin](GraphicsEffectMixin.md)                         | prettyqt.widgets.graphicseffect                   |                                                                      |
+| [GraphicsScene](GraphicsScene.md)                                     | prettyqt.widgets.graphicsscene                    |                                                                      |
+| [Completer](Completer.md)                                             | prettyqt.widgets.completer                        |                                                                      |
+| [Scroller](Scroller.md)                                               | prettyqt.widgets.scroller                         | Enables kinetic scrolling for any scrolling widget or graphics item. |
+| [AbstractItemDelegateMixin](AbstractItemDelegateMixin.md)             | prettyqt.widgets.abstractitemdelegate             |                                                                      |
+| [SystemTrayIcon](SystemTrayIcon.md)                                   | prettyqt.widgets.systemtrayicon                   |                                                                      |
+| [LayoutMixin](LayoutMixin.md)                                         | prettyqt.widgets.layout                           |                                                                      |
+| [ButtonGroup](ButtonGroup.md)                                         | prettyqt.widgets.buttongroup                      |                                                                      |
+| [DataWidgetMapper](DataWidgetMapper.md)                               | prettyqt.widgets.datawidgetmapper                 |                                                                      |
+| [GestureMixin](GestureMixin.md)                                       | prettyqt.widgets.gesture                          |                                                                      |
+| [BluetoothLocalDevice](BluetoothLocalDevice.md)                       | prettyqt.bluetooth.bluetoothlocaldevice           |                                                                      |
+| [BluetoothServer](BluetoothServer.md)                                 | prettyqt.bluetooth.bluetoothserver                |                                                                      |
+| [BluetoothDeviceDiscoveryAgent](BluetoothDeviceDiscoveryAgent.md)     | prettyqt.bluetooth.bluetoothdevicediscoveryagent  |                                                                      |
+| [BluetoothServiceDiscoveryAgent](BluetoothServiceDiscoveryAgent.md)   | prettyqt.bluetooth.bluetoothservicediscoveryagent |                                                                      |
+| [BarSet](BarSet.md)                                                   | prettyqt.charts.barset                            |                                                                      |
+| [BoxSet](BoxSet.md)                                                   | prettyqt.charts.boxset                            |                                                                      |
+| [CandlestickSet](CandlestickSet.md)                                   | prettyqt.charts.candlestickset                    |                                                                      |
+| [PieSlice](PieSlice.md)                                               | prettyqt.charts.pieslice                          |                                                                      |
+| [AbstractAxisMixin](AbstractAxisMixin.md)                             | prettyqt.charts.abstractaxis                      |                                                                      |
+| [AbstractSeriesMixin](AbstractSeriesMixin.md)                         | prettyqt.charts.abstractseries                    |                                                                      |
+| [PyDesignerTaskMenuExtension](PyDesignerTaskMenuExtension.md)         | prettyqt.designer.pydesignertaskmenuextension     |                                                                      |
+| [DesignerFormEditorInterface](DesignerFormEditorInterface.md)         | prettyqt.designer.designerformeditorinterface     |                                                                      |
+| [GeoPositionInfoSourceMixin](GeoPositionInfoSourceMixin.md)           | prettyqt.positioning.geopositioninfosource        |                                                                      |
+| [GeoSatelliteInfoSource](GeoSatelliteInfoSource.md)                   | prettyqt.positioning.geosatelliteinfosource       |                                                                      |
+| [GeoAreaMonitorSource](GeoAreaMonitorSource.md)                       | prettyqt.positioning.geoareamonitorsource         |                                                                      |
+| [GeoCodingManager](GeoCodingManager.md)                               | prettyqt.location.geocodingmanager                | Support for geocoding operations.                                    |
+| [GeoRoutingManager](GeoRoutingManager.md)                             | prettyqt.location.georoutingmanager               | Support for geographic routing operations.                           |
+| [PlaceReplyMixin](PlaceReplyMixin.md)                                 | prettyqt.location.placereply                      |                                                                      |
+| [GeoServiceProvider](GeoServiceProvider.md)                           | prettyqt.location.geoserviceprovider              |                                                                      |
+| [Camera](Camera.md)                                                   | prettyqt.multimedia.camera                        |                                                                      |
+| [MediaPlayer](MediaPlayer.md)                                         | prettyqt.multimedia.mediaplayer                   |                                                                      |
+| [ScreenCapture](ScreenCapture.md)                                     | prettyqt.multimedia.screencapture                 |                                                                      |
+| [MediaRecorder](MediaRecorder.md)                                     | prettyqt.multimedia.mediarecorder                 |                                                                      |
+| [NetworkCookieJar](NetworkCookieJar.md)                               | prettyqt.network.networkcookiejar                 |                                                                      |
+| [LocalServer](LocalServer.md)                                         | prettyqt.network.localserver                      |                                                                      |
+| [TcpServer](TcpServer.md)                                             | prettyqt.network.tcpserver                        |                                                                      |
+| [HttpMultiPart](HttpMultiPart.md)                                     | prettyqt.network.httpmultipart                    |                                                                      |
+| [NetworkAccessManager](NetworkAccessManager.md)                       | prettyqt.network.networkaccessmanager             |                                                                      |
+| [PdfDocument](PdfDocument.md)                                         | prettyqt.pdf.pdfdocument                          |                                                                      |
+| [QmlExpression](QmlExpression.md)                                     | prettyqt.qml.qmlexpression                        |                                                                      |
+| [QmlPropertyMapMixin](QmlPropertyMapMixin.md)                         | prettyqt.qml.qmlpropertymap                       |                                                                      |
+| [JSEngineMixin](JSEngineMixin.md)                                     | prettyqt.qml.jsengine                             |                                                                      |
+| [QmlComponent](QmlComponent.md)                                       | prettyqt.qml.qmlcomponent                         |                                                                      |
+| [HelpEngineCoreMixin](HelpEngineCoreMixin.md)                         | prettyqt.qthelp.helpenginecore                    | The core functionality of the help system.                           |
+| [HelpSearchEngine](HelpSearchEngine.md)                               | prettyqt.qthelp.helpsearchengine                  |                                                                      |
+| [HelpFilterEngine](HelpFilterEngine.md)                               | prettyqt.qthelp.helpfilterengine                  | Filtered view of the help contents.                                  |
+| [QuickTextDocument](QuickTextDocument.md)                             | prettyqt.quick.quicktextdocument                  |                                                                      |
+| [QuickRenderControl](QuickRenderControl.md)                           | prettyqt.quick.quickrendercontrol                 |                                                                      |
+| [QuickImageResponse](QuickImageResponse.md)                           | prettyqt.quick.quickimageresponse                 |                                                                      |
+| [QuickItemGrabResult](QuickItemGrabResult.md)                         | prettyqt.quick.quickitemgrabresult                | Contains the result from QQuickItem::grabToImage().                  |
+| [QuickItemMixin](QuickItemMixin.md)                                   | prettyqt.quick.quickitem                          |                                                                      |
+| [AbstractStateMixin](AbstractStateMixin.md)                           | prettyqt.statemachine.abstractstate               |                                                                      |
+| [AbstractTransitionMixin](AbstractTransitionMixin.md)                 | prettyqt.statemachine.abstracttransition          |                                                                      |
+| [SvgRenderer](SvgRenderer.md)                                         | prettyqt.svg.svgrenderer                          |                                                                      |
+| [TextToSpeech](TextToSpeech.md)                                       | prettyqt.texttospeech.texttospeech                |                                                                      |
+| [AmbientSound](AmbientSound.md)                                       | prettyqt.spatialaudio.ambientsound                |                                                                      |
+| [AudioEngine](AudioEngine.md)                                         | prettyqt.spatialaudio.audioengine                 |                                                                      |
+| [AudioListener](AudioListener.md)                                     | prettyqt.spatialaudio.audiolistener               |                                                                      |
+| [AudioRoom](AudioRoom.md)                                             | prettyqt.spatialaudio.audioroom                   |                                                                      |
+| [SpatialSound](SpatialSound.md)                                       | prettyqt.spatialaudio.spatialsound                |                                                                      |
+| [WebChannel](WebChannel.md)                                           | prettyqt.webchannel.webchannel                    |                                                                      |
+| [WebEngineUrlSchemeHandler](WebEngineUrlSchemeHandler.md)             | prettyqt.webenginecore.webengineurlschemehandler  |                                                                      |
+| [WebEnginePage](WebEnginePage.md)                                     | prettyqt.webenginecore.webenginepage              |                                                                      |
+| [WebEngineProfile](WebEngineProfile.md)                               | prettyqt.webenginecore.webengineprofile           |                                                                      |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473299815024
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.core.object.ObjectMixin
+    options:
+      show_root_toc_entry: False

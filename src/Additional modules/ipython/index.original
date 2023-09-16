@@ -1,0 +1,12 @@
+---
+hide:
+- toc
+---
+
+## Classes
+
+| Name                                                                                                                                                                                                                                        | Children                                                                                                                                | Inherits                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **<font size='4'>[BaseIPythonWidget](BaseIPythonWidget.md)</font>**<br>*<font size='1'>prettyqt.ipython.baseipythonwidget</font>*<br>Convenience class for a live IPython console widget running out\-of\-process\.                         | <ul><li>[InProcessIPythonWidget](InProcessIPythonWidget.md)</li><li>[OutOfProcessIPythonWidget](OutOfProcessIPythonWidget.md)</li></ul> | <ul><li>[RichJupyterWidget](http://jupyter.org)</li><li>[WidgetMixin](WidgetMixin.md)</li></ul> |
+| **<font size='4'>[OutOfProcessIPythonWidget](OutOfProcessIPythonWidget.md)</font>**<br>*<font size='1'>prettyqt.ipython.outofprocessipythonwidget</font>*<br>Convenience class for a live IPython console widget running out\-of\-process\. |                                                                                                                                         | <ul><li>[BaseIPythonWidget](BaseIPythonWidget.md)</li></ul>                                     |
+| **<font size='4'>[InProcessIPythonWidget](InProcessIPythonWidget.md)</font>**<br>*<font size='1'>prettyqt.ipython.inprocessipythonwidget</font>*<br>Convenience class for a live IPython console widget\.                                   |                                                                                                                                         | <ul><li>[BaseIPythonWidget](BaseIPythonWidget.md)</li></ul>                                     |

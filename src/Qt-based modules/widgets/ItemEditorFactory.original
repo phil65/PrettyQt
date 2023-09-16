@@ -1,0 +1,29 @@
+Qt Base Class: [QItemEditorFactory](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QItemEditorFactory.html#PySide6.QtWidgets.PySide6.QtWidgets.QItemEditorFactory)
+
+Signature: `QItemEditorFactory(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                | Children                                                    | Inherits                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QItemEditorFactory](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QItemEditorFactory.html#PySide6.QtWidgets.PySide6.QtWidgets.QItemEditorFactory)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QItemEditorFactory\(self\) \-\> None | <ul><li>[ItemEditorFactory](ItemEditorFactory.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296383744["widgets.ItemEditorFactory"]
+  1473290818448["QtWidgets.QItemEditorFactory"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473290818448 --> 1473296383744
+  1473291690208 --> 1473290818448
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.itemeditorfactory.ItemEditorFactory
+    options:
+      show_root_toc_entry: False

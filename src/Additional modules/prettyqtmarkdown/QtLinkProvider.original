@@ -1,0 +1,23 @@
+## Base classes
+
+| Name                                                                                                                                 | Children                                              | Inherits                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[LinkProvider](https://phil65.github.io/mknodes/)</font>**<br>*<font size='1'>mknodes.info.linkprovider</font>*<br> | <ul><li>[QtLinkProvider](QtLinkProvider.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473286054640["prettyqtmarkdown.QtLinkProvider"]
+  1473287384080["linkprovider.LinkProvider"]
+  140713234304496["builtins.object"]
+  1473287384080 --> 1473286054640
+  140713234304496 --> 1473287384080
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.prettyqtmarkdown.qtlinkprovider.QtLinkProvider
+    options:
+      show_root_toc_entry: False

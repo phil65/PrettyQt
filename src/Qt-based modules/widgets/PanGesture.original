@@ -1,0 +1,57 @@
+Qt Base Class: [QPanGesture](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QPanGesture.html#PySide6.QtWidgets.PySide6.QtWidgets.QPanGesture)
+
+Signature: `QPanGesture(self, parent: Optional[PySide6.QtCore.QObject] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                          | Children                                                                                                                                                                                                                                                    | Inherits                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GestureMixin](GestureMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.gesture</font>*<br>                                                                                                                                                                             | <ul><li>[Gesture](Gesture.md)</li><li>[TapGesture](TapGesture.md)</li><li>[TapAndHoldGesture](TapAndHoldGesture.md)</li><li>[PanGesture](PanGesture.md)</li><li>[PinchGesture](PinchGesture.md)</li><li>[SwipeGestureMixin](SwipeGestureMixin.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                                          |
+| **<font size='4'>[QPanGesture](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QPanGesture.html#PySide6.QtWidgets.PySide6.QtWidgets.QPanGesture)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QPanGesture\(self, parent: Optional\[PySide6\.QtCore\.QObject\] \= None\) \-\> None | <ul><li>[PanGesture](PanGesture.md)</li></ul>                                                                                                                                                                                                               | <ul><li>[QGesture](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGesture.html#PySide6.QtWidgets.PySide6.QtWidgets.QGesture)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296378864["widgets.PanGesture"]
+  1473296392528["widgets.GestureMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473293719472["QtWidgets.QPanGesture"]
+  1473293749728["QtWidgets.QGesture"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473296392528 --> 1473296378864
+  1473299815024 --> 1473296392528
+  140713234304496 --> 1473299815024
+  1473293719472 --> 1473296378864
+  1473293749728 --> 1473293719472
+  1473288842240 --> 1473293749728
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.pangesture.PanGesture
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property           | Type                              | Doc |
+| --------------------- | --------------------------------- | --- |
+| `objectName`          | **QString**                       |     |
+| `state`               | **Qt::GestureState**              |     |
+| `gestureType`         | **Qt::GestureType**               |     |
+| `gestureCancelPolicy` | **QGesture::GestureCancelPolicy** |     |
+| `hotSpot`             | **QPointF**                       |     |
+| `hasHotSpot`          | **bool**                          |     |
+| `lastOffset`          | **QPointF**                       |     |
+| `offset`              | **QPointF**                       |     |
+| `delta`               | **QPointF**                       |     |
+| `acceleration`        | **double**                        |     |
+| `horizontalVelocity`  | **double**                        |     |
+| `verticalVelocity`    | **double**                        |     |

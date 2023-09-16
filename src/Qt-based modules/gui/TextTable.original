@@ -1,0 +1,50 @@
+Qt Base Class: [QTextTable](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextTable.html#PySide6.QtGui.PySide6.QtGui.QTextTable)
+
+Signature: `QTextTable(self, doc: PySide6.QtGui.QTextDocument) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                    | Children                                                                      | Inherits                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[TextFrameMixin](TextFrameMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.textframe</font>*<br>                                                                                                                                     | <ul><li>[TextFrame](TextFrame.md)</li><li>[TextTable](TextTable.md)</li></ul> | <ul><li>[TextObjectMixin](TextObjectMixin.md)</li></ul>                                                                            |
+| **<font size='4'>[QTextTable](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextTable.html#PySide6.QtGui.PySide6.QtGui.QTextTable)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextTable\(self, doc: PySide6\.QtGui\.QTextDocument\) \-\> None | <ul><li>[TextTable](TextTable.md)</li></ul>                                   | <ul><li>[QTextFrame](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextFrame.html#PySide6.QtGui.PySide6.QtGui.QTextFrame)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245674384["gui.TextTable"]
+  1473245671456["gui.TextFrameMixin"]
+  1473245670480["gui.TextObjectMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473289219328["QtGui.QTextTable"]
+  1473289201760["QtGui.QTextFrame"]
+  1473289218352["QtGui.QTextObject"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473245671456 --> 1473245674384
+  1473245670480 --> 1473245671456
+  1473299815024 --> 1473245670480
+  140713234304496 --> 1473299815024
+  1473289219328 --> 1473245674384
+  1473289201760 --> 1473289219328
+  1473289218352 --> 1473289201760
+  1473288842240 --> 1473289218352
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.texttable.TextTable
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property  | Type        | Doc |
+| ------------ | ----------- | --- |
+| `objectName` | **QString** |     |

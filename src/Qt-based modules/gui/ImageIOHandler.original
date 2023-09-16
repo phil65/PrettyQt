@@ -1,0 +1,29 @@
+Qt Base Class: [QImageIOHandler](https://doc.qt.io/qtforpython/PySide6/QtGui/QImageIOHandler.html#PySide6.QtGui.PySide6.QtGui.QImageIOHandler)
+
+Signature: `QImageIOHandler(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                    | Children                                              | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QImageIOHandler](https://doc.qt.io/qtforpython/PySide6/QtGui/QImageIOHandler.html#PySide6.QtGui.PySide6.QtGui.QImageIOHandler)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QImageIOHandler\(self\) \-\> None | <ul><li>[ImageIOHandler](ImageIOHandler.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245645104["gui.ImageIOHandler"]
+  1473300113600["QtGui.QImageIOHandler"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473300113600 --> 1473245645104
+  1473291690208 --> 1473300113600
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.imageiohandler.ImageIOHandler
+    options:
+      show_root_toc_entry: False

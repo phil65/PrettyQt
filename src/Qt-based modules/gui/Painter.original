@@ -1,0 +1,34 @@
+Qt Base Class: [QPainter](https://doc.qt.io/qtforpython/PySide6/QtGui/QPainter.html#PySide6.QtGui.PySide6.QtGui.QPainter)
+
+Signature: `QPainter(self) -> None
+QPainter(self, arg__1: PySide6.QtGui.QPaintDevice) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                        | Children                                                                                                                                                                              | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[PainterMixin](PainterMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.painter</font>*<br>                                                                                               | <ul><li>[Painter](Painter.md)</li><li>[StylePainter](StylePainter.md)</li></ul>                                                                                                       | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QPainter](https://doc.qt.io/qtforpython/PySide6/QtGui/QPainter.html#PySide6.QtGui.PySide6.QtGui.QPainter)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QPainter\(self\) \-\> None | <ul><li>[Painter](Painter.md)</li><li>[QStylePainter](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QStylePainter.html#PySide6.QtWidgets.PySide6.QtWidgets.QStylePainter)</li></ul> | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245631440["gui.Painter"]
+  1473245613872["gui.PainterMixin"]
+  140713234304496["builtins.object"]
+  1473299984768["QtGui.QPainter"]
+  1473291690208["Shiboken.Object"]
+  1473245613872 --> 1473245631440
+  140713234304496 --> 1473245613872
+  1473299984768 --> 1473245631440
+  1473291690208 --> 1473299984768
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.painter.Painter
+    options:
+      show_root_toc_entry: False

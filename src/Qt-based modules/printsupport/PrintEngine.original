@@ -1,0 +1,29 @@
+Qt Base Class: [QPrintEngine](https://doc.qt.io/qtforpython/PySide6/QtPrintSupport/QPrintEngine.html#PySide6.QtPrintSupport.PySide6.QtPrintSupport.QPrintEngine)
+
+Signature: `QPrintEngine(self) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                            | Children                                        | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QPrintEngine](https://doc.qt.io/qtforpython/PySide6/QtPrintSupport/QPrintEngine.html#PySide6.QtPrintSupport.PySide6.QtPrintSupport.QPrintEngine)</font>**<br>*<font size='1'>PySide6.QtPrintSupport</font>*<br>QPrintEngine\(self\) \-\> None | <ul><li>[PrintEngine](PrintEngine.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572229104["printsupport.PrintEngine"]
+  1473572066352["QtPrintSupport.QPrintEngine"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473572066352 --> 1473572229104
+  1473291690208 --> 1473572066352
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.printsupport.printengine.PrintEngine
+    options:
+      show_root_toc_entry: False

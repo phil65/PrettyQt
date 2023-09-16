@@ -1,0 +1,29 @@
+Qt Base Class: [QJSValueIterator](https://doc.qt.io/qtforpython/PySide6/QtQml/QJSValueIterator.html#PySide6.QtQml.PySide6.QtQml.QJSValueIterator)
+
+Signature: `QJSValueIterator(self, value: Union[PySide6.QtQml.QJSValue, PySide6.QtQml.QJSValue.SpecialValue, bool, str, bytes, float, int]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                        | Children                                                | Inherits                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QJSValueIterator](https://doc.qt.io/qtforpython/PySide6/QtQml/QJSValueIterator.html#PySide6.QtQml.PySide6.QtQml.QJSValueIterator)</font>**<br>*<font size='1'>PySide6.QtQml</font>*<br>QJSValueIterator\(self, value: Union\[PySide6\.QtQml\.QJSValue, PySide6\.QtQml\.QJSValue\.SpecialValue, bool, str, bytes, float, int\]\) \-\> None | <ul><li>[JSValueIterator](JSValueIterator.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572318896["qml.JSValueIterator"]
+  1473572258384["QtQml.QJSValueIterator"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473572258384 --> 1473572318896
+  1473291690208 --> 1473572258384
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qml.jsvalueiterator.JSValueIterator
+    options:
+      show_root_toc_entry: False

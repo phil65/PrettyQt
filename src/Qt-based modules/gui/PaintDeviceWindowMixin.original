@@ -1,0 +1,40 @@
+## Base classes
+
+| Name                                                                                                                      | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| **<font size='4'>[WindowMixin](WindowMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.window</font>*<br>                | <ul><li>[Window](Window.md)</li><li>[PaintDeviceWindowMixin](PaintDeviceWindowMixin.md)</li><li>[QuickWindowMixin](QuickWindowMixin.md)</li></ul>                                                                                                                                                                                                 | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[SurfaceMixin](SurfaceMixin.md)</li></ul> |
+| **<font size='4'>[PaintDeviceMixin](PaintDeviceMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.paintdevice</font>*<br> | <ul><li>[PaintDevice](PaintDevice.md)</li><li>[PaintDeviceWindowMixin](PaintDeviceWindowMixin.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[Image](Image.md)</li><li>[PagedPaintDeviceMixin](PagedPaintDeviceMixin.md)</li><li>[Picture](Picture.md)</li><li>[WidgetMixin](WidgetMixin.md)</li><li>[SvgGenerator](SvgGenerator.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>     |
+
+
+## Subclasses
+
+| Class                                     | Module                         | Description |
+| ----------------------------------------- | ------------------------------ | ----------- |
+| [PaintDeviceWindow](PaintDeviceWindow.md) | prettyqt.gui.paintdevicewindow |             |
+| [RasterWindow](RasterWindow.md)           | prettyqt.gui.rasterwindow      |             |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245534816["gui.PaintDeviceWindowMixin"]
+  1473245538720["gui.WindowMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245537744["gui.SurfaceMixin"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473245538720 --> 1473245534816
+  1473299815024 --> 1473245538720
+  140713234304496 --> 1473299815024
+  1473245537744 --> 1473245538720
+  140713234304496 --> 1473245537744
+  1473245548480 --> 1473245534816
+  140713234304496 --> 1473245548480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.paintdevicewindow.PaintDeviceWindowMixin
+    options:
+      show_root_toc_entry: False

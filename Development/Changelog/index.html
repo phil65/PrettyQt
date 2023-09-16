@@ -6,21 +6,23 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Python wrapper for PySide6 / PyQt6.">
+        <meta name="description" content="A pythonic layer on top of PyQt6 / PySide6">
       
+      
+        <meta name="author" content="philipptemminghoff@googlemail.com">
       
       
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/Development/Changelog/">
       
       
-        <link rel="prev" href="../../Additional%20modules/validators/RegexPatternValidator/">
+        <link rel="prev" href="../../Additional%20modules/validators/AlphaNumericValidator/">
       
       
         <link rel="next" href="../Dependencies/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.7">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.3.1">
     
     
       
@@ -54,9 +56,9 @@
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../assets/mknodes_nodes.css">
-    
       <link rel="stylesheet" href="../../assets/mknodes_theme.css">
+    
+      <link rel="stylesheet" href="../../assets/mknodes_nodes.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -109,21 +111,21 @@
           <div class="md-banner__inner md-grid md-typeset">
             
             
-<body><a href='https://github.com/blambright/qstylizer'><svg xmlns="http://www.w3.org/2000/svg" width="105" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_1">        <rect width="105" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_1)">        <path fill="#555" d="M0 0h64v20H0z"/>        <path fill="#4051b5" d="M64 0h41v20H64z"/>        <path fill="url(#b)" d="M0 0h105v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="33.0" y="15" fill="#010101" fill-opacity=".3">qstylizer</text>        <text x="32.0" y="14">qstylizer</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="85.5" y="15" fill="#010101" fill-opacity=".3">0.2.2</text>        <text x="84.5" y="14">0.2.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://www.pyside.org'><svg xmlns="http://www.w3.org/2000/svg" width="97" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_2">        <rect width="97" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_2)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h41v20H56z"/>        <path fill="url(#b)" d="M0 0h97v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">PySide6</text>        <text x="28.0" y="14">PySide6</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="77.5" y="15" fill="#010101" fill-opacity=".3">6.5.2</text>        <text x="76.5" y="14">6.5.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://typing-extensions.readthedocs.io/'><svg xmlns="http://www.w3.org/2000/svg" width="160" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_3">        <rect width="160" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_3)">        <path fill="#555" d="M0 0h119v20H0z"/>        <path fill="#4051b5" d="M119 0h41v20H119z"/>        <path fill="url(#b)" d="M0 0h160v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="60.5" y="15" fill="#010101" fill-opacity=".3">typing_extensions</text>        <text x="59.5" y="14">typing_extensions</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="140.5" y="15" fill="#010101" fill-opacity=".3">4.7.1</text>        <text x="139.5" y="14">4.7.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://www.numpy.org'><svg xmlns="http://www.w3.org/2000/svg" width="96" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_4">        <rect width="96" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_4)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h48v20H48z"/>        <path fill="url(#b)" d="M0 0h96v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">numpy</text>        <text x="24.0" y="14">numpy</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="73.0" y="15" fill="#010101" fill-opacity=".3">1.25.2</text>        <text x="72.0" y="14">1.25.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://github.com/mhammond/pywin32'><svg xmlns="http://www.w3.org/2000/svg" width="87" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_5">        <rect width="87" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_5)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h31v20H56z"/>        <path fill="url(#b)" d="M0 0h87v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">pywin32</text>        <text x="28.0" y="14">pywin32</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="72.5" y="15" fill="#010101" fill-opacity=".3">306</text>        <text x="71.5" y="14">306</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://github.com/ijl/orjson'><svg xmlns="http://www.w3.org/2000/svg" width="89" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_6">        <rect width="89" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_6)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h41v20H48z"/>        <path fill="url(#b)" d="M0 0h89v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">orjson</text>        <text x="24.0" y="14">orjson</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.5" y="15" fill="#010101" fill-opacity=".3">3.9.5</text>        <text x="68.5" y="14">3.9.5</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://github.com/enthought/comtypes'><svg xmlns="http://www.w3.org/2000/svg" width="108" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_7">        <rect width="108" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_7)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h41v20H67z"/>        <path fill="url(#b)" d="M0 0h108v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">comtypes</text>        <text x="33.5" y="14">comtypes</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="88.5" y="15" fill="#010101" fill-opacity=".3">1.2.0</text>        <text x="87.5" y="14">1.2.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://bidict.readthedocs.io'><svg xmlns="http://www.w3.org/2000/svg" width="92" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_8">        <rect width="92" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_8)">        <path fill="#555" d="M0 0h44v20H0z"/>        <path fill="#4051b5" d="M44 0h48v20H44z"/>        <path fill="url(#b)" d="M0 0h92v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="23.0" y="15" fill="#010101" fill-opacity=".3">bidict</text>        <text x="22.0" y="14">bidict</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.0" y="15" fill="#010101" fill-opacity=".3">0.22.1</text>        <text x="68.0" y="14">0.22.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://python-pillow.org'><svg xmlns="http://www.w3.org/2000/svg" width="91" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_9">        <rect width="91" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_9)">        <path fill="#555" d="M0 0h43v20H0z"/>        <path fill="#4051b5" d="M43 0h48v20H43z"/>        <path fill="url(#b)" d="M0 0h91v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="22.5" y="15" fill="#010101" fill-opacity=".3">Pillow</text>        <text x="21.5" y="14">Pillow</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="68.0" y="15" fill="#010101" fill-opacity=".3">10.0.0</text>        <text x="67.0" y="14">10.0.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://pygments.org'><svg xmlns="http://www.w3.org/2000/svg" width="115" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_10">        <rect width="115" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_10)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h48v20H67z"/>        <path fill="url(#b)" d="M0 0h115v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">Pygments</text>        <text x="33.5" y="14">Pygments</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="92.0" y="15" fill="#010101" fill-opacity=".3">2.16.1</text>        <text x="91.0" y="14">2.16.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://ipython.org'><svg xmlns="http://www.w3.org/2000/svg" width="102" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_11">        <rect width="102" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_11)">        <path fill="#555" d="M0 0h54v20H0z"/>        <path fill="#4051b5" d="M54 0h48v20H54z"/>        <path fill="url(#b)" d="M0 0h102v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="28.0" y="15" fill="#010101" fill-opacity=".3">ipython</text>        <text x="27.0" y="14">ipython</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="79.0" y="15" fill="#010101" fill-opacity=".3">8.15.0</text>        <text x="78.0" y="14">8.15.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='http://github.com/fsspec/filesystem_spec'><svg xmlns="http://www.w3.org/2000/svg" width="112" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_12">        <rect width="112" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_12)">        <path fill="#555" d="M0 0h50v20H0z"/>        <path fill="#4051b5" d="M50 0h62v20H50z"/>        <path fill="url(#b)" d="M0 0h112v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="26.0" y="15" fill="#010101" fill-opacity=".3">fsspec</text>        <text x="25.0" y="14">fsspec</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="82.0" y="15" fill="#010101" fill-opacity=".3">2023.9.0</text>        <text x="81.0" y="14">2023.9.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://lxml.de/'><svg xmlns="http://www.w3.org/2000/svg" width="76" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_13">        <rect width="76" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_13)">        <path fill="#555" d="M0 0h35v20H0z"/>        <path fill="#4051b5" d="M35 0h41v20H35z"/>        <path fill="url(#b)" d="M0 0h76v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="18.5" y="15" fill="#010101" fill-opacity=".3">lxml</text>        <text x="17.5" y="14">lxml</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="56.5" y="15" fill="#010101" fill-opacity=".3">4.9.3</text>        <text x="55.5" y="14">4.9.3</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='http://jupyter.org'><svg xmlns="http://www.w3.org/2000/svg" width="109" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_14">        <rect width="109" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_14)">        <path fill="#555" d="M0 0h68v20H0z"/>        <path fill="#4051b5" d="M68 0h41v20H68z"/>        <path fill="url(#b)" d="M0 0h109v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="35.0" y="15" fill="#010101" fill-opacity=".3">qtconsole</text>        <text x="34.0" y="14">qtconsole</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="89.5" y="15" fill="#010101" fill-opacity=".3">5.4.4</text>        <text x="88.5" y="14">5.4.4</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
-<body><a href='https://www.attrs.org/'><svg xmlns="http://www.w3.org/2000/svg" width="88" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_15">        <rect width="88" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_15)">        <path fill="#555" d="M0 0h40v20H0z"/>        <path fill="#4051b5" d="M40 0h48v20H40z"/>        <path fill="url(#b)" d="M0 0h88v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="21.0" y="15" fill="#010101" fill-opacity=".3">attrs</text>        <text x="20.0" y="14">attrs</text>    </g>    <g fill="#ffffff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="65.0" y="15" fill="#010101" fill-opacity=".3">23.1.0</text>        <text x="64.0" y="14">23.1.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://python-pillow.org'><svg xmlns="http://www.w3.org/2000/svg" width="91" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_1">        <rect width="91" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_1)">        <path fill="#555" d="M0 0h43v20H0z"/>        <path fill="#4051b5" d="M43 0h48v20H43z"/>        <path fill="url(#b)" d="M0 0h91v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="22.5" y="15" fill="#010101" fill-opacity=".3">Pillow</text>        <text x="21.5" y="14">Pillow</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="68.0" y="15" fill="#010101" fill-opacity=".3">10.0.1</text>        <text x="67.0" y="14">10.0.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/ijl/orjson'><svg xmlns="http://www.w3.org/2000/svg" width="89" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_2">        <rect width="89" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_2)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h41v20H48z"/>        <path fill="url(#b)" d="M0 0h89v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">orjson</text>        <text x="24.0" y="14">orjson</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.5" y="15" fill="#010101" fill-opacity=".3">3.9.7</text>        <text x="68.5" y="14">3.9.7</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://pygments.org'><svg xmlns="http://www.w3.org/2000/svg" width="115" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_3">        <rect width="115" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_3)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h48v20H67z"/>        <path fill="url(#b)" d="M0 0h115v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">Pygments</text>        <text x="33.5" y="14">Pygments</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="92.0" y="15" fill="#010101" fill-opacity=".3">2.16.1</text>        <text x="91.0" y="14">2.16.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://www.pyside.org'><svg xmlns="http://www.w3.org/2000/svg" width="97" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_4">        <rect width="97" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_4)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h41v20H56z"/>        <path fill="url(#b)" d="M0 0h97v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">PySide6</text>        <text x="28.0" y="14">PySide6</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="77.5" y="15" fill="#010101" fill-opacity=".3">6.5.2</text>        <text x="76.5" y="14">6.5.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='http://github.com/fsspec/filesystem_spec'><svg xmlns="http://www.w3.org/2000/svg" width="112" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_5">        <rect width="112" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_5)">        <path fill="#555" d="M0 0h50v20H0z"/>        <path fill="#4051b5" d="M50 0h62v20H50z"/>        <path fill="url(#b)" d="M0 0h112v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="26.0" y="15" fill="#010101" fill-opacity=".3">fsspec</text>        <text x="25.0" y="14">fsspec</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="82.0" y="15" fill="#010101" fill-opacity=".3">2023.9.1</text>        <text x="81.0" y="14">2023.9.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/enthought/comtypes'><svg xmlns="http://www.w3.org/2000/svg" width="108" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_6">        <rect width="108" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_6)">        <path fill="#555" d="M0 0h67v20H0z"/>        <path fill="#4051b5" d="M67 0h41v20H67z"/>        <path fill="url(#b)" d="M0 0h108v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="34.5" y="15" fill="#010101" fill-opacity=".3">comtypes</text>        <text x="33.5" y="14">comtypes</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="88.5" y="15" fill="#010101" fill-opacity=".3">1.2.0</text>        <text x="87.5" y="14">1.2.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://www.attrs.org/'><svg xmlns="http://www.w3.org/2000/svg" width="88" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_7">        <rect width="88" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_7)">        <path fill="#555" d="M0 0h40v20H0z"/>        <path fill="#4051b5" d="M40 0h48v20H40z"/>        <path fill="url(#b)" d="M0 0h88v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="21.0" y="15" fill="#010101" fill-opacity=".3">attrs</text>        <text x="20.0" y="14">attrs</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="65.0" y="15" fill="#010101" fill-opacity=".3">23.1.0</text>        <text x="64.0" y="14">23.1.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://www.numpy.org'><svg xmlns="http://www.w3.org/2000/svg" width="96" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_8">        <rect width="96" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_8)">        <path fill="#555" d="M0 0h48v20H0z"/>        <path fill="#4051b5" d="M48 0h48v20H48z"/>        <path fill="url(#b)" d="M0 0h96v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="25.0" y="15" fill="#010101" fill-opacity=".3">numpy</text>        <text x="24.0" y="14">numpy</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="73.0" y="15" fill="#010101" fill-opacity=".3">1.25.2</text>        <text x="72.0" y="14">1.25.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://bidict.readthedocs.io'><svg xmlns="http://www.w3.org/2000/svg" width="92" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_9">        <rect width="92" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_9)">        <path fill="#555" d="M0 0h44v20H0z"/>        <path fill="#4051b5" d="M44 0h48v20H44z"/>        <path fill="url(#b)" d="M0 0h92v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="23.0" y="15" fill="#010101" fill-opacity=".3">bidict</text>        <text x="22.0" y="14">bidict</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="69.0" y="15" fill="#010101" fill-opacity=".3">0.22.1</text>        <text x="68.0" y="14">0.22.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://typing-extensions.readthedocs.io/'><svg xmlns="http://www.w3.org/2000/svg" width="160" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_10">        <rect width="160" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_10)">        <path fill="#555" d="M0 0h119v20H0z"/>        <path fill="#4051b5" d="M119 0h41v20H119z"/>        <path fill="url(#b)" d="M0 0h160v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="60.5" y="15" fill="#010101" fill-opacity=".3">typing_extensions</text>        <text x="59.5" y="14">typing_extensions</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="140.5" y="15" fill="#010101" fill-opacity=".3">4.7.1</text>        <text x="139.5" y="14">4.7.1</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='http://jupyter.org'><svg xmlns="http://www.w3.org/2000/svg" width="109" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_11">        <rect width="109" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_11)">        <path fill="#555" d="M0 0h68v20H0z"/>        <path fill="#4051b5" d="M68 0h41v20H68z"/>        <path fill="url(#b)" d="M0 0h109v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="35.0" y="15" fill="#010101" fill-opacity=".3">qtconsole</text>        <text x="34.0" y="14">qtconsole</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="89.5" y="15" fill="#010101" fill-opacity=".3">5.4.4</text>        <text x="88.5" y="14">5.4.4</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/mhammond/pywin32'><svg xmlns="http://www.w3.org/2000/svg" width="87" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_12">        <rect width="87" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_12)">        <path fill="#555" d="M0 0h56v20H0z"/>        <path fill="#4051b5" d="M56 0h31v20H56z"/>        <path fill="url(#b)" d="M0 0h87v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="29.0" y="15" fill="#010101" fill-opacity=".3">pywin32</text>        <text x="28.0" y="14">pywin32</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="72.5" y="15" fill="#010101" fill-opacity=".3">306</text>        <text x="71.5" y="14">306</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://lxml.de/'><svg xmlns="http://www.w3.org/2000/svg" width="76" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_13">        <rect width="76" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_13)">        <path fill="#555" d="M0 0h35v20H0z"/>        <path fill="#4051b5" d="M35 0h41v20H35z"/>        <path fill="url(#b)" d="M0 0h76v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="18.5" y="15" fill="#010101" fill-opacity=".3">lxml</text>        <text x="17.5" y="14">lxml</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="56.5" y="15" fill="#010101" fill-opacity=".3">4.9.3</text>        <text x="55.5" y="14">4.9.3</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://ipython.org'><svg xmlns="http://www.w3.org/2000/svg" width="102" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_14">        <rect width="102" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_14)">        <path fill="#555" d="M0 0h54v20H0z"/>        <path fill="#4051b5" d="M54 0h48v20H54z"/>        <path fill="url(#b)" d="M0 0h102v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="28.0" y="15" fill="#010101" fill-opacity=".3">ipython</text>        <text x="27.0" y="14">ipython</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="79.0" y="15" fill="#010101" fill-opacity=".3">8.15.0</text>        <text x="78.0" y="14">8.15.0</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+<body><a href='https://github.com/blambright/qstylizer'><svg xmlns="http://www.w3.org/2000/svg" width="105" height="20">    <linearGradient id="b" x2="0" y2="100%">        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>        <stop offset="1" stop-opacity=".1"/>    </linearGradient>    <mask id="anybadge_15">        <rect width="105" height="20" rx="3" fill="#fff"/>    </mask>    <g mask="url(#anybadge_15)">        <path fill="#555" d="M0 0h64v20H0z"/>        <path fill="#4051b5" d="M64 0h41v20H64z"/>        <path fill="url(#b)" d="M0 0h105v20H0z"/>    </g>    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="33.0" y="15" fill="#010101" fill-opacity=".3">qstylizer</text>        <text x="32.0" y="14">qstylizer</text>    </g>    <g fill="#000000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">        <text x="85.5" y="15" fill="#010101" fill-opacity=".3">0.2.2</text>        <text x="84.5" y="14">0.2.2</text>    </g></svg></a><script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 
 
           </div>
@@ -280,7 +282,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../Usage/prettyqt/docs/api_guidelines/general/" class="md-tabs__link">
+        <a href="../../Usage/general/" class="md-tabs__link">
           
   
     
@@ -300,7 +302,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../Features/prettyqt/docs/features/proxies/" class="md-tabs__link">
+        <a href="../../Features/proxies/" class="md-tabs__link">
           
   
     
@@ -319,8 +321,14 @@
   
     
     
+      
+  
+  
+  
+    
+    
       <li class="md-tabs__item">
-        <a href="../../Qt-based%20modules/" class="md-tabs__link">
+        <a href="../../Qt-based%20modules/bluetooth/" class="md-tabs__link">
           
   
     
@@ -332,6 +340,9 @@
     
   
 
+    
+  
+
       
         
   
@@ -339,8 +350,14 @@
   
     
     
+      
+  
+  
+  
+    
+    
       <li class="md-tabs__item">
-        <a href="../../Additional%20modules/" class="md-tabs__link">
+        <a href="../../Additional%20modules/animations/" class="md-tabs__link">
           
   
     
@@ -349,6 +366,9 @@
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -463,7 +483,7 @@
         
   
   
-    <a href="../../Usage/prettyqt/docs/api_guidelines/general/" class="md-nav__link">
+    <a href="../../Usage/general/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -508,7 +528,7 @@
         
   
   
-    <a href="../../Features/prettyqt/docs/features/proxies/" class="md-nav__link">
+    <a href="../../Features/proxies/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -536,10 +556,6 @@
     
       
         
-          
-        
-      
-        
       
         
       
@@ -603,7 +619,10 @@
         
   
   
-    <a href="../../Qt-based%20modules/" class="md-nav__link">
+    
+  
+  
+    <a href="../../Qt-based%20modules/bluetooth/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -615,6 +634,8 @@
         <span class="md-nav__icon md-icon"></span>
       
     </a>
+  
+
   
 
       
@@ -631,10 +652,6 @@
     
       
         
-          
-        
-      
-        
       
         
       
@@ -678,7 +695,10 @@
         
   
   
-    <a href="../../Additional%20modules/" class="md-nav__link">
+    
+  
+  
+    <a href="../../Additional%20modules/animations/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -690,6 +710,8 @@
         <span class="md-nav__icon md-icon"></span>
       
     </a>
+  
+
   
 
       
@@ -797,6 +819,13 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v1574-2023-09-16" class="md-nav__link">
+    v1.57.4 - 2023-09-16
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#v1573-2023-09-04" class="md-nav__link">
@@ -3160,6 +3189,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v1574-2023-09-16" class="md-nav__link">
+    v1.57.4 - 2023-09-16
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v1573-2023-09-04" class="md-nav__link">
     v1.57.3 - 2023-09-04
   </a>
@@ -5401,21 +5437,27 @@
 <p>The format is based on <a href="http://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>
 and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
 <!-- insertion marker -->
+<h2 id="v1574-2023-09-16"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.57.4">v1.57.4</a> - 2023-09-16</h2>
+<p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.57.3...v1.57.4">Compare with v1.57.3</a></small></p>
+<h3 id="bug-fixes">Bug Fixes</h3>
+<ul>
+<li>adapt to mknodes changes (<a href="https://github.com/phil65/PrettyQt/commit/b7859093dd498d66238a27496f5ea512b630f5dc">b785909</a> by phil65).</li>
+</ul>
 <h2 id="v1573-2023-09-04"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.57.3">v1.57.3</a> - 2023-09-04</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.57.2...v1.57.3">Compare with v1.57.2</a></small></p>
-<h3 id="bug-fixes">Bug Fixes</h3>
+<h3 id="bug-fixes_1">Bug Fixes</h3>
 <ul>
 <li>adjust build to mknodes changes (<a href="https://github.com/phil65/PrettyQt/commit/9434ce0d146ff07a56a4ce39674f607c558ed2ec">9434ce0</a> by phil65).</li>
 </ul>
 <h2 id="v1572-2023-08-02"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.57.2">v1.57.2</a> - 2023-08-02</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.57.1...v1.57.2">Compare with v1.57.1</a></small></p>
-<h3 id="bug-fixes_1">Bug Fixes</h3>
+<h3 id="bug-fixes_2">Bug Fixes</h3>
 <ul>
 <li>switch to new processor system (<a href="https://github.com/phil65/PrettyQt/commit/8087807468c1ce4380f9cfbc990022fe644db619">8087807</a> by phil65).</li>
 </ul>
 <h2 id="v1571-2023-07-31"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.57.1">v1.57.1</a> - 2023-07-31</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.57.0...v1.57.1">Compare with v1.57.0</a></small></p>
-<h3 id="bug-fixes_2">Bug Fixes</h3>
+<h3 id="bug-fixes_3">Bug Fixes</h3>
 <ul>
 <li>adapt to mknodes changes (<a href="https://github.com/phil65/PrettyQt/commit/075a57b7e66a54bd494447862822afb13be90a78">075a57b</a> by phil65).</li>
 </ul>
@@ -5425,39 +5467,39 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <ul>
 <li>support negative indexes for <strong>getitem</strong> (<a href="https://github.com/phil65/PrettyQt/commit/e0070fda1d758c60df6697db80af092ab073de1f">e0070fd</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_3">Bug Fixes</h3>
+<h3 id="bug-fixes_4">Bug Fixes</h3>
 <ul>
 <li>SyntaxHighlighter fix (<a href="https://github.com/phil65/PrettyQt/commit/269765c6d44bfa87b7923c66bab7345713bdbc9c">269765c</a> by phil65).</li>
 <li>Mk prefix for Markdown nodes (<a href="https://github.com/phil65/PrettyQt/commit/cf3cf04d9e72795edda3b27d5cacd3ed8c601d9a">cf3cf04</a> by phil65).</li>
 </ul>
 <h2 id="v1565-2023-07-26"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.56.5">v1.56.5</a> - 2023-07-26</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.56.4...v1.56.5">Compare with v1.56.4</a></small></p>
-<h3 id="bug-fixes_4">Bug Fixes</h3>
+<h3 id="bug-fixes_5">Bug Fixes</h3>
 <ul>
 <li>test docs deployment (<a href="https://github.com/phil65/PrettyQt/commit/1b1f4b974ee90252e51c19b733dfa3737c99ae32">1b1f4b9</a> by phil65).</li>
 </ul>
 <h2 id="v1564-2023-07-26"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.56.4">v1.56.4</a> - 2023-07-26</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.56.3...v1.56.4">Compare with v1.56.3</a></small></p>
-<h3 id="bug-fixes_5">Bug Fixes</h3>
+<h3 id="bug-fixes_6">Bug Fixes</h3>
 <ul>
 <li>used wrong class as Mixin (<a href="https://github.com/phil65/PrettyQt/commit/e6c6e9d9a216fcd46166f27b1d302b21fc736485">e6c6e9d</a> by phil65).</li>
 </ul>
 <h2 id="v1563-2023-07-26"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.56.3">v1.56.3</a> - 2023-07-26</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.56.2...v1.56.3">Compare with v1.56.2</a></small></p>
-<h3 id="bug-fixes_6">Bug Fixes</h3>
+<h3 id="bug-fixes_7">Bug Fixes</h3>
 <ul>
 <li>typo (<a href="https://github.com/phil65/PrettyQt/commit/e1ed790a55c9ae9796ece197484cbab5954fe6ce">e1ed790</a> by phil65).</li>
 <li>adjust to kwarg-only (<a href="https://github.com/phil65/PrettyQt/commit/76d0663aa3d3e3509d74958cb4a7c80dc1fe3982">76d0663</a> by phil65).</li>
 </ul>
 <h2 id="v1562-2023-07-25"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.56.2">v1.56.2</a> - 2023-07-25</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.56.1...v1.56.2">Compare with v1.56.1</a></small></p>
-<h3 id="bug-fixes_7">Bug Fixes</h3>
+<h3 id="bug-fixes_8">Bug Fixes</h3>
 <ul>
 <li>longer timeout when building docs (<a href="https://github.com/phil65/PrettyQt/commit/964b1ea7c2565de33375654d97417212a19bdafc">964b1ea</a> by phil65).</li>
 </ul>
 <h2 id="v1561-2023-07-25"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.56.1">v1.56.1</a> - 2023-07-25</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.56.0...v1.56.1">Compare with v1.56.0</a></small></p>
-<h3 id="bug-fixes_8">Bug Fixes</h3>
+<h3 id="bug-fixes_9">Bug Fixes</h3>
 <ul>
 <li>use pypi mknodes version (<a href="https://github.com/phil65/PrettyQt/commit/38010a4a140ec6671af49311994e1ab9ab325287">38010a4</a> by phil65).</li>
 </ul>
@@ -5470,7 +5512,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add TupleTreeModel (<a href="https://github.com/phil65/PrettyQt/commit/8032665847f3339af08f64ff1b310f45b43b5624">8032665</a> by phil65).</li>
 <li>make total and role a Property (<a href="https://github.com/phil65/PrettyQt/commit/20b4ccc32316fbc98b8eb7ef9b3495faa212a97c">20b4ccc</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_9">Bug Fixes</h3>
+<h3 id="bug-fixes_10">Bug Fixes</h3>
 <ul>
 <li>prevent name clash (<a href="https://github.com/phil65/PrettyQt/commit/677c154db1d81b4ad6c3ebc5fe8603ded9aff7c1">677c154</a> by phil65).</li>
 <li>add missing Mixin (<a href="https://github.com/phil65/PrettyQt/commit/2afbf5fd66524134f959d38ea473cacd5dc471cb">2afbf5f</a> by phil65).</li>
@@ -5484,7 +5526,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add get_scope_object and list_options methods (<a href="https://github.com/phil65/PrettyQt/commit/c6d5c92498d8e58edde9010b5487db3926320d87">c6d5c92</a> by phil65).</li>
 <li>add get_qt_base_class method (<a href="https://github.com/phil65/PrettyQt/commit/7d7ee53cf92d73c3d527f3895893684f1e840751">7d7ee53</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_10">Bug Fixes</h3>
+<h3 id="bug-fixes_11">Bug Fixes</h3>
 <ul>
 <li>fix link creation (<a href="https://github.com/phil65/PrettyQt/commit/14137409550df6042fd49b038ee3d8dd199d284e">1413740</a> by phil65).</li>
 </ul>
@@ -5502,7 +5544,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>allow str for indexes (<a href="https://github.com/phil65/PrettyQt/commit/ef59c594bfae67d1764397fea3aa8b5615023de6">ef59c59</a> by phil65).</li>
 <li>add grab_example_pixmap classmethod (<a href="https://github.com/phil65/PrettyQt/commit/7a0da6cb6e7472da4c067c34fede110ac6563d83">7a0da6c</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_11">Bug Fixes</h3>
+<h3 id="bug-fixes_12">Bug Fixes</h3>
 <ul>
 <li>avoid recursive loop (<a href="https://github.com/phil65/PrettyQt/commit/b094289b23bf67465cfd2da5b2f9bcbd6219c9e8">b094289</a> by phil65).</li>
 <li>emit ChangeLayout when props change (<a href="https://github.com/phil65/PrettyQt/commit/73b29a85640978369d970e274f5b3e1275bed678">73b29a8</a> by phil65).</li>
@@ -5513,13 +5555,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v1532-2023-07-07"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.53.2">v1.53.2</a> - 2023-07-07</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.53.1...v1.53.2">Compare with v1.53.1</a></small></p>
-<h3 id="bug-fixes_12">Bug Fixes</h3>
+<h3 id="bug-fixes_13">Bug Fixes</h3>
 <ul>
 <li>rem duplicate lines (<a href="https://github.com/phil65/PrettyQt/commit/5ef098059fb98e546fc7842ff1c69bdb4330f495">5ef0980</a> by phil65).</li>
 </ul>
 <h2 id="v1531-2023-07-07"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.53.1">v1.53.1</a> - 2023-07-07</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.53.0...v1.53.1">Compare with v1.53.0</a></small></p>
-<h3 id="bug-fixes_13">Bug Fixes</h3>
+<h3 id="bug-fixes_14">Bug Fixes</h3>
 <ul>
 <li>install addons for docs build (<a href="https://github.com/phil65/PrettyQt/commit/83353959eed64807f84b22385312feaaf52967c9">8335395</a> by phil65).</li>
 </ul>
@@ -5547,7 +5589,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add is_tree kwarg (<a href="https://github.com/phil65/PrettyQt/commit/7c74bc0eb3ffff4a2b62e552cdbaec5b4ced3daa">7c74bc0</a> by phil65).</li>
 <li>add is_descendent_of helper (<a href="https://github.com/phil65/PrettyQt/commit/d26fa8d9f420667f3cebb52cdb35754a063756ba">d26fa8d</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_14">Bug Fixes</h3>
+<h3 id="bug-fixes_15">Bug Fixes</h3>
 <ul>
 <li>correct time formatting (<a href="https://github.com/phil65/PrettyQt/commit/b80d1031cb34e2a1da7aa4027f8092a6acaf8526">b80d103</a> by phil65).</li>
 <li>fix typo (<a href="https://github.com/phil65/PrettyQt/commit/f77ed316ec4de4fe3045775e112af50e0587bc5e">f77ed31</a> by phil65).</li>
@@ -5577,7 +5619,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add LinkedSelectionModel (<a href="https://github.com/phil65/PrettyQt/commit/ece840ed34226e586d69d107ff38baea3511bc97">ece840e</a> by phil65).</li>
 <li>allow more than 2 models for mapping (<a href="https://github.com/phil65/PrettyQt/commit/06046a34b8e252af0ed06136e745255c9fb50b0a">06046a3</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_15">Bug Fixes</h3>
+<h3 id="bug-fixes_16">Bug Fixes</h3>
 <ul>
 <li>use proper val for caching (<a href="https://github.com/phil65/PrettyQt/commit/59d461e78f582301b296791537b49c31ee70663d">59d461e</a> by phil65).</li>
 <li>fix Verticalheader labelling (<a href="https://github.com/phil65/PrettyQt/commit/2cd5aa5a11997c6acfb0b2bcdcec3963f8788b05">2cd5aa5</a> by phil65).</li>
@@ -5601,7 +5643,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add caching (<a href="https://github.com/phil65/PrettyQt/commit/ac38d6595b55e385d47962840dff9bc848a5a7a6">ac38d65</a> by phil65).</li>
 <li>add ChangeHeadersProxyModel (<a href="https://github.com/phil65/PrettyQt/commit/938d157bd79693429930d62724d7355453b23152">938d157</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_16">Bug Fixes</h3>
+<h3 id="bug-fixes_17">Bug Fixes</h3>
 <ul>
 <li>fix offsets for MetaProps etc (<a href="https://github.com/phil65/PrettyQt/commit/f37e29efe4302e482a083d12eee81e1108d61bcb">f37e29e</a> by phil65).</li>
 <li>row, column indexing instead of column, row (<a href="https://github.com/phil65/PrettyQt/commit/1d2aba7cd83f27d885a5cf341f217effd653a5cc">1d2aba7</a> by phil65).</li>
@@ -5638,7 +5680,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>allow explicitely overriding empty handling for validators (<a href="https://github.com/phil65/PrettyQt/commit/acdba5ae515ca6214db0f137e2ff204606b6d652">acdba5a</a> by phil65).</li>
 <li>change set_read_only to a more general change_flags method (<a href="https://github.com/phil65/PrettyQt/commit/1062eaf77a0644c604799d8e8b0be9072ddb8517">1062eaf</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_17">Bug Fixes</h3>
+<h3 id="bug-fixes_18">Bug Fixes</h3>
 <ul>
 <li>fix map_to/from("window", ...) (<a href="https://github.com/phil65/PrettyQt/commit/ff05c35ff43707b8df1266c04a7a7cd3b565b47a">ff05c35</a> by phil65).</li>
 <li>fix behaviour for non-power-of-2 flags (<a href="https://github.com/phil65/PrettyQt/commit/e9cc09f29885743d47ae154f97e8e0921c397893">e9cc09f</a> by phil65).</li>
@@ -5769,7 +5811,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>allow predicates for find_children property selector (<a href="https://github.com/phil65/PrettyQt/commit/212ba44d1f8248ace1c367d41e98aa2de53af86d">212ba44</a> by phil65).</li>
 <li>allow re.Pattern in ctor (<a href="https://github.com/phil65/PrettyQt/commit/9edfe13dbaae5bcb1426f48b1d2eafc049a82037">9edfe13</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_18">Bug Fixes</h3>
+<h3 id="bug-fixes_19">Bug Fixes</h3>
 <ul>
 <li>prevent namespace issues (<a href="https://github.com/phil65/PrettyQt/commit/3b4c177ab10ed2b8492c20e8a9cc2fc02216dc01">3b4c177</a> by phil65).</li>
 <li>method somehow landed in wrong class (<a href="https://github.com/phil65/PrettyQt/commit/2550b1ea87ea06d0f2f00a78d17b9971bfe9de18">2550b1e</a> by phil65).</li>
@@ -5800,7 +5842,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>checks module (<a href="https://github.com/phil65/PrettyQt/commit/e9ffbe0bb90aee5015939ab51ca41c4e7468b115">e9ffbe0</a> by phil65).</li>
 <li>Windows contextmenu stuff (<a href="https://github.com/phil65/PrettyQt/commit/82a6fdcbe132fee82726573f2435a22b4ecde60c">82a6fdc</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_19">Bug Fixes</h3>
+<h3 id="bug-fixes_20">Bug Fixes</h3>
 <ul>
 <li>properly reset before hiding (<a href="https://github.com/phil65/PrettyQt/commit/2aca41a618bc4b79f77c99118ca6a3b7036f2e27">2aca41a</a> by phil65).</li>
 </ul>
@@ -5903,7 +5945,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add CrossFadeWidget (<a href="https://github.com/phil65/PrettyQt/commit/5a376e706579fcf2d5443fdb9313a7a69d6f13b3">5a376e7</a> by phil65).</li>
 <li>add AdjustingBoxLayoutDockWidget (<a href="https://github.com/phil65/PrettyQt/commit/fa86cdbbd892c22c865b9bf82d4212ca93e7f4e9">fa86cdb</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_20">Bug Fixes</h3>
+<h3 id="bug-fixes_21">Bug Fixes</h3>
 <ul>
 <li>raise KeyError for non-existing keys (<a href="https://github.com/phil65/PrettyQt/commit/cfa9af2f2235f6af435e69fb094d5a791a706f10">cfa9af2</a> by phil65).</li>
 <li>fix create_char (<a href="https://github.com/phil65/PrettyQt/commit/9a0d961d4ba2b650aca9e6a14f13c62783106896">9a0d961</a> by phil65).</li>
@@ -5944,7 +5986,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add <strong>delitem</strong> method (<a href="https://github.com/phil65/PrettyQt/commit/52f52ee4f5a8bc8d066550bda77bc75a039f56cb">52f52ee</a> by phil65).</li>
 <li>add ListViewGridResizeEventFilter (<a href="https://github.com/phil65/PrettyQt/commit/8c5b08350df663d64a6d6bf4afe65d0938476bda">8c5b083</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_21">Bug Fixes</h3>
+<h3 id="bug-fixes_22">Bug Fixes</h3>
 <ul>
 <li>fix _get_viewer_zoom without viewer (<a href="https://github.com/phil65/PrettyQt/commit/c76b323d22d6a2308fbd6999f6aa561af2545d63">c76b323</a> by phil65).</li>
 <li>correctly position on parent (<a href="https://github.com/phil65/PrettyQt/commit/8e60e2c60f7ea8dc2e3a2ff63668d72613e1c33e">8e60e2c</a> by phil65).</li>
@@ -5955,7 +5997,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <ul>
 <li>parent widget column (<a href="https://github.com/phil65/PrettyQt/commit/cf6411136caa0eeec339c11f20a5baa078c42ad9">cf64111</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_22">Bug Fixes</h3>
+<h3 id="bug-fixes_23">Bug Fixes</h3>
 <ul>
 <li>fix transpose for PySide6 (<a href="https://github.com/phil65/PrettyQt/commit/70c7fa478670a002def0285ae57b6c63a0ed7a95">70c7fa4</a> by phil65).</li>
 <li>correctly cast in get_name (<a href="https://github.com/phil65/PrettyQt/commit/04f36d5885e567486c539f021f8bf38b02120e44">04f36d5</a> by phil65).</li>
@@ -6015,7 +6057,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>Elision functionality for Label (<a href="https://github.com/phil65/PrettyQt/commit/6e2511e5076021db24e010f0b1c7473d0c284766">6e2511e</a> by phil65).</li>
 <li>add JsonValidator / PythonCodeValidator / ColorValidator classes (<a href="https://github.com/phil65/PrettyQt/commit/deb67d2daa9216aae924141ee69f7b246c0069c4">deb67d2</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_23">Bug Fixes</h3>
+<h3 id="bug-fixes_24">Bug Fixes</h3>
 <ul>
 <li>correct subclass check in set_pos (<a href="https://github.com/phil65/PrettyQt/commit/c30e6ab558c1144d097a6eda4db48521df2f6bf6">c30e6ab</a> by phil65).</li>
 <li>only declare one user prop (<a href="https://github.com/phil65/PrettyQt/commit/0a9408ab84eca81ba9a2c5e49f404fc44877250a">0a9408a</a> by phil65).</li>
@@ -6034,7 +6076,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add get_widgets method (<a href="https://github.com/phil65/PrettyQt/commit/8363a192d7ebd5d281b9711126d15a367dda22e6">8363a19</a> by phil65).</li>
 <li>allow str in PropertyAnimation ctor (<a href="https://github.com/phil65/PrettyQt/commit/08aa7d52ee46921fbf090d30bf5c2384a2715360">08aa7d5</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_24">Bug Fixes</h3>
+<h3 id="bug-fixes_25">Bug Fixes</h3>
 <ul>
 <li>missed some testing shit (<a href="https://github.com/phil65/PrettyQt/commit/554ef57defae393f2713835546af23b1bb93730e">554ef57</a> by phil65).</li>
 <li>correctly map in map_to_global (<a href="https://github.com/phil65/PrettyQt/commit/c5e0718062f9c927cfcc4e3a2dcd3d5fb3de8967">c5e0718</a> by phil65).</li>
@@ -6083,7 +6125,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add usage counter and get_type (<a href="https://github.com/phil65/PrettyQt/commit/3c4616d5a5a3ffeb463bab730b7912233d9a96bc">3c4616d</a> by phil65).</li>
 <li>add invalidated signal (<a href="https://github.com/phil65/PrettyQt/commit/da1a8b6906e791680b06b16bec3d59702bf538cf">da1a8b6</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_25">Bug Fixes</h3>
+<h3 id="bug-fixes_26">Bug Fixes</h3>
 <ul>
 <li>proper mono font for all platforms (<a href="https://github.com/phil65/PrettyQt/commit/08a29f1727ff663bb91245d15616179fcf3cbf61">08a29f1</a> by phil65).</li>
 <li>qt6 fix (<a href="https://github.com/phil65/PrettyQt/commit/606ce58e799d4e3bd6773f567130dc220390f9a3">606ce58</a> by phil65).</li>
@@ -6113,7 +6155,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add set_completion_role method (<a href="https://github.com/phil65/PrettyQt/commit/722afe7c9bfafa2f718dfd763473f2a3b91faabc">722afe7</a> by phil65).</li>
 <li>add set_filter_role method (<a href="https://github.com/phil65/PrettyQt/commit/f20174cc33b0c4f3e20b2e05dfc53b1e379dfd71">f20174c</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_26">Bug Fixes</h3>
+<h3 id="bug-fixes_27">Bug Fixes</h3>
 <ul>
 <li>fix get_sort_value (<a href="https://github.com/phil65/PrettyQt/commit/3c5db566726703d362184d8578046947b4d281e9">3c5db56</a> by phil65).</li>
 <li>fix set_data method (<a href="https://github.com/phil65/PrettyQt/commit/3f439d270420fd78c4ec6d9d3e4911ac5e64ddda">3f439d2</a> by phil65).</li>
@@ -6137,13 +6179,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add GoogleCompleter (<a href="https://github.com/phil65/PrettyQt/commit/6c4a887498908d43344a8ecf32f39e80f0c00269">6c4a887</a> by phil65).</li>
 <li>add HTMLItemDelegate (<a href="https://github.com/phil65/PrettyQt/commit/9635d4d00937796685f11b3347b392426d0a7a63">9635d4d</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_27">Bug Fixes</h3>
+<h3 id="bug-fixes_28">Bug Fixes</h3>
 <ul>
 <li>set parent in append_child (<a href="https://github.com/phil65/PrettyQt/commit/51b080a251da3a7e266efd1ae9e704c712d89bcd">51b080a</a> by phil65).</li>
 </ul>
 <h2 id="v1391-2023-05-08"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.39.1">v1.39.1</a> - 2023-05-08</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.39.0...v1.39.1">Compare with v1.39.0</a></small></p>
-<h3 id="bug-fixes_28">Bug Fixes</h3>
+<h3 id="bug-fixes_29">Bug Fixes</h3>
 <ul>
 <li>model cleanup (<a href="https://github.com/phil65/PrettyQt/commit/97345c1b57ab118f0dba1126965df2263b0f61fe">97345c1</a> by phil65).</li>
 </ul>
@@ -6166,7 +6208,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add set_viewport_margins method (<a href="https://github.com/phil65/PrettyQt/commit/f2db8806dc99e4d9d7debff4d3031b317ca3b95f">f2db880</a> by phil65).</li>
 <li>set_size for SvgGenerator and QuickItem (<a href="https://github.com/phil65/PrettyQt/commit/72e67c6caf2576588c82c433cfb6902c880ad085">72e67c6</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_29">Bug Fixes</h3>
+<h3 id="bug-fixes_30">Bug Fixes</h3>
 <ul>
 <li>fix highlight_current_line (<a href="https://github.com/phil65/PrettyQt/commit/e821572f23911bba7389423f2c4da3ae1434e6d6">e821572</a> by phil65).</li>
 <li>also inherit transparency when QColor for ctor (<a href="https://github.com/phil65/PrettyQt/commit/c058198bc0f01734ec5776a7828158c3ea233aa2">c058198</a> by phil65).</li>
@@ -6174,7 +6216,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v1381-2023-05-07"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.38.1">v1.38.1</a> - 2023-05-07</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.38.0...v1.38.1">Compare with v1.38.0</a></small></p>
-<h3 id="bug-fixes_30">Bug Fixes</h3>
+<h3 id="bug-fixes_31">Bug Fixes</h3>
 <ul>
 <li>used wrong call for setting style (<a href="https://github.com/phil65/PrettyQt/commit/17c66f29b4ac61adf7454f98e2412e0626255198">17c66f2</a> by phil65).</li>
 </ul>
@@ -6189,13 +6231,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>auto adjust Chart and PygmentsHighlighter colors to Palette (<a href="https://github.com/phil65/PrettyQt/commit/0930dff8ba527c12aa60dcdbbfc68b208297ad9e">0930dff</a> by phil65).</li>
 <li>allow disabling highlight_inactive (<a href="https://github.com/phil65/PrettyQt/commit/ededffdee3dbff40a6c45f036676f9388b699db3">ededffd</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_31">Bug Fixes</h3>
+<h3 id="bug-fixes_32">Bug Fixes</h3>
 <ul>
 <li>oops (<a href="https://github.com/phil65/PrettyQt/commit/cd72ed60236c22469ff585a64b1204629aa341b6">cd72ed6</a> by phil65).</li>
 </ul>
 <h2 id="v1371-2023-05-06"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.37.1">v1.37.1</a> - 2023-05-06</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.37.0...v1.37.1">Compare with v1.37.0</a></small></p>
-<h3 id="bug-fixes_32">Bug Fixes</h3>
+<h3 id="bug-fixes_33">Bug Fixes</h3>
 <ul>
 <li>check for None-model in set_sorting_enabled (<a href="https://github.com/phil65/PrettyQt/commit/f334fd9a89c027b2a96a75af11dd7360e9901d2f">f334fd9</a> by phil65).</li>
 </ul>
@@ -6227,7 +6269,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add recursive option for get_children (<a href="https://github.com/phil65/PrettyQt/commit/1f85214d45cb624be946785aa680e2ca58937189">1f85214</a> by phil65).</li>
 <li>add get_items method (<a href="https://github.com/phil65/PrettyQt/commit/06288130eb5f69b5ad1e880acd6f2406db900f27">0628813</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_33">Bug Fixes</h3>
+<h3 id="bug-fixes_34">Bug Fixes</h3>
 <ul>
 <li>fixed is_case_sensitive method (<a href="https://github.com/phil65/PrettyQt/commit/6ead3a39bcacbbeb842c71cbf47a712af64b1b98">6ead3a3</a> by phil65).</li>
 <li>correctly inherit for QuickView (<a href="https://github.com/phil65/PrettyQt/commit/7852a699fa90fec1e9f6f7cb8118c43d6e2c333c">7852a69</a> by phil65).</li>
@@ -6254,7 +6296,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v1331-2023-05-04"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.33.1">v1.33.1</a> - 2023-05-04</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.33.0...v1.33.1">Compare with v1.33.0</a></small></p>
-<h3 id="bug-fixes_34">Bug Fixes</h3>
+<h3 id="bug-fixes_35">Bug Fixes</h3>
 <ul>
 <li>test fixes (<a href="https://github.com/phil65/PrettyQt/commit/d071c52a0963184577287d41f2c2a29456db2786">d071c52</a> by phil65).</li>
 </ul>
@@ -6293,7 +6335,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add to_dict and clone methods (<a href="https://github.com/phil65/PrettyQt/commit/2031631c8cd336458320b6ceba2fa7ac25be67ef">2031631</a> by phil65).</li>
 <li>add VariantDelegate class (<a href="https://github.com/phil65/PrettyQt/commit/b1e2230870efc17ef3c8baade7be4f4dd562edea">b1e2230</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_35">Bug Fixes</h3>
+<h3 id="bug-fixes_36">Bug Fixes</h3>
 <ul>
 <li>qt6 regression (PointF instead of Point) (<a href="https://github.com/phil65/PrettyQt/commit/70b720bf437b09896593609b84f2a08714055bfa">70b720b</a> by phil65).</li>
 <li>reset model in set_root_item (<a href="https://github.com/phil65/PrettyQt/commit/924106d381e14b451df0129056027fab97a9ef2d">924106d</a> by phil65).</li>
@@ -6322,7 +6364,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add is_dark method (<a href="https://github.com/phil65/PrettyQt/commit/f250dc4e828ed3fedc1cceacd0edf5b6b0ab6a0d">f250dc4</a> by phil65).</li>
 <li>add quickwidgets module (<a href="https://github.com/phil65/PrettyQt/commit/4cc1fcbc9199dc61de7231d13a8fb48689c779a7">4cc1fcb</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_36">Bug Fixes</h3>
+<h3 id="bug-fixes_37">Bug Fixes</h3>
 <ul>
 <li>add missing button icon (<a href="https://github.com/phil65/PrettyQt/commit/1c73ea71eb9ec349d3da8dcfd40cad5f195a7751">1c73ea7</a> by phil65).</li>
 </ul>
@@ -6352,7 +6394,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add add_msecs, add_secs and get_current_time methods (<a href="https://github.com/phil65/PrettyQt/commit/d4c0ca713fea95a469eaec9e5284119921efecd8">d4c0ca7</a> by phil65).</li>
 <li>add clicked signal (<a href="https://github.com/phil65/PrettyQt/commit/cce2c68ced1c110a7a9d5b69de45b6dee90a3ee0">cce2c68</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_37">Bug Fixes</h3>
+<h3 id="bug-fixes_38">Bug Fixes</h3>
 <ul>
 <li>fix root glob call (<a href="https://github.com/phil65/PrettyQt/commit/e4e4ce2775568f954d84ec276ff9307bc9c707f6">e4e4ce2</a> by phil65).</li>
 <li>qt6 fix (<a href="https://github.com/phil65/PrettyQt/commit/cb19f7993780dea2b5834b9cadb9ba2f40ce53e9">cb19f79</a> by phil65).</li>
@@ -6369,7 +6411,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add fake_mouse_move classmethod (<a href="https://github.com/phil65/PrettyQt/commit/7199ab6f48d16a994d3f93bb5d9a937f6364a13f">7199ab6</a> by phil65).</li>
 <li>add set_style method (<a href="https://github.com/phil65/PrettyQt/commit/033e222245d55303cf8caf6f63bd423c921e48e9">033e222</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_38">Bug Fixes</h3>
+<h3 id="bug-fixes_39">Bug Fixes</h3>
 <ul>
 <li>correctly propagate wheelEvent (<a href="https://github.com/phil65/PrettyQt/commit/97444589ed9fe38a50bfcfdab227cbcb60736b4c">9744458</a> by phil65).</li>
 </ul>
@@ -6386,13 +6428,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>some new methods (<a href="https://github.com/phil65/PrettyQt/commit/76b5fccd53e4774e0f229b14afddadad883dace3">76b5fcc</a> by phil65).</li>
 <li>add PdfSearchModel class (<a href="https://github.com/phil65/PrettyQt/commit/567cb902d20e0c659f4330d2a0460330a6deb119">567cb90</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_39">Bug Fixes</h3>
+<h3 id="bug-fixes_40">Bug Fixes</h3>
 <ul>
 <li>support several QOpenGlWidgets for get_image (<a href="https://github.com/phil65/PrettyQt/commit/de0cd378a6cbb88617e63bb1f1eb3185445a5d4b">de0cd37</a> by phil65).</li>
 </ul>
 <h2 id="v1281-2023-04-26"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.28.1">v1.28.1</a> - 2023-04-26</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.28.0...v1.28.1">Compare with v1.28.0</a></small></p>
-<h3 id="bug-fixes_40">Bug Fixes</h3>
+<h3 id="bug-fixes_41">Bug Fixes</h3>
 <ul>
 <li>weird PySide6 issue with Enum val as default kwarg (PyQt works fine..) (<a href="https://github.com/phil65/PrettyQt/commit/bdff9ba0497901088cc02431d22ec47c00d9ace4">bdff9ba</a> by phil65).</li>
 </ul>
@@ -6408,7 +6450,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <ul>
 <li>filesystemmodel mixin for FsSpecModel (<a href="https://github.com/phil65/PrettyQt/commit/58b68fe2d8265d10b9af3d3f582a37006f903434">58b68fe</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_41">Bug Fixes</h3>
+<h3 id="bug-fixes_42">Bug Fixes</h3>
 <ul>
 <li>always return correct type for permissions() (<a href="https://github.com/phil65/PrettyQt/commit/7e3172dc73240da3e3ae284c4da3d84b412cf150">7e3172d</a> by phil65).</li>
 </ul>
@@ -6421,7 +6463,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add PdfBookmarkModel class (<a href="https://github.com/phil65/PrettyQt/commit/3954ceacedf0f3b38049a8f2fe3b083dd0a830f6">3954cea</a> by phil65).</li>
 <li>add get_role_names method (<a href="https://github.com/phil65/PrettyQt/commit/8c977a7eebd4c9b483303bd2a1f31adb0e7f11b4">8c977a7</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_42">Bug Fixes</h3>
+<h3 id="bug-fixes_43">Bug Fixes</h3>
 <ul>
 <li>change SORT_ROLE and NAME_ROLE values to not conflict with FileSystemModel enums (<a href="https://github.com/phil65/PrettyQt/commit/7db632ebd1b10e35654e446579b72b2132e01799">7db632e</a> by phil65).</li>
 <li><strong>getitem</strong> and <strong>setitem</strong> seem to cause issues? (<a href="https://github.com/phil65/PrettyQt/commit/4899917808c8b9f3d45543c3f7834c811742bd25">4899917</a> by phil65).</li>
@@ -6448,20 +6490,20 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>Add ModelRoleData class (<a href="https://github.com/phil65/PrettyQt/commit/525cabc402edaca72a784afa3bf891c90179574c">525cabc</a> by phil65).</li>
 <li>add ImportlibTreeModel (<a href="https://github.com/phil65/PrettyQt/commit/d88994365eaea675af696c4f23bd6a579661308c">d889943</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_43">Bug Fixes</h3>
+<h3 id="bug-fixes_44">Bug Fixes</h3>
 <ul>
 <li>correctly behaving listmixin (<a href="https://github.com/phil65/PrettyQt/commit/ad7de5e0c04f5d54423413e8e9738972f1dfc12b">ad7de5e</a> by phil65).</li>
 </ul>
 <h2 id="v1222-2023-04-25"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.22.2">v1.22.2</a> - 2023-04-25</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.22.1...v1.22.2">Compare with v1.22.1</a></small></p>
-<h3 id="bug-fixes_44">Bug Fixes</h3>
+<h3 id="bug-fixes_45">Bug Fixes</h3>
 <ul>
 <li>add default value for index kwargs (<a href="https://github.com/phil65/PrettyQt/commit/56414c98d40d2a56e37427edd7911bc77278ef37">56414c9</a> by phil65).</li>
 <li>correctly behaving RegexMatchesModel (<a href="https://github.com/phil65/PrettyQt/commit/0e8c97036b5daad0fd912133c7c7256227d5f2a8">0e8c970</a> by phil65).</li>
 </ul>
 <h2 id="v1221-2023-04-24"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.22.1">v1.22.1</a> - 2023-04-24</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.22.0...v1.22.1">Compare with v1.22.0</a></small></p>
-<h3 id="bug-fixes_45">Bug Fixes</h3>
+<h3 id="bug-fixes_46">Bug Fixes</h3>
 <ul>
 <li>rowCount fix (<a href="https://github.com/phil65/PrettyQt/commit/867ac0ffa3eed15af67c46ce06b6b9a86ac713a9">867ac0f</a> by phil65).</li>
 </ul>
@@ -6473,7 +6515,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add get_control_types method (<a href="https://github.com/phil65/PrettyQt/commit/6a4231aed8f9b5df4479ba07673821ebed35409c">6a4231a</a> by phil65).</li>
 <li>add get/set_size_policy and <strong>bool</strong> methods (<a href="https://github.com/phil65/PrettyQt/commit/0c1236374ba88d29d567069314172ba85ca8f3c4">0c12363</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_46">Bug Fixes</h3>
+<h3 id="bug-fixes_47">Bug Fixes</h3>
 <ul>
 <li>fix create_char method (<a href="https://github.com/phil65/PrettyQt/commit/0aa08c2c6f720946e9d9113c74b950c021405894">0aa08c2</a> by phil65).</li>
 </ul>
@@ -6493,7 +6535,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add serialize_document method (<a href="https://github.com/phil65/PrettyQt/commit/d786fd622d9af2ebc4ad7af81f0f2aa1afb2e02b">d786fd6</a> by phil65).</li>
 <li>add toggle_maximized method (<a href="https://github.com/phil65/PrettyQt/commit/1b557b350535df47aa4005864e575cc8b777fb84">1b557b3</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_47">Bug Fixes</h3>
+<h3 id="bug-fixes_48">Bug Fixes</h3>
 <ul>
 <li>correct isinstance check for to_json (<a href="https://github.com/phil65/PrettyQt/commit/8d8c5cbf928ec69442c34bdfef2762913399b5fc">8d8c5cb</a> by phil65).</li>
 <li>fix serialization (<a href="https://github.com/phil65/PrettyQt/commit/d7dd426e61c7232c3f27744296ac4f360aad4807">d7dd426</a> by phil65).</li>
@@ -6507,7 +6549,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>get rid of flags param for from_image (<a href="https://github.com/phil65/PrettyQt/commit/8fbbfb35f6af5b37554f5a8944efa061dd8f9c1f">8fbbfb3</a> by phil65).</li>
 <li>add BluetoothDeviceInfo class (<a href="https://github.com/phil65/PrettyQt/commit/80482f0e31e72bc04e65813e61a670bf488b7221">80482f0</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_48">Bug Fixes</h3>
+<h3 id="bug-fixes_49">Bug Fixes</h3>
 <ul>
 <li>correctly set flags for start_discovery (<a href="https://github.com/phil65/PrettyQt/commit/4f53be680fcdaa2deec2cee1b941fb79ee7876a0">4f53be6</a> by phil65).</li>
 </ul>
@@ -6526,7 +6568,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>more dict interface (<a href="https://github.com/phil65/PrettyQt/commit/903d78632c98b3b7812cfd82aacc0b86ab6fd5a9">903d786</a> by phil65).</li>
 <li>add set_badge_number method (<a href="https://github.com/phil65/PrettyQt/commit/57e9b9e41687c969890c79d54f3bd7e59dd7c204">57e9b9e</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_49">Bug Fixes</h3>
+<h3 id="bug-fixes_50">Bug Fixes</h3>
 <ul>
 <li>make sure to correctly set parent for actions added to menus (<a href="https://github.com/phil65/PrettyQt/commit/8ea4384d81e27a610604d441f14b765b5f333f80">8ea4384</a> by phil65).</li>
 <li>context menu fix (<a href="https://github.com/phil65/PrettyQt/commit/c71c2d744d842e39c011b88d203ff1b74c332ab5">c71c2d7</a> by phil65).</li>
@@ -6539,7 +6581,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add get_cursor method (<a href="https://github.com/phil65/PrettyQt/commit/4dc77ed75cf4fb61726a02d6d18563aa6dad890c">4dc77ed</a> by phil65).</li>
 <li>add convert_to_format method (<a href="https://github.com/phil65/PrettyQt/commit/f36f1355c73eed635f13cd833595b99527019909">f36f135</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_50">Bug Fixes</h3>
+<h3 id="bug-fixes_51">Bug Fixes</h3>
 <ul>
 <li>avoid duplicates in requirements (<a href="https://github.com/phil65/PrettyQt/commit/d27d2642d4b320eaa9dccddd091eb4f3ff36f6c0">d27d264</a> by phil65).</li>
 </ul>
@@ -6556,7 +6598,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v1151-2023-04-20"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.15.1">v1.15.1</a> - 2023-04-20</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.15.0...v1.15.1">Compare with v1.15.0</a></small></p>
-<h3 id="bug-fixes_51">Bug Fixes</h3>
+<h3 id="bug-fixes_52">Bug Fixes</h3>
 <ul>
 <li>correctly build charmap dict (<a href="https://github.com/phil65/PrettyQt/commit/49e183410c79dcfcf65d667d284fbb2532065947">49e1834</a> by phil65).</li>
 <li>fix get_rect type issue (got broken with qt6) (<a href="https://github.com/phil65/PrettyQt/commit/6965326cbfc22078dfeb2e0586a45c01ea0a957a">6965326</a> by phil65).</li>
@@ -6570,25 +6612,25 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add get_dynamic_properties method (<a href="https://github.com/phil65/PrettyQt/commit/7c82ba9191bb45197b2abae12fe717a3f401e01e">7c82ba9</a> by phil65).</li>
 <li>allow passing the qt property method directly for apply_to (<a href="https://github.com/phil65/PrettyQt/commit/1ca12880e3883d45704a22873db6c864befecaf4">1ca1288</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_52">Bug Fixes</h3>
+<h3 id="bug-fixes_53">Bug Fixes</h3>
 <ul>
 <li>offsets were off by 1 (<a href="https://github.com/phil65/PrettyQt/commit/cecd70330ca0a6ee78d064056e0bb525fd3fb250">cecd703</a> by phil65).</li>
 </ul>
 <h2 id="v1143-2023-04-20"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.14.3">v1.14.3</a> - 2023-04-20</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.14.2...v1.14.3">Compare with v1.14.2</a></small></p>
-<h3 id="bug-fixes_53">Bug Fixes</h3>
+<h3 id="bug-fixes_54">Bug Fixes</h3>
 <ul>
 <li>another release fix :) (<a href="https://github.com/phil65/PrettyQt/commit/af959d4063b8040299a790d65c31bcb644362034">af959d4</a> by phil65).</li>
 </ul>
 <h2 id="v1142-2023-04-20"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.14.2">v1.14.2</a> - 2023-04-20</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.14.1...v1.14.2">Compare with v1.14.1</a></small></p>
-<h3 id="bug-fixes_54">Bug Fixes</h3>
+<h3 id="bug-fixes_55">Bug Fixes</h3>
 <ul>
 <li>another release fix (<a href="https://github.com/phil65/PrettyQt/commit/bdc1085d98a6e03956dff0679674c704bc716151">bdc1085</a> by phil65).</li>
 </ul>
 <h2 id="v1141-2023-04-20"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.14.1">v1.14.1</a> - 2023-04-20</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.14.0...v1.14.1">Compare with v1.14.0</a></small></p>
-<h3 id="bug-fixes_55">Bug Fixes</h3>
+<h3 id="bug-fixes_56">Bug Fixes</h3>
 <ul>
 <li>release pipeline fix (<a href="https://github.com/phil65/PrettyQt/commit/bcfd8737e6cff2016def568c57953598eec0e8d6">bcfd873</a> by phil65).</li>
 </ul>
@@ -6599,14 +6641,14 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>register some attributes as Qt Properties (<a href="https://github.com/phil65/PrettyQt/commit/d3b2542d2011a23f5c2cf76683c88449a0da5e35">d3b2542</a> by phil65).</li>
 <li>also support indexes for openPersistentEditor (<a href="https://github.com/phil65/PrettyQt/commit/d450d40d9713d0771861ec03f6bf1f130d56bdc2">d450d40</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_56">Bug Fixes</h3>
+<h3 id="bug-fixes_57">Bug Fixes</h3>
 <ul>
 <li>property doesnt accept bytes (anymore) (<a href="https://github.com/phil65/PrettyQt/commit/25a962c6cab32bf65234d3689dd417bb00333968">25a962c</a> by phil65).</li>
 <li>fix draw_rounded_rect method (<a href="https://github.com/phil65/PrettyQt/commit/bb88306049a42fc999dc050953569e7d7f7ec5df">bb88306</a> by phil65).</li>
 </ul>
 <h2 id="v1131-2023-04-19"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.13.1">v1.13.1</a> - 2023-04-19</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.13.0...v1.13.1">Compare with v1.13.0</a></small></p>
-<h3 id="bug-fixes_57">Bug Fixes</h3>
+<h3 id="bug-fixes_58">Bug Fixes</h3>
 <ul>
 <li>fix tests... (<a href="https://github.com/phil65/PrettyQt/commit/58c78daf3d039bf08c04b02c1af21abead582f87">58c78da</a> by phil65).</li>
 </ul>
@@ -6619,7 +6661,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v1121-2023-04-19"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.12.1">v1.12.1</a> - 2023-04-19</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.12.0...v1.12.1">Compare with v1.12.0</a></small></p>
-<h3 id="bug-fixes_58">Bug Fixes</h3>
+<h3 id="bug-fixes_59">Bug Fixes</h3>
 <ul>
 <li>missing string cast for set_stylesheet (<a href="https://github.com/phil65/PrettyQt/commit/e536beec652473b8c8f6d546a1781f1bc0b293a1">e536bee</a> by phil65).</li>
 </ul>
@@ -6636,7 +6678,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>allow some special values for set_input_mask (<a href="https://github.com/phil65/PrettyQt/commit/f6681648244a950ad5e2e3133d40a7792172466a">f668164</a> by phil65).</li>
 <li>add get_measurement_system (<a href="https://github.com/phil65/PrettyQt/commit/fd7bf27d887af6c8799b4052b5994bad4e28cd87">fd7bf27</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_59">Bug Fixes</h3>
+<h3 id="bug-fixes_60">Bug Fixes</h3>
 <ul>
 <li>always return correct rowCount (<a href="https://github.com/phil65/PrettyQt/commit/15268d118ce151ebadbb52aefc010162e53108f2">15268d1</a> by phil65).</li>
 </ul>
@@ -6647,20 +6689,20 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>methods for setting data (<a href="https://github.com/phil65/PrettyQt/commit/054a271a14d3bffca928af82ee91cd6a177ef13d">054a271</a> by phil65).</li>
 <li>add <strong>iter</strong> method (<a href="https://github.com/phil65/PrettyQt/commit/464eb1a27c4c83849b2022ab09056195a962bbb0">464eb1a</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_60">Bug Fixes</h3>
+<h3 id="bug-fixes_61">Bug Fixes</h3>
 <ul>
 <li>checkstate instead of text for is_attribute (<a href="https://github.com/phil65/PrettyQt/commit/b5130b100489a534e210c14693a97defe16ecf83">b5130b1</a> by phil65).</li>
 <li>raise KeyError instead of returning it (<a href="https://github.com/phil65/PrettyQt/commit/e266aa09d90fe8a0ef8e4dbb18433d57a2b86bcb">e266aa0</a> by phil65).</li>
 </ul>
 <h2 id="v192-2023-04-17"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.9.2">v1.9.2</a> - 2023-04-17</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.9.1...v1.9.2">Compare with v1.9.1</a></small></p>
-<h3 id="bug-fixes_61">Bug Fixes</h3>
+<h3 id="bug-fixes_62">Bug Fixes</h3>
 <ul>
 <li>move some stuff to baseclass (<a href="https://github.com/phil65/PrettyQt/commit/d550023cda15acf4bdef51d09563ef5f677752b5">d550023</a> by phil65).</li>
 </ul>
 <h2 id="v191-2023-04-17"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.9.1">v1.9.1</a> - 2023-04-17</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.9.0...v1.9.1">Compare with v1.9.0</a></small></p>
-<h3 id="bug-fixes_62">Bug Fixes</h3>
+<h3 id="bug-fixes_63">Bug Fixes</h3>
 <ul>
 <li>fix wrong value for non-listed roles in data() (<a href="https://github.com/phil65/PrettyQt/commit/8baef8f40d09606b8686516ad78477b656a07032">8baef8f</a> by phil65).</li>
 <li>re-add DEFAULT_ATTR_DETAILS and inspected_node_is_visible (<a href="https://github.com/phil65/PrettyQt/commit/df7a177ce7411ef5185505ec18448dfced00bb47">df7a177</a> by phil65).</li>
@@ -6672,13 +6714,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add FileTree class (<a href="https://github.com/phil65/PrettyQt/commit/c85b4401476f01baee6b329f1a9c2b3a68d2d6ff">c85b440</a> by phil65).</li>
 <li>add update_all method (<a href="https://github.com/phil65/PrettyQt/commit/be08627b1e22c2b75293559002c82e5a66ac9ae6">be08627</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_63">Bug Fixes</h3>
+<h3 id="bug-fixes_64">Bug Fixes</h3>
 <ul>
 <li>fix exception when QIcon is passed (<a href="https://github.com/phil65/PrettyQt/commit/f7659dee4f12929336b62ed6ec9a4dce58322ec7">f7659de</a> by phil65).</li>
 </ul>
 <h2 id="v181-2023-04-17"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.8.1">v1.8.1</a> - 2023-04-17</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.8.0...v1.8.1">Compare with v1.8.0</a></small></p>
-<h3 id="bug-fixes_64">Bug Fixes</h3>
+<h3 id="bug-fixes_65">Bug Fixes</h3>
 <ul>
 <li>user_data fix (<a href="https://github.com/phil65/PrettyQt/commit/998871da3255b1928edf96d19986b3898fb691b9">998871d</a> by phil65).</li>
 </ul>
@@ -6690,7 +6732,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v171-2023-04-17"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.7.1">v1.7.1</a> - 2023-04-17</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.7.0...v1.7.1">Compare with v1.7.0</a></small></p>
-<h3 id="bug-fixes_65">Bug Fixes</h3>
+<h3 id="bug-fixes_66">Bug Fixes</h3>
 <ul>
 <li>fix docs generation (<a href="https://github.com/phil65/PrettyQt/commit/7b8b7796f96c7bb8ead7b750289c830966647baa">7b8b779</a> by phil65).</li>
 </ul>
@@ -6712,7 +6754,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add scroll_to_next/previous_row methods (<a href="https://github.com/phil65/PrettyQt/commit/353479f04371213deffa27b532f65f07f044c476">353479f</a> by phil65).</li>
 <li>add to_string method (<a href="https://github.com/phil65/PrettyQt/commit/5cdab55a313a756f069e340cb952ea6a8e7741dd">5cdab55</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_66">Bug Fixes</h3>
+<h3 id="bug-fixes_67">Bug Fixes</h3>
 <ul>
 <li>correct icon colors for new Qt built in dark mode (when using Fusion theme) (<a href="https://github.com/phil65/PrettyQt/commit/dabda536b54ecfa203666c50af3be9e9bbcbbf40">dabda53</a> by phil65).</li>
 <li>correct cursor shape for dragging movements (<a href="https://github.com/phil65/PrettyQt/commit/e882db180beaddad72ed6fedddcf36d6a75c6be1">e882db1</a> by phil65).</li>
@@ -6726,19 +6768,19 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add set_text_alignment method (<a href="https://github.com/phil65/PrettyQt/commit/bd2ed5d5a6ebe631a8d2ffa620cfc7811b38cbd0">bd2ed5d</a> by phil65).</li>
 <li>add get_file_path / get_file_info methods (<a href="https://github.com/phil65/PrettyQt/commit/037a58c802f048bd512e11d2a4ac8bb6c1c3b9ea">037a58c</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_67">Bug Fixes</h3>
+<h3 id="bug-fixes_68">Bug Fixes</h3>
 <ul>
 <li>fix yield_child_indexes method (<a href="https://github.com/phil65/PrettyQt/commit/04ad61b058b046401c431458377920352f26c742">04ad61b</a> by phil65).</li>
 </ul>
 <h2 id="v142-2023-04-12"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.4.2">v1.4.2</a> - 2023-04-12</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.4.1...v1.4.2">Compare with v1.4.1</a></small></p>
-<h3 id="bug-fixes_68">Bug Fixes</h3>
+<h3 id="bug-fixes_69">Bug Fixes</h3>
 <ul>
 <li>only run tests on linux for now (<a href="https://github.com/phil65/PrettyQt/commit/b7fbb9149920deb7eaff21381c4f199d1e161b9b">b7fbb91</a> by phil65).</li>
 </ul>
 <h2 id="v141-2023-04-12"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.4.1">v1.4.1</a> - 2023-04-12</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.4.0...v1.4.1">Compare with v1.4.0</a></small></p>
-<h3 id="bug-fixes_69">Bug Fixes</h3>
+<h3 id="bug-fixes_70">Bug Fixes</h3>
 <ul>
 <li>remove codecov from deps (<a href="https://github.com/phil65/PrettyQt/commit/d41a601fe254da42389629d9d64141eb36e9f4c6">d41a601</a> by phil65).</li>
 </ul>
@@ -6751,7 +6793,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add KeyCombination class (<a href="https://github.com/phil65/PrettyQt/commit/4fafbe9139b5a9d726d7008a0f309bfffe23cefb">4fafbe9</a> by phil65).</li>
 <li>re-add qthelp module (<a href="https://github.com/phil65/PrettyQt/commit/19671bf78c8fe07cac87385f5928fc7079436ee3">19671bf</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_70">Bug Fixes</h3>
+<h3 id="bug-fixes_71">Bug Fixes</h3>
 <ul>
 <li>fixed Color.as_qt error with Qt6.5 (<a href="https://github.com/phil65/PrettyQt/commit/4b488fa3b848d10e458164de32749d94cedb9706">4b488fa</a> by phil65).</li>
 </ul>
@@ -6772,7 +6814,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add MetaType class (<a href="https://github.com/phil65/PrettyQt/commit/6358b492ac6d20f470bcbd14818329bc1246d59b">6358b49</a> by phil65).</li>
 <li>add StyleHints class (<a href="https://github.com/phil65/PrettyQt/commit/a8ff86a92817d9e8d18914b005ad67807ffd62ef">a8ff86a</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_71">Bug Fixes</h3>
+<h3 id="bug-fixes_72">Bug Fixes</h3>
 <ul>
 <li>correct filtering for Dir.get_entry_info_list (<a href="https://github.com/phil65/PrettyQt/commit/05f1f40014af42aea1b0cce19dc247fc464452fa">05f1f40</a> by phil65).</li>
 <li>explicitely use kwargs for entryList/entryInfoList calls (<a href="https://github.com/phil65/PrettyQt/commit/e65c85590aba6c295dbd60194e2aaf3b4808818a">e65c855</a> by phil65).</li>
@@ -6780,13 +6822,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v112-2023-04-10"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.1.2">v1.1.2</a> - 2023-04-10</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.1.1...v1.1.2">Compare with v1.1.1</a></small></p>
-<h3 id="bug-fixes_72">Bug Fixes</h3>
+<h3 id="bug-fixes_73">Bug Fixes</h3>
 <ul>
 <li>always pass sys.argv to QCoreApplication etc (<a href="https://github.com/phil65/PrettyQt/commit/81d456b358dfa7ef4eaecb46586d4ce4c5481a7f">81d456b</a> by phil65).</li>
 </ul>
 <h2 id="v111-2023-04-09"><a href="https://github.com/phil65/PrettyQt/releases/tag/v1.1.1">v1.1.1</a> - 2023-04-09</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v1.1.0...v1.1.1">Compare with v1.1.0</a></small></p>
-<h3 id="bug-fixes_73">Bug Fixes</h3>
+<h3 id="bug-fixes_74">Bug Fixes</h3>
 <ul>
 <li>Qt6 fixes for Dialog classes (<a href="https://github.com/phil65/PrettyQt/commit/b7de55ff55be12d580ea9d93415c7b51670410c7">b7de55f</a> by phil65).</li>
 </ul>
@@ -6804,26 +6846,26 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>get rid of mro fuckery (<a href="https://github.com/phil65/PrettyQt/commit/550c2603878e6775225090329b8b95658cabc446">550c260</a> by phil65).</li>
 <li>re-add location module (<a href="https://github.com/phil65/PrettyQt/commit/c43422acccd16dc9b4eeb9b0ba5b9cd0aeba22f5">c43422a</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_74">Bug Fixes</h3>
+<h3 id="bug-fixes_75">Bug Fixes</h3>
 <ul>
 <li>remove title property for widgets (<a href="https://github.com/phil65/PrettyQt/commit/4a4fa0e7d143a265bb1ab09d275f4e6a0b251cfd">4a4fa0e</a> by phil65).</li>
 </ul>
 <h2 id="v01933-2023-04-04"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.193.3">v0.193.3</a> - 2023-04-04</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.193.2...v0.193.3">Compare with v0.193.2</a></small></p>
-<h3 id="bug-fixes_75">Bug Fixes</h3>
+<h3 id="bug-fixes_76">Bug Fixes</h3>
 <ul>
 <li>get rid of sre_constants warnings (<a href="https://github.com/phil65/PrettyQt/commit/3b85135ce064396fcddeb8a4f3fb92e5e0a03b5e">3b85135</a> by phil65).</li>
 </ul>
 <h2 id="v01932-2023-02-04"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.193.2">v0.193.2</a> - 2023-02-04</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.193.1...v0.193.2">Compare with v0.193.1</a></small></p>
-<h3 id="bug-fixes_76">Bug Fixes</h3>
+<h3 id="bug-fixes_77">Bug Fixes</h3>
 <ul>
 <li>correctly init dataclass for py3.11 (<a href="https://github.com/phil65/PrettyQt/commit/dbda4a856ffe86f93ad2eff4d141f32b12585856">dbda4a8</a> by phil65).</li>
 <li>proper QDialog exec fix (<a href="https://github.com/phil65/PrettyQt/commit/8305521ddaf23a9320848bd970d54da6e0cdb204">8305521</a> by phil65).</li>
 </ul>
 <h2 id="v01931-2022-11-18"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.193.1">v0.193.1</a> - 2022-11-18</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.193.0...v0.193.1">Compare with v0.193.0</a></small></p>
-<h3 id="bug-fixes_77">Bug Fixes</h3>
+<h3 id="bug-fixes_78">Bug Fixes</h3>
 <ul>
 <li>exec_ fix for PyQt6 (<a href="https://github.com/phil65/PrettyQt/commit/36902d58bf0f702d9e7b1a455c69bb045bc309ea">36902d5</a> by phil65).</li>
 </ul>
@@ -6835,7 +6877,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01921-2022-11-12"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.192.1">v0.192.1</a> - 2022-11-12</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.192.0...v0.192.1">Compare with v0.192.0</a></small></p>
-<h3 id="bug-fixes_78">Bug Fixes</h3>
+<h3 id="bug-fixes_79">Bug Fixes</h3>
 <ul>
 <li>disable BaseModelMixin test for now (<a href="https://github.com/phil65/PrettyQt/commit/b05b5deb39c96ef84a6f1d4d5d241d1022771117">b05b5de</a> by phil65).</li>
 </ul>
@@ -6853,31 +6895,31 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01908-2022-11-09"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.190.8">v0.190.8</a> - 2022-11-09</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.190.7...v0.190.8">Compare with v0.190.7</a></small></p>
-<h3 id="bug-fixes_79">Bug Fixes</h3>
+<h3 id="bug-fixes_80">Bug Fixes</h3>
 <ul>
 <li>better check for combobox set_editable method (<a href="https://github.com/phil65/PrettyQt/commit/17a8d0d1d6cbb28e5f4429554dccce0baca34e8d">17a8d0d</a> by phil65).</li>
 </ul>
 <h2 id="v01907-2022-11-08"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.190.7">v0.190.7</a> - 2022-11-08</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.190.6...v0.190.7">Compare with v0.190.6</a></small></p>
-<h3 id="bug-fixes_80">Bug Fixes</h3>
+<h3 id="bug-fixes_81">Bug Fixes</h3>
 <ul>
 <li>set Completer only when calling set_editable to avoid error message (<a href="https://github.com/phil65/PrettyQt/commit/2f7a37add83c0fe2b8489c6dd08683599b3d89d2">2f7a37a</a> by phil65).</li>
 </ul>
 <h2 id="v01906-2022-11-03"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.190.6">v0.190.6</a> - 2022-11-03</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.190.5...v0.190.6">Compare with v0.190.5</a></small></p>
-<h3 id="bug-fixes_81">Bug Fixes</h3>
+<h3 id="bug-fixes_82">Bug Fixes</h3>
 <ul>
 <li>proper fix for restoreState (<a href="https://github.com/phil65/PrettyQt/commit/00292690d8967a0fb1d070627f122698b0e3cbee">0029269</a> by phil65).</li>
 </ul>
 <h2 id="v01905-2022-11-03"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.190.5">v0.190.5</a> - 2022-11-03</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.190.4...v0.190.5">Compare with v0.190.4</a></small></p>
-<h3 id="bug-fixes_82">Bug Fixes</h3>
+<h3 id="bug-fixes_83">Bug Fixes</h3>
 <ul>
 <li>allow str for restoreState (<a href="https://github.com/phil65/PrettyQt/commit/4bfa433856b2fd3ff82b4bd6099eeaed81cfd2e5">4bfa433</a> by phil65).</li>
 </ul>
 <h2 id="v01904-2022-11-02"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.190.4">v0.190.4</a> - 2022-11-02</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.190.3...v0.190.4">Compare with v0.190.3</a></small></p>
-<h3 id="bug-fixes_83">Bug Fixes</h3>
+<h3 id="bug-fixes_84">Bug Fixes</h3>
 <ul>
 <li>qt compat (<a href="https://github.com/phil65/PrettyQt/commit/a552dd4a0e169dae67629a2df0bc8371b4190709">a552dd4</a> by phil65).</li>
 <li>some compat fixes (<a href="https://github.com/phil65/PrettyQt/commit/12f6dfac771439f7be7cdba1f8c5d636ace832e4">12f6dfa</a> by phil65).</li>
@@ -6886,19 +6928,19 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01903-2022-06-30"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.190.3">v0.190.3</a> - 2022-06-30</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.190.2...v0.190.3">Compare with v0.190.2</a></small></p>
-<h3 id="bug-fixes_84">Bug Fixes</h3>
+<h3 id="bug-fixes_85">Bug Fixes</h3>
 <ul>
 <li>bump regex dep (<a href="https://github.com/phil65/PrettyQt/commit/7989d44e50c939c5fd32c7dff608cbf3445a778b">7989d44</a> by phil65).</li>
 </ul>
 <h2 id="v01902-2022-04-06"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.190.2">v0.190.2</a> - 2022-04-06</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.190.1...v0.190.2">Compare with v0.190.1</a></small></p>
-<h3 id="bug-fixes_85">Bug Fixes</h3>
+<h3 id="bug-fixes_86">Bug Fixes</h3>
 <ul>
 <li>scxml not available for PyQt5 (<a href="https://github.com/phil65/PrettyQt/commit/e97d66ba8ed86abd4870b928b5a23aefa5098286">e97d66b</a> by phil65).</li>
 </ul>
 <h2 id="v01901-2022-04-06"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.190.1">v0.190.1</a> - 2022-04-06</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.190.0...v0.190.1">Compare with v0.190.0</a></small></p>
-<h3 id="bug-fixes_86">Bug Fixes</h3>
+<h3 id="bug-fixes_87">Bug Fixes</h3>
 <ul>
 <li>regex fix (<a href="https://github.com/phil65/PrettyQt/commit/7ff16f3d5b45ee2a56720adacf6f44446c060451">7ff16f3</a> by phil65).</li>
 </ul>
@@ -6924,7 +6966,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add set_data method (<a href="https://github.com/phil65/PrettyQt/commit/6316eab2bcc39cc80528a9e531525307cbd34bd6">6316eab</a> by phil65).</li>
 <li>add get_screen method (<a href="https://github.com/phil65/PrettyQt/commit/a3dbba13e5e77cca84c2e76539883e6b8a2b9de8">a3dbba1</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_87">Bug Fixes</h3>
+<h3 id="bug-fixes_88">Bug Fixes</h3>
 <ul>
 <li>typo for DateType (<a href="https://github.com/phil65/PrettyQt/commit/58bd61b7e4061d6ddf4798f53116a956aec4e428">58bd61b</a> by phil65).</li>
 <li>correctly cast to int for SetY (<a href="https://github.com/phil65/PrettyQt/commit/277aad93c202adf6a3200a5c17c6b51946754425">277aad9</a> by phil65).</li>
@@ -6951,13 +6993,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01872-2021-11-18"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.187.2">v0.187.2</a> - 2021-11-18</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.187.1...v0.187.2">Compare with v0.187.1</a></small></p>
-<h3 id="bug-fixes_88">Bug Fixes</h3>
+<h3 id="bug-fixes_89">Bug Fixes</h3>
 <ul>
 <li>fix import for non-windows (<a href="https://github.com/phil65/PrettyQt/commit/c5739a29f1f7cf1efcd4f7201efde0aaca76c304">c5739a2</a> by phil65).</li>
 </ul>
 <h2 id="v01871-2021-11-18"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.187.1">v0.187.1</a> - 2021-11-18</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.187.0...v0.187.1">Compare with v0.187.0</a></small></p>
-<h3 id="bug-fixes_89">Bug Fixes</h3>
+<h3 id="bug-fixes_90">Bug Fixes</h3>
 <ul>
 <li>add FramelessWindow to <strong>init</strong>.py (<a href="https://github.com/phil65/PrettyQt/commit/cb2183aa42682abd670d028b09202284d2d88c3c">cb2183a</a> by phil65).</li>
 </ul>
@@ -6974,7 +7016,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add from_char method (<a href="https://github.com/phil65/PrettyQt/commit/e150ea1bf28c575d1e8c7def463b58791845a664">e150ea1</a> by phil65).</li>
 <li>add create_char method (<a href="https://github.com/phil65/PrettyQt/commit/e76b6f336527ccda12661e7f97e6d05104dcf322">e76b6f3</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_90">Bug Fixes</h3>
+<h3 id="bug-fixes_91">Bug Fixes</h3>
 <ul>
 <li>fix ProgressBarDelegate orientation for Qt6 (<a href="https://github.com/phil65/PrettyQt/commit/2c0bfd2b4db3f2adb8f485dc98c091cb5d78f882">2c0bfd2</a> by phil65).</li>
 </ul>
@@ -7001,7 +7043,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <ul>
 <li>add QT_VERSION var to qt module (<a href="https://github.com/phil65/PrettyQt/commit/398321d5f39ff61ac123e66e054352bc590ad2e1">398321d</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_91">Bug Fixes</h3>
+<h3 id="bug-fixes_92">Bug Fixes</h3>
 <ul>
 <li>dont shadow builtin libraries (<a href="https://github.com/phil65/PrettyQt/commit/6dc659a0472f39af0d336b2c148c6b66535597d5">6dc659a</a> by phil65).</li>
 </ul>
@@ -7036,7 +7078,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>Add MenuRecentFiles class (<a href="https://github.com/phil65/PrettyQt/commit/8b77de7a55a991fb604fdf174cba27ece47d13ef">8b77de7</a> by phil65).</li>
 <li>update iconsets (<a href="https://github.com/phil65/PrettyQt/commit/136cfdf9366250e5ead617a91a0a0211b32fe726">136cfdf</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_92">Bug Fixes</h3>
+<h3 id="bug-fixes_93">Bug Fixes</h3>
 <ul>
 <li>correctly convert EOL in <strong>str</strong> (<a href="https://github.com/phil65/PrettyQt/commit/eb9a351bcd3be484a3e8d65a9d25fbc5227a5bf9">eb9a351</a> by phil65).</li>
 <li>qt6 flag fix (<a href="https://github.com/phil65/PrettyQt/commit/9a04cd9fc4029ff5d019eea2c9350867ea3cbacf">9a04cd9</a> by phil65).</li>
@@ -7044,39 +7086,39 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01836-2021-10-25"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.183.6">v0.183.6</a> - 2021-10-25</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.183.5...v0.183.6">Compare with v0.183.5</a></small></p>
-<h3 id="bug-fixes_93">Bug Fixes</h3>
+<h3 id="bug-fixes_94">Bug Fixes</h3>
 <ul>
 <li>more qt compat stuff (<a href="https://github.com/phil65/PrettyQt/commit/5475c8b7eb09ef0f2f85b697c7ffdf1a320e7dbe">5475c8b</a> by phil65).</li>
 <li>generate docs on py3.9 (<a href="https://github.com/phil65/PrettyQt/commit/8a00ceda76b2eed6c0bd4d829700305e31a02f32">8a00ced</a> by phil65).</li>
 </ul>
 <h2 id="v01835-2021-10-12"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.183.5">v0.183.5</a> - 2021-10-12</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.183.4...v0.183.5">Compare with v0.183.4</a></small></p>
-<h3 id="bug-fixes_94">Bug Fixes</h3>
+<h3 id="bug-fixes_95">Bug Fixes</h3>
 <ul>
 <li>only test on 3.9 / macos10 (<a href="https://github.com/phil65/PrettyQt/commit/50be2fd803272fc8db80ab8cafa41e3b012cac5b">50be2fd</a> by phil65).</li>
 </ul>
 <h2 id="v01834-2021-10-12"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.183.4">v0.183.4</a> - 2021-10-12</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.183.3...v0.183.4">Compare with v0.183.3</a></small></p>
-<h3 id="bug-fixes_95">Bug Fixes</h3>
+<h3 id="bug-fixes_96">Bug Fixes</h3>
 <ul>
 <li>dont use poetry pre version (<a href="https://github.com/phil65/PrettyQt/commit/e8a822804efd87615b752c4d4f53d34fc5d76a99">e8a8228</a> by phil65).</li>
 </ul>
 <h2 id="v01833-2021-10-12"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.183.3">v0.183.3</a> - 2021-10-12</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.183.2...v0.183.3">Compare with v0.183.2</a></small></p>
-<h3 id="bug-fixes_96">Bug Fixes</h3>
+<h3 id="bug-fixes_97">Bug Fixes</h3>
 <ul>
 <li>qt6 compat (<a href="https://github.com/phil65/PrettyQt/commit/2c028c84f20fd9a932493d49192a4aa9906569e7">2c028c8</a> by phil65).</li>
 <li>some flag fixes (<a href="https://github.com/phil65/PrettyQt/commit/748297749571c8eeea22a2b4ca0013fc9e27ddac">7482977</a> by phil65).</li>
 </ul>
 <h2 id="v01832-2021-02-05"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.183.2">v0.183.2</a> - 2021-02-05</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.183.1...v0.183.2">Compare with v0.183.1</a></small></p>
-<h3 id="bug-fixes_97">Bug Fixes</h3>
+<h3 id="bug-fixes_98">Bug Fixes</h3>
 <ul>
 <li>another try to fix docs generation (<a href="https://github.com/phil65/PrettyQt/commit/eed673bb4f679a21b02d5d5d0c4e4f85724ebdd4">eed673b</a> by phil65).</li>
 </ul>
 <h2 id="v01831-2021-02-05"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.183.1">v0.183.1</a> - 2021-02-05</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.183.0...v0.183.1">Compare with v0.183.0</a></small></p>
-<h3 id="bug-fixes_98">Bug Fixes</h3>
+<h3 id="bug-fixes_99">Bug Fixes</h3>
 <ul>
 <li>fix docs generation (<a href="https://github.com/phil65/PrettyQt/commit/36521cb0b392bfad77e6fc82b28fc7e54433138f">36521cb</a> by phil65).</li>
 </ul>
@@ -7094,13 +7136,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add some signals (<a href="https://github.com/phil65/PrettyQt/commit/fcba974910cc2ce7f01ea38e165d6a9c4d58ef9b">fcba974</a> by phil65).</li>
 <li>add SvgWidget class (<a href="https://github.com/phil65/PrettyQt/commit/38a08c3f4121037cada961bf5b13bcc42f338b51">38a08c3</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_99">Bug Fixes</h3>
+<h3 id="bug-fixes_100">Bug Fixes</h3>
 <ul>
 <li>correctly keep state when using block_signals / updates_off context managers (<a href="https://github.com/phil65/PrettyQt/commit/828a3dfc8ed45c448a5799eecd5a9dfa9f05f201">828a3df</a> by phil65).</li>
 </ul>
 <h2 id="v01821-2021-01-26"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.182.1">v0.182.1</a> - 2021-01-26</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.182.0...v0.182.1">Compare with v0.182.0</a></small></p>
-<h3 id="bug-fixes_100">Bug Fixes</h3>
+<h3 id="bug-fixes_101">Bug Fixes</h3>
 <ul>
 <li>colors fix (<a href="https://github.com/phil65/PrettyQt/commit/a7ebec738ff9bba09f76bafb88b0caa4f27f807a">a7ebec7</a> by phil65).</li>
 </ul>
@@ -7158,7 +7200,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add get_qcolorshower/get_qcolorshowlabel methods (<a href="https://github.com/phil65/PrettyQt/commit/a1ee0d1b3d09a1a1c83238c0e5bbcc95aba74ded">a1ee0d1</a> by phil65).</li>
 <li>add set_tooltip method (<a href="https://github.com/phil65/PrettyQt/commit/a458a99f0c3a83f166a37f8e34d7cd0d43074cc1">a458a99</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_101">Bug Fixes</h3>
+<h3 id="bug-fixes_102">Bug Fixes</h3>
 <ul>
 <li>RegexInput flags fix (<a href="https://github.com/phil65/PrettyQt/commit/5e96cca45b5f69a00c957fe8ce12c7538d95c59d">5e96cca</a> by phil65).</li>
 <li>correctly disconnect model (<a href="https://github.com/phil65/PrettyQt/commit/4ebb476c83bfc775489b09055757a23bf1292c83">4ebb476</a> by phil65).</li>
@@ -7176,7 +7218,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01771-2021-01-13"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.177.1">v0.177.1</a> - 2021-01-13</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.177.0...v0.177.1">Compare with v0.177.0</a></small></p>
-<h3 id="bug-fixes_102">Bug Fixes</h3>
+<h3 id="bug-fixes_103">Bug Fixes</h3>
 <ul>
 <li>test fix (<a href="https://github.com/phil65/PrettyQt/commit/6227064bfd4624d1f6ef0797f8ad1fc24c2dd693">6227064</a> by phil65).</li>
 </ul>
@@ -7229,7 +7271,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add get/set_window_file_path methods (<a href="https://github.com/phil65/PrettyQt/commit/1c61f81011f7eb8902cee977da86336a645a8d0b">1c61f81</a> by phil65).</li>
 <li>add SplitterHandle class (<a href="https://github.com/phil65/PrettyQt/commit/4d80af8ec4a0486128246e07962f4bad31c45771">4d80af8</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_103">Bug Fixes</h3>
+<h3 id="bug-fixes_104">Bug Fixes</h3>
 <ul>
 <li>correct icon color for dark mode (<a href="https://github.com/phil65/PrettyQt/commit/57fb383100c369323edc185da88ec74272ee2b1f">57fb383</a> by phil65).</li>
 </ul>
@@ -7248,7 +7290,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01711-2021-01-07"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.171.1">v0.171.1</a> - 2021-01-07</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.171.0...v0.171.1">Compare with v0.171.0</a></small></p>
-<h3 id="bug-fixes_104">Bug Fixes</h3>
+<h3 id="bug-fixes_105">Bug Fixes</h3>
 <ul>
 <li>comment out some event constants (<a href="https://github.com/phil65/PrettyQt/commit/8ea517d235b6d9f180439cd7c5372f962a70cb21">8ea517d</a> by phil65).</li>
 </ul>
@@ -7265,7 +7307,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add draw_primitive method (<a href="https://github.com/phil65/PrettyQt/commit/b19ba94ab4d07856280fa137966f7bb8b5ae79aa">b19ba94</a> by phil65).</li>
 <li>add based_on method (<a href="https://github.com/phil65/PrettyQt/commit/97d8a66c0727545258f9aee6a623c3105467f8ab">97d8a66</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_105">Bug Fixes</h3>
+<h3 id="bug-fixes_106">Bug Fixes</h3>
 <ul>
 <li>use typing.get_type_hints (<a href="https://github.com/phil65/PrettyQt/commit/8d5ead43e00ef3b3dfe581422811c1dcf72994f5">8d5ead4</a> by phil65).</li>
 </ul>
@@ -7296,7 +7338,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add workaround for raising window (<a href="https://github.com/phil65/PrettyQt/commit/0824e46a36bcc2ba7d971b305b7273d4b9da9a5e">0824e46</a> by phil65).</li>
 <li>add LocalSocket class (<a href="https://github.com/phil65/PrettyQt/commit/5b2e9485a067cdc13a5b28846ba8302e889c1c8c">5b2e948</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_106">Bug Fixes</h3>
+<h3 id="bug-fixes_107">Bug Fixes</h3>
 <ul>
 <li>fix setting metadata (<a href="https://github.com/phil65/PrettyQt/commit/ce96b44bb59254d309dac8b5bd34d7a12181d696">ce96b44</a> by phil65).</li>
 </ul>
@@ -7320,7 +7362,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01661-2021-01-01"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.166.1">v0.166.1</a> - 2021-01-01</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.166.0...v0.166.1">Compare with v0.166.0</a></small></p>
-<h3 id="bug-fixes_107">Bug Fixes</h3>
+<h3 id="bug-fixes_108">Bug Fixes</h3>
 <ul>
 <li>localization fixups (<a href="https://github.com/phil65/PrettyQt/commit/0ab68749c9603e7c64ddad409d7783fbaed45c8e">0ab6874</a> by phil65).</li>
 </ul>
@@ -7349,7 +7391,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <ul>
 <li>add restart method (<a href="https://github.com/phil65/PrettyQt/commit/dff9924a15c2db5f60029ad6c51338eeb4dbc242">dff9924</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_108">Bug Fixes</h3>
+<h3 id="bug-fixes_109">Bug Fixes</h3>
 <ul>
 <li>make get_system_font a classmethod (<a href="https://github.com/phil65/PrettyQt/commit/51543a654ebfab9ee2df4c34aea573a5bd41f66d">51543a6</a> by phil65).</li>
 <li>ObjectBrowser signal fix for Qt6 (<a href="https://github.com/phil65/PrettyQt/commit/f5e2acf0fcd5c05aadad6f912822de1847be4aad">f5e2acf</a> by phil65).</li>
@@ -7363,7 +7405,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add <strong>hash</strong> method (<a href="https://github.com/phil65/PrettyQt/commit/7d9c131eb869f8458823ad6022e5272d6feadd23">7d9c131</a> by phil65).</li>
 <li>add optional md5 check for add_font (<a href="https://github.com/phil65/PrettyQt/commit/842daa3ae73ee5b41d447e1498335f8e2bd71605">842daa3</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_109">Bug Fixes</h3>
+<h3 id="bug-fixes_110">Bug Fixes</h3>
 <ul>
 <li>revert CharIconPainter paint method for now (<a href="https://github.com/phil65/PrettyQt/commit/e35c6cb7ce8ff079f3c9079df8b2ca8fe84d0b2a">e35c6cb</a> by phil65).</li>
 </ul>
@@ -7374,7 +7416,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add additional check in add_font (<a href="https://github.com/phil65/PrettyQt/commit/c8fad09eea3fb2f63ca16659106cc504d6e374d5">c8fad09</a> by phil65).</li>
 <li>add offset_by and apply_transform context managers (<a href="https://github.com/phil65/PrettyQt/commit/54a08f7a5bb5ef02defdbc550d95f5df7e8b3e6f">54a08f7</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_110">Bug Fixes</h3>
+<h3 id="bug-fixes_111">Bug Fixes</h3>
 <ul>
 <li>update when setting size (<a href="https://github.com/phil65/PrettyQt/commit/267eb7c8d6f23d731271848050c89373a52a2c63">267eb7c</a> by phil65).</li>
 </ul>
@@ -7387,7 +7429,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add edit_pen context manager (<a href="https://github.com/phil65/PrettyQt/commit/63222b4fa082b801ad1f01bdfe49ce260faadb16">63222b4</a> by phil65).</li>
 <li>alternative ctors for diamond / star creation (<a href="https://github.com/phil65/PrettyQt/commit/6f3d57a174abebe467b6c2b1f09e61bee15a7c8a">6f3d57a</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_111">Bug Fixes</h3>
+<h3 id="bug-fixes_112">Bug Fixes</h3>
 <ul>
 <li>call adjust_margins on correct object (<a href="https://github.com/phil65/PrettyQt/commit/b2c7d66264456ef24c3965cd399552d85799984b">b2c7d66</a> by phil65).</li>
 <li>correct IconProvider init (<a href="https://github.com/phil65/PrettyQt/commit/ff11624dd3f358364c9dbc3060c017243f5e5138">ff11624</a> by phil65).</li>
@@ -7418,7 +7460,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01571-2020-12-22"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.157.1">v0.157.1</a> - 2020-12-22</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.157.0...v0.157.1">Compare with v0.157.0</a></small></p>
-<h3 id="bug-fixes_112">Bug Fixes</h3>
+<h3 id="bug-fixes_113">Bug Fixes</h3>
 <ul>
 <li>SpanSlider fix (<a href="https://github.com/phil65/PrettyQt/commit/fc1c8e6b0c2d0d3efb742b89de355de4a4a2f74e">fc1c8e6</a> by phil65).</li>
 </ul>
@@ -7458,7 +7500,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add get/set_filter methods (<a href="https://github.com/phil65/PrettyQt/commit/49ce5b46233b878cb4bea17ef87ec372b47515d4">49ce5b4</a> by phil65).</li>
 <li>add get/set_input_mode and get/set_text_echo_mode methods (<a href="https://github.com/phil65/PrettyQt/commit/d03cda2286d29d352a0a462a6e4eb0ac32ee6a60">d03cda2</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_113">Bug Fixes</h3>
+<h3 id="bug-fixes_114">Bug Fixes</h3>
 <ul>
 <li>correct StarDelegate setModelData call (<a href="https://github.com/phil65/PrettyQt/commit/9015c4e2e1d77656db274ffadc83feed86855c3f">9015c4e</a> by phil65).</li>
 </ul>
@@ -7470,7 +7512,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01521-2020-12-17"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.152.1">v0.152.1</a> - 2020-12-17</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.152.0...v0.152.1">Compare with v0.152.0</a></small></p>
-<h3 id="bug-fixes_114">Bug Fixes</h3>
+<h3 id="bug-fixes_115">Bug Fixes</h3>
 <ul>
 <li>PySide2 workaround for non-recursive Object.findChild(ren) (<a href="https://github.com/phil65/PrettyQt/commit/155254fb921bea46998a0b923bf5a365b030a194">155254f</a> by phil65).</li>
 </ul>
@@ -7491,7 +7533,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add set_menu method (<a href="https://github.com/phil65/PrettyQt/commit/a3ac20b967e5e9d43f9b7f88566279c9de8664f8">a3ac20b</a> by phil65).</li>
 <li>add str method (<a href="https://github.com/phil65/PrettyQt/commit/adb058256c34f64141c56d7108cab92404394f81">adb0582</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_115">Bug Fixes</h3>
+<h3 id="bug-fixes_116">Bug Fixes</h3>
 <ul>
 <li>PySide2 find_child(ren) fix (<a href="https://github.com/phil65/PrettyQt/commit/3485f4cbcb07284b82dcc02568a6df498fca2e3a">3485f4c</a> by phil65).</li>
 </ul>
@@ -7517,7 +7559,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add set_text_alignment method (<a href="https://github.com/phil65/PrettyQt/commit/76114289ddc5f17e8c89248639cb27f20161910a">7611428</a> by phil65).</li>
 <li>add repr and some helper methods to gradient classes (<a href="https://github.com/phil65/PrettyQt/commit/28ae007d24a1007dc59070b34f82286743ca1414">28ae007</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_116">Bug Fixes</h3>
+<h3 id="bug-fixes_117">Bug Fixes</h3>
 <ul>
 <li>PySide2 workaround for missing recursive param in findChild(ren) (<a href="https://github.com/phil65/PrettyQt/commit/15b31ee57dd3082d42e9f2a5d9b295d305d447d5">15b31ee</a> by phil65).</li>
 <li>WebEngineHistory len fix for PySide2 (<a href="https://github.com/phil65/PrettyQt/commit/d5243417fafca57524367f6b38daaf0ab7c474d2">d524341</a> by phil65).</li>
@@ -7540,13 +7582,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01472-2020-12-13"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.147.2">v0.147.2</a> - 2020-12-13</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.147.1...v0.147.2">Compare with v0.147.1</a></small></p>
-<h3 id="bug-fixes_117">Bug Fixes</h3>
+<h3 id="bug-fixes_118">Bug Fixes</h3>
 <ul>
 <li>MacOs test fix (<a href="https://github.com/phil65/PrettyQt/commit/a5199330a09b72944b9c01182f23491c56bc1ba6">a519933</a> by phil65).</li>
 </ul>
 <h2 id="v01471-2020-12-13"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.147.1">v0.147.1</a> - 2020-12-13</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.147.0...v0.147.1">Compare with v0.147.0</a></small></p>
-<h3 id="bug-fixes_118">Bug Fixes</h3>
+<h3 id="bug-fixes_119">Bug Fixes</h3>
 <ul>
 <li>MacOs test fix (<a href="https://github.com/phil65/PrettyQt/commit/bd8a363546d65a68c4ab7da21e982163f5c72228">bd8a363</a> by phil65).</li>
 </ul>
@@ -7567,7 +7609,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add get(_line)_wrap_mode methods (<a href="https://github.com/phil65/PrettyQt/commit/13b084fff8d711db09e30a905ee9a1886b023412">13b084f</a> by phil65).</li>
 <li>add get_application_state method (<a href="https://github.com/phil65/PrettyQt/commit/65142f0e1816a625b96d6bdf6dee7b8c65e2213a">65142f0</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_119">Bug Fixes</h3>
+<h3 id="bug-fixes_120">Bug Fixes</h3>
 <ul>
 <li>correctly serialize AbstractGraphicsShapeItem (<a href="https://github.com/phil65/PrettyQt/commit/1d9eef3a6eac45ecab16ce82c4cfcf1dfc76dcaf">1d9eef3</a> by phil65).</li>
 </ul>
@@ -7589,7 +7631,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add brush methods (<a href="https://github.com/phil65/PrettyQt/commit/d37b89888d6da753ab5491210644ae91bc70932e">d37b898</a> by phil65).</li>
 <li>add ImportlibDistributionModel class (<a href="https://github.com/phil65/PrettyQt/commit/51cfc47097d31a720e5f6e3e118ac8cc9d58962b">51cfc47</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_120">Bug Fixes</h3>
+<h3 id="bug-fixes_121">Bug Fixes</h3>
 <ul>
 <li>serialize correctly (<a href="https://github.com/phil65/PrettyQt/commit/a37f93a6d669b13192bebbcb99bcb0c9c2b78d95">a37f93a</a> by phil65).</li>
 <li>use correct module in set_video/audio_settings (<a href="https://github.com/phil65/PrettyQt/commit/c958bcac5b0f4de24af018e5a95179ad3a69e464">c958bca</a> by phil65).</li>
@@ -7608,7 +7650,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add get_text_rect method (<a href="https://github.com/phil65/PrettyQt/commit/7dbb452bf22005a09c55bdc7e889d84c61b52142">7dbb452</a> by phil65).</li>
 <li>add add_item method (<a href="https://github.com/phil65/PrettyQt/commit/9312919b58580695ae275082b0f53f39a6ad22d7">9312919</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_121">Bug Fixes</h3>
+<h3 id="bug-fixes_122">Bug Fixes</h3>
 <ul>
 <li>iter through key-value pairs (<a href="https://github.com/phil65/PrettyQt/commit/499e39144ec5317a4a40b13d5fea9e4f8cbadead">499e391</a> by phil65).</li>
 <li>correct inheritance for QuickItem (<a href="https://github.com/phil65/PrettyQt/commit/41d33f1c3cac8f13f44a0b09d1284c46e7ce5bb5">41d33f1</a> by phil65).</li>
@@ -7620,13 +7662,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <ul>
 <li>implement <strong>eq</strong> method for some more validator classes (<a href="https://github.com/phil65/PrettyQt/commit/152801703576e1723208297c79eefb64985d228f">1528017</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_122">Bug Fixes</h3>
+<h3 id="bug-fixes_123">Bug Fixes</h3>
 <ul>
 <li>ObjectBrowser fix (<a href="https://github.com/phil65/PrettyQt/commit/348f55a0c0c6e1f21c007ba739cc8e6b1d567413">348f55a</a> by phil65).</li>
 </ul>
 <h2 id="v01421-2020-12-07"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.142.1">v0.142.1</a> - 2020-12-07</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.142.0...v0.142.1">Compare with v0.142.0</a></small></p>
-<h3 id="bug-fixes_123">Bug Fixes</h3>
+<h3 id="bug-fixes_124">Bug Fixes</h3>
 <ul>
 <li>use our own SizeF class (<a href="https://github.com/phil65/PrettyQt/commit/1d6a5c8dcb12ab829f0092326a776e2ba0eb4134">1d6a5c8</a> by phil65).</li>
 </ul>
@@ -7649,7 +7691,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add SocketNotifier class (<a href="https://github.com/phil65/PrettyQt/commit/21319de6a0ce8817f70bad58e9bca2edebb28881">21319de</a> by phil65).</li>
 <li>add Shortcut class (<a href="https://github.com/phil65/PrettyQt/commit/c2de715c0a9a889c4b4b04ba4511ed37b77d3700">c2de715</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_124">Bug Fixes</h3>
+<h3 id="bug-fixes_125">Bug Fixes</h3>
 <ul>
 <li>Correctly inherit StyleItemDelegate (<a href="https://github.com/phil65/PrettyQt/commit/3ec658b146a502e36e0707581e1e616d1ea4d519">3ec658b</a> by phil65).</li>
 </ul>
@@ -7659,31 +7701,31 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <ul>
 <li>add Collator(SortKey) classes (<a href="https://github.com/phil65/PrettyQt/commit/01ab5e8e56ad9705a02e35490bc77cebc8171033">01ab5e8</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_125">Bug Fixes</h3>
+<h3 id="bug-fixes_126">Bug Fixes</h3>
 <ul>
 <li>github actions fix (<a href="https://github.com/phil65/PrettyQt/commit/df4776d3050386a7fce11d33b311255cf4faf824">df4776d</a> by phil65).</li>
 </ul>
 <h2 id="v01404-2020-12-02"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.140.4">v0.140.4</a> - 2020-12-02</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.140.3...v0.140.4">Compare with v0.140.3</a></small></p>
-<h3 id="bug-fixes_126">Bug Fixes</h3>
+<h3 id="bug-fixes_127">Bug Fixes</h3>
 <ul>
 <li>docs build fix (<a href="https://github.com/phil65/PrettyQt/commit/a5f19c759ae17a11c2a64ae30a1f75a6f781503c">a5f19c7</a> by phil65).</li>
 </ul>
 <h2 id="v01403-2020-12-02"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.140.3">v0.140.3</a> - 2020-12-02</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.140.2...v0.140.3">Compare with v0.140.2</a></small></p>
-<h3 id="bug-fixes_127">Bug Fixes</h3>
+<h3 id="bug-fixes_128">Bug Fixes</h3>
 <ul>
 <li>docs deployment (<a href="https://github.com/phil65/PrettyQt/commit/cf8754518481be8394ac763b04f7b339a42570de">cf87545</a> by phil65).</li>
 </ul>
 <h2 id="v01402-2020-12-02"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.140.2">v0.140.2</a> - 2020-12-02</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.140.1...v0.140.2">Compare with v0.140.1</a></small></p>
-<h3 id="bug-fixes_128">Bug Fixes</h3>
+<h3 id="bug-fixes_129">Bug Fixes</h3>
 <ul>
 <li>deploy check for github actions (<a href="https://github.com/phil65/PrettyQt/commit/74f3c0ea180a3692d9584de6383cfe86a7bd8dc8">74f3c0e</a> by phil65).</li>
 </ul>
 <h2 id="v01401-2020-12-02"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.140.1">v0.140.1</a> - 2020-12-02</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.140.0...v0.140.1">Compare with v0.140.0</a></small></p>
-<h3 id="bug-fixes_129">Bug Fixes</h3>
+<h3 id="bug-fixes_130">Bug Fixes</h3>
 <ul>
 <li>github actions: conditional deploy step (<a href="https://github.com/phil65/PrettyQt/commit/768ac544d3da70a205e1c32917011a33ad840ca5">768ac54</a> by phil65).</li>
 </ul>
@@ -7748,7 +7790,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01371-2020-11-27"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.137.1">v0.137.1</a> - 2020-11-27</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.137.0...v0.137.1">Compare with v0.137.0</a></small></p>
-<h3 id="bug-fixes_130">Bug Fixes</h3>
+<h3 id="bug-fixes_131">Bug Fixes</h3>
 <ul>
 <li>doc build fix (<a href="https://github.com/phil65/PrettyQt/commit/e4ed118a5be650c0bc634e54b780753f88bed2d8">e4ed118</a> by phil65).</li>
 </ul>
@@ -7779,7 +7821,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add clone_from method to reply classes (<a href="https://github.com/phil65/PrettyQt/commit/553e7343569222690812ec284fd0dca07422dc82">553e734</a> by phil65).</li>
 <li>add has_id method (<a href="https://github.com/phil65/PrettyQt/commit/55044c071727782450f953ec9b6d50d02d8ba931">55044c0</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_131">Bug Fixes</h3>
+<h3 id="bug-fixes_132">Bug Fixes</h3>
 <ul>
 <li>emit inputandslider signal correctly on value change (<a href="https://github.com/phil65/PrettyQt/commit/e7bd3ac8f387ee721b0524a3c8e6c7bda28535b6">e7bd3ac</a> by phil65).</li>
 <li>correct flag for constants.NO_CHILDREN (<a href="https://github.com/phil65/PrettyQt/commit/298ddfdc2da568d57a0b5e08d9ac70f961be3b4c">298ddfd</a> by phil65).</li>
@@ -7809,7 +7851,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add ItemSelection class (<a href="https://github.com/phil65/PrettyQt/commit/5935bb97cb3792c393d040df48953996ac27c346">5935bb9</a> by phil65).</li>
 <li>add set_margin method (<a href="https://github.com/phil65/PrettyQt/commit/543305f3dfff161b6d9c294a79a08981edda3149">543305f</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_132">Bug Fixes</h3>
+<h3 id="bug-fixes_133">Bug Fixes</h3>
 <ul>
 <li>correctly add items for GraphicsGridLayout (<a href="https://github.com/phil65/PrettyQt/commit/3fc5fc693ffcdedb3e17de9f076188186ceec479">3fc5fc6</a> by phil65).</li>
 </ul>
@@ -7836,14 +7878,14 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>some more methods (<a href="https://github.com/phil65/PrettyQt/commit/45fbe5d84a82ee2bb6aff05e1bfa835c14ace5af">45fbe5d</a> by phil65).</li>
 <li>add backup_state contextmanager (<a href="https://github.com/phil65/PrettyQt/commit/5923b47b36a7851f49474ec8699654a2d0574b2f">5923b47</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_133">Bug Fixes</h3>
+<h3 id="bug-fixes_134">Bug Fixes</h3>
 <ul>
 <li>correct repr (<a href="https://github.com/phil65/PrettyQt/commit/46d5fab2e21c982ca31ed5afccd91b50ea7bb154">46d5fab</a> by phil65).</li>
 <li>correct coloring for WaitingSpinner (<a href="https://github.com/phil65/PrettyQt/commit/184f4f20baa22266f655064480d3492a59dd7e0d">184f4f2</a> by phil65).</li>
 </ul>
 <h2 id="v01331-2020-11-16"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.133.1">v0.133.1</a> - 2020-11-16</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.133.0...v0.133.1">Compare with v0.133.0</a></small></p>
-<h3 id="bug-fixes_134">Bug Fixes</h3>
+<h3 id="bug-fixes_135">Bug Fixes</h3>
 <ul>
 <li>test fix (<a href="https://github.com/phil65/PrettyQt/commit/680c6449a7bb1721a05a05a888493a342400f738">680c644</a> by phil65).</li>
 </ul>
@@ -7865,7 +7907,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01321-2020-11-07"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.132.1">v0.132.1</a> - 2020-11-07</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.132.0...v0.132.1">Compare with v0.132.0</a></small></p>
-<h3 id="bug-fixes_135">Bug Fixes</h3>
+<h3 id="bug-fixes_136">Bug Fixes</h3>
 <ul>
 <li>import fix (<a href="https://github.com/phil65/PrettyQt/commit/6774ca07c2f0c9b49bbb677122d55b55c0957f1a">6774ca0</a> by phil65).</li>
 </ul>
@@ -7931,14 +7973,14 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add Axis-related classes (<a href="https://github.com/phil65/PrettyQt/commit/b348be9f1d6df7183b1a770ecf93d6cad151dc9f">b348be9</a> by phil65).</li>
 <li>add BarSeries-related classes (<a href="https://github.com/phil65/PrettyQt/commit/8f5fbd2fefa13db40df677b6d40f339a64aafc05">8f5fbd2</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_136">Bug Fixes</h3>
+<h3 id="bug-fixes_137">Bug Fixes</h3>
 <ul>
 <li>fix tests (<a href="https://github.com/phil65/PrettyQt/commit/ae6c5ebb9649fcc0f374b0750052cec76fd983d1">ae6c5eb</a> by phil65).</li>
 <li>fix multimedia tests for Travis (<a href="https://github.com/phil65/PrettyQt/commit/b404469c42432f83e94a4e090c25c69f064e09ad">b404469</a> by phil65).</li>
 </ul>
 <h2 id="v01281-2020-10-25"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.128.1">v0.128.1</a> - 2020-10-25</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.128.0...v0.128.1">Compare with v0.128.0</a></small></p>
-<h3 id="bug-fixes_137">Bug Fixes</h3>
+<h3 id="bug-fixes_138">Bug Fixes</h3>
 <ul>
 <li>import fix (<a href="https://github.com/phil65/PrettyQt/commit/333f692f945a9c4952771cc0480f14ccf504d4d0">333f692</a> by phil65).</li>
 </ul>
@@ -7958,13 +8000,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add Margins class (<a href="https://github.com/phil65/PrettyQt/commit/5f880b87bd2e611dd113370091cc5b36e107b115">5f880b8</a> by phil65).</li>
 <li>add some more modules (<a href="https://github.com/phil65/PrettyQt/commit/ec21b0c71dd0724eba5274ea6ff7645cba1fccbe">ec21b0c</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_138">Bug Fixes</h3>
+<h3 id="bug-fixes_139">Bug Fixes</h3>
 <ul>
 <li>properly inherit from GraphicsWidget (<a href="https://github.com/phil65/PrettyQt/commit/8e1bda80639b273e636e7a297d1cc9c2988787ce">8e1bda8</a> by phil65).</li>
 </ul>
 <h2 id="v01271-2020-10-20"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.127.1">v0.127.1</a> - 2020-10-20</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.127.0...v0.127.1">Compare with v0.127.0</a></small></p>
-<h3 id="bug-fixes_139">Bug Fixes</h3>
+<h3 id="bug-fixes_140">Bug Fixes</h3>
 <ul>
 <li>fix tests (<a href="https://github.com/phil65/PrettyQt/commit/0fcfea44862bfad01f6abd7aa7a63badbeaf829d">0fcfea4</a> by phil65).</li>
 </ul>
@@ -7989,7 +8031,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add get/is_effect_enabled methods (<a href="https://github.com/phil65/PrettyQt/commit/fb2f0b6e41225dfee13383cd74075254af5a4ddf">fb2f0b6</a> by phil65).</li>
 <li>add Player class (<a href="https://github.com/phil65/PrettyQt/commit/0f73c2a4bc017f09731b54745ceaf07cd45a2837">0f73c2a</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_140">Bug Fixes</h3>
+<h3 id="bug-fixes_141">Bug Fixes</h3>
 <ul>
 <li>always import correct bindings for winextras module (<a href="https://github.com/phil65/PrettyQt/commit/e8fc9ad0e03711a64568aa85b83f8b34568d8b74">e8fc9ad</a> by phil65).</li>
 <li>allow initializing without arg (<a href="https://github.com/phil65/PrettyQt/commit/c727c7c5b5f72c6b2d86869fe2b5b50fb26d2af9">c727c7c</a> by phil65).</li>
@@ -8007,7 +8049,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01251-2020-10-06"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.125.1">v0.125.1</a> - 2020-10-06</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.125.0...v0.125.1">Compare with v0.125.0</a></small></p>
-<h3 id="bug-fixes_141">Bug Fixes</h3>
+<h3 id="bug-fixes_142">Bug Fixes</h3>
 <ul>
 <li>import fix (<a href="https://github.com/phil65/PrettyQt/commit/c3bf74c5975c03b0d8b0d4bc96b0c7b37b9363bb">c3bf74c</a> by phil65).</li>
 </ul>
@@ -8018,7 +8060,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add Transition classes (<a href="https://github.com/phil65/PrettyQt/commit/61f7b0f4f52190865162fd8f4a13622ca6160e2c">61f7b0f</a> by phil65).</li>
 <li>add Transition classes (<a href="https://github.com/phil65/PrettyQt/commit/fc2aee5d1ed789528d3b03c439ccf86e733a1a9a">fc2aee5</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_142">Bug Fixes</h3>
+<h3 id="bug-fixes_143">Bug Fixes</h3>
 <ul>
 <li>fix Action.get_shortcut for NoneValue (<a href="https://github.com/phil65/PrettyQt/commit/0b6fe134b7cf84bd1c99291e88c96c3c947aef0a">0b6fe13</a> by phil65).</li>
 </ul>
@@ -8039,7 +8081,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01231-2020-09-29"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.123.1">v0.123.1</a> - 2020-09-29</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.123.0...v0.123.1">Compare with v0.123.0</a></small></p>
-<h3 id="bug-fixes_143">Bug Fixes</h3>
+<h3 id="bug-fixes_144">Bug Fixes</h3>
 <ul>
 <li>add missing State import in core module (<a href="https://github.com/phil65/PrettyQt/commit/7b5b2d985b78eee4ad5b4d0c3caf2e3d30e4144a">7b5b2d9</a> by phil65).</li>
 </ul>
@@ -8059,7 +8101,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01221-2020-09-27"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.122.1">v0.122.1</a> - 2020-09-27</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.122.0...v0.122.1">Compare with v0.122.0</a></small></p>
-<h3 id="bug-fixes_144">Bug Fixes</h3>
+<h3 id="bug-fixes_145">Bug Fixes</h3>
 <ul>
 <li>use correct icon names (<a href="https://github.com/phil65/PrettyQt/commit/6c4334d541a49f779bc50b1adf0a2acb39d43579">6c4334d</a> by phil65).</li>
 </ul>
@@ -8091,7 +8133,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add <strong>reversed</strong> and <strong>abs</strong> methods (<a href="https://github.com/phil65/PrettyQt/commit/f04dfd7d906820983659ad9445e32a72dd050462">f04dfd7</a> by phil65).</li>
 <li>add get/set_item_index_method method (<a href="https://github.com/phil65/PrettyQt/commit/54635e056cf3d67df991afd7ba598b227ce6c400">54635e0</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_145">Bug Fixes</h3>
+<h3 id="bug-fixes_146">Bug Fixes</h3>
 <ul>
 <li>serialization fixes (<a href="https://github.com/phil65/PrettyQt/commit/579795a43dc75eabd3906e802f7a085b087a751e">579795a</a> by phil65).</li>
 </ul>
@@ -8118,7 +8160,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01191-2020-08-23"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.119.1">v0.119.1</a> - 2020-08-23</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.119.0...v0.119.1">Compare with v0.119.0</a></small></p>
-<h3 id="bug-fixes_146">Bug Fixes</h3>
+<h3 id="bug-fixes_147">Bug Fixes</h3>
 <ul>
 <li>add missing StyleOptionComplex class (<a href="https://github.com/phil65/PrettyQt/commit/0b7a41724f342c5d9d29ac3ba6f7ad19a8f35ddf">0b7a417</a> by phil65).</li>
 </ul>
@@ -8136,20 +8178,20 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add Blur/Colorize/DropShadowEffect (<a href="https://github.com/phil65/PrettyQt/commit/cac6a9f9b632dd4e441439769dd80c0abf3fcaf8">cac6a9f</a> by phil65).</li>
 <li>add <strong>getitem</strong> and <strong>setitem</strong> methods (<a href="https://github.com/phil65/PrettyQt/commit/98333e6fac0d2598bf4ae9e02aab786a8279ac4d">98333e6</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_147">Bug Fixes</h3>
+<h3 id="bug-fixes_148">Bug Fixes</h3>
 <ul>
 <li>Graphicsitem collides methods fix (<a href="https://github.com/phil65/PrettyQt/commit/4e0c5949976113c5758eba23928623ca0e3b589b">4e0c594</a> by phil65).</li>
 <li>pickling (<a href="https://github.com/phil65/PrettyQt/commit/3aac19bd1c966a9e9d9778d425612f0b2448de0b">3aac19b</a> by phil65).</li>
 </ul>
 <h2 id="v01182-2020-08-17"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.118.2">v0.118.2</a> - 2020-08-17</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.118.1...v0.118.2">Compare with v0.118.1</a></small></p>
-<h3 id="bug-fixes_148">Bug Fixes</h3>
+<h3 id="bug-fixes_149">Bug Fixes</h3>
 <ul>
 <li>Fix tests (<a href="https://github.com/phil65/PrettyQt/commit/be6da504c9294d516549740e501ca8b8f617cf74">be6da50</a> by phil65).</li>
 </ul>
 <h2 id="v01181-2020-08-17"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.118.1">v0.118.1</a> - 2020-08-17</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.118.0...v0.118.1">Compare with v0.118.0</a></small></p>
-<h3 id="bug-fixes_149">Bug Fixes</h3>
+<h3 id="bug-fixes_150">Bug Fixes</h3>
 <ul>
 <li>fix add method (<a href="https://github.com/phil65/PrettyQt/commit/9450662c9a8f716d0f2b6385766649eed1012d41">9450662</a> by phil65).</li>
 </ul>
@@ -8213,13 +8255,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add add_rect method (<a href="https://github.com/phil65/PrettyQt/commit/761869bc80cf3a88774c12d0458a0da891352bf4">761869b</a> by phil65).</li>
 <li>add <strong>class_getitem</strong> (<a href="https://github.com/phil65/PrettyQt/commit/a784e4cf45e4ef7da6e7426bee8b1b75b7c47c89">a784e4c</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_150">Bug Fixes</h3>
+<h3 id="bug-fixes_151">Bug Fixes</h3>
 <ul>
 <li>correctly initialize dialog (<a href="https://github.com/phil65/PrettyQt/commit/fca10fc92fa20c2a4388979c1a81c1497fdb3cb8">fca10fc</a> by phil65).</li>
 </ul>
 <h2 id="v01141-2020-08-12"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.114.1">v0.114.1</a> - 2020-08-12</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.114.0...v0.114.1">Compare with v0.114.0</a></small></p>
-<h3 id="bug-fixes_151">Bug Fixes</h3>
+<h3 id="bug-fixes_152">Bug Fixes</h3>
 <ul>
 <li>fix saving state (<a href="https://github.com/phil65/PrettyQt/commit/3d24798d8c593d047770b53ffdd2f3a9ba2c5fae">3d24798</a> by phil65).</li>
 </ul>
@@ -8268,7 +8310,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add get_icon method (<a href="https://github.com/phil65/PrettyQt/commit/839aa3f9797d2ecf9b1b9b01d1462a826c198259">839aa3f</a> by phil65).</li>
 <li>add show_exception method (<a href="https://github.com/phil65/PrettyQt/commit/30a5ba89213b73623f9363ece9735e40eed2303b">30a5ba8</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_152">Bug Fixes</h3>
+<h3 id="bug-fixes_153">Bug Fixes</h3>
 <ul>
 <li>another test fix (<a href="https://github.com/phil65/PrettyQt/commit/76886a2d06a4ce2dda751acf32c01632c6d7da55">76886a2</a> by phil65).</li>
 </ul>
@@ -8278,7 +8320,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01111-2020-08-03"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.111.1">v0.111.1</a> - 2020-08-03</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.111.0...v0.111.1">Compare with v0.111.0</a></small></p>
-<h3 id="bug-fixes_153">Bug Fixes</h3>
+<h3 id="bug-fixes_154">Bug Fixes</h3>
 <ul>
 <li>fix tests for Linux (<a href="https://github.com/phil65/PrettyQt/commit/68d3626d37197b993048998c87dc0899e50c8fd5">68d3626</a> by phil65).</li>
 </ul>
@@ -8291,7 +8333,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>some more ctor kwargs (<a href="https://github.com/phil65/PrettyQt/commit/c8f3834b76c83f7b3413865eae3f9229f9806c18">c8f3834</a> by phil65).</li>
 <li>add get/set_menu_role methods, some pickle work (<a href="https://github.com/phil65/PrettyQt/commit/c0f44dc1f242d453616cad526ba21171fc0c7832">c0f44dc</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_154">Bug Fixes</h3>
+<h3 id="bug-fixes_155">Bug Fixes</h3>
 <ul>
 <li>disable separator widgetAction (<a href="https://github.com/phil65/PrettyQt/commit/72a2480ecc3cdd70085c11b3e141466c39a9dcbe">72a2480</a> by phil65).</li>
 </ul>
@@ -8301,13 +8343,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01102-2020-08-02"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.110.2">v0.110.2</a> - 2020-08-02</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.110.1...v0.110.2">Compare with v0.110.1</a></small></p>
-<h3 id="bug-fixes_155">Bug Fixes</h3>
+<h3 id="bug-fixes_156">Bug Fixes</h3>
 <ul>
 <li>fix broken LogTextEdit (<a href="https://github.com/phil65/PrettyQt/commit/ce9a8528f46b75761c6bfeae0f0e64196340efa5">ce9a852</a> by phil65).</li>
 </ul>
 <h2 id="v01101-2020-08-02"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.110.1">v0.110.1</a> - 2020-08-02</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.110.0...v0.110.1">Compare with v0.110.0</a></small></p>
-<h3 id="bug-fixes_156">Bug Fixes</h3>
+<h3 id="bug-fixes_157">Bug Fixes</h3>
 <ul>
 <li>improve exception handling (<a href="https://github.com/phil65/PrettyQt/commit/2b6e0ee6a0d874e144e97c53ce9cbdbdbedc9c20">2b6e0ee</a> by phil65).</li>
 <li>some fixes related to set_marker (<a href="https://github.com/phil65/PrettyQt/commit/b2839c3b4dfa5739a60b60e825fa437267972836">b2839c3</a> by phil65).</li>
@@ -8360,7 +8402,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01061-2020-07-29"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.106.1">v0.106.1</a> - 2020-07-29</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.106.0...v0.106.1">Compare with v0.106.0</a></small></p>
-<h3 id="bug-fixes_157">Bug Fixes</h3>
+<h3 id="bug-fixes_158">Bug Fixes</h3>
 <ul>
 <li>correctly close detached tabs on app close (<a href="https://github.com/phil65/PrettyQt/commit/a3c491eecc785585a7dd6550ed9e3fd9edc4b157">a3c491e</a> by phil65).</li>
 <li>pickle fixes for toolbar and dockwidget (<a href="https://github.com/phil65/PrettyQt/commit/04998deb4a744ae6d87d00ce24904c544f777aa6">04998de</a> by phil65).</li>
@@ -8383,7 +8425,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>sort_by_column for tableview and treeview (<a href="https://github.com/phil65/PrettyQt/commit/9d093f7af412345a32529b918cff674ea44a8a39">9d093f7</a> by phil65).</li>
 <li>dict-setter and getter for encodersettings (<a href="https://github.com/phil65/PrettyQt/commit/3a7542fde3c52edeba361ab3c7c0e094fb348693">3a7542f</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_158">Bug Fixes</h3>
+<h3 id="bug-fixes_159">Bug Fixes</h3>
 <ul>
 <li>use PrimaryScreen geometry instead of screens[0] for positioning (<a href="https://github.com/phil65/PrettyQt/commit/bd8eb5865938d9c0d23bc16fad4f3a100c90893c">bd8eb58</a> by phil65).</li>
 </ul>
@@ -8430,7 +8472,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v01011-2020-07-20"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.101.1">v0.101.1</a> - 2020-07-20</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.101.0...v0.101.1">Compare with v0.101.0</a></small></p>
-<h3 id="bug-fixes_159">Bug Fixes</h3>
+<h3 id="bug-fixes_160">Bug Fixes</h3>
 <ul>
 <li>better integrate with custom qstylesheets (<a href="https://github.com/phil65/PrettyQt/commit/3ab55135b11932ad6e978bf3eed853d61ccbf47c">3ab5513</a> by phil65).</li>
 </ul>
@@ -8440,7 +8482,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <ul>
 <li>add detail_text keyword argument to message method (<a href="https://github.com/phil65/PrettyQt/commit/4e676f70ab89c17b6b6937b43b60029662905715">4e676f7</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_160">Bug Fixes</h3>
+<h3 id="bug-fixes_161">Bug Fixes</h3>
 <ul>
 <li>correct return type for gui.icon.get_icon (<a href="https://github.com/phil65/PrettyQt/commit/1f9999b880b7a980110eb53b129babb5631a8e22">1f9999b</a> by phil65).</li>
 </ul>
@@ -8476,7 +8518,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v0984-2020-07-15"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.98.4">v0.98.4</a> - 2020-07-15</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.98.3...v0.98.4">Compare with v0.98.3</a></small></p>
-<h3 id="bug-fixes_161">Bug Fixes</h3>
+<h3 id="bug-fixes_162">Bug Fixes</h3>
 <ul>
 <li>use qta default icon color instead of black for default (<a href="https://github.com/phil65/PrettyQt/commit/7b95ffb7aa0b95e3010739b362bfaa8dfb95f260">7b95ffb</a> by phil65).</li>
 </ul>
@@ -8490,13 +8532,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v0982-2020-07-15"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.98.2">v0.98.2</a> - 2020-07-15</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.98.1...v0.98.2">Compare with v0.98.1</a></small></p>
-<h3 id="bug-fixes_162">Bug Fixes</h3>
+<h3 id="bug-fixes_163">Bug Fixes</h3>
 <ul>
 <li>package name (<a href="https://github.com/phil65/PrettyQt/commit/06178fae9bfa2b4d4b561d771fb646566b4e99bd">06178fa</a> by phil65).</li>
 </ul>
 <h2 id="v0981-2020-07-15"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.98.1">v0.98.1</a> - 2020-07-15</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.98.0...v0.98.1">Compare with v0.98.0</a></small></p>
-<h3 id="bug-fixes_163">Bug Fixes</h3>
+<h3 id="bug-fixes_164">Bug Fixes</h3>
 <ul>
 <li>correctly reset stylesheet for widget validation background (<a href="https://github.com/phil65/PrettyQt/commit/192e103632a8dfce58b151e807d50bc685f1759a">192e103</a> by phil65).</li>
 </ul>
@@ -8566,7 +8608,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v0921-2020-07-14"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.92.1">v0.92.1</a> - 2020-07-14</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.92.0...v0.92.1">Compare with v0.92.0</a></small></p>
-<h3 id="bug-fixes_164">Bug Fixes</h3>
+<h3 id="bug-fixes_165">Bug Fixes</h3>
 <ul>
 <li>winextras test fix (<a href="https://github.com/phil65/PrettyQt/commit/5544ab4a888a9bf76c7e321c88c7cb71f6468638">5544ab4</a> by phil65).</li>
 </ul>
@@ -8606,7 +8648,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v0881-2020-07-13"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.88.1">v0.88.1</a> - 2020-07-13</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.88.0...v0.88.1">Compare with v0.88.0</a></small></p>
-<h3 id="bug-fixes_165">Bug Fixes</h3>
+<h3 id="bug-fixes_166">Bug Fixes</h3>
 <ul>
 <li>fix add_items method (<a href="https://github.com/phil65/PrettyQt/commit/bf79ad64dc4c91e4e70d0f8e6c3df90a2790e8fc">bf79ad6</a> by phil65).</li>
 </ul>
@@ -8634,13 +8676,13 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v0862-2020-07-12"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.86.2">v0.86.2</a> - 2020-07-12</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.86.1...v0.86.2">Compare with v0.86.1</a></small></p>
-<h3 id="bug-fixes_166">Bug Fixes</h3>
+<h3 id="bug-fixes_167">Bug Fixes</h3>
 <ul>
 <li>another deployment fix (<a href="https://github.com/phil65/PrettyQt/commit/58265d0b82da94cd3f440fd965cca3ed84659e49">58265d0</a> by phil65).</li>
 </ul>
 <h2 id="v0861-2020-07-12"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.86.1">v0.86.1</a> - 2020-07-12</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.86.0...v0.86.1">Compare with v0.86.0</a></small></p>
-<h3 id="bug-fixes_167">Bug Fixes</h3>
+<h3 id="bug-fixes_168">Bug Fixes</h3>
 <ul>
 <li>deployment fix (<a href="https://github.com/phil65/PrettyQt/commit/c67790e6f8b27227be5d068e0fd6c88a16589e53">c67790e</a> by phil65).</li>
 </ul>
@@ -8653,7 +8695,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v0851-2020-07-10"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.85.1">v0.85.1</a> - 2020-07-10</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.85.0...v0.85.1">Compare with v0.85.0</a></small></p>
-<h3 id="bug-fixes_168">Bug Fixes</h3>
+<h3 id="bug-fixes_169">Bug Fixes</h3>
 <ul>
 <li>add missing pygments requirement (<a href="https://github.com/phil65/PrettyQt/commit/b666f36eacbfdbc6be23a1ba956561bc1b34fdf2">b666f36</a> by phil65).</li>
 </ul>
@@ -8708,7 +8750,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v0801-2020-07-08"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.80.1">v0.80.1</a> - 2020-07-08</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.80.0...v0.80.1">Compare with v0.80.0</a></small></p>
-<h3 id="bug-fixes_169">Bug Fixes</h3>
+<h3 id="bug-fixes_170">Bug Fixes</h3>
 <ul>
 <li>Settings.value() returned wrong type (<a href="https://github.com/phil65/PrettyQt/commit/af4c34bb74c8f91dc233efe3138326aed78c89a9">af4c34b</a> by phil65).</li>
 </ul>
@@ -8721,7 +8763,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 </ul>
 <h2 id="v0791-2020-07-08"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.79.1">v0.79.1</a> - 2020-07-08</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/v0.79.0...v0.79.1">Compare with v0.79.0</a></small></p>
-<h3 id="bug-fixes_170">Bug Fixes</h3>
+<h3 id="bug-fixes_171">Bug Fixes</h3>
 <ul>
 <li>remove Qt logger on Application exit (<a href="https://github.com/phil65/PrettyQt/commit/21a0c4ba504c2f9d13fc0d9fce972db19119b418">21a0c4b</a> by phil65).</li>
 </ul>
@@ -8737,14 +8779,14 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <ul>
 <li>allow to save/load window state recursively. Saving needs to be done explicitely now. (<a href="https://github.com/phil65/PrettyQt/commit/0fc39d5726b8d30a32281db3b6e113ab6bee0385">0fc39d5</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_171">Bug Fixes</h3>
+<h3 id="bug-fixes_172">Bug Fixes</h3>
 <ul>
 <li>some fixes for core.Settings dict interface (<a href="https://github.com/phil65/PrettyQt/commit/fdf1c18df6f7cf95167a3b34c2aa8e6dbe19d389">fdf1c18</a> by phil65).</li>
 <li>properly preserve types in core.Settings (<a href="https://github.com/phil65/PrettyQt/commit/8d259883c2af4bdc23502884820d68363059f0d5">8d25988</a> by phil65).</li>
 </ul>
 <h2 id="v0771-2020-07-07"><a href="https://github.com/phil65/PrettyQt/releases/tag/v0.77.1">v0.77.1</a> - 2020-07-07</h2>
 <p><small><a href="https://github.com/phil65/PrettyQt/compare/0.77.0...v0.77.1">Compare with 0.77.0</a></small></p>
-<h3 id="bug-fixes_172">Bug Fixes</h3>
+<h3 id="bug-fixes_173">Bug Fixes</h3>
 <ul>
 <li>return correct types for re.groupdict / re.groups (<a href="https://github.com/phil65/PrettyQt/commit/77da71a3217f7e129b9f3a1beefb072587cb697f">77da71a</a> by phil65).</li>
 <li>Fixed an issue which prevented saving an image from chartview (<a href="https://github.com/phil65/PrettyQt/commit/e842690982fda7830f63b0a2c3d62aa9a58979a2">e842690</a> by phil65).</li>
@@ -8765,7 +8807,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
 <li>add regexinput (<a href="https://github.com/phil65/PrettyQt/commit/9ba3c1afcae982640bbff26ad52f5b26e1e05e1d">9ba3c1a</a> by phil65).</li>
 <li>add pre-commit-hook for commit messages (<a href="https://github.com/phil65/PrettyQt/commit/2834ad89c573b831edd99aa59655e4a476338a9d">2834ad8</a> by phil65).</li>
 </ul>
-<h3 id="bug-fixes_173">Bug Fixes</h3>
+<h3 id="bug-fixes_174">Bug Fixes</h3>
 <ul>
 <li>fix Messagebox.message call (<a href="https://github.com/phil65/PrettyQt/commit/19c7bd131e149873a87fb29b4905dc22a2fde01c">19c7bd1</a> by phil65).</li>
 </ul>
@@ -8892,7 +8934,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../Additional%20modules/validators/RegexPatternValidator/" class="md-footer__link md-footer__link--prev" aria-label="Previous: RegexPatternValidator" rel="prev">
+          <a href="../../Additional%20modules/validators/AlphaNumericValidator/" class="md-footer__link md-footer__link--prev" aria-label="Previous: AlphaNumericValidator" rel="prev">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -8902,7 +8944,7 @@ and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semanti
                 Previous
               </span>
               <div class="md-ellipsis">
-                RegexPatternValidator
+                AlphaNumericValidator
               </div>
             </div>
           </a>

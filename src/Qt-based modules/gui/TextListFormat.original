@@ -1,0 +1,37 @@
+Qt Base Class: [QTextListFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextListFormat.html#PySide6.QtGui.PySide6.QtGui.QTextListFormat)
+
+Signature: `QTextListFormat(self) -> None
+QTextListFormat(self, QTextListFormat: PySide6.QtGui.QTextListFormat) -> None
+QTextListFormat(self, fmt: PySide6.QtGui.QTextFormat) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                    | Children                                                                                                                                                                                                                                              | Inherits                                                                                                                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[TextFormatMixin](TextFormatMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.textformat</font>*<br>                                                                                                                  | <ul><li>[TextFormat](TextFormat.md)</li><li>[TextFrameFormatMixin](TextFrameFormatMixin.md)</li><li>[TextBlockFormat](TextBlockFormat.md)</li><li>[TextCharFormatMixin](TextCharFormatMixin.md)</li><li>[TextListFormat](TextListFormat.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                   |
+| **<font size='4'>[QTextListFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextListFormat.html#PySide6.QtGui.PySide6.QtGui.QTextListFormat)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QTextListFormat\(self\) \-\> None | <ul><li>[TextListFormat](TextListFormat.md)</li></ul>                                                                                                                                                                                                 | <ul><li>[QTextFormat](https://doc.qt.io/qtforpython/PySide6/QtGui/QTextFormat.html#PySide6.QtGui.PySide6.QtGui.QTextFormat)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245666576["gui.TextListFormat"]
+  1473245646080["gui.TextFormatMixin"]
+  140713234304496["builtins.object"]
+  1473299710592["QtGui.QTextListFormat"]
+  1473299700832["QtGui.QTextFormat"]
+  1473291690208["Shiboken.Object"]
+  1473245646080 --> 1473245666576
+  140713234304496 --> 1473245646080
+  1473299710592 --> 1473245666576
+  1473299700832 --> 1473299710592
+  1473291690208 --> 1473299700832
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.textlistformat.TextListFormat
+    options:
+      show_root_toc_entry: False

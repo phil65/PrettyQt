@@ -1,0 +1,36 @@
+Qt Base Class: [QJSValue](https://doc.qt.io/qtforpython/PySide6/QtQml/QJSValue.html#PySide6.QtQml.PySide6.QtQml.QJSValue)
+
+Signature: `QJSValue(self, other: Union[PySide6.QtQml.QJSValue, PySide6.QtQml.QJSValue.SpecialValue, bool, str, bytes, float, int]) -> None
+QJSValue(self, str: bytes) -> None
+QJSValue(self, value: PySide6.QtQml.QJSValue.SpecialValue = Instance(PySide6.QtQml.QJSValue.SpecialValue.UndefinedValue)) -> None
+QJSValue(self, value: str) -> None
+QJSValue(self, value: bool) -> None
+QJSValue(self, value: float) -> None
+QJSValue(self, value: int) -> None
+QJSValue(self, value: int) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                        | Children                                | Inherits                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- | ------------------------------------- |
+| **<font size='4'>[QJSValue](https://doc.qt.io/qtforpython/PySide6/QtQml/QJSValue.html#PySide6.QtQml.PySide6.QtQml.QJSValue)</font>**<br>*<font size='1'>PySide6.QtQml</font>*<br>QJSValue\(self, other: Union\[PySide6\.QtQml\.QJSValue, PySide6\.QtQml\.QJSValue\.SpecialValue, bool, str, bytes, float, int\]\) \-\> None | <ul><li>[JSValue](JSValue.md)</li></ul> | <ul><li>[Object](Object.md)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473572325728["qml.JSValue"]
+  1473572255456["QtQml.QJSValue"]
+  1473291690208["Shiboken.Object"]
+  140713234304496["builtins.object"]
+  1473572255456 --> 1473572325728
+  1473291690208 --> 1473572255456
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.qml.jsvalue.JSValue
+    options:
+      show_root_toc_entry: False

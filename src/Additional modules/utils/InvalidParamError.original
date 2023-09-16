@@ -1,0 +1,27 @@
+## Base classes
+
+| Name                                                                                                                                                                                           | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Inherits                                                                                   |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| **<font size='4'>[ValueError](https://docs.python.org/3/library/exceptions.html#ValueError)</font>**<br>*<font size='1'>builtins</font>*<br>Inappropriate argument value \(of correct type\)\. | <ul><li>[UnicodeError](https://docs.python.org/3/library/exceptions.html#UnicodeError)</li><li>[UnsupportedOperation](https://docs.python.org/3/library/io.html#io.UnsupportedOperation)</li><li>[AddressValueError](https://docs.python.org/3/library/ipaddress.html#ipaddress.AddressValueError)</li><li>[NetmaskValueError](https://docs.python.org/3/library/ipaddress.html#ipaddress.NetmaskValueError)</li><li>[Error](https://docs.python.org/3/library/binascii.html#binascii.Error)</li><li>[IllegalMonthError](IllegalMonthError.md)</li><li>[IllegalWeekdayError](IllegalWeekdayError.md)</li><li>[MessageDefect](MessageDefect.md)</li><li>[UnsupportedDigestmodError](UnsupportedDigestmodError.md)</li><li>[JSONDecodeError](JSONDecodeError.md)</li><li>...</li></ul> | <ul><li>[Exception](https://docs.python.org/3/library/exceptions.html#Exception)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473299720352["utils.InvalidParamError"]
+  140713234269808["builtins.ValueError"]
+  140713234273136["builtins.Exception"]
+  140713234273968["builtins.BaseException"]
+  140713234304496["builtins.object"]
+  140713234269808 --> 1473299720352
+  140713234273136 --> 140713234269808
+  140713234273968 --> 140713234273136
+  140713234304496 --> 140713234273968
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.utils.InvalidParamError
+    options:
+      show_root_toc_entry: False

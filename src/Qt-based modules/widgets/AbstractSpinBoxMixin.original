@@ -1,0 +1,38 @@
+## Base classes
+
+| Name                                                                                                           | Children                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Inherits                                                                                        |
+| -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **<font size='4'>[WidgetMixin](WidgetMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.widget</font>*<br> | <ul><li>[Widget](Widget.md)</li><li>[FrameMixin](FrameMixin.md)</li><li>[FocusFrame](FocusFrame.md)</li><li>[AbstractSliderMixin](AbstractSliderMixin.md)</li><li>[AbstractButtonMixin](AbstractButtonMixin.md)</li><li>[LineEdit](LineEdit.md)</li><li>[AbstractSpinBoxMixin](AbstractSpinBoxMixin.md)</li><li>[RubberBandMixin](RubberBandMixin.md)</li><li>[DialogButtonBox](DialogButtonBox.md)</li><li>[DialogMixin](DialogMixin.md)</li><li>...</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[PaintDeviceMixin](PaintDeviceMixin.md)</li></ul> |
+
+
+## Subclasses
+
+| Class                                     | Module                           | Description                         |
+| ----------------------------------------- | -------------------------------- | ----------------------------------- |
+| [AbstractSpinBox](AbstractSpinBox.md)     | prettyqt.widgets.abstractspinbox |                                     |
+| [SpinBox](SpinBox.md)                     | prettyqt.widgets.spinbox         |                                     |
+| [DoubleSpinBox](DoubleSpinBox.md)         | prettyqt.widgets.doublespinbox   |                                     |
+| [DateTimeEditMixin](DateTimeEditMixin.md) | prettyqt.widgets.datetimeedit    | Widget for editing dates and times. |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293702880["widgets.AbstractSpinBoxMixin"]
+  1473293688240["widgets.WidgetMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473245548480["gui.PaintDeviceMixin"]
+  1473293688240 --> 1473293702880
+  1473299815024 --> 1473293688240
+  140713234304496 --> 1473299815024
+  1473245548480 --> 1473293688240
+  140713234304496 --> 1473245548480
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.abstractspinbox.AbstractSpinBoxMixin
+    options:
+      show_root_toc_entry: False

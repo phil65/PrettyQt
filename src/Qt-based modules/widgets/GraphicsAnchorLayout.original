@@ -1,0 +1,39 @@
+Qt Base Class: [QGraphicsAnchorLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsAnchorLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsAnchorLayout)
+
+Signature: `QGraphicsAnchorLayout(self, parent: Optional[PySide6.QtWidgets.QGraphicsLayoutItem] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                                 | Children                                                                                                                                                                                                                  | Inherits                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GraphicsLayoutMixin](GraphicsLayoutMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicslayout</font>*<br>                                                                                                                                                                                                               | <ul><li>[GraphicsLayout](GraphicsLayout.md)</li><li>[GraphicsGridLayout](GraphicsGridLayout.md)</li><li>[GraphicsLinearLayout](GraphicsLinearLayout.md)</li><li>[GraphicsAnchorLayout](GraphicsAnchorLayout.md)</li></ul> | <ul><li>[GraphicsLayoutItemMixin](GraphicsLayoutItemMixin.md)</li></ul>                                                                                       |
+| **<font size='4'>[QGraphicsAnchorLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsAnchorLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsAnchorLayout)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QGraphicsAnchorLayout\(self, parent: Optional\[PySide6\.QtWidgets\.QGraphicsLayoutItem\] \= None\) \-\> None | <ul><li>[GraphicsAnchorLayout](GraphicsAnchorLayout.md)</li></ul>                                                                                                                                                         | <ul><li>[QGraphicsLayout](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsLayout.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsLayout)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296160240["widgets.GraphicsAnchorLayout"]
+  1473293716544["widgets.GraphicsLayoutMixin"]
+  1473293712640["widgets.GraphicsLayoutItemMixin"]
+  140713234304496["builtins.object"]
+  1473290827232["QtWidgets.QGraphicsAnchorLayout"]
+  1473290826256["QtWidgets.QGraphicsLayout"]
+  1473290825280["QtWidgets.QGraphicsLayoutItem"]
+  1473291690208["Shiboken.Object"]
+  1473293716544 --> 1473296160240
+  1473293712640 --> 1473293716544
+  140713234304496 --> 1473293712640
+  1473290827232 --> 1473296160240
+  1473290826256 --> 1473290827232
+  1473290825280 --> 1473290826256
+  1473291690208 --> 1473290825280
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicsanchorlayout.GraphicsAnchorLayout
+    options:
+      show_root_toc_entry: False

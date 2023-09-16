@@ -1,0 +1,92 @@
+Qt Base Class: [QQuickItem](https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickItem.html#PySide6.QtQuick.PySide6.QtQuick.QQuickItem)
+
+Signature: `QQuickItem(self, parent: Optional[PySide6.QtQuick.QQuickItem] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                  | Children                                                                                                                                                                                                                                                                                                                                                              | Inherits                                                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[QuickItemMixin](QuickItemMixin.md)</font>**<br>*<font size='1'>prettyqt.quick.quickitem</font>*<br>                                                                                                                                                                 | <ul><li>[QuickItem](QuickItem.md)</li><li>[QuickPaintedItem](QuickPaintedItem.md)</li></ul>                                                                                                                                                                                                                                                                           | <ul><li>[ObjectMixin](ObjectMixin.md)</li><li>[QmlParserStatusMixin](QmlParserStatusMixin.md)</li></ul>                                                                                                                                                                 |
+| **<font size='4'>[QQuickItem](https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickItem.html#PySide6.QtQuick.PySide6.QtQuick.QQuickItem)</font>**<br>*<font size='1'>PySide6.QtQuick</font>*<br>QQuickItem\(self, parent: Optional\[PySide6\.QtQuick\.QQuickItem\] \= None\) \-\> None | <ul><li>[QQuickPaintedItem](https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickPaintedItem.html#PySide6.QtQuick.PySide6.QtQuick.QQuickPaintedItem)</li><li>[QQuickFramebufferObject](https://doc.qt.io/qtforpython/PySide6/QtQuick/QQuickFramebufferObject.html#PySide6.QtQuick.PySide6.QtQuick.QQuickFramebufferObject)</li><li>[QuickItem](QuickItem.md)</li></ul> | <ul><li>[QObject](https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject)</li><li>[QQmlParserStatus](https://doc.qt.io/qtforpython/PySide6/QtQml/QQmlParserStatus.html#PySide6.QtQml.PySide6.QtQml.QQmlParserStatus)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473374461344["quick.QuickItem"]
+  1473374484768["quick.QuickItemMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473572323776["qml.QmlParserStatusMixin"]
+  1473374449632["QtQuick.QQuickItem"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473572235936["QtQml.QQmlParserStatus"]
+  1473374484768 --> 1473374461344
+  1473299815024 --> 1473374484768
+  140713234304496 --> 1473299815024
+  1473572323776 --> 1473374484768
+  140713234304496 --> 1473572323776
+  1473374449632 --> 1473374461344
+  1473288842240 --> 1473374449632
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+  1473572235936 --> 1473374449632
+  1473291690208 --> 1473572235936
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.quick.quickitem.QuickItem
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property            | Type                                   | Doc |
+| ---------------------- | -------------------------------------- | --- |
+| `objectName`           | **QString**                            |     |
+| `parent`               | **QQuickItem**                         |     |
+| `data`                 | **QQmlListProperty<QObject>**          |     |
+| `resources`            | **QQmlListProperty<QObject>**          |     |
+| `children`             | **QQmlListProperty<QQuickItem>**       |     |
+| `x`                    | **double**                             |     |
+| `y`                    | **double**                             |     |
+| `z`                    | **double**                             |     |
+| `width`                | **double**                             |     |
+| `height`               | **double**                             |     |
+| `opacity`              | **double**                             |     |
+| `enabled`              | **bool**                               |     |
+| `visible`              | **bool**                               |     |
+| `palette`              | **QQuickPalette**                      |     |
+| `visibleChildren`      | **QQmlListProperty<QQuickItem>**       |     |
+| `states`               | **QQmlListProperty<QQuickState>**      |     |
+| `transitions`          | **QQmlListProperty<QQuickTransition>** |     |
+| `state`                | **QString**                            |     |
+| `childrenRect`         | **QRectF**                             |     |
+| `anchors`              | **QQuickAnchors**                      |     |
+| `left`                 | **QQuickAnchorLine**                   |     |
+| `right`                | **QQuickAnchorLine**                   |     |
+| `horizontalCenter`     | **QQuickAnchorLine**                   |     |
+| `top`                  | **QQuickAnchorLine**                   |     |
+| `bottom`               | **QQuickAnchorLine**                   |     |
+| `verticalCenter`       | **QQuickAnchorLine**                   |     |
+| `baseline`             | **QQuickAnchorLine**                   |     |
+| `baselineOffset`       | **double**                             |     |
+| `clip`                 | **bool**                               |     |
+| `focus`                | **bool**                               |     |
+| `activeFocus`          | **bool**                               |     |
+| `activeFocusOnTab`     | **bool**                               |     |
+| `rotation`             | **double**                             |     |
+| `scale`                | **double**                             |     |
+| `transformOrigin`      | **QQuickItem::TransformOrigin**        |     |
+| `transformOriginPoint` | **QPointF**                            |     |
+| `transform`            | **QQmlListProperty<QQuickTransform>**  |     |
+| `smooth`               | **bool**                               |     |
+| `antialiasing`         | **bool**                               |     |
+| `implicitWidth`        | **double**                             |     |
+| `implicitHeight`       | **double**                             |     |
+| `containmentMask`      | **QObject**                            |     |
+| `layer`                | **QQuickItemLayer**                    |     |

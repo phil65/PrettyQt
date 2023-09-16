@@ -1,0 +1,65 @@
+Qt Base Class: [QWidgetAction](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidgetAction.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidgetAction)
+
+Signature: `QWidgetAction(self, parent: PySide6.QtCore.QObject) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                              | Children                                                                      | Inherits                                                                                                                  |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[ActionMixin](ActionMixin.md)</font>**<br>*<font size='1'>prettyqt.gui.action</font>*<br>                                                                                                                                                                        | <ul><li>[Action](Action.md)</li><li>[WidgetAction](WidgetAction.md)</li></ul> | <ul><li>[ObjectMixin](ObjectMixin.md)</li></ul>                                                                           |
+| **<font size='4'>[QWidgetAction](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidgetAction.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidgetAction)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QWidgetAction\(self, parent: PySide6\.QtCore\.QObject\) \-\> None | <ul><li>[WidgetAction](WidgetAction.md)</li></ul>                             | <ul><li>[QAction](https://doc.qt.io/qtforpython/PySide6/QtGui/QAction.html#PySide6.QtGui.PySide6.QtGui.QAction)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473296233440["widgets.WidgetAction"]
+  1473245659744["gui.ActionMixin"]
+  1473299815024["core.ObjectMixin"]
+  140713234304496["builtins.object"]
+  1473293728256["QtWidgets.QWidgetAction"]
+  1473289259344["QtGui.QAction"]
+  1473288842240["QtCore.QObject"]
+  1473291690208["Shiboken.Object"]
+  1473245659744 --> 1473296233440
+  1473299815024 --> 1473245659744
+  140713234304496 --> 1473299815024
+  1473293728256 --> 1473296233440
+  1473289259344 --> 1473293728256
+  1473288842240 --> 1473289259344
+  1473291690208 --> 1473288842240
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.widgetaction.WidgetAction
+    options:
+      show_root_toc_entry: False
+
+
+## ⌗ Property table
+
+| Qt Property                    | Type                    | Doc                                |
+| ------------------------------ | ----------------------- | ---------------------------------- |
+| `objectName`                   | **QString**             |                                    |
+| `checkable`                    | **bool**                |                                    |
+| `checked`                      | **bool**                |                                    |
+| `enabled`                      | **bool**                |                                    |
+| `icon`                         | **QIcon**               |                                    |
+| `text`                         | **QString**             |                                    |
+| `iconText`                     | **QString**             |                                    |
+| `toolTip`                      | **QString**             |                                    |
+| `statusTip`                    | **QString**             |                                    |
+| `whatsThis`                    | **QString**             |                                    |
+| `font`                         | **QFont**               |                                    |
+| `shortcut`                     | **QKeySequence**        |                                    |
+| `shortcutContext`              | **Qt::ShortcutContext** |                                    |
+| `autoRepeat`                   | **bool**                |                                    |
+| `visible`                      | **bool**                |                                    |
+| `menuRole`                     | **QAction::MenuRole**   |                                    |
+| `iconVisibleInMenu`            | **bool**                |                                    |
+| `shortcutVisibleInContextMenu` | **bool**                |                                    |
+| `priority`                     | **QAction::Priority**   |                                    |
+| `usage_count`                  | **int**                 | How often the action was triggered |

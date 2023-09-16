@@ -1,0 +1,36 @@
+Qt Base Class: [QGraphicsPixmapItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsPixmapItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsPixmapItem)
+
+Signature: `QGraphicsPixmapItem(self, parent: Optional[PySide6.QtWidgets.QGraphicsItem] = None) -> None
+QGraphicsPixmapItem(self, pixmap: Union[PySide6.QtGui.QPixmap, PySide6.QtGui.QImage, str], parent: Optional[PySide6.QtWidgets.QGraphicsItem] = None) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                                                                                                                                   | Children                                                                                                                                                                                                                                                                                                                                  | Inherits                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<font size='4'>[GraphicsItemMixin](GraphicsItemMixin.md)</font>**<br>*<font size='1'>prettyqt.widgets.graphicsitem</font>*<br>                                                                                                                                                                                                       | <ul><li>[GraphicsItem](GraphicsItem.md)</li><li>[GraphicsItemGroup](GraphicsItemGroup.md)</li><li>[AbstractGraphicsShapeItemMixin](AbstractGraphicsShapeItemMixin.md)</li><li>[GraphicsPixmapItem](GraphicsPixmapItem.md)</li><li>[GraphicsObjectMixin](GraphicsObjectMixin.md)</li><li>[GraphicsLineItem](GraphicsLineItem.md)</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul>                                                                     |
+| **<font size='4'>[QGraphicsPixmapItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsPixmapItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsPixmapItem)</font>**<br>*<font size='1'>PySide6.QtWidgets</font>*<br>QGraphicsPixmapItem\(self, parent: Optional\[PySide6\.QtWidgets\.QGraphicsItem\] \= None\) \-\> None | <ul><li>[GraphicsPixmapItem](GraphicsPixmapItem.md)</li></ul>                                                                                                                                                                                                                                                                             | <ul><li>[QGraphicsItem](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QGraphicsItem.html#PySide6.QtWidgets.PySide6.QtWidgets.QGraphicsItem)</li></ul> |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473293695072["widgets.GraphicsPixmapItem"]
+  1473293706784["widgets.GraphicsItemMixin"]
+  140713234304496["builtins.object"]
+  1473290847728["QtWidgets.QGraphicsPixmapItem"]
+  1473290795024["QtWidgets.QGraphicsItem"]
+  1473291690208["Shiboken.Object"]
+  1473293706784 --> 1473293695072
+  140713234304496 --> 1473293706784
+  1473290847728 --> 1473293695072
+  1473290795024 --> 1473290847728
+  1473291690208 --> 1473290795024
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.widgets.graphicspixmapitem.GraphicsPixmapItem
+    options:
+      show_root_toc_entry: False

@@ -1,0 +1,41 @@
+Qt Base Class: [QColorSpace](https://doc.qt.io/qtforpython/PySide6/QtGui/QColorSpace.html#PySide6.QtGui.PySide6.QtGui.QColorSpace)
+
+Signature: `QColorSpace(self) -> None
+QColorSpace(self, colorSpace: Union[PySide6.QtGui.QColorSpace, PySide6.QtGui.QColorSpace.NamedColorSpace]) -> None
+QColorSpace(self, namedColorSpace: PySide6.QtGui.QColorSpace.NamedColorSpace) -> None
+QColorSpace(self, primaries: PySide6.QtGui.QColorSpace.Primaries, gamma: float) -> None
+QColorSpace(self, primaries: PySide6.QtGui.QColorSpace.Primaries, transferFunction: PySide6.QtGui.QColorSpace.TransferFunction, gamma: float = 0.0) -> None
+QColorSpace(self, primaries: PySide6.QtGui.QColorSpace.Primaries, transferFunctionTable: Sequence[int]) -> None
+QColorSpace(self, whitePoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], redPoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], greenPoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], bluePoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], redTransferFunctionTable: Sequence[int], greenTransferFunctionTable: Sequence[int], blueTransferFunctionTable: Sequence[int]) -> None
+QColorSpace(self, whitePoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], redPoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], greenPoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], bluePoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], transferFunction: PySide6.QtGui.QColorSpace.TransferFunction, gamma: float = 0.0) -> None
+QColorSpace(self, whitePoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], redPoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], greenPoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], bluePoint: Union[PySide6.QtCore.QPointF, PySide6.QtCore.QPoint, PySide6.QtGui.QPainterPath.Element], transferFunctionTable: Sequence[int]) -> None`
+
+## Base classes
+
+| Name                                                                                                                                                                                                                    | Children                                                                                                                                                                                                                                                                                                                                          | Inherits                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **<font size='4'>[SerializeMixin](SerializeMixin.md)</font>**<br>*<font size='1'>prettyqt.utils.serializemixin</font>*<br>                                                                                              | <ul><li>[EasingCurve](EasingCurve.md)</li><li>[Url](Url.md)</li><li>[KeyCombination](KeyCombination.md)</li><li>[Icon](Icon.md)</li><li>[PixmapMixin](PixmapMixin.md)</li><li>[IconEngine](IconEngine.md)</li><li>[Image](Image.md)</li><li>[Brush](Brush.md)</li><li>[Region](Region.md)</li><li>[Transform](Transform.md)</li><li>...</li></ul> | <ul><li>[object](https://docs.python.org/3/library/functions.html#object)</li></ul> |
+| **<font size='4'>[QColorSpace](https://doc.qt.io/qtforpython/PySide6/QtGui/QColorSpace.html#PySide6.QtGui.PySide6.QtGui.QColorSpace)</font>**<br>*<font size='1'>PySide6.QtGui</font>*<br>QColorSpace\(self\) \-\> None | <ul><li>[ColorSpace](ColorSpace.md)</li></ul>                                                                                                                                                                                                                                                                                                     | <ul><li>[Object](Object.md)</li></ul>                                               |
+
+
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473245660720["gui.ColorSpace"]
+  1473299806240["utils.SerializeMixin"]
+  140713234304496["builtins.object"]
+  1473300172160["QtGui.QColorSpace"]
+  1473291690208["Shiboken.Object"]
+  1473299806240 --> 1473245660720
+  140713234304496 --> 1473299806240
+  1473300172160 --> 1473245660720
+  1473291690208 --> 1473300172160
+  140713234304496 --> 1473291690208
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.gui.colorspace.ColorSpace
+    options:
+      show_root_toc_entry: False

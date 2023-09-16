@@ -1,0 +1,14 @@
+## ⋔ Inheritance diagram
+
+``` mermaid
+graph TD
+  1473574740544["webenginecore.WebEngineHistory"]
+  140713234304496["builtins.object"]
+  140713234304496 --> 1473574740544
+```
+
+## 🛈 DocStrings
+
+::: prettyqt.webenginecore.webenginehistory.WebEngineHistory
+    options:
+      show_root_toc_entry: False
