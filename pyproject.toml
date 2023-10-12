@@ -141,22 +141,13 @@ dependencies = [
 test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg --cov=tests'
 
 
-
-
-
 [tool.hatch.envs.default.scripts]
 test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg --cov=tests'
-
-
-
 
 
 [tool.hatch.envs.docs.scripts]
 build = "mkdocs build --clean"
 serve = "mkdocs serve --dirtyreload"
-
-
-
 
 
 [tool.hatch.build]
@@ -230,12 +221,6 @@ iconbrowser = "prettyqt.custom_widgets.iconbrowser:run"
 [tool.poetry.plugins."pyinstaller40"]
 hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
 
-[tool.poetry.plugins."mkdocs.plugins"]
-mknodes = "mknodes.plugin:MkNodesPlugin"
-
-# [tool.poetry.plugins."pytest11"]
-# pytest-qt = "prettyqt.prettyqtest.plugin"
-
 [tool.poetry.dependencies]
 python = "^3.11"
 bidict = "^0"
@@ -284,7 +269,7 @@ pytest-xvfb = {version = "^2", markers = "sys_platform == 'linux'"}
 coverage = "^7"
 
 mkdocs = "^1"
-mknodes = "*"
+mkdocs_mknodes = "*"
 mkdocs-material = {version = "^9", allow-prereleases=true}
 mkdocstrings = {version = "^0", extras = ["python"]}
 mkdocs-glightbox = "*"
