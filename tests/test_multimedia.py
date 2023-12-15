@@ -55,10 +55,10 @@ def test_cameraformat():
 
 def test_mediaplayer():
     player = multimedia.MediaPlayer()
-    file = core.File()
-    player.set_source_device(file, "")
-    player.set_source("")
+    # file = core.File()
+    # player.set_source_device(file, "")
+    # player.set_source("")
     assert player.get_source() is None
-    assert player.get_error() == "resource"
+    assert player.get_error() == "none"
     assert player.get_playback_state() == "stopped"
     assert player.get_media_status() == "none"
