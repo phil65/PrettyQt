@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import enum
 import logging
-
 from typing import Any
 
 from prettyqt import constants, core, gui, widgets
@@ -78,10 +77,9 @@ class EditorDelegate(widgets.StyledItemDelegate):
         self,
         *args,
         role: constants.ItemDataRole = constants.EDIT_ROLE,
-        validator: gui.QValidator
-        | widgets.lineedit.ValidatorStr
-        | datatypes.PatternType
-        | None = None,
+        validator: (
+            gui.QValidator | widgets.lineedit.ValidatorStr | datatypes.PatternType | None
+        ) = None,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)

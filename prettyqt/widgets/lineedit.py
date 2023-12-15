@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Callable
 import re
-
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
@@ -168,11 +167,9 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
 
     def set_validator(
         self,
-        validator: gui.QValidator
-        | ValidatorStr
-        | datatypes.PatternType
-        | Callable
-        | None,
+        validator: (
+            gui.QValidator | ValidatorStr | datatypes.PatternType | Callable | None
+        ),
         strict: bool = True,
         empty_allowed: bool | None = None,
         append: bool = False,
@@ -191,9 +188,10 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
             case _:
                 raise ValueError(validator)
         if empty_allowed is False:
-            validator = validators.AndValidator(
-                [validator, validators.NotEmptyValidator()]
-            )
+            validator = validators.AndValidator([
+                validator,
+                validators.NotEmptyValidator(),
+            ])
         elif empty_allowed is True:
             validator = validators.OrValidator([validator, validators.EmptyValidator()])
         if not strict:

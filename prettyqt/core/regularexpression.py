@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Callable, Iterator
 import re
-
 from typing import Literal
 
 import bidict as bd
@@ -11,14 +10,12 @@ from prettyqt import core
 from prettyqt.utils import bidict, get_repr
 
 
-RE_MAP = bd.bidict(
-    {
-        re.IGNORECASE: core.QRegularExpression.PatternOption.CaseInsensitiveOption,
-        re.MULTILINE: core.QRegularExpression.PatternOption.MultilineOption,
-        re.DOTALL: core.QRegularExpression.PatternOption.DotMatchesEverythingOption,
-        re.VERBOSE: core.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption,
-    }
-)
+RE_MAP = bd.bidict({
+    re.IGNORECASE: core.QRegularExpression.PatternOption.CaseInsensitiveOption,
+    re.MULTILINE: core.QRegularExpression.PatternOption.MultilineOption,
+    re.DOTALL: core.QRegularExpression.PatternOption.DotMatchesEverythingOption,
+    re.VERBOSE: core.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption,
+})
 
 mod = core.QRegularExpression
 

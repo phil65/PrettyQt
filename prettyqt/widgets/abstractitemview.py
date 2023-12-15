@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Generator, Sequence
 import functools
 import logging
-
 from typing import Any, Literal
 
 from prettyqt import constants, core, widgets

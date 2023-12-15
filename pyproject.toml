@@ -394,6 +394,7 @@ ignore = [
     "D408",  # Section underline should be in the line following the section's name ("{name}")
     "D409",  # Section underline should match the length of its name ("{name}")
     "D413",  # Missing blank line after last section ("{name}")
+    "INP001", # File is part of an implicit namespace package. Add an `__init__.py`.
     "SLF001",# Private member accessed
     "RUF012", # Mutable class attributes should be annotated
     "RUF013", # PEP 484 prohibits implicit `Optional`

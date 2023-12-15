@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import logging
-
 from typing import Literal
 
 from prettyqt import core, custom_widgets, itemmodels, widgets
@@ -22,11 +21,12 @@ class ProxyComparerWidget(widgets.Splitter):
     def __init__(
         self,
         model: core.QAbstractProxyModel,
-        itemview: Literal["tree", "table", "list"]
-        | type[widgets.QAbstractItemView] = "table",
-        delegate: widgets.abstractitemview.DelegateStr
-        | widgets.QItemDelegate
-        | None = "editor",
+        itemview: (
+            Literal["tree", "table", "list"] | type[widgets.QAbstractItemView]
+        ) = "table",
+        delegate: (
+            widgets.abstractitemview.DelegateStr | widgets.QItemDelegate | None
+        ) = "editor",
         link_selections: bool = True,
         **kwargs,
     ):

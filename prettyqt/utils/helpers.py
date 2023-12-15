@@ -247,7 +247,7 @@ def ansi2html(ansi_string: str, styles: dict[int, dict[str, str]] = ANSI_STYLES)
 
         try:
             params = [int(p) for p in params.split(";")]
-        except ValueError:  # noqa: PERF203
+        except ValueError:
             params = [0]
 
         for i, v in enumerate(params):

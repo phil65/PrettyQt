@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Callable, Generator, Sequence
 import logging
-
 from typing import Any
 
 from prettyqt import core, qt

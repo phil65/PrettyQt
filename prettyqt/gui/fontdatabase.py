@@ -3,7 +3,6 @@ from __future__ import annotations
 import hashlib
 import logging
 import pathlib
-
 from typing import Literal
 
 from prettyqt.qt import QtGui

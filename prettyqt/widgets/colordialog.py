@@ -37,21 +37,21 @@ class ColorDialog(widgets.DialogMixin, widgets.QColorDialog):
         return gui.Color(self.currentColor())
 
     def get_qcolorshower(self) -> widgets.QWidget:
-        return [
+        return next(
             a
             for a in self.children()
             if hasattr(a, "metaObject")
             and a.metaObject().className() == "QtPrivate::QColorShower"
-        ][0]
+        )
 
     def get_qcolorshowlabel(self) -> widgets.QFrame:
         qcs = self.get_qcolorshower()
-        return [
+        return next(
             b
             for b in qcs.children()
             if hasattr(b, "metaObject")
             and b.metaObject().className() == "QtPrivate::QColorShowLabel"
-        ][0]
+        )
 
     def replace_qcolorshowlabel(self, widget: widgets.QWidget):
         # Find the dialog widget used to display the current

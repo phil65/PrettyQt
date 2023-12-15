@@ -4,8 +4,7 @@ from collections.abc import Callable
 import functools
 import inspect
 import logging
-
-from typing_extensions import Self
+from typing import Self
 
 from prettyqt import core
 

@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
-
-from typing_extensions import Self
+from typing import Self
 
 from prettyqt import location
 

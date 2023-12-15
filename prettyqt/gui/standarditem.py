@@ -3,10 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 import html
 import os
-
-from typing import Any
-
-from typing_extensions import Self
+from typing import Any, Self
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.utils import datatypes, get_repr, helpers, listdelegators, serializemixin

@@ -3,7 +3,6 @@ from __future__ import annotations
 import enum
 import itertools
 import logging
-
 from typing import Literal
 
 from prettyqt import constants, core, gui, itemmodels

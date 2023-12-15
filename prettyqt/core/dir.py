@@ -3,10 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterable
 import os
 import pathlib
-
-from typing import Literal
-
-from typing_extensions import Self
+from typing import Literal, Self
 
 from prettyqt import core
 from prettyqt.utils import bidict, datatypes, get_repr

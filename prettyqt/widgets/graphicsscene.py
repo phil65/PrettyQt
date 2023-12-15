@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import enum
-
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
@@ -193,8 +192,9 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
     def colliding_items(
         self,
         item: widgets.QGraphicsItem,
-        mode: constants.ItemSelectionModeStr
-        | constants.ItemSelectionMode = "intersects_shape",
+        mode: (
+            constants.ItemSelectionModeStr | constants.ItemSelectionMode
+        ) = "intersects_shape",
     ) -> listdelegators.ListDelegator[widgets.QGraphicsItem]:
         items = self.collidingItems(item, constants.ITEM_SELECTION_MODE[mode])
         return listdelegators.ListDelegator(items)
@@ -223,9 +223,9 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
         lines = [
             core.QLineF(x, top, x, bottom) for x in range(first_left, right, grid_size)
         ]
-        lines.extend(
-            [core.QLineF(left, y, right, y) for y in range(first_top, bottom, grid_size)]
-        )
+        lines.extend([
+            core.QLineF(left, y, right, y) for y in range(first_top, bottom, grid_size)
+        ])
 
         painter.setPen(pen)
         painter.drawLines(lines)

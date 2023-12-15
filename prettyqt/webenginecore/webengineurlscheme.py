@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal
-
-from typing_extensions import Self
+from typing import Literal, Self
 
 from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import bidict, datatypes

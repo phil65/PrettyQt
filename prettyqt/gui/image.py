@@ -3,10 +3,7 @@ from __future__ import annotations
 import io
 import mimetypes
 import os
-
-from typing import Literal
-
-from typing_extensions import Self
+from typing import Literal, Self
 
 from prettyqt import core, gui
 from prettyqt.qt import API
@@ -159,8 +156,7 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
 
         E.g.::
 
-            return self.mimetype_icon(
-                path, fallback=':/icons/text-x-python.png')
+            return self.mimetype_icon(path, fallback=":/icons/text-x-python.png")
 
         :param path: file path for which the icon must be created
         :param fallback: fallback icon path (qrc or file system)

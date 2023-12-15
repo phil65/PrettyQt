@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Iterator, Sequence
 import contextlib
 import logging
-
 from typing import Any, Literal, overload
 
 from prettyqt import constants, core
@@ -56,14 +55,12 @@ class AbstractItemModelMixin(core.ObjectMixin):
         return proxy
 
     @overload
-    def __getitem__(self, index: tuple[int, int] | int) -> core.ModelIndex:
-        ...
+    def __getitem__(self, index: tuple[int, int] | int) -> core.ModelIndex: ...
 
     @overload
     def __getitem__(
         self, index: tuple[slice, int] | tuple[int, slice] | tuple[slice, slice]
-    ) -> listdelegators.ListDelegator[core.ModelIndex]:
-        ...
+    ) -> listdelegators.ListDelegator[core.ModelIndex]: ...
 
     def __getitem__(
         self, index: tuple[int | slice, int | slice]
@@ -410,8 +407,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def get_header_index_for_value(
         self,
         label,
-        orientation: constants.Orientation
-        | constants.OrientationStr = constants.HORIZONTAL,
+        orientation: (
+            constants.Orientation | constants.OrientationStr
+        ) = constants.HORIZONTAL,
         *,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> int | None:

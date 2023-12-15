@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal
-
-from typing_extensions import Self
+from typing import Literal, Self
 
 from prettyqt import constants, core, widgets
 from prettyqt.utils import bidict, datatypes
@@ -86,8 +84,9 @@ class Scroller(core.ObjectMixin):
     @staticmethod
     def grab_gesture(
         target: core.QObject,
-        gesture_type: ScrollGestureTypeStr
-        | widgets.QScroller.ScrollerGestureType = "touch",
+        gesture_type: (
+            ScrollGestureTypeStr | widgets.QScroller.ScrollerGestureType
+        ) = "touch",
     ) -> constants.GestureTypeStr:
         gesture = widgets.QScroller.grabGesture(
             target, SCROLLER_GESTURE_TYPE.get_enum_value(gesture_type)

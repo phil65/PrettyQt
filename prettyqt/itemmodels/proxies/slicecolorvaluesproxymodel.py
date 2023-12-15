@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import enum
 import logging
-
 from typing import Literal
 
 from prettyqt import constants, core, gui, itemmodels

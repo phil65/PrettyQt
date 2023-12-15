@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Iterator, Mapping
 import functools
-
 from typing import Any
 
 from prettyqt import constants, core, iconprovider, widgets
@@ -156,8 +155,9 @@ class ListWidget(widgets.ListViewMixin, widgets.QListWidget):
     def scroll_to_item(
         self,
         item: widgets.QListWidgetItem,
-        mode: widgets.abstractitemview.ScrollHintStr
-        | widgets.QAbstractItemView.ScrollHint = "ensure_visible",
+        mode: (
+            widgets.abstractitemview.ScrollHintStr | widgets.QAbstractItemView.ScrollHint
+        ) = "ensure_visible",
     ):
         self.scrollToItem(item, widgets.abstractitemview.SCROLL_HINT.get_enum_value(mode))
 

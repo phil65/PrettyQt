@@ -4,7 +4,6 @@ from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass
 import functools
 import pathlib
-
 from typing import Any
 
 from prettyqt import custom_widgets, gui, validators, widgets

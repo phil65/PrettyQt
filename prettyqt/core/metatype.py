@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import enum
-
 from typing import Literal
 
 from prettyqt.qt import QtCore

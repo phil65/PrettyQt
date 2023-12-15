@@ -3,8 +3,7 @@ from __future__ import annotations
 import base64
 import os
 import pathlib
-
-from typing_extensions import Self
+from typing import Self
 
 from prettyqt import constants, core, gui
 from prettyqt.utils import colors, datatypes, serializemixin

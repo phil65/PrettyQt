@@ -4,7 +4,6 @@ from collections.abc import Callable
 import functools
 import logging
 import operator
-
 from typing import TYPE_CHECKING, Any, Literal
 
 from prettyqt import constants, core, gui, widgets
@@ -509,8 +508,9 @@ class Proxifier:
     def change_headers(
         self,
         headers: list[Any] | dict[int, Any],
-        orientation: constants.Orientation
-        | constants.OrientationStr = constants.HORIZONTAL,
+        orientation: (
+            constants.Orientation | constants.OrientationStr
+        ) = constants.HORIZONTAL,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> itemmodels.ChangeHeadersProxyModel:
         """Change headers of source model.

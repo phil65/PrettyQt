@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import logging
-
 from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui
@@ -104,13 +103,15 @@ class Cursor(serializemixin.SerializeMixin, gui.QCursor):
     @classmethod
     def set_pos(
         cls,
-        where: Literal["screen", "current"]
-        | gui.QScreen
-        | widgets.QWidget
-        | core.QRect
-        | core.QPoint
-        | tuple[int, int]
-        | tuple[int, int, int, int],
+        where: (
+            Literal["screen", "current"]
+            | gui.QScreen
+            | widgets.QWidget
+            | core.QRect
+            | core.QPoint
+            | tuple[int, int]
+            | tuple[int, int, int, int]
+        ),
         how: Literal[
             "center",
             "top",

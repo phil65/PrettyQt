@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 import contextlib
-
 from typing import Literal
 
 from prettyqt import constants, core, gui
@@ -112,7 +111,7 @@ class PainterMixin:
 
     def draw_polygon(
         self,
-        points: (gui.QPolygon | gui.QPolygonF | list[core.QPoint] | list[core.QPointF]),
+        points: gui.QPolygon | gui.QPolygonF | list[core.QPoint] | list[core.QPointF],
         fill_rule: constants.FillRuleStr | constants.FillRule = "odd_even",
     ):
         self.drawPolygon(points, fillRule=constants.FILL_RULE.get_enum_value(fill_rule))
@@ -248,9 +247,7 @@ class PainterMixin:
         self.setClipPath(path, constants.CLIP_OPERATION.get_enum_value(operation))
 
     def get_text_rect(self, text: str) -> core.Rect:
-        return self.drawText(
-            core.Rect(), constants.TextFlag.TextDontPrint, text
-        )  # type: ignore
+        return self.drawText(core.Rect(), constants.TextFlag.TextDontPrint, text)  # type: ignore
 
     @contextlib.contextmanager
     def clip_path(

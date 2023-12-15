@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
-from typing import overload
-
-from typing_extensions import Self
+from typing import Self, overload
 
 from prettyqt import constants, widgets
 from prettyqt.utils import listdelegators
@@ -19,14 +17,12 @@ class SplitterMixin(widgets.FrameMixin):
         self.setHandleWidth(10)
 
     @overload
-    def __getitem__(self, index: int | str) -> widgets.QWidget:
-        ...
+    def __getitem__(self, index: int | str) -> widgets.QWidget: ...
 
     @overload
     def __getitem__(
         self, index: slice
-    ) -> listdelegators.SplitterDelegator[widgets.QWidget]:
-        ...
+    ) -> listdelegators.SplitterDelegator[widgets.QWidget]: ...
 
     def __getitem__(
         self, index: int | str | slice

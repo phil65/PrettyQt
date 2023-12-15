@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Callable, Sequence
 import functools
-
 from typing import TYPE_CHECKING
 
 from prettyqt import core

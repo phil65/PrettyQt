@@ -1,10 +1,7 @@
 from __future__ import annotations
 
 import sys
-
-from typing import Any, Literal
-
-from typing_extensions import Self
+from typing import Any, Literal, Self
 
 from prettyqt import gui
 from prettyqt.utils import bidict, get_repr

@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
-from typing import Literal
-
-from typing_extensions import Self
+from typing import Literal, Self
 
 from prettyqt import core
 from prettyqt.utils import datatypes, get_repr

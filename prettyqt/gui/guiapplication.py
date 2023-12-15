@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Iterator
 import contextlib
 import sys
-
 from typing import SupportsInt
 
 from prettyqt import constants, core, gui, iconprovider
@@ -78,8 +77,10 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
     @classmethod
     def set_high_dpi_scale_factor_rounding_policy(
         cls,
-        policy: constants.HighDpiScaleFactorRoundingPolicyStr
-        | constants.HighDpiScaleFactorRoundingPolicy,
+        policy: (
+            constants.HighDpiScaleFactorRoundingPolicyStr
+            | constants.HighDpiScaleFactorRoundingPolicy
+        ),
     ):
         """Set high dpi scale factor rounding policy.
 

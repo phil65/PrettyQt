@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Callable, Iterator
 import re
-
 from typing import Any
 
 import bidict
@@ -22,14 +21,12 @@ MULTILINE = re.MULTILINE
 DOTALL = re.DOTALL
 VERBOSE = re.VERBOSE
 
-MAP = bidict.bidict(
-    {
-        re.IGNORECASE: core.QRegularExpression.PatternOption.CaseInsensitiveOption,
-        re.MULTILINE: core.QRegularExpression.PatternOption.MultilineOption,
-        re.DOTALL: core.QRegularExpression.PatternOption.DotMatchesEverythingOption,
-        re.VERBOSE: core.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption,
-    }
-)
+MAP = bidict.bidict({
+    re.IGNORECASE: core.QRegularExpression.PatternOption.CaseInsensitiveOption,
+    re.MULTILINE: core.QRegularExpression.PatternOption.MultilineOption,
+    re.DOTALL: core.QRegularExpression.PatternOption.DotMatchesEverythingOption,
+    re.VERBOSE: core.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption,
+})
 
 
 class Match(core.RegularExpressionMatch):

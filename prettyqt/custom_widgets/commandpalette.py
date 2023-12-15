@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import collections
-
 from collections.abc import Sequence
 import logging
 import pathlib

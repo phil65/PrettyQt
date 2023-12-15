@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Iterable
 import enum
 import re
-
 from typing import Literal
 
 from prettyqt import constants, core

@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
-from typing import Literal, overload
-
-from typing_extensions import Self
+from typing import Literal, Self, overload
 
 from prettyqt import constants, core, widgets
 from prettyqt.utils import bidict, datatypes, listdelegators
@@ -77,12 +75,10 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     @overload
     def __getitem__(
         self, index: slice
-    ) -> listdelegators.ListDelegator[widgets.QWidget | widgets.QLayout]:
-        ...
+    ) -> listdelegators.ListDelegator[widgets.QWidget | widgets.QLayout]: ...
 
     @overload
-    def __getitem__(self, index: int | str) -> widgets.QWidget | widgets.QLayout:
-        ...
+    def __getitem__(self, index: int | str) -> widgets.QWidget | widgets.QLayout: ...
 
     def __getitem__(
         self, index: str | int | slice

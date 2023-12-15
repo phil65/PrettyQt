@@ -23,10 +23,11 @@ interface, and call one of those 4 methods.  So if you override a method, you
 MUST make sure that all the appropriate events are emitted.  (Tests should
 cover this in test_evented_list.py)
 """
+
 from __future__ import annotations
 
 from collections.abc import Iterable, MutableSequence
-from typing import Any, TypeVar, cast
+from typing import TypeVar, cast
 
 from prettyqt import core
 
@@ -118,7 +119,7 @@ class SignalList(MutableSequence[_T]):
         copy.extend(other)
         return copy
 
-    def __iadd__(self, other: Iterable[_T]) -> SignalList[_T]:
+    def __iadd__(self, other: Iterable[_T]) -> SignalList[_T]:  # noqa: PYI034
         """Add other to self in place (self += other)."""
         self.extend(other)
         return self
@@ -135,7 +136,7 @@ class SignalList(MutableSequence[_T]):
         """Return repr(self)."""
         return f"{type(self).__name__}({self._data})"
 
-    def __eq__(self, other: Any) -> bool:
+    def __eq__(self, other: object) -> bool:
         """Return self==value."""
         return self._data == other
 

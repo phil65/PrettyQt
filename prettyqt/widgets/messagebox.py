@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Callable
 import sys
 import traceback
-
 from typing import Literal
 
 from prettyqt import constants, gui, iconprovider, widgets
@@ -97,8 +96,9 @@ class MessageBox(widgets.DialogMixin, widgets.QMessageBox):
     def __init__(
         self,
         icon: datatypes.IconType | IconStr = None,
-        buttons: list[StandardButtonStr | widgets.QMessageBox.StandardButton]
-        | None = None,
+        buttons: (
+            list[StandardButtonStr | widgets.QMessageBox.StandardButton] | None
+        ) = None,
         **kwargs,
     ):
         super().__init__(**kwargs)

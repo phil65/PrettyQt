@@ -2,7 +2,7 @@
 
 import pytest
 
-from prettyqt import core, multimedia, qt
+from prettyqt import multimedia, qt
 from prettyqt.utils import InvalidParamError
 
 

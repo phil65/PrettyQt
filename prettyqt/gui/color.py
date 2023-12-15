@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Literal
-
-from typing_extensions import Self
+from typing import Any, Literal, Self
 
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, get_repr, helpers
@@ -175,17 +173,23 @@ class Color(QtGui.QColor):
         match colorspace:
             case "rgb":
                 components = helpers.get_color_percentage(
-                    start.getRgb(), end.getRgb(), percent  # type: ignore
+                    start.getRgb(),
+                    end.getRgb(),
+                    percent,  # type: ignore
                 )
                 out.setRgb(*components)
             case "hsv":
                 components = helpers.get_color_percentage(
-                    start.getHsv(), end.getHsv(), percent  # type: ignore
+                    start.getHsv(),
+                    end.getHsv(),
+                    percent,  # type: ignore
                 )
                 out.setHsv(*components)
             case "hsl":
                 components = helpers.get_color_percentage(
-                    start.getHsl(), end.getHsl(), percent  # type: ignore
+                    start.getHsl(),
+                    end.getHsl(),
+                    percent,  # type: ignore
                 )
                 out.setHsl(*components)
             case _:

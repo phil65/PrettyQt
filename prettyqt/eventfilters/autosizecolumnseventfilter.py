@@ -15,8 +15,9 @@ class AutoSizeColumnsEventFilter(eventfilters.BaseEventFilter):
     def __init__(
         self,
         parent: widgets.TableView | widgets.TreeView,
-        orientation: constants.Orientation
-        | constants.OrientationStr = constants.VERTICAL,
+        orientation: (
+            constants.Orientation | constants.OrientationStr
+        ) = constants.VERTICAL,
     ):
         super().__init__(parent)
         self._widget = parent
@@ -84,7 +85,7 @@ class AutoSizeColumnsEventFilter(eventfilters.BaseEventFilter):
 
 
 if __name__ == "__main__":
-    from prettyqt import debugging, widgets  # noqa: F811
+    from prettyqt import debugging, widgets
 
     app = widgets.app()
     widget = debugging.example_table()

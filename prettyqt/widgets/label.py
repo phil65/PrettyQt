@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 import os
-
-from typing_extensions import Self
+from typing import Self
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import colors, datatypes, get_repr

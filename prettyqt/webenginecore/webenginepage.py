@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Callable
 import logging
 import os
-
 from typing import Literal
 import webbrowser
 
@@ -412,7 +411,8 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
             btn: Mouse button
         """
         btn_id = dict(left=0, middle=1, right=2)[btn]
-        return self.runJavaScript(f"""
+        return self.runJavaScript(
+            f"""
             (function () {{
                 var element = document.querySelector({selector!r});
                 var evt = document.createEvent("MouseEvents");
@@ -421,7 +421,8 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
                                    {btn_id!r}, element);
                 return element.dispatchEvent(evt);
             }})();
-        """)
+        """
+        )
 
     def set_input_value(self, selector: str, value):
         """Set the value of the input matched by given selector."""

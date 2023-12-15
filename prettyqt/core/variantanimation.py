@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Iterator
-
-from typing_extensions import Self
+from typing import Self
 
 from prettyqt import core
 from prettyqt.utils import datatypes
@@ -20,9 +19,9 @@ class VariantAnimationMixin(core.AbstractAnimationMixin):
 
     def set_easing(
         self,
-        easing_type: core.easingcurve.TypeStr
-        | core.QEasingCurve.Type
-        | Callable[[float], float],
+        easing_type: (
+            core.easingcurve.TypeStr | core.QEasingCurve.Type | Callable[[float], float]
+        ),
     ):
         curve = core.EasingCurve()
         if callable(easing_type):

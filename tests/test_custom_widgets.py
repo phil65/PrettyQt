@@ -6,7 +6,6 @@ import re
 import pytest
 
 import prettyqt
-
 from prettyqt import constants, core, custom_widgets, gui, widgets
 import prettyqt.custom_widgets.dataset as fo
 

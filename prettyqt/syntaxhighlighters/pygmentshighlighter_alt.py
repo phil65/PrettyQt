@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import contextlib
-
 from itertools import takewhile
 import logging
 from typing import Literal

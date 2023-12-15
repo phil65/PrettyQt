@@ -9,7 +9,6 @@ import itertools
 import logging
 import re
 import types
-
 from typing import TYPE_CHECKING, Any, TypeVar, get_args
 
 from prettyqt import constants, core

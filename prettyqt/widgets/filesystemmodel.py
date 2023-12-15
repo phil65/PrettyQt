@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Sequence
 import os
 import pathlib
-
 from typing import Literal
 
 from prettyqt import constants, core, qt, widgets

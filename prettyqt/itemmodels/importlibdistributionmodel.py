@@ -3,14 +3,13 @@ from __future__ import annotations
 # from collections.abc import Sequence
 import contextlib
 import enum
-
 from importlib import metadata
 import logging
 import pkgutil
+from typing import Self
 
 from packaging.markers import Marker
 from packaging.requirements import InvalidRequirement, Requirement
-from typing_extensions import Self
 
 from prettyqt import constants, core, itemmodels
 

@@ -2,8 +2,7 @@ from __future__ import annotations
 
 import os
 import pathlib
-
-from typing_extensions import Self
+from typing import Self
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr

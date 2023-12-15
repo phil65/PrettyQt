@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 import pathlib
-
-from typing_extensions import Self
+from typing import Self
 
 from prettyqt import core, paths
 from prettyqt.utils import datatypes

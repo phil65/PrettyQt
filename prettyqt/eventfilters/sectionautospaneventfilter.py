@@ -15,8 +15,9 @@ class SectionAutoSpanEventFilter(eventfilters.BaseEventFilter):
     def __init__(
         self,
         parent: widgets.TableView | widgets.TreeView,
-        orientation: constants.Orientation
-        | constants.OrientationStr = constants.HORIZONTAL,
+        orientation: (
+            constants.Orientation | constants.OrientationStr
+        ) = constants.HORIZONTAL,
     ):
         super().__init__(parent)
         self._widget = parent
@@ -59,7 +60,7 @@ class SectionAutoSpanEventFilter(eventfilters.BaseEventFilter):
 
 
 if __name__ == "__main__":
-    from prettyqt import debugging, widgets  # noqa: F811
+    from prettyqt import debugging, widgets
 
     app = widgets.app()
     widget = debugging.example_table()

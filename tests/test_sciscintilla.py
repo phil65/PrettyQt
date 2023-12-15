@@ -3,7 +3,6 @@
 import pytest
 
 import prettyqt.qt
-
 from prettyqt.utils import InvalidParamError
 
 

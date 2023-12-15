@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 import logging
-
 from typing import Any
 
 from prettyqt import constants, core, itemmodels

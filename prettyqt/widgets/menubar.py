@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import functools
-
 from typing import Literal, overload
 
 from prettyqt import constants, gui, widgets
@@ -21,12 +20,10 @@ class MenuBar(widgets.WidgetMixin, widgets.QMenuBar):
         )
 
     @overload
-    def add_menu(self, menu_or_str: str) -> widgets.Menu:
-        ...
+    def add_menu(self, menu_or_str: str) -> widgets.Menu: ...
 
     @overload
-    def add_menu(self, menu_or_str: widgets.QMenu) -> gui.Action:
-        ...
+    def add_menu(self, menu_or_str: widgets.QMenu) -> gui.Action: ...
 
     @functools.singledispatchmethod
     def add_menu(self, title: str) -> widgets.Menu:

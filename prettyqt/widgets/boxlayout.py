@@ -74,7 +74,6 @@ class BoxLayout(BoxLayoutMixin, widgets.QBoxLayout):
     """Lines up child widgets horizontally or vertically."""
 
     ID = "box"
-    pass
 
 
 if __name__ == "__main__":

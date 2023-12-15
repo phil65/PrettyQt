@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Callable
 import contextlib
-
 from queue import Empty, Queue
 from typing import Literal
 

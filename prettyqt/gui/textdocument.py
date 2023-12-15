@@ -4,7 +4,6 @@ from collections.abc import Iterator
 import contextlib
 import os
 import pathlib
-
 from typing import Literal
 
 import qstylizer.parser

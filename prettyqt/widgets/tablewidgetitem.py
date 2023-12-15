@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import html
 import os
-
 from typing import Any
 
 from prettyqt import constants, gui, iconprovider
@@ -60,9 +59,9 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
 
     def set_text_alignment(
         self,
-        horizontal: constants.HorizontalAlignmentStr
-        | constants.AlignmentFlag
-        | None = None,
+        horizontal: (
+            constants.HorizontalAlignmentStr | constants.AlignmentFlag | None
+        ) = None,
         vertical: constants.VerticalAlignmentStr | constants.AlignmentFlag | None = None,
     ):
         """Set text alignment of the checkbox.

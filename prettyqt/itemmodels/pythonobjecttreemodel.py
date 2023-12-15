@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Callable, Iterable, Mapping
 import contextlib
-
 from difflib import SequenceMatcher
 import inspect
 import logging

@@ -54,7 +54,7 @@ class BaseResolver:
 
         A resolver using the `name` attribute:
 
-        >>> r = Resolver('name')
+        >>> r = Resolver("name")
 
         Relative paths:
 
@@ -101,13 +101,13 @@ class BaseResolver:
 
         Case insensitive matching:
 
-        >>> r.get(top, '/TOP')
+        >>> r.get(top, "/TOP")
         Traceback (most recent call last):
             ...
         ResolverError: unknown root node '/TOP'. root is '/top'.
 
-        >>> r = Resolver('name', ignore_case=True)
-        >>> r.get(top, '/TOp')
+        >>> r = Resolver("name", ignore_case=True)
+        >>> r.get(top, "/TOp")
         Node('/top')
         """
         node, parts = self.__start(root_node, path, self.__cmp)
@@ -148,7 +148,7 @@ class BaseResolver:
 
         A resolver using the `name` attribute:
 
-        >>> r = Resolver('name')
+        >>> r = Resolver("name")
 
         Relative paths:
 
@@ -252,7 +252,7 @@ class BaseResolver:
                         matches += self.__glob(child, remainder)
                     else:
                         matches.append(child)
-            except ResolverError as exc:  # noqa: PERF203
+            except ResolverError as exc:
                 if not self.is_wildcard(pat):
                     raise exc
         return matches
@@ -289,7 +289,7 @@ class BaseResolver:
                 re_pat += "."
             else:
                 re_pat += re.escape(char)
-        return f"(?ms){re_pat}" + r"\Z"  # noqa: ISC003
+        return f"(?ms){re_pat}" + r"\Z"
 
 
 class ResolverError(RuntimeError):

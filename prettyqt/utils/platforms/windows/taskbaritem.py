@@ -1,5 +1,4 @@
 import ctypes
-
 from ctypes.wintypes import HBITMAP, HICON, LPCWSTR, RECT  # , HWND
 import enum
 import logging

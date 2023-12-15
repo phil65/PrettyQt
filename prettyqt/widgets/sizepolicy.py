@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Literal
-
-from typing_extensions import Self
+from typing import Any, Literal, Self
 
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, get_repr

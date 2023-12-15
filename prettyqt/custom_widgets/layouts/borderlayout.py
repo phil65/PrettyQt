@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import enum
-
 from typing import Literal
 
 from prettyqt import constants, core, widgets

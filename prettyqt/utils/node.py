@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Callable, Iterable, Iterator, Sequence
 import logging
-
 from typing import Self
 
 from prettyqt.utils import baseresolver, get_repr

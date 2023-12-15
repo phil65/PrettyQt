@@ -4,7 +4,6 @@ from ctypes import POINTER, Structure, byref, c_bool, c_int, cdll, pointer, size
 from ctypes.wintypes import BOOL, DWORD, HRGN, LONG, LPCVOID, ULONG
 import enum
 import sys
-
 from typing import SupportsInt
 
 import win32con

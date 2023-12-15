@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import enum
 import logging
-
 from typing import Literal
 
 from prettyqt import constants, core, gui, itemmodels, widgets
@@ -126,8 +125,9 @@ class ScrollAreaTocWidget(widgets.TreeView):
     def __init__(
         self,
         scrollarea: widgets.QScrollArea,
-        orientation: constants.Orientation
-        | constants.OrientationStr = constants.VERTICAL,
+        orientation: (
+            constants.Orientation | constants.OrientationStr
+        ) = constants.VERTICAL,
         widget_class: type = widgets.QWidget,
         **kwargs,
     ) -> None:

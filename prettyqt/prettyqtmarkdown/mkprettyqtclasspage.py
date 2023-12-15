@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 
 import mknodes
-
 from mknodes.pages import processors
 
 from prettyqt import core, gui, itemmodels, prettyqtmarkdown, widgets

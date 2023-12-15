@@ -8,7 +8,6 @@ import PyQt6
 import PySide6
 
 import prettyqt
-
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 

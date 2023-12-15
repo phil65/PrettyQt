@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import prettyqt
-
 from prettyqt import charts, core, gui
 from prettyqt.utils import datatypes
 

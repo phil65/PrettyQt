@@ -4,7 +4,6 @@ from collections.abc import Iterator
 import contextlib
 import logging
 import re
-
 from typing import Literal
 
 from prettyqt import core, gui, widgets

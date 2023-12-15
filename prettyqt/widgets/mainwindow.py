@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import collections
-
 from collections.abc import Sequence
 import logging
 from typing import Literal
@@ -234,9 +233,9 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
     def add_dockwidget(
         self,
         widget: widgets.QWidget,
-        position: constants.DockWidgetAreaStr
-        | constants.DockWidgetArea
-        | Literal["auto"] = "auto",
+        position: (
+            constants.DockWidgetAreaStr | constants.DockWidgetArea | Literal["auto"]
+        ) = "auto",
         **kwargs,
     ):
         if position == "auto":
@@ -255,10 +254,12 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
 
     def remove(
         self,
-        items: Sequence[widgets.QDockWidget | widgets.QToolBar | gui.QAction]
-        | widgets.QDockWidget
-        | widgets.QToolBar
-        | gui.QAction,
+        items: (
+            Sequence[widgets.QDockWidget | widgets.QToolBar | gui.QAction]
+            | widgets.QDockWidget
+            | widgets.QToolBar
+            | gui.QAction
+        ),
     ):
         widget_list = items if isinstance(items, list) else [items]
         for i in widget_list:

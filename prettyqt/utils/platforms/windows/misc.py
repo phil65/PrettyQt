@@ -4,11 +4,9 @@ from ctypes import Structure, byref, c_int, sizeof, windll
 from ctypes.wintypes import DWORD, HWND, LPARAM, RECT, UINT
 import os
 import sys
-
 from typing import SupportsInt
 
 import win32api
-
 from win32comext.shell import shellcon
 import win32con
 import win32gui

@@ -1,10 +1,7 @@
 from __future__ import annotations
 
 import logging
-
-from typing import Literal
-
-from typing_extensions import Self
+from typing import Literal, Self
 
 from prettyqt import qml
 from prettyqt.utils import bidict, get_repr

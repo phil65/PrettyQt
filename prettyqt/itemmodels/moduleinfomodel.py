@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import enum
-
 from importlib import machinery
 import logging
 import os
@@ -84,9 +83,9 @@ class ModuleInfoModel(itemmodels.TreeModel):
     ) -> list[ModuleInfoModel.TreeItem]:
         return [
             self.TreeItem(obj=i)
-            for i in pkgutil.iter_modules(
-                [f"{item.obj.module_finder.path}\\{item.obj.name}"]
-            )
+            for i in pkgutil.iter_modules([
+                f"{item.obj.module_finder.path}\\{item.obj.name}"
+            ])
         ]
 
     def _has_children(self, item: ModuleInfoModel.TreeItem) -> bool:
@@ -96,7 +95,6 @@ class ModuleInfoModel(itemmodels.TreeModel):
 
 if __name__ == "__main__":
     import prettyqt
-
     from prettyqt import widgets
 
     app = widgets.app()

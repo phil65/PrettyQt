@@ -1,6 +1,5 @@
 """Tests for `prettyqt` package."""
 
-
 import pathlib
 import pickle
 import tempfile
@@ -9,7 +8,6 @@ import pytest
 
 from prettyqt import constants, core, gui, widgets
 import prettyqt.qt
-
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 

@@ -6,7 +6,6 @@ import functools
 import inspect
 import logging
 import types
-
 from typing import get_args
 
 from prettyqt import constants, core, gui, itemmodels

@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterator, MutableMapping
-
-from typing_extensions import Self
+from typing import Self
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes

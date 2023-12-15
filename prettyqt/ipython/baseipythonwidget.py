@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import logging
 import os
-
 from typing import Literal
 
 from qtconsole.rich_jupyter_widget import RichJupyterWidget

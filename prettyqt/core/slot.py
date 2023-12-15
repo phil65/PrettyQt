@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import asyncio
-
 from collections.abc import Callable, Iterable
 import functools
 import inspect

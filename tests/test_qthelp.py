@@ -5,7 +5,6 @@ import sys
 import pytest
 
 import prettyqt
-
 from prettyqt import core, qthelp
 from prettyqt.qt import QtHelp
 

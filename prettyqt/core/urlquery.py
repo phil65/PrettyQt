@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import MutableMapping
-from typing import Any
-
-from typing_extensions import Self
+from typing import Any, Self
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr

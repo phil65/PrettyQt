@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 import math
-
 from typing import Literal
 
 from prettyqt import constants, core

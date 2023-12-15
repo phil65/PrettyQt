@@ -7,7 +7,6 @@ import enum
 import os
 import pathlib
 import re
-
 from typing import TYPE_CHECKING, Any, ClassVar, Protocol, TypeVar, runtime_checkable
 from urllib import parse
 
@@ -47,18 +46,15 @@ PathType = str | os.PathLike
 class Validatable(Protocol):
     """An object with an isValid method (e.g. QUrl)."""
 
-    def isValid(self) -> bool:
-        ...
+    def isValid(self) -> bool: ...
 
 
 class SupportsValue(Protocol):
     """An object with a set_value and get_value method."""
 
-    def set_value(self, value):
-        ...
+    def set_value(self, value): ...
 
-    def get_value(self, value):
-        ...
+    def get_value(self, value): ...
 
 
 @runtime_checkable
@@ -74,12 +70,10 @@ class IsAttrs(Protocol):
 @runtime_checkable
 class IsTreeIterator(Protocol):
     @property
-    def root(self):
-        ...
+    def root(self): ...
 
     @property
-    def _abc_impl(self):
-        ...
+    def _abc_impl(self): ...
 
 
 if TYPE_CHECKING:
@@ -643,10 +637,14 @@ def to_marginsf(margins: MarginsFType | QtCore.QMargins | None) -> QtCore.QMargi
         case (int() | float() as x, int() | float() as y):
             return QtCore.QMarginsF(x, y, x, y)
         case (
-            int() | float() as left,
-            int() | float() as top,
-            int() | float() as right,
-            int() | float() as bottom,
+            int()
+            | float() as left,
+            int()
+            | float() as top,
+            int()
+            | float() as right,
+            int()
+            | float() as bottom,
         ):
             return QtCore.QMarginsF(left, top, right, bottom)
         case QtCore.QMarginsF():
@@ -743,9 +741,11 @@ def to_py_pattern(pattern: PatternAndStringType):
 
 def to_regular_expression(
     pattern: PatternAndStringType,
-    flag: core.regularexpression.PatternOptionStr
-    | core.RegularExpression.PatternOption
-    | None = None,
+    flag: (
+        core.regularexpression.PatternOptionStr
+        | core.RegularExpression.PatternOption
+        | None
+    ) = None,
 ):
     from prettyqt import core
 

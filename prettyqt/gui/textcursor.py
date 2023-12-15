@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import contextlib
-
 from typing import Literal
 
 from prettyqt import gui

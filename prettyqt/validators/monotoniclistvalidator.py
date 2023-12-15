@@ -33,7 +33,7 @@ class MonotonicListValidator(gui.Validator):
         for valuestr in re_custom_sep.split(string.strip()):
             try:
                 value = float(valuestr)
-            except ValueError:  # noqa: PERF203
+            except ValueError:
                 return self.State.Intermediate, string, pos
             if prev is not None and value <= prev:
                 return self.State.Intermediate, string, pos

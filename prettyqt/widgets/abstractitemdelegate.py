@@ -10,7 +10,6 @@ logger = logging.getLogger(__name__)
 
 
 class AbstractItemDelegateMixin(core.ObjectMixin):
-    pass
     # this pattern doesnt work for PySide6 yet (cant pass kwargs for class definition)
     # _registry = {}
 

@@ -1,6 +1,6 @@
 import inspect
-import pathlib
 import logging
+import pathlib
 
 from bs4 import BeautifulSoup
 import requests
@@ -27,7 +27,7 @@ def scrape(module_name, klass_name):
     text = text.encode("cp1252", errors="ignore")
     text = text.decode(errors="ignore")
     logger.warning(text)
-    path = pathlib.Path() / module_name
+    pathlib.Path() / module_name
     # path.mkdir(parents=True, exist_ok=True)
     # filepath = path / f"{klass_name}.txt"
     # filepath.write_text(text)

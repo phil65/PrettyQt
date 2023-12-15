@@ -5,7 +5,6 @@ import contextlib
 
 # import enum
 import logging
-
 from typing import TypeVar
 
 from prettyqt import constants, core, eventfilters, gui

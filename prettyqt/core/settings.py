@@ -5,10 +5,7 @@ import contextlib
 import logging
 import os
 import sys
-
-from typing import Any, Literal
-
-from typing_extensions import Self
+from typing import Any, Literal, Self
 
 from prettyqt import core
 from prettyqt.utils import bidict, datatypes

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import functools
-
 from operator import or_
 
 from prettyqt import constants
@@ -12,18 +11,16 @@ from prettyqt.utils import bidict, get_repr, serializemixin
 Mod = constants.KeyboardModifier
 Key = constants.Key
 
-MODIFIERS = bidict(
-    {
-        "None": Mod.NoModifier,
-        "Shift": Mod.ShiftModifier,
-        "Ctrl": Mod.ControlModifier,
-        "Alt": Mod.AltModifier,
-        "Meta": Mod.MetaModifier,
-        "Ctrl+Shift": Mod.ControlModifier | Mod.ShiftModifier,
-        "Ctrl+Alt": Mod.ControlModifier | Mod.AltModifier,
-        "Alt+Shift": Mod.AltModifier | Mod.ShiftModifier,
-    }
-)
+MODIFIERS = bidict({
+    "None": Mod.NoModifier,
+    "Shift": Mod.ShiftModifier,
+    "Ctrl": Mod.ControlModifier,
+    "Alt": Mod.AltModifier,
+    "Meta": Mod.MetaModifier,
+    "Ctrl+Shift": Mod.ControlModifier | Mod.ShiftModifier,
+    "Ctrl+Alt": Mod.ControlModifier | Mod.AltModifier,
+    "Alt+Shift": Mod.AltModifier | Mod.ShiftModifier,
+})
 
 MODIFIER_KEYS = frozenset({Key.Key_Shift, Key.Key_Control, Key.Key_Meta, Key.Key_Alt})
 ARROW_KEYS = frozenset({Key.Key_Up, Key.Key_Down, Key.Key_Left, Key.Key_Right})

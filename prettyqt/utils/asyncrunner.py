@@ -20,7 +20,6 @@ import logging
 import os
 import threading
 import time
-
 from typing import Any, ParamSpec, TypeVar, cast
 
 from prettyqt import core
@@ -340,7 +339,6 @@ if __name__ == "__main__":
     from urllib.parse import urlsplit
 
     import requests
-
     from requests import Response
     from requests.exceptions import ConnectionError
 

@@ -7,7 +7,6 @@ import html
 import os
 import pathlib
 import sys
-
 from typing import TYPE_CHECKING, Any, Literal, overload
 
 import qstylizer.parser
@@ -168,10 +167,12 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
     def map_to(
         self,
         widget: widgets.QWidget | Literal["global", "parent", "window"],
-        pos_or_rect: datatypes.PointType
-        | datatypes.RectType
-        | datatypes.PointFType
-        | datatypes.RectFType,
+        pos_or_rect: (
+            datatypes.PointType
+            | datatypes.RectType
+            | datatypes.PointFType
+            | datatypes.RectFType
+        ),
     ) -> core.QRect | core.QRectF | core.QPoint | core.QPointF:
         """Map a point or rect to a widget, global position or parent.
 
@@ -219,10 +220,12 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
     def map_from(
         self,
         widget: widgets.QWidget | Literal["global", "parent", "window"],
-        pos_or_rect: datatypes.PointType
-        | datatypes.RectType
-        | datatypes.PointFType
-        | datatypes.RectFType,
+        pos_or_rect: (
+            datatypes.PointType
+            | datatypes.RectType
+            | datatypes.PointFType
+            | datatypes.RectFType
+        ),
     ) -> core.QRect | core.QRectF | core.QPoint | core.QPointF:
         """Map a point or rect from a widget, global position or parent.
 
@@ -708,12 +711,12 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
 
     def set_size_policy(
         self,
-        horizontal: widgets.sizepolicy.SizePolicyStr
-        | widgets.QSizePolicy.Policy
-        | None = None,
-        vertical: widgets.sizepolicy.SizePolicyStr
-        | widgets.QSizePolicy.Policy
-        | None = None,
+        horizontal: (
+            widgets.sizepolicy.SizePolicyStr | widgets.QSizePolicy.Policy | None
+        ) = None,
+        vertical: (
+            widgets.sizepolicy.SizePolicyStr | widgets.QSizePolicy.Policy | None
+        ) = None,
     ):
         """Set the size policy.
 
