@@ -52,7 +52,6 @@ dev = [
     "pip",
     "pyreadline3",
     "devtools",
-    "commitizen",
 ]
 
 typing = [
@@ -263,22 +262,14 @@ types-orjson = "^3.6"
 types-python-dateutil = "^2"
 types-requests = "^2.31.0.1"
 pytest-xvfb = {version = "^2", markers = "sys_platform == 'linux'"}
-coverage = "^7"
-
-mkdocs = "^1"
 mkdocs_mknodes = "*"
 mkdocs-material = {version = "^9", allow-prereleases=true}
 mkdocstrings = {version = "^0", extras = ["python"]}
 mkdocs-glightbox = "*"
-mkdocs-section-index = "^0.3.5"
 markdown-exec = "*"
-mkdocs-literate-nav = "^0.6.0"
-mkdocs-gen-files = "^0.5.0"
 pymdown-extensions = "^10"
 
-black = "^23"
 devtools = "^0"
-commitizen = "^3"
 
 
 [tool.pytest.ini_options]
@@ -423,18 +414,6 @@ lines-between-types = 1
 force-sort-within-sections = true
 combine-as-imports = true
 
-[tool.commitizen]
-name = "cz_conventional_commits"
-github_repo = "phil65/PrettyQt"
-version = "1.57.4"
-tag_format = "v$version"
-update_changelog_on_bump = false
-changelog_start_rev = "v1.40.0"
-changelog_file = "changelog.md"
-version_files = [
-    "prettyqt/__init__.py:__version__",
-    "pyproject.toml:version",
-]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
