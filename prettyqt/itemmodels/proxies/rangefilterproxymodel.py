@@ -25,7 +25,7 @@ class RangeFilterProxyModel(core.SortFilterProxyModel):
             return False
         return self._max_value is None or value <= self._max_value
 
-    def set_min_value(self, value: float | int | None):
+    def set_min_value(self, value: float | None):
         self._min_value = value
         self.invalidateRowsFilter()
 
@@ -34,7 +34,7 @@ class RangeFilterProxyModel(core.SortFilterProxyModel):
             return -float("inf")
         return self._min_value
 
-    def set_max_value(self, value: float | int):
+    def set_max_value(self, value: float):
         self._max_value = value
         self.invalidateRowsFilter()
 

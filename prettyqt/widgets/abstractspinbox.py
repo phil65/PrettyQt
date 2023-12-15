@@ -118,7 +118,7 @@ class AbstractSpinBoxMixin(widgets.WidgetMixin):
     def get_value(self) -> int:
         return self.value()
 
-    def set_value(self, value: int | float):
+    def set_value(self, value: float):
         self.setValue(value)
 
 
