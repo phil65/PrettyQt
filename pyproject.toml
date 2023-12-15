@@ -51,8 +51,6 @@ Changelog = "https://github.com/phil65/prettyqt/blob/main/CHANGELOG.md"
 dev = [
     "pip",
     "pyreadline3",
-    "pylint",
-    "black",
     "devtools",
     "commitizen",
 ]
@@ -264,7 +262,6 @@ types-Deprecated = "^1.2"
 types-orjson = "^3.6"
 types-python-dateutil = "^2"
 types-requests = "^2.31.0.1"
-pylint = "^2.5"
 pytest-xvfb = {version = "^2", markers = "sys_platform == 'linux'"}
 coverage = "^7"
 
@@ -411,6 +408,13 @@ target-version = "py311"
 [tool.ruff.flake8-quotes]
 docstring-quotes = "double"
 
+
+[tool.ruff.format]
+# Enable preview style formatting.
+preview = true
+docstring-code-format = true
+
+
 [tool.ruff.isort]
 lines-after-imports = 2
 lines-between-types = 1
@@ -418,24 +422,6 @@ lines-between-types = 1
 force-sort-within-sections = true
 combine-as-imports = true
 
-[tool.black]
-line-length = 90
-target-version = ['py311']
-include = '\.pyi?$'
-exclude = '''
-/(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-  | tests/.*/setup.py
-)/
-'''
 [tool.commitizen]
 name = "cz_conventional_commits"
 github_repo = "phil65/PrettyQt"
