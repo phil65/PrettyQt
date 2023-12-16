@@ -66,16 +66,16 @@ class ErrorMessageBox(widgets.MessageBox):
         return cls.from_exc(e, parent=parent).exec()
 
     def _get_traceback(self):
-        return (
-            traceback.format_exc()
-            if self._exc is None
-            else get_tb_formatter(gui.Font.mono().family())(self._exc, as_html=True)
-        )
+        if self._exc is None:
+            return traceback.format_exc()
+        formatter = get_tb_formatter(gui.Font.mono().family())
+        return formatter(self._exc, as_html=True)
 
     @classmethod
     def _excepthook(cls, exc_type: type[Exception], exc_value: Exception, exc_traceback):
         """Exception hook used during application execution."""
-        tb = "".join(traceback.format_exception(exc_type, exc_value, exc_traceback))
+        strings = traceback.format_exception(exc_type, exc_value, exc_traceback)
+        tb = "".join(strings)
         logger.error(tb)
         return ErrorMessageBox.raise_(exc_value, parent=None)
 
@@ -106,35 +106,24 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
             # avoids printing the array data
             # some discussion related to obtaining the current string function
             # can be found here, https://github.com/numpy/numpy/issues/11266
-            info = (
-                exc.__class__,
-                exc,
-                exc.__traceback__,
-            )
             import numpy as np
 
             np.set_string_function(lambda arr: f"{type(arr)} {arr.shape} {arr.dtype}")
 
             vbtb = IPython.core.ultratb.VerboseTB(color_scheme=color)
+            tb = vbtb.text(exc.__class__, exc, exc.__traceback__)
             if as_html:
                 ansi_string = (
-                    vbtb.text(*info)
-                    .replace(" ", "&nbsp;")
-                    .replace("<", "&lt;")
-                    .replace(">", "&gt;")
+                    tb.replace(" ", "&nbsp;").replace("<", "&lt;").replace(">", "&gt;")
                 )
                 html = helpers.ansi2html(ansi_string)
                 html = html.replace("\n", "<br>")
-                html = (
-                    f"<span style='font-family: monaco,{font},monospace;'>{html}</span>"
-                )
-                tb_text = html
-            else:
-                tb_text = vbtb.text(*info)
+                style = f"font-family: monaco,{font},monospace;"
+                tb = f"<span style='{style}'>{html}</span>"
 
             # resets to default behavior
             np.set_string_function(None)
-            return tb_text
+            return tb
 
     except ModuleNotFoundError:
         import cgitb
@@ -179,7 +168,7 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
             except ImportError:
                 np_imported = False
             if as_html:
-                html = "\n".join(cgitb_chain(info[1]))
+                html = "\n".join(cgitb_chain(exc))
                 # cgitb has a lot of hardcoded colors that don't work for us
                 # remove bgcolor, and let theme handle it
                 html = re.sub('bgcolor="#.*"', "", html)
@@ -199,15 +188,12 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
                 )
                 # remove hardcoded fonts
                 html = html.replace("\n", "<br>")
-                html = (
-                    f"<span style='font-family: monaco,{font},monospace;'>"
-                    + html
-                    + "</span>"
-                )
-                tb_text = html
+                style = f"font-family: monaco,{font},monospace;"
+                tb_text = f"<span style='{style}'>{html}</span>"
             else:
                 # if we don't need HTML, just use traceback
-                tb_text = "".join(traceback.format_exception(*info))
+                strings = traceback.format_exception(*info)
+                tb_text = "".join(strings)
             # resets to default behavior
             if np_imported:
                 np.set_string_function(None)
