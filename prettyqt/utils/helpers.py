@@ -19,7 +19,14 @@ CASE_PATTERN = re.compile(r"(?<!^)(?=[A-Z])")
 
 
 def is_in_slice(a_slice: slice | range, idx: int) -> bool:
-    """Note: this always returns False for negative slice.stop."""
+    """Check whether given index is part of given slice.
+
+    Note: this always returns False for negative slice.stop.
+
+    Arguments:
+        a_slice: slice to check
+        idx: index to check
+    """
     start = a_slice.start or 0
     is_behind_range = a_slice.stop is not None and idx >= a_slice.stop
     if idx < start or is_behind_range:
@@ -29,7 +36,13 @@ def is_in_slice(a_slice: slice | range, idx: int) -> bool:
 
 
 def is_position_in_index(x: int, y: int, index) -> bool:
-    """Index is a slice tuple."""
+    """Check whether given x and y values are part of the index.
+
+    Arguments:
+        x: x value
+        y: y value
+        index: tuple of two ints / slices. If None, True is returned.
+    """
     match index:
         case None:
             return True
@@ -41,6 +54,8 @@ def is_position_in_index(x: int, y: int, index) -> bool:
             return is_in_slice(col, y) and is_in_slice(row, x)
         case int() as row, int() as col:
             return x == row and y == col
+        case _:
+            raise TypeError(index)
 
 
 def iter_positions(
@@ -113,6 +128,11 @@ def load_json(data):
 
 
 def parse_time(time_str: str) -> int:
+    """Parse given string and return duration in seconds.
+
+    Arguments:
+        time_str: String to parse
+    """
     parts = TIME_REGEX.match(time_str)
     if not parts:
         raise ValueError(time_str)
