@@ -46,10 +46,8 @@ plugins:
 - search
 # - social  # this one has dependency which is not on pypi for windows. (cairocffi)
 - tags
-- section-index  # clickable sections leading to index page (https://github.com/oprypin/mkdocs-section-index)
 - glightbox  # better image support
 - markdown-exec
-- literate-nav
 - mknodes:
     build_fn: docs/gen_pages.py:build
 - mkdocstrings:

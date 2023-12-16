@@ -43,7 +43,7 @@ class MarkdownModel(itemmodels.TreeModel):
             case constants.DISPLAY_ROLE, 0:
                 match node:
                     case mknodes.MkNav():
-                        return f"{node.section}/"
+                        return f"{node.title}/"
                     case mknodes.MkPage():
                         return node.path
                     case _:
@@ -54,7 +54,7 @@ class MarkdownModel(itemmodels.TreeModel):
             case constants.DISPLAY_ROLE, 1:
                 return type(node).__name__
             case constants.DISPLAY_ROLE, 2:
-                keys = node.resolved_virtual_files.keys()
+                keys = node.get_resources().keys()
                 return ", ".join(keys)
             case self.Roles.MarkdownRole, _:
                 return node.to_markdown()
@@ -69,7 +69,8 @@ class MarkdownModel(itemmodels.TreeModel):
 if __name__ == "__main__":
     page = mknodes.MkPage()
     page += mknodes.MkAdmonition("test")
-    page += mknodes.MkTable(data=dict(a=[1, 2], b=["c", "D"]), header="From mapping")
+    data = dict(a=["1", "2"], b=["c", "D"])
+    page += mknodes.MkTable(data=data)
     page += mknodes.MkDocStrings(helpers, header="DocStrings")
     model = MarkdownModel(page)
     print(page.to_markdown())

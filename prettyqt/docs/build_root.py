@@ -6,29 +6,28 @@ import sys
 
 import prettyqt
 from prettyqt import prettyqtmarkdown
-import mknodes
+import mknodes as mk
 
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-
-ClassPage = prettyqtmarkdown.MkPrettyQtClassPage
 
 
 def is_qt_module(module):
     return hasattr(module, "QT_MODULE")
 
 
-def build_root(project: mknodes.Project):
+def build_root(project: mk.Project):
     old = project.linkprovider
     provider = prettyqtmarkdown.QtLinkProvider(
         old.base_url, old.use_directory_urls, include_stdlib=True
     )
     provider.add_inv_file("docs/qt6.inv", "https://doc.qt.io/qtforpython/")
     project.linkprovider = provider
-    project.theme.announcement_bar = mknodes.MkMetadataBadges("dependencies")
+    project.theme.announcement_bar = mk.MkMetadataBadges("dependencies")
     nav_file = pathlib.Path(__file__).parent / "SUMMARY.md"
-    root_nav = mknodes.MkNav.from_file(nav_file)
+    root_nav = mk.MkNav()
+    root_nav.parse.file(nav_file)
     project._root = root_nav
     root_nav.associated_project = project
     qt_docs = root_nav.add_doc(prettyqt, section_name="Qt-based modules")
@@ -43,32 +42,31 @@ def build_root(project: mknodes.Project):
     return root_nav
 
 
-def populate_docs(doc_nav: mknodes.MkDoc, predicate):
+def populate_docs(doc_nav: mk.MkDoc, predicate):
     prettyqt.import_all()
     for submod in doc_nav.iter_modules(predicate=predicate):
-        subdoc = doc_nav.add_doc(submod, class_page=ClassPage, flatten_nav=True)
-        subdoc.collect_classes()
+        doc_nav.add_doc(submod, class_template="classpage_custom.jinja", flatten_nav=True)
 
 
-def populate_dev_section(nav: mknodes.MkNav):
+def populate_dev_section(nav: mk.MkNav):
     page = nav.add_page("Changelog")
-    page += mknodes.MkChangelog()
+    page += mk.MkChangelog()
 
-    page = nav.add_page("Dependencies", hide_toc=True)
-    page += mknodes.MkDependencyTable()
+    page = nav.add_page("Dependencies", hide="toc")
+    page += mk.MkDependencyTable()
 
     page = nav.add_page("Code of conduct")
-    page += mknodes.MkCodeOfConduct()
+    page += mk.MkCodeOfConduct()
 
     page = nav.add_page("Contributing")
-    page += mknodes.MkCommitConventions()
-    page += mknodes.MkPullRequestGuidelines()
+    page += mk.MkCommitConventions()
+    page += mk.MkPullRequestGuidelines()
 
     page = nav.add_page("Setting up the environment")
-    page += mknodes.MkDevEnvSetup()
+    page += mk.MkDevEnvSetup()
 
-    node = mknodes.MkLicense()
-    page = nav.add_page("License", hide_toc=True)
+    node = mk.MkLicense()
+    page = nav.add_page("License", hide="toc")
     page += node
 
 
@@ -77,7 +75,8 @@ if __name__ == "__main__":
 
     app = widgets.app()
     nav_file = pathlib.Path(__file__).parent / "SUMMARY.md"
-    root_nav = mknodes.MkNav.from_file(nav_file, section=None)
+    root_nav = mk.MkNav()
+    root_nav.parse.file(nav_file)
     table = prettyqtmarkdown.MarkdownWidget()
     table.set_markdown(root_nav)
     table.show()

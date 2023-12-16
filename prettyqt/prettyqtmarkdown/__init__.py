@@ -12,7 +12,6 @@ from .qtlinkprovider import QtLinkProvider
 from .markdownmodel import MarkdownModel
 from .markdownwidget import MarkdownWidget
 from .mkitemmodeltable import MkItemModelTable
-from .mkprettyqtclasspage import MkPrettyQtClassPage
 from .mkprettyqtdiagram import MkPrettyQtDiagram
 from .mkpropertytable import MkPropertyTable
 from .mkwidgetscreenshot import MkWidgetScreenShot
@@ -22,7 +21,6 @@ __all__ = [
     "MkItemModelTable",
     "MarkdownModel",
     "MarkdownWidget",
-    "MkPrettyQtClassPage",
     "MkPrettyQtDiagram",
     "MkPropertyTable",
     "MkWidgetScreenShot",
