@@ -2,6 +2,7 @@
 
 Application's QSettings are used to store the list of recent files.
 """
+
 from __future__ import annotations
 
 import contextlib

@@ -1,4 +1,5 @@
 """Tests for `prettyqt` package."""
+
 import pytest
 
 from prettyqt import core, network

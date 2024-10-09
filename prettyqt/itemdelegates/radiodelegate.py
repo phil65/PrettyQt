@@ -96,7 +96,9 @@ class RadioDelegate(widgets.StyledItemDelegate):
         button = editor.button_group.checkedId()
         if button >= 0:
             model.setData(
-                index, self.items[button], constants.DISPLAY_ROLE  # type: ignore
+                index,
+                self.items[button],
+                constants.DISPLAY_ROLE,  # type: ignore
             )
             self.choices[button] = index.row()
 
