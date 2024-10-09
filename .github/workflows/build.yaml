@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
   build:
-
     strategy:
       fail-fast: false
       matrix:
@@ -12,58 +11,60 @@ jobs:
         python-version: ["3.11", "3.12"]
     runs-on: ${{ matrix.platform }}
     env:
-      DISPLAY: ':99.0'
+      DISPLAY: ":99.0"
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-    - uses: tlambert03/setup-qt-libs@v1
-    - name: Linux opengl
-      if: runner.os == 'Linux'
-      run: sudo apt-get install -y libopengl0 libegl1-mesa libxcb-xinput0 libpulse0
-    # - name: start TextToSpeech service
-    #   if: runner.os == 'Linux'
-    #   run: |
-    #     sudo apt-get install speech-dispatcher espeak
-    #     speech-dispatcher -d
-    - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip install poetry
-        poetry install
-    - name: Test with pytest  (PyQt6)
-      # combine test coverage with --cov-append?
-      uses: coactions/setup-xvfb@v1
-      timeout-minutes: 5
-      with:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: tlambert03/setup-qt-libs@v1
+      - name: Linux opengl
+        if: runner.os == 'Linux'
+        run: sudo apt-get install -y libopengl0 libegl1-mesa libxcb-xinput0 libpulse0
+      # - name: start TextToSpeech service
+      #   if: runner.os == 'Linux'
+      #   run: |
+      #     sudo apt-get install speech-dispatcher espeak
+      #     speech-dispatcher -d
+      - name: Install uv
+        uses: yezz123/setup-uv@v4
+      - name: Install dependencies
         run: |
-          poetry install -E pyqt6 -E addons
-          poetry run pytest
-    - name: Test with pytest (PySide6)
-      uses: coactions/setup-xvfb@v1
-      # if: runner.os == 'Linux'
-      timeout-minutes: 5
-      with:
-        run: |
-          poetry install -E pyside6 -E addons
-          poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
+          pip install --upgrade pip
+          pip install poetry
+          poetry install
+      - name: Test with pytest  (PyQt6)
+        # combine test coverage with --cov-append?
+        uses: coactions/setup-xvfb@v1
+        timeout-minutes: 5
+        with:
+          run: |
+            poetry install -E pyqt6 -E addons
+            poetry run pytest
+      - name: Test with pytest (PySide6)
+        uses: coactions/setup-xvfb@v1
+        # if: runner.os == 'Linux'
+        timeout-minutes: 5
+        with:
+          run: |
+            poetry install -E pyside6 -E addons
+            poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
 
-    - name: Upload coverage to Codecov
-      if: runner.os == 'Windows' && matrix.python-version == '3.11'
-      uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-    - name: Create documentation
-      # combine test coverage with --cov-append?
-      # if: matrix.python-version == '3.11' && runner.os == 'Linux'
-      uses: coactions/setup-xvfb@v1
-      timeout-minutes: 10
-      with:
-        run: |
-          poetry install -E pyside6 -E addons
-          poetry run mkdocs build
+      - name: Upload coverage to Codecov
+        if: runner.os == 'Windows' && matrix.python-version == '3.11'
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Create documentation
+        # combine test coverage with --cov-append?
+        # if: matrix.python-version == '3.11' && runner.os == 'Linux'
+        uses: coactions/setup-xvfb@v1
+        timeout-minutes: 10
+        with:
+          run: |
+            poetry install -E pyside6 -E addons
+            poetry run mkdocs build
     # - name: Build and publish
     #   if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.11' && runner.os == 'Linux'
     #   run: |
@@ -81,40 +82,40 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     needs: build
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
 
-    - name: Install packages
+      - name: Install packages
 
-      # if: runner.os == 'Linux'
-      run: |
-        pip install --upgrade pip
-        pip install poetry
-        poetry install -E pyside6 -E addons
-    - name: Build documentation
-      uses: coactions/setup-xvfb@v1
-      timeout-minutes: 10
-      with:
+        # if: runner.os == 'Linux'
         run: |
-          poetry run mkdocs build
-    - name: Build and publish
-      run: |
-        poetry config pypi-token.pypi ${{ secrets.PYPI_SECRET }}
-        poetry publish --build
-    # - name: Deploy docs
-    #   # if: github.event_name == 'push'
-    #   uses: mhausenblas/mkdocs-deploy-gh-pages@master
-    #   # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #     # CUSTOM_DOMAIN: optionaldomain.com
-    - name: Deploy docs
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./site
+          pip install --upgrade pip
+          pip install poetry
+          poetry install -E pyside6 -E addons
+      - name: Build documentation
+        uses: coactions/setup-xvfb@v1
+        timeout-minutes: 10
+        with:
+          run: |
+            poetry run mkdocs build
+      - name: Build and publish
+        run: |
+          poetry config pypi-token.pypi ${{ secrets.PYPI_SECRET }}
+          poetry publish --build
+      # - name: Deploy docs
+      #   # if: github.event_name == 'push'
+      #   uses: mhausenblas/mkdocs-deploy-gh-pages@master
+      #   # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     # CUSTOM_DOMAIN: optionaldomain.com
+      - name: Deploy docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
