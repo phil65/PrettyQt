@@ -21,20 +21,18 @@ ChannelConfigStr = Literal[
 ]
 
 CHANNEL_CONFIG: bidict[ChannelConfigStr, QtMultimedia.QAudioFormat.ChannelConfig] = (
-    bidict(
-        **{
-            "unknown": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigUnknown,
-            "mono": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigMono,
-            "stereo": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigStereo,
-            "2_1": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfig2Dot1,
-            "3_0": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfig3Dot0,
-            "3_1": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfig3Dot1,
-            "5_0": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigSurround5Dot0,
-            "5_1": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigSurround5Dot1,
-            "7_0": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigSurround7Dot0,
-            "7_1": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigSurround7Dot1,
-        }
-    )
+    bidict(**{
+        "unknown": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigUnknown,
+        "mono": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigMono,
+        "stereo": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigStereo,
+        "2_1": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfig2Dot1,
+        "3_0": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfig3Dot0,
+        "3_1": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfig3Dot1,
+        "5_0": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigSurround5Dot0,
+        "5_1": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigSurround5Dot1,
+        "7_0": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigSurround7Dot0,
+        "7_1": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigSurround7Dot1,
+    })
 )
 
 

@@ -48,12 +48,12 @@ class TabWidget(widgets.WidgetMixin, widgets.QTabWidget):
         return self.count()
 
     @overload
-    def __getitem__(self, index: int) -> widgets.QWidget:
-        ...
+    def __getitem__(self, index: int) -> widgets.QWidget: ...
 
     @overload
-    def __getitem__(self, index: slice) -> listdelegators.ListDelegator[widgets.QWidget]:
-        ...
+    def __getitem__(
+        self, index: slice
+    ) -> listdelegators.ListDelegator[widgets.QWidget]: ...
 
     def __getitem__(
         self, index: int | slice

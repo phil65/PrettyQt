@@ -1,6 +1,5 @@
 """Tests for `prettyqt` package."""
 
-
 import pathlib
 
 import pytest

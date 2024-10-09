@@ -27,9 +27,9 @@ def get_all_qt_enums():
         if isinstance(i[1], enum.EnumType)
     ]
 
-    all_qt_enums.extend(
-        [i[1] for i in inspect.getmembers(core.Qt) if isinstance(i[1], enum.EnumType)]
-    )
+    all_qt_enums.extend([
+        i[1] for i in inspect.getmembers(core.Qt) if isinstance(i[1], enum.EnumType)
+    ])
     return all_qt_enums
 
 

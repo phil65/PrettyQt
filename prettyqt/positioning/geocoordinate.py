@@ -27,13 +27,11 @@ CoordinateFormatStr = Literal[
 ]
 
 
-COORDINATE_TYPE = bidict(
-    {
-        "invalid": mod.CoordinateType.InvalidCoordinate,
-        "2d": mod.CoordinateType.Coordinate2D,
-        "3d": mod.CoordinateType.Coordinate3D,
-    }
-)
+COORDINATE_TYPE = bidict({
+    "invalid": mod.CoordinateType.InvalidCoordinate,
+    "2d": mod.CoordinateType.Coordinate2D,
+    "3d": mod.CoordinateType.Coordinate3D,
+})
 
 CoordinateTypeStr = Literal["invalid", "2d", "3d"]
 

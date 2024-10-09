@@ -53,7 +53,7 @@ jobs:
 
       - name: Upload coverage to Codecov
         if: runner.os == 'Windows' && matrix.python-version == '3.11'
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Create documentation

@@ -17,9 +17,10 @@ class ChangeHeadersProxyModel(core.IdentityProxyModel):
     ### Example
 
     ```py
-    table.proxifier.change_headers(header=["x", "y", "z"],
+    table.proxifier.change_headers(
+        header=["x", "y", "z"],
         orientation=constants.HORIZONTAL,
-        role=constants.DISPLAY_ROLE
+        role=constants.DISPLAY_ROLE,
     )
     table.show()
     # or
