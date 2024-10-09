@@ -637,14 +637,10 @@ def to_marginsf(margins: MarginsFType | QtCore.QMargins | None) -> QtCore.QMargi
         case (int() | float() as x, int() | float() as y):
             return QtCore.QMarginsF(x, y, x, y)
         case (
-            int()
-            | float() as left,
-            int()
-            | float() as top,
-            int()
-            | float() as right,
-            int()
-            | float() as bottom,
+            int() | float() as left,
+            int() | float() as top,
+            int() | float() as right,
+            int() | float() as bottom,
         ):
             return QtCore.QMarginsF(left, top, right, bottom)
         case QtCore.QMarginsF():

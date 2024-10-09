@@ -52,7 +52,6 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
         table.set_model(model)
         # table.proxifier.add_column(header="Full name", formatter="{1}, {0}")
         table.show()
-
         ```
         <figure markdown>
           ![Image title](../../images/columnjoinerproxymodel_before.png)

@@ -28,7 +28,6 @@ class MeltProxyModel(core.AbstractProxyModel):
         table.set_model(model)
         # table.proxifier.melt(id_columns=[0, 1])
         table.show()
-
         ```
         <figure markdown>
           ![Image title](../../images/meltproxymodel_before.png)

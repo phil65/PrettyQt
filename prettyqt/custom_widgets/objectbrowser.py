@@ -1,6 +1,5 @@
 """Object browser GUI in Qt."""
 
-
 from __future__ import annotations
 
 import logging

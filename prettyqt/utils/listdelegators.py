@@ -20,16 +20,13 @@ class ListDelegator(list[T]):
         super().__init__(*args)
 
     @overload
-    def __getitem__(self, index: str) -> ListDelegator[fx.AnimationWrapper]:
-        ...
+    def __getitem__(self, index: str) -> ListDelegator[fx.AnimationWrapper]: ...
 
     @overload
-    def __getitem__(self, index: slice) -> ListDelegator[T]:
-        ...
+    def __getitem__(self, index: slice) -> ListDelegator[T]: ...
 
     @overload
-    def __getitem__(self, index: SupportsIndex) -> T:
-        ...
+    def __getitem__(self, index: SupportsIndex) -> T: ...
 
     def __getitem__(
         self, index: str | SupportsIndex | slice
@@ -49,12 +46,10 @@ class ListDelegator(list[T]):
                 return super().__getitem__(index)
 
     @overload
-    def __getattr__(self, method_name: Literal["fx"]) -> ListDelegator[fx.Fx]:
-        ...
+    def __getattr__(self, method_name: Literal["fx"]) -> ListDelegator[fx.Fx]: ...
 
     @overload
-    def __getattr__(self, method_name: str) -> Callable:
-        ...
+    def __getattr__(self, method_name: str) -> Callable: ...
 
     def __getattr__(self, method_name: str) -> ListDelegator[fx.Fx] | Callable:
         # method_name = helpers.to_lower_camel(method_name)

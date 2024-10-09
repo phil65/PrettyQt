@@ -60,9 +60,9 @@ class WidgetsDetailsModel(core.AbstractTableModel):
         if isinstance(value, bool) and role == constants.CHECKSTATE_ROLE:
             return self.to_checkstate(value)
         match role:
-            case (
-                constants.DISPLAY_ROLE | constants.EDIT_ROLE | constants.USER_ROLE
-            ) if not isinstance(value, bool):
+            case constants.DISPLAY_ROLE | constants.EDIT_ROLE | constants.USER_ROLE if (
+                not isinstance(value, bool)
+            ):
                 return value
 
     def setData(

@@ -18,12 +18,12 @@ class StackedWidget(widgets.FrameMixin, widgets.QStackedWidget):
         return self
 
     @overload
-    def __getitem__(self, index: int) -> widgets.QWidget:
-        ...
+    def __getitem__(self, index: int) -> widgets.QWidget: ...
 
     @overload
-    def __getitem__(self, index: slice) -> listdelegators.ListDelegator[widgets.QWidget]:
-        ...
+    def __getitem__(
+        self, index: slice
+    ) -> listdelegators.ListDelegator[widgets.QWidget]: ...
 
     def __getitem__(
         self, index: int | slice
