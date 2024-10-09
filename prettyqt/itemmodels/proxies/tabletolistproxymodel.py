@@ -24,7 +24,6 @@ class TableToListProxyModel(core.IdentityProxyModel):
         table.set_model(model)
         # table.proxifier.to_list()
         table.show()
-
         ```
         <figure markdown>
           ![Image title](../../images/tabletolistproxymodel_before.png)

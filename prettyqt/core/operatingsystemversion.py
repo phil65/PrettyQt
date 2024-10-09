@@ -87,14 +87,12 @@ class OperatingSystemVersion(core.QOperatingSystemVersion):
         )
 
     def __hash__(self):
-        return hash(
-            (
-                self.get_type(),
-                self.majorVersion(),
-                self.minorVersion(),
-                self.microVersion(),
-            )
-        )
+        return hash((
+            self.get_type(),
+            self.majorVersion(),
+            self.minorVersion(),
+            self.microVersion(),
+        ))
 
     def get_type(self) -> OsTypeStr:
         """Get current os type.

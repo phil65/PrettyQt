@@ -367,7 +367,7 @@ if __name__ == "__main__":
         for i in range(10):
             section = SectionWidget(window_title=f"test{i}")
             section.box.add(SectionWidget(window_title=f"{i}nested"))
-            section.box.add(SectionWidget(window_title=f"{i*10}nested"))
+            section.box.add(SectionWidget(window_title=f"{i * 10}nested"))
             scroll_layout.add(section)
         window.show()
         app.exec()

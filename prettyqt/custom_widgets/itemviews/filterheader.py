@@ -27,7 +27,7 @@ class FilterHeader(widgets.HeaderView):
     model = MyModel()
     widget = widgets.TableView()
     widget.set_model(model)
-    widget.h_header = custom_widgets.FilterHeader() # same as setHorizontalHeader()
+    widget.h_header = custom_widgets.FilterHeader()  # same as setHorizontalHeader()
     ```
 
     and you will get filter capabilities for your table.

@@ -10,35 +10,33 @@ from prettyqt.utils import bidict
 
 SOURCE_FONT = gui.Font.mono(as_qt=True)
 
-NODE_MAP = bidict(
-    {
-        ast.Add: "+",
-        ast.Sub: "-",
-        ast.Mult: "*",
-        ast.Div: "/",
-        ast.Mod: "%",
-        ast.Eq: "==",
-        ast.In: "in",
-        ast.Pow: "**",
-        ast.MatMult: "@",
-        ast.FloorDiv: "//",
-        ast.BitAnd: "&",
-        ast.BitOr: "|",
-        ast.BitXor: "^",
-        ast.Gt: ">",
-        ast.GtE: ">=",
-        ast.Lt: "<",
-        ast.LtE: "<=",
-        ast.Is: "is",
-        ast.NotEq: "!=",
-        ast.IsNot: "is not",
-        ast.Not: "not ",
-        ast.NotIn: "not in",
-        ast.And: "and",
-        ast.Or: "or",
-        ast.Invert: "~",
-    }
-)
+NODE_MAP = bidict({
+    ast.Add: "+",
+    ast.Sub: "-",
+    ast.Mult: "*",
+    ast.Div: "/",
+    ast.Mod: "%",
+    ast.Eq: "==",
+    ast.In: "in",
+    ast.Pow: "**",
+    ast.MatMult: "@",
+    ast.FloorDiv: "//",
+    ast.BitAnd: "&",
+    ast.BitOr: "|",
+    ast.BitXor: "^",
+    ast.Gt: ">",
+    ast.GtE: ">=",
+    ast.Lt: "<",
+    ast.LtE: "<=",
+    ast.Is: "is",
+    ast.NotEq: "!=",
+    ast.IsNot: "is not",
+    ast.Not: "not ",
+    ast.NotIn: "not in",
+    ast.And: "and",
+    ast.Or: "or",
+    ast.Invert: "~",
+})
 
 
 logger = logging.getLogger(__name__)
@@ -57,6 +55,7 @@ class AstModel(itemmodels.TreeModel):
     ### Example:
     ```py
     import ast
+
     view = TreeView()
     code = pathlib.Path(__file__).read_text()
     tree = ast.parse(code)
