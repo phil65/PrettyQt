@@ -59,8 +59,11 @@ class TupleTreeModel(itemmodels.TreeModel):
     @classmethod
     def supports(cls, instance) -> bool:
         match instance:
-            case dict() if all(
-                isinstance(k, pathlib.Path | tuple) for k in instance.keys() and instance
+            case dict() if (
+                all(
+                    isinstance(k, pathlib.Path | tuple)
+                    for k in instance.keys() and instance
+                )
             ):
                 return True
         return False

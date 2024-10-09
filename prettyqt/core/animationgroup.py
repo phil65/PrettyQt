@@ -13,14 +13,12 @@ if TYPE_CHECKING:
 
 class AnimationGroupMixin(core.AbstractAnimationMixin):
     @overload
-    def __getitem__(self, index: int) -> core.QAbstractAnimation:
-        ...
+    def __getitem__(self, index: int) -> core.QAbstractAnimation: ...
 
     @overload
     def __getitem__(
         self, index: slice
-    ) -> listdelegators.ListDelegator[core.QAbstractAnimation]:
-        ...
+    ) -> listdelegators.ListDelegator[core.QAbstractAnimation]: ...
 
     def __getitem__(self, index: int | slice):
         count = self.animationCount()

@@ -17,18 +17,16 @@ ThemeStr = Literal[
     "Qt",
 ]
 
-THEMES: bidict[ThemeStr, charts.QChart.ChartTheme] = bidict(
-    {
-        "Light": charts.QChart.ChartTheme.ChartThemeLight,
-        "Blue Cerulean": charts.QChart.ChartTheme.ChartThemeBlueCerulean,
-        "Dark": charts.QChart.ChartTheme.ChartThemeDark,
-        "Brown Sand": charts.QChart.ChartTheme.ChartThemeBrownSand,
-        "Blue NCS": charts.QChart.ChartTheme.ChartThemeBlueNcs,
-        "High Contrast": charts.QChart.ChartTheme.ChartThemeHighContrast,
-        "Blue Icy": charts.QChart.ChartTheme.ChartThemeBlueIcy,
-        "Qt": charts.QChart.ChartTheme.ChartThemeQt,
-    }
-)
+THEMES: bidict[ThemeStr, charts.QChart.ChartTheme] = bidict({
+    "Light": charts.QChart.ChartTheme.ChartThemeLight,
+    "Blue Cerulean": charts.QChart.ChartTheme.ChartThemeBlueCerulean,
+    "Dark": charts.QChart.ChartTheme.ChartThemeDark,
+    "Brown Sand": charts.QChart.ChartTheme.ChartThemeBrownSand,
+    "Blue NCS": charts.QChart.ChartTheme.ChartThemeBlueNcs,
+    "High Contrast": charts.QChart.ChartTheme.ChartThemeHighContrast,
+    "Blue Icy": charts.QChart.ChartTheme.ChartThemeBlueIcy,
+    "Qt": charts.QChart.ChartTheme.ChartThemeQt,
+})
 
 
 AnimationOptionStr = Literal["none", "grid_axis", "series", "all"]
