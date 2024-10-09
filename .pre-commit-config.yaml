@@ -1,6 +1,6 @@
 default_language_version:
     python: python3.11
-default_stages: [commit]
+default_stages: [pre-commit]
 repos:
 - repo: local
   hooks:
@@ -8,12 +8,12 @@ repos:
       name: pytest-check
       entry: poetry run pytest
       language: system
-      stages: [push]
+      stages: [pre-push]
       types: [python]
       pass_filenames: false
       always_run: true
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.5.0
+  rev: v5.0.0
   hooks:
     # - id: trailing-whitespace
     # - id: check-ast
@@ -28,7 +28,7 @@ repos:
     # - id: check-added-large-files
 # https://pre-commit.com/hooks.html
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v3.13.0
+  rev: v3.29.1
   hooks:
     - id: commitizen
       stages: [commit-msg]
@@ -42,7 +42,7 @@ repos:
 #       exclude: '(sciscintilla)\.py'
 
 - repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.1.8
+  rev: v0.6.9
   hooks:
     - id: ruff
     - id: ruff-format
