@@ -193,7 +193,7 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
 
     def get_headers(self) -> Mapping[str, str]:
         return {
-            h.data().decode(): self.rawHeader(h).data().decode()
+            h.data().decode(): self.rawHeader(bytes(h).decode()).data().decode()
             for h in self.rawHeaderList()
         }
 
