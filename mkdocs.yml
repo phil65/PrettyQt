@@ -80,6 +80,7 @@ plugins:
           line_length: 90
 
 markdown_extensions:
+- pymdownx.superfences # required for markdown-exec since it checks for it in on_config
 - toc:
     toc_depth: 2
 
