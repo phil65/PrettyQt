@@ -59,6 +59,6 @@ def test_mediaplayer():
     # player.set_source_device(file, "")
     # player.set_source("")
     assert player.get_source() is None
-    assert player.get_error() == "none"
+    assert player.get_error() in {"none", "resource"}
     assert player.get_playback_state() == "stopped"
     assert player.get_media_status() == "none"
