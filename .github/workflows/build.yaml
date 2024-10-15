@@ -31,25 +31,23 @@ jobs:
         uses: yezz123/setup-uv@v4
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
-          pip install poetry
-          poetry install
+          uv sync
       - name: Test with pytest  (PyQt6)
         # combine test coverage with --cov-append?
         uses: coactions/setup-xvfb@v1
         timeout-minutes: 5
         with:
           run: |
-            poetry install -E pyqt6 -E addons
-            poetry run pytest
+            uv sync --extra pyqt6 --extra addons
+            uv run pytest
       - name: Test with pytest (PySide6)
         uses: coactions/setup-xvfb@v1
         # if: runner.os == 'Linux'
         timeout-minutes: 5
         with:
           run: |
-            poetry install -E pyside6 -E addons
-            poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
+            uv sync --extra pyside6 --extra addons
+            uv run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
 
       - name: Upload coverage to Codecov
         if: runner.os == 'Windows' && matrix.python-version == '3.11'
@@ -63,8 +61,8 @@ jobs:
         timeout-minutes: 10
         with:
           run: |
-            poetry install -E pyside6 -E addons
-            poetry run mkdocs build
+            uv sync --extra pyside6 --extra addons
+            uv run mkdocs build
     # - name: Build and publish
     #   if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.11' && runner.os == 'Linux'
     #   run: |
@@ -91,22 +89,23 @@ jobs:
           python-version: "3.11"
 
       - name: Install packages
-
         # if: runner.os == 'Linux'
         run: |
-          pip install --upgrade pip
-          pip install poetry
-          poetry install -E pyside6 -E addons
+          uv sync --extra pyside6 --extra addons
       - name: Build documentation
         uses: coactions/setup-xvfb@v1
         timeout-minutes: 10
         with:
           run: |
-            poetry run mkdocs build
-      - name: Build and publish
+            uv run mkdocs build
+      - name: Build
         run: |
-          poetry config pypi-token.pypi ${{ secrets.PYPI_SECRET }}
-          poetry publish --build
+          uv build
+      - name: Publish on PyPI
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.UV_PUBLISH_TOKEN }}
+        run: |
+          uv publish
       # - name: Deploy docs
       #   # if: github.event_name == 'push'
       #   uses: mhausenblas/mkdocs-deploy-gh-pages@master
