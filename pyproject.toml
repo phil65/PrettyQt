@@ -52,6 +52,7 @@ dev-dependencies = [
     "coverage",
     "mkdocs",
     "mkdocs-material",
+    "mkdocs_mknodes",
     "mkdocstrings[python]",
     "pymdown-extensions",
     "mkdocs-literate-nav",
