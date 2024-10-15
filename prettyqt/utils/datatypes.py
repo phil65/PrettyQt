@@ -226,11 +226,14 @@ def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:
         case bool():
             return "✓" if val else "☐"
         case enum.Flag():
-            return val.name
+            return val.name or ""
         case enum.Enum():
             return val.name
-        case int() | float() | core.QByteArray():
+        case int() | float():
             return locale.toString(val)
+        # case core.QByteArray():
+        #     data = val.data()
+        #     return locale.toString(data)
         case gui.QColor():
             return f"({val.red()},{val.green()},{val.blue()},{val.alpha()})"
         case gui.QBrush():
