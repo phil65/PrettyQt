@@ -1,3 +1,10 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "typed_ast",
+# ]
+# ///
+
 import pathlib
 import sys
 

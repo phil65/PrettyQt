@@ -1,3 +1,11 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "bs4",
+#   "requests"
+# ]
+# ///
+
 import collections
 import os
 import pathlib

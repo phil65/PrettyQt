@@ -1,8 +1,15 @@
-from __future__ import annotations
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "prettyqt",
+#   "pyside6",
+# ]
+# ///
 
 import importlib
 import pkgutil
 import types
+from typing import Self
 
 import PyQt6
 import PySide6
@@ -40,7 +47,7 @@ class API:
     def import_modules(self):
         return [importlib.import_module(p) for p in self.list_modules()]
 
-    def compare_with(self, other: API):
+    def compare_with(self, other: Self):
         theirs = dir(other.module)
         ours = dir(self.module)
         print(f"Missing modules for {self.module.__name__}")

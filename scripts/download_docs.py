@@ -1,3 +1,14 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "prettyqt",
+#   "pyside6",
+#   "bs4",
+#   "requests"
+# ]
+# ///
+
+
 import inspect
 import logging
 import pathlib

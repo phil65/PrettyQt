@@ -1,3 +1,12 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "requests",
+#   "sphinx",
+#   "pyside6"
+# ]
+# ///
+
 import codecs
 import pathlib
 import re

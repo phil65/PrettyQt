@@ -1,3 +1,7 @@
+# /// script
+# requires-python = ">=3.11"
+# ///
+
 import pathlib
 import re
 import sys
