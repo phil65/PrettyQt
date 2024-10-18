@@ -19,112 +19,149 @@ from sphinx.ext.intersphinx import inspect_main
 from sphinx.util.inventory import InventoryFileReader
 
 
-pyside_uri = "https://doc.qt.io/qtforpython/"
-package_name = "PySide6"
+PYSIDE_URI = "https://doc.qt.io/qtforpython/"
+PACKAGE_NAME = "PySide6"
 
-alias_modules = PySide6._find_all_qt_modules()
-
-# the filename to use to save the original objects.inv file
-original_inv = pathlib.Path("qt6-original.inv")
-original_txt = pathlib.Path("qt6-original.txt")
-
-# the filename to use to save the Sphinx-compatible object.inv file
-modified_inv = pathlib.Path("qt6-with-aliases.inv")
-modified_txt = pathlib.Path("qt6-with-aliases.txt")
+# File paths
+ORIGINAL_INV = pathlib.Path("qt6-original.inv")
+ORIGINAL_TXT = pathlib.Path("qt6-original.txt")
+MODIFIED_INV = pathlib.Path("qt6-with-aliases.inv")
+MODIFIED_TXT = pathlib.Path("qt6-with-aliases.txt")
 
 
-def create_modified_inv():
-    def write(*args):
-        fout.write(compressor.compress((" ".join(args) + "\n").encode("utf-8")))
+def get_alias_modules() -> list[str]:
+    """Get a list of all Qt modules.
 
-    # download the original objects.inv file
-    with original_inv.open(mode="wb") as f:
-        f.write(requests.get(f"{pyside_uri}objects.inv").content)
+    Returns:
+        A list of Qt module names.
+    """
+    return PySide6.__all__
 
-    with original_inv.open(mode="rb") as fin:
-        with modified_inv.open(mode="wb") as fout:
-            # use the same compression for the output file as
-            # sphinx.util.inventory.InventoryFile.dump
-            compressor = zlib.compressobj(9)
 
-            reader = InventoryFileReader(fin)
+def download_original_inv(url: str, output_path: pathlib.Path) -> None:
+    """Download the original objects.inv file.
 
-            # copy the header
-            for _i in range(4):
-                fout.write((reader.readline() + "\n").encode("utf-8"))
+    Args:
+        url: The URL to download the inventory file from.
+        output_path: The path to save the downloaded file.
+    """
+    response = requests.get(url)
+    response.raise_for_status()
+    output_path.write_bytes(response.content)
 
-            for line in reader.read_compressed_lines():
-                # the re.match code is copied from
-                # sphinx.util.inventory.InventoryFile.load_v2
-                m = re.match(
-                    r"(?x)(.+?)\s+(\S*:\S*)\s+(-?\d+)\s+(\S+)\s+(.*)", line.rstrip()
+
+def parse_inventory_line(line: str) -> tuple[str, str, str, str, str]:
+    """Parse a line from the inventory file.
+
+    Args:
+        line: A line from the inventory file.
+
+    Returns:
+        A tuple containing (name, type, priority, location, display_name).
+    """
+    match = re.match(r"(?x)(.+?)\s+(\S*:\S*)\s+(-?\d+)\s+(\S+)\s+(.*)", line.rstrip())
+    if not match:
+        raise ValueError(f"Invalid inventory line: {line}")
+    return match.groups()
+
+
+def generate_aliases(module: str, classname: str, method: str) -> list[str]:
+    """Generate aliases for a given class and method.
+
+    Args:
+        module: The Qt module name.
+        classname: The class name.
+        method: The method name (can be empty).
+
+    Returns:
+        A list of generated aliases.
+    """
+    return [
+        f"PyQt6.{module}.{classname}{method}",
+        f"prettyqt.qt.{module}.{classname}{method}",
+        f"prettyqt.{module[2:].lower()}.{classname}{method}",
+        f"qtpy.{module}.{classname}{method}",
+        f"PySide6.{module}.{classname}{method}",
+        f"{module}.{classname}{method}",
+        f"{classname}{method}",
+    ]
+
+
+def create_modified_inv(
+    original_path: pathlib.Path,
+    modified_path: pathlib.Path,
+    alias_modules: list[str],
+) -> None:
+    """Create a modified inventory file with aliases.
+
+    Args:
+        original_path: Path to the original inventory file.
+        modified_path: Path to save the modified inventory file.
+        alias_modules: List of Qt modules to generate aliases for.
+    """
+    with original_path.open("rb") as fin, modified_path.open("wb") as fout:
+        compressor = zlib.compressobj(9)
+        reader = InventoryFileReader(fin)
+
+        def write(*args: str) -> None:
+            fout.write(compressor.compress((" ".join(args) + "\n").encode("utf-8")))
+
+        # Copy the header
+        for _ in range(4):
+            fout.write((reader.readline() + "\n").encode("utf-8"))
+
+        for line in reader.read_compressed_lines():
+            name, typ, prio, location, dispname = parse_inventory_line(line)
+            location = location.rstrip("$") + name
+
+            write(name, typ, prio, location, dispname)
+            if name.endswith("QtCore.Signal"):
+                write(
+                    f"{PACKAGE_NAME}.QtCore.SignalInstance", typ, prio, location, dispname
                 )
-                if not m:
-                    continue
 
-                name, typ, prio, location, dispname = m.groups()
-                location = location.rstrip("$") + name
+            # Apply the aliases
+            for module in alias_modules:
+                match = re.match(
+                    rf"{PACKAGE_NAME}\.{module}\.{PACKAGE_NAME}\.{module}\.(\w+)(\.\w+)?",
+                    name,
+                )
+                if match:
+                    classname, method = match.groups()
+                    method = method or ""
+                    for alias in generate_aliases(module, classname, method):
+                        write(alias, typ, prio, location, dispname)
 
-                write(name, typ, prio, location, dispname)
-                if name.endswith("QtCore.Signal"):
-                    # QtCore.SignalInstance maps to QtCore.Signal
-                    write(
-                        f"{package_name}.QtCore.SignalInstance",
-                        typ,
-                        prio,
-                        location,
-                        dispname,
-                    )
-
-                # apply the aliases
-                for module in alias_modules:
-                    m = re.match(
-                        rf"{package_name}\.{module}\.{package_name}\.{module}\.(\w+)(\.\w+)?",
-                        name,
-                    )
-                    if m:
-                        classname, method = m.groups()
-                        if method is None:
-                            method = ""
-
-                        aliases = [
-                            f"PyQt6.{module}.{classname}{method}",
-                            f"prettyqt.qt.{module}.{classname}{method}",
-                            f"prettyqt.{module[2:].lower()}.{classname}{method}",
-                            f"qtpy.{module}.{classname}{method}",
-                            f"PySide6.{module}.{classname}{method}",
-                            f"{module}.{classname}{method}",
-                            classname + method,
-                        ]
-
-                        for alias in aliases:
-                            write(alias, typ, prio, location, dispname)
-                            # print(location)
-
-            fout.write(compressor.flush())
+        fout.write(compressor.flush())
 
 
-def main():
-    create_modified_inv()
+def inspect_inventory(inv_path: pathlib.Path, output_path: pathlib.Path) -> None:
+    """Inspect an inventory file and save the output to a text file.
+
+    Args:
+        inv_path: Path to the inventory file to inspect.
+        output_path: Path to save the inspection output.
+    """
+    with codecs.open(output_path, "wb", encoding="utf-8") as f:
+        sys.stdout = f
+        inspect_main([str(inv_path)])
+    sys.stdout = sys.__stdout__
+
+
+def main() -> None:
+    """Main function to orchestrate the inventory file creation and inspection."""
+    alias_modules = get_alias_modules()
+    download_original_inv(f"{PYSIDE_URI}objects.inv", ORIGINAL_INV)
+    create_modified_inv(ORIGINAL_INV, MODIFIED_INV, alias_modules)
+
+    inspect_inventory(ORIGINAL_INV, ORIGINAL_TXT)
+    inspect_inventory(MODIFIED_INV, MODIFIED_TXT)
 
     print("Created:")
-    print(f"  {original_inv}")
-    print(f"  {original_txt}")
-    print(f"  {modified_inv}")
-    print(f"  {modified_txt}")
-
-    # redirect the print() statements in the inspect_main() function to a file
-    sys.stdout = codecs.open(original_txt, "wb", encoding="utf-8")
-    inspect_main([original_inv])
-    sys.stdout.close()
-
-    # if the following succeeds without raising an exception then Sphinx is
-    # able to read the pyqt#-modified-objects.inv file that was just created
-    sys.stdout = codecs.open(modified_txt, "wb", encoding="utf-8")
-    inspect_main([modified_inv])
-    sys.stdout.close()
-
-    sys.exit(0)
+    print(f"  {ORIGINAL_INV}")
+    print(f"  {ORIGINAL_TXT}")
+    print(f"  {MODIFIED_INV}")
+    print(f"  {MODIFIED_TXT}")
 
 
 if __name__ == "__main__":

@@ -12,6 +12,7 @@
 import inspect
 import logging
 import pathlib
+from typing import Any
 
 from bs4 import BeautifulSoup
 import requests
@@ -19,37 +20,68 @@ import requests
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
-module_dict = dict(QtWidgets=QtWidgets, QtGui=QtGui, QtCore=QtCore)
-
-
-def scrape(module_name, klass_name):
-    url = f"https://doc.qt.io/qtforpython-6/PySide6/{module_name}/{klass_name}.html"
-    website = requests.get(url)
-    results = BeautifulSoup(website.content, "html.parser")
-    match = results.find(id="detailed-description")
-    # logger.warning(match)
-    if match is None:
-        return
-    match = match.find(**{"class": "reference internal"})
-    # logger.warning(match)
-    if match is None:
-        return
-    text = match.parent.get_text()
-    text = text.encode("cp1252", errors="ignore")
-    text = text.decode(errors="ignore")
-    logger.warning(text)
-    pathlib.Path() / module_name
-    # path.mkdir(parents=True, exist_ok=True)
-    # filepath = path / f"{klass_name}.txt"
-    # filepath.write_text(text)
-
-
+# Setup logging
+logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
-for module_name, module in module_dict.items():
-    clsmembers = inspect.getmembers(module, inspect.isclass)
-    for klass_name, _klass in clsmembers:
-        scrape(module_name, klass_name)
+
+# Define modules to scrape
+MODULE_DICT: dict[str, Any] = {"QtWidgets": QtWidgets, "QtGui": QtGui, "QtCore": QtCore}
+
+
+def get_class_description(module_name: str, class_name: str) -> str | None:
+    """Scrape and return the detailed description of a PySide6 class.
+
+    Args:
+        module_name: The name of the module (e.g., 'QtWidgets').
+        class_name: The name of the class (e.g., 'QAbstractItemView').
+
+    Returns:
+        The detailed description as a string, or None if not found.
+    """
+    url = f"https://doc.qt.io/qtforpython-6/PySide6/{module_name}/{class_name}.html"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.content, "html.parser")
+
+        description_section = soup.find(id="detailed-description")
+        if description_section is None:
+            return None
+
+        reference = description_section.find(class_="reference internal")
+        if reference is None:
+            return None
+
+        text = reference.parent.get_text()
+        return text.encode("cp1252", errors="ignore").decode(errors="ignore")
+    except requests.RequestException as e:
+        logger.error(f"Error fetching {url}: {e}")
+        return None
+
+
+def process_module(module_name: str, module: Any, save: bool = False) -> None:
+    """Process all classes in a given module.
+
+    Args:
+        module_name: The name of the module.
+        module: The module object.
+        save: whether to save the docs on disk
+    """
+    for class_name, _ in inspect.getmembers(module, inspect.isclass):
+        description = get_class_description(module_name, class_name)
+        if description:
+            logger.warning(f"{module_name}.{class_name}: {description}")
+            if save:
+                save_path = pathlib.Path(module_name)
+                save_path.mkdir(parents=True, exist_ok=True)
+                (save_path / f"{class_name}.txt").write_text(description)
+
+
+def main() -> None:
+    """Main function to process all modules and classes."""
+    for module_name, module in MODULE_DICT.items():
+        process_module(module_name, module, save=True)
 
 
 if __name__ == "__main__":
-    scrape("QtWidgets", "QAbstractItemView")
+    main()
