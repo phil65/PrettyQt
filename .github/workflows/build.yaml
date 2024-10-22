@@ -9,29 +9,40 @@ jobs:
       matrix:
         platform: [macos-latest, windows-latest, ubuntu-22.04]
         python-version: ["3.11", "3.12"]
+        # qt-binding: ["pyside6", "pyqt6"]
     runs-on: ${{ matrix.platform }}
     env:
       DISPLAY: ":99.0"
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+
       - uses: tlambert03/setup-qt-libs@v1
+      # *alternative*:
+      # - uses: pyvista/setup-headless-display-action@v2
+      #   with:
+      #     qt: true
       - name: Linux opengl
         if: runner.os == 'Linux'
-        run: sudo apt-get install -y libopengl0 libegl1-mesa libxcb-xinput0 libpulse0
+        run: sudo apt-get install -y libegl1-mesa libpulse0
+
       # - name: start TextToSpeech service
       #   if: runner.os == 'Linux'
       #   run: |
       #     sudo apt-get install speech-dispatcher espeak
       #     speech-dispatcher -d
+
       - name: Install uv
         uses: yezz123/setup-uv@v4
+
       - name: Install dependencies
         run: |
           uv sync
+
       - name: Test with pytest  (PyQt6)
         # combine test coverage with --cov-append?
         uses: coactions/setup-xvfb@v1
@@ -40,6 +51,7 @@ jobs:
           run: |
             uv sync --extra pyqt6 --extra addons
             uv run pytest
+
       - name: Test with pytest (PySide6)
         uses: coactions/setup-xvfb@v1
         # if: runner.os == 'Linux'
@@ -50,30 +62,20 @@ jobs:
             uv run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
 
       - name: Upload coverage to Codecov
-        if: runner.os == 'Windows' && matrix.python-version == '3.11'
+        if: runner.os == 'Windows' && matrix.python-version == '3.12'
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
       - name: Create documentation
         # combine test coverage with --cov-append?
-        # if: matrix.python-version == '3.11' && runner.os == 'Linux'
+        # if: matrix.python-version == '3.12' && runner.os == 'Linux'
         uses: coactions/setup-xvfb@v1
         timeout-minutes: 10
         with:
           run: |
             uv sync --extra pyside6 --extra addons
             uv run mkdocs build
-    # - name: Build and publish
-    #   if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.11' && runner.os == 'Linux'
-    #   run: |
-    #     poetry config pypi-token.pypi ${{ secrets.PYPI_SECRET }}
-    #     poetry publish --build
-    # - name: Deploy docs
-    #   if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.11' && runner.os == 'Linux'
-    #   uses: peaceiris/actions-gh-pages@v4
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     publish_dir: ./site
 
   deploy:
     runs-on: windows-latest
@@ -83,37 +85,42 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Install packages
-        # if: runner.os == 'Linux'
         run: |
           uv sync --extra pyside6 --extra addons
+
       - name: Build documentation
         uses: coactions/setup-xvfb@v1
         timeout-minutes: 10
         with:
           run: |
             uv run mkdocs build
-      - name: Build
+
+      - name: Build package
         run: |
           uv build
-      - name: Publish on PyPI
+
+      - name: Publish package on PyPI
         env:
           UV_PUBLISH_TOKEN: ${{ secrets.UV_PUBLISH_TOKEN }}
         run: |
           uv publish
-      # - name: Deploy docs
+
+      # - name: Publish package on GitHub
       #   # if: github.event_name == 'push'
       #   uses: mhausenblas/mkdocs-deploy-gh-pages@master
       #   # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     # CUSTOM_DOMAIN: optionaldomain.com
-      - name: Deploy docs
+
+      - name: Deploy docs to Github Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
