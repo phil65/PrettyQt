@@ -90,12 +90,12 @@ COLOR_OPTIONS = {
 }
 
 
-def set_global_defaults(**kwargs):
+def set_global_defaults(**kwargs: Any):
     """Set global defaults for the options passed to the icon painter."""
-    for kw in kwargs:
-        if kw not in VALID_OPTIONS:
-            raise KeyError(f"Invalid option {kw!r}")
-        _default_options[kw] = kwargs[kw]
+    for k, v in kwargs.items():
+        if k not in VALID_OPTIONS:
+            raise KeyError(f"Invalid option {k!r}")
+        _default_options[k] = v
 
 
 class FontError(Exception):

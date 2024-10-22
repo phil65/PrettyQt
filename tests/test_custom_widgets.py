@@ -217,7 +217,7 @@ def test_inputandslider(qtbot):
 def test_codeeditor(qtbot):
     editor = custom_widgets.CodeEditor()
     qtbot.addWidget(editor)
-    assert editor.text() == ""
+    assert not editor.text()
     editor.line_area_width()
     editor.set_syntaxhighlighter("python")
     event = gui.QResizeEvent(core.Size(10, 10), core.Size(20, 20))

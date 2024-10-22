@@ -58,7 +58,7 @@ class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
         value: str,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
-        if value == "" or value is None:  # False is a valid value.
+        if value == "" or value is None:  # False is a valid value.  # noqa: PLC1901
             del self._filters[column]
         else:
             self._filters[column] = Filter(column=column, value=value, role=role)

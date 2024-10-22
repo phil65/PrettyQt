@@ -227,6 +227,7 @@ combine-as-imports = true
 [tool.pyright]
 reportImplicitOverride = false
 reportUnusedCallResult = false
+reportAny = false
 
 [build-system]
 requires = ["hatchling"]

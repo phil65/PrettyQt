@@ -53,17 +53,17 @@ def get_concretes(annotations: list) -> list:
     ret = []
     for item in annotations:
         if is_optional(item):
-            annotations.remove(item)
+            annotations.remove(item)  # noqa: B909
             continue
         if concrete := get_concrete(item):
             ret.append(concrete)
-            annotations.remove(item)
+            annotations.remove(item)  # noqa: B909
     return ret + annotations
 
 
 def AutoSlot(func):
     def wrapper(func) -> func:
-        anots: dict = func.__annotations__
+        anots: dict[str, Any] = func.__annotations__
         return_ = anots.pop("return", None)
         if return_ is Any:
             return_ = "QVariant"
@@ -101,8 +101,8 @@ def _build_arguments(
     args = argspec.args
     annotations = get_type_hints(func)
 
-    slot_args = []
-    slot_kwargs = {}
+    slot_args: list[Any] = []
+    slot_kwargs: dict[str, Any] = {}
 
     if "return" in annotations and annotations["return"] is not None:
         slot_kwargs["result"] = annotations["return"]

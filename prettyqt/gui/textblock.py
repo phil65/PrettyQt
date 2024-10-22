@@ -153,7 +153,7 @@ class TextBlock(QtGui.QTextBlock):
         start = TextBlock(self)
         if not self.is_fold_trigger():
             # search level of next non blank line
-            while start.text().strip() == "" and start.isValid():
+            while not start.text().strip() and start.isValid():
                 start = start.next()
             ref_level = self.get_fold_level() - 1
             start = original

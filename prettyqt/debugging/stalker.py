@@ -5,7 +5,7 @@ import contextlib
 
 # import enum
 import logging
-from typing import TypeVar
+from typing import Any, TypeVar
 
 from prettyqt import constants, core, eventfilters, gui
 
@@ -56,14 +56,18 @@ class Stalker(core.Object):
         qobject: core.QObject,
         include=None,
         exclude=None,
-        **kwargs,
+        **kwargs: Any,
     ):
         self._log_level = logging.INFO
         super().__init__(**kwargs)
         self._obj = qobject
-        self._meta = core.MetaObject(self._obj.metaObject())
-        self.counter: collections.defaultdict[int] = collections.defaultdict(int)
-        self.signal_counter: collections.defaultdict[int] = collections.defaultdict(int)
+        qmeta = self._obj.metaObject()
+        assert qmeta
+        self._meta = core.MetaObject(qmeta)
+        self.counter: collections.defaultdict[str, int] = collections.defaultdict(int)
+        self.signal_counter: collections.defaultdict[str, int] = collections.defaultdict(
+            int
+        )
         self.exclude = ["meta_call", "timer"] if exclude is None else exclude
         self.include = include
         self._handles: list[core.QMetaObject.Connection] = []
@@ -90,7 +94,7 @@ class Stalker(core.Object):
             signal_name = signal.get_name()
             # PyQt reports non-existing signals in MetaObject.
             if hasattr(self._obj, signal_name):
-                signal_instance = self._obj.__getattribute__(signal_name)
+                signal_instance = getattr(self._obj, signal_name)
             fn = self._on_signal_emitted(signal)
             handle = signal_instance.connect(fn)
             self._handles.append(handle)

@@ -74,7 +74,8 @@ class Rule(syntaxhighlighters.HighlightRule):
 
 
 class Keyword(Rule):
-    regex = r"\b%s\b" % r"\b|\b".join(KEYWORDS)
+    r = r"\b|\b".join(KEYWORDS)
+    regex = rf"\b{r}\b"
     color = gui.Color(200, 120, 50)
     bold = True
 

@@ -366,9 +366,9 @@ class MetaObject:
                 # but it doesnt exist...
                 logger.warning(f"Signal {signal_name} does not exist.")
                 continue
-            signal_instance = source_qobject.__getattribute__(signal_name)
+            signal_instance = getattr(source_qobject, signal_name)
             slot = (
-                fn_or_qobject.__getattribute__(signal_name)
+                getattr(fn_or_qobject, signal_name)
                 if isinstance(fn_or_qobject, core.QObject)
                 else fn_or_qobject
             )
