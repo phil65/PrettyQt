@@ -16,7 +16,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.11",
-    # "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Desktop Environment",
     "Topic :: Software Development :: User Interfaces",
     "Topic :: Software Development :: Widget Sets",
@@ -55,11 +55,7 @@ dev-dependencies = [
     "mkdocs_mknodes",
     "mkdocstrings[python]",
     "pymdown-extensions",
-    "mkdocs-literate-nav",
-    # "mkdocs-autorefs",
     "mkdocs-glightbox",
-    "mkdocs-section-index",
-    "mkdocs-gen-files",
     "markdown-exec",
     "pyreadline3",
     "devtools",
@@ -77,10 +73,6 @@ iconbrowser = "prettyqt.custom_widgets.iconbrowser:run"
 
 [project.entry-points.pyinstaller40]
 hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
-
-[tool.hatch.envs.docs.scripts]
-build = "mkdocs build --clean"
-serve = "mkdocs serve --dirtyreload"
 
 [tool.pytest.ini_options]
 minversion = "7.0"
