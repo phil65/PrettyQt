@@ -64,7 +64,7 @@ def to_module(
             except (ImportError, AttributeError) as e:
                 logger.warning(f"Could not import {module_path!r}")
                 if return_none:
-                    return
+                    return None
                 raise e
         case types.ModuleType():
             return module
@@ -93,7 +93,7 @@ def to_module_parts(module: Sequence[str] | str | types.ModuleType) -> tuple[str
 
 def find_common_ancestor(cls_list: list[type]) -> type:
     mros = [list(inspect.getmro(cls)) for cls in cls_list]
-    track = collections.defaultdict(int)
+    track: collections.defaultdict[type, int] = collections.defaultdict(int)
     while mros:
         for mro in mros:
             cur = mro.pop(0)
@@ -105,7 +105,7 @@ def find_common_ancestor(cls_list: list[type]) -> type:
             ):
                 return cur
             if len(mro) == 0:
-                mros.remove(mro)
+                mros.remove(mro)  # noqa: B909
     raise TypeError("Couldnt find common base class")
 
 
@@ -202,7 +202,7 @@ def iter_classes_for_module(
     """
     module = to_module(module)
     if not module:
-        return []
+        return
     if recursive:
         for _name, submod in inspect.getmembers(module, inspect.ismodule):
             if submod.__name__.startswith(module_filter or ""):

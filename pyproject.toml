@@ -209,6 +209,9 @@ ignore = [
     "SLF001", # Private member accessed
     "RUF012", # Mutable class attributes should be annotated
     "RUF013", # PEP 484 prohibits implicit `Optional`
+    "PLC0415", # imports at top of file,
+    "RUF001", # Ambiguous signs in string
+    "ISC001", # implicit string concatenation
 ]
 
 [tool.ruff.lint.flake8-quotes]
@@ -228,6 +231,10 @@ lines-after-imports = 2
 force-sort-within-sections = true
 combine-as-imports = true
 
+
+[tool.pyright]
+reportImplicitOverride = false
+reportUnusedCallResult = false
 
 [build-system]
 requires = ["hatchling"]

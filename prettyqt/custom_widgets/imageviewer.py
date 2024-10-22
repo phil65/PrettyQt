@@ -40,7 +40,7 @@ def draw_size(p: gui.Painter, rect: core.Rect, w: int, h: int):
     f = p.font()
     f.setBold(True)
     p.setFont(f)
-    sz = "\u00a0%d x %d\u00a0" % (w, h)
+    sz = f"\u00a0{w:d} x {h:d}\u00a0"
     flags = (
         constants.AlignmentFlag.AlignBottom
         | constants.AlignmentFlag.AlignRight
@@ -55,7 +55,7 @@ def draw_size(p: gui.Painter, rect: core.Rect, w: int, h: int):
 class ImageViewer(widgets.Widget):
     def __init__(
         self,
-        image: gui.QPixmap | os.PathLike | None = None,
+        image: gui.QPixmap | os.PathLike[str] | str | None = None,
         *,
         show_border: bool = True,
         show_size: bool = False,
@@ -70,7 +70,7 @@ class ImageViewer(widgets.Widget):
         self.draw_border = show_border
         self.show_size = show_size
 
-    def set_image(self, pixmap: gui.QPixmap | os.PathLike | None):
+    def set_image(self, pixmap: gui.QPixmap | os.PathLike[str] | str | None):
         match pixmap:
             case gui.QPixmap():
                 self._pixmap = pixmap

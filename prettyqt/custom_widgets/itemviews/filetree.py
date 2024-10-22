@@ -133,7 +133,7 @@ class FileExplorer(widgets.Widget):
             path = new.data(model.Roles.FilePathRole)
             self.tool_bar.set_breadcrumbs(path)
 
-    def _update_root(self, path: os.PathLike):
+    def _update_root(self, path: os.PathLike[str]):
         if pathlib.Path(path).exists():
             self._file_tree.setRoot(os.fspath(path))
 

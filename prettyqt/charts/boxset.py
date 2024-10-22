@@ -36,7 +36,7 @@ class BoxSet(core.ObjectMixin, QtCharts.QBoxSet):
         self, index: int | ValuePositionStr | QtCharts.QBoxSet.ValuePositions
     ) -> float:
         """Returns the value of the box-and-whiskers item specified by index."""
-        if type(index) is not int:  # noqa: E721
+        if type(index) is not int:
             index = VALUE_POSITION.get_enum_value(index).value
         if not (0 <= index <= 4):
             raise KeyError(index)
@@ -46,7 +46,7 @@ class BoxSet(core.ObjectMixin, QtCharts.QBoxSet):
         self, index: int | ValuePositionStr | QtCharts.QBoxSet.ValuePositions, value: int
     ):
         """Sets the value specified by value in the position specified by index."""
-        if type(index) is not int:  # noqa: E721
+        if type(index) is not int:
             index = VALUE_POSITION.get_enum_value(index).value
         if not (0 <= index <= 4):
             raise KeyError(index)

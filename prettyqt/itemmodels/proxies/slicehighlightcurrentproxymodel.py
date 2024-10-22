@@ -198,8 +198,7 @@ class SliceHighlightCurrentProxyModel(itemmodels.SliceIdentityProxyModel):
             and (
                 (self._mode == "column" and index.column() == self._current_column)
                 or (
-                    self._mode == "row"
-                    and (index.row() == self._current_row)
+                    (self._mode == "row" and (index.row() == self._current_row))
                     or self._mode == "all"
                 )
             )

@@ -151,7 +151,7 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
         return img
 
     @classmethod
-    def for_mimetype(cls, path: os.PathLike) -> Self | None:
+    def for_mimetype(cls, path: os.PathLike[str] | str) -> Self | None:
         """Try to create an icon from theme using the file mimetype.
 
         E.g.::
@@ -171,7 +171,7 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
                 icon = cls(cls.fromTheme(icon))
                 if not icon.isNull():
                     return icon
-        return None  #  gui.Icon.fromTheme("text-x-generic")
+        return None  # gui.Icon.fromTheme("text-x-generic")
 
     def to_pil(self):
         from PIL import Image as PILImage

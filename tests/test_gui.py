@@ -702,7 +702,7 @@ def test_polygonf():
     xor = poly ^ poly2
     assert sub == xor
     polygon = poly.to_polygon()
-    assert type(polygon) == gui.Polygon
+    assert type(polygon) is gui.Polygon
     poly.add_points((0, 1), core.PointF(2, 2))
     bytes(poly)
 

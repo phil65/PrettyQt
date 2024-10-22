@@ -71,8 +71,7 @@ def get_validator(
             return gui.RegularExpressionValidator(WEB_REGEX)
         case str():
             ValidatorClass = classhelpers.get_class_for_id(gui.ValidatorMixin, validator)
-            validator = ValidatorClass(**kwargs)
-            return validator
+            return ValidatorClass(**kwargs)
         case core.QRegularExpression():
             return gui.RegularExpressionValidator(validator)
         case re.Pattern():

@@ -128,7 +128,9 @@ class Taskbar:
 
 
 def add_to_context_menu(
-    app_name: str, path: os.PathLike, icon_path: os.PathLike | None = None
+    app_name: str,
+    path: str | os.PathLike[str],
+    icon_path: str | os.PathLike[str] | None = None,
 ):
     import winreg
 

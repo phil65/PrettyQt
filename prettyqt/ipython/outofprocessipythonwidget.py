@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 # asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 
-def run_server(connection_file: os.PathLike):
+def run_server(connection_file: str | os.PathLike[str]):
     IPython.embed_kernel(
         local_ns=sys._getframe(1).f_locals,
         connection_file=os.fspath(connection_file),

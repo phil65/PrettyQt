@@ -38,7 +38,7 @@ class NumFilterWidget(widgets.Widget):
 
     def get_filter_fn(self) -> Callable:
         val = self.lineedit.get_value()
-        if val == "":
+        if not val:
             return lambda x: True
         val = float(val)
         match self.op_button.text():

@@ -10,7 +10,8 @@ class DateTime(core.QDateTime):
     """DateTime funcitons."""
 
     def __repr__(self):
-        template = super().__repr__().split("(")[1]
+        super_repr = super().__repr__()
+        template = str(super_repr).split("(")[1]
         return f"{type(self).__name__}({template}"
 
     def __str__(self):
@@ -19,9 +20,9 @@ class DateTime(core.QDateTime):
     def __reduce__(self):
         return type(self), (self.date(), self.time(), self.get_timezone())
 
-    def __format__(self, format_spec: constants.DateFormatStr):
+    def __format__(self, format_spec: str):
         if format_spec in constants.DATE_FORMAT:
-            return self.to_format(format_spec)
+            return self.toString(constants.DATE_FORMAT[format_spec])
         return self.toString(format_spec)
 
     @classmethod

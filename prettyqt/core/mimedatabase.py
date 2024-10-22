@@ -35,7 +35,9 @@ class MimeDatabase(core.QMimeDatabase):
         return core.MimeType(self.mimeTypeForData(data))
 
     def get_mime_type_for_filename_and_data(
-        self, filename: os.PathLike, data: datatypes.ByteArrayType | core.QIODevice
+        self,
+        filename: str | os.PathLike[str],
+        data: datatypes.ByteArrayType | core.QIODevice,
     ) -> core.MimeType:
         path = os.fspath(filename)
         return core.MimeType(self.mimeTypeForFileNameAndData(path, data))

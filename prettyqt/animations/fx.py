@@ -53,7 +53,8 @@ class AnimationWrapper:
     ) -> AnimationTimer:
         """General animation with global coordinates."""
         self._animation = core.PropertyAnimation()
-        self._animation.apply_to(self._widget.__getattr__(self._property_name))
+        prop = getattr(self._widget, self._property_name)
+        self._animation.apply_to(prop)
         self._animation.set_start_value(start)
         self._animation.set_end_value(end)
         self._animation.set_easing(easing)
@@ -75,7 +76,8 @@ class AnimationWrapper:
     ) -> AnimationTimer:
         """Makes property transition from current value to given end value."""
         self._animation = core.PropertyAnimation()
-        self._animation.apply_to(self._widget.__getattr__(self._property_name))
+        prop = getattr(self._widget, self._property_name)
+        self._animation.apply_to(prop)
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
         start: datatypes.VariantType = obj.property(prop_name)
@@ -106,7 +108,8 @@ class AnimationWrapper:
     ) -> AnimationTimer:
         """Makes property transition from given start value to its current value."""
         self._animation = core.PropertyAnimation()
-        self._animation.apply_to(self._widget.__getattr__(self._property_name))
+        prop = getattr(self._widget, self._property_name)
+        self._animation.apply_to(prop)
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
         end: core.VariantType = obj.property(prop_name)
@@ -137,7 +140,8 @@ class AnimationWrapper:
     ) -> core.PropertyAnimation:
         """Starts property transition from start to end when given event occurs."""
         self._animation = core.PropertyAnimation()
-        self._animation.apply_to(self._widget.__getattr__(self._property_name))
+        prop = getattr(self._widget, self._property_name)
+        self._animation.apply_to(prop)
         if start is None:
             prop_name = self._animation.get_property_name()
             obj = self._animation.targetObject()
@@ -174,8 +178,9 @@ class Fx:
     def __getitem__(self, value: str) -> AnimationWrapper:
         value = helpers.to_lower_camel(value)
         logger.debug(f"Building {value!r} PropertyAnimation for {self._widget!r}")
-        self._wrapper = AnimationWrapper(value, self)
-        return self._wrapper
+        wrapper = AnimationWrapper(value, self)
+        self._wrapper = wrapper
+        return wrapper
 
     # def __getattr__(self, attr):
     #     return self.__getitem__(attr)

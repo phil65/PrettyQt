@@ -92,7 +92,7 @@ class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
     def get_modality(self) -> constants.WindowModalityStr:
         return constants.WINDOW_MODALITY.inverse[self.modality()]
 
-    def set_file_path(self, file_path: os.PathLike):
+    def set_file_path(self, file_path: str | os.PathLike[str]):
         path = os.fspath(file_path)
         self.setFilePath(path)
 

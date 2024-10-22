@@ -48,7 +48,10 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
         return cls(cls.fromImage(img, flag))
 
     def save_to_file(
-        self, path: os.PathLike, fmt: str = "png", quality: int | None = None
+        self,
+        path: str | os.PathLike[str],
+        fmt: str = "png",
+        quality: int | None = None,
     ) -> bool:
         return self.save(os.fspath(path), fmt, -1 if quality is None else quality)
 

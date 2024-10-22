@@ -23,7 +23,7 @@ class SplashScreenMixin(widgets.WidgetMixin):
     def __exit__(self, typ, value, traceback):
         self.hide()
 
-    def setPixmap(self, pixmap: os.PathLike | gui.QPixmap | None):
+    def setPixmap(self, pixmap: str | os.PathLike[str] | gui.QPixmap | None):
         match pixmap:
             case os.PathLike():
                 pixmap = gui.Pixmap(os.fspath(pixmap))

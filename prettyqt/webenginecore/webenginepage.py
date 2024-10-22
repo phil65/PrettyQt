@@ -366,7 +366,7 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
             logger.exception(e)
 
     def insert_stylesheet(
-        self, name: str, css: str | os.PathLike, immediately: bool = True
+        self, name: str, css: str | os.PathLike[str], immediately: bool = True
     ):
         """Load css using JavaScript.
 

@@ -9,7 +9,8 @@ class Time(core.QTime):
     """Clock time functions."""
 
     def __repr__(self):
-        template = super().__repr__().split("(")[1]  # type: ignore
+        super_repr = super().__repr__()
+        template = str(super_repr).split("(")[1]  # type: ignore
         return f"{type(self).__name__}({template}"
 
     def __str__(self):

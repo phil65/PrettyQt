@@ -57,7 +57,9 @@ RECORDER_STATE: bidict[RecorderStateStr, QtMultimedia.QMediaRecorder.RecorderSta
 
 
 class MediaRecorder(core.ObjectMixin, QtMultimedia.QMediaRecorder):
-    def set_output_location(self, url: datatypes.UrlType | os.PathLike | None = None):
+    def set_output_location(
+        self, url: datatypes.UrlType | os.PathLike[str] | None = None
+    ):
         url = datatypes.to_local_url(url)
         self.setOutputLocation(url)
 

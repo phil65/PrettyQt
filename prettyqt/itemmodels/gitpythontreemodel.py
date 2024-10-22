@@ -44,7 +44,7 @@ class GitPythonTreeModel(itemmodels.TreeModel):
         # "Executable mode",
     ]
 
-    def __init__(self, path: os.PathLike | str | git.Tree | git.Repo, **kwargs):
+    def __init__(self, path: os.PathLike[str] | str | git.Tree | git.Repo, **kwargs):
         match path:
             case os.PathLike() | str():
                 tree = git.Repo(path).tree()
@@ -151,7 +151,9 @@ class GitPythonCommitTreeModel(itemmodels.TreeModel):
     ]
 
     def __init__(
-        self, repo: os.PathLike | str | git.Tree | git.Repo | git.Commit, **kwargs
+        self,
+        repo: os.PathLike[str] | str | git.Tree | git.Repo | git.Commit,
+        **kwargs,
     ):
         match repo:
             case os.PathLike() | str():

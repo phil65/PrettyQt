@@ -40,7 +40,7 @@ MultiResultIndexer = tuple[slice, int] | tuple[int, slice] | tuple[slice, slice]
 PatternType = re.Pattern | QtCore.QRegularExpression
 PatternAndStringType = str | PatternType
 JSONType = str | int | float | bool | None | dict[str, Any] | list[Any]
-PathType = str | os.PathLike
+PathType = str | os.PathLike[str]
 
 
 class Validatable(Protocol):
@@ -589,7 +589,7 @@ def to_url(url: UrlType | None) -> QtCore.QUrl:
             raise TypeError(url)
 
 
-def to_local_url(url: UrlType | os.PathLike | None) -> QtCore.QUrl:
+def to_local_url(url: UrlType | os.PathLike[str] | None) -> QtCore.QUrl:
     # TODO: need to check whether we should merge to_local_url and to_url
     # core.Url.from_user_input() perhaps a good option, too?
     match url:

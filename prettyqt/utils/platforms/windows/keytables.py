@@ -64,107 +64,107 @@ def _get_virtual_key(qtkeys):
 #   Key_unknown = Unknown Virtual Key, no translation possible, ignore
 
 KEY_TABLE = [  # Keyboard mapping table
-    ##                        # Dec |  Hex | Windows Virtual key
-    Key.Key_unknown,  #   0   0x00
-    Key.Key_unknown,  #   1   0x01   VK_LBUTTON          | Left mouse button
-    Key.Key_unknown,  #   2   0x02   VK_RBUTTON          | Right mouse button
-    Key.Key_Cancel,  #   3   0x03   VK_CANCEL           | Control-Break processing
-    Key.Key_unknown,  #   4   0x04   VK_MBUTTON          | Middle mouse button
-    Key.Key_unknown,  #   5   0x05   VK_XBUTTON1         | X1 mouse button
-    Key.Key_unknown,  #   6   0x06   VK_XBUTTON2         | X2 mouse button
-    Key.Key_unknown,  #   7   0x07   -- unassigned --
-    Key.Key_Backspace,  #   8   0x08   VK_BACK             | BackSpace key
-    Key.Key_Tab,  #   9   0x09   VK_TAB              | Tab key
-    Key.Key_unknown,  #  10   0x0A   -- reserved --
-    Key.Key_unknown,  #  11   0x0B   -- reserved --
-    Key.Key_Clear,  #  12   0x0C   VK_CLEAR            | Clear key
-    Key.Key_Return,  #  13   0x0D   VK_RETURN           | Enter key
-    Key.Key_unknown,  #  14   0x0E   -- unassigned --
-    Key.Key_unknown,  #  15   0x0F   -- unassigned --
-    Key.Key_Shift,  #  16   0x10   VK_SHIFT            | Shift key
-    Key.Key_Control,  #  17   0x11   VK_CONTROL          | Ctrl key
-    Key.Key_Alt,  #  18   0x12   VK_MENU             | Alt key
-    Key.Key_Pause,  #  19   0x13   VK_PAUSE            | Pause key
-    Key.Key_CapsLock,  #  20   0x14   VK_CAPITAL          | Caps-Lock
-    Key.Key_unknown,  #  21   0x15   VK_KANA / VK_HANGUL | IME Kana or Hangul mode
-    Key.Key_unknown,  #  22   0x16   -- unassigned --
-    Key.Key_unknown,  #  23   0x17   VK_JUNJA            | IME Junja mode
-    Key.Key_unknown,  #  24   0x18   VK_FINAL            | IME final mode
-    Key.Key_unknown,  #  25   0x19   VK_HANJA / VK_KANJI | IME Hanja or Kanji mode
-    Key.Key_unknown,  #  26   0x1A   -- unassigned --
-    Key.Key_Escape,  #  27   0x1B   VK_ESCAPE           | Esc key
-    Key.Key_unknown,  #  28   0x1C   VK_CONVERT          | IME convert
-    Key.Key_unknown,  #  29   0x1D   VK_NONCONVERT       | IME non-convert
-    Key.Key_unknown,  #  30   0x1E   VK_ACCEPT           | IME accept
-    Key.Key_Mode_switch,  #  31   0x1F   VK_MODECHANGE       | IME mode change request
-    Key.Key_Space,  #  32   0x20   VK_SPACE            | Spacebar
-    Key.Key_PageUp,  #  33   0x21   VK_PRIOR            | Page Up key
-    Key.Key_PageDown,  #  34   0x22   VK_NEXT             | Page Down key
-    Key.Key_End,  #  35   0x23   VK_END              | End key
-    Key.Key_Home,  #  36   0x24   VK_HOME             | Home key
-    Key.Key_Left,  #  37   0x25   VK_LEFT             | Left arrow key
-    Key.Key_Up,  #  38   0x26   VK_UP               | Up arrow key
-    Key.Key_Right,  #  39   0x27   VK_RIGHT            | Right arrow key
-    Key.Key_Down,  #  40   0x28   VK_DOWN             | Down arrow key
-    Key.Key_Select,  #  41   0x29   VK_SELECT           | Select key
-    Key.Key_Printer,  #  42   0x2A   VK_PRINT            | Print key
-    Key.Key_Execute,  #  43   0x2B   VK_EXECUTE          | Execute key
-    Key.Key_Print,  #  44   0x2C   VK_SNAPSHOT         | Print Screen key
-    Key.Key_Insert,  #  45   0x2D   VK_INSERT           | Ins key
-    Key.Key_Delete,  #  46   0x2E   VK_DELETE           | Del key
-    Key.Key_Help,  #  47   0x2F   VK_HELP             | Help key
-    0,  #  48   0x30   (VK_0)              | 0 key
-    0,  #  49   0x31   (VK_1)              | 1 key
-    0,  #  50   0x32   (VK_2)              | 2 key
-    0,  #  51   0x33   (VK_3)              | 3 key
-    0,  #  52   0x34   (VK_4)              | 4 key
-    0,  #  53   0x35   (VK_5)              | 5 key
-    0,  #  54   0x36   (VK_6)              | 6 key
-    0,  #  55   0x37   (VK_7)              | 7 key
-    0,  #  56   0x38   (VK_8)              | 8 key
-    0,  #  57   0x39   (VK_9)              | 9 key
-    Key.Key_unknown,  #  58   0x3A   -- unassigned --
-    Key.Key_unknown,  #  59   0x3B   -- unassigned --
-    Key.Key_unknown,  #  60   0x3C   -- unassigned --
-    Key.Key_unknown,  #  61   0x3D   -- unassigned --
-    Key.Key_unknown,  #  62   0x3E   -- unassigned --
-    Key.Key_unknown,  #  63   0x3F   -- unassigned --
-    Key.Key_unknown,  #  64   0x40   -- unassigned --
-    0,  #  65   0x41   (VK_A)              | A key
-    0,  #  66   0x42   (VK_B)              | B key
-    0,  #  67   0x43   (VK_C)              | C key
-    0,  #  68   0x44   (VK_D)              | D key
-    0,  #  69   0x45   (VK_E)              | E key
-    0,  #  70   0x46   (VK_F)              | F key
-    0,  #  71   0x47   (VK_G)              | G key
-    0,  #  72   0x48   (VK_H)              | H key
-    0,  #  73   0x49   (VK_I)              | I key
-    0,  #  74   0x4A   (VK_J)              | J key
-    0,  #  75   0x4B   (VK_K)              | K key
-    0,  #  76   0x4C   (VK_L)              | L key
-    0,  #  77   0x4D   (VK_M)              | M key
-    0,  #  78   0x4E   (VK_N)              | N key
-    0,  #  79   0x4F   (VK_O)              | O key
-    0,  #  80   0x50   (VK_P)              | P key
-    0,  #  81   0x51   (VK_Q)              | Q key
-    0,  #  82   0x52   (VK_R)              | R key
-    0,  #  83   0x53   (VK_S)              | S key
-    0,  #  84   0x54   (VK_T)              | T key
-    0,  #  85   0x55   (VK_U)              | U key
-    0,  #  86   0x56   (VK_V)              | V key
-    0,  #  87   0x57   (VK_W)              | W key
-    0,  #  88   0x58   (VK_X)              | X key
-    0,  #  89   0x59   (VK_Y)              | Y key
-    0,  #  90   0x5A   (VK_Z)              | Z key
-    Key.Key_Meta,  #  91   0x5B   VK_LWIN             | Left Windows  - MS Natural kbd
-    Key.Key_Meta,  #  92   0x5C   VK_RWIN             | Right Windows - MS Natural kbd
-    Key.Key_Menu,  #  93   0x5D   VK_APPS             | Application key-MS Natural kbd
-    Key.Key_unknown,  #  94   0x5E   -- reserved --
-    Key.Key_Sleep,  #  95   0x5F   VK_SLEEP
-    Key.Key_0,  #  96   0x60   VK_NUMPAD0          | Numeric keypad 0 key
-    Key.Key_1,  #  97   0x61   VK_NUMPAD1          | Numeric keypad 1 key
-    Key.Key_2,  #  98   0x62   VK_NUMPAD2          | Numeric keypad 2 key
-    Key.Key_3,  #  99   0x63   VK_NUMPAD3          | Numeric keypad 3 key
+    # # Dec |  Hex | Windows Virtual key
+    Key.Key_unknown,  # 0   0x00
+    Key.Key_unknown,  # 1   0x01   VK_LBUTTON          | Left mouse button
+    Key.Key_unknown,  # 2   0x02   VK_RBUTTON          | Right mouse button
+    Key.Key_Cancel,  # 3   0x03   VK_CANCEL           | Control-Break processing
+    Key.Key_unknown,  # 4   0x04   VK_MBUTTON          | Middle mouse button
+    Key.Key_unknown,  # 5   0x05   VK_XBUTTON1         | X1 mouse button
+    Key.Key_unknown,  # 6   0x06   VK_XBUTTON2         | X2 mouse button
+    Key.Key_unknown,  # 7   0x07   -- unassigned --
+    Key.Key_Backspace,  # 8   0x08   VK_BACK             | BackSpace key
+    Key.Key_Tab,  # 9   0x09   VK_TAB              | Tab key
+    Key.Key_unknown,  # 10   0x0A   -- reserved --
+    Key.Key_unknown,  # 11   0x0B   -- reserved --
+    Key.Key_Clear,  # 12   0x0C   VK_CLEAR            | Clear key
+    Key.Key_Return,  # 13   0x0D   VK_RETURN           | Enter key
+    Key.Key_unknown,  # 14   0x0E   -- unassigned --
+    Key.Key_unknown,  # 15   0x0F   -- unassigned --
+    Key.Key_Shift,  # 16   0x10   VK_SHIFT            | Shift key
+    Key.Key_Control,  # 17   0x11   VK_CONTROL          | Ctrl key
+    Key.Key_Alt,  # 18   0x12   VK_MENU             | Alt key
+    Key.Key_Pause,  # 19   0x13   VK_PAUSE            | Pause key
+    Key.Key_CapsLock,  # 20   0x14   VK_CAPITAL          | Caps-Lock
+    Key.Key_unknown,  # 21   0x15   VK_KANA / VK_HANGUL | IME Kana or Hangul mode
+    Key.Key_unknown,  # 22   0x16   -- unassigned --
+    Key.Key_unknown,  # 23   0x17   VK_JUNJA            | IME Junja mode
+    Key.Key_unknown,  # 24   0x18   VK_FINAL            | IME final mode
+    Key.Key_unknown,  # 25   0x19   VK_HANJA / VK_KANJI | IME Hanja or Kanji mode
+    Key.Key_unknown,  # 26   0x1A   -- unassigned --
+    Key.Key_Escape,  # 27   0x1B   VK_ESCAPE           | Esc key
+    Key.Key_unknown,  # 28   0x1C   VK_CONVERT          | IME convert
+    Key.Key_unknown,  # 29   0x1D   VK_NONCONVERT       | IME non-convert
+    Key.Key_unknown,  # 30   0x1E   VK_ACCEPT           | IME accept
+    Key.Key_Mode_switch,  # 31   0x1F   VK_MODECHANGE       | IME mode change request
+    Key.Key_Space,  # 32   0x20   VK_SPACE            | Spacebar
+    Key.Key_PageUp,  # 33   0x21   VK_PRIOR            | Page Up key
+    Key.Key_PageDown,  # 34   0x22   VK_NEXT             | Page Down key
+    Key.Key_End,  # 35   0x23   VK_END              | End key
+    Key.Key_Home,  # 36   0x24   VK_HOME             | Home key
+    Key.Key_Left,  # 37   0x25   VK_LEFT             | Left arrow key
+    Key.Key_Up,  # 38   0x26   VK_UP               | Up arrow key
+    Key.Key_Right,  # 39   0x27   VK_RIGHT            | Right arrow key
+    Key.Key_Down,  # 40   0x28   VK_DOWN             | Down arrow key
+    Key.Key_Select,  # 41   0x29   VK_SELECT           | Select key
+    Key.Key_Printer,  # 42   0x2A   VK_PRINT            | Print key
+    Key.Key_Execute,  # 43   0x2B   VK_EXECUTE          | Execute key
+    Key.Key_Print,  # 44   0x2C   VK_SNAPSHOT         | Print Screen key
+    Key.Key_Insert,  # 45   0x2D   VK_INSERT           | Ins key
+    Key.Key_Delete,  # 46   0x2E   VK_DELETE           | Del key
+    Key.Key_Help,  # 47   0x2F   VK_HELP             | Help key
+    0,  # 48   0x30   (VK_0)              | 0 key
+    0,  # 49   0x31   (VK_1)              | 1 key
+    0,  # 50   0x32   (VK_2)              | 2 key
+    0,  # 51   0x33   (VK_3)              | 3 key
+    0,  # 52   0x34   (VK_4)              | 4 key
+    0,  # 53   0x35   (VK_5)              | 5 key
+    0,  # 54   0x36   (VK_6)              | 6 key
+    0,  # 55   0x37   (VK_7)              | 7 key
+    0,  # 56   0x38   (VK_8)              | 8 key
+    0,  # 57   0x39   (VK_9)              | 9 key
+    Key.Key_unknown,  # 58   0x3A   -- unassigned --
+    Key.Key_unknown,  # 59   0x3B   -- unassigned --
+    Key.Key_unknown,  # 60   0x3C   -- unassigned --
+    Key.Key_unknown,  # 61   0x3D   -- unassigned --
+    Key.Key_unknown,  # 62   0x3E   -- unassigned --
+    Key.Key_unknown,  # 63   0x3F   -- unassigned --
+    Key.Key_unknown,  # 64   0x40   -- unassigned --
+    0,  # 65   0x41   (VK_A)              | A key
+    0,  # 66   0x42   (VK_B)              | B key
+    0,  # 67   0x43   (VK_C)              | C key
+    0,  # 68   0x44   (VK_D)              | D key
+    0,  # 69   0x45   (VK_E)              | E key
+    0,  # 70   0x46   (VK_F)              | F key
+    0,  # 71   0x47   (VK_G)              | G key
+    0,  # 72   0x48   (VK_H)              | H key
+    0,  # 73   0x49   (VK_I)              | I key
+    0,  # 74   0x4A   (VK_J)              | J key
+    0,  # 75   0x4B   (VK_K)              | K key
+    0,  # 76   0x4C   (VK_L)              | L key
+    0,  # 77   0x4D   (VK_M)              | M key
+    0,  # 78   0x4E   (VK_N)              | N key
+    0,  # 79   0x4F   (VK_O)              | O key
+    0,  # 80   0x50   (VK_P)              | P key
+    0,  # 81   0x51   (VK_Q)              | Q key
+    0,  # 82   0x52   (VK_R)              | R key
+    0,  # 83   0x53   (VK_S)              | S key
+    0,  # 84   0x54   (VK_T)              | T key
+    0,  # 85   0x55   (VK_U)              | U key
+    0,  # 86   0x56   (VK_V)              | V key
+    0,  # 87   0x57   (VK_W)              | W key
+    0,  # 88   0x58   (VK_X)              | X key
+    0,  # 89   0x59   (VK_Y)              | Y key
+    0,  # 90   0x5A   (VK_Z)              | Z key
+    Key.Key_Meta,  # 91   0x5B   VK_LWIN             | Left Windows  - MS Natural kbd
+    Key.Key_Meta,  # 92   0x5C   VK_RWIN             | Right Windows - MS Natural kbd
+    Key.Key_Menu,  # 93   0x5D   VK_APPS             | Application key-MS Natural kbd
+    Key.Key_unknown,  # 94   0x5E   -- reserved --
+    Key.Key_Sleep,  # 95   0x5F   VK_SLEEP
+    Key.Key_0,  # 96   0x60   VK_NUMPAD0          | Numeric keypad 0 key
+    Key.Key_1,  # 97   0x61   VK_NUMPAD1          | Numeric keypad 1 key
+    Key.Key_2,  # 98   0x62   VK_NUMPAD2          | Numeric keypad 2 key
+    Key.Key_3,  # 99   0x63   VK_NUMPAD3          | Numeric keypad 3 key
     Key.Key_4,  # 100   0x64   VK_NUMPAD4          | Numeric keypad 4 key
     Key.Key_5,  # 101   0x65   VK_NUMPAD5          | Numeric keypad 5 key
     Key.Key_6,  # 102   0x66   VK_NUMPAD6          | Numeric keypad 6 key
@@ -329,59 +329,59 @@ KEY_TABLE = [  # Keyboard mapping table
 
 CMD_TABLE = [  # Multimedia keys mapping table
     # Dec |  Hex | AppCommand
-    Key.Key_unknown,  #   0   0x00
-    Key.Key_Back,  #   1   0x01   APPCOMMAND_BROWSER_BACKWARD
-    Key.Key_Forward,  #   2   0x02   APPCOMMAND_BROWSER_FORWARD
-    Key.Key_Refresh,  #   3   0x03   APPCOMMAND_BROWSER_REFRESH
-    Key.Key_Stop,  #   4   0x04   APPCOMMAND_BROWSER_STOP
-    Key.Key_Search,  #   5   0x05   APPCOMMAND_BROWSER_SEARCH
-    Key.Key_Favorites,  #   6   0x06   APPCOMMAND_BROWSER_FAVORITES
-    Key.Key_Home,  #   7   0x07   APPCOMMAND_BROWSER_HOME
-    Key.Key_VolumeMute,  #   8   0x08   APPCOMMAND_VOLUME_MUTE
-    Key.Key_VolumeDown,  #   9   0x09   APPCOMMAND_VOLUME_DOWN
-    Key.Key_VolumeUp,  #  10   0x0a   APPCOMMAND_VOLUME_UP
-    Key.Key_MediaNext,  #  11   0x0b   APPCOMMAND_MEDIA_NEXTTRACK
-    Key.Key_MediaPrevious,  #  12   0x0c   APPCOMMAND_MEDIA_PREVIOUSTRACK
-    Key.Key_MediaStop,  #  13   0x0d   APPCOMMAND_MEDIA_STOP
-    Key.Key_MediaTogglePlayPause,  #  14   0x0e   APPCOMMAND_MEDIA_PLAYPAUSE
-    Key.Key_LaunchMail,  #  15   0x0f   APPCOMMAND_LAUNCH_MAIL
-    Key.Key_LaunchMedia,  #  16   0x10   APPCOMMAND_LAUNCH_MEDIA_SELECT
-    Key.Key_Launch0,  #  17   0x11   APPCOMMAND_LAUNCH_APP1
-    Key.Key_Launch1,  #  18   0x12   APPCOMMAND_LAUNCH_APP2
-    Key.Key_BassDown,  #  19   0x13   APPCOMMAND_BASS_DOWN
-    Key.Key_BassBoost,  #  20   0x14   APPCOMMAND_BASS_BOOST
-    Key.Key_BassUp,  #  21   0x15   APPCOMMAND_BASS_UP
-    Key.Key_TrebleDown,  #  22   0x16   APPCOMMAND_TREBLE_DOWN
-    Key.Key_TrebleUp,  #  23   0x17   APPCOMMAND_TREBLE_UP
-    Key.Key_MicMute,  #  24   0x18   APPCOMMAND_MICROPHONE_VOLUME_MUTE
-    Key.Key_MicVolumeDown,  #  25   0x19   APPCOMMAND_MICROPHONE_VOLUME_DOWN
-    Key.Key_MicVolumeUp,  #  26   0x1a   APPCOMMAND_MICROPHONE_VOLUME_UP
-    Key.Key_Help,  #  27   0x1b   APPCOMMAND_HELP
-    Key.Key_Find,  #  28   0x1c   APPCOMMAND_FIND
-    Key.Key_New,  #  29   0x1d   APPCOMMAND_NEW
-    Key.Key_Open,  #  30   0x1e   APPCOMMAND_OPEN
-    Key.Key_Close,  #  31   0x1f   APPCOMMAND_CLOSE
-    Key.Key_Save,  #  32   0x20   APPCOMMAND_SAVE
-    Key.Key_Printer,  #  33   0x21   APPCOMMAND_PRINT
-    Key.Key_Undo,  #  34   0x22   APPCOMMAND_UNDO
-    Key.Key_Redo,  #  35   0x23   APPCOMMAND_REDO
-    Key.Key_Copy,  #  36   0x24   APPCOMMAND_COPY
-    Key.Key_Cut,  #  37   0x25   APPCOMMAND_CUT
-    Key.Key_Paste,  #  38   0x26   APPCOMMAND_PASTE
-    Key.Key_Reply,  #  39   0x27   APPCOMMAND_REPLY_TO_MAIL
-    Key.Key_MailForward,  #  40   0x28   APPCOMMAND_FORWARD_MAIL
-    Key.Key_Send,  #  41   0x29   APPCOMMAND_SEND_MAIL
-    Key.Key_Spell,  #  42   0x2a   APPCOMMAND_SPELL_CHECK
-    Key.Key_unknown,  #  43   0x2b   APPCOMMAND_DICTATE_OR_COMMAND_CONTROL_TOGGLE
-    Key.Key_unknown,  #  44   0x2c   APPCOMMAND_MIC_ON_OFF_TOGGLE
-    Key.Key_unknown,  #  45   0x2d   APPCOMMAND_CORRECTION_LIST
-    Key.Key_MediaPlay,  #  46   0x2e   APPCOMMAND_MEDIA_PLAY
-    Key.Key_MediaPause,  #  47   0x2f   APPCOMMAND_MEDIA_PAUSE
-    Key.Key_MediaRecord,  #  48   0x30   APPCOMMAND_MEDIA_RECORD
-    Key.Key_AudioForward,  #  49   0x31   APPCOMMAND_MEDIA_FAST_FORWARD
-    Key.Key_AudioRewind,  #  50   0x32   APPCOMMAND_MEDIA_REWIND
-    Key.Key_ChannelDown,  #  51   0x33   APPCOMMAND_MEDIA_CHANNEL_DOWN
-    Key.Key_ChannelUp,  #  52   0x34   APPCOMMAND_MEDIA_CHANNEL_UP
+    Key.Key_unknown,  # 0   0x00
+    Key.Key_Back,  # 1   0x01   APPCOMMAND_BROWSER_BACKWARD
+    Key.Key_Forward,  # 2   0x02   APPCOMMAND_BROWSER_FORWARD
+    Key.Key_Refresh,  # 3   0x03   APPCOMMAND_BROWSER_REFRESH
+    Key.Key_Stop,  # 4   0x04   APPCOMMAND_BROWSER_STOP
+    Key.Key_Search,  # 5   0x05   APPCOMMAND_BROWSER_SEARCH
+    Key.Key_Favorites,  # 6   0x06   APPCOMMAND_BROWSER_FAVORITES
+    Key.Key_Home,  # 7   0x07   APPCOMMAND_BROWSER_HOME
+    Key.Key_VolumeMute,  # 8   0x08   APPCOMMAND_VOLUME_MUTE
+    Key.Key_VolumeDown,  # 9   0x09   APPCOMMAND_VOLUME_DOWN
+    Key.Key_VolumeUp,  # 10   0x0a   APPCOMMAND_VOLUME_UP
+    Key.Key_MediaNext,  # 11   0x0b   APPCOMMAND_MEDIA_NEXTTRACK
+    Key.Key_MediaPrevious,  # 12   0x0c   APPCOMMAND_MEDIA_PREVIOUSTRACK
+    Key.Key_MediaStop,  # 13   0x0d   APPCOMMAND_MEDIA_STOP
+    Key.Key_MediaTogglePlayPause,  # 14   0x0e   APPCOMMAND_MEDIA_PLAYPAUSE
+    Key.Key_LaunchMail,  # 15   0x0f   APPCOMMAND_LAUNCH_MAIL
+    Key.Key_LaunchMedia,  # 16   0x10   APPCOMMAND_LAUNCH_MEDIA_SELECT
+    Key.Key_Launch0,  # 17   0x11   APPCOMMAND_LAUNCH_APP1
+    Key.Key_Launch1,  # 18   0x12   APPCOMMAND_LAUNCH_APP2
+    Key.Key_BassDown,  # 19   0x13   APPCOMMAND_BASS_DOWN
+    Key.Key_BassBoost,  # 20   0x14   APPCOMMAND_BASS_BOOST
+    Key.Key_BassUp,  # 21   0x15   APPCOMMAND_BASS_UP
+    Key.Key_TrebleDown,  # 22   0x16   APPCOMMAND_TREBLE_DOWN
+    Key.Key_TrebleUp,  # 23   0x17   APPCOMMAND_TREBLE_UP
+    Key.Key_MicMute,  # 24   0x18   APPCOMMAND_MICROPHONE_VOLUME_MUTE
+    Key.Key_MicVolumeDown,  # 25   0x19   APPCOMMAND_MICROPHONE_VOLUME_DOWN
+    Key.Key_MicVolumeUp,  # 26   0x1a   APPCOMMAND_MICROPHONE_VOLUME_UP
+    Key.Key_Help,  # 27   0x1b   APPCOMMAND_HELP
+    Key.Key_Find,  # 28   0x1c   APPCOMMAND_FIND
+    Key.Key_New,  # 29   0x1d   APPCOMMAND_NEW
+    Key.Key_Open,  # 30   0x1e   APPCOMMAND_OPEN
+    Key.Key_Close,  # 31   0x1f   APPCOMMAND_CLOSE
+    Key.Key_Save,  # 32   0x20   APPCOMMAND_SAVE
+    Key.Key_Printer,  # 33   0x21   APPCOMMAND_PRINT
+    Key.Key_Undo,  # 34   0x22   APPCOMMAND_UNDO
+    Key.Key_Redo,  # 35   0x23   APPCOMMAND_REDO
+    Key.Key_Copy,  # 36   0x24   APPCOMMAND_COPY
+    Key.Key_Cut,  # 37   0x25   APPCOMMAND_CUT
+    Key.Key_Paste,  # 38   0x26   APPCOMMAND_PASTE
+    Key.Key_Reply,  # 39   0x27   APPCOMMAND_REPLY_TO_MAIL
+    Key.Key_MailForward,  # 40   0x28   APPCOMMAND_FORWARD_MAIL
+    Key.Key_Send,  # 41   0x29   APPCOMMAND_SEND_MAIL
+    Key.Key_Spell,  # 42   0x2a   APPCOMMAND_SPELL_CHECK
+    Key.Key_unknown,  # 43   0x2b   APPCOMMAND_DICTATE_OR_COMMAND_CONTROL_TOGGLE
+    Key.Key_unknown,  # 44   0x2c   APPCOMMAND_MIC_ON_OFF_TOGGLE
+    Key.Key_unknown,  # 45   0x2d   APPCOMMAND_CORRECTION_LIST
+    Key.Key_MediaPlay,  # 46   0x2e   APPCOMMAND_MEDIA_PLAY
+    Key.Key_MediaPause,  # 47   0x2f   APPCOMMAND_MEDIA_PAUSE
+    Key.Key_MediaRecord,  # 48   0x30   APPCOMMAND_MEDIA_RECORD
+    Key.Key_AudioForward,  # 49   0x31   APPCOMMAND_MEDIA_FAST_FORWARD
+    Key.Key_AudioRewind,  # 50   0x32   APPCOMMAND_MEDIA_REWIND
+    Key.Key_ChannelDown,  # 51   0x33   APPCOMMAND_MEDIA_CHANNEL_DOWN
+    Key.Key_ChannelUp,  # 52   0x34   APPCOMMAND_MEDIA_CHANNEL_UP
 ]
 
 # Possible modifier states.

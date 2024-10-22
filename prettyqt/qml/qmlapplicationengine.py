@@ -17,7 +17,7 @@ class QmlApplicationEngine(qml.QmlEngineMixin, qml.QQmlApplicationEngine):
     def load_data(
         self,
         data: datatypes.ByteArrayType,
-        url: datatypes.UrlType | os.PathLike | None = None,
+        url: datatypes.UrlType | os.PathLike[str] | None = None,
     ):
         data = datatypes.to_bytearray(data)
         url = datatypes.to_local_url(url)

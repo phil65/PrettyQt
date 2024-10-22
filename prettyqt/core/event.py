@@ -307,7 +307,7 @@ TYPE: bidict[TypeStr, mod.Type] = bidict(
     z_order_change=mod.Type.ZOrderChange,
 )
 
-MouseButtonTypeStr = Literal["press", "release", "double_click", "release"]
+MouseButtonTypeStr = Literal["press", "release", "double_click", "move"]
 
 MouseButtonType: bidict[MouseButtonTypeStr, QtCore.QEvent.Type] = bidict(
     press=QtCore.QEvent.Type.MouseButtonPress,
