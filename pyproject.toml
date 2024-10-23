@@ -3,7 +3,7 @@ name = "PrettyQt"
 version = "1.57.4"
 description = "A pythonic layer on top of PyQt6 / PySide6"
 readme = 'README.md'
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = "MIT"
 authors = [
     { name = "Philipp Temminghoff", email = "philipptemminghoff@gmail.com" },
@@ -15,8 +15,8 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Desktop Environment",
     "Topic :: Software Development :: User Interfaces",
     "Topic :: Software Development :: Widget Sets",
@@ -95,7 +95,7 @@ exclude_lines = [
 ]
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 disable_error_code = [
     "assignment",
     "misc",
@@ -108,7 +108,7 @@ disable_error_code = [
 [tool.ruff]
 line-length = 90
 extend-exclude = ['docs', '__init__.py', "prettyqt/qt/"]
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 preview = true
