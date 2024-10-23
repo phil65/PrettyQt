@@ -1,12 +1,7 @@
 from __future__ import annotations
 
-
-try:  # pragma: no cover
-    import re._constants as sre_constants
-except ImportError:  # Python < 3.11
-    import sre_constants  # type: ignore
-
 import re
+import re._constants as sre_constants  # noqa: PLC2701
 
 from prettyqt import core, gui
 from prettyqt.utils import get_repr
