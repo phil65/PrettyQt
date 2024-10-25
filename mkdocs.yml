@@ -33,7 +33,7 @@ theme:
     - content.code.copy
     - content.code.select
     - content.code.annotate
-    # - content.tooltips  # for insiders..
+    - content.tooltips
     - navigation.instant # make things faster
     - navigation.tracking # update URL based on current item in TOC
     - navigation.path # shows breadcrumbs
