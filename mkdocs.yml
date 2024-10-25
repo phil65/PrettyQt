@@ -10,84 +10,89 @@ theme:
   name: material
   custom_dir: docs/overrides
   palette:
-  # Palette toggle for light mode
-  - media: "(prefers-color-scheme: light)"
-    scheme: default
-    toggle:
-      icon: material/brightness-7
-      name: Switch to dark mode
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
 
-  # Palette toggle for dark mode
-  - media: "(prefers-color-scheme: dark)"
-    scheme: slate
-    toggle:
-      icon: material/brightness-4
-      name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
   features:
-  - content.code.copy
-  - content.code.select
-  - content.code.annotate
-  # - content.tooltips  # for insiders..
-  - navigation.instant # make things faster
-  - navigation.tracking # update URL based on current item in TOC
-  - navigation.path  # shows breadcrumbs
-  - navigation.tabs # make top level tabs
-  - navigation.prune
-  # - navigation.expand # expand all subsections in left sidebar by defuault
-  - navigation.indexes # documents can be directly attached to sections (overview pages)
-  - navigation.footer # next/previous page buttons in footer
-  # - navigation.tabs.sticky # and make them sticky
-  - toc.follow  # makes toc follow scrolling
-  # - toc.integrate  # integrates toc into left menu
-  - navigation.top  # adds back-to-top button
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    # - content.tooltips  # for insiders..
+    - navigation.instant # make things faster
+    - navigation.tracking # update URL based on current item in TOC
+    - navigation.path # shows breadcrumbs
+    - navigation.tabs # make top level tabs
+    - navigation.prune
+    # - navigation.expand # expand all subsections in left sidebar by defuault
+    - navigation.indexes # documents can be directly attached to sections (overview pages)
+    - navigation.footer # next/previous page buttons in footer
+    # - navigation.tabs.sticky # and make them sticky
+    - toc.follow # makes toc follow scrolling
+    # - toc.integrate  # integrates toc into left menu
+    - navigation.top # adds back-to-top button
   # - navigation.sections # top-level sections are rendered as groups
 
 plugins:
-- search
-# - social  # this one has dependency which is not on pypi for windows. (cairocffi)
-- tags
-- glightbox  # better image support
-- markdown-exec
-- mknodes:
-    build_fn: docs/gen_pages.py:build
-- mkdocstrings:
-    default_handler: python
-    handlers:
-      python:
-        import:
-        - url: https://docs.python.org/3/objects.inv
-          domains: [std, py]
-        - url: https://raw.githubusercontent.com/phil65/PrettyQt/master/docs/qt6.inv
-          base_url: https://doc.qt.io/qtforpython/
-          domains: [std, py]
-        - url: https://docs.python-requests.org/en/master/objects.inv
-          domains: [std, py]
-        - url: https://phil65.github.io/mknodes/objects.inv
-          domains: [std, py]
-        options:
-          # https://mkdocstrings.github.io/python/usage/
-          show_docstring_returns: false
-          show_source: true
-          show_signature_annotations: true
-          show_symbol_type_toc: true
-          show_symbol_type_heading: true
-          # merge_init_into_class: true
-          # ignore_init_summary: true
-          # show_if_no_docstring: true
-          inherited_members: false
-          signature_crossrefs: true
-          # separate_signature: true
-          line_length: 90
+  - search
+  # - social  # this one has dependency which is not on pypi for windows. (cairocffi)
+  - tags
+  - glightbox # better image support
+  - markdown-exec
+  - mknodes:
+      build_fn: docs/gen_pages.py:build
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          import:
+            - url: https://docs.python.org/3/objects.inv
+              domains: [std, py]
+            - url: https://raw.githubusercontent.com/phil65/PrettyQt/master/docs/qt6.inv
+              base_url: https://doc.qt.io/qtforpython/
+              domains: [std, py]
+            - url: https://docs.python-requests.org/en/master/objects.inv
+              domains: [std, py]
+            - url: https://phil65.github.io/mknodes/objects.inv
+              domains: [std, py]
+          options:
+            # https://mkdocstrings.github.io/python/usage/
+            show_docstring_returns: false
+            show_source: true
+            show_signature_annotations: true
+            show_symbol_type_toc: true
+            show_symbol_type_heading: true
+            # merge_init_into_class: true
+            # ignore_init_summary: true
+            # show_if_no_docstring: true
+            inherited_members: false
+            signature_crossrefs: true
+            # separate_signature: true
+            line_length: 90
 
 markdown_extensions:
-- pymdownx.superfences # required for markdown-exec since it checks for it in on_config
-- toc:
-    toc_depth: 2
+  - pymdownx.superfences # required for markdown-exec since it checks for it in on_config
+  - toc:
+      toc_depth: 2
 
 extra_javascript:
   - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
   - javascripts/tablesort.js
-
 # extra:
 #   social:
 #   - icon: fontawesome/brands/github
@@ -96,6 +101,6 @@ extra_javascript:
 #     link: https://matrix.to/#/#prettyqt:gitter.im
 #   - icon: fontawesome/brands/python
 #     link: https://pypi.org/project/prettyqt/
-  # generator: false disable "made with Material"
-  # version:  # multiple doc versions
-  #   provider: mike
+# generator: false disable "made with Material"
+# version:  # multiple doc versions
+#   provider: mike
