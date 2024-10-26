@@ -96,3 +96,6 @@ docs/site
 
 # mypy
 .mypy_cache/
+
+# uv
+uv.lock
