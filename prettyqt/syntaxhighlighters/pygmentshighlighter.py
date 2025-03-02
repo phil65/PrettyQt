@@ -158,7 +158,8 @@ def get_tokens_unprocessed(self, text: str, stack=("root",)):
                 case "#push":
                     statestack.append(statestack[-1])
                 case _:
-                    raise AssertionError(f"wrong state def: {new_state!r}")
+                    msg = f"wrong state def: {new_state!r}"
+                    raise AssertionError(msg)
             statetokens = tokendefs[statestack[-1]]
             break
         else:
@@ -283,8 +284,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         """Returns a QTextCharFormat for token or None."""
         if self._style is None:
             return self._get_format_from_document(token, self._document)
-        else:
-            return _get_format_from_style(token, self._style)
+        return _get_format_from_style(token, self._style)
 
     def _get_format_from_document(
         self, token: str, document: gui.QTextDocument

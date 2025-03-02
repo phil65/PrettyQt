@@ -31,7 +31,7 @@ class RegexMatchHighlighter(gui.SyntaxHighlighter):
         start_char = block.position()
         end_char = start_char + block.length()
         if not self.spans or not text:
-            return None
+            return
         for i, (start, end) in enumerate(self.spans):
             if end < start_char:
                 continue

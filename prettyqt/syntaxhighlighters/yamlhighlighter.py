@@ -4,6 +4,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from prettyqt import core, gui, syntaxhighlighters
 
 
@@ -19,7 +21,7 @@ class Rule(syntaxhighlighters.HighlightRule):
 
 
 class Bool(Rule):
-    regex = [r"\btrue\b", r"\bfalse\b"]
+    regex: ClassVar = [r"\btrue\b", r"\bfalse\b"]
     color = "blue"
     bold = True
 
