@@ -6,4 +6,4 @@ from prettyqt.qt import QtTest
 
 QT_MODULE = QtTest
 
-__all__ = ["SignalSpy", "AbstractItemModelTester"]
+__all__ = ["AbstractItemModelTester", "SignalSpy"]

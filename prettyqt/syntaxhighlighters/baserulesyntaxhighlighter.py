@@ -1,13 +1,17 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
-from re import Pattern
+from typing import TYPE_CHECKING, ClassVar
 
 from prettyqt import gui
 
 
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+    from re import Pattern
+
+
 class BaseRuleSyntaxHighlighter(gui.SyntaxHighlighter):
-    RULES: list = []
+    RULES: ClassVar[list] = []
 
     @classmethod
     def iter_rules(cls) -> Iterator[tuple[Pattern, int, gui.TextCharFormat]]:

@@ -15,13 +15,13 @@ from .yamlhighlighter import YamlHighlighter
 
 
 __all__ = [
-    "HighlightRule",
     "BaseRuleSyntaxHighlighter",
-    "SelectedWordHighlighter",
+    "HighlightRule",
     "JsonHighlighter",
-    "YamlHighlighter",
-    "PythonHighlighter",
-    "RegexMatchHighlighter",
     "MarkdownHighlighter",
     "PygmentsHighlighter",
+    "PythonHighlighter",
+    "RegexMatchHighlighter",
+    "SelectedWordHighlighter",
+    "YamlHighlighter",
 ]

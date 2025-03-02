@@ -68,14 +68,14 @@ from .widgetdelegate import WidgetDelegate
 
 __all__ = [
     "ButtonDelegate",
-    "RadioDelegate",
-    "ProgressBarDelegate",
-    "IconDelegate",
-    "StarDelegate",
-    "RenderLinkDelegate",
-    "NoFocusDelegate",
-    "HtmlItemDelegate",
-    "MarkdownItemDelegate",
-    "WidgetDelegate",
     "EditorDelegate",
+    "HtmlItemDelegate",
+    "IconDelegate",
+    "MarkdownItemDelegate",
+    "NoFocusDelegate",
+    "ProgressBarDelegate",
+    "RadioDelegate",
+    "RenderLinkDelegate",
+    "StarDelegate",
+    "WidgetDelegate",
 ]

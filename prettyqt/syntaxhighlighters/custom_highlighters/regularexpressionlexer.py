@@ -1,15 +1,17 @@
 from __future__ import annotations
 
+from typing import ClassVar
+
 from pygments.lexer import RegexLexer, bygroups
 from pygments.token import Comment, Keyword, Name, Number, Operator, Text, Token
 
 
 class CustomLexer(RegexLexer):
     name = "regex"
-    aliases = ["regex"]
-    filenames: list[str] = []
+    aliases: ClassVar = ["regex"]
+    filenames: ClassVar[list[str]] = []
 
-    tokens = {
+    tokens: ClassVar = {
         "root": [
             (r"\w+", Name),
             (r"\d+", Number),

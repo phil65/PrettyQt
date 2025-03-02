@@ -11,7 +11,4 @@ from prettyqt.qt import QtTextToSpeech
 
 QT_MODULE = QtTextToSpeech
 
-__all__ = [
-    "Voice",
-    "TextToSpeech",
-]
+__all__ = ["TextToSpeech", "Voice"]

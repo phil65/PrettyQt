@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Iterator
 import re
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import bidict
 
 from prettyqt import core
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterator
 
 
 # IGNORECASE = core.QRegularExpression.PatternOption.CaseInsensitiveOption
@@ -120,8 +123,7 @@ class Pattern(core.RegularExpression):
         match = super().match(string, pos)
         if match.hasMatch() and len(string) == match.end() - match.start():
             return Match(match)
-        else:
-            return None
+        return None
 
     def finditer(
         self, string: str, pos: int = 0, endpos: int | None = None
@@ -195,14 +197,13 @@ class Pattern(core.RegularExpression):
         return self.patternOptions()
 
 
-def compile(pattern: str, flags: int = 0) -> Pattern:
+def compile(pattern: str, flags: int = 0) -> Pattern:  # noqa: A001
     return Pattern(pattern, flags)
 
 
 def search(pattern: str, string: str, flags: int = 0) -> core.RegularExpression | None:
     compiled = compile(pattern, flags)
-    match = compiled.search(string)
-    return match
+    return compiled.search(string)
 
 
 def match(pattern: str, string: str, flags: int = 0) -> core.RegularExpression | None:
