@@ -103,13 +103,32 @@ class MeltProxyModel(core.AbstractProxyModel):
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
-        column = index.column()
-        if self.is_variable_column(column) and role == constants.DISPLAY_ROLE:
-            col = index.row() // self.sourceModel().rowCount()
-            return self.sourceModel().headerData(
-                self.value_columns[col], constants.HORIZONTAL
-            )
-        return super().data(index, role)
+        if not index.isValid():
+            return None
+
+        source = self.sourceModel()
+        row, column = index.row(), index.column()
+        source_row_count = source.rowCount()
+
+        # Handle variable column
+        if self.is_variable_column(column):
+            if role == constants.DISPLAY_ROLE:
+                col = row // source_row_count
+                return source.headerData(self.value_columns[col], constants.HORIZONTAL)
+            return None
+
+        # Handle value column
+        if self.is_value_column(column):
+            source_col = self.value_columns[row // source_row_count]
+            source_row = row % source_row_count
+            source_index = source.index(source_row, source_col)
+            return source.data(source_index, role)
+
+        # Handle ID columns
+        source_col = self.get_source_column_for_proxy_column(column)
+        source_row = row % source_row_count
+        source_index = source.index(source_row, source_col)
+        return source.data(source_index, role)
 
     def headerData(
         self,
@@ -121,22 +140,21 @@ class MeltProxyModel(core.AbstractProxyModel):
             return str(section)
         if self.is_variable_column(section):
             return self._var_name or "Variable"
-        elif self.is_value_column(section):
+        if self.is_value_column(section):
             return self._value_name or "Value"
-        else:
-            section = self.get_source_column_for_proxy_column(section)
-            return self.sourceModel().headerData(section, orientation, role)
+        section = self.get_source_column_for_proxy_column(section)
+        return self.sourceModel().headerData(section, orientation, role)
 
     def index(
         self, row: int, column: int, parent: core.ModelIndex | None = None
     ) -> core.ModelIndex:
-        # TODO: broken
-        parent = parent or core.ModelIndex()
-        if column not in self._id_columns:
-            return self.createIndex(row, column, core.ModelIndex())
-        col_pos = self.get_source_column_for_proxy_column(column)
-        row_pos = row % self.sourceModel().rowCount()
-        return self.sourceModel().index(row_pos, col_pos, parent)
+        if parent and parent.isValid():
+            return core.ModelIndex()
+
+        if not (0 <= row < self.rowCount() and 0 <= column < self.columnCount()):
+            return core.ModelIndex()
+
+        return self.createIndex(row, column)
 
     def parent(self, index: core.ModelIndex):
         if not self.is_source_column(index.column()):
@@ -157,28 +175,38 @@ class MeltProxyModel(core.AbstractProxyModel):
         row_count = source.rowCount()
         if self.is_variable_column(column):
             return core.ModelIndex()
-        elif self.is_value_column(column):
+        if self.is_value_column(column):
             source_col = self.value_columns[row // row_count]
             source_row = row % row_count
             return source.index(source_row, source_col, core.ModelIndex())
-        else:
-            source_col = self.get_source_column_for_proxy_column(column)
-            source_row = row % row_count
-            return source.index(source_row, source_col)
+        source_col = self.get_source_column_for_proxy_column(column)
+        source_row = row % row_count
+        return source.index(source_row, source_col)
 
     def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
-        # TODO: this is still broken.
+        if not source_index.isValid():
+            return core.ModelIndex()
+
         source = self.sourceModel()
-        if source is None or not source_index.isValid():
-            return core.ModelIndex()
-        row, col = source_index.row(), source_index.column()
-        # we can only really return a corresponding index for the value columns.
-        # Var column is completely virtual and the id columns would have multiple
-        # source indexes which correspond to the proxy index.
-        if col not in self.value_columns:
-            return core.ModelIndex()
-        # TODO: convert row / col
-        return source.index(row, col, core.ModelIndex())
+        source_row = source_index.row()
+        source_col = source_index.column()
+
+        # Handle ID columns
+        if source_col in self._id_columns:
+            proxy_col = self._id_columns.index(source_col)
+            base_row = source_row
+            for val_col in self.value_columns:
+                if val_col < source_col:
+                    base_row += source.rowCount()
+            return self.createIndex(base_row, proxy_col)
+
+        # Handle value columns
+        if source_col in self.value_columns:
+            value_col_idx = self.value_columns.index(source_col)
+            proxy_row = source_row + (value_col_idx * source.rowCount())
+            return self.createIndex(proxy_row, self.columnCount() - 1)
+
+        return core.ModelIndex()
 
     def get_id_columns(self) -> list[int]:
         """Get list of identifier columns."""

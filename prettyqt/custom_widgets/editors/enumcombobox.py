@@ -45,7 +45,7 @@ class EnumComboBox(widgets.ComboBox):
     def _set_enum_class(self, enum: enum.EnumMeta | None):
         """Set enum class from which members value should be selected."""
         if enum == self._enum_class:
-            return None
+            return
         self._enum_class = enum
         super().clear()
         if self._allow_none and enum is not None:
@@ -92,13 +92,13 @@ class EnumComboBox(widgets.ComboBox):
     #     if self._enum_class is not None:
     #         self.current_enum_changed.emit(self.get_value())
 
-    allowNone = core.Property(
+    allowNone = core.Property(  # noqa: N815
         bool,
         is_none_allowed,
         set_allow_none,
         doc="Whether None is allowed as a value",
     )
-    enumValue = core.Property(
+    enumValue = core.Property(  # noqa: N815
         enum.Enum,
         get_value,
         set_value,
