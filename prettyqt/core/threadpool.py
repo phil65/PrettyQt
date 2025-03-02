@@ -46,7 +46,8 @@ class Worker(core.Runnable):
         attr = getattr(self.signals, name, None)
         if isinstance(attr, core.SignalInstance):
             return getattr(self.signals, name)
-        raise AttributeError(f"{type(self).__name__!r} has no attribute {name!r}")
+        msg = f"{type(self).__name__!r} has no attribute {name!r}"
+        raise AttributeError(msg)
 
     @core.Slot()
     def run(self):
@@ -60,7 +61,7 @@ class Worker(core.Runnable):
                 self.signals.result.emit(result)
             self.signals.finished.emit()
         except Exception as e:
-            logger.exception(e)
+            logger.exception("Error occurred in function %r", self.fn.__name__)
             self.signals.error.emit(e)
 
 

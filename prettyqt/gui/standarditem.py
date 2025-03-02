@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
 import html
 import os
-from typing import Any, Self
+from typing import TYPE_CHECKING, Any, Self
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.utils import datatypes, get_repr, helpers, listdelegators, serializemixin
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
@@ -51,7 +54,8 @@ class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
                 self.add(other)
                 return self
             case _:
-                raise TypeError("wrong type for addition")
+                msg = "wrong type for addition"
+                raise TypeError(msg)
 
     def get_children(self) -> listdelegators.ListDelegator[gui.QStandardItem]:
         items = [self.child(index) for index in range(self.rowCount())]

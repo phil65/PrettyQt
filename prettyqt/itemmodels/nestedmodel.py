@@ -68,8 +68,7 @@ class NestedModel(  # type: ignore
                 if item.parent in [self.root, None]
                 else self.createIndex(item.parent.row(), 0, item.parent)
             )
-        else:
-            return core.ModelIndex()
+        return core.ModelIndex()
 
     def data_by_index(self, index):
         return index.internalPointer()

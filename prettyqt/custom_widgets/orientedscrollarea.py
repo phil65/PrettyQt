@@ -51,8 +51,8 @@ class OrientedScrollArea(widgets.ScrollArea):
         h = widget_size.height() + margins_height
         if self._orientation == constants.Orientation.Horizontal:
             return core.QSize(w, h + self.horizontalScrollBar().sizeHint().height())
-        else:  # self._orientation == Qt.Vertical:
-            return core.QSize(w + self.verticalScrollBar().sizeHint().width(), h)
+        # self._orientation == Qt.Vertical:
+        return core.QSize(w + self.verticalScrollBar().sizeHint().width(), h)
 
 
 if __name__ == "__main__":

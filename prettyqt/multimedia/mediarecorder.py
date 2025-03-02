@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-import os
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtMultimedia
 from prettyqt.utils import bidict, datatypes
+
+
+if TYPE_CHECKING:
+    import os
 
 
 EncodingModeStr = Literal[

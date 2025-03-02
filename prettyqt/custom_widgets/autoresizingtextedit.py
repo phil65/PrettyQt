@@ -54,9 +54,9 @@ class AutoResizeTextEditMixin:
     def setLineWrapMode(self, mode):
         """Reimplemented to avoid WidgetWidth wrap mode, which causes resize loops."""
         if mode == self.LineWrapMode.WidgetWidth:
-            raise ValueError("cannot use WidgetWidth wrap mode")
-        else:
-            super().setLineWrapMode(mode)
+            msg = "cannot use WidgetWidth wrap mode"
+            raise ValueError(msg)
+        super().setLineWrapMode(mode)
 
 
 class AutoResizeTextEdit(AutoResizeTextEditMixin, widgets.TextEdit):

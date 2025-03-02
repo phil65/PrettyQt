@@ -43,8 +43,7 @@ class DataClassModel(itemmodels.BaseDataclassModel):
         val = getattr(instance, field_name)
         if isinstance(val, bool):
             return super().flags(parent) | constants.IS_CHECKABLE
-        else:
-            return super().flags(parent) | constants.IS_EDITABLE
+        return super().flags(parent) | constants.IS_EDITABLE
 
 
 if __name__ == "__main__":

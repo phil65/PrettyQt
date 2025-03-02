@@ -57,7 +57,8 @@ class GeoManeuver(QtLocation.QGeoManeuver):
     def __getitem__(self, index: str):
         attr = self.extendedAttributes()
         if index not in attr:
-            raise KeyError(f"Key {index!r} does not exist.")
+            msg = f"Key {index!r} does not exist."
+            raise KeyError(msg)
         return attr[index]
 
     def get_position(self) -> positioning.GeoCoordinate:

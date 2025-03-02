@@ -99,8 +99,8 @@ class ActionGrid(widgets.Frame):
         tool_button_style : Tool button style.
     """
 
-    actionTriggered = core.Signal(gui.QAction)
-    actionHovered = core.Signal(gui.QAction)
+    actionTriggered = core.Signal(gui.QAction)  # noqa: N815
+    actionHovered = core.Signal(gui.QAction)  # noqa: N815
 
     def __init__(
         self,
@@ -320,8 +320,7 @@ class ActionGrid(widgets.Frame):
             button = self._grid_slots[index].button
             button.setFocus(constants.FocusReason.TabFocusReason)
             return True
-        else:
-            return False
+        return False
 
 
 if __name__ == "__main__":

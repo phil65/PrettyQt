@@ -6,6 +6,7 @@ from difflib import SequenceMatcher
 import inspect
 import logging
 import pprint
+from typing import ClassVar
 
 from prettyqt import constants, core, gui, itemmodels
 
@@ -56,6 +57,7 @@ class NameColumn(itemmodels.ColumnItem):
                     font = gui.QFont()
                     font.setItalic(True)
                     return font
+                return None
             case constants.USER_ROLE:
                 return item
 
@@ -300,7 +302,7 @@ class PythonObjectTreeModel(itemmodels.ColumnItemModel):
     IS_RECURSIVE = True
     ICON = "mdi.python"
     SUPPORTS = object
-    COLUMNS = [
+    COLUMNS: ClassVar = [
         NameColumn,
         DescriptionColumn,
         PathColumn,
@@ -338,7 +340,7 @@ class PythonObjectTreeModel(itemmodels.ColumnItemModel):
         # TODO: not used yet, better rework ColumnItemModel first
         treeitem = index.data(constants.USER_ROLE)
         if treeitem is None:
-            return
+            return None
         prev_data = treeitem.obj
         pieces = []
         while (index := index.parent()).isValid():
@@ -410,7 +412,7 @@ class PythonObjectTreeModel(itemmodels.ColumnItemModel):
         """
         tree_item = self.data_by_index(tree_index)
         if not tree_item.children_fetched:
-            return None
+            return
         old_items = tree_item.children
         new_items = self._fetch_object_children(tree_item)
 
@@ -457,7 +459,8 @@ class PythonObjectTreeModel(itemmodels.ColumnItemModel):
                     with self.insert_rows(first, last, tree_index):
                         tree_item.insert_children(i1, new_items[j1:j2])
                 case _:
-                    raise ValueError(f"Invalid tag: {tag}")
+                    msg = f"Invalid tag: {tag}"
+                    raise ValueError(msg)
 
     def refresh_tree(self):
         if self._show_root:

@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import pathlib
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
 from prettyqt import core, paths
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class TranslatorMixin(core.ObjectMixin):
@@ -18,7 +21,8 @@ class TranslatorMixin(core.ObjectMixin):
     def load_file(self, path: datatypes.PathType):
         path = pathlib.Path(path)
         if not self.load(path.name, str(path.parent)):
-            raise OSError(f"Invalid language file {path}")
+            msg = f"Invalid language file {path}"
+            raise OSError(msg)
 
     @classmethod
     def get_available_languages(cls) -> set[str]:
@@ -43,7 +47,8 @@ class TranslatorMixin(core.ObjectMixin):
             f"qt_{core.Locale.system().name()}",
             str(core.LibraryInfo.get_location("translations")),
         ):
-            raise OSError("Could not get translator for system language")
+            msg = "Could not get translator for system language"
+            raise OSError(msg)
         return translator
 
 

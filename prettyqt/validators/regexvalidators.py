@@ -1,10 +1,15 @@
 from __future__ import annotations
 
-import re
+from typing import TYPE_CHECKING
 
 from prettyqt import gui
-from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr
+
+
+if TYPE_CHECKING:
+    import re
+
+    from prettyqt.qt import QtCore
 
 
 class BaseRegexValidator(gui.Validator):
@@ -34,14 +39,16 @@ class BaseRegexValidator(gui.Validator):
 
     def get_regex(self) -> str:
         if self.regex is None:
-            raise TypeError("Validator not initialized")
+            msg = "Validator not initialized"
+            raise TypeError(msg)
         return self.regex.pattern
 
     def validate(  # type: ignore
         self, text: str, pos: int = 0
     ) -> tuple[gui.QValidator.State, str, int]:
         if self.regex is None:
-            raise TypeError("Validator not initialized")
+            msg = "Validator not initialized"
+            raise TypeError(msg)
         if not text:
             return self.State.Intermediate, text, pos
         match = self.regex.match(text)  # type: ignore
@@ -49,8 +56,7 @@ class BaseRegexValidator(gui.Validator):
             #     return self.State.Invalid, text, pos
             # elif match.partial:  # type: ignore
             return self.State.Intermediate, text, pos
-        else:
-            return self.State.Acceptable, text, pos
+        return self.State.Acceptable, text, pos
 
 
 class IntListValidator(BaseRegexValidator):

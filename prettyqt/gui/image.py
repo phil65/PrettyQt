@@ -135,8 +135,7 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
         height = qimage.height()
 
         ptr = qimage.constBits()
-        array = np.array(ptr).reshape(height, width, channels)  # Copies the data
-        return array
+        return np.array(ptr).reshape(height, width, channels)  # Copies the data
 
     @classmethod
     def from_pil(cls, image) -> Self:

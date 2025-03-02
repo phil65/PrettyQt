@@ -197,8 +197,7 @@ class Font(gui.QFont):
                 font = "Monospace"
         if as_qt:
             return gui.QFont(font)
-        else:
-            return cls(font, size)
+        return cls(font, size)
         # font.setStyleHint()
 
     def scaled(self, factor: float) -> Self:

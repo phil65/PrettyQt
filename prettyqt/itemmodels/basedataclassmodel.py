@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Sequence
 import contextlib
 import logging
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import constants, core
 from prettyqt.utils import classhelpers
+
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 logger = logging.getLogger(__name__)
@@ -20,7 +23,7 @@ class BaseDataclassModel(core.AbstractTableModel):
         self.items = items
         klasses = [type(i) for i in items]
         self.Class = classhelpers.lca_type(klasses)
-        logger.debug(f"{type(self).__name__}: found common ancestor {self.Class}")
+        logger.debug("%s: found common ancestor %s", type(self).__name__, self.Class)
         self._fields = self.get_fields()
         self._field_names = list(self._fields.keys())
 
@@ -103,6 +106,5 @@ class BaseDataclassModel(core.AbstractTableModel):
             setattr(instance, field_name, val)
             if isinstance(val, bool):
                 return super().flags(parent) | constants.IS_CHECKABLE
-            else:
-                return super().flags(parent) | constants.IS_EDITABLE
+            return super().flags(parent) | constants.IS_EDITABLE
         return super().flags(parent)

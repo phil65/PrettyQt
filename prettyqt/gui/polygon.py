@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
 import ctypes
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
 from prettyqt import constants, core
 from prettyqt.qt import API, QtGui
 from prettyqt.utils import datatypes, serializemixin
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class Polygon(serializemixin.SerializeMixin, QtGui.QPolygon):

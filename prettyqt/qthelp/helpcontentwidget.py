@@ -1,8 +1,13 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtHelp
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class HelpContentWidget(widgets.TreeViewMixin, QtHelp.QHelpContentWidget):

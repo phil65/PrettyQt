@@ -86,8 +86,7 @@ class WidgetDelegate(widgets.StyledItemDelegate):
         editor = self._editor_for_index(index)
         if isinstance(editor, widgets.QWidget):
             return editor.sizeHint()
-        else:
-            return super().sizeHint(option, index)
+        return super().sizeHint(option, index)
 
     def updateEditorGeometry(
         self,

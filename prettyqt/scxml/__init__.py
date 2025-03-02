@@ -16,11 +16,11 @@ from prettyqt.qt import QtScxml
 QT_MODULE = QtScxml
 
 __all__ = [
-    "ScxmlCompiler",
-    "ScxmlStateMachine",
-    "ScXmlDataModel",
     "ScXmlCppDataModel",
-    "ScXmlNullDataModel",
+    "ScXmlDataModel",
     "ScXmlInvokableService",
     "ScXmlInvokableServiceFactory",
+    "ScXmlNullDataModel",
+    "ScxmlCompiler",
+    "ScxmlStateMachine",
 ]

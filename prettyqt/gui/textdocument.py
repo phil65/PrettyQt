@@ -1,16 +1,19 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
 import contextlib
 import os
 import pathlib
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import constants, core, gui
 from prettyqt.utils import bidict, datatypes, get_repr
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 MarkdownFeatureStr = Literal["no_html", "commonmark", "github"]
@@ -82,18 +85,16 @@ class TextDocumentMixin(core.ObjectMixin):
         # starts with 0-index
         block = self.findBlockByNumber(number)
         if not block.isValid():
-            raise ValueError(
-                f"{number} not a valid block index. Block count: {self.blockCount()}"
-            )
+            msg = f"{number} not a valid block index. Block count: {self.blockCount()}"
+            raise ValueError(msg)
         return gui.TextBlock(block)
 
     def find_block_by_line_number(self, line_number: int) -> gui.TextBlock:
         # starts with 0-index
         block = self.findBlockByLineNumber(line_number)
         if not block.isValid():
-            raise ValueError(
-                f"{line_number} not a valid line index. Line count: {self.lineCount()}"
-            )
+            msg = f"{line_number} not a valid line index. Line count: {self.lineCount()}"
+            raise ValueError(msg)
         return gui.TextBlock(block)
 
     def set_text(self, text: str):
@@ -234,10 +235,9 @@ class TextDocumentMixin(core.ObjectMixin):
                 b = b.next()
             h += self.documentMargin()
             return h
-        else:
-            line_count = self.document().blockCount()
-            font_metrics = gui.FontMetrics(self.defaultFont())
-            return (max(line_count, 1) * font_metrics.height()) + self.documentMargin()
+        line_count = self.document().blockCount()
+        font_metrics = gui.FontMetrics(self.defaultFont())
+        return (max(line_count, 1) * font_metrics.height()) + self.documentMargin()
 
 
 class TextDocument(TextDocumentMixin, gui.QTextDocument):

@@ -16,12 +16,12 @@ from prettyqt.qt import QtPrintSupport
 QT_MODULE = QtPrintSupport
 
 __all__ = [
-    "Printer",
     "AbstractPrintDialog",
     "AbstractPrintDialogMixin",
-    "PrintDialog",
     "PageSetupDialog",
+    "PrintDialog",
     "PrintEngine",
-    "PrintPreviewWidget",
     "PrintPreviewDialog",
+    "PrintPreviewWidget",
+    "Printer",
 ]

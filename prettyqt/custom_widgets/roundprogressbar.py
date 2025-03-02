@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Sequence
 import enum
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, widgets
+
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 BarStyleStr = Literal["donut", "pie", "line", "expand"]
@@ -77,13 +80,13 @@ class RoundProgressBar(widgets.Widget):
 
     def set_bar_style(self, style: BarStyleStr | RoundProgressBar.BarStyle):
         if isinstance(style, str):
-            BAR_STYLE = dict(
+            bar_style = dict(
                 donut=RoundProgressBar.BarStyle.Donut,
                 pie=RoundProgressBar.BarStyle.Pie,
                 line=RoundProgressBar.BarStyle.Line,
                 expand=RoundProgressBar.BarStyle.Expand,
             )
-            style = BAR_STYLE[style]
+            style = bar_style[style]
         if style != self.bar_style:
             self.bar_style = style
             self._rebuild_brush = True
@@ -295,7 +298,7 @@ class RoundProgressBar(widgets.Widget):
         with self.edit_palette() as palette:
             palette.set_brush("highlight", data_brush)
 
-    nullPosition = core.Property(
+    nullPosition = core.Property(  # noqa: N815
         enum.Enum,
         get_null_position,
         set_null_position,

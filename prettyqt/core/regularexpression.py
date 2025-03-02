@@ -1,13 +1,16 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Iterator
 import re
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 import bidict as bd
 
 from prettyqt import core
 from prettyqt.utils import bidict, get_repr
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterator
 
 
 RE_MAP = bd.bidict({
@@ -129,8 +132,7 @@ class RegularExpression(core.QRegularExpression):
         match = super().match(string, pos)
         if match.hasMatch() and len(string) == match.end() - match.start():
             return core.RegularExpressionMatch(match)
-        else:
-            return None
+        return None
 
     def finditer(
         self, string: str, pos: int = 0, endpos: int | None = None

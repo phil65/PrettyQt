@@ -1,10 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Iterator, Sequence
+from typing import TYPE_CHECKING
 
 from prettyqt import gui
-from prettyqt.qt import QtCore
 from prettyqt.utils import get_repr
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator, Sequence
+
+    from prettyqt.qt import QtCore
 
 
 class CompositeValidator(gui.Validator):
@@ -68,10 +73,9 @@ class AndValidator(CompositeValidator):
         vals = [v.validate(text, pos)[0] for v in self.validators]  # type: ignore
         if self.State.Invalid in vals:
             return self.State.Invalid, text, pos
-        elif self.State.Intermediate in vals:
+        if self.State.Intermediate in vals:
             return self.State.Intermediate, text, pos
-        else:
-            return self.State.Acceptable, text, pos
+        return self.State.Acceptable, text, pos
 
 
 class OrValidator(CompositeValidator):
@@ -85,10 +89,9 @@ class OrValidator(CompositeValidator):
         vals = [v.validate(text, pos)[0] for v in self.validators]  # type: ignore
         if self.State.Acceptable in vals:
             return self.State.Acceptable, text, pos
-        elif self.State.Intermediate in vals:
+        if self.State.Intermediate in vals:
             return self.State.Intermediate, text, pos
-        else:
-            return self.State.Invalid, text, pos
+        return self.State.Invalid, text, pos
 
 
 if __name__ == "__main__":

@@ -2,10 +2,13 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class FileChooserButton(widgets.Widget):

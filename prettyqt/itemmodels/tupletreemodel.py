@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Hashable
 import logging
 import pathlib
+from typing import ClassVar
 
 from prettyqt import constants, core, itemmodels
 
@@ -24,7 +25,7 @@ class TupleTreeModel(itemmodels.TreeModel):
     """
 
     SUPPORTS = dict[tuple[Hashable, ...] | pathlib.Path, str]
-    HEADER = ["Name"]
+    HEADER: ClassVar = ["Name"]
 
     def __init__(self, mapping: dict, **kwargs):
         super().__init__((), **kwargs)
@@ -59,11 +60,8 @@ class TupleTreeModel(itemmodels.TreeModel):
     @classmethod
     def supports(cls, instance) -> bool:
         match instance:
-            case dict() if (
-                all(
-                    isinstance(k, pathlib.Path | tuple)
-                    for k in instance.keys() and instance
-                )
+            case dict() if all(
+                isinstance(k, pathlib.Path | tuple) for k in instance.keys() and instance
             ):
                 return True
         return False
@@ -74,7 +72,7 @@ class TupleTreeModel(itemmodels.TreeModel):
         parts = item.obj.parts if isinstance(item.obj, pathlib.Path) else item.obj
         return [
             self.TreeItem(obj=k)
-            for k in self.mapping.keys()
+            for k in self.mapping
             if len(k) == len(parts) + 1
             and all(parent_part == k[i] for i, parent_part in enumerate(parts))
         ]
@@ -84,7 +82,7 @@ class TupleTreeModel(itemmodels.TreeModel):
         return any(
             len(k) == len(parts) + 1
             and all(parent_part == k[i] for i, parent_part in enumerate(parts))
-            for k in self.mapping.keys()
+            for k in self.mapping
         )
 
 

@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from typing import TYPE_CHECKING
 
 from prettyqt import gui
 from prettyqt.utils import get_repr
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class TextBlockGroup(gui.TextObjectMixin, gui.QTextBlockGroup):

@@ -8,4 +8,4 @@ from prettyqt.qt import QtMultimediaWidgets
 
 QT_MODULE = QtMultimediaWidgets
 
-__all__ = ["VideoWidget", "GraphicsVideoItem"]
+__all__ = ["GraphicsVideoItem", "VideoWidget"]

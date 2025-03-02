@@ -52,13 +52,10 @@ class VerticalLabel(widgets.Label):
         if self.orientation == constants.VERTICAL:
             if self._size_hint:
                 return core.QSize(self._size_hint.height(), self._size_hint.width())
-            else:
-                return core.QSize(19, 50)
-        else:
-            if self._size_hint:
-                return core.QSize(self._size_hint.width(), self._size_hint.height())
-            else:
-                return core.QSize(50, 19)
+            return core.QSize(19, 50)
+        if self._size_hint:
+            return core.QSize(self._size_hint.width(), self._size_hint.height())
+        return core.QSize(50, 19)
 
 
 if __name__ == "__main__":

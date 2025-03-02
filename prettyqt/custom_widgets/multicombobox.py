@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-from collections.abc import Generator
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import constants, core, gui, widgets
+
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 
 # Subclass Delegate to increase item height
@@ -17,7 +20,7 @@ class SizeHintDelegate(widgets.StyledItemDelegate):
 class MultiComboBox(widgets.ComboBox):
     """ComboBox allowing multiple-choice selection."""
 
-    selectionChanged = core.Signal(list)
+    selectionChanged = core.Signal(list)  # noqa: N815
 
     def __init__(self, parent: widgets.QWidget | None = None, **kwargs):
         super().__init__(parent=parent, **kwargs)
@@ -45,8 +48,8 @@ class MultiComboBox(widgets.ComboBox):
         if item.index().row() == 0:
             state = item.checkState()
             with self.model().change_layout():
-                for item in self.get_model_items():
-                    item.setCheckState(state)
+                for _item in self.get_model_items():
+                    _item.setCheckState(state)
 
     def resizeEvent(self, event):
         # Recompute text to elide as needed

@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Sequence
 import enum
 import logging
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import constants, core, gui, itemmodels
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable, Sequence
 
 
 logger = logging.getLogger(__name__)

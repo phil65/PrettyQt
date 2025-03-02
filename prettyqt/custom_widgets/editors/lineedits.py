@@ -1,8 +1,12 @@
 from __future__ import annotations
 
-from collections.abc import Sequence
+from typing import TYPE_CHECKING
 
 from prettyqt import core, widgets
+
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 class IntLineEdit(widgets.LineEdit):

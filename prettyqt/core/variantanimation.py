@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Iterator
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
 from prettyqt import core
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterator
+
+    from prettyqt.utils import datatypes
 
 
 class VariantAnimationMixin(core.AbstractAnimationMixin):

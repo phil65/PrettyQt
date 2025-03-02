@@ -217,7 +217,8 @@ class ScrollAreaTocWidget(widgets.TreeView):
     def set_widget(self, widget: widgets.QScrollArea):
         """Set the ScrollArea widget to follow."""
         if widget.widget() is None:
-            raise RuntimeError("No widget set on ScrollArea.")
+            msg = "No widget set on ScrollArea."
+            raise RuntimeError(msg)
         self.scrollarea = widget
         model = ScrollAreaTocModel(
             widget.widget(),
@@ -332,7 +333,7 @@ class ScrollAreaTocWidget(widgets.TreeView):
     def set_always_expanded(self, always_expanded: bool):
         self._always_expanded = always_expanded
 
-    scrollMode = core.Property(
+    scrollMode = core.Property(  # noqa: N815
         enum.Enum,
         _scrollMode,
         set_scroll_mode,

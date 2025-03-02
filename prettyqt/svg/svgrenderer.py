@@ -1,17 +1,22 @@
 from __future__ import annotations
 
 import os
+from typing import TYPE_CHECKING
 
 from prettyqt import constants, core
 from prettyqt.qt import QtSvg
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class SvgRenderer(core.ObjectMixin, QtSvg.QSvgRenderer):
     def load_file(self, path: datatypes.PathType):
         result = self.load(os.fspath(path))
         if not result:
-            raise ValueError("invalid path")
+            msg = "invalid path"
+            raise ValueError(msg)
 
     def set_aspect_ratio_mode(
         self, mode: constants.AspectRatioModeStr | constants.AspectRatioMode

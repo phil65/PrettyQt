@@ -1,8 +1,12 @@
 from __future__ import annotations
 
-from collections.abc import Sequence
+from typing import TYPE_CHECKING, ClassVar
 
 from prettyqt import constants, gui, itemmodels
+
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 class WhatsThisColumn(itemmodels.ColumnItem):
@@ -108,7 +112,7 @@ class ParentColumn(itemmodels.ColumnItem):
 class ShortcutsModel(itemmodels.ColumnTableModel):
     """Model to display a list of gui.QShortcuts."""
 
-    COLUMNS = [
+    COLUMNS: ClassVar = [
         WhatsThisColumn,
         EnabledColumn,
         ShortcutColumn,

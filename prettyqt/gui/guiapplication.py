@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
 import contextlib
 import sys
-from typing import SupportsInt
+from typing import TYPE_CHECKING, SupportsInt
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.utils import colors, datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class GuiApplicationMixin(core.CoreApplicationMixin):
@@ -185,7 +188,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
     def set_progress_value(self, value: int, total: int = 100):
         windows = self.topLevelWindows()
         if not windows:
-            return None
+            return
         if sys.platform.startswith("win"):
             from prettyqt.utils.platforms.windows import taskbaritem
 

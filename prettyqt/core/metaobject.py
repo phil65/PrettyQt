@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import logging
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from prettyqt import constants, core
 from prettyqt.utils import datatypes, helpers
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 T = TypeVar("T", bound=core.QObject)
@@ -144,9 +147,10 @@ class MetaObject:
         """
         try:
             self.get_property(name)
-            return True
         except KeyError:
             return False
+        else:
+            return True
 
     def get_property(self, index: int | str) -> core.MetaProperty:
         """Get MetaProperty based on index or name.
@@ -204,8 +208,7 @@ class MetaObject:
         ]
         if type_filter is None:
             return methods
-        else:
-            return [i for i in methods if i.get_method_type() == type_filter]
+        return [i for i in methods if i.get_method_type() == type_filter]
 
     def get_enums(self, include_super: bool = True) -> list[core.MetaEnum]:
         """Get all MetaEnums based on given criteria.
@@ -283,8 +286,7 @@ class MetaObject:
         vals = {prop.get_name(): prop.read(qobject) for prop in self.get_properties()}
         if cast_types:
             return {k: datatypes.make_serializable(v) for k, v in vals.items()}
-        else:
-            return vals
+        return vals
 
     def get_signals(
         self, include_super: bool = True, only_notifiers: bool = False
@@ -301,8 +303,7 @@ class MetaObject:
                 for prop in self.get_properties(include_super)
                 if prop.hasNotifySignal()
             ]
-        else:
-            return self.get_methods(include_super=include_super, type_filter="signal")
+        return self.get_methods(include_super=include_super, type_filter="signal")
 
     def get_slots(self, include_super: bool = True) -> list[core.MetaMethod]:
         """Get all slot MetaMethods based on given criteria.
@@ -364,7 +365,7 @@ class MetaObject:
             if not hasattr(source_qobject, signal_name):
                 # PyQt6 reports applicationNameChanged for QCoreApplication,
                 # but it doesnt exist...
-                logger.warning(f"Signal {signal_name} does not exist.")
+                logger.warning("Signal %r does not exist.", signal_name)
                 continue
             signal_instance = getattr(source_qobject, signal_name)
             slot = (
@@ -374,7 +375,7 @@ class MetaObject:
             )
             handle = signal_instance.connect(slot)
             handles.append(handle)
-        logger.debug(f"connected {len(handles)} signals to {fn_or_qobject}.")
+        logger.debug("connected %s signals to %s.", len(handles), fn_or_qobject)
         return handles
 
     def copy(self, qobject: T, forward_signals: bool = True) -> T:
@@ -395,7 +396,7 @@ class MetaObject:
             prop.write(new, val)
         if forward_signals:
             self.connect_signals(new, qobject)
-        logger.debug(f"copied {qobject!r}")
+        logger.debug("copied %r", qobject)
         return new
 
     @classmethod

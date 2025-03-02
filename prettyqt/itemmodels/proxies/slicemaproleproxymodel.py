@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Mapping
+from typing import TYPE_CHECKING
 
 from bidict import bidict
 
 from prettyqt import constants, core, itemmodels
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Mapping
 
 
 class SliceMapRoleProxyModel(itemmodels.SliceIdentityProxyModel):

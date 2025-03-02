@@ -76,7 +76,8 @@ class SignalList(MutableSequence[_T]):
             return
         if isinstance(key, slice):
             if not isinstance(value, Iterable):
-                raise TypeError("Can only assign an iterable to slice")
+                msg = "Can only assign an iterable to slice"
+                raise TypeError(msg)
             value = [self._pre_insert(v) for v in value]  # before we mutate the list
         else:
             value = self._pre_insert(cast("_T", value))
@@ -147,7 +148,8 @@ class SignalList(MutableSequence[_T]):
         if self._hashable:
             return id(self)
         name = self.__class__.__name__
-        raise TypeError(f"unhashable type: {name!r}.")
+        msg = f"unhashable type: {name!r}."
+        raise TypeError(msg)
 
     def reverse(self, *, emit_individual_events: bool = False) -> None:
         """Reverse list *IN PLACE*."""
@@ -239,7 +241,8 @@ class SignalList(MutableSequence[_T]):
             dest_index: The destination for sources.
         """
         if isinstance(dest_index, slice):
-            raise TypeError("Destination index may not be a slice")  # pragma: no cover
+            msg = "Destination index may not be a slice"
+            raise TypeError(msg)  # pragma: no cover
 
         to_move: list[int] = []
         for idx in sources:

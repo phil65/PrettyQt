@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Mapping
-from typing import Any, Literal, TypedDict
+from typing import TYPE_CHECKING, Any, Literal, TypedDict
 
 from prettyqt import core
 from prettyqt.qt import QtNetwork
 from prettyqt.utils import bidict, datatypes, get_repr
+
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 
 Req = QtNetwork.QNetworkRequest

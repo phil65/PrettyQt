@@ -44,7 +44,7 @@ class ButtonDelegate(widgets.StyledItemDelegate):
     ):
         btn_callback = index.data(self.method_role)
         if btn_callback is None:
-            return
+            return None
         return widgets.PushButton(parent=parent, text=index.data(), clicked=btn_callback)
 
     def setEditorData(self, editor: widgets.QWidget, index: core.ModelIndex):

@@ -12,4 +12,4 @@ from prettyqt.qt import QtPdf
 QT_MODULE = QtPdf
 
 
-__all__ = ["PdfDocument", "PdfBookmarkModel", "PdfSearchModel"]
+__all__ = ["PdfBookmarkModel", "PdfDocument", "PdfSearchModel"]

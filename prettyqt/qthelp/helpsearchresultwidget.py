@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import core, qthelp, widgets
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class HelpSearchResultWidget(widgets.WidgetMixin):  # , qthelp.QHelpSearchResultWidget):
@@ -14,7 +19,7 @@ class HelpSearchResultWidget(widgets.WidgetMixin):  # , qthelp.QHelpSearchResult
         return getattr(self.item, val)
 
     @classmethod
-    def setup_example(self):
+    def setup_example(cls):
         core_engine = qthelp.HelpEngineCore("test")
         engine = qthelp.HelpSearchEngine(core_engine)
         widget = engine.get_result_widget()

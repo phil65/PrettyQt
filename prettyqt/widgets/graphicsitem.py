@@ -60,10 +60,9 @@ class GraphicsItemMixin:
             return self.collidesWithPath(
                 item, constants.ITEM_SELECTION_MODE.get_enum_value(mode)
             )
-        else:
-            return self.collidesWithItem(
-                item, constants.ITEM_SELECTION_MODE.get_enum_value(mode)
-            )
+        return self.collidesWithItem(
+            item, constants.ITEM_SELECTION_MODE.get_enum_value(mode)
+        )
 
     def set_panel_modality(
         self, modality: PanelModalityStr | QtWidgets.QGraphicsItem.PanelModality

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-import re._constants as sre_constants  # noqa: PLC2701
+import re._constants as sre_constants
 
 from prettyqt import core, gui
 from prettyqt.utils import get_repr

@@ -1,9 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
+from typing import TYPE_CHECKING
 
 from prettyqt import constants, core, gui
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
+    from prettyqt.utils import datatypes
 
 
 class Shortcut(core.ObjectMixin, gui.QShortcut):

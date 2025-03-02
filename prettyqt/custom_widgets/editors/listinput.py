@@ -24,7 +24,8 @@ class ListInput(widgets.LineEdit):
             case builtins.float:
                 self.set_validator("float_list", allow_single=allow_single)
             case _:
-                raise ValueError(f"Invalid type {typ}")
+                msg = f"Invalid type {typ}"
+                raise ValueError(msg)
         self.set_value(value)
 
     def get_value(self) -> list[float | int]:  # type: ignore[override]

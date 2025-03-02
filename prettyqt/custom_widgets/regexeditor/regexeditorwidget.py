@@ -104,7 +104,7 @@ class RegexEditorWidget(widgets.Widget):
                 self._highlighter.set_spans(None)
                 self.table_matches.set_model(None)
                 self.label_num_matches.set_text("0 matches")
-                return None
+                return
             try:
                 self.prog = re.compile(
                     self.regexinput.get_pattern(), self.regexinput.get_flags()

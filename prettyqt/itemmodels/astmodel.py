@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import enum
 import logging
+from typing import ClassVar
 
 from prettyqt import constants, core, gui, itemmodels
 from prettyqt.utils import bidict
@@ -69,7 +70,7 @@ class AstModel(itemmodels.TreeModel):
         NodeRole = constants.USER_ROLE
 
     SUPPORTS = ast.AST
-    HEADER = [
+    HEADER: ClassVar = [
         "Node type",
         "Name",
         "Line range",
@@ -103,7 +104,7 @@ class AstModel(itemmodels.TreeModel):
                 try:
                     node = ast.parse(ast_tree)
                 except SyntaxError as e:
-                    logger.debug(f"caught {e!r} when building AST")
+                    logger.debug("caught %r when building AST", e)
                     return
             case ast.AST():
                 code = ast.unparse(ast_tree)
@@ -133,7 +134,7 @@ class AstModel(itemmodels.TreeModel):
                 return self.HEADER[section]
         return None
 
-    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
+    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):  # noqa: PLR0911
         if not index.isValid():
             return None
         node = self.data_by_index(index).obj
@@ -162,6 +163,7 @@ class AstModel(itemmodels.TreeModel):
                         if node.lineno != node.end_lineno
                         else str(node.lineno)
                     )
+                return None
             case constants.DISPLAY_ROLE, 3:
                 if hasattr(node, "col_offset"):
                     return (
@@ -169,6 +171,7 @@ class AstModel(itemmodels.TreeModel):
                         if node.col_offset != node.end_col_offset
                         else str(node.col_offset)
                     )
+                return None
             case constants.DISPLAY_ROLE, 4:
                 return ast.get_source_segment(self.code, node)
             case constants.FONT_ROLE, 4 | 5:
@@ -204,7 +207,7 @@ class AstModel(itemmodels.TreeModel):
         if root_tree is None:
             root_tree = self.ast_tree
         for i in ast.iter_fields(root_tree):
-            if not isinstance(a := getattr(root_tree, i), list):
+            if not isinstance(a := getattr(root_tree, i), list):  # noqa: SIM102
                 if a == old and not {*scope} & {*ignore}:
                     setattr(root_tree, i, new)
             n = a if isinstance(a, list) else [a]

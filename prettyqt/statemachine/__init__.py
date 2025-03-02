@@ -1,4 +1,4 @@
-""" Provides classes for creating and executing state graphs."""
+"""Provides classes for creating and executing state graphs."""
 
 from __future__ import annotations
 
@@ -19,12 +19,12 @@ QT_MODULE = QtStateMachine
 __all__ = [
     "AbstractState",
     "AbstractStateMixin",
-    "FinalState",
-    "HistoryState",
-    "State",
-    "StateMachine",
     "AbstractTransition",
     "AbstractTransitionMixin",
-    "SignalTransition",
     "EventTransition",
+    "FinalState",
+    "HistoryState",
+    "SignalTransition",
+    "State",
+    "StateMachine",
 ]

@@ -130,8 +130,7 @@ class TreeModel(core.AbstractItemModel):
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return 0
-        else:
-            return not self.data_by_index(parent).children_fetched
+        return not self.data_by_index(parent).children_fetched
 
     def fetchMore(self, parent: core.ModelIndex | None = None):
         """Fetch the children given the model index of a parent node.

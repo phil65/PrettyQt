@@ -35,7 +35,7 @@ class Transform(serializemixin.SerializeMixin, QtGui.QTransform):
             self.m33(),
         )
 
-    def __getitem__(self, value: tuple[int, int]) -> float:
+    def __getitem__(self, value: tuple[int, int]) -> float:  # noqa: PLR0911
         match value[0], value[1]:
             case 0, 0:
                 return self.m11()
@@ -56,7 +56,8 @@ class Transform(serializemixin.SerializeMixin, QtGui.QTransform):
             case 2, 2:
                 return self.m33()
             case _:
-                raise ValueError(f"Wrong value {value}")
+                msg = f"Wrong value {value}"
+                raise ValueError(msg)
 
     @property
     def _m11(self) -> float:

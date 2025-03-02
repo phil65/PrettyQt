@@ -169,7 +169,8 @@ class PageSize(QtGui.QPageSize):
         """
         units = self.definitionUnits()
         if units.value == -1:
-            raise ValueError("Invalid page size")
+            msg = "Invalid page size"
+            raise ValueError(msg)
         return UNITS.inverse[units]
 
     def get_id(self) -> str:

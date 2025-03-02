@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import core
-from prettyqt.qt import QtLocation
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtLocation
 
 
 class GeoCodingManager(core.ObjectMixin):

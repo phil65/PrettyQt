@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import gui
-from prettyqt.qt import QtCore
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
 
 
 class BlacklistValidator(gui.Validator):

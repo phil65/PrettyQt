@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
 from prettyqt import location
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class PlaceSearchReply(location.PlaceReplyMixin, location.QPlaceSearchReply):

@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-import datetime
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, widgets
 from prettyqt.utils import bidict, datatypes
+
+
+if TYPE_CHECKING:
+    import datetime
 
 
 SelectionModeStr = Literal["none", "single"]

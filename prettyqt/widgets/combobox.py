@@ -163,7 +163,8 @@ class ComboBoxMixin(widgets.WidgetMixin):
     def set_data(self, data: Any):
         idx = self.findData(data)
         if idx == -1:
-            raise ValueError("invalid data")
+            msg = "invalid data"
+            raise ValueError(msg)
         self.setCurrentIndex(idx)
 
     def text(self) -> str:

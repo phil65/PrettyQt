@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
 import math
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 ElementTypeStr = Literal[
@@ -39,7 +42,7 @@ class PainterPath(QtGui.QPainterPath):
             other,
             core.QPoint | core.QRect | QtGui.QPainterPath | QtGui.QRegion,
         ):
-            raise ValueError(other)
+            raise TypeError(other)
         self.add(other)
         return self
 

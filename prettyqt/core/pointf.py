@@ -27,7 +27,8 @@ class PointF(QtCore.QPointF):
             case 1:
                 return self.y()
             case _:
-                raise IndexError(f"Invalid index {index} for Point")
+                msg = f"Invalid index {index} for Point"
+                raise IndexError(msg)
 
     def __setitem__(self, i, x: float):
         match i:
@@ -36,7 +37,8 @@ class PointF(QtCore.QPointF):
             case 1:
                 return self.setY(x)
             case _:
-                raise IndexError(f"Invalid index {i} for Point")
+                msg = f"Invalid index {i} for Point"
+                raise IndexError(msg)
 
     def __reduce__(self):
         return type(self), (self.x(), self.y())

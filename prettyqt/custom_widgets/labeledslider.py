@@ -19,7 +19,8 @@ class LabeledSlider(widgets.Widget):
         super().__init__(parent=parent)
 
         if not isinstance(labels, Sequence):
-            raise ValueError("<labels> must be a sequence.")
+            msg = "<labels> must be a sequence."
+            raise TypeError(msg)
         self.levels = labels
         orientation = constants.ORIENTATION.get_enum_value(orientation)
         self.set_layout(constants.ORIENTATION.inverse[orientation], margin=10)

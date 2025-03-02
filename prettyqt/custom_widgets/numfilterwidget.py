@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import functools
 import operator
+from typing import TYPE_CHECKING
 
 from prettyqt import core, gui, widgets
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 class NumFilterWidget(widgets.Widget):

@@ -20,7 +20,8 @@ class ProcessEnvironment(
 
     def __getitem__(self, index: str) -> str:
         if index not in self:
-            raise KeyError("Environment variable not set.")
+            msg = "Environment variable not set."
+            raise KeyError(msg)
         return self.value(index)
 
     def __delitem__(self, index: str):

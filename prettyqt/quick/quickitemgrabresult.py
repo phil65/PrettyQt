@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import core, gui
-from prettyqt.qt import QtQuick
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtQuick
 
 
 class QuickItemGrabResult(core.ObjectMixin):

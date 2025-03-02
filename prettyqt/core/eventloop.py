@@ -34,7 +34,8 @@ class EventLoop(core.ObjectMixin, core.QEventLoop):
         wait_for_more: bool = False,
     ) -> int:
         if self._executing:
-            raise AssertionError("Eventloop is already running!")
+            msg = "Eventloop is already running!"
+            raise AssertionError(msg)
         self._executing = True
         flag = core.QEventLoop.ProcessEventsFlag(0)
         if not user_input:

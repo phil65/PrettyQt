@@ -66,8 +66,7 @@ class FilterHeader(widgets.HeaderView):
     @classmethod
     def setup_example(cls):
         w = widgets.TableView()
-        widget = cls(parent=w)
-        return widget
+        return cls(parent=w)
 
     def are_editors_visible(self) -> bool:
         return self._editors_visible

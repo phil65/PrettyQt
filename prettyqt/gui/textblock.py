@@ -41,7 +41,7 @@ class TextBlock(QtGui.QTextBlock):
     def set_user_data(self, data):
         if isinstance(data, QtGui.QTextBlockUserData):
             self.setUserData(data)
-            return None
+            return
         user_data = UserData(data)
         self.setUserData(user_data)
 

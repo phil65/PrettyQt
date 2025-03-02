@@ -1,7 +1,10 @@
 from __future__ import annotations
 
-from collections.abc import Iterator, Sequence
-from typing import Self
+from typing import TYPE_CHECKING, Self
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator, Sequence
 
 
 class NestedItem:

@@ -21,8 +21,7 @@ class RegularExpressionMatch(core.QRegularExpressionMatch):
     def __getitem__(self, item: int | str) -> str:
         if captured := self.captured(item):
             return captured
-        else:
-            raise KeyError(item)
+        raise KeyError(item)
 
     def __bool__(self):
         return self.isValid()

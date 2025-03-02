@@ -93,7 +93,7 @@ class SpanSlider(widgets.Slider):
         event.accept()
 
     def mouseMoveEvent(self, event):
-        if self.lower_pressed != HANDLE_STYLE and self.upper_pressed != HANDLE_STYLE:
+        if HANDLE_STYLE not in (self.lower_pressed, self.upper_pressed):
             event.ignore()
             return
 
@@ -221,7 +221,8 @@ class SpanSlider(widgets.Slider):
             ValueError: movement mode type does not exist
         """
         if mode not in MOVEMENT_MODE:
-            raise ValueError("Invalid movement mode")
+            msg = "Invalid movement mode"
+            raise ValueError(msg)
         self.movement = mode
 
     def set_span(self, lower: float, upper: float):
@@ -284,8 +285,7 @@ class SpanSlider(widgets.Slider):
     def pick(self, p: datatypes.PointType) -> int:
         if isinstance(p, tuple):
             return p[0] if self.is_horizontal() else p[1]
-        else:
-            return p.x() if self.is_horizontal() else p.y()
+        return p.x() if self.is_horizontal() else p.y()
 
     def trigger_action(self, action: ActionStr, main: bool):
         value = 0.0

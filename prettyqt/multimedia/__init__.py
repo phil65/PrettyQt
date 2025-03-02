@@ -18,13 +18,13 @@ from prettyqt.qt import QtMultimedia
 QT_MODULE = QtMultimedia
 
 __all__ = [
-    "AudioFormat",
     "AudioDevice",
+    "AudioFormat",
     "Camera",
     "CameraDevice",
     "CameraFormat",
+    "MediaMetaData",
     "MediaPlayer",
     "MediaRecorder",
     "ScreenCapture",
-    "MediaMetaData",
 ]

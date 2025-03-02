@@ -31,7 +31,8 @@ class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutIte
             case "horizontal" | "vertical":
                 layout = widgets.GraphicsLinearLayout(layout)
             case _:
-                raise ValueError(f"Invalid Layout {layout}")
+                msg = f"Invalid Layout {layout}"
+                raise ValueError(msg)
         self.setLayout(layout)
         return layout
 

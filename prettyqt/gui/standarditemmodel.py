@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from typing import TYPE_CHECKING
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.utils import datatypes, helpers, listdelegators
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
@@ -71,7 +75,8 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
                 self.add(other)
                 return self
             case _:
-                raise TypeError("wrong type for addition")
+                msg = "wrong type for addition"
+                raise TypeError(msg)
 
     def get_children(self) -> listdelegators.ListDelegator[gui.QStandardItem]:
         items = [self.item(index) for index in range(self.rowCount())]

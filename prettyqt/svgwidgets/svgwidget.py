@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 import os
+from typing import TYPE_CHECKING
 
 from prettyqt import widgets
 from prettyqt.qt import QtSvgWidgets
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class SvgWidget(widgets.WidgetMixin, QtSvgWidgets.QSvgWidget):

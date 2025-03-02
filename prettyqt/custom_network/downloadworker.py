@@ -30,7 +30,7 @@ class DownloadWorker(core.QRunnable):
             req = requests.get(self.url, verify=True, timeout=self.timeout)
         except Exception as e:
             msg = f"Exception '{e}' during download of '{self.url}'"
-            logger.error(msg)
+            logger.exception(msg)
             self.signals.download_failed.emit(msg, self.url)
         else:
             self.signals.download_finished.emit(req.content, self.url)

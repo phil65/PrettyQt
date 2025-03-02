@@ -23,18 +23,18 @@ try:
 
     QT_MODULE = QtWebEngineCore
     __all__ = [
-        "WebEngineHttpRequest",
-        "WebEngineUrlScheme",
-        "WebEngineHistoryItem",
         "WebEngineContextMenuRequest",
         "WebEngineDownloadRequest",
         "WebEngineHistory",
-        "WebEngineUrlSchemeHandler",
-        "WebEngineSettings",
+        "WebEngineHistoryItem",
+        "WebEngineHttpRequest",
+        "WebEnginePage",
+        "WebEngineProfile",
         "WebEngineScript",
         "WebEngineScriptCollection",
-        "WebEngineProfile",
-        "WebEnginePage",
+        "WebEngineSettings",
+        "WebEngineUrlScheme",
+        "WebEngineUrlSchemeHandler",
     ]
 except ModuleNotFoundError:
     logger.warning("Tried to import WebEngine module but not installed.")

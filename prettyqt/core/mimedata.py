@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Iterator
-from typing import Any, Self
+from typing import TYPE_CHECKING, Any, Self
 
 from prettyqt import core
 from prettyqt.utils import datatypes, helpers
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable, Iterator
 
 
 DB = core.MimeDatabase()

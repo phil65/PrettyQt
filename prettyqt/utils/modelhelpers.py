@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Sequence
 import functools
 from typing import TYPE_CHECKING
 
@@ -8,10 +7,12 @@ from prettyqt import core
 
 
 if TYPE_CHECKING:
+    from collections.abc import Callable, Sequence
+
     from prettyqt import widgets
 
 
-def is_descendent_of(
+def is_descendent_of(  # noqa: PLR0911
     indexes: list[core.ModelIndex] | core.QItemSelection | core.QItemSelectionRange,
     index: core.ModelIndex,
 ) -> bool:
@@ -86,8 +87,8 @@ def ci(
                 index, index_is_valid, do_not_use_parent, parent_is_invalid
             ):
                 return fn(ref, index, *args, **kwargs)
-            else:
-                raise TypeError("Invalid index")
+            msg = "Invalid index"
+            raise TypeError(msg)
 
         return wrapper
 
@@ -98,7 +99,8 @@ def requires_model(fn: Callable) -> Callable:
     @functools.wraps(fn)
     def wrapper(ref: widgets.AbstractItemViewMixin, *args, **kwargs):
         if ref.model() is None:
-            raise RuntimeError(f"Trying to call {fn.__name__} without a model set.")
+            msg = f"Trying to call {fn.__name__} without a model set."
+            raise RuntimeError(msg)
         return fn(ref, *args, **kwargs)
 
     return wrapper

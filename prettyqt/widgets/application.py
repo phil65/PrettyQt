@@ -1,18 +1,22 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Iterable, Iterator, Mapping, MutableMapping
 import contextlib
 import logging
 import os
 import pathlib
 import sys
 import timeit
+from typing import TYPE_CHECKING
 
 import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, paths, widgets
 from prettyqt.utils import datatypes, listdelegators
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterable, Iterator, Mapping, MutableMapping
 
 
 logger = logging.getLogger(__name__)
@@ -37,8 +41,7 @@ def setup_runner():
     def connect(self, slot):
         if inspect.iscoroutinefunction(slot):
             return old_connect(self, runner.to_sync(slot))
-        else:
-            return old_connect(self, slot)
+        return old_connect(self, slot)
 
     SignalInstance.connect = connect
     return runner
@@ -119,6 +122,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         for widget in cls.widgets_at(pos):
             if isinstance(widget, typ):
                 return widget
+        return None
 
     @classmethod
     def widgets_at(

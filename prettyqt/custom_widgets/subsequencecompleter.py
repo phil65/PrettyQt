@@ -38,7 +38,7 @@ class SubsequenceCompleter(widgets.Completer):
 
     def _on_path_updated(self, path: str):
         if path == self.completion_search_term:
-            return None
+            return
         self.completion_search_term = path
         count = self.completionCount()
         if count or len(self.completion_search_term) <= 1 or self._force_next_update:

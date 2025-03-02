@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-import datetime
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
 from prettyqt.utils import bidict, datatypes, get_repr
+
+
+if TYPE_CHECKING:
+    import datetime
 
 
 FileErrorStr = Literal[

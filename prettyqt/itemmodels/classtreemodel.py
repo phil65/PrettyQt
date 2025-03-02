@@ -6,7 +6,7 @@ import functools
 import inspect
 import logging
 import types
-from typing import get_args
+from typing import ClassVar, get_args
 
 from prettyqt import constants, core, gui, itemmodels
 
@@ -46,7 +46,7 @@ SOURCE_FONT = gui.Font.mono(as_qt=True)
 class BaseClassTreeModel(itemmodels.TreeModel):
     """Base Tree Model to display class tree structures."""
 
-    HEADER = ["Name", "Docstrings", "Module", "Comments", "File", "Is Abstract"]
+    HEADER: ClassVar = ["Name", "Docstrings", "Module", "Comments", "File", "Is Abstract"]
 
     @core.Enum
     class Roles(enum.IntEnum):
@@ -68,7 +68,7 @@ class BaseClassTreeModel(itemmodels.TreeModel):
                 return self.HEADER[section]
         return None
 
-    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
+    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):  # noqa: PLR0911
         if not index.isValid():
             return None
         klass = self.data_by_index(index).obj
@@ -183,8 +183,7 @@ class ParentClassTreeModel(BaseClassTreeModel):
     ) -> list[ParentClassTreeModel.TreeItem]:
         if self._show_mro:
             return [self.TreeItem(obj=i) for i in item.obj.mro()[1:]]
-        else:
-            return [self.TreeItem(obj=i) for i in item.obj.__bases__]
+        return [self.TreeItem(obj=i) for i in item.obj.__bases__]
 
     def _has_children(self, item: ParentClassTreeModel.TreeItem) -> bool:
         if item.obj is None:

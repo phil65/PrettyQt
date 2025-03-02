@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import logging
+from typing import TYPE_CHECKING
 
 import mknodes
 
 from prettyqt import constants, core, widgets
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -35,7 +39,7 @@ class MkWidgetScreenShot(mknodes.MkBinaryImage):
         """
         if path is None:
             path = f"{widget.__class__.__name__}_screenshot.png"
-        logger.info(f"Screenshot for {widget}")
+        logger.info("Screenshot for %s", widget)
         self.widget = widget
         widget.setAttribute(constants.WidgetAttribute.WA_DontShowOnScreen)
         widget.show()

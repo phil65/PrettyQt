@@ -30,10 +30,9 @@ class OrientedTableView(widgets.TableView):
             return core.ItemSelection(
                 model.index(0, 0), model.index(levels - 2, model.columnCount() - 1)
             )
-        else:
-            return core.ItemSelection(
-                model.index(0, 0), model.index(model.rowCount() - 1, levels - 2)
-            )
+        return core.ItemSelection(
+            model.index(0, 0), model.index(model.rowCount() - 1, levels - 2)
+        )
 
     def set_section_span(self, row: int, column: int, count: int):
         if self.is_horizontal():
@@ -51,6 +50,7 @@ class OrientedTableView(widgets.TableView):
         if left != right != 0:
             # We're at the left edge of the first column
             return left
+        return None
 
     def is_horizontal(self) -> bool:
         return self.orientation == constants.HORIZONTAL
@@ -67,8 +67,7 @@ class OrientedTableView(widgets.TableView):
     def get_split_cursor(self) -> gui.Cursor:
         if self.is_horizontal():
             return gui.Cursor(constants.CursorShape.SplitHCursor)
-        else:
-            return gui.Cursor(constants.CursorShape.SplitVCursor)
+        return gui.Cursor(constants.CursorShape.SplitVCursor)
 
 
 if __name__ == "__main__":

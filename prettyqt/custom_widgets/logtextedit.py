@@ -4,6 +4,7 @@ import logging
 import re
 import sys
 import traceback
+from typing import ClassVar
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import signallogger
@@ -37,7 +38,8 @@ class Highlighter:
         pat = rf"{text[:-1]}([ +-]?\#?\#?\d*,?(?:\.\d+)?[bcdeEfFgGnosxX%]?)"
         self.pattern = re.compile(pat)
         if self.formatter._fmt is None:
-            raise TypeError("Formatter does not contain format string")
+            msg = "Formatter does not contain format string"
+            raise TypeError(msg)
         self.is_included = self.pattern.search(self.formatter._fmt) is not None
 
     def get_format(self, value) -> gui.TextCharFormat:
@@ -178,7 +180,7 @@ class PathName(Highlighter):
 class LevelName(Highlighter):
     placeholder = "%(levelname)s"
     color = "red"
-    formats = dict(
+    formats: ClassVar = dict(
         DEBUG=gui.TextCharFormat(text_color="green", bold=True),
         INFO=gui.TextCharFormat(text_color="blue", bold=True),
         WARNING=gui.TextCharFormat(text_color="orange", bold=True),
@@ -220,7 +222,8 @@ class LogTextEdit(widgets.PlainTextEdit):
     def append_record(self, record: logging.LogRecord):
         start_of_line = len(self.text())
         if self.formatter._fmt is None:
-            raise TypeError("Formatter does not contain format string")
+            msg = "Formatter does not contain format string"
+            raise TypeError(msg)
         self.append_text(self.formatter._fmt)
         old_fmt = self.textCursor().charFormat()
         with self.selecter.create_cursor() as c:
@@ -256,9 +259,10 @@ if __name__ == "__main__":
 
     def raise_exc():
         try:
-            raise Exception("test")
-        except Exception as e:
-            logger.exception(e)
+            msg = "test"
+            raise Exception(msg)  # noqa: TRY002, TRY301
+        except Exception:
+            logger.exception("Exception!")
 
     w.box.add(widgets.PushButton("Raise", clicked=raise_exc))
     w.box.add(widgets.PushButton("Debug", clicked=lambda: logger.debug("Debug")))

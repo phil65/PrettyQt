@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import core
-from prettyqt.qt import QtHelp
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtHelp
 
 
 class HelpLink:

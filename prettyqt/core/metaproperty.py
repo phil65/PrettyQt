@@ -43,10 +43,9 @@ class MetaProperty:
     def get_enumerator_type(self) -> Literal["flag", "enum"] | None:
         if self.isFlagType():
             return "flag"
-        elif self.isEnumType():
+        if self.isEnumType():
             return "enum"
-        else:
-            return None
+        return None
 
 
 if __name__ == "__main__":

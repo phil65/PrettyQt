@@ -47,7 +47,8 @@ class StringOrNumberWidget(widgets.GroupBox):
                 self.rb_spinbox.setChecked(True)
                 self.spinbox.set_value(value)
             case _:
-                raise TypeError(f"Invalid Type for set_value: {type(value)}")
+                msg = f"Invalid Type for set_value: {type(value)}"
+                raise TypeError(msg)
 
 
 if __name__ == "__main__":

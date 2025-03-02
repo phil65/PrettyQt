@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
 import contextlib
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui
 from prettyqt.utils import bidict, colors, datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 CompositionModeStr = Literal[

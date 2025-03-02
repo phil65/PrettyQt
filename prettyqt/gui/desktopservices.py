@@ -1,9 +1,13 @@
 from __future__ import annotations
 
 import os
+from typing import TYPE_CHECKING
 
 from prettyqt import core, gui
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class DesktopServices(gui.QDesktopServices):

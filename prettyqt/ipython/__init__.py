@@ -5,4 +5,4 @@ from .inprocessipythonwidget import InProcessIPythonWidget
 from .outofprocessipythonwidget import OutOfProcessIPythonWidget
 
 
-__all__ = ["InProcessIPythonWidget", "OutOfProcessIPythonWidget", "BaseIPythonWidget"]
+__all__ = ["BaseIPythonWidget", "InProcessIPythonWidget", "OutOfProcessIPythonWidget"]

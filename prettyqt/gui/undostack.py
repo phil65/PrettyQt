@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import contextlib
+from typing import TYPE_CHECKING
 
 from prettyqt import core, gui
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 class UndoStackMixin(core.ObjectMixin):

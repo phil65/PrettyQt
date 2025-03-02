@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, gui, iconprovider, widgets
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 AreaStr = Literal["top", "bottom"]
@@ -119,7 +122,8 @@ class SidebarWidget(widgets.MainWindow):
             case str():
                 w = self.area.find_child(widgets.QWidget, name=item, recursive=False)
                 if w not in self.area.box:
-                    raise ValueError("Layout does not contain the chosen widget")
+                    msg = "Layout does not contain the chosen widget"
+                    raise ValueError(msg)
                 return w
             case _:
                 raise TypeError(item)
@@ -129,7 +133,8 @@ class SidebarWidget(widgets.MainWindow):
         for k, v in self.button_map.items():
             if v.isChecked():
                 return k
-        raise RuntimeError("no page activated.")
+        msg = "no page activated."
+        raise RuntimeError(msg)
 
     def set_tab(self, item: str | int | widgets.QWidget):
         widget = item if isinstance(item, widgets.QWidget) else self._get_widget(item)

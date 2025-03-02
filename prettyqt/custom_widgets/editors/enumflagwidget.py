@@ -36,7 +36,7 @@ class EnumFlagWidget(widgets.ToolButton):
     def _set_enum_class(self, enum: enum.EnumMeta | None):
         """Set enum class from which members value should be selected."""
         if enum == self._enum_class:
-            return None
+            return
         self._enum_class = enum
         self.clear()
         for i in self._enum_class.__members__.values():
@@ -67,10 +67,11 @@ class EnumFlagWidget(widgets.ToolButton):
             value = self._enum_class(value)
         self._set_enum_class(value.__class__)
         if not isinstance(value, self._enum_class):
-            raise TypeError(
+            msg = (
                 "setValue(self, Enum): argument 1 has unexpected type "
                 f"{type(value).__name__!r}"
             )
+            raise TypeError(msg)
         # this filter shouldnt be needed, see https://bugreports.qt.io/browse/PYSIDE-2369
         values = []
         for i in self._enum_class.__members__.values():

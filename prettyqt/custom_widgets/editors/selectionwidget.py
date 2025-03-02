@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 from collections.abc import Iterable, Iterator, Mapping
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 from prettyqt import constants, core, iconprovider, widgets
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 TypeStr = Literal["string", "int", "float"]

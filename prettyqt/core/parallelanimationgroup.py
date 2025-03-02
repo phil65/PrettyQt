@@ -13,4 +13,5 @@ class ParallelAnimationGroup(core.AnimationGroupMixin, core.QParallelAnimationGr
                 case core.QVariantAnimation():
                     anim.setDuration(duration)
                 case _:
-                    raise TypeError("set_duration only works with QVariantAnimations.")
+                    msg = "set_duration only works with QVariantAnimations."
+                    raise TypeError(msg)

@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Callable
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
 from prettyqt.utils import bidict
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 DirectionStr = Literal["forward", "backward"]

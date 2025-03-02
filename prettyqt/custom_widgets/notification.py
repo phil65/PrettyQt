@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import contextlib
 from queue import Empty, Queue
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core, gui, widgets
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 CURSOR_MARGIN_TOP = 10
@@ -69,7 +72,7 @@ class MessageLabel(widgets.Label):
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
-        if self.wordWrap() and self.get_size_policy().get_vertical_policy() == "minimum":
+        if self.wordWrap() and self.get_size_policy().get_vertical_policy() == "minimum":  # noqa: SIM102
             if (new_height := self.heightForWidth(self.width())) >= 1:
                 self.setMaximumHeight(new_height)
 
@@ -169,7 +172,8 @@ class Notification(widgets.Widget):
             TypeError: duration is not an integer
         """
         if not isinstance(duration, int):
-            raise TypeError("duration should be an integer")
+            msg = "duration should be an integer"
+            raise TypeError(msg)
         self.setGraphicsEffect(self.opacity_effect)
         self.fade_in_anim.setDuration(duration)
         self.is_fading_in = True
@@ -248,9 +252,8 @@ class Notification(widgets.Widget):
         """
         allowed_values = ["primary", "success", "info", "warning", "danger"]
         if value not in allowed_values:
-            raise ValueError(
-                f"{value!r} is not a valid value. Should be one of {allowed_values}"
-            )
+            msg = f"{value!r} is not a valid value. Should be one of {allowed_values}"
+            raise ValueError(msg)
         self._category = value
 
     def enterEvent(self, e):
@@ -294,7 +297,8 @@ class NotificationArea(widgets.Widget):
             TypeError : target_widget is not an object that inherits QWidget
         """
         if not isinstance(target_widget, widgets.QWidget):
-            raise TypeError("target_widget is not a QWidget (or child of it")
+            msg = "target_widget is not a QWidget (or child of it"
+            raise TypeError(msg)
 
         # Pop some variables from kwargs.
         self.use_queue = use_queue

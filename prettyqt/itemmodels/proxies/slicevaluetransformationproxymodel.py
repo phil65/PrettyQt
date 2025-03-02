@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import dataclasses
 import logging
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import constants, core, itemmodels
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 logger = logging.getLogger(__name__)

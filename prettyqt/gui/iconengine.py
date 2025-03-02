@@ -93,15 +93,14 @@ class IconEngine(serializemixin.SerializeMixin, gui.QIconEngine):
                     gui.icon.STATE.get_enum_value(state),
                 )
             )
-        else:
-            return gui.Pixmap(
-                self.scaledPixmap(
-                    datatypes.to_size(size),
-                    gui.icon.MODE.get_enum_value(mode),
-                    gui.icon.STATE.get_enum_value(state),
-                    scale,
-                )
+        return gui.Pixmap(
+            self.scaledPixmap(
+                datatypes.to_size(size),
+                gui.icon.MODE.get_enum_value(mode),
+                gui.icon.STATE.get_enum_value(state),
+                scale,
             )
+        )
 
 
 if __name__ == "__main__":

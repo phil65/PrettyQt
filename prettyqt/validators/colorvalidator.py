@@ -15,8 +15,7 @@ class ColorValidator(gui.Validator):
         color = gui.Color(text)
         if color.isValid():
             return self.State.Acceptable, text, pos
-        else:
-            return self.State.Intermediate, text, pos
+        return self.State.Intermediate, text, pos
 
 
 if __name__ == "__main__":

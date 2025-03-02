@@ -30,8 +30,7 @@ class AbstractItemDelegateMixin(core.ObjectMixin):
     ):
         # using index.data() sometimes casts stuff in PyQt6
         model = index.model()
-        data = model.data(index, role)
-        return data
+        return model.data(index, role)
 
 
 class AbstractItemDelegate(AbstractItemDelegateMixin, QtWidgets.QAbstractItemDelegate):

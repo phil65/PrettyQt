@@ -20,17 +20,17 @@ from prettyqt.qt import QtQuick
 QT_MODULE = QtQuick
 
 __all__ = [
-    "SGNode",
-    "QuickView",
-    "QuickItem",
-    "QuickItemMixin",
-    "QuickWindow",
-    "QuickPaintedItem",
-    "QuickTextDocument",
-    "QuickRenderControl",
-    "QuickImageResponse",
+    "QuickAsyncImageProvider",
     "QuickImageProvider",
     "QuickImageProviderMixin",
-    "QuickAsyncImageProvider",
+    "QuickImageResponse",
+    "QuickItem",
     "QuickItemGrabResult",
+    "QuickItemMixin",
+    "QuickPaintedItem",
+    "QuickRenderControl",
+    "QuickTextDocument",
+    "QuickView",
+    "QuickWindow",
+    "SGNode",
 ]

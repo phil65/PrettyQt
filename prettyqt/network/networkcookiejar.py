@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from typing import TYPE_CHECKING
 
 from prettyqt import core
 from prettyqt.qt import QtNetwork
 from prettyqt.utils import datatypes, get_repr
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class NetworkCookieJar(core.ObjectMixin, QtNetwork.QNetworkCookieJar):

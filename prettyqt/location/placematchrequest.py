@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import location
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class PlaceMatchRequest(location.QPlaceMatchRequest):
@@ -13,7 +18,8 @@ class PlaceMatchRequest(location.QPlaceMatchRequest):
     def __getitem__(self, index: str) -> datatypes.Variant:
         attr = self.parameters()
         if index not in attr:
-            raise KeyError(f"Key {index!r} does not exist.")
+            msg = f"Key {index!r} does not exist."
+            raise KeyError(msg)
         return attr[index]
 
     def get_places(self) -> list[location.Place]:

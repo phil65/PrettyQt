@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from typing import TYPE_CHECKING
 
 from prettyqt import widgets
 from prettyqt.utils import datatypes, listdelegators
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):

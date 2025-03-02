@@ -1,11 +1,16 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
 import os
+from typing import TYPE_CHECKING
 
 from prettyqt import qml
-from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+
+    from prettyqt.qt import QtCore
 
 
 class QmlApplicationEngine(qml.QmlEngineMixin, qml.QQmlApplicationEngine):

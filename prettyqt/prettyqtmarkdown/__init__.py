@@ -18,9 +18,9 @@ from .mkwidgetscreenshot import MkWidgetScreenShot
 
 
 __all__ = [
-    "MkItemModelTable",
     "MarkdownModel",
     "MarkdownWidget",
+    "MkItemModelTable",
     "MkPrettyQtDiagram",
     "MkPropertyTable",
     "MkWidgetScreenShot",

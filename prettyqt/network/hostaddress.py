@@ -54,4 +54,5 @@ class HostAddress(network.QHostAddress):
             address = SPECIAL_ADDRESS[address]
         ret = self.setAddress(address)
         if ret is False:
-            raise ValueError("invalid address")
+            msg = "invalid address"
+            raise ValueError(msg)
