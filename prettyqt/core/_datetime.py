@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-import datetime
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
 from prettyqt import constants, core
+
+
+if TYPE_CHECKING:
+    import datetime
 
 
 class DateTime(core.QDateTime):
@@ -32,7 +35,7 @@ class DateTime(core.QDateTime):
         return new
 
     def get_value(self) -> datetime.datetime:
-        return self.toPython()
+        return self.toPython()  # type: ignore
 
     def get_date(self) -> core.Date:
         return core.Date(self.date())

@@ -10,14 +10,17 @@ methods returning instances of ``QIcon``.
 
 from __future__ import annotations
 
-from collections.abc import Iterable
-
 # Standard library imports
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import constants, gui
 from prettyqt.iconprovider import chariconengine
-from prettyqt.qt import QtCore
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
+    from prettyqt.qt import QtCore
 
 
 _default_options = {
@@ -94,7 +97,8 @@ def set_global_defaults(**kwargs: Any):
     """Set global defaults for the options passed to the icon painter."""
     for k, v in kwargs.items():
         if k not in VALID_OPTIONS:
-            raise KeyError(f"Invalid option {k!r}")
+            msg = f"Invalid option {k!r}"
+            raise KeyError(msg)
         _default_options[k] = v
 
 
@@ -174,7 +178,8 @@ class IconicFont:
             return self.icon_cache[cache_key]
         opts = kwargs.pop("options", [{}] * len(names))
         if len(opts) != len(names):
-            raise TypeError(f'"options" must be a list of size {len(names)}')
+            msg = f'"options" must be a list of size {len(names)}'
+            raise TypeError(msg)
         parsed_options = [self._parse_options(o, kwargs, n) for o, n in zip(opts, names)]
         engine = chariconengine.CharIconEngine(self, parsed_options)
         icon = gui.QIcon(engine)
@@ -216,14 +221,17 @@ class IconicFont:
         }
         names = [icon_dict.get(kw, name) for kw in ICON_KW]
         chars = []
-        for name in names:
-            if "." not in name:
-                raise Exception("Invalid icon name")
-            prefix, n = name.split(".")
+        for icon_name in names:
+            if "." not in icon_name:
+                msg = "Invalid icon name"
+                raise Exception(msg)  # noqa: TRY002
+            prefix, n = icon_name.split(".")
             if prefix not in self.fonts:
-                raise Exception(f"Invalid font prefix {prefix!r}")
+                msg = f"Invalid font prefix {prefix!r}"
+                raise Exception(msg)  # noqa: TRY002
             if n not in self.fonts[prefix].charmap:
-                raise Exception(f"Invalid icon name {n!r} in font {prefix!r}")
+                msg = f"Invalid icon name {n!r} in font {prefix!r}"
+                raise Exception(msg)  # noqa: TRY002
             chars.append(self.fonts[prefix].charmap[n])
         options |= dict(zip(*(ICON_KW, chars)))
         options["prefix"] = prefix

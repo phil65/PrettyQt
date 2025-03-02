@@ -1,9 +1,8 @@
 """Package containing stuff related to animating widgets.
 
-
 ```py
 # a lot of animations depend on current geometry.
-# It´s advisable to show widget first so that it gets layouted.
+# It's advisable to show widget first so that it gets layouted.
 widget = widget.Label("I will get animated.")
 widget.show()
 
@@ -48,10 +47,10 @@ from .animator import Animator
 
 
 __all__ = [
-    "SlideAnimation",
-    "ZoomAnimation",
-    "TextAnimation",
-    "CursorMoveAnimation",
     "Animator",
+    "CursorMoveAnimation",
     "Fx",
+    "SlideAnimation",
+    "TextAnimation",
+    "ZoomAnimation",
 ]

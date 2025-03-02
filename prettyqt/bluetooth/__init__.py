@@ -20,14 +20,14 @@ QT_MODULE = QtBluetooth
 
 
 __all__ = [
+    "BluetoothAddress",
+    "BluetoothDeviceDiscoveryAgent",
+    "BluetoothDeviceInfo",
     "BluetoothHostInfo",
     "BluetoothLocalDevice",
-    "BluetoothDeviceInfo",
-    "BluetoothUuid",
-    "BluetoothSocket",
     "BluetoothServer",
-    "BluetoothAddress",
-    "BluetoothServiceInfo",
-    "BluetoothDeviceDiscoveryAgent",
     "BluetoothServiceDiscoveryAgent",
+    "BluetoothServiceInfo",
+    "BluetoothSocket",
+    "BluetoothUuid",
 ]

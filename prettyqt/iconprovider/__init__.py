@@ -3,15 +3,17 @@ from __future__ import annotations
 from dataclasses import dataclass
 import json
 import os
-import pathlib
 
-from typing import Literal, overload
+from typing import Literal, overload, TYPE_CHECKING
 
 # Third party imports
 from prettyqt import gui, paths
 from prettyqt.iconprovider.iconic_font import FontError, IconicFont, set_global_defaults
 from prettyqt.qt import QtGui
-from prettyqt.utils import datatypes
+
+if TYPE_CHECKING:
+    import pathlib
+    from prettyqt.utils import datatypes
 
 
 key_type = tuple[str | None, str | None, bool]
@@ -24,11 +26,12 @@ PREFIXES = ("mdi.", "mdi6.", "fa5.", "fa5s.", "ei.", "ph.")
 
 def hook(obj: dict) -> dict:
     result = {}
-    for key in obj:
+    for key, val in obj.items():
         try:
-            result[key] = chr(int(obj[key], 16))
+            result[key] = chr(int(val, 16))
         except ValueError as e:
-            raise FontError(f"Failed to load character {key}:{obj[key]}") from e
+            msg = f"Failed to load character {key}:{obj[key]}"
+            raise FontError(msg) from e
     return result
 
 
@@ -271,8 +274,7 @@ def for_color(color: str | QtGui.QColor | QtGui.QBrush) -> gui.Icon:
         bitmap = gui.Pixmap(16, 16)
         bitmap.fill(color)
         return gui.Icon(bitmap)
-    else:
-        return gui.Icon(_icon("mdi.card-outline"))
+    return gui.Icon(_icon("mdi.card-outline"))
 
 
 def set_defaults(**kwargs):
@@ -290,15 +292,13 @@ def set_defaults(**kwargs):
 @overload
 def get_icon(
     icon: datatypes.IconType, color: str | None = None, as_qicon: Literal[False] = False
-) -> gui.Icon:
-    ...
+) -> gui.Icon: ...
 
 
 @overload
 def get_icon(
     icon: datatypes.IconType, color: str | None = None, as_qicon: Literal[True] = True
-) -> QtGui.QIcon:
-    ...
+) -> QtGui.QIcon: ...
 
 
 def get_icon(

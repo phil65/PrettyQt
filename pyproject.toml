@@ -198,6 +198,7 @@ ignore = [
     "D408",    # Section underline should be in the line following the section's name ("{name}")
     "D409",    # Section underline should match the length of its name ("{name}")
     "D413",    # Missing blank line after last section ("{name}")
+    "N802",    # Function name should be lowercase
     "ISC001",
     "PLR0912", # Too many branches
     "PLR0913", # Too many arguments to function call

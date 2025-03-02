@@ -23,7 +23,7 @@ class Spin:
             return
         timer, angle, step = self.info[self.parent_widget]
 
-        if angle >= 360:
+        if angle >= 360:  # noqa: PLR2004
             angle = 0
 
         angle += step

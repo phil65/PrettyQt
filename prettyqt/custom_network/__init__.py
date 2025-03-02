@@ -1,1 +1,1 @@
-"""custom_network pachakge."""
+"""custom_network package."""

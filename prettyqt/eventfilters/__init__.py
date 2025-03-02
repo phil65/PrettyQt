@@ -16,15 +16,15 @@ from .timelabeleventfilter import (
 
 
 __all__ = [
-    "BaseEventFilter",
-    "TextUpdateEventFilter",
-    "HoverIconEventFilter",
     "AnimatedToolTipEventFilter",
-    "EventCatcher",
     "AutoSizeColumnsEventFilter",
-    "SectionAutoSpanEventFilter",
-    "ListViewGridResizeEventFilter",
-    "SliderMoveToMouseClickEventFilter",
+    "BaseEventFilter",
     "DateLabelEventFilter",
+    "EventCatcher",
+    "HoverIconEventFilter",
+    "ListViewGridResizeEventFilter",
+    "SectionAutoSpanEventFilter",
+    "SliderMoveToMouseClickEventFilter",
+    "TextUpdateEventFilter",
     "TimeLabelEventFilter",
 ]

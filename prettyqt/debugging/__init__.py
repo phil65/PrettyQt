@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import contextlib
 import functools
 import logging
@@ -15,6 +14,10 @@ from .qobjectdetailsdialog import QObjectDetailsDialog
 from .stalker import Stalker
 from .tracebackdialog import TracebackDialog
 from .proxycomparerwidget import ProxyComparerWidget
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 logger = logging.getLogger(__name__)
@@ -28,9 +31,8 @@ def timeit(func: Callable) -> Callable:
         result = func(*args, **kwargs)
         end_time = time.perf_counter()
         total_time = end_time - start_time
-        logger.info(
-            f"Function {func.__name__}{args} {kwargs} Took {total_time:.4f} seconds"
-        )
+        msg = f"Function {func.__name__}{args} {kwargs} Took {total_time:.4f} seconds"
+        logger.info(msg)
         return result
 
     return timeit_wrapper
@@ -47,7 +49,7 @@ def for_all_methods(decorator: Callable) -> Callable:
     def decorate(cls):
         for attr in cls.__dict__:  # there's propably a better way to do this
             if callable(getattr(cls, attr)):
-                logger.info(f"decorated {attr}")
+                logger.info("decorated %r", attr)
                 setattr(cls, attr, decorator(getattr(cls, attr)))
         return cls
 
@@ -171,10 +173,10 @@ def example_widget():
 
 
 __all__ = [
-    "Stalker",
-    "TracebackDialog",
     "ErrorMessageBox",
     "MessageHandler",
-    "QObjectDetailsDialog",
     "ProxyComparerWidget",
+    "QObjectDetailsDialog",
+    "Stalker",
+    "TracebackDialog",
 ]

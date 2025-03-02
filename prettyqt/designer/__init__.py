@@ -23,13 +23,13 @@ from prettyqt.qt import QtDesigner
 QT_MODULE = QtDesigner
 
 __all__ = [
-    "PyDesignerCustomWidgetPlugin",
-    "PyDesignerCustomWidgetCollectionPlugin",
-    "PyDesignerCustomWidgetCollection",
     "AbstractExtensionFactory",
-    "PyDesignerTaskMenuExtension",
+    "AbstractFormBuilder",
     "DesignerCustomWidgetInterface",
     "DesignerFormEditorInterface",
-    "AbstractFormBuilder",
     "FormBuilder",
+    "PyDesignerCustomWidgetCollection",
+    "PyDesignerCustomWidgetCollectionPlugin",
+    "PyDesignerCustomWidgetPlugin",
+    "PyDesignerTaskMenuExtension",
 ]

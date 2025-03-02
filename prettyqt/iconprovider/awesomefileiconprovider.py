@@ -16,7 +16,7 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
         self.drive_icon = iconprovider.get_icon("mdi.harddisk")
         self.network_icon = iconprovider.get_icon("mdi.folder-network")
 
-    def icon(
+    def icon(  # noqa: PLR0911
         self, icon: widgets.QFileIconProvider.IconType | QtCore.QFileInfo
     ) -> gui.Icon:
         match icon:
@@ -37,10 +37,9 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
             case QtCore.QFileInfo():
                 if icon.isDir():
                     return self.folder_icon
-                elif icon.isFile():
+                if icon.isFile():
                     return self.file_icon
-                else:
-                    return self.file_icon
+                return self.file_icon
             case _:
                 return self.file_icon
 
