@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import Sequence
 import contextlib
 import functools
 import html
@@ -17,7 +16,7 @@ from prettyqt.utils import colors, datatypes
 
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Iterator
+    from collections.abc import Callable, Iterator, Sequence
 
     from prettyqt import custom_widgets
 
@@ -113,6 +112,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
                 return super().addAction(action)
             position_or_action = actions[position_or_action]
         super().insertAction(position_or_action, action)
+        return None
 
     def add_action(
         self,
@@ -151,20 +151,18 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
         if self.isFullScreen():
             self.showNormal()
             return False
-        else:
-            self.showFullScreen()
-            return True
+        self.showFullScreen()
+        return True
 
     def toggle_maximized(self) -> bool:
         """Toggle between maximized and regular size."""
         if self.isMaximized():
             self.showNormal()
             return False
-        else:
-            self.showMaximized()
-            return True
+        self.showMaximized()
+        return True
 
-    def map_to(
+    def map_to(  # noqa: PLR0911
         self,
         widget: widgets.QWidget | Literal["global", "parent", "window"],
         pos_or_rect: (
@@ -217,7 +215,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
             case _:
                 raise ValueError(pos_or_rect)
 
-    def map_from(
+    def map_from(  # noqa: PLR0911
         self,
         widget: widgets.QWidget | Literal["global", "parent", "window"],
         pos_or_rect: (
@@ -292,7 +290,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
         icon = iconprovider.get_icon(icon, color=color)
         super().setWindowIcon(icon)
 
-    setWindowIcon = set_icon
+    setWindowIcon = set_icon  # noqa: N815
 
     def get_icon(self) -> gui.Icon | None:
         """Get the window icon (returns None if not existing)."""
@@ -321,7 +319,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
             case _:
                 raise TypeError(size)
 
-    setMinimumSize = set_min_size
+    setMinimumSize = set_min_size  # noqa: N815
 
     @set_min_size.register
     def _(self, x: int, y: int | None):
@@ -341,7 +339,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
             case _:
                 super().setMaximumSize(size)
 
-    setMaximumSize = set_min_size
+    setMaximumSize = set_min_size  # noqa: N815
 
     @set_max_size.register
     def _(self, x: int, y: int | None):
@@ -354,26 +352,26 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
     def set_min_width(self, width: int | None):
         super().setMinimumWidth(width or 0)
 
-    setMinimumWidth = set_min_width
+    setMinimumWidth = set_min_width  # noqa: N815
 
     def set_max_width(self, width: int | None):
         if width is None:
             width = QWIDGETSIZE_MAX
         super().setMaximumWidth(width)
 
-    setMaximumWidth = set_max_width
+    setMaximumWidth = set_max_width  # noqa: N815
 
     def set_min_height(self, height: int | None):
         super().setMinimumHeight(height or 0)
 
-    setMinimumHeight = set_min_height
+    setMinimumHeight = set_min_height  # noqa: N815
 
     def set_max_height(self, height: int | None):
         if height is None:
             height = QWIDGETSIZE_MAX
         super().setMaximumHeight(height)
 
-    setMaximumHeight = set_max_height
+    setMaximumHeight = set_max_height  # noqa: N815
 
     def setWindowTitle(self, title: str):
         if not self.objectName() and widgets.app().is_debug():
@@ -628,7 +626,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
             contents_margins_respects_safe_area: set ContentsMarginsRespectsSafeArea
                                                  attribute
         """
-        Attr = constants.WidgetAttribute
+        Attr = constants.WidgetAttribute  # noqa: N806
         flags = {
             Attr.WA_AcceptDrops: accept_drops,
             Attr.WA_AlwaysShowToolTips: always_show_tooltips,
@@ -943,7 +941,8 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
             case widgets.QLayout():
                 layout = layout
             case _:
-                raise ValueError(f"Invalid Layout {layout}")
+                msg = f"Invalid Layout {layout}"
+                raise ValueError(msg)
         self.setLayout(layout)
         if margin is not None:
             layout.set_margin(margin)
@@ -1161,6 +1160,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
             item = layout.takeAt(0)
             if widget := item.widget():
                 widget.deleteLater()
+        return None
 
     def get_cursor(self) -> gui.Cursor:
         return gui.Cursor(self.cursor())
@@ -1179,6 +1179,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
         while child := child.parent():
             if isinstance(child, typ):
                 return child
+        return None
 
     def set_layout_direction(
         self, direction: constants.LayoutDirectionStr | constants.LayoutDirection | None
