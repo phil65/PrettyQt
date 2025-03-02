@@ -61,7 +61,8 @@ def parse_inventory_line(line: str) -> tuple[str, str, str, str, str]:
     """
     match = re.match(r"(?x)(.+?)\s+(\S*:\S*)\s+(-?\d+)\s+(\S+)\s+(.*)", line.rstrip())
     if not match:
-        raise ValueError(f"Invalid inventory line: {line}")
+        msg = f"Invalid inventory line: {line}"
+        raise ValueError(msg)
     return match.groups()
 
 

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, widgets
@@ -8,7 +7,7 @@ from prettyqt.utils import bidict
 
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Callable, Iterator
 
 
 mod = widgets.QWizard

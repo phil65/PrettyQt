@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 mod = QtWidgets.QScrollerProperties

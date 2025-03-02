@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-import datetime
+from typing import TYPE_CHECKING
 
 from prettyqt import charts
 from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    import datetime
 
 
 class DateTimeAxis(charts.AbstractAxisMixin, charts.QDateTimeAxis):

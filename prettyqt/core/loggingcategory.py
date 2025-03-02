@@ -22,14 +22,13 @@ class LoggingCategory(QtCore.QLoggingCategory):
     def get_level(self) -> MsgTypeStr:
         if self.isDebugEnabled():
             return "debug"
-        elif self.isInfoEnabled():
+        if self.isInfoEnabled():
             return "info"
-        elif self.isWarningEnabled():
+        if self.isWarningEnabled():
             return "warning"
-        elif self.isCriticalEnabled():
+        if self.isCriticalEnabled():
             return "critical"
-        else:
-            return "fatal"
+        return "fatal"
 
     def set_enabled(
         self,

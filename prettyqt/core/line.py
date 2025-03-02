@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
 import math
-from typing import Literal, Self
+from typing import TYPE_CHECKING, Literal, Self
 
 from prettyqt import core
 from prettyqt.utils import datatypes, get_repr
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class Line(core.QLine):

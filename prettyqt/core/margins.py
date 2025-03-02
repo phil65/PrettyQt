@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from typing import TYPE_CHECKING
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import get_repr
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class Margins(QtCore.QMargins):

@@ -19,7 +19,7 @@ TickPositionAllStr = Literal["none", "both_sides", "above", "below", "left", "ri
 
 
 class HollowHandleStyle(widgets.ProxyStyle):
-    def __init__(self, config: dict = None):
+    def __init__(self, config: dict | None = None):
         super().__init__()
         self.config = {
             "groove.height": 3,
@@ -63,7 +63,7 @@ class HollowHandleStyle(widgets.ProxyStyle):
             groove_rect = core.QRectF(0, (rect.height() - h) // 2, rect.width(), h)
             return groove_rect.toRect()
 
-        elif sc == self.SubControl.SC_SliderHandle:
+        if sc == self.SubControl.SC_SliderHandle:
             size = self.config["handle.size"]
             x = self.sliderPositionFromValue(
                 opt.minimum, opt.maximum, opt.sliderPosition, rect.width()
@@ -73,6 +73,7 @@ class HollowHandleStyle(widgets.ProxyStyle):
             x *= (rect.width() - size.width()) / rect.width()
             slider_rect = core.QRectF(x, 0, size.width(), size.height())
             return slider_rect.toRect()
+        return None
 
     def drawComplexControl(
         self,
@@ -136,6 +137,8 @@ class HollowHandleStyle(widgets.ProxyStyle):
             handle_color.setAlpha(255)
             painter.setBrush(handle_color)
             painter.drawEllipse(handle_rect)
+            return None
+        return None
 
 
 class Slider(widgets.AbstractSliderMixin, widgets.QSlider):

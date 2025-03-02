@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
 
 
 StandardPixmapStr = Literal[

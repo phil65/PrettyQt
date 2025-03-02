@@ -42,9 +42,9 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, widgets.QScrollArea):
             top_left = w.mapTo(viewport, w.rect().topLeft())
             bottom_right = w.mapTo(viewport, w.rect().bottomRight())
             mapped = core.Rect(top_left, bottom_right)
-            if partial_allowed and rect.intersects(mapped):
-                found.append(w)
-            elif not partial_allowed and rect.contains(mapped):
+            if (partial_allowed and rect.intersects(mapped)) or (
+                not partial_allowed and rect.contains(mapped)
+            ):
                 found.append(w)
         return listdelegators.ListDelegator(found)
 

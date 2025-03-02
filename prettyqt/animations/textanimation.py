@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import logging
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -63,7 +66,7 @@ class TextAnimation(core.PropertyAnimation):
     def updateCurrentValue(self, value: datatypes.VariantType):
         match value:
             case None:
-                return
+                return None
             case gui.QColor():
                 color = gui.Color(value)
                 text = color.get_name(self._fmt) if self._fmt else color.toString()
@@ -76,6 +79,7 @@ class TextAnimation(core.PropertyAnimation):
                 return f"{value.width()}, {value.width()}"
         logger.debug(value)
         super().updateCurrentValue(value)
+        return None
 
 
 if __name__ == "__main__":

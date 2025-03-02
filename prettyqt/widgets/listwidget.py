@@ -2,11 +2,14 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Iterator, Mapping
 import functools
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import constants, core, iconprovider, widgets
-from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes, listdelegators
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
 
 
 class NoData:
@@ -90,7 +93,7 @@ class ListWidget(widgets.ListViewMixin, widgets.QListWidget):
         foreground: QtGui.QBrush | None = None,
         background: QtGui.QBrush | None = None,
         font: QtGui.QFont | None = None,
-        selected: bool = None,
+        selected: bool | None = None,
         status_tip: str = "",
         tool_tip: str = "",
         whats_this: str | None = None,

@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import collections
-from collections.abc import Sequence
 import logging
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import bidict, listdelegators
+
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 DOCK_OPTION = bidict(
@@ -84,7 +87,8 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
     def __getitem__(self, index: str) -> widgets.QWidget:
         result = self.find_child(widgets.QWidget, index)
         if result is None:
-            raise KeyError("Widget not found")
+            msg = "Widget not found"
+            raise KeyError(msg)
         return result
 
     def _get_map(self):
@@ -185,14 +189,16 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
         restored = False
         if geom is not None and state is not None:
             try:
-                logger.debug(f"Loading window state for {self.windowTitle()!r}...")
+                logger.debug("Loading window state for %r...", self.windowTitle())
                 self.restoreGeometry(geom)
                 if isinstance(state, str):
                     state = state.encode()
                 self.restoreState(state)
                 restored = True
             except TypeError:
-                logger.error("Wrong type for window state. Probably Qt binding switch?")
+                logger.exception(
+                    "Wrong type for window state. Probably Qt binding switch?"
+                )
         if recursive:
             for window in self.find_children(MainWindow, recursive=True):
                 if window.objectName():
@@ -207,7 +213,7 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
         """
         settings = core.Settings()
         name = self.objectName()
-        logger.debug(f"Saving window state for {self.windowTitle()!r}...")
+        logger.debug("Saving window state for %r...", self.windowTitle())
         settings[f"{name}.geometry"] = self.saveGeometry()
         settings[f"{name}.state"] = self.saveState()
         if recursive:
@@ -247,10 +253,8 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
                 constants.DOCK_WIDGET_AREA.get_enum_value(position), dock_widget
             )
             return dock_widget
-        else:
-            self.addDockWidget(
-                constants.DOCK_WIDGET_AREA.get_enum_value(position), widget
-            )
+        self.addDockWidget(constants.DOCK_WIDGET_AREA.get_enum_value(position), widget)
+        return None
 
     def remove(
         self,
@@ -320,8 +324,7 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
         docks = self.find_children(widgets.QDockWidget, recursive=False)
         if position is None:
             return docks
-        else:
-            return [i for i in docks if self.get_dock_area(i) == position]
+        return [i for i in docks if self.get_dock_area(i) == position]
 
     def _get_preferred_dock_position(
         self,
@@ -355,8 +358,7 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
         toolbars = self.find_children(widgets.QToolBar, recursive=False)
         if position is None:
             return toolbars
-        else:
-            return [i for i in toolbars if self.get_toolbar_area(i) == position]
+        return [i for i in toolbars if self.get_toolbar_area(i) == position]
 
 
 if __name__ == "__main__":

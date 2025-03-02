@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
-from typing import Self, overload
+from typing import TYPE_CHECKING, Self, overload
 
 from prettyqt import constants, widgets
 from prettyqt.utils import listdelegators
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class SplitterMixin(widgets.FrameMixin):
@@ -35,7 +38,8 @@ class SplitterMixin(widgets.FrameMixin):
             case str():
                 result = self.find_child(widgets.QWidget, index)
                 if result is None:
-                    raise KeyError("Widget not found")
+                    msg = "Widget not found"
+                    raise KeyError(msg)
                 return result
             case slice():
                 stop = index.stop or self.count()

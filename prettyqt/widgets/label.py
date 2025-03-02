@@ -159,23 +159,21 @@ class Label(widgets.FrameMixin, widgets.QLabel):
         align = self.alignment()
         if align & constants.ALIGN_RIGHT:  # type: ignore
             return "right"
-        elif align & constants.ALIGN_H_CENTER:  # type: ignore
+        if align & constants.ALIGN_H_CENTER:  # type: ignore
             return "center"
-        elif align & constants.ALIGN_JUSTIFY:  # type: ignore
+        if align & constants.ALIGN_JUSTIFY:  # type: ignore
             return "justify"
-        else:
-            return "left"
+        return "left"
 
     def get_vertical_alignment(self) -> constants.VerticalAlignmentStr:
         align = self.alignment()
         if align & constants.ALIGN_TOP:  # type: ignore
             return "top"
-        elif align & constants.ALIGN_BOTTOM:  # type: ignore
+        if align & constants.ALIGN_BOTTOM:  # type: ignore
             return "bottom"
-        elif align & constants.ALIGN_BASELINE:  # type: ignore
+        if align & constants.ALIGN_BASELINE:  # type: ignore
             return "baseline"
-        else:
-            return "center"
+        return "center"
 
     def set_indent(self, indent: int) -> Label:
         """Set the label's text indent in pixels."""
@@ -282,7 +280,7 @@ class Label(widgets.FrameMixin, widgets.QLabel):
         label.resize(pixmap.width(), pixmap.height())
         return label
 
-    elideMode = core.Property(
+    elideMode = core.Property(  # noqa: N815
         str,
         get_elide_mode,
         set_elide_mode,

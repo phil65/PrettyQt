@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from typing import TYPE_CHECKING
 
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.utils import datatypes, listdelegators
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class ToolBox(widgets.FrameMixin, widgets.QToolBox):
@@ -18,7 +22,8 @@ class ToolBox(widgets.FrameMixin, widgets.QToolBox):
             case str():
                 result = self.find_child(widgets.QWidget, index)
                 if result is None:
-                    raise KeyError("Widget not found")
+                    msg = "Widget not found"
+                    raise KeyError(msg)
                 return result
             case slice():
                 stop = index.stop or self.count()

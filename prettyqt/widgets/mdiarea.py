@@ -111,8 +111,7 @@ class MdiArea(widgets.AbstractScrollAreaMixin, widgets.QMdiArea):
             window.setWidget(widget)
             self.addSubWindow(window)
             return window
-        else:
-            return self.addSubWindow(widget)
+        return self.addSubWindow(widget)
 
 
 if __name__ == "__main__":

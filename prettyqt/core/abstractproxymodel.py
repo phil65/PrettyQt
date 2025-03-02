@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Generator, Sequence
 import logging
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import core, qt
 from prettyqt.utils import modelhelpers
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Generator, Sequence
 
 
 logger = logging.getLogger(__name__)
@@ -63,7 +66,7 @@ class AbstractProxyModelMixin(core.AbstractItemModelMixin):
             self.setSourceModel(None)
         elif idx == 0 and len(models) > 0:
             parent.set_model(models[1])
-        elif idx > 0 and len(models) > 2:
+        elif idx > 0 and len(models) > 2:  # noqa: PLR2004
             models[idx - 1].setSourceModel(models[idx + 1])
             self.setSourceModel(None)
 

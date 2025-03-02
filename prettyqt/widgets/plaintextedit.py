@@ -43,8 +43,9 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         if event.modifiers() & constants.CTRL_MOD:
             self.zoomIn() if event.angleDelta().y() > 0 else self.zoomOut()
             event.accept()
-        else:
-            super().wheelEvent(event)
+            return None
+        super().wheelEvent(event)
+        return None
 
     def _get_map(self):
         maps = super()._get_map()
@@ -181,8 +182,8 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         self, validator: gui.QValidator | widgets.lineedit.ValidatorStr | None, **kwargs
     ) -> gui.QValidator:
         if isinstance(validator, str):
-            ValidatorClass = classhelpers.get_class_for_id(gui.ValidatorMixin, validator)
-            validator = ValidatorClass(**kwargs)
+            validator_cls = classhelpers.get_class_for_id(gui.ValidatorMixin, validator)
+            validator = validator_cls(**kwargs)
         self.validator = validator
         self._update_background()
         return validator

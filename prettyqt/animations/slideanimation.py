@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Callable
+from typing import TYPE_CHECKING
 
 from prettyqt import core
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 class SlideAnimation(core.PropertyAnimation):

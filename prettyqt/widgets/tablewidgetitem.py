@@ -2,11 +2,14 @@ from __future__ import annotations
 
 import html
 import os
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class TableWidgetItem(QtWidgets.QTableWidgetItem):

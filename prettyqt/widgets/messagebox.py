@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import sys
 import traceback
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, gui, iconprovider, widgets
 from prettyqt.utils import bidict, datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 IconStr = Literal["none", "information", "warning", "critical", "question"]

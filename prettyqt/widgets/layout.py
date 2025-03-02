@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
-from typing import Literal, Self, overload
+from typing import TYPE_CHECKING, Literal, Self, overload
 
 from prettyqt import constants, core, widgets
 from prettyqt.utils import bidict, datatypes, listdelegators
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 # @contxtlib.contextmanager
@@ -32,7 +35,7 @@ from prettyqt.utils import bidict, datatypes, listdelegators
 #             return widgets.MainWindow(parent=parent)
 #         case _:
 #             from prettyqt import custom_widgets
-#             CONTEXT_LAYOUTS = dict(
+#             ctx_layouts = dict(
 #                 horizontal=widgets.HBoxLayout,
 #                 vertical=widgets.VBoxLayout,
 #                 grid=widgets.GridLayout,
@@ -41,7 +44,7 @@ from prettyqt.utils import bidict, datatypes, listdelegators
 #                 flow=custom_widgets.FlowLayout,
 #                 border=custom_widgets.BorderLayout,
 #             )
-#             Klass = CONTEXT_LAYOUTS[sub_container]
+#             Klass = ctx_layouts[sub_container]
 #             layout = Klass(**kwargs)
 #             widget = widgets.Widget(parent=parent)
 #             widget.set_layout(layout)
@@ -90,7 +93,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         match index:
             case int():
                 if index < 0:
-                    index + self.count()
+                    index += self.count()
                 if index < 0 or index >= self.count():
                     raise IndexError(index)
                 item = self.itemAt(index)
@@ -159,7 +162,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         return enter(self)
 
     def __exit__(self, *_):
-        def exit(item):
+        def exit(item):  # noqa: A001
             if item._stack:
                 item = item._stack.pop()
                 exit(item)
@@ -179,7 +182,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     ) -> Self:
         from prettyqt import custom_widgets
 
-        CONTEXT_LAYOUTS = dict(
+        ctx_layouts = dict(
             horizontal=widgets.HBoxLayout,
             vertical=widgets.VBoxLayout,
             grid=widgets.GridLayout,
@@ -190,33 +193,33 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
             scroll=widgets.ScrollArea,
             frame=widgets.GroupBox,
         )
-        Klass = CONTEXT_LAYOUTS[layout]
+        kls = ctx_layouts[layout]
         match self._container:
             case widgets.QWidget() if layout == "scroll":
-                scroller = Klass(parent=self._container)
+                scroller = kls(parent=self._container)
                 scroller.setWidgetResizable(True)
                 widget = widgets.Widget()
                 scroller.set_widget(widget)
                 new = widget.set_layout(orientation, **kwargs)
             case widgets.QLayout() if layout == "scroll":
-                scroller = Klass(parent=self._container)
+                scroller = kls(parent=self._container)
                 scroller.setWidgetResizable(True)
                 widget = widgets.Widget()
                 scroller.set_widget(widget)
                 new = widget.set_layout(orientation, **kwargs)
                 self._container.add(new)
             case widgets.QWidget() if layout == "splitter":
-                new = Klass(orientation=orientation, parent=self._container, **kwargs)
+                new = kls(orientation=orientation, parent=self._container, **kwargs)
             case widgets.QLayout() if layout == "splitter":
-                new = Klass(orientation=orientation, **kwargs)
+                new = kls(orientation=orientation, **kwargs)
                 self._container.add(new)
             case widgets.QWidget() if layout == "frame":
-                frame = Klass(parent=self._container, **kwargs)
+                frame = kls(parent=self._container, **kwargs)
                 widget = widgets.Widget()
                 new = widget.set_layout(orientation or "horizontal")
                 frame.set_layout(new)
             case widgets.QLayout() if layout == "frame":
-                frame = Klass(**kwargs)
+                frame = kls(**kwargs)
                 widget = widgets.Widget()
                 new = widget.set_layout(orientation or "horizontal")
                 frame.set_layout(new)
@@ -224,7 +227,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
             case widgets.QMainWindow():
                 widget = widgets.Widget(parent=self._container)
                 self._container.setCentralWidget(widget)
-                new = Klass(widget, **kwargs)
+                new = kls(widget, **kwargs)
             case widgets.QScrollArea():
                 widget = widgets.Widget(parent=self._container)
                 self._container.setWidget(widget)
@@ -233,11 +236,11 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
             case widgets.QSplitter():
                 widget = widgets.Widget(parent=self._container)
                 self._container.addWidget(widget)
-                new = Klass(widget, **kwargs)
+                new = kls(widget, **kwargs)
             case None | widgets.QWidget():
-                new = Klass(self._container, **kwargs)
+                new = kls(self._container, **kwargs)
             case widgets.QLayout():
-                new = Klass(**kwargs)
+                new = kls(**kwargs)
                 if stretch:
                     self._container.add(new, stretch)
                 else:
@@ -256,6 +259,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
                     item = self.itemAt(i)
                     if item.geometry().contains(pos_or_index):
                         return item
+                return None
             case _:
                 raise ValueError(pos_or_index)
 
@@ -320,8 +324,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         """
         if item is not None:
             return self.setAlignment(item, constants.ALIGNMENTS.get_enum_value(alignment))
-        else:
-            return self.setAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
+        return self.setAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
 
     # def add(self, *items: widgets.QWidget | widgets.QLayout):
     #     for i in items:

@@ -1,8 +1,12 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from typing import TYPE_CHECKING
 
 from prettyqt import core
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class ItemSelectionRange(core.QItemSelectionRange):

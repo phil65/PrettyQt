@@ -1,11 +1,16 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
 import os
 import pathlib
+from typing import TYPE_CHECKING
 
 from prettyqt import gui, widgets
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
+    from prettyqt.utils import datatypes
 
 
 class TextBrowser(widgets.TextEditMixin, widgets.QTextBrowser):

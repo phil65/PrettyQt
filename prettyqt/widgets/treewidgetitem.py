@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, datatypes, get_repr, listdelegators, serializemixin
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 mod = QtWidgets.QTreeWidgetItem

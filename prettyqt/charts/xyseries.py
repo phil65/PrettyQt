@@ -28,8 +28,7 @@ class XYSeriesMixin(charts.AbstractSeriesMixin):
     def get_points(self) -> list[core.QPoint]:
         if prettyqt.qt.API == "pyqt6":
             return [self.at(i) for i in range(self.count())]
-        else:
-            return self.points()
+        return self.points()
 
     def get_pen(self) -> gui.Pen:
         return gui.Pen(self.pen())

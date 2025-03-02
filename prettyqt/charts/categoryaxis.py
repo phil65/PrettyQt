@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import charts
 from prettyqt.utils import bidict
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 LabelsPositionStr = Literal["center", "on_value"]

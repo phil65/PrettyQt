@@ -1,9 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from typing import TYPE_CHECKING
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+
+    from prettyqt.utils import datatypes
 
 
 class MenuMixin(widgets.WidgetMixin):
@@ -24,7 +29,8 @@ class MenuMixin(widgets.WidgetMixin):
         for action in self.actions():
             if action.objectName() == item:
                 return action
-        raise KeyError(f"Action {item} not in menu")
+        msg = f"Action {item} not in menu"
+        raise KeyError(msg)
 
     def add(self, *item: gui.QAction):
         for i in item:

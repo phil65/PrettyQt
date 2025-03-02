@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Iterable
 import dataclasses
+from typing import TYPE_CHECKING
 
-from prettyqt import constants
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterable
+
+    from prettyqt import constants
 
 
 @dataclasses.dataclass
@@ -39,7 +43,8 @@ def bind(
     allow_override: bool = True,
 ) -> None:
     if not allow_override and keybinding in _registry:
-        raise ValueError(f"Duplicate keybinding for '{keybinding}'")
+        msg = f"Duplicate keybinding for '{keybinding}'"
+        raise ValueError(msg)
     _registry[keybinding] = (command, fn)
 
 
@@ -49,5 +54,6 @@ def unbind(keybinding: str, mode: constants.ShortcutContextStr = "application") 
     See config/configcommands.unbind for the corresponding command.
     """
     if keybinding not in _registry:
-        raise KeyError(f"No binding found for '{keybinding}'")
+        msg = f"No binding found for '{keybinding}'"
+        raise KeyError(msg)
     del _registry[keybinding]

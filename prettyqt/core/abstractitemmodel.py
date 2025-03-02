@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Iterator, Sequence
 import contextlib
 import logging
-from typing import Any, Literal, overload
+from typing import TYPE_CHECKING, Any, Literal, overload
 
 from prettyqt import constants, core
 from prettyqt.utils import bidict, helpers, listdelegators, modelhelpers
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator, Sequence
 
 
 logger = logging.getLogger(__name__)
