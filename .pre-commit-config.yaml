@@ -28,7 +28,7 @@ repos:
       # - id: check-added-large-files
   # https://pre-commit.com/hooks.html
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.29.1
+    rev: v4.3.0
     hooks:
       - id: commitizen
         stages: [commit-msg]
@@ -42,7 +42,7 @@ repos:
   #       exclude: '(sciscintilla)\.py'
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.6.9
+    rev: v0.9.9
     hooks:
       - id: ruff
       - id: ruff-format
