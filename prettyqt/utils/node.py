@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Iterable, Iterator, Sequence
 import logging
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
 from prettyqt.utils import baseresolver, get_repr
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterable, Iterator, Sequence
 
 
 logger = logging.getLogger(__name__)
@@ -117,6 +120,8 @@ class BaseNode:
             children = self.parent_item.children
             if child_idx := children.index(self):
                 return self.parent_item.children[child_idx - 1]
+            return None
+        return None
 
     @property
     def right_sibling(self) -> Self | None:
@@ -126,6 +131,8 @@ class BaseNode:
             child_idx = children.index(self)
             if child_idx + 1 < len(children):
                 return self.parent_item.children[child_idx + 1]
+            return None
+        return None
 
     @property
     def node_path(self) -> Iterable[Self]:

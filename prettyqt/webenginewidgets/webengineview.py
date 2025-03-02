@@ -1,11 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Callable
+from typing import TYPE_CHECKING
 import webbrowser
 
 from prettyqt import core, webenginecore, widgets
 from prettyqt.qt import QtWebEngineWidgets
 from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 # os.environ["QTWEBENGINE_CHROMIUM_FLAGS"] = "--enable-logging --log-level=3"

@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 import collections
-from collections.abc import Sequence
 import logging
 import pathlib
+from typing import TYPE_CHECKING
 
 from prettyqt import constants, core, gui, itemmodels, widgets
 from prettyqt.utils import colors, datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 logger = logging.getLogger(__name__)

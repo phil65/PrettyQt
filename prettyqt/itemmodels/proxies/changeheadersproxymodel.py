@@ -57,7 +57,8 @@ class ChangeHeadersProxyModel(core.IdentityProxyModel):
             else model.rowCount()
         )
         if isinstance(self._header, list) and len(self._header) != header_len:
-            raise ValueError("list needs to be same list as header")
+            msg = "list needs to be same list as header"
+            raise ValueError(msg)
         super().setSourceModel(model)
 
     def get_header(self) -> list[int]:
@@ -80,10 +81,10 @@ class ChangeHeadersProxyModel(core.IdentityProxyModel):
         orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
-        if orientation == self._orientation and role == self._role:
-            if isinstance(self._header, dict) and section in self._header:
-                return self._header[section]
-            elif isinstance(self._header, list):
+        if orientation == self._orientation and role == self._role:  # noqa: SIM102
+            if (isinstance(self._header, dict) and section in self._header) or isinstance(
+                self._header, list
+            ):
                 return self._header[section]
         return self.sourceModel().headerData(section, orientation, role)
 

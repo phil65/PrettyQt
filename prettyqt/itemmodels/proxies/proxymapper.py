@@ -64,9 +64,10 @@ class ProxyMapper(core.Object):
             if all(element in sublist for sublist in chains[1:])
         ]
         if not common_list:
-            raise RuntimeError("No common source model")
+            msg = "No common source model"
+            raise RuntimeError(msg)
         common_source = common_list[0]
-        logger.debug(f"Common source: {common_source}")
+        logger.debug("Common source: %s", common_source)
         self._chains = [chain[: chain.index(common_source)] for chain in chains]
 
     def map_index(
@@ -74,10 +75,10 @@ class ProxyMapper(core.Object):
     ) -> core.ModelIndex:
         """Map index from source to target."""
         for model in self._chains[source]:
-            logger.debug(f"mapping from {model!r} to {model.sourceModel()!r}")
+            logger.debug("mapping from %r to %r", model, model.sourceModel())
             index = model.mapToSource(index)
         for model in reversed(self._chains[target]):
-            logger.debug(f"mapping from {model.sourceModel()!r} to {model!r}")
+            logger.debug("mapping from %r to %r", model.sourceModel(), model)
             index = model.mapFromSource(index)
         return index
 
@@ -86,10 +87,10 @@ class ProxyMapper(core.Object):
     ) -> core.QItemSelection:
         """Map selection from source to target."""
         for model in self._chains[source]:
-            logger.debug(f"mapping from {model!r} to {model.sourceModel()!r}")
+            logger.debug("mapping from %r to %r", model, model.sourceModel())
             selection = model.mapSelectionToSource(selection)
         for model in reversed(self._chains[target]):
-            logger.debug(f"mapping from {model.sourceModel()!r} to {model!r}")
+            logger.debug("mapping from %r to %r", model.sourceModel(), model)
             selection = model.mapSelectionFromSource(selection)
         return selection
 

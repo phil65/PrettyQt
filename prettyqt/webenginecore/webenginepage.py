@@ -1,13 +1,16 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import logging
 import os
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 import webbrowser
 
 from prettyqt import core, gui, webenginecore
 from prettyqt.utils import bidict, datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 mod = webenginecore.QWebEnginePage
@@ -362,8 +365,8 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
         """Open page URL in default system browser."""
         try:
             webbrowser.open(self.getUrl().toString())
-        except ValueError as e:
-            logger.exception(e)
+        except ValueError:
+            logger.exception("Error opening URL %r", self.getUrl().toString())
 
     def insert_stylesheet(
         self, name: str, css: str | os.PathLike[str], immediately: bool = True

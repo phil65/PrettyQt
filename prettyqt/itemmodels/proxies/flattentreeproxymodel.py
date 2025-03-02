@@ -163,8 +163,7 @@ class FlattenTreeProxyModel(core.AbstractProxyModel):
         return 0 if parent.isValid() else 1
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
-        flags = super().flags(index)
-        return flags
+        return super().flags(index)
         # this would disable non-leave items
         # index = self.mapToSource(index)
         # model = self.sourceModel()
