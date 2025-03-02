@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from collections.abc import Callable, Generator, Sequence
 import contextlib
 
 # import inspect
@@ -16,6 +15,8 @@ from prettyqt.utils import classhelpers, datatypes, helpers, listdelegators
 
 
 if TYPE_CHECKING:
+    from collections.abc import Callable, Generator, Sequence
+
     from prettyqt import eventfilters
 
 T = TypeVar("T", bound=core.QObject)
@@ -59,7 +60,7 @@ class ObjectMixin:
                 # this allows snake_case naming.
                 camel_k = helpers.to_lower_camel(k)
                 if camel_k != k and camel_k in kwargs:
-                    logger.warning(f"{k} defined twice: {v} / {kwargs[camel_k]}")
+                    logger.warning("%s defined twice: %s / %s", k, v, kwargs[camel_k])
                 # allow str values instead of enum
                 if camel_k in mapper and isinstance(v, str):
                     new[camel_k] = mapper[camel_k][v]
@@ -118,7 +119,7 @@ class ObjectMixin:
     def installEventFilter(self, filter_: core.QObject | str, **kwargs):
         """Override to also allow setting eventfilters by name."""
         if filter_ in self._eventfilters:
-            logger.warning(f"Installing same EventFilter multiple times to {self}.")
+            logger.warning("Installing same EventFilter multiple times to %s.", self)
             return
         match filter_:
             case core.QObject():
@@ -126,10 +127,8 @@ class ObjectMixin:
             case str():
                 from prettyqt import eventfilters
 
-                Klass = classhelpers.get_class_for_id(
-                    eventfilters.BaseEventFilter, filter_
-                )
-                filter_ = Klass(parent=self, **kwargs)
+                kls = classhelpers.get_class_for_id(eventfilters.BaseEventFilter, filter_)
+                filter_ = kls(parent=self, **kwargs)
             case _:
                 raise ValueError(filter_)
         self._eventfilters.add(filter_)
@@ -391,12 +390,12 @@ class ObjectMixin:
             for i in self.dynamicPropertyNames()
         }
 
-    def bind_property(cls, object_name: str, prop_name: str) -> property:
+    def bind_property(self, object_name: str, prop_name: str) -> property:
         def getter(self):
-            return self.findChild(cls, object_name).property(prop_name)
+            return self.findChild(self, object_name).property(prop_name)
 
         def setter(self, value):
-            self.findChild(cls, object_name).setProperty(prop_name, value)
+            self.findChild(self, object_name).setProperty(prop_name, value)
 
         return property(getter, setter)
 

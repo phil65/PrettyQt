@@ -4,7 +4,7 @@ from ctypes import Structure, byref, c_int, sizeof, windll
 from ctypes.wintypes import DWORD, HWND, LPARAM, RECT, UINT
 import os
 import sys
-from typing import SupportsInt
+from typing import ClassVar, SupportsInt
 
 import win32api
 from win32comext.shell import shellcon
@@ -13,7 +13,7 @@ import win32gui
 
 
 class APPBARDATA(Structure):
-    _fields_ = [
+    _fields_: ClassVar = [
         ("cbSize", DWORD),
         ("hWnd", HWND),
         ("uCallbackMessage", UINT),
@@ -62,6 +62,7 @@ def start_system_move(h_wnd: SupportsInt) -> None:
 def get_monitor_info(h_wnd, dw_flags):
     if monitor := win32api.MonitorFromWindow(h_wnd, dw_flags):
         return win32api.GetMonitorInfo(monitor)
+    return None
 
 
 def is_full_screen(h_wnd):
