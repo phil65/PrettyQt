@@ -50,7 +50,7 @@ class Color(QtGui.QColor):
         return get_repr(self, self.red(), self.green(), self.blue(), self.alpha())
 
     def __str__(self):
-        return self.name() if self.alpha() == 255 else self.name(self.NameFormat.HexArgb)
+        return self.name() if self.alpha() == 255 else self.name(self.NameFormat.HexArgb)  # noqa: PLR2004
 
     def __reduce__(self):
         return type(self), (self.red(), self.green(), self.blue(), self.alpha())
@@ -168,7 +168,7 @@ class Color(QtGui.QColor):
             The interpolated QColor, with the same spec as the given start color.
         """
         if colorspace is None:
-            return cls(*end.getRgb()) if percent == 100 else cls(*start.getRgb())
+            return cls(*end.getRgb()) if percent == 100 else cls(*start.getRgb())  # noqa: PLR2004
         out = cls()
         match colorspace:
             case "rgb":
@@ -193,12 +193,13 @@ class Color(QtGui.QColor):
                 )
                 out.setHsl(*components)
             case _:
-                raise ValueError("Invalid colorspace!")
+                msg = "Invalid colorspace!"
+                raise ValueError(msg)
         return cls(out.convertTo(start.spec()))
 
     def is_dark(self) -> bool:
         """Check whether a color is 'dark'."""
-        return self.lightness() < 128
+        return self.lightness() < 128  # noqa: PLR2004
 
     def get_spec(self) -> SpecStr:
         return SPEC.inverse[self.spec()]
@@ -270,13 +271,12 @@ class Color(QtGui.QColor):
 
     def drift(self, factor: int = 1.0) -> Self:
         """Return color that is lighter or darker than the base color."""
-        Cls = type(self)
+        kls = type(self)
         if self == Color("#000000"):
-            return Cls(Color("#050505").lighter(int(factor * 100)))
-        elif self.lightness() > 128:
-            return Cls(self.darker(int(factor * 100)))
-        else:
-            return Cls(self.lighter(int(factor * 100)))
+            return kls(Color("#050505").lighter(int(factor * 100)))
+        if self.lightness() > 128:  # noqa: PLR2004
+            return kls(self.darker(int(factor * 100)))
+        return kls(self.lighter(int(factor * 100)))
 
 
 # QtGui.QColor.__str__ = __str__
