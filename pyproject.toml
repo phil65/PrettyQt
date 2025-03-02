@@ -29,6 +29,7 @@ dependencies = [
     "pygments",
     "qstylizer",
     "typing-extensions",
+    "sublime-search>=0.1.2",
 ]
 # dynamic = ["version"]
 

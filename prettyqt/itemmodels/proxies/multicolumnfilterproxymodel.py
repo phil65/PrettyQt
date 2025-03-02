@@ -5,8 +5,9 @@ import dataclasses
 import logging
 from typing import Any
 
+import sublime_search
+
 from prettyqt import constants, core
-from prettyqt.utils import fuzzy
 
 
 logger = logging.getLogger(__name__)
@@ -58,17 +59,19 @@ class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
         value: str,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
-        if value == "" or value is None:  # False is a valid value.  # noqa: PLC1901
+        if value == "" or value is None:  # False is a valid value.
             del self._filters[column]
         else:
             self._filters[column] = Filter(column=column, value=value, role=role)
         self.invalidateRowsFilter()
 
     def setFilterKeyColumn(self, column: int):
-        raise NotImplementedError("Not supported.")
+        msg = "Not supported."
+        raise NotImplementedError(msg)
 
     def setFilterRole(self, column: int):
-        raise NotImplementedError("Not supported.")
+        msg = "Not supported."
+        raise NotImplementedError(msg)
 
     def filterAcceptsRow(self, row, parent):
         source = self.sourceModel()
@@ -80,10 +83,13 @@ class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
                 case str():
                     search_val = str(search_val)
                     data = str(data)
-                    if self.filterMode == "fuzzy" and not fuzzy.fuzzy_match_simple(
-                        search_val,
-                        data,
-                        case_sensitive=self.is_filter_case_sensitive(),
+                    if (
+                        self.filterMode == "fuzzy"
+                        and not sublime_search.fuzzy_match_simple(
+                            search_val,
+                            data,
+                            case_sensitive=self.is_filter_case_sensitive(),
+                        )
                     ):
                         return False
                     if not self.is_filter_case_sensitive():

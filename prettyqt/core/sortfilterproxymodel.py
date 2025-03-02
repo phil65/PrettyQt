@@ -1,12 +1,17 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
 import enum
 import re
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
+
+import sublime_search
 
 from prettyqt import constants, core
-from prettyqt.utils import bidict, datatypes, fuzzy
+from prettyqt.utils import bidict, datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 
 class FilterMode(enum.IntEnum):
@@ -68,7 +73,7 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, core.QSortFilterProxyMo
         source_model = self.sourceModel()
         idx = source_model.index(source_row, column, source_index)
         text = source_model.data(idx)
-        return fuzzy.fuzzy_match_simple(
+        return sublime_search.fuzzy_match_simple(
             self.filterRegularExpression().pattern(),
             text,
             case_sensitive=self.is_filter_case_sensitive(),
@@ -191,7 +196,7 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, core.QSortFilterProxyMo
         self._filter_mode = mode
         self.filter_mode_changed.emit(mode)
 
-    filterMode = core.Property(
+    filterMode = core.Property(  # noqa: N815
         str,
         get_filter_mode,
         set_filter_mode,
