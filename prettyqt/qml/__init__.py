@@ -5,8 +5,8 @@ from __future__ import annotations
 from prettyqt.qt.QtQml import *  # noqa: F403
 
 from prettyqt.qt.QtQml import (
-    qmlRegisterType as register_qml_type,
-    qmlClearTypeRegistrations as clear_type_registrations,
+    qmlRegisterType as register_qml_type,  # noqa: N813
+    qmlClearTypeRegistrations as clear_type_registrations,  # noqa: N813
 )
 from .qmlparserstatus import QmlParserStatus, QmlParserStatusMixin
 from .qmlerror import QmlError
@@ -29,32 +29,32 @@ def register_objects_from_module(module):
     from prettyqt import core
     from prettyqt.utils import classhelpers
 
-    for Klass in classhelpers.iter_classes_for_module(module):
-        if core.ObjectMixin in Klass.mro():
-            register_class(Klass)
+    for kls in classhelpers.iter_classes_for_module(module):
+        if core.ObjectMixin in kls.mro():
+            register_class(kls)
 
 
-def register_class(Klass):
-    register_qml_type(Klass, Klass.__module__, 1, 0, Klass.__name__)
+def register_class(kls):
+    register_qml_type(kls, kls.__module__, 1, 0, kls.__name__)
 
 
 __all__ = [
-    "register_qml_type",
-    "clear_type_registrations",
-    "QmlParserStatus",
-    "QmlError",
-    "QmlExpression",
-    "QmlProperty",
-    "QmlParserStatusMixin",
-    "QmlPropertyMap",
-    "JSValue",
-    "JSValueIterator",
-    "QmlEngine",
-    "QmlEngineMixin",
     "JSEngine",
     "JSEngineMixin",
+    "JSValue",
+    "JSValueIterator",
     "QmlApplicationEngine",
     "QmlComponent",
+    "QmlEngine",
+    "QmlEngineMixin",
+    "QmlError",
+    "QmlExpression",
     "QmlImageProviderBase",
     "QmlImageProviderBaseMixin",
+    "QmlParserStatus",
+    "QmlParserStatusMixin",
+    "QmlProperty",
+    "QmlPropertyMap",
+    "clear_type_registrations",
+    "register_qml_type",
 ]

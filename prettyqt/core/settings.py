@@ -26,7 +26,7 @@ SCOPE: bidict[ScopeStr, core.QSettings.Scope] = bidict(
 )
 
 
-class Settings_(
+class Settings_(  # noqa: N801
     core.ObjectMixin, core.QSettings, MutableMapping, metaclass=datatypes.QABCMeta
 ):
     """Persistent platform-independent application settings."""
@@ -76,7 +76,8 @@ class Settings_(
 
     def set_value(self, key: str, value):
         if not self.applicationName():
-            raise RuntimeError("no app name defined")
+            msg = "no app name defined"
+            raise RuntimeError(msg)
         if isinstance(value, Settings_):
             value = dict(value)
         self.setValue(key, value)
@@ -185,7 +186,7 @@ class Settings_(
         app_name: str | None = None,
         app_path: None | datatypes.PathType = None,
     ):
-        logger.debug(f"assigning extensions {exts} to {app_name}")
+        logger.debug("assigning extensions %s to %r", exts, app_name)
         s = cls("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.Format.NativeFormat)
         if app_path is None:
             app_path = str(core.CoreApplication.get_application_file_path())

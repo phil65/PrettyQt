@@ -1,6 +1,5 @@
 """Provides Qt init stuff."""
 
-
 import os
 import sys
 
@@ -23,7 +22,8 @@ if API.lower() in {"pyqt5", "pyside2"}:
 
 initial_api = API
 if API not in API_NAMES:
-    raise ValueError(f"Specified QT_API={repr(API)} is not in valid options: {API_NAMES}")
+    msg = f"Specified QT_API={repr(API)!r} is not in valid options: {API_NAMES}"
+    raise ValueError(msg)
 
 
 PYQT6 = False
@@ -54,8 +54,12 @@ if API == "pyqt6":
 
 if API == "pyside6":
     try:
-        from PySide6 import __version__ as API_VERSION  # analysis:ignore
-        from PySide6.QtCore import __version__ as QT_VERSION  # analysis:ignore
+        from PySide6 import (
+            __version__ as API_VERSION,  # noqa: F401, N812
+        )  # analysis:ignore
+        from PySide6.QtCore import (
+            __version__ as QT_VERSION,  # noqa: F401, N812
+        )  # analysis:ignore
 
         PYSIDE6 = True
 
@@ -67,10 +71,11 @@ if API == "pyside6":
 
 # If a correct API name is passed to QT_API and it could not be found,
 # switches to another and informs through the warning
-if API != initial_api and binding_specified:
+if initial_api != API and binding_specified:
     warnings.warn(
         f"Selected binding {initial_api!r} not found. Falling back to {API!r}",
         ImportWarning,
+        stacklevel=2,
     )
 
 
@@ -80,8 +85,8 @@ MODULE = sys.modules[API_NAME]
 
 
 def set_env_vars(qt_binding: Literal["PyQt6", "PySide6"]):
-    ENV_VARS = ["QT_API", "USE_QT_API", "PYTEST_QT_API", "PYQTGRAPH_QT_LIB"]
-    for var in ENV_VARS:
+    env_vars = ["QT_API", "USE_QT_API", "PYTEST_QT_API", "PYQTGRAPH_QT_LIB"]
+    for var in env_vars:
         os.environ[var] = qt_binding
 
 
