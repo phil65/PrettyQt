@@ -3,9 +3,13 @@ from __future__ import annotations
 import logging
 import os
 import pathlib
+from typing import TYPE_CHECKING
 
 from prettyqt import core, widgets
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -34,7 +38,7 @@ class FileTree(widgets.TreeView):
 
         def _save_expanded_on_level(index: core.ModelIndex):
             if not self.isExpanded(index):
-                return None
+                return
             model = self.model()
             if index.isValid():
                 path = model.data(index, model.Roles.FilePathRole)
@@ -59,10 +63,10 @@ class FileTree(widgets.TreeView):
             model = self.model()
             path = model.data(index, model.Roles.FilePathRole)
             if path not in self._expanded_ids:
-                return None
+                return
             self.setExpanded(index, True)
             if not model.hasChildren(index):
-                return None
+                return
             path = pathlib.Path(path)
             for it in path.iterdir():
                 child_index = model.index(str(path / it))
@@ -86,7 +90,7 @@ class BreadCrumbsToolBar(widgets.ToolBar):
     def set_breadcrumbs(self, path: datatypes.PathType):
         self.clear()
         path = pathlib.Path(path)
-        logger.info(f"Setting breadrumbs to {path}")
+        logger.info("Setting breadrumbs to %s", path)
         if path.parents:
             action = self.add_action(
                 text=str(path.parents[-1]), triggered=self._on_button_clicked

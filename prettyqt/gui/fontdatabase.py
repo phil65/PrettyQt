@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 import logging
 import pathlib
-from typing import Literal
+from typing import ClassVar, Literal
 
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, datatypes
@@ -98,14 +98,14 @@ WritingSystemStr = Literal[
 class FontDatabase(QtGui.QFontDatabase):
     """Information about the fonts available in the underlying window system."""
 
-    font_paths: dict[str, int] = {}
+    font_paths: ClassVar[dict[str, int]] = {}
 
     @classmethod
     def add_fonts_from_folder(cls, path: datatypes.PathType):
         path = pathlib.Path(path)
         for p in path.iterdir():
             if p.suffix.lower() in [".ttf", ".otf"]:
-                logger.debug(f"adding font {p!r} to database.")
+                logger.debug("adding font %r to database.", p)
                 cls.addApplicationFont(str(p))
 
     @classmethod
@@ -113,16 +113,18 @@ class FontDatabase(QtGui.QFontDatabase):
         path = pathlib.Path(path)
         font_id = cls.addApplicationFont(str(path))
         if not cls.applicationFontFamilies(font_id):
-            raise RuntimeError(
+            msg = (
                 f"Font {path!r} appears to be empty. "
                 "If you are on Windows 10, please read "
                 "https://support.microsoft.com/"
                 "en-us/kb/3053676"
             )
+            raise RuntimeError(msg)
         if ttf_hash is not None:
             content = path.read_bytes()
             if hashlib.md5(content).hexdigest() != ttf_hash:
-                raise OSError(f"Font is corrupt at: {path!r}")
+                msg = f"Font is corrupt at: {path!r}"
+                raise OSError(msg)
         cls.font_paths[str(path)] = font_id
         return font_id
 

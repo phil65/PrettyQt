@@ -8,4 +8,4 @@ from prettyqt.qt import QtSvgWidgets
 
 QT_MODULE = QtSvgWidgets
 
-__all__ = ["SvgWidget", "GraphicsSvgItem"]
+__all__ = ["GraphicsSvgItem", "SvgWidget"]

@@ -4,6 +4,7 @@ import logging
 import os
 import pathlib
 import time
+from typing import ClassVar
 
 import git
 
@@ -25,7 +26,7 @@ class GitPythonTreeModel(itemmodels.TreeModel):
     """
 
     SUPPORTS = os.PathLike | str | git.Tree | git.Repo
-    HEADER = [
+    HEADER: ClassVar = [
         "Name",
         "Absolute path",
         "Blob id",
@@ -70,7 +71,7 @@ class GitPythonTreeModel(itemmodels.TreeModel):
                 return self.HEADER[section]
         return None
 
-    def data(
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
@@ -86,9 +87,11 @@ class GitPythonTreeModel(itemmodels.TreeModel):
             case constants.DISPLAY_ROLE, 2:
                 if isinstance(tree, git.Tree):
                     return tree.blob_id
+                return None
             case constants.DISPLAY_ROLE, 3:
                 if isinstance(tree, git.Tree):
                     return tree.commit_id
+                return None
             case constants.DISPLAY_ROLE, 4:
                 return tree.type
             # case constants.DISPLAY_ROLE, 5:
@@ -102,20 +105,25 @@ class GitPythonTreeModel(itemmodels.TreeModel):
             case constants.DISPLAY_ROLE, 7:
                 if isinstance(tree, git.Tree):
                     return tree.tree_id
+                return None
             case constants.DISPLAY_ROLE, 8:
                 return tree.mode
             case constants.DISPLAY_ROLE, 9:
                 if isinstance(tree, git.Tree):
                     return tree.symlink_id
+                return None
             case constants.DISPLAY_ROLE, 10:
                 if isinstance(tree, git.Blob):
                     return tree.mime_type
+                return None
             case constants.DISPLAY_ROLE, 11:
                 if isinstance(tree, git.Blob):
                     return tree.link_mode
+                return None
             case constants.DISPLAY_ROLE, 12:
                 if isinstance(tree, git.Blob):
                     return tree.file_mode
+                return None
             # case constants.DISPLAY_ROLE, 15:
             #     if isinstance(tree, git.Blob):
             #         return tree.executabe_mode
@@ -145,7 +153,7 @@ class GitPythonCommitTreeModel(itemmodels.TreeModel):
     """
 
     SUPPORTS = os.PathLike | str | git.Repo | git.Commit
-    HEADER = [
+    HEADER: ClassVar = [
         "Sha",
         "Absolute path",
     ]

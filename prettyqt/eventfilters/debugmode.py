@@ -39,7 +39,7 @@ class DebugMode(eventfilters.BaseEventFilter):
                         self.menu.add_action(text=repr(candidate), data=candidate)
                     self.menu.exec(pos)
                     return True
-                elif "alt" in mods:
+                if "alt" in mods:
                     from prettyqt import ipython
 
                     self.frame.hide()
@@ -74,7 +74,7 @@ class DebugMode(eventfilters.BaseEventFilter):
     def _on_clicked(self, item):
         from prettyqt import debugging
 
-        logger.debug(f"clicked on {item}")
+        logger.debug("clicked on %s", item)
         widget = item.data()
         self.editor = debugging.QObjectDetailsDialog(widget)
         self.menu.close()

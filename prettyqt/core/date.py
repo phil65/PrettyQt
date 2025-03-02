@@ -42,14 +42,12 @@ class Date(QtCore.QDate):
     def add_months(self, months: int, calendar: QtCore.QCalendar | None = None) -> Self:
         if calendar:
             return type(self)(self.addMonths(months, calendar))
-        else:
-            return type(self)(self.addMonths(months))
+        return type(self)(self.addMonths(months))
 
     def add_years(self, years: int, calendar: QtCore.QCalendar | None = None) -> Self:
         if calendar:
             return type(self)(self.addYears(years, calendar))
-        else:
-            return type(self)(self.addYears(years))
+        return type(self)(self.addYears(years))
 
     @classmethod
     def get_current_date(cls) -> Self:

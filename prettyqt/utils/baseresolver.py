@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 import re
+from typing import ClassVar
 
 
 _MAXCACHE = 20
@@ -10,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class BaseResolver:
-    _match_cache = {}
+    _match_cache: ClassVar = {}
 
     def __init__(self, ignore_case: bool = False):
         """Base resolver. Subclass to get glob functionality.
@@ -227,13 +228,12 @@ class BaseResolver:
                 parent = self.get_parent(node)
                 if parent is None:
                     raise RootResolverError(node)
-                else:
-                    nodes += self.__glob(parent, remainder)
+                nodes += self.__glob(parent, remainder)
             elif name in ("", "."):
                 nodes += self.__glob(node, remainder)
-            elif matches := self.__find(node, name, remainder):
-                nodes += matches
-            elif self.is_wildcard(name):
+            elif (matches := self.__find(node, name, remainder)) or self.is_wildcard(
+                name
+            ):
                 nodes += matches
             else:
                 names = [repr(self.get_attribute(c)) for c in self.get_children(node)]
@@ -252,9 +252,9 @@ class BaseResolver:
                         matches += self.__glob(child, remainder)
                     else:
                         matches.append(child)
-            except ResolverError as exc:
+            except ResolverError:
                 if not self.is_wildcard(pat):
-                    raise exc
+                    raise
         return matches
 
     @staticmethod

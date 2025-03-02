@@ -1,23 +1,27 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from collections.abc import Callable
 import ctypes
 from ctypes import WINFUNCTYPE, FormatError, c_bool, c_int
 from ctypes.wintypes import UINT
 import logging
-from typing import SupportsInt
+from typing import TYPE_CHECKING, ClassVar, SupportsInt
 
 from prettyqt import core
 from prettyqt.utils.platforms.windows import keytables
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 logger = logging.getLogger(__name__)
 
 
 class GlobalHotKeyEventFilter(core.AbstractNativeEventFilter):
-    _keybindings: defaultdict[list] = defaultdict(list)
-    _keygrabs: defaultdict[int] = defaultdict(int)  # Key grab key -> number of grabs
+    _keybindings: ClassVar[defaultdict[str, list]] = defaultdict(list)
+    # Key grab key -> number of grabs
+    _keygrabs: ClassVar[defaultdict[int]] = defaultdict(int)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -32,14 +36,14 @@ class GlobalHotKeyEventFilter(core.AbstractNativeEventFilter):
         paramflags = (1, "hWnd", 0), (1, "id", 0)
         self.UnregisterHotKey = prototype(("UnregisterHotKey", self.user32), paramflags)
 
-    def nativeEventFilter(self, eventType, message):
-        WM_HOTKEY_MSG = 0x0312  # 768
+    def nativeEventFilter(self, event_type, message):
+        WM_HOTKEY_MSG = 0x0312  # 768  # noqa: N806
         msg = ctypes.wintypes.MSG.from_address(int(message))
         handled = False
-        if eventType != b"windows_generic_MSG" or msg.message != WM_HOTKEY_MSG:
+        if event_type != b"windows_generic_MSG" or msg.message != WM_HOTKEY_MSG:
             return False, 0
         key = msg.lParam
-        logger.info(f"handling hotkey {key}")
+        logger.info("handling hotkey %s", key)
         for cb in self._keybindings.get(key, []):
             try:
                 cb()
@@ -61,7 +65,7 @@ class GlobalHotKeyEventFilter(core.AbstractNativeEventFilter):
         # Add MOD_NOREPEAT = 0x4000 to mods, so that keys don't get notified twice
         # This requires VISTA+ operating system
         key_index = kc << 16 | mods
-        logger.info(f"registering key {key_index} for window {wid}")
+        logger.info("registering key %s for window %s", key_index, wid)
         if not self._keygrabs[key_index] and not self.RegisterHotKey(
             wid, key_index, UINT(mods | 0x4000), UINT(kc)
         ):
@@ -83,7 +87,7 @@ class GlobalHotKeyEventFilter(core.AbstractNativeEventFilter):
         self._keybindings.pop(key_index)
         self._keygrabs.pop(key_index)
 
-        logger.info(f"unregistering key {key_index} for window {wid}")
+        logger.info("unregistering key %s for window %s", key_index, wid)
         if not self.UnregisterHotKey(wid, key_index):
             err = f"Couldn't unregister hot key '{kc}': {FormatError()}."
             logger.error(err)

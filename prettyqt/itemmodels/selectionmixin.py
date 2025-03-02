@@ -1,13 +1,17 @@
 from __future__ import annotations
 
-from collections.abc import Callable
+from typing import TYPE_CHECKING, ClassVar
 
 from prettyqt import constants, core
 
 
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+
 class SelectionMixin:
-    CHECKSTATE: dict[int, Callable] = {}  # column: identifier
-    dataChanged: core.Signal
+    CHECKSTATE: ClassVar[dict[int, Callable]] = {}  # column: identifier
+    dataChanged: core.Signal  # noqa: N815
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,7 +25,7 @@ class SelectionMixin:
     ) -> bool:
         if not index.isValid():
             return False
-        elif role == constants.CHECKSTATE_ROLE:
+        if role == constants.CHECKSTATE_ROLE:
             name = self._get_selection_id(index)
             self.selected[name] = not self.selected[name]
             self.dataChanged.emit(index, index)
@@ -53,3 +57,4 @@ class SelectionMixin:
         item = index.data(constants.USER_ROLE)
         if id_fn := self.CHECKSTATE.get(index.column()):
             return id_fn(item)
+        return None

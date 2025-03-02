@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import logging
-from typing import Any
+from typing import Any, ClassVar
 
 from prettyqt import constants, core
 
@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class BaseFieldsModel(core.AbstractTableModel):
-    HEADER: list[str] = []
+    HEADER: ClassVar[list[str]] = []
     DELEGATE_DEFAULT = "editor"
 
     def __init__(self, instance, **kwargs):
@@ -81,7 +81,6 @@ class BaseFieldsModel(core.AbstractTableModel):
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         field_name = self._field_names[index.row()]
-        if index.column() == 0:
-            if self._is_writable(field_name):
-                return super().flags(index) | constants.IS_EDITABLE
+        if index.column() == 0 and self._is_writable(field_name):
+            return super().flags(index) | constants.IS_EDITABLE
         return super().flags(index)

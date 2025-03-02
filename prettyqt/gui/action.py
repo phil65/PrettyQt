@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import html
 import os
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.utils import bidict, datatypes, get_repr
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 ActionEventStr = Literal["trigger", "hover"]
@@ -85,12 +88,11 @@ class ActionMixin(core.ObjectMixin):
     def get_type(self) -> Literal["menu", "separator", "widget", "regular"]:
         if self.menu() is not None:
             return "menu"
-        elif self.isSeparator():
+        if self.isSeparator():
             return "separator"
-        elif hasattr(self, "defaultWidget"):
+        if hasattr(self, "defaultWidget"):
             return "widget"
-        else:
-            return "regular"
+        return "regular"
 
     def set_disabled(self):
         self.setEnabled(False)
@@ -117,7 +119,7 @@ class ActionMixin(core.ObjectMixin):
             tooltip = f"<html>{html.escape(tooltip)}</html>"
         super().setToolTip(tooltip)
 
-    setToolTip = set_tooltip
+    setToolTip = set_tooltip  # noqa: N815
 
     def set_icon(self, icon: datatypes.IconType):
         """Set the icon for the action.
@@ -128,7 +130,7 @@ class ActionMixin(core.ObjectMixin):
         icon = iconprovider.get_icon(icon)
         super().setIcon(icon)
 
-    setIcon = set_icon
+    setIcon = set_icon  # noqa: N815
 
     def set_shortcut(self, shortcut: None | gui.QKeySequence | str):
         if shortcut is None:
@@ -139,7 +141,7 @@ class ActionMixin(core.ObjectMixin):
             )
         super().setShortcut(shortcut)
 
-    setShortcut = set_shortcut
+    setShortcut = set_shortcut  # noqa: N815
 
     def setText(self, text: str | None):
         super().setText(text or "")
@@ -172,7 +174,7 @@ class ActionMixin(core.ObjectMixin):
         """
         super().setPriority(PRIORITIES.get_enum_value(priority))
 
-    setPriority = set_priority
+    setPriority = set_priority  # noqa: N815
 
     def get_priority(self) -> PriorityStr:
         """Return current priority.
@@ -192,7 +194,7 @@ class ActionMixin(core.ObjectMixin):
         """
         super().setShortcutContext(constants.SHORTCUT_CONTEXT.get_enum_value(context))
 
-    setShortcutContext = set_shortcut_context
+    setShortcutContext = set_shortcut_context  # noqa: N815
 
     def get_shortcut_context(self) -> constants.ShortcutContextStr:
         """Return shortcut context.
@@ -210,7 +212,7 @@ class ActionMixin(core.ObjectMixin):
         """
         super().setMenuRole(MENU_ROLE.get_enum_value(role))
 
-    setMenuRole = set_menu_role
+    setMenuRole = set_menu_role  # noqa: N815
 
     def get_menu_role(self) -> MenuRoleStr:
         """Return menu role.

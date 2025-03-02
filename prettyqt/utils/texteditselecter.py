@@ -1,13 +1,16 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
 import contextlib
 import logging
 import re
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import colors, datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 logger = logging.getLogger(__name__)
@@ -57,8 +60,7 @@ class TextEditSelecter:
     def get_selected_text(self) -> str:
         if self._widget.textCursor().hasSelection():
             return self._widget.textCursor().selectedText()
-        else:
-            return ""
+        return ""
 
     def highlight_current_line(self, color: datatypes.ColorType = None):
         if color is None:
@@ -208,7 +210,9 @@ class TextEditSelecter:
             t.setPosition(t.position() - length)
             t.setPosition(t.position() + length, gui.QTextCursor.MoveMode.KeepAnchor)
             self._widget.setTextCursor(t)
-            logger.info(f"Replaced on line {t.blockNumber()}, pos {t.positionInBlock()}")
+            logger.info(
+                "Replaced on line %s, pos %s", t.blockNumber(), t.positionInBlock()
+            )
         else:
             logger.error("Text not found")
 
@@ -227,7 +231,7 @@ class TextEditSelecter:
             self._widget.textCursor().insertText(replace_buffer)
             times += 1
         if times:
-            logger.info(f'{times} instance{"s" if times else ""} replaced')
+            logger.info("%s instance %s replaced", times, "s" if times else "")
         else:
             logger.error("Text not found")
         self._widget.setTextCursor(temp_cursor)

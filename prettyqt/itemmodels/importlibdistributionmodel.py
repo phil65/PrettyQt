@@ -6,7 +6,7 @@ import enum
 from importlib import metadata
 import logging
 import pkgutil
-from typing import Self
+from typing import ClassVar, Self
 
 from packaging.markers import Marker
 from packaging.requirements import InvalidRequirement, Requirement
@@ -34,8 +34,8 @@ def list_package_requirements(package_name: str) -> list[metadata.Distribution]:
     dist = metadata.distribution(package_name)
     try:
         modules = {Requirement(i).name for i in dist.requires} if dist.requires else set()
-    except ValueError as e:
-        logger.error(f"{e} for {dist.name}")
+    except ValueError:
+        logger.exception("Error listing requirements for %s", dist.name)
         return []
     return [dist for i in modules if (dist := load_dist_info(i)) is not None]
 
@@ -191,7 +191,7 @@ class ImportlibTreeModel(itemmodels.ColumnItemModel):
     SUPPORTS = metadata.Distribution | str
     TreeItem = DistTreeItem
     IS_RECURSIVE = True
-    COLUMNS = [
+    COLUMNS: ClassVar = [
         NameColumn,
         VersionColumn,
         ConstraintsColumn,

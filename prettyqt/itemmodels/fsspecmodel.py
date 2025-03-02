@@ -1,17 +1,23 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
 import datetime
 import enum
 import logging
 import os
 import pathlib
+from typing import TYPE_CHECKING, ClassVar
 
 # from typing import TypedDict
 import fsspec
 
 from prettyqt import constants, core, gui, itemmodels, widgets
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
+    from prettyqt.itemmodels.columnitemmodel import ColumnItem
+    from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -95,8 +101,7 @@ class SizeColumn(FsSpecColumnItem):
                     return core.Locale().get_formatted_data_size(
                         size, precision=self.precision, fmt=self.fmt
                     )
-                else:
-                    return ""
+                return ""
             case constants.SORT_ROLE:
                 return item.obj["size"]
             case _:
@@ -164,6 +169,7 @@ class PermissionsColumn(FsSpecColumnItem):
             case constants.DISPLAY_ROLE:
                 if mode := item.obj.get("mode"):
                     return oct(int(mode))[-4:]
+                return None
             case _:
                 return super().get_data(item, role)
 
@@ -208,12 +214,12 @@ class FSSpecTreeModel(
     """
 
     SUPPORTS = FsSpecProtocolStr | fsspec.AbstractFileSystem
-    DEFAULT_COLUMNS = [
+    DEFAULT_COLUMNS: ClassVar[list[type[ColumnItem]]] = [
         NameColumn,
         SizeColumn,
         TypeColumn,
     ]
-    EXTRA_COLUMNS = [
+    EXTRA_COLUMNS: ClassVar[list[type[ColumnItem]]] = [
         PathColumn,
         CreatedColumn,
         ModifiedColumn,
@@ -222,9 +228,9 @@ class FSSpecTreeModel(
         ShaColumn,
     ]
 
-    directoryLoaded = core.Signal(str)
-    fileRenamed = core.Signal(str, str, str)
-    rootPathChanged = core.Signal(str)
+    directoryLoaded = core.Signal(str)  # noqa: N815
+    fileRenamed = core.Signal(str, str, str)  # noqa: N815
+    rootPathChanged = core.Signal(str)  # noqa: N815
 
     class Roles(enum.IntEnum):
         FileIconRole = constants.DECORATION_ROLE
@@ -434,7 +440,7 @@ class FSSpecTreeModel(
         return mime_data
 
     def supportedDropActions(self):
-        DropAction = constants.DropAction
+        DropAction = constants.DropAction  # noqa: N806
         return DropAction.MoveAction | DropAction.CopyAction | DropAction.LinkAction
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
@@ -463,13 +469,12 @@ class FSSpecTreeModel(
         parent: core.QModelIndex | None = None,
     ):
         position = len(self.items) if position is None else position
-        items = list(items)
+        return list(items)
         # with self.insert_rows(position, position + len(items) - 1, parent):
         #     for i in range(len(items)):
         #         self.items.insert(i + position, items[i])
         #         pass
         #     self.items.extend(items)
-        return items
 
     def canDropMimeData(
         self,
@@ -561,7 +566,7 @@ class FSSpecTreeModel(
             path = pathlib.Path(path)
             if target == path:
                 return index
-            elif target.is_relative_to(path):
+            if target.is_relative_to(path):
                 if self.canFetchMore(index):
                     self.fetchMore(index)
                 return self._iter_path(target, column, index)
@@ -613,13 +618,13 @@ class FSSpecTreeModel(
     def nameFilters(self):
         return NotImplemented
 
-    def setFilter(self, filter):
+    def setFilter(self, filter):  # noqa: A002
         return NotImplemented
 
     def filter(self):
         return NotImplemented
 
-    readOnly = core.Property(
+    readOnly = core.Property(  # noqa: N815
         bool,
         isReadOnly,
         setReadOnly,

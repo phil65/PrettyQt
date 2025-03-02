@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import collections
-from collections.abc import Iterator, Sequence
 import contextlib
 import functools
 import importlib
@@ -10,6 +9,10 @@ import logging
 import operator
 import types
 import typing
+
+
+if typing.TYPE_CHECKING:
+    from collections.abc import Iterator, Sequence
 
 
 T = typing.TypeVar("T", bound=type)
@@ -61,11 +64,11 @@ def to_module(
             module_path = module if isinstance(module, str) else ".".join(module)
             try:
                 return importlib.import_module(module_path)
-            except (ImportError, AttributeError) as e:
-                logger.warning(f"Could not import {module_path!r}")
+            except (ImportError, AttributeError):
+                logger.warning("Could not import %r", module_path)
                 if return_none:
                     return None
-                raise e
+                raise
         case types.ModuleType():
             return module
         case _:
@@ -105,8 +108,9 @@ def find_common_ancestor(cls_list: list[type]) -> type:
             ):
                 return cur
             if len(mro) == 0:
-                mros.remove(mro)  # noqa: B909
-    raise TypeError("Couldnt find common base class")
+                mros.remove(mro)
+    msg = "Couldnt find common base class"
+    raise TypeError(msg)
 
 
 def get_subclasses(klass: type, include_abstract: bool = False) -> typing.Iterator[type]:
@@ -174,12 +178,13 @@ def get_class_for_id(base_class: T, id_: str) -> T:
         if isinstance(base_class, types.UnionType)
         else (base_class,)
     )
-    for base_class in base_classes:
-        for Klass in get_subclasses(base_class):
-            if "ID" in Klass.__dict__ and id_ == Klass.ID:
-                logger.debug(f"found class for id {Klass.ID!r}")
-                return Klass
-    raise ValueError(f"Couldnt find class with id {id_!r} for base class {base_class}")
+    for base_kls in base_classes:
+        for klass in get_subclasses(base_kls):
+            if "ID" in klass.__dict__ and id_ == klass.ID:
+                logger.debug("found class for id %r", klass.ID)
+                return klass
+    msg = f"Couldnt find class with id {id_!r} for base class {base_kls}"
+    raise ValueError(msg)
 
 
 def iter_classes_for_module(

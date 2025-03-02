@@ -1,18 +1,18 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, ClassVar
 
 from prettyqt import constants, core
 
 
 class ModelMixin:
     DTYPE_ROLE = constants.USER_ROLE + 1  # type: ignore
-    HEADER = ["Name"]
-    LABELS: dict = {}
-    CHECKSTATE: dict = {}
-    TOOLTIPS: dict = {}
-    DECORATIONS: dict = {}
-    SET_DATA: dict = {}
+    HEADER: ClassVar = ["Name"]
+    LABELS: ClassVar = {}
+    CHECKSTATE: ClassVar = {}
+    TOOLTIPS: ClassVar = {}
+    DECORATIONS: ClassVar = {}
+    SET_DATA: ClassVar = {}
     content_type = ""
 
     def headerData(
@@ -39,7 +39,7 @@ class ModelMixin:
             return self.DEFAULT_FLAGS | constants.IS_EDITABLE
         return self.DEFAULT_FLAGS
 
-    def data(
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
@@ -51,15 +51,19 @@ class ModelMixin:
             case constants.DECORATION_ROLE:
                 if fn := self.DECORATIONS.get(index.column()):
                     return fn(item)
+                return None
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
                 if fn := self.LABELS.get(index.column()):
                     return fn(item)
+                return None
             case constants.TOOLTIP_ROLE:
                 if fn := self.TOOLTIPS.get(index.column()):
                     return fn(item)
+                return None
             case constants.CHECKSTATE_ROLE:
                 if fn := self.CHECKSTATE.get(index.column()):
                     return fn(item)
+                return None
             case constants.USER_ROLE:
                 return item
             case _:
@@ -79,3 +83,5 @@ class ModelMixin:
                 fn(item, value)
                 self.update_row(index.row())
                 return True
+            return None
+        return None

@@ -1,26 +1,32 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import logging
 import os
 import pathlib
 import sys
+from typing import TYPE_CHECKING, ClassVar
 
 from prettyqt import constants, core
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)
 
 
 class CoreApplicationMixin(core.ObjectMixin):
-    translators: dict[str, core.Translator] = {}
+    translators: ClassVar[dict[str, core.Translator]] = {}
 
     @classmethod
     def call_on_exit(cls, func: Callable):
         instance = cls.instance()
         if instance is None:
-            raise RuntimeError("No QApplication running")
+            msg = "No QApplication running"
+            raise RuntimeError(msg)
         instance.aboutToQuit.connect(func)
 
     @classmethod
