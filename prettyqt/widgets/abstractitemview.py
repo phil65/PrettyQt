@@ -169,7 +169,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         """Override, we dont want to selectAll for too many items bc of performance."""
         if self.model() is None:
             return
-        if self.model().rowCount() * self.model().columnCount() > 1_000_000:
+        if self.model().rowCount() * self.model().columnCount() > 1_000_000:  # noqa: PLR2004
             logger.warning("Too many cells to select.")
             return
         super().selectAll()
@@ -205,18 +205,19 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         # we import to collect the models
         from prettyqt import itemmodels  # noqa: F401
 
-        for Klass in classhelpers.get_subclasses(core.QAbstractItemModel):
+        for kls in classhelpers.get_subclasses(core.QAbstractItemModel):
             if (
-                "supports" in Klass.__dict__
-                and callable(Klass.supports)
-                and Klass.supports(data)
-                and Klass.__name__ != "PythonObjectTreeModel"
+                "supports" in kls.__dict__
+                and callable(kls.supports)
+                and kls.supports(data)
+                and kls.__name__ != "PythonObjectTreeModel"
             ):
-                logger.debug(f"found model for data structure {data!r}")
+                logger.debug("found model for data structure %r", data)
                 break
         else:
-            raise TypeError("No suiting model found.")
-        model = Klass(data, parent=self)
+            msg = "No suiting model found."
+            raise TypeError(msg)
+        model = kls(data, parent=self)
         self.set_model(model)
 
     def get_model(self, skip_proxies: bool = False) -> core.QAbstractItemModel:
@@ -393,17 +394,16 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             # case "button":
             #     delegate = itemdelegates.ButtonDelegate(parent=self, **kwargs)
             case str():
-                Klass = classhelpers.get_class_for_id(
-                    widgets.StyledItemDelegate, delegate
-                )
-                dlg = Klass(parent=self, **kwargs)
+                kls = classhelpers.get_class_for_id(widgets.StyledItemDelegate, delegate)
+                dlg = kls(parent=self, **kwargs)
             case None:
                 dlg = widgets.StyledItemDelegate()
             case _:
                 raise ValueError(delegate)
         match column, row:
             case int(), int():
-                raise ValueError("Only set column or row, not both.")
+                msg = "Only set column or row, not both."
+                raise ValueError(msg)
             case Sequence(), None:
                 for i in column:
                     self.set_delegate(delegate, column=i, row=row, persistent=persistent)
@@ -456,6 +456,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         if (model := self.selectionModel()) is not None:
             idx = model.currentIndex()
             return idx.data(role)
+        return None
 
     def current_row(self) -> int | None:
         if (model := self.selectionModel()) is not None:

@@ -1,8 +1,12 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
+from typing import TYPE_CHECKING
 
 from prettyqt import constants, core, widgets
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 
 class CycleWidget(widgets.ListWidget):
@@ -44,7 +48,7 @@ class CycleWidget(widgets.ListWidget):
         self._create_items(items)
 
     def _create_items(self, items: list[str]):
-        N = len(items)
+        N = len(items)  # noqa: N806
         self.is_cycle = self.visible_number < N
 
         if self.is_cycle:
@@ -82,7 +86,7 @@ class CycleWidget(widgets.ListWidget):
         if not items:
             return
 
-        idx = self.row(items[1]) if len(items) >= 2 else self.row(items[0])
+        idx = self.row(items[1]) if len(items) >= 2 else self.row(items[0])  # noqa: PLR2004
         self.setCurrentIndex(idx)
         super().scroll_to_item(self.currentItem(), "position_at_center")
 
@@ -148,7 +152,7 @@ class CycleWidget(widgets.ListWidget):
             n = self.visible_number // 2
             self._current_index = max(n, min(n + len(self.origin_items) - 1, index))
             return
-        N = self.count() // 2
+        N = self.count() // 2  # noqa: N806
         m = (self.visible_number + 1) // 2
         self._current_index = index
         # scroll to center to achieve circular scrolling

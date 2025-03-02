@@ -175,8 +175,9 @@ def get_color_percentage(color_1: tuple, color_2: tuple, percent: float) -> tupl
     Return:
         A (x, y, z, alpha) tuple with the interpolated color components.
     """
-    if not 0 <= percent <= 100:
-        raise ValueError("percent needs to be between 0 and 100!")
+    if not 0 <= percent <= 100:  # noqa: PLR2004
+        msg = "percent needs to be between 0 and 100!"
+        raise ValueError(msg)
     ls = [
         round(color_1[i] + (color_2[i] - color_1[i]) * percent / 100)
         for i, _ in enumerate(color_1)

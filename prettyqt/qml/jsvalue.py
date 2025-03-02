@@ -57,8 +57,7 @@ class JSValue(qml.QJSValue):
     def get_error_type(self) -> ErrorTypeStr | None:
         if (error_type := self.errorType()) == qml.QJSValue.ErrorType(0):
             return None
-        else:
-            return ERROR_TYPES.inverse[error_type]
+        return ERROR_TYPES.inverse[error_type]
 
     @classmethod
     def from_object(cls, obj, jsengine: qml.QJSEngine) -> Self:
@@ -81,7 +80,7 @@ class JSValue(qml.QJSValue):
                 try:
                     return cls(obj)
                 except TypeError:
-                    logger.debug(f"unknown type: {obj}")
+                    logger.debug("unknown type: %s", obj)
                     return cls()
 
 

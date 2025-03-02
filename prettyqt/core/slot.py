@@ -1,14 +1,17 @@
 from __future__ import annotations
 
 import asyncio
-from collections.abc import Callable, Iterable
 import functools
 import inspect
 import itertools
 import logging
-from typing import Any, Optional, get_args, get_type_hints
+from typing import TYPE_CHECKING, Any, Optional, get_args, get_type_hints
 
 from prettyqt.qt import QtCore
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterable
 
 
 logger = logging.getLogger(__name__)
@@ -27,8 +30,7 @@ def Slot(*args, auto: bool = False, **kwargs):
                 return asyncio.create_task(fn(*args, **kwargs))
 
             return wrapper
-        else:
-            return QtCore.Slot(*args, **kwargs)(fn)
+        return QtCore.Slot(*args, **kwargs)(fn)
 
     return outer_decorator
 
@@ -53,11 +55,11 @@ def get_concretes(annotations: list) -> list:
     ret = []
     for item in annotations:
         if is_optional(item):
-            annotations.remove(item)  # noqa: B909
+            annotations.remove(item)
             continue
         if concrete := get_concrete(item):
             ret.append(concrete)
-            annotations.remove(item)  # noqa: B909
+            annotations.remove(item)
     return ret + annotations
 
 
@@ -123,9 +125,10 @@ def _build_arguments(
         elif arg not in annotations:
             gap = True
         else:
-            raise TypeError(
+            msg = (
                 f"Annotations must be in a continuous row - arg before '{arg}' is missing"
             )
+            raise TypeError(msg)
 
     return slot_args, slot_kwargs
 
@@ -160,7 +163,7 @@ def AutoSlotAlternative(func: Callable):
     ellipses (`...`) or `pass` to fill in the body.
     """
     args, kwargs = _build_arguments(func)
-    logger.debug(f"Auto-slot for {func.__name__}: args: {args}, kwargs: {kwargs}")
+    logger.debug("Auto-slot for %s: args: %s, kwargs: %s", func.__name__, args, kwargs)
 
     QtCore.Slot(*args, **kwargs)(func)
 
@@ -171,8 +174,7 @@ def AutoSlotAlternative(func: Callable):
 
         if new_func.__name__ != func.__name__:
             return _OverloadedSlotPlaceholder(new_func.__name__, func.__name__)
-        else:
-            return func
+        return func
 
     func.overload = overload  # type: ignore
 

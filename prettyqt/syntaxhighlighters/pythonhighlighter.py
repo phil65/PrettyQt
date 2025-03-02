@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from prettyqt import core, gui, syntaxhighlighters
 
 
@@ -81,7 +83,7 @@ class Keyword(Rule):
 
 
 class Operator(Rule):
-    regex = f'{"|".join(OPERATORS)}'
+    regex = f"{'|'.join(OPERATORS)}"
     color = gui.Color(150, 150, 150)
 
 
@@ -121,7 +123,7 @@ class Comment(Rule):
 
 
 class Number(Rule):
-    regex = [
+    regex: ClassVar = [
         r"\b[+-]?[0-9]+[lL]?\b",
         r"\b[+-]?0[xX][0-9A-Fa-f]+[lL]?\b",
         r"\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b",
@@ -175,7 +177,7 @@ class PythonHighlighter(syntaxhighlighters.BaseRuleSyntaxHighlighter):
         else:
             match = delimiter.match(text)
             if not match.hasMatch():
-                return
+                return None
             start = match.capturedStart()
             add = match.capturedLength()
 

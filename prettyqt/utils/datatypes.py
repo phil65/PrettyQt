@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from abc import ABCMeta
-from collections.abc import Sequence
 import datetime
 import enum
 import os
@@ -12,7 +11,7 @@ from urllib import parse
 
 import dateutil.parser
 
-from prettyqt.qt import QtCore
+from prettyqt.qt import QtCore, QtGui
 
 
 class QABCMeta(type(QtCore.QObject), ABCMeta):
@@ -77,8 +76,10 @@ class IsTreeIterator(Protocol):
 
 
 if TYPE_CHECKING:
+    from collections.abc import Sequence
+
     from prettyqt import core
-    from prettyqt.qt import QtGui, QtWidgets
+    from prettyqt.qt import QtWidgets
 
     UrlType = str | QtCore.QUrl
     PointType = tuple[int, int] | QtCore.QPoint
@@ -215,7 +216,7 @@ if TYPE_CHECKING:
     # QtWebEngineCore.QWebEngineHistory
 
 
-def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:
+def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:  # noqa: PLR0911
     from prettyqt import constants, core, gui, widgets
 
     if locale is None:
@@ -309,7 +310,7 @@ def get_editor_for_value_list(ls: Sequence, parent=None):
     return container
 
 
-def get_editor_for_value(val, parent=None):
+def get_editor_for_value(val, parent=None):  # noqa: PLR0911
     """Returns an editor for given value.
 
     Functions checks for type and returns an appropriate editor.
@@ -412,7 +413,7 @@ def get_editor_for_value(val, parent=None):
 T = TypeVar("T")
 
 
-def align_types(source: T, target: VariantType | tuple) -> T:
+def align_types(source: T, target: VariantType | tuple) -> T:  # noqa: PLR0911
     """Align target to the type of source."""
     from prettyqt import core, gui
     from prettyqt.utils import colors
@@ -436,7 +437,7 @@ def align_types(source: T, target: VariantType | tuple) -> T:
             return target
 
 
-def make_qtype(obj):
+def make_qtype(obj):  # noqa: PLR0911
     """Cast a subclassed PrettyQt instance to its orginal Qt Type."""
     from prettyqt import core
 
@@ -789,7 +790,7 @@ def to_keysequence(sequence: KeySequenceType):
             raise TypeError(sequence)
 
 
-def make_serializable(obj):
+def make_serializable(obj):  # noqa: PLR0911
     #  possible to avoid importing by checking the metaobject instead of isinstance?
     from prettyqt import core
 

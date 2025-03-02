@@ -54,8 +54,8 @@ def get_class_description(module_name: str, class_name: str) -> str | None:
 
         text = reference.parent.get_text()
         return text.encode("cp1252", errors="ignore").decode(errors="ignore")
-    except requests.RequestException as e:
-        logger.error(f"Error fetching {url}: {e}")
+    except requests.RequestException:
+        logger.exception("Error fetching %s", url)
         return None
 
 
@@ -70,7 +70,7 @@ def process_module(module_name: str, module: Any, save: bool = False) -> None:
     for class_name, _ in inspect.getmembers(module, inspect.isclass):
         description = get_class_description(module_name, class_name)
         if description:
-            logger.warning(f"{module_name}.{class_name}: {description}")
+            logger.warning("%s.%s: %s", module_name, class_name, description)
             if save:
                 save_path = pathlib.Path(module_name)
                 save_path.mkdir(parents=True, exist_ok=True)
