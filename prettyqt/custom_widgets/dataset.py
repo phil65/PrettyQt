@@ -4,10 +4,13 @@ from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass
 import functools
 import pathlib
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import custom_widgets, gui, validators, widgets
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 @dataclass
@@ -234,9 +237,9 @@ class Enum(DataItem):
         else:
             for item in self.choices:
                 if isinstance(item, tuple):
-                    if len(item) == 2:
+                    if len(item) == 2:  # noqa: PLR2004
                         widget.add(item[1], item[0])
-                    elif len(item) == 3:
+                    elif len(item) == 3:  # noqa: PLR2004
                         widget.add(item[1], item[0], item[2])
                 else:
                     widget.add(item)
@@ -257,9 +260,9 @@ class MultipleChoice(DataItem):
         else:
             for item in self.choices:
                 if isinstance(item, tuple):
-                    if len(item) == 2:
+                    if len(item) == 2:  # noqa: PLR2004
                         widget.add(item[1], item[0])
-                    elif len(item) == 3:
+                    elif len(item) == 3:  # noqa: PLR2004
                         widget.add(item[1], item[0], item[2])
                 else:
                     widget.add(item)

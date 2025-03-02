@@ -4,6 +4,7 @@ from ctypes import POINTER, Structure, c_int, cast
 from ctypes.wintypes import HWND, LPRECT, MSG, RECT, UINT
 from enum import Enum
 from sys import getwindowsversion
+from typing import ClassVar
 
 import win32con
 
@@ -12,7 +13,7 @@ from prettyqt.utils.platforms.windows import misc, windoweffects
 
 
 class PWINDOWPOS(Structure):
-    _fields_ = [
+    _fields_: ClassVar = [
         ("hWnd", HWND),
         ("hwndInsertAfter", HWND),
         ("x", c_int),
@@ -23,8 +24,8 @@ class PWINDOWPOS(Structure):
     ]
 
 
-class NCCALCSIZE_PARAMS(Structure):
-    _fields_ = [("rgrc", RECT * 3), ("lppos", POINTER(PWINDOWPOS))]
+class NCCALCSIZE_PARAMS(Structure):  # noqa: N801
+    _fields_: ClassVar = [("rgrc", RECT * 3), ("lppos", POINTER(PWINDOWPOS))]
 
 
 LPNCCALCSIZE_PARAMS = POINTER(NCCALCSIZE_PARAMS)
@@ -63,7 +64,7 @@ class CustomBase(widgets.Widget):
             Window background color
         """
         super().__init__()
-        self.is_win11 = getwindowsversion().build >= 22000
+        self.is_win11 = getwindowsversion().build >= 22000  # noqa: PLR2004
         self.use_mica = use_mica if self.is_win11 else False
         match theme:
             case "auto":
@@ -74,8 +75,9 @@ class CustomBase(widgets.Widget):
                 self.dark_mode = False
             case _:
                 raise ValueError(theme)
-        if len(color) != 8:
-            raise ValueError("Wrong argument 'color': must be 8 hex symbols")
+        if len(color) != 8:  # noqa: PLR2004
+            msg = "Wrong argument 'color': must be 8 hex symbols"
+            raise ValueError(msg)
         self.acrylic_color = invert_color(color) if self.dark_mode else color
         self.effect_enabled = False
         self.win_effects = windoweffects.WindowsEffects()
@@ -112,6 +114,7 @@ class CustomBase(widgets.Widget):
         if self.is_win11 or not self._effect_timer:
             return super().moveEvent(event)
         self._temporary_disable_effect()
+        return None
 
     def paintEvent(self, event):
         if self.effect_enabled:
@@ -123,6 +126,7 @@ class CustomBase(widgets.Widget):
             else:
                 painter.setBrush(constants.GlobalColor.white)
             painter.drawRect(self.rect())
+            return None
 
     def nativeEvent(self, event_type, message):
         msg = MSG.from_address(int(message))
@@ -363,7 +367,7 @@ class FramelessWindow(CustomBase):
         if not self.use_mica:
             self._temporary_disable_effect()
 
-    def nativeEvent(self, event_type, message):
+    def nativeEvent(self, event_type, message):  # noqa: PLR0911
         msg = MSG.from_address(int(message))
         if not msg.hWnd:
             return False, 0
@@ -385,19 +389,19 @@ class FramelessWindow(CustomBase):
             by = y > self.height() - self.BORDER_WIDTH
             if rx and by:
                 return True, win32con.HTBOTTOMRIGHT
-            elif rx and ty:
+            if rx and ty:
                 return True, win32con.HTTOPRIGHT
-            elif lx and by:
+            if lx and by:
                 return True, win32con.HTBOTTOMLEFT
-            elif lx and ty:
+            if lx and ty:
                 return True, win32con.HTTOPLEFT
-            elif rx:
+            if rx:
                 return True, win32con.HTRIGHT
-            elif by:
+            if by:
                 return True, win32con.HTBOTTOM
-            elif lx:
+            if lx:
                 return True, win32con.HTLEFT
-            elif ty:
+            if ty:
                 return True, win32con.HTTOP
         elif self.is_win11 and self._max_btn_hovered:
             max_btn_state = self.title_bar.max_btn.get_state()

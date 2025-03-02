@@ -1,17 +1,16 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import functools
 import logging
 import operator
 from typing import TYPE_CHECKING, Any, Literal
 
-from prettyqt import constants, core, gui, widgets
+from prettyqt import constants, core, gui, itemmodels, widgets
 from prettyqt.utils import classhelpers, datatypes
 
 
 if TYPE_CHECKING:
-    from prettyqt import itemmodels
+    from collections.abc import Callable
 
 
 logger = logging.getLogger(__name__)
@@ -41,7 +40,8 @@ ProxyStr = Literal[
 class Sliced:
     def __init__(self, indexer, widget: widgets.QAbstractItemView, proxifier: Proxifier):
         if widget.model() is None:
-            raise RuntimeError("Need a model in order to proxify.")
+            msg = "Need a model in order to proxify."
+            raise RuntimeError(msg)
         # PySide6 shows empty tables when no parent is set.
         if widget.model().parent() is None:
             widget.model().setParent(widget)
@@ -380,7 +380,7 @@ class Proxifier:
 
     def __getitem__(self, value: slice) -> Sliced:
         """Return a Sliced Object."""
-        logger.debug(f"Building {value!r} ProxyModel for {self._widget!r}")
+        logger.debug("Building %r ProxyModel for %r", value, self._widget)
         self._wrapper = Sliced(indexer=value, widget=self._widget, proxifier=self)
         return self._wrapper
 
@@ -389,8 +389,7 @@ class Proxifier:
         self._wrapper = Sliced(indexer=indexer, widget=self._widget, proxifier=self)
         if hasattr(self._wrapper, name):
             return getattr(self._wrapper, name)
-        else:
-            raise AttributeError(name)
+        raise AttributeError(name)
 
     def transpose(self) -> core.TransposeProxyModel:
         """Transpose rows/columns.
@@ -442,6 +441,49 @@ class Proxifier:
             id_columns=id_columns,
             var_name=var_name,
             value_name=value_name,
+            parent=self._widget,
+            source_model=self._widget.model(),
+        )
+        self._widget.set_model(proxy)
+        return proxy
+
+    def unmelt(
+        self,
+        id_columns: list[int],
+        variable_column: int,
+        value_column: int,
+    ) -> itemmodels.UnmeltProxyModel:
+        """Wraps model in a Proxy which pivots the table from long format to wide format.
+
+        Reverses the melt operation by converting a long-format table to wide format.
+
+        Arguments:
+            id_columns: List of column indices that identify unique rows
+            variable_column: Column index containing variable names
+            value_column: Column index containing values
+
+        Example:
+            ```py
+            app = widgets.app()
+            data = {
+                "ID": ["A", "A", "B", "B"] * 2,
+                "Variable": ["height", "weight"] * 4,
+                "Value": [5.5, 130, 6.0, 150, 5.7, 140, 5.9, 145],
+            }
+            model = gui.StandardItemModel.from_dict(data)
+            table = widgets.TableView()
+            table.set_model(model)
+            # Convert from long to wide format
+            table.proxifier.unmelt(id_columns=[0], variable_column=1, value_column=2)
+            table.show()
+            ```
+        """
+        from prettyqt import itemmodels
+
+        proxy = itemmodels.UnmeltProxyModel(
+            id_columns=id_columns,
+            variable_column=variable_column,
+            value_column=value_column,
             parent=self._widget,
             source_model=self._widget.model(),
         )
@@ -542,8 +584,8 @@ class Proxifier:
         return proxy
 
     def get_proxy(self, proxy: ProxyStr, **kwargs) -> core.QAbstractProxyModel:
-        Klass = classhelpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
-        proxy_instance = Klass(
+        kls = classhelpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
+        proxy_instance = kls(
             parent=self._widget, source_model=self._widget.model(), **kwargs
         )
         self._widget.set_model(proxy_instance)

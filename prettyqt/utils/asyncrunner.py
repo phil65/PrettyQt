@@ -128,6 +128,7 @@ class AsyncRunner:
         funcs = [functools.partial(func, *args, **kwargs)]
         async for result in self.run_parallel(funcs):
             return result
+        return None
 
     async def run_parallel(  # type:ignore[override]
         self, funcs: Iterable[Callable[[], T]]
@@ -261,7 +262,7 @@ class AsyncRunner:
             nonlocal result, exception, completed
             try:
                 result = await coroutine
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 exception = e
             completed = True
 
@@ -340,7 +341,7 @@ if __name__ == "__main__":
 
     import requests
     from requests import Response
-    from requests.exceptions import ConnectionError
+    from requests.exceptions import ConnectionError as ConnError
 
     from prettyqt import widgets
 
@@ -407,7 +408,7 @@ if __name__ == "__main__":
                             self, "Cancelled", "Download cancelled"
                         )
                         return
-            except ConnectionError as e:
+            except ConnError as e:
                 widgets.MessageBox.critical(
                     self, "Error", f"Error connecting to TheCatApi:\n{e}"
                 )
