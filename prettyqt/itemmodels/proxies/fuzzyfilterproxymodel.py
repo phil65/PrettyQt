@@ -3,6 +3,8 @@ from __future__ import annotations
 import enum
 import logging
 
+import sublime_search
+
 from prettyqt import constants, core, gui
 from prettyqt.utils import colors, datatypes, fuzzy
 
@@ -61,8 +63,8 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
         if left.data() is None or right.data() is None:
             return True
         # since fuzzy scores are cached, it should be fine to do this here.
-        left_data = fuzzy.fuzzy_match(self._search_term, str(left.data()))
-        right_data = fuzzy.fuzzy_match(self._search_term, str(right.data()))
+        left_data = sublime_search.fuzzy_match(self._search_term, str(left.data()))
+        right_data = sublime_search.fuzzy_match(self._search_term, str(right.data()))
 
         return left_data < right_data
 
@@ -100,14 +102,14 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
             #     label = super().data(idx, constants.DISPLAY_ROLE)
             #     if label is None:
             #         return None
-            #     result = fuzzy.fuzzy_match(self._search_term, str(label))
+            #     result = sublime_search.fuzzy_match(self._search_term, str(label))
             #     return str(result[1])
             case self.Roles.BackupRole, _:
                 return super().data(index, constants.DISPLAY_ROLE)
             case self.Roles.SortRole, _:
                 idx = self.index(index.row(), filter_column)
                 label = super().data(idx, constants.DISPLAY_ROLE)
-                result = fuzzy.fuzzy_match(self._search_term, label)
+                result = sublime_search.fuzzy_match(self._search_term, label)
                 return result[1]
             case _, _:
                 return super().data(index, role)
