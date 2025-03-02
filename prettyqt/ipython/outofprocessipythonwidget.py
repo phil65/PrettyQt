@@ -53,6 +53,7 @@ class OutOfProcessIPythonWidget(ipython.BaseIPythonWidget):
     def shutdown(self):
         """Stop IPython server process and clean up."""
         logger.info("shutting down IPython MP kernel")
+        assert self.kernel_client, "Kernel client not initialized"
         self.kernel_client.stop_channels()
         self.kernel_client.shutdown()
         self.p.terminate()
@@ -69,6 +70,6 @@ if __name__ == "__main__":
     console_widget = OutOfProcessIPythonWidget(app)
     console_widget.print_text("hallo")
     console_widget.show()
-    console_widget.add_shortcut("Ctrl+P", cp.show)
+    console_widget.add_shortcut("Ctrl+P", callback=cp.show)
     cp.populate_from_widget(console_widget)
     app.exec()

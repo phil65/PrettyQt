@@ -1,4 +1,4 @@
-"""debugging pachakge."""
+"""debugging package."""
 
 import enum
 import importlib

@@ -52,7 +52,7 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
         self._set_completion_widget(mode)
 
     def get_completion_mode(self) -> CompletionmodeStr:
-        return self.gui_completion
+        return self.gui_completion  # type: ignore
 
     @property
     def texteditor(self) -> widgets.QPlainTextEdit:  # to shut up linters
@@ -76,19 +76,18 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
         """Set code string to Jupyter QtConsole buffer."""
         self.input_buffer = ""
         if not isinstance(code, str):
-            raise ValueError(f"Cannot set {type(code)}.")
+            msg = f"Cannot set {type(code)}."
+            raise ValueError(msg)  # noqa: TRY004
         cursor = self.texteditor.textCursor()
         lines = code.split("\n")
         for line in lines[:-1]:
             cursor.insertText(line + "\n")
             self._insert_continuation_prompt(cursor)  # insert "...:"
         cursor.insertText(lines[-1])
-        return None
 
     def insert_text(self, text: str) -> None:
         cursor = self.texteditor.textCursor()
         cursor.insertText(text)
-        return None
 
     def set_temp_text(self, text: str) -> None:
         cursor = self.texteditor.textCursor()
@@ -98,7 +97,6 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
         cursor.setPosition(pos)
         cursor.setPosition(pos + len(text), gui.TextCursor.MoveMode.KeepAnchor)
         self.texteditor.setTextCursor(cursor)
-        return None
 
     def get_selected_text(self) -> str:
         """Return the selected text."""
@@ -124,7 +122,6 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
             source = self.input_buffer
         super().execute(source=source, hidden=hidden, interactive=interactive)
         self.code_executed.emit(source)
-        return None
 
     completion_mode = core.Property(
         str,

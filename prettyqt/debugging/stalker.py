@@ -110,7 +110,7 @@ class Stalker(core.Object):
     def unhook(self):
         if self.eventcatcher is None:
             logger.warning("unhook() called before hook()")
-            return None
+            return
         """Clean up our mess."""
         self._obj.connectNotify = self.old_connectNotify
         self._obj.disconnectNotify = self.old_disconnectNotify
@@ -125,7 +125,7 @@ class Stalker(core.Object):
     def log(self, message: str):
         if self.log_level:
             with contextlib.suppress(RuntimeError):
-                logger.log(self._log_level, f"{self._obj!r}: {message}")
+                logger.log(self._log_level, f"{self._obj!r}: {message}")  # noqa: G004
 
     def _on_signal_connected(self, qsignal: core.QMetaMethod):
         signal = core.MetaMethod(qsignal)
@@ -142,7 +142,7 @@ class Stalker(core.Object):
         try:
             self.event_detected.emit(event)
         except RuntimeError:
-            return
+            return None
         match event.type():
             case core.Event.Type.KeyPress:
                 combo = gui.KeySequence(event.keyCombination()).toString()
@@ -198,8 +198,7 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = widgets.LineEdit()
     widget.show()
-    with app.debug_mode():
-        with Stalker(widget, log_level=logging.INFO) as stalker:
-            stalker.eventsignals.MouseButtonPress.connect(print)
-            stalker.show()
-            app.exec()
+    with app.debug_mode(), Stalker(widget, log_level=logging.INFO) as stalker:
+        stalker.eventsignals.MouseButtonPress.connect(print)
+        stalker.show()
+        app.exec()

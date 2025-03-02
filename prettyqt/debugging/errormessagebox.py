@@ -1,13 +1,17 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Generator
 import logging
 import re
 import sys
 import traceback
+from typing import TYPE_CHECKING
 
 from prettyqt import debugging, gui, widgets
 from prettyqt.utils import helpers
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Generator
 
 
 logger = logging.getLogger(__name__)
@@ -45,6 +49,7 @@ class ErrorMessageBox(widgets.MessageBox):
                 dlg = debugging.TracebackDialog(self)
                 dlg.setText(tb)
                 dlg.exec()
+                return None
             case widgets.MessageBox.StandardButton.Close:
                 sys.exit(1)
             case widgets.MessageBox.StandardButton.Ok:

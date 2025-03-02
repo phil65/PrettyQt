@@ -36,13 +36,13 @@ class ProxyComparerWidget(widgets.Splitter):
         # determine ItemView class for the models
         match itemview:
             case "tree":
-                View = widgets.TreeView
+                view_cls = widgets.TreeView
             case "table":
-                View = widgets.TableView
+                view_cls = widgets.TableView
             case "list":
-                View = widgets.ListView
+                view_cls = widgets.ListView
             case type():
-                View = itemview
+                view_cls = itemview
             case _:
                 raise TypeError(itemview)
 
@@ -58,7 +58,7 @@ class ProxyComparerWidget(widgets.Splitter):
         for model in reversed(models):
             container = widgets.Widget()
             layout = container.set_layout("vertical")
-            table = View()
+            table = view_cls()
             table.set_model(model)
             table.set_delegate(delegate)
             self.model_itemviews.append(table)
