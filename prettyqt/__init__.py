@@ -12,6 +12,7 @@ __version__ = "1.57.4"
 def import_all():
     import importlib
     import logging
+    from prettyqt import qt
 
     logger = logging.getLogger(__name__)
     mods = []
@@ -20,7 +21,7 @@ def import_all():
             mod = importlib.import_module(f"prettyqt.{mod}")
             mods.append(mod)
         except ImportError:
-            logger.warning(f"{mod} not available. binding: {qt.API}")
+            logger.warning("%s not available. binding: %s", mod, qt.API)
     return mods
 
 
@@ -64,23 +65,22 @@ def show(item):
 
 
 __all__ = [
+    "animations",
     "bluetooth",
     "charts",
     "constants",
     "core",
-    "animations",
-    "itemdelegates",
-    "itemmodels",
-    "docs",
     "custom_network",
-    "validators",
     "custom_widgets",
     "debugging",
     "designer",
+    "docs",
     "eventfilters",
     "gui",
     "iconprovider",
     "ipython",
+    "itemdelegates",
+    "itemmodels",
     "location",
     "multimedia",
     "multimediawidgets",
@@ -97,13 +97,14 @@ __all__ = [
     "quickwidgets",
     "scintilla",
     "scxml",
+    "spatialaudio",
     "statemachine",
     "svg",
     "svgwidgets",
     "syntaxhighlighters",
     "texttospeech",
-    "spatialaudio",
     "utils",
+    "validators",
     "webchannel",
     "webenginecore",
     "webenginewidgets",
