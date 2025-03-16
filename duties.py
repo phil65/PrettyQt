@@ -51,8 +51,9 @@ def clean(ctx):
 
 
 @duty(capture=False)
-def update(ctx, *args: str):
+def update(ctx):
     """Update all environment packages using pip directly."""
+    ctx.run("uv lock --upgrade")
     ctx.run("uv sync --all-extras")
 
 
