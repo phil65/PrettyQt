@@ -20,7 +20,7 @@ import logging
 import os
 import threading
 import time
-from typing import Any, ParamSpec, TypeVar, cast
+from typing import Any, ParamSpec, Self, TypeVar, cast
 
 from prettyqt import core
 
@@ -29,14 +29,6 @@ log = logging.getLogger(__name__)
 
 Params = ParamSpec("Params")
 T = TypeVar("T")
-
-
-def chunked_iter(src: Iterable, size: int):
-    if not src:
-        return
-    src_iter = iter(src)
-    while cur_chunk := list(itertools.islice(src_iter, size)):
-        yield cur_chunk
 
 
 class AsyncRunner:
@@ -59,7 +51,7 @@ class AsyncRunner:
         self._signaller = _FutureDoneSignaller()
         self._signaller.future_done_signal.connect(self._resume_coroutine)
 
-    def __enter__(self: T) -> T:
+    def __enter__(self) -> Self:
         return self
 
     def __exit__(self, *exc_info: object):
@@ -108,7 +100,7 @@ class AsyncRunner:
 
     async def run(
         self, func: Callable[Params, T], *args: Params.args, **kwargs: Params.kwargs
-    ) -> T:
+    ) -> T | None:
         """Run the given function in a thread.
 
         While it is running, yields
@@ -149,7 +141,7 @@ class AsyncRunner:
         # that try to submit functions to execute in threads would only be resumed
         # much later, causing a noticeable slow down in the application.
         batch_size = max(self._max_threads // 2, 1)
-        for function_batch in chunked_iter(funcs, batch_size):
+        for function_batch in itertools.batched(funcs, batch_size):
             # Submit all functions from the current batch to the thread pool,
             # using the _AsyncTask to track the futures and await when they finish.
             task = _AsyncTask({self._pool.submit(f) for f in function_batch})

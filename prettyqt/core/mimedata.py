@@ -2,12 +2,15 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, Self
 
+import anyenv
+
 from prettyqt import core
-from prettyqt.utils import datatypes, helpers
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Iterator
+
+    from prettyqt.utils import datatypes
 
 
 DB = core.MimeDatabase()
@@ -36,14 +39,15 @@ class MimeData(core.ObjectMixin, core.QMimeData):
         self.setData(mime_type, core.QByteArray(data.encode()))
 
     def set_json_data(self, mime_type: str, data: datatypes.JSONType):
-        self.setData(mime_type, core.QByteArray(helpers.dump_json(data)))
+        bytes_ = anyenv.dump_json(data).encode()
+        self.setData(mime_type, core.QByteArray(bytes_))
 
     def get_data(self, mime_type: str) -> str:
         return bytes(self.data(mime_type)).decode()
 
     def get_json_data(self, mime_type: str) -> datatypes.JSONType:
         data = self.data(mime_type)
-        return helpers.load_json(bytes(data))
+        return anyenv.load_json(bytes(data))
 
     def keys(self) -> list[str]:
         return self.formats()

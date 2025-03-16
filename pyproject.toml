@@ -30,6 +30,7 @@ dependencies = [
     "qstylizer",
     "typing-extensions",
     "sublime-search>=0.1.2",
+    "anyenv>=0.4.6",
 ]
 # dynamic = ["version"]
 
@@ -207,6 +208,7 @@ ignore = [
     # "PLR2004", # Magic values instead of named consts
     "SLF001", # Private member accessed
     "TRY003", # Avoid specifying long messages outside the exception class
+    "TC006",
 ]
 
 [tool.ruff.lint.flake8-quotes]

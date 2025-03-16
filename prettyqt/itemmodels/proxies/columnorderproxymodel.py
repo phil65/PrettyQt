@@ -1,6 +1,12 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import constants, core
+
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 class ColumnOrderProxyModel(core.IdentityProxyModel):
@@ -27,10 +33,10 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
     ID = "column_order"
     ICON = "mdi.reorder-vertical"
 
-    def __init__(self, order: list[int | str], **kwargs):
-        self._column_order = order
+    def __init__(self, order: Sequence[int | str], **kwargs):
+        self._column_order = list(order)
         super().__init__(**kwargs)
-        self.set_column_order(order)
+        self.set_column_order(self._column_order)
 
     def get_column_order(self) -> list[int]:
         return self._column_order

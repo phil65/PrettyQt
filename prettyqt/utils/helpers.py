@@ -104,29 +104,6 @@ def get_connections(objects, child_getter, id_getter=None):
     return items, connections
 
 
-def dump_json(data: str):
-    try:
-        import orjson
-
-        opts = orjson.OPT_NAIVE_UTC | orjson.OPT_SERIALIZE_NUMPY
-        return orjson.dumps(data, option=opts)
-    except ImportError:
-        import json
-
-        return json.dumps(data).encode()
-
-
-def load_json(data):
-    try:
-        import orjson
-
-        return orjson.loads(data)
-    except ImportError:
-        import json
-
-        return json.loads(data)
-
-
 def parse_time(time_str: str) -> int:
     """Parse given string and return duration in seconds.
 
