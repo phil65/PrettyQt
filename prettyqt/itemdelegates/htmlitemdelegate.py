@@ -72,7 +72,7 @@ class MarkdownItemDelegate(BaseMarkupDelegate):
         self._mode = mode
 
     def set_text(self, text: str):
-        Feat = self.doc.MarkdownFeature
+        Feat = self.doc.MarkdownFeature  # noqa: N806
         match self._mode:
             case "no_html":
                 self.doc.setMarkdown(text, Feat.MarkdownNoHTML)
@@ -83,7 +83,7 @@ class MarkdownItemDelegate(BaseMarkupDelegate):
             case _:
                 raise ValueError(self._mode)
 
-    def get_markup_mode(self, str):
+    def get_markup_mode(self) -> str:
         return self._mode
 
     def set_markup_mode(self, mode: str):

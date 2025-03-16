@@ -117,13 +117,13 @@ class EditorDelegate(widgets.StyledItemDelegate):
         index: core.ModelIndex,
     ):
         val = self._data_for_index(index, self._role)
-        logger.info(f"creating editor for {val!r}...")
+        logger.info("creating editor for %r...", val)
         if isinstance(val, list):
             widget = datatypes.get_editor_for_value_list(val, parent)
         else:
             widget = datatypes.get_editor_for_value(val, parent)
         if widget is None:
-            logger.warning(f"Could not find editor for {val!r} ({type(val)})")
+            logger.warning("Could not find editor for %r (%s)", val, type(val))
             return None
         if self._validator and isinstance(
             widget, widgets.LineEdit | widgets.AbstractSpinBoxMixin
@@ -136,7 +136,7 @@ class EditorDelegate(widgets.StyledItemDelegate):
 
     def setEditorData(self, editor: widgets.QWidget, index: core.ModelIndex):
         value = self._data_for_index(index, self._role)
-        logger.info(f"setting data for {editor!r} to {value!r}")
+        logger.info("setting data for %r to %r", editor, value)
         editor.set_value(value)
 
     def setModelData(
@@ -146,7 +146,7 @@ class EditorDelegate(widgets.StyledItemDelegate):
         index: core.ModelIndex,
     ):
         if (value := editor.get_value()) is not None:
-            logger.info(f"setting data for {model!r} to {value!r}")
+            logger.info("setting data for %r to %r", model, value)
             model.setData(index, value, self._role)
             # self.closeEditor.emit(editor, self.EndEditHint.NoHint)
             self.commitData.emit(editor)
