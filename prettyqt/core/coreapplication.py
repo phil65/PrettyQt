@@ -10,7 +10,7 @@ from prettyqt import constants, core
 
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
+    from collections.abc import Callable, Coroutine
 
     from prettyqt.utils import datatypes
 
@@ -119,6 +119,25 @@ class CoreApplicationMixin(core.ObjectMixin):
 
     def main_loop(self) -> int:
         return self.exec()
+
+    @staticmethod
+    def run_async(
+        coro: Coroutine | None = None,
+        keep_running: bool = True,
+        quit_qapp: bool = True,
+        *,
+        handle_sigint: bool = False,
+        debug: bool | None = None,
+    ) -> int:
+        from prettyqt.qt import QtAsyncio
+
+        return QtAsyncio.run(
+            coro=coro,
+            keep_running=keep_running,
+            quit_qapp=quit_qapp,
+            handle_sigint=handle_sigint,
+            debug=debug,
+        )
 
     @staticmethod
     def restart():
