@@ -1,6 +1,6 @@
 [project]
 name = "PrettyQt"
-version = "1.57.4"
+dynamic = ["version"]
 description = "A pythonic layer on top of PyQt6 / PySide6"
 readme = 'README.md'
 requires-python = ">=3.12"
@@ -249,6 +249,12 @@ reportSelfClsParameterName = false
 reportPrivateImportUsage = false
 
 
+[tool.hatch.version]
+source = "regex_commit"
+commit_extra_args = ["-e"]
+path = "prettyqt/__init__.py"
+
+
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-regex-commit"]
 build-backend = "hatchling.build"
