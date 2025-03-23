@@ -67,7 +67,7 @@ dev-dependencies = [
 
 addons = ["orjson", "fsspec", "pillow", "numpy", "qtconsole", "ipython", "lxml"]
 pyqt6 = ["PyQt6", "PyQt6-Charts", "PyQt6-WebEngine", "PyQt6-QScintilla"]
-pyside6 = ["pyside6"]
+pyside6 = ["pyside6", "PySide6-Addons"]
 
 [project.gui-scripts]
 regexeditor = "prettyqt.custom_widgets.regexeditor.__main__:run"
