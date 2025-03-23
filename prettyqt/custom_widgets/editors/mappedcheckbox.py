@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+from typing import Any
+
 from prettyqt import widgets
-from prettyqt.utils import bidict
 
 
 class MappedCheckBox(widgets.CheckBox):
@@ -13,9 +14,11 @@ class MappedCheckBox(widgets.CheckBox):
         object_name: str = "mapped_checkbox",
         **kwargs,
     ):
+        import bidict
+
         super().__init__(*args, object_name=object_name, **kwargs)
         dct = {True: true_value, False: false_value}
-        self.map = bidict(dct)
+        self.map = bidict.bidict[bool, Any](dct)
 
     def get_value(self):
         return self.map[self.isChecked()]

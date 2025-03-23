@@ -52,7 +52,6 @@ if __name__ == "__main__":
     status_bar.set_color("black")
     label = widgets.Label("test")
     status_bar.addWidget(label)
-    status_bar.setup_default_bar()
     dlg.setStatusBar(status_bar)
     dlg.show()
     app.exec()

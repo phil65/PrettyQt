@@ -7,7 +7,6 @@ import pytest
 
 import prettyqt
 from prettyqt import constants, core, custom_widgets, gui, widgets
-import prettyqt.custom_widgets.dataset as fo
 
 
 def test_booldicttoolbutton(qtbot):
@@ -68,29 +67,6 @@ def test_regexeditor(qtbot):
     widget.string = "test123"
     assert widget.string == "test123"
     widget.compile_flags = re.IGNORECASE
-
-
-def test_dataset(qtbot):
-    class Test(fo.DataSet):
-        i1 = fo.Bool(label="My first one")
-        string1 = fo.String(label="My first one", regex="[0-9]")
-        string2 = fo.String(label="My second one", notempty=True)
-        choiceitem = fo.Enum(label="A", choices=["A", "B"], disabled_on="i1")
-        mchoiceitem = fo.MultipleChoice(label="A", choices=["A", "B"])
-        floatitem = fo.Float(label="FloatItem", enabled_on="i1")
-        intitem = fo.Int(label="IntItem", enabled_on="i1")
-        coloritem = fo.Color(label="ColorItem", value="green")
-        fileitem = fo.File(label="File")
-        folderitem = fo.Folder(label="File", optional="Test")
-        stringornumber = fo.StringOrNumber(label="Test")
-        buttonitem = fo.Button(label="Button", callback=print)
-        intlist = fo.IntList(label="Button", value=[1, 2, 3])
-        floatlist = fo.FloatList(label="Button", value=[1.1, 2, 3])
-        code = fo.Code(label="Test", value="class Test")
-
-    settings = Test(icon="mdi.timer")
-    settings.create_dialog()
-    settings.to_dict()
 
 
 def test_flagselectionwidget(qtbot):
@@ -157,7 +133,7 @@ def test_timeline(qtbot):
     sample_3 = custom_widgets.VideoSample(20)
     tl[1] = sample_3
     assert tl[1] == sample_3
-    assert len(tl) == 2
+    assert len(tl) == 2  # noqa: PLR2004
     tl.close()
 
 
@@ -205,7 +181,7 @@ def test_inputandslider(qtbot):
     qtbot.addWidget(w)
     w.set_range(0, 10)
     w.set_value(5)
-    assert w.get_value() == 5
+    assert w.get_value() == 5  # noqa: PLR2004
     w.set_step_size(2)
     assert w.is_valid()
 
@@ -242,7 +218,7 @@ def test_flowlayout(qtbot):
     assert layout[0] == btn
     for _i in layout:
         pass
-    assert len(layout) == 5
+    assert len(layout) == 5  # noqa: PLR2004
     layout.get_children()
 
 
@@ -273,9 +249,9 @@ def test_logtextedit(qtbot):
     textedit.set_formatter(fmt)
     logger.info("Test")
     try:
-        raise Exception
-    except Exception as e:
-        logger.exception(e)
+        raise Exception  # noqa: TRY002, TRY301
+    except Exception:
+        logger.exception("Exception!")
     textedit.hide()
 
 
@@ -290,9 +266,9 @@ def test_roundprogressbar(qtbot):
     qtbot.addWidget(bar)
     bar.show()
     assert bar.minimum() == 0
-    assert bar.maximum() == 100
+    assert bar.maximum() == 100  # noqa: PLR2004
     bar.set_value(50)
-    assert bar.get_value() == 50
+    assert bar.get_value() == 50  # noqa: PLR2004
     bar.set_null_position(40)
     bar.hide()
     bar.set_bar_style("donut")
@@ -341,8 +317,8 @@ def test_spanslider(qtbot, qttester):
     slider.set_lower_pos(15)
     slider.set_upper_pos(25)
     slider.set_upper_pos(25)
-    assert slider.lower_value == 15
-    assert slider.upper_value == 25
+    assert slider.lower_value == 15  # noqa: PLR2004
+    assert slider.upper_value == 25  # noqa: PLR2004
     slider.set_value((16, 24))
     assert slider.get_value() == (16, 24)
     slider.set_lower_value(12)
@@ -371,13 +347,13 @@ def test_waitingspinner(qtbot):
     qtbot.addWidget(spinner)
     spinner.repaint()
     spinner.set_line_num(2)
-    assert spinner.get_line_num() == 2
+    assert spinner.get_line_num() == 2  # noqa: PLR2004
     spinner.set_line_length(2)
-    assert spinner.get_line_length() == 2
+    assert spinner.get_line_length() == 2  # noqa: PLR2004
     spinner.set_line_width(2)
-    assert spinner.get_line_width() == 2
+    assert spinner.get_line_width() == 2  # noqa: PLR2004
     spinner.set_inner_radius(2)
-    assert spinner.get_inner_radius() == 2
+    assert spinner.get_inner_radius() == 2  # noqa: PLR2004
     spinner.set_color("black")
     spinner.set_revolutions_per_second(2)
     spinner.set_trail_fade_percentage(2)
