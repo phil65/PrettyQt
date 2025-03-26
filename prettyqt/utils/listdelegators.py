@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Literal, SupportsIndex, TypeVar, overload
+from typing import TYPE_CHECKING, Any, Literal, SupportsIndex, overload
 
 from prettyqt.utils import helpers
 
@@ -10,10 +10,8 @@ if TYPE_CHECKING:
 
     from prettyqt.utils import fx
 
-T = TypeVar("T")
 
-
-class ListDelegator(list[T]):
+class ListDelegator[T](list[T]):
     """Delegates method calls to all list members."""
 
     def __init__(self, *args, parent=None):

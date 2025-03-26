@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import functools
+from typing import ClassVar
 
 from prettyqt.qt import QtCore
 
@@ -63,7 +64,7 @@ class MakeNotified:
     Creates the modified classes just once, on initialization.
     """
 
-    change_methods = {
+    change_methods: ClassVar[dict[type, list[str]]] = {
         list: [
             "__delitem__",
             "__iadd__",
