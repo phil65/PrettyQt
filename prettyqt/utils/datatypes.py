@@ -293,7 +293,7 @@ def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:  # noqa: P
             case np.str_():
                 return val.astype(str)
             case np.bool_():
-                return bool(val.astype(bool))
+                return to_string(bool(val.astype(bool)))
             case np.datetime64():
                 return to_string(val.astype(datetime.datetime), locale)
     return repr(val)

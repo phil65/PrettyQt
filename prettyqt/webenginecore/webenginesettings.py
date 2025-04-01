@@ -7,78 +7,49 @@ from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import bidict, get_repr
 
 
-FONT_FAMILY = bidict(
-    standard=QtWebEngineCore.QWebEngineSettings.FontFamily.StandardFont,
-    fixed=QtWebEngineCore.QWebEngineSettings.FontFamily.FixedFont,
-    serif=QtWebEngineCore.QWebEngineSettings.FontFamily.SerifFont,
-    sans_serif=QtWebEngineCore.QWebEngineSettings.FontFamily.SansSerifFont,
-    cursive=QtWebEngineCore.QWebEngineSettings.FontFamily.CursiveFont,
-    fantasy=QtWebEngineCore.QWebEngineSettings.FontFamily.FantasyFont,
-    pictograph=QtWebEngineCore.QWebEngineSettings.FontFamily.PictographFont,
-)
-
 FontFamilyStr = Literal[
     "standard", "fixed", "serif", "sans_serif", "cursive", "fantasy", "pictograph"
 ]
 
-FONT_SIZE = bidict(
+FONT_FAMILY: bidict[FontFamilyStr, QtWebEngineCore.QWebEngineSettings.FontFamily] = (
+    bidict(
+        standard=QtWebEngineCore.QWebEngineSettings.FontFamily.StandardFont,
+        fixed=QtWebEngineCore.QWebEngineSettings.FontFamily.FixedFont,
+        serif=QtWebEngineCore.QWebEngineSettings.FontFamily.SerifFont,
+        sans_serif=QtWebEngineCore.QWebEngineSettings.FontFamily.SansSerifFont,
+        cursive=QtWebEngineCore.QWebEngineSettings.FontFamily.CursiveFont,
+        fantasy=QtWebEngineCore.QWebEngineSettings.FontFamily.FantasyFont,
+        pictograph=QtWebEngineCore.QWebEngineSettings.FontFamily.PictographFont,
+    )
+)
+
+FontSizeStr = Literal["minimum", "minimum_logical", "default", "default_fixed"]
+
+FONT_SIZE: bidict[FontSizeStr, QtWebEngineCore.QWebEngineSettings.FontSize] = bidict(
     minimum=QtWebEngineCore.QWebEngineSettings.FontSize.MinimumFontSize,
     minimum_logical=QtWebEngineCore.QWebEngineSettings.FontSize.MinimumLogicalFontSize,
     default=QtWebEngineCore.QWebEngineSettings.FontSize.DefaultFontSize,
     default_fixed=QtWebEngineCore.QWebEngineSettings.FontSize.DefaultFixedFontSize,
 )
 
-FontSizeStr = Literal["minimum", "minimum_logical", "default", "default_fixed"]
 
 mod = QtWebEngineCore.QWebEngineSettings
 
 pol = mod.UnknownUrlSchemePolicy
 
-UNKNOWN_URL_SCHEME_POLICY = bidict(
-    disallow=pol.DisallowUnknownUrlSchemes,
-    allow_from_user_interaction=pol.AllowUnknownUrlSchemesFromUserInteraction,
-    allow_all=pol.AllowAllUnknownUrlSchemes,
-)
 
 UnknownUrlSchemePolicyStr = Literal[
     "disallow", "allow_from_user_interaction", "allow_all"
 ]
 
-attr = mod.WebAttribute
-
-WEB_ATTRIBUTES = bidict(
-    auto_load_images=attr.AutoLoadImages,
-    javascript_enabled=attr.JavascriptEnabled,
-    javascript_can_open_windows=attr.JavascriptCanOpenWindows,
-    javascript_can_access_clipboard=attr.JavascriptCanAccessClipboard,
-    links_included_in_focus_chain=attr.LinksIncludedInFocusChain,
-    local_storage_enabled=attr.LocalStorageEnabled,
-    local_content_can_access_remote_urls=attr.LocalContentCanAccessRemoteUrls,
-    spatial_navigation_enabled=attr.SpatialNavigationEnabled,
-    local_content_can_access_file_urls=attr.LocalContentCanAccessFileUrls,
-    hyperlink_auditing_enabled=attr.HyperlinkAuditingEnabled,
-    scroll_animator_enabled=attr.ScrollAnimatorEnabled,
-    error_page_enabled=attr.ErrorPageEnabled,
-    plugins_enabled=attr.PluginsEnabled,
-    full_screen_support_enabled=attr.FullScreenSupportEnabled,
-    screen_capture_enabled=attr.ScreenCaptureEnabled,
-    web_gl_enabled=attr.WebGLEnabled,
-    accelerated_2d_canvas_enabled=attr.Accelerated2dCanvasEnabled,
-    auto_load_icons_for_page=attr.AutoLoadIconsForPage,
-    touch_icons_enabled=attr.TouchIconsEnabled,
-    focus_on_navigation_enabled=attr.FocusOnNavigationEnabled,
-    print_element_backgrounds=attr.PrintElementBackgrounds,
-    allow_running_insecure_content=attr.AllowRunningInsecureContent,
-    allow_geolocation_on_insecure_origins=attr.AllowGeolocationOnInsecureOrigins,
-    allow_window_activation_from_javascript=attr.AllowWindowActivationFromJavaScript,
-    show_scrollbars=attr.ShowScrollBars,
-    playback_requires_user_gesture=attr.PlaybackRequiresUserGesture,
-    javascript_can_paste=attr.JavascriptCanPaste,
-    web_rtc_public_interfaces_only=attr.WebRTCPublicInterfacesOnly,
-    dns_prefetch_enabled=attr.DnsPrefetchEnabled,
-    pdf_viewer_enabled=mod.WebAttribute.PdfViewerEnabled,
+UNKNOWN_URL_SCHEME_POLICY: bidict[UnknownUrlSchemePolicyStr, pol] = bidict(
+    disallow=pol.DisallowUnknownUrlSchemes,
+    allow_from_user_interaction=pol.AllowUnknownUrlSchemesFromUserInteraction,
+    allow_all=pol.AllowAllUnknownUrlSchemes,
 )
 
+
+attr = mod.WebAttribute
 
 WebAttributeStr = Literal[
     "auto_load_images",
@@ -112,6 +83,39 @@ WebAttributeStr = Literal[
     "dns_prefetch_enabled",
     "pdf_viewer_enabled",
 ]
+
+WEB_ATTRIBUTES = bidict[WebAttributeStr, mod.WebAttribute](
+    auto_load_images=attr.AutoLoadImages,
+    javascript_enabled=attr.JavascriptEnabled,
+    javascript_can_open_windows=attr.JavascriptCanOpenWindows,
+    javascript_can_access_clipboard=attr.JavascriptCanAccessClipboard,
+    links_included_in_focus_chain=attr.LinksIncludedInFocusChain,
+    local_storage_enabled=attr.LocalStorageEnabled,
+    local_content_can_access_remote_urls=attr.LocalContentCanAccessRemoteUrls,
+    spatial_navigation_enabled=attr.SpatialNavigationEnabled,
+    local_content_can_access_file_urls=attr.LocalContentCanAccessFileUrls,
+    hyperlink_auditing_enabled=attr.HyperlinkAuditingEnabled,
+    scroll_animator_enabled=attr.ScrollAnimatorEnabled,
+    error_page_enabled=attr.ErrorPageEnabled,
+    plugins_enabled=attr.PluginsEnabled,
+    full_screen_support_enabled=attr.FullScreenSupportEnabled,
+    screen_capture_enabled=attr.ScreenCaptureEnabled,
+    web_gl_enabled=attr.WebGLEnabled,
+    accelerated_2d_canvas_enabled=attr.Accelerated2dCanvasEnabled,
+    auto_load_icons_for_page=attr.AutoLoadIconsForPage,
+    touch_icons_enabled=attr.TouchIconsEnabled,
+    focus_on_navigation_enabled=attr.FocusOnNavigationEnabled,
+    print_element_backgrounds=attr.PrintElementBackgrounds,
+    allow_running_insecure_content=attr.AllowRunningInsecureContent,
+    allow_geolocation_on_insecure_origins=attr.AllowGeolocationOnInsecureOrigins,
+    allow_window_activation_from_javascript=attr.AllowWindowActivationFromJavaScript,
+    show_scrollbars=attr.ShowScrollBars,
+    playback_requires_user_gesture=attr.PlaybackRequiresUserGesture,
+    javascript_can_paste=attr.JavascriptCanPaste,
+    web_rtc_public_interfaces_only=attr.WebRTCPublicInterfacesOnly,
+    dns_prefetch_enabled=attr.DnsPrefetchEnabled,
+    pdf_viewer_enabled=mod.WebAttribute.PdfViewerEnabled,
+)
 
 
 class WebEngineSettings(MutableMapping):

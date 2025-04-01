@@ -77,8 +77,10 @@ class BoxLayout(BoxLayoutMixin, widgets.QBoxLayout):
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
+
     app = widgets.app()
-    layout = BoxLayout("vertical")
+    layout = widgets.VBoxLayout()
     widget = widgets.Widget()
     widget2 = widgets.RadioButton("Test")
     layout.add(widget2)

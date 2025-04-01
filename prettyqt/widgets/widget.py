@@ -862,44 +862,50 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
 
     @overload
     def set_layout(
-        self, layout: Literal["horizontal"], margin: int | None = None, **kwargs
+        self, layout: Literal["horizontal"], *, margin: int | None = None, **kwargs
     ) -> widgets.HBoxLayout:
         pass
 
     @overload
     def set_layout(
-        self, layout: Literal["vertical"], margin: int | None = None, **kwargs
+        self, layout: Literal["vertical"], *, margin: int | None = None, **kwargs
     ) -> widgets.VBoxLayout:
         pass
 
     @overload
     def set_layout(
-        self, layout: Literal["grid"], margin: int | None = None, **kwargs
+        self, layout: Literal["grid"], *, margin: int | None = None, **kwargs
     ) -> widgets.GridLayout:
         pass
 
     @overload
     def set_layout(
-        self, layout: Literal["border"], margin: int | None = None, **kwargs
+        self, layout: Literal["border"], *, margin: int | None = None, **kwargs
     ) -> custom_widgets.BorderLayout:
         pass
 
     @overload
     def set_layout(
-        self, layout: Literal["flow"], margin: int | None = None, **kwargs
+        self, layout: Literal["flow"], *, margin: int | None = None, **kwargs
     ) -> custom_widgets.FlowLayout:
         pass
 
     @overload
     def set_layout(
-        self, layout: Literal["form"], margin: int | None = None, **kwargs
+        self, layout: Literal["form"], *, margin: int | None = None, **kwargs
     ) -> widgets.FormLayout:
         pass
 
     @overload
     def set_layout(
-        self, layout: Literal["stacked"], margin: int | None = None, **kwargs
+        self, layout: Literal["stacked"], *, margin: int | None = None, **kwargs
     ) -> widgets.StackedLayout:
+        pass
+
+    @overload
+    def set_layout(
+        self, layout: widgets.QLayout, *, margin: int | None = None, **kwargs
+    ) -> widgets.QLayout:
         pass
 
     def set_layout(
