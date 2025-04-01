@@ -120,6 +120,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
         *,
         parent: widgets.QWidget | None = None,
         data: Any = None,
+        callback: Callable | None = None,
         **kwargs: datatypes.VariantType,
     ) -> gui.Action:
         """Add an action to the menu.
@@ -128,12 +129,18 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
             text: Label for the action
             parent: parent
             data: data for the Action
+            callback: callback to be called when action is triggered
             kwargs: kwargs passed to action ctor
         Returns:
             Action added to menu
         """
         if isinstance(text, str):
-            action = gui.Action(parent=parent or self, text=text, **kwargs)
+            action = gui.Action(
+                parent=parent or self,
+                text=text,
+                callback=callback,
+                **kwargs,
+            )
         else:
             action = text
             action.setParent(self)
