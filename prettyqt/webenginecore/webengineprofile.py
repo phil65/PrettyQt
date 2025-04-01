@@ -55,7 +55,7 @@ class WebEngineProfile(core.ObjectMixin, webenginecore.QWebEngineProfile):
         """
         return PERSISTENT_COOKIE_POLICY.inverse[self.persistentCookiesPolicy()]
 
-    def set_http_cache_type(self, typ: HttpCacheTypeStr | mod.PersistentCookiesPolicy):
+    def set_http_cache_type(self, typ: HttpCacheTypeStr | mod.HttpCacheType):
         """Set the http cache type.
 
         Args:
