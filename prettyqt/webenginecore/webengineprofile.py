@@ -1,9 +1,18 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 from prettyqt import core, webenginecore
 from prettyqt.utils import bidict
+from prettyqt.webenginecore.webengineurlschemehandler import (
+    CallbackWebEngineUrlSchemeHandler,
+)
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from prettyqt.webenginecore import QWebEngineUrlRequestJob
 
 
 mod = webenginecore.QWebEngineProfile
@@ -61,6 +70,15 @@ class WebEngineProfile(core.ObjectMixin, webenginecore.QWebEngineProfile):
             Http cache type
         """
         return HTTP_CACHE_TYPE.inverse[self.httpCacheType()]
+
+    def install_url_scheme_handler(
+        self,
+        scheme: str,
+        callback: Callable[[QWebEngineUrlRequestJob], Any],
+    ):
+        """Install a URL scheme handler."""
+        handler = CallbackWebEngineUrlSchemeHandler(callback)
+        self.installUrlSchemeHandler(scheme.encode(), handler)
 
     def get_scripts(self) -> webenginecore.WebEngineScriptCollection:
         return webenginecore.WebEngineScriptCollection(self.scripts())
