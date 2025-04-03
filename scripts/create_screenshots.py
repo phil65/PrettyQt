@@ -28,7 +28,7 @@ def create_widget_instance(widget_class: type[QWidget]) -> QWidget | None:
     """
     try:
         return widget_class()
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"Failed to create instance of {widget_class.__name__}: {e}")
         return None
 
@@ -60,7 +60,7 @@ def process_widget(widget_class: type[QWidget], save_path: pathlib.Path) -> None
 
     try:
         save_widget_screenshot(widget, save_path)
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"Error processing {widget_class.__name__}: {e}")
     finally:
         if hasattr(widget, "hide"):

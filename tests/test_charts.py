@@ -53,7 +53,7 @@ def test_categoryaxis(qtbot):
     axis = charts.CategoryAxis()
     axis += ("a", 2)
     axis += ("b", 4)
-    assert len(axis) == 2
+    assert len(axis) == 2  # noqa: PLR2004
     assert axis[0] == "a"
     axis["a"] = "c"
     assert list(axis) == ["c", "b"]

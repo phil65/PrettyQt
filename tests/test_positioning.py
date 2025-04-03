@@ -75,7 +75,7 @@ def test_geopositioninfo():
     info = positioning.GeoPositionInfo()
     info["direction"] = 10.0
     assert "direction" in info
-    assert info["direction"] == 10.0
+    assert info["direction"] == 10.0  # noqa: PLR2004
     del info["direction"]
     assert not bool(info)
     info.get_coordinate()

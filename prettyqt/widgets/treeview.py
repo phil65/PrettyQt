@@ -78,7 +78,7 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
 
     def adapt_sizes(self):
         model = self.model()
-        if model is not None and (model.rowCount() * model.columnCount()) < 1000:
+        if model is not None and (model.rowCount() * model.columnCount()) < 1000:  # noqa: PLR2004
             self.h_header.resizeSections(self.h_header.ResizeMode.ResizeToContents)
         else:
             self.h_header.resize_sections("interactive")

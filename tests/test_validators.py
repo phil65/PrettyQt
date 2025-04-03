@@ -71,7 +71,7 @@ def test_andvalidator():
     assert val1 in composite
     assert val1 == composite[0]
     composite[1] = validators.NotZeroValidator()
-    assert len(composite) == 2
+    assert len(composite) == 2  # noqa: PLR2004
     del composite[1]
     repr(composite)
 

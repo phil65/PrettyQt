@@ -29,7 +29,7 @@ def test_animationgroup():
     assert group[0] == anim
     assert group[0:2] == [anim, anim2]
     group[1] = core.PropertyAnimation()
-    assert len(group) == 2
+    assert len(group) == 2  # noqa: PLR2004
     del group[0]
     assert len(group) == 1
 
@@ -123,7 +123,7 @@ def test_coreapplication(qapp):
 
 def test_cryptographichash():
     cryptohash = core.CryptographicHash("sha_1")
-    assert core.CryptographicHash.get_hash_length("sha_256") == 32
+    assert core.CryptographicHash.get_hash_length("sha_256") == 32  # noqa: PLR2004
     assert bytes(cryptohash) == cryptohash.get_result()
 
 
@@ -217,11 +217,11 @@ def test_easingcurve():
 
 
 def test_file():
-    tf = tempfile.NamedTemporaryFile()
-    buf = core.File(tf.name)
-    with buf.open_file("read_only"):
-        pass
-    assert buf.get_error() in ["none", "open"]
+    with tempfile.NamedTemporaryFile() as tf:
+        buf = core.File(tf.name)
+        with buf.open_file("read_only"):
+            pass
+        assert buf.get_error() in ["none", "open"]
 
 
 def test_fileinfo():
@@ -513,7 +513,7 @@ def test_propertyanimation():
     assert animation.get_direction() == "forward"
     assert animation.get_state() == "stopped"
     animation.setDuration(100)
-    assert len(animation) == 100
+    assert len(animation) == 100  # noqa: PLR2004
     animation.apply_to(button.geometry)
     assert animation.get_property_name() == "geometry"
     animation.setEndValue(core.Rect(20, 50, 70, 89))
@@ -561,7 +561,7 @@ def test_regularexpression():
     for _match in regex.finditer("123"):
         pass
     matches = regex.findall("123")
-    assert len(matches) == 3
+    assert len(matches) == 3  # noqa: PLR2004
 
 
 def test_resource():

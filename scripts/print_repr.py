@@ -18,6 +18,6 @@ if __name__ == "__main__":
     for _name, cls in clsmembers:
         try:
             item = cls()
-        except Exception:
+        except Exception:  # noqa: BLE001
             continue
         print(repr(item), str(item))

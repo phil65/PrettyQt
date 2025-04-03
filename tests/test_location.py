@@ -241,7 +241,7 @@ def test_placesupplier():
 def test_placeratings():
     ratings = location.PlaceRatings()
     ratings.setAverage(1.5)
-    assert float(ratings) == 1.5
+    assert float(ratings) == 1.5  # noqa: PLR2004
     assert bool(ratings) is True
 
 

@@ -24,7 +24,7 @@ def test_svggenerator():
 )
 def test_svgrenderer():
     renderer = svg.SvgRenderer()
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError):  # noqa: PT011
         renderer.load_file("test")
     renderer.set_aspect_ratio_mode("ignore")
     assert renderer.get_aspect_ratio_mode() == "ignore"
