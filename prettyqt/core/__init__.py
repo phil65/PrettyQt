@@ -47,7 +47,7 @@ from .metaobject import MetaObject
 from .modelroledata import ModelRoleData
 from .persistentmodelindex import PersistentModelIndex
 from .cryptographichash import CryptographicHash
-from .uuid import Uuid, UuidMixin
+from ._uuid import Uuid, UuidMixin
 from .signalblocker import SignalBlocker
 from .abstractnativeeventfilter import AbstractNativeEventFilter
 
