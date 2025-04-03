@@ -109,7 +109,7 @@ disable_error_code = [
 
 [tool.ruff]
 line-length = 90
-extend-exclude = ['docs']
+extend-exclude = ['docs', "prettyqt/qt/"]
 target-version = "py312"
 
 [tool.ruff.lint]
