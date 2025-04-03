@@ -33,7 +33,7 @@ def test_boxlayout(qtbot):
     with pytest.raises(InvalidParamError):
         layout.set_size_constraint("bla")
     layout.set_margin(0)
-    assert len(layout) == 2
+    assert len(layout) == 2  # noqa: PLR2004
     layout.add_stretch(1)
     layout.add_spacing(1)
     layout.set_direction("bottom_to_top")
@@ -204,7 +204,7 @@ def test_dialogbuttonbox(qtbot):
         box.set_orientation("test")
     assert box.get_orientation() == "horizontal"
     box.add_button("test_dialogbuttonbox", callback=print)
-    assert len(box) == 2
+    assert len(box) == 2  # noqa: PLR2004
     assert btn == box["apply"]
     assert "apply" in box
     for _item in box:
@@ -309,7 +309,7 @@ def test_formlayout(qtbot):
     layout += button_4
     button_5 = widgets.RadioButton("tuple")
     layout += ("added with +=", button_5)
-    assert len(layout) == 6
+    assert len(layout) == 6  # noqa: PLR2004
     layout.set_row_wrap_policy("wrap_long")
     assert layout.get_row_wrap_policy() == "wrap_long"
     with pytest.raises(InvalidParamError):
@@ -385,7 +385,7 @@ def test_graphicsgridlayout(qtbot):
     layout.set_row_alignment(0, "left")
     with pytest.raises(InvalidParamError):
         layout.set_row_alignment(0, "test")
-    assert len(layout) == 2
+    assert len(layout) == 2  # noqa: PLR2004
     layout.set_margin(0)
 
 
@@ -493,7 +493,7 @@ def test_gridlayout(qtbot):
     assert layout[5, 5] == layout2
     layout.set_size_constraint("maximum")
     layout.set_alignment("left")
-    assert len(layout) == len(list(layout)) == 2
+    assert len(layout) == len(list(layout)) == 2  # noqa: PLR2004
     layout += widgets.RadioButton()
     layout.set_origin_corner("bottom_right")
     assert layout.get_origin_corner() == "bottom_right"
@@ -603,7 +603,7 @@ def test_lcdnumber(qtbot):
     lcd = widgets.LCDNumber()
     qtbot.addWidget(lcd)
     lcd.set_value(500)
-    assert lcd.get_value() == 500
+    assert lcd.get_value() == 500  # noqa: PLR2004
     lcd.set_segment_style("filled")
     with pytest.raises(InvalidParamError):
         lcd.set_segment_style("test")
@@ -654,7 +654,7 @@ def test_listwidget(qtbot):
     qtbot.addWidget(widget)
     widget.add("test_listwidget", icon="mdi.timer")
     widget.add("test_listwidget", icon="mdi.timer")
-    assert len(widget) == 2
+    assert len(widget) == 2  # noqa: PLR2004
     item = widget[0]
     assert item is not None
     widget.scroll_to_item(item, mode="ensure_visible")
@@ -725,8 +725,8 @@ def test_mainwindow(qtbot):
     toolbar = widgets.ToolBar()
     qtbot.addWidget(toolbar)
     window.add_toolbar(toolbar)
+    toolbar_2 = widgets.ToolBar()
     with pytest.raises(InvalidParamError):
-        toolbar_2 = widgets.ToolBar()
         window.add_toolbar(toolbar_2, area="test")
     assert len(window.get_toolbars()) == 1
     assert len(window.get_docks()) == 1
@@ -789,7 +789,7 @@ def test_menu(qtbot):
         checkable=True,
         status_tip="test",
     )
-    assert len(menu) == 3
+    assert len(menu) == 3  # noqa: PLR2004
     for _item in menu:
         pass
     menu.add_menu(widgets.Menu())
@@ -948,7 +948,7 @@ def test_scrollerproperties():
     properties["snap_time"] = 100
     with pytest.raises(InvalidParamError):
         properties.set_scroll_metric("test", 100)
-    assert properties["snap_time"] == 100
+    assert properties["snap_time"] == 100  # noqa: PLR2004
     with pytest.raises(InvalidParamError):
         properties.get_scroll_metric("test")
 
@@ -1060,7 +1060,7 @@ def test_spinbox(qtbot):
     with pytest.raises(InvalidParamError):
         widget.set_step_type("test")
     assert widget.is_valid()
-    assert widget.get_value() == 10
+    assert widget.get_value() == 10  # noqa: PLR2004
 
 
 def test_splashscreen(qtbot):
@@ -1081,7 +1081,7 @@ def test_splitter(qtbot):
     qtbot.addWidget(widget)
     widget.add_widget(test)
     widget += test2
-    assert len(widget) == 2
+    assert len(widget) == 2  # noqa: PLR2004
     assert widget[0] == test
     for _item in widget:
         pass
@@ -1158,16 +1158,16 @@ def test_tapandholdgesture():
 
 
 def test_textbrowser(qtbot):
-    tmp = tempfile.NamedTemporaryFile(delete=False)
-    tmp.write(b"Test")
-    tmp.close()
-    path = pathlib.Path(tempfile.gettempdir()) / tmp.name
-    widget = widgets.TextBrowser()
-    widget.set_markdown("test")
-    widget.set_markdown_file(str(path))
-    # widget.set_rst("test")
-    # widget.set_rst_file(str(path))
-    path.unlink()
+    with tempfile.NamedTemporaryFile(delete=False) as tmp:
+        tmp.write(b"Test")
+        tmp.close()
+        path = pathlib.Path(tempfile.gettempdir()) / tmp.name
+        widget = widgets.TextBrowser()
+        widget.set_markdown("test")
+        widget.set_markdown_file(str(path))
+        # widget.set_rst("test")
+        # widget.set_rst_file(str(path))
+        path.unlink()
 
 
 def test_textedit(qtbot):
@@ -1517,7 +1517,7 @@ def test_widget(qtbot):
         widget.set_focus_policy("test")
     layout = widgets.HBoxLayout()
     widget.set_layout(layout)
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError):  # noqa: PT011
         widget.set_layout("test")
     with widget.signals_blocked():
         pass

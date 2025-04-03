@@ -184,7 +184,7 @@ def test_fontmetrics():
     val = fontmetrics.elided_text("This is a test", mode="right", width=40)
     with pytest.raises(InvalidParamError):
         val = fontmetrics.elided_text("This is a test", mode="test", width=40)
-    assert len(val) < 10
+    assert len(val) < 10  # noqa: PLR2004
     fontmetrics.get_bounding_rect("test")
     fontmetrics.get_tight_bounding_rect("test")
 
@@ -195,7 +195,7 @@ def test_fontmetricsf():
     val = fontmetrics.elided_text("This is a test", mode="right", width=40)
     with pytest.raises(InvalidParamError):
         val = fontmetrics.elided_text("This is a test", mode="test", width=40)
-    assert len(val) < 10
+    assert len(val) < 10  # noqa: PLR2004
     fontmetrics.get_bounding_rect("test")
     fontmetrics.get_tight_bounding_rect("test")
 
@@ -514,7 +514,7 @@ def test_textdocument():
     for i in doc:
         repr(i)
     assert doc[1].text() == "Hello"
-    assert len(doc) == 2
+    assert len(doc) == 2  # noqa: PLR2004
     doc.set_text("test")
     doc.clear_stacks("undo_and_redo")
     with pytest.raises(InvalidParamError):
@@ -555,7 +555,7 @@ def test_painter():
                 painter.fill_rect(core.Rect(), "transparent")
                 with pytest.raises(InvalidParamError):
                     painter.fill_rect(core.Rect(), "transparent", "test")
-                with pytest.raises(ValueError):
+                with pytest.raises(ValueError):  # noqa: PT011
                     painter.fill_rect(core.Rect(), "testus")
                 painter.set_color("black")
                 painter.set_composition_mode("source_atop")
@@ -596,7 +596,7 @@ def test_pagelayout():
 def test_pagesize():
     size = gui.PageSize()
     assert size.get_id() == "custom"
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError):  # noqa: PT011
         size.get_definition_units()
     size = gui.PageSize(gui.PageSize.PageSizeId.A3)
     size = pickle_roundtrip(size)
@@ -607,7 +607,7 @@ def test_painterpath():
     path = gui.PainterPath()
     rect = core.RectF(0, 0, 1, 1)
     path.addRect(rect)
-    assert len(path) == 5
+    assert len(path) == 5  # noqa: PLR2004
     assert bool(path)
     assert core.PointF(0.5, 0.5) in path
     path[1] = (0.5, 0.5)
@@ -628,8 +628,8 @@ def test_painterpathstroker():
 
 def test_palette():
     pal = gui.Palette()
-    assert len(pal.get_colors()) == 21
-    assert len(pal.get_brushes()) == 21
+    assert len(pal.get_colors()) == 21  # noqa: PLR2004
+    assert len(pal.get_brushes()) == 21  # noqa: PLR2004
     color = gui.Color("red")
     pal.set_brush("window", "red")
     assert pal.get_brush("window") == color

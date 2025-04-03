@@ -83,13 +83,15 @@ def test_webenginesettings(qapp):
     settings.set_font_size("default_fixed", 14)
     with pytest.raises(InvalidParamError):
         settings.set_font_size("test", "test")
-    assert settings.get_font_size("default_fixed") == 14
+    assert settings.get_font_size("default_fixed") == 14  # noqa: PLR2004
 
 
 def test_webenginehistory():
     page = webenginecore.WebEnginePage()
     history = page.get_history()
-    assert len(history) < 2  # 0 returns 1 for PySide6 6.5, 0 for PyQt6 6.4
+    assert (
+        len(history) < 2  # noqa: PLR2004
+    )  # 0 returns 1 for PySide6 6.5, 0 for PyQt6 6.4
     for _item in history:
         pass
     history.get_items()

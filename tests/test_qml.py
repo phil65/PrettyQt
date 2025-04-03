@@ -62,7 +62,7 @@ def test_jsvalue():
     val["test2"] = 2
     assert val["test1"] == 1
     assert "test2" in val
-    assert len(val) == 2
+    assert len(val) == 2  # noqa: PLR2004
     del val["test2"]
     for _n, _v in val:
         pass
