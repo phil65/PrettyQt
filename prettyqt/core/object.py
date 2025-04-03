@@ -110,12 +110,6 @@ class ObjectMixin:
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def __getattr__(self, val):
-        cameled = helpers.to_lower_camel(val)
-        if cameled in dir(self):
-            return getattr(self, cameled)
-        raise AttributeError(val)
-
     def installEventFilter(self, filter_: core.QObject | str, **kwargs):
         """Override to also allow setting eventfilters by name."""
         if filter_ in self._eventfilters:
