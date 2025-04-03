@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 import logging
+from typing import ClassVar
 
 from prettyqt import constants, core, gui, itemmodels
 
@@ -145,8 +146,8 @@ class CheckStateColumn(itemmodels.ColumnItem):
         return False
 
     def get_flags(self, item):
-        DEFAULT = constants.IS_SELECTABLE | constants.IS_ENABLED
-        return DEFAULT | constants.IS_CHECKABLE if item.isCheckable() else DEFAULT
+        default = constants.IS_SELECTABLE | constants.IS_ENABLED
+        return default | constants.IS_CHECKABLE if item.isCheckable() else default
 
 
 class UsageCountColumn(itemmodels.ColumnItem):
@@ -167,7 +168,7 @@ class ActionsModel(itemmodels.ColumnTableModel):
     """
 
     SUPPORTS = Sequence[gui.QAction]
-    COLUMNS = [
+    COLUMNS: ClassVar = [
         NameColumn,
         ToolTipColumn,
         ShortcutColumn,

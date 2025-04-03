@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from typing import ClassVar
 
 from prettyqt import constants, core
 
@@ -8,7 +9,7 @@ from prettyqt import constants, core
 class RegexMatchesModel(core.AbstractTableModel):
     """Model to display a list of re.Matches."""
 
-    HEADER = ["Start", "End", "Value", "Groups"]
+    HEADER: ClassVar = ["Start", "End", "Value", "Groups"]
     SUPPORTS = list[re.Match]
 
     def __init__(self, matches: list | None = None, **kwargs):

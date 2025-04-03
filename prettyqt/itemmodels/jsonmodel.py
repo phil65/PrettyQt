@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, ClassVar
 
 from prettyqt import constants, itemmodels
 
@@ -55,7 +55,7 @@ class JsonItem:
 
 
 class JsonModel(itemmodels.ColumnItemModel):
-    COLUMNS = [NameColumn, ValueColumn, TypeColumn]
+    COLUMNS: ClassVar = [NameColumn, ValueColumn, TypeColumn]
     SUPPORTS = Mapping
 
     def __init__(

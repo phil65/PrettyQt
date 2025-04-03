@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import dataclasses
 import logging
-from typing import Any
+from typing import Any, ClassVar
 
 from prettyqt import constants, core, itemmodels
 from prettyqt.qt import QtGui
@@ -19,7 +19,7 @@ class DataClassFieldsModel(itemmodels.BaseFieldsModel):
     """
 
     SUPPORTS = datatypes.IsDataclass
-    HEADER = [
+    HEADER: ClassVar = [
         "Field name",
         "Value",
         "Type",
@@ -43,7 +43,7 @@ class DataClassFieldsModel(itemmodels.BaseFieldsModel):
         fields = dataclasses.fields(instance)
         return {field.name: field for field in fields}
 
-    def data(
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,

@@ -4,6 +4,7 @@ from collections.abc import Sequence
 import datetime
 import logging
 import traceback
+from typing import ClassVar
 
 from prettyqt import constants, core, itemmodels
 
@@ -152,7 +153,7 @@ class MessageColumn(itemmodels.ColumnItem):
 class LogRecordModel(itemmodels.ColumnTableModel):
     """Model to display a list of logging.LogRecords."""
 
-    COLUMNS = [
+    COLUMNS: ClassVar = [
         LevelNameColumn,
         FileNameColumn,
         FunctionNameColumn,

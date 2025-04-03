@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 import logging
-from typing import Any
+from typing import Any, ClassVar
 
 from prettyqt import constants, core, itemmodels
 from prettyqt.utils import bidict
@@ -25,7 +25,7 @@ class ModelIndexModel(itemmodels.ListMixin, core.AbstractTableModel):
 
     SUPPORTS = Sequence[core.QModelIndex]
     ID = "modelindex"
-    FIXED_HEADER = ["Path", "Row", "Column", "Flags"]
+    FIXED_HEADER: ClassVar = ["Path", "Row", "Column", "Flags"]
 
     def __init__(
         self,
@@ -80,8 +80,9 @@ class ModelIndexModel(itemmodels.ListMixin, core.AbstractTableModel):
                 return self.headers[section]
             case constants.VERTICAL, constants.DISPLAY_ROLE:
                 return str(section)
+        return None
 
-    def data(
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,

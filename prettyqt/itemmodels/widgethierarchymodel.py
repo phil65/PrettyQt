@@ -127,6 +127,7 @@ class BaseHierarchyModel(itemmodels.TreeModel):
         match orientation, role, section:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
                 return self.props[section].get_name()
+        return None
 
     def data(
         self,

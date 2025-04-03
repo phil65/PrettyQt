@@ -7,6 +7,7 @@ import os
 import pathlib
 import pkgutil
 import types
+from typing import ClassVar
 
 from prettyqt import constants, core, itemmodels
 
@@ -17,7 +18,7 @@ logger = logging.getLogger(__name__)
 class ModuleInfoModel(itemmodels.TreeModel):
     """Tree Model to display a module hierarchy (using pkgutil)."""
 
-    HEADER = ["Name", "Path", "Is Package"]
+    HEADER: ClassVar = ["Name", "Path", "Is Package"]
     SUPPORTS = str | os.PathLike[str] | types.ModuleType | pkgutil.ModuleInfo
 
     def __init__(self, obj, **kwargs):

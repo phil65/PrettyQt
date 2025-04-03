@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from typing import ClassVar
 
 from prettyqt import constants, core
 from prettyqt.qt import QtGui
@@ -10,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class QObjectPropertiesModel(core.AbstractTableModel):
-    HEADER = [
+    HEADER: ClassVar = [
         "Property name",
         "Value",
         "Type",
@@ -61,7 +62,7 @@ class QObjectPropertiesModel(core.AbstractTableModel):
                 prop = self._metaobj.get_property(section)
                 return prop.propertyIndex()
 
-    def data(
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,

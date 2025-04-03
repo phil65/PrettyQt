@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
+from typing import ClassVar
 
 from prettyqt import constants, core, itemmodels
 
@@ -112,7 +113,7 @@ class ValidColumn(itemmodels.ColumnItem):
 class StorageInfoModel(itemmodels.ColumnTableModel):
     """Model to display a list of core.QStorageInfos."""
 
-    COLUMNS = [
+    COLUMNS: ClassVar = [
         RootPathColumn,
         VolumeNameColumn,
         DeviceColumn,

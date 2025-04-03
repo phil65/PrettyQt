@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from typing import ClassVar
 
 import pydantic
 
@@ -23,7 +24,7 @@ class PydanticFieldsModel(itemmodels.BaseFieldsModel):
     """
 
     SUPPORTS = pydantic.BaseModel
-    HEADER = [
+    HEADER: ClassVar = [
         "Value",
         "Type",
         "Default",
@@ -42,7 +43,7 @@ class PydanticFieldsModel(itemmodels.BaseFieldsModel):
     def get_fields(self, instance: pydantic.BaseModel):
         return instance.model_fields
 
-    def data(
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,

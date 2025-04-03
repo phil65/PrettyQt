@@ -3,6 +3,7 @@ from __future__ import annotations
 import enum
 import io
 import logging
+from typing import ClassVar
 import xml.etree.ElementTree as ET
 
 from prettyqt import constants, core, itemmodels
@@ -65,7 +66,7 @@ class AttributeColumn(XmlColumnItem):
 
 class BaseXmlModel(itemmodels.ColumnItemModel):
     ICON = "mdi.xml"
-    COLUMNS = [TagColumn, TextColumn, TailColumn, AttributeColumn]
+    COLUMNS: ClassVar = [TagColumn, TextColumn, TailColumn, AttributeColumn]
 
     def __init__(self, obj, **kwargs):
         super().__init__(obj=obj, columns=self.COLUMNS, show_root=True, **kwargs)

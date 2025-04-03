@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from typing import ClassVar
 
 import attr
 import attrs
@@ -21,7 +22,7 @@ class AttrsFieldsModel(itemmodels.BaseFieldsModel):
     """
 
     SUPPORTS = datatypes.IsAttrs
-    HEADER = [
+    HEADER: ClassVar = [
         "Value",
         "Type",
         "Default",
@@ -46,7 +47,7 @@ class AttrsFieldsModel(itemmodels.BaseFieldsModel):
         fields = attrs.fields(type(instance))
         return {field.name: field for field in fields}
 
-    def data(
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,

@@ -17,7 +17,7 @@ class WidgetsDetailsModel(core.AbstractTableModel):
         super().__init__(**kwargs)
         self.items = items
         common_ancestor = classhelpers.find_common_ancestor([type(i) for i in self.items])
-        logger.debug(f"{type(self).__name__}: found common ancestor {common_ancestor}")
+        logger.debug("%s: found common ancestor %s", type(self).__name__, common_ancestor)
         self.props = core.MetaObject(common_ancestor.staticMetaObject).get_properties(
             only_stored=True
         )

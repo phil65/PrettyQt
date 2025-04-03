@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 import inspect
 import logging
+from typing import ClassVar
 
 from prettyqt import constants, core, gui, itemmodels
 
@@ -15,7 +16,14 @@ SOURCE_FONT = gui.Font.mono(as_qt=True)
 class FrameInfoModel(itemmodels.ListMixin, core.AbstractTableModel):
     """Model to display a list of inspect.Frameinfos / inspect.Tracebacks."""
 
-    HEADER = ["Filename", "Line number", "Function", "Code context", "Index", "Positions"]
+    HEADER: ClassVar = [
+        "Filename",
+        "Line number",
+        "Function",
+        "Code context",
+        "Index",
+        "Positions",
+    ]
     SUPPORTS = Sequence[inspect.FrameInfo | inspect.Traceback]
 
     @classmethod
@@ -40,8 +48,9 @@ class FrameInfoModel(itemmodels.ListMixin, core.AbstractTableModel):
                 return self.HEADER[section]
             case constants.VERTICAL, constants.DISPLAY_ROLE:
                 return str(section)
+        return None
 
-    def data(
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
