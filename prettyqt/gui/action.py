@@ -146,6 +146,8 @@ class ActionMixin(core.ObjectMixin):
     def setText(self, text: str | None):
         super().setText(text or "")
 
+    set_text = setText
+
     def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
         return None if icon.isNull() else gui.Icon(icon)

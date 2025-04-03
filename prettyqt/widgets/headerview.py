@@ -223,7 +223,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         if event.type() == core.Event.Type.ContextMenu:
             menu = self.createPopupMenu()
             menu.exec(self.mapToGlobal(event.pos()))
-            logger.info(f"KeypressEvent {event} taken by EventFilter")
+            logger.info("KeypressEvent %s taken by EventFilter", event)
             return True
         return False
 
@@ -255,11 +255,13 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
 
     def toggle_section_visibility(self, logical_index: int):
         self.setSectionHidden(logical_index, not self.isSectionHidden(logical_index))
-        logger.info(f"toggling {logical_index}")
+        logger.info("toggling %s", logical_index)
 
     def setSectionHidden(self, logical_index: int, hide: bool):
         self.section_visiblity_changed.emit(logical_index, hide)
         super().setSectionHidden(logical_index, hide)
+
+    set_section_hidden = setSectionHidden
 
     def set_sizes(self, sizes: Iterable[int | None]):
         for i, size in enumerate(sizes):

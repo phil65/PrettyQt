@@ -53,6 +53,8 @@ class AbstractButtonMixin(widgets.WidgetMixin):
             self.setObjectName(text)
         super().setText(text)
 
+    set_text = setText
+
     def set_icon_size(self, size: datatypes.SizeType):
         """Set size of the icon."""
         self.setIconSize(datatypes.to_size(size))
