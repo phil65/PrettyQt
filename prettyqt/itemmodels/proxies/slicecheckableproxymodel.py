@@ -164,7 +164,7 @@ class SliceCheckableTreeProxyModel(itemmodels.SliceIdentityProxyModel):
             else:
                 val = constants.CheckState.PartiallyChecked
             key = self.get_index_key(idx, include_column=True)
-            logger.debug(f"Setting {key} to {val}")
+            logger.debug("Setting %s to %s", key, val)
             self._checked[key] = val
             self.dataChanged.emit(idx, idx)
             self.checkstate_changed.emit(idx, val)

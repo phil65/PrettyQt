@@ -26,25 +26,29 @@ class AdjustingBoxLayoutDockWidget(widgets.DockWidget):
 
     def _dock_location_changed(self, area: DockWidgetArea):
         self._current_area = area
-        if (widget := self.widget()) is not None:
-            if isinstance(layout := widget.layout(), widgets.QBoxLayout):
-                if area in (
-                    DockWidgetArea.LeftDockWidgetArea,
-                    DockWidgetArea.RightDockWidgetArea,
-                ):
-                    direction = widgets.BoxLayout.Direction.TopToBottom
-                else:
-                    direction = widgets.BoxLayout.Direction.LeftToRight
-                layout.setDirection(direction)
-                self.resize(widget.minimumSize())
-                self.adjustSize()
+        if (widget := self.widget()) is not None and isinstance(
+            layout := widget.layout(), widgets.QBoxLayout
+        ):
+            if area in (
+                DockWidgetArea.LeftDockWidgetArea,
+                DockWidgetArea.RightDockWidgetArea,
+            ):
+                direction = widgets.BoxLayout.Direction.TopToBottom
+            else:
+                direction = widgets.BoxLayout.Direction.LeftToRight
+            layout.setDirection(direction)
+            self.resize(widget.minimumSize())
+            self.adjustSize()
 
     def _top_level_changed(self, top_level: bool):
-        if (widget := self.widget()) is not None and top_level:
-            if isinstance(layout := widget.layout(), widgets.QBoxLayout):
-                layout.setDirection(widgets.BoxLayout.Direction.LeftToRight)
-                self.resize(widget.minimumSize())
-                self.adjustSize()
+        if (
+            (widget := self.widget()) is not None
+            and top_level
+            and isinstance(layout := widget.layout(), widgets.QBoxLayout)
+        ):
+            layout.setDirection(widgets.BoxLayout.Direction.LeftToRight)
+            self.resize(widget.minimumSize())
+            self.adjustSize()
 
     def showEvent(self, event):
         """Make sure this dock widget is raised when it is shown.

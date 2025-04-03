@@ -66,7 +66,7 @@ class FlowLayout(widgets.Layout):
         left, top, right, bottom = self.getContentsMargins()
         return size + core.QSize(left + right, top + bottom)
 
-    sizeHint = minimumSize
+    sizeHint = minimumSize  # noqa: N815
 
     def smart_spacing(self, horizontal: bool = True) -> int:
         p = self.parent()

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from prettyqt import core, gui, syntaxhighlighters
 
 
@@ -77,7 +79,7 @@ class Strong(Rule):
 
 
 class Code(Rule):
-    regex = [r"`[^`]*`", r"^((?:(?:[ ]{4}|\t).*(\\R|$))+)"]
+    regex: ClassVar = [r"`[^`]*`", r"^((?:(?:[ ]{4}|\t).*(\\R|$))+)"]
     color = "grey"
 
 

@@ -206,19 +206,19 @@ class SliceHighlightCurrentProxyModel(itemmodels.SliceIdentityProxyModel):
             return self._highlight_color
         return super().data(index, role)
 
-    highlightMode = core.Property(
+    highlightMode = core.Property(  # noqa: N815
         str,
         get_highlight_mode,
         set_highlight_mode,
         doc="Highlight mode",
     )
-    highlightColor = core.Property(
+    highlightColor = core.Property(  # noqa: N815
         QtGui.QColor,
         get_highlight_color,
         set_highlight_color,
         doc="Color to use for highlighting",
     )
-    highlightRole = core.Property(
+    highlightRole = core.Property(  # noqa: N815
         constants.ItemDataRole,
         get_highlight_role,
         set_highlight_role,

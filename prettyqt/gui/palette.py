@@ -199,7 +199,7 @@ class Palette(serializemixin.SerializeMixin, gui.QPalette):
 
     def is_dark(self) -> bool:
         col = self.color(self.ColorRole.Window)
-        return max(col.getRgb()[:3]) < 115
+        return max(col.getRgb()[:3]) < 115  # noqa: PLR2004
 
 
 if __name__ == "__main__":

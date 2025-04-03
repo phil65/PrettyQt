@@ -99,7 +99,7 @@ class Self(Rule):
 
 
 class String(Rule):
-    regex = [r'"[^"\\]*(\\.[^"\\]*)*"', r"'[^'\\]*(\\.[^'\\]*)*'"]
+    regex: ClassVar = [r'"[^"\\]*(\\.[^"\\]*)*"', r"'[^'\\]*(\\.[^'\\]*)*'"]
     color = gui.Color(20, 110, 100)
 
 

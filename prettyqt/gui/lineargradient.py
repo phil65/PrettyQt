@@ -18,8 +18,8 @@ class LinearGradient(gui.GradientMixin, gui.QLinearGradient):
 
     def get_css(self) -> str:
         """Convert gradient to a CSS string. Can be used for stylesheets."""
-        stop, finalStop = self.start(), self.finalStop()
-        x1, y1, x2, y2 = stop.x(), stop.y(), finalStop.x(), finalStop.y()
+        stop, final_stop = self.start(), self.finalStop()
+        x1, y1, x2, y2 = stop.x(), stop.y(), final_stop.x(), final_stop.y()
         stops = self.stops()
         stops = "\n".join(f"    stop: {stop:f} {color.name()}" for stop, color in stops)
         spread = self.get_spread()

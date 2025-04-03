@@ -171,13 +171,13 @@ class PreviewScrollBar(widgets.ScrollBar):
         #  check for div/0
         if self.map_grove_rect.height() == 0:
             return y
-        newY = (
+        new_y = (
             (y - self.map_grove_rect.top())
             * self.std_grove_rect.height()
             / self.map_grove_rect.height()
         )
-        newY += self.std_grove_rect.top()
-        return newY
+        new_y += self.std_grove_rect.top()
+        return new_y
 
 
 if __name__ == "__main__":

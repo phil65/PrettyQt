@@ -46,7 +46,7 @@ class SliceDisplayTextProxyModel(itemmodels.SliceIdentityProxyModel):
         # self._force_override = False
         super().__init__(*args, **kwargs)
 
-    def data(
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
