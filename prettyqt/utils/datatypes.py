@@ -78,7 +78,7 @@ class IsTreeIterator(Protocol):
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from prettyqt import core
+    from prettyqt import core, widgets
     from prettyqt.qt import QtWidgets
 
     UrlType = str | QtCore.QUrl
@@ -408,6 +408,225 @@ def get_editor_for_value(val, parent=None):  # noqa: PLR0911
                 return widgets.DateTimeEdit(parent=parent)
             case np.bool_():
                 return widgets.CheckBox(parent=parent)
+
+
+def get_editor_for_type(  # noqa: PLR0911
+    typ: type, default_value: Any = None, parent=None
+) -> widgets.QWidget | None:
+    """Returns an editor for a given type annotation.
+
+    Arguments:
+        typ: Type annotation
+        default_value: Default value for the editor
+        parent: Parent widget
+    """
+    from typing import Union, get_args, get_origin
+
+    from prettyqt import core, custom_widgets, gui, widgets
+
+    # Handle Optional/Union types
+    if get_origin(typ) is Union:
+        args = get_args(typ)
+        # Handle Optional (Union with None)
+        if type(None) in args:
+            # Use the non-None type
+            inner_type = next(arg for arg in args if arg is not type(None))
+            return get_editor_for_type(inner_type, default_value, parent)
+
+    # Handle lists
+    if get_origin(typ) is list:
+        args = get_args(typ)
+        if not args:
+            return None
+        inner_type = args[0]
+        if inner_type is int:
+            return custom_widgets.ListInput(parent=parent, typ=int)
+        if inner_type is float:
+            return custom_widgets.ListInput(parent=parent, typ=float)
+        if inner_type is str:
+            return custom_widgets.StringListEdit(parent=parent)
+        return None
+
+    # Handle basic types
+    if typ is bool:
+        editor = widgets.CheckBox(parent=parent)
+        if default_value is not None:
+            editor.setChecked(default_value)
+        return editor
+
+    if typ is int:
+        editor = widgets.SpinBox(parent=parent)
+        if default_value is not None:
+            editor.setValue(default_value)
+        return editor
+
+    if typ is float:
+        editor = widgets.DoubleSpinBox(parent=parent)
+        if default_value is not None:
+            editor.setValue(default_value)
+        return editor
+
+    if typ is str:
+        editor = widgets.LineEdit(parent=parent)
+        editor.setFrame(False)
+        if default_value is not None:
+            editor.setText(default_value)
+        return editor
+
+    if typ is pathlib.Path:
+        editor = custom_widgets.FileChooserButton(parent=parent)
+        if default_value is not None:
+            editor.set_path(default_value)
+        return editor
+
+    # Qt types
+    if issubclass(typ, core.QRegularExpression) or typ is re.Pattern:
+        editor = custom_widgets.RegexInput(show_error=False, parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, core.QTime):
+        editor = widgets.TimeEdit(parent=parent)
+        if default_value is not None:
+            editor.setTime(default_value)
+        return editor
+
+    if issubclass(typ, core.QDate):
+        editor = widgets.DateEdit(parent=parent)
+        if default_value is not None:
+            editor.setDate(default_value)
+        return editor
+
+    if issubclass(typ, core.QDateTime):
+        editor = widgets.DateTimeEdit(parent=parent)
+        if default_value is not None:
+            editor.setDateTime(default_value)
+        return editor
+
+    if issubclass(typ, core.QPoint):
+        editor = custom_widgets.PointEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, core.QSize):
+        editor = custom_widgets.SizeEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, core.QRect):
+        editor = custom_widgets.RectEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, gui.QKeySequence):
+        editor = widgets.KeySequenceEdit(parent=parent)
+        if default_value is not None:
+            editor.setKeySequence(default_value)
+        return editor
+
+    if issubclass(typ, gui.QRegion):
+        editor = custom_widgets.RegionEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, gui.QFont):
+        editor = widgets.FontComboBox(parent=parent)
+        if default_value is not None:
+            editor.setCurrentFont(default_value)
+        return editor
+
+    if issubclass(typ, gui.QColor):
+        editor = custom_widgets.ColorComboBox(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, gui.QBrush):
+        editor = custom_widgets.BrushEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, widgets.QSizePolicy):
+        editor = custom_widgets.SizePolicyEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, core.QUrl):
+        editor = custom_widgets.UrlLineEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, gui.QPalette):
+        editor = custom_widgets.PaletteEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, gui.QCursor):
+        editor = custom_widgets.CursorEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, gui.QIcon):
+        editor = custom_widgets.IconEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, core.QLocale):
+        editor = custom_widgets.LocaleEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, slice):
+        editor = custom_widgets.SliceEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    if issubclass(typ, range):
+        editor = custom_widgets.RangeEdit(parent=parent)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    # Handle Enum types
+    if isinstance(typ, type) and issubclass(typ, enum.Enum):
+        if issubclass(typ, enum.Flag):
+            editor = custom_widgets.EnumFlagWidget(parent=parent)
+        else:
+            editor = custom_widgets.EnumComboBox(parent=parent)
+        editor._set_enum_class(typ)
+        if default_value is not None:
+            editor.set_value(default_value)
+        return editor
+
+    # Try numpy types if available
+    try:
+        import numpy as np
+
+        if isinstance(typ, type) and issubclass(typ, np.number):
+            if issubclass(typ, np.floating):
+                editor = custom_widgets.FloatLineEdit(parent=parent)
+            elif issubclass(typ, np.integer):
+                editor = custom_widgets.IntLineEdit(parent=parent)
+            if default_value is not None:
+                editor.set_value(default_value)
+            return editor
+    except ImportError:
+        pass
+
+    return None
 
 
 T = TypeVar("T")
