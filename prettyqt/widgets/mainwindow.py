@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import collections
 import logging
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, overload
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import bidict, listdelegators
@@ -236,6 +236,26 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
         self.add_dockwidget(dock_widget, position)
         return dock_widget
 
+    @overload
+    def add_dockwidget(
+        self,
+        widget: widgets.QDockWidget,
+        position: constants.DockWidgetAreaStr
+        | constants.DockWidgetArea
+        | Literal["auto"] = "auto",
+    ) -> None: ...
+
+    @overload
+    def add_dockwidget(
+        self,
+        widget: widgets.QWidget,
+        position: constants.DockWidgetAreaStr
+        | constants.DockWidgetArea
+        | Literal["auto"] = "auto",
+        **kwargs,
+    ) -> widgets.DockWidget: ...
+
+    # Then keep your original implementation unchanged
     def add_dockwidget(
         self,
         widget: widgets.QWidget,
@@ -243,7 +263,7 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
             constants.DockWidgetAreaStr | constants.DockWidgetArea | Literal["auto"]
         ) = "auto",
         **kwargs,
-    ):
+    ) -> widgets.DockWidget | None:
         if position == "auto":
             position = self._get_preferred_dock_position()
         if not isinstance(widget, widgets.QDockWidget):
