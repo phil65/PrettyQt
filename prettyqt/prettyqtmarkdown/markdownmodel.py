@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from typing import ClassVar
 
 import mknodes
 
@@ -11,10 +12,10 @@ from prettyqt.utils import helpers
 logger = logging.getLogger(__name__)
 
 
-class MarkdownModel(itemmodels.TreeModel):
+class MkNodesModel(itemmodels.TreeModel):
     """An ItemModel for displaying a mknodes tree."""
 
-    HEADER = ["Repr", "Type", "Files"]
+    HEADER: ClassVar = ["Repr", "Type", "Files"]
 
     class Roles:
         MarkdownRole = constants.USER_ROLE + 5325
@@ -59,7 +60,7 @@ class MarkdownModel(itemmodels.TreeModel):
             case self.Roles.MarkdownRole, _:
                 return node.to_markdown()
 
-    def _fetch_object_children(self, item) -> list[MarkdownModel.TreeItem]:
+    def _fetch_object_children(self, item) -> list[MkNodesModel.TreeItem]:
         return [self.TreeItem(i) for i in item.obj.children]
 
     def _has_children(self, item) -> bool:
@@ -72,5 +73,5 @@ if __name__ == "__main__":
     data = dict(a=["1", "2"], b=["c", "D"])
     page += mknodes.MkTable(data=data)
     page += mknodes.MkDocStrings(helpers, header="DocStrings")
-    model = MarkdownModel(page)
+    model = MkNodesModel(page)
     print(page.to_markdown())

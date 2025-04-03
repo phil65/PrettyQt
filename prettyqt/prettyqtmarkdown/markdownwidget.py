@@ -24,7 +24,7 @@ class MarkdownWidget(widgets.Widget):
         layout[0, 1] = self.textbox
 
     def set_markdown(self, item: mknodes.MkNode):
-        model = prettyqtmarkdown.MarkdownModel(item)
+        model = prettyqtmarkdown.MkNodesModel(item)
         self.tree.set_model(model)
         self.tree.selectionModel().currentRowChanged.connect(self._on_current_change)
 
