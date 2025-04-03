@@ -69,7 +69,7 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
     def get_foreground_brush(self) -> gui.Brush:
         return gui.Brush(self.foregroundBrush())
 
-    def add(self, item) -> widgets.QGraphicsItem:
+    def add(self, item) -> widgets.QGraphicsItem:  # noqa: PLR0911
         match item:
             case widgets.QGraphicsItem():
                 self.addItem(item)
@@ -270,7 +270,7 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
 
         elif self._grid_mode == self.GridType.LineGrid:
             zoom = self._get_viewer_zoom()
-            if zoom > -0.5:
+            if zoom > -0.5:  # noqa: PLR2004
                 pen = gui.QPen(self.grid_color, self._pen_width)
                 self._draw_grid(painter, rect, pen, self._grid_size)
             color = self._bg_color.darker(150)

@@ -73,7 +73,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
 
     def adapt_sizes(self):
         model = self.model()
-        if model is not None and (model.rowCount() * model.columnCount()) < 1000:
+        if model is not None and (model.rowCount() * model.columnCount()) < 1000:  # noqa: PLR2004
             self.resizeColumnsToContents()
         else:
             self.h_header.resize_sections("interactive")
@@ -186,13 +186,15 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
                     model.index(level, i).data(role)
                     for i in range(start_section, end_section + 1)
                 ]
-                logger.debug(f"{type(self).__name__}: spanning horizontal {arr}")
+                typ = type(self).__name__
+                logger.debug("%s: spanning horizontal %s", typ, arr)
             else:
                 arr = [
                     model.index(i, level).data(role)
                     for i in range(start_section, end_section + 1)
                 ]
-                logger.debug(f"{type(self).__name__}: spanning vertical {arr}")
+                typ = type(self).__name__
+                logger.debug("%s: spanning vertical %s", typ, arr)
             for section in range(1, len(arr)):
                 if arr[section] == arr[section - 1]:
                     if match_start is None:

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Self
+from typing import ClassVar, Self
 
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtGui
@@ -75,7 +75,7 @@ def get_creator_class(editor_cls: type[widgets.QWidget], property_name: str = ""
 class ItemEditorFactory(widgets.QItemEditorFactory):
     """Widgets for editing item data in views and delegates."""
 
-    creators = []
+    creators: ClassVar = []
 
     @classmethod
     def register_default_editor(

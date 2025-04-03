@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from typing import ClassVar
 
 from prettyqt import gui
 
@@ -46,7 +47,7 @@ class ScientificIntegerValidator(BaseScientificValidator):
     re_pattern = re.compile(
         r"(([+-]?\d+)([eE]\+?\d+)?\s?([YZEPTGMk])?\s*)", flags=re.UNICODE
     )
-    group_map = {"match": 0, "mantissa": 1, "exponent": 2, "si": 3}
+    group_map: ClassVar = {"match": 0, "mantissa": 1, "exponent": 2, "si": 3}
 
     def validate(self, string, position):
         if not string.strip() or string.strip() in list("YZEPTGMk"):
@@ -76,9 +77,9 @@ class ScientificFloatValidator(BaseScientificValidator):
         r"(\s*([+-]?)(\d+\.\d+|\.\d+|\d+\.?)([eE][+-]?\d+)?\s?([YZEPTGMkmµunpfazy]?)\s*)",
         flags=re.UNICODE,
     )
-    group_map = {"match": 0, "sign": 1, "mantissa": 2, "exponent": 3, "si": 4}
+    group_map: ClassVar = {"match": 0, "sign": 1, "mantissa": 2, "exponent": 3, "si": 4}
 
-    def validate(self, string, position):
+    def validate(self, string, position):  # noqa: PLR0911
         if (
             string.strip() in "+.-."
             or string.strip() in list("YZEPTGMkmµunpfazy")

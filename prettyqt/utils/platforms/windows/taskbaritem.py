@@ -5,7 +5,7 @@ import logging
 from typing import Literal, SupportsInt
 
 import comtypes.client as cc
-import comtypes.gen.TaskbarLib as tbl
+from comtypes.gen import TaskbarLib
 
 
 # from comtypes.gen import _683BF642_E9CA_4124_BE43_67065B2FA653_0_1_0
@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 cc.GetModule("./TaskbarLib.tlb")
 
 taskbar = cc.CreateObject(
-    "{56FDF344-FD6D-11d0-958A-006097C9A090}", interface=tbl.ITaskbarList3
+    "{56FDF344-FD6D-11d0-958A-006097C9A090}", interface=TaskbarLib.ITaskbarList3
 )
 dwmapi = ctypes.WinDLL("dwmapi")
 taskbar.HrInit()
@@ -75,30 +75,30 @@ class TaskBarItem:
             self.set_progress_value(value, total)
 
     def set_progress_value(self, value: int, total: int = 100):
-        if value > 100 or value < 0 or value > total:
+        if value > 100 or value < 0 or value > total:  # noqa: PLR2004
             raise ValueError(value)
         result = taskbar.setProgressValue(self.win_id, value, total)
         return bool(result)
 
     def activate_tab(self):
-        logger.info(f"Activate tab {self.win_id}")
+        logger.info("Activate tab %", self.win_id)
         result = taskbar.ActivateTab(self.win_id)
         return bool(result)
 
     def set_thumbnail_clip(self, rect: tuple[int, int, int, int]) -> bool:
-        logger.info(f"Set thumnail clip to {rect!r} for handle {self.win_id}")
+        logger.info("Set thumnail clip to %r for handle %", rect, self.win_id)
         area = RECT(*rect)
         result = taskbar.SetThumbnailClip(self.win_id, area)
         return bool(result)
 
     def set_thumbnail_tooltip(self, tooltip: str) -> bool:
-        logger.info(f"Set thumnail tooltip {tooltip!r} for handle {self.win_id}")
+        logger.info("Set thumnail tooltip %r for handle %", tooltip, self.win_id)
         result = taskbar.SetThumbnailTooltip(self.win_id, LPCWSTR(tooltip))
         return bool(result)
 
     def register_tab(self, tab_win_id: SupportsInt):
         tab_win_id = int(tab_win_id)
-        logger.info(f"Register tab {tab_win_id} in handle {self.win_id}")
+        logger.info("Register tab %r in handle %s", tab_win_id, self.win_id)
         set_window_attribute(tab_win_id, 7, True)
         set_window_attribute(tab_win_id, 10, True)
         result = taskbar.RegisterTab(tab_win_id, self.win_id)
@@ -111,19 +111,19 @@ class TaskBarItem:
         tab_win_id = int(tab_win_id)
         # if tab_win_id not in self.tabs:
         #     raise ValueError(f"no handle with {tab_win_id} registered.")
-        logger.info(f"Register tab {tab_win_id}")
+        logger.info("Register tab %s", tab_win_id)
         result = taskbar.UnregisterTab(tab_win_id)
         self.tabs.remove(tab_win_id)
         return bool(result)
 
     def set_tab_active(self, tab_win_id: SupportsInt):
         tab_win_id = int(tab_win_id)
-        logger.info(f"Set tab {tab_win_id} for handle {self.win_id} active")
+        logger.info("Set tab %s for handle %s active", tab_win_id, self.win_id)
         result = taskbar.SetTabActive(tab_win_id, self.win_id, 0)
         return bool(result)
 
     def set_overlay_icon(self, icon, description: str = ""):
-        logger.info(f"Set overlay icon for {self.win_id}")
+        logger.info("Set overlay icon for %s", self.win_id)
 
         # CreateIconFromResourceEx = windll.user32.CreateIconFromResourceEx
         # size_x, size_y = 32, 32
@@ -141,11 +141,11 @@ class TaskBarItem:
         return bool(result)
 
     def set_iconic_live_preview_bitmap(self, bitmap: HBITMAP):  # available via QImage
-        logger.info(f"Set iconic live preview for {self.win_id}")
+        logger.info("Set iconic live preview for %s", self.win_id)
         dwmapi.DwmSetIconicLivePreviewBitmap(self.win_id, bitmap, 0)
 
     def set_iconic_thumbnail(self, thumbnail: HBITMAP):  # available via QImage
-        logger.info(f"Set iconic thumbnail for {self.win_id}")
+        logger.info("Set iconic thumbnail for %s", self.win_id)
         # SM_CXSMICON = 49
         # SM_CYSMICON = 50
         # ico_x = GetSystemMetrics(SM_CXSMICON)
@@ -156,7 +156,7 @@ class TaskBarItem:
 
 
 def set_window_attribute(win_id, key, value):  # available via QImage
-    logger.info(f"Set iconic thumbnail for {win_id}")
+    logger.info("Set iconic thumbnail for %s", win_id)
     dwmapi.DwmSetWindowAttribute(
         win_id,
         key,  # DWMWA_FORCE_ICONIC_REPRESENTATION = 7

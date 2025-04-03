@@ -97,7 +97,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
             case _:
                 return super().setData(index, value, role)
 
-    def data(
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,

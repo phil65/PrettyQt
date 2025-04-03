@@ -21,21 +21,21 @@ class SpinBox(widgets.AbstractSpinBoxMixin, widgets.QSpinBox):
         self.setMinimum(start)
         self.setMaximum(end)
 
-    setRange = set_range
+    setRange = set_range  # noqa: N815
 
     def set_minimum(self, value: int | None):
         if value is None:
             value = -MAX_VAL
         super().setMinimum(value)
 
-    setMinimum = set_minimum
+    setMinimum = set_minimum  # noqa: N815
 
     def set_maximum(self, value: int | None):
         if value is None:
             value = MAX_VAL
         super().setMaximum(value)
 
-    setMaximum = set_maximum
+    setMaximum = set_maximum  # noqa: N815
 
     def set_step_size(self, step_size):
         self.setSingleStep(step_size)

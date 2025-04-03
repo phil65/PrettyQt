@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from re import Pattern
+from typing import ClassVar
 
 
 try:  # pragma: no cover
@@ -29,14 +30,14 @@ class RegexFlag(enum.IntEnum):
 
 
 class RegexInput(widgets.Widget):
-    LABEL_MAP = dict(
+    LABEL_MAP: ClassVar = dict(
         multiline="MultiLine",
         ignorecase="Ignore case",
         ascii="ASCII-only matching",
         dotall="Dot matches newline",
         verbose="Ignore whitespace",
     )
-    VALUE_MAP = dict(
+    VALUE_MAP: ClassVar = dict(
         multiline=re.MULTILINE,
         ignorecase=re.IGNORECASE,
         ascii=re.ASCII,

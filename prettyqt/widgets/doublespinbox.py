@@ -20,21 +20,21 @@ class DoubleSpinBox(widgets.AbstractSpinBoxMixin, widgets.QDoubleSpinBox):
         self.set_minimum(start)
         self.set_maximum(end)
 
-    setRange = set_range
+    setRange = set_range  # noqa: N815
 
     def set_minimum(self, value: float | None):
         if value is None:
             value = -float("inf")
         super().setMinimum(value)
 
-    setMinimum = set_minimum
+    setMinimum = set_minimum  # noqa: N815
 
     def set_maximum(self, value: float | None):
         if value is None:
             value = float("inf")
         super().setMaximum(value)
 
-    setMaximum = set_maximum
+    setMaximum = set_maximum  # noqa: N815
 
 
 if __name__ == "__main__":

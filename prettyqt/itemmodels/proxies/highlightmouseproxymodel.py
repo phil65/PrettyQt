@@ -98,13 +98,13 @@ class HighlightMouseProxyModel(core.IdentityProxyModel):
             case _:
                 return super().data(index, role)
 
-    highlightMode = core.Property(
+    highlightMode = core.Property(  # noqa: N815
         str,
         get_highlight_mode,
         set_highlight_mode,
         doc="Highlight mode",
     )
-    highlightColor = core.Property(
+    highlightColor = core.Property(  # noqa: N815
         QtGui.QColor,
         get_highlight_color,
         set_highlight_color,
