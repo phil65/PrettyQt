@@ -65,7 +65,7 @@ class SliceChangeIconSizeProxyModel(itemmodels.SliceIdentityProxyModel):
         self._size = datatypes.to_size(size)
         self._cache = {}
 
-    def data(
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,

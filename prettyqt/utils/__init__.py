@@ -17,7 +17,7 @@ KT = TypeVar("KT", bound=str)
 VT = TypeVar("VT", bound=enum.Enum)
 
 
-class bidict(bdct.bidict[KT, VT]):
+class bidict(bdct.bidict[KT, VT]):  # noqa: N801
     def __init__(self, *args, **kwargs):
         match args:
             case (dict(),):

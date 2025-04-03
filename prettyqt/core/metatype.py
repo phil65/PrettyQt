@@ -252,7 +252,7 @@ class MetaType(QtCore.QMetaType):
     # def get_meta_object_for_type(cls, typ: int) -> core.MetaObject:
     #     return core.MetaObject(cls.metaObjectForType(typ))
 
-    def get_type(self) -> type:
+    def get_type(self) -> type:  # noqa: PLR0911
         meta_type = QtCore.QMetaType.Type(self.id())
         match meta_type:
             case QtCore.QMetaType.Type.Bool:

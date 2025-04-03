@@ -58,7 +58,7 @@ class Cursor(serializemixin.SerializeMixin, gui.QCursor):
             return
         pos = cls.pos().toPointF()
         local = pos - widget.mapToGlobal(core.PointF(0, 0))
-        logger.info(f"sending MouseClick events to {widget} at {local}")
+        logger.info("sending MouseClick events to %s at %s", widget, local)
         event = gui.QMouseEvent(
             core.QEvent.Type.MouseButtonPress,
             local,

@@ -34,7 +34,7 @@ class QObjectPropertiesTableView(widgets.TableView):
             self.event_catcher = eventfilters.EventCatcher(
                 include=["resize", "move"], parent=qobject
             )
-            logger.debug(f"Connected {qobject!r} to {model!r}")
+            logger.debug("Connected %r to %r", qobject, model)
             self.event_catcher.caught.connect(model.force_layoutchange)
             qobject.installEventFilter(self.event_catcher)
         if update_on_signal_emission:
@@ -48,7 +48,7 @@ class QObjectPropertiesTableView(widgets.TableView):
         for handle in self._handles:
             model._qobject.disconnect(handle)
         model._qobject.removeEventFilter(self.event_catcher)
-        logger.debug(f"Disconnected {model._qobject!r} from {self!r}")
+        logger.debug("Disconnected %r from %r", model._qobject, self)
 
 
 if __name__ == "__main__":

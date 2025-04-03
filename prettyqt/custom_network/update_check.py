@@ -83,8 +83,8 @@ class UpdateChecker(core.Object):
             match = re.search(regex, text)
             if match and match[1]:
                 newest_v = match[1]
-        except Exception as e:
-            logger.exception("Parsing response of update check failed: %s", e)
+        except Exception:
+            logger.exception("Parsing response of update check failed")
 
         if not newest_v:
             logger.error("Could not detect remote version. Update check won't work!")

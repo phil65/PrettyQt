@@ -51,8 +51,8 @@ class InProcessIPythonWidget(ipython.BaseIPythonWidget):
         """Pull object with name *obj_name from namespace."""
         try:
             data = self.kernel_manager.kernel.shell.ev(obj_name)
-        except NameError as e:
-            logger.exception(e)
+        except NameError:
+            logger.exception("Exception when evaluating %s", obj_name)
             return None
         self._append_plain_text(f'\nread "{obj_name}" object to namespace\n', True)
         self.evaluated.emit(data)

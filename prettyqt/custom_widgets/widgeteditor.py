@@ -30,10 +30,10 @@ class WidgetEditor(widgets.Widget):
             value = prop.read(self._qobject)
             # typ = prop.get_meta_type().get_type()
             name = prop.name()
-            logger.info(f"setting {name} editor to {value}")
+            logger.info("setting %s editor to %s", name, value)
             widget = datatypes.get_editor_for_value(value)
             if widget is None:
-                logger.warning(f"No editor found for {value!r}")
+                logger.warning("No editor found for %r", value)
                 continue
             widget.set_value(value)
             widget.value_changed.connect(self._on_value_change)

@@ -323,7 +323,7 @@ class BluetoothDeviceInfo(bluetooth.QBluetoothDeviceInfo):
         """Get major device class."""
         return MAJOR_DEVICE_CLASS.inverse[self.majorDeviceClass()]
 
-    def get_minor_device_class(self) -> str:
+    def get_minor_device_class(self) -> str:  # noqa: PLR0911
         """Get minor device class."""
         major = self.get_major_device_class()
         match major:

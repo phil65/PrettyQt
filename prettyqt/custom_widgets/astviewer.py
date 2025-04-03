@@ -85,9 +85,10 @@ class AstViewer(widgets.Splitter):
             ignore = []
         tree = self.tree.get_model(skip_proxies=True).ast_tree
         for i in ast.iter_fields(tree):
-            if not isinstance(a := getattr(tree, i), list):
-                if a == old and not {*scope} & {*ignore}:
-                    setattr(tree, i, new)
+            if not isinstance(a := getattr(tree, i), list) and (
+                a == old and not {*scope} & {*ignore}
+            ):
+                setattr(tree, i, new)
             n = a if isinstance(a, list) else [a]
             s = [tree.name] if tree.__class__.__name__.endswith("Def") else scope
             for j in n:

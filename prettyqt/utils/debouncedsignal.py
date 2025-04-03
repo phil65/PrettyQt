@@ -27,7 +27,7 @@ class SignalMeta(type(core.QObject)):
         new_cls = super().__new__(cls, name, bases, attrs, **kwargs)
         user_init = new_cls.__init__
 
-        def __init__(self, *args, **kwargs_):
+        def __init__(self, *args, **kwargs_):  # noqa: N807
             user_init(self, *args, **kwargs_)
             for k, v in to_replace.items():
                 self.__dict__[k] = get_debounced_signal(*v[0], **v[1])()

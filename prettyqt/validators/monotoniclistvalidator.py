@@ -26,7 +26,7 @@ class MonotonicListValidator(gui.Validator):
         for i, c in enumerate(string, start=1):
             if c not in "+-., 0123456789":
                 return self.State.Invalid, string, i
-        if pos == len(string) >= 2 and string[-1] == " " and string[-2].isdigit():
+        if pos == len(string) >= 2 and string[-1] == " " and string[-2].isdigit():  # noqa: PLR2004
             string = f"{string[:-1]}, "
             pos += 1
         prev = None

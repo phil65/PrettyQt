@@ -47,8 +47,7 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = widgets.LineEdit()
     widget.show()
-    with app.debug_mode():
-        with debugging.Stalker(widget, log_level=logging.INFO) as stalker:
-            stalker.eventsignals.MouseButtonPress.connect(print)
-            stalker.show()
-            app.exec()
+    with app.debug_mode(), debugging.Stalker(widget, log_level=logging.INFO) as stalker:
+        stalker.eventsignals.MouseButtonPress.connect(print)
+        stalker.show()
+        app.exec()

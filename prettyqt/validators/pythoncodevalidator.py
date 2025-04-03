@@ -16,9 +16,10 @@ class PythonCodeValidator(gui.Validator):
     def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
         try:
             ast.parse(text)
-            return self.State.Acceptable, text, pos
         except SyntaxError:
             return self.State.Intermediate, text, pos
+        else:
+            return self.State.Acceptable, text, pos
 
 
 if __name__ == "__main__":
