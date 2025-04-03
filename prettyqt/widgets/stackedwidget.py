@@ -32,7 +32,9 @@ class StackedWidget(widgets.FrameMixin, widgets.QStackedWidget):
             case int():
                 if index >= self.count():
                     raise IndexError(index)
-                return self.widget(index)
+                w = self.widget(index)
+                assert w is not None
+                return w
             case slice():
                 rng = range(index.start or 0, index.stop or self.count(), index.step or 1)
                 return listdelegators.ListDelegator(self.widget(i) for i in rng)
@@ -40,9 +42,8 @@ class StackedWidget(widgets.FrameMixin, widgets.QStackedWidget):
                 raise TypeError(index)
 
     def __delitem__(self, item: int | widgets.QWidget):
-        if isinstance(item, int):
-            item = self.widget(item)
-        self.removeWidget(item)
+        i = self.widget(item) if isinstance(item, int) else item
+        self.removeWidget(i)
 
     def __len__(self):
         # needed for PySide6
@@ -50,6 +51,13 @@ class StackedWidget(widgets.FrameMixin, widgets.QStackedWidget):
 
     def __contains__(self, item: widgets.QWidget):
         return self.indexOf(item) >= 0
+
+    def set_current_widget(self, widget: widgets.QWidget | int):
+        if isinstance(widget, widgets.QWidget):
+            self.setCurrentWidget(widget)
+        else:
+            w = self[widget]
+            self.setCurrentWidget(w)
 
     # __iter__ not needed, we have __getitem__ and __len__
 

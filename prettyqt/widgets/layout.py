@@ -173,6 +173,9 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def _container(self):
         return self._stack[-1] if self._stack else self
 
+    def add_widget(self, widget: widgets.QWidget):
+        self.addWidget(widget)
+
     def get_sub_layout(
         self,
         layout: str,

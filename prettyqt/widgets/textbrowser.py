@@ -41,6 +41,9 @@ class TextBrowser(widgets.TextEditMixin, widgets.QTextBrowser):
             file_content = f.read()
         self.setMarkdown(file_content)
 
+    def set_markdown(self, text: str):
+        self.setMarkdown(text)
+
     def get_search_paths(self) -> list[pathlib.Path]:
         return [pathlib.Path(p) for p in self.searchPaths()]
 
