@@ -88,7 +88,7 @@ class GridSplitter(widgets.Splitter):
         self.sub_splitters.append(splitter)
 
     def _on_handle_move(self, position: int, index: int):
-        logger.debug(f"{position=} {index=}")
+        logger.debug("Position: %s, index: %s", position, index)
         sender = self.sender()
         receivers = [splitter for splitter in self.sub_splitters if splitter != sender]
         for rec in receivers:

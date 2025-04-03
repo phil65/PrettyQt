@@ -1,4 +1,4 @@
-# This is a PyInstaller `hook
+# This is a PyInstaller `hook  # noqa: N999
 # <https://pyinstaller.readthedocs.io/en/stable/hooks.html>`_.
 # See the `PyInstaller manual <https://pyinstaller.readthedocs.io/>`_
 # for more information.

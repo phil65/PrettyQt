@@ -59,7 +59,8 @@ class AnimationWrapper:
         self._animation.set_end_value(end)
         self._animation.set_easing(easing)
         self._animation.set_duration(duration)
-        logger.debug(f"Setting up animation: {start=}, {end=}, {easing=}, {duration=}")
+        msg = "Setting up animation (start: %s, end: %s, easing: %s, duration: %s"
+        logger.debug(msg, start, end, easing, duration)
         if reverse:
             self._animation.append_reversed()
         return self.fx.run(self._animation, delay=delay, single_shot=single_shot)
@@ -177,7 +178,7 @@ class Fx:
 
     def __getitem__(self, value: str) -> AnimationWrapper:
         value = helpers.to_lower_camel(value)
-        logger.debug(f"Building {value!r} PropertyAnimation for {self._widget!r}")
+        logger.debug("Building %r PropertyAnimation for %r", value, self._widget)
         wrapper = AnimationWrapper(value, self)
         self._wrapper = wrapper
         return wrapper
@@ -324,7 +325,8 @@ class Fx:
         """
         if not animation.targetObject().isVisible():
             logger.info("Attention. Starting animation for invisible widget.")
-        logger.debug(f"starting {animation!r} with {delay=}. ({single_shot=})")
+        msg = "starting %s with delay %s, single_shot %s"
+        logger.debug(msg, animation, delay, single_shot)
         timer = AnimationTimer(
             parent=self._widget,
             single_shot=single_shot,

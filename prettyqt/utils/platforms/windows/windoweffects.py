@@ -15,7 +15,7 @@ class WINDOWCOMPOSITIONATTRIB(enum.Enum):
     WCA_USEDARKMODECOLORS = 26
 
 
-class ACCENT_STATE(enum.Enum):
+class ACCENT_STATE(enum.Enum):  # noqa: N801
     ACCENT_DISABLED = 0
     ACCENT_ENABLE_ACRYLICBLURBEHIND = 4  # Acrylic effect
     ACCENT_ENABLE_HOSTBACKDROP = 5  # Mica effect
@@ -29,7 +29,7 @@ class DWMNCRENDERINGPOLICY(enum.Enum):
     DWMNCRP_DISABLED = 1
 
 
-class ACCENT_POLICY(Structure):
+class ACCENT_POLICY(Structure):  # noqa: N801
     _fields_ = [
         ("AccentState", DWORD),
         ("AccentFlags", DWORD),
@@ -55,7 +55,7 @@ class MARGINS(Structure):
     ]
 
 
-class DWM_BLURBEHIND(Structure):
+class DWM_BLURBEHIND(Structure):  # noqa: N801
     _fields_ = [
         ("dwFlags", DWORD),
         ("fEnable", BOOL),
@@ -129,7 +129,7 @@ class WindowsEffects:
                 WINDOWCOMPOSITIONATTRIB.WCA_ACCENT_POLICY.value
             )
 
-        if sys.getwindowsversion().build >= 22523:
+        if sys.getwindowsversion().build >= 22523:  # noqa: PLR2004
             self.dwm_set_win_attr(h_wnd, 38, byref(c_int(2)), 4)
         else:
             self.dwm_set_win_attr(h_wnd, 1029, byref(c_int(1)), 4)

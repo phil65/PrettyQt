@@ -357,8 +357,8 @@ class AccordionWidget(widgets.ScrollArea):
         layout.addStretch(1)
         self.setWidget(widget)
 
-    def setSpacing(self, spaceInt):
-        self.widget().layout().setSpacing(spaceInt)
+    def setSpacing(self, space_int):
+        self.widget().layout().setSpacing(space_int)
 
     def addItem(
         self,
