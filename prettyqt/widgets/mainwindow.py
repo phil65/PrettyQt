@@ -344,7 +344,9 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
         docks = self.find_children(widgets.QDockWidget, recursive=False)
         if position is None:
             return docks
-        return [i for i in docks if self.get_dock_area(i) == position]
+        return listdelegators.ListDelegator([
+            i for i in docks if self.get_dock_area(i) == position
+        ])
 
     def _get_preferred_dock_position(
         self,

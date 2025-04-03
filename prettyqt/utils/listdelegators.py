@@ -8,7 +8,7 @@ from prettyqt.utils import helpers
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from prettyqt.utils import fx
+    from prettyqt.animations import fx
 
 
 class ListDelegator[T](list[T]):
