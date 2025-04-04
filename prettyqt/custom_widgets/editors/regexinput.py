@@ -1,16 +1,10 @@
 from __future__ import annotations
 
-from re import Pattern
-from typing import ClassVar
-
-
-try:  # pragma: no cover
-    import re._constants as sre_constants
-except ImportError:  # Python < 3.11
-    import sre_constants  # type: ignore
-
 import enum
 import re
+from re import Pattern
+import re._constants as sre_constants
+from typing import ClassVar
 
 from prettyqt import core, custom_widgets, widgets
 

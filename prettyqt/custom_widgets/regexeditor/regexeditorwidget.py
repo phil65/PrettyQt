@@ -3,15 +3,9 @@
 from __future__ import annotations
 
 import pathlib
-from re import Match, Pattern
-
-
-try:  # pragma: no cover
-    import re._constants as sre_constants
-except ImportError:  # Python < 3.11
-    import sre_constants  # type: ignore
-
 import re
+from re import Match, Pattern
+import re._constants as sre_constants
 
 from prettyqt import constants, core, custom_widgets, itemmodels, widgets
 from prettyqt.syntaxhighlighters import RegexMatchHighlighter
