@@ -136,6 +136,13 @@ class WebEngineView(widgets.WidgetMixin, QtWebEngineWidgets.QWebEngineView):
         req = self.lastContextMenuRequest()
         return webenginecore.WebEngineContextMenuRequest(req) if req else None
 
+    def set_html(self, html: str, base_url: datatypes.UrlType | None = None):
+        if base_url:
+            url = datatypes.to_url(base_url)
+            self.setHtml(html, baseUrl=url)
+        else:
+            self.setHtml(html)
+
 
 if __name__ == "__main__":
     import pathlib

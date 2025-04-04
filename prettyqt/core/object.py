@@ -207,6 +207,10 @@ class ObjectMixin:
         count = next(counter_dict[class_name])
         self.setObjectName(f"{class_name}_{count}")
 
+    def set_object_name(self, name: str):
+        """Set unique objectName."""
+        self.setObjectName(name)
+
     @classmethod
     def get_qt_base_class(cls) -> type[core.QObject] | None:
         return classhelpers.get_qt_parent_class(cls)

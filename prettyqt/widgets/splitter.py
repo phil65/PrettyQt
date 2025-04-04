@@ -164,6 +164,15 @@ class SplitterMixin(widgets.FrameMixin):
         """
         return constants.ORIENTATION.inverse[self.orientation()]
 
+    def set_sizes(self, sizes: list[int]):
+        """Set the sizes of the splitter.
+
+        Args:
+            sizes: sizes for the splitter
+
+        """
+        self.setSizes(sizes)
+
 
 class Splitter(SplitterMixin, widgets.QSplitter):
     """Implements a splitter widget."""
