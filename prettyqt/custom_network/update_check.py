@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from functools import partial
 import logging
 import re
 import webbrowser
@@ -59,7 +60,7 @@ class UpdateChecker(core.Object):
             self.message_box.add_custom_button(
                 "Show changelog",
                 "accept",
-                callback=lambda: webbrowser.open(self.changelog_url),
+                callback=partial(webbrowser.open, self.changelog_url),
             )
 
     def get(self, url: str, timeout: int = 30) -> None:

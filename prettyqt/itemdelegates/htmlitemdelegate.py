@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from prettyqt import core, gui, widgets
 
 
@@ -17,7 +19,7 @@ class BaseMarkupDelegate(widgets.StyledItemDelegate):
     def paint(
         self,
         painter: gui.QPainter,
-        option: widgets.QStyleOptionViewItem,
+        option: Any,  # widgets.QStyleOptionViewItem,
         index: core.ModelIndex,
     ):
         painter.save()
@@ -39,13 +41,20 @@ class BaseMarkupDelegate(widgets.StyledItemDelegate):
 
         painter.restore()
 
-    def sizeHint(self, option: widgets.QStyleOptionViewItem, index: core.ModelIndex):
+    def sizeHint(
+        self,
+        option: Any,  # widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         option = widgets.StyleOptionViewItem(option)
         self.initStyleOption(option, index)
         self.prepare_doc(option)
         return core.QSize(int(self.doc.idealWidth()), int(self.doc.size().height()))
 
-    def prepare_doc(self, option: widgets.QStyleOptionViewItem):
+    def prepare_doc(
+        self,
+        option: Any,  # widgets.QStyleOptionViewItem,
+    ):
         self.text_option.setAlignment(option.displayAlignment)
         self.doc.setDefaultFont(option.font)
         self.set_text(option.text)

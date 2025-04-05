@@ -28,8 +28,11 @@ class BaseScrapeModel(gui.StandardItemModel):
 
     @core.Slot()
     def on_finished(self):
+        assert self._reply
         if self._reply.error() == network.QNetworkReply.NetworkError.NoError:
-            response = self._reply.readAll().data().decode()
+            data = self._reply.readAll().data()
+            assert isinstance(data, bytes)
+            response = data.decode()
             for s in self.process_reply(response):
                 self.appendRow(gui.StandardItem(s))
         self.finished.emit()
@@ -58,11 +61,12 @@ class GoogleCompleter(widgets.Completer):
         super().__init__(*args, **kwargs)
         self.set_completion_mode("unfiltered_popup")
         self.set_case_sensitive(False)
-        self.setModel(GoogleSearchModel())
+        self._model = GoogleSearchModel()
+        self.setModel(self._model)
         self.setCompletionPrefix("")
 
     def splitPath(self, path: str):
-        self.model().search(path)
+        self._model.search(path)
         return super().splitPath(path)
 
 
