@@ -11,7 +11,13 @@ class MultiLineLayout(widgets.BoxLayout):
 
     def __init__(self, vertical: bool = True, row_number: int = 3, **kwargs):
         self.row_nb = row_number
-        self.layouts = []
+        self.layouts: list[
+            widgets.BoxLayout
+            | MultiLineLayout
+            | widgets.GridLayout
+            | custom_widgets.FlowLayout
+            | widgets.StackedLayout
+        ] = []
         self._sub_layout_type = "box"
         direction = self.Direction.TopToBottom if vertical else self.Direction.LeftToRight
         super().__init__(direction, **kwargs)
@@ -38,14 +44,14 @@ class MultiLineLayout(widgets.BoxLayout):
                 direction = self.get_sub_direction()
                 layout = widgets.BoxLayout(direction)
             case "grid":
-                layout = widget.GridLayout()
+                layout = widgets.GridLayout()
             case "flow":
                 layout = custom_widgets.FlowLayout()
             case "stacked":
                 layout = widgets.StackedLayout()
             case "nested":
                 direction = self.get_sub_direction()
-                layout = MultiLineLayout(direction)
+                layout = MultiLineLayout(direction == self.Direction.TopToBottom)
         super().addLayout(layout)
         self.layouts.append(layout)
 

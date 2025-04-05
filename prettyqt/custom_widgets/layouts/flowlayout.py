@@ -63,7 +63,7 @@ class FlowLayout(widgets.Layout):
         size = core.QSize()
         for item in self._items:
             size = size.expandedTo(item.minimumSize())
-        left, top, right, bottom = self.getContentsMargins()
+        left, top, right, bottom = self.getContentsMargins()  # pyright: ignore
         return size + core.QSize(left + right, top + bottom)
 
     sizeHint = minimumSize  # noqa: N815
@@ -73,6 +73,7 @@ class FlowLayout(widgets.Layout):
         if p is None:
             return -1
         if p.isWidgetType():
+            assert isinstance(p, widgets.QWidget)
             which = (
                 widgets.Style.PixelMetric.PM_LayoutHorizontalSpacing
                 if horizontal
@@ -98,7 +99,8 @@ class FlowLayout(widgets.Layout):
                 constants.HORIZONTAL if horizontal else constants.VERTICAL,
             )
 
-        lines, current_line = [], []
+        lines = []
+        current_line = []
         gmap = {}
         for item in self._items:
             isz, wid = item.sizeHint(), item.widget()

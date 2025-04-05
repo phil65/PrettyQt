@@ -20,7 +20,7 @@ class BlacklistValidator(gui.Validator):
         parent: QtCore.QObject | None = None,
     ):
         super().__init__(parent)
-        self._options = options
+        self._options = options or []
 
     def __eq__(self, other: object):
         return isinstance(other, BlacklistValidator) and self._options == other._options
@@ -35,7 +35,7 @@ class NotZeroValidator(BlacklistValidator):
     ID = "not_zero"
 
     def __init__(self, parent: QtCore.QObject | None = None):
-        super().__init__(parent)
+        super().__init__(parent=parent)
         self._options = ["0"]
 
 
@@ -43,7 +43,7 @@ class NotEmptyValidator(BlacklistValidator):
     ID = "not_empty"
 
     def __init__(self, parent: QtCore.QObject | None = None):
-        super().__init__(parent)
+        super().__init__(parent=parent)
         self._options = [""]
 
 

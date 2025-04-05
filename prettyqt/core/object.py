@@ -222,6 +222,12 @@ class ObjectMixin:
     def get_metaobject(self) -> core.MetaObject:
         return core.MetaObject(self.metaObject())
 
+    def get_sender(self, typ: type[T]) -> T | None:
+        sender: T = self.sender()
+        if sender is None or not isinstance(sender, typ):
+            return None
+        return sender
+
     def find_children(
         self,
         typ: type[T] = core.QObject,

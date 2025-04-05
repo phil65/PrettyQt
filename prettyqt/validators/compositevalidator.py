@@ -23,7 +23,7 @@ class CompositeValidator(gui.Validator):
         parent: QtCore.QObject | None = None,
     ):
         super().__init__(parent)
-        self.validators = validators if validators is not None else []
+        self.validators = list(validators) if validators else []
 
     def __repr__(self):
         return get_repr(self, self.validators)

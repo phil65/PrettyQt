@@ -63,7 +63,7 @@ TYPES = {
 
 def get_creator_class(editor_cls: type[widgets.QWidget], property_name: str = ""):
     class EditorCreator(widgets.ItemEditorCreatorBase):
-        def createWidget(self, parent: widgets.QWidget) -> widgets.QWidget:
+        def createWidget(self, parent: widgets.QWidget | None) -> widgets.QWidget:
             return editor_cls(parent=parent)
 
         def valuePropertyName(self) -> QtCore.QByteArray:
@@ -85,18 +85,19 @@ class ItemEditorFactory(widgets.QItemEditorFactory):
         property_name: str = "",
     ):
         factory = cls.defaultFactory()
+        assert factory
         creator = get_creator_class(editor_cls, property_name)()
         cls.creators.append(creator)
         match typ:
             case None:
-                typ = editor_cls.staticMetaObject.userProperty().userType()
+                typ = editor_cls.staticMetaObject.userProperty().userType()  # pyright: ignore
             case type() if typ in TYPES:
                 typ = TYPES[typ].value
             case int():
                 pass
             case _:
                 raise TypeError(typ)
-        factory.registerEditor(typ, creator)
+        factory.registerEditor(typ, creator)  # type: ignore
         cls.setDefaultFactory(factory)
 
     def register_editor(
@@ -109,14 +110,14 @@ class ItemEditorFactory(widgets.QItemEditorFactory):
         self.creators.append(creator)
         match typ:
             case None:
-                typ = editor_cls.staticMetaObject.userProperty().userType()
+                typ = editor_cls.staticMetaObject.userProperty().userType()  # pyright: ignore
             case type() if typ in TYPES:
                 typ = TYPES[typ].value
             case int():
                 pass
             case _:
                 raise TypeError(typ)
-        self.registerEditor(typ, creator)
+        self.registerEditor(typ, creator)  # type: ignore
 
     @classmethod
     def create_extended(cls) -> Self:

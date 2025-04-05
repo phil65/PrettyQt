@@ -36,7 +36,7 @@ class LocaleEdit(widgets.ComboBox):
 
     def set_current_locale(self, locale: core.QLocale | str):
         self._current_locale = core.Locale(locale)
-        self.set_current_text(self._current_locale.bcp47Name())
+        self.setCurrentText(self._current_locale.bcp47Name())
 
     def is_valid(self) -> bool:
         return self._current_locale.isValid()

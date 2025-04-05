@@ -1,8 +1,15 @@
 from __future__ import annotations
 
 import logging
+from typing import TYPE_CHECKING
 
 from prettyqt import constants, core, custom_widgets, widgets
+
+
+if TYPE_CHECKING:
+    from prettyqt.itemmodels.proxies.multicolumnfilterproxymodel import (
+        MultiColumnFilterProxyModel,
+    )
 
 
 logger = logging.getLogger(__name__)
@@ -46,7 +53,7 @@ class FilterHeader(widgets.HeaderView):
     def __init__(self, parent: widgets.TableView):
         self._editors_visible = False
         self._editors = []
-        self._proxy = parent.proxifier.get_proxy(
+        self._proxy: MultiColumnFilterProxyModel = parent.proxifier.get_proxy(  # type: ignore
             "multi_column_filter",
             recursive_filtering_enabled=True,
         )
@@ -61,7 +68,7 @@ class FilterHeader(widgets.HeaderView):
         parent.model_changed.connect(self._update_filter_boxes)
         self.sectionResized.connect(self._adjust_positions)
         self._update_filter_boxes()
-        self.update_geometries()
+        self.updateGeometries()
 
     @classmethod
     def setup_example(cls):

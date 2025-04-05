@@ -6,6 +6,7 @@ import pathlib
 from typing import TYPE_CHECKING
 
 from prettyqt import core, widgets
+from prettyqt.gui.action import Action
 
 
 if TYPE_CHECKING:
@@ -20,12 +21,12 @@ class FileTree(widgets.TreeView):
         super().__init__(*args, **kwargs)
         self.setRootIsDecorated(True)
         self.setup_dragdrop_move()
-        model = widgets.FileSystemModel()
-        model.resolve_sym_links(False)
+        self._model = widgets.FileSystemModel()
+        self._model.resolve_sym_links(False)
         if filters:
-            model.set_name_filters(filters, hide=False)
-        self.set_model(model)
-        self._expanded_ids = []
+            self._model.set_name_filters(filters, hide=False)
+        self.set_model(self._model)
+        self._expanded_ids: list[str] = []
 
     def get_expanded_state(self, root_index: core.ModelIndex | None = None) -> list[str]:
         """Get a list of all expanded paths.
@@ -39,9 +40,8 @@ class FileTree(widgets.TreeView):
         def _save_expanded_on_level(index: core.ModelIndex):
             if not self.isExpanded(index):
                 return
-            model = self.model()
             if index.isValid():
-                path = model.data(index, model.Roles.FilePathRole)
+                path = model.data(index, self._model.Roles.FilePathRole)
                 self._expanded_ids.append(path)
             for i in range(model.rowCount(index)):
                 val = model.index(i, 0, index)
@@ -60,7 +60,7 @@ class FileTree(widgets.TreeView):
         self._expanded_ids = state
 
         def _restore_expanded_on_level(index: core.ModelIndex):
-            model = self.model()
+            model = self._model
             path = model.data(index, model.Roles.FilePathRole)
             if path not in self._expanded_ids:
                 return
@@ -79,8 +79,8 @@ class FileTree(widgets.TreeView):
     def set_root_path(self, path: datatypes.PathType):
         """Set tree rootpath to given path."""
         path = os.fspath(path)
-        self.model().set_root_path(path)
-        index = self.model().index(path)
+        self._model.set_root_path(path)
+        index = self._model.index(path)
         self.setRootIndex(index)
 
 
@@ -93,20 +93,20 @@ class BreadCrumbsToolBar(widgets.ToolBar):
         logger.info("Setting breadrumbs to %s", path)
         if path.parents:
             action = self.add_action(
-                text=str(path.parents[-1]), triggered=self._on_button_clicked
+                text=str(path.parents[-1]), callback=self._on_button_clicked
             )
             action.setData(path.parents[-1])
         for p in reversed(path.parents[:-1]):
-            action = self.add_action(text=p.name, triggered=self._on_button_clicked)
+            action = self.add_action(text=p.name, callback=self._on_button_clicked)
             action.setData(p)
         if path.is_dir():
-            action = self.add_action(text=path.name, triggered=self._on_button_clicked)
+            action = self.add_action(text=path.name, callback=self._on_button_clicked)
             action.setData(path)
 
     def _on_button_clicked(self, button):
-        action = self.sender()
-        path = action.data()
-        self.path_clicked.emit(path)
+        if action := self.get_sender(Action):
+            path = action.data()
+            self.path_clicked.emit(path)
 
 
 class FileExplorer(widgets.Widget):
@@ -139,7 +139,7 @@ class FileExplorer(widgets.Widget):
 
     def _update_root(self, path: os.PathLike[str]):
         if pathlib.Path(path).exists():
-            self._file_tree.setRoot(os.fspath(path))
+            self._file_tree.set_root_path(os.fspath(path))
 
 
 if __name__ == "__main__":

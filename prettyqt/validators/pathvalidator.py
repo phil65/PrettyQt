@@ -15,7 +15,7 @@ class PathValidator(gui.Validator):
     ID = "path"
 
     def __init__(self, *args, **kwargs):
-        self._mode = "any"
+        self._mode: ModeStr = "any"
         super().__init__(*args, **kwargs)
 
     def __eq__(self, other: object):

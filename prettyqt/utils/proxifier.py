@@ -23,6 +23,7 @@ ProxyStr = Literal[
     "identity",
     "value_transformation",
     "range_filter",
+    "multi_column_filter",
     "checkable",
     "subset",
     "flatten_tree",
