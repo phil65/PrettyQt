@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-import os
 from typing import Literal
 
-from prettyqt import core, pdf
 from prettyqt.qt import QtWebEngineCore
-from prettyqt.utils import bidict, datatypes
+from prettyqt.utils import bidict
 
 
 ROLE = bidict(
@@ -22,27 +20,21 @@ RoleStr = Literal[
     "icon_url",
 ]
 
+WebEngineHistoryModel = QtWebEngineCore.QWebEngineHistoryModel
 
-class WebEngineHistoryModel(
-    core.AbstractListModelMixin, QtWebEngineCore.QWebEngineHistoryModel
-):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.setDocument(pdf.PdfDocument(self))
+# cant subclass.
 
-    def set_document(self, document: datatypes.PathType | QtWebEngineCore.QPdfDocument):
-        if not isinstance(document, QtWebEngineCore.QPdfDocument):
-            path = os.fspath(document)
-            document = pdf.PdfDocument(self)
-            document.load(path)
-        self.setDocument(document)
+# class WebEngineHistoryModel(
+#     core.AbstractListModelMixin, QtWebEngineCore.QWebEngineHistoryModel
+# ):
+#     pass
 
 
 if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    # model = WebEngineHistoryModel()
+    model = WebEngineHistoryModel()
     widget = widgets.TableView()
     # widget.set_model(model)
     widget.show()

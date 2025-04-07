@@ -7,14 +7,6 @@ from prettyqt import core, pdf
 from prettyqt.utils import bidict, datatypes
 
 
-ROLE = bidict(
-    page=pdf.QPdfSearchModel.Role.Page,
-    index_on_page=pdf.QPdfSearchModel.Role.IndexOnPage,
-    location=pdf.QPdfSearchModel.Role.Location,
-    context_Before=pdf.QPdfSearchModel.Role.ContextBefore,
-    context_after=pdf.QPdfSearchModel.Role.ContextAfter,
-)
-
 RoleStr = Literal[
     "page",
     "index_on_page",
@@ -23,13 +15,22 @@ RoleStr = Literal[
     "context_after",
 ]
 
+ROLE = bidict[RoleStr, pdf.QPdfSearchModel.Role](
+    page=pdf.QPdfSearchModel.Role.Page,
+    index_on_page=pdf.QPdfSearchModel.Role.IndexOnPage,
+    location=pdf.QPdfSearchModel.Role.Location,
+    context_Before=pdf.QPdfSearchModel.Role.ContextBefore,
+    context_after=pdf.QPdfSearchModel.Role.ContextAfter,
+)
+
 
 class PdfSearchModel(core.AbstractItemModelMixin, pdf.QPdfSearchModel):
     """Searches for a string in a PDF document and holds the results."""
 
     def __init__(self, parent: core.QObject | None = None):
         super().__init__(parent)
-        self.setDocument(pdf.PdfDocument(self))
+        doc = pdf.PdfDocument(self)
+        self.setDocument(doc)
 
     def set_document(self, document: datatypes.PathType | pdf.QPdfDocument):
         """Set document for model."""

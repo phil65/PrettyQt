@@ -28,11 +28,13 @@ class InProcessIPythonWidget(ipython.BaseIPythonWidget):
         self.kernel_manager.kernel.gui = "qt"
         if importlib.util.find_spec("matplotlib"):
             self.kernel_manager.kernel.shell.enable_matplotlib(gui="inline")
-        self.kernel_client = self._kernel_manager.client()
+        self.kernel_client = self.kernel_manager.client()
         self.kernel_client.start_channels()
 
     def shutdown(self):
         logger.info("shutting down IPython kernel...")
+        assert self.kernel_manager
+        assert self.kernel_client
         self.kernel_client.stop_channels()
         self.kernel_manager.shutdown_kernel()
         logger.info("shutdown successful.")
@@ -43,12 +45,14 @@ class InProcessIPythonWidget(ipython.BaseIPythonWidget):
         Given a dictionary containing name / value pairs, push those variables
         to the IPython console widget.
         """
+        assert self.kernel_manager
         self.kernel_manager.kernel.shell.push(var_dict)
         for key in var_dict:
             self._append_plain_text(f'\nadded "{key}" object to namespace\n', True)
 
     def eval(self, obj_name):
         """Pull object with name *obj_name from namespace."""
+        assert self.kernel_manager
         try:
             data = self.kernel_manager.kernel.shell.ev(obj_name)
         except NameError:

@@ -56,7 +56,7 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
 
     @property
     def texteditor(self) -> widgets.QPlainTextEdit:  # to shut up linters
-        return self._control
+        return self._control  # type: ignore
 
     def adjust_style_to_palette(self):
         """Adjust coloring of the terminal to current palette."""

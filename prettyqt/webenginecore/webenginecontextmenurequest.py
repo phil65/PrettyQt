@@ -133,6 +133,4 @@ if __name__ == "__main__":
 
     app = widgets.app()
     page = webenginecore.WebEnginePage()
-    context_menu_data = page.get_context_menu_data()
-    print(context_menu_data.can_copy())
     app.exec()
