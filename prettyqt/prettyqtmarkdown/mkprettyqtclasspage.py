@@ -24,10 +24,8 @@ class QtParentContainerProcessor(processors.ContainerProcessor):
 
     def append_block(self, page: mknodes.MkPage):
         qt_parent = classhelpers.get_qt_parent_class(self.item)
-        if page.associated_project:
-            provider = page.associated_project.linkprovider
-        else:
-            provider = prettyqtmarkdown.QtLinkProvider()
+        assert qt_parent
+        provider = page.ctx.links if page.ctx else prettyqtmarkdown.QtLinkProvider()
         page += f"Qt Base Class: {provider.link_for_klass(qt_parent)}"
         page += f"Signature: `{qt_parent.__doc__}`"
 

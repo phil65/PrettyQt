@@ -401,9 +401,7 @@ if __name__ == "__main__":
                         )
                         return
             except ConnError as e:
-                widgets.MessageBox.critical(
-                    self, "Error", f"Error connecting to TheCatApi:\n{e}"
-                )
+                widgets.MessageBox.critical(self, "Error", e)
                 return
             finally:
                 self.progress_label.setText(f"Done, {downloaded_count} cats downloaded")
