@@ -44,9 +44,7 @@ Changelog = "https://github.com/phil65/prettyqt/blob/main/CHANGELOG.md"
 dev-dependencies = [
     "mypy",
     "types-Deprecated",
-    "types-orjson",
     "types-python-dateutil",
-    "types-requests",
     "pytest",
     "pytest-cov",
     "pytest-qt",
