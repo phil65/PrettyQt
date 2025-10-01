@@ -13,7 +13,7 @@ repos:
         pass_filenames: false
         always_run: true
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       # - id: trailing-whitespace
       # - id: check-ast
@@ -28,7 +28,7 @@ repos:
       # - id: check-added-large-files
   # https://pre-commit.com/hooks.html
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.4.1
+    rev: v4.9.1
     hooks:
       - id: commitizen
         stages: [commit-msg]
@@ -42,7 +42,7 @@ repos:
   #       exclude: '(sciscintilla)\.py'
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.11.3
+    rev: v0.13.2
     hooks:
       - id: ruff
       - id: ruff-format
