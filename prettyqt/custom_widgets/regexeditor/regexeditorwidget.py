@@ -5,7 +5,7 @@ from __future__ import annotations
 import pathlib
 import re
 from re import Match, Pattern
-import re._constants as sre_constants
+import re._constants as sre_constants  # pyright: ignore
 
 from prettyqt import constants, core, custom_widgets, itemmodels, widgets
 from prettyqt.syntaxhighlighters import RegexMatchHighlighter
@@ -56,7 +56,7 @@ class RegexEditorWidget(widgets.Widget):
         self._highlighter.rehighlight()
         self.regexinput.value_changed.connect(self._update_view)
         self.textedit_teststring.textChanged.connect(self._update_view)
-        self.regexinput.pattern = regex
+        self.regexinput.pattern = regex  # pyright: ignore
         groupbox = widgets.GroupBox(title="Regular expression")
         layout_toprow = widgets.HBoxLayout()
         layout_toprow.add(self.regexinput)
