@@ -255,5 +255,8 @@ combine-as-imports = true
 # Enable preview style formatting.
 preview = true
 
+[tool.uv]
+default-groups = ["dev", "lint", "docs"]
+
 [tool.uv.build-backend]
 module-root = ""
