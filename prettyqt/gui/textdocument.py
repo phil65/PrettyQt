@@ -9,11 +9,13 @@ import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import constants, core, gui
-from prettyqt.utils import bidict, datatypes, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
+
+    from prettyqt.utils import datatypes
 
 
 MarkdownFeatureStr = Literal["no_html", "commonmark", "github"]

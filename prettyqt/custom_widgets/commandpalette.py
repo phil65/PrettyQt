@@ -6,11 +6,13 @@ import pathlib
 from typing import TYPE_CHECKING
 
 from prettyqt import constants, core, gui, itemmodels, widgets
-from prettyqt.utils import colors, datatypes
+from prettyqt.utils import colors
 
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
+
+    from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)

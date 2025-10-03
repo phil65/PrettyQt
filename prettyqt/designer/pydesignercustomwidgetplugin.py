@@ -1,7 +1,13 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import core
-from prettyqt.qt import QtDesigner, QtWidgets
+from prettyqt.qt import QtDesigner
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
 
 
 class PyDesignerCustomWidgetPlugin(

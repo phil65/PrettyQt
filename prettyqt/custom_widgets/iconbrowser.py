@@ -1,10 +1,15 @@
 from __future__ import annotations
 
 import sys
+from typing import TYPE_CHECKING
 
 from prettyqt import constants, core, iconprovider, itemmodels, widgets
 from prettyqt.eventfilters import listviewgridresizeeventfilter
-from prettyqt.utils import colors, datatypes
+from prettyqt.utils import colors
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 # TODO: Set icon colour and copy code with color kwarg

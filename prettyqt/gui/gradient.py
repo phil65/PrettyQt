@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 from prettyqt import gui
-from prettyqt.utils import bidict, colors, datatypes
+from prettyqt.utils import bidict, colors
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 CoordinateModeStr = Literal["logical", "object", "stretch_to_device", "object_bounding"]

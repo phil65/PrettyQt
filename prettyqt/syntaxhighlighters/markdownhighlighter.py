@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import TYPE_CHECKING, ClassVar
 
-from prettyqt import core, gui, syntaxhighlighters
+from prettyqt import core, syntaxhighlighters
+
+
+if TYPE_CHECKING:
+    from prettyqt import gui
 
 
 BASE_FONT = 12.0

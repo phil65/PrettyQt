@@ -5,12 +5,14 @@ import logging
 import operator
 from typing import TYPE_CHECKING, Any, Literal
 
-from prettyqt import constants, core, gui, itemmodels, widgets
+from prettyqt import constants, core, itemmodels, widgets
 from prettyqt.utils import classhelpers, datatypes
 
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+
+    from prettyqt import gui
 
 
 logger = logging.getLogger(__name__)

@@ -1,7 +1,13 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import iconprovider
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtWidgets
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
 
 
 mod = QtWidgets.QStyle

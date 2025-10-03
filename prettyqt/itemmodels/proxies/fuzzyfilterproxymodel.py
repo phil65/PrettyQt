@@ -2,11 +2,16 @@ from __future__ import annotations
 
 import enum
 import logging
+from typing import TYPE_CHECKING
 
 import sublime_search
 
 from prettyqt import constants, core, gui
-from prettyqt.utils import colors, datatypes, fuzzy
+from prettyqt.utils import colors, fuzzy
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)

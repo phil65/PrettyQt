@@ -4,11 +4,13 @@ import functools
 import operator
 from typing import TYPE_CHECKING
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, widgets
 
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+
+    from prettyqt import gui
 
 
 class NumFilterWidget(widgets.Widget):

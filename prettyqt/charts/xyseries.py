@@ -1,8 +1,14 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import prettyqt
-from prettyqt import charts, core, gui
+from prettyqt import charts, gui
 from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 class XYSeriesMixin(charts.AbstractSeriesMixin):

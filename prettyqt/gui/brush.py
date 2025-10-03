@@ -1,7 +1,13 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import constants, gui
-from prettyqt.utils import datatypes, get_repr, serializemixin
+from prettyqt.utils import get_repr, serializemixin
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class Brush(serializemixin.SerializeMixin, gui.QBrush):

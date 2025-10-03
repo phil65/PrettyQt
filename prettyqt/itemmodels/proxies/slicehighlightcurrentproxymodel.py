@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, itemmodels
 from prettyqt.qt import QtGui
-from prettyqt.utils import colors, datatypes
+from prettyqt.utils import colors
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 HighlightModeStr = Literal["column", "row", "all"]

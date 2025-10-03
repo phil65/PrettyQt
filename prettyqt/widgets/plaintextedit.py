@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
-from prettyqt.utils import bidict, classhelpers, colors, datatypes, texteditselecter
+from prettyqt.utils import bidict, classhelpers, colors, texteditselecter
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 LINE_WRAP_MODE = bidict(

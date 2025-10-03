@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Iterator, MutableMapping
-from typing import Self
+from collections.abc import MutableMapping
+from typing import TYPE_CHECKING, Self
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class ProcessEnvironment(

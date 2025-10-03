@@ -4,11 +4,13 @@ import dataclasses
 import logging
 from typing import TYPE_CHECKING, Any
 
-from prettyqt import constants, core, itemmodels
+from prettyqt import constants, itemmodels
 
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+
+    from prettyqt import core
 
 
 logger = logging.getLogger(__name__)

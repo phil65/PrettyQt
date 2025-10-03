@@ -632,7 +632,7 @@ def get_editor_for_type(  # noqa: PLR0911
 T = TypeVar("T")
 
 
-def align_types(source: T, target: VariantType | tuple) -> T:  # noqa: PLR0911
+def align_types[T](source: T, target: VariantType | tuple) -> T:  # noqa: PLR0911
     """Align target to the type of source."""
     from prettyqt import core, gui
     from prettyqt.utils import colors

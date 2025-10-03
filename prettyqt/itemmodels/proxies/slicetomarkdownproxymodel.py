@@ -2,8 +2,13 @@ from __future__ import annotations
 
 import logging
 import re
+from typing import TYPE_CHECKING
 
-from prettyqt import constants, core, gui, itemmodels
+from prettyqt import constants, gui, itemmodels
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 def escaped(text: str, entity_type: str | None = None) -> str:

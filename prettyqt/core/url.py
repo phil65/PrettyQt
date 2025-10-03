@@ -2,10 +2,14 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import Any, Literal, Self
+from typing import TYPE_CHECKING, Any, Literal, Self
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict, datatypes, get_repr, serializemixin
+from prettyqt.utils import bidict, get_repr, serializemixin
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 ComponentFormattingStr = Literal[

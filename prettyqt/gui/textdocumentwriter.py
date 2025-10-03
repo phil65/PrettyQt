@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import os
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import datatypes, get_repr
+from prettyqt.utils import get_repr
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 FormatStr = Literal["plaintext", "HTML", "markdown", "ODF"]

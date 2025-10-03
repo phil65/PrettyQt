@@ -5,11 +5,13 @@ from typing import TYPE_CHECKING, Self
 
 from prettyqt import constants, core
 from prettyqt.qt import API, QtGui
-from prettyqt.utils import datatypes, serializemixin
+from prettyqt.utils import serializemixin
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
+
+    from prettyqt.utils import datatypes
 
 
 class Polygon(serializemixin.SerializeMixin, QtGui.QPolygon):

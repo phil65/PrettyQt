@@ -6,11 +6,13 @@ import re
 from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import colors, datatypes
+from prettyqt.utils import colors
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
+
+    from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)

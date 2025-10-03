@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import logging
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import mknodes
 
-from prettyqt import core, itemmodels
+from prettyqt import itemmodels
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 logger = logging.getLogger(__name__)

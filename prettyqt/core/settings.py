@@ -1,14 +1,18 @@
 from __future__ import annotations
 
-from collections.abc import Iterator, Mapping, MutableMapping, Sequence
+from collections.abc import MutableMapping
 import contextlib
 import logging
 import os
 import sys
-from typing import Any, Literal, Self
+from typing import TYPE_CHECKING, Any, Literal, Self
 
 from prettyqt import core
 from prettyqt.utils import bidict, datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator, Mapping, Sequence
 
 
 logger = logging.getLogger(__name__)

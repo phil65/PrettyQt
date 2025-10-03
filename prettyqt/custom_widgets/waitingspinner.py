@@ -28,9 +28,15 @@ SOFTWARE.
 from __future__ import annotations
 
 import math
+from typing import TYPE_CHECKING
 
-from prettyqt import constants, core, gui, widgets
-from prettyqt.utils import colors, datatypes
+from prettyqt import core, gui, widgets
+from prettyqt.utils import colors
+
+
+if TYPE_CHECKING:
+    from prettyqt import constants
+    from prettyqt.utils import datatypes
 
 
 class BaseWaitingSpinner(widgets.Widget):
@@ -205,7 +211,7 @@ class BaseWaitingSpinner(widgets.Widget):
         if count_distance == 0:
             return color
         min_alpha_f = min_opacity / 100
-        dist_threshold = int(math.ceil((total_lines - 1) * fade_perc / 100))
+        dist_threshold = math.ceil((total_lines - 1) * fade_perc / 100)
         if count_distance > dist_threshold:
             color.setAlphaF(min_alpha_f)
         else:

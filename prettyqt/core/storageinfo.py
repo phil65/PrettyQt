@@ -2,10 +2,14 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes, get_repr
+from prettyqt.utils import get_repr
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class StorageInfo(QtCore.QStorageInfo):

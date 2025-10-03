@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
-from prettyqt import constants, core, widgets
+from prettyqt import constants, widgets
 from prettyqt.utils import bidict
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 area = widgets.QAbstractScrollArea

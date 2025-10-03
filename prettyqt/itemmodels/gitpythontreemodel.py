@@ -4,11 +4,15 @@ import logging
 import os
 import pathlib
 import time
-from typing import ClassVar
+from typing import TYPE_CHECKING, ClassVar
 
 import git
 
-from prettyqt import constants, core, itemmodels
+from prettyqt import constants, itemmodels
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 logger = logging.getLogger(__name__)

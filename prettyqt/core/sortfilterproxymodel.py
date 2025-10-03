@@ -7,11 +7,13 @@ from typing import TYPE_CHECKING, Literal
 import sublime_search
 
 from prettyqt import constants, core
-from prettyqt.utils import bidict, datatypes
+from prettyqt.utils import bidict
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
+
+    from prettyqt.utils import datatypes
 
 
 class FilterMode(enum.IntEnum):

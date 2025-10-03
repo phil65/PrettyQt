@@ -3,10 +3,14 @@ from __future__ import annotations
 import base64
 import os
 import pathlib
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
 from prettyqt import constants, core, gui
-from prettyqt.utils import colors, datatypes, serializemixin
+from prettyqt.utils import colors, serializemixin
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):

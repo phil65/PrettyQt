@@ -3,10 +3,14 @@ from __future__ import annotations
 import hashlib
 import logging
 import pathlib
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import bidict, datatypes
+from prettyqt.utils import bidict
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)

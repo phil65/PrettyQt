@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 import os
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.utils import colors, datatypes, get_repr
+from prettyqt.utils import colors, get_repr
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class Label(widgets.FrameMixin, widgets.QLabel):

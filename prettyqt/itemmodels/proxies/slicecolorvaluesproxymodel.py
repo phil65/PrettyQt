@@ -2,10 +2,14 @@ from __future__ import annotations
 
 import enum
 import logging
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, itemmodels
-from prettyqt.utils import bidict, colors, datatypes, helpers
+from prettyqt.utils import bidict, colors, helpers
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)

@@ -4,11 +4,13 @@ from typing import TYPE_CHECKING
 
 from prettyqt import core
 from prettyqt.qt import QtNetwork
-from prettyqt.utils import datatypes, get_repr
+from prettyqt.utils import get_repr
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
+
+    from prettyqt.utils import datatypes
 
 
 class NetworkCookieJar(core.ObjectMixin, QtNetwork.QNetworkCookieJar):

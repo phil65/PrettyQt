@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from prettyqt import constants, core
+from prettyqt import core
 
 
 if TYPE_CHECKING:
-    from prettyqt import widgets
+    from prettyqt import constants, widgets
 
 
 class Animator(core.Object):

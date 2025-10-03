@@ -3,11 +3,12 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Self
 
 from prettyqt import gui
-from prettyqt.utils import datatypes, get_repr
+from prettyqt.utils import get_repr
 
 
 if TYPE_CHECKING:
     from prettyqt.qt import QtCore
+    from prettyqt.utils import datatypes
 
 
 class TextDocumentFragment(gui.QTextDocumentFragment):

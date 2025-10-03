@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import functools
-from typing import Literal, Self
+from typing import TYPE_CHECKING, Literal, Self
 
-from prettyqt import constants, core
+from prettyqt import core
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, get_repr
+
+
+if TYPE_CHECKING:
+    from prettyqt import constants
 
 
 SEQUENCE_MATCHES = bidict(

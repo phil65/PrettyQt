@@ -2,8 +2,13 @@ from __future__ import annotations
 
 import ast
 import logging
+from typing import TYPE_CHECKING
 
-from prettyqt import constants, core, custom_widgets, itemmodels, widgets
+from prettyqt import constants, custom_widgets, itemmodels, widgets
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 logger = logging.getLogger(__name__)

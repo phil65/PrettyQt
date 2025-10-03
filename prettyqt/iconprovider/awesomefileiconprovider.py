@@ -1,7 +1,13 @@
 from __future__ import annotations
 
-from prettyqt import gui, iconprovider, widgets
+from typing import TYPE_CHECKING
+
+from prettyqt import iconprovider, widgets
 from prettyqt.qt import QtCore
+
+
+if TYPE_CHECKING:
+    from prettyqt import gui
 
 
 class AwesomeFileIconProvider(widgets.FileIconProvider):

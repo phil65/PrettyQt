@@ -10,12 +10,13 @@ from typing import TYPE_CHECKING, ClassVar
 # from typing import TypedDict
 import fsspec
 
-from prettyqt import constants, core, gui, itemmodels, widgets
+from prettyqt import constants, core, itemmodels, widgets
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
+    from prettyqt import gui
     from prettyqt.itemmodels.columnitemmodel import ColumnItem
     from prettyqt.utils import datatypes
 

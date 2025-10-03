@@ -3,11 +3,13 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Literal, Self
 
 from prettyqt import constants, core, widgets
-from prettyqt.utils import bidict, listdelegators
+from prettyqt.utils import bidict
 
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterator, Sequence
+
+    from prettyqt.utils import listdelegators
 
 
 StandardButtonStr = Literal[

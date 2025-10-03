@@ -5,11 +5,13 @@ import pathlib
 from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, qt, widgets
-from prettyqt.utils import bidict, datatypes
+from prettyqt.utils import bidict
 
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
+
+    from prettyqt.utils import datatypes
 
 
 OptionStr = Literal["dont_watch_changes", "dont_resolve_symlinks", "no_custom_icons"]

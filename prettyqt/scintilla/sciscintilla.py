@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import gui, widgets
 from prettyqt.qt import Qsci  # type: ignore
-from prettyqt.utils import bidict, colors, datatypes
+from prettyqt.utils import bidict, colors
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 ARROW_MARKER_NUM = 8

@@ -5,11 +5,11 @@
 #   "pyside6",
 # ]
 # ///
+from __future__ import annotations
 
 import importlib
 import pkgutil
-import types
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
 import PyQt6
 import PySide6
@@ -17,6 +17,10 @@ import PySide6
 import prettyqt
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
+
+
+if TYPE_CHECKING:
+    import types
 
 
 OBSELETE = ["QPictureIO", "QDesktopWidget", "QDirModel"]

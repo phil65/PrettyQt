@@ -1,14 +1,17 @@
 """Module containing helper functions."""
+from __future__ import annotations
 
-from collections.abc import Iterable
 import enum
 import functools
 import logging
 import operator
 
-from typing import Any, TypeVar
+from typing import Any, TypeVar, TYPE_CHECKING
 
 import bidict as bdct
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 
 logger = logging.getLogger(__name__)

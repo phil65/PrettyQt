@@ -5,11 +5,13 @@ import traceback
 from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, gui, iconprovider, widgets
-from prettyqt.utils import bidict, datatypes
+from prettyqt.utils import bidict
 
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+
+    from prettyqt.utils import datatypes
 
 
 IconStr = Literal["none", "information", "warning", "critical", "question"]

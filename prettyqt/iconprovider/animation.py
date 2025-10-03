@@ -2,10 +2,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from prettyqt import core, gui
+from prettyqt import core
 
 
 if TYPE_CHECKING:
+    from prettyqt import gui
     from prettyqt.qt import QtWidgets
 
 

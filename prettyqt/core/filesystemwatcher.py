@@ -5,11 +5,13 @@ import pathlib
 from typing import TYPE_CHECKING
 
 from prettyqt import core
-from prettyqt.utils import datatypes, get_repr
+from prettyqt.utils import get_repr
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
+
+    from prettyqt.utils import datatypes
 
 
 class FileSystemWatcher(core.ObjectMixin, core.QFileSystemWatcher):

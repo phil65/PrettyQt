@@ -4,11 +4,13 @@ import enum
 import logging
 from typing import TYPE_CHECKING, Any
 
-from prettyqt import constants, core, gui, itemmodels
+from prettyqt import constants, core, itemmodels
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Sequence
+
+    from prettyqt import gui
 
 
 logger = logging.getLogger(__name__)

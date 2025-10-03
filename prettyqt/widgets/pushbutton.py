@@ -1,7 +1,13 @@
 from __future__ import annotations
 
-from prettyqt import core, gui, widgets
+from typing import TYPE_CHECKING
+
+from prettyqt import core, widgets
 from prettyqt.utils import get_repr
+
+
+if TYPE_CHECKING:
+    from prettyqt import gui
 
 
 class PushButtonMixin(widgets.AbstractButtonMixin):

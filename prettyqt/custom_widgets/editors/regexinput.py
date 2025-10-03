@@ -2,11 +2,14 @@ from __future__ import annotations
 
 import enum
 import re
-from re import Pattern
 import re._constants as sre_constants
-from typing import ClassVar
+from typing import TYPE_CHECKING, ClassVar
 
 from prettyqt import core, custom_widgets, widgets
+
+
+if TYPE_CHECKING:
+    from re import Pattern
 
 
 class RegexFlag(enum.IntEnum):

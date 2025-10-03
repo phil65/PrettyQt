@@ -1,7 +1,13 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import constants, core, gui, iconprovider, widgets
-from prettyqt.utils import colors, datatypes
+from prettyqt.utils import colors
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 TEXT_COLOR = gui.Color("lightgray")

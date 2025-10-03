@@ -2,10 +2,14 @@ from __future__ import annotations
 
 from collections.abc import Callable
 import re
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.utils import bidict, classhelpers, colors, datatypes, get_repr
+from prettyqt.utils import bidict, classhelpers, colors, get_repr
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 EchoModeStr = Literal["normal", "no_echo", "password", "echo_on_edit"]

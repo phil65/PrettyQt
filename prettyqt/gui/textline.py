@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import bidict, datatypes, get_repr
+from prettyqt.utils import bidict, get_repr
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 CursorPositionStr = Literal["cursor_between_characters", "cursor_on_character"]

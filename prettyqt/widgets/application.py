@@ -12,11 +12,13 @@ import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, paths, widgets
-from prettyqt.utils import datatypes, listdelegators
+from prettyqt.utils import datatypes
 
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterable, Iterator, Mapping, MutableMapping
+
+    from prettyqt.utils import listdelegators
 
 
 logger = logging.getLogger(__name__)

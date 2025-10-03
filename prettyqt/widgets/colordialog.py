@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import gui, widgets
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict, colors, datatypes
+from prettyqt.utils import bidict, colors
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 OptionStr = Literal["show_alpha", "no_buttons", "no_native"]

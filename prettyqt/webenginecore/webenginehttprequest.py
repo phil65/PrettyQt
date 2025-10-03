@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtWebEngineCore
-from prettyqt.utils import bidict, datatypes
+from prettyqt.utils import bidict
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 MethodStr = Literal["get", "post"]

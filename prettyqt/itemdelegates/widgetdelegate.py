@@ -1,6 +1,12 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, gui, widgets
+from typing import TYPE_CHECKING
+
+from prettyqt import constants, core, widgets
+
+
+if TYPE_CHECKING:
+    from prettyqt import gui
 
 
 class WidgetDelegate(widgets.StyledItemDelegate):

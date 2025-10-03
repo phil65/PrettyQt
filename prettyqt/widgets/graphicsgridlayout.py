@@ -1,9 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Iterator
+from collections.abc import Iterable
+from typing import TYPE_CHECKING
 
 from prettyqt import constants, widgets
 from prettyqt.utils import helpers, listdelegators
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 class GraphicsGridLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsGridLayout):

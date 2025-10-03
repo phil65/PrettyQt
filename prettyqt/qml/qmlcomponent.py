@@ -1,8 +1,14 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import core
 from prettyqt.qt import QtQml
-from prettyqt.utils import bidict, datatypes
+from prettyqt.utils import bidict
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 COMPILATION_MODES = bidict(

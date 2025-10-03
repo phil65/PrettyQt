@@ -7,14 +7,17 @@
 #   "packaging",
 # ]
 # ///
+from __future__ import annotations
 
 import inspect
 import pathlib
-from typing import Any
-
-from PySide6.QtWidgets import QWidget
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import custom_widgets, widgets
+
+
+if TYPE_CHECKING:
+    from PySide6.QtWidgets import QWidget
 
 
 def create_widget_instance(widget_class: type[QWidget]) -> QWidget | None:

@@ -1,12 +1,16 @@
 from __future__ import annotations
 
-from collections.abc import Generator, Sequence
+from collections.abc import Sequence
 import functools
 import logging
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.utils import bidict, classhelpers, datatypes, listdelegators
+
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 
 DelegateStr = Literal[

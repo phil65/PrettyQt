@@ -1,6 +1,12 @@
 from __future__ import annotations
 
-from prettyqt import core, gui, widgets
+from typing import TYPE_CHECKING
+
+from prettyqt import widgets
+
+
+if TYPE_CHECKING:
+    from prettyqt import core, gui
 
 
 # https://stackoverflow.com/a/55252650/3620725

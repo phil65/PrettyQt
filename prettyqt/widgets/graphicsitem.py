@@ -1,10 +1,15 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, gui
-from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import bidict, datatypes, get_repr, listdelegators
+from prettyqt.qt import QtWidgets
+from prettyqt.utils import bidict, get_repr, listdelegators
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+    from prettyqt.utils import datatypes
 
 
 PanelModalityStr = Literal["none", "panel", "scene"]

@@ -2,10 +2,14 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core, qml
-from prettyqt.utils import bidict, datatypes
+from prettyqt.utils import bidict
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 ObjectOwnershipStr = Literal["cpp", "javascript"]

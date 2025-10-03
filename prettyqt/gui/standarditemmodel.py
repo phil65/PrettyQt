@@ -3,11 +3,13 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.utils import datatypes, helpers, listdelegators
+from prettyqt.utils import helpers, listdelegators
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
+
+    from prettyqt.utils import datatypes
 
 
 class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):

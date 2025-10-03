@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Iterator, Mapping
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, Literal
 
-from prettyqt import constants, core, iconprovider, widgets
+from prettyqt import core, iconprovider, widgets
 
 
 if TYPE_CHECKING:
+    from collections.abc import Iterable, Iterator
+
+    from prettyqt import constants
     from prettyqt.utils import datatypes
 
 

@@ -1,10 +1,15 @@
 from __future__ import annotations
 
 import logging
+from typing import TYPE_CHECKING
 
 from mknodes.utils import connector
 
-from prettyqt import constants, core
+from prettyqt import constants
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 logger = logging.getLogger(__name__)

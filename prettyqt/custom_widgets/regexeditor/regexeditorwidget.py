@@ -4,11 +4,15 @@ from __future__ import annotations
 
 import pathlib
 import re
-from re import Match, Pattern
 import re._constants as sre_constants  # pyright: ignore
+from typing import TYPE_CHECKING
 
 from prettyqt import constants, core, custom_widgets, itemmodels, widgets
 from prettyqt.syntaxhighlighters import RegexMatchHighlighter
+
+
+if TYPE_CHECKING:
+    from re import Match, Pattern
 
 
 REF_HTML_FILE = pathlib.Path(__file__).parent / "ref.html"

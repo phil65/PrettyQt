@@ -1,9 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Sequence
+from collections.abc import Sequence
 import logging
+from typing import TYPE_CHECKING
 
 from prettyqt import core, eventfilters
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 logger = logging.getLogger(__name__)

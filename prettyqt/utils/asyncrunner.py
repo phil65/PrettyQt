@@ -3,13 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import (
-    AsyncIterator,
     Awaitable,
-    Callable,
-    Coroutine,
-    Generator,
-    Iterable,
-    Iterator,
 )
 from concurrent.futures import Future, ThreadPoolExecutor
 from contextlib import suppress
@@ -20,9 +14,22 @@ import logging
 import os
 import threading
 import time
-from typing import Any, ParamSpec, Self, TypeVar, cast
+from typing import TYPE_CHECKING, Any, ParamSpec, Self, TypeVar, cast
 
 from prettyqt import core
+
+
+if TYPE_CHECKING:
+    from collections.abc import (
+        AsyncIterator,
+        Callable,
+        Coroutine,
+        Generator,
+        Iterable,
+        Iterator,
+    )
+
+    from requests import Response
 
 
 log = logging.getLogger(__name__)
@@ -332,7 +339,6 @@ if __name__ == "__main__":
     from urllib.parse import urlsplit
 
     import requests
-    from requests import Response
     from requests.exceptions import ConnectionError as ConnError
 
     from prettyqt import widgets

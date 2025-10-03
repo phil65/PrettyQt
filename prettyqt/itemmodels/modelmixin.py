@@ -1,8 +1,12 @@
 from __future__ import annotations
 
-from typing import Any, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
-from prettyqt import constants, core
+from prettyqt import constants
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 class ModelMixin:

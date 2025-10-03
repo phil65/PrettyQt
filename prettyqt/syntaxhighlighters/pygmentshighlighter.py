@@ -2,13 +2,17 @@ from __future__ import annotations
 
 import functools
 import logging
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
-from pygments import lexer, lexers, style, styles
+from pygments import lexer, lexers, styles
 from pygments.formatters import html
 
 from prettyqt import core, gui, paths
 from prettyqt.utils import get_repr
+
+
+if TYPE_CHECKING:
+    from pygments import style
 
 
 logger = logging.getLogger(__name__)

@@ -4,10 +4,14 @@
 
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import colors, datatypes
+from prettyqt.utils import colors
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy

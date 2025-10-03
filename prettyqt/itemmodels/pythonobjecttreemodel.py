@@ -1,14 +1,20 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Iterable, Mapping
+from collections.abc import Iterable, Mapping
 import contextlib
 from difflib import SequenceMatcher
 import inspect
 import logging
 import pprint
-from typing import ClassVar
+from typing import TYPE_CHECKING, ClassVar
 
-from prettyqt import constants, core, gui, itemmodels
+from prettyqt import constants, gui, itemmodels
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from prettyqt import core
 
 
 logger = logging.getLogger(__name__)

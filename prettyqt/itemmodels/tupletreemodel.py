@@ -3,9 +3,13 @@ from __future__ import annotations
 from collections.abc import Hashable
 import logging
 import pathlib
-from typing import ClassVar
+from typing import TYPE_CHECKING, ClassVar
 
-from prettyqt import constants, core, itemmodels
+from prettyqt import constants, itemmodels
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 logger = logging.getLogger(__name__)

@@ -1,15 +1,18 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Iterator, Mapping
+from collections.abc import Iterable, Mapping
 import functools
 from typing import TYPE_CHECKING, Any
 
 from prettyqt import constants, core, iconprovider, widgets
-from prettyqt.utils import datatypes, listdelegators
+from prettyqt.utils import listdelegators
 
 
 if TYPE_CHECKING:
+    from collections.abc import Iterator
+
     from prettyqt.qt import QtGui
+    from prettyqt.utils import datatypes
 
 
 class NoData:

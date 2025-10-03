@@ -3,10 +3,14 @@ from __future__ import annotations
 from collections.abc import Sequence
 import dataclasses
 import logging
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from prettyqt import constants, core, itemmodels
+from prettyqt import constants, itemmodels
 from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 logger = logging.getLogger(__name__)

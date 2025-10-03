@@ -1,7 +1,12 @@
-from collections.abc import Callable, Iterable
-from typing import Any
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import constants, core
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterable
 
 
 class ListMixin:

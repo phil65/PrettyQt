@@ -1,7 +1,13 @@
 from __future__ import annotations
 
-from prettyqt import core, widgets
+from typing import TYPE_CHECKING
+
+from prettyqt import widgets
 from prettyqt.qt import QtGui
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 class StatusBar(widgets.WidgetMixin, widgets.QStatusBar):

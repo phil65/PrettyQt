@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
 
 
 CorrectionModeStr = Literal["to_previous", "to_nearest"]

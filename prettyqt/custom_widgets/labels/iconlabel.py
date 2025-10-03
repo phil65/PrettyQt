@@ -1,7 +1,13 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import iconprovider, widgets
-from prettyqt.utils import datatypes, get_repr
+from prettyqt.utils import get_repr
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class IconLabel(widgets.Widget):

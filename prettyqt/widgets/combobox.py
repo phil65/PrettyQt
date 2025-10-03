@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping
-from typing import Any, Literal
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, Literal
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.utils import bidict, datatypes
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 
 mod = widgets.QComboBox

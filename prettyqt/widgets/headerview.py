@@ -1,12 +1,16 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping, MutableMapping
+from collections.abc import Iterable
 import hashlib
 import logging
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import bidict
+
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping, MutableMapping
 
 
 ResizeModeStr = Literal["interactive", "fixed", "stretch", "resize_to_contents"]

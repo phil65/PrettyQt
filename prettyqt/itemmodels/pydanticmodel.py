@@ -2,10 +2,15 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 import logging
+from typing import TYPE_CHECKING
 
 import pydantic
 
-from prettyqt import constants, core, itemmodels
+from prettyqt import constants, itemmodels
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 logger = logging.getLogger(__name__)

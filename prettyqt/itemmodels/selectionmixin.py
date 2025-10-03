@@ -2,11 +2,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, ClassVar
 
-from prettyqt import constants, core
+from prettyqt import constants
 
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+
+    from prettyqt import core
 
 
 class SelectionMixin:

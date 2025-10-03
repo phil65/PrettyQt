@@ -166,7 +166,7 @@ def get_qt_parent_class(klass: type, only_direct: bool = False) -> type | None:
     )
 
 
-def get_class_for_id(base_class: T, id_: str) -> T:
+def get_class_for_id[T: type](base_class: T, id_: str) -> T:
     """Get subclass of base class which has an attribute "ID" with given id.
 
     Arguments:

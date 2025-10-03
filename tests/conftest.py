@@ -3,11 +3,16 @@
 from __future__ import annotations
 
 import sys
+from typing import TYPE_CHECKING
 
 import pytest
 
 from prettyqt import constants, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
 
 
 # import pytest

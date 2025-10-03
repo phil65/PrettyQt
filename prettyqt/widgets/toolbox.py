@@ -3,11 +3,13 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from prettyqt import gui, iconprovider, widgets
-from prettyqt.utils import datatypes, listdelegators
+from prettyqt.utils import listdelegators
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
+
+    from prettyqt.utils import datatypes
 
 
 class ToolBox(widgets.FrameMixin, widgets.QToolBox):

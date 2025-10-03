@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 import logging
-from typing import ClassVar
+from typing import TYPE_CHECKING, ClassVar
 
 import attr
 import attrs
 
-from prettyqt import constants, core, gui, itemmodels
+from prettyqt import constants, gui, itemmodels
 from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 logger = logging.getLogger(__name__)

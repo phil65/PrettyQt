@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from typing import Literal, Self
+from typing import TYPE_CHECKING, Literal, Self
 
 from prettyqt import gui
-from prettyqt.utils import bidict, colors, datatypes, get_repr, serializemixin
+from prettyqt.utils import bidict, colors, get_repr, serializemixin
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 RoleStr = Literal[

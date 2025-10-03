@@ -5,11 +5,13 @@ import os
 from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.utils import bidict, datatypes, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+
+    from prettyqt.utils import datatypes
 
 
 ActionEventStr = Literal["trigger", "hover"]

@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, colors, datatypes, texteditselecter
+from prettyqt.utils import bidict, colors, texteditselecter
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 AutoFormattingStr = Literal["none", "bullet_list", "all"]
