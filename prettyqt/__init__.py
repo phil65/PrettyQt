@@ -1,8 +1,13 @@
 """Top-level package for PrettyQt."""
 
+from importlib.metadata import version as _metadata_version
+import importlib
+import logging
+import inspect
+
 __author__ = """Philipp Temminghoff"""
 __email__ = "phil65@kodi.tv"
-__version__ = "1.59.1"
+__version__ = _metadata_version("llmling-agent")
 
 # import os
 
@@ -10,8 +15,6 @@ __version__ = "1.59.1"
 
 
 def import_all():
-    import importlib
-    import logging
     from prettyqt import qt
 
     logger = logging.getLogger(__name__)
@@ -27,8 +30,6 @@ def import_all():
 
 def debug():
     """Print the local variables in the caller's frame."""
-    import inspect
-
     frame = inspect.currentframe()
     stack = inspect.stack()
     if frame is None or frame.f_back is None:
