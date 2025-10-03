@@ -4,7 +4,7 @@ from ctypes import POINTER, Structure, byref, c_bool, c_int, cdll, pointer, size
 from ctypes.wintypes import BOOL, DWORD, HRGN, LONG, LPCVOID, ULONG
 import enum
 import sys
-from typing import SupportsInt
+from typing import ClassVar, SupportsInt
 
 import win32con
 import win32gui
@@ -30,7 +30,7 @@ class DWMNCRENDERINGPOLICY(enum.Enum):
 
 
 class ACCENT_POLICY(Structure):  # noqa: N801
-    _fields_ = [
+    _fields_: ClassVar = [
         ("AccentState", DWORD),
         ("AccentFlags", DWORD),
         ("GradientColor", DWORD),
@@ -39,7 +39,7 @@ class ACCENT_POLICY(Structure):  # noqa: N801
 
 
 class WINDOWCOMPOSITIONATTRIBDATA(Structure):
-    _fields_ = [
+    _fields_: ClassVar = [
         ("Attribute", DWORD),
         ("Data", POINTER(ACCENT_POLICY)),
         ("SizeOfData", ULONG),
@@ -47,7 +47,7 @@ class WINDOWCOMPOSITIONATTRIBDATA(Structure):
 
 
 class MARGINS(Structure):
-    _fields_ = [
+    _fields_: ClassVar = [
         ("cxLeftWidth", c_int),
         ("cxRightWidth", c_int),
         ("cyTopHeight", c_int),
@@ -56,7 +56,7 @@ class MARGINS(Structure):
 
 
 class DWM_BLURBEHIND(Structure):  # noqa: N801
-    _fields_ = [
+    _fields_: ClassVar = [
         ("dwFlags", DWORD),
         ("fEnable", BOOL),
         ("hRgnBlur", HRGN),

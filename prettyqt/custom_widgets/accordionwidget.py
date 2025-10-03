@@ -321,10 +321,10 @@ class AccordionItem(widgets.GroupBox):
 
 
 class AccordionWidget(widgets.ScrollArea):
-    itemCollapsed = core.Signal(AccordionItem)
-    itemMenuRequested = core.Signal(AccordionItem)
-    itemDragFailed = core.Signal(AccordionItem)
-    itemsReordered = core.Signal()
+    itemCollapsed = core.Signal(AccordionItem)  # noqa: N815
+    itemMenuRequested = core.Signal(AccordionItem)  # noqa: N815
+    itemDragFailed = core.Signal(AccordionItem)  # noqa: N815
+    itemsReordered = core.Signal()  # noqa: N815
 
     class RolloutStyle(enum.IntEnum):
         """Rollout style for the widget."""
