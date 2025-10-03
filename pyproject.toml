@@ -1,231 +1,101 @@
 [project]
 name = "PrettyQt"
-dynamic = ["version"]
+version = "1.59.1"
 description = "A pythonic layer on top of PyQt6 / PySide6"
-readme = 'README.md'
+readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 authors = [
-    { name = "Philipp Temminghoff", email = "philipptemminghoff@gmail.com" },
+  { name = "Philipp Temminghoff", email = "philipptemminghoff@gmail.com" },
 ]
+keywords = ["components", "framework", "gui", "pyqt", "pyside", "qt", "widgets"]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "Environment :: X11 Applications :: Qt",
-    "Intended Audience :: Developers",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Topic :: Desktop Environment",
-    "Topic :: Software Development :: User Interfaces",
-    "Topic :: Software Development :: Widget Sets",
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: X11 Applications :: Qt",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Desktop Environment",
+  "Topic :: Software Development :: User Interfaces",
+  "Topic :: Software Development :: Widget Sets",
 ]
-keywords = ["qt", "pyqt", "pyside", "widgets", "components", "framework", "gui"]
 dependencies = [
-    "bidict",
-    "pywin32;platform_system == 'Windows'",
-    "comtypes;platform_system == 'Windows'",
-    "pygments",
-    "qstylizer",
-    "typing-extensions",
-    "sublime-search>=0.1.2",
-    "anyenv>=0.4.6",
+  "anyenv>=0.4.6",
+  "bidict",
+  "comtypes;platform_system == 'Windows'",
+  "pygments",
+  "pywin32;platform_system == 'Windows'",
+  "qstylizer",
+  "sublime-search>=0.1.2",
+  "typing-extensions",
 ]
 # dynamic = ["version"]
 
 [project.urls]
+Changelog = "https://github.com/phil65/prettyqt/blob/main/CHANGELOG.md"
 Documentation = "https://phil65.github.io/PrettyQt/index.html"
 Source = "https://github.com/phil65/prettyqt"
 Tracker = "https://github.com/phil65/prettyqt/issues"
-Changelog = "https://github.com/phil65/prettyqt/blob/main/CHANGELOG.md"
-
-[tool.uv]
-dev-dependencies = [
-    "mypy",
-    "types-Deprecated",
-    "types-python-dateutil",
-    "pytest",
-    "pytest-cov",
-    "pytest-qt",
-    "pytest-xvfb;platform_system == 'Linux'",
-    "coverage",
-    "mkdocs",
-    "mkdocs-material",
-    "mkdocs_mknodes",
-    "mkdocstrings[python]",
-    "pymdown-extensions",
-    "mkdocs-glightbox",
-    "markdown-exec",
-    "pyreadline3",
-    "devtools",
-]
-
-[project.optional-dependencies]
-
-addons = ["orjson", "fsspec", "pillow", "numpy", "qtconsole", "ipython", "lxml"]
-pyqt6 = ["PyQt6", "PyQt6-Charts", "PyQt6-WebEngine", "PyQt6-QScintilla"]
-pyside6 = ["pyside6", "PySide6-Addons"]
 
 [project.gui-scripts]
-regexeditor = "prettyqt.custom_widgets.regexeditor.__main__:run"
 iconbrowser = "prettyqt.custom_widgets.iconbrowser:run"
+regexeditor = "prettyqt.custom_widgets.regexeditor.__main__:run"
 
 [project.entry-points.pyinstaller40]
 hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
 
-[tool.pytest.ini_options]
-minversion = "7.0"
-testpaths = ["tests"]
-junit_family = "xunit2"
-qt_qapp_name = "prettyqt-test"
-# qt_api = "pyside6"
-qt_log_level_fail = "CRITICAL"
-log_cli = true
-log_format = "%(asctime)s %(levelname)s %(message)s"
-log_date_format = "%Y-%m-%d %H:%M:%S"
+[project.optional-dependencies]
+addons = ["orjson", "fsspec", "pillow", "numpy", "qtconsole", "ipython", "lxml"]
+pyqt6 = ["PyQt6", "PyQt6-Charts", "PyQt6-WebEngine", "PyQt6-QScintilla"]
+pyside6 = ["pyside6", "PySide6-Addons"]
+
+[dependency-groups]
+dev = [
+  "coverage",
+  "devtools",
+  "markdown-exec",
+  "mkdocs",
+  "mkdocs-glightbox",
+  "mkdocs-material",
+  "mkdocs_mknodes",
+  "mkdocstrings[python]",
+  "mypy",
+  "pymdown-extensions",
+  "pyreadline3",
+  "pytest",
+  "pytest-cov",
+  "pytest-qt",
+  "pytest-xvfb;platform_system == 'Linux'",
+  "types-Deprecated",
+  "types-python-dateutil",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.22"]
+build-backend = "uv_build"
 
 [tool.coverage.report]
 exclude_lines = [
-    "pragma: no cover",
-    "if TYPE_CHECKING:",
-    "@overload",
-    "except ImportError",
-    'if __name__ == "__main__":',
+  "pragma: no cover",
+  "if TYPE_CHECKING:",
+  "@overload",
+  "except ImportError",
+  'if __name__ == "__main__":',
 ]
 
 [tool.mypy]
 python_version = "3.12"
 disable_error_code = [
-    "assignment",
-    "misc",
-    "attr-defined",
-    "import",
-    "misc",
-    "attr-defined",
+  "assignment",
+  "misc",
+  "attr-defined",
+  "import",
+  "misc",
+  "attr-defined",
 ]
-
-[tool.ruff]
-line-length = 90
-extend-exclude = ['docs', "prettyqt/qt/"]
-target-version = "py312"
-
-[tool.ruff.lint]
-select = [
-    "A", # Flake8-builtins
-    # "ANN",  # Flake8-Annotations
-    # "ASYNC",  # Flake8-Async
-    # "ARG",  # # Flake8-Unused-Arguments
-    "B",   # flake8-bugbear
-    "BLE", # Flake8-blind-except
-    "C",
-    "C4",  # flake8-comprehensions
-    # "C90",  # MCCabe
-    "COM", #  Flake8-commas
-    # "CPY",  #  Copyright-related rules
-    "D", # PyDocStyle
-    # "DTZ",  # Flake8- Datetimez
-    "E",  # PyCodeStyle Error
-    "EM", # flake8-errmsg
-    # "ERA",  #  Eradicate
-    "EXE", # flake8-executable
-    "F",   # PyFlakes
-    "FA",  # flake8-future-annotations
-    # "FBT",  # flake8-boolean-trap
-    # "FIX",  # flake8-fixme
-    "FLY", # flynt
-    "G",   #  flake8-logging-format
-    "I",   # ISort
-    "ICN", # Flake8-import-conventions
-    "INP", # flake8-no-pep420
-    "INT", # flake8-gettext
-    "ISC", # flake8-implicit-str-concat
-    "N",   # pep8-naming
-    # "NPY",  # numpy-specific rules
-    # "PD",   # pandas-vet
-    "PERF", # perflint
-    # "PGH",  # pygrep-hooks
-    "PIE", # flake8-pie
-    "PLE", # PyLint Error
-    "PLC", # PyLint convention
-    # "PLW",  # PyLint Warning
-    "PLR", # PyLint refactor
-    "PT",  # flake8-pytest-style
-    "PTH", # flake8-use-pathlib
-    "PYI", # flake8-pyi
-    "Q",   # flake8-quotes
-    "RET", # flake8-return
-    "RSE", # flake8-raise
-    "RUF", # ruff-specific rules
-    # "S",    # flake8-bandit
-    "SIM",  # flake8-simplify
-    "SLF",  # flake8-self
-    "SLOT", # flake8-slots
-    # "T",
-    # "TD",   # flake8-todos
-    "T10", # flake8-debugger
-    # "T20",  # flake8-print
-    "TC",  # flake8-type-checking
-    "TID", # flake8-tidy-imports
-    "TRY", # tryceratops
-    "UP",  # PyUpgrade
-    "W",   # PyCodeStyle warning
-    "YTT", # flake8-2020
-]
-ignore = [
-    "C408",   # Unnecessary {obj_type} call (rewrite as a literal)
-    "B905",   # zip() without an explicit strict= parameter
-    "C901",   # {name} is too complex ({complexity} > {max_complexity})
-    "COM812",
-    # "CPY001", # Missing copyright notice at top of file
-    "D100",    # Missing docstring in public module
-    "D101",    # Missing docstring in public class
-    "D102",    # Missing docstring in public method
-    "D103",    # Missing docstring in public function
-    "D104",    # Missing docstring in public package
-    "D105",    # Missing docstring in magic method
-    "D106",    # Missing docstring in public nested class
-    "D107",    # Missing docstring in __init__
-    "D203",    # 1 blank line required before class docstring
-    "D204",    # 1 blank line required after class docstring
-    "D213",    # Multi-line docstring summary should start at the second line
-    "D215",    # Section underline is over-indented ("{name}")
-    "D400",    # First line should end with a period
-    "D401",    # First line of docstring should be in imperative mood: "{first_line}"
-    "D404",    # First word of the docstring should not be "This"
-    "D406",    # Section name should end with a newline ("{name}")
-    "D407",    # Missing dashed underline after section ("{name}")
-    "D408",    # Section underline should be in the line following the section's name ("{name}")
-    "D409",    # Section underline should match the length of its name ("{name}")
-    "D413",    # Missing blank line after last section ("{name}")
-    "N802",    # Function name should be lowercase
-    "ISC001",
-    "PLR0912", # Too many branches
-    "PLR0913", # Too many arguments to function call
-    "PLR0915", # Too many statements
-    # "PLR2004", # Magic values instead of named consts
-    "SLF001", # Private member accessed
-    "TRY003", # Avoid specifying long messages outside the exception class
-    "TC006",
-]
-
-[tool.ruff.lint.flake8-quotes]
-docstring-quotes = "double"
-
-[tool.ruff.format]
-# Enable preview style formatting.
-preview = true
-
-[tool.ruff.lint.isort]
-lines-after-imports = 2
-# lines-between-types = 1
-# atomic = true
-force-sort-within-sections = true
-combine-as-imports = true
-
-[tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["E402", "I001"]
-"scripts/*" = ["INP001"]
 
 [tool.pyright]
 venvPath = "."
@@ -246,13 +116,139 @@ reportUnannotatedClassAttribute = false
 reportSelfClsParameterName = false
 reportPrivateImportUsage = false
 
+[tool.pytest.ini_options]
+junit_family = "xunit2"
+log_cli = true
+log_date_format = "%Y-%m-%d %H:%M:%S"
+log_format = "%(asctime)s %(levelname)s %(message)s"
+minversion = "7.0"
+testpaths = ["tests"]
+qt_qapp_name = "prettyqt-test"
+# qt_api = "pyside6"
+qt_log_level_fail = "CRITICAL"
 
-[tool.hatch.version]
-source = "regex_commit"
-commit_extra_args = ["-e"]
-path = "prettyqt/__init__.py"
+[tool.ruff]
+line-length = 90
+extend-exclude = ["docs", "prettyqt/qt/"]
+target-version = "py312"
 
+[tool.ruff.lint]
+future-annotations = true
+select = [
+  "A",  # Flake8-builtins
+  # "ANN",  # Flake8-Annotations
+  # "ASYNC",  # Flake8-Async
+  # "ARG",  # # Flake8-Unused-Arguments
+  "B",  # flake8-bugbear
+  "BLE",  # Flake8-blind-except
+  "C",
+  "C4",  # flake8-comprehensions
+  # "C90",  # MCCabe
+  "COM",  # Flake8-commas
+  # "CPY",  #  Copyright-related rules
+  "D",  # PyDocStyle
+  # "DTZ",  # Flake8- Datetimez
+  "E",  # PyCodeStyle Error
+  "EM",  # flake8-errmsg
+  # "ERA",  #  Eradicate
+  "EXE",  # flake8-executable
+  "F",  # PyFlakes
+  "FA",  # flake8-future-annotations
+  # "FBT",  # flake8-boolean-trap
+  # "FIX",  # flake8-fixme
+  "FLY",  # flynt
+  "G",  # flake8-logging-format
+  "I",  # ISort
+  "ICN",  # Flake8-import-conventions
+  "INP",  # flake8-no-pep420
+  "INT",  # flake8-gettext
+  "ISC",  # flake8-implicit-str-concat
+  "N",  # pep8-naming
+  # "NPY",  # numpy-specific rules
+  # "PD",   # pandas-vet
+  "PERF",  # perflint
+  # "PGH",  # pygrep-hooks
+  "PIE",  # flake8-pie
+  "PLE",  # PyLint Error
+  "PLC",  # PyLint convention
+  # "PLW",  # PyLint Warning
+  "PLR",  # PyLint refactor
+  "PT",  # flake8-pytest-style
+  "PTH",  # flake8-use-pathlib
+  "PYI",  # flake8-pyi
+  "Q",  # flake8-quotes
+  "RET",  # flake8-return
+  "RSE",  # flake8-raise
+  "RUF",  # ruff-specific rules
+  # "S",    # flake8-bandit
+  "SIM",  # flake8-simplify
+  "SLF",  # flake8-self
+  "SLOT",  # flake8-slots
+  # "T",
+  # "TD",   # flake8-todos
+  "T10",  # flake8-debugger
+  # "T20",  # flake8-print
+  "TC",  # flake8-type-checking
+  "TID",  # flake8-tidy-imports
+  "TRY",  # tryceratops
+  "UP",  # PyUpgrade
+  "W",  # PyCodeStyle warning
+  "YTT",  # flake8-2020
+]
+ignore = [
+  "C408",  # Unnecessary {obj_type} call (rewrite as a literal)
+  "B905",  # zip() without an explicit strict= parameter
+  "C901",  # {name} is too complex ({complexity} > {max_complexity})
+  "COM812",
+  # "CPY001", # Missing copyright notice at top of file
+  "D100",  # Missing docstring in public module
+  "D101",  # Missing docstring in public class
+  "D102",  # Missing docstring in public method
+  "D103",  # Missing docstring in public function
+  "D104",  # Missing docstring in public package
+  "D105",  # Missing docstring in magic method
+  "D106",  # Missing docstring in public nested class
+  "D107",  # Missing docstring in __init__
+  "D203",  # 1 blank line required before class docstring
+  "D204",  # 1 blank line required after class docstring
+  "D213",  # Multi-line docstring summary should start at the second line
+  "D215",  # Section underline is over-indented ("{name}")
+  "D400",  # First line should end with a period
+  "D401",  # First line of docstring should be in imperative mood: "{first_line}"
+  "D404",  # First word of the docstring should not be "This"
+  "D406",  # Section name should end with a newline ("{name}")
+  "D407",  # Missing dashed underline after section ("{name}")
+  "D408",  # Section underline should be in the line following the section's name ("{name}")
+  "D409",  # Section underline should match the length of its name ("{name}")
+  "D413",  # Missing blank line after last section ("{name}")
+  "N802",  # Function name should be lowercase
+  "ISC001",
+  "PLR0912",  # Too many branches
+  "PLR0913",  # Too many arguments to function call
+  "PLR0915",  # Too many statements
+  # "PLR2004", # Magic values instead of named consts
+  "SLF001",  # Private member accessed
+  "TRY003",  # Avoid specifying long messages outside the exception class
+  "TC006",
+]
 
-[build-system]
-requires = ["hatchling", "hatch-regex-commit"]
-build-backend = "hatchling.build"
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+# lines-between-types = 1
+# atomic = true
+force-sort-within-sections = true
+combine-as-imports = true
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402", "I001"]
+"scripts/*" = ["INP001"]
+
+[tool.ruff.format]
+# Enable preview style formatting.
+preview = true
+
+[tool.uv.build-backend]
+module-root = ""
