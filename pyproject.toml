@@ -56,14 +56,6 @@ pyside6 = ["pyside6", "PySide6-Addons"]
 dev = [
   "coverage",
   "devtools",
-  "markdown-exec",
-  "mkdocs",
-  "mkdocs-glightbox",
-  "mkdocs-material",
-  "mkdocs_mknodes",
-  "mkdocstrings[python]",
-  "mypy",
-  "pymdown-extensions",
   "pyreadline3",
   "pytest",
   "pytest-cov",
@@ -71,6 +63,19 @@ dev = [
   "pytest-xvfb;platform_system == 'Linux'",
   "types-Deprecated",
   "types-python-dateutil",
+]
+docs = [
+  "markdown-exec",
+  "mkdocs",
+  "mkdocs-glightbox",
+  "mkdocs-material",
+  "mkdocs_mknodes",
+  "mkdocstrings[python]",
+  "pymdown-extensions",
+]
+lint = [
+  "mypy",
+  "ruff",
 ]
 
 [build-system]
