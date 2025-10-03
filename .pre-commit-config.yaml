@@ -42,7 +42,7 @@ repos:
     #       exclude: '(sciscintilla)\.py'
 
     - repo: https://github.com/charliermarsh/ruff-pre-commit
-      rev: v0.13.2
+      rev: v0.13.3
       hooks:
           - id: ruff
           - id: ruff-format
