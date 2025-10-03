@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from typing import Literal
 
 from duty import duty
 
@@ -81,7 +82,29 @@ def profile(ctx, *args: str):
 
 
 @duty(capture=False)
-def version(ctx, *args: str):
-    """Bump package version."""
-    args_str = " " + " ".join(args) if args else ""
-    ctx.run(f"hatch version{args_str}")
+def version(
+    ctx,
+    bump_type: Literal[
+        "major", "minor", "patch", "stable", "alpha", "beta", "rc", "post", "dev"
+    ] = "patch",
+):
+    """Release a new version with git operations. (major|minor|patch|stable|alpha|beta|rc|post|dev)."""  # noqa: E501
+    # Check for uncommitted changes
+    result = ctx.run("git status --porcelain", capture=True)
+    if result.strip():
+        msg = "Cannot release with uncommitted changes. Please commit or stash first."
+        raise RuntimeError(msg)
+
+    # Read current version
+    old_version = ctx.run("uv version --short", capture=True).strip()
+    print(f"Current version: {old_version}")
+    ctx.run(f"uv version --bump {bump_type}")
+    new_version = ctx.run("uv version --short", capture=True).strip()
+    print(f"New version: {new_version}")
+    ctx.run("git add pyproject.toml")
+    ctx.run(f'git commit -m "chore: bump version {old_version} -> {new_version}"')
+
+    # Create and push tag
+    tag = f"v{new_version}"
+    ctx.run(f"git tag {tag}")
+    print(f"Created tag: {tag}")
