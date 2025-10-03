@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import sys
 
+from prettyqt.constants import Qt
 from prettyqt.qt.QtWidgets import *  # noqa: F403
 
 from .style import Style, StyleMixin
@@ -204,6 +205,7 @@ QT_MODULE = QtWidgets
 
 
 def app(args: list[str] | None = None, style: str = "Fusion", **kwargs) -> Application:
+    Application.setAttribute(Qt.ApplicationAttribute.AA_ShareOpenGLContexts, True)
     if (instance := Application.instance()) is not None:
         return instance
     #  + ["--ignore-gpu-blacklist", "--enable-gpu-rasterization"]
