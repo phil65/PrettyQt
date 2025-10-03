@@ -7,7 +7,7 @@ import inspect
 
 __author__ = """Philipp Temminghoff"""
 __email__ = "phil65@kodi.tv"
-__version__ = _metadata_version("llmling-agent")
+__version__ = _metadata_version("prettyqt")
 
 # import os
 
