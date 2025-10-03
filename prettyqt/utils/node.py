@@ -149,7 +149,7 @@ class BaseNode:
     @property
     def is_leaf(self) -> bool:
         """Get indicator if self is leaf node."""
-        return not len(list(self.children))
+        return not list(self.children)
 
     @property
     def root(self) -> Self:

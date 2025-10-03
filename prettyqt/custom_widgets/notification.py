@@ -57,8 +57,8 @@ DEFAULT_NOTIFICATION_STYLES = """
     """
 
 CategoryStr = Literal["primary", "success", "info", "warning", "danger"]
-FadeOutValue = Literal[None, "fade_out"]
-FadeInValue = Literal[None, "fade_in"]
+FadeOutValue = Literal["fade_out"] | None
+FadeInValue = Literal["fade_in"] | None
 
 
 class MessageLabel(widgets.Label):

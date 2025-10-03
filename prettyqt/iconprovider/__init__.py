@@ -30,7 +30,7 @@ def hook(obj: dict) -> dict:
         try:
             result[key] = chr(int(val, 16))
         except ValueError as e:
-            msg = f"Failed to load character {key}:{obj[key]}"
+            msg = f"Failed to load character {key}:{val}"
             raise FontError(msg) from e
     return result
 
