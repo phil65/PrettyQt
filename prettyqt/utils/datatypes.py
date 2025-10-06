@@ -6,7 +6,7 @@ import enum
 import os
 import pathlib
 import re
-from typing import TYPE_CHECKING, Any, ClassVar, Protocol, TypeVar, runtime_checkable
+from typing import TYPE_CHECKING, Any, ClassVar, Protocol, runtime_checkable
 from urllib import parse
 
 import dateutil.parser
@@ -627,9 +627,6 @@ def get_editor_for_type(  # noqa: PLR0911
         pass
 
     return None
-
-
-T = TypeVar("T")
 
 
 def align_types[T](source: T, target: VariantType | tuple) -> T:  # noqa: PLR0911

@@ -14,7 +14,7 @@ import logging
 import os
 import threading
 import time
-from typing import TYPE_CHECKING, Any, ParamSpec, Self, TypeVar, cast
+from typing import TYPE_CHECKING, Any, Self, cast
 
 from prettyqt import core
 
@@ -33,9 +33,6 @@ if TYPE_CHECKING:
 
 
 log = logging.getLogger(__name__)
-
-Params = ParamSpec("Params")
-T = TypeVar("T")
 
 
 class AsyncRunner:
@@ -105,8 +102,8 @@ class AsyncRunner:
     def close(self):
         self._pool.shutdown(wait=True, cancel_futures=True)
 
-    async def run(
-        self, func: Callable[Params, T], *args: Params.args, **kwargs: Params.kwargs
+    async def run[**P, T](
+        self, func: Callable[P, T], *args: P.args, **kwargs: P.kwargs
     ) -> T | None:
         """Run the given function in a thread.
 
@@ -129,7 +126,7 @@ class AsyncRunner:
             return result
         return None
 
-    async def run_parallel(  # type:ignore[override]
+    async def run_parallel[T](  # type:ignore[override]
         self, funcs: Iterable[Callable[[], T]]
     ) -> AsyncIterator[T]:
         """Run functions in parallel.
@@ -242,7 +239,7 @@ class AsyncRunner:
                 return
             raise ValueError(value)
 
-    def run_coroutine(self, coroutine: Coroutine[Any, Any, T]) -> T:
+    def run_coroutine[T](self, coroutine: Coroutine[Any, Any, T]) -> T:
         """Start the coroutine.
 
         Starts the coroutine, doing a busy loop while waiting for it to complete,
