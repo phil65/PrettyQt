@@ -131,6 +131,7 @@ testpaths = ["tests"]
 qt_qapp_name = "prettyqt-test"
 # qt_api = "pyside6"
 qt_log_level_fail = "CRITICAL"
+asyncio_mode = "auto"
 
 [tool.ruff]
 line-length = 90
