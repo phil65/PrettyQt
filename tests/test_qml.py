@@ -41,7 +41,7 @@ def test_qmlapplicationengine(qtlog):
         for _item in engine:
             pass
         path = pathlib.Path.cwd() / "tests" / "qmltest.qml"
-        engine.load_data(path.read_text())
+        engine.load_data(path.read_text("utf-8"))
 
 
 def test_qmlcomponent():

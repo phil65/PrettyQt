@@ -21,7 +21,7 @@ for filename in sys.argv[1:]:
     path = pathlib.Path(filename)
     if path.suffix != ".py":
         continue
-    content = path.read_text()
+    content = path.read_text("utf-8")
     print(filename)
     for orig_re, replacement in replacements:
         content = orig_re.sub(replacement, content)

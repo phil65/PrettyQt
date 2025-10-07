@@ -107,5 +107,5 @@ set_env_vars(API_NAME)
 #         filepath = path / f"{klass_name}.txt"
 #         if filepath.exists():
 #             # print(klass_name)
-#             text = filepath.read_text()
+#             text = filepath.read_text("utf-8")
 #             klass.__doc__ = text

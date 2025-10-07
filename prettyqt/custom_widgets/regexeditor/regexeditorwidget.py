@@ -44,7 +44,7 @@ class RegexEditorWidget(widgets.Widget):
             parent=self,
             read_only=True,
             object_name="textedit_quickref",
-            html=REF_HTML_FILE.read_text(),
+            html=REF_HTML_FILE.read_text("utf-8"),
         )
         cb_quickref = widgets.CheckBox(
             "Show Regular Expression Quick Reference",

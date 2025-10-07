@@ -105,7 +105,7 @@ class AstViewer(widgets.Splitter):
     #     import pathlib
 
     #     widget = cls()
-    #     code = pathlib.Path(__file__).read_text()
+    #     code = pathlib.Path(__file__).read_text("utf-8")
     #     widget.set_ast(code)
     #     return widget
 

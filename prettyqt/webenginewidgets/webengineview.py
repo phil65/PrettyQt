@@ -173,7 +173,7 @@ if __name__ == "__main__":
         "pymdownx.tilde",
     ]
 
-    html = markdown.markdown(path.read_text(), extensions=extensions)
+    html = markdown.markdown(path.read_text("utf-8"), extensions=extensions)
     widget.setHtml(html)
     page = widget.page()
     path = pathlib.Path(

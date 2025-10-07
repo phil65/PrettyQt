@@ -184,7 +184,7 @@ class TextDocumentMixin(core.ObjectMixin):
     ):
         match ss:
             case os.PathLike():
-                ss = pathlib.Path(ss).read_text()
+                ss = pathlib.Path(ss).read_text("utf-8")
             case None:
                 ss = ""
             case qstylizer.style.StyleSheet():

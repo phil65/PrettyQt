@@ -36,7 +36,7 @@ def find_enums(tree):
 
 def main():
     for filename in sys.argv[1:]:
-        tree = ast3.parse(pathlib.Path(filename).read_text())
+        tree = ast3.parse(pathlib.Path(filename).read_text("utf-8"))
         for mod, cls, name in find_enums(tree):
             old = f"{mod}.{name}"
             new = f"{mod}.{cls}.{name}"

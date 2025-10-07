@@ -58,7 +58,7 @@ class AstModel(itemmodels.TreeModel):
     import ast
 
     view = TreeView()
-    code = pathlib.Path(__file__).read_text()
+    code = pathlib.Path(__file__).read_text("utf-8)
     tree = ast.parse(code)
     model = AstModel(tree)
     view.set_model(model)
@@ -233,7 +233,7 @@ if __name__ == "__main__":
     app = widgets.app()
     with app.debug_mode():
         view = widgets.TreeView()
-        code = pathlib.Path(__file__).read_text()
+        code = pathlib.Path(__file__).read_text("utf-8")
         tree = ast.parse(code)
         model = AstModel(tree)
         view.set_model(model)

@@ -33,7 +33,7 @@ logger = logging.getLogger(__name__)
 #     path = paths.DOCSTRING_PATH /  module
 #     filepath = path / f"Q{klass_name.replace('Mixin', '')}.txt"
 #     if filepath.exists():
-#         klass.__doc__ =  filepath.read_text()
+#         klass.__doc__ =  filepath.read_text("utf-8")
 #     return klass
 
 

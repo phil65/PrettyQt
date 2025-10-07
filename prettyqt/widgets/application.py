@@ -188,7 +188,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
             case str():
                 pass
             case os.PathLike():
-                ss = pathlib.Path(ss).read_text()
+                ss = pathlib.Path(ss).read_text("utf-8")
             case None:
                 ss = ""
             case qstylizer.style.StyleSheet():
@@ -212,7 +212,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
                 self.set_stylesheet("")
                 color = self.get_palette().get_color("highlighted_text")
             case "dark":
-                ss = (paths.THEMES_PATH / "darktheme.qss").read_text()
+                ss = (paths.THEMES_PATH / "darktheme.qss").read_text("utf-8")
                 self.set_stylesheet(ss)
                 color = gui.Color("lightblue")
         iconprovider.set_defaults(color=color)

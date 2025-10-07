@@ -795,7 +795,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
             case str():
                 pass
             case os.PathLike():
-                ss = pathlib.Path(ss).read_text()
+                ss = pathlib.Path(ss).read_text("utf-8")
             case qstylizer.style.StyleSheet():
                 ss = str(ss)
         self.setStyleSheet(ss)
