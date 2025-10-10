@@ -105,6 +105,9 @@ class Url(serializemixin.SerializeMixin, QtCore.QUrl):
     def __str__(self):
         return self.toString()
 
+    def __vfspath__(self) -> str:
+        return self.toString()
+
     def serialize_fields(self):
         return dict(path=self.toString())
 
