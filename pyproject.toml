@@ -30,7 +30,6 @@ dependencies = [
   "pywin32;platform_system == 'Windows'",
   "qstylizer",
   "sublime-search>=0.1.2",
-  "typing-extensions",
 ]
 # dynamic = ["version"]
 
