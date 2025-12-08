@@ -10,13 +10,14 @@ from typing import TYPE_CHECKING, ClassVar
 # from typing import TypedDict
 import fsspec
 
-from prettyqt import constants, core, itemmodels, widgets
+from prettyqt import constants, core, gui, itemmodels, widgets
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
-    from prettyqt import gui
+    from upath import UPath
+
     from prettyqt.itemmodels.columnitemmodel import ColumnItem
     from prettyqt.utils import datatypes
 
@@ -247,27 +248,33 @@ class FSSpecTreeModel(
 
     def __init__(
         self,
-        protocol: str = "file",
+        obj: str | fsspec.AbstractFileSystem | UPath = "file",
         root: datatypes.PathType = "",
         show_root: bool = False,
         parent: core.QObject | None = None,
         **kwargs,
     ):
-        self.set_protocol(protocol, **kwargs)
+        if isinstance(obj, str):
+            from fsspec import url_to_fs
+
+            fs, path = url_to_fs(obj, **kwargs)
+            self.fs = fs
+            self.root = path
+        elif isinstance(obj, fsspec.AbstractFileSystem):
+            self.fs = obj
+            self.root = self.fs.root_marker
+        else:
+            self.fs = obj.fs
+            self.root = obj
         obj = self.fs.info(root)
         columns = self.DEFAULT_COLUMNS + self._get_extra_columns_for_protocol(
-            self.fs.protocol
+            self.fs.protocol if isinstance(self.fs.protocol, str) else self.fs.protocol[0]
         )
         super().__init__(obj, columns=columns, parent=parent, show_root=show_root)
 
     @classmethod
     def supports(cls, instance) -> bool:
         return isinstance(instance, fsspec.AbstractFileSystem | str)
-
-    def set_protocol(self, protocol: str | fsspec.AbstractFileSystem, **kwargs):
-        if isinstance(protocol, str):
-            protocol = fsspec.filesystem(protocol, **kwargs)
-        self.fs = protocol
 
     def _get_extra_columns_for_protocol(self, protocol: str) -> list[FsSpecColumnItem]:
         match self.fs.protocol:
