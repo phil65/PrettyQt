@@ -296,13 +296,17 @@ class FSSpecTreeModel(
     def _fetch_object_children(
         self, item: FSSpecTreeModel.TreeItem
     ) -> list[FSSpecTreeModel.TreeItem]:
-        glob = f"{item.obj['name']}/*/" if item.obj["name"] else "*"
+        path = item.obj["name"]
+        try:
+            children = self.fs.ls(path, detail=True)
+        except (FileNotFoundError, PermissionError):
+            children = []
         items = [
-            FSSpecTreeModel.TreeItem(obj=i, parent=item)
-            for i in self.fs.glob(glob, detail=True).values()
+            FSSpecTreeModel.TreeItem(obj=info, parent=item)
+            for info in children
+            if pathlib.Path(info.get("name", "")).name not in {".", ".."}
         ]
-        # not sure if this should be emitted later?
-        self.directoryLoaded.emit(item.obj["name"])
+        self.directoryLoaded.emit(path)
         return items
 
     def get_protocol_path(self, index: core.QModelIndex | str) -> str:
