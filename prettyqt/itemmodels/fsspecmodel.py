@@ -291,7 +291,7 @@ class FSSpecTreeModel(
         return [col for col in self.EXTRA_COLUMNS if col.identifier in columns]
 
     def _has_children(self, item: FSSpecTreeModel.TreeItem) -> bool:
-        return item.obj["type"] == "directory"
+        return self.fs.isdir(item.obj["name"])
 
     def _fetch_object_children(
         self, item: FSSpecTreeModel.TreeItem
