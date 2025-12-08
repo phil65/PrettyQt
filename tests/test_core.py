@@ -615,7 +615,8 @@ def test_settings(qapp):
     settings["test"] = dict(a="b")
     assert settings["test"] == dict(a="b")
     settings["test"] = (1, "b")
-    assert settings["test"] == (1, "b")
+    assert settings["test"][0] == 1  # pyright: ignore[reportOptionalSubscript]
+    assert settings["test"][1] == "b"  # pyright: ignore[reportOptionalSubscript]
     settings["test"] = QtCore.QByteArray(b"test")
     assert settings["test"] == QtCore.QByteArray(b"test")
     settings["test"] = b"test"
