@@ -18,7 +18,6 @@ if TYPE_CHECKING:
 
     from upath import UPath
 
-    from prettyqt.itemmodels.columnitemmodel import ColumnItem
     from prettyqt.utils import datatypes
 
 
@@ -217,12 +216,12 @@ class FSSpecTreeModel(
     """
 
     SUPPORTS = FsSpecProtocolStr | fsspec.AbstractFileSystem
-    DEFAULT_COLUMNS: ClassVar[list[type[ColumnItem]]] = [
+    DEFAULT_COLUMNS: ClassVar[list[type[FsSpecColumnItem]]] = [
         NameColumn,
         SizeColumn,
         TypeColumn,
     ]
-    EXTRA_COLUMNS: ClassVar[list[type[ColumnItem]]] = [
+    EXTRA_COLUMNS: ClassVar[list[type[FsSpecColumnItem]]] = [
         PathColumn,
         CreatedColumn,
         ModifiedColumn,
@@ -273,9 +272,7 @@ class FSSpecTreeModel(
             self.fs = obj.fs
             self.root = str(obj)
         root_info = self._normalize_info(self.fs.info(self.root), self.root)
-        columns = self.DEFAULT_COLUMNS + self._get_extra_columns_for_protocol(
-            self.fs.protocol if isinstance(self.fs.protocol, str) else self.fs.protocol[0]
-        )
+        columns = self.DEFAULT_COLUMNS + self._get_extra_columns()
         super().__init__(root_info, columns=columns, parent=parent, show_root=show_root)
 
     def _normalize_info(self, info: dict, path: str) -> dict:
@@ -298,18 +295,27 @@ class FSSpecTreeModel(
     def supports(cls, instance) -> bool:
         return isinstance(instance, fsspec.AbstractFileSystem | str)
 
-    def _get_extra_columns_for_protocol(self, protocol: str) -> list[FsSpecColumnItem]:
-        match self.fs.protocol:
-            case "github":
-                columns = {"size", "sha"}
-            case "file":
-                columns = {"path", "created", "mtime", "mode", "is_link"}
-            case "smb":
-                columns = {"uid", "gid", "mtime", "time"}
-            case "memory":
-                columns = {"created"}
-            case _:
-                return self.EXTRA_COLUMNS
+    def _get_extra_columns(self) -> list[FsSpecColumnItem]:
+        protocol = (
+            self.fs.protocol if isinstance(self.fs.protocol, str) else self.fs.protocol[0]
+        )
+        if hasattr(self.fs, "get_info_fields"):
+            columns = self.fs.get_info_fields()  # pyright: ignore[reportAttributeAccessIssue]
+            # Exclude columns that are already in DEFAULT_COLUMNS
+            default_identifiers = {col.identifier for col in self.DEFAULT_COLUMNS}
+            columns = {col for col in columns if col not in default_identifiers}
+        else:
+            match protocol:
+                case "github":
+                    columns = {"size", "sha"}
+                case "file":
+                    columns = {"path", "created", "mtime", "mode", "is_link"}
+                case "smb":
+                    columns = {"uid", "gid", "mtime", "time"}
+                case "memory":
+                    columns = {"created"}
+                case _:
+                    return self.EXTRA_COLUMNS
         return [col for col in self.EXTRA_COLUMNS if col.identifier in columns]
 
     def _has_children(self, item: FSSpecTreeModel.TreeItem) -> bool:
