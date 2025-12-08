@@ -99,13 +99,14 @@ class SizeColumn(FsSpecColumnItem):
     def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                if (size := item.obj["size"]) > 0:
+                size = item.obj.get("size") or 0
+                if size > 0:
                     return core.Locale().get_formatted_data_size(
                         size, precision=self.precision, fmt=self.fmt
                     )
                 return ""
             case constants.SORT_ROLE:
-                return item.obj["size"]
+                return item.obj.get("size") or 0
             case _:
                 return super().get_data(item, role)
 
@@ -118,7 +119,7 @@ class TypeColumn(FsSpecColumnItem):
     def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return item.obj["type"] or ""
+                return item.obj.get("type") or ""
             case _:
                 return super().get_data(item, role)
 
@@ -259,18 +260,34 @@ class FSSpecTreeModel(
 
             fs, path = url_to_fs(obj, **kwargs)
             self.fs = fs
-            self.root = path
+            self.root = path or fs.root_marker
         elif isinstance(obj, fsspec.AbstractFileSystem):
             self.fs = obj
             self.root = self.fs.root_marker
         else:
             self.fs = obj.fs
             self.root = str(obj)
-        root_info = self.fs.info(self.root)
+        root_info = self._normalize_info(self.fs.info(self.root), self.root)
         columns = self.DEFAULT_COLUMNS + self._get_extra_columns_for_protocol(
             self.fs.protocol if isinstance(self.fs.protocol, str) else self.fs.protocol[0]
         )
         super().__init__(root_info, columns=columns, parent=parent, show_root=show_root)
+
+    def _normalize_info(self, info: dict, path: str) -> dict:
+        """Normalize info dict to have consistent structure across filesystems."""
+        normalized = dict(info)
+        # Ensure name is the path, not a model/module name
+        if "name" not in normalized or not self._is_path_like(normalized.get("name", "")):
+            normalized["name"] = path
+        # Ensure size has a default
+        normalized.setdefault("size", 0)
+        return normalized
+
+    def _is_path_like(self, value: str) -> bool:
+        """Check if value looks like a path rather than a name."""
+        if not value:
+            return True  # Empty string is valid root
+        return "/" in value or value == self.fs.root_marker
 
     @classmethod
     def supports(cls, instance) -> bool:
@@ -291,7 +308,11 @@ class FSSpecTreeModel(
         return [col for col in self.EXTRA_COLUMNS if col.identifier in columns]
 
     def _has_children(self, item: FSSpecTreeModel.TreeItem) -> bool:
-        return self.fs.isdir(item.obj["name"])
+        path = item.obj["name"]
+        try:
+            return self.fs.isdir(path)
+        except (FileNotFoundError, PermissionError):
+            return False
 
     def _fetch_object_children(
         self, item: FSSpecTreeModel.TreeItem
@@ -301,11 +322,20 @@ class FSSpecTreeModel(
             children = self.fs.ls(path, detail=True)
         except (FileNotFoundError, PermissionError):
             children = []
-        items = [
-            FSSpecTreeModel.TreeItem(obj=info, parent=item)
-            for info in children
-            if pathlib.Path(info.get("name", "")).name not in {".", ".."}
-        ]
+        items = []
+        for info in children:
+            name = info.get("name", "")
+            # Skip . and ..
+            if pathlib.Path(name).name in {".", ".."}:
+                continue
+            # Normalize child info - prepend parent path if name is not a full path
+            if not self._is_path_like(name):
+                sep = self.fs.sep if hasattr(self.fs, "sep") else "/"
+                full_path = f"{path.rstrip(sep)}{sep}{name}" if path else name
+                info = dict(info)
+                info["name"] = full_path
+            info = self._normalize_info(info, info["name"])
+            items.append(FSSpecTreeModel.TreeItem(obj=info, parent=item))
         self.directoryLoaded.emit(path)
         return items
 
@@ -353,7 +383,13 @@ class FSSpecTreeModel(
         if isinstance(index, str):
             index = self.index(index)
         tree_item = index.internalPointer()
-        return False if tree_item is None else tree_item.obj["type"] == "directory"
+        if tree_item is None:
+            return False
+        path = tree_item.obj["name"]
+        try:
+            return self.fs.isdir(path)
+        except (FileNotFoundError, PermissionError):
+            return False
 
     def mkdir(self, index: core.QModelIndex | str, name: str):
         if isinstance(index, str):
@@ -373,11 +409,10 @@ class FSSpecTreeModel(
         if isinstance(index, str):
             index = self.index(index)
         tree_item = index.internalPointer()
-        return (
-            None
-            if tree_item is None
-            else datetime.datetime.fromtimestamp(tree_item.obj["mtime"])
-        )
+        if tree_item is None:
+            return None
+        mtime = tree_item.obj.get("mtime")
+        return datetime.datetime.fromtimestamp(mtime) if mtime else None
 
     def permissions(self, index: core.QModelIndex | str) -> core.QFileDevice.Permission:
         if isinstance(index, str):
@@ -386,7 +421,10 @@ class FSSpecTreeModel(
         flag = core.QFileDevice.Permission(0)
         if tree_item is None:
             return flag
-        val = oct(int(tree_item.obj["mode"]))[-4:]
+        mode = tree_item.obj.get("mode")
+        if mode is None:
+            return flag
+        val = oct(int(mode))[-4:]
         for i in core.filedevice.PERMISSIONS.get_list(int(val, 8)):
             flag |= core.filedevice.PERMISSIONS[i]
         return flag
@@ -415,7 +453,7 @@ class FSSpecTreeModel(
 
     def setRootPath(self, path: str | os.PathLike[str] | None) -> core.ModelIndex:
         path = os.fspath(path) if path else self.fs.root_marker
-        item = self.fs.info(path)
+        item = self._normalize_info(self.fs.info(path), path)
         self.set_root_item(item)
         self.rootPathChanged.emit(path)
 
