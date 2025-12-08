@@ -265,12 +265,12 @@ class FSSpecTreeModel(
             self.root = self.fs.root_marker
         else:
             self.fs = obj.fs
-            self.root = obj
-        obj = self.fs.info(root)
+            self.root = str(obj)
+        root_info = self.fs.info(self.root)
         columns = self.DEFAULT_COLUMNS + self._get_extra_columns_for_protocol(
             self.fs.protocol if isinstance(self.fs.protocol, str) else self.fs.protocol[0]
         )
-        super().__init__(obj, columns=columns, parent=parent, show_root=show_root)
+        super().__init__(root_info, columns=columns, parent=parent, show_root=show_root)
 
     @classmethod
     def supports(cls, instance) -> bool:
