@@ -256,11 +256,16 @@ class FSSpecTreeModel(
         **kwargs,
     ):
         if isinstance(obj, str):
-            from fsspec import url_to_fs
+            if "://" in obj:
+                from fsspec import url_to_fs
 
-            fs, path = url_to_fs(obj, **kwargs)
-            self.fs = fs
-            self.root = path or fs.root_marker
+                fs, path = url_to_fs(obj, **kwargs)
+                self.fs = fs
+                self.root = path or fs.root_marker
+            else:
+                # obj is a protocol name like "github", "memory", etc.
+                self.fs = fsspec.filesystem(obj, **kwargs)
+                self.root = self.fs.root_marker
         elif isinstance(obj, fsspec.AbstractFileSystem):
             self.fs = obj
             self.root = self.fs.root_marker
