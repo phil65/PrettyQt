@@ -1,6 +1,6 @@
 [project]
 name = "PrettyQt"
-version = "1.59.2"
+version = "1.59.3"
 description = "A pythonic layer on top of PyQt6 / PySide6"
 readme = "README.md"
 requires-python = ">=3.12"
