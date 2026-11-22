@@ -11,7 +11,7 @@ jobs:
         python-version: ["3.12", "3.13"]
         # qt-binding: ["pyside6", "pyqt6"]
     runs-on: ${{ matrix.platform }}
-    timeout-minutes: 30
+    timeout-minutes: 60
     env:
       DISPLAY: ":99.0"
       UV_PYTHON: ${{ matrix.python-version }}
@@ -70,14 +70,14 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Create documentation
-        # combine test coverage with --cov-append?
-        # if: matrix.python-version == '3.12' && runner.os == 'Linux'
+        # generating a page per class is slow, so only build docs once
+        if: matrix.python-version == '3.13' && runner.os == 'Linux'
         uses: coactions/setup-xvfb@v1
-        timeout-minutes: 10
+        timeout-minutes: 40
         with:
           run: |
             uv sync --extra pyside6 --extra addons
-            uv run mkdocs build
+            uv run mkdocs-mknodes build
 
   deploy:
     runs-on: windows-latest
@@ -91,7 +91,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version: "3.13"
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
@@ -102,10 +102,10 @@ jobs:
 
       - name: Build documentation
         uses: coactions/setup-xvfb@v1
-        timeout-minutes: 10
+        timeout-minutes: 40
         with:
           run: |
-            uv run mkdocs build
+            uv run mkdocs-mknodes build
 
       - name: Build package
         run: |
