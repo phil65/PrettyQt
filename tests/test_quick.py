@@ -48,7 +48,12 @@ def test_quickwindow():
     assert window.get_text_render_type() == "native_text"
     with window.external_commands():
         pass
-    runnable = core.Runnable()
+
+    class NoOpRunnable(core.Runnable):
+        def run(self):
+            pass
+
+    runnable = NoOpRunnable()
     with pytest.raises(InvalidParamError):
         window.schedule_render_job(runnable, "test")
     window.schedule_render_job(runnable, "before_rendering")
