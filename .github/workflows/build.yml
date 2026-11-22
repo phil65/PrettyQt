@@ -86,6 +86,9 @@ jobs:
     runs-on: windows-latest
     if: startsWith(github.ref, 'refs/tags/v')
     needs: build
+    permissions:
+      contents: write  # push the docs to gh-pages
+      id-token: write  # PyPI trusted publishing
     steps:
       - uses: actions/checkout@v7
         with:
@@ -108,8 +111,6 @@ jobs:
           uv build
 
       - name: Publish package on PyPI
-        env:
-          UV_PUBLISH_TOKEN: ${{ secrets.UV_PUBLISH_TOKEN }}
         run: |
           uv publish
 

@@ -77,7 +77,7 @@ uv build
 ```
 
 `duties.py` wraps these (`duty test`, `duty lint`, `duty lint_check`, `duty version`).
-CI: `.github/workflows/build.yaml` runs pytest under PyQt6 and PySide6 on
+CI: `.github/workflows/build.yml` runs pytest under PyQt6 and PySide6 on
 Linux/macOS/Windows plus the docs build; the `deploy` job (tags `v*` only) publishes to
 PyPI and gh-pages.
 
