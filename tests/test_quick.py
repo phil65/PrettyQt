@@ -57,3 +57,6 @@ def test_quickwindow():
     with pytest.raises(InvalidParamError):
         window.schedule_render_job(runnable, "test")
     window.schedule_render_job(runnable, "before_rendering")
+    # Qt now owns the job, but PySide6 still frees it with the Python wrapper:
+    # release the window first (Python 3.14 clears locals in a different order).
+    del window

@@ -915,6 +915,10 @@ def test_undocommand():
     cmd2 = gui.UndoCommand(cmd)
     assert cmd[0] == cmd2
     assert len(cmd) == 1
+    # PySide6 keeps a child QUndoCommand owned by Python, so freeing the child wrapper
+    # before its parent double-frees it. Python 3.14 clears locals in a different
+    # order, so release the parent first.
+    del cmd
 
 
 def test_undogroup():
