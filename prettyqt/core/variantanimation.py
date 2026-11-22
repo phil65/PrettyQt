@@ -39,6 +39,15 @@ class VariantAnimationMixin(core.AbstractAnimationMixin):
         typ = curve.get_type()
         return curve.get_custom_type() if typ == "custom" else typ
 
+    def set_start_value(self, value: datatypes.Variant):
+        self.setStartValue(value)
+
+    def set_end_value(self, value: datatypes.Variant):
+        self.setEndValue(value)
+
+    def set_duration(self, duration: int):
+        self.setDuration(duration)
+
     def set_range(self, start, end):
         self.setStartValue(start)
         self.setEndValue(end)
