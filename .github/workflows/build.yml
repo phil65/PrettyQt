@@ -8,9 +8,11 @@ jobs:
       fail-fast: false
       matrix:
         platform: [macos-latest, windows-latest, ubuntu-latest]
-        python-version: ["3.12", "3.13"]
+        python-version: ["3.12", "3.13", "3.14", "3.15"]
         # qt-binding: ["pyside6", "pyqt6"]
     runs-on: ${{ matrix.platform }}
+    # 3.15 is a pre-release: test it early, but don't let it block the build.
+    continue-on-error: ${{ matrix.python-version == '3.15' }}
     timeout-minutes: 60
     env:
       DISPLAY: ":99.0"
@@ -25,6 +27,7 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
 
       - uses: tlambert03/setup-qt-libs@v1
       # *alternative*:
