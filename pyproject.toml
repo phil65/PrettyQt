@@ -1,14 +1,23 @@
 [project]
 name = "PrettyQt"
 version = "1.59.4"
-description = "A pythonic layer on top of PyQt6 / PySide6"
+description = "Pythonic layer on top of PyQt6 / PySide6, with extra widgets, models and tooling"
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 authors = [
   { name = "Philipp Temminghoff", email = "philipptemminghoff@gmail.com" },
 ]
-keywords = ["components", "framework", "gui", "pyqt", "pyside", "qt", "widgets"]
+keywords = [
+  "components",
+  "framework",
+  "gui",
+  "item-models",
+  "pyqt6",
+  "pyside6",
+  "qt",
+  "widgets",
+]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Environment :: X11 Applications :: Qt",
@@ -21,6 +30,7 @@ classifiers = [
   "Topic :: Desktop Environment",
   "Topic :: Software Development :: User Interfaces",
   "Topic :: Software Development :: Widget Sets",
+  "Typing :: Typed",
 ]
 dependencies = [
   "anyenv>=0.4.6",
@@ -36,10 +46,11 @@ dependencies = [
 # dynamic = ["version"]
 
 [project.urls]
-Changelog = "https://github.com/phil65/prettyqt/blob/main/CHANGELOG.md"
-Documentation = "https://phil65.github.io/PrettyQt/index.html"
-Source = "https://github.com/phil65/prettyqt"
-Tracker = "https://github.com/phil65/prettyqt/issues"
+Changelog = "https://github.com/phil65/PrettyQt/blob/main/CHANGELOG.md"
+Documentation = "https://phil65.github.io/PrettyQt/"
+Homepage = "https://github.com/phil65/PrettyQt"
+Issues = "https://github.com/phil65/PrettyQt/issues"
+Source = "https://github.com/phil65/PrettyQt"
 
 [project.gui-scripts]
 iconbrowser = "prettyqt.custom_widgets.iconbrowser:run"
