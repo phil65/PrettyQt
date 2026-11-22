@@ -7,12 +7,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [macos-latest, windows-latest, ubuntu-22.04]
-        python-version: ["3.11", "3.12"]
+        platform: [macos-latest, windows-latest, ubuntu-latest]
+        python-version: ["3.12", "3.13"]
         # qt-binding: ["pyside6", "pyqt6"]
     runs-on: ${{ matrix.platform }}
+    timeout-minutes: 30
     env:
       DISPLAY: ":99.0"
+      UV_PYTHON: ${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v5
 
@@ -28,7 +30,7 @@ jobs:
       #     qt: true
       - name: Linux opengl
         if: runner.os == 'Linux'
-        run: sudo apt-get install -y libegl1-mesa libpulse0
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libpulse0
 
       # - name: start TextToSpeech service
       #   if: runner.os == 'Linux'
@@ -37,7 +39,7 @@ jobs:
       #     speech-dispatcher -d
 
       - name: Install uv
-        uses: yezz123/setup-uv@v4
+        uses: astral-sh/setup-uv@v7
 
       - name: Install dependencies
         run: |
@@ -90,6 +92,9 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
 
       - name: Install packages
         run: |
