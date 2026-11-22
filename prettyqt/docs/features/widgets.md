@@ -4,14 +4,14 @@ Since this library is huge, I will try to give an overview about some modules an
 - All setters and getters for Enum properties have an equivalent method taking a string:
 
 ```py
-widget = QtWidgets.QWidget()
+widget = QtWidgets.QComboBox()
 widget.setSizeAdjustPolicy(widget.SizeAdjustPolicy.AdjustToContents)
 ```
 becomes:
 
 ```py
-widgets = widgets.Widget()
-widget.set_size_adjust_policy("adjust_to_contents")
+widget = widgets.ComboBox()
+widget.set_size_adjust_policy("content")
 ```
 
 Everything is fully typed with Literals, so you should get a very nice IDE experience.
@@ -23,7 +23,7 @@ assert widget.sizeAdjustPolicy() == widget.SizeAdjustPolicy.AdjustToContents
 ```
 becomes
 ```py
-assert widget.get_size_adjust_policy() == "adjust_to_contents"
+assert widget.get_size_adjust_policy() == "content"
 ```
 
 Note that these new setters and getters are "optional" to use. The "old" methods are still fully accessible. As a general rule, the library tries to be 100% "backwards-compatible".

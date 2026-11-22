@@ -6,7 +6,7 @@ Easy one-liners to bring
 ```py
 # a lot of animations depend on current geometry.
 # It´s advisable to show widget first so that it gets layouted.
-widget = widget.Label("I will get animated.")
+widget = widgets.Label("I will get animated.")
 widget.show()
 
 # start a general fade animation with fixed start/end
@@ -22,7 +22,7 @@ widget.fx["pos"].transition_from((0, -100), duration=1000)
 widget.fx["windowOpacity"].animate_on_event("mouse_button_press", start=0, end=1)
 
 # convenience method for mentioned fade-in
-widget.fx.fade_in(start=0, end=1, start=500)
+widget.fx.fade_in(duration=500)
 
 # start a zoom animation
 widget.fx.zoom(start=1, end=1.5, duration=400)

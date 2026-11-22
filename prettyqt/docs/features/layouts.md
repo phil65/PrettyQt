@@ -53,17 +53,10 @@ Available layouts:
 
 * custom layouts:
 
-    * "multiline"
     * "border"
     * "flow"
 
-!!! info
-    Any layout which inherits from widgets.LayoutMixin can be set using an identifier.
-
-    ```py
-    class MyLayoutSubClass(widgets.BoxLayout):  # BoxLayout inherits from LayoutMixin
-        ID = "some_identifier"   # this one will be usable for set_layout.
-    ```
+Any other layout instance (`QLayout` subclass) can be passed directly.
 ## Accessing widgets inside a layout
 
 All layouts support slicing, including the possibility to apply batch operations:
