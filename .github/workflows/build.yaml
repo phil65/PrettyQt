@@ -15,6 +15,9 @@ jobs:
     env:
       DISPLAY: ":99.0"
       UV_PYTHON: ${{ matrix.python-version }}
+      # QtWebEngine segfaults on headless Linux runners with GPU / sandbox enabled
+      QTWEBENGINE_CHROMIUM_FLAGS: "--disable-gpu --no-sandbox"
+      QTWEBENGINE_DISABLE_SANDBOX: "1"
     steps:
       - uses: actions/checkout@v5
 
