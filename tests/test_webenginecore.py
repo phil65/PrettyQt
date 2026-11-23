@@ -30,6 +30,10 @@ def test_webenginehttprequest():
     req.get_post_data()
 
 
+@pytest.mark.skip(
+    reason="Flaky: tearing down the QWebEngineProfile intermittently raises "
+    "'NoneType' object is not callable in the Qt event loop (seen on CI and locally)."
+)
 def test_webengineprofile(qapp):
     profile = webenginecore.WebEngineProfile("MyProfile")
     profile.set_persistent_cookie_policy("force")
