@@ -16,13 +16,13 @@ from prettyqt.utils import InvalidParamError
 #     assert val.get_value() == 2
 
 
-def test_jsengine():
+def test_jsengine(qapp):
     engine = qml.JSEngine()
     engine.install_extensions("translation")
     engine.eval("")
 
 
-def test_qmlengine():
+def test_qmlengine(qapp):
     engine = qml.QmlEngine()
     obj = core.Object()
     engine.set_object_ownership(obj, "javascript")
@@ -35,7 +35,7 @@ def test_qmlengine():
     engine.get_import_paths()
 
 
-def test_qmlapplicationengine(qtlog):
+def test_qmlapplicationengine(qapp, qtlog):
     with qtlog.disabled():
         engine = qml.QmlApplicationEngine()
         for _item in engine:
@@ -44,14 +44,14 @@ def test_qmlapplicationengine(qtlog):
         engine.load_data(path.read_text("utf-8"))
 
 
-def test_qmlcomponent():
+def test_qmlcomponent(qapp):
     comp = qml.QmlComponent()
     assert comp.get_status() == "null"
     # comp.load_url("", mode="asynchronous")
     comp.get_url()
 
 
-def test_jsvalue():
+def test_jsvalue(qapp):
     val = qml.JSValue(1)
     assert val.get_error_type() is None
     assert val.get_value() == 1

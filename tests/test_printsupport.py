@@ -15,7 +15,7 @@ pytestmark = pytest.mark.skipif(
 )
 
 
-def test_printer():
+def test_printer(qapp):
     printer = printsupport.Printer()
     assert printer.get_duplex() == "none"
     printer.set_pdf_version("v1_6")
@@ -24,22 +24,22 @@ def test_printer():
         printer.set_pdf_version("test")
 
 
-def test_printdialog():
+def test_printdialog(qapp):
     dlg = printsupport.PrintDialog()
     assert dlg is not None
 
 
-def test_pagesetupdialog():
+def test_pagesetupdialog(qapp):
     dlg = printsupport.PageSetupDialog()
     assert dlg is not None
 
 
-def test_printpreviewdialog():
+def test_printpreviewdialog(qapp):
     dlg = printsupport.PrintPreviewDialog()
     assert dlg is not None
 
 
-def test_printpreviewwidget():
+def test_printpreviewwidget(qapp):
     widget = printsupport.PrintPreviewWidget()
     widget.set_view_mode("facing_pages")
     assert widget.get_view_mode() == "facing_pages"

@@ -5,7 +5,7 @@ import pathlib
 from prettyqt import quickwidgets
 
 
-def test_quickview():
+def test_quickview(qapp):
     view = quickwidgets.QuickWidget()
     path = pathlib.Path.cwd() / "tests" / "qmltest.qml"
     view.set_source(path)

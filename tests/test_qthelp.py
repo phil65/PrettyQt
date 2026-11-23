@@ -12,13 +12,13 @@ from prettyqt.qt import QtHelp
 # from prettyqt.utils import InvalidParamError
 
 
-def test_helplink():
+def test_helplink(qapp):
     qtlink = QtHelp.QHelpLink()
     link = qthelp.HelpLink(qtlink)
     link.get_url()
 
 
-def test_helpcontentitem():
+def test_helpcontentitem(qapp):
     engine = qthelp.HelpEngine("")
     model = engine.get_content_model()
     repr(model)
@@ -27,21 +27,21 @@ def test_helpcontentitem():
     # assert len(item) == 0
 
 
-def test_helpcontentmodel():
+def test_helpcontentmodel(qapp):
     engine = qthelp.HelpEngine("")
     model = engine.get_content_model()
     repr(model)
     # model.get_content_item_at(core.QModelIndex())
 
 
-def test_helpfilterdata():
+def test_helpfilterdata(qapp):
     data = qthelp.HelpFilterData(QtHelp.QHelpFilterData())
     versions = [core.VersionNumber(1, 0, 0)]
     data.set_versions(versions)
     assert data.get_versions() == versions
 
 
-def test_helpsearchresultwidget():
+def test_helpsearchresultwidget(qapp):
     core_engine = qthelp.HelpEngineCore("")
     engine = qthelp.HelpSearchEngine(core_engine)
     widget = engine.get_result_widget()
@@ -52,29 +52,29 @@ def test_helpsearchresultwidget():
     sys.platform == "linux" and prettyqt.qt.API.startswith("pyside"),
     reason="Segmentation fault",
 )
-def test_helpsearchquerywidget():
+def test_helpsearchquerywidget(qapp):
     widget = qthelp.HelpSearchQueryWidget()
     assert widget is not None
 
 
-def test_helpfilterengine():
+def test_helpfilterengine(qapp):
     core_engine = qthelp.HelpEngineCore("")
     engine = core_engine.get_filter_engine()
     engine.get_available_versions()
 
 
-def test_helpengine():
+def test_helpengine(qapp):
     engine = qthelp.HelpEngine("")
     engine.get_file_data(core.Url(""))
     engine.get_files("", "")
 
 
-def test_helpsearchengine():
+def test_helpsearchengine(qapp):
     core_engine = qthelp.HelpEngineCore("")
     engine = qthelp.HelpSearchEngine(core_engine)
     engine.search_results(0, 0)
 
 
-def test_helpsearchresult():
+def test_helpsearchresult(qapp):
     result = qthelp.HelpSearchResult(core.Url(""), "", "")
     result.get_url()
