@@ -10,9 +10,12 @@ from prettyqt.utils import classhelpers, datatypes
 
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
+    from collections.abc import Callable, Sequence
 
     from prettyqt import gui
+    from prettyqt.itemmodels.proxies.binsproxymodel import BinsProxyModel
+    from prettyqt.itemmodels.proxies.rankproxymodel import RankMethod, RankProxyModel
+    from prettyqt.itemmodels.proxies.stackproxymodel import StackProxyModel
 
 
 logger = logging.getLogger(__name__)
@@ -487,6 +490,79 @@ class Proxifier:
             id_columns=id_columns,
             variable_column=variable_column,
             value_column=value_column,
+            parent=self._widget,
+            source_model=self._widget.model(),
+        )
+        self._widget.set_model(proxy)
+        return proxy
+
+    def stack(self) -> StackProxyModel:
+        """Wraps model in a Proxy which stacks all columns into rows.
+
+        The resulting table has two columns: the header of the source column
+        ("Variable") and the cell value ("Value"), similar to pandas.DataFrame.stack().
+        """
+        from prettyqt.itemmodels.proxies.stackproxymodel import StackProxyModel
+
+        proxy = StackProxyModel(parent=self._widget, source_model=self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
+
+    def rank(
+        self,
+        column: int,
+        method: RankMethod = "average",
+        ascending: bool = True,
+        na_option: Literal["keep", "top", "bottom"] = "keep",
+    ) -> RankProxyModel:
+        """Wraps model in a Proxy which replaces the values of a column with their rank.
+
+        Arguments:
+            column: Column to rank
+            method: How to rank equal values ("average", "min", "max", "dense",
+                    "ordinal"), same as pandas.Series.rank()
+            ascending: Whether lowest value gets rank 1
+            na_option: How to rank non-numeric values ("keep" leaves them empty,
+                       "top" / "bottom" ranks them first / last)
+        """
+        from prettyqt.itemmodels.proxies.rankproxymodel import RankProxyModel
+
+        proxy = RankProxyModel(
+            column=column,
+            method=method,
+            ascending=ascending,
+            na_option=na_option,
+            parent=self._widget,
+            source_model=self._widget.model(),
+        )
+        self._widget.set_model(proxy)
+        return proxy
+
+    def bins(
+        self,
+        column: int,
+        bins: Sequence[float],
+        labels: Sequence[str] | None = None,
+        right: bool = True,
+    ) -> BinsProxyModel:
+        """Wraps model in a Proxy which sorts the values of a column into bins.
+
+        Similar to pandas.cut(). Values outside of the bins are shown empty.
+
+        Arguments:
+            column: Column to bin
+            bins: Bin edges, including leftmost and rightmost edge
+            labels: Labels for the bins (len(bins) - 1 items). If None, interval
+                    notation like "(0, 10]" gets used.
+            right: Whether bins include the rightmost edge
+        """
+        from prettyqt.itemmodels.proxies.binsproxymodel import BinsProxyModel
+
+        proxy = BinsProxyModel(
+            column=column,
+            bins=bins,
+            labels=labels,
+            right=right,
             parent=self._widget,
             source_model=self._widget.model(),
         )

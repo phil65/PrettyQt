@@ -291,3 +291,25 @@ def test_checkable_tree_proxy(qapp):
     assert p.data(role) == constants.CheckState.Checked
     proxy.setData(p, constants.CheckState.Unchecked, role)
     assert proxy.index(0, 0, p).data(role) == constants.CheckState.Unchecked
+
+
+def test_proxifier_reshape_methods(qapp):
+    from prettyqt import gui
+
+    def make_table(data):
+        table = widgets.TableView()
+        table.set_model(gui.StandardItemModel.from_dict(data))
+        return table
+
+    table = make_table({"score": [85, 92, 78]})
+    proxy = table.proxifier.rank(column=0, method="dense", ascending=False)
+    assert [proxy.index(i, 0).data() for i in range(3)] == ["2", "1", "3"]
+    table = make_table({"age": [22, 44, 99]})
+    proxy = table.proxifier.bins(column=0, bins=[0, 30, 50], labels=["young", "old"])
+    assert [proxy.index(i, 0).data() for i in range(3)] == ["young", "old", ""]
+    table = make_table({"a": [1, 2], "b": [3, 4]})
+    proxy = table.proxifier.stack()
+    assert proxy.rowCount() == 4  # noqa: PLR2004
+    # source changes must reach the (source_model kwarg constructed) proxies.
+    table.model().sourceModel().setData(table.model().sourceModel().index(0, 0), 7)
+    assert proxy.index(0, 1).data() == 7  # noqa: PLR2004
