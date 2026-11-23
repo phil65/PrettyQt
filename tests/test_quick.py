@@ -8,7 +8,7 @@ from prettyqt import core, gui, quick
 from prettyqt.utils import InvalidParamError
 
 
-def test_quickitem():
+def test_quickitem(qapp):
     item = quick.QuickItem()
     item.get_children_rect()
     item.get_cursor()
@@ -19,7 +19,7 @@ def test_quickitem():
     assert item.get_transform_origin() == "bottom"
 
 
-def test_quickpainteditem():
+def test_quickpainteditem(qapp):
     item = quick.QuickPaintedItem()
     item.get_fill_color()
     item.get_texture_size()
@@ -29,7 +29,7 @@ def test_quickpainteditem():
     assert item.get_render_target() == "framebuffer_object"
 
 
-def test_quickview():
+def test_quickview(qapp):
     view = quick.QuickView()
     path = pathlib.Path.cwd() / "tests" / "qmltest.qml"
     view.set_source(path)
@@ -37,7 +37,7 @@ def test_quickview():
     assert view.get_status() == "ready"
 
 
-def test_quickwindow():
+def test_quickwindow(qapp):
     window = quick.QuickWindow()
     window.create_texture_from_image(gui.Image())
     window.grab_window()
