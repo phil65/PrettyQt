@@ -55,7 +55,7 @@ plugins:
   - glightbox # better image support
   - markdown-exec
   - mknodes:
-      build_fn: docs/gen_pages.py:build
+      build_fn: prettyqt.docs.gen_pages:build
   - mkdocstrings:
       default_handler: python
       handlers:

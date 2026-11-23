@@ -1,8 +1,12 @@
 from __future__ import annotations
 
-from prettyqt.docs import build_root, build_index
+from typing import TYPE_CHECKING
 
-import mknodes
+from prettyqt.docs import build_index, build_root
+
+
+if TYPE_CHECKING:
+    import mknodes
 
 
 def build(root: mknodes.MkNav, theme: mknodes.Theme) -> mknodes.MkNav:

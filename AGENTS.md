@@ -45,7 +45,7 @@ delegates, validators and tooling. Not copier-managed; everything here is hand-m
   `utils/` (helpers, `datatypes.py` type conversions, `classhelpers.py`, `proxifier.py`).
 - `prettyqt/__init__.py`: `import_all()` imports every subpackage in `__all__`, logging
   (not raising) when a binding lacks a module.
-- `prettyqtmarkdown/` + `prettyqt/docs/` + `docs/gen_pages.py`: mknodes-based docs
+- `prettyqtmarkdown/` + `prettyqt/docs/` (entry point: `prettyqt/docs/gen_pages.py`): mknodes-based docs
   generation (needs the `docs` group / `mknodes`, not a runtime dependency).
 
 ## Where to look
@@ -58,7 +58,7 @@ delegates, validators and tooling. Not copier-managed; everything here is hand-m
 | Binding differences, import fallbacks | `prettyqt/qt/Qt<Module>/__init__.py` |
 | Enum ↔ string maps | `prettyqt/constants/__init__.py`, or the class's module |
 | Argument type conversion | `prettyqt/utils/datatypes.py` |
-| Docs site structure | `docs/gen_pages.py`, `prettyqt/docs/build_root.py`, `prettyqt/docs/build_index.py`, `prettyqt/docs/SUMMARY.md` |
+| Docs site structure | `prettyqt/docs/gen_pages.py`, `prettyqt/docs/build_root.py`, `prettyqt/docs/build_index.py`, `prettyqt/docs/SUMMARY.md` |
 | Hand-written guide pages | `prettyqt/docs/api_guidelines/`, `prettyqt/docs/features/` |
 | PyInstaller hook | `prettyqt/__pyinstaller/` |
 | Tests | `tests/test_<module>.py` (one file per package), fixtures in `tests/conftest.py` |
