@@ -1,13 +1,16 @@
+"""Tree model for any filesystem supported by fsspec, with a QFileSystemModel-like API."""
+
 from __future__ import annotations
 
-import datetime
+import contextlib
+import datetime as dt
 import enum
+import fnmatch
+import json
 import logging
 import os
-import pathlib
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
-# from typing import TypedDict
 import fsspec
 
 from prettyqt import constants, core, gui, itemmodels, widgets
@@ -23,6 +26,42 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
+# Mime type for drag & drop inside the model (json list of paths).
+PATHS_MIME_TYPE = "application/x-fsspec-paths"
+
+Filter = core.QDir.Filter
+# Like QFileSystemModel default, but hidden files are shown.
+DEFAULT_FILTER = (
+    Filter.AllEntries | Filter.NoDotAndDotDot | Filter.AllDirs | Filter.Hidden
+)
+
+
+def _to_datetime(value: Any) -> dt.datetime | None:
+    """Convert the timestamps of the different fsspec implementations."""
+    match value:
+        case dt.datetime():
+            return value
+        case bool() | None:
+            return None
+        case int() | float():
+            return dt.datetime.fromtimestamp(value)
+        case str():
+            with contextlib.suppress(ValueError):
+                return dt.datetime.fromisoformat(value)
+    return None
+
+
+def _get_filesystem(protocol: str, **storage_options: Any) -> fsspec.AbstractFileSystem:
+    """Instantiate filesystem for given protocol.
+
+    Uses upathtools (if installed) to support its additional protocols.
+    """
+    try:
+        from upathtools import core as upathtools_core
+    except ImportError:
+        return fsspec.filesystem(protocol, **storage_options)
+    return upathtools_core.filesystem(protocol, **storage_options)
+
 
 class FsSpecCompleter(widgets.Completer):
     def pathFromIndex(self, index):
@@ -35,44 +74,50 @@ class FsSpecCompleter(widgets.Completer):
 _icon_provider = widgets.FileIconProvider()
 
 
-VALUE_LETTERS = [(4, "r"), (2, "w"), (1, "x")]
-
-
 class FsSpecColumnItem(itemmodels.ColumnItem):
     identifier: str = ""
+    model: FSSpecTreeModel
 
     def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         name = item.obj["name"]
         match role:
             case FSSpecTreeModel.Roles.FilePathRole:
                 return name
-            case FSSpecTreeModel.Roles.FilePathRole:
-                path = name
-                return pathlib.Path(path).name if path else ""
+            case FSSpecTreeModel.Roles.FileNameRole:
+                return self.model.get_file_name(name)
             case FSSpecTreeModel.Roles.FilePermissions:
-                return self.model.permissions(name)
+                return self.model.get_permission_flags(item.obj)
             case FSSpecTreeModel.Roles.ProtocolPathRole:
                 return self.model.get_protocol_path(name)
+        return None
 
 
 class NameColumn(FsSpecColumnItem):
     identifier = "name"
     name = "Name"
     doc = "File name"
+    editable = True
+
+    def get_flags(self, tree_item):
+        flags = super().get_flags(tree_item)
+        if self.model.isReadOnly() or tree_item is self.model.inspected_item:
+            flags &= ~constants.IS_EDITABLE
+        return flags
 
     def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
-            case constants.DISPLAY_ROLE:
-                return pathlib.Path(path).name if (path := item.obj["name"]) else ""
+            case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
+                return self.model.get_file_name(item.obj["name"])
             case constants.DECORATION_ROLE:
-                return _icon_provider.get_icon(core.QFileInfo(item.obj["name"]))
+                return self.model.get_icon(item.obj)
             case _:
                 return super().get_data(item, role)
 
     def set_data(self, item, value, role):
         match role:
             case constants.EDIT_ROLE:
-                item.set_name(value)
+                return self.model.rename_item(item, str(value))
+        return False
 
 
 class PathColumn(FsSpecColumnItem):
@@ -99,7 +144,7 @@ class SizeColumn(FsSpecColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 size = item.obj.get("size") or 0
-                if size > 0:
+                if size > 0 and not self.model.is_dir_info(item.obj):
                     return core.Locale().get_formatted_data_size(
                         size, precision=self.precision, fmt=self.fmt
                     )
@@ -123,42 +168,30 @@ class TypeColumn(FsSpecColumnItem):
                 return super().get_data(item, role)
 
 
-class CreatedColumn(FsSpecColumnItem):
+class _DateColumn(FsSpecColumnItem):
+    display_format = "%m/%d/%Y, %H:%M:%S"
+
+    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                date = _to_datetime(item.obj.get(self.identifier))
+                return "" if date is None else date.strftime(self.display_format)
+            case constants.USER_ROLE | constants.SORT_ROLE:
+                return _to_datetime(item.obj.get(self.identifier))
+            case _:
+                return super().get_data(item, role)
+
+
+class CreatedColumn(_DateColumn):
     identifier = "created"
     name = "Created"
     doc = "Creation date of file."
-    display_format = "%m/%d/%Y, %H:%M:%S"
-
-    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
-        if not item.obj.get("created"):
-            return None
-        created = datetime.datetime.fromtimestamp(item.obj["created"])
-        match role:
-            case constants.DISPLAY_ROLE:
-                return created.strftime(self.display_format)
-            case constants.USER_ROLE:
-                return created
-            case _:
-                return super().get_data(item, role)
 
 
-class ModifiedColumn(FsSpecColumnItem):
+class ModifiedColumn(_DateColumn):
     identifier = "mtime"
     name = "Modified"
-    doc = "Modified"
-    display_format = "%m/%d/%Y, %H:%M:%S"
-
-    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
-        if not item.obj.get("mtime"):
-            return None
-        mtime = datetime.datetime.fromtimestamp(item.obj["mtime"])
-        match role:
-            case constants.DISPLAY_ROLE:
-                return mtime.strftime(self.display_format)
-            case constants.USER_ROLE:
-                return mtime
-            case _:
-                return super().get_data(item, role)
+    doc = "Modification date of file."
 
 
 class PermissionsColumn(FsSpecColumnItem):
@@ -169,9 +202,9 @@ class PermissionsColumn(FsSpecColumnItem):
     def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                if mode := item.obj.get("mode"):
+                if (mode := item.obj.get("mode")) is not None:
                     return oct(int(mode))[-4:]
-                return None
+                return ""
             case _:
                 return super().get_data(item, role)
 
@@ -184,7 +217,7 @@ class IsLinkColumn(FsSpecColumnItem):
     def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return self.to_checkstate(item.obj.get("islink"))
+                return self.to_checkstate(bool(item.obj.get("islink")))
             case _:
                 return super().get_data(item, role)
 
@@ -211,8 +244,20 @@ class FSSpecTreeModel(
     """Tree model to display filesystems supported by fsspec.
 
     The model offers the same API as QFileSystemModel so that it can work
-    easily as a drop-in replacement, only difference being that on
-    windows, FsSpec does not support a "real" root folder (aka a listing of drives.)
+    easily as a drop-in replacement. Differences:
+
+    * on windows, fsspec does not support a "real" root folder (a listing of drives)
+    * the model does not watch for changes, use `refresh()` to update a folder.
+    * `fileInfo()` / `rootDirectory()` only make sense for the local filesystem.
+
+    ### Example
+
+    ```py
+    model = FSSpecTreeModel("github", org="phil65", repo="prettyqt")
+    model = FSSpecTreeModel("memory")
+    model = FSSpecTreeModel("s3://bucket/folder")
+    model = FSSpecTreeModel(fsspec.filesystem("file"), root="/home")
+    ```
     """
 
     SUPPORTS = FsSpecProtocolStr | fsspec.AbstractFileSystem
@@ -241,47 +286,88 @@ class FSSpecTreeModel(
         FilePermissions = constants.USER_ROLE + 3
         ProtocolPathRole = constants.USER_ROLE + 4
 
-    class Option(enum.IntEnum):
-        DontWatchForChanges = 1
-        DontResolveSymlinks = 2
-        DontUseCustomDirectoryIcons = 4
+    Option = widgets.QFileSystemModel.Option
 
     def __init__(
         self,
         obj: str | fsspec.AbstractFileSystem | UPath = "file",
         root: datatypes.PathType = "",
         show_root: bool = False,
+        read_only: bool = False,
         parent: core.QObject | None = None,
-        **kwargs,
+        **kwargs: Any,
     ):
-        if isinstance(obj, str):
-            if "://" in obj:
-                from fsspec import url_to_fs
+        """Create a model for given filesystem.
 
-                fs, path = url_to_fs(obj, **kwargs)
-                self.fs = fs
-                self.root = path or fs.root_marker
-            else:
-                # obj is a protocol name like "github", "memory", etc.
-                self.fs = fsspec.filesystem(obj, **kwargs)
+        Arguments:
+            obj: fsspec filesystem, UPath, URL ("s3://bucket/path")
+                 or protocol name ("memory", "github", ...)
+            root: Root path (default: root of the filesystem / the URL path)
+            show_root: Whether to show the root folder as an item.
+            read_only: Whether the model allows renaming / drag & drop.
+            parent: parent QObject
+            kwargs: storage options for the filesystem (if obj is a string)
+        """
+        match obj:
+            case str() if "://" in obj:
+                self.fs, path = fsspec.url_to_fs(obj, **kwargs)
+                self.root = path or self.fs.root_marker
+            case str():
+                self.fs = _get_filesystem(obj, **kwargs)
                 self.root = self.fs.root_marker
-        elif isinstance(obj, fsspec.AbstractFileSystem):
-            self.fs = obj
-            self.root = self.fs.root_marker
-        else:
-            self.fs = obj.fs
-            self.root = str(obj)
-        root_info = self._normalize_info(self.fs.info(self.root), self.root)
+            case fsspec.AbstractFileSystem():
+                self.fs = obj
+                self.root = self.fs.root_marker
+            case _:  # UPath
+                self.fs = obj.fs
+                self.root = obj.path
+        if root:
+            self.root = os.fspath(root)
+        # these need to exist before super().__init__ fetches the root folder.
+        self._read_only = read_only
+        self._options = self.Option(0)
+        self._resolve_symlinks = True
+        self._filter = DEFAULT_FILTER
+        self._name_filters: list[str] = []
+        self._name_filter_disables = True
+        self._sort_column = 0
+        self._sort_order = constants.ASCENDING
+        root_info = self._get_info(self.root)
         columns = self.DEFAULT_COLUMNS + self._get_extra_columns()
-        super().__init__(root_info, columns=columns, parent=parent, show_root=show_root)
+        super().__init__(
+            root_info,
+            columns=columns,
+            parent=parent,
+            show_root=show_root,
+            read_only=read_only,
+        )
 
-    def _normalize_info(self, info: dict, path: str) -> dict:
+    @classmethod
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, fsspec.AbstractFileSystem)
+
+    # helpers
+
+    @property
+    def is_local(self) -> bool:
+        protocols = (
+            (self.fs.protocol,) if isinstance(self.fs.protocol, str) else self.fs.protocol
+        )
+        return "file" in protocols or "local" in protocols
+
+    def _get_info(self, path: str) -> dict[str, Any]:
+        try:
+            info = self.fs.info(path)
+        except (FileNotFoundError, NotImplementedError):
+            info = {"name": path, "type": "directory"}
+        return self._normalize_info(info, path)
+
+    def _normalize_info(self, info: dict, path: str) -> dict[str, Any]:
         """Normalize info dict to have consistent structure across filesystems."""
         normalized = dict(info)
         # Ensure name is the path, not a model/module name
         if "name" not in normalized or not self._is_path_like(normalized.get("name", "")):
             normalized["name"] = path
-        # Ensure size has a default
         normalized.setdefault("size", 0)
         return normalized
 
@@ -291,39 +377,136 @@ class FSSpecTreeModel(
             return True  # Empty string is valid root
         return "/" in value or value == self.fs.root_marker
 
-    @classmethod
-    def supports(cls, instance) -> bool:
-        return isinstance(instance, fsspec.AbstractFileSystem | str)
-
-    def _get_extra_columns(self) -> list[FsSpecColumnItem]:
+    def _get_extra_columns(self) -> list[type[FsSpecColumnItem]]:
         protocol = (
             self.fs.protocol if isinstance(self.fs.protocol, str) else self.fs.protocol[0]
         )
-        if hasattr(self.fs, "get_info_fields"):
-            columns = self.fs.get_info_fields()  # pyright: ignore[reportAttributeAccessIssue]
-            # Exclude columns that are already in DEFAULT_COLUMNS
-            default_identifiers = {col.identifier for col in self.DEFAULT_COLUMNS}
-            columns = {col for col in columns if col not in default_identifiers}
+        get_fields = getattr(self.fs, "get_info_fields", None)
+        # info dict keys which differ from the column identifiers
+        key_map = {"islink": "is_link"}
+        if get_fields and (fields := get_fields()):
+            columns = {key_map.get(field, field) for field in fields}
         else:
             match protocol:
                 case "github":
-                    columns = {"size", "sha"}
-                case "file":
+                    columns = {"sha"}
+                case "file" | "local":
                     columns = {"path", "created", "mtime", "mode", "is_link"}
                 case "smb":
-                    columns = {"uid", "gid", "mtime", "time"}
+                    columns = {"mtime"}
                 case "memory":
                     columns = {"created"}
                 case _:
-                    return self.EXTRA_COLUMNS
+                    return list(self.EXTRA_COLUMNS)
         return [col for col in self.EXTRA_COLUMNS if col.identifier in columns]
 
-    def _has_children(self, item: FSSpecTreeModel.TreeItem) -> bool:
-        path = item.obj["name"]
+    def join(self, folder: str, name: str) -> str:
+        """Join a folder path and a file name using the filesystem separator."""
+        sep = getattr(self.fs, "sep", "/")
+        return f"{folder.rstrip(sep)}{sep}{name}" if folder else name
+
+    def get_file_name(self, path: str) -> str:
+        """Return the last part of given path (the path itself for the root)."""
+        sep = getattr(self.fs, "sep", "/")
+        return path.rstrip(sep).rsplit(sep, 1)[-1] or path
+
+    def is_dir_info(self, info: dict[str, Any]) -> bool:
+        match info.get("type"):
+            case "directory":
+                return True
+            case "file":
+                return False
+        # unknown types (like "other" / "link"), ask the filesystem.
         try:
-            return self.fs.isdir(path)
-        except (FileNotFoundError, PermissionError):
+            return self.fs.isdir(info["name"])
+        except (OSError, NotImplementedError):
             return False
+
+    def get_icon(self, info: dict[str, Any]) -> gui.QIcon:
+        if self.is_local:
+            return _icon_provider.icon(core.QFileInfo(info["name"]))
+        icon_type = (
+            widgets.QFileIconProvider.IconType.Folder
+            if self.is_dir_info(info)
+            else widgets.QFileIconProvider.IconType.File
+        )
+        return _icon_provider.icon(icon_type)
+
+    def get_permission_flags(self, info: dict[str, Any]) -> core.QFileDevice.Permission:
+        flag = core.QFileDevice.Permission(0)
+        if (mode := info.get("mode")) is None:
+            return flag
+        for i in core.filedevice.PERMISSIONS.get_list(int(mode) & 0o7777):
+            flag |= core.filedevice.PERMISSIONS[i]
+        return flag
+
+    def _item_for(self, index: core.ModelIndex | str) -> FSSpecTreeModel.TreeItem | None:
+        if isinstance(index, str):
+            index = self.index(index)
+        return index.internalPointer() if index.isValid() else None
+
+    def _is_hidden(self, name: str) -> bool:
+        return self.get_file_name(name).startswith(".")
+
+    def _matches_name_filters(self, name: str) -> bool:
+        if not self._name_filters:
+            return True
+        name = self.get_file_name(name)
+        if self._filter & Filter.CaseSensitive:
+            return any(fnmatch.fnmatchcase(name, f) for f in self._name_filters)
+        name = name.lower()
+        return any(fnmatch.fnmatchcase(name, f.lower()) for f in self._name_filters)
+
+    def _accept(self, info: dict[str, Any]) -> bool | None:
+        """Check whether info passes the filters.
+
+        Returns True if accepted, None if it should be shown disabled
+        (name filters with nameFilterDisables) and False if rejected.
+        """
+        name = info["name"]
+        is_dir = self.is_dir_info(info)
+        flt = self._filter
+        if is_dir and not flt & (Filter.Dirs | Filter.AllDirs):
+            return False
+        if not is_dir and not flt & Filter.Files:
+            return False
+        if self._is_hidden(name) and not flt & Filter.Hidden:
+            return False
+        if info.get("islink") and flt & Filter.NoSymLinks:
+            return False
+        name_filtered = not (is_dir and flt & Filter.AllDirs)
+        if name_filtered and not self._matches_name_filters(name):
+            return None if self._name_filter_disables else False
+        return True
+
+    def _sort_key(self, item: FSSpecTreeModel.TreeItem):
+        col = self._attr_cols[self._sort_column]
+        value = col.get_data(item, constants.SORT_ROLE)
+        if value is None:
+            value = col.get_data(item, constants.DISPLAY_ROLE)
+        match value:
+            case None:
+                value = (2, "")
+            case int() | float():
+                value = (0, value)
+            case dt.datetime():
+                value = (0, value.timestamp())
+            case _:
+                value = (1, str(value).lower())
+        # folders first, like QFileSystemModel.
+        is_dir = self.is_dir_info(item.obj)
+        if self._sort_order == constants.DESCENDING:
+            return (is_dir, value)
+        return (not is_dir, value)
+
+    def _sorted(self, items: list) -> list:
+        reverse = self._sort_order == constants.DESCENDING
+        return sorted(items, key=self._sort_key, reverse=reverse)
+
+    # TreeModel overrides
+
+    def _has_children(self, item: FSSpecTreeModel.TreeItem) -> bool:
+        return self.is_dir_info(item.obj)
 
     def _fetch_object_children(
         self, item: FSSpecTreeModel.TreeItem
@@ -331,211 +514,346 @@ class FSSpecTreeModel(
         path = item.obj["name"]
         try:
             children = self.fs.ls(path, detail=True)
-        except (FileNotFoundError, PermissionError):
+        except (OSError, NotImplementedError):
+            logger.debug("Could not list %s", path)
             children = []
         items = []
-        for info in children:
-            name = info.get("name", "")
-            # Skip . and ..
-            if pathlib.Path(name).name in {".", ".."}:
+        for child in children:
+            name = child.get("name", "")
+            if self.get_file_name(name) in {".", ".."}:
                 continue
-            # Normalize child info - prepend parent path if name is not a full path
+            # prepend parent path if name is not a full path
             if not self._is_path_like(name):
-                sep = self.fs.sep if hasattr(self.fs, "sep") else "/"
-                full_path = f"{path.rstrip(sep)}{sep}{name}" if path else name
-                info = dict(info)
-                info["name"] = full_path
-            info = self._normalize_info(info, info["name"])
-            items.append(FSSpecTreeModel.TreeItem(obj=info, parent=item))
+                name = self.join(path, name)
+            info = self._normalize_info(child, name)
+            info["name"] = name
+            match self._accept(info):
+                case False:
+                    continue
+                case None:
+                    info["_disabled"] = True
+            items.append(self.TreeItem(obj=info))
         self.directoryLoaded.emit(path)
-        return items
+        return self._sorted(items)
 
-    def get_protocol_path(self, index: core.QModelIndex | str) -> str:
-        """Get protocol path for given index."""
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
+        flags = super().flags(index)
+        if not index.isValid():
+            return flags if self._read_only else flags | constants.DROP_ENABLED
+        item = index.internalPointer()
+        if item.obj.get("_disabled"):
+            return flags & ~constants.IS_ENABLED
+        flags |= constants.DRAG_ENABLED
+        if not self._read_only and self.is_dir_info(item.obj):
+            flags |= constants.DROP_ENABLED
+        return flags
+
+    def sort(self, column: int, order: constants.SortOrder = constants.ASCENDING):
+        """Sort all loaded folders by given column (folders first)."""
+        if not 0 <= column < len(self._attr_cols):
+            return
+        self._sort_column = column
+        self._sort_order = order
+        self.layoutAboutToBeChanged.emit()
+        old_indexes = self.persistentIndexList()
+        items = [(idx.internalPointer(), idx.column()) for idx in old_indexes]
+        stack = [self.inspected_item]
+        while stack:
+            tree_item = stack.pop()
+            if tree_item.children_fetched and tree_item.children:
+                tree_item.children = self._sorted(tree_item.children)
+                stack.extend(tree_item.children)
+        new_indexes = [self.createIndex(item.row(), col, item) for item, col in items]
+        self.changePersistentIndexList(old_indexes, new_indexes)
+        self.layoutChanged.emit()
+
+    # Refreshing / modifying
+
+    def refresh(self, index: core.ModelIndex | str | None = None):
+        """Reload the children of given folder index (default: root folder)."""
         if isinstance(index, str):
             index = self.index(index)
-        protocol = self.fs.protocol
-        path = index.data(self.Roles.FilePathRole)
-        return f"{protocol}://{path}"
+        index = index or core.ModelIndex()
+        if not index.isValid() and self._show_root:
+            index = self.index(0, 0)
+        index = index.siblingAtColumn(0) if index.isValid() else index
+        item = self.data_by_index(index)
+        with contextlib.suppress(Exception):
+            self.fs.invalidate_cache(item.obj["name"])
+        if item.children:
+            with self.remove_rows(0, len(item.children) - 1, index):
+                item.children.clear()
+        item.children_fetched = False
+        self.fetchMore(index)
 
-    def get_file_content(self, index_or_path: str | core.QModelIndex):
-        if isinstance(index_or_path, str):
-            index = self.index(index_or_path)
-        else:
-            index = index_or_path
-        protocol_path = self.get_protocol_path(index)
-        # info = self.fs.info(protocol_path)
-        with self.fs.open(protocol_path) as file:
-            return file.read()
+    def _refresh_path(self, path: str):
+        """Refresh folder with given path if it is loaded."""
+        if (index := self._find_index(path, fetch=False)).isValid() or (
+            path.rstrip("/") == self.rootPath().rstrip("/")
+        ):
+            self.refresh(index)
 
-    def fileIcon(self, index: core.QModelIndex | str) -> gui.Icon:
-        if isinstance(index, str):
-            index = self.index(index)
-        tree_item = index.internalPointer()
-        if tree_item is None:
-            return None
-        return _icon_provider.get_icon(core.FileInfo(tree_item.obj["name"]))
-
-    def fileInfo(self, index: core.QModelIndex | str):
-        if isinstance(index, str):
-            index = self.index(index)
-        tree_item = index.internalPointer()
-        return None if tree_item is None else core.FileInfo(tree_item.obj["name"])
-
-    def fileName(self, index: core.QModelIndex) -> str:
-        tree_item = index.internalPointer()
-        return "" if tree_item is None else pathlib.Path(tree_item.obj["name"]).name
-
-    def filePath(self, index: core.QModelIndex) -> str:
-        tree_item = index.internalPointer()
-        return "" if tree_item is None else tree_item.obj["name"]
-
-    def isDir(self, index: core.QModelIndex | str):
-        if isinstance(index, str):
-            index = self.index(index)
-        tree_item = index.internalPointer()
-        if tree_item is None:
-            return False
-        path = tree_item.obj["name"]
+    def mkdir(self, parent: core.QModelIndex | str, name: str) -> core.ModelIndex:
+        """Create a folder in given parent folder, return its index."""
+        if isinstance(parent, str):
+            parent = self.index(parent)
+        parent_item = self.data_by_index(parent)
+        path = self.join(parent_item.obj["name"], name)
         try:
-            return self.fs.isdir(path)
-        except (FileNotFoundError, PermissionError):
+            self.fs.mkdir(path)
+        except (OSError, NotImplementedError):
+            logger.exception("Could not create folder %s", path)
+            return core.ModelIndex()
+        self.refresh(parent)
+        return self.index(path)
+
+    def _remove_index(self, index: core.QModelIndex | str, func) -> bool:
+        if isinstance(index, str):
+            index = self.index(index)
+        if not index.isValid() or self._read_only:
             return False
-
-    def mkdir(self, index: core.QModelIndex | str, name: str):
-        if isinstance(index, str):
-            index = self.index(index)
-        tree_item = index.internalPointer()
-        path = tree_item.obj["name"]
-        new_folder = pathlib.Path(path) / name
-        self.fs.mkdir(str(new_folder))
-
-    def size(self, index: core.QModelIndex | str) -> int:
-        if isinstance(index, str):
-            index = self.index(index)
-        tree_item = index.internalPointer()
-        return 0 if tree_item is None else tree_item.obj["size"]
-
-    def lastModified(self, index: core.QModelIndex | str) -> datetime.datetime | None:
-        if isinstance(index, str):
-            index = self.index(index)
-        tree_item = index.internalPointer()
-        if tree_item is None:
-            return None
-        mtime = tree_item.obj.get("mtime")
-        return datetime.datetime.fromtimestamp(mtime) if mtime else None
-
-    def permissions(self, index: core.QModelIndex | str) -> core.QFileDevice.Permission:
-        if isinstance(index, str):
-            index = self.index(index)
-        tree_item = index.internalPointer()
-        flag = core.QFileDevice.Permission(0)
-        if tree_item is None:
-            return flag
-        mode = tree_item.obj.get("mode")
-        if mode is None:
-            return flag
-        val = oct(int(mode))[-4:]
-        for i in core.filedevice.PERMISSIONS.get_list(int(val, 8)):
-            flag |= core.filedevice.PERMISSIONS[i]
-        return flag
+        path = index.internalPointer().obj["name"]
+        try:
+            func(path)
+        except (OSError, NotImplementedError):
+            logger.exception("Could not remove %s", path)
+            return False
+        with self.remove_row(index.row(), index.parent()):
+            index.internalPointer().parent_item.children.pop(index.row())
+        return True
 
     def remove(self, index: core.QModelIndex | str) -> bool:
-        if isinstance(index, str):
-            index = self.index(index)
-        tree_item = index.internalPointer()
-        path = tree_item.obj["name"]
-        # TODO: returned bool should indicate whether operation is possible,
-        # not whether file exists after trying.
-        with self.remove_row(index.row(), index.parent()):
-            self.fs.rm_file(path)
-        return self.fs.exists(path)
+        """Remove file / folder (recursively) at given index."""
+        return self._remove_index(index, lambda p: self.fs.rm(p, recursive=True))
 
     def rmdir(self, index: core.QModelIndex | str) -> bool:
-        if isinstance(index, str):
-            index = self.index(index)
-        tree_item = index.internalPointer()
-        path = tree_item.obj["name"]
-        # TODO: returned bool should indicate whether operation is possible,
-        # not whether file exists after trying.
-        with self.remove_row(index.row(), index.parent()):
-            self.fs.rmdir(path)
-        return self.fs.exists(path)
+        """Remove the (empty) folder at given index."""
+        return self._remove_index(index, self.fs.rmdir)
+
+    def rename_item(self, item: FSSpecTreeModel.TreeItem, new_name: str) -> bool:
+        path = item.obj["name"]
+        folder = path.rstrip("/").rsplit("/", 1)[0] if "/" in path else ""
+        old_name = self.get_file_name(path)
+        if self._read_only or not new_name or new_name == old_name:
+            return False
+        target = self.join(folder, new_name)
+        try:
+            self.fs.mv(path, target, recursive=True)
+        except (OSError, NotImplementedError):
+            logger.exception("Could not rename %s", path)
+            return False
+        item.obj = self._get_info(target)
+        # children (if loaded) still have the old paths.
+        item.children.clear()
+        item.children_fetched = False
+        self.fileRenamed.emit(folder, old_name, new_name)
+        return True
+
+    def rename(self, index: core.QModelIndex | str, value: str) -> bool:
+        item = self._item_for(index)
+        if item is None or not self.rename_item(item, value):
+            return False
+        index = self.index_for_item(item)
+        self.dataChanged.emit(index, index.siblingAtColumn(self.columnCount() - 1))
+        return True
+
+    # QFileSystemModel API
+
+    def get_protocol_path(self, index: core.QModelIndex | str) -> str:
+        """Get the full URL (including protocol) for given index or path."""
+        path = index if isinstance(index, str) else index.data(self.Roles.FilePathRole)
+        return self.fs.unstrip_protocol(path)
+
+    def get_file_content(self, index_or_path: str | core.QModelIndex) -> bytes:
+        path = (
+            index_or_path
+            if isinstance(index_or_path, str)
+            else index_or_path.data(self.Roles.FilePathRole)
+        )
+        return self.fs.cat_file(path)
+
+    def fileIcon(self, index: core.QModelIndex | str) -> gui.QIcon:
+        item = self._item_for(index)
+        return gui.QIcon() if item is None else self.get_icon(item.obj)
+
+    def fileInfo(self, index: core.QModelIndex | str) -> core.FileInfo | None:
+        """Return a FileInfo for given index. (only meaningful for local paths)."""
+        item = self._item_for(index)
+        return None if item is None else core.FileInfo(item.obj["name"])
+
+    def fileName(self, index: core.QModelIndex | str) -> str:
+        item = self._item_for(index)
+        return "" if item is None else self.get_file_name(item.obj["name"])
+
+    def filePath(self, index: core.QModelIndex | str) -> str:
+        item = self._item_for(index)
+        return "" if item is None else item.obj["name"]
+
+    def isDir(self, index: core.QModelIndex | str) -> bool:
+        item = self._item_for(index)
+        return item is not None and self.is_dir_info(item.obj)
+
+    def size(self, index: core.QModelIndex | str) -> int:
+        item = self._item_for(index)
+        return 0 if item is None else item.obj.get("size") or 0
+
+    def type(self, index: core.QModelIndex | str) -> str:
+        item = self._item_for(index)
+        return "" if item is None else item.obj.get("type") or ""
+
+    def lastModified(self, index: core.QModelIndex | str) -> dt.datetime | None:
+        item = self._item_for(index)
+        return None if item is None else _to_datetime(item.obj.get("mtime"))
+
+    def permissions(self, index: core.QModelIndex | str) -> core.QFileDevice.Permission:
+        item = self._item_for(index)
+        if item is None:
+            return core.QFileDevice.Permission(0)
+        return self.get_permission_flags(item.obj)
 
     def setRootPath(self, path: str | os.PathLike[str] | None) -> core.ModelIndex:
-        path = os.fspath(path) if path else self.fs.root_marker
-        item = self._normalize_info(self.fs.info(path), path)
-        self.set_root_item(item)
-        self.rootPathChanged.emit(path)
-
-    def rootDirectory(self) -> core.Dir:
-        return core.Dir(self.rootPath())
+        self.root = os.fspath(path) if path else self.fs.root_marker
+        self.set_root_item(self._get_info(self.root))
+        self.rootPathChanged.emit(self.root)
+        return self.index(0, 0) if self._show_root else core.ModelIndex()
 
     def rootPath(self) -> str:
-        return self._root_item["name"]
+        return self.inspected_item.obj["name"]
 
-    def rename(self, index, value: str):
-        tree_item = index.internalPointer()
-        path = tree_item.obj["name"]
-        old_name = pathlib.Path(path).name
-        parent_folder = pathlib.Path(path).parent
-        target = str(parent_folder / value)
-        self.fs.mv(path, target)
-        exists = self.fs.exists(target)
-        if exists:
-            self.fileRenamed.emit(parent_folder, old_name, value)
-        return exists
+    def rootDirectory(self) -> core.Dir:
+        """Return the root as a Dir. (only meaningful for local paths)."""
+        return core.Dir(self.rootPath())
 
-    def type(self, index) -> str:
-        tree_item = index.internalPointer()
-        return tree_item.obj["type"]
+    def index(
+        self,
+        path_or_row: str | int,
+        column: int = 0,
+        parent: core.QModelIndex | None = None,
+    ) -> core.ModelIndex:
+        """Return index for given row/column/parent or for given path."""
+        if isinstance(path_or_row, int):
+            return super().index(path_or_row, column, parent)
+        return self._find_index(path_or_row, column)
 
-    def mimeTypes(self):
-        return ["text/uri-list"]
+    def _find_index(
+        self, target: str, column: int = 0, fetch: bool = True
+    ) -> core.ModelIndex:
+        """Find index for given path, fetching the folders on the way if fetch=True."""
+        sep = getattr(self.fs, "sep", "/")
+        target = os.fspath(target).rstrip(sep) or target
+        parent = core.ModelIndex()
+        while True:
+            if fetch and self.canFetchMore(parent):
+                self.fetchMore(parent)
+            for i in range(self.rowCount(parent)):
+                index = super().index(i, 0, parent)
+                path = index.internalPointer().obj["name"].rstrip(sep)
+                if path == target:
+                    return index.siblingAtColumn(column)
+                if target.startswith(path + sep) or (not path and self._show_root):
+                    parent = index
+                    break
+            else:
+                return core.ModelIndex()
 
-    def mimeData(self, indexes):
+    def roleNames(self) -> dict[int, core.QByteArray]:
+        return {
+            constants.DISPLAY_ROLE: core.QByteArray(b"display"),
+            constants.DECORATION_ROLE: core.QByteArray(b"fileIcon"),
+            constants.EDIT_ROLE: core.QByteArray(b"edit"),
+            constants.TOOLTIP_ROLE: core.QByteArray(b"toolTip"),
+            constants.STATUSTIP_ROLE: core.QByteArray(b"statusTip"),
+            constants.WHATS_THIS_ROLE: core.QByteArray(b"whatsThis"),
+            self.Roles.FilePathRole: core.QByteArray(b"filePath"),
+            self.Roles.FileNameRole: core.QByteArray(b"fileName"),
+            self.Roles.FilePermissions: core.QByteArray(b"filePermissions"),
+        }
+
+    def setReadOnly(self, val: bool):
+        self._read_only = val
+
+    def isReadOnly(self) -> bool:
+        return self._read_only
+
+    def setOption(self, option: widgets.QFileSystemModel.Option, on: bool = True):
+        """Options are stored for compatibility, the model does not watch for changes."""
+        self._options = self._options | option if on else self._options & ~option
+
+    def options(self) -> widgets.QFileSystemModel.Option:
+        return self._options
+
+    def setOptions(self, options: widgets.QFileSystemModel.Option):
+        self._options = options
+
+    def testOption(self, option: widgets.QFileSystemModel.Option) -> bool:
+        return bool(self._options & option)
+
+    def resolveSymlinks(self) -> bool:
+        return self._resolve_symlinks
+
+    def setResolveSymlinks(self, enable: bool):
+        self._resolve_symlinks = enable
+
+    def setNameFilterDisables(self, enable: bool):
+        self._name_filter_disables = enable
+        self._apply_filters()
+
+    def nameFilterDisables(self) -> bool:
+        return self._name_filter_disables
+
+    def setNameFilters(self, filters: Iterable[str]):
+        self._name_filters = list(filters)
+        self._apply_filters()
+
+    def nameFilters(self) -> list[str]:
+        return self._name_filters
+
+    def setFilter(self, filters: core.QDir.Filter):
+        self._filter = filters
+        self._apply_filters()
+
+    def filter(self) -> core.QDir.Filter:
+        return self._filter
+
+    def _apply_filters(self):
+        # only rebuild once initialized.
+        if hasattr(self, "_attr_cols"):
+            self.set_root_item(self.inspected_item.obj)
+
+    readOnly = core.Property(  # noqa: N815
+        bool,
+        isReadOnly,
+        setReadOnly,
+        doc="Used to set model to read-only",
+    )
+
+    # Drag & drop
+
+    def mimeTypes(self) -> list[str]:
+        return [PATHS_MIME_TYPE, "text/uri-list"]
+
+    def mimeData(self, indexes: Iterable[core.ModelIndex]) -> core.QMimeData:
+        paths = list(
+            dict.fromkeys(i.data(self.Roles.FilePathRole) for i in indexes if i.isValid())
+        )
         mime_data = core.MimeData()
-        role = self.Roles.FilePathRole
-        urls = [core.Url(i) for idx in indexes if (i := idx.data(role))]
+        mime_data.setData(PATHS_MIME_TYPE, json.dumps(paths).encode())
+        urls = [core.QUrl(self.get_protocol_path(p)) for p in paths]
         mime_data.setUrls(urls)
         return mime_data
 
-    def supportedDropActions(self):
-        DropAction = constants.DropAction  # noqa: N806
-        return DropAction.MoveAction | DropAction.CopyAction | DropAction.LinkAction
+    def supportedDragActions(self) -> constants.DropAction:
+        return constants.DropAction.MoveAction | constants.DropAction.CopyAction
 
-    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
-        return super().flags(index) | constants.DROP_ENABLED | constants.DRAG_ENABLED
+    def supportedDropActions(self) -> constants.DropAction:
+        return constants.DropAction.MoveAction | constants.DropAction.CopyAction
 
-    # def dragEnterEvent(self, event):
-    #     event.accept() if event.mimeData().hasUrls() else super().dragEnterEvent(event)
-
-    # def removeRows(self, row: int, count: int, parent: core.ModelIndex):
-    #     end_row = row + count - 1
-    #     with self.remove_rows(row, end_row, parent):
-    #         for i in range(end_row, row - 1, -1):
-    #             index = self.index(i, 0, parent)
-    #             path = index.data(self.Roles.FilePathRole)
-    #             self.rm_file(path)
-    #     return True
-
-    def remove_items(self, offsets: Iterable[int]):
-        for offset in sorted(offsets, reverse=True):
-            self.removeRow(offset)
-
-    def add_items(
-        self,
-        items: Iterable,
-        position: int | None = None,
-        parent: core.QModelIndex | None = None,
-    ):
-        position = len(self.items) if position is None else position
-        return list(items)
-        # with self.insert_rows(position, position + len(items) - 1, parent):
-        #     for i in range(len(items)):
-        #         self.items.insert(i + position, items[i])
-        #         pass
-        #     self.items.extend(items)
+    def _get_dropped_paths(self, mime_data: core.QMimeData) -> list[str]:
+        if mime_data.hasFormat(PATHS_MIME_TYPE):
+            return json.loads(mime_data.data(PATHS_MIME_TYPE).data().decode())
+        if self.is_local and mime_data.hasUrls():
+            return [u.toLocalFile() for u in mime_data.urls() if u.isLocalFile()]
+        return []
 
     def canDropMimeData(
         self,
@@ -545,7 +863,20 @@ class FSSpecTreeModel(
         column: int,
         parent_index: core.QModelIndex,
     ) -> bool:
-        return column == 0 and mime_data.hasFormat("text/uri-list")
+        if self._read_only or action not in (
+            constants.DropAction.MoveAction,
+            constants.DropAction.CopyAction,
+        ):
+            return False
+        return bool(self._get_dropped_paths(mime_data))
+
+    def _get_drop_folder(self, parent_index: core.QModelIndex) -> str:
+        if not parent_index.isValid():
+            return self.rootPath()
+        info = parent_index.internalPointer().obj
+        if self.is_dir_info(info):
+            return info["name"]
+        return info["name"].rstrip("/").rsplit("/", 1)[0]
 
     def dropMimeData(
         self,
@@ -554,143 +885,32 @@ class FSSpecTreeModel(
         row: int,
         column: int,
         parent_index: core.QModelIndex,
-    ):
+    ) -> bool:
         if not self.canDropMimeData(mime_data, action, row, column, parent_index):
             return False
-        print(mime_data.urls(), action, row, column, parent_index.data())
-        urls = [core.Url(i) for i in mime_data.urls()]
-        if not urls:
-            return False
-        match action:
-            case constants.DropAction.MoveAction:
-                with self.change_layout():
-                    for i in sorted(urls, reverse=True):
-                        logger.info(
-                            "move %s to %s", i, parent_index.data(self.Roles.FilePathRole)
-                        )
-            case constants.DropAction.CopyAction:
-                pass
-            case constants.DropAction.LinkAction:
-                pass
-
-        column = min(column, 0)
-        if row != -1:
-            begin_row = row
-        begin_row = self.rowCount(parent_index) + 1
-        print(begin_row)
-        return True
-
-        # if action == Qt.CopyAction:
-        #     # Behavior if parent is a text item
-        #     # For example, we select a text and do: CTRL+C CTRL+V
-        #     if parent.isValid() and not parent.internalPointer().isFolder():
-        #         # We insert copy in parent folder, just below
-        #         begin_row = parent.row() + 1
-        #         parent = parent.parent()
-
-        #     if parent.isValid() and parent.internalPointer().isFolder():
-        #         pass
-        # if not items:
-        #     return False
-
-        # if action == Qt.CopyAction:
-        #     pass
-
-        # r = self.insertItems(items, begin_row, parent)
-        # return r
-
-        # return True
-
-    # @functools.singledispatchmethod
-    def index(
-        self,
-        path_or_row: str | int,
-        column: int = 0,
-        index: core.QModelIndex | None = None,
-    ) -> core.ModelIndex:
-        if isinstance(path_or_row, int):
-            return super().index(path_or_row, column, index)
-        return self._iter_path(path_or_row, column, index)
-
-    def _iter_path(
-        self,
-        target: datatypes.PathType,
-        column: int = 0,
-        parent: core.ModelIndex | None = None,
-    ) -> core.ModelIndex:
-        parent = parent or core.ModelIndex()
-        target = pathlib.Path(target)
-        row_count = self.rowCount(parent)
-        for i in range(row_count):
-            index = self.index(i, column, parent)
-            path = self.filePath(index)
-            path = pathlib.Path(path)
-            if target == path:
-                return index
-            if target.is_relative_to(path):
-                if self.canFetchMore(index):
-                    self.fetchMore(index)
-                return self._iter_path(target, column, index)
-        return core.ModelIndex()
-
-    def roleNames(self) -> dict[int, core.QByteArray]:
-        return {
-            259: core.QByteArray(b"filePermissions"),
-            1: core.QByteArray(b"fileIcon"),
-            4: core.QByteArray(b"statusTip"),
-            3: core.QByteArray(b"toolTip"),
-            2: core.QByteArray(b"edit"),
-            257: core.QByteArray(b"filePath"),
-            0: core.QByteArray(b"display"),
-            258: core.QByteArray(b"fileName"),
-            5: core.QByteArray(b"whatsThis"),
-        }
-
-    def setReadOnly(self, val: bool):
-        return NotImplemented
-
-    def isReadOnly(self) -> bool:
-        return NotImplemented
-
-    def setOption(self, opt, val):
-        return NotImplemented
-
-    def options(self):
-        return NotImplemented
-
-    def testOption(self, opt):
-        return NotImplemented
-
-    def resolveSymlinks(self, val):
-        return NotImplemented
-
-    def setResolveSymlinks(self, val):
-        return NotImplemented
-
-    def setNameFilterDisables(self, value):
-        return NotImplemented
-
-    def nameFilterDisables(self):
-        return NotImplemented
-
-    def setNameFilters(self, filters):
-        return NotImplemented
-
-    def nameFilters(self):
-        return NotImplemented
-
-    def setFilter(self, filter):  # noqa: A002
-        return NotImplemented
-
-    def filter(self):
-        return NotImplemented
-
-    readOnly = core.Property(  # noqa: N815
-        bool,
-        isReadOnly,
-        setReadOnly,
-        doc="Used to set model to read-only",
-    )
+        folder = self._get_drop_folder(parent_index)
+        source_folders = set()
+        changed = False
+        for path in self._get_dropped_paths(mime_data):
+            target = self.join(folder, self.get_file_name(path))
+            # skip dropping onto itself / into own subfolder
+            if path in (target, folder) or folder.startswith(path + "/"):
+                continue
+            try:
+                if action == constants.DropAction.MoveAction:
+                    self.fs.mv(path, target, recursive=True)
+                    source_folders.add(path.rstrip("/").rsplit("/", 1)[0])
+                else:
+                    self.fs.copy(path, target, recursive=True)
+            except (OSError, NotImplementedError):
+                logger.exception("Could not drop %s to %s", path, target)
+                continue
+            changed = True
+        for source_folder in source_folders - {folder}:
+            self._refresh_path(source_folder)
+        if changed:
+            self._refresh_path(folder)
+        return changed
 
 
 if __name__ == "__main__":
@@ -698,13 +918,13 @@ if __name__ == "__main__":
 
     app = widgets.app()
 
-    model = FSSpecTreeModel("github", org="phil65", repo="prettyqt", path="/")
-    # model.set_root_path("/")
+    model = FSSpecTreeModel("github", org="phil65", repo="prettyqt")
     tree = widgets.TreeView()
     tree.setRootIsDecorated(True)
     tree.setup_dragdrop_move()
     tree.setAlternatingRowColors(True)
     tree.set_model(model)
+    tree.setSortingEnabled(True)
     tree.set_selection_behavior("rows")
     tree.setUniformRowHeights(True)
     tree.setAnimated(True)

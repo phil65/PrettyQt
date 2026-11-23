@@ -90,13 +90,121 @@ def test_fsspecmodel(qtbot, qtmodeltester):
     model.get_paths([idx])
     model.data(idx, model.Roles.FilePathRole)
     model.watch_for_changes(False)
+    assert model.testOption(model.Option.DontWatchForChanges)
     model.use_custom_icons(False)
     model.resolve_sym_links(False)
+    assert not model.resolveSymlinks()
     model.set_name_filters(["test"], hide=True)
     model.set_filter("drives")
     with pytest.raises(InvalidParamError):
         model.set_filter("test")
-    # qtmodeltester.check(model, force_py=True)
+
+
+@pytest.fixture
+def memory_fs_model(qapp):
+    model = fsspecmodel.FSSpecTreeModel("memory")
+    fs = model.fs
+    for path in fs.find("/", withdirs=True)[::-1]:
+        fs.rm(path, recursive=True)
+    for path in ["/d/b.txt", "/d/a.py", "/d/.hidden", "/z.txt"]:
+        fs.pipe(path, b"xx")
+    fs.mkdir("/d/sub")
+    fs.pipe("/d/sub/c.txt", b"x")
+    model.refresh()
+    return model
+
+
+def _names(model, path=None):
+    parent = core.ModelIndex() if path is None else model.index(path)
+    if model.canFetchMore(parent):
+        model.fetchMore(parent)
+    return [model.index(i, 0, parent).data() for i in range(model.rowCount(parent))]
+
+
+def test_fsspecmodel_contract(memory_fs_model, qtmodeltester):
+    model = memory_fs_model
+    assert _names(model) == ["d", "z.txt"]  # folders first
+    assert _names(model, "/d") == ["sub", ".hidden", "a.py", "b.txt"]
+    qtmodeltester.check(model, force_py=True)
+
+
+def test_fsspecmodel_info(memory_fs_model):
+    model = memory_fs_model
+    assert model.isDir("/d")
+    assert not model.isDir("/z.txt")
+    assert model.size("/z.txt") == 2  # noqa: PLR2004
+    assert model.fileName("/d/sub") == "sub"
+    assert model.filePath("/d/sub") == "/d/sub"
+    assert model.get_file_content("/z.txt") == b"xx"
+    assert model.get_protocol_path("/z.txt") == "memory:///z.txt"
+    assert model.index("/d/b.txt").data(model.Roles.FileNameRole) == "b.txt"
+    assert not model.index("/does/not/exist").isValid()
+
+
+def test_fsspecmodel_filters(memory_fs_model):
+    model = memory_fs_model
+    model.setNameFilters(["*.txt"])  # nameFilterDisables is True by default
+    d = model.index("/d")
+    _names(model, "/d")
+    enabled = [
+        bool(model.index(i, 0, d).flags() & constants.IS_ENABLED)
+        for i in range(model.rowCount(d))
+    ]
+    assert enabled == [True, False, False, True]  # folders ignore name filters
+    model.set_name_filters(["*.txt"], hide=True)
+    assert _names(model, "/d") == ["sub", "b.txt"]
+    model.setNameFilters([])
+    model.setFilter(core.QDir.Filter.AllDirs | core.QDir.Filter.Files)
+    assert _names(model, "/d") == ["sub", "a.py", "b.txt"]  # no hidden files
+    model.setFilter(core.QDir.Filter.Dirs)
+    assert _names(model) == ["d"]
+
+
+def test_fsspecmodel_sort(memory_fs_model):
+    model = memory_fs_model
+    _names(model, "/d")
+    model.sort(0, constants.DESCENDING)
+    assert _names(model, "/d") == ["sub", "b.txt", "a.py", ".hidden"]
+
+
+def test_fsspecmodel_modify(memory_fs_model):
+    model = memory_fs_model
+    fs = model.fs
+    assert model.mkdir("/d", "new").data() == "new"
+    assert fs.isdir("/d/new")
+    assert model.rename("/d/b.txt", "renamed.txt")
+    assert fs.exists("/d/renamed.txt")
+    # renaming by editing the name column
+    assert model.setData(model.index("/d/renamed.txt"), "r2.txt")
+    assert fs.exists("/d/r2.txt")
+    assert model.remove("/d/a.py")
+    assert not fs.exists("/d/a.py")
+    assert _names(model, "/d") == ["new", "sub", ".hidden", "r2.txt"]
+    model.setReadOnly(True)
+    assert not model.index("/d").flags() & constants.IS_EDITABLE
+    assert not model.remove("/d/sub")
+
+
+def test_fsspecmodel_drag_and_drop(memory_fs_model):
+    model = memory_fs_model
+    fs = model.fs
+    mime = model.mimeData([model.index("/z.txt")])
+    move = constants.DropAction.MoveAction
+    assert model.dropMimeData(mime, move, -1, 0, model.index("/d/sub"))
+    assert fs.exists("/d/sub/z.txt")
+    assert _names(model) == ["d"]
+    mime = model.mimeData([model.index("/d/sub/c.txt")])
+    copy = constants.DropAction.CopyAction
+    assert model.dropMimeData(mime, copy, -1, 0, core.ModelIndex())
+    assert _names(model) == ["d", "c.txt"]
+    assert fs.exists("/d/sub/c.txt")
+
+
+def test_fsspecmodel_set_root_path(memory_fs_model):
+    model = memory_fs_model
+    model.setRootPath("/d")
+    assert model.rootPath() == "/d"
+    assert _names(model) == ["sub", ".hidden", "a.py", "b.txt"]
 
 
 # regression tests
