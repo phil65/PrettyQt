@@ -6,7 +6,7 @@ from prettyqt import core, webenginecore
 from prettyqt.utils import InvalidParamError
 
 
-def test_webengineurlscheme():
+def test_webengineurlscheme(qapp):
     scheme = webenginecore.WebEngineUrlScheme()
     scheme.set_name("test")
     assert scheme.get_name() == "test"
@@ -16,7 +16,7 @@ def test_webengineurlscheme():
     assert scheme.get_syntax() == "host"
 
 
-def test_webenginehttprequest():
+def test_webenginehttprequest(qapp):
     req = webenginecore.WebEngineHttpRequest()
     headers = {"a": "b"}
     req.set_headers(headers)
@@ -47,7 +47,7 @@ def test_webengineprofile(qapp):
     profile.get_scripts()
 
 
-def test_webenginescript():
+def test_webenginescript(qapp):
     script = webenginecore.WebEngineScript()
     script.set_injection_point("document_ready")
     with pytest.raises(InvalidParamError):
@@ -55,7 +55,7 @@ def test_webenginescript():
     assert script.get_injection_point() == "document_ready"
 
 
-def test_webenginescriptcollection():
+def test_webenginescriptcollection(qapp):
     page = webenginecore.WebEnginePage()
     script = webenginecore.WebEngineScript()
     script.setName("test")
@@ -90,7 +90,7 @@ def test_webenginesettings(qapp):
     assert settings.get_font_size("default_fixed") == 14  # noqa: PLR2004
 
 
-def test_webenginehistory():
+def test_webenginehistory(qapp):
     page = webenginecore.WebEnginePage()
     history = page.get_history()
     assert (
