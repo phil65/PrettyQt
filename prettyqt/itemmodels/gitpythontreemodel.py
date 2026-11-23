@@ -33,20 +33,11 @@ class GitPythonTreeModel(itemmodels.TreeModel):
     HEADER: ClassVar = [
         "Name",
         "Absolute path",
-        "Blob id",
-        "Commit id",
         "Type",
-        # "Repo",
-        # "Path",
         "Size",
         "Hex SHA",
-        "Tree ID",
         "Mode",
-        "Symlink id",
         "Mime type",
-        "Link mode",
-        "File mode",
-        # "Executable mode",
     ]
 
     def __init__(self, path: os.PathLike[str] | str | git.Tree | git.Repo, **kwargs):
@@ -61,7 +52,7 @@ class GitPythonTreeModel(itemmodels.TreeModel):
                 raise TypeError(path)
         super().__init__(tree, **kwargs)
 
-    def columnCount(self, parent: core.ModelIndex | None = None):
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         return len(self.HEADER)
 
     def headerData(
@@ -70,8 +61,10 @@ class GitPythonTreeModel(itemmodels.TreeModel):
         orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
-        match orientation, role, section:
-            case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
+        match orientation, role:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE if section < len(
+                self.HEADER
+            ):
                 return self.HEADER[section]
         return None
 
@@ -82,55 +75,25 @@ class GitPythonTreeModel(itemmodels.TreeModel):
     ):
         if not index.isValid():
             return None
-        tree = self.data_by_index(index).obj
+        obj = self.data_by_index(index).obj
         match role, index.column():
             case constants.DISPLAY_ROLE, 0:
-                return tree.name
+                return obj.name
             case constants.DISPLAY_ROLE, 1:
-                return tree.abspath
+                return obj.abspath
             case constants.DISPLAY_ROLE, 2:
-                if isinstance(tree, git.Tree):
-                    return tree.blob_id
-                return None
+                return obj.type
             case constants.DISPLAY_ROLE, 3:
-                if isinstance(tree, git.Tree):
-                    return tree.commit_id
-                return None
+                return str(obj.size)
             case constants.DISPLAY_ROLE, 4:
-                return tree.type
-            # case constants.DISPLAY_ROLE, 5:
-            #     return tree.repo
-            # case constants.DISPLAY_ROLE, 6:
-            #     return tree.path
+                return obj.hexsha
             case constants.DISPLAY_ROLE, 5:
-                return tree.size
+                return oct(obj.mode)
             case constants.DISPLAY_ROLE, 6:
-                return tree.hexsha
-            case constants.DISPLAY_ROLE, 7:
-                if isinstance(tree, git.Tree):
-                    return tree.tree_id
-                return None
-            case constants.DISPLAY_ROLE, 8:
-                return tree.mode
-            case constants.DISPLAY_ROLE, 9:
-                if isinstance(tree, git.Tree):
-                    return tree.symlink_id
-                return None
-            case constants.DISPLAY_ROLE, 10:
-                if isinstance(tree, git.Blob):
-                    return tree.mime_type
-                return None
-            case constants.DISPLAY_ROLE, 11:
-                if isinstance(tree, git.Blob):
-                    return tree.link_mode
-                return None
-            case constants.DISPLAY_ROLE, 12:
-                if isinstance(tree, git.Blob):
-                    return tree.file_mode
-                return None
-            # case constants.DISPLAY_ROLE, 15:
-            #     if isinstance(tree, git.Blob):
-            #         return tree.executabe_mode
+                return obj.mime_type if isinstance(obj, git.Blob) else ""
+            case constants.USER_ROLE, _:
+                return obj
+        return None
 
     @classmethod
     def supports(cls, instance) -> bool:
@@ -139,10 +102,12 @@ class GitPythonTreeModel(itemmodels.TreeModel):
     def _fetch_object_children(
         self, item: GitPythonTreeModel.TreeItem
     ) -> list[GitPythonTreeModel.TreeItem]:
+        if not isinstance(item.obj, git.Tree):
+            return []
         return [self.TreeItem(obj=i) for i in item.obj.trees + item.obj.blobs]
 
     def _has_children(self, item: GitPythonTreeModel.TreeItem) -> bool:
-        return False if isinstance(item.obj, git.Blob) else len(item.obj.trees) > 0
+        return isinstance(item.obj, git.Tree) and len(item.obj) > 0
 
 
 class GitPythonCommitTreeModel(itemmodels.TreeModel):
@@ -158,8 +123,10 @@ class GitPythonCommitTreeModel(itemmodels.TreeModel):
 
     SUPPORTS = os.PathLike | str | git.Repo | git.Commit
     HEADER: ClassVar = [
-        "Sha",
-        "Absolute path",
+        "Date",
+        "Hex SHA",
+        "Author",
+        "Summary",
     ]
 
     def __init__(
@@ -171,14 +138,14 @@ class GitPythonCommitTreeModel(itemmodels.TreeModel):
             case os.PathLike() | str():
                 commit = git.Repo(repo).head.commit
             case git.Repo():
-                commit = repo.tree().head.commit
+                commit = repo.head.commit
             case git.Commit():
                 commit = repo
             case _:
                 raise TypeError(repo)
         super().__init__(commit, **kwargs)
 
-    def columnCount(self, parent: core.ModelIndex | None = None):
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         return len(self.HEADER)
 
     def headerData(
@@ -187,12 +154,14 @@ class GitPythonCommitTreeModel(itemmodels.TreeModel):
         orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
-        match orientation, role, section:
-            case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
+        match orientation, role:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE if section < len(
+                self.HEADER
+            ):
                 return self.HEADER[section]
         return None
 
-    def data(
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
@@ -204,10 +173,16 @@ class GitPythonCommitTreeModel(itemmodels.TreeModel):
             case constants.DISPLAY_ROLE, 0:
                 gmtime = time.gmtime(commit.committed_date)
                 return time.strftime("%a, %d %b %Y %H:%M", gmtime)
-            case constants.DISPLAY_ROLE, 0:
-                return commit.authored_date
             case constants.DISPLAY_ROLE, 1:
                 return commit.hexsha
+            case constants.DISPLAY_ROLE, 2:
+                return str(commit.author)
+            case constants.DISPLAY_ROLE, 3:
+                summary = commit.summary
+                return summary.decode() if isinstance(summary, bytes) else summary
+            case constants.USER_ROLE, _:
+                return commit
+        return None
 
     @classmethod
     def supports(cls, instance) -> bool:

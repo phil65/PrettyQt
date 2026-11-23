@@ -4,12 +4,13 @@ import logging
 from typing import Any
 
 from prettyqt import constants, core
+from prettyqt.itemmodels.proxies.flatproxymodel import FlatProxyModel
 
 
 logger = logging.getLogger(__name__)
 
 
-class StackProxyModel(core.AbstractProxyModel):
+class StackProxyModel(FlatProxyModel):
     """Proxy model to stack columns into rows.
 
     Transforms wide format with multiple columns into long format
@@ -60,19 +61,21 @@ class StackProxyModel(core.AbstractProxyModel):
                   None means stack all columns.
             kwargs: Additional keyword arguments.
         """
-        super().__init__(**kwargs)
         self._level = level
+        super().__init__(**kwargs)
 
     def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         """Return number of rows in stacked format."""
+        parent = parent or core.ModelIndex()
         source = self.sourceModel()
-        if not source:
+        if source is None or parent.isValid():
             return 0
         return source.rowCount() * source.columnCount()
 
     def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         """Return number of columns (always 2 - index and values)."""
-        return 2
+        parent = parent or core.ModelIndex()
+        return 0 if parent.isValid() or self.sourceModel() is None else 2
 
     def data(
         self,
@@ -92,11 +95,13 @@ class StackProxyModel(core.AbstractProxyModel):
 
         # First column shows the header name
         if index.column() == 0:
-            return source.headerData(source_col, constants.HORIZONTAL, role)
+            if role not in (constants.DISPLAY_ROLE, constants.EDIT_ROLE):
+                return None
+            header = source.headerData(source_col, constants.HORIZONTAL, role)
+            return None if header is None else str(header)
 
         # Second column shows the value
-        source_index = source.index(source_row, source_col)
-        return source.data(source_index, role)
+        return source.index(source_row, source_col).data(role)
 
     def headerData(
         self,
@@ -108,7 +113,7 @@ class StackProxyModel(core.AbstractProxyModel):
         if orientation != constants.HORIZONTAL or role != constants.DISPLAY_ROLE:
             return None
 
-        return ["Variable", "Value"][section]
+        return ["Variable", "Value"][section] if section in (0, 1) else None
 
     def mapToSource(self, proxy_index: core.ModelIndex) -> core.ModelIndex:
         """Map proxy index to source index."""
@@ -123,9 +128,14 @@ class StackProxyModel(core.AbstractProxyModel):
 
         return source.index(source_row, source_col)
 
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
+        if index.isValid() and index.column() == 0:
+            return constants.IS_SELECTABLE | constants.IS_ENABLED
+        return super().flags(index)
+
     def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
         """Map source index to proxy index."""
-        if not source_index.isValid():
+        if not source_index.isValid() or source_index.parent().isValid():
             return core.ModelIndex()
 
         proxy_row = (

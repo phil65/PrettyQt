@@ -56,11 +56,17 @@ class QObjectPropertiesModel(core.AbstractTableModel):
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
         match orientation, role:
-            case constants.HORIZONTAL, constants.DISPLAY_ROLE:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE if section < len(
+                self.HEADER
+            ):
                 return self.HEADER[section]
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE if section >= len(
+                self.HEADER
+            ):
+                return None
             case constants.VERTICAL, constants.DISPLAY_ROLE:
-                prop = self._metaobj.get_property(section)
-                return prop.propertyIndex()
+                return str(section)
+        return None
 
     def data(  # noqa: PLR0911
         self,
@@ -79,7 +85,9 @@ class QObjectPropertiesModel(core.AbstractTableModel):
                 font = QtGui.QFont()
                 font.setBold(True)
                 return font
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 1:
+            case constants.DISPLAY_ROLE, 1:
+                return self.to_display_text(prop.read(self._qobject))
+            case constants.EDIT_ROLE, 1:
                 return prop.read(self._qobject)
             case constants.DISPLAY_ROLE, 2:
                 return prop.get_meta_type().get_name()
@@ -113,12 +121,13 @@ class QObjectPropertiesModel(core.AbstractTableModel):
                 notifier = prop.get_notify_signal()
                 return "" if notifier is None else notifier.get_name()
             case constants.DISPLAY_ROLE, 15:
-                return prop.userType()
+                return str(prop.userType())
             # case constants.DISPLAY_ROLE, 8:
             #     enumerator = prop.get_enumerator()
             #     return "" if enumerator is None else enumerator.get_name()
             case constants.USER_ROLE, _:
                 return prop.read(self._qobject)
+        return None
 
     def setData(
         self,
@@ -126,10 +135,13 @@ class QObjectPropertiesModel(core.AbstractTableModel):
         value,
         role: constants.ItemDataRole = constants.EDIT_ROLE,
     ) -> bool:
+        if not index.isValid():
+            return False
         prop = self._metaobj.get_property(index.row())
         match role, index.column():
-            case constants.USER_ROLE | constants.EDIT_ROLE, _:
-                prop.write(self._qobject, value)
+            case (constants.USER_ROLE, _) | (constants.EDIT_ROLE, 1):
+                if not prop.write(self._qobject, value):
+                    return False
                 self.update_row(index.row())
                 return True
         return False
@@ -142,6 +154,8 @@ class QObjectPropertiesModel(core.AbstractTableModel):
         return 0 if parent.isValid() else self._metaobj.propertyCount()
 
     def flags(self, index: core.QModelIndex) -> constants.ItemFlag:
+        if not index.isValid():
+            return super().flags(index)
         prop = self._metaobj.get_property(index.row())
         if index.column() == 1 and prop.isWritable():
             return super().flags(index) | constants.IS_EDITABLE

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping
+from collections.abc import Mapping
 import contextlib
 from difflib import SequenceMatcher
 import inspect
@@ -8,13 +8,11 @@ import logging
 import pprint
 from typing import TYPE_CHECKING, ClassVar
 
-from prettyqt import constants, gui, itemmodels
+from prettyqt import constants, core, gui, itemmodels
 
 
 if TYPE_CHECKING:
     from collections.abc import Callable
-
-    from prettyqt import core
 
 
 logger = logging.getLogger(__name__)
@@ -343,30 +341,9 @@ class PythonObjectTreeModel(itemmodels.ColumnItemModel):
         An.example = {"a": [b, c, {"d": e}]} -> path of e: An.example["a"][2]["d"]
         ```
         """
-        # TODO: not used yet, better rework ColumnItemModel first
-        treeitem = index.data(constants.USER_ROLE)
-        if treeitem is None:
-            return None
-        prev_data = treeitem.obj
-        pieces = []
-        while (index := index.parent()).isValid():
-            treeitem = index.data(constants.USER_ROLE)
-            data = treeitem.obj
-            match data:
-                case Mapping():
-                    for k, v in data.items():
-                        if v is prev_data:
-                            pieces.append(f"[{k!r}]")
-                            break
-                case Iterable():
-                    pieces.append(f"[{data.index(prev_data)}]")
-                case _:
-                    # or should this be treeitem.obj_name?
-                    pieces.append(f".{prev_data.__name__}")
-            prev_data = data
-        pieces.append(treeitem.obj_name)
-        logger.info(pieces)
-        return "".join(reversed(pieces))
+        if not index.isValid():
+            return ""
+        return self.data_by_index(index).obj_path
 
     def _fetch_object_children(
         self, treeitem: PythonObjectTreeItem
@@ -380,21 +357,21 @@ class PythonObjectTreeModel(itemmodels.ColumnItemModel):
         obj = treeitem.obj
         obj_path = treeitem.obj_path
         if isinstance(obj, list | tuple | set | frozenset):
-            obj_children = [(str(i), j) for i, j in sorted(enumerate(obj))]
-            path_strings = [
-                f"{obj_path}[{i[0]}]" if obj_path else i[0] for i in obj_children
-            ]
+            obj_children = [(str(i), j) for i, j in enumerate(obj)]
+            path_strings = [f"{obj_path}[{i}]" for i, _ in obj_children]
         elif isinstance(obj, Mapping):
             obj_children = list(obj.items())
-            path_strings = [
-                f"{obj_path}[{item[0]!r}]" if obj_path else item[0]
-                for item in obj_children
-            ]
+            path_strings = [f"{obj_path}[{key!r}]" for key, _ in obj_children]
 
         is_attr_list = [False] * len(obj_children)
 
         # Object attributes
-        for attr_name, attr_value in sorted(inspect.getmembers(obj)):
+        try:
+            members = sorted(inspect.getmembers(obj), key=lambda x: x[0])
+        except Exception:  # noqa: BLE001
+            logger.debug("could not get members of %r", obj)
+            members = []
+        for attr_name, attr_value in members:
             obj_children.append((attr_name, attr_value))
             path_strings.append(f"{obj_path}.{attr_name}" if obj_path else attr_name)
             is_attr_list.append(True)
@@ -435,49 +412,46 @@ class PythonObjectTreeModel(itemmodels.ColumnItemModel):
             match tag:
                 case "equal":
                     # when node names are equal is aux_refresh_tree called recursively.
-                    for old_row, new_row in zip(range(i1, i2), range(j1, j2)):
+                    for old_row, new_row in zip(
+                        range(i1, i2), range(j1, j2), strict=True
+                    ):
                         old_items[old_row].obj = new_items[new_row].obj
                         child_index = self.index(old_row, 0, parent=tree_index)
                         self._aux_refresh_tree(child_index)
+                    top_left = self.index(i1, 0, tree_index)
+                    bottom_right = self.index(i2 - 1, self.columnCount() - 1, tree_index)
+                    self.dataChanged.emit(top_left, bottom_right)
 
                 case "replace":
                     # Remove the old item and insert the new. The old item may have child
                     # nodes which indices must be removed by Qt, otherwise it crashes.
-                    first = i1  # row number of first that will be removed
-                    last = i1 + i2 - 1  # row number of last element after insertion
-                    with self.remove_rows(first, last, tree_index):
+                    with self.remove_rows(i1, i2 - 1, tree_index):
                         del tree_item.children[i1:i2]
-
-                    first = i1  # row number of first element after insertion
-                    last = i1 + j2 - j1 - 1  # row number of last element after insertion
-                    with self.insert_rows(first, last, tree_index):
+                    with self.insert_rows(i1, i1 + j2 - j1 - 1, tree_index):
                         tree_item.insert_children(i1, new_items[j1:j2])
 
                 case "delete":
-                    first = i1  # row number of first that will be removed
-                    last = i1 + i2 - 1  # row number of last element after insertion
-                    with self.remove_rows(first, last, tree_index):
+                    with self.remove_rows(i1, i2 - 1, tree_index):
                         del tree_item.children[i1:i2]
 
                 case "insert":
-                    first = i1
-                    last = i1 + j2 - j1 - 1
-                    with self.insert_rows(first, last, tree_index):
+                    with self.insert_rows(i1, i1 + j2 - j1 - 1, tree_index):
                         tree_item.insert_children(i1, new_items[j1:j2])
                 case _:
                     msg = f"Invalid tag: {tag}"
                     raise ValueError(msg)
 
     def refresh_tree(self):
+        """Refresh the tree model from the underlying root object.
+
+        Keeps fetched / expanded nodes, emits dataChanged for all fetched rows.
+        """
         if self._show_root:
             index = self.createIndex(0, 0, self.inspected_item)
+            self.dataChanged.emit(index, self.index(0, self.columnCount() - 1))
         else:
-            index = self.root_index()
-        """Refresh the tree model from the underlying root object."""
+            index = core.ModelIndex()
         self._aux_refresh_tree(index)
-        # Emit the dataChanged signal for all cells. This is faster than checking which
-        # nodes have changed, which may be slow for some underlying Python objects.
-        self.update_all()
 
 
 if __name__ == "__main__":

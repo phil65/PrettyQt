@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import datetime
+import datetime as dt
 import logging
 
 from prettyqt import constants, core, itemmodels
@@ -53,7 +53,7 @@ class SliceDisplayTextProxyModel(itemmodels.SliceIdentityProxyModel):
     ):
         if not self.indexer_contains(index) or role != constants.DISPLAY_ROLE:
             return super().data(index, role)
-        data = index.data()
+        data = super().data(index, role)
         match data:
             case int():
                 return self._int_format.format(data)
@@ -61,15 +61,15 @@ class SliceDisplayTextProxyModel(itemmodels.SliceIdentityProxyModel):
                 return self._float_format.format(data)
             case core.QDateTime():
                 return data.toString(self._datetime_format)
-            case datetime.datetime():
+            case dt.datetime():
                 return data.strftime(self._datetime_format)
             case core.QTime():
                 return data.toString(self._time_format)
-            case datetime.time():
+            case dt.time():
                 return data.strftime(self._time_format)
             case core.QDate():
                 return data.toString(self._date_format)
-            case datetime.date():
+            case dt.date():
                 return data.strftime(self._date_format)
             case _:
                 return super().data(index, role)

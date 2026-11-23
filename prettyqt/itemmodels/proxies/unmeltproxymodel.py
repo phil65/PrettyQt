@@ -4,12 +4,13 @@ import logging
 from typing import Any
 
 from prettyqt import constants, core
+from prettyqt.itemmodels.proxies.flatproxymodel import FlatProxyModel
 
 
 logger = logging.getLogger(__name__)
 
 
-class UnmeltProxyModel(core.AbstractProxyModel):
+class UnmeltProxyModel(FlatProxyModel):
     """Proxy model to pivot a table from long format to wide format.
 
     Reverses the MeltProxyModel operation.
@@ -64,55 +65,50 @@ class UnmeltProxyModel(core.AbstractProxyModel):
             value_column: Column index containing values
             kwargs: Additional keyword arguments.
         """
-        super().__init__(**kwargs)
         self._id_columns = id_columns
         self._variable_column = variable_column
         self._value_column = value_column
         self._unique_vars: list[str] = []
         self._unique_ids: list[tuple] = []
+        # (id tuple, variable name) -> source row
+        self._lookup: dict[tuple[tuple, str], int] = {}
+        # id tuple -> first source row with these ids
+        self._id_rows: dict[tuple, int] = {}
+        super().__init__(**kwargs)
+
+    def _get_ids(self, source_row: int) -> tuple:
+        source = self.sourceModel()
+        return tuple(source.index(source_row, col).data() for col in self._id_columns)
 
     def _update_cache(self):
         """Update internal cache of unique variables and IDs."""
+        self._lookup.clear()
+        self._id_rows.clear()
         source = self.sourceModel()
         if source is None:
+            self._unique_vars, self._unique_ids = [], []
             return
-
-        # Get unique variables
-        variables = set()
+        variables: dict[str, None] = {}
         for row in range(source.rowCount()):
-            idx = source.index(row, self._variable_column)
-            var = str(source.data(idx, constants.DISPLAY_ROLE))
-            variables.add(var)
+            var = str(source.index(row, self._variable_column).data())
+            ids = self._get_ids(row)
+            variables[var] = None
+            self._id_rows.setdefault(ids, row)
+            self._lookup.setdefault((ids, var), row)
         self._unique_vars = sorted(variables)
-
-        # Get unique ID combinations
-        id_combinations = set()
-        for row in range(source.rowCount()):
-            id_values = []
-            for col in self._id_columns:
-                idx = source.index(row, col)
-                value = source.data(idx, constants.DISPLAY_ROLE)
-                id_values.append(value)
-            id_combinations.add(tuple(id_values))
-        self._unique_ids = sorted(id_combinations)
-
-    def sourceModelReset(self):
-        """Handle source model reset."""
-        self._update_cache()
-        super().sourceModelReset()
-
-    def setSourceModel(self, model):
-        """Set source model and update cache."""
-        result = super().setSourceModel(model)
-        self._update_cache()
-        return result
+        # keep order of first appearance (ids may not be sortable)
+        self._unique_ids = list(self._id_rows)
 
     def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         """Return number of rows in the model."""
-        return len(self._unique_ids)
+        parent = parent or core.ModelIndex()
+        return 0 if parent.isValid() else len(self._unique_ids)
 
     def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         """Return number of columns in the model."""
+        parent = parent or core.ModelIndex()
+        if parent.isValid() or self.sourceModel() is None:
+            return 0
         return len(self._id_columns) + len(self._unique_vars)
 
     def headerData(
@@ -123,8 +119,7 @@ class UnmeltProxyModel(core.AbstractProxyModel):
     ) -> Any:
         """Return header data for given section and orientation."""
         if orientation != constants.HORIZONTAL or role != constants.DISPLAY_ROLE:
-            return super().headerData(section, orientation, role)
-
+            return None
         if section < len(self._id_columns):
             # Return original header for ID columns
             return self.sourceModel().headerData(
@@ -132,7 +127,7 @@ class UnmeltProxyModel(core.AbstractProxyModel):
             )
         # Return variable name for value columns
         var_idx = section - len(self._id_columns)
-        return self._unique_vars[var_idx]
+        return self._unique_vars[var_idx] if var_idx < len(self._unique_vars) else None
 
     def data(
         self,
@@ -140,87 +135,45 @@ class UnmeltProxyModel(core.AbstractProxyModel):
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> Any:
         """Return data for given index and role."""
-        if not index.isValid():
-            return None
-
-        source = self.sourceModel()
-        row, col = index.row(), index.column()
-
-        # Handle ID columns
-        if col < len(self._id_columns):
-            id_values = self._unique_ids[row]
-            return id_values[col]
-
-        # Handle value columns
-        var_name = self._unique_vars[col - len(self._id_columns)]
-        id_values = self._unique_ids[row]
-
-        # Find matching row in source model
-        for source_row in range(source.rowCount()):
-            # Check if ID values match
-            matches = True
-            for i, id_col in enumerate(self._id_columns):
-                idx = source.index(source_row, id_col)
-                if source.data(idx, constants.DISPLAY_ROLE) != id_values[i]:
-                    matches = False
-                    break
-
-            # Check if variable matches
-            if matches:
-                var_idx = source.index(source_row, self._variable_column)
-                if source.data(var_idx, constants.DISPLAY_ROLE) == var_name:
-                    value_idx = source.index(source_row, self._value_column)
-                    return source.data(value_idx, role)
-
-        return None
+        source_index = self.mapToSource(index)
+        return source_index.data(role) if source_index.isValid() else None
 
     def mapToSource(self, proxy_index: core.ModelIndex) -> core.ModelIndex:
         """Map proxy index to source index."""
-        if not proxy_index.isValid():
+        if not proxy_index.isValid() or self.sourceModel() is None:
             return core.ModelIndex()
-
         row, col = proxy_index.row(), proxy_index.column()
-
-        # ID columns map directly
+        ids = self._unique_ids[row]
         if col < len(self._id_columns):
-            id_values = self._unique_ids[row]
-            # Find matching row in source
-            for source_row in range(self.sourceModel().rowCount()):
-                matches = True
-                for i, id_col in enumerate(self._id_columns):
-                    idx = self.sourceModel().index(source_row, id_col)
-                    if self.sourceModel().data(idx) != id_values[i]:
-                        matches = False
-                        break
-                if matches:
-                    return self.sourceModel().index(source_row, self._id_columns[col])
-
-        return core.ModelIndex()
+            source_row = self._id_rows[ids]
+            return self.sourceModel().index(source_row, self._id_columns[col])
+        var_name = self._unique_vars[col - len(self._id_columns)]
+        if (source_row := self._lookup.get((ids, var_name))) is None:
+            return core.ModelIndex()
+        return self.sourceModel().index(source_row, self._value_column)
 
     def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
         """Map source index to proxy index."""
-        if not source_index.isValid():
+        if not source_index.isValid() or source_index.parent().isValid():
             return core.ModelIndex()
-
         source_row, source_col = source_index.row(), source_index.column()
-
-        # Handle ID columns
+        ids = self._get_ids(source_row)
+        if ids not in self._id_rows:
+            return core.ModelIndex()
+        proxy_row = self._unique_ids.index(ids)
         if source_col in self._id_columns:
-            # Get ID values for this row
-            id_values = []
-            for col in self._id_columns:
-                idx = self.sourceModel().index(source_row, col)
-                id_values.append(self.sourceModel().data(idx))
-            id_tuple = tuple(id_values)
-
-            try:
-                proxy_row = self._unique_ids.index(id_tuple)
-                proxy_col = self._id_columns.index(source_col)
-                return self.createIndex(proxy_row, proxy_col)
-            except ValueError:
-                return core.ModelIndex()
-
+            return self.index(proxy_row, self._id_columns.index(source_col))
+        if source_col == self._value_column:
+            var = str(self.sourceModel().index(source_row, self._variable_column).data())
+            proxy_col = len(self._id_columns) + self._unique_vars.index(var)
+            return self.index(proxy_row, proxy_col)
         return core.ModelIndex()
+
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
+        source_index = self.mapToSource(index)
+        if not source_index.isValid():
+            return constants.NO_FLAGS if index.isValid() else super().flags(index)
+        return self.sourceModel().flags(source_index)
 
 
 if __name__ == "__main__":

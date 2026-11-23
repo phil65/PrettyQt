@@ -3,14 +3,10 @@ from __future__ import annotations
 from collections.abc import Sequence
 import dataclasses
 import logging
-from typing import TYPE_CHECKING, Any
+from typing import Any
 
-from prettyqt import constants, itemmodels
+from prettyqt import itemmodels
 from prettyqt.utils import datatypes
-
-
-if TYPE_CHECKING:
-    from prettyqt import core
 
 
 logger = logging.getLogger(__name__)
@@ -36,18 +32,8 @@ class DataClassModel(itemmodels.BaseDataclassModel):
         fields = dataclasses.fields(self.Class)
         return {field.name: field for field in fields}
 
-    def flags(self, parent: core.ModelIndex) -> constants.ItemFlag:
-        if not parent.isValid():
-            return super().flags(parent)
-        if self.Class.__dataclass_params__.frozen:
-            super().flags(parent)
-        field_name = self._field_names[parent.column()]
-        instance = self.items[parent.row()]
-        # need to cover not parent.isValid()?
-        val = getattr(instance, field_name)
-        if isinstance(val, bool):
-            return super().flags(parent) | constants.IS_CHECKABLE
-        return super().flags(parent) | constants.IS_EDITABLE
+    def _is_frozen(self) -> bool:
+        return self.Class.__dataclass_params__.frozen
 
 
 if __name__ == "__main__":

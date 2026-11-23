@@ -42,9 +42,10 @@ class TreeModel(core.AbstractItemModel):
 
     def __init__(self, obj=None, show_root: bool = True, **kwargs):
         super().__init__(**kwargs)
-        self._root_item = self.TreeItem(obj=obj)
         self._show_root = show_root
-        self.set_root_item(obj)
+        self._root_item = self.TreeItem(obj=None)
+        self.inspected_item = self._root_item
+        self._init_root_item(obj)
 
     @property
     def show_root(self) -> bool:
@@ -54,20 +55,22 @@ class TreeModel(core.AbstractItemModel):
         """
         return self._show_root
 
-    def set_root_item(self, obj):
+    def _init_root_item(self, obj):
         if self._show_root:
             self._root_item = self.TreeItem(obj=None)
             self._root_item.children_fetched = True
             self.inspected_item = self.TreeItem(obj=obj)
             self._root_item.append_child(self.inspected_item)
-            # root_index = self.index(0, 0)
-            # self.fetchMore(self.index(0, 0, root_index))
         else:
             # The root itself will be invisible
             self._root_item = self.TreeItem(obj=obj)
             self.inspected_item = self._root_item
-            root_index = self.index(0, 0)
-            self.fetchMore(root_index)
+            self._fetch_children(self._root_item)
+
+    def set_root_item(self, obj):
+        """Set a new object to display. Resets the model."""
+        with self.reset_model():
+            self._init_root_item(obj)
 
     @property
     def root_item(self) -> TreeModel.TreeItem:
@@ -79,16 +82,12 @@ class TreeModel(core.AbstractItemModel):
     def index_for_item(
         self, item: TreeModel.TreeItem, column: int = 0
     ) -> core.ModelIndex:
-        if item == self.root_item:
+        if item is self.root_item or item.parent_item is None:
             return core.ModelIndex()
-        parent = item.parent_item or self.root_item
-        if (not parent) or (len(parent.children) == 0):
-            return None
-        row = parent.children.index(item)
-        return self.createIndex(row, column, item)
+        return self.createIndex(item.row(), column, item)
 
     def index(
-        self, row: int, column: int, parent: core.ModelIndex | None = None
+        self, row: int, column: int = 0, parent: core.ModelIndex | None = None
     ) -> core.ModelIndex:
         parent = parent or core.ModelIndex()
         if not self.hasIndex(row, column, parent):
@@ -108,7 +107,7 @@ class TreeModel(core.AbstractItemModel):
         child_item = self.data_by_index(index)
         parent_item = child_item.parent_item
 
-        if parent_item is None or parent_item == self.root_item:
+        if parent_item is None or parent_item is self.root_item:
             return core.ModelIndex()
 
         return self.createIndex(parent_item.row(), 0, parent_item)
@@ -117,19 +116,21 @@ class TreeModel(core.AbstractItemModel):
         parent = parent or core.ModelIndex()
         return 0 if parent.column() > 0 else len(self.data_by_index(parent).children)
 
-    def hasChildren(self, parent: core.ModelIndex | None = None) -> int:
+    def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
-            return 0
+            return False
         treeitem = self.data_by_index(parent)
-        if self._show_root and treeitem == self._root_item:
+        if treeitem.children_fetched:
+            return len(treeitem.children) > 0
+        if self._show_root and treeitem is self._root_item:
             return True
-        return self._has_children(treeitem)
+        return bool(self._has_children(treeitem))
 
-    def canFetchMore(self, parent: core.ModelIndex | None = None):
+    def canFetchMore(self, parent: core.ModelIndex | None = None) -> bool:
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
-            return 0
+            return False
         return not self.data_by_index(parent).children_fetched
 
     def fetchMore(self, parent: core.ModelIndex | None = None):
@@ -140,20 +141,31 @@ class TreeModel(core.AbstractItemModel):
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return
-
         parent_item = self.data_by_index(parent)
         if parent_item.children_fetched:
             return
-
         tree_items = self._fetch_object_children(parent_item)
-
-        with self.insert_rows(0, len(tree_items) - 1, parent):
-            for tree_item in tree_items:
-                parent_item.append_child(tree_item)
+        if not tree_items:
             parent_item.children_fetched = True
+            return
+        first = len(parent_item.children)
+        with self.insert_rows(first, first + len(tree_items) - 1, parent):
+            self._add_fetched_children(parent_item, tree_items)
+
+    def _fetch_children(self, parent_item: TreeModel.TreeItem):
+        """Fetch children without emitting signals (used during reset)."""
+        if not parent_item.children_fetched:
+            items = self._fetch_object_children(parent_item)
+            self._add_fetched_children(parent_item, items)
+
+    @staticmethod
+    def _add_fetched_children(parent_item: TreeModel.TreeItem, items):
+        for tree_item in items:
+            parent_item.append_child(tree_item)
+        parent_item.children_fetched = True
 
     def _fetch_object_children(self, treeitem) -> list[TreeModel.TreeItem]:
-        return treeitem.children
+        return []
 
     def _has_children(self, treeitem) -> bool:
         return treeitem.has_children

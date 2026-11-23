@@ -8,7 +8,7 @@ from prettyqt import constants, core, itemmodels
 
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable, Sequence
+    from collections.abc import Sequence
 
     from prettyqt import gui
 
@@ -83,6 +83,8 @@ class ColumnItemModelMixin:
         TreeItemRole = constants.USER_ROLE + 43435
         ColumnItemRole = constants.USER_ROLE + 43436
 
+    _attr_cols: list[ColumnItem]
+
     def set_columns(self, columns: Sequence[type[ColumnItem]]):
         self._attr_cols = [Col(model=self) for Col in columns]
 
@@ -94,17 +96,16 @@ class ColumnItemModelMixin:
         """Return the tree item at the given index and role."""
         if not index.isValid():
             return None
-
-        col = index.column()
         tree_item = self.data_by_index(index)
-        col_item = self._attr_cols[col]
+        col_item = self._attr_cols[index.column()]
         match role:
             case self.ExtraRoles.TreeItemRole:
                 return tree_item
             case self.ExtraRoles.ColumnItemRole:
                 return col_item
             case _:
-                return col_item.get_data(tree_item, role)
+                result = col_item.get_data(tree_item, role)
+                return None if result is NotImplemented else result
 
     def setData(
         self,
@@ -114,19 +115,20 @@ class ColumnItemModelMixin:
     ) -> bool:
         if not index.isValid():
             return False
-        col = index.column()
         tree_item = self.data_by_index(index)
-        col_item = self._attr_cols[col]
-        col_item.set_data(tree_item, value, role)
+        col_item = self._attr_cols[index.column()]
+        # set_data implementations may return None for success (legacy behaviour)
+        result = col_item.set_data(tree_item, value, role)
+        if result is NotImplemented or result is False:
+            return False
         self.dataChanged.emit(index, index)
         return True
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         if not index.isValid():
-            return super().flags(index)  # TODO: whats best here?
-        col = index.column()
+            return super().flags(index)
         tree_item = self.data_by_index(index)
-        return self._attr_cols[col].get_flags(tree_item)
+        return self._attr_cols[index.column()].get_flags(tree_item)
 
     def headerData(
         self,
@@ -135,121 +137,57 @@ class ColumnItemModelMixin:
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
         match orientation, role:
-            case constants.HORIZONTAL, constants.DISPLAY_ROLE:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE if (
+                0 <= section < len(self._attr_cols)
+            ):
                 return self._attr_cols[section].get_name()
-            case _, _:
-                return None
+            case constants.HORIZONTAL, constants.TOOLTIP_ROLE if (
+                0 <= section < len(self._attr_cols)
+            ):
+                return self._attr_cols[section].doc
+        return None
 
 
 class ColumnItemModel(ColumnItemModelMixin, itemmodels.TreeModel):
+    """TreeModel with columns defined by ColumnItem classes."""
+
     def __init__(
         self,
         obj=None,
-        columns: Sequence[type[ColumnItem]] = [],
+        columns: Sequence[type[ColumnItem]] = (),
         mime_type: str | None = None,
         show_root: bool = True,
         **kwargs,
     ):
-        super().__init__(**kwargs)
-        self._root_item = self.TreeItem(obj=obj)
-        self._show_root = show_root
+        # columns need to be available before the TreeModel fetches the root.
         self.mime_type = mime_type
-        self._attr_cols = []
         self.set_columns(columns)
-        self.set_root_item(obj)
+        super().__init__(obj=obj, show_root=show_root, **kwargs)
 
-    def columnCount(self, parent=None):
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         return len(self._attr_cols)
 
 
-class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
+class ColumnTableModel(
+    itemmodels.ListMixin, ColumnItemModelMixin, core.AbstractTableModel
+):
+    """List-based table model with columns defined by ColumnItem classes."""
+
     def __init__(
         self,
-        items: Sequence,
-        columns: Sequence[ColumnItem],
+        items: Sequence | None = None,
+        columns: Sequence[type[ColumnItem]] = (),
         mime_type: str | None = None,
         **kwargs,
     ):
-        super().__init__(**kwargs)
-        self.items = items
-        self.mime_type = mime_type
-        self._attr_cols = []
         self.set_columns(columns)
-
-    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
-        parent = parent or core.ModelIndex()
-        return 0 if parent.isValid() else len(self.items)
+        self.mime_type = mime_type
+        self.MIME_TYPE = mime_type or ""
+        super().__init__(items=items, **kwargs)
 
     def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
         return 0 if parent.isValid() else len(self._attr_cols)
-
-    def data_by_index(self, index: core.ModelIndex):
-        return self.items[index.row()]
-
-    def setData(
-        self,
-        index: core.ModelIndex,
-        value: Any,
-        role: constants.ItemDataRole = constants.EDIT_ROLE,
-    ):
-        if role == constants.USER_ROLE:
-            self.items[index.row()] = value
-            self.update_row(index.row())
-            return True
-        return super().setData(index, value, role)
-
-    def removeRows(self, row: int, count: int, parent):
-        end_row = row + count - 1
-        with self.remove_rows(row, end_row, parent):
-            for i in range(end_row, row - 1, -1):
-                self.items.pop(i)
-        return True
-
-    def dropMimeData(self, mime_data, action, row, column, parent_index):
-        if not mime_data.hasFormat(self.mime_type):
-            return False
-        # Since we only drop in between items, parent_index must be invalid,
-        # and we use the row arg to know where the drop took place.
-        if parent_index.isValid():
-            return False
-        indexes = mime_data.get_json_data(self.mime_type)
-        pos = row if row < len(self.items) and row != -1 else len(self.items)
-        rem_offset = sum(i <= pos for i in indexes)
-        new = [self.items[i] for i in indexes]
-        with self.change_layout():
-            for i in sorted(indexes, reverse=True):
-                self.items.pop(i)
-            for item in reversed(new):
-                self.items.insert(pos - rem_offset, item)
-        return False
-
-    def sort(self, ncol: int, order):
-        """Sort table by given column number."""
-        is_asc = order == constants.ASCENDING
-        if sorter := self._attr_cols[ncol].label:
-            with self.change_layout():
-                self.items.sort(key=sorter, reverse=is_asc)
-
-    def add(self, item: Any, position: int | None = None):
-        """Append provided item to the list."""
-        self.add_items(items=[item], position=position)
-        return item
-
-    def add_items(self, items: Iterable[Any], position: int | None = None):
-        """Append a list of items to the list."""
-        if position is None:
-            position = len(self.items)
-        items = list(items)
-        with self.insert_rows(position, position + len(items) - 1):
-            for i, _ in enumerate(items):
-                self.items.insert(i + position, items[i])
-            # self.items.extend(items)
-        return items
-
-    def remove_items(self, offsets: Iterable[int]):
-        for offset in sorted(offsets, reverse=True):
-            self.removeRow(offset)
 
 
 if __name__ == "__main__":

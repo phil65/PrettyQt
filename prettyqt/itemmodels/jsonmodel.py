@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping
+from collections.abc import Mapping, MutableMapping, MutableSequence
 from dataclasses import dataclass
 from typing import Any, ClassVar
 
@@ -14,7 +14,7 @@ class NameColumn(itemmodels.ColumnItem):
     def get_data(self, item, role):
         match role:
             case constants.DISPLAY_ROLE:
-                return item.obj.key
+                return str(item.obj.key)
 
 
 class ValueColumn(itemmodels.ColumnItem):
@@ -29,10 +29,24 @@ class ValueColumn(itemmodels.ColumnItem):
             case constants.EDIT_ROLE:
                 return item.obj.value
 
+    def get_flags(self, tree_item):
+        flags = super().get_flags(tree_item)
+        if _is_container(tree_item.obj.value):
+            return flags & ~constants.IS_EDITABLE
+        return flags
+
     def set_data(self, item, value, role):
         match role:
             case constants.EDIT_ROLE:
+                # write through to the original data structure
+                parent = item.parent_item
+                container = parent.obj.value if parent and parent.obj else None
+                if isinstance(container, MutableMapping | MutableSequence):
+                    container[item.obj.key] = value
+                elif container is not None:  # immutable container (tuple, ...)
+                    return False
                 item.obj.value = value
+                item.obj.typ = type(value)
                 return True
         return False
 
@@ -45,6 +59,10 @@ class TypeColumn(itemmodels.ColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 return repr(item.obj.typ)
+
+
+def _is_container(value: Any) -> bool:
+    return isinstance(value, Mapping | list | tuple | set | frozenset)
 
 
 @dataclass
@@ -76,7 +94,7 @@ class JsonModel(itemmodels.ColumnItemModel):
         return isinstance(instance, Mapping)
 
     def _has_children(self, item: JsonModel.TreeItem) -> bool:
-        return isinstance(item.obj.value, dict | list | set) and bool(item.obj.value)
+        return _is_container(item.obj.value) and bool(item.obj.value)
 
     def _fetch_object_children(
         self, item: JsonModel.TreeItem
@@ -93,21 +111,12 @@ class JsonModel(itemmodels.ColumnItemModel):
                     for k, v in item.obj.value.items()
                 ]
 
-            case Iterable() if not isinstance(item.obj.value, str):
+            case _ if _is_container(item.obj.value):
                 return [
                     self.TreeItem(obj=JsonItem(key=k, value=v, typ=type(v)))
                     for k, v in enumerate(item.obj.value)
                 ]
-            case _:
-                return [
-                    self.TreeItem(
-                        obj=JsonItem(
-                            key="key",
-                            value=repr(item.obj.value),
-                            typ=type(item.obj.value),
-                        )
-                    )
-                ]
+        return []
 
 
 if __name__ == "__main__":

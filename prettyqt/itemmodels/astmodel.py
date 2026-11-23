@@ -114,7 +114,7 @@ class AstModel(itemmodels.TreeModel):
         node = ast.fix_missing_locations(node)
         with self.reset_model():
             self.ast_tree = node
-            self.set_root_item(node)
+            self._init_root_item(node)
             self.code = code
 
     # def find_lineno(self, index):
@@ -129,8 +129,10 @@ class AstModel(itemmodels.TreeModel):
         orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
-        match orientation, role, section:
-            case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
+        match orientation, role:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE if section < len(
+                self.HEADER
+            ):
                 return self.HEADER[section]
         return None
 
@@ -148,14 +150,13 @@ class AstModel(itemmodels.TreeModel):
                     case (
                         ast.Name(id=name)
                         | ast.arg(arg=name)
-                        | ast.Constant(value=name)
                         | ast.alias(name=name)
                         | ast.ClassDef(name=name)
                         | ast.FunctionDef(name=name)
                     ):
                         return name
-                    case str():
-                        return node
+                    case ast.Constant(value=value):
+                        return repr(value)
             case constants.DISPLAY_ROLE, 2:
                 if hasattr(node, "lineno"):
                     return (
@@ -183,6 +184,7 @@ class AstModel(itemmodels.TreeModel):
                     return None
             case self.Roles.NodeRole, _:
                 return node
+        return None
 
     def _fetch_object_children(self, item: AstModel.TreeItem) -> list[AstModel.TreeItem]:
         return [self.TreeItem(obj=i) for i in ast.iter_child_nodes(item.obj)]
@@ -200,21 +202,34 @@ class AstModel(itemmodels.TreeModel):
         ignore: list[str] | None = None,
         scope: list[str] | None = None,
     ):
-        if scope is None:
-            scope = ["main"]
-        if ignore is None:
-            ignore = []
+        """Rename all identifiers named `old` to `new`.
+
+        Arguments:
+            old: identifier to rename
+            new: new name
+            root_tree: tree to modify (default: the tree of the model)
+            ignore: names of function / class scopes to leave untouched
+            scope: initial scope stack
+        """
+        top_level = root_tree is None
+        root_tree = self.ast_tree if root_tree is None else root_tree
         if root_tree is None:
-            root_tree = self.ast_tree
-        for i in ast.iter_fields(root_tree):
-            if not isinstance(a := getattr(root_tree, i), list):  # noqa: SIM102
-                if a == old and not {*scope} & {*ignore}:
-                    setattr(root_tree, i, new)
-            n = a if isinstance(a, list) else [a]
-            s = [root_tree.name] if type(root_tree).__name__.endswith("Def") else scope
-            for j in n:
-                if isinstance(j, ast.AST):
-                    self.rename_variable(j, old, new, ignore, s)
+            return
+        self._rename(root_tree, old, new, set(ignore or []), scope or ["main"])
+        if top_level:
+            self.set_ast(root_tree)
+
+    def _rename(self, node: ast.AST, old: str, new: str, ignore: set[str], scope):
+        if isinstance(node, ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef):
+            scope = [*scope, node.name]
+        for field, value in ast.iter_fields(node):
+            if isinstance(node, ast.Constant):
+                continue
+            if value == old and isinstance(value, str) and not set(scope) & ignore:
+                setattr(node, field, new)
+            for child in value if isinstance(value, list) else [value]:
+                if isinstance(child, ast.AST):
+                    self._rename(child, old, new, ignore, scope)
 
     def get_variable_names(self):
         current_names = set()

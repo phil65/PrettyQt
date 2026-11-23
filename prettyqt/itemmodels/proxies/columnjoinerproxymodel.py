@@ -18,7 +18,7 @@ class ColumnMapping:
     flags: constants.ItemFlag | None = None
 
 
-class ColumnJoinerProxyModel(core.AbstractProxyModel):
+class ColumnJoinerProxyModel(core.IdentityProxyModel):
     """Proxy model which joins the contents of several columns.
 
     The columns are joined based on a formatter and appended to the end of the model
@@ -76,80 +76,106 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
     ICON = "mdi.table-column-plus-before"
 
     def __init__(self, *args, **kwargs):
+        self.mapping: list[ColumnMapping] = []
         super().__init__(*args, **kwargs)
-        self.mapping = []
+
+    def _source_column_count(self) -> int:
+        source = self.sourceModel()
+        return 0 if source is None else source.columnCount()
 
     def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
-        return (
-            0
-            if self.sourceModel() is None
-            else self.sourceModel().columnCount(parent) + len(self.mapping)
-        )
+        if self.sourceModel() is None or parent.column() > 0:
+            return 0
+        return self._source_column_count() + len(self.mapping)
 
-    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
-        return self.sourceModel().rowCount()
+    def is_additional_column(self, column: int) -> bool:
+        return column >= self._source_column_count()
+
+    def _get_mapping(self, column: int) -> ColumnMapping:
+        return self.mapping[column - self._source_column_count()]
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
-        column = index.column()
-        if self.is_additional_column(column):
-            flags = self.mapping[column - self.columnCount()].flags
+        if index.isValid() and self.is_additional_column(index.column()):
+            flags = self._get_mapping(index.column()).flags
             return (
                 flags
                 if flags is not None
                 else constants.IS_ENABLED | constants.IS_SELECTABLE
             )
-        return self.sourceModel().flags(index)
+        return super().flags(index)
 
-    def is_additional_column(self, column: int):
-        col_count = self.sourceModel().columnCount()
-        return column >= col_count
+    # Indexes of the additional columns carry the internalId of the source index of
+    # the same row (like QIdentityProxyModel indexes do), so parent() still works.
 
-    def index(self, row: int, column: int, parent: core.ModelIndex | None = None):
+    def index(
+        self, row: int, column: int = 0, parent: core.ModelIndex | None = None
+    ) -> core.ModelIndex:
         parent = parent or core.ModelIndex()
-        if self.is_additional_column(column):
-            return self.createIndex(row, column, core.ModelIndex())
-        return self.sourceModel().index(row, column, parent)
-
-    def parent(self, index=None):
-        if index is None:
-            return super().parent()
-        if self.is_additional_column(index.column()):
+        if not self.is_additional_column(column):
+            return super().index(row, column, parent)
+        if not self.hasIndex(row, column, parent):
             return core.ModelIndex()
-        return self.sourceModel().parent(index)
+        first_col = super().index(row, 0, parent)
+        return self.createIndex(row, column, first_col.internalId())
+
+    def parent(self, *args) -> core.ModelIndex | core.QObject | None:
+        if not args:  # QObject.parent()
+            return core.QObject.parent(self)
+        index = args[0]
+        if index.isValid() and self.is_additional_column(index.column()):
+            index = self.createIndex(index.row(), 0, index.internalId())
+        return super().parent(index)
+
+    def _parent_index(self, index: core.ModelIndex) -> core.ModelIndex:
+        parent = self.parent(index)
+        assert isinstance(parent, core.ModelIndex)
+        return parent
+
+    def sibling(self, row: int, column: int, idx: core.ModelIndex) -> core.ModelIndex:
+        return self.index(row, column, self._parent_index(idx))
+
+    def _get_text(self, index: core.ModelIndex, column: int) -> str:
+        data = self.index(index.row(), column, self._parent_index(index)).data()
+        return "" if data is None else str(data)
 
     def data(
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
-        col_count = self.sourceModel().columnCount()
-        column = index.column()
-        if self.is_additional_column(column):
-            if role == constants.DISPLAY_ROLE:
-                mapper = self.mapping[column - col_count]
-                formatter = mapper.formatter
-                field_names = [
-                    field_name
-                    for (
-                        _literal_text,
-                        field_name,
-                        _format_spec,
-                        _conversion,
-                    ) in string.Formatter().parse(formatter)
-                    # if field_name is not None
-                ]
-                match formatter:
-                    case str():
-                        for name in field_names:
-                            idx = self.index(index.row(), int(name), index.parent())
-                            data = self.data(idx)
-                            formatter = formatter.replace(f"{{{name}}}", data)
-                        return formatter
-                    case Callable():
-                        return formatter(index)
+        if not index.isValid():
             return None
-        return super().data(index, role)
+        if not self.is_additional_column(index.column()):
+            return super().data(index, role)
+        if role != constants.DISPLAY_ROLE:
+            return None
+        formatter = self._get_mapping(index.column()).formatter
+        match formatter:
+            case str():
+                field_names = {
+                    field_name
+                    for _, field_name, _, _ in string.Formatter().parse(formatter)
+                    if field_name
+                }
+                for name in field_names:
+                    formatter = formatter.replace(
+                        f"{{{name}}}", self._get_text(index, int(name))
+                    )
+                return formatter
+            case Callable():
+                return formatter(index)
+        return None
+
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
+        if index.isValid() and self.is_additional_column(index.column()):
+            return False
+        return super().setData(index, value, role)
 
     def headerData(
         self,
@@ -158,24 +184,15 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         if orientation == constants.HORIZONTAL and self.is_additional_column(section):
-            if role == constants.DISPLAY_ROLE:
-                mapper = self.mapping[section - self.columnCount()]
-                return mapper.header
+            if role == constants.DISPLAY_ROLE and section < self.columnCount():
+                return self._get_mapping(section).header
             return None
         return super().headerData(section, orientation, role)
 
-    def mapToSource(self, proxy_index):
-        if not proxy_index.isValid():
+    def mapToSource(self, proxy_index: core.ModelIndex) -> core.ModelIndex:
+        if not proxy_index.isValid() or self.is_additional_column(proxy_index.column()):
             return core.ModelIndex()
-        column = proxy_index.column()
-        if self.is_additional_column(column):
-            return core.ModelIndex()
-        return self.sourceModel().index(proxy_index.row(), column, proxy_index.parent())
-
-    def mapFromSource(self, index):
-        if self.is_additional_column(index.column()):
-            return core.ModelIndex()
-        return self.sourceModel().index(index.row(), index.column(), index.parent())
+        return super().mapToSource(proxy_index)
 
     def add_mapping(
         self, header: str, formatter: str, flags: constants.ItemFlag | None = None
@@ -187,7 +204,9 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
             formatter: String formatter (example "{0}: {1}")
             flags: ItemFlags for new column
         """
-        self.mapping.append(ColumnMapping(formatter, header, flags))
+        col = self.columnCount()
+        with self.insert_columns(col, col):
+            self.mapping.append(ColumnMapping(formatter, header, flags))
 
 
 if __name__ == "__main__":

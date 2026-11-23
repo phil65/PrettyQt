@@ -21,19 +21,20 @@ class TupleTreeModel(itemmodels.TreeModel):
     The dictionary keys are tuples of path parts, like ("path", "to", "something")
 
     ```py
-    model = TupleTreeModel({("a"): "test2", ("a", "b"): "test", ("a", "b", "c"): "test3"})
+    mapping = {("a",): "test2", ("a", "b"): "test", ("a", "b", "c"): "test3"}
+    model = TupleTreeModel(mapping)
     table = widgets.TreeView()
     table.set_model(model)
     table.show()
     ```
     """
 
-    SUPPORTS = dict[tuple[Hashable, ...] | pathlib.Path, str]
+    SUPPORTS = dict[tuple[Hashable, ...] | pathlib.PurePath, str]
     HEADER: ClassVar = ["Name"]
 
     def __init__(self, mapping: dict, **kwargs):
+        self.mapping = {(): "root"} | {_to_tuple(k): v for k, v in mapping.items()}
         super().__init__((), **kwargs)
-        self.mapping = {(): "root"} | mapping
 
     def columnCount(self, parent: core.ModelIndex | None = None):
         return len(self.HEADER)
@@ -59,35 +60,49 @@ class TupleTreeModel(itemmodels.TreeModel):
         tup = self.data_by_index(index).obj
         match role, index.column():
             case constants.DISPLAY_ROLE, 0:
-                return str(self.mapping[tup])
+                # intermediate nodes may not be part of the mapping.
+                value = self.mapping.get(tup)
+                return str(tup[-1] if value is None and tup else value)
+            case constants.USER_ROLE, _:
+                return tup
+        return None
 
     @classmethod
     def supports(cls, instance) -> bool:
         match instance:
-            case dict() if all(
-                isinstance(k, pathlib.Path | tuple) for k in instance.keys() and instance
+            case dict() if instance and all(
+                isinstance(k, pathlib.PurePath | tuple) for k in instance
             ):
                 return True
         return False
 
+    def _child_keys(self, parts: tuple) -> list[tuple]:
+        depth = len(parts)
+        # dict keeps insertion order and removes duplicates
+        children = {
+            k[: depth + 1]: None
+            for k in self.mapping
+            if len(k) > depth and k[:depth] == parts
+        }
+        return list(children)
+
     def _fetch_object_children(
         self, item: TupleTreeModel.TreeItem
     ) -> list[TupleTreeModel.TreeItem]:
-        parts = item.obj.parts if isinstance(item.obj, pathlib.Path) else item.obj
-        return [
-            self.TreeItem(obj=k)
-            for k in self.mapping
-            if len(k) == len(parts) + 1
-            and all(parent_part == k[i] for i, parent_part in enumerate(parts))
-        ]
+        return [self.TreeItem(obj=k) for k in self._child_keys(item.obj)]
 
     def _has_children(self, item: TupleTreeModel.TreeItem) -> bool:
-        parts = item.obj.parts if isinstance(item.obj, pathlib.Path) else item.obj
-        return any(
-            len(k) == len(parts) + 1
-            and all(parent_part == k[i] for i, parent_part in enumerate(parts))
-            for k in self.mapping
-        )
+        depth = len(item.obj)
+        return any(len(k) > depth and k[:depth] == item.obj for k in self.mapping)
+
+
+def _to_tuple(key) -> tuple:
+    match key:
+        case pathlib.PurePath():
+            return key.parts
+        case tuple():
+            return key
+    return (key,)
 
 
 if __name__ == "__main__":

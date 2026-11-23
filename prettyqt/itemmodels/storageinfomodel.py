@@ -127,7 +127,7 @@ class StorageInfoModel(itemmodels.ColumnTableModel):
     ]
     SUPPORTS = Sequence[core.QStorageInfo]
 
-    def __init__(self, volumes: list[core.QStorageInfo], parent=None):
+    def __init__(self, volumes: Sequence[core.QStorageInfo], parent=None):
         super().__init__(volumes, self.COLUMNS, parent=parent)
 
     @classmethod

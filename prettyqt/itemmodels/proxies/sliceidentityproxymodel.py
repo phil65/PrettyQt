@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 
 from prettyqt import core
-from prettyqt.utils import helpers
 
 
 logger = logging.getLogger(__name__)
@@ -26,36 +25,16 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
     def indexer_contains(self, index: core.ModelIndex | tuple[int, int]) -> bool:
         """Check whether given ModelIndex is included in our Indexer."""
         if isinstance(index, core.ModelIndex):
-            index = (index.row(), index.column())
-        col_slice = self.get_column_slice()
-        row_slice = self.get_row_slice()
-        source = self.sourceModel()
-        col_slice = self.update_slice_boundaries(col_slice, count=source.columnCount())
-        row_slice = self.update_slice_boundaries(row_slice, count=source.rowCount())
-        # logger.info(f"{col_slice=} {row_slice=}")
-        to_check = (row_slice, col_slice)  # instead of _indexer, for negative indexes.
-        return helpers.is_position_in_index(*index, to_check)
+            parent = self.mapToSource(index.parent()) if index.isValid() else None
+            row, column = index.row(), index.column()
+        else:
+            parent = None
+            row, column = index
+        return row in self.get_row_range(parent) and column in self.get_column_range()
 
     def update_slice_boundaries(self, sl: slice, count: int) -> slice:
         """Update slice boundaries by resolving negative indexes."""
-        # Not sure yet whats the best approach here and which cases I should support...
-        # if sl.end is larger than count, clip it (or perhaps throw exception?)
-        # if sl.stop is not None and sl.stop >= count:
-        #     sl = slice(sl.start, count, sl.step)
-        # resolve negative start value
-        if sl.start is not None and sl.start < 0:
-            start = count + sl.start
-            end = count + sl.stop
-            # end = start + (sl.stop - sl.start)
-            if start < 0:
-                raise IndexError(sl.start)
-            sl = slice(start, end, sl.step)
-        # if sl.stop is not None and sl.stop < 0:
-        #     stop = source.columnCount() + sl.stop
-        #     if stop < 0:
-        #         raise IndexError(sl.stop)
-        #     sl = slice(sl.start, stop, sl.step)
-        return sl
+        return slice(*sl.indices(count))
 
     def set_indexer(self, indexer):
         """Takes basically anything which is common to use for __getitem__."""
@@ -91,7 +70,7 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
                 raise TypeError(self._indexer)
 
     def set_column_slice(
-        self, value: slice | int | None | tuple[int | None, int | None, int | None]
+        self, value: slice | int | tuple[int | None, int | None, int | None] | None
     ):
         """Throw anything at this method in order to set the column slice."""
         match value:
@@ -112,7 +91,7 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
         self._indexer = (self.get_row_slice(), sl)
 
     def set_row_slice(
-        self, value: slice | int | None | tuple[int | None, int | None, int | None]
+        self, value: slice | int | tuple[int | None, int | None, int | None] | None
     ):
         """Throw anything at this method in order to set the row slice."""
         match value:
@@ -132,27 +111,31 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
                 raise TypeError(value)
         self._indexer = (sl, self.get_column_slice())
 
-    def get_row_range(self) -> range:
-        """Return a range for the row slice with valid start / stop / step values."""
-        sl = self.get_row_slice()
-        row_count = self.sourceModel().rowCount()
-        return range(sl.start or 0, sl.stop or row_count, sl.step or 1)
+    def get_row_range(self, parent: core.ModelIndex | None = None) -> range:
+        """Return a range for the row slice with valid start / stop / step values.
+
+        Arguments:
+            parent: source parent index to get the range for (default: root)
+        """
+        source = self.sourceModel()
+        row_count = 0 if source is None else source.rowCount(parent or core.ModelIndex())
+        return range(*self.get_row_slice().indices(row_count))
 
     def get_column_range(self) -> range:
         """Return a range for the column slice with valid start / stop / step values."""
-        sl = self.get_column_slice()
-        col_count = self.sourceModel().columnCount()
-        return range(sl.start or 0, sl.stop or col_count, sl.step or 1)
+        source = self.sourceModel()
+        col_count = 0 if source is None else source.columnCount()
+        return range(*self.get_column_slice().indices(col_count))
 
     def position_in_column_slice(self, col: int) -> int:
         """Can be interpreted as slice.index(col) if slice would be a list."""
-        sl = self.get_column_slice()
-        return int((col - (sl.start or 0)) / (sl.step or 1))
+        return self.get_column_range().index(col)
 
-    def position_in_row_slice(self, row: int) -> int:
+    def position_in_row_slice(
+        self, row: int, parent: core.ModelIndex | None = None
+    ) -> int:
         """Can be interpreted as slice.index(row) if slice would be a list."""
-        sl = self.get_row_slice()
-        return int((row - (sl.start or 0)) / (sl.step or 1))
+        return self.get_row_range(parent).index(row)
 
     # The Qt typesystems dont like slices (or ranges / tuples)
     # seems what works is to throw tuples at a QtProperty declared as list.

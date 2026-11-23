@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, itemmodels
+from prettyqt.itemmodels.proxies.flatproxymodel import FlatProxyMixin
 
 
-class SliceFilterProxyModel(itemmodels.SliceIdentityProxyModel):
+class SliceFilterProxyModel(FlatProxyMixin, itemmodels.SliceIdentityProxyModel):
     """Proxy model to filter an item view based on python slicing syntax.
 
     Since slicing operations are bijective, this model can filter without
@@ -32,14 +33,17 @@ class SliceFilterProxyModel(itemmodels.SliceIdentityProxyModel):
     ID = "slice_filter"
     ICON = "mdi.table-filter"
 
-    def rowCount(self, index: core.ModelIndex | None = None) -> int:
-        rowcount = super().rowCount()
-        # TODO: not sure if slice.stop = 0 is covered correctly?
-        return min(rowcount, self.get_row_slice().stop or rowcount)
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
+        parent = parent or core.ModelIndex()
+        if parent.isValid() or self.sourceModel() is None:
+            return 0
+        return len(self.get_row_range())
 
-    def columnCount(self, index: core.ModelIndex | None = None) -> int:
-        colcount = super().columnCount()
-        return min(colcount, self.get_column_slice().stop or colcount)
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
+        parent = parent or core.ModelIndex()
+        if parent.isValid() or self.sourceModel() is None:
+            return 0
+        return len(self.get_column_range())
 
     def headerData(
         self,
@@ -53,23 +57,33 @@ class SliceFilterProxyModel(itemmodels.SliceIdentityProxyModel):
         """
         is_horizontal = orientation == constants.HORIZONTAL
         rng = self.get_column_range() if is_horizontal else self.get_row_range()
-        pos = rng.start + section * rng.step
-        return super().headerData(pos, orientation, role)
+        if not 0 <= section < len(rng) or self.sourceModel() is None:
+            return None
+        return self.sourceModel().headerData(rng[section], orientation, role)
 
-    def index(
-        self, row: int, column: int, parent: core.ModelIndex | None = None
-    ) -> core.ModelIndex:
-        parent = parent or core.ModelIndex()
-        source = self.sourceModel()
-        if row < 0 or column < 0 or source is None:
-            return core.ModelIndex()
-        source_parent = self.mapToSource(parent)
-        col_range = self.get_column_range()
-        row_range = self.get_row_range()
-        col_pos = col_range.start + (col_range.step * column)
-        row_pos = row_range.start + (row_range.step * row)
-        source_index = source.index(row_pos, col_pos, source_parent)
-        return self.mapFromSource(source_index)
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
+        return self.mapToSource(index).data(role) if index.isValid() else None
+
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
+        source_index = self.mapToSource(index)
+        if not source_index.isValid():
+            return False
+        return self.sourceModel().setData(source_index, value, role)
+
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
+        source_index = self.mapToSource(index)
+        if not source_index.isValid():
+            return constants.NO_FLAGS
+        return self.sourceModel().flags(source_index)
 
     def mapToSource(self, proxy_idx: core.ModelIndex) -> core.ModelIndex:
         """Map index to source by calculating position from slice values.
@@ -81,9 +95,9 @@ class SliceFilterProxyModel(itemmodels.SliceIdentityProxyModel):
             return core.ModelIndex()
         col_range = self.get_column_range()
         row_range = self.get_row_range()
-        col_pos = col_range.start + (col_range.step * proxy_idx.column())
-        row_pos = row_range.start + (row_range.step * proxy_idx.row())
-        return source.index(row_pos, col_pos)
+        if proxy_idx.row() >= len(row_range) or proxy_idx.column() >= len(col_range):
+            return core.ModelIndex()
+        return source.index(row_range[proxy_idx.row()], col_range[proxy_idx.column()])
 
     def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
         """Map index from source by calculating position based on slice values.
@@ -92,9 +106,21 @@ class SliceFilterProxyModel(itemmodels.SliceIdentityProxyModel):
         """
         if self.sourceModel() is None or not source_index.isValid():
             return core.ModelIndex()
-        row_pos = self.position_in_row_slice(source_index.row())
-        col_pos = self.position_in_column_slice(source_index.column())
-        return self.createIndex(row_pos, col_pos, source_index.internalPointer())
+        if source_index.parent().isValid():
+            return core.ModelIndex()
+        row_range = self.get_row_range()
+        col_range = self.get_column_range()
+        if source_index.row() not in row_range or source_index.column() not in col_range:
+            return core.ModelIndex()
+        return self.index(
+            row_range.index(source_index.row()), col_range.index(source_index.column())
+        )
+
+    def set_indexer(self, indexer):
+        super().set_indexer(indexer)
+        # model might not be initialized yet when called from __init__
+        if self.sourceModel() is not None:
+            self.force_reset()
 
 
 if __name__ == "__main__":

@@ -2,15 +2,10 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 import logging
-from typing import TYPE_CHECKING
 
 import pydantic
 
-from prettyqt import constants, itemmodels
-
-
-if TYPE_CHECKING:
-    from prettyqt import core
+from prettyqt import itemmodels
 
 
 logger = logging.getLogger(__name__)
@@ -38,21 +33,14 @@ class PydanticModel(itemmodels.BaseDataclassModel):
             case _:
                 return False
 
-    def get_fields(self) -> list:
+    def get_fields(self) -> dict:
         return self.Class.model_fields
 
-    def flags(self, parent: core.ModelIndex) -> constants.ItemFlag:
-        if not parent.isValid():
-            return super().flags(parent)
-        if self.Class.model_config.get("frozen"):
-            super().flags(parent)
-        field_name = self._field_names[parent.column()]
-        instance = self.items[parent.row()]
-        # need to cover not parent.isValid()?
-        val = getattr(instance, field_name)
-        if isinstance(val, bool):
-            return super().flags(parent) | constants.IS_CHECKABLE
-        return super().flags(parent) | constants.IS_EDITABLE
+    def _is_frozen(self) -> bool:
+        return bool(self.Class.model_config.get("frozen"))
+
+    def _is_writable(self, instance, field_name: str, value) -> bool:
+        return not (self._is_frozen() or self._fields[field_name].frozen)
 
 
 if __name__ == "__main__":

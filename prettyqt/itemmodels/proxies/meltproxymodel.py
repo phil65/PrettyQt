@@ -3,12 +3,13 @@ from __future__ import annotations
 import logging
 
 from prettyqt import constants, core
+from prettyqt.itemmodels.proxies.flatproxymodel import FlatProxyModel
 
 
 logger = logging.getLogger(__name__)
 
 
-class MeltProxyModel(core.AbstractProxyModel):
+class MeltProxyModel(FlatProxyModel):
     """Proxy model to unpivot a table from wide format to long format.
 
     Works same way as [pandas.melt](https://shorturl.at/bhGI3).
@@ -79,15 +80,22 @@ class MeltProxyModel(core.AbstractProxyModel):
 
     @property
     def value_columns(self) -> list[int]:
+        if self.sourceModel() is None:
+            return []
         colcount = self.sourceModel().columnCount()
         return [i for i in range(colcount) if i not in self._id_columns]
 
-    def rowCount(self, index: core.ModelIndex | None = None) -> int:
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
+        parent = parent or core.ModelIndex()
+        if parent.isValid() or self.sourceModel() is None:
+            return 0
         return self.sourceModel().rowCount() * len(self.value_columns)
 
     def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
-        return 0 if self.sourceModel() is None else len(self._id_columns) + 2
+        if parent.isValid() or self.sourceModel() is None:
+            return 0
+        return len(self._id_columns) + 2
 
     def is_source_column(self, column: int) -> bool:
         return 0 <= column < self.columnCount() - 2
@@ -112,23 +120,12 @@ class MeltProxyModel(core.AbstractProxyModel):
 
         # Handle variable column
         if self.is_variable_column(column):
-            if role == constants.DISPLAY_ROLE:
+            if role in (constants.DISPLAY_ROLE, constants.EDIT_ROLE):
                 col = row // source_row_count
-                return source.headerData(self.value_columns[col], constants.HORIZONTAL)
+                header = source.headerData(self.value_columns[col], constants.HORIZONTAL)
+                return None if header is None else str(header)
             return None
-
-        # Handle value column
-        if self.is_value_column(column):
-            source_col = self.value_columns[row // source_row_count]
-            source_row = row % source_row_count
-            source_index = source.index(source_row, source_col)
-            return source.data(source_index, role)
-
-        # Handle ID columns
-        source_col = self.get_source_column_for_proxy_column(column)
-        source_row = row % source_row_count
-        source_index = source.index(source_row, source_col)
-        return source.data(source_index, role)
+        return self.mapToSource(index).data(role)
 
     def headerData(
         self,
@@ -136,6 +133,8 @@ class MeltProxyModel(core.AbstractProxyModel):
         orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
+        if role != constants.DISPLAY_ROLE:
+            return None
         if orientation != constants.HORIZONTAL:
             return str(section)
         if self.is_variable_column(section):
@@ -145,27 +144,11 @@ class MeltProxyModel(core.AbstractProxyModel):
         section = self.get_source_column_for_proxy_column(section)
         return self.sourceModel().headerData(section, orientation, role)
 
-    def index(
-        self, row: int, column: int, parent: core.ModelIndex | None = None
-    ) -> core.ModelIndex:
-        if parent and parent.isValid():
-            return core.ModelIndex()
-
-        if not (0 <= row < self.rowCount() and 0 <= column < self.columnCount()):
-            return core.ModelIndex()
-
-        return self.createIndex(row, column)
-
-    def parent(self, index: core.ModelIndex):
-        if not self.is_source_column(index.column()):
-            return core.ModelIndex()
-        return self.sourceModel().parent(index)
-
     def get_source_column_for_proxy_column(self, column: int) -> int:
-        return self._id_columns.index(column)
+        return self._id_columns[column]
 
     def get_proxy_column_for_source_column(self, column: int) -> int:
-        return column - sum(column > col for col in self._id_columns)
+        return self._id_columns.index(column)
 
     def mapToSource(self, proxy_index: core.ModelIndex) -> core.ModelIndex:
         source = self.sourceModel()
@@ -173,7 +156,7 @@ class MeltProxyModel(core.AbstractProxyModel):
             return core.ModelIndex()
         row, column = proxy_index.row(), proxy_index.column()
         row_count = source.rowCount()
-        if self.is_variable_column(column):
+        if self.is_variable_column(column) or row_count == 0:
             return core.ModelIndex()
         if self.is_value_column(column):
             source_col = self.value_columns[row // row_count]
@@ -184,29 +167,30 @@ class MeltProxyModel(core.AbstractProxyModel):
         return source.index(source_row, source_col)
 
     def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
-        if not source_index.isValid():
+        if not source_index.isValid() or source_index.parent().isValid():
             return core.ModelIndex()
 
         source = self.sourceModel()
         source_row = source_index.row()
         source_col = source_index.column()
 
-        # Handle ID columns
+        # Handle ID columns (they are repeated, map to the first block)
         if source_col in self._id_columns:
-            proxy_col = self._id_columns.index(source_col)
-            base_row = source_row
-            for val_col in self.value_columns:
-                if val_col < source_col:
-                    base_row += source.rowCount()
-            return self.createIndex(base_row, proxy_col)
+            proxy_col = self.get_proxy_column_for_source_column(source_col)
+            return self.index(source_row, proxy_col)
 
         # Handle value columns
         if source_col in self.value_columns:
             value_col_idx = self.value_columns.index(source_col)
             proxy_row = source_row + (value_col_idx * source.rowCount())
-            return self.createIndex(proxy_row, self.columnCount() - 1)
+            return self.index(proxy_row, self.columnCount() - 1)
 
         return core.ModelIndex()
+
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
+        if index.isValid() and self.is_variable_column(index.column()):
+            return constants.IS_SELECTABLE | constants.IS_ENABLED
+        return super().flags(index)
 
     def get_id_columns(self) -> list[int]:
         """Get list of identifier columns."""
@@ -216,6 +200,7 @@ class MeltProxyModel(core.AbstractProxyModel):
         """Set identifier variable columns."""
         with self.reset_model():
             self._id_columns = columns
+        self._update_cache()
 
     def get_var_name(self) -> str:
         """Get variable column header."""

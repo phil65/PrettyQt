@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import contextlib
 import logging
 from typing import TYPE_CHECKING, Any
 
@@ -9,29 +8,39 @@ from prettyqt.utils import classhelpers
 
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Mapping, Sequence
 
 
 logger = logging.getLogger(__name__)
 
 
 class BaseDataclassModel(core.AbstractTableModel):
+    """Base table model for a list of dataclass-like instances.
+
+    Rows are the instances, columns are the fields of their closest common ancestor.
+    Subclasses need to implement `get_fields` and should implement `_is_frozen`.
+    """
+
     DELEGATE_DEFAULT = "editor"
 
     def __init__(self, items: Sequence, **kwargs):
         super().__init__(**kwargs)
         self.items = items
-        klasses = [type(i) for i in items]
-        self.Class = classhelpers.lca_type(klasses)
+        self.Class = classhelpers.lca_type([type(i) for i in items]) if items else None
         logger.debug("%s: found common ancestor %s", type(self).__name__, self.Class)
-        self._fields = self.get_fields()
+        self._fields = self.get_fields() if self.Class is not None else {}
         self._field_names = list(self._fields.keys())
 
-    def get_fields(self):
-        return NotImplemented
+    def get_fields(self) -> Mapping[str, Any]:
+        raise NotImplementedError
 
-    def columnCount(self, parent=None):
-        return len(self._fields)
+    def _is_frozen(self) -> bool | None:
+        """Return whether the common class is frozen. None means "unknown"."""
+        return None
+
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
+        parent = parent or core.ModelIndex()
+        return 0 if parent.isValid() else len(self._fields)
 
     def headerData(
         self,
@@ -39,12 +48,19 @@ class BaseDataclassModel(core.AbstractTableModel):
         orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
-        match orientation, role, section:
-            case constants.VERTICAL, constants.DISPLAY_ROLE, _:
-                instance = self.items[section]
-                return type(instance).__name__
-            case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
+        match orientation, role:
+            case constants.VERTICAL, constants.DISPLAY_ROLE if section < len(self.items):
+                return type(self.items[section]).__name__
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE if section < len(
+                self._field_names
+            ):
                 return self._field_names[section]
+        return None
+
+    def _get_value(self, index: core.ModelIndex) -> tuple[Any, str, Any]:
+        field_name = self._field_names[index.column()]
+        instance = self.items[index.row()]
+        return instance, field_name, getattr(instance, field_name)
 
     def data(
         self,
@@ -53,9 +69,7 @@ class BaseDataclassModel(core.AbstractTableModel):
     ):
         if not index.isValid():
             return None
-        field_name = self._field_names[index.column()]
-        instance = self.items[index.row()]
-        value = getattr(instance, field_name)
+        _instance, _field_name, value = self._get_value(index)
         match role:
             case constants.DISPLAY_ROLE if not isinstance(value, bool):
                 return repr(value)
@@ -63,6 +77,7 @@ class BaseDataclassModel(core.AbstractTableModel):
                 return self.to_checkstate(value)
             case constants.USER_ROLE | constants.EDIT_ROLE:
                 return value
+        return None
 
     def setData(
         self,
@@ -70,41 +85,49 @@ class BaseDataclassModel(core.AbstractTableModel):
         value: Any,
         role: constants.ItemDataRole = constants.EDIT_ROLE,
     ) -> bool:
-        field_name = self._field_names[index.column()]
-        instance = self.items[index.row()]
+        if not index.isValid():
+            return False
+        instance, field_name, _ = self._get_value(index)
         match role:
             case constants.EDIT_ROLE | constants.USER_ROLE:
-                with self.reset_model():
-                    setattr(instance, field_name, value)
-                return True
+                pass
             case constants.CHECKSTATE_ROLE:
-                with self.reset_model():
-                    setattr(instance, field_name, bool(value))
-                return True
-        return False
+                value = self.from_checkstate(value)
+            case _:
+                return False
+        try:
+            setattr(instance, field_name, value)
+        except Exception:
+            logger.exception("Could not set %s to %r", field_name, value)
+            return False
+        self.dataChanged.emit(index, index)
+        return True
 
     def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         """Override for AbstractitemModel base method."""
         parent = parent or core.ModelIndex()
-        if parent.column() > 0:
-            return 0
         return 0 if parent.isValid() else len(self.items)
 
-    def flags(self, parent: core.ModelIndex) -> constants.ItemFlag:
-        """Override.
+    def _is_writable(self, instance, field_name: str, value) -> bool:
+        match self._is_frozen():
+            case True:
+                return False
+            case False:
+                return True
+        # Unknown: try to set the same value again.
+        try:
+            setattr(instance, field_name, value)
+        except Exception:  # noqa: BLE001
+            return False
+        return True
 
-        BaseClass implementation just tries to set attribute with same value to test
-        if field is writable. If possible, subclasses should find a more efficient way.
-        """
-        if not parent.isValid():
-            return super().flags(parent)
-        field_name = self._field_names[parent.column()]
-        instance = self.items[parent.row()]
-        # need to cover not parent.isValid()?
-        val = getattr(instance, field_name)
-        with contextlib.suppress(Exception):
-            setattr(instance, field_name, val)
-            if isinstance(val, bool):
-                return super().flags(parent) | constants.IS_CHECKABLE
-            return super().flags(parent) | constants.IS_EDITABLE
-        return super().flags(parent)
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
+        flags = super().flags(index)
+        if not index.isValid():
+            return flags
+        instance, field_name, value = self._get_value(index)
+        if not self._is_writable(instance, field_name, value):
+            return flags
+        if isinstance(value, bool):
+            return flags | constants.IS_CHECKABLE
+        return flags | constants.IS_EDITABLE

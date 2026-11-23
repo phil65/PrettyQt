@@ -66,21 +66,28 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
             if self.sourceModel() is not None:
                 self._resolve_string_indexes()
 
+    # Proxy indexes carry the internalId of the corresponding source index
+    # (like QIdentityProxyModel does), so the C++ implementation of
+    # QIdentityProxyModel.mapToSource can be used to build the source index.
+    # (Never use internalPointer() here, source indexes may come from C++ models.)
+
     def mapToSource(self, proxy_index: core.ModelIndex) -> core.ModelIndex:
-        if not proxy_index.isValid():
+        if not proxy_index.isValid() or self.sourceModel() is None:
             return core.ModelIndex()
-        return self.sourceModel().createIndex(
-            proxy_index.row(),
-            self._column_order[proxy_index.column()],
-            proxy_index.internalPointer(),
+        if proxy_index.column() >= len(self._column_order):
+            return core.ModelIndex()
+        source_column = self._column_order[proxy_index.column()]
+        helper = self.createIndex(
+            proxy_index.row(), source_column, proxy_index.internalId()
         )
+        return super().mapToSource(helper)
 
     def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
-        if not source_index.isValid():
+        if not source_index.isValid() or source_index.column() not in self._column_order:
             return core.ModelIndex()
         proxy_column = self._column_order.index(source_index.column())
         return self.createIndex(
-            source_index.row(), proxy_column, source_index.internalPointer()
+            source_index.row(), proxy_column, source_index.internalId()
         )
 
     def sibling(self, row: int, column: int, index: core.ModelIndex) -> core.ModelIndex:
@@ -94,46 +101,63 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
         orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
+        if self.sourceModel() is None:
+            return None
         if orientation == constants.HORIZONTAL:
+            if not 0 <= section < len(self._column_order):
+                return None
             section = self._column_order[section]
         return self.sourceModel().headerData(section, orientation, role)
 
-    def hasChildren(self, parent_index: core.ModelIndex) -> bool:
-        if self.sourceModel() is None or parent_index.column() > 0:
-            return False
-        source_parent = self.mapToSource(parent_index).sibling(parent_index.row(), 0)
-        return self.sourceModel().rowCount(source_parent) > 0
+    def _source_parent(self, parent: core.ModelIndex) -> core.ModelIndex:
+        """Source index of the first column of given proxy parent."""
+        if not parent.isValid():
+            return core.ModelIndex()
+        return self.mapToSource(parent).siblingAtColumn(0)
 
-    def parent(self, index: core.ModelIndex) -> core.ModelIndex:
+    def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
+        parent = parent or core.ModelIndex()
+        if self.sourceModel() is None or parent.column() > 0:
+            return False
+        return self.sourceModel().hasChildren(self._source_parent(parent))
+
+    def parent(self, *args) -> core.ModelIndex | core.QObject | None:
+        if not args:  # QObject.parent()
+            return core.QObject.parent(self)
+        index = args[0]
+        if not index.isValid():
+            return core.ModelIndex()
         source_parent = self.mapToSource(index).parent()
         if not source_parent.isValid():
             return core.ModelIndex()
-        return self.createIndex(source_parent.row(), 0, source_parent.internalPointer())
+        return self.createIndex(source_parent.row(), 0, source_parent.internalId())
 
     def index(
-        self, row: int, column: int, parent: core.ModelIndex | None = None
+        self, row: int, column: int = 0, parent: core.ModelIndex | None = None
     ) -> core.ModelIndex:
         parent = parent or core.ModelIndex()
         if parent.column() > 0 or self.sourceModel() is None:
             return core.ModelIndex()
-        source_parent = self.mapToSource(parent).sibling(parent.row(), 0)
+        if not 0 <= column < len(self._column_order):
+            return core.ModelIndex()
         source_index = self.sourceModel().index(
-            row, self._column_order[column], source_parent
+            row, self._column_order[column], self._source_parent(parent)
         )
         if not source_index.isValid():
             return core.ModelIndex()
-        return self.createIndex(row, column, source_index.internalPointer())
+        return self.createIndex(row, column, source_index.internalId())
 
-    def columnCount(self, index: core.ModelIndex | None = None) -> int:
-        index = index or core.ModelIndex()
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
+        parent = parent or core.ModelIndex()
+        if self.sourceModel() is None or parent.column() > 0:
+            return 0
         return len(self._column_order)
 
-    def rowCount(self, index: core.ModelIndex | None = None) -> int:
-        index = index or core.ModelIndex()
-        if self.sourceModel() is None or index.column() > 0:
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
+        parent = parent or core.ModelIndex()
+        if self.sourceModel() is None or parent.column() > 0:
             return 0
-        source_parent = self.mapToSource(index).sibling(index.row(), 0)
-        return self.sourceModel().rowCount(source_parent)
+        return self.sourceModel().rowCount(self._source_parent(parent))
 
     order = core.Property(
         list,

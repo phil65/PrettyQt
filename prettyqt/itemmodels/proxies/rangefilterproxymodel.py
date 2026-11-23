@@ -21,6 +21,14 @@ class RangeFilterProxyModel(core.SortFilterProxyModel):
         source_model = self.sourceModel()
         idx = source_model.index(source_row, column, parent)
         value = source_model.data(idx, role)
+        if self._min_value is None and self._max_value is None:
+            return True
+        if not isinstance(value, int | float):
+            # also allow numeric strings (DisplayRole often contains strings)
+            try:
+                value = float(value)
+            except (TypeError, ValueError):
+                return False
         if self._min_value is not None and value < self._min_value:
             return False
         return self._max_value is None or value <= self._max_value

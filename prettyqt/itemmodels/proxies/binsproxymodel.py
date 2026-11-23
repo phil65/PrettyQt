@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import itertools
 import logging
 from typing import TYPE_CHECKING, Any
 
@@ -13,7 +14,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class BinsProxyModel(core.AbstractProxyModel):
+class BinsProxyModel(core.IdentityProxyModel):
     """Proxy model to convert continuous data into categorical bins.
 
     === "Without proxy"
@@ -72,49 +73,34 @@ class BinsProxyModel(core.AbstractProxyModel):
             right: Whether bins includes the rightmost edge
             kwargs: Additional keyword arguments
         """
-        super().__init__(**kwargs)
+        if labels is not None and len(labels) != len(bins) - 1:
+            msg = "Number of labels must be equal to number of bins - 1"
+            raise ValueError(msg)
         self._column = column
         self._bins = list(bins)
         self._labels = list(labels) if labels is not None else None
         self._right = right
-
-        if labels is not None and len(labels) != len(bins) - 1:
-            msg = "Number of labels must be equal to number of bins - 1"
-            raise ValueError(msg)
+        super().__init__(**kwargs)
 
     def _get_bin(self, value: float | None) -> int | None:
-        """Get bin index for value."""
-        if value is None:
+        """Get bin index for value. None if value is outside of the bins."""
+        if value is None or len(self._bins) < 2:  # noqa: PLR2004
             return None
-
-        for i, edge in enumerate(self._bins[1:], 1):
-            if self._right:
-                if value <= edge:
-                    return i - 1
-            elif value < edge:
-                return i - 1
-        return len(self._bins) - 2
+        for i, (left, right) in enumerate(itertools.pairwise(self._bins)):
+            if (left < value <= right) if self._right else (left <= value < right):
+                return i
+        return None
 
     def _get_bin_label(self, bin_idx: int | None) -> str:
         """Get label for bin index."""
         if bin_idx is None:
             return ""
-
         if self._labels:
             return self._labels[bin_idx]
-
-        # Create default label using bin edges
+        # Create default label using bin edges (interval notation)
         left = self._bins[bin_idx]
         right = self._bins[bin_idx + 1]
-        return f"[{left}, {right}{'[' if not self._right else ']'}"
-
-    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
-        """Return number of columns (same as source)."""
-        return self.sourceModel().columnCount() if self.sourceModel() else 0
-
-    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
-        """Return number of rows (same as source)."""
-        return self.sourceModel().rowCount() if self.sourceModel() else 0
+        return f"({left}, {right}]" if self._right else f"[{left}, {right})"
 
     def data(
         self,
@@ -124,47 +110,20 @@ class BinsProxyModel(core.AbstractProxyModel):
         """Return data for given index and role."""
         if not index.isValid():
             return None
-
-        # Only modify the specified column
-        if index.column() != self._column:
-            return self.sourceModel().data(index, role)
-
-        source_data = self.sourceModel().data(index, constants.EDIT_ROLE)
-
+        if index.column() != self._column or role not in (
+            constants.DISPLAY_ROLE,
+            constants.EDIT_ROLE,
+        ):
+            return super().data(index, role)
+        source_data = super().data(index, constants.EDIT_ROLE)
         try:
             value = float(source_data)
         except (ValueError, TypeError):
-            return self.sourceModel().data(index, role)
-
+            return super().data(index, role)
         bin_idx = self._get_bin(value)
-
         if role == constants.DISPLAY_ROLE:
             return self._get_bin_label(bin_idx)
-        if role == constants.EDIT_ROLE:
-            return bin_idx
-
-        return self.sourceModel().data(index, role)
-
-    def headerData(
-        self,
-        section: int,
-        orientation: constants.Orientation,
-        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-    ) -> Any:
-        """Return header data (same as source)."""
-        return self.sourceModel().headerData(section, orientation, role)
-
-    def mapToSource(self, proxy_index: core.ModelIndex) -> core.ModelIndex:
-        """Map proxy index to source index (direct mapping)."""
-        if not proxy_index.isValid():
-            return core.ModelIndex()
-        return self.sourceModel().index(proxy_index.row(), proxy_index.column())
-
-    def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
-        """Map source index to proxy index (direct mapping)."""
-        if not source_index.isValid():
-            return core.ModelIndex()
-        return self.index(source_index.row(), source_index.column())
+        return bin_idx
 
     def get_column(self) -> int:
         """Get column to bin."""
@@ -181,6 +140,9 @@ class BinsProxyModel(core.AbstractProxyModel):
 
     def set_bins(self, bins: Sequence[float]):
         """Set bin edges."""
+        if self._labels is not None and len(self._labels) != len(bins) - 1:
+            msg = "Number of labels must be equal to number of bins - 1"
+            raise ValueError(msg)
         with self.reset_model():
             self._bins = list(bins)
 
@@ -190,6 +152,9 @@ class BinsProxyModel(core.AbstractProxyModel):
 
     def set_labels(self, labels: Sequence[str] | None):
         """Set bin labels."""
+        if labels is not None and len(labels) != len(self._bins) - 1:
+            msg = "Number of labels must be equal to number of bins - 1"
+            raise ValueError(msg)
         with self.reset_model():
             self._labels = list(labels) if labels is not None else None
 

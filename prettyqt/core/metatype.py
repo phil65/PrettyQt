@@ -243,7 +243,13 @@ class MetaType(QtCore.QMetaType):
         return TYPE.inverse[QtCore.QMetaType.Type(self.id())]
 
     def is_enumeration(self) -> bool:
-        return bool(self.flags() & QtCore.QMetaType.TypeFlag.IsEnumeration)
+        try:
+            flags = self.flags()
+        except ValueError:
+            # PyQt raises for flag bits it doesnt know about (happens for some
+            # QtGui types like QFont / QPalette), those are no enumerations.
+            return False
+        return bool(flags & QtCore.QMetaType.TypeFlag.IsEnumeration)
 
     # def get_meta_object(self) -> core.MetaObject:  # apparently doesnt exist in bindings
     #     return core.MetaObject(self.metaObject())

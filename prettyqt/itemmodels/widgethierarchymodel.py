@@ -84,12 +84,11 @@ class BaseHierarchyModel(itemmodels.TreeModel):
         show_root: bool = True,
         parent: core.QObject | None = None,
     ):
-        self.BaseClass = None
-        self.props = None
+        # base class needs to be set before the root item gets fetched.
+        self._set_base_class("QWidget")
         super().__init__(obj=obj, show_root=show_root, parent=parent)
-        self.set_base_class("QWidget")
 
-    def set_base_class(self, klass: str | type[core.QObject]):
+    def _set_base_class(self, klass: str | type[core.QObject]):
         from prettyqt import widgets
 
         if isinstance(klass, str):
@@ -99,15 +98,18 @@ class BaseHierarchyModel(itemmodels.TreeModel):
                     break
             else:
                 klass = core.QObject
+        self.BaseClass = klass
+        metaobj = klass.staticMetaObject
+        self.props = core.MetaObject(metaobj).get_properties(only_stored=True)
+        self.props.insert(0, FakeClassNameProp())
+        if issubclass(klass, widgets.QWidget):
+            self.props.insert(1, FakeLayoutProp())
+        self.props.insert(1, FakeUserPropertyNameProp())
+        self.props.insert(1, FakeUserPropertyValueProp())
+
+    def set_base_class(self, klass: str | type[core.QObject]):
         with self.reset_model():
-            self.BaseClass = klass
-            metaobj = klass.staticMetaObject
-            self.props = core.MetaObject(metaobj).get_properties(only_stored=True)
-            self.props.insert(0, FakeClassNameProp())
-            if issubclass(klass, widgets.QWidget):
-                self.props.insert(1, FakeLayoutProp())
-            self.props.insert(1, FakeUserPropertyNameProp())
-            self.props.insert(1, FakeUserPropertyValueProp())
+            self._set_base_class(klass)
 
     def get_base_class_name(self) -> str:
         return self.BaseClass.__name__
@@ -115,7 +117,7 @@ class BaseHierarchyModel(itemmodels.TreeModel):
     def get_base_class(self) -> type[core.QObject]:
         return self.BaseClass
 
-    def columnCount(self, parent=None):
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         return len(self.props)
 
     def headerData(
@@ -124,34 +126,44 @@ class BaseHierarchyModel(itemmodels.TreeModel):
         orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
-        match orientation, role, section:
-            case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
+        match orientation, role:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE if section < len(
+                self.props
+            ):
                 return self.props[section].get_name()
         return None
 
-    def data(
+    def _read(self, index: core.ModelIndex):
+        widget = self.data_by_index(index).obj
+        prop = self.props[index.column()]
+        # props of the base class cant be read from other objects (like layouts)
+        if not isinstance(widget, self.BaseClass) and isinstance(prop, core.MetaProperty):
+            return widget, prop, None
+        return widget, prop, prop.read(widget)
+
+    def data(  # noqa: PLR0911
         self,
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         if not index.isValid():
             return None
-        widget = self.data_by_index(index).obj
-        prop = self.props[index.column()]
-        val = prop.read(widget)
+        widget, _prop, val = self._read(index)
         is_bool = isinstance(val, bool)
         match role:
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE if not is_bool:
+            case constants.DISPLAY_ROLE if not is_bool:
+                return self.to_display_text(val)
+            case constants.EDIT_ROLE if not is_bool:
                 return val
             case constants.CHECKSTATE_ROLE if is_bool:
                 return self.to_checkstate(val)
             case constants.USER_ROLE:
-                prop = self.props[index.column()]
                 return val
             case self.Roles.WidgetRole:
                 return widget
             case constants.SIZE_HINT_ROLE:
                 return core.QSize(250, 35)
+        return None
 
     def setData(
         self,
@@ -159,27 +171,30 @@ class BaseHierarchyModel(itemmodels.TreeModel):
         value,
         role: constants.ItemDataRole = constants.EDIT_ROLE,
     ) -> bool:
-        prop = self.props[index.column()]
-        widget = self.data_by_index(index).obj
+        if not index.isValid():
+            return False
+        widget, prop, _ = self._read(index)
         match role:
             case constants.EDIT_ROLE | constants.USER_ROLE:
-                with self.change_layout():
-                    prop.write(widget, value)
-                # self.update_row(index.row())
-                return True
+                pass
             case constants.CHECKSTATE_ROLE:
-                with self.change_layout():
-                    prop.write(widget, bool(value))
-                return True
-        return False
+                value = self.from_checkstate(value)
+            case _:
+                return False
+        if not prop.isWritable() or prop.write(widget, value) is False:
+            return False
+        self.dataChanged.emit(index, index)
+        return True
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
-        prop = self.props[index.column()]
-        widget = self.data_by_index(index).obj
-        val = prop.read(widget)
-        flag = constants.IS_CHECKABLE if isinstance(val, bool) else constants.IS_EDITABLE
         default = super().flags(index)
-        return (default | flag) if prop.isWritable() else default
+        if not index.isValid():
+            return default
+        _widget, prop, val = self._read(index)
+        if val is None or not prop.isWritable():
+            return default
+        flag = constants.IS_CHECKABLE if isinstance(val, bool) else constants.IS_EDITABLE
+        return default | flag
 
     base_class_name = core.Property(
         str,
@@ -241,17 +256,20 @@ class LayoutHierarchyModel(BaseHierarchyModel):
                 | widgets.QTabWidget()
             ):
                 items = [item.obj.widget(i) for i in range(item.obj.count())]
-            case widgets.QWidget():
-                layout = item.obj.layout()
-                items = [layout.itemAt(i) for i in range(layout.count())]
-                items = [w if (w := i.widget()) else i.layout() for i in items]
-            case widgets.QLayout():
-                layout = item.obj
-                items = [layout.itemAt(i) for i in range(layout.count())]
-                items = [w if (w := i.widget()) else i.layout() for i in items]
+            case widgets.QWidget() | widgets.QLayout():
+                layout = (
+                    item.obj
+                    if isinstance(item.obj, widgets.QLayout)
+                    else item.obj.layout()
+                )
+                if layout is None:
+                    return []
+                layout_items = [layout.itemAt(i) for i in range(layout.count())]
+                # spacer items have neither a widget nor a layout, skip them.
+                items = [i.widget() or i.layout() for i in layout_items]
             case _:
                 raise ValueError(item)
-        return [self.TreeItem(obj=i) for i in items]
+        return [self.TreeItem(obj=i) for i in items if i is not None]
 
     def _has_children(self, item: LayoutHierarchyModel.TreeItem) -> bool:
         from prettyqt import widgets
@@ -265,9 +283,10 @@ class LayoutHierarchyModel(BaseHierarchyModel):
                 | widgets.QLayout()
             ):
                 return item.obj.count() > 0
-            case _:
+            case widgets.QWidget():
                 layout = item.obj.layout()
                 return False if layout is None else layout.count() > 0
+        return False
 
 
 if __name__ == "__main__":

@@ -5,8 +5,7 @@ from typing import TYPE_CHECKING, ClassVar
 
 import pydantic
 
-from prettyqt import constants, itemmodels
-from prettyqt.qt import QtGui
+from prettyqt import constants, gui, itemmodels
 
 
 if TYPE_CHECKING:
@@ -45,7 +44,7 @@ class PydanticFieldsModel(itemmodels.BaseFieldsModel):
         return isinstance(instance, pydantic.BaseModel)
 
     def get_fields(self, instance: pydantic.BaseModel):
-        return instance.model_fields
+        return type(instance).model_fields
 
     def data(  # noqa: PLR0911
         self,
@@ -58,34 +57,29 @@ class PydanticFieldsModel(itemmodels.BaseFieldsModel):
         field = self._fields[field_name]
         value = getattr(self._instance, field_name)
         match role, index.column():
-            case constants.DISPLAY_ROLE, 0:
-                return repr(value)
-            case constants.EDIT_ROLE, 0:
-                return value
-            case constants.FONT_ROLE, 0:
-                font = QtGui.QFont()
-                font.setBold(True)
-                return font
+            case _, 0:
+                return self._get_value_data(value, role)
             case constants.DISPLAY_ROLE, 1:
-                return repr(field.annotation)
+                return self._to_display(field.annotation)
             case constants.FONT_ROLE, 1:
-                font = QtGui.QFont()
+                font = gui.QFont()
                 font.setItalic(True)
                 return font
             case constants.DISPLAY_ROLE, 2:
-                return field.default
+                return self._to_display(field.default)
             case constants.CHECKSTATE_ROLE, 3:
                 return self.to_checkstate(bool(field.frozen))
             case constants.DISPLAY_ROLE, 4:
-                return field.alias
+                return field.alias or ""
             case constants.CHECKSTATE_ROLE, 5:
                 return self.to_checkstate(field.repr)
             case constants.USER_ROLE, _:
                 return value
+        return None
 
     def _is_writable(self, field_name: str):
         model_frozen = self._instance.model_config.get("frozen")
-        field_frozen = self._instance.model_fields[field_name].frozen
+        field_frozen = self._fields[field_name].frozen
         frozen = model_frozen or field_frozen
         return not frozen
 

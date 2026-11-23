@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+import enum
 import logging
 from typing import TYPE_CHECKING, Any, Literal, overload
 
@@ -202,7 +203,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     ):
         parent = core.ModelIndex() if parent is None else parent
         first = first or 0
-        last = last if last is not None else self.rowCount()
+        last = last if last is not None else self.rowCount(parent) - 1
         self.beginRemoveRows(parent, first, last)
         yield None
         self.endRemoveRows()
@@ -216,7 +217,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     ):
         parent = core.ModelIndex() if parent is None else parent
         first = first or 0
-        last = last if last is not None else self.rowCount()
+        last = last if last is not None else self.columnCount(parent) - 1
         self.beginRemoveColumns(parent, first, last)
         yield None
         self.endRemoveColumns()
@@ -237,7 +238,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     ):
         parent = core.ModelIndex() if parent is None else parent
         first = first or 0
-        last = last if last is not None else self.rowCount()
+        last = last if last is not None else first
         self.beginInsertRows(parent, first, last)
         yield None
         self.endInsertRows()
@@ -259,7 +260,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     ):
         parent = core.ModelIndex() if parent is None else parent
         first = first or 0
-        last = last if last is not None else self.rowCount()
+        last = last if last is not None else first
         self.beginInsertColumns(parent, first, last)
         yield None
         self.endInsertColumns()
@@ -406,6 +407,36 @@ class AbstractItemModelMixin(core.ObjectMixin):
     @staticmethod
     def to_checkstate(value: bool):
         return constants.CheckState.Checked if value else constants.CheckState.Unchecked
+
+    @staticmethod
+    def to_display_text(value: Any) -> str:
+        """Convert an arbitrary value into a string suitable for DisplayRole."""
+        match value:
+            case None:
+                return ""
+            case str():
+                return value
+            case bool() | int() | float():
+                return str(value)
+            case enum.Enum():
+                return value.name
+        return repr(value)
+
+    @staticmethod
+    def from_checkstate(value: Any) -> bool:
+        """Convert a value passed to setData for CheckStateRole into a bool.
+
+        Views may pass either an int or a CheckState enum member, and enum members
+        are always truthy, so `bool(value)` cannot be used.
+        """
+        match value:
+            case constants.CheckState():
+                return value == constants.CheckState.Checked
+            case bool():
+                return value
+            case int():
+                return value == constants.CheckState.Checked.value
+        return bool(value)
 
     def get_header_index_for_value(
         self,

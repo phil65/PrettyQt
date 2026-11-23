@@ -3,8 +3,6 @@ from __future__ import annotations
 import logging
 from typing import Any, Literal
 
-import numpy as np
-
 from prettyqt import constants, core
 
 
@@ -14,7 +12,7 @@ logger = logging.getLogger(__name__)
 RankMethod = Literal["average", "min", "max", "dense", "ordinal"]
 
 
-class RankProxyModel(core.AbstractProxyModel):
+class RankProxyModel(core.IdentityProxyModel):
     """Proxy model to compute numerical ranks for values.
 
     === "Without proxy"
@@ -81,93 +79,99 @@ class RankProxyModel(core.AbstractProxyModel):
                 'bottom': assign highest rank to NA
             kwargs: Additional keyword arguments
         """
-        super().__init__(**kwargs)
+        # attributes need to exist before super().__init__, since a source_model kwarg
+        # calls setSourceModel during init.
         self._column = column
         self._method = method
         self._ascending = ascending
         self._na_option = na_option
-        # Cache for ranks since calculation is fast but not instant
-        self._ranks: dict[int, float | None] = {}
+        # Cache for ranks, keyed by source parent and row. None means "invalid".
+        self._ranks: dict[tuple, dict[int, float | None]] = {}
+        super().__init__(**kwargs)
 
-    def _calculate_ranks(self) -> None:
-        """Calculate ranks for current data."""
-        source = self.sourceModel()
-        if not source:
-            return
-
-        # Get values and their indices
-        values = []
-        indices = []
-        na_indices = []
-
-        for row in range(source.rowCount()):
-            idx = source.index(row, self._column)
-            val = source.data(idx, constants.EDIT_ROLE)
-            try:
-                val = float(val)
-                values.append(val)
-                indices.append(row)
-            except (ValueError, TypeError):
-                na_indices.append(row)
-
-        if not values:
-            return
-
-        # Convert to numpy array for efficient ranking
-        arr = np.array(values)
-        if not self._ascending:
-            arr = -arr
-
-        # Calculate ranks
-        if self._method == "ordinal":
-            ranks = np.argsort(arr).argsort() + 1
-        else:
-            ties = {
-                "average": "average",
-                "min": "min",
-                "max": "max",
-                "dense": "dense",
-            }[self._method]
-            ranks = np.array(list(range(1, len(arr) + 1)), dtype=float)
-
-            # Handle ties
-            unique_values = np.unique(arr)
-            for value in unique_values:
-                mask = arr == value
-                if ties == "average":
-                    rank = ranks[mask].mean()
-                elif ties == "min":
-                    rank = ranks[mask].min()
-                elif ties == "max":
-                    rank = ranks[mask].max()
-                elif ties == "dense":
-                    rank = np.where(arr < value)[0].size + 1
-                ranks[mask] = rank
-
-        # Store ranks in cache
+    def _clear_cache(self, *_args):
         self._ranks.clear()
-        for idx, rank in zip(indices, ranks):
-            self._ranks[idx] = rank
 
-        # Handle NA values
-        if na_indices:
-            if self._na_option == "top":
+    def setSourceModel(self, model: core.QAbstractItemModel | None) -> None:
+        """Set source model and clear cache."""
+        if (old := self.sourceModel()) is not None:
+            for signal in self._cache_signals(old):
+                signal.disconnect(self._clear_cache)
+        super().setSourceModel(model)
+        self._clear_cache()
+        if model is not None:
+            for signal in self._cache_signals(model):
+                signal.connect(self._clear_cache)
+
+    @staticmethod
+    def _cache_signals(model: core.QAbstractItemModel):
+        return [
+            model.dataChanged,
+            model.rowsInserted,
+            model.rowsRemoved,
+            model.rowsMoved,
+            model.modelReset,
+            model.layoutChanged,
+        ]
+
+    def _calculate_ranks(self, parent: core.ModelIndex) -> dict[int, float | None]:
+        """Calculate ranks for the rows below given source parent."""
+        source = self.sourceModel()
+        values: dict[int, float] = {}
+        na_rows: list[int] = []
+        for row in range(source.rowCount(parent)):
+            val = source.index(row, self._column, parent).data(constants.EDIT_ROLE)
+            try:
+                values[row] = float(val)
+            except (ValueError, TypeError):
+                na_rows.append(row)
+        ranks: dict[int, float | None] = {}
+        rows = sorted(values, key=values.__getitem__, reverse=not self._ascending)
+        position = 0
+        dense_rank = 0
+        while position < len(rows):
+            # find group of equal values
+            end = position
+            while end + 1 < len(rows) and values[rows[end + 1]] == values[rows[position]]:
+                end += 1
+            dense_rank += 1
+            first, last = position + 1, end + 1  # 1-based ranks of the group
+            for offset, row in enumerate(rows[position : end + 1]):
+                match self._method:
+                    case "average":
+                        ranks[row] = (first + last) / 2
+                    case "min":
+                        ranks[row] = first
+                    case "max":
+                        ranks[row] = last
+                    case "dense":
+                        ranks[row] = dense_rank
+                    case "ordinal":
+                        ranks[row] = first + offset
+                    case _:
+                        raise ValueError(self._method)
+            position = end + 1
+        match self._na_option:
+            case "top":
                 na_rank = 0
-            elif self._na_option == "bottom":
+            case "bottom":
                 na_rank = len(values) + 1
-            else:  # "keep"
+            case _:
                 na_rank = None
+        for row in na_rows:
+            ranks[row] = na_rank
+        return ranks
 
-            for idx in na_indices:
-                self._ranks[idx] = na_rank
-
-    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
-        """Return number of columns (same as source)."""
-        return self.sourceModel().columnCount() if self.sourceModel() else 0
-
-    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
-        """Return number of rows (same as source)."""
-        return self.sourceModel().rowCount() if self.sourceModel() else 0
+    def _get_rank(self, source_index: core.ModelIndex) -> float | None:
+        parent = source_index.parent()
+        key = (
+            (parent.row(), parent.column(), parent.internalId())
+            if parent.isValid()
+            else ()
+        )
+        if key not in self._ranks:
+            self._ranks[key] = self._calculate_ranks(parent)
+        return self._ranks[key].get(source_index.row())
 
     def data(
         self,
@@ -177,61 +181,17 @@ class RankProxyModel(core.AbstractProxyModel):
         """Return data for given index and role."""
         if not index.isValid():
             return None
-
-        # Only modify the specified column
-        if index.column() != self._column:
-            return self.sourceModel().data(index, role)
-
-        # Calculate ranks if needed
-        if not self._ranks:
-            self._calculate_ranks()
-
-        rank = self._ranks.get(index.row())
-
-        if role == constants.DISPLAY_ROLE:
-            return str(int(rank)) if rank is not None else ""
+        if index.column() != self._column or role not in (
+            constants.DISPLAY_ROLE,
+            constants.EDIT_ROLE,
+        ):
+            return super().data(index, role)
+        rank = self._get_rank(self.mapToSource(index))
         if role == constants.EDIT_ROLE:
             return rank
-
-        return self.sourceModel().data(index, role)
-
-    def headerData(
-        self,
-        section: int,
-        orientation: constants.Orientation,
-        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-    ) -> Any:
-        """Return header data (same as source)."""
-        return self.sourceModel().headerData(section, orientation, role)
-
-    def setSourceModel(self, model: core.QAbstractItemModel) -> None:
-        """Set source model and clear cache."""
-        super().setSourceModel(model)
-        self._ranks.clear()
-
-    def sourceDataChanged(
-        self,
-        top_left: core.ModelIndex,
-        bottom_right: core.ModelIndex,
-        roles: list[constants.ItemDataRole],
-    ) -> None:
-        """Handle source data changes."""
-        # Only recalculate if the ranked column was changed
-        if top_left.column() <= self._column <= bottom_right.column():
-            self._ranks.clear()
-        super().sourceDataChanged(top_left, bottom_right, roles)
-
-    def mapToSource(self, proxy_index: core.ModelIndex) -> core.ModelIndex:
-        """Map proxy index to source index (direct mapping)."""
-        if not proxy_index.isValid():
-            return core.ModelIndex()
-        return self.sourceModel().index(proxy_index.row(), proxy_index.column())
-
-    def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
-        """Map source index to proxy index (direct mapping)."""
-        if not source_index.isValid():
-            return core.ModelIndex()
-        return self.index(source_index.row(), source_index.column())
+        if rank is None:
+            return ""
+        return str(int(rank)) if float(rank).is_integer() else str(rank)
 
     def get_column(self) -> int:
         """Get column to rank."""
@@ -241,7 +201,7 @@ class RankProxyModel(core.AbstractProxyModel):
         """Set column to rank."""
         with self.reset_model():
             self._column = column
-            self._ranks.clear()
+            self._clear_cache()
 
     def get_method(self) -> RankMethod:
         """Get ranking method."""
@@ -251,7 +211,7 @@ class RankProxyModel(core.AbstractProxyModel):
         """Set ranking method."""
         with self.reset_model():
             self._method = method
-            self._ranks.clear()
+            self._clear_cache()
 
     def get_ascending(self) -> bool:
         """Get sort order."""
@@ -261,7 +221,7 @@ class RankProxyModel(core.AbstractProxyModel):
         """Set sort order."""
         with self.reset_model():
             self._ascending = ascending
-            self._ranks.clear()
+            self._clear_cache()
 
     column = core.Property(
         int,

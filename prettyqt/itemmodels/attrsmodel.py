@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 import logging
 
+from attr import _make
 import attrs
 
 from prettyqt import itemmodels
@@ -31,6 +32,9 @@ class AttrsModel(itemmodels.BaseDataclassModel):
     def get_fields(self):
         fields = attrs.fields(self.Class)
         return {field.name: field for field in fields}
+
+    def _is_frozen(self) -> bool:
+        return _make._has_frozen_base_class(self.Class)
 
 
 if __name__ == "__main__":

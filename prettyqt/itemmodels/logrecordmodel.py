@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
-import datetime
+import datetime as dt
 import logging
 import traceback
 from typing import ClassVar
@@ -116,7 +116,7 @@ class RelativeCreatedColumn(itemmodels.ColumnItem):
     def get_data(self, item: logging.LogRecord, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return str(datetime.timedelta(milliseconds=item.relativeCreated))
+                return str(dt.timedelta(milliseconds=item.relativeCreated))
 
 
 class NameColumn(itemmodels.ColumnItem):
@@ -171,8 +171,8 @@ class LogRecordModel(itemmodels.ColumnTableModel):
     ]
     SUPPORTS = Sequence[logging.LogRecord]
 
-    def __init__(self, **kwargs):
-        super().__init__(items=[], columns=self.COLUMNS, **kwargs)
+    def __init__(self, items: Sequence[logging.LogRecord] | None = None, **kwargs):
+        super().__init__(items=items, columns=self.COLUMNS, **kwargs)
 
     @classmethod
     def supports(cls, instance) -> bool:

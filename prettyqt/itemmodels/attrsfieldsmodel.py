@@ -62,34 +62,28 @@ class AttrsFieldsModel(itemmodels.BaseFieldsModel):
         field = self._fields[field_name]
         value = getattr(self._instance, field_name)
         match role, index.column():
-            case constants.FONT_ROLE, 0:
-                font = gui.QFont()
-                font.setBold(True)
-                return font
-            case constants.DISPLAY_ROLE, 0:
-                return repr(value)
-            case constants.EDIT_ROLE, 0:
-                return value
+            case _, 0:
+                return self._get_value_data(value, role)
             case constants.DISPLAY_ROLE, 1:
-                return field.type
+                return self._to_display(field.type)
             case constants.FONT_ROLE, 1:
                 font = gui.QFont()
                 font.setItalic(True)
                 return font
             case constants.DISPLAY_ROLE, 2:
-                return field.default
+                return self._to_display(field.default)
             case constants.DISPLAY_ROLE, 3:
-                return str(field.metadata)
+                return str(dict(field.metadata)) if field.metadata else ""
             case constants.EDIT_ROLE, 3:
                 return field.metadata
             case constants.CHECKSTATE_ROLE, 4:
                 return self.to_checkstate(field.init)
             case constants.CHECKSTATE_ROLE, 5:
-                return self.to_checkstate(field.repr)
+                return self.to_checkstate(bool(field.repr))
             case constants.CHECKSTATE_ROLE, 6:
                 return self.to_checkstate(field.eq)
             case constants.CHECKSTATE_ROLE, 7:
-                return self.to_checkstate(field.hash)
+                return self.to_checkstate(bool(field.hash))
             case constants.CHECKSTATE_ROLE, 8:
                 return self.to_checkstate(field.kw_only)
             case constants.CHECKSTATE_ROLE, 9:
@@ -98,6 +92,7 @@ class AttrsFieldsModel(itemmodels.BaseFieldsModel):
                 return self.to_checkstate(field.validator is not None)
             case constants.USER_ROLE, _:
                 return value
+        return None
 
     def _is_writable(self, field_name: str) -> bool:
         # return all(
@@ -106,12 +101,11 @@ class AttrsFieldsModel(itemmodels.BaseFieldsModel):
         # )
         return not attr._make._has_frozen_base_class(type(self._instance))
 
-    def flags(self, index: core.ModelIndex):
-        match index.column():
-            case 0 | 1 | 2 | 3:
-                return super().flags(index)
-            case _:
-                return super().flags(index) & ~constants.IS_ENABLED
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
+        # the metadata checkboxes are read-only, show them disabled.
+        if index.column() > 3:  # noqa: PLR2004
+            return super().flags(index) & ~constants.IS_ENABLED
+        return super().flags(index)
 
 
 if __name__ == "__main__":

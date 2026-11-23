@@ -4,8 +4,7 @@ import dataclasses
 import logging
 from typing import TYPE_CHECKING, Any, ClassVar
 
-from prettyqt import constants, itemmodels
-from prettyqt.qt import QtGui
+from prettyqt import constants, gui, itemmodels
 from prettyqt.utils import datatypes
 
 
@@ -24,7 +23,6 @@ class DataClassFieldsModel(itemmodels.BaseFieldsModel):
 
     SUPPORTS = datatypes.IsDataclass
     HEADER: ClassVar = [
-        "Field name",
         "Value",
         "Type",
         "Default",
@@ -58,22 +56,16 @@ class DataClassFieldsModel(itemmodels.BaseFieldsModel):
         field = self._fields[field_name]
         value = getattr(self._instance, field_name)
         match role, index.column():
-            case constants.FONT_ROLE, 0:
-                font = QtGui.QFont()
-                font.setBold(True)
-                return font
-            case constants.DISPLAY_ROLE, 0:
-                return repr(value)
-            case constants.EDIT_ROLE, 0:
-                return value
+            case _, 0:
+                return self._get_value_data(value, role)
             case constants.DISPLAY_ROLE, 1:
-                return field.type
+                return self._to_display(field.type)
             case constants.FONT_ROLE, 1:
-                font = QtGui.QFont()
+                font = gui.QFont()
                 font.setItalic(True)
                 return font
             case constants.DISPLAY_ROLE, 2:
-                return field.default
+                return self._to_display(field.default)
             case constants.CHECKSTATE_ROLE, 3:
                 return self.to_checkstate(field.init)
             case constants.CHECKSTATE_ROLE, 4:
@@ -81,13 +73,14 @@ class DataClassFieldsModel(itemmodels.BaseFieldsModel):
             case constants.CHECKSTATE_ROLE, 5:
                 return self.to_checkstate(field.compare)
             case constants.CHECKSTATE_ROLE, 6:
-                return self.to_checkstate(field.hash)
+                return self.to_checkstate(bool(field.hash))
             case constants.DISPLAY_ROLE, 7:
-                return str(field.metadata)
+                return str(dict(field.metadata)) if field.metadata else ""
             case constants.CHECKSTATE_ROLE, 8:
-                return self.to_checkstate(field.kw_only)
+                return self.to_checkstate(field.kw_only is True)
             case constants.USER_ROLE, _:
                 return value
+        return None
 
     def _is_writable(self, field_name: str) -> bool:
         return not self._instance.__dataclass_params__.frozen

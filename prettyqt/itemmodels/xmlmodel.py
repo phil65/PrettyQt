@@ -60,7 +60,10 @@ class AttributeColumn(XmlColumnItem):
     def get_data(self, item: XmlModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return item.obj.attrib
+                attrib = item.obj.attrib
+                return " ".join(f"{k}={v!r}" for k, v in attrib.items())
+            case constants.USER_ROLE:
+                return dict(item.obj.attrib)
         return super().get_data(item, role)
 
 
@@ -68,8 +71,8 @@ class BaseXmlModel(itemmodels.ColumnItemModel):
     ICON = "mdi.xml"
     COLUMNS: ClassVar = [TagColumn, TextColumn, TailColumn, AttributeColumn]
 
-    def __init__(self, obj, **kwargs):
-        super().__init__(obj=obj, columns=self.COLUMNS, show_root=True, **kwargs)
+    def __init__(self, obj, show_root: bool = True, **kwargs):
+        super().__init__(obj=obj, columns=self.COLUMNS, show_root=show_root, **kwargs)
 
     class Roles(enum.IntEnum):
         NodeRole = constants.USER_ROLE + 24245
@@ -82,40 +85,41 @@ class BaseXmlModel(itemmodels.ColumnItemModel):
 
 
 class XmlModel(BaseXmlModel):
-    """Semi-lazy xml model. Fetches all direct child nodes when needed.
+    """Xml model for the builtin ElementTree. Child items are created lazily.
 
     Model cant be modified, that only really makes sense for a full DOM implementation.
     """
 
-    SUPPORTS = io.StringIO | str | datatypes.IsTreeIterator | ET.ElementTree
+    SUPPORTS = io.StringIO | str | datatypes.IsTreeIterator | ET.ElementTree | ET.Element
 
     def __init__(
         self,
-        obj: str | datatypes.IsTreeIterator | ET.ElementTree,
+        obj: str | io.StringIO | datatypes.IsTreeIterator | ET.ElementTree | ET.Element,
         show_root: bool = True,
         **kwargs,
     ):
         match obj:
             case io.StringIO():
-                context = ET.iterparse(obj, events=("start",))
-                _, root = next(context)
+                root = ET.parse(obj).getroot()
             case str():
-                context = ET.iterparse(io.StringIO(obj), events=("start",))
-                _, root = next(context)
-            case datatypes.IsTreeIterator():
-                _, root = next(obj)
+                root = ET.fromstring(obj)
+            case ET.Element():
+                root = obj
             case ET.ElementTree():
-                xml_str = ET.tostring(obj._root, encoding="unicode")
-                context = ET.iterparse(io.StringIO(xml_str), events=("start",))
-                _, root = next(context)
+                root = obj.getroot()
+            case datatypes.IsTreeIterator():
+                # consume the whole iterator, otherwise the tree is incomplete.
+                for _ in obj:
+                    pass
+                root = obj.root
             case _:
                 raise TypeError(obj)
-        super().__init__(obj=root, **kwargs)
+        super().__init__(obj=root, show_root=show_root, **kwargs)
 
     @classmethod
     def supports(cls, instance) -> bool:
         match instance:
-            case datatypes.IsTreeIterator() | ET.ElementTree():
+            case datatypes.IsTreeIterator() | ET.ElementTree() | ET.Element():
                 return True
             case _:
                 return False

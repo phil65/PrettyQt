@@ -91,6 +91,7 @@ class BaseClassTreeModel(itemmodels.TreeModel):
                 return SOURCE_FONT
             case self.Roles.SourceRole, _:
                 return get_source(klass)
+        return None
 
 
 class SubClassTreeModel(BaseClassTreeModel):
@@ -122,14 +123,14 @@ class SubClassTreeModel(BaseClassTreeModel):
     ) -> list[SubClassTreeModel.TreeItem]:
         if isinstance(item.obj, types.UnionType):
             return [self.TreeItem(obj=i) for i in get_args(item.obj)]
-        return [self.TreeItem(obj=i) for i in item.obj.__subclasses__()]
+        return [self.TreeItem(obj=i) for i in type.__subclasses__(item.obj)]
 
     def _has_children(self, item: SubClassTreeModel.TreeItem) -> bool:
         if item.obj is None:
             return False
         if isinstance(item.obj, types.UnionType):
             return True
-        return len(item.obj.__subclasses__()) > 0
+        return len(type.__subclasses__(item.obj)) > 0
 
 
 class ParentClassTreeModel(BaseClassTreeModel):
@@ -158,7 +159,7 @@ class ParentClassTreeModel(BaseClassTreeModel):
 
         app = widgets.app()
         widget = widgets.TreeView()
-        model = itemmodels.ParentClassTreeModel(widgets.TreeWidget, mro=True)
+        model = itemmodels.ParentClassTreeModel(widgets.TreeWidget, show_mro=True)
         widget.set_model(model)
         widget.show()
         ```
@@ -170,8 +171,8 @@ class ParentClassTreeModel(BaseClassTreeModel):
 
     SUPPORTS = type
 
-    def __init__(self, *args, **kwargs):
-        self._show_mro = False
+    def __init__(self, *args, show_mro: bool = False, **kwargs):
+        self._show_mro = show_mro
         super().__init__(*args, **kwargs)
 
     @classmethod
@@ -196,7 +197,11 @@ class ParentClassTreeModel(BaseClassTreeModel):
         Arguments:
             show: toggle mro mode on/off
         """
+        if show == self._show_mro:
+            return
         self._show_mro = show
+        # rebuild the tree with the new mode
+        self.set_root_item(self.inspected_item.obj)
 
     def get_show_mro(self) -> bool:
         """Returns True if mro mode is turned on."""

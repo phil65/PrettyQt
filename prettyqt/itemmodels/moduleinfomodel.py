@@ -23,20 +23,15 @@ class ModuleInfoModel(itemmodels.TreeModel):
 
     def __init__(self, obj, **kwargs):
         match obj:
-            case str() | os.PathLike():
-                path = pathlib.Path(obj)
-                obj = pkgutil.ModuleInfo(
-                    module_finder=machinery.FileFinder(str(path.parent)),
-                    name=path.name,
-                    ispkg=True,
-                )
             case types.ModuleType():
-                path = pathlib.Path(obj)
-                obj = pkgutil.ModuleInfo(
-                    module_finder=machinery.FileFinder(str(path.parent)),
-                    name=path.name,
-                    ispkg=True,
-                )
+                # packages have __path__, plain modules only __file__
+                paths = getattr(obj, "__path__", None)
+                file = paths[0] if paths else obj.__file__
+                if file is None:
+                    raise TypeError(obj)
+                obj = _module_info_for_path(pathlib.Path(file))
+            case str() | os.PathLike():
+                obj = _module_info_for_path(pathlib.Path(obj))
             case pkgutil.ModuleInfo():
                 pass
             case _:
@@ -72,26 +67,40 @@ class ModuleInfoModel(itemmodels.TreeModel):
                 return str(info.module_finder.path)
             case constants.CHECKSTATE_ROLE, 2:
                 return self.to_checkstate(info.ispkg)
-            case self.Roles.ModuleInfoRole:
+            case self.Roles.ModuleInfoRole, _:
                 return info
+        return None
 
     @classmethod
     def supports(cls, instance) -> bool:
         return isinstance(instance, pkgutil.ModuleInfo | types.ModuleType)
 
+    @staticmethod
+    def _get_package_path(info: pkgutil.ModuleInfo) -> str | None:
+        if not info.ispkg:
+            return None
+        return os.path.join(info.module_finder.path, info.name)  # noqa: PTH118
+
     def _fetch_object_children(
         self, item: ModuleInfoModel.TreeItem
     ) -> list[ModuleInfoModel.TreeItem]:
-        return [
-            self.TreeItem(obj=i)
-            for i in pkgutil.iter_modules([
-                f"{item.obj.module_finder.path}\\{item.obj.name}"
-            ])
-        ]
+        if (path := self._get_package_path(item.obj)) is None:
+            return []
+        return [self.TreeItem(obj=i) for i in pkgutil.iter_modules([path])]
 
     def _has_children(self, item: ModuleInfoModel.TreeItem) -> bool:
-        path = [f"{item.obj.module_finder.path}\\{item.obj.name}"]
-        return any(pkgutil.iter_modules(path))
+        if (path := self._get_package_path(item.obj)) is None:
+            return False
+        return any(True for _ in pkgutil.iter_modules([path]))
+
+
+def _module_info_for_path(path: pathlib.Path) -> pkgutil.ModuleInfo:
+    if path.name == "__init__.py":
+        path = path.parent
+    is_pkg = path.is_dir()
+    name = path.name if is_pkg else path.stem
+    finder = machinery.FileFinder(str(path.parent))
+    return pkgutil.ModuleInfo(module_finder=finder, name=name, ispkg=is_pkg)
 
 
 if __name__ == "__main__":

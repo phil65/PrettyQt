@@ -33,8 +33,7 @@ class ModelIndexModel(itemmodels.ListMixin, core.AbstractTableModel):
         **kwargs,
     ):
         self._use_model_roles = False
-        super().__init__(**kwargs)
-        self.items = indexes
+        super().__init__(items=indexes, **kwargs)
         self._update_columns()
 
     def _update_columns(self):
@@ -66,8 +65,9 @@ class ModelIndexModel(itemmodels.ListMixin, core.AbstractTableModel):
             case _:
                 return False
 
-    def columnCount(self, parent=None) -> int:
-        return len(self.headers)
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
+        parent = parent or core.ModelIndex()
+        return 0 if parent.isValid() else len(self.headers)
 
     def headerData(
         self,
@@ -76,11 +76,18 @@ class ModelIndexModel(itemmodels.ListMixin, core.AbstractTableModel):
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
         match orientation, role:
-            case constants.HORIZONTAL, constants.DISPLAY_ROLE:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE if section < len(
+                self.headers
+            ):
                 return self.headers[section]
             case constants.VERTICAL, constants.DISPLAY_ROLE:
                 return str(section)
         return None
+
+    def _get_column_role(self, column: int) -> constants.ItemDataRole | None:
+        if column < len(self.FIXED_HEADER):
+            return None
+        return self.role_mapping[self.headers[column]]
 
     def data(  # noqa: PLR0911
         self,
@@ -90,25 +97,27 @@ class ModelIndexModel(itemmodels.ListMixin, core.AbstractTableModel):
         if not index.isValid():
             return None
         idx = self.items[index.row()]
-        header = self.headers[index.column()]
+        col_role = self._get_column_role(index.column())
         match role, index.column():
             case constants.DISPLAY_ROLE, 0:
-                #  pieces = self.get_breadcrumbs_path()
                 pieces = self.get_index_key(idx, include_column=True)
                 return " / ".join(str(i) for i in pieces)
             case constants.DISPLAY_ROLE, 1:
-                return idx.row()
+                return str(idx.row())
             case constants.DISPLAY_ROLE, 2:
-                return idx.column()
+                return str(idx.column())
             case constants.DISPLAY_ROLE, 3:
-                roles = constants.ITEM_FLAG.get_list(idx.flags())
-                return " / ".join(roles)
+                return " / ".join(constants.ITEM_FLAG.get_list(idx.flags()))
+            case _, _ if col_role is None:
+                return None
             case constants.DISPLAY_ROLE, _:
-                role = self.role_mapping[header]
-                return repr(idx.data(role))
-            case _ as role, _:
-                # print(self.headers[column], role)
-                return idx.data(role)
+                return repr(idx.data(col_role))
+            case constants.EDIT_ROLE, _:
+                return idx.data(col_role)
+            case _ if role == col_role:
+                # delegates may be set up with data_role=col_role
+                return idx.data(col_role)
+        return None
 
     def setData(
         self,
@@ -116,18 +125,27 @@ class ModelIndexModel(itemmodels.ListMixin, core.AbstractTableModel):
         value: Any,
         role: constants.ItemDataRole = constants.EDIT_ROLE,
     ) -> bool:
+        if not index.isValid():
+            return False
+        col_role = self._get_column_role(index.column())
+        if col_role is None or role not in (constants.EDIT_ROLE, col_role):
+            return False
         idx = self.items[index.row()]
-        idx.model().setData(idx, value, role)
+        if not idx.model().setData(idx, value, col_role):
+            return False
         self.update_row(index.row())
         return True
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
-        return super().flags(index) | constants.IS_EDITABLE
-        # idx = self.items[index.row()]
-        # return idx.flags()
+        flags = super().flags(index)
+        if not index.isValid() or self._get_column_role(index.column()) is None:
+            return flags
+        return flags | constants.IS_EDITABLE
 
     def set_use_model_roles(self, value: bool):
-        self._use_model_roles = value
+        with self.reset_model():
+            self._use_model_roles = value
+            self._update_columns()
 
     def is_using_model_roles(self) -> bool:
         return self._use_model_roles

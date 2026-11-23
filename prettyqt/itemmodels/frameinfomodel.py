@@ -62,28 +62,31 @@ class FrameInfoModel(itemmodels.ListMixin, core.AbstractTableModel):
             case constants.DISPLAY_ROLE, 0:
                 return field.filename
             case constants.DISPLAY_ROLE, 1:
-                return field.lineno
+                return str(field.lineno)
             case constants.DISPLAY_ROLE, 2:
                 return field.function
             case constants.DISPLAY_ROLE, 3:
+                # show leading whitespace as dots
                 lines = []
-                pretty = ""
-                for line in field.code_context:
-                    while line.startswith(" "):
-                        pretty += "·"
-                        line = line[1:]
-                    pretty += line
-                    lines.append(pretty)
+                for line in field.code_context or []:
+                    stripped = line.lstrip(" ")
+                    lines.append(
+                        "·" * (len(line) - len(stripped)) + stripped.rstrip("\n")
+                    )
                 return "\n".join(lines)
             case constants.FONT_ROLE, 3:
                 return SOURCE_FONT
             case constants.DISPLAY_ROLE, 4:
-                return field.index
+                return "" if field.index is None else str(field.index)
             case constants.DISPLAY_ROLE, 5:
-                p = field.positions
+                if (p := field.positions) is None:
+                    return ""
                 return f"{p.lineno} - {p.end_lineno}, {p.col_offset} {p.end_col_offset}"
+            case constants.USER_ROLE, _:
+                return field
             case constants.ALIGNMENT_ROLE, _:
                 return constants.ALIGN_CENTER_LEFT
+        return None
 
 
 if __name__ == "__main__":
