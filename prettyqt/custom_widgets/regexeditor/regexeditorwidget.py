@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import pathlib
 import re
-import re._constants as sre_constants  # pyright: ignore
 from typing import TYPE_CHECKING
 
 from prettyqt import constants, core, custom_widgets, itemmodels, widgets
@@ -107,7 +106,7 @@ class RegexEditorWidget(widgets.Widget):
                 self.prog = re.compile(
                     self.regexinput.get_pattern(), self.regexinput.get_flags()
                 )
-            except sre_constants.error:
+            except re.PatternError:
                 self._highlighter.set_spans(None)
                 self.table_matches.set_model(None)
                 self.label_num_matches.set_text("0 matches")

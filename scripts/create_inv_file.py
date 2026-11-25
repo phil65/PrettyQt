@@ -7,10 +7,9 @@
 # ]
 # ///
 
-import codecs
+import contextlib
 import pathlib
 import re
-import sys
 import zlib
 
 import PySide6
@@ -143,10 +142,8 @@ def inspect_inventory(inv_path: pathlib.Path, output_path: pathlib.Path) -> None
         inv_path: Path to the inventory file to inspect.
         output_path: Path to save the inspection output.
     """
-    with codecs.open(output_path, "wb", encoding="utf-8") as f:
-        sys.stdout = f
+    with output_path.open("w", encoding="utf-8") as f, contextlib.redirect_stdout(f):
         inspect_main([str(inv_path)])
-    sys.stdout = sys.__stdout__
 
 
 def main() -> None:

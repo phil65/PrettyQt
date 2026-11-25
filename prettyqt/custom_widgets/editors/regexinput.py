@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import enum
 import re
-import re._constants as sre_constants
 from typing import TYPE_CHECKING, ClassVar
 
 from prettyqt import core, custom_widgets, widgets
@@ -76,7 +75,7 @@ class RegexInput(widgets.Widget):
     def _on_value_change(self):
         try:
             val = self.get_value()
-        except sre_constants.error:
+        except re.PatternError:
             return
         else:
             self.value_changed.emit(val)

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import re
-import re._constants as sre_constants
 
 from prettyqt import core, gui
 from prettyqt.utils import get_repr
@@ -28,7 +27,7 @@ class RegexPatternValidator(gui.Validator):
         #     return (self.Intermediate, text, pos)
         try:
             compiled = re.compile(text)
-        except sre_constants.error as e:
+        except re.PatternError as e:
             self.error_occured.emit(str(e))
             self.pattern_updated.emit(None)
             return self.State.Intermediate, text, pos

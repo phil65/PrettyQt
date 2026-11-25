@@ -92,6 +92,17 @@ def test_regexeditor(qtbot):
     widget.compile_flags = re.IGNORECASE
 
 
+def test_regexinput_invalid_pattern(qtbot):
+    widget = custom_widgets.RegexInput()
+    qtbot.addWidget(widget)
+    widget.set_pattern("[0-9]")
+    with qtbot.wait_signal(widget.value_changed):
+        widget._on_value_change()
+    widget.set_pattern("[")
+    with qtbot.assert_not_emitted(widget.value_changed):
+        widget._on_value_change()
+
+
 def test_flagselectionwidget(qtbot):
     widget = custom_widgets.FlagSelectionWidget()
     qtbot.addWidget(widget)
