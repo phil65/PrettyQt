@@ -12,11 +12,14 @@ if TYPE_CHECKING:
     from collections.abc import Iterator
 
 
+DEFAULT_WINDOW_ICON_COLOR = "darkcyan"
+
+
 class GuiApplicationMixin(core.CoreApplicationMixin):
     palette_changed = core.Signal(gui.Palette)
 
     def __init__(self, *args, **kwargs):
-        self._window_icon_color = "darkcyan"
+        self._window_icon_color = DEFAULT_WINDOW_ICON_COLOR
         super().__init__(*args, **kwargs)
 
     def event(self, e):
@@ -208,6 +211,14 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
         set_window_icon_color,
         doc="Global window icon color",
     )
+
+
+def get_window_icon_color() -> str:
+    """Return the window icon color of the running app (default if not prettyqt's)."""
+    app = gui.QGuiApplication.instance()
+    if isinstance(app, GuiApplicationMixin):
+        return app.get_window_icon_color()
+    return DEFAULT_WINDOW_ICON_COLOR
 
 
 class GuiApplication(GuiApplicationMixin, gui.QGuiApplication):

@@ -293,7 +293,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
         Args:
             icon: icon to use
         """
-        color = widgets.app().get_window_icon_color()
+        color = gui.guiapplication.get_window_icon_color()
         icon = iconprovider.get_icon(icon, color=color)
         super().setWindowIcon(icon)
 
@@ -381,7 +381,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
     setMaximumHeight = set_max_height  # noqa: N815
 
     def setWindowTitle(self, title: str):
-        if not self.objectName() and widgets.app().is_debug():
+        if not self.objectName() and widgets.application.is_debug():
             self.setObjectName(title)
         super().setWindowTitle(title)
 
@@ -786,7 +786,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
         self.set_stylesheet(ss)
 
     def set_stylesheet(
-        self, ss: None | str | qstylizer.style.StyleSheet | datatypes.PathType
+        self, ss: str | qstylizer.style.StyleSheet | datatypes.PathType | None
     ):
         """Set stylesheet for this widget."""
         match ss:

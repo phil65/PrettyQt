@@ -12,7 +12,7 @@ import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, paths, widgets
-from prettyqt.utils import datatypes
+from prettyqt.utils import asyncrunner, datatypes
 
 
 if TYPE_CHECKING:
@@ -31,22 +31,37 @@ SAVE_STATES = dict(
 )
 
 
-def setup_runner():
+_runner: asyncrunner.AsyncRunner | None = None
+
+
+def setup_runner() -> asyncrunner.AsyncRunner:
+    """Create the app's AsyncRunner and let signals connect to coroutine functions.
+
+    `SignalInstance.connect` gets wrapped once per process so that coroutine
+    functions are converted via the current runner. All other arguments
+    (connection type etc.) are passed through unchanged.
+    """
+    global _runner
     import inspect
 
     from prettyqt.qt.QtCore import SignalInstance
-    from prettyqt.utils import asyncrunner
 
+    _runner = asyncrunner.AsyncRunner()
     old_connect = SignalInstance.connect
-    runner = asyncrunner.AsyncRunner()
+    if getattr(old_connect, "_prettyqt_wrapped", False):
+        return _runner
 
-    def connect(self, slot):
-        if inspect.iscoroutinefunction(slot):
-            return old_connect(self, runner.to_sync(slot))
-        return old_connect(self, slot)
+    def connect(self, slot, *args, **kwargs):
+        if _runner is not None and inspect.iscoroutinefunction(slot):
+            slot = _runner.to_sync(slot)
+        return old_connect(self, slot, *args, **kwargs)
 
-    SignalInstance.connect = connect
-    return runner
+    connect._prettyqt_wrapped = True  # type: ignore[attr-defined]
+    try:
+        SignalInstance.connect = connect
+    except TypeError:  # binding does not allow patching its signal type
+        logger.debug("Could not enable coroutine slots for %s", SignalInstance)
+    return _runner
 
 
 class ApplicationMixin(gui.GuiApplicationMixin):
@@ -182,7 +197,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         self.set_stylesheet(ss)
 
     def set_stylesheet(
-        self, ss: None | str | qstylizer.style.StyleSheet | datatypes.PathType
+        self, ss: str | qstylizer.style.StyleSheet | datatypes.PathType | None
     ):
         match ss:
             case str():
@@ -311,6 +326,12 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         if wait_for_more:  # doesnt seem to work? Could use this for sleep() otherwise.
             flag |= core.EventLoop.ProcessEventsFlag.WaitForMoreEvents
         cls.processEvents(flag, msecs)
+
+
+def is_debug() -> bool:
+    """Return whether the running app is a prettyqt Application in debug mode."""
+    app = widgets.QApplication.instance()
+    return isinstance(app, ApplicationMixin) and app.is_debug()
 
 
 class Application(ApplicationMixin, widgets.QApplication):

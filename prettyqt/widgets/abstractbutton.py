@@ -49,7 +49,7 @@ class AbstractButtonMixin(widgets.WidgetMixin):
         )
 
     def setText(self, text: str):
-        if not self.objectName() and widgets.app().is_debug():
+        if not self.objectName() and widgets.application.is_debug():
             self.setObjectName(text)
         super().setText(text)
 

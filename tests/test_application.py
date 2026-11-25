@@ -75,3 +75,89 @@ def test_coreapplication(qapp):
     )
     qapp.load_language("de")
     qapp.removeTranslator(qapp.translators["de"])
+
+
+class _Receiver(QtCore.QObject):
+    def __init__(self):
+        super().__init__()
+        self.threads: list[QtCore.QThread] = []
+
+    def on_signal(self):
+        self.threads.append(QtCore.QThread.currentThread())
+
+
+class _Emitter(QtCore.QObject):
+    fired = core.Signal()
+
+
+def test_connect_passes_connection_type(qapp):
+    """Application's connect wrapper must not drop the connection type."""
+    receiver = _Receiver()
+    emitter = _Emitter()
+    emitter.fired.connect(receiver.on_signal, QtCore.Qt.ConnectionType.QueuedConnection)
+    emitter.fired.emit()
+    assert receiver.threads == []  # queued: not delivered directly
+    qapp.processEvents()
+    assert receiver.threads == [qapp.thread()]
+
+
+def test_queued_connection_from_worker_thread(qapp, qtbot):
+    receiver = _Receiver()
+    emitter = _Emitter()
+    emitter.fired.connect(receiver.on_signal, QtCore.Qt.ConnectionType.QueuedConnection)
+    worker = QtCore.QThread()
+    emitter.moveToThread(worker)
+    worker.started.connect(emitter.fired.emit)
+    worker.start()
+    qtbot.waitUntil(lambda: len(receiver.threads) == 1, timeout=5000)
+    worker.quit()
+    worker.wait()
+    assert receiver.threads == [qapp.thread()]
+
+
+def test_coroutine_slot(qapp, qtbot):
+    results = []
+
+    async def slot():
+        results.append(1)
+
+    emitter = _Emitter()
+    emitter.fired.connect(slot)
+    emitter.fired.emit()
+    qtbot.waitUntil(lambda: results == [1], timeout=5000)
+
+
+def test_widgets_work_under_plain_qapplication():
+    """Prettyqt widgets must not require prettyqt's Application."""
+    import os
+    import subprocess
+    import sys
+
+    code = """
+from prettyqt.qt import QtWidgets
+app = QtWidgets.QApplication([])
+from prettyqt import widgets
+assert not isinstance(app, widgets.Application)
+w = widgets.Widget()
+w.set_icon("mdi.timer")
+w.setWindowTitle("title")
+widgets.PushButton().setText("text")
+import pydantic
+from prettyqt.custom_widgets.pydanticform import PydanticDialog
+class Model(pydantic.BaseModel):
+    name: str = "x"
+    count: int = 1
+dlg = PydanticDialog(Model, title="Model")
+dlg.show()
+app.processEvents()
+print("ok")
+"""
+    # pydantic plugins (e.g. logfire) are unrelated and may break on new Pythons
+    env = dict(
+        os.environ, QT_QPA_PLATFORM="offscreen", PYDANTIC_DISABLE_PLUGINS="__all__"
+    )
+    result = subprocess.run(
+        [sys.executable, "-c", code], capture_output=True, text=True, env=env, timeout=60
+    )
+    assert result.returncode == 0, result.stderr
+    assert "ok" in result.stdout

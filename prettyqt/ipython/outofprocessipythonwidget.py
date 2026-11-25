@@ -41,7 +41,7 @@ class OutOfProcessIPythonWidget(ipython.BaseIPythonWidget):
         for _ in range(500):
             if self.connection_file.exists() and self.connection_file.stat().st_size > 0:
                 break
-            widgets.app().sleep(0.1)
+            widgets.Application.sleep(0.1)
         else:
             raise FileNotFoundError(self.connection_file)
         logger.info("Connection file found. Opening channels.")

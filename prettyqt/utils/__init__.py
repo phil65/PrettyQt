@@ -25,9 +25,20 @@ class bidict(bdct.bidict[KT, VT]):  # noqa: N801
     def __init__(self, *args, **kwargs):
         match args:
             case (dict(),):
-                super().__init__(args[0])
+                mapping = args[0]
             case _:
-                super().__init__(kwargs)
+                mapping = kwargs
+        # Some bindings / platforms alias enum members (e.g. PySide6 on Windows
+        # with Python 3.15 resolves AutoAll to AutoBulletList), so keep the
+        # first key for a duplicated value instead of failing on import.
+        deduped: dict[KT, VT] = {}
+        seen: set = set()
+        for k, v in mapping.items():
+            if v in seen:
+                continue
+            seen.add(v)
+            deduped[k] = v
+        super().__init__(deduped)
 
     def __getitem__(self, item) -> VT:
         try:
