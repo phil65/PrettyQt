@@ -60,7 +60,9 @@ def test_colorchooserbutton(qtbot):
 
 @pytest.mark.skipif(prettyqt.qt.API == "pyside6", reason="Segmentation fault")
 def test_regexeditor(qtbot):
-    widget = custom_widgets.regexeditor.RegexEditorWidget()
+    from prettyqt.custom_widgets import regexeditor
+
+    widget = regexeditor.RegexEditorWidget()
     qtbot.addWidget(widget)
     widget.regex = "[0-9]"
     assert widget.regex == "[0-9]"
@@ -186,10 +188,6 @@ def test_inputandslider(qtbot):
     assert w.is_valid()
 
 
-# something related to syntaxhighlighting...
-@pytest.mark.skipif(
-    prettyqt.qt.API == "pyside6", reason="Windows fatal exception: access violation"
-)
 def test_codeeditor(qtbot):
     editor = custom_widgets.CodeEditor()
     qtbot.addWidget(editor)
@@ -199,6 +197,93 @@ def test_codeeditor(qtbot):
     event = gui.QResizeEvent(core.Size(10, 10), core.Size(20, 20))
     editor.resizeEvent(event)
     editor.repaint()
+
+
+def test_codeeditor_python_highlighting(qtbot):
+    from prettyqt import syntaxhighlighters
+
+    editor = custom_widgets.CodeEditor(language="python")
+    qtbot.addWidget(editor)
+    assert isinstance(editor._hl, syntaxhighlighters.PygmentsHighlighter)
+    old = editor._hl
+    editor.set_syntaxhighlighter("python")
+    assert old.document() is None  # previous highlighter detached
+    editor.set_text("def foo():\n    return 1\n")
+    block = editor.document().firstBlock()
+    assert block.layout().formats()  # keywords got formats
+
+
+def test_codeeditor_line_markers(qtbot):
+    editor = custom_widgets.CodeEditor()
+    qtbot.addWidget(editor)
+    editor.set_text("a = 1\nb = (\nc = 3\n")
+    editor.add_line_marker(2, "SyntaxError: '(' was never closed")
+    editor.add_line_marker(2, "second message", kind="warning")
+    assert editor.get_line_marker_text(2) == (
+        "SyntaxError: '(' was never closed\nsecond message"
+    )
+    assert len(editor.extraSelections()) == 1
+    editor.set_line_markers({1: "first", 3: "third"}, kind="info")
+    assert [(m.line, m.kind) for m in editor.get_line_markers()] == [
+        (1, "info"),
+        (3, "info"),
+    ]
+    assert editor.get_line_marker_text(2) == ""
+    assert len(editor.extraSelections()) == 2  # noqa: PLR2004
+    editor.set_line_markers([custom_widgets.codeeditor.LineMarker(9, "out of range")])
+    assert editor.extraSelections() == []  # line does not exist
+    editor.clear_line_markers(9)
+    assert editor.get_line_markers() == []
+    editor.set_line_markers([(1, "x")])
+    editor.clear_line_markers()
+    assert editor.get_line_markers() == []
+    with pytest.raises(ValueError, match="Invalid marker kind"):
+        editor.add_line_marker(1, "x", kind="fatal")  # type: ignore[arg-type]
+    editor.add_line_marker(1, "boom")
+    editor.show()
+    editor.repaint()
+    block = editor.document().firstBlock()
+    geom = editor.blockBoundingGeometry(block).translated(editor.contentOffset())
+    pos = geom.center().toPoint()
+    assert editor.show_marker_tooltip(pos, editor.mapToGlobal(pos))
+    assert not editor.show_marker_tooltip(core.QPoint(1, 5000), core.QPoint(1, 1))
+
+
+def test_codeeditor_read_only(qtbot):
+    editor = custom_widgets.CodeEditor()
+    qtbot.addWidget(editor)
+    editor.set_text("x = 1")
+    editor.set_read_only()
+    assert editor.isReadOnly()
+    qtbot.keyClicks(editor, "abc")
+    assert editor.text() == "x = 1"
+    editor.set_text("y = 2")  # programmatic changes still work
+    assert editor.text() == "y = 2"
+
+
+def test_codeeditor_set_text_keeps_position(qtbot):
+    editor = custom_widgets.CodeEditor()
+    qtbot.addWidget(editor)
+    editor.resize(300, 100)
+    editor.show()
+    text = "\n".join(f"line_{i} = {i}" for i in range(200))
+    editor.set_text(text)
+    cursor = editor.textCursor()
+    cursor.setPosition(500)
+    editor.setTextCursor(cursor)
+    editor.verticalScrollBar().setValue(50)
+    editor.set_text(text.replace("line_0 ", "line_zero "))
+    assert editor.textCursor().position() == 500  # noqa: PLR2004
+    assert editor.verticalScrollBar().value() == 50  # noqa: PLR2004
+    assert editor.text().startswith("line_zero")
+    editor.undo()  # change is undoable
+    assert editor.text() == text
+    editor.set_text("short")
+    assert editor.textCursor().position() == len("short")
+    editor.set_text("reset", keep_position=False)
+    assert editor.textCursor().position() == 0
+    editor.set_value("via value")
+    assert editor.get_value() == "via value"
 
 
 def test_flowlayout(qtbot):
