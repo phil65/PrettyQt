@@ -73,7 +73,19 @@ class FlatModuleDoc(mk.MkDoc):
         return [*pages, self.index_page]
 
 
+def load_optional_widgets():
+    """Import lazily exported widgets so that they get a class page."""
+    from prettyqt import custom_widgets
+
+    for name in ("PydanticForm", "PydanticDialog"):
+        try:
+            getattr(custom_widgets, name)
+        except ImportError:
+            logger.warning("Could not import custom_widgets.%s", name)
+
+
 def populate_docs(doc_nav: mk.MkNav, predicate):
+    load_optional_widgets()
     for submod in prettyqt.import_all():
         if predicate(submod):
             doc = FlatModuleDoc(module=submod, parent=doc_nav, flatten_nav=True)

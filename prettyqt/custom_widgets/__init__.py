@@ -160,3 +160,15 @@ __all__ = [
     "WaitingSpinner",
     "WidgetEditor",
 ]
+
+
+def __getattr__(name: str):
+    # pydantic is optional (extra "pydantic"): import the form module on first access.
+    if name in {"PydanticForm", "PydanticDialog"}:
+        from . import pydanticform
+
+        value = getattr(pydanticform, name)
+        globals()[name] = value
+        return value
+    msg = f"module {__name__!r} has no attribute {name!r}"
+    raise AttributeError(msg)

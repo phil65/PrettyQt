@@ -58,7 +58,17 @@ regexeditor = "prettyqt.custom_widgets.regexeditor.__main__:run"
 hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
 
 [project.optional-dependencies]
-addons = ["orjson", "fsspec", "pillow", "numpy", "qtconsole", "ipython", "lxml"]
+addons = [
+  "fsspec",
+  "ipython",
+  "lxml",
+  "numpy",
+  "orjson",
+  "pillow",
+  "pydantic>=2.11",
+  "qtconsole",
+]
+pydantic = ["pydantic>=2.11"]
 pyqt6 = ["PyQt6", "PyQt6-Charts", "PyQt6-Pdf", "PyQt6-WebEngine", "PyQt6-QScintilla"]
 pyside6 = ["pyside6", "PySide6-Addons"]
 

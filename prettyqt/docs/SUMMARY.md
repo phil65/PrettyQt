@@ -5,5 +5,6 @@
 * Features
     * [Proxy models](features/proxies.md)
     * [Widgets](features/widgets.md)
+    * [Forms and code editor](features/forms.md)
     * [Layouts](features/layouts.md)
     * [Animating](features/animating.md)

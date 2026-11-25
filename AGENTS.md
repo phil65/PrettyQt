@@ -102,6 +102,9 @@ PyPI and gh-pages.
   `IPython`/`qtconsole`, `fsspec`, `PIL`, `mknodes`) lazily or only when that module is
   imported; they are not runtime dependencies. Eager imports must be declared in
   `[project] dependencies`.
+  `custom_widgets.PydanticForm` / `PydanticDialog` (extra `pydantic`, also in `addons`)
+  are exported lazily via `custom_widgets.__getattr__`; `prettyqt/docs/build_root.py`
+  loads them so they get class pages.
 - Import order in package `__init__.py` files matters (bases before subclasses).
 - Tests need a display: set `QT_QPA_PLATFORM=offscreen` (or run under xvfb).
 - `prettyqt/qt/` and `docs/` are excluded from ruff.
