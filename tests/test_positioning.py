@@ -117,7 +117,12 @@ def test_nmeapositioninfosource():
     assert source.get_update_mode() == "real_time"
     assert source.get_error() == "unknown_source"
     source.set_preferred_positioning_methods("satellite")
-    assert source.get_preferred_positioning_methods() == ["satellite", "all"]
+    # PySide6 6.12 on Windows / Python 3.15 aliases AllPositioningMethods to
+    # SatellitePositioningMethods, so "all" is dropped from the mapping there.
+    from prettyqt.positioning.geopositioninfosource import POSITIONING_METHODS
+
+    expected = ["satellite", "all"] if "all" in POSITIONING_METHODS else ["satellite"]
+    assert source.get_preferred_positioning_methods() == expected
     with pytest.raises(InvalidParamError):
         source.set_preferred_positioning_methods("test")
     source.get_supported_positioning_methods()
