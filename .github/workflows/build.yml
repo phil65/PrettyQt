@@ -8,7 +8,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [macos-latest, windows-latest, ubuntu-latest]
-        python-version: ["3.12", "3.13", "3.14", "3.15"]
+        python-version: ["3.14", "3.15"]
         # qt-binding: ["pyside6", "pyqt6"]
     runs-on: ${{ matrix.platform }}
     # 3.15 is a pre-release: test it early, but don't let it block the build.
@@ -70,14 +70,14 @@ jobs:
             uv run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
 
       - name: Upload coverage to Codecov
-        if: runner.os == 'Windows' && matrix.python-version == '3.12'
+        if: runner.os == 'Windows' && matrix.python-version == '3.14'
         uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Create documentation
         # generating a page per class is slow, so only build docs once
-        if: matrix.python-version == '3.13' && runner.os == 'Linux'
+        if: matrix.python-version == '3.14' && runner.os == 'Linux'
         uses: coactions/setup-xvfb@v1
         timeout-minutes: 40
         with:
@@ -106,7 +106,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: "3.13"
+          python-version: "3.14"
 
       - uses: tlambert03/setup-qt-libs@v1
 

@@ -35,7 +35,7 @@ window = widgets.Widget(window_title="PrettyQt demo")
 layout = window.set_layout("vertical", margin=10)
 
 checkbox = widgets.CheckBox("Enable feature")
-checkbox.set_checkstate("partial")      # strings instead of enums
+checkbox.set_checkstate("partial")  # strings instead of enums
 assert checkbox.get_checkstate() == "partial"
 assert checkbox.checkState() == core.Qt.CheckState.PartiallyChecked  # Qt API still works
 
