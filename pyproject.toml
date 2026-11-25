@@ -145,7 +145,12 @@ minversion = "7.0"
 testpaths = ["tests"]
 qt_qapp_name = "prettyqt-test"
 # qt_api = "pyside6"
-qt_log_level_fail = "CRITICAL"
+# No pytest-qt message capture: it swaps the Qt message handler before / after each
+# test, which races with QtWebEngine's Chromium GPU thread logging asynchronously
+# ("GPUInfo not initialized on GpuInfoUpdate"). PyQt6 then calls the already reset
+# handler ("TypeError: 'NoneType' object is not callable" at teardown), PySide6
+# calls a freed one (segfault). Qt messages still end up in pytest's captured stderr.
+addopts = ["--no-qt-log"]
 asyncio_mode = "auto"
 
 [tool.ruff]

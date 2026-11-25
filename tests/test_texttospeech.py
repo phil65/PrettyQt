@@ -11,9 +11,8 @@ texttospeech = pytest.importorskip("prettyqt.texttospeech")
 # from prettyqt.utils import InvalidParamError
 
 
-def test_texttospeech(qtlog):
-    with qtlog.disabled():
-        tts = texttospeech.TextToSpeech()
+def test_texttospeech():
+    tts = texttospeech.TextToSpeech()
     assert tts.get_state() in ["ready", "error"]
     tts.get_locale()
     tts.get_available_locales()

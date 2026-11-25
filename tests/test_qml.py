@@ -35,13 +35,12 @@ def test_qmlengine(qapp):
     engine.get_import_paths()
 
 
-def test_qmlapplicationengine(qapp, qtlog):
-    with qtlog.disabled():
-        engine = qml.QmlApplicationEngine()
-        for _item in engine:
-            pass
-        path = pathlib.Path.cwd() / "tests" / "qmltest.qml"
-        engine.load_data(path.read_text("utf-8"))
+def test_qmlapplicationengine(qapp):
+    engine = qml.QmlApplicationEngine()
+    for _item in engine:
+        pass
+    path = pathlib.Path.cwd() / "tests" / "qmltest.qml"
+    engine.load_data(path.read_text("utf-8"))
 
 
 def test_qmlcomponent(qapp):
