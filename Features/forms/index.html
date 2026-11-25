@@ -897,6 +897,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#command-palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Command palette
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1297,6 +1308,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#command-palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Command palette
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1477,23 +1499,47 @@ and selected with <code>json_schema_extra={"widget": "column"}</code>; a factory
 <code>(field_name, field_info, hints)</code> and returns a widget with <code>get_value()</code>,
 <code>set_value()</code> and a <code>value_changed</code> signal.</p>
 <p>Labels come from <code>title</code> (fallback: the field name), tooltips from <code>description</code>.
-Validation errors are shown below the field, model-level errors below the form.
+To translate them, pass a translation function: titles, descriptions and <code>mapping</code>
+labels go through it, so they can be gettext msgids (marked with <code>N_()</code>).
+After a language change, <code>retranslate()</code> updates the texts in place (values and
+errors are kept, nested forms included):</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">form</span> <span class="o">=</span> <span class="n">custom_widgets</span><span class="o">.</span><span class="n">PydanticForm</span><span class="p">(</span><span class="n">FillParams</span><span class="p">,</span> <span class="n">translate</span><span class="o">=</span><span class="n">i18n</span><span class="o">.</span><span class="n">gettext</span><span class="p">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="o">...</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">i18n</span><span class="o">.</span><span class="n">set_language</span><span class="p">(</span><span class="s2">"de"</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">form</span><span class="o">.</span><span class="n">retranslate</span><span class="p">()</span>
+</span></code></pre></div>
+<p>Validation errors are shown below the field, model-level errors below the form.
 <code>get_value()</code> validates and returns the model (or <code>None</code>), <code>set_value()</code> takes a
 model instance or a dict.</p>
 <p><code>custom_widgets.PydanticDialog(model)</code> wraps the form with OK / Cancel; OK is
 enabled only while the input is valid.
-<code>PydanticDialog.get_model_instance(FillParams)</code> runs it modally.</p>
+<code>PydanticDialog.get_model_instance(FillParams)</code> runs it modally.
+It takes <code>translate</code> as well (also applied to the window title) and has
+<code>retranslate()</code>.</p>
 <h2 id="code-editor">Code editor</h2>
 <p><code>custom_widgets.CodeEditor</code> is a plain text editor with line numbers and Pygments
 syntax highlighting (<code>language="python"</code> by default):</p>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">editor</span> <span class="o">=</span> <span class="n">custom_widgets</span><span class="o">.</span><span class="n">CodeEditor</span><span class="p">()</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">editor</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>  <span class="c1"># keeps cursor / scroll position, undoable</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">editor</span><span class="o">.</span><span class="n">add_line_marker</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"SyntaxError: invalid syntax"</span><span class="p">)</span>  <span class="c1"># kind: error / warning / info</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">editor</span><span class="o">.</span><span class="n">set_line_markers</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="s2">"unused import"</span><span class="p">},</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"warning"</span><span class="p">)</span>  <span class="c1"># replace all markers</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">editor</span><span class="o">.</span><span class="n">clear_line_markers</span><span class="p">()</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">editor</span><span class="o">.</span><span class="n">set_read_only</span><span class="p">()</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">editor</span> <span class="o">=</span> <span class="n">custom_widgets</span><span class="o">.</span><span class="n">CodeEditor</span><span class="p">()</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">editor</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>  <span class="c1"># keeps cursor / scroll position, undoable</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">editor</span><span class="o">.</span><span class="n">add_line_marker</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"SyntaxError: invalid syntax"</span><span class="p">)</span>  <span class="c1"># kind: error / warning / info</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">editor</span><span class="o">.</span><span class="n">set_line_markers</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="s2">"unused import"</span><span class="p">},</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"warning"</span><span class="p">)</span>  <span class="c1"># replace all markers</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">editor</span><span class="o">.</span><span class="n">clear_line_markers</span><span class="p">()</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">editor</span><span class="o">.</span><span class="n">set_read_only</span><span class="p">()</span>
 </span></code></pre></div>
 <p>Marked lines are tinted; hovering them (or their line number) shows the messages.</p>
+<h2 id="command-palette">Command palette</h2>
+<p><code>custom_widgets.CommandPalette</code> is a frameless popup with a fuzzy-filtered list of
+<code>QAction</code>s (Enter triggers the selected one, Escape closes it):</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">palette</span> <span class="o">=</span> <span class="n">custom_widgets</span><span class="o">.</span><span class="n">CommandPalette</span><span class="p">()</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">palette</span><span class="o">.</span><span class="n">install_to</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">window</span><span class="o">.</span><span class="n">add_shortcut</span><span class="p">(</span><span class="s2">"Ctrl+Shift+P"</span><span class="p">,</span> <span class="n">palette</span><span class="o">.</span><span class="n">show</span><span class="p">)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">palette</span><span class="o">.</span><span class="n">add_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>  <span class="c1"># append</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">palette</span><span class="o">.</span><span class="n">set_actions</span><span class="p">(</span><span class="n">other_actions</span><span class="p">)</span>  <span class="c1"># replace all (e.g. after the registry changed)</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">palette</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">palette</span><span class="o">.</span><span class="n">get_actions</span><span class="p">()</span>
+</span></code></pre></div>
+<p>Action texts are read when the list is shown; after re-texting actions (language
+change), call <code>set_actions(palette.get_actions())</code> to refresh the list.</p>
 
 
 
