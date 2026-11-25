@@ -81,8 +81,8 @@ docs = [
   "mkdocs",
   "mkdocs-glightbox",
   "mkdocs-material",
-  "mkdocs_mknodes",
   "mkdocstrings[python]",
+  "mknodes>=4.0.0; python_full_version >= '3.13'",
   "pymdown-extensions",
 ]
 lint = [
@@ -102,6 +102,9 @@ exclude_lines = [
   "except ImportError",
   'if __name__ == "__main__":',
 ]
+
+[tool.mknodes]
+build-fn = "prettyqt.docs.gen_pages:build"
 
 [tool.mypy]
 python_version = "3.12"

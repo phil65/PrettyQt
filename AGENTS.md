@@ -72,7 +72,7 @@ uv run pytest --doctest-modules           # CI's PySide6 run
 QT_API=pyside6 uv run pytest              # force a binding when both are installed
 uv run ruff check . && uv run ruff format --check .
 uv run mypy prettyqt/                     # duty lint_check; not enforced in CI
-uv run mkdocs-mknodes build               # docs (slow: generates a page per class)
+uv run mknodes build               # docs (slow: generates a page per class)
 uv build
 ```
 

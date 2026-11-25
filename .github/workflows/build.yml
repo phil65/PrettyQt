@@ -83,7 +83,7 @@ jobs:
         with:
           run: |
             uv sync --extra pyside6 --extra addons
-            uv run mkdocs-mknodes build
+            uv run mknodes build
 
   deploy:
     # Linux like the "Create documentation" step of the build job:
@@ -134,7 +134,7 @@ jobs:
         timeout-minutes: 40
         with:
           run: |
-            uv run mkdocs-mknodes build
+            uv run mknodes build
 
       # - name: Publish package on GitHub
       #   # if: github.event_name == 'push'
