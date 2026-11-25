@@ -421,3 +421,17 @@ def test_proxifier_reshape_methods(qapp):
     # source changes must reach the (source_model kwarg constructed) proxies.
     table.model().sourceModel().setData(table.model().sourceModel().index(0, 0), 7)
     assert proxy.index(0, 1).data() == 7  # noqa: PLR2004
+
+
+def test_nesteditem_parent_links():
+    root = itemmodels.NestedItem()
+    child = itemmodels.NestedItem()
+    root.append_child(child)
+    assert child.parent is root
+    assert not hasattr(child, "parent_item")
+    a, b = itemmodels.NestedItem(), itemmodels.NestedItem()
+    root.insert_children(0, [a, b])
+    assert a.parent is root
+    assert b.parent is root
+    assert [c.row() for c in root.children] == [0, 1, 2]
+    assert not hasattr(a, "parent_item")

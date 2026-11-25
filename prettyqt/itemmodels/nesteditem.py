@@ -34,13 +34,13 @@ class NestedItem:
         self.children.extend(children)
 
     def append_child(self, item: Self):
-        item.parent_item = self
+        item.parent = self
         self.children.append(item)
 
     def insert_children(self, idx: int, items: Sequence[Self]):
         self.children[idx:idx] = items
         for item in items:
-            item.parent_item = self
+            item.parent = self
 
     def child(self, row: int) -> Self:
         return self.children[row]
