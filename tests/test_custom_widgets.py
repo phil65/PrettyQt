@@ -49,6 +49,27 @@ def test_elidedlabel(qtbot):
 #     widget.show()
 
 
+def test_commandpalette(qtbot):
+    palette = custom_widgets.CommandPalette()
+    qtbot.addWidget(palette)
+    first = [gui.Action(text="Open"), gui.Action(text="Save")]
+    palette.add_actions(first)
+    assert palette.get_actions() == first
+    proxy = palette._table._proxy
+    assert proxy.rowCount() == 2  # noqa: PLR2004
+    second = [gui.Action(text="Filter rows")]
+    palette.set_actions(second)
+    assert palette.get_actions() == second
+    assert proxy.rowCount() == 1
+    assert proxy.index(0, 0).data() == "Filter rows"
+    second[0].setText("Zeilen filtern")
+    palette.set_actions(palette.get_actions())
+    assert proxy.index(0, 0).data() == "Zeilen filtern"
+    palette.clear()
+    assert palette.get_actions() == []
+    assert proxy.rowCount() == 0
+
+
 def test_colorchooserbutton(qtbot):
     btn = custom_widgets.ColorChooserButton()
     qtbot.addWidget(btn)

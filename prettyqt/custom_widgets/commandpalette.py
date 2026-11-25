@@ -10,7 +10,7 @@ from prettyqt.utils import colors
 
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Iterable
 
     from prettyqt.utils import datatypes
 
@@ -158,8 +158,21 @@ class CommandPalette(widgets.Widget):
     #     self.hide()
     #     return super().focusOutEvent(a0)
 
-    def add_actions(self, actions: Sequence[gui.QAction]):
+    def add_actions(self, actions: Iterable[gui.QAction]):
+        """Append actions to the palette."""
         self._table._model.add_items(actions)
+
+    def set_actions(self, actions: Iterable[gui.QAction]):
+        """Replace all actions of the palette (also refreshes changed action texts)."""
+        self._table._model.set_list(list(actions))
+
+    def get_actions(self) -> list[gui.QAction]:
+        """Return the actions of the palette."""
+        return list(self._table._model.items)
+
+    def clear(self):
+        """Remove all actions from the palette."""
+        self.set_actions([])
 
     def show(self):
         self._line.setText("")

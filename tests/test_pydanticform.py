@@ -307,3 +307,86 @@ def test_dialog(qtbot):
     dialog.accept()
     assert dialog.is_accepted()
     assert dialog.get_value() == Validated(text="fine")
+
+
+class Translated(pydantic.BaseModel):
+    model_config = pydantic.ConfigDict(title="Settings")
+
+    name: str = pydantic.Field("x", title="Name", description="The name")
+    how: str | None = pydantic.Field(
+        "l", title="Join", json_schema_extra={"mapping": {"l": "Left", "r": "Right"}}
+    )
+    plain_value: int = 1
+    inner: Inner = pydantic.Field(Inner(), title="Inner part")
+
+
+class Catalog:
+    """Stand-in for a gettext catalog with a switchable language."""
+
+    def __init__(self):
+        self.lang = "en"
+        self.de = {
+            "Name": "Name (de)",
+            "The name": "Der Name",
+            "Join": "Verbinden",
+            "Left": "Links",
+            "Right": "Rechts",
+            "Inner part": "Innerer Teil",
+            "Settings": "Einstellungen",
+        }
+
+    def __call__(self, text: str) -> str:
+        return self.de.get(text, text) if self.lang == "de" else text
+
+
+def _label_texts(form: pf.PydanticForm) -> dict[str, str]:
+    return {name: label.text() for name, label in form._labels.items()}
+
+
+def test_translate_and_retranslate(qtbot):
+    catalog = Catalog()
+    catalog.lang = "de"
+    form = pf.PydanticForm(Translated, debounce_ms=0, translate=catalog)
+    qtbot.addWidget(form)
+    assert _label_texts(form) == {
+        "name": "Name (de)",
+        "how": "Verbinden",
+        "plain_value": "Plain value",
+    }
+    assert form._labels["name"].toolTip() == "Der Name"
+    assert form.get_editor("name").toolTip() == "Der Name"
+    combo = form.get_editor("how").editor
+    assert [combo.itemText(i) for i in range(combo.count())] == ["Links", "Rechts"]
+    assert form.get_editor("inner").title() == "Innerer Teil"
+
+    form.get_editor("name").set_value("kept")
+    form.get_editor("how").set_value("r")
+    edits = []
+    form.edited.connect(lambda: edits.append(1))
+    catalog.lang = "en"
+    form.retranslate()
+    assert _label_texts(form)["how"] == "Join"
+    assert form.get_editor("name").toolTip() == "The name"
+    assert [combo.itemText(i) for i in range(combo.count())] == ["Left", "Right"]
+    assert form.get_editor("inner").title() == "Inner part"
+    assert not edits
+    assert form.get_value() == Translated(name="kept", how="r")
+
+
+def test_no_translate_uses_texts_as_given(qtbot):
+    form = pf.PydanticForm(Translated, debounce_ms=0)
+    qtbot.addWidget(form)
+    form.retranslate()
+    assert _label_texts(form)["how"] == "Join"
+    assert form.get_editor("inner").title() == "Inner part"
+
+
+def test_dialog_translate(qtbot):
+    catalog = Catalog()
+    dialog = pf.PydanticDialog(Translated, translate=catalog)
+    qtbot.addWidget(dialog)
+    assert dialog.windowTitle() == "Settings"
+    catalog.lang = "de"
+    dialog.retranslate()
+    assert dialog.windowTitle() == "Einstellungen"
+    assert dialog.form._labels["name"].text() == "Name (de)"

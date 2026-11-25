@@ -60,6 +60,18 @@ and selected with `json_schema_extra={"widget": "column"}`; a factory gets
 `set_value()` and a `value_changed` signal.
 
 Labels come from `title` (fallback: the field name), tooltips from `description`.
+To translate them, pass a translation function: titles, descriptions and `mapping`
+labels go through it, so they can be gettext msgids (marked with `N_()`).
+After a language change, `retranslate()` updates the texts in place (values and
+errors are kept, nested forms included):
+
+```py
+form = custom_widgets.PydanticForm(FillParams, translate=i18n.gettext)
+...
+i18n.set_language("de")
+form.retranslate()
+```
+
 Validation errors are shown below the field, model-level errors below the form.
 `get_value()` validates and returns the model (or `None`), `set_value()` takes a
 model instance or a dict.
@@ -67,6 +79,8 @@ model instance or a dict.
 `custom_widgets.PydanticDialog(model)` wraps the form with OK / Cancel; OK is
 enabled only while the input is valid.
 `PydanticDialog.get_model_instance(FillParams)` runs it modally.
+It takes `translate` as well (also applied to the window title) and has
+`retranslate()`.
 
 ## Code editor
 
@@ -83,3 +97,21 @@ editor.set_read_only()
 ```
 
 Marked lines are tinted; hovering them (or their line number) shows the messages.
+
+## Command palette
+
+`custom_widgets.CommandPalette` is a frameless popup with a fuzzy-filtered list of
+`QAction`s (Enter triggers the selected one, Escape closes it):
+
+```py
+palette = custom_widgets.CommandPalette()
+palette.install_to(window)
+window.add_shortcut("Ctrl+Shift+P", palette.show)
+palette.add_actions(actions)  # append
+palette.set_actions(other_actions)  # replace all (e.g. after the registry changed)
+palette.clear()
+palette.get_actions()
+```
+
+Action texts are read when the list is shown; after re-texting actions (language
+change), call `set_actions(palette.get_actions())` to refresh the list.

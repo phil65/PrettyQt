@@ -23,6 +23,10 @@ Widget selection and UI hints come from the field's `json_schema_extra`:
 
 Hint values end up in the model's JSON schema, so keep them JSON-serializable.
 
+Translation: pass `translate` (e.g. a gettext function) to translate field titles,
+descriptions and `mapping` labels; they can then be marked as msgids (`N_()`).
+`retranslate()` re-applies it after a language change.
+
 All widget code runs on the GUI thread; `value_changed` is emitted on the GUI thread.
 """
 
@@ -60,6 +64,9 @@ STRING_LIST_ORIGINS = (list, tuple, set, frozenset, Sequence)
 #
 # The widget must provide `get_value()`, `set_value(value)` and a `value_changed` signal.
 WidgetFactory = Callable[[str, FieldInfo, Mapping[str, Any]], widgets.QWidget]
+
+# Translation function for user-visible texts (msgid -> translated text).
+Translator = Callable[[str], str]
 
 
 @dataclasses.dataclass(frozen=True)
@@ -189,6 +196,12 @@ class ChoiceEditor(widgets.ComboBox):
 
     def _index_changed(self, index: int):
         self.value_changed.emit(self.get_value())
+
+    def set_labels(self, labels: Sequence[str]):
+        """Replace the item labels (same order as the choices); keeps the value."""
+        with self.signals_blocked():
+            for i, label in enumerate(labels):
+                self.setItemText(i, label)
 
     def get_value(self) -> Any:
         idx = self.currentIndex()
@@ -344,13 +357,19 @@ class ModelEditor(widgets.GroupBox):
         title: str = "",
         optional: bool = False,
         widget_factories: Mapping[str, WidgetFactory] | None = None,
+        translate: Translator | None = None,
     ):
         super().__init__(title=title)
         self.setCheckable(optional)
         if optional:
             self.setChecked(False)
         layout = self.set_layout("vertical")
-        self.form = PydanticForm(model, debounce_ms=0, widget_factories=widget_factories)
+        self.form = PydanticForm(
+            model,
+            debounce_ms=0,
+            widget_factories=widget_factories,
+            translate=translate,
+        )
         self.form._auto_validate = False
         self.form.set_margin(0)
         self.form.edited.connect(self._on_change)
@@ -386,7 +405,9 @@ class PydanticForm(widgets.Widget):
     See the module docstring for the `json_schema_extra` UI hints.
 
     Labels come from the field's `title` (fallback: the field name), tooltips from
-    `description`; both are used as given (pass translated strings).
+    `description`. With `translate`, titles, descriptions and `mapping` labels are
+    passed through it (the name fallback and `Literal` / `Enum` values are not);
+    call `retranslate()` after a language change.
 
     Signals (all emitted on the GUI thread; the widget must only be used from it):
 
@@ -407,6 +428,7 @@ class PydanticForm(widgets.Widget):
         *,
         debounce_ms: int = 200,
         widget_factories: Mapping[str, WidgetFactory] | None = None,
+        translate: Translator | None = None,
         parent: widgets.QWidget | None = None,
         **kwargs: Any,
     ):
@@ -418,6 +440,8 @@ class PydanticForm(widgets.Widget):
                          0 validates synchronously on every edit.
             widget_factories: named editor factories, selected with the
                               `widget` hint (e.g. a column chooser)
+            translate: translation function applied to titles, descriptions and
+                       `mapping` labels (e.g. `gettext`)
             parent: parent widget
             kwargs: passed to `widgets.Widget`
         """
@@ -427,7 +451,10 @@ class PydanticForm(widgets.Widget):
             type(instance) if instance is not None else model  # type: ignore[assignment]
         )
         self._factories: dict[str, WidgetFactory] = dict(widget_factories or {})
+        self._translate = translate
+        self._specs: dict[str, FieldSpec] = {}
         self._editors: dict[str, widgets.QWidget] = {}
+        self._labels: dict[str, widgets.Label] = {}
         self._error_labels: dict[str, widgets.Label] = {}
         self._kept_values: dict[str, Any] = {}
         self._errors: dict[str, str] = {}
@@ -463,34 +490,68 @@ class PydanticForm(widgets.Widget):
         label.hide()
         return label
 
+    def _tr(self, text: str) -> str:
+        return self._translate(text) if self._translate is not None else text
+
+    def _title(self, spec: FieldSpec) -> str:
+        if spec.info.title:
+            return self._tr(spec.info.title)
+        return spec.name.replace("_", " ").capitalize()
+
     def _add_field(self, spec: FieldSpec):
         hints = spec.hints
         if hints.get("hidden"):
             return
-        title = spec.info.title or spec.name.replace("_", " ").capitalize()
         editor = self.create_editor(spec)
         if hints.get("readonly") or spec.info.frozen:
             editor.setEnabled(False)
-        if spec.info.description:
-            editor.setToolTip(spec.info.description)
         editor.setObjectName(spec.name)
         editor.value_changed.connect(self._on_edit)
+        self._specs[spec.name] = spec
         self._editors[spec.name] = editor
         error_label = self._make_error_label()
         self._error_labels[spec.name] = error_label
         if isinstance(editor, ModelEditor):
             self._layout.addRow(editor)
             self._layout.addRow(error_label)
+        else:
+            container = widgets.Widget()
+            box = container.set_layout("vertical", margin=0, spacing=2)
+            box.add(editor)
+            box.add(error_label)
+            label = widgets.Label()
+            label.setBuddy(editor)
+            self._labels[spec.name] = label
+            self._layout.addRow(label, container)
+        self._apply_texts(spec)
+
+    def _apply_texts(self, spec: FieldSpec):
+        """Set the (translated) label, tooltips and choice labels of a field."""
+        editor = self._editors[spec.name]
+        title = self._title(spec)
+        description = self._tr(spec.info.description) if spec.info.description else ""
+        editor.setToolTip(description)
+        if (label := self._labels.get(spec.name)) is not None:
+            label.setText(title)
+            label.setToolTip(description)
+        if isinstance(editor, ModelEditor):
+            editor.setTitle(title)
+            editor.form.retranslate()
             return
-        container = widgets.Widget()
-        box = container.set_layout("vertical", margin=0, spacing=2)
-        box.add(editor)
-        box.add(error_label)
-        label = widgets.Label(title)
-        if spec.info.description:
-            label.setToolTip(spec.info.description)
-        label.setBuddy(editor)
-        self._layout.addRow(label, container)
+        inner = editor.editor if isinstance(editor, OptionalEditor) else editor
+        mapping = spec.hints.get("mapping")
+        if isinstance(inner, ChoiceEditor) and isinstance(mapping, Mapping):
+            labels = [self._tr(str(label)) for label in mapping.values()]
+            if len(labels) == inner.count():
+                inner.set_labels(labels)
+
+    def retranslate(self):
+        """Re-apply `translate` to all labels / tooltips (e.g. on language change).
+
+        Values and validation state are kept. Nested forms are retranslated too.
+        """
+        for spec in self._specs.values():
+            self._apply_texts(spec)
 
     def create_editor(self, spec: FieldSpec) -> widgets.QWidget:
         """Create the editor widget for a field (override to customize)."""
@@ -500,16 +561,13 @@ class PydanticForm(widgets.Widget):
             editor = self._factories[widget_name](spec.name, spec.info, hints)
             return OptionalEditor(editor) if spec.optional else editor
         if _is_model(spec.annotation) and widget_name is None:
-            title = spec.info.title or spec.name.replace("_", " ").capitalize()
-            editor = ModelEditor(
+            return ModelEditor(
                 spec.annotation,
-                title=title,
+                title=self._title(spec),
                 optional=spec.optional,
                 widget_factories=self._factories,
+                translate=self._translate,
             )
-            if spec.info.description:
-                editor.setToolTip(spec.info.description)
-            return editor
         editor = self._create_plain_editor(spec, widget_name)
         return OptionalEditor(editor) if spec.optional else editor
 
@@ -759,16 +817,32 @@ class PydanticDialog(widgets.Dialog):
         *,
         title: str | None = None,
         widget_factories: Mapping[str, WidgetFactory] | None = None,
+        translate: Translator | None = None,
         parent: widgets.QWidget | None = None,
         **kwargs: Any,
     ):
+        """Create the dialog.
+
+        Args:
+            model: model class, or an instance whose values are loaded
+            title: window title (default: the model's `title` config, else its name)
+            widget_factories: named editor factories (see `PydanticForm`)
+            translate: translation function for the title and the form texts
+            parent: parent widget
+            kwargs: passed to `widgets.Dialog`
+        """
         super().__init__(parent=parent, **kwargs)
         model_cls = type(model) if isinstance(model, pydantic.BaseModel) else model
-        self.setWindowTitle(
-            title or model_cls.model_config.get("title") or model_cls.__name__
-        )
+        self._title = title or model_cls.model_config.get("title")
+        self._model_name = model_cls.__name__
+        self._translate = translate
         layout = self.set_layout("vertical")
-        self.form = PydanticForm(model, debounce_ms=0, widget_factories=widget_factories)
+        self.form = PydanticForm(
+            model,
+            debounce_ms=0,
+            widget_factories=widget_factories,
+            translate=translate,
+        )
         layout.add(self.form)
         self.button_box = widgets.DialogButtonBox.create(
             ok=self.accept, cancel=self.reject
@@ -777,6 +851,20 @@ class PydanticDialog(widgets.Dialog):
         self.form.errors_changed.connect(self._on_errors_changed)
         self.form.get_value()
         self._on_errors_changed(self.form.get_errors())
+        self._apply_title()
+
+    def _apply_title(self):
+        if not self._title:
+            self.setWindowTitle(self._model_name)
+        elif self._translate is not None:
+            self.setWindowTitle(self._translate(self._title))
+        else:
+            self.setWindowTitle(self._title)
+
+    def retranslate(self):
+        """Re-apply `translate` to the window title and the form texts."""
+        self._apply_title()
+        self.form.retranslate()
 
     def _on_errors_changed(self, errors: Mapping[str, str]):
         self.button_box["ok"].setEnabled(not errors)
