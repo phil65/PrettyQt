@@ -35,7 +35,7 @@ class FileChooserButton(widgets.Widget):
         """
         super().__init__(object_name=object_name, **kwargs)
         self._path: pathlib.Path | None = None
-        self._extensions = extensions or []
+        self._extensions: dict[str, list[str]] = extensions or {}
         self.mode = mode
         self.file_mode = file_mode
         self.root = root
@@ -88,10 +88,10 @@ class FileChooserButton(widgets.Widget):
     def set_value(self, value: datatypes.PathType | None):
         self.set_path(value)
 
-    def get_extensions(self) -> list[str]:
+    def get_extensions(self) -> dict[str, list[str]]:
         return self._extensions
 
-    def set_extensions(self, extensions: list[str]):
+    def set_extensions(self, extensions: dict[str, list[str]]):
         self._extensions = extensions
 
     # path = core.Property(object, get_value, set_value)

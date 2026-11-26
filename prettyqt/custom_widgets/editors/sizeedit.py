@@ -1,10 +1,5 @@
-from typing import TYPE_CHECKING
-
 from prettyqt import core, widgets
-
-
-if TYPE_CHECKING:
-    from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes
 
 
 class SizeEdit(widgets.Widget):
@@ -29,16 +24,15 @@ class SizeEdit(widgets.Widget):
 
     def get_value(self) -> core.Size:
         return core.Size(
-            self.spinbox_width.get_value(),
-            self.spinbox_height.get_value(),
+            self.spinbox_width.value(),
+            self.spinbox_height.value(),
         )
 
     def set_value(self, value: datatypes.SizeType):
-        if isinstance(value, tuple):
-            value = core.Size(*value)
-        self._value = value
-        self.spinbox_width.set_value(value.width())
-        self.spinbox_height.set_value(value.height())
+        size = datatypes.to_size(value)
+        self._value = size
+        self.spinbox_width.set_value(size.width())
+        self.spinbox_height.set_value(size.height())
 
     value = core.Property(
         core.Size,

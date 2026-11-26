@@ -22,16 +22,15 @@ class KeyCombinationEdit(widgets.WidgetMixin, widgets.QKeySequenceEdit):
         self.value_changed.emit(val[0])
 
     def set_value(self, value: datatypes.KeyCombinationType):
-        if not isinstance(value, gui.QKeySequence):
-            value = gui.KeySequence(value)
-        if len(value) == 0:
+        seq = value if isinstance(value, gui.KeySequence) else gui.KeySequence(value)
+        if seq.count() == 0:
             self.clear()
         else:
-            self.setKeySequence(gui.KeySequence(value[0]))
+            self.setKeySequence(gui.KeySequence(seq[0]))
 
     def get_value(self) -> str:
-        seq = self.keySequence()
-        return seq[0].toString() if seq.count() > 0 else ""
+        seq = gui.KeySequence(self.keySequence())
+        return gui.KeySequence(seq[0]).toString() if seq.count() > 0 else ""
 
     def is_valid(self) -> bool:
         return True

@@ -28,9 +28,9 @@ class RangeEdit(widgets.Widget):
 
     def get_value(self) -> range:
         return range(
-            self.spinbox_start.get_value(),
-            self.spinbox_stop.get_value(),
-            self.spinbox_step.get_value(),
+            self.spinbox_start.value(),
+            self.spinbox_stop.value(),
+            self.spinbox_step.value(),
         )
 
     def set_value(self, value: range | tuple[int, int, int]):

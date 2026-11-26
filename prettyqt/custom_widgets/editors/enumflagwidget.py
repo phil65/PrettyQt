@@ -1,5 +1,5 @@
 import enum
-from typing import cast
+from enum import Flag
 
 from prettyqt import core, gui, widgets
 
@@ -8,23 +8,29 @@ class EnumFlagWidget(widgets.ToolButton):
     value_changed = core.Signal(enum.Flag)
 
     def __init__(self, *args, object_name: str = "enum_flag_widget", **kwargs):
-        self._enum_class = None
-        self._action_map = {}
+        self._enum_class: type[enum.Flag] | None = None
+        self._action_map: dict[enum.Flag, gui.Action] = {}
         self.button_menu = widgets.Menu(triggered=self._on_menu_click)
         super().__init__(*args, object_name=object_name, **kwargs)
         self.setMenu(self.button_menu)
         self.set_popup_mode("instant")
 
     def _on_menu_click(self):
-        values = []
         value = self.get_value()
+        if self._enum_class is None or value is None:
+            return
+        values = []
         for i in self._enum_class.__members__.values():
             if i.value == 0:
                 continue
             # self._action_map[i].setChecked(value & i == i)
             if value & i == i:
                 values.append(i)
-        text = " | ".join(i.name for i in values) if values else self._enum_class(0).name
+        text = (
+            " | ".join(i.name for i in values if i.name)
+            if values
+            else (self._enum_class(0).name or "")
+        )
         self.set_text(text)
         self.value_changed.emit(value)
 
@@ -32,21 +38,25 @@ class EnumFlagWidget(widgets.ToolButton):
         self._action_map = {}
         self.button_menu.clear()
 
-    def _set_enum_class(self, enum: enum.EnumMeta | None):
+    def _set_enum_class(self, enum: type[enum.Enum] | None):
         """Set enum class from which members value should be selected."""
         if enum == self._enum_class:
             return
+        if enum is not None and not issubclass(enum, Flag):
+            raise TypeError(enum)
         self._enum_class = enum
         self.clear()
-        for i in self._enum_class.__members__.values():
+        if self._enum_class is None:
+            return
+        for name, i in self._enum_class.__members__.items():
             if i.value == 0:
                 continue
-            action = gui.Action(text=i.name.replace("_", " "), checkable=True)
+            action = gui.Action(text=name.replace("_", " "), checkable=True)
             action.setData(i)
             self._action_map[i] = action
             self.button_menu.add(action)
 
-    def get_enum_class(self) -> enum.EnumMeta | None:
+    def get_enum_class(self) -> type[enum.Flag] | None:
         """Return current Enum class."""
         return self._enum_class
 
@@ -54,7 +64,7 @@ class EnumFlagWidget(widgets.ToolButton):
         """Current value as Enum member."""
         if self._enum_class is None:
             return None
-        flag = cast("enum.Flag", self._enum_class(0))
+        flag = self._enum_class(0)
         for k, v in self._action_map.items():
             if v.isChecked():
                 flag |= k
@@ -63,9 +73,16 @@ class EnumFlagWidget(widgets.ToolButton):
     def set_value(self, value: enum.Flag) -> None:
         """Set value with Enum."""
         if not isinstance(value, enum.Flag):
+            if self._enum_class is None:
+                msg = (
+                    "setValue(self, Enum): argument 1 has unexpected type "
+                    f"{type(value).__name__!r}"
+                )
+                raise TypeError(msg)
             value = self._enum_class(value)
         self._set_enum_class(value.__class__)
-        if not isinstance(value, self._enum_class):
+        enum_cls = self._enum_class
+        if enum_cls is None or not isinstance(value, enum_cls):
             msg = (
                 "setValue(self, Enum): argument 1 has unexpected type "
                 f"{type(value).__name__!r}"
@@ -73,13 +90,17 @@ class EnumFlagWidget(widgets.ToolButton):
             raise TypeError(msg)
         # this filter shouldnt be needed, see https://bugreports.qt.io/browse/PYSIDE-2369
         values = []
-        for i in self._enum_class.__members__.values():
+        for i in enum_cls.__members__.values():
             if i.value == 0:
                 continue
             if value & i == i:
                 self._action_map[i].setChecked(True)
                 values.append(i)
-        text = " | ".join(i.name for i in values) if values else self._enum_class(0).name
+        text = (
+            " | ".join(i.name for i in values if i.name)
+            if values
+            else (enum_cls(0).name or "")
+        )
         self.set_text(text)
 
     value = core.Property(

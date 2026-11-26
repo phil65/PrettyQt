@@ -26,7 +26,9 @@ class SelectionWidget(widgets.GroupBox):
     ):
         super().__init__(title=label, object_name=object_name, **kwargs)
         self.set_layout(layout)
-        self.widget_custom: widgets.Widget | None = None
+        self.widget_custom: (
+            widgets.LineEdit | widgets.SpinBox | widgets.DoubleSpinBox | None
+        ) = None
         self.rb_other = widgets.RadioButton()
         self.buttons: dict[widgets.RadioButton, Any] = {}
 
@@ -75,29 +77,39 @@ class SelectionWidget(widgets.GroupBox):
         default: float | str | None = None,
         regex: str | None = None,
     ):
+        widget: widgets.LineEdit | widgets.SpinBox | widgets.DoubleSpinBox
         match typ:
             case "string":
-                self.widget_custom = widgets.LineEdit()
+                widget = widgets.LineEdit()
+                if default is not None:
+                    if not isinstance(default, str):
+                        raise TypeError(default)
+                    widget.set_value(default)
+                if regex:
+                    widget.set_regex_validator(regex)
             case "int":
-                self.widget_custom = widgets.SpinBox()
+                widget = widgets.SpinBox()
+                if default is not None:
+                    if not isinstance(default, int):
+                        raise TypeError(default)
+                    widget.set_value(default)
             case "float":
-                self.widget_custom = widgets.DoubleSpinBox()
+                widget = widgets.DoubleSpinBox()
+                if default is not None:
+                    if not isinstance(default, int | float):
+                        raise TypeError(default)
+                    widget.set_value(default)
             case _:
                 raise ValueError(typ)
+        self.widget_custom = widget
         # TODO: Enable this or add BAR radio and option.
-        self.widget_custom.set_disabled()  # type: ignore
-        if default is not None:
-            self.widget_custom.set_value(default)  # type: ignore
+        widget.set_disabled()
         self.rb_other.setText(label)
-        self.rb_other.toggled.connect(self.widget_custom.set_enabled)  # type: ignore
-        self.widget_custom.value_changed.connect(  # type: ignore
-            lambda: self.update_choice(True)
-        )
-        if regex and typ == "string":
-            self.widget_custom.set_regex_validator(regex)  # type: ignore
+        self.rb_other.toggled.connect(widget.set_enabled)
+        widget.value_changed.connect(lambda: self.update_choice(True))
         layout = widgets.HBoxLayout()
         layout.add(self.rb_other)
-        layout.add(self.widget_custom)
+        layout.add(widget)
         self.box.add(layout)
 
     def current_choice(self) -> Any:

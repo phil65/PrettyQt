@@ -15,6 +15,8 @@ class CursorEdit(custom_widgets.EnumComboBox):
 
     def get_value(self) -> gui.Cursor:
         shape = super().get_value()
+        if not isinstance(shape, constants.CursorShape):
+            return gui.Cursor()
         return gui.Cursor(shape)
 
     def set_value(self, value: gui.Cursor):

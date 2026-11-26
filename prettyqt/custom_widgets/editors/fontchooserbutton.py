@@ -12,7 +12,7 @@ class FontChooserButton(widgets.Widget):
         **kwargs,
     ):
         super().__init__(object_name=object_name, **kwargs)
-        self._current_font = None
+        self._current_font: gui.QFont
         layout = self.set_layout("horizontal", margin=0)
         self.lineedit = widgets.LineEdit(read_only=True)
         self.set_current_font(font)

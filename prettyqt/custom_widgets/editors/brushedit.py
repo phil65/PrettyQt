@@ -44,8 +44,11 @@ class BrushEdit(widgets.Widget):
             self.set_current_brush(new_color)
             self.value_changed.emit(new_color)
 
-    def set_current_brush(self, color: datatypes.ColorType):
-        self._current_brush = gui.QBrush(colors.get_color(color))
+    def set_current_brush(self, color: datatypes.ColorAndBrushType):
+        if isinstance(color, gui.QBrush):
+            self._current_brush = gui.QBrush(color)
+        else:
+            self._current_brush = gui.QBrush(colors.get_color(color))
         self.lineedit.set_text(self._current_brush.color().name().upper())
         icon = iconprovider.for_color(self._current_brush)
         self.button.set_icon(icon)
@@ -56,7 +59,7 @@ class BrushEdit(widgets.Widget):
     def get_value(self) -> gui.QBrush:
         return gui.QBrush(self._current_brush)
 
-    def set_value(self, value: datatypes.ColorType):
+    def set_value(self, value: datatypes.ColorAndBrushType):
         self.set_current_brush(value)
 
     current_brush = core.Property(

@@ -1,12 +1,14 @@
 import enum
 import re
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, ClassVar, cast
 
 from prettyqt import core, custom_widgets, widgets
 
 
 if TYPE_CHECKING:
     from re import Pattern
+
+    from prettyqt import validators
 
 
 class RegexFlag(enum.IntEnum):
@@ -55,7 +57,7 @@ class RegexInput(widgets.Widget):
         self.label_error = widgets.Label()
         self.label_error.set_color("highlight_role")
         self.lineedit = custom_widgets.RegexLineEdit()
-        val = self.lineedit.validator
+        val = cast("validators.RegexPatternValidator", self.lineedit.validator)
         val.error_occured.connect(self.label_error.set_text)
         val.pattern_updated.connect(self.value_changed)
         self.tb_flags = custom_widgets.BoolDictToolButton(

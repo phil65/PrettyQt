@@ -39,7 +39,7 @@ class InputAndSlider(widgets.Widget):
         self.slider.set_range(min_val, max_val)
 
     def get_value(self) -> int:
-        return self.spinbox.get_value()
+        return self.spinbox.value()
 
     def set_value(self, value: int):
         self.spinbox.set_value(value)

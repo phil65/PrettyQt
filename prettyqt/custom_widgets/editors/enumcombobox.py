@@ -1,13 +1,9 @@
 # credits to SuperQt (https://github.com/pyapp-kit/superqt)
 
 import enum
-from typing import TypeVar
 
 from prettyqt import core, widgets
 from prettyqt.utils import get_repr
-
-
-EnumType = TypeVar("EnumType", bound=enum.Enum)
 
 
 NONE_STRING = "----"
@@ -21,10 +17,10 @@ class EnumComboBox(widgets.ComboBox):
     """
 
     # current_enum_changed = core.Signal(object)
-    value_changed = core.Signal(enum.Enum)
+    value_changed = core.Signal(object)
 
     def __init__(self, value=None, object_name: str = "enum_combobox", **kwargs):
-        self._enum_class = None
+        self._enum_class: type[enum.Enum] | None = None
         self._allow_none = False
         super().__init__(object_name=object_name, **kwargs)
         if value is not None:
@@ -40,18 +36,20 @@ class EnumComboBox(widgets.ComboBox):
     def is_none_allowed(self) -> bool:
         return self._allow_none
 
-    def _set_enum_class(self, enum: enum.EnumMeta | None):
+    def _set_enum_class(self, enum: type[enum.Enum] | None):
         """Set enum class from which members value should be selected."""
         if enum == self._enum_class:
             return
         self._enum_class = enum
         super().clear()
-        if self._allow_none and enum is not None:
+        if self._enum_class is None:
+            return
+        if self._allow_none:
             super().addItem(NONE_STRING)
         items = [i.name.replace("_", " ") for i in self._enum_class.__members__.values()]
         super().addItems(items)
 
-    def get_enum_class(self) -> enum.EnumMeta | None:
+    def get_enum_class(self) -> type[enum.Enum] | None:
         """Return current Enum class."""
         return self._enum_class
 
@@ -64,7 +62,7 @@ class EnumComboBox(widgets.ComboBox):
         self._allow_none = False
         super().clear()
 
-    def get_value(self) -> EnumType | None:
+    def get_value(self) -> enum.Enum | None:
         """Current value as Enum member."""
         if self._enum_class is None:
             return None
@@ -74,7 +72,7 @@ class EnumComboBox(widgets.ComboBox):
         is_none = self.currentText() == NONE_STRING
         return None if is_none else class_members[self.currentIndex() - 1]
 
-    def set_value(self, value: EnumType | None) -> None:
+    def set_value(self, value: enum.Enum | None) -> None:
         """Set value with Enum."""
         if value is None:
             if not self._allow_none:
@@ -82,6 +80,8 @@ class EnumComboBox(widgets.ComboBox):
             self.setCurrentIndex(0)
             return
         if not isinstance(value, enum.Enum):
+            if self._enum_class is None:
+                raise ValueError(value)
             value = self._enum_class(value)
         self._set_enum_class(value.__class__)
         self.setCurrentText(value.name.replace("_", " "))

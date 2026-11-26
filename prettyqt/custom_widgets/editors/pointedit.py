@@ -26,14 +26,15 @@ class PointEdit(widgets.Widget):
 
     def get_value(self) -> core.Point:
         return core.Point(
-            self.spinbox_x.get_value(),
-            self.spinbox_y.get_value(),
+            self.spinbox_x.value(),
+            self.spinbox_y.value(),
         )
 
     def set_value(self, value: datatypes.PointType):
-        self._value = datatypes.to_point(value)
-        self.spinbox_x.set_value(value.x())
-        self.spinbox_y.set_value(value.y())
+        point = datatypes.to_point(value)
+        self._value = point
+        self.spinbox_x.set_value(point.x())
+        self.spinbox_y.set_value(point.y())
 
     value = core.Property(
         core.Point,
