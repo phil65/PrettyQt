@@ -1,4 +1,10 @@
-"""Provides Qt init stuff."""
+"""Provides Qt init stuff.
+
+Type checking: each `prettyqt.qt.Qt<Module>` star-imports one binding chosen at runtime.
+For type checkers, those modules import PySide6 only (an `if TYPE_CHECKING:` branch in
+front): both bindings expose the same Qt API, and checking against the union of both stub
+sets makes ty take minutes and gigabytes of memory. So ty needs PySide6 installed.
+"""
 
 import os
 import sys

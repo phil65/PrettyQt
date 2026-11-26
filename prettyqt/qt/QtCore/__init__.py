@@ -2,6 +2,8 @@
 
 import datetime
 
+from typing import TYPE_CHECKING
+
 from prettyqt.qt import PYQT6, PYSIDE6
 from prettyqt.utils import get_repr
 
@@ -20,7 +22,12 @@ def to_time(self) -> datetime.time:
     return self.toPyTime()
 
 
-if PYQT6:
+# Type checkers see PySide6 only (see prettyqt/qt/__init__.py).
+if TYPE_CHECKING:
+    from PySide6.QtCore import *  # type: ignore
+    from PySide6.QtCore import __version__  # type: ignore
+    from PySide6 import __version__ as BINDING_VERSION
+elif PYQT6:
     from PyQt6.QtCore import (
         QT_VERSION_STR,
         QT_VERSION_STR as __version__,
