@@ -294,24 +294,6 @@ class ApplicationMixin(gui.GuiApplicationMixin, _ApplicationBase):
         """
         return self.isEffectEnabled(constants.UI_EFFECTS[effect])
 
-    def set_navigation_mode(
-        self, mode: constants.NavigationModeStr | constants.NavigationMode
-    ):
-        """Set the navigation mode.
-
-        Args:
-            mode: navigation mode to use
-        """
-        self.setNavigationMode(constants.NAVIGATION_MODES.get_enum_value(mode))
-
-    def get_navigation_mode(self) -> constants.NavigationModeStr:
-        """Return navigation mode.
-
-        Returns:
-            navigation mode
-        """
-        return constants.NAVIGATION_MODES.inverse[self.navigationMode()]
-
     @classmethod
     def sleep(cls, secs: float):
         """Pause application (non-blocking).
