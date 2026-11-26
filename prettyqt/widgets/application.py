@@ -23,8 +23,6 @@ if TYPE_CHECKING:
         MutableMapping,
     )
 
-    from prettyqt.utils import listdelegators
-
 
 logger = logging.getLogger(__name__)
 
@@ -61,7 +59,7 @@ def setup_runner() -> asyncrunner.AsyncRunner:
             slot = _runner.to_sync(slot)
         return old_connect(self, slot, *args, **kwargs)
 
-    connect._prettyqt_wrapped = True  # type: ignore[attr-defined]
+    connect._prettyqt_wrapped = True  # ty: ignore[missing-attribute]
     try:
         SignalInstance.connect = connect
     except TypeError:  # binding does not allow patching its signal type
@@ -107,7 +105,7 @@ class ApplicationMixin(gui.GuiApplicationMixin, _ApplicationBase):
         root_logger.addHandler(handler)
         root_logger.setLevel(log_level)
         _original_excepthook = sys.excepthook
-        sys.excepthook = ErrorMessageBox._excepthook
+        sys.excepthook = ErrorMessageBox._excepthook  # ty: ignore[invalid-assignment]
         eventfilter = debugmode.DebugMode(self)
         self._debug = True
         self.installEventFilter(eventfilter)
@@ -146,18 +144,16 @@ class ApplicationMixin(gui.GuiApplicationMixin, _ApplicationBase):
     @classmethod
     def widget_at(
         cls, pos: datatypes.PointType, typ: type | None = None
-    ) -> widgets.QWidget:
+    ) -> widgets.QWidget | None:
         if typ is None:
-            return super().widgetAt(pos)
+            return super().widgetAt(datatypes.to_point(pos))
         for widget in cls.widgets_at(pos):
             if isinstance(widget, typ):
                 return widget
         return None
 
     @classmethod
-    def widgets_at(
-        cls, pos: datatypes.PointType
-    ) -> listdelegators.ListDelegator[widgets.QWidget]:
+    def widgets_at(cls, pos: datatypes.PointType) -> list[widgets.QWidget]:
         """Return ALL widgets at `pos`.
 
         Arguments:
@@ -186,7 +182,7 @@ class ApplicationMixin(gui.GuiApplicationMixin, _ApplicationBase):
         if app is None:
             return None
         return next(
-            (w for w in app.topLevelWidgets() if isinstance(w, widgets.QMainWindow)),
+            (w for w in cls.topLevelWidgets() if isinstance(w, widgets.QMainWindow)),
             None,
         )
 
@@ -272,8 +268,8 @@ class ApplicationMixin(gui.GuiApplicationMixin, _ApplicationBase):
     ) -> gui.Icon:
         style = cls.style()
         # icon_size = style.pixelMetric(widgets.QStyle.PM_MessageBoxIconSize)
-        icon = style.standardIcon(widgets.style.STANDARD_PIXMAP.get_enum_value(icon))
-        return gui.Icon(icon)
+        pixmap = widgets.style.STANDARD_PIXMAP.get_enum_value(icon)
+        return gui.Icon(style.standardIcon(pixmap))
 
     def set_effect_enabled(
         self, effect: constants.UiEffectStr | constants.UIEffect, enabled: bool = True

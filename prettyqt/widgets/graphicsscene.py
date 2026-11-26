@@ -140,7 +140,7 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
 
     def add_line(
         self,
-        line: core.QLineF | core.QLine | tuple[float, float, float, float],
+        line: datatypes.LineFType,
         pen: gui.QPen | None = None,
     ) -> widgets.GraphicsLineItem:
         g_item = widgets.GraphicsLineItem(datatypes.to_linef(line))
@@ -255,7 +255,7 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
             for y in range(first_top, bottom, grid_size)
         ]
 
-    def drawBackground(self, painter: gui.QPainter, rect: core.QRect):
+    def drawBackground(self, painter: gui.QPainter, rect: core.QRectF):
         super().drawBackground(painter, rect)
 
         painter.save()
@@ -263,13 +263,13 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
         painter.setBrush(self.backgroundBrush())
 
         if self._grid_mode == self.GridType.DotGrid:
-            pen = gui.QPen(self.grid_color, self._pen_width)
+            pen = gui.QPen(self.get_grid_color(), self._pen_width)
             self._draw_dots(painter, rect, pen, self._grid_size)
 
         elif self._grid_mode == self.GridType.LineGrid:
             zoom = self._get_viewer_zoom()
             if zoom > -0.5:  # noqa: PLR2004
-                pen = gui.QPen(self.grid_color, self._pen_width)
+                pen = gui.QPen(self.get_grid_color(), self._pen_width)
                 self._draw_grid(painter, rect, pen, self._grid_size)
             color = self._bg_color.darker(150)
             if zoom < 0:

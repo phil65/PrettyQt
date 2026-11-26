@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Literal, Self, overload
+from typing import TYPE_CHECKING, Any, Literal, Self, cast, overload
 
 from prettyqt import constants, core, widgets
 from prettyqt.utils import bidict, datatypes, listdelegators
@@ -102,17 +102,20 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, _LayoutBase):
                     index += self.count()
                 if index < 0 or index >= self.count():
                     raise IndexError(index)
-                item = self.itemAt(index)
-                return i if (i := item.widget()) is not None else item.layout()
+                if (item := self.itemAt(index)) is None:
+                    raise IndexError(index)
+                widget = item.widget()
+                # None for spacer items, typed without it for convenience
+                return widget if widget is not None else item.layout()  # ty: ignore[invalid-explicit-return]
             case str():
                 if (item := self.find_child(typ=core.QObject, name=index)) is not None:
-                    return item
+                    return cast("widgets.QWidget | widgets.QLayout", item)
                 raise KeyError(index)
             case slice():
                 stop = index.stop or self.count()
                 rng = range(index.start or 0, stop, index.step or 1)
-                widgets = [self[i] for i in rng]
-                return listdelegators.ListDelegator(widgets, parent=self)
+                children = [self[i] for i in rng]
+                return listdelegators.ListDelegator(children, parent=self)
             case _:
                 raise TypeError(index)
 
@@ -195,7 +198,8 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, _LayoutBase):
     ) -> Self:
         from prettyqt import custom_widgets
 
-        ctx_layouts = dict(
+        # dynamic dispatch on the layout name, the classes have different signatures
+        ctx_layouts: dict[str, Any] = dict(
             horizontal=widgets.HBoxLayout,
             vertical=widgets.VBoxLayout,
             grid=widgets.GridLayout,
@@ -213,13 +217,13 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, _LayoutBase):
                 scroller.setWidgetResizable(True)
                 widget = widgets.Widget()
                 scroller.set_widget(widget)
-                new = widget.set_layout(orientation, **kwargs)
+                new = widget.set_layout(orientation or "vertical", **kwargs)
             case widgets.QLayout() if layout == "scroll":
                 scroller = kls(parent=self._container)
                 scroller.setWidgetResizable(True)
                 widget = widgets.Widget()
                 scroller.set_widget(widget)
-                new = widget.set_layout(orientation, **kwargs)
+                new = widget.set_layout(orientation or "vertical", **kwargs)
                 self._container.add(new)
             case widgets.QWidget() if layout == "splitter":
                 new = kls(orientation=orientation, parent=self._container, **kwargs)
@@ -263,14 +267,14 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, _LayoutBase):
         self._next_container = new
         return self
 
-    def item_at(self, pos_or_index: int | core.Point) -> widgets.QLayoutItem:
+    def item_at(self, pos_or_index: int | core.Point) -> widgets.QLayoutItem | None:
         match pos_or_index:
             case int():
                 return super().itemAt(pos_or_index)
             case core.QPoint():
                 for i in range(self.count()):
                     item = self.itemAt(i)
-                    if item.geometry().contains(pos_or_index):
+                    if item is not None and item.geometry().contains(pos_or_index):
                         return item
                 return None
             case _:
@@ -337,7 +341,8 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, _LayoutBase):
         """
         if item is not None:
             return self.setAlignment(item, constants.ALIGNMENTS.get_enum_value(alignment))
-        return self.setAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
+        self.setAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
+        return True
 
     # def add(self, *items: widgets.QWidget | widgets.QLayout):
     #     for i in items:

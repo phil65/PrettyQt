@@ -38,7 +38,7 @@ class ColorDialog(widgets.DialogMixin, widgets.QColorDialog):
     def current_color(self) -> gui.Color:
         return gui.Color(self.currentColor())
 
-    def get_qcolorshower(self) -> widgets.QWidget:
+    def get_qcolorshower(self) -> QtCore.QObject:
         return next(
             a
             for a in self.children()
@@ -46,7 +46,7 @@ class ColorDialog(widgets.DialogMixin, widgets.QColorDialog):
             and a.metaObject().className() == "QtPrivate::QColorShower"
         )
 
-    def get_qcolorshowlabel(self) -> widgets.QFrame:
+    def get_qcolorshowlabel(self) -> QtCore.QObject:
         qcs = self.get_qcolorshower()
         return next(
             b
@@ -99,8 +99,11 @@ class CPAlphaShowLabel(widgets.Label):
         # (Pattern is made up of 2x2 squares, total size 2n x 2n)
         self.checkerboard_size = 8
         # Start out transparent by default
-        self.color = self.parent().currentColor()
-        self.parent().currentColorChanged.connect(self.update_color)
+        dialog = self.parent()
+        if not isinstance(dialog, widgets.QColorDialog):
+            raise TypeError(dialog)
+        self.color = dialog.currentColor()
+        dialog.currentColorChanged.connect(self.update_color)
         self.pattern = gui.Pixmap.create_checkerboard_pattern(
             self.checkerboard_size, "#aaa", "#ccc"
         )

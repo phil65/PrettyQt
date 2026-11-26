@@ -175,33 +175,37 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
         empty_allowed: bool | None = None,
         append: bool = False,
         **kwargs,
-    ) -> gui.QValidator:
+    ) -> gui.QValidator | None:
         from prettyqt import validators
 
+        val: gui.QValidator | None
         match validator:
             case str() if "|" in validator:
-                vals = [get_validator(i, **kwargs) for i in validator.split("|")]
-                validator: widgets.QValidator = validators.AndValidator(vals)
+                vals = [get_validator(i, **kwargs) for i in validator.split("|")]  # ty: ignore[invalid-argument-type]
+                val = validators.AndValidator(vals)
             case str() | re.Pattern() | core.QRegularExpression() | Callable():
-                validator = get_validator(validator, **kwargs)
+                val = get_validator(validator, **kwargs)  # ty: ignore[invalid-argument-type]
             case None | gui.QValidator():
-                pass
+                val = validator
             case _:
                 raise ValueError(validator)
         if empty_allowed is False:
-            validator = validators.AndValidator([
-                validator,
+            val = validators.AndValidator([
+                *([val] if val is not None else []),
                 validators.NotEmptyValidator(),
             ])
         elif empty_allowed is True:
-            validator = validators.OrValidator([validator, validators.EmptyValidator()])
+            val = validators.OrValidator([
+                *([val] if val is not None else []),
+                validators.EmptyValidator(),
+            ])
         if not strict:
-            validator = validators.NotStrictValidator(validator)
-        if append and (prev := self.validator()) is not None:
-            validator = validators.AndValidator([prev, validator])
-        self.setValidator(validator)
+            val = validators.NotStrictValidator(val)
+        if append and (prev := self.validator()) is not None and val is not None:
+            val = validators.AndValidator([prev, val])
+        self.setValidator(val)  # ty: ignore[invalid-argument-type]  # None unsets
         self._update_background()
-        return validator
+        return val
 
     def set_input_mask(self, mask: str):
         match mask:

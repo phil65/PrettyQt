@@ -7,8 +7,6 @@ from prettyqt.utils import bidict
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterator, Sequence
 
-    from prettyqt.utils import listdelegators
-
 
 StandardButtonStr = Literal[
     "cancel",
@@ -147,7 +145,7 @@ class DialogButtonBox(widgets.WidgetMixin, widgets.QDialogButtonBox):
 
     def add_default_buttons(
         self, buttons: Sequence[StandardButtonStr]
-    ) -> listdelegators.ListDelegator[widgets.QPushButton]:
+    ) -> list[widgets.QPushButton]:
         return [self.add_default_button(btn) for btn in buttons]
 
     def add_default_button(

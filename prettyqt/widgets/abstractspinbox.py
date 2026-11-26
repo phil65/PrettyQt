@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, cast
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
@@ -44,6 +44,8 @@ STEP_ENABLED_FLAG: bidict[StepEnabledFlagStr, QtWidgets.QSpinBox.StepEnabledFlag
 
 if TYPE_CHECKING:
     _AbstractSpinBoxBase = QtWidgets.QAbstractSpinBox
+    # value / step type helpers are only meaningful for these subclasses
+    _NumericSpinBox = QtWidgets.QSpinBox | QtWidgets.QDoubleSpinBox
 else:
     _AbstractSpinBoxBase = object
 
@@ -67,8 +69,10 @@ class AbstractSpinBoxMixin(widgets.WidgetMixin, _AbstractSpinBoxBase):
 
     def set_validator(
         self, validator: QtGui.QValidator | widgets.lineedit.ValidatorStr | None, **kwargs
-    ) -> QtGui.QValidator:
-        return self.lineEdit().set_validator(validator)
+    ) -> QtGui.QValidator | None:
+        # prettyqt installs its own LineEdit
+        line_edit = cast("widgets.LineEdit", self.lineEdit())
+        return line_edit.set_validator(validator)
 
     def get_button_symbols(self) -> SymbolStr:
         """Return button symbol type.
@@ -104,7 +108,9 @@ class AbstractSpinBoxMixin(widgets.WidgetMixin, _AbstractSpinBoxBase):
         """
         return CORRECTION_MODES.inverse[self.correctionMode()]
 
-    def set_step_type(self, mode: StepTypeStr | QtWidgets.QSpinBox.StepType):
+    def set_step_type(
+        self: _NumericSpinBox, mode: StepTypeStr | QtWidgets.QSpinBox.StepType
+    ):
         """Set step type.
 
         Args:
@@ -112,7 +118,7 @@ class AbstractSpinBoxMixin(widgets.WidgetMixin, _AbstractSpinBoxBase):
         """
         self.setStepType(STEP_TYPES.get_enum_value(mode))
 
-    def get_step_type(self) -> StepTypeStr:
+    def get_step_type(self: _NumericSpinBox) -> StepTypeStr:
         """Return step type.
 
         Returns:
@@ -123,11 +129,11 @@ class AbstractSpinBoxMixin(widgets.WidgetMixin, _AbstractSpinBoxBase):
     def set_special_value(self, value: str):
         self.setSpecialValueText(value)
 
-    def get_value(self) -> int:
+    def get_value(self: _NumericSpinBox) -> float:
         return self.value()
 
-    def set_value(self, value: float):
-        self.setValue(value)
+    def set_value(self: _NumericSpinBox, value: float):
+        self.setValue(value)  # ty: ignore[invalid-argument-type]  # int for QSpinBox
 
 
 class AbstractSpinBox(AbstractSpinBoxMixin, QtWidgets.QAbstractSpinBox):

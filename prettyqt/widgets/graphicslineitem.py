@@ -13,4 +13,4 @@ class GraphicsLineItem(widgets.GraphicsItemMixin, widgets.QGraphicsLineItem):
 
 
 if __name__ == "__main__":
-    item = GraphicsLineItem(core.Point(0, 0), core.Point(2, 2))
+    item = GraphicsLineItem(core.LineF(0, 0, 2, 2))

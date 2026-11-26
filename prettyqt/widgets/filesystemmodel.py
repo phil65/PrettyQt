@@ -37,7 +37,8 @@ class FileSystemModelMixin(_FileSystemModelBase):
     content_type = "files"
 
     def __init__(self, *args, read_only: bool = False, **kwargs):
-        super().__init__(*args, read_only=read_only, **kwargs)
+        super().__init__(*args, **kwargs)
+        self.setReadOnly(read_only)
         self.use_custom_icons(False)
 
     def data(

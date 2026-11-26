@@ -237,7 +237,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin, _HeaderViewBase):
             return True
         return False
 
-    def get_header_actions(self) -> list[gui.Action]:
+    def get_header_actions(self) -> list[gui.QAction]:
         menu = self.createPopupMenu()
         return menu.actions()
 

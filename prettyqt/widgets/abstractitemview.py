@@ -218,8 +218,8 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin, _AbstractItemViewBa
         for kls in classhelpers.get_subclasses(core.QAbstractItemModel):
             if (
                 "supports" in kls.__dict__
-                and callable(kls.supports)
-                and kls.supports(data)
+                and callable(supports := getattr(kls, "supports", None))
+                and supports(data)
                 and kls.__name__ != "PythonObjectTreeModel"
             ):
                 logger.debug("found model for data structure %r", data)
@@ -280,7 +280,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin, _AbstractItemViewBa
         match index:
             case None:
                 self.selectionModel().setCurrentIndex(
-                    index, core.ItemSelectionModel.SelectionFlag.Clear
+                    core.ModelIndex(), core.ItemSelectionModel.SelectionFlag.Clear
                 )
                 return
             case tuple():
@@ -687,8 +687,8 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin, _AbstractItemViewBa
         )
 
     def sync_with(
-        self,
-        table_to_sync: widgets.QAbstractItemView,
+        self: widgets.TableViewMixin,
+        table_to_sync: widgets.TableViewMixin,
         orientation: constants.OrientationStr | constants.Orientation,
     ) -> list[core.QMetaObject.Connection]:
         orientation = constants.ORIENTATION.get_enum_value(orientation)

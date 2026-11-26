@@ -57,7 +57,8 @@ class FileDialog(widgets.DialogMixin, widgets.QFileDialog):
         **kwargs,
     ):
         super().__init__(**kwargs)
-        self.set_title(caption)
+        if caption is not None:
+            self.set_title(caption)
         self.path_id = path_id
         if extension_filter:
             self.set_extension_filter(extension_filter)

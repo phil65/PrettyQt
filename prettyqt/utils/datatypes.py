@@ -113,8 +113,8 @@ if TYPE_CHECKING:
         | QtGui.QVector3D
         | QtGui.QVector4D
     )
-    LineType = tuple[int, int] | QtCore.QLine
-    LineFType = tuple[float, float] | QtCore.QLineF | QtCore.QLine
+    LineType = tuple[int, int, int, int] | QtCore.QLine
+    LineFType = tuple[float, float, float, float] | QtCore.QLineF | QtCore.QLine
     SemanticVersionType = str | QtCore.QVersionNumber | tuple[int, int, int]
     IconType = QtGui.QIcon | str | pathlib.Path | None
     ByteArrayType = str | bytes | QtCore.QByteArray

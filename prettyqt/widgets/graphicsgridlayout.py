@@ -22,7 +22,7 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsGridLayou
                 if row >= rowcount or col >= colcount:
                     raise IndexError(index)
                 return self.itemAt(row, col)
-            case (row, col):
+            case (int() | slice() as row, int() | slice() as col):
                 items = [
                     item
                     for i, j in helpers.iter_positions(row, col, rowcount, colcount)
@@ -73,8 +73,8 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsGridLayou
             x, y, w, h = pos
             self[x : x + w - 1, y : y + h - 1] = item
 
-    def __iter__(self) -> Iterator[widgets.QWidget | widgets.QLayout]:
-        return iter(self[i] for i in range(self.count()) if self[i] is not None)
+    def __iter__(self) -> Iterator[widgets.QGraphicsLayoutItem]:
+        return iter(i for n in range(self.count()) if (i := self.itemAt(n)) is not None)
 
     def __add__(
         self,

@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Any, Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import bidict
@@ -19,7 +19,7 @@ TickPositionAllStr = Literal["none", "both_sides", "above", "below", "left", "ri
 class HollowHandleStyle(widgets.ProxyStyle):
     def __init__(self, config: dict | None = None):
         super().__init__()
-        self.config = {
+        self.config: dict[str, Any] = {
             "groove.height": 3,
             "sub-page.color": gui.Color(255, 255, 255),
             "add-page.color": gui.Color(255, 255, 255, 64),

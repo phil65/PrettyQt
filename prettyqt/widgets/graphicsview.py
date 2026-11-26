@@ -129,7 +129,7 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin, _GraphicsViewBase):
     def remove_item(self, *args):
         return self.scene().removeItem(*args)
 
-    def get_view_rect(self) -> core.QRect:
+    def get_view_rect(self) -> core.QRectF:
         """Return the boundaries of the view in scene coordinates."""
         r = core.QRectF(self.rect())
         return self.viewportTransform().inverted()[0].mapRect(r)

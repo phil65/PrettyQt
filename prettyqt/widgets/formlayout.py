@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, cast
 
 from prettyqt import constants, widgets
 from prettyqt.utils import bidict
@@ -52,7 +52,7 @@ class FormLayout(widgets.LayoutMixin, widgets.QFormLayout):
     ):
         match index:
             case (int() as row, str() as role):
-                self.set_widget(value, row, role)
+                self.set_widget(value, row, cast("ItemRoleStr", role))  # validated there
             case int() as row:
                 self.set_widget(value, row, "both")
             case _:
@@ -129,8 +129,10 @@ class FormLayout(widgets.LayoutMixin, widgets.QFormLayout):
 
     def get_widget(
         self, row: int, role: ItemRoleStr | mod.ItemRole = "both"
-    ) -> widgets.QLayout | widgets.QWidget:
+    ) -> widgets.QLayout | widgets.QWidget | None:
         item = self.itemAt(row, ITEM_ROLE.get_enum_value(role))
+        if item is None:
+            return None
         return i if (i := item.widget()) is not None else item.layout()
 
     def get_item_position(self, index: int) -> tuple[int, ItemRoleStr] | None:

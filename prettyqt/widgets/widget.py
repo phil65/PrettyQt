@@ -4,7 +4,7 @@ import html
 import os
 import pathlib
 import sys
-from typing import TYPE_CHECKING, Any, Literal, overload
+from typing import TYPE_CHECKING, Any, Literal, cast, overload
 
 import qstylizer.parser
 import qstylizer.style
@@ -31,6 +31,18 @@ PositionPossibilityType = (
     | tuple[int, int]
     | tuple[int, int, int, int]
 )
+
+
+def _rect_like(
+    template: core.QRect | core.QRectF,
+    top_left: core.QPoint | core.QPointF,
+    bottom_right: core.QPoint | core.QPointF,
+) -> core.QRect | core.QRectF:
+    """Build a rect of the same type as template from two (mapped) corners."""
+    tl, br = core.QPointF(top_left), core.QPointF(bottom_right)
+    if isinstance(template, core.QRectF):
+        return core.QRectF(tl, br)
+    return core.QRect(tl.toPoint(), br.toPoint())
 
 
 if TYPE_CHECKING:
@@ -204,25 +216,25 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
             case core.QRect() | core.QRectF(), widgets.QWidget():
                 top_left = super().mapTo(widget, pos_or_rect.topLeft())
                 bottom_right = super().mapTo(widget, pos_or_rect.bottomRight())
-                return type(pos_or_rect)(top_left, bottom_right)
+                return _rect_like(pos_or_rect, top_left, bottom_right)
             case core.QPoint() | core.QPointF(), widgets.QWidget():
                 return super().mapTo(widget, pos_or_rect)
             case core.QRect() | core.QRectF(), "parent":
                 top_left = super().mapToParent(pos_or_rect.topLeft())
                 bottom_right = super().mapToParent(pos_or_rect.bottomRight())
-                return type(pos_or_rect)(top_left, bottom_right)
+                return _rect_like(pos_or_rect, top_left, bottom_right)
             case core.QPoint() | core.QPointF(), "parent":
                 return super().mapToParent(pos_or_rect)
             case core.QRect() | core.QRectF(), "window":
                 top_left = super().mapTo(self.window(), pos_or_rect.topLeft())
                 bottom_right = super().mapTo(self.window(), pos_or_rect.bottomRight())
-                return type(pos_or_rect)(top_left, bottom_right)
+                return _rect_like(pos_or_rect, top_left, bottom_right)
             case core.QPoint() | core.QPointF(), "window":
                 return super().mapTo(self.window(), pos_or_rect)
             case core.QRect() | core.QRectF(), "global":
                 top_left = super().mapToGlobal(pos_or_rect.topLeft())
                 bottom_right = super().mapToGlobal(pos_or_rect.bottomRight())
-                return type(pos_or_rect)(top_left, bottom_right)
+                return _rect_like(pos_or_rect, top_left, bottom_right)
             case core.QPoint() | core.QPointF(), "global":
                 return super().mapToGlobal(pos_or_rect)
             case _:
@@ -257,25 +269,25 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
             case core.QRect() | core.QRectF(), widgets.QWidget():
                 top_left = super().mapFrom(widget, pos_or_rect.topLeft())
                 bottom_right = super().mapFrom(widget, pos_or_rect.bottomRight())
-                return type(pos_or_rect)(top_left, bottom_right)
+                return _rect_like(pos_or_rect, top_left, bottom_right)
             case core.QPoint() | core.QPointF(), widgets.QWidget():
                 return super().mapFrom(widget, pos_or_rect)
             case core.QRect() | core.QRectF(), "parent":
                 top_left = super().mapFromParent(pos_or_rect.topLeft())
                 bottom_right = super().mapFromParent(pos_or_rect.bottomRight())
-                return type(pos_or_rect)(top_left, bottom_right)
+                return _rect_like(pos_or_rect, top_left, bottom_right)
             case core.QPoint() | core.QPointF(), "parent":
                 return super().mapFromParent(pos_or_rect)
             case core.QRect() | core.QRectF(), "window":
                 top_left = super().mapFrom(self.window(), pos_or_rect.topLeft())
                 bottom_right = super().mapFrom(self.window(), pos_or_rect.bottomRight())
-                return type(pos_or_rect)(top_left, bottom_right)
+                return _rect_like(pos_or_rect, top_left, bottom_right)
             case core.QPoint() | core.QPointF(), "window":
                 return super().mapFrom(self.window(), pos_or_rect)
             case core.QRect() | core.QRectF(), "global":
                 top_left = super().mapFromGlobal(pos_or_rect.topLeft())
                 bottom_right = super().mapFromGlobal(pos_or_rect.bottomRight())
-                return type(pos_or_rect)(top_left, bottom_right)
+                return _rect_like(pos_or_rect, top_left, bottom_right)
             case core.QPoint() | core.QPointF(), "global":
                 return super().mapFromGlobal(pos_or_rect)
             case _:
@@ -286,7 +298,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
         if sys.platform.startswith("win"):
             from prettyqt.utils.platforms.windows import misc
 
-            misc.raise_to_top()
+            misc.raise_to_top(self.winId())
         # state = (self.windowState() & ~Qt.WindowMinimized) | Qt.WindowActive
         # self.setWindowState(state)
         self.raise_()
@@ -317,7 +329,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
         """
         if duration is None:
             duration = -1  # automatic
-        pos = self.map_to("global", (0, 0))
+        pos = self.mapToGlobal(core.QPoint(0, 0))
         widgets.ToolTip.showText(pos, self.toolTip(), msecShowTime=duration)
 
     # lets be gentle and allow all reasonable signatures for the size setters.
@@ -413,9 +425,9 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
             if size is None:
                 tooltip = f"<img src={path!r}>"
             else:
-                if isinstance(size, core.QSize):
-                    size = (size.width(), size.height())
-                tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
+                qsize = datatypes.to_size(size)
+                w, h = qsize.width(), qsize.height()
+                tooltip = f'<img src={path!r} width="{w}" height="{h}">'
         tooltip = tooltip.replace("\n", "<br/>")
         if rich_text:
             tooltip = f"<html>{html.escape(tooltip)}</html>"
@@ -867,7 +879,8 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
 
     @property
     def box(self) -> widgets.Layout:
-        return self.layout()
+        # set_layout() always installs a prettyqt layout
+        return cast("widgets.Layout", self.layout())
 
     @box.setter
     def box(self, layout: widgets.Layout):
@@ -964,7 +977,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
                 raise ValueError(msg)
         self.setLayout(layout)
         if margin is not None:
-            layout.set_margin(margin)
+            layout.setContentsMargins(margin, margin, margin, margin)
         return layout
 
     def position_on(
@@ -1010,7 +1023,9 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
             case (int(), int(), int(), int()):
                 geom = core.Rect(*where)
             case "parent":
-                geom = self.parent().frameGeometry()
+                if (parent := self.parentWidget()) is None:
+                    raise ValueError(where)
+                geom = parent.frameGeometry()
             case "window":
                 geom = self.window().frameGeometry()
             case widgets.QWidget():
@@ -1172,12 +1187,13 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
 
     def delete_children(self):
         """Delete all children of the specified QObject."""
-        if hasattr(self, "clear"):
-            return self.clear()
-        layout = self.layout()
+        if (clear := getattr(self, "clear", None)) is not None:
+            return clear()
+        if (layout := self.layout()) is None:
+            return None
         while layout.count():
             item = layout.takeAt(0)
-            if widget := item.widget():
+            if item is not None and (widget := item.widget()) is not None:
                 widget.deleteLater()
         return None
 
@@ -1192,10 +1208,10 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
 
     def child_at(self, *args, typ: type[widgets.QWidget] | None = None):
         """Get child widget at position. If type is given, search parents recursively."""
-        child = super().childAt(*args)
+        child: core.QObject | None = super().childAt(*args)
         if typ is None or isinstance(child, typ):
             return child
-        while child := child.parent():
+        while child is not None and (child := child.parent()) is not None:
             if isinstance(child, typ):
                 return child
         return None
@@ -1244,7 +1260,6 @@ if __name__ == "__main__":
     # val = animations.FadeInAnimation()
     # val.apply_to(widget)
     # val.start()
-    widget.fx.set_graphics_effect("colorize")
     widget.show()
     widget2.show()
     mainwindow = widgets.MainWindow()
