@@ -144,8 +144,14 @@ class ObjectMixin(_ObjectBase):
     def add_callback_for_event(
         self,
         callback: Callable[[core.QEvent], bool],
-        include: core.QEvent.Type | Sequence[core.QEvent.Type] | None = None,
-        exclude: core.QEvent.Type | Sequence[core.QEvent.Type] | None = None,
+        include: core.QEvent.Type
+        | core.event.TypeStr
+        | Sequence[core.QEvent.Type | core.event.TypeStr]
+        | None = None,
+        exclude: core.QEvent.Type
+        | core.event.TypeStr
+        | Sequence[core.QEvent.Type | core.event.TypeStr]
+        | None = None,
     ) -> eventfilters.EventCatcher:
         """Connect widget events to a callback.
 

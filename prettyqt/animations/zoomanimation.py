@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, cast
 
 from prettyqt import core, widgets
 
@@ -8,6 +8,9 @@ AnchorStr = Literal["center", "top", "left", "right", "bottom"]
 
 class ZoomAnimation(core.ParallelAnimationGroup):
     ID = "zoom"
+
+    def _widget(self) -> widgets.QWidget:
+        return cast("widgets.QWidget", self.parent())
 
     def __init__(
         self,
@@ -26,7 +29,7 @@ class ZoomAnimation(core.ParallelAnimationGroup):
         self.anim1 = core.PropertyAnimation()
         # slide animation
         self.anim2 = core.PropertyAnimation()
-        self.apply_to(parent)
+        self.apply_to(cast("widgets.QWidget", parent))
         self.set_easing(easing)
         self.set_start_value(start)
         self.set_end_value(end)
@@ -35,21 +38,21 @@ class ZoomAnimation(core.ParallelAnimationGroup):
         self.addAnimation(self.anim2)
 
     def set_start_value(self, factor: float):
-        size = self.parent().size()
+        size = self._widget().size()
         self._start = factor
         self.anim1.setStartValue(size)
-        self.anim2.setStartValue(self.parent().pos())
+        self.anim2.setStartValue(self._widget().pos())
 
     def set_end_value(self, factor: float):
         self._end = factor
         zoom_ratio = self._end / self._start
         # setup zoom
-        size = self.parent().size()
+        size = self._widget().size()
         new = size.toSizeF() * zoom_ratio * zoom_ratio
         self.anim1.setEndValue(new.toSize())
         # setup move
-        move_x = -zoom_ratio * self.parent().width()
-        move_y = -zoom_ratio * self.parent().height()
+        move_x = -zoom_ratio * self._widget().width()
+        move_y = -zoom_ratio * self._widget().height()
         match self._anchor:
             case "center":
                 movement = core.Point(int(move_x / 2), int(move_y / 2))
@@ -61,7 +64,7 @@ class ZoomAnimation(core.ParallelAnimationGroup):
                 movement = core.Point(int(move_x / 2), 0)
             case "bottom":
                 movement = core.Point(int(move_x / 2), int(move_y))
-        self.anim2.setEndValue(self.parent().pos() + movement)
+        self.anim2.setEndValue(self._widget().pos() + movement)
 
     def set_duration(self, duration: int):
         self.anim1.setDuration(duration)

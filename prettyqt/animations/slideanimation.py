@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from prettyqt import core
 from prettyqt.qt import QtWidgets
@@ -7,6 +7,7 @@ from prettyqt.utils import datatypes
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+    import types
 
 
 class SlideAnimation(core.PropertyAnimation):
@@ -28,18 +29,18 @@ class SlideAnimation(core.PropertyAnimation):
 
     def set_start_value(self, point: datatypes.PointType):
         offset = datatypes.to_point(point)
-        pos = self.parent().geometry().topLeft()
+        pos = cast("QtWidgets.QWidget", self.parent()).geometry().topLeft()
         self.setStartValue(pos + offset)
 
     def set_end_value(self, point: datatypes.PointType):
         offset = datatypes.to_point(point)
-        pos = self.parent().geometry().topLeft()
+        pos = cast("QtWidgets.QWidget", self.parent()).geometry().topLeft()
         self.setEndValue(pos + offset)
 
     def apply_to(self, obj: QtWidgets.QWidget | Callable):
         if isinstance(obj, QtWidgets.QWidget):
             obj = obj.pos
-        super().apply_to(obj)
+        super().apply_to(cast("types.MethodType", obj))
 
 
 if __name__ == "__main__":

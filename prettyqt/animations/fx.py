@@ -1,7 +1,12 @@
 import logging
+from typing import TYPE_CHECKING, Any, cast
 
 from prettyqt import core, widgets
 from prettyqt.utils import colors, datatypes, helpers
+
+
+if TYPE_CHECKING:
+    from prettyqt import animations
 
 
 logger = logging.getLogger(__name__)
@@ -15,7 +20,7 @@ class AnimationTimer(core.Timer):
 
     def __init__(
         self,
-        animation: core.PropertyAnimation,
+        animation: core.QAbstractAnimation,
         interval: int,
         single_shot: bool = True,
         parent: core.QObject | None = None,
@@ -78,13 +83,13 @@ class AnimationWrapper:
         prop = getattr(self._widget, self._property_name)
         self._animation.apply_to(prop)
         prop_name = self._animation.get_property_name()
-        obj = self._animation.targetObject()
+        obj = cast("widgets.Widget", self._animation.targetObject())  # the Fx widget
         start: datatypes.VariantType = obj.property(prop_name)
         end = datatypes.align_types(start, end)
         if isinstance(end, core.QPoint | core.QRect | core.QPointF | core.QRectF):
             end = obj.map_to("parent", end)
         if relative and hasattr(end, "__add__"):
-            end = end + start
+            end = cast("Any", end) + start  # checked via hasattr above
         return self.animate(
             start,
             end,
@@ -110,13 +115,13 @@ class AnimationWrapper:
         prop = getattr(self._widget, self._property_name)
         self._animation.apply_to(prop)
         prop_name = self._animation.get_property_name()
-        obj = self._animation.targetObject()
-        end: core.VariantType = obj.property(prop_name)
+        obj = cast("widgets.Widget", self._animation.targetObject())  # the Fx widget
+        end: datatypes.VariantType = obj.property(prop_name)
         start = datatypes.align_types(end, start)
         if isinstance(start, core.QPoint | core.QRect | core.QPointF | core.QRectF):
             start = obj.map_to("parent", start)
         if relative and hasattr(start, "__add__"):
-            start = end + start
+            start = cast("Any", end) + start  # checked via hasattr above
         return self.animate(
             start,
             end,
@@ -143,7 +148,7 @@ class AnimationWrapper:
         self._animation.apply_to(prop)
         if start is None:
             prop_name = self._animation.get_property_name()
-            obj = self._animation.targetObject()
+            obj = cast("widgets.Widget", self._animation.targetObject())
             start = obj.property(prop_name)
             self._animation.setStartValue(start)
             end = datatypes.align_types(start, end)
@@ -161,7 +166,7 @@ class AnimationWrapper:
             self.fx.run(self._animation, delay=delay)
             return False
 
-        obj = self._animation.targetObject()
+        obj = cast("widgets.Widget", self._animation.targetObject())  # the Fx widget
         obj.add_callback_for_event(on_event, include=event)
         return self._animation
 
@@ -252,9 +257,9 @@ class Fx:
         start: float = 1.0,
         end: float = 1.0,
         easing: core.easingcurve.TypeStr = "in_out_sine",
-        anchor: str = "center",
+        anchor: animations.zoomanimation.AnchorStr = "center",
         delay: int = 0,
-    ) -> AnimationTimer:
+    ) -> animations.ZoomAnimation:
         """Trigger a zoom animation with given anchor."""
         from prettyqt import animations
 
@@ -307,7 +312,7 @@ class Fx:
 
     def run(
         self,
-        animation: core.QPropertyAnimation,
+        animation: core.QPropertyAnimation | core.AnimationGroupMixin,
         delay: int | str = 0,
         single_shot: bool = True,
     ) -> AnimationTimer:
@@ -321,7 +326,8 @@ class Fx:
         Returns:
             AnimationTimer, a core.Timer subclass with the PropertyAnimation attached.
         """
-        if not animation.targetObject().isVisible():
+        target = animation.targetObject()
+        if isinstance(target, widgets.QWidget) and not target.isVisible():
             logger.info("Attention. Starting animation for invisible widget.")
         msg = "starting %s with delay %s, single_shot %s"
         logger.debug(msg, animation, delay, single_shot)

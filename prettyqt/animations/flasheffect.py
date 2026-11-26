@@ -1,5 +1,6 @@
 import contextlib
 import functools
+from typing import cast
 import weakref
 
 from prettyqt import core, widgets
@@ -22,16 +23,18 @@ class FlashEffect(widgets.GraphicsColorizeEffect):
             widget_ref : QWidget
                 Any Qt widget.
             """
-            if widget_ref() is None:
+            if (widget := widget_ref()) is None:
                 return
-            widget = widget_ref()
             with contextlib.suppress(RuntimeError):
-                widget.setGraphicsEffect(None)
+                widget.setGraphicsEffect(None)  # ty: ignore[invalid-argument-type]  # unsets
 
         # let's make sure to remove the animation from the widget because
         # if we don't, the widget will actually be black and white.
         self._flash_animation.finished.connect(
-            functools.partial(remove_flash_animation, weakref.ref(self.parent()))
+            functools.partial(
+                remove_flash_animation,
+                weakref.ref(cast("widgets.QWidget", self.parent())),
+            )
         )
 
     def flash(self, duration: int = 1000, color="red"):
