@@ -128,7 +128,7 @@ class MessageBox(widgets.DialogMixin, widgets.QMessageBox):
         icon: datatypes.IconType = None,
         detail_text: str | None = None,
     ) -> str:
-        m = cls("none", title, text)
+        m = cls(window_title=title, text=text)
         m.set_icon(icon)
         if detail_text is not None:
             m.setDetailedText(detail_text)

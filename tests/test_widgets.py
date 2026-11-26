@@ -1728,3 +1728,15 @@ def test_style_draw_control(qapp):
     option = widgets.QStyleOptionButton()
     widgets.Style.draw_control(style, "push_button", option, painter)
     painter.end()
+
+
+def test_messagebox_message(qtbot, monkeypatch):
+    shown = []
+
+    def show_blocking(self):
+        shown.append((self.windowTitle(), self.text()))
+        return "ok"
+
+    monkeypatch.setattr(widgets.MessageBox, "show_blocking", show_blocking)
+    assert widgets.MessageBox.message("text", "title") == "ok"
+    assert shown == [("title", "text")]
