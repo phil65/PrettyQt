@@ -36,7 +36,10 @@ class JsonDocument(core.QJsonDocument):
             if not isinstance(index, int):
                 raise TypeError
             array = self.array()
-            array[index] = value
+            if isinstance(array, list):  # PyQt6 returns a list
+                array[index] = value
+            else:  # PySide6 returns a QJsonArray, which has no item assignment
+                array.replace(index, core.QJsonValue(value))
             self.setArray(array)
         elif self.isObject():
             if not isinstance(index, str):
@@ -47,7 +50,7 @@ class JsonDocument(core.QJsonDocument):
 
     def to_string(self, indented: bool = False) -> str:
         flag = self.JsonFormat.Indented if indented else self.JsonFormat.Compact
-        return self.toJson(flag).data().decode()
+        return bytes(self.toJson(flag).data()).decode()
 
     @classmethod
     def from_variant(cls, obj) -> Self:

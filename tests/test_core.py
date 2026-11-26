@@ -274,6 +274,9 @@ def test_jsondocument():
     doc["k"] = "v"
     assert doc["k"] == "v"
     doc.to_string()
+    doc = core.JsonDocument.from_variant([1, 2, 3])
+    doc[0] = 5
+    assert doc.toVariant() == [5, 2, 3]
 
 
 def test_jsonvalue():
