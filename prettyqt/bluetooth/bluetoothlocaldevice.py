@@ -50,17 +50,13 @@ class BluetoothLocalDevice(core.ObjectMixin, bluetooth.QBluetoothLocalDevice):
     def __repr__(self):
         return get_repr(self, self.address())
 
-    def get_error(self) -> ErrorStr:
-        """Get error code."""
-        return ERROR.inverse[self.error()]
-
     def set_host_mode(self, mode: HostModeStr | HostMode):
         """Set host mode.
 
         Args:
             mode: host mode to use
         """
-        self.setGridStyle(HOST_MODE.get_enum_value(mode))
+        self.setHostMode(HOST_MODE.get_enum_value(mode))
 
     def get_host_mode(self) -> HostModeStr:
         """Return host mode.
@@ -68,7 +64,7 @@ class BluetoothLocalDevice(core.ObjectMixin, bluetooth.QBluetoothLocalDevice):
         Returns:
             host mode
         """
-        return HOST_MODE.inverse[self.gridStyle()]
+        return HOST_MODE.inverse[self.hostMode()]
 
     def get_pairing_status(
         self, address: bluetooth.QBluetoothAddress | int | str
@@ -106,4 +102,4 @@ class BluetoothLocalDevice(core.ObjectMixin, bluetooth.QBluetoothLocalDevice):
 
 
 if __name__ == "__main__":
-    devices = BluetoothLocalDevice.get_all_devices()
+    devices = BluetoothLocalDevice.for_all_devices()

@@ -82,11 +82,12 @@ class BluetoothDeviceDiscoveryAgent(
             classic: use classic method
             low_energy: use BLE mode
         """
-        flag = bluetooth.QBluetoothDeviceDiscoveryAgent.NoMethod
+        method = bluetooth.QBluetoothDeviceDiscoveryAgent.DiscoveryMethod
+        flag = method.NoMethod
         if classic:
-            flag |= bluetooth.QBluetoothDeviceDiscoveryAgent.ClassicMethod
+            flag |= method.ClassicMethod
         if low_energy:
-            flag |= bluetooth.QBluetoothDeviceDiscoveryAgent.LowEnergyMethod
+            flag |= method.LowEnergyMethod
         self.start(flag)
 
     def get_error(self) -> ErrorStr:

@@ -305,9 +305,9 @@ class BluetoothDeviceInfo(bluetooth.QBluetoothDeviceInfo):
         """Get bluetooth address."""
         return bluetooth.BluetoothAddress(self.address())
 
-    def get_device_ids(self) -> list[bluetooth.BluetoothUuid]:
-        """Get list of device ids."""
-        return [bluetooth.BluetoothUuid(i) for i in self.deviceIds()]
+    def get_device_uuid(self) -> bluetooth.BluetoothUuid:
+        """Get the device's UUID (Qt 6 has a single deviceUuid())."""
+        return bluetooth.BluetoothUuid(self.deviceUuid())
 
     def get_service_ids(self) -> list[bluetooth.BluetoothUuid]:
         """Get list of service ids."""

@@ -37,10 +37,8 @@ class BluetoothServiceDiscoveryAgent(
         Arguments:
             full: full discovery instead of minimal discovery.
         """
-        if full:
-            flag = bluetooth.QBluetoothServiceDiscoveryAgent.FullDiscovery
-        else:
-            flag = bluetooth.QBluetoothServiceDiscoveryAgent.MinimalDiscovery
+        mode = bluetooth.QBluetoothServiceDiscoveryAgent.DiscoveryMode
+        flag = mode.FullDiscovery if full else mode.MinimalDiscovery
         self.start(flag)
 
     def get_error(self) -> ErrorStr:

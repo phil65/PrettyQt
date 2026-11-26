@@ -24,3 +24,15 @@ def test_bluetoothdevicediscoveryagent():
     agent = bluetooth.BluetoothDeviceDiscoveryAgent()
     assert agent.get_error() == "none"
     agent.get_supported_discovery_methods()
+
+
+def test_bluetooth_discovery_and_host_mode(qapp):
+    agent = bluetooth.BluetoothDeviceDiscoveryAgent()
+    agent.start_discovery(classic=True, low_energy=False)
+    agent.stop()
+    service_agent = bluetooth.BluetoothServiceDiscoveryAgent()
+    service_agent.start_discovery(full=True)
+    service_agent.stop()
+    device = bluetooth.BluetoothLocalDevice()
+    device.get_host_mode()
+    bluetooth.BluetoothDeviceInfo().get_device_uuid()
