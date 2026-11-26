@@ -62,7 +62,7 @@ class LxmlModel(itemmodels.BaseXmlModel):
     def get_indexes_from_xpath(self, xpath: str):
         elements = self.tree.xpath(xpath)
         keys = [self.get_key_for_element(element) for element in elements]
-        [self.index_from_key(key) for key in keys]
+        return [self.index_from_key(key) for key in keys]
 
 
 class LazyLxmlModel(itemmodels.BaseXmlModel):
@@ -114,10 +114,11 @@ class LazyLxmlModel(itemmodels.BaseXmlModel):
         parent = index.parent()
         return parent.data(self.Roles.NodeRole)
 
-    def get_key_for_element(self, element):
-        child_elem = self
+    @staticmethod
+    def get_key_for_element(element: etree.Element) -> list[int]:
+        child_elem = element
         key = []
-        while parent_elem := child_elem.getparent():
+        while (parent_elem := child_elem.getparent()) is not None:
             key.append(parent_elem.index(child_elem))
             child_elem = parent_elem
         return key

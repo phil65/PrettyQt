@@ -459,3 +459,12 @@ def test_fsspecmodel_permission_flags(qapp):
     assert flags & perm.ReadOther
     assert not flags & perm.WriteOther
     assert not flags & perm.ExeOwner
+
+
+def test_lazylxmlmodel_get_key_for_element():
+    etree = pytest.importorskip("lxml.etree")
+    from prettyqt.itemmodels import lxmlmodel
+
+    root = etree.fromstring("<a><b/><c><d/></c></a>")
+    d = root[1][0]
+    assert lxmlmodel.LazyLxmlModel.get_key_for_element(d) == [0, 1]

@@ -52,7 +52,7 @@ class NestedModel(itemmodels.ListMixin, itemmodels.ModelMixin, core.AbstractItem
         # not really nice, a proper dispatch library would be better.
         # functools.singledispatchmethod doesnt work here.
         if index is None:
-            return super().parent()
+            return super().parent()  # ty: ignore[invalid-explicit-return]  # QObject.parent()
         if not index.isValid():
             return core.ModelIndex()
 
@@ -66,16 +66,3 @@ class NestedModel(itemmodels.ListMixin, itemmodels.ModelMixin, core.AbstractItem
 
     def data_by_index(self, index):
         return index.internalPointer()
-
-    def json(self, root=None) -> dict:
-        """Serialise model as JSON-compliant dictionary.
-
-        Arguments:
-            root (JsonTreeItem, optional): Serialise from here
-                defaults to the the top-level item
-
-        Returns:
-            model as dict
-        """
-        root = root or self.root
-        return root.as_json()
