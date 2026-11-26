@@ -74,10 +74,11 @@ jobs:
         with:
           run: uv run --no-sync pytest --doctest-modules --cov-report=xml --cov=prettyqt --cov-report=term-missing
 
-      # Project-specific (prettyqt): ty checks against the PySide6 stubs, and the
-      # PyQt6-only modules (QScintilla) need PyQt6, so install both bindings.
-      - name: Install dependencies (both bindings, for ty)
-        run: uv sync --extra pyqt6 --extra pyside6 --extra addons --no-group docs
+      # Project-specific (prettyqt): ty checks against the PySide6 stubs, the PyQt6-only
+      # modules (QScintilla) need PyQt6, and the docs helpers import the docs group:
+      # same environment as the pre-commit hook.
+      - name: Install dependencies (all extras and groups, for ty)
+        run: uv sync --all-extras
 
       - name: Static type checking (ty)
         run: uv run --no-sync ty check
