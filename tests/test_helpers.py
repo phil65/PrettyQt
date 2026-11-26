@@ -67,3 +67,10 @@ def test_errormessagebox_tb_formatter(monkeypatch, hide_ipython):
         raise ValueError("boom")
     assert "boom" in formatter(info.value, False)
     assert formatter(info.value, True).startswith("<span")
+
+
+def test_colors_get_color_role(qapp):
+    from prettyqt import gui
+    from prettyqt.utils import colors
+
+    assert colors.get_color("base_role") == gui.Palette().get_color("base")

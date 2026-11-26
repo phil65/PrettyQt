@@ -47,9 +47,9 @@ def get_color(color: datatypes.ColorType) -> gui.Color:
         case list() | tuple():
             return gui.Color(*color)
         case str() if color.endswith("_role"):
-            color = color.rstrip("_role")
+            role = color.removesuffix("_role")
             palette = gui.Palette()
-            return palette.get_color(color)
+            return palette.get_color(role)  # ty: ignore[invalid-argument-type]  # validated there
         case _:
             return gui.Color(color)
 
