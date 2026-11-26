@@ -197,7 +197,7 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
             validator = validators.OrValidator([validator, validators.EmptyValidator()])
         if not strict:
             validator = validators.NotStrictValidator(validator)
-        if append and (prev := widget.validator()) is not None:
+        if append and (prev := self.validator()) is not None:
             validator = validators.AndValidator([prev, validator])
         self.setValidator(validator)
         self._update_background()

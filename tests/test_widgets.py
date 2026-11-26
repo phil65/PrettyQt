@@ -942,6 +942,11 @@ def test_scrollarea(qtbot):
     widget = widgets.ScrollArea()
     qtbot.addWidget(widget)
     widget.set_widget(widgets.Widget())
+    widget.widget().set_layout("vertical")
+    widget.add(widgets.Widget(), stretch=1)
+    widget.add(widgets.HBoxLayout(), stretch=2)
+    assert widget.widget().layout().stretch(1) == 2  # noqa: PLR2004
+    assert len(widget.get_children()) == 2  # noqa: PLR2004
 
 
 def test_scrollerproperties():
@@ -1679,3 +1684,11 @@ def test_gridlayout_iter_yields_widgets(qapp):
     widget = widgets.Widget()
     layout.add(widget, 0, 0)
     assert list(layout) == [widget]
+
+
+def test_lineedit_set_validator_append(qtbot):
+    line_edit = widgets.LineEdit()
+    qtbot.addWidget(line_edit)
+    line_edit.set_validator("integer")
+    validator = line_edit.set_validator("not_zero", append=True)
+    assert line_edit.validator() is validator

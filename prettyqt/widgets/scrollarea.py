@@ -1,10 +1,10 @@
-from typing import TypeVar
+from typing import TypeVar, cast
 
 from prettyqt import core, widgets
 from prettyqt.utils import listdelegators
 
 
-T = TypeVar("T", bound=widgets.QWidget)
+T = TypeVar("T", bound=widgets.QWidget, default=widgets.QWidget)
 
 
 class ScrollArea(widgets.AbstractScrollAreaMixin, widgets.QScrollArea):
@@ -21,7 +21,7 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, widgets.QScrollArea):
 
     def get_visible_widgets(
         self,
-        typ: type[T] = widgets.QWidget,
+        typ: type[T] = widgets.QWidget,  # ty: ignore[invalid-parameter-default]
         partial_allowed: bool = True,
         margin: int = 10,
         recursive: bool = True,
@@ -32,7 +32,9 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, widgets.QScrollArea):
         A positive margin increases the area to search for widgets, a negative margin
         decreases it.
         """
-        widget = self.widget()
+        if (widget := self.widget()) is None:
+            return listdelegators.ListDelegator([])
+        widget = cast("widgets.Widget", widget)  # set via prettyqt
         viewport = self.viewport()
         rect = viewport.rect().adjusted(-margin, -margin, margin, margin)
         found = []
@@ -46,37 +48,47 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, widgets.QScrollArea):
                 found.append(w)
         return listdelegators.ListDelegator(found)
 
+    def _get_layout(self) -> widgets.LayoutMixin:
+        """Layout of the scrolled widget (set_layout() installs prettyqt layouts)."""
+        if (widget := self.widget()) is None or (layout := widget.layout()) is None:
+            msg = "ScrollArea has no widget with a layout"
+            raise RuntimeError(msg)
+        return cast("widgets.LayoutMixin", layout)
+
     def get_children(self) -> listdelegators.ListDelegator[widgets.QWidget]:
-        return self.widget().layout().get_children()
+        return self._get_layout().get_children()
 
     def set_widget(self, widget: widgets.QWidget):
         self.setWidget(widget)
 
     def add_widget(self, *args, **kwargs):
-        self.widget().layout().addWidget(*args, **kwargs)
+        self._get_layout().addWidget(*args, **kwargs)
 
     def add_layout(self, *args, **kwargs):
-        self.widget().layout().addLayout(*args, **kwargs)
+        layout = self._get_layout()
+        if not isinstance(layout, widgets.QBoxLayout | widgets.QGridLayout):
+            raise TypeError(layout)
+        layout.addLayout(*args, **kwargs)
 
     def add(
         self,
         item: widgets.QWidget | widgets.QLayout | list,
-        stretch: float | None = None,
+        stretch: int | None = None,
     ):
         match item:
             case widgets.QWidget():
                 self.add_widget(item)
-                if stretch:
-                    self.widget().layout().setStretchFactor(self.count() - 1, stretch)
             case widgets.QLayout():
                 widget = widgets.Widget(self)
                 widget.set_layout(item)
                 self.add_widget(widget)
-                if stretch:
-                    self.setStretchFactor(self.count() - 1, stretch)
             case list():
                 for i in item:
                     self.add(i, stretch)
+                return item
+        layout = self._get_layout()
+        if stretch and isinstance(layout, widgets.QBoxLayout):
+            layout.setStretch(layout.count() - 1, stretch)
         return item
 
 
