@@ -1,6 +1,7 @@
 """Base classes for graphical user interface (GUI) components."""
 
 import sys
+from typing import cast
 
 from prettyqt.qt.QtGui import *  # noqa: F403
 
@@ -115,10 +116,10 @@ QT_MODULE = QtGui
 # might_be_rich_text = Qt.mightBeRichText
 
 
-def app(args: list[str] | None = None, **kwargs) -> QtGui.QGuiApplication:
-    # the running instance may be any (prettyqt) application class
+def app(args: list[str] | None = None, **kwargs) -> GuiApplication:
     if (instance := GuiApplication.instance()) is not None:
-        return instance
+        # Usually a prettyqt application; one created elsewhere is returned as is.
+        return cast("GuiApplication", instance)
     return GuiApplication(sys.argv if args is None else args, **kwargs)
 
 

@@ -85,7 +85,7 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
                 if row >= rowcount or col >= colcount:
                     raise IndexError(index)
                 return self.index(row, col)
-            case (row, col):
+            case (int() | slice() as row, int() | slice() as col):
                 indexes = [
                     self.index(i, j)
                     for i, j in helpers.iter_positions(row, col, rowcount, colcount)

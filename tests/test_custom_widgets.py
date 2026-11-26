@@ -567,3 +567,21 @@ def test_scrollareatocwidget_scroll(qtbot, mode):
         scroll_layout.add(scrollareatocwidget.SectionWidget(window_title=f"s{i}"))
     window.show()
     toc._on_scroll()
+
+
+def test_accordionwidget(qtbot):
+    from prettyqt.custom_widgets.accordionwidget import AccordionWidget
+
+    accordion = AccordionWidget()
+    qtbot.addWidget(accordion)
+    first = widgets.Label("first")
+    accordion.addItem("First", first)
+    accordion.addItem("Second", widgets.Label("second"), collapsed=True)
+    assert accordion.count() == 2  # noqa: PLR2004
+    assert accordion.indexOf(first) == 0
+    accordion.move_item_down(0)
+    assert accordion.indexOf(first) == 1
+    accordion.move_item_up(1)
+    assert accordion.takeAt(0) is not None
+    accordion.clear()
+    assert accordion.count() == 0

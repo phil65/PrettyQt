@@ -1,4 +1,5 @@
 import enum
+from typing import cast
 
 from prettyqt import constants, core, gui, widgets
 
@@ -48,7 +49,9 @@ class AccordionItem(widgets.GroupBox):
 
     def dropEvent(self, event):
         widget = event.source()
-        layout = self.parent().layout()
+        # items live in the AccordionWidget's container widget with a VBoxLayout
+        container = cast("widgets.QWidget", self.parentWidget())
+        layout = cast("widgets.QVBoxLayout", container.layout())
         layout.insertWidget(layout.indexOf(self), widget)
         # print(self.parent(), self._widget)
         # self.parent().itemsReordered.emit()
@@ -145,7 +148,8 @@ class AccordionItem(widgets.GroupBox):
             font = painter.font()
             font.setBold(True)
             painter.setFont(font)
-            x, y, w, h = self.rect().adjusted(0, 0, -1, -1).getRect()
+            r = self.rect().adjusted(0, 0, -1, -1)
+            x, y, w, h = r.x(), r.y(), r.width(), r.height()
             light_color = self.palette().color(gui.Palette.ColorRole.Light)
             shadow_color = self.palette().color(gui.Palette.ColorRole.Shadow)
             # draw a rounded style
@@ -355,38 +359,44 @@ class AccordionWidget(widgets.ScrollArea):
         layout.addStretch(1)
         self.setWidget(widget)
 
+    def _box(self) -> widgets.QVBoxLayout:
+        """The vertical layout set up in __init__ (last item is a stretch)."""
+        return cast(
+            "widgets.QVBoxLayout", cast("widgets.QWidget", self.widget()).layout()
+        )
+
     def setSpacing(self, space_int):
-        self.widget().layout().setSpacing(space_int)
+        self._box().setSpacing(space_int)
 
     def addItem(
         self,
-        title: object,
-        widget: object,
-        collapsed: object = False,
-        index: object = None,
-    ) -> object:
+        title: str,
+        widget: widgets.QWidget,
+        collapsed: bool = False,
+        index: int | None = None,
+    ) -> AccordionItem:
         with self.updates_off():
             item = self._ItemClass(widget, title=title, parent=self)
             item.set_rollout_style(self.get_rollout_style())
             item.set_dragdrop_enabled(self.is_dragdrop_enabled())
-            layout = self.widget().layout()
+            layout = self._box()
             if index is None:  # append if not specified index
                 index = layout.count() - 1
             layout.insertWidget(index, item)
             layout.setStretchFactor(item, 0)
             if collapsed:
-                item.setCollapsed(collapsed)
+                item.setCollapsed(bool(collapsed))
             return item
 
     def clear(self):
         with self.updates_off():
-            layout = self.widget().layout()
+            layout = self._box()
             while layout.count() > 1:
-                item = layout.itemAt(0)
-                w = item.widget()
-                layout.removeItem(item)
-                w.close()
-                w.deleteLater()
+                if (item := layout.takeAt(0)) is None:
+                    break
+                if (w := item.widget()) is not None:
+                    w.close()
+                    w.deleteLater()
 
     # def eventFilter(self, object, event) -> bool:
     #     if event.type() == QtCore.QEvent.Type.MouseButtonPress:
@@ -401,21 +411,16 @@ class AccordionWidget(widgets.ScrollArea):
     #     return False
 
     def count(self):
-        return self.widget().layout().count() - 1
+        return self._box().count() - 1
 
     def is_dragdrop_enabled(self) -> bool:
         return self._dragdrop_enabled
 
     def indexOf(self, widget):
-        layout = self.widget().layout()
-        return next(
-            (
-                index
-                for index in range(layout.count())
-                if layout.itemAt(index).widget().widget() == widget
-            ),
-            -1,
-        )
+        for index in range(self.count()):
+            if (item := self.itemAt(index)) is not None and item.widget() == widget:
+                return index
+        return -1
 
     def is_boxed_mode(self):
         return self._rollout_style == self.RolloutStyle.Boxed
@@ -426,10 +431,10 @@ class AccordionWidget(widgets.ScrollArea):
     def item_class(self):
         return self._ItemClass
 
-    def itemAt(self, index):
-        layout = self.widget().layout()
-        if 0 <= index < layout.count() - 1:
-            return layout.itemAt(index).widget()
+    def itemAt(self, index) -> AccordionItem | None:
+        layout = self._box()
+        if 0 <= index < layout.count() - 1 and (item := layout.itemAt(index)) is not None:
+            return cast("AccordionItem | None", item.widget())
         return None
 
     def enterEvent(self, event):
@@ -473,16 +478,20 @@ class AccordionWidget(widgets.ScrollArea):
         event.accept()
 
     def move_item_down(self, index):
-        layout = self.widget().layout()
-        if (layout.count() - 1) > (index + 1):
-            widget = layout.takeAt(index).widget()
+        layout = self._box()
+        if (
+            (layout.count() - 1) > (index + 1)
+            and (item := layout.takeAt(index))
+            and (widget := item.widget()) is not None
+        ):
             layout.insertWidget(index + 1, widget)
 
     def move_item_up(self, index):
         if index > 0:
-            layout = self.widget().layout()
-            widget = layout.takeAt(index).widget()
-            layout.insertWidget(index - 1, widget)
+            layout = self._box()
+            item = layout.takeAt(index)
+            if item is not None and (widget := item.widget()) is not None:
+                layout.insertWidget(index - 1, widget)
 
     def set_dragdrop_enabled(self, mode: bool):
         self._dragdrop_enabled = mode
@@ -501,13 +510,13 @@ class AccordionWidget(widgets.ScrollArea):
 
     def takeAt(self, index):
         with self.updates_off():
-            layout = self.widget().layout()
+            layout = self._box()
             widget = None
-            if 0 <= index < layout.count() - 1:
-                item = layout.itemAt(index)
+            if 0 <= index < layout.count() - 1 and (item := layout.itemAt(index)):
                 widget = item.widget()
                 layout.removeItem(item)
-                widget.close()
+                if widget is not None:
+                    widget.close()
             return widget
 
     def widgetAt(self, index):

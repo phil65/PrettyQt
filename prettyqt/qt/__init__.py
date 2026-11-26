@@ -90,7 +90,7 @@ API_NAME = API_NAMES[API]
 MODULE = sys.modules[API_NAME]
 
 
-def set_env_vars(qt_binding: Literal["PyQt6", "PySide6"]):
+def set_env_vars(qt_binding: str):
     env_vars = ["QT_API", "USE_QT_API", "PYTEST_QT_API", "PYQTGRAPH_QT_LIB"]
     for var in env_vars:
         os.environ[var] = qt_binding

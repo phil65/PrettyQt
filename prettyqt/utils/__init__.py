@@ -16,7 +16,8 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 KT = TypeVar("KT", bound=str)
-VT = TypeVar("VT", bound=enum.Enum)
+# Values are Qt enums, a few maps (ITEM_DATA_ROLE, EVENT_PRIORITY) also hold ints.
+VT = TypeVar("VT", bound=enum.Enum | int)
 
 
 class bidict(bdct.bidict[KT, VT]):  # noqa: N801

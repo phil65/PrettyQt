@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 
 class HeaderWrapper:
-    def __init__(self, indexer, widget: widgets.HeaderViewMixin):
+    def __init__(self, indexer, widget: HeaderViewMixin):
         self._widget = widget
         self._range = (
             range(

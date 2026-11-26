@@ -2,6 +2,7 @@
 
 import contextlib
 import sys
+from typing import cast
 from prettyqt.qt import QtCore
 
 
@@ -166,10 +167,10 @@ def update_property_group():
     QtCore.Qt.endPropertyUpdateGroup()
 
 
-def app(args: list[str] | None = None, **kwargs) -> QtCore.QCoreApplication:
-    # the running instance may be any (prettyqt) application class
+def app(args: list[str] | None = None, **kwargs) -> CoreApplication:
     if (instance := CoreApplication.instance()) is not None:
-        return instance
+        # Usually a prettyqt application; one created elsewhere is returned as is.
+        return cast("CoreApplication", instance)
     return CoreApplication(sys.argv if args is None else args, **kwargs)
 
 

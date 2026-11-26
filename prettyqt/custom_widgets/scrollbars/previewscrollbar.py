@@ -155,28 +155,6 @@ class PreviewScrollBar(widgets.ScrollBar):
                 0, int(handle_rect_y_pos), self._width, int(handle_rect_height), 5, 5
             )
 
-    def minimap_y_to_std_y(self, y: int) -> int:
-        #  Check if the minimap fills the whole scrollbar
-        if self.std_grove_rect.height() == self.map_grove_rect.height():
-            return y
-        #  check if y is on the step up/down
-        if (y < self.std_grove_rect.top()) or (y > self.std_grove_rect.bottom()):
-            return y
-        if y < self.map_grove_rect.top():
-            return self.std_grove_rect.top() + 1
-        if y > self.map_grove_rect.bottom():
-            return self.std_grove_rect.bottom() - 1
-        #  check for div/0
-        if self.map_grove_rect.height() == 0:
-            return y
-        new_y = (
-            (y - self.map_grove_rect.top())
-            * self.std_grove_rect.height()
-            / self.map_grove_rect.height()
-        )
-        new_y += self.std_grove_rect.top()
-        return new_y
-
 
 if __name__ == "__main__":
     app = widgets.app()
