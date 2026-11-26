@@ -1003,13 +1003,13 @@ def to_transform(transform: TransformType):
             raise TypeError(transform)
 
 
-def to_keysequence(sequence: KeySequenceType):
+def to_keysequence(sequence: KeySequenceType | QtGui.QKeySequence.StandardKey):
     from prettyqt import gui
 
     match sequence:
         case None:
             return gui.KeySequence("")
-        case QtCore.QKeyCombination():
+        case QtCore.QKeyCombination() | QtGui.QKeySequence.StandardKey():
             return gui.KeySequence(sequence)
         case gui.QKeySequence():
             return sequence

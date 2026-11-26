@@ -42,3 +42,11 @@ def test_datatypes_to_point():
 
     assert datatypes.to_point((1, 2)) == core.QPoint(1, 2)
     assert datatypes.to_point(core.QPointF(1.4, 2.6)) == core.QPoint(1, 3)
+
+
+def test_datatypes_to_keysequence_standard_key(qapp):
+    from prettyqt import gui
+    from prettyqt.utils import datatypes
+
+    seq = datatypes.to_keysequence(gui.QKeySequence.StandardKey.Copy)
+    assert seq == gui.QKeySequence(gui.QKeySequence.StandardKey.Copy)
