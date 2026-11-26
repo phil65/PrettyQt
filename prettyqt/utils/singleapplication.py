@@ -43,8 +43,8 @@ class SingleApplicationMixin(_SingleApplicationBase):
     def _activate_window(self):
         # bit dumb inheritance check to avoid importing QtWidgets so that this mixin
         # can also get used with QGuiApplication and QCoreApplication
-        if hasattr(self, "get_mainwindow"):
-            window = self.get_mainwindow()
+        if (get_mainwindow := getattr(self, "get_mainwindow", None)) is not None:
+            window = get_mainwindow()
             if window is None:
                 return
             window.raise_to_top()

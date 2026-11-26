@@ -5,7 +5,7 @@ import functools
 import logging
 import operator
 
-from typing import Any, TypeVar, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 import bidict as bdct
 
@@ -21,6 +21,7 @@ VT = TypeVar("VT", bound=enum.Enum)
 
 class bidict(bdct.bidict[KT, VT]):  # noqa: N801
     def __init__(self, *args, **kwargs):
+        mapping: dict[Any, Any]
         match args:
             case (dict(),):
                 mapping = args[0]
@@ -29,7 +30,7 @@ class bidict(bdct.bidict[KT, VT]):  # noqa: N801
         # Some bindings / platforms alias enum members (e.g. PySide6 on Windows
         # with Python 3.15 resolves AutoAll to AutoBulletList), so keep the
         # first key for a duplicated value instead of failing on import.
-        deduped: dict[KT, VT] = {}
+        deduped: dict[Any, Any] = {}
         seen: set = set()
         for k, v in mapping.items():
             if v in seen:
@@ -44,11 +45,12 @@ class bidict(bdct.bidict[KT, VT]):  # noqa: N801
         except KeyError as e:
             raise InvalidParamError(item, list(self.keys())) from e
 
-    def get_list(self, flag: enum.Enum) -> list[KT]:
-        return [k for k, v in self.items() if v & flag]
+    def get_list(self, flag: enum.Flag) -> list[KT]:
+        # only meaningful for Flag enums
+        return [k for k, v in self.items() if cast("enum.Flag", v) & flag]
 
-    def get_dict(self, flag: enum.Enum) -> dict[KT, VT]:
-        return {k: v & flag for k, v in self.items()}
+    def get_dict(self, flag: enum.Flag) -> dict[KT, VT]:
+        return {k: cast("VT", cast("enum.Flag", v) & flag) for k, v in self.items()}
 
     # def get_flag(self, **kwargs) -> dict[str, Any]:
     #     for k, v in kwargs.items():
@@ -63,7 +65,9 @@ class bidict(bdct.bidict[KT, VT]):  # noqa: N801
         return self[value] if isinstance(value, str) else value
 
     def get_str_value(self, value: KT | VT) -> KT:
-        return self.inverse[value] if isinstance(value, enum.Enum) else value
+        if isinstance(value, str):
+            return cast("KT", value)
+        return self.inverse[value]
 
 
 class InvalidParamError(ValueError):

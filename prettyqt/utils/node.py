@@ -39,10 +39,12 @@ class BaseNode:
     """A Node class that can be used to build trees."""
 
     # __slots__ = ("parent_item", "children")
+    parent_item: Self | None
+    children: list[Self]
 
     def __init__(self, parent: Self | None = None):
         self.parent_item = parent
-        self.children: list[Self] = []
+        self.children = []
 
     def __repr__(self):
         return get_repr(self)
@@ -116,8 +118,8 @@ class BaseNode:
         """Get sibling left of self."""
         if self.parent_item:
             children = self.parent_item.children
-            if child_idx := children.index(self):
-                return self.parent_item.children[child_idx - 1]
+            if child_idx := children.index(self):  # ty: ignore[invalid-argument-type]
+                return self.parent_item.children[child_idx - 1]  # ty: ignore[invalid-explicit-return]
             return None
         return None
 
@@ -126,9 +128,9 @@ class BaseNode:
         """Get sibling right of self."""
         if self.parent_item:
             children = self.parent_item.children
-            child_idx = children.index(self)
+            child_idx = children.index(self)  # ty: ignore[invalid-argument-type]
             if child_idx + 1 < len(children):
-                return self.parent_item.children[child_idx + 1]
+                return self.parent_item.children[child_idx + 1]  # ty: ignore[invalid-explicit-return]
             return None
         return None
 
@@ -167,7 +169,8 @@ class BaseNode:
         )
 
     def row(self) -> int:
-        return self.parent_item.children.index(self) if self.parent_item else 0
+        # ty binds Self per method, so list[Self] doesn't accept `self` here
+        return self.parent_item.children.index(self) if self.parent_item else 0  # ty: ignore[invalid-argument-type]
 
     def pretty_print(self, indent: int = 0):
         text = indent * "    " + repr(self)

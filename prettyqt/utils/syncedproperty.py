@@ -1,7 +1,7 @@
 # credits to
 # https://stackoverflow.com/questions/48425316/how-to-create-pyqt-properties-dynamically
 import functools
-from typing import ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 from prettyqt.qt import QtCore
 
@@ -31,6 +31,11 @@ class SyncedProperty:
     Instances of this class will be replaced with their full
     implementation by the PropertyMeta metaclass.
     """
+
+    if TYPE_CHECKING:
+        # what instances see after PropertyMeta replaced the definition
+        def __get__(self, instance: Any, owner: Any) -> Any: ...
+        def __set__(self, instance: Any, value: Any) -> None: ...
 
     def __init__(self, type_):
         self.type_ = type_

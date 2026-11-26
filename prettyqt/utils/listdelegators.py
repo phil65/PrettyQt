@@ -34,7 +34,7 @@ class ListDelegator[T](list[T]):
             # i.e. WidgetDelegator.
             case str():
                 return ListDelegator(
-                    [instance.__getitem__(index) for instance in self],
+                    [instance[index] for instance in self],  # ty: ignore[not-subscriptable]
                     parent=self._parent,
                 )
             case slice():
@@ -53,7 +53,8 @@ class ListDelegator[T](list[T]):
 
         # TODO: should implement a general way to deal with properties.
         if method_name == "fx":
-            return ListDelegator([instance.fx for instance in self], parent=self._parent)
+            fxs = [instance.fx for instance in self]  # ty: ignore[missing-attribute]  # widgets
+            return ListDelegator(fxs, parent=self._parent)
 
         def delegator(*args, **kwargs) -> list[Any]:
             results = []
@@ -132,7 +133,7 @@ class SplitterDelegator[T](ListDelegator[T]):
             def delegator(*args, **kwargs):
                 results = []
                 for instance in self:
-                    idx = self._parent.indexOf(instance)
+                    idx = self._parent.indexOf(instance)  # ty: ignore[missing-union-attribute]
                     result = getattr(self._parent, method_name)(idx, *args, **kwargs)
                     results.append(result)
                 return results

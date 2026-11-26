@@ -343,7 +343,20 @@ include = ["prettyqt"]
 [tool.ty.analysis]
 # Optional dependencies that are not always installed, e.g. "numpy", "numpy.**".
 # Unresolved imports are errors otherwise, so broken imports are caught.
-allowed-unresolved-imports = []
+# Project-specific (prettyqt): optional / platform-only imports, each only imported
+# lazily by the module that needs it.
+allowed-unresolved-imports = [
+  "PyInstaller.**",  # __pyinstaller hook
+  "attr",
+  "attrs",
+  "comtypes.**",  # Windows taskbar integration
+  "emoji",
+  "pandas",
+  "win32api",  # pywin32 (Windows only)
+  "win32con",
+  "win32gui",
+  "win32comext.**",
+]
 
 [tool.ty.rules]
 # Narrowing an overridden class attribute (e.g. pydantic discriminators,

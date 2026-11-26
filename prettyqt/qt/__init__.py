@@ -64,8 +64,8 @@ if API == "pyside6":
             __version__ as API_VERSION,  # noqa: F401, N812
         )  # analysis:ignore
         from PySide6.QtCore import (
-            __version__ as QT_VERSION,  # noqa: F401, N812
-        )  # analysis:ignore
+            __version__ as QT_VERSION,  # noqa: F401, N812  # ty: ignore[missing-module-member]
+        )
 
         PYSIDE6 = True
 

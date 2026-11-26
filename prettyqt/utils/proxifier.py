@@ -42,7 +42,9 @@ ProxyStr = Literal[
 
 
 class Sliced:
-    def __init__(self, indexer, widget: widgets.QAbstractItemView, proxifier: Proxifier):
+    def __init__(
+        self, indexer, widget: widgets.AbstractItemViewMixin, proxifier: Proxifier
+    ):
         if widget.model() is None:
             msg = "Need a model in order to proxify."
             raise RuntimeError(msg)
@@ -378,7 +380,7 @@ class Proxifier:
     ```
     """
 
-    def __init__(self, widget: widgets.QAbstractItemView):
+    def __init__(self, widget: widgets.AbstractItemViewMixin):
         self._widget = widget
         self._wrapper = None
 

@@ -100,17 +100,17 @@ class WindowsEffects:
         enable_shadow: bool = True,
         animation_id: int = 0,
     ):
-        gradient_color = "".join(gradient_color[i : i + 2] for i in range(6, -1, -2))
-        gradient_color = DWORD(int(gradient_color, base=16))
+        abgr = "".join(gradient_color[i : i + 2] for i in range(6, -1, -2))
+        gradient = DWORD(int(abgr, base=16))
         accent_flags = DWORD(0x20 | 0x40 | 0x80 | 0x100) if enable_shadow else DWORD(0)
-        animation_id = DWORD(animation_id)
+        animation = DWORD(animation_id)
 
         self.accent_policy.AccentState = (
             ACCENT_STATE.ACCENT_ENABLE_ACRYLICBLURBEHIND.value
         )
         self.accent_policy.AccentFlags = accent_flags
-        self.accent_policy.GradientColor = gradient_color
-        self.accent_policy.AnimationId = animation_id
+        self.accent_policy.GradientColor = gradient
+        self.accent_policy.AnimationId = animation
         self.set_win_comp_attr(int(h_wnd), pointer(self.win_comp_attr_data))
 
     def add_mica_effect(self, h_wnd: SupportsInt, dark_mode: bool = False):

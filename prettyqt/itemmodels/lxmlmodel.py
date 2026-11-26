@@ -1,7 +1,7 @@
 import io
 import logging
 
-from lxml import etree
+from lxml import etree  # ty: ignore[missing-module-member]  # compiled, no stubs
 
 from prettyqt import core, itemmodels
 

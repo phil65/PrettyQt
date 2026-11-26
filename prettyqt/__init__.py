@@ -28,6 +28,9 @@ def import_all():
     return mods
 
 
+_app = None  # keeps the application of debug() / show() alive
+
+
 def debug():
     """Print the local variables in the caller's frame."""
     frame = inspect.currentframe()
@@ -38,10 +41,11 @@ def debug():
     try:
         from prettyqt import custom_widgets, widgets
 
-        debug.app = widgets.app(organization_name="phil65", application_name="Prettyqt")
+        global _app
+        _app = widgets.app(organization_name="phil65", application_name="Prettyqt")
         objectbrowser = custom_widgets.ObjectBrowser(frame.f_back.f_globals, stack)
         objectbrowser.show()
-        debug.app.exec()
+        _app.exec()
     finally:
         del frame
 
@@ -50,9 +54,10 @@ def show(item):
     from prettyqt import core, debugging, widgets, itemmodels  # noqa
     from prettyqt.utils import classhelpers
 
-    debug.app = widgets.app(organization_name="phil65", application_name="Prettyqt")
+    global _app
+    _app = widgets.app(organization_name="phil65", application_name="Prettyqt")
     for klass in classhelpers.get_subclasses(core.QAbstractItemModel):
-        if "supports" in klass.__dict__ and klass.supports(item):
+        if "supports" in klass.__dict__ and klass.supports(item):  # ty: ignore[missing-attribute]
             if issubclass(klass, core.QAbstractTableModel):
                 viewer = widgets.TableView()
             else:
@@ -60,9 +65,9 @@ def show(item):
             instance = klass(item)
             viewer.set_model(instance)
             viewer.show()
-            debug.app.exec()
+            _app.exec()
             break
-    debug.app.exec()
+    _app.exec()
 
 
 __all__ = [

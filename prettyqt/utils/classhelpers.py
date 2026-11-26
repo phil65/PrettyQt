@@ -59,7 +59,9 @@ def to_module(
     """
     match module:
         case (str(), *_) | str():
-            module_path = module if isinstance(module, str) else ".".join(module)
+            module_path = (
+                module if isinstance(module, str) else ".".join(map(str, module))
+            )
             try:
                 return importlib.import_module(module_path)
             except ImportError, AttributeError:
@@ -83,7 +85,7 @@ def to_module_parts(module: Sequence[str] | str | types.ModuleType) -> tuple[str
     """
     match module:
         case (str(), *_):
-            return tuple(module)
+            return tuple(str(i) for i in module)
         case str():
             return tuple(module.split("."))
         case types.ModuleType():
@@ -178,9 +180,9 @@ def get_class_for_id[T: type](base_class: T, id_: str) -> T:
     )
     for base_kls in base_classes:
         for klass in get_subclasses(base_kls):
-            if "ID" in klass.__dict__ and id_ == klass.ID:
-                logger.debug("found class for id %r", klass.ID)
-                return klass
+            if klass.__dict__.get("ID") == id_:
+                logger.debug("found class for id %r", id_)
+                return typing.cast("T", klass)
     msg = f"Couldnt find class with id {id_!r} for base class {base_kls}"
     raise ValueError(msg)
 
@@ -203,9 +205,10 @@ def iter_classes_for_module(
         filter_by___all__: Whether to filter based on whats defined in __all__.
         recursive: import all submodules recursively and also yield their classes.
     """
-    module = to_module(module)
-    if not module:
+    mod = to_module(module)
+    if not mod:
         return
+    module = mod
     if recursive:
         for _name, submod in inspect.getmembers(module, inspect.ismodule):
             if submod.__name__.startswith(module_filter or ""):
@@ -218,7 +221,9 @@ def iter_classes_for_module(
                 )
     for klass_name, kls in inspect.getmembers(module, inspect.isclass):
         has_all = hasattr(module, "__all__")
-        if filter_by___all__ and (not has_all or klass_name not in module.__all__):
+        if filter_by___all__ and (
+            not has_all or klass_name not in getattr(module, "__all__", ())
+        ):
             continue
         if type_filter is not None and not issubclass(kls, type_filter):
             continue

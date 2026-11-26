@@ -1,6 +1,7 @@
 from collections import defaultdict
 import ctypes
 from ctypes import WINFUNCTYPE, FormatError, c_bool, c_int
+import ctypes.wintypes
 from ctypes.wintypes import UINT
 import logging
 from typing import TYPE_CHECKING, ClassVar, SupportsInt
@@ -19,7 +20,7 @@ logger = logging.getLogger(__name__)
 class GlobalHotKeyEventFilter(core.AbstractNativeEventFilter):
     _keybindings: ClassVar[defaultdict[str, list]] = defaultdict(list)
     # Key grab key -> number of grabs
-    _keygrabs: ClassVar[defaultdict[int]] = defaultdict(int)
+    _keygrabs: ClassVar[defaultdict[int, int]] = defaultdict(int)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

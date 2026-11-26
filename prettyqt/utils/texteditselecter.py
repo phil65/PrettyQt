@@ -161,6 +161,8 @@ class TextEditSelecter:
             logger.error("Malformed search/replace expression")
 
     def _searching_backwards(self) -> bool:
+        if self.search_flags is None:
+            return False
         return bool(gui.QTextDocument.FindFlag.FindBackward & self.search_flags)
 
     def search_next(self):

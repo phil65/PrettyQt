@@ -1,4 +1,5 @@
 import time
+from typing import TYPE_CHECKING, Any
 
 from prettyqt import core
 
@@ -9,6 +10,10 @@ class DebouncedSignal:
     Instances of this class will be replaced with a QObject holding a SignalInstance
      by the SignalMeta metaclass.
     """
+
+    if TYPE_CHECKING:
+        # what instances see after SignalMeta replaced the definition
+        def __get__(self, instance: Any, owner: Any) -> Any: ...
 
     def __init__(self, *args, **kwargs):
         self.args = args
@@ -30,7 +35,7 @@ class SignalMeta(type(core.QObject)):
             for k, v in to_replace.items():
                 self.__dict__[k] = get_debounced_signal(*v[0], **v[1])()
 
-        new_cls.__init__ = __init__
+        new_cls.__init__ = __init__  # ty: ignore[invalid-assignment]
         return new_cls
 
 
@@ -59,11 +64,11 @@ def get_debounced_signal(
     **kwargs,
 ):
     class DebouncedSignalImpl(BaseSignalImpl):
-        signal = core.Signal(*args)
+        signal = core.Signal(*args)  # ty: ignore[invalid-argument-type]  # type names work
 
         def __init__(self, *args):
             super().__init__()
-            self.last_tried_emission = ...  # just a sentinel value
+            self.last_tried_emission: tuple | None = None  # nothing tried yet
             self.debounce_time = debounce_time
             # self.last_emission_time = time.time()
             # self.last_emission_try = time.time()
@@ -84,6 +89,8 @@ def get_debounced_signal(
             # self.last_emission_time = time.time()
 
         def timer_emit(self):
+            if self.last_tried_emission is None:
+                return
             self.signal.emit(*self.last_tried_emission)
             self.last_emission_time = time.time()
             # print("emitted delayed", self.last_tried_emission)
