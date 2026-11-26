@@ -1,7 +1,7 @@
 # based on https://stackoverflow.com/questions/58891116/delegate-with-radio-buttons
 # credits to musicamante
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from prettyqt import constants, core, gui, widgets
 
@@ -10,12 +10,16 @@ if TYPE_CHECKING:
     from collections.abc import Iterable
 
 
+class _RadioEditor(widgets.Widget):
+    button_group: widgets.ButtonGroup
+
+
 class RadioDelegate(widgets.StyledItemDelegate):
     ID = "radio"
 
     def __init__(self, parent: widgets.QWidget, items: Iterable[str]):
         super().__init__(parent)
-        self.items = items
+        self.items = list(items)
         self.choices: list[int | None] = [None for _ in self.items]
 
     def createEditor(
@@ -24,7 +28,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         option: widgets.QStyleOptionViewItem,
         index: core.ModelIndex,
     ) -> widgets.Widget:
-        editor = widgets.Widget(parent=parent, margin=0, auto_fill_background=True)
+        editor = _RadioEditor(parent=parent, margin=0, auto_fill_background=True)
         # create a button group to keep track of the checked radio
         editor.button_group = widgets.ButtonGroup()
         # adding the widget as an argument to the layout constructor automatically
@@ -46,12 +50,15 @@ class RadioDelegate(widgets.StyledItemDelegate):
         return editor
 
     def eventFilter(self, source: core.QObject, event: core.QEvent) -> bool:
+        if not isinstance(source, widgets.QWidget):
+            return super().eventFilter(source, event)
         match event.type():
             case core.Event.Type.MouseButtonPress:
                 if isinstance(source, widgets.QRadioButton):
-                    if not source.parent().hasFocus():
+                    container = source.parentWidget()
+                    if container is not None and not container.hasFocus():
                         # the parent has no focus, set it and ignore the click
-                        source.parent().setFocus()
+                        container.setFocus()
                         return True
                 elif not source.hasFocus():
                     # the container has been clicked, check
@@ -65,7 +72,8 @@ class RadioDelegate(widgets.StyledItemDelegate):
                 source.setMask(source.property("offMask"))
                 # update the table viewport to get rid of possible
                 # grid lines left after masking
-                source.parent().update()
+                if (container := source.parentWidget()) is not None:
+                    container.update()
         return super().eventFilter(source, event)
 
     def updateEditorGeometry(
@@ -87,7 +95,9 @@ class RadioDelegate(widgets.StyledItemDelegate):
     def setEditorData(self, editor: widgets.QWidget, index: core.ModelIndex):
         value = index.data(constants.DISPLAY_ROLE)
         if value in self.items:
-            editor.button_group.button(self.items.index(value)).setChecked(True)
+            group = cast("_RadioEditor", editor).button_group
+            if (button := group.button(self.items.index(value))) is not None:
+                button.setChecked(True)
 
     def setModelData(
         self,
@@ -95,7 +105,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         model: core.QAbstractItemModel,
         index: core.ModelIndex,
     ):
-        button = editor.button_group.checkedId()
+        button = cast("_RadioEditor", editor).button_group.checkedId()
         if button >= 0:
             model.setData(
                 index,

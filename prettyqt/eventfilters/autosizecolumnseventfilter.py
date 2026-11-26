@@ -65,7 +65,7 @@ class AutoSizeColumnsEventFilter(eventfilters.BaseEventFilter):
                 col += 1
                 end = self._widget.columnAt(width)
                 end = colcount if end == -1 else end
-        else:
+        elif isinstance(self._widget, widgets.QTableView):  # rows: tables only
             rowcount = self._widget.model().rowCount()
             span = self._widget.get_visible_section_span("vertical")
             if span == self.last_span:

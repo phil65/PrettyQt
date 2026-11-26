@@ -12,7 +12,7 @@ class SectionAutoSpanEventFilter(eventfilters.BaseEventFilter):
 
     def __init__(
         self,
-        parent: widgets.TableView | widgets.TreeView,
+        parent: widgets.TableView,
         orientation: (
             constants.Orientation | constants.OrientationStr
         ) = constants.HORIZONTAL,

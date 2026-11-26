@@ -995,7 +995,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
             "bottom_right",
         ] = "center",
         *,
-        scale_ratio: int | None = None,
+        scale_ratio: float | None = None,
         x_offset: int = 0,
         y_offset: int = 0,
     ):

@@ -29,7 +29,8 @@ def timeit(func: Callable) -> Callable:
         result = func(*args, **kwargs)
         end_time = time.perf_counter()
         total_time = end_time - start_time
-        msg = f"Function {func.__name__}{args} {kwargs} Took {total_time:.4f} seconds"
+        name = getattr(func, "__name__", func)
+        msg = f"Function {name}{args} {kwargs} Took {total_time:.4f} seconds"
         logger.info(msg)
         return result
 
@@ -78,6 +79,8 @@ def is_deleted(obj) -> bool:
             from PyQt6 import sip
 
             return sip.isdeleted(obj)
+        case _:
+            raise ValueError(qt.API)
 
 
 def example_tree(flatten: bool = False):
@@ -165,7 +168,7 @@ def example_widget():
             layout2[0, 0] = widgets.PlainTextEdit("VerticalLayout left")
             layout2[0, 1] = widgets.PlainTextEdit("VerticalLayout right")
             layout2[1, 0:1] = example_table()
-    button.clicked.connect(lambda: widget.layout().addWidget(widgets.Label("test")))
+    button.clicked.connect(lambda: widget.box.addWidget(widgets.Label("test")))
     return widget
 
 

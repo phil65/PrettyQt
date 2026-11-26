@@ -1,4 +1,4 @@
-from prettyqt import constants, core, eventfilters, widgets
+from prettyqt import constants, core, eventfilters, gui, widgets
 
 
 CC = widgets.QStyle.ComplexControl
@@ -46,11 +46,11 @@ class SliderMoveToMouseClickEventFilter(eventfilters.BaseEventFilter):
 
     def eventFilter(self, source: widgets.QScrollBar, event: core.QEvent):
         match event.type():
-            case core.QEvent.Type.MouseMove:
+            case core.QEvent.Type.MouseMove if isinstance(event, gui.QMouseEvent):
                 if event.buttons() & constants.MouseButton.LeftButton:
                     point = event.position().toPoint()
                     self._move_to_mouse_position(source, point)
-            case core.QEvent.Type.MouseButtonPress:
+            case core.QEvent.Type.MouseButtonPress if isinstance(event, gui.QMouseEvent):
                 if event.button() == constants.MouseButton.LeftButton:
                     point = event.position().toPoint()
                     self._move_to_mouse_position(source, point)

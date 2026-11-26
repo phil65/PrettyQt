@@ -3,20 +3,20 @@ import contextlib
 
 # import enum
 import logging
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from prettyqt import constants, core, eventfilters, gui
 
 
 logger = logging.getLogger(__name__)
 
-T = TypeVar("T", bound=core.QObject)
+T = TypeVar("T", bound=core.QObject, default=core.QObject)
 
 
 class EventSignaller(core.Object):
     signal = core.Signal(core.QEvent)
 
-    def __init__(self, obj: core.QObject, **kwargs):
+    def __init__(self, obj: core.ObjectMixin, **kwargs):
         super().__init__(**kwargs)
         self._obj = obj
 
@@ -52,8 +52,8 @@ class Stalker(core.Object):
     def __init__(
         self,
         qobject: core.QObject,
-        include=None,
-        exclude=None,
+        include: core.event.TypeStr | list[core.event.TypeStr] | None = None,
+        exclude: core.event.TypeStr | list[core.event.TypeStr] | None = None,
         **kwargs: Any,
     ):
         self._log_level = logging.INFO
@@ -66,7 +66,9 @@ class Stalker(core.Object):
         self.signal_counter: collections.defaultdict[str, int] = collections.defaultdict(
             int
         )
-        self.exclude = ["meta_call", "timer"] if exclude is None else exclude
+        self.exclude: core.event.TypeStr | list[core.event.TypeStr] = (
+            ["meta_call", "timer"] if exclude is None else exclude
+        )
         self.include = include
         self._handles: list[core.QMetaObject.Connection] = []
 
@@ -79,7 +81,8 @@ class Stalker(core.Object):
 
     @property
     def eventsignals(self):
-        return EventSignaller(self._obj)
+        # needs a prettyqt object (add_callback_for_event)
+        return EventSignaller(cast("core.ObjectMixin", self._obj))
 
     def hook(self):
         # enable event logging by installing EventCatcher, which includes logging
@@ -91,8 +94,9 @@ class Stalker(core.Object):
         for signal in self._meta.get_signals(only_notifiers=False):
             signal_name = signal.get_name()
             # PyQt reports non-existing signals in MetaObject.
-            if hasattr(self._obj, signal_name):
-                signal_instance = getattr(self._obj, signal_name)
+            if not hasattr(self._obj, signal_name):
+                continue
+            signal_instance = getattr(self._obj, signal_name)
             fn = self._on_signal_emitted(signal)
             handle = signal_instance.connect(fn)
             self._handles.append(handle)
@@ -110,12 +114,12 @@ class Stalker(core.Object):
             logger.warning("unhook() called before hook()")
             return
         """Clean up our mess."""
-        self._obj.connectNotify = self.old_connectNotify
-        self._obj.disconnectNotify = self.old_disconnectNotify
+        self._obj.connectNotify = self.old_connectNotify  # ty: ignore[invalid-assignment]
+        self._obj.disconnectNotify = self.old_disconnectNotify  # ty: ignore[invalid-assignment]
         self.old_connectNotify = None
         self.old_disconnectNotify = None
         for handle in self._handles:
-            self._obj.disconnect(handle)
+            self._obj.disconnect(handle)  # ty: ignore[invalid-argument-type]  # a Connection
         self._handles = []
         with contextlib.suppress(RuntimeError):
             self._obj.removeEventFilter(self.eventcatcher)
@@ -171,7 +175,10 @@ class Stalker(core.Object):
     def get_log_level(self) -> int:
         return self._log_level
 
-    def count_children(self, type_filter: type[T] = core.QObject) -> collections.Counter:
+    def count_children(
+        self,
+        type_filter: type[T] = core.QObject,  # ty: ignore[invalid-parameter-default]
+    ) -> collections.Counter:
         objects = self.findChildren(type_filter)
         return collections.Counter([type(o) for o in objects])
 

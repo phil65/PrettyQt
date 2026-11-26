@@ -86,7 +86,7 @@ class ErrorMessageBox(widgets.MessageBox):
 # See https://github.com/napari/napari/blob/main/napari/utils/notifications.py
 
 
-def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str], str]:
+def get_tb_formatter(font: str = "Monospace") -> Callable[..., str]:
     """Return a formatter callable that uses IPython VerboseTB if available.
 
     Imports IPython lazily if available to take advantage of ultratb.VerboseTB,

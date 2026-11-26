@@ -49,6 +49,9 @@ class BaseMarkupDelegate(widgets.StyledItemDelegate):
         self.prepare_doc(option)
         return core.QSize(int(self.doc.idealWidth()), int(self.doc.size().height()))
 
+    def set_text(self, text: str):
+        raise NotImplementedError
+
     def prepare_doc(
         self,
         option: Any,  # widgets.QStyleOptionViewItem,

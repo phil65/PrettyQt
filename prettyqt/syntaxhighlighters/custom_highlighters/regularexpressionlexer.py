@@ -1,15 +1,13 @@
-from typing import ClassVar
-
 from pygments.lexer import RegexLexer, bygroups
 from pygments.token import Comment, Keyword, Name, Number, Operator, Text, Token
 
 
 class CustomLexer(RegexLexer):
     name = "regex"
-    aliases: ClassVar = ["regex"]
-    filenames: ClassVar[list[str]] = []
+    aliases = ["regex"]  # noqa: RUF012  # pygments declares these as instance attributes
+    filenames: list[str] = []  # noqa: RUF012
 
-    tokens: ClassVar = {
+    tokens = {  # noqa: RUF012
         "root": [
             (r"\w+", Name),
             (r"\d+", Number),

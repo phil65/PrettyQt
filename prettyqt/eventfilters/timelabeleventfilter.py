@@ -1,4 +1,6 @@
-from prettyqt import core, eventfilters
+from typing import cast
+
+from prettyqt import core, eventfilters, widgets
 
 
 class TextUpdateEventFilter(eventfilters.BaseEventFilter):
@@ -19,6 +21,9 @@ class TextUpdateEventFilter(eventfilters.BaseEventFilter):
     def _update_text(self):
         return NotImplemented
 
+    def _label(self) -> widgets.QLabel:
+        return cast("widgets.QLabel", self.parent())  # the label this filter is set on
+
 
 class TimeLabelEventFilter(TextUpdateEventFilter):
     ID = "time_label"
@@ -29,7 +34,7 @@ class TimeLabelEventFilter(TextUpdateEventFilter):
 
     def _update_text(self):
         time = core.Time.get_current_time()
-        self.parent().set_text(time.toString(self._format))
+        self._label().setText(time.toString(self._format))
 
 
 class DateLabelEventFilter(TextUpdateEventFilter):
@@ -41,7 +46,7 @@ class DateLabelEventFilter(TextUpdateEventFilter):
 
     def _update_text(self):
         time = core.Date.get_current_date()
-        self.parent().set_text(time.toString(self._format))
+        self._label().setText(time.toString(self._format))
 
 
 if __name__ == "__main__":

@@ -79,7 +79,7 @@ def _get_format_from_style(token: str, style: style.Style) -> gui.TextCharFormat
     """Return a QTextCharFormat for token by reading a Pygments style."""
     result = gui.TextCharFormat()
     try:
-        token_style = style.style_for_token(token)
+        token_style = style.style_for_token(token)  # ty: ignore[missing-attribute]  # StyleMeta
     except KeyError:
         return result
     for key, value in token_style.items():
@@ -217,7 +217,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
     def highlightBlock(self, string):
         """Highlight a block of text."""
         if (prev_data := self.currentBlock().previous().userData()) is not None:
-            self._lexer._saved_state_stack = prev_data.syntax_stack
+            self._lexer._saved_state_stack = prev_data.syntax_stack  # ty: ignore[missing-attribute]  # set by us
         elif hasattr(self._lexer, "_saved_state_stack"):
             del self._lexer._saved_state_stack
 
@@ -250,7 +250,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
                 raise TypeError(style)
         self._clear_caches()
 
-    def get_style(self) -> StyleStr:
+    def get_style(self) -> StyleStr | str:
         return self._stylename
 
     def adjust_style_to_palette(self):

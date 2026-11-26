@@ -1,7 +1,11 @@
 import re
-from typing import Literal
+from typing import TYPE_CHECKING, Literal, cast
 
 from prettyqt import core, gui
+
+
+if TYPE_CHECKING:
+    from prettyqt import widgets
 
 
 ModeStr = Literal["word", "all"]
@@ -18,7 +22,10 @@ class SelectedWordHighlighter(gui.SyntaxHighlighter):
         self._highlight_format.setBackground(gui.Color(255, 210, 120))
         self._highlight_format.setFontWeight(gui.QFont.Weight.Bold)
         self._highlight_pattern = None
-        self._widget = parent.parent()
+        if parent is None:
+            raise TypeError(parent)
+        # the document belongs to a prettyqt text edit
+        self._widget = cast("widgets.PlainTextEdit", parent.parent())
         self._widget.selectionChanged.connect(self._filter_selection_for_single_word)
 
     def set_selection_term(self, term: str):
@@ -55,6 +62,8 @@ class SelectedWordHighlighter(gui.SyntaxHighlighter):
             self._apply_highlight(text)
 
     def _apply_highlight(self, text):
+        if self._highlight_pattern is None:
+            return
         for m in self._highlight_pattern.finditer(text):
             length = m.span()[1] - m.span()[0]
             self.setFormat(m.span()[0], length, self._highlight_format)

@@ -1,6 +1,6 @@
 import enum
 import logging
-from typing import Any
+from typing import Any, cast
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import datatypes
@@ -135,7 +135,8 @@ class EditorDelegate(widgets.StyledItemDelegate):
     def setEditorData(self, editor: widgets.QWidget, index: core.ModelIndex):
         value = self._data_for_index(index, self._role)
         logger.info("setting data for %r to %r", editor, value)
-        editor.set_value(value)
+        # editors are prettyqt editor widgets with get_value() / set_value()
+        cast("Any", editor).set_value(value)
 
     def setModelData(
         self,
@@ -143,7 +144,7 @@ class EditorDelegate(widgets.StyledItemDelegate):
         model: core.QAbstractItemModel,
         index: core.ModelIndex,
     ):
-        if (value := editor.get_value()) is not None:
+        if (value := cast("Any", editor).get_value()) is not None:
             logger.info("setting data for %r to %r", model, value)
             model.setData(index, value, self._role)
             # self.closeEditor.emit(editor, self.EndEditHint.NoHint)

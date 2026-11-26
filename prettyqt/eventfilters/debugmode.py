@@ -1,6 +1,6 @@
 import logging
 
-from prettyqt import constants, core, eventfilters, widgets
+from prettyqt import constants, core, eventfilters, gui, widgets
 
 
 logger = logging.getLogger(__name__)
@@ -22,12 +22,18 @@ class DebugMode(eventfilters.BaseEventFilter):
     def eventFilter(self, source: core.QObject, event: core.QEvent) -> bool:
         border_keys = [constants.Key.Key_Control, constants.Key.Key_Alt]
         match event.type():
-            case core.Event.Type.KeyPress if event.key() in border_keys:
+            case core.Event.Type.KeyPress if (
+                isinstance(event, gui.QKeyEvent) and event.key() in border_keys
+            ):
                 with widgets.app().edit_stylesheet() as ss:
                     ss.QWidget.border.setValue("1px solid red")
-            case core.Event.Type.KeyRelease if event.key() in border_keys:
+            case core.Event.Type.KeyRelease if (
+                isinstance(event, gui.QKeyEvent) and event.key() in border_keys
+            ):
                 widgets.app().setStyleSheet("")
-            case core.Event.Type.MouseButtonPress:
+            case core.Event.Type.MouseButtonPress if isinstance(
+                event, gui.QMouseEvent
+            ) and isinstance(source, widgets.QWidget):
                 mods = widgets.Application.query_keyboard_modifiers()
                 if "ctrl" in mods:
                     pos = source.mapToGlobal(event.pos())

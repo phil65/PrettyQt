@@ -1,23 +1,28 @@
 # see https://github.com/ITVRoC/SeekurJr/blob/master/seekur_12.04/packages/
 # multimaster_fkie/node_manager_fkie/src/node_manager_fkie/yaml_highlighter.py
 
-from dataclasses import dataclass, field
 import re
+from typing import TYPE_CHECKING, ClassVar
 
 from prettyqt import gui
 
 
-@dataclass
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
+
+
 class HighlightRule:
-    regex: str | list[str] = ""
-    color: str = "black"
-    italic: bool = False
-    bold: bool = False
-    minimal: bool = False
-    font_size: float | None = None
-    nth: int = 0
-    compiled = None
-    fmt: gui.TextCharFormat = field(default_factory=gui.TextCharFormat)
+    """A highlighting rule, configured via class attributes of subclasses."""
+
+    regex: ClassVar[str | list[str]] = ""
+    color: ClassVar[datatypes.ColorType] = "black"
+    italic: ClassVar[bool] = False
+    bold: ClassVar[bool] = False
+    minimal: ClassVar[bool] = False
+    font_size: ClassVar[float | None] = None
+    nth: ClassVar[int] = 0
+    compiled: ClassVar[re.Pattern | list[re.Pattern] | None] = None
+    fmt: ClassVar[gui.TextCharFormat]
 
     def __init_subclass__(cls):
         super().__init_subclass__()

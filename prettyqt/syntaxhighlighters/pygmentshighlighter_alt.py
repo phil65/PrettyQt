@@ -135,7 +135,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
                 raise TypeError(style)
         self._formatter = QFormatter(style=self._stylename)
 
-    def get_style(self) -> StyleStr:
+    def get_style(self) -> StyleStr | str:
         return self._stylename
 
     def adjust_style_to_palette(self):

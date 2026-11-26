@@ -1,3 +1,5 @@
+from typing import cast
+
 from prettyqt import constants, core, gui, widgets
 
 
@@ -149,7 +151,7 @@ class StarDelegate(widgets.StyledItemDelegate):
         index: core.ModelIndex,
     ):
         """Get the data from our custom editor and stuffs it into the model."""
-        model.setData(index, editor.star_rating.star_count)
+        model.setData(index, cast("StarEditor", editor).star_rating.star_count)
 
     def commitAndCloseEditor(self):
         editor = self.sender()

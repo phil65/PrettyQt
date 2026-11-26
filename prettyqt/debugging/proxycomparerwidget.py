@@ -1,5 +1,5 @@
 import logging
-from typing import Literal
+from typing import Literal, cast
 
 from prettyqt import core, custom_widgets, itemmodels, widgets
 
@@ -40,7 +40,7 @@ class ProxyComparerWidget(widgets.Splitter):
             case "list":
                 view_cls = widgets.ListView
             case type():
-                view_cls = itemview
+                view_cls = cast("type[widgets.AbstractItemViewMixin]", itemview)
             case _:
                 raise TypeError(itemview)
 

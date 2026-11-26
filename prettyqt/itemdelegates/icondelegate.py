@@ -1,3 +1,5 @@
+from typing import cast
+
 from prettyqt import constants, core, gui, widgets
 
 
@@ -58,7 +60,7 @@ class IconDelegate(widgets.StyledItemDelegate):
                 option.decorationSize.boundedTo(actual_size)
             case _:
                 raise ValueError(value)
-        r = core.Rect(core.Point(), option.decorationSize)
+        r = core.Rect(core.Point(), cast("core.QSize", option.decorationSize))
         r.moveCenter(option.rect.center())
         r.setRight(option.rect.right() - self.margin)
         state = (

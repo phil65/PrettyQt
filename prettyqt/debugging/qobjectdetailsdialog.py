@@ -5,6 +5,7 @@ from prettyqt import (
     core,
     custom_widgets,
     debugging,
+    itemmodels,
     widgets,
 )
 
@@ -21,7 +22,8 @@ def get_tabbed(qobject: core.QObject, parent: widgets.QWidget | None = None):
     propertyview.h_header = custom_widgets.FilterHeader(propertyview)
     tabwidget.add_tab(propertyview, "Main")
 
-    if hasattr(qobject, "model") and (model := qobject.model()) is not None:
+    get_model = getattr(qobject, "model", None)
+    if callable(get_model) and (model := get_model()) is not None:
         while isinstance(model, core.QAbstractProxyModel):
             view = custom_widgets.QObjectPropertiesTableView(
                 object_name=f"property_view({type(model).__name__})",
@@ -80,7 +82,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
         stalker = debugging.Stalker(qobject, log_level=logging.DEBUG)
         stalker.hook()
         self.stalkers.append(stalker)
-        for widget in qobject.find_children(widgets.QWidget):
+        for widget in qobject.findChildren(widgets.QWidget):
             stalker = debugging.Stalker(widget, log_level=logging.DEBUG)
             stalker.hook()
             fn = functools.partial(self._on_widget_click, widget)
@@ -124,7 +126,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
 
     def _current_changed(self, new, old):
         # logger.info(f"{new=} {old=}")
-        role = self.hierarchyview.get_model(skip_proxies=True).Roles.WidgetRole
+        role = itemmodels.widgethierarchymodel.BaseHierarchyModel.Roles.WidgetRole
         if (qobject := self.hierarchyview.current_data(role)) is not None:
             self.propertyview.set_qobject(qobject)
 
@@ -140,6 +142,5 @@ if __name__ == "__main__":
     widget = debugging.example_widget()
     with app.debug_mode(log_level=logging.INFO):
         wnd = QObjectDetailsDialog(widget)
-        wnd.hierarchyview.select_object(None)
         wnd.show()
         app.exec()
