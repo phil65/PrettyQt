@@ -75,10 +75,13 @@ else:
 class TextCharFormatMixin(gui.TextFormatMixin, _TextCharFormatBase):
     def __init__(
         self,
-        text_color: datatypes.ColorType | gui.QBrush = None,
+        text_color: datatypes.ColorType | gui.QBrush | gui.QTextCharFormat = None,
         bold: bool = False,
         italic: bool = False,
     ):
+        if isinstance(text_color, gui.QTextCharFormat):  # copy constructor
+            super().__init__(text_color)
+            return
         super().__init__()
         if text_color is not None:
             self.set_foreground_color(text_color)

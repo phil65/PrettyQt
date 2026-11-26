@@ -791,6 +791,8 @@ def test_textcharformat():
     fmt = gui.TextCharFormat()
     fmt.set_font_weight("bold")
     assert fmt.get_font_weight() == "bold"
+    copied = gui.TextCharFormat(fmt)
+    assert copied.get_font_weight() == "bold"
     fmt.set_foreground_color("yellow")
     fmt.set_background_color("yellow")
     with pytest.raises(InvalidParamError):
