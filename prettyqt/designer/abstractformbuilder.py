@@ -1,7 +1,15 @@
+from typing import TYPE_CHECKING
+
 from prettyqt.qt import QtDesigner
 
 
-class AbstractFormBuilderMixin:
+if TYPE_CHECKING:
+    _AbstractFormBuilderBase = QtDesigner.QAbstractFormBuilder
+else:
+    _AbstractFormBuilderBase = object
+
+
+class AbstractFormBuilderMixin(_AbstractFormBuilderBase):
     pass
 
 

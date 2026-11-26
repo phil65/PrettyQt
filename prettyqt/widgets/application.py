@@ -62,7 +62,15 @@ def setup_runner() -> asyncrunner.AsyncRunner:
     return _runner
 
 
-class ApplicationMixin(gui.GuiApplicationMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _ApplicationBase = QtWidgets.QApplication
+else:
+    _ApplicationBase = object
+
+
+class ApplicationMixin(gui.GuiApplicationMixin, _ApplicationBase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._debug = False

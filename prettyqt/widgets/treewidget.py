@@ -1,8 +1,18 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import constants, core, widgets
 from prettyqt.utils import listdelegators
 
 
-class TreeWidgetMixin(widgets.TreeViewMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _TreeWidgetBase = QtWidgets.QTreeWidget
+else:
+    _TreeWidgetBase = object
+
+
+class TreeWidgetMixin(widgets.TreeViewMixin, _TreeWidgetBase):
     def __contains__(self, other: widgets.QTreeWidgetItem):
         return self.indexOfTopLevelItem(other) >= 0
 

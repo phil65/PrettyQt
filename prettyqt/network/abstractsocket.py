@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core, network
 from prettyqt.utils import bidict, get_repr
@@ -168,7 +168,15 @@ TYPE_OF_SERVICE: bidict[TypeOfServiceStr, int] = bidict(
 )
 
 
-class AbstractSocketMixin(core.IODeviceMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtNetwork
+
+    _AbstractSocketBase = QtNetwork.QAbstractSocket
+else:
+    _AbstractSocketBase = object
+
+
+class AbstractSocketMixin(core.IODeviceMixin, _AbstractSocketBase):
     def __repr__(self):
         return get_repr(self)
 

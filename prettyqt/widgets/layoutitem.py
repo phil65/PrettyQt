@@ -1,7 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import constants, widgets
 
 
-class LayoutItemMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _LayoutItemBase = QtWidgets.QLayoutItem
+else:
+    _LayoutItemBase = object
+
+
+class LayoutItemMixin(_LayoutItemBase):
     def __bool__(self):
         return not self.isEmpty()
 

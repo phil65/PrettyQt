@@ -7,7 +7,15 @@ if TYPE_CHECKING:
     from prettyqt.utils import datatypes
 
 
-class GeoRouteMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtLocation
+
+    _GeoRouteBase = QtLocation.QGeoRoute
+else:
+    _GeoRouteBase = object
+
+
+class GeoRouteMixin(_GeoRouteBase):
     def __setitem__(self, index: str, val: datatypes.Variant):
         attrs = self.extendedAttributes()
         attrs[index] = val

@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core, gui, qml
 from prettyqt.qt import QtQuick
@@ -74,7 +74,13 @@ TRANSFORM_ORIGIN: bidict[TransformOriginStr, QtQuick.QQuickItem.TransformOrigin]
 )
 
 
-class QuickItemMixin(core.ObjectMixin, qml.QmlParserStatusMixin):
+if TYPE_CHECKING:
+    _QuickItemBase = QtQuick.QQuickItem
+else:
+    _QuickItemBase = object
+
+
+class QuickItemMixin(core.ObjectMixin, qml.QmlParserStatusMixin, _QuickItemBase):
     def __getitem__(self, index: tuple[int, int]) -> QtQuick.QQuickItem:
         return self.childAt(*index)
 

@@ -1,9 +1,15 @@
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
 from prettyqt.qt import QtWidgets
 
 
-class StyleOptionMixin:
+if TYPE_CHECKING:
+    _StyleOptionBase = QtWidgets.QStyleOption
+else:
+    _StyleOptionBase = object
+
+
+class StyleOptionMixin(_StyleOptionBase):
     @classmethod
     def based_on(cls, widget: QtWidgets.QWidget) -> Self:
         opt = cls()

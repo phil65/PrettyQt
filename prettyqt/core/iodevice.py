@@ -1,5 +1,5 @@
 import contextlib
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
 from prettyqt.utils import bidict
@@ -34,7 +34,15 @@ OPEN_MODES: Literal[OpenModeStr, mod.OpenModeFlag] = bidict(
 )
 
 
-class IODeviceMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _IODeviceBase = QtCore.QIODevice
+else:
+    _IODeviceBase = object
+
+
+class IODeviceMixin(core.ObjectMixin, _IODeviceBase):
     def __len__(self):
         return self.size()
 

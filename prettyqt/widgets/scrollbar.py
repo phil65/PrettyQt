@@ -1,7 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import constants, core, widgets
 
 
-class ScrollBarMixin(widgets.AbstractSliderMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _ScrollBarBase = QtWidgets.QScrollBar
+else:
+    _ScrollBarBase = object
+
+
+class ScrollBarMixin(widgets.AbstractSliderMixin, _ScrollBarBase):
     value_changed = core.Signal(int)
 
     def __init__(

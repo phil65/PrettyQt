@@ -74,7 +74,15 @@ class ColumnItem:
         return constants.CheckState.Checked if value else constants.CheckState.Unchecked
 
 
-class ColumnItemModelMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _ColumnItemModelBase = QtCore.QAbstractItemModel
+else:
+    _ColumnItemModelBase = object
+
+
+class ColumnItemModelMixin(_ColumnItemModelBase):
     class ExtraRoles(enum.IntEnum):
         """Addional roles."""
 

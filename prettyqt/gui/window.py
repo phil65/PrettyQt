@@ -33,7 +33,15 @@ VISIBILITY: bidict[VisibilityStr, gui.QWindow.Visibility] = bidict(
 )
 
 
-class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _WindowBase = QtGui.QWindow
+else:
+    _WindowBase = object
+
+
+class WindowMixin(core.ObjectMixin, gui.SurfaceMixin, _WindowBase):
     def __repr__(self):
         return get_repr(self)
 

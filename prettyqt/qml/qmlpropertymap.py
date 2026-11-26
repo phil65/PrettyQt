@@ -1,11 +1,18 @@
 from collections.abc import MutableMapping
+from typing import TYPE_CHECKING
 
 from prettyqt import core
 from prettyqt.qt import QtQml
 from prettyqt.utils import datatypes, get_repr
 
 
-class QmlPropertyMapMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _QmlPropertyMapBase = QtQml.QQmlPropertyMap
+else:
+    _QmlPropertyMapBase = object
+
+
+class QmlPropertyMapMixin(core.ObjectMixin, _QmlPropertyMapBase):
     pass
 
 

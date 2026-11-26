@@ -1,9 +1,18 @@
 from collections.abc import Iterable
+from typing import TYPE_CHECKING
 
 from prettyqt import constants, core, widgets
 
 
-class TreeViewMixin(widgets.AbstractItemViewMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _TreeViewBase = QtWidgets.QTreeView
+else:
+    _TreeViewBase = object
+
+
+class TreeViewMixin(widgets.AbstractItemViewMixin, _TreeViewBase):
     def __init__(
         self,
         *args,

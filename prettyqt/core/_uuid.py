@@ -1,4 +1,4 @@
-from typing import Literal, Self
+from typing import TYPE_CHECKING, Literal, Self
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
@@ -35,7 +35,13 @@ VERSION: bidict[VersionStr, QtCore.QUuid.Version] = bidict(
 )
 
 
-class UuidMixin:
+if TYPE_CHECKING:
+    _UuidBase = QtCore.QUuid
+else:
+    _UuidBase = object
+
+
+class UuidMixin(_UuidBase):
     def __repr__(self):
         return get_repr(self, self.toString())
 

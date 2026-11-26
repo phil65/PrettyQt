@@ -19,7 +19,15 @@ OBJECT_OWNERSHIP: bidict[ObjectOwnershipStr, qml.QQmlEngine.ObjectOwnership] = b
 )
 
 
-class QmlEngineMixin(qml.JSEngineMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtQml
+
+    _QmlEngineBase = QtQml.QQmlEngine
+else:
+    _QmlEngineBase = object
+
+
+class QmlEngineMixin(qml.JSEngineMixin, _QmlEngineBase):
     def set_object_ownership(
         self,
         obj: core.QObject,

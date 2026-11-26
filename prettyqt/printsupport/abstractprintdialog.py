@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtPrintSupport
@@ -33,7 +33,13 @@ PrintDialogOptionStr = Literal[
 ]
 
 
-class AbstractPrintDialogMixin(widgets.DialogMixin):
+if TYPE_CHECKING:
+    _AbstractPrintDialogBase = QtPrintSupport.QAbstractPrintDialog
+else:
+    _AbstractPrintDialogBase = object
+
+
+class AbstractPrintDialogMixin(widgets.DialogMixin, _AbstractPrintDialogBase):
     def get_print_range(self) -> PrintRangeStr:
         return PRINT_RANGE.inverse[self.printRange()]
 

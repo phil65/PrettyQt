@@ -9,7 +9,15 @@ if TYPE_CHECKING:
     from prettyqt.utils import datatypes
 
 
-class VariantAnimationMixin(core.AbstractAnimationMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _VariantAnimationBase = QtCore.QVariantAnimation
+else:
+    _VariantAnimationBase = object
+
+
+class VariantAnimationMixin(core.AbstractAnimationMixin, _VariantAnimationBase):
     def __getitem__(self, value: float) -> datatypes.Variant:
         return self.keyValueAt(value)
 

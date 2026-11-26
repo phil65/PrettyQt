@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core, widgets
 from prettyqt.utils import bidict, datatypes
@@ -40,7 +40,15 @@ RESIZE_MODE: bidict[ResizeModeStr, widgets.QListView.ResizeMode] = bidict(
 )
 
 
-class ListViewMixin(widgets.AbstractItemViewMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _ListViewBase = QtWidgets.QListView
+else:
+    _ListViewBase = object
+
+
+class ListViewMixin(widgets.AbstractItemViewMixin, _ListViewBase):
     def _get_map(self):
         maps = super()._get_map()
         maps |= {

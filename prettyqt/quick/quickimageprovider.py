@@ -1,8 +1,16 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import qml
 from prettyqt.qt import QtQuick
 
 
-class QuickImageProviderMixin(qml.QmlImageProviderBaseMixin):
+if TYPE_CHECKING:
+    _QuickImageProviderBase = QtQuick.QQuickImageProvider
+else:
+    _QuickImageProviderBase = object
+
+
+class QuickImageProviderMixin(qml.QmlImageProviderBaseMixin, _QuickImageProviderBase):
     pass
 
 

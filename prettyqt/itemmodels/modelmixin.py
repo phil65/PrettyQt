@@ -7,7 +7,15 @@ if TYPE_CHECKING:
     from prettyqt import core
 
 
-class ModelMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _ModelBase = QtCore.QAbstractItemModel
+else:
+    _ModelBase = object
+
+
+class ModelMixin(_ModelBase):
     DTYPE_ROLE = constants.USER_ROLE + 1  # type: ignore
     HEADER: ClassVar = ["Name"]
     LABELS: ClassVar = {}

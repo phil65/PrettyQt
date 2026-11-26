@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import bidict, datatypes
@@ -71,7 +71,15 @@ class TabBarWrapper:
         return fn
 
 
-class TabBarMixin(widgets.WidgetMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _TabBarBase = QtWidgets.QTabBar
+else:
+    _TabBarBase = object
+
+
+class TabBarMixin(widgets.WidgetMixin, _TabBarBase):
     tab_doubleclicked = core.Signal(int, core.QPoint)
 
     def __init__(self, *args, **kwargs) -> None:

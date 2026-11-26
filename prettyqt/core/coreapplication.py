@@ -16,7 +16,15 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class CoreApplicationMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _CoreApplicationBase = QtCore.QCoreApplication
+else:
+    _CoreApplicationBase = object
+
+
+class CoreApplicationMixin(core.ObjectMixin, _CoreApplicationBase):
     translators: ClassVar[dict[str, core.Translator]] = {}
 
     @classmethod

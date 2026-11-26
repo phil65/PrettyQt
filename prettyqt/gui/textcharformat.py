@@ -64,7 +64,15 @@ VERTICAL_ALIGNMENT: bidict[
 )
 
 
-class TextCharFormatMixin(gui.TextFormatMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _TextCharFormatBase = QtGui.QTextCharFormat
+else:
+    _TextCharFormatBase = object
+
+
+class TextCharFormatMixin(gui.TextFormatMixin, _TextCharFormatBase):
     def __init__(
         self,
         text_color: datatypes.ColorType | gui.QBrush = None,

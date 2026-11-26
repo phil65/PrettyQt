@@ -1,7 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import constants, core, widgets
 
 
-class TableWidgetMixin(widgets.TableViewMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _TableWidgetBase = QtWidgets.QTableWidget
+else:
+    _TableWidgetBase = object
+
+
+class TableWidgetMixin(widgets.TableViewMixin, _TableWidgetBase):
     def __getitem__(self, index: tuple[int, int]) -> widgets.QTableWidgetItem:
         item = self.item(*index)
         if item is None:

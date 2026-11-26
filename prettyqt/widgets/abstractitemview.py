@@ -130,7 +130,15 @@ STATE: bidict[StateStr, widgets.QAbstractItemView.State] = bidict(
 )
 
 
-class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _AbstractItemViewBase = QtWidgets.QAbstractItemView
+else:
+    _AbstractItemViewBase = object
+
+
+class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin, _AbstractItemViewBase):
     model_changed = core.Signal(core.QAbstractItemModel)
 
     def __init__(

@@ -7,7 +7,15 @@ if TYPE_CHECKING:
     from prettyqt.utils import datatypes
 
 
-class HelpEngineCoreMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtHelp
+
+    _HelpEngineCoreBase = QtHelp.QHelpEngineCore
+else:
+    _HelpEngineCoreBase = object
+
+
+class HelpEngineCoreMixin(core.ObjectMixin, _HelpEngineCoreBase):
     """The core functionality of the help system."""
 
     def get_file_data(self, url: core.QUrl) -> bytes:

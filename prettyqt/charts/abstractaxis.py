@@ -1,8 +1,16 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCharts
 
 
-class AbstractAxisMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _AbstractAxisBase = QtCharts.QAbstractAxis
+else:
+    _AbstractAxisBase = object
+
+
+class AbstractAxisMixin(core.ObjectMixin, _AbstractAxisBase):
     def get_alignment(self) -> constants.SideStr | None:
         """Return current alignment.
 

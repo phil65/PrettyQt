@@ -41,7 +41,15 @@ def get_signals(klass):
     return _signals[klass]
 
 
-class ObjectMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _ObjectBase = QtCore.QObject
+else:
+    _ObjectBase = object
+
+
+class ObjectMixin(_ObjectBase):
     def __init__(self, *args, **kwargs):
         self._eventfilters = set()
         # klass = type(self)

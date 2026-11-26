@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtStateMachine
@@ -15,7 +15,13 @@ TRANSITION_TYPE: bidict[
 )
 
 
-class AbstractTransitionMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _AbstractTransitionBase = QtStateMachine.QAbstractTransition
+else:
+    _AbstractTransitionBase = object
+
+
+class AbstractTransitionMixin(core.ObjectMixin, _AbstractTransitionBase):
     def set_transition_type(
         self, typ: TransitionTypeStr | QtStateMachine.QAbstractTransition.TransitionType
     ):

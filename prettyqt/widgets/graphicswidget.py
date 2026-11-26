@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.utils import datatypes
@@ -7,7 +7,17 @@ from prettyqt.utils import datatypes
 LayoutStr = Literal["grid", "horizontal", "vertical", "anchor"]
 
 
-class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutItemMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _GraphicsWidgetBase = QtWidgets.QGraphicsWidget
+else:
+    _GraphicsWidgetBase = object
+
+
+class GraphicsWidgetMixin(
+    widgets.GraphicsObjectMixin, widgets.GraphicsLayoutItemMixin, _GraphicsWidgetBase
+):
     @property
     def box(self):
         return self.layout()

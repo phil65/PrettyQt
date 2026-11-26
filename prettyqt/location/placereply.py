@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtLocation
@@ -52,7 +52,13 @@ TypeStr = Literal[
 ]
 
 
-class PlaceReplyMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _PlaceReplyBase = QtLocation.QPlaceReply
+else:
+    _PlaceReplyBase = object
+
+
+class PlaceReplyMixin(core.ObjectMixin, _PlaceReplyBase):
     def get_error(self) -> ErrorStr:
         """Return error type.
 

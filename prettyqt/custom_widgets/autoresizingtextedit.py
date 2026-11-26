@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core, widgets
 
 
@@ -5,7 +7,15 @@ PM = widgets.QStyle.PixelMetric
 SH = widgets.QStyle.StyleHint
 
 
-class AutoResizeTextEditMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _AutoResizeTextEditBase = QtWidgets.QAbstractScrollArea
+else:
+    _AutoResizeTextEditBase = object
+
+
+class AutoResizeTextEditMixin(_AutoResizeTextEditBase):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.set_line_wrap_mode("none")

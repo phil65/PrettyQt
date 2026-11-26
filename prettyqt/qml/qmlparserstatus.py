@@ -1,7 +1,15 @@
+from typing import TYPE_CHECKING
+
 from prettyqt.qt import QtQml
 
 
-class QmlParserStatusMixin:
+if TYPE_CHECKING:
+    _QmlParserStatusBase = QtQml.QQmlParserStatus
+else:
+    _QmlParserStatusBase = object
+
+
+class QmlParserStatusMixin(_QmlParserStatusBase):
     pass
 
 

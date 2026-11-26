@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, get_repr
@@ -23,7 +23,13 @@ SURFACE_TYPES = bidict(
 SurfaceTypeStr = Literal["raster", "open_gl", "raster_gl", "open_vg", "vulkan", "metal"]
 
 
-class SurfaceMixin:
+if TYPE_CHECKING:
+    _SurfaceBase = QtGui.QSurface
+else:
+    _SurfaceBase = object
+
+
+class SurfaceMixin(_SurfaceBase):
     def __repr__(self):
         return get_repr(self)
 

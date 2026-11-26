@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtPositioning
@@ -26,7 +26,13 @@ ERRORS = bidict(
 ErrorStr = Literal["access_error", "closed_error", "none", "unknown_source"]
 
 
-class GeoPositionInfoSourceMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _GeoPositionInfoSourceBase = QtPositioning.QGeoPositionInfoSource
+else:
+    _GeoPositionInfoSourceBase = object
+
+
+class GeoPositionInfoSourceMixin(core.ObjectMixin, _GeoPositionInfoSourceBase):
     def __str__(self):
         return self.sourceName()
 

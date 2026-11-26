@@ -33,7 +33,15 @@ PositionPossibilityType = (
 )
 
 
-class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _WidgetBase = QtWidgets.QWidget
+else:
+    _WidgetBase = object
+
+
+class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
     def __init__(self, *args, margin: int | None = None, **kwargs):
         super().__init__(*args, **kwargs)
         self.fx = animations.Fx(self)

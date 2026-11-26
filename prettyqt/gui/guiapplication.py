@@ -13,7 +13,15 @@ if TYPE_CHECKING:
 DEFAULT_WINDOW_ICON_COLOR = "darkcyan"
 
 
-class GuiApplicationMixin(core.CoreApplicationMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _GuiApplicationBase = QtGui.QGuiApplication
+else:
+    _GuiApplicationBase = object
+
+
+class GuiApplicationMixin(core.CoreApplicationMixin, _GuiApplicationBase):
     palette_changed = core.Signal(gui.Palette)
 
     def __init__(self, *args, **kwargs):

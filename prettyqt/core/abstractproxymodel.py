@@ -12,7 +12,15 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class AbstractProxyModelMixin(core.AbstractItemModelMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _AbstractProxyModelBase = QtCore.QAbstractProxyModel
+else:
+    _AbstractProxyModelBase = object
+
+
+class AbstractProxyModelMixin(core.AbstractItemModelMixin, _AbstractProxyModelBase):
     ID = ""
     ICON = "mdi.table-edit"
 

@@ -1,8 +1,16 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core
 from prettyqt.qt import QtScxml
 
 
-class ScxmlDataModelMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _ScxmlDataModelBase = QtScxml.QScxmlDataModel
+else:
+    _ScxmlDataModelBase = object
+
+
+class ScxmlDataModelMixin(core.ObjectMixin, _ScxmlDataModelBase):
     pass
 
 

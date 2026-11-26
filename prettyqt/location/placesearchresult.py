@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import location
 from prettyqt.utils import bidict
@@ -13,7 +13,15 @@ TYPE = bidict(
 TypeStr = Literal["unknown", "place", "proposed_search"]
 
 
-class PlaceSearchResultMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtLocation
+
+    _PlaceSearchResultBase = QtLocation.QPlaceSearchResult
+else:
+    _PlaceSearchResultBase = object
+
+
+class PlaceSearchResultMixin(_PlaceSearchResultBase):
     def get_icon(self) -> location.PlaceIcon | None:
         icon = self.icon()
         return None if icon.isEmpty() else location.PlaceIcon(icon)

@@ -52,7 +52,15 @@ RENDER_HINTS: bidict[RenderHintStr, gui.QPainter.RenderHint] = bidict(
 )
 
 
-class PainterMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _PainterBase = QtGui.QPainter
+else:
+    _PainterBase = object
+
+
+class PainterMixin(_PainterBase):
     def __enter__(self):
         return self
 

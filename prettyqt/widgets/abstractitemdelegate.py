@@ -1,4 +1,5 @@
 import logging
+from typing import TYPE_CHECKING
 
 from prettyqt import constants, core
 from prettyqt.qt import QtWidgets
@@ -7,7 +8,13 @@ from prettyqt.qt import QtWidgets
 logger = logging.getLogger(__name__)
 
 
-class AbstractItemDelegateMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _AbstractItemDelegateBase = QtWidgets.QAbstractItemDelegate
+else:
+    _AbstractItemDelegateBase = object
+
+
+class AbstractItemDelegateMixin(core.ObjectMixin, _AbstractItemDelegateBase):
     # this pattern doesnt work for PySide6 yet (cant pass kwargs for class definition)
     # _registry = {}
 

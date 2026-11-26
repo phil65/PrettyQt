@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core, qml
 from prettyqt.utils import bidict
 
@@ -10,7 +12,15 @@ EXTENSIONS = bidict(
 )
 
 
-class JSEngineMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtQml
+
+    _JSEngineBase = QtQml.QJSEngine
+else:
+    _JSEngineBase = object
+
+
+class JSEngineMixin(core.ObjectMixin, _JSEngineBase):
     def install_extensions(self, extension: str, obj: qml.QJSValue | None = None):
         if obj is None:
             obj = qml.QJSValue()

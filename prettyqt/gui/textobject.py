@@ -1,8 +1,18 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core, gui
 from prettyqt.utils import get_repr
 
 
-class TextObjectMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _TextObjectBase = QtGui.QTextObject
+else:
+    _TextObjectBase = object
+
+
+class TextObjectMixin(core.ObjectMixin, _TextObjectBase):
     def __repr__(self):
         return get_repr(self)
 

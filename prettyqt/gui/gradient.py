@@ -128,7 +128,15 @@ PRESET: bidict[PresetStr, gui.QGradient.Preset] = bidict(
 )
 
 
-class GradientMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _GradientBase = QtGui.QGradient
+else:
+    _GradientBase = object
+
+
+class GradientMixin(_GradientBase):
     def __setitem__(self, key: float, value: datatypes.ColorType):
         self.set_color_at(key, value)
 

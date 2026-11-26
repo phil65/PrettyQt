@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import bidict, datatypes
@@ -49,7 +49,15 @@ VIEWPORT_UPDATE_MODE: bidict[ViewportUpdateModeStr, mod.ViewportUpdateMode] = bi
 )
 
 
-class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _GraphicsViewBase = QtWidgets.QGraphicsView
+else:
+    _GraphicsViewBase = object
+
+
+class GraphicsViewMixin(widgets.AbstractScrollAreaMixin, _GraphicsViewBase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if not args or not isinstance(args[0], widgets.QGraphicsScene):

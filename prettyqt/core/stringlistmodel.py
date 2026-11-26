@@ -1,7 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core
 
 
-class StringListModelMixin(core.AbstractListModelMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _StringListModelBase = QtCore.QStringListModel
+else:
+    _StringListModelBase = object
+
+
+class StringListModelMixin(core.AbstractListModelMixin, _StringListModelBase):
     pass
 
 

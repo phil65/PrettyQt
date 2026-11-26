@@ -1,7 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core, gui
 
 
-class SyntaxHighlighterMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _SyntaxHighlighterBase = QtGui.QSyntaxHighlighter
+else:
+    _SyntaxHighlighterBase = object
+
+
+class SyntaxHighlighterMixin(core.ObjectMixin, _SyntaxHighlighterBase):
     def __init__(self, parent: core.QObject | None = None):
         super().__init__(parent)  # type: ignore
 

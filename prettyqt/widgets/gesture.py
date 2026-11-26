@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.utils import bidict
@@ -14,7 +14,15 @@ GESTURE_CANCEL_POLICY: bidict[
 )
 
 
-class GestureMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _GestureBase = QtWidgets.QGesture
+else:
+    _GestureBase = object
+
+
+class GestureMixin(core.ObjectMixin, _GestureBase):
     def get_state(self) -> constants.GestureStateStr:
         """Return current state.
 

@@ -65,7 +65,15 @@ SizeConstraintStr = Literal[
 LayoutTypeStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]
 
 
-class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _LayoutBase = QtWidgets.QLayout
+else:
+    _LayoutBase = object
+
+
+class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, _LayoutBase):
     def __init__(self, *args, margin=None, **kwargs):
         self._next_container = None
         self._stack = []

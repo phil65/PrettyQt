@@ -21,7 +21,15 @@ def _sort_key(value: Any) -> tuple:
             return (1, 0, str(value))
 
 
-class ListMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _ListBase = QtCore.QAbstractItemModel
+else:
+    _ListBase = object
+
+
+class ListMixin(_ListBase):
     """Mixin for flat models which are backed by a python list (`self.items`).
 
     Provides the list interface (`append`, `pop`, `__getitem__` etc.) with correct

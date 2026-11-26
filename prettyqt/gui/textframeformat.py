@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import gui
 from prettyqt.utils import bidict
@@ -41,7 +41,15 @@ BORDER_STYLES: bidict[BorderStyleStr, gui.QTextFrameFormat.BorderStyle] = bidict
 )
 
 
-class TextFrameFormatMixin(gui.TextFormatMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _TextFrameFormatBase = QtGui.QTextFrameFormat
+else:
+    _TextFrameFormatBase = object
+
+
+class TextFrameFormatMixin(gui.TextFormatMixin, _TextFrameFormatBase):
     def get_height(self) -> gui.TextLength:
         length = self.height()
         return gui.TextLength(length.type(), length.rawValue())

@@ -1,7 +1,19 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import gui
 
 
-class PaintDeviceWindowMixin(gui.WindowMixin, gui.PaintDeviceMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _PaintDeviceWindowBase = QtGui.QPaintDeviceWindow
+else:
+    _PaintDeviceWindowBase = object
+
+
+class PaintDeviceWindowMixin(
+    gui.WindowMixin, gui.PaintDeviceMixin, _PaintDeviceWindowBase
+):
     pass
 
 

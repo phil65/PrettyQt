@@ -93,7 +93,15 @@ WIZARD_STYLE: bidict[WizardStyleStr, mod.WizardStyle] = bidict(
 )
 
 
-class WizardMixin(widgets.DialogMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _WizardBase = QtWidgets.QWizard
+else:
+    _WizardBase = object
+
+
+class WizardMixin(widgets.DialogMixin, _WizardBase):
     custom_button_1_clicked = core.Signal()
     custom_button_2_clicked = core.Signal()
     custom_button_3_clicked = core.Signal()

@@ -1,7 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import widgets
 
 
-class StyleOptionComplexMixin(widgets.StyleOptionMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _StyleOptionComplexBase = QtWidgets.QStyleOptionComplex
+else:
+    _StyleOptionComplexBase = object
+
+
+class StyleOptionComplexMixin(widgets.StyleOptionMixin, _StyleOptionComplexBase):
     pass
 
 

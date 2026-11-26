@@ -1,8 +1,16 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core
 from prettyqt.qt import QtGui
 
 
-class UndoGroupMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _UndoGroupBase = QtGui.QUndoGroup
+else:
+    _UndoGroupBase = object
+
+
+class UndoGroupMixin(core.ObjectMixin, _UndoGroupBase):
     def __len__(self) -> int:
         return len(self.stacks())
 

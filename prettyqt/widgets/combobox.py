@@ -46,7 +46,15 @@ SIZE_ADJUST_POLICY: bidict[SizeAdjustPolicyStr, mod.SizeAdjustPolicy] = bidict(
 )
 
 
-class ComboBoxMixin(widgets.WidgetMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _ComboBoxBase = QtWidgets.QComboBox
+else:
+    _ComboBoxBase = object
+
+
+class ComboBoxMixin(widgets.WidgetMixin, _ComboBoxBase):
     """Combobox that lets the user select a font family."""
 
     value_changed = core.Signal(object)

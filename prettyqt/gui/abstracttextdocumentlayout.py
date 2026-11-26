@@ -1,9 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import constants, core
 from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes, get_repr
 
 
-class AbstractTextDocumentLayoutMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _AbstractTextDocumentLayoutBase = QtGui.QAbstractTextDocumentLayout
+else:
+    _AbstractTextDocumentLayoutBase = object
+
+
+class AbstractTextDocumentLayoutMixin(core.ObjectMixin, _AbstractTextDocumentLayoutBase):
     def __repr__(self):
         return get_repr(self)
 

@@ -1,5 +1,5 @@
 import datetime as dt
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.utils import bidict, datatypes
@@ -30,7 +30,15 @@ SECTIONS: bidict[SectionStr, widgets.QDateTimeEdit.Section] = bidict(
 )
 
 
-class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _DateTimeEditBase = QtWidgets.QDateTimeEdit
+else:
+    _DateTimeEditBase = object
+
+
+class DateTimeEditMixin(widgets.AbstractSpinBoxMixin, _DateTimeEditBase):
     """Widget for editing dates and times."""
 
     value_changed = core.Signal(dt.datetime)

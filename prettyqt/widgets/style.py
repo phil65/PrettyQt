@@ -754,7 +754,15 @@ State: bidict[StateStr, st] = bidict(
 )
 
 
-class StyleMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _StyleBase = QtWidgets.QStyle
+else:
+    _StyleBase = object
+
+
+class StyleMixin(core.ObjectMixin, _StyleBase):
     def draw_primitive(
         self,
         element: SubControlStr | mod.SubControl,

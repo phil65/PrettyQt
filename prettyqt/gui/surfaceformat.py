@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, get_repr
@@ -54,7 +54,13 @@ SWAP_BEHAVIOR = bidict(
 SwapBehaviorStr = Literal["default", "single", "double", "triple"]
 
 
-class SurfaceFormatMixin:
+if TYPE_CHECKING:
+    _SurfaceFormatBase = QtGui.QSurfaceFormat
+else:
+    _SurfaceFormatBase = object
+
+
+class SurfaceFormatMixin(_SurfaceFormatBase):
     def __repr__(self):
         return get_repr(self)
 

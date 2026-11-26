@@ -33,7 +33,13 @@ OPTIONS = bidict(
 OptionStr = Literal["dont_use_custom_dir_icons"]
 
 
-class AbstractFileIconProviderMixin:
+if TYPE_CHECKING:
+    _AbstractFileIconProviderBase = QtGui.QAbstractFileIconProvider
+else:
+    _AbstractFileIconProviderBase = object
+
+
+class AbstractFileIconProviderMixin(_AbstractFileIconProviderBase):
     def get_type(self, file: core.QFileInfo | datatypes.PathType) -> str:
         if isinstance(file, os.PathLike):
             file = core.FileInfo(file)

@@ -28,7 +28,15 @@ LINE_WRAP_MODE: bidict[LineWrapModeStr, widgets.QTextEdit.LineWrapMode] = bidict
 )
 
 
-class TextEditMixin(widgets.AbstractScrollAreaMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _TextEditBase = QtWidgets.QTextEdit
+else:
+    _TextEditBase = object
+
+
+class TextEditMixin(widgets.AbstractScrollAreaMixin, _TextEditBase):
     value_changed = core.Signal(str)
 
     def __init__(self, *args, **kwargs) -> None:

@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import widgets
 from prettyqt.utils import bidict
@@ -14,7 +14,15 @@ DIRECTION: bidict[DirectionStr, widgets.QBoxLayout.Direction] = bidict(
 )
 
 
-class BoxLayoutMixin(widgets.LayoutMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _BoxLayoutBase = QtWidgets.QBoxLayout
+else:
+    _BoxLayoutBase = object
+
+
+class BoxLayoutMixin(widgets.LayoutMixin, _BoxLayoutBase):
     # def __init__(
     #     self,
     #     orientation: Literal["horizontal", "vertical"] = "horizontal",

@@ -8,7 +8,15 @@ if TYPE_CHECKING:
     from prettyqt import gui
 
 
-class PushButtonMixin(widgets.AbstractButtonMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _PushButtonBase = QtWidgets.QPushButton
+else:
+    _PushButtonBase = object
+
+
+class PushButtonMixin(widgets.AbstractButtonMixin, _PushButtonBase):
     value_changed = core.Signal(bool)
 
     def __init__(self, *args, **kwargs):

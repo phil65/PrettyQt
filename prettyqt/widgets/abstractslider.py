@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.utils import bidict
@@ -27,7 +27,15 @@ SLIDER_ACTION: bidict[SliderActionStr, widgets.QAbstractSlider.SliderAction] = b
 )
 
 
-class AbstractSliderMixin(widgets.WidgetMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _AbstractSliderBase = QtWidgets.QAbstractSlider
+else:
+    _AbstractSliderBase = object
+
+
+class AbstractSliderMixin(widgets.WidgetMixin, _AbstractSliderBase):
     value_changed = core.Signal(int)
 
     def _get_map(self):

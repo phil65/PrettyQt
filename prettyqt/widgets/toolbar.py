@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtGui
@@ -8,7 +8,15 @@ from prettyqt.utils import datatypes, get_repr, listdelegators
 # from typing import Any
 
 
-class ToolBarMixin(widgets.WidgetMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _ToolBarBase = QtWidgets.QToolBar
+else:
+    _ToolBarBase = object
+
+
+class ToolBarMixin(widgets.WidgetMixin, _ToolBarBase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_icon_size(24)

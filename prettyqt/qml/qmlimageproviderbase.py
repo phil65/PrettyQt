@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from prettyqt.qt import QtQml
 from prettyqt.utils import bidict
 
@@ -17,7 +19,13 @@ IMAGE_TYPE = bidict(
 )
 
 
-class QmlImageProviderBaseMixin:
+if TYPE_CHECKING:
+    _QmlImageProviderBaseBase = QtQml.QQmlImageProviderBase
+else:
+    _QmlImageProviderBaseBase = object
+
+
+class QmlImageProviderBaseMixin(_QmlImageProviderBaseBase):
     pass
 
 

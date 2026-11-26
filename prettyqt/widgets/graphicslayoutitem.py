@@ -1,10 +1,19 @@
 import functools
+from typing import TYPE_CHECKING
 
 from prettyqt import widgets
 from prettyqt.utils import get_repr
 
 
-class GraphicsLayoutItemMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _GraphicsLayoutItemBase = QtWidgets.QGraphicsLayoutItem
+else:
+    _GraphicsLayoutItemBase = object
+
+
+class GraphicsLayoutItemMixin(_GraphicsLayoutItemBase):
     def __repr__(self):
         return get_repr(self)
 

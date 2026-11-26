@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import widgets
 from prettyqt.utils import bidict
@@ -11,7 +11,15 @@ SHAPE = bidict(
 ShapeStr = Literal["line", "rectangle"]
 
 
-class RubberBandMixin(widgets.WidgetMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _RubberBandBase = QtWidgets.QRubberBand
+else:
+    _RubberBandBase = object
+
+
+class RubberBandMixin(widgets.WidgetMixin, _RubberBandBase):
     def __init__(
         self,
         shape: ShapeStr | widgets.QRubberBand.Shape,

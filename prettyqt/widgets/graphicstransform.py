@@ -1,8 +1,16 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core
 from prettyqt.qt import QtWidgets
 
 
-class GraphicsTransformMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _GraphicsTransformBase = QtWidgets.QGraphicsTransform
+else:
+    _GraphicsTransformBase = object
+
+
+class GraphicsTransformMixin(core.ObjectMixin, _GraphicsTransformBase):
     pass
 
 

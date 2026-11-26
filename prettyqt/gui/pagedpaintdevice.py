@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import gui
 from prettyqt.utils import bidict
@@ -13,7 +13,15 @@ PDF_VERSION = bidict(
 PdfVersionStr = Literal["v1_4", "va1b", "v1_6"]
 
 
-class PagedPaintDeviceMixin(gui.PaintDeviceMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _PagedPaintDeviceBase = QtGui.QPagedPaintDevice
+else:
+    _PagedPaintDeviceBase = object
+
+
+class PagedPaintDeviceMixin(gui.PaintDeviceMixin, _PagedPaintDeviceBase):
     def get_page_ranges(self) -> list[gui.PageRanges]:
         return [gui.PageRanges(i) for i in self.pageRanges()]
 

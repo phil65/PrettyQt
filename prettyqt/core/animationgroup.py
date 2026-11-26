@@ -10,7 +10,15 @@ if TYPE_CHECKING:
     from prettyqt import widgets
 
 
-class AnimationGroupMixin(core.AbstractAnimationMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _AnimationGroupBase = QtCore.QAnimationGroup
+else:
+    _AnimationGroupBase = object
+
+
+class AnimationGroupMixin(core.AbstractAnimationMixin, _AnimationGroupBase):
     @overload
     def __getitem__(self, index: int) -> core.QAbstractAnimation: ...
 

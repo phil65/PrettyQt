@@ -60,7 +60,15 @@ META_INFORMATION: bidict[MetaInformationStr, gui.QTextDocument.MetaInformation] 
 )
 
 
-class TextDocumentMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _TextDocumentBase = QtGui.QTextDocument
+else:
+    _TextDocumentBase = object
+
+
+class TextDocumentMixin(core.ObjectMixin, _TextDocumentBase):
     def __getitem__(self, index: int) -> gui.TextBlock:
         return gui.TextBlock(self.findBlockByNumber(index))
 

@@ -11,7 +11,15 @@ if TYPE_CHECKING:
     from prettyqt.utils import datatypes
 
 
-class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _PixmapBase = QtGui.QPixmap
+else:
+    _PixmapBase = object
+
+
+class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin, _PixmapBase):
     """Off-screen image representation that can be used as a paint device."""
 
     def __bool__(self):

@@ -8,7 +8,15 @@ if TYPE_CHECKING:
     from collections.abc import Iterator
 
 
-class SplitterMixin(widgets.FrameMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _SplitterBase = QtWidgets.QSplitter
+else:
+    _SplitterBase = object
+
+
+class SplitterMixin(widgets.FrameMixin, _SplitterBase):
     def __init__(
         self,
         orientation: constants.OrientationStr | constants.Orientation = "horizontal",

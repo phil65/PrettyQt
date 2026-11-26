@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import charts
 from prettyqt.utils import bidict
@@ -16,7 +16,15 @@ LABELS_POSITIONS: bidict[LabelsPositionStr, charts.QAbstractBarSeries.LabelsPosi
 )
 
 
-class AbstractBarSeriesMixin(charts.AbstractSeriesMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCharts
+
+    _AbstractBarSeriesBase = QtCharts.QAbstractBarSeries
+else:
+    _AbstractBarSeriesBase = object
+
+
+class AbstractBarSeriesMixin(charts.AbstractSeriesMixin, _AbstractBarSeriesBase):
     def __delitem__(self, item: int | charts.QBarSet):
         """Implements `del series[0]`."""
         if isinstance(item, int):

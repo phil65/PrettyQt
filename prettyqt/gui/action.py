@@ -48,7 +48,15 @@ MENU_ROLE: bidict[MenuRoleStr, gui.QAction.MenuRole] = bidict(
 )
 
 
-class ActionMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _ActionBase = QtGui.QAction
+else:
+    _ActionBase = object
+
+
+class ActionMixin(core.ObjectMixin, _ActionBase):
     def __init__(
         self,
         *args,

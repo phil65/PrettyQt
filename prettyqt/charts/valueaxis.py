@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import charts
 from prettyqt.utils import bidict
@@ -12,7 +12,15 @@ TICK_TYPES: bidict[TickTypeStr, charts.QValueAxis.TickType] = bidict(
 )
 
 
-class ValueAxisMixin(charts.AbstractAxisMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCharts
+
+    _ValueAxisBase = QtCharts.QValueAxis
+else:
+    _ValueAxisBase = object
+
+
+class ValueAxisMixin(charts.AbstractAxisMixin, _ValueAxisBase):
     def set_tick_type(self, tick_type: TickTypeStr | charts.QValueAxis.TickType):
         """Set the tick type of the legend.
 

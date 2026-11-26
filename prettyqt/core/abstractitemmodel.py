@@ -37,7 +37,15 @@ LAYOUT_CHANGE_HINT: bidict[
 )
 
 
-class AbstractItemModelMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _AbstractItemModelBase = QtCore.QAbstractItemModel
+else:
+    _AbstractItemModelBase = object
+
+
+class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
     IS_RECURSIVE = False  # for docs
     DELEGATE_DEFAULT = None
     DEFAULT_FLAGS = (

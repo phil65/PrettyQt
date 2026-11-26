@@ -1,7 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core, network
 
 
-class SingleApplicationMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _SingleApplicationBase = QtCore.QCoreApplication
+else:
+    _SingleApplicationBase = object
+
+
+class SingleApplicationMixin(_SingleApplicationBase):
     message_received = core.Signal(str)
 
     def __init__(self, *args, **kwargs):

@@ -9,7 +9,15 @@ if TYPE_CHECKING:
     from prettyqt.utils import datatypes
 
 
-class MenuMixin(widgets.WidgetMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _MenuBase = QtWidgets.QMenu
+else:
+    _MenuBase = object
+
+
+class MenuMixin(widgets.WidgetMixin, _MenuBase):
     def __init__(self, *args, tool_tips_visible=True, **kwargs):
         super().__init__(*args, tool_tips_visible=tool_tips_visible, **kwargs)
 

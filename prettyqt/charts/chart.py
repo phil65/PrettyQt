@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import charts, constants, core, gui, widgets
 from prettyqt.utils import bidict, datatypes
@@ -45,7 +45,15 @@ CHART_TYPES: bidict[ChartTypeStr, charts.QChart.ChartType] = bidict(
 )
 
 
-class ChartMixin(widgets.GraphicsWidgetMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCharts
+
+    _ChartBase = QtCharts.QChart
+else:
+    _ChartBase = object
+
+
+class ChartMixin(widgets.GraphicsWidgetMixin, _ChartBase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.max_x = 0

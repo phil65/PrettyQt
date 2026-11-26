@@ -1,5 +1,5 @@
 import functools
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
 from prettyqt.utils import bidict
@@ -30,7 +30,15 @@ STATE: bidict[StateStr, core.QAbstractAnimation.State] = bidict(
 )
 
 
-class AbstractAnimationMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _AbstractAnimationBase = QtCore.QAbstractAnimation
+else:
+    _AbstractAnimationBase = object
+
+
+class AbstractAnimationMixin(core.ObjectMixin, _AbstractAnimationBase):
     """The base of all animations."""
 
     def __len__(self):

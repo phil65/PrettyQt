@@ -1,9 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core
 from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
-class ValidatorMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _ValidatorBase = QtGui.QValidator
+else:
+    _ValidatorBase = object
+
+
+class ValidatorMixin(core.ObjectMixin, _ValidatorBase):
     def __repr__(self):
         return get_repr(self)
 

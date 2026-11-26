@@ -1,8 +1,18 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.utils import datatypes
 
 
-class AbstractButtonMixin(widgets.WidgetMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _AbstractButtonBase = QtWidgets.QAbstractButton
+else:
+    _AbstractButtonBase = object
+
+
+class AbstractButtonMixin(widgets.WidgetMixin, _AbstractButtonBase):
     """Abstract button widget base class, providing functionality common to buttons."""
 
     def __bool__(self):

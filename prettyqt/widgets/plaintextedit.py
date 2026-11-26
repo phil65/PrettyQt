@@ -16,7 +16,15 @@ LINE_WRAP_MODE = bidict(
 LineWrapModeStr = Literal["none", "widget_width"]
 
 
-class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _PlainTextEditBase = QtWidgets.QPlainTextEdit
+else:
+    _PlainTextEditBase = object
+
+
+class PlainTextEditMixin(widgets.AbstractScrollAreaMixin, _PlainTextEditBase):
     value_changed = core.Signal(str)
 
     def __init__(self, text: str = "", **kwargs):

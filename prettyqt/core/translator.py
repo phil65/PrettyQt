@@ -8,7 +8,15 @@ if TYPE_CHECKING:
     from prettyqt.utils import datatypes
 
 
-class TranslatorMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _TranslatorBase = QtCore.QTranslator
+else:
+    _TranslatorBase = object
+
+
+class TranslatorMixin(core.ObjectMixin, _TranslatorBase):
     def __bool__(self):
         return not self.isEmpty()
 

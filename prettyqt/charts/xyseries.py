@@ -9,7 +9,15 @@ if TYPE_CHECKING:
     from prettyqt import core
 
 
-class XYSeriesMixin(charts.AbstractSeriesMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCharts
+
+    _XYSeriesBase = QtCharts.QXYSeries
+else:
+    _XYSeriesBase = object
+
+
+class XYSeriesMixin(charts.AbstractSeriesMixin, _XYSeriesBase):
     def __setitem__(self, index: int, val: datatypes.PointFType):
         """Set point at given index to value."""
         self.replace(index, datatypes.to_pointf(val))

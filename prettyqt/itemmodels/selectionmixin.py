@@ -9,7 +9,15 @@ if TYPE_CHECKING:
     from prettyqt import core
 
 
-class SelectionMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _SelectionBase = QtCore.QAbstractItemModel
+else:
+    _SelectionBase = object
+
+
+class SelectionMixin(_SelectionBase):
     CHECKSTATE: ClassVar[dict[int, Callable]] = {}  # column: identifier
     dataChanged: core.Signal  # noqa: N815
 

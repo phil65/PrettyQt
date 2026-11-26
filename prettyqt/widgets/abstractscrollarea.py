@@ -19,7 +19,15 @@ SIZE_ADJUST_POLICY: bidict[SizeAdjustPolicyStr, area.SizeAdjustPolicy] = bidict(
 )
 
 
-class AbstractScrollAreaMixin(widgets.FrameMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _AbstractScrollAreaBase = QtWidgets.QAbstractScrollArea
+else:
+    _AbstractScrollAreaBase = object
+
+
+class AbstractScrollAreaMixin(widgets.FrameMixin, _AbstractScrollAreaBase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setHorizontalScrollBar(widgets.ScrollBar(parent=self))

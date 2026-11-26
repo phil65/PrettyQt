@@ -84,7 +84,15 @@ PERMISSIONS: bidict[PermissionStr, core.QFileDevice.Permission] = bidict(
 )
 
 
-class FileDeviceMixin(core.IODeviceMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _FileDeviceBase = QtCore.QFileDevice
+else:
+    _FileDeviceBase = object
+
+
+class FileDeviceMixin(core.IODeviceMixin, _FileDeviceBase):
     """Interface for reading from and writing to open files."""
 
     def __repr__(self):

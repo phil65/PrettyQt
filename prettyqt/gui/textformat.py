@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, gui
 from prettyqt.utils import bidict, get_repr
@@ -34,7 +34,15 @@ PAGE_BREAK_FLAG = bidict(
 PageBreakFlagStr = Literal["auto", "always_before", "always_after"]
 
 
-class TextFormatMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _TextFormatBase = QtGui.QTextFormat
+else:
+    _TextFormatBase = object
+
+
+class TextFormatMixin(_TextFormatBase):
     def __getitem__(self, key: int):
         return self.property(key)
 

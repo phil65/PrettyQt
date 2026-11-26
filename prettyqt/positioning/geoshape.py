@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from prettyqt.qt import QtPositioning
 from prettyqt.utils import bidict
 
@@ -11,7 +13,13 @@ SHAPE_TYPES = bidict(
 )
 
 
-class GeoShapeMixin:
+if TYPE_CHECKING:
+    _GeoShapeBase = QtPositioning.QGeoShape
+else:
+    _GeoShapeBase = object
+
+
+class GeoShapeMixin(_GeoShapeBase):
     def __contains__(self, other: QtPositioning.QGeoCoordinate):
         return self.contains(other)
 

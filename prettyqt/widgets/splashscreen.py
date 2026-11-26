@@ -8,7 +8,15 @@ if TYPE_CHECKING:
     from prettyqt.utils import datatypes
 
 
-class SplashScreenMixin(widgets.WidgetMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _SplashScreenBase = QtWidgets.QSplashScreen
+else:
+    _SplashScreenBase = object
+
+
+class SplashScreenMixin(widgets.WidgetMixin, _SplashScreenBase):
     def __init__(self, *args, **kwargs):
         match args:
             case (os.PathLike(), *rest):

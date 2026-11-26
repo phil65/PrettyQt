@@ -8,7 +8,15 @@ if TYPE_CHECKING:
     from collections.abc import Callable
 
 
-class UndoStackMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtGui
+
+    _UndoStackBase = QtGui.QUndoStack
+else:
+    _UndoStackBase = object
+
+
+class UndoStackMixin(core.ObjectMixin, _UndoStackBase):
     def __len__(self) -> int:
         return self.count()
 

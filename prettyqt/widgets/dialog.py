@@ -1,7 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import constants, widgets
 
 
-class DialogMixin(widgets.WidgetMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _DialogBase = QtWidgets.QDialog
+else:
+    _DialogBase = object
+
+
+class DialogMixin(widgets.WidgetMixin, _DialogBase):
     def __init__(
         self,
         *args,

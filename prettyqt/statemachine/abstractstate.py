@@ -1,8 +1,16 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core
 from prettyqt.qt import QtStateMachine
 
 
-class AbstractStateMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _AbstractStateBase = QtStateMachine.QAbstractState
+else:
+    _AbstractStateBase = object
+
+
+class AbstractStateMixin(core.ObjectMixin, _AbstractStateBase):
     pass
 
 

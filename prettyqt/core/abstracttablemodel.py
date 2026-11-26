@@ -1,7 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import constants, core
 
 
-class AbstractTableModelMixin(core.AbstractItemModelMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _AbstractTableModelBase = QtCore.QAbstractTableModel
+else:
+    _AbstractTableModelBase = object
+
+
+class AbstractTableModelMixin(core.AbstractItemModelMixin, _AbstractTableModelBase):
     DEFAULT_FLAGS = (
         constants.DRAG_ENABLED
         | constants.IS_ENABLED

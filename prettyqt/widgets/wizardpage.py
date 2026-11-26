@@ -1,7 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import gui, widgets
 
 
-class WizardPageMixin(widgets.WidgetMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _WizardPageBase = QtWidgets.QWizardPage
+else:
+    _WizardPageBase = object
+
+
+class WizardPageMixin(widgets.WidgetMixin, _WizardPageBase):
     def set_pixmap(
         self,
         typ: widgets.wizard.WizardPixmapStr | widgets.QWizard.WizardPixmap,

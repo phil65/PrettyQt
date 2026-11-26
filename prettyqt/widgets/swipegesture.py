@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import widgets
 from prettyqt.utils import bidict
@@ -18,7 +18,15 @@ HorizontalDirectionStr = Literal["none", "left", "right"]
 VerticalDirectionStr = Literal["none", "up", "down"]
 
 
-class SwipeGestureMixin(widgets.GestureMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _SwipeGestureBase = QtWidgets.QSwipeGesture
+else:
+    _SwipeGestureBase = object
+
+
+class SwipeGestureMixin(widgets.GestureMixin, _SwipeGestureBase):
     def get_horizontal_direction(self) -> HorizontalDirectionStr:
         """Return horizontal direction of the gesture.
 

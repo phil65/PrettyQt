@@ -8,7 +8,15 @@ if TYPE_CHECKING:
     from collections.abc import Iterator
 
 
-class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _GraphicsLayoutBase = QtWidgets.QGraphicsLayout
+else:
+    _GraphicsLayoutBase = object
+
+
+class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin, _GraphicsLayoutBase):
     def __getitem__(
         self, index: int | slice
     ) -> widgets.QGraphicsItem | listdelegators.ListDelegator[widgets.QGraphicsItem]:

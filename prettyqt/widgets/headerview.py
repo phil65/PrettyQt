@@ -66,7 +66,15 @@ class HeaderWrapper:
         ) and self._widget.is_in_visual_range(self._range.stop)
 
 
-class HeaderViewMixin(widgets.AbstractItemViewMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _HeaderViewBase = QtWidgets.QHeaderView
+else:
+    _HeaderViewBase = object
+
+
+class HeaderViewMixin(widgets.AbstractItemViewMixin, _HeaderViewBase):
     section_visiblity_changed = core.Signal(int, bool)
     section_resized_by_user = core.Signal(int, int, int)
 

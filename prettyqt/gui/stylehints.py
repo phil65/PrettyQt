@@ -1,8 +1,16 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import constants, core
 from prettyqt.qt import QtGui
 
 
-class StyleHintsMixin(core.ObjectMixin):
+if TYPE_CHECKING:
+    _StyleHintsBase = QtGui.QStyleHints
+else:
+    _StyleHintsBase = object
+
+
+class StyleHintsMixin(core.ObjectMixin, _StyleHintsBase):
     def get_color_scheme(self) -> constants.ColorSchemeStr:
         """Return current color scheme of the system.
 

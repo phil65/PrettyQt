@@ -42,7 +42,13 @@ STEP_ENABLED_FLAG: bidict[StepEnabledFlagStr, QtWidgets.QSpinBox.StepEnabledFlag
 )
 
 
-class AbstractSpinBoxMixin(widgets.WidgetMixin):
+if TYPE_CHECKING:
+    _AbstractSpinBoxBase = QtWidgets.QAbstractSpinBox
+else:
+    _AbstractSpinBoxBase = object
+
+
+class AbstractSpinBoxMixin(widgets.WidgetMixin, _AbstractSpinBoxBase):
     def __init__(self, *args, show_group_separator: bool = True, **kwargs):
         super().__init__(*args, show_group_separator=show_group_separator, **kwargs)
         self.setLineEdit(widgets.LineEdit(parent=self))

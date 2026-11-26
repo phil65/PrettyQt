@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import location
 from prettyqt.utils import bidict
@@ -15,7 +15,15 @@ TYPE = bidict(
 TypeStr = Literal["none", "image", "review", "editorial", "custom"]
 
 
-class PlaceContentMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtLocation
+
+    _PlaceContentBase = QtLocation.QPlaceContent
+else:
+    _PlaceContentBase = object
+
+
+class PlaceContentMixin(_PlaceContentBase):
     def get_type(self) -> TypeStr:
         """Return the visibility of the place.
 

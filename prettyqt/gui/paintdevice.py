@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
@@ -35,7 +35,13 @@ MetricStr = Literal[
 ]
 
 
-class PaintDeviceMixin:
+if TYPE_CHECKING:
+    _PaintDeviceBase = QtGui.QPaintDevice
+else:
+    _PaintDeviceBase = object
+
+
+class PaintDeviceMixin(_PaintDeviceBase):
     def get_metric(self, metric: MetricStr | QtGui.QPaintDevice.PaintDeviceMetric) -> int:
         """Return metric information.
 

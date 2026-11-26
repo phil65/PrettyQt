@@ -1,7 +1,17 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core
 
 
-class AbstractListModelMixin(core.AbstractItemModelMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _AbstractListModelBase = QtCore.QAbstractListModel
+else:
+    _AbstractListModelBase = object
+
+
+class AbstractListModelMixin(core.AbstractItemModelMixin, _AbstractListModelBase):
     pass
 
 

@@ -21,7 +21,15 @@ OPTIONS: bidict[OptionStr, widgets.QFileSystemModel.Option] = bidict(
 )
 
 
-class FileSystemModelMixin:
+if TYPE_CHECKING:
+    from prettyqt.qt import QtCore
+
+    _FileSystemModelBase = QtCore.QAbstractItemModel
+else:
+    _FileSystemModelBase = object
+
+
+class FileSystemModelMixin(_FileSystemModelBase):
     """Class to populate a filesystem treeview."""
 
     DATA_ROLE = constants.USER_ROLE + 33  # type: ignore

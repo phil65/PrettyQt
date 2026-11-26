@@ -27,7 +27,13 @@ CACHE_MODE: bidict[CacheModeStr, QtWidgets.QGraphicsItem.CacheMode] = bidict(
 )
 
 
-class GraphicsItemMixin:
+if TYPE_CHECKING:
+    _GraphicsItemBase = QtWidgets.QGraphicsItem
+else:
+    _GraphicsItemBase = object
+
+
+class GraphicsItemMixin(_GraphicsItemBase):
     def __repr__(self):
         return get_repr(self)
 

@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import statemachine
 from prettyqt.utils import bidict
@@ -19,7 +19,15 @@ RESTORE_POLICY: bidict[RestorePolicyStr, statemachine.QState.RestorePolicy] = bi
 )
 
 
-class StateMixin(statemachine.AbstractStateMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtStateMachine
+
+    _StateBase = QtStateMachine.QState
+else:
+    _StateBase = object
+
+
+class StateMixin(statemachine.AbstractStateMixin, _StateBase):
     def set_child_mode(self, mode: ChildModeStr | statemachine.QState.ChildMode):
         """Set child mode to use.
 

@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import widgets
 from prettyqt.utils import bidict, datatypes
@@ -27,7 +27,15 @@ FRAME_SHAPE: bidict[FrameShapeStr, widgets.QFrame.Shape] = bidict(
 )
 
 
-class FrameMixin(widgets.WidgetMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _FrameBase = QtWidgets.QFrame
+else:
+    _FrameBase = object
+
+
+class FrameMixin(widgets.WidgetMixin, _FrameBase):
     def _get_map(self):
         maps = super()._get_map()
         maps |= {"frameShape": FRAME_SHAPE, "frameShadow": SHADOW}

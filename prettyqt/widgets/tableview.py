@@ -1,4 +1,5 @@
 import logging
+from typing import TYPE_CHECKING
 
 from prettyqt import constants, widgets
 
@@ -6,7 +7,15 @@ from prettyqt import constants, widgets
 logger = logging.getLogger(__name__)
 
 
-class TableViewMixin(widgets.AbstractItemViewMixin):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _TableViewBase = QtWidgets.QTableView
+else:
+    _TableViewBase = object
+
+
+class TableViewMixin(widgets.AbstractItemViewMixin, _TableViewBase):
     def __init__(
         self,
         *args,
