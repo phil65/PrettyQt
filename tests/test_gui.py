@@ -999,3 +999,12 @@ def test_vector4d():
     assert bool(vector)
     vector.to_point()
     vector.to_pointf()
+
+
+def test_painter_draw_text(qapp):
+    pixmap = gui.Pixmap(20, 20)
+    painter = gui.Painter(pixmap)
+    painter.draw_text((1, 10), "x")
+    painter.draw_text(core.Point(1, 10), "x")
+    painter.draw_text((0, 0, 20, 20), "x", alignment="center")
+    painter.end()

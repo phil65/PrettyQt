@@ -104,11 +104,17 @@ class PainterMixin(_PainterBase):
         alignment: constants.AlignmentStr = "center",
     ):
         match position:
-            case (_, _):
-                position = core.Point(*position)
-            case (_, _, _, _):
-                position = core.RectF(*position)
-        self.drawText(position, constants.ALIGNMENTS[alignment].value, text)
+            case (x, y):
+                # alignment needs a rect, a point is the text's baseline start
+                self.drawText(core.PointF(x, y), text)
+            case core.QPoint() | core.QPointF():
+                self.drawText(position, text)
+            case (x, y, w, h):
+                self.drawText(
+                    core.RectF(x, y, w, h), constants.ALIGNMENTS[alignment], text
+                )
+            case _:
+                self.drawText(position, constants.ALIGNMENTS[alignment], text)
 
     def draw_image(
         self,
