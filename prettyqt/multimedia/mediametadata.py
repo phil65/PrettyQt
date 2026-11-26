@@ -76,28 +76,30 @@ class MediaMetaData(
     def __repr__(self):
         return get_repr(self, dict(self))
 
-    def __setitem__(self, key: KeyStr, value: datatypes.Variant):
-        if isinstance(key, str):
-            key = KEY[key]
-        self.insert(key, value)
+    def __setitem__(
+        self, key: KeyStr | QtMultimedia.QMediaMetaData.Key, value: datatypes.Variant
+    ):
+        self.insert(KEY.get_enum_value(key), value)
 
-    def __getitem__(self, key: KeyStr) -> datatypes.Variant:
-        if isinstance(key, str):
-            key = KEY[key]
-        if key not in self.keys():
+    def __getitem__(
+        self, key: KeyStr | QtMultimedia.QMediaMetaData.Key
+    ) -> datatypes.Variant:
+        qt_key = KEY.get_enum_value(key)
+        if qt_key not in self.keys():
             raise KeyError(key)
-        return self.value(key)
+        return self.value(qt_key)
 
-    def __delitem__(self, key: KeyStr):
-        if isinstance(key, str):
-            key = KEY[key]
-        self.remove(key)
+    def __delitem__(self, key: KeyStr | QtMultimedia.QMediaMetaData.Key):
+        self.remove(KEY.get_enum_value(key))
 
     def __bool__(self):
         return not self.isEmpty()
 
     def __iter__(self):
         return iter(self.keys())
+
+    def __len__(self):
+        return len(self.keys())
 
 
 if __name__ == "__main__":

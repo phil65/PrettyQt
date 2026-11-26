@@ -103,9 +103,10 @@ class BluetoothServiceInfo(
                 flag = index.value
         return self.setAttribute(flag, value)
 
-    def __contains__(self, value: int) -> bool:
-        attr = ATTRIBUTE_IDS.inverse[value]
-        return self.contains(attr)
+    def __contains__(self, value: int | AttributeIdStr | AttributeId) -> bool:
+        if isinstance(value, str):
+            value = ATTRIBUTE_IDS[value]
+        return self.contains(value if isinstance(value, int) else value.value)
 
     def __iter__(self):
         """Iter the info attributes."""

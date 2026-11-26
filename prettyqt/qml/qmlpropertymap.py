@@ -47,6 +47,9 @@ class QmlPropertyMap(
     def __iter__(self):
         return iter(self.keys())
 
+    def __len__(self):
+        return self.count()
+
 
 if __name__ == "__main__":
     propmap = QmlPropertyMap()

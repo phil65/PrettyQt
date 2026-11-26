@@ -20,9 +20,8 @@ class AudioDevice(multimedia.QAudioDevice):
     def get_supported_sample_formats(
         self,
     ) -> list[multimedia.audioformat.SampleFormatStr]:
-        return multimedia.audioformat.SAMPLE_FORMAT.get_list(
-            self.supportedSampleFormats()
-        )
+        formats = multimedia.audioformat.SAMPLE_FORMAT.inverse
+        return [formats[i] for i in self.supportedSampleFormats()]
 
     def get_channel_config(self) -> multimedia.audioformat.ChannelConfigStr:
         return multimedia.audioformat.CHANNEL_CONFIG.inverse[self.channelConfiguration()]

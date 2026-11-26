@@ -62,3 +62,20 @@ def test_mediaplayer():
     assert player.get_error() in {"none", "resource"}
     assert player.get_playback_state() == "stopped"
     assert player.get_media_status() == "none"
+
+
+def test_mediametadata_mapping():
+    metadata = multimedia.MediaMetaData()
+    assert len(metadata) == 0
+    if qt.API != "pyside6":
+        pytest.skip("PyQt6 crashes in QMediaMetaData.keys() after insert()")
+    metadata["title"] = "x"
+    assert metadata["title"] == "x"
+    assert len(metadata) == 1
+    del metadata["title"]
+    assert not metadata
+
+
+def test_audiodevice_sample_formats(qapp):
+    device = multimedia.AudioDevice()
+    assert isinstance(device.get_supported_sample_formats(), list)
