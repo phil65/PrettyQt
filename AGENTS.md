@@ -113,6 +113,7 @@ release (git-cliff notes).
   else:
       _FrameBase = object
 
+
   class FrameMixin(widgets.WidgetMixin, _FrameBase): ...
   ```
 
