@@ -34,3 +34,11 @@ def test_bidict_tolerates_enum_aliases():
     assert mapping["bullet_list"] is Flag.bullet
     assert mapping.inverse[Flag.all] == "bullet_list"
     assert "all" not in mapping
+
+
+def test_datatypes_to_point():
+    from prettyqt import core
+    from prettyqt.utils import datatypes
+
+    assert datatypes.to_point((1, 2)) == core.QPoint(1, 2)
+    assert datatypes.to_point(core.QPointF(1.4, 2.6)) == core.QPoint(1, 3)

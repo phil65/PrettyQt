@@ -707,7 +707,7 @@ def to_point(point: QtCore.QPointF | PointType):
         case QtCore.QPoint():
             return point
         case QtCore.QPointF():
-            return point.toPointF()
+            return point.toPoint()
         case _:
             raise TypeError(point)
 
