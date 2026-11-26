@@ -80,6 +80,7 @@ from .proxies.slicetomarkdownproxymodel import SliceToMarkdownProxyModel
 from .proxies.tabletolistproxymodel import TableToListProxyModel
 from .proxies.flattentreeproxymodel import FlattenTreeProxyModel
 from .proxies.meltproxymodel import MeltProxyModel
+from .proxies.unmeltproxymodel import UnmeltProxyModel
 from .proxies.columnorderproxymodel import ColumnOrderProxyModel
 
 # Other proxies
@@ -172,6 +173,7 @@ __all__ = [
     "TableToListProxyModel",
     "TreeModel",
     "TupleTreeModel",
+    "UnmeltProxyModel",
     "ValueFilterProxyModel",
     "WidgetHierarchyModel",
     "WidgetsDetailsModel",

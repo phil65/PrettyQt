@@ -435,3 +435,14 @@ def test_nesteditem_parent_links():
     assert b.parent is root
     assert [c.row() for c in root.children] == [0, 1, 2]
     assert not hasattr(a, "parent_item")
+
+
+def test_proxifier_unmelt(qtbot):
+    from prettyqt import gui, widgets
+
+    data = dict(id=["A", "A"], variable=["height", "weight"], value=[5.5, 130])
+    table = widgets.TableView()
+    qtbot.addWidget(table)
+    table.set_model(gui.StandardItemModel.from_dict(data))
+    proxy = table.proxifier.unmelt(id_columns=[0], variable_column=1, value_column=2)
+    assert isinstance(proxy, itemmodels.UnmeltProxyModel)
