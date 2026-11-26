@@ -1741,4 +1741,7 @@ def test_messagebox_message(qtbot, monkeypatch):
 
     monkeypatch.setattr(widgets.MessageBox, "show_blocking", show_blocking)
     assert widgets.MessageBox.message("text", "title") == "ok"
-    assert shown == [("title", "text")]
+    title, text = shown[0]
+    assert text == "text"
+    if sys.platform != "darwin":  # macOS message boxes have no window title
+        assert title == "title"
