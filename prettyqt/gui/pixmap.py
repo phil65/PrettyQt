@@ -86,7 +86,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin, _PixmapBa
         """
         device = core.Buffer()
         assert device.open_file("read_write")
-        self.save(device, b"png")
+        self.save(device, "png")
         device.close()
         data = bytes(device.data())
         payload = base64.b64encode(data).decode("ascii")

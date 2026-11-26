@@ -696,6 +696,7 @@ def test_pixmap(qapp):
     pix.get_size()
     pix.get_rect()
     pix.to_image()
+    assert gui.Pixmap(2, 2).get_image_data_url().startswith("data:image/png;base64,")
     image = gui.Image(4, 4, gui.QImage.Format.Format_ARGB32)
     assert not gui.Pixmap.from_image(image, color_preference="color_only").isNull()
 
