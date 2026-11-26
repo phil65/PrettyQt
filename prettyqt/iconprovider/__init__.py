@@ -311,15 +311,16 @@ def get_icon(
         return icon if as_qicon else gui.Icon(icon)
     if isinstance(icon, os.PathLike):
         icon = os.fspath(icon)
-    if (icon, color, as_qicon) in icon_cache:
-        return icon_cache[(icon, color, as_qicon)]
+    key = (icon, color, as_qicon)
+    if key in icon_cache:
+        return icon_cache[key]
     if isinstance(icon, str) and icon.startswith(PREFIXES):
         new = _icon(icon, color=color) if color is not None else _icon(icon)
     else:
-        new = QtGui.QIcon(icon)  # type: ignore
-    icon = new if as_qicon else gui.Icon(new)
-    icon_cache[(icon, color, as_qicon)] = icon
-    return icon
+        new = QtGui.QIcon(icon)
+    result = new if as_qicon else gui.Icon(new)
+    icon_cache[key] = result
+    return result
 
 
 if __name__ == "__main__":

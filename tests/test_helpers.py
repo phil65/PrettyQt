@@ -103,3 +103,9 @@ def test_animated_tooltip_eventfilter(qapp):
     from prettyqt import eventfilters
 
     assert eventfilters.AnimatedToolTipEventFilter()
+
+
+def test_iconprovider_get_icon_cache(qapp):
+    from prettyqt import iconprovider
+
+    assert iconprovider.get_icon("mdi.timer") is iconprovider.get_icon("mdi.timer")
