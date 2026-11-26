@@ -165,7 +165,7 @@ class DialogButtonBox(widgets.WidgetMixin, widgets.QDialogButtonBox):
             created button
         """
         btn = super().addButton(STANDARD_BUTTON.get_enum_value(button))
-        btn.setObjectName(button)
+        btn.setObjectName(STANDARD_BUTTON.get_str_value(button))
         if callback:
             btn.clicked.connect(callback)
         return btn

@@ -111,7 +111,7 @@ class GraphicsItemMixin(_GraphicsItemBase):
         return gui.PainterPath(self.shape())
 
     def set_scale(self, scale: tuple[float, float] | float):
-        if isinstance(scale, float):
+        if isinstance(scale, int | float):
             self.setScale(scale)
         else:
             self.setTransform(gui.Transform.fromScale(scale[0], scale[1]), True)

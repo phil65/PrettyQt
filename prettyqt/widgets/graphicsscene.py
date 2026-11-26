@@ -246,7 +246,7 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
         first_left = left - (left % grid_size)
         first_top = top - (top % grid_size)
 
-        pen.setWidth(grid_size / 10)
+        pen.setWidthF(grid_size / 10)
         painter.setPen(pen)
 
         [

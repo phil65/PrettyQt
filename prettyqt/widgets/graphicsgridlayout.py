@@ -19,7 +19,7 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsGridLayou
         colcount = self.columnCount()
         match index:
             case int() as row, int() as col:
-                if row >= rowcount or col >= rowcount:
+                if row >= rowcount or col >= colcount:
                     raise IndexError(index)
                 return self.itemAt(row, col)
             case (row, col):

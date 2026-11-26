@@ -1637,3 +1637,31 @@ def test_headerview_set_resize_mode_stretch_last_section(qtbot):
     qtbot.addWidget(table)
     table.h_header.set_resize_mode("interactive", stretch_last_section=True)
     assert table.h_header.stretchLastSection()
+
+
+def test_dialogbuttonbox_add_default_button_enum(qtbot):
+    box = widgets.DialogButtonBox()
+    qtbot.addWidget(box)
+    btn = box.add_default_button(widgets.QDialogButtonBox.StandardButton.Ok)
+    assert btn.objectName() == "ok"
+
+
+def test_graphicsgridlayout_getitem_wide(qapp):
+    layout = widgets.GraphicsGridLayout()
+    item = widgets.GraphicsWidget()
+    layout.addItem(item, 0, 2)
+    assert layout[0, 2] is item
+
+
+def test_graphicsitem_set_scale_int(qapp):
+    item = widgets.GraphicsRectItem()
+    item.set_scale(2)
+    assert item.scale() == 2  # noqa: PLR2004
+
+
+def test_graphicsscene_dot_grid_pen(qapp):
+    scene = widgets.GraphicsScene()
+    pixmap = gui.Pixmap(10, 10)
+    painter = gui.Painter(pixmap)
+    scene._draw_dots(painter, core.QRectF(0, 0, 10, 10), gui.QPen(), 20)
+    painter.end()
