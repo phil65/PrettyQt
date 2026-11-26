@@ -1,6 +1,6 @@
 import collections
 import logging
-from typing import TYPE_CHECKING, Literal, overload
+from typing import TYPE_CHECKING, Literal, cast, overload
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import bidict, listdelegators
@@ -136,11 +136,16 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
             case widgets.QDockWidget():
                 self.add_dockwidget(widget, **kwargs)
             case widgets.QWidget():
-                self.centralWidget().layout().add(widget, **kwargs)
+                if (central := self.centralWidget()) is None or (
+                    layout := central.layout()
+                ) is None:
+                    msg = "MainWindow needs a central widget with a layout"
+                    raise RuntimeError(msg)
+                cast("widgets.LayoutMixin", layout).add(widget, **kwargs)
 
     def get_corner(
         self, corner: constants.CornerStr | constants.Corner
-    ) -> constants.DockWidgetAreaStr:
+    ) -> constants.DockWidgetAreasStr:
         corner_flag = constants.CORNER.get_enum_value(corner)
         area = self.corner(corner_flag)
         return constants.DOCK_WIDGET_AREAS.inverse[area]
@@ -297,7 +302,7 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
         self.set_modality("application")
         self.show()
 
-    def get_dock_area(self, widget: widgets.QDockWidget) -> constants.DockWidgetAreaStr:
+    def get_dock_area(self, widget: widgets.QDockWidget) -> constants.DockWidgetAreasStr:
         area = self.dockWidgetArea(widget)
         return constants.DOCK_WIDGET_AREAS.inverse[area]
 
@@ -358,7 +363,7 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
         positions.remove(preference)
         positions.append(preference)
         counter = collections.Counter(positions + areas)  # type: ignore[operator]
-        return counter.most_common()[-1][0]  # type: ignore[return-value]
+        return counter.most_common()[-1][0]  # ty: ignore[invalid-explicit-return]
 
     def _get_preferred_toolbar_position(
         self,
@@ -370,7 +375,7 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
         positions.remove(preference)
         positions.append(preference)
         counter = collections.Counter(positions + areas)  # type: ignore[operator]
-        return counter.most_common()[-1][0]  # type: ignore[return-value]
+        return counter.most_common()[-1][0]  # ty: ignore[invalid-explicit-return]
 
     def get_toolbars(
         self, position: constants.ToolbarAreaStr | None = None
@@ -378,7 +383,9 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
         toolbars = self.find_children(widgets.QToolBar, recursive=False)
         if position is None:
             return toolbars
-        return [i for i in toolbars if self.get_toolbar_area(i) == position]
+        return listdelegators.ListDelegator([
+            i for i in toolbars if self.get_toolbar_area(i) == position
+        ])
 
 
 if __name__ == "__main__":
@@ -391,6 +398,6 @@ if __name__ == "__main__":
     action = FullScreenAction(parent=form)
     menu = widgets.Menu("test")
     menu.add_action(action)
-    form.menuBar().add_menu(menu)
+    form.menuBar().addMenu(menu)
     form.show()
     app.exec()

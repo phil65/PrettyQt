@@ -5,7 +5,7 @@ from prettyqt.utils import bidict
 
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Iterator, KeysView
 
 
 mod = QtWidgets.QScrollerProperties
@@ -85,7 +85,7 @@ class ScrollerProperties(QtWidgets.QScrollerProperties):
     def __setitem__(self, metric: ScrollmetricStr | mod.ScrollMetric, value: Any):
         self.set_scroll_metric(metric, value)
 
-    def keys(self) -> ScrollmetricStr:
+    def keys(self) -> KeysView[ScrollmetricStr]:
         return SCROLL_METRIC.keys()
 
     def __iter__(self) -> Iterator[ScrollmetricStr]:

@@ -116,7 +116,7 @@ class ListDelegator[T](list[T]):
 #     ...
 
 
-class SplitterDelegator(ListDelegator):
+class SplitterDelegator[T](ListDelegator[T]):
     """Delegates method calls to either the parent splitter or to all list members."""
 
     def __getattr__(self, method_name: str):

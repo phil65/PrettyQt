@@ -263,7 +263,8 @@ class WizardMixin(widgets.DialogMixin, _WizardBase):
     def set_custom_button(
         self, button: Literal[1, 2, 3], text: str | None, callback: Callable | None = None
     ):
-        self.set_option(f"custom_button_{button}", text is not None)
+        option = mod.WizardOption[f"HaveCustomButton{button}"]
+        self.set_option(option, text is not None)
         if text is None:
             return
         self.setButtonText(WIZARD_BUTTON[f"custom_{button}"], text)

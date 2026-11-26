@@ -38,9 +38,9 @@ class SplitterMixin(widgets.FrameMixin, _SplitterBase):
     ) -> widgets.QWidget | listdelegators.SplitterDelegator[widgets.QWidget]:
         match index:
             case int():
-                if index >= self.count():
+                if (widget := self.widget(index)) is None:
                     raise IndexError(index)
-                return self.widget(index)
+                return widget
             case str():
                 result = self.find_child(widgets.QWidget, index)
                 if result is None:
@@ -117,7 +117,7 @@ class SplitterMixin(widgets.FrameMixin, _SplitterBase):
         stretch: int | None = None,
         collapsible: bool = True,
         position: int | None = None,
-    ) -> widgets.Widget:
+    ) -> widgets.QWidget:
         widget = widgets.Widget()
         widget.set_layout(layout)
         return self.add_widget(

@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Literal, Self
+from typing import TYPE_CHECKING, Literal, Self, cast
 
 from prettyqt import constants, widgets
 from prettyqt.utils import bidict
@@ -22,8 +22,9 @@ class ToolButton(widgets.AbstractButtonMixin, widgets.QToolButton):
     """Quick-access button to commands or options, usually used inside a QToolBar."""
 
     def __getitem__(self, item: str) -> QtGui.QAction:
-        menu = self.menu()
-        return menu[item]
+        if (menu := self.menu()) is None:
+            raise KeyError(item)
+        return cast("widgets.Menu", menu)[item]  # set via prettyqt's set_menu()
 
     # def set_menu(self, menu: widgets.QMenu):
     #     menu.setParent(self)
@@ -107,6 +108,6 @@ if __name__ == "__main__":
     # icon = gui.Icon()
     # icon.add_pixmap("mdi.timer")
     # icon.add_pixmap("mdi.folder", state="on")
-    w.set_icon("mdi.timer", "mdi.folder")
+    w.set_icon("mdi.timer")
     w.show()
     app.exec()

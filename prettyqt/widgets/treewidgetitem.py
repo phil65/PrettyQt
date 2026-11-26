@@ -41,7 +41,9 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         )
 
     def __iter__(self) -> Iterator[QtWidgets.QTreeWidgetItem]:
-        return iter(self.child(i) for i in range(self.childCount()))
+        return iter(
+            c for i in range(self.childCount()) if (c := self.child(i)) is not None
+        )
 
     def __len__(self):
         return self.childCount()
@@ -90,7 +92,8 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         recursive option is written iteratively to also support original QTreeWidgetItems.
         """
         if not recursive:
-            return [self.child(i) for i in range(self.childCount())]
+            children = [self.child(i) for i in range(self.childCount())]
+            return listdelegators.ListDelegator([i for i in children if i is not None])
         results = []
         nodes = [self]
         while nodes:
@@ -104,14 +107,16 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
     def collapse(self, recursive: bool = False):
         if recursive:
             for i in range(self.childCount()):
-                self.child(i).collapse(True)
+                if isinstance(child := self.child(i), TreeWidgetItem):
+                    child.collapse(True)
         self.setExpanded(False)
 
     def expand(self, recursive: bool = False):
         self.setExpanded(True)
         if recursive:
             for i in range(self.childCount()):
-                self.child(i).expand(True)
+                if isinstance(child := self.child(i), TreeWidgetItem):
+                    child.expand(True)
 
     def set_size_hint(self, hint: datatypes.SizeType, column: int = 0):
         self.setSizeHint(column, datatypes.to_size(hint))
@@ -202,7 +207,9 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         return CHILD_INDICATOR_POLICY.inverse[self.childIndicatorPolicy()]
 
     def get_text_alignment(self, column: int) -> constants.AlignmentStr:
-        return constants.ALIGNMENTS.inverse[self.textAlignment(column)]
+        return constants.ALIGNMENTS.inverse[
+            constants.AlignmentFlag(self.textAlignment(column))
+        ]
 
 
 if __name__ == "__main__":

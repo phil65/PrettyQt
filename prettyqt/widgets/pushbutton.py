@@ -40,6 +40,8 @@ class PushButtonMixin(widgets.AbstractButtonMixin, _PushButtonBase):
 
     @core.Slot()
     def _update_button_for_action(self):
+        if self._action is None:
+            return
         self.setText(self._action.text())
         self.setIcon(self._action.icon())
         self.setStatusTip(self._action.statusTip())

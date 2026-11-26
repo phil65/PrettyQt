@@ -312,7 +312,7 @@ H_ALIGNMENT: bidict[HorizontalAlignmentStr, Qt.AlignmentFlag] = bidict(
     justify=Qt.AlignmentFlag.AlignJustify,
 )
 
-V_ALIGNMENT: bidict[HorizontalAlignmentStr, Qt.AlignmentFlag] = bidict(
+V_ALIGNMENT: bidict[VerticalAlignmentStr, Qt.AlignmentFlag] = bidict(
     top=Qt.AlignmentFlag.AlignTop,
     bottom=Qt.AlignmentFlag.AlignBottom,
     center=Qt.AlignmentFlag.AlignVCenter,

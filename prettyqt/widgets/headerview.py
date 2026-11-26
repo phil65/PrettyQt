@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 
 class HeaderWrapper:
-    def __init__(self, indexer, widget: widgets.QHeaderView):
+    def __init__(self, indexer, widget: widgets.HeaderViewMixin):
         self._widget = widget
         self._range = (
             range(
@@ -259,7 +259,8 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin, _HeaderViewBase):
         return menu
 
     def _on_toggle_action_triggered(self):
-        action = self.sender()
+        if not isinstance(action := self.sender(), gui.QAction):
+            return
         section = action.data()
         self.toggle_section_visibility(section)
 

@@ -68,7 +68,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin, _TableViewBase):
         model = self.model()
         if not do_sort and model is not None:
             backup = model.sort
-            model.sort = lambda x, y: None
+            model.sort = lambda x, y: None  # ty: ignore[invalid-assignment]
         self.setSortingEnabled(enabled)
         if not do_sort and model is not None:
             model.sort = backup

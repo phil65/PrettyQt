@@ -65,7 +65,8 @@ class TreeWidgetMixin(widgets.TreeViewMixin, _TreeWidgetBase):
         """
         root = self.invisibleRootItem()
         if not recursive:
-            return [root.child(i) for i in range(root.childCount())]
+            children = [root.child(i) for i in range(root.childCount())]
+            return listdelegators.ListDelegator([i for i in children if i is not None])
         results = []
         nodes = [root]
         while nodes:

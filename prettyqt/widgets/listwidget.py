@@ -99,7 +99,7 @@ class ListWidget(widgets.ListViewMixin, widgets.QListWidget):
         tool_tip: str = "",
         whats_this: str | None = None,
         # text_alignment: Optional[str] = None,
-        checkstate: constants.StateStr | constants.CheckState | None = None,
+        checkstate: constants.CheckStateStr | constants.CheckState | None = None,
         flags: constants.ItemFlag | None = None,
         size_hint: datatypes.SizeType | None = None,
         is_user_type: bool = False,

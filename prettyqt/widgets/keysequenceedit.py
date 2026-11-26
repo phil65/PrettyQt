@@ -33,7 +33,9 @@ class KeySequenceEdit(widgets.WidgetMixin, widgets.QKeySequenceEdit):
         return [core.KeyCombination(i) for i in self.finishingKeyCombinations()]
 
     def get_key_combinations(self) -> list[core.KeyCombination]:
-        return [core.KeyCombination(i) for i in self.keySequence()]
+        # QKeySequence is iterable at runtime (not in the stubs)
+        keys = self.keySequence()
+        return [core.KeyCombination(i) for i in keys]  # ty: ignore[not-iterable]
 
 
 if __name__ == "__main__":

@@ -1,4 +1,3 @@
-import functools
 from typing import Literal, overload
 
 from prettyqt import constants, gui, widgets
@@ -23,18 +22,15 @@ class MenuBar(widgets.WidgetMixin, widgets.QMenuBar):
     @overload
     def add_menu(self, menu_or_str: widgets.QMenu) -> gui.Action: ...
 
-    @functools.singledispatchmethod
-    def add_menu(self, title: str) -> widgets.Menu:
-        action = gui.Action(parent=self, text=title)
-        menu = widgets.Menu(title=title, parent=self)
-        action.set_menu(menu)
-        self.addAction(action)
-        return menu
-
-    @add_menu.register
-    def _(self, menu: widgets.QMenu) -> gui.Action:
-        action = gui.Action(parent=self, text=menu.title())
-        action.set_menu(menu)
+    def add_menu(self, menu_or_str: str | widgets.QMenu) -> widgets.Menu | gui.Action:
+        if isinstance(menu_or_str, str):
+            action = gui.Action(parent=self, text=menu_or_str)
+            menu = widgets.Menu(title=menu_or_str, parent=self)
+            action.set_menu(menu)
+            self.addAction(action)
+            return menu
+        action = gui.Action(parent=self, text=menu_or_str.title())
+        action.set_menu(menu_or_str)
         self.addAction(action)
         return action
 

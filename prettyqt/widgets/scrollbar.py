@@ -26,7 +26,7 @@ class ScrollBarMixin(widgets.AbstractSliderMixin, _ScrollBarBase):
     @classmethod
     def setup_example(cls):
         w = widgets.ScrollArea()
-        w.v_scrollbar = cls(orientation="vertical", parent=w)
+        w.setVerticalScrollBar(cls(orientation="vertical", parent=w))
         return w
 
     def scroll_by_value(self, value: int):

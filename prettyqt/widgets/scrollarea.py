@@ -55,7 +55,9 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, widgets.QScrollArea):
             raise RuntimeError(msg)
         return cast("widgets.LayoutMixin", layout)
 
-    def get_children(self) -> listdelegators.ListDelegator[widgets.QWidget]:
+    def get_children(
+        self,
+    ) -> listdelegators.ListDelegator[widgets.QWidget | widgets.QLayout]:
         return self._get_layout().get_children()
 
     def set_widget(self, widget: widgets.QWidget):

@@ -31,9 +31,10 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
                     col = colcount + col
                 if row >= rowcount or row < 0 or col >= colcount or col < 0:
                     raise IndexError(index)
-                item = self.itemAtPosition(row, col)
-                return i if (i := item.widget()) is not None else item.layout()
-            case (row, col):
+                if (item := self.itemAtPosition(row, col)) is None:
+                    raise IndexError(index)
+                return i if (i := item.widget()) is not None else item.layout()  # ty: ignore[invalid-explicit-return]  # None for spacers
+            case (int() | slice() as row, int() | slice() as col):
                 items = [
                     item
                     for i, j in helpers.iter_positions(row, col, rowcount, colcount)
@@ -48,8 +49,9 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
                     row = rowcount + row
                 if row >= rowcount or row < 0:
                     raise IndexError(index)
-                item = self.itemAt(row)
-                return i if (i := item.widget()) is not None else item.layout()
+                if (item := self.itemAt(row)) is None:
+                    raise IndexError(index)
+                return i if (i := item.widget()) is not None else item.layout()  # ty: ignore[invalid-explicit-return]  # None for spacers
             case slice() as rowslice:
                 count = rowcount if rowslice.stop is None else rowslice.stop
                 items = [self.itemAt(i) for i in range(count)[rowslice]]
@@ -58,7 +60,7 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
                 ]
                 return listdelegators.ListDelegator(list(set(items)))
             case str():
-                return self.find_child(widgets.QWidget | widgets.QLayout, index)
+                return self.find_child(widgets.QWidget | widgets.QLayout, index)  # ty: ignore[invalid-argument-type]  # unions work at runtime
             case _:
                 raise TypeError(index)
 
@@ -82,7 +84,7 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
     # def __reduce__(self):
     #     return type(self), (), self.__getstate__()
 
-    def __iter__(self) -> Iterator[widgets.QWidget | widgets.QLayout]:
+    def __iter__(self) -> Iterator[widgets.QWidget | widgets.QLayout | None]:
         return iter(
             w if (w := item.widget()) is not None else item.layout()
             for i in range(self.count())

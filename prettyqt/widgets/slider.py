@@ -131,7 +131,7 @@ class HollowHandleStyle(widgets.ProxyStyle):
         painter.drawPath(path)
 
         # press handle
-        if widget.isSliderDown():
+        if isinstance(widget, widgets.QAbstractSlider) and widget.isSliderDown():
             handle_color.setAlpha(255)
             painter.setBrush(handle_color)
             painter.drawEllipse(handle_rect)

@@ -22,7 +22,9 @@ ViewItemFeatureStr = Literal[
     "has_decoration",
 ]
 
-VIEW_ITEM_FEATURE: bidict[ViewItemFeatureStr, widgets.QStyleOptionViewItem] = bidict(
+VIEW_ITEM_FEATURE: bidict[
+    ViewItemFeatureStr, widgets.QStyleOptionViewItem.ViewItemFeature
+] = bidict(
     none=widgets.QStyleOptionViewItem.ViewItemFeature(0),  # type: ignore
     wrap_text=widgets.QStyleOptionViewItem.ViewItemFeature.WrapText,
     alternate=widgets.QStyleOptionViewItem.ViewItemFeature.Alternate,
@@ -49,7 +51,7 @@ class StyleOptionViewItem(widgets.StyleOptionMixin, widgets.QStyleOptionViewItem
     def get_view_item_position(self) -> ViewItemPositionStr:
         return VIEW_ITEM_POSITION.inverse[self.viewItemPosition]
 
-    def get_features(self) -> ViewItemFeatureStr:
+    def get_features(self) -> list[ViewItemFeatureStr]:
         return VIEW_ITEM_FEATURE.get_list(self.features)
 
     def get_decoration_position(self) -> PositionStr:

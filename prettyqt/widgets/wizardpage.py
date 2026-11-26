@@ -29,7 +29,7 @@ class WizardPageMixin(widgets.WidgetMixin, _WizardPageBase):
 
     def set_button_text(
         self,
-        button_type: widgets.wizard.WizardButtonStr | widgets.QWizard.WizardPixmap,
+        button_type: widgets.wizard.WizardButtonStr | widgets.QWizard.WizardButton,
         value: str,
     ):
         """Set text for given button type.

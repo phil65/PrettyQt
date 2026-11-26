@@ -60,7 +60,11 @@ class ColorDialog(widgets.DialogMixin, widgets.QColorDialog):
         # color, so we can replace it with our implementation
         qcs = self.get_qcolorshower()
         qcsl = self.get_qcolorshowlabel()
-        qcs.layout().replaceWidget(qcsl, widget)
+        if not isinstance(qcs, widgets.QWidget) or not isinstance(qcsl, widgets.QWidget):
+            raise TypeError(qcs)
+        if (layout := qcs.layout()) is None:
+            raise RuntimeError(qcs)
+        layout.replaceWidget(qcsl, widget)
         # Make sure it doesn't receive signals while hidden
         qcsl.blockSignals(True)
         qcsl.hide()

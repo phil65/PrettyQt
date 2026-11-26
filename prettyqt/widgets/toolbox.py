@@ -18,7 +18,9 @@ class ToolBox(widgets.FrameMixin, widgets.QToolBox):
     ) -> widgets.QWidget | listdelegators.ListDelegator[widgets.QWidget]:
         match index:
             case int():
-                return self.widget(index)
+                if (widget := self.widget(index)) is None:
+                    raise IndexError(index)
+                return widget
             case str():
                 result = self.find_child(widgets.QWidget, index)
                 if result is None:

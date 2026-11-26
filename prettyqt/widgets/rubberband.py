@@ -44,7 +44,8 @@ class RubberBandMixin(widgets.WidgetMixin, _RubberBandBase):
         event_catcher.caught.connect(self.update_size)
 
     def update_size(self):
-        self.setGeometry(self.parent().rect())
+        if (parent := self.parentWidget()) is not None:
+            self.setGeometry(parent.rect())
 
 
 class RubberBand(RubberBandMixin, widgets.QRubberBand):

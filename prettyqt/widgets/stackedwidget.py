@@ -41,6 +41,8 @@ class StackedWidget(widgets.FrameMixin, widgets.QStackedWidget):
 
     def __delitem__(self, item: int | widgets.QWidget):
         i = self.widget(item) if isinstance(item, int) else item
+        if i is None:
+            raise IndexError(item)
         self.removeWidget(i)
 
     def __len__(self):

@@ -1,13 +1,10 @@
 import html
 import os
-from typing import TYPE_CHECKING, Any
+from typing import Any
 
 from prettyqt import constants, gui, iconprovider
-from prettyqt.qt import QtCore, QtWidgets
-
-
-if TYPE_CHECKING:
-    from prettyqt.utils import datatypes
+from prettyqt.qt import QtWidgets
+from prettyqt.utils import datatypes
 
 
 class TableWidgetItem(QtWidgets.QTableWidgetItem):
@@ -71,17 +68,13 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
             horizontal: horizontal text alignment to use
             vertical: vertical text alignment to use
         """
-        match horizontal, vertical:
-            case None, None:
-                return
-            case None, _:
-                flag = constants.V_ALIGNMENT.get_enum_value(vertical)
-            case _, None:
-                flag = constants.H_ALIGNMENT.get_enum_value(horizontal)
-            case _, _:
-                flag = constants.V_ALIGNMENT.get_enum_value(
-                    vertical
-                ) | constants.H_ALIGNMENT.get_enum_value(horizontal)
+        if horizontal is None and vertical is None:
+            return
+        flag = constants.AlignmentFlag(0)
+        if vertical is not None:
+            flag |= constants.V_ALIGNMENT.get_enum_value(vertical)
+        if horizontal is not None:
+            flag |= constants.H_ALIGNMENT.get_enum_value(horizontal)
         self.setTextAlignment(flag)
 
     def get_background(self) -> gui.Brush:
@@ -117,9 +110,9 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
             if size is None:
                 tooltip = f"<img src={path!r}>"
             else:
-                if isinstance(size, QtCore.QSize):
-                    size = (size.width(), size.height())
-                tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
+                qsize = datatypes.to_size(size)
+                w, h = qsize.width(), qsize.height()
+                tooltip = f'<img src={path!r} width="{w}" height="{h}">'
         if rich_text:
             tooltip = f"<html>{html.escape(tooltip)}</html>"
         super().setToolTip(tooltip)

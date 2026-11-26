@@ -79,17 +79,13 @@ class ListWidgetItem(serializemixin.SerializeMixin, QtWidgets.QListWidgetItem):
             vertical: vertical text alignment to use
 
         """
-        match horizontal, vertical:
-            case None, None:
-                return
-            case None, _:
-                flag = constants.V_ALIGNMENT.get_enum_value(vertical)
-            case _, None:
-                flag = constants.H_ALIGNMENT.get_enum_value(horizontal)
-            case _, _:
-                flag = constants.V_ALIGNMENT.get_enum_value(
-                    vertical
-                ) | constants.H_ALIGNMENT.get_enum_value(horizontal)
+        if horizontal is None and vertical is None:
+            return
+        flag = constants.AlignmentFlag(0)
+        if vertical is not None:
+            flag |= constants.V_ALIGNMENT.get_enum_value(vertical)
+        if horizontal is not None:
+            flag |= constants.H_ALIGNMENT.get_enum_value(horizontal)
         self.setTextAlignment(flag)
 
 
@@ -100,6 +96,6 @@ if __name__ == "__main__":
     widget = widgets.ListWidget()
     item = ListWidgetItem("AB")
     item.set_data("display", "test")
-    widget.add(item)
+    widget.addItem(item)
     widget.show()
     app.exec()

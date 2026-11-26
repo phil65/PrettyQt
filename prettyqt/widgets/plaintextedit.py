@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, cast
 
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
 from prettyqt.utils import bidict, classhelpers, colors, texteditselecter
@@ -96,7 +96,9 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin, _PlainTextEditBase):
         self.setPlainText(text)
 
     def set_syntaxhighlighter(
-        self, syntax: str | gui.QSyntaxHighlighter, style: str | None = None
+        self,
+        syntax: str | gui.QSyntaxHighlighter,
+        style: syntaxhighlighters.pygmentshighlighter.StyleStr | None = None,
     ):
         if isinstance(syntax, gui.QSyntaxHighlighter):
             self._hl = syntax
@@ -190,7 +192,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin, _PlainTextEditBase):
 
     def set_validator(
         self, validator: gui.QValidator | widgets.lineedit.ValidatorStr | None, **kwargs
-    ) -> gui.QValidator:
+    ) -> gui.QValidator | None:
         if isinstance(validator, str):
             validator_cls = classhelpers.get_class_for_id(gui.ValidatorMixin, validator)
             validator = validator_cls(**kwargs)
@@ -207,7 +209,10 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin, _PlainTextEditBase):
     def is_valid(self) -> bool:
         if self.validator is None:
             return True
-        val = self.validator.validate(self.text(), 0)
+        val = cast(
+            "tuple[gui.QValidator.State, str, int]",
+            self.validator.validate(self.text(), 0),
+        )
         return val[0] == self.validator.State.Acceptable
 
     def set_value(self, value: str):
@@ -223,7 +228,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin, _PlainTextEditBase):
             self.cursorPositionChanged.disconnect(self.selecter._update_on_block_change)
         self._current_line_color = colors.get_color(color) if color else None
 
-    def get_current_line_color(self) -> gui.Color:
+    def get_current_line_color(self) -> gui.Color | None:
         return self._current_line_color
 
     current_line_color = core.Property(
@@ -240,10 +245,12 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin, _PlainTextEditBase):
         end = min(start + page_step, self.blockCount())
         return (start, end)
 
-    def get_pixel_height(self, exact: bool = True) -> int:
+    def get_pixel_height(self, exact: bool = True) -> float:
         """Returns the pixel height of the text area."""
         widget_margins = self.contentsMargins()
-        doc_height = self.document().get_pixel_height(exact=exact)
+        # PlainTextEdit installs a prettyqt TextDocument
+        doc = cast("gui.TextDocument", self.document())
+        doc_height = doc.get_pixel_height(exact=exact)
         return widget_margins.top() + doc_height + widget_margins.bottom()
 
     validation_color = core.Property(

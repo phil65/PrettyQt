@@ -35,8 +35,13 @@ class GroupBox(widgets.WidgetMixin, widgets.QGroupBox):
         return constants.H_ALIGNMENT.inverse[self.alignment()]
 
     def set_enabled(self, state):
-        for widget in self.layout():
-            widget.setEnabled(state)
+        if (layout := self.layout()) is None:
+            return
+        for i in range(layout.count()):
+            if (item := layout.itemAt(i)) is not None and (
+                w := item.widget()
+            ) is not None:
+                w.setEnabled(state)
 
 
 if __name__ == "__main__":

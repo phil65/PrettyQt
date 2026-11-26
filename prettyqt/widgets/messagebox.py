@@ -149,7 +149,7 @@ class MessageBox(widgets.DialogMixin, widgets.QMessageBox):
             self.setIconPixmap(ico.get_pixmap(size=64))
 
     def show_blocking(self) -> StandardButtonStr:
-        return STANDARD_BUTTON.inverse[self.exec()]
+        return STANDARD_BUTTON.inverse[widgets.QMessageBox.StandardButton(self.exec())]
 
     def get_icon_pixmap(self) -> gui.Pixmap | None:
         pix = self.iconPixmap()

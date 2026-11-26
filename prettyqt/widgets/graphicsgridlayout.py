@@ -14,7 +14,11 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsGridLayou
 
     def __getitem__(
         self, index: tuple[int | slice, int | slice] | int
-    ) -> widgets.QGraphicsLayoutItem | None:
+    ) -> (
+        widgets.QGraphicsLayoutItem
+        | listdelegators.ListDelegator[widgets.QGraphicsLayoutItem]
+        | None
+    ):
         rowcount = self.rowCount()
         colcount = self.columnCount()
         match index:

@@ -139,7 +139,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
         parent: widgets.QWidget | None = None,
         data: Any = None,
         callback: Callable | None = None,
-        **kwargs: datatypes.VariantType,
+        **kwargs: Any,
     ) -> gui.Action:
         """Add an action to the menu.
 

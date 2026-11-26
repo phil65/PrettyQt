@@ -88,7 +88,7 @@ class ItemEditorFactory(widgets.QItemEditorFactory):
         cls.creators.append(creator)
         match typ:
             case None:
-                typ = editor_cls.staticMetaObject.userProperty().userType()  # pyright: ignore
+                typ = editor_cls.staticMetaObject.userProperty().userType()  # ty: ignore[missing-attribute]  # not in stubs
             case type() if typ in TYPES:
                 typ = TYPES[typ].value
             case int():
@@ -108,7 +108,7 @@ class ItemEditorFactory(widgets.QItemEditorFactory):
         self.creators.append(creator)
         match typ:
             case None:
-                typ = editor_cls.staticMetaObject.userProperty().userType()  # pyright: ignore
+                typ = editor_cls.staticMetaObject.userProperty().userType()  # ty: ignore[missing-attribute]  # not in stubs
             case type() if typ in TYPES:
                 typ = TYPES[typ].value
             case int():

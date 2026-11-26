@@ -765,7 +765,7 @@ else:
 class StyleMixin(core.ObjectMixin, _StyleBase):
     def draw_primitive(
         self,
-        element: SubControlStr | mod.SubControl,
+        element: PrimitiveElementStr | mod.PrimitiveElement,
         option: widgets.QStyleOption,
         painter: QtGui.QPainter,
         widget: widgets.QWidget | None = None,

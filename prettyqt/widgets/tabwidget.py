@@ -1,4 +1,4 @@
-from typing import Literal, overload
+from typing import Literal, cast, overload
 
 from prettyqt import animations, core, gui, iconprovider, widgets
 from prettyqt.utils import bidict, datatypes, listdelegators
@@ -58,9 +58,9 @@ class TabWidget(widgets.WidgetMixin, widgets.QTabWidget):
     ) -> widgets.QWidget | listdelegators.ListDelegator[widgets.QWidget]:
         match index:
             case int():
-                if index >= self.count():
+                if (widget := self.widget(index)) is None:
                     raise IndexError(index)
-                return self.widget(index)
+                return widget
             case slice():
                 rng = range(index.start or 0, index.stop or self.count(), index.step or 1)
                 return listdelegators.ListDelegator(self.widget(i) for i in rng)
@@ -153,12 +153,9 @@ class TabWidget(widgets.WidgetMixin, widgets.QTabWidget):
         # Get the tab content
         name = self.tabText(index)
         icon = self.tab_icon(index) or self.window().windowIcon()
-        widget = self.widget(index)
-
-        try:
-            widget_rect = widget.frameGeometry()
-        except AttributeError:
+        if (widget := self.widget(index)) is None:
             return
+        widget_rect = widget.frameGeometry()
 
         # Create a new detached tab window
         detached_tab = DetachedTab(name, widget)
@@ -263,13 +260,21 @@ class TabWidget(widgets.WidgetMixin, widgets.QTabWidget):
         """Create a tab containing delivered widget."""
         self.add_tab(widget, title, icon="mdi.widgets", show=True)
 
-    def set_tab(self, index: int, position: str, widget: widgets.QWidget | None = None):
-        self.tabBar().set_tab(index, position, widget)
+    def set_tab(
+        self,
+        index: int,
+        position: widgets.tabbar.PositionStr,
+        widget: widgets.QWidget | None = None,
+    ):
+        # prettyqt installs its own TabBar
+        cast("widgets.TabBar", self.tabBar()).set_tab(index, position, widget)
 
     def create_tab_preview(self, index: int, width: int = 200) -> widgets.Label:
         widget = widgets.Label(self)
         widget.setScaledContents(True)
-        px = self.widget(index).grab().scaledToWidth(width)
+        if (tab := self.widget(index)) is None:
+            raise IndexError(index)
+        px = tab.grab().scaledToWidth(width)
         widget.setPixmap(px)
         widget.resize(width, width)
         return widget

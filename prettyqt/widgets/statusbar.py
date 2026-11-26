@@ -53,7 +53,6 @@ if __name__ == "__main__":
     app = widgets.app()
     dlg = widgets.MainWindow()
     status_bar = StatusBar()
-    status_bar.set_color("black")
     label = widgets.Label("test")
     status_bar.addWidget(label)
     dlg.setStatusBar(status_bar)

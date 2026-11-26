@@ -27,7 +27,7 @@ else:
 
 
 class SwipeGestureMixin(widgets.GestureMixin, _SwipeGestureBase):
-    def get_horizontal_direction(self) -> HorizontalDirectionStr:
+    def get_horizontal_direction(self) -> SwipeDirectionStr:
         """Return horizontal direction of the gesture.
 
         Returns:
@@ -35,7 +35,7 @@ class SwipeGestureMixin(widgets.GestureMixin, _SwipeGestureBase):
         """
         return SWIPE_DIRECTION.inverse[self.horizontalDirection()]
 
-    def get_vertical_direction(self) -> VerticalDirectionStr:
+    def get_vertical_direction(self) -> SwipeDirectionStr:
         """Return vertical direction of the gesture.
 
         Returns:

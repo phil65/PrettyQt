@@ -64,7 +64,10 @@ class TreeViewMixin(widgets.AbstractItemViewMixin, _TreeViewBase):
         if depth is None:
             super().expandAll()
         else:
-            for idx in self.model().iter_tree(parent_index=self.rootIndex(), depth=depth):
+            model = self.model()
+            if not isinstance(model, core.AbstractItemModelMixin):
+                raise TypeError(model)
+            for idx in model.iter_tree(parent_index=self.rootIndex(), depth=depth):
                 self.setExpanded(idx, True)
 
     def set_sorting_enabled(self, enabled: bool, do_sort: bool = False):
@@ -72,7 +75,7 @@ class TreeViewMixin(widgets.AbstractItemViewMixin, _TreeViewBase):
         model = self.model()
         if not do_sort and model is not None:
             backup = model.sort
-            model.sort = lambda x, y: None
+            model.sort = lambda x, y: None  # ty: ignore[invalid-assignment]
         self.setSortingEnabled(enabled)
         if not do_sort and model is not None:
             model.sort = backup

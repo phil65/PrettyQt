@@ -35,7 +35,7 @@ class SplashScreenMixin(widgets.WidgetMixin, _SplashScreenBase):
 
     def setPixmap(self, pixmap: str | os.PathLike[str] | gui.QPixmap | None):
         match pixmap:
-            case os.PathLike():
+            case str() | os.PathLike():
                 pixmap = gui.Pixmap(os.fspath(pixmap))
             case None:
                 pixmap = gui.Pixmap()
