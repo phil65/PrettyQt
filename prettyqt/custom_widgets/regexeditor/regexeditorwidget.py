@@ -57,7 +57,7 @@ class RegexEditorWidget(widgets.Widget):
         self._highlighter.rehighlight()
         self.regexinput.value_changed.connect(self._update_view)
         self.textedit_teststring.textChanged.connect(self._update_view)
-        self.regexinput.pattern = regex  # pyright: ignore
+        self.regexinput.set_pattern(regex)
         groupbox = widgets.GroupBox(title="Regular expression")
         layout_toprow = widgets.HBoxLayout()
         layout_toprow.add(self.regexinput)

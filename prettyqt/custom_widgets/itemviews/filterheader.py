@@ -1,5 +1,5 @@
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from prettyqt import constants, core, custom_widgets, widgets
 
@@ -94,8 +94,13 @@ class FilterHeader(widgets.HeaderView):
     def create_editors(self):
         # using parent model here bc we cant guarantee that we are already set to view.
         parent = self.parent()
-        model = parent.model()
+        if not isinstance(parent, widgets.QAbstractItemView):
+            return
         self._proxy.clear_filters()
+        raw_model = parent.model()
+        if raw_model is None:
+            return
+        model = cast("core.AbstractItemModel", raw_model)
         for i in range(model.columnCount()):
             typ = model.get_column_type(i)
             if typ is bool:
@@ -206,8 +211,8 @@ if __name__ == "__main__":
         header = FilterHeader(parent=view)
         view.setHorizontalHeader(header)
         # view.h_header._update_filter_boxes()
-        view.h_header.visible_editors = True
+        header.set_editors_visible(True)
         view.show()
         with app.debug_mode():
             app.exec()
-            print(view.h_header._proxy._filters)
+            print(header._proxy._filters)

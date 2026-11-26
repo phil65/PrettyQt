@@ -22,7 +22,7 @@ class ClickableLabel(widgets.Label):
         self.setFixedWidth(width + 18)
         super().setText(text)
 
-    def enterEvent(self, event: core.QEvent):
+    def enterEvent(self, event: gui.QEnterEvent):
         with self.edit_font() as font:
             font.setUnderline(True)
         self.set_cursor("pointing_hand")

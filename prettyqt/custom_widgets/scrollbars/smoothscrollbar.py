@@ -4,6 +4,8 @@ from prettyqt import core, gui, widgets
 
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
+
     from prettyqt import constants
 
 
@@ -26,9 +28,12 @@ class SmoothScrollBar(widgets.ScrollBar):
         self._animation.set_easing(easing)
         self._animation.setDuration(animation_duration)
         self._animation.finished.connect(self.scroll_ended)
-        self.widget.viewport().installEventFilter(self)
-        if trigger:
-            self.widget.h_scrollbar.valueChanged.connect(gui.Cursor.fake_mouse_move)
+        if self.widget is not None:
+            self.widget.viewport().installEventFilter(self)
+            if trigger:
+                self.widget.horizontalScrollBar().valueChanged.connect(
+                    gui.Cursor.fake_mouse_move
+                )
 
     def mouseMoveEvent(self, e):
         self._animation.stop()
@@ -69,8 +74,16 @@ class SmoothScrollBar(widgets.ScrollBar):
         self._value = value
 
     def eventFilter(self, source, event) -> bool:
-        if event.type() == core.Event.Type.Wheel and source == self.widget.viewport():
-            self.widget.v_scrollbar.scroll_by_value(-event.angleDelta().y())
+        if (
+            self.widget is not None
+            and event.type() == core.Event.Type.Wheel
+            and source == self.widget.viewport()
+        ):
+            v_bar = self.widget.verticalScrollBar()
+            if isinstance(v_bar, widgets.ScrollBar):
+                v_bar.scroll_by_value(-event.angleDelta().y())
+            else:
+                v_bar.setValue(v_bar.value() - event.angleDelta().y())
             return True
         return False
 
@@ -86,7 +99,9 @@ class SmoothScrollBar(widgets.ScrollBar):
     ):
         self._animation.set_easing(easing)
 
-    def get_animation_easing(self) -> core.easingcurve.TypeStr:
+    def get_animation_easing(
+        self,
+    ) -> core.easingcurve.TypeStr | Callable[[float], float]:
         return self._animation.get_easing()
 
     def animationEasing(self) -> core.QEasingCurve.Type:

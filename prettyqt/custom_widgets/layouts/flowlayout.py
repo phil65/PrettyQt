@@ -61,8 +61,10 @@ class FlowLayout(widgets.Layout):
         size = core.QSize()
         for item in self._items:
             size = size.expandedTo(item.minimumSize())
-        left, top, right, bottom = self.getContentsMargins()  # pyright: ignore
-        return size + core.QSize(left + right, top + bottom)
+        margins = self.contentsMargins()
+        return size + core.QSize(
+            margins.left() + margins.right(), margins.top() + margins.bottom()
+        )
 
     sizeHint = minimumSize  # noqa: N815
 
@@ -78,7 +80,9 @@ class FlowLayout(widgets.Layout):
                 else widgets.Style.PixelMetric.PM_LayoutVerticalSpacing
             )
             return p.style().pixelMetric(which, None, p)
-        return p.spacing()
+        if isinstance(p, widgets.QLayout):
+            return p.spacing()
+        return -1
 
     def _do_layout(self, rect: core.QRect, apply_geometry: bool = False) -> int:
         erect = rect.marginsRemoved(self.contentsMargins())

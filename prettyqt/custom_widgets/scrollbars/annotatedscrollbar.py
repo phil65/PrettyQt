@@ -36,8 +36,9 @@ class AnnotatedScrollBar(widgets.ScrollBar):
     @classmethod
     def create_example(cls):
         widget = widgets.PlainTextEdit("\n".join(str(i) for i in range(1000)))
-        widget.v_scrollbar = AnnotatedScrollBar(constants.VERTICAL)
-        widget.v_scrollbar.set_annotations([(10, 20), (50, 60), (82, 85)])
+        scrollbar = AnnotatedScrollBar(constants.VERTICAL)
+        scrollbar.set_annotations([(10, 20), (50, 60), (82, 85)])
+        widget.v_scrollbar = scrollbar
         return widget
 
     def set_annotations(self, annotations: list[tuple[int, int]]):
@@ -63,7 +64,7 @@ class AnnotatedScrollBar(widgets.ScrollBar):
             p.setClipRegion(
                 gui.QRegion(gr) - gui.QRegion(sr), constants.ClipOperation.IntersectClip
             )
-            x, y, w, h = gr.getRect()
+            x, y, w, h = gr.x(), gr.y(), gr.width(), gr.height()
             c = gui.QColor(self._annotation_color)
             p.setBrush(c)
             c.setAlphaF(0.3)
@@ -71,7 +72,7 @@ class AnnotatedScrollBar(widgets.ScrollBar):
             scale = 1.0 / self._document_length
             if self.orientation() == constants.VERTICAL:
                 rects = [
-                    core.QRect(
+                    core.QRectF(
                         x + 1,
                         y + h * start * scale - 0.5,
                         w - 2,
@@ -81,7 +82,7 @@ class AnnotatedScrollBar(widgets.ScrollBar):
                 ]
             else:
                 rects = [
-                    core.QRect(
+                    core.QRectF(
                         x + w * start * scale - 0.5,
                         y + 1,
                         w * (end - start) * scale + 1,
@@ -89,7 +90,8 @@ class AnnotatedScrollBar(widgets.ScrollBar):
                     )
                     for start, end in self._annotations
                 ]
-            p.drawRects(rects)
+            if rects:
+                p.drawRects(rects)
 
     def set_annotation_color(self, color: datatypes.ColorType):
         self._annotation_color = colors.get_color(color).as_qt()
@@ -126,8 +128,9 @@ class AnnotatedScrollBar(widgets.ScrollBar):
 if __name__ == "__main__":
     app = widgets.app()
     widget = widgets.PlainTextEdit("\n".join(str(i) for i in range(1000)))
-    widget.v_scrollbar = AnnotatedScrollBar(constants.VERTICAL)
-    widget.v_scrollbar.set_annotations([(10, 20), (50, 60), (82, 85)])
+    scrollbar = AnnotatedScrollBar(constants.VERTICAL)
+    scrollbar.set_annotations([(10, 20), (50, 60), (82, 85)])
+    widget.v_scrollbar = scrollbar
     widget.show()
     with app.debug_mode():
         app.exec()

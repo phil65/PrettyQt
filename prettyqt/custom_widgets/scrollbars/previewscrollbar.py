@@ -4,7 +4,7 @@ from prettyqt import core, gui, widgets
 class PreviewScrollBar(widgets.ScrollBar):
     """Scrollbar showing a small preview of a (Plain)TextEdit."""
 
-    def __init__(self, *args, parent=None, **kwargs):
+    def __init__(self, *args, parent: widgets.PlainTextEdit | None = None, **kwargs):
         super().__init__(*args, **kwargs)
         self._scrollarea = parent
         self._width = 150
@@ -26,10 +26,12 @@ class PreviewScrollBar(widgets.ScrollBar):
         return super().sizeHint().expandedTo(expand)
 
     def paintEvent(self, event):
+        super().paintEvent(event)
+        if self._scrollarea is None:
+            return
         # viewport = self._scrollarea.viewport()
         doc = self._scrollarea.document()
         v_scroll = self._scrollarea.v_scrollbar
-        super().paintEvent(event)
         with gui.Painter(self) as painter:
             painter.setRenderHint(painter.RenderHint.TextAntialiasing, True)
 

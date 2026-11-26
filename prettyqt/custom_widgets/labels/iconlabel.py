@@ -17,15 +17,15 @@ class IconLabel(widgets.Widget):
         parent: widgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
-        self.set_layout("horizontal", spacing=0)
+        layout = self.set_layout("horizontal", spacing=0)
         self.label = widgets.Label(text, margin=10)
         self.label.set_size_policy(horizontal="minimum")
         icon = iconprovider.get_icon(icon)
         self.icon = widgets.Label(tool_tip=tooltip, pixmap=icon.pixmap(20, 20))
         self.icon.set_size_policy(horizontal="minimum")
-        self.box.add(self.label)
-        self.box.add(self.icon)
-        self.box.addStretch()
+        layout.add(self.label)
+        layout.add(self.icon)
+        layout.addStretch()
 
     def __getattr__(self, value: str):
         return self.label.__getattribute__(value)

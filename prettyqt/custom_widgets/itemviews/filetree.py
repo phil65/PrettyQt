@@ -1,7 +1,7 @@
 import logging
 import os
 import pathlib
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from prettyqt import core, widgets
 from prettyqt.gui.action import Action
@@ -59,7 +59,7 @@ class FileTree(widgets.TreeView):
 
         def _restore_expanded_on_level(index: core.ModelIndex):
             model = self._model
-            path = model.data(index, model.Roles.FilePathRole)
+            path = index.data(model.Roles.FilePathRole)
             if path not in self._expanded_ids:
                 return
             self.setExpanded(index, True)
@@ -127,7 +127,8 @@ class FileExplorer(widgets.Widget):
         # self._update_root(curpath)
 
     def _on_breadcrumbs_clicked(self, path: pathlib.Path):
-        index = self._file_tree.model().index(str(path))
+        model = cast("widgets.FileSystemModel", self._file_tree.model())
+        index = model.index(str(path))
         self._file_tree.set_current_index(index)
 
     def _on_current_changed(self, new, _):
