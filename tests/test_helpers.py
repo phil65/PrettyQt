@@ -74,3 +74,32 @@ def test_colors_get_color_role(qapp):
     from prettyqt.utils import colors
 
     assert colors.get_color("base_role") == gui.Palette().get_color("base")
+
+
+def test_qtlogger_emit(qapp):
+    import logging
+
+    from prettyqt import debugging
+
+    logger = logging.getLogger("prettyqt.test_qtlogger")
+    handler = debugging.QtLogger()
+    logger.addHandler(handler)
+    try:
+        for level in (logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR):
+            logger.log(level, "message")
+    finally:
+        logger.removeHandler(handler)
+
+
+def test_event_transitions_import():
+    pytest.importorskip("prettyqt.statemachine")
+    from prettyqt.statemachine import keyeventtransition, mouseeventtransition
+
+    assert keyeventtransition.KeyEventTransition()
+    assert mouseeventtransition.MouseEventTransition()
+
+
+def test_animated_tooltip_eventfilter(qapp):
+    from prettyqt import eventfilters
+
+    assert eventfilters.AnimatedToolTipEventFilter()

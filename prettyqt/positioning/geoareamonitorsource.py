@@ -29,7 +29,7 @@ class GeoAreaMonitorSource(core.ObjectMixin, QtPositioning.QGeoAreaMonitorSource
         return self.sourceName()
 
     def __repr__(self):
-        return get_repr(self, self.name())
+        return get_repr(self, self.sourceName())
 
     def get_error(self) -> AreaMonitorFeatureStr:
         """Return error type.

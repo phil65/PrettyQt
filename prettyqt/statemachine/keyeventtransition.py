@@ -2,6 +2,6 @@ from prettyqt import statemachine
 
 
 class KeyEventTransition(
-    statemachine.EventTransitionMixin, statemachine.QKeyEventTransition
+    statemachine.AbstractTransitionMixin, statemachine.QKeyEventTransition
 ):
     pass

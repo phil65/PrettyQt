@@ -1,10 +1,11 @@
-from typing import TYPE_CHECKING
-
-from prettyqt import constants, itemmodels, widgets
+from prettyqt import constants, core, widgets
 
 
-if TYPE_CHECKING:
-    from prettyqt import core
+class SubsequenceProxyModel(core.SortFilterProxyModel):
+    """Accepts rows whose text contains the search term's characters in order."""
+
+    def set_search_term(self, search_term: str):
+        self.setFilterString(search_term)
 
 
 class SubsequenceCompleter(widgets.Completer):
@@ -15,7 +16,7 @@ class SubsequenceCompleter(widgets.Completer):
         self.completion_search_term = ""
         self.source_model = None
         self.set_completion_mode("unfiltered_popup")
-        self.proxy_model = itemmodels.SubsequenceSortFilterProxyModel(parent=self)
+        self.proxy_model = SubsequenceProxyModel(parent=self)
         self.proxy_model.setFilterCaseSensitivity(self.caseSensitivity())
         self.set_case_sensitive(False)
         self._force_next_update = True
@@ -24,7 +25,7 @@ class SubsequenceCompleter(widgets.Completer):
 
     def setModel(self, model: core.QAbstractItemModel):
         self.source_model = model
-        self.proxy_model = itemmodels.SubsequenceSortFilterProxyModel(parent=self)
+        self.proxy_model = SubsequenceProxyModel(parent=self)
         self.proxy_model.setFilterCaseSensitivity(self.caseSensitivity())
         self.proxy_model.set_search_term(self.completion_search_term)
         self.proxy_model.setSourceModel(self.source_model)

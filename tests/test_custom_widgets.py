@@ -494,3 +494,11 @@ def test_localeedit_is_valid(qtbot):
     qtbot.addWidget(edit)
     edit.set_current_locale("de_DE")
     assert edit.is_valid()
+
+
+def test_subsequencecompleter(qtbot):
+    completer = custom_widgets.SubsequenceCompleter()
+    model = core.StringListModel(["apple", "banana", "pineapple"])
+    completer.setModel(model)
+    completer.proxy_model.set_search_term("ple")
+    assert completer.proxy_model.rowCount() == 2  # noqa: PLR2004

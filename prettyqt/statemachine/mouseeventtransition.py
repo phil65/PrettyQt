@@ -2,6 +2,6 @@ from prettyqt import statemachine
 
 
 class MouseEventTransition(
-    statemachine.EventTransitionMixin, statemachine.QMouseEventTransition
+    statemachine.AbstractTransitionMixin, statemachine.QMouseEventTransition
 ):
     pass

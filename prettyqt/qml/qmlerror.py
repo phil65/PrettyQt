@@ -12,9 +12,6 @@ class QmlError(QtQml.QQmlError):
     def get_url(self) -> core.Url:
         return core.Url(self.url())
 
-    def get_property(self) -> core.MetaProperty:
-        return core.MetaProperty(self.property())
-
     def __str__(self):
         return self.toString()
 

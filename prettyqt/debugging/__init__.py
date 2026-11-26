@@ -56,17 +56,16 @@ def for_all_methods(decorator: Callable) -> Callable:
 
 class QtLogger(logging.Handler):
     def emit(self, record: logging.LogRecord):
-        match record.level:
-            case logging.DEBUG:
-                QtCore.qDebug(self.format(record))
-            case logging.INFO:
-                QtCore.qInfo(self.format(record))
-            case logging.WARNING:
-                QtCore.qWarning(self.format(record))
-            case logging.CRITICAL:
-                QtCore.qCritical(self.format(record))
-            case logging.CRITICAL:
-                QtCore.qFatal(self.format(record))
+        # qFatal() would abort the process, so CRITICAL goes to qCritical() too.
+        msg = self.format(record)
+        if record.levelno >= logging.ERROR:
+            QtCore.qCritical(msg)
+        elif record.levelno >= logging.WARNING:
+            QtCore.qWarning(msg)
+        elif record.levelno >= logging.INFO:
+            QtCore.qInfo(msg)
+        else:
+            QtCore.qDebug(msg)
 
 
 def is_deleted(obj) -> bool:

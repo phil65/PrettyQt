@@ -16,8 +16,10 @@ class AnimatedToolTipEventFilter(eventfilters.BaseEventFilter):
         self.tool_tip.hide()
         self.slide_anim = animations.SlideAnimation(self.tool_tip, duration=1000)
         self.slide_anim.apply_to(self.tool_tip)
-        self.fade_anim = animations.FadeInAnimation(duration=1000)
-        self.fade_anim.apply_to(self.tool_tip)
+        self.fade_anim = core.PropertyAnimation(parent=self.tool_tip)
+        self.fade_anim.apply_to(self.tool_tip.windowOpacity)
+        self.fade_anim.set_range(0.0, 1.0)
+        self.fade_anim.setDuration(1000)
         self.animation = self.slide_anim | self.fade_anim
 
     def eventFilter(self, obj: widgets.QWidget, event: core.QEvent) -> bool:

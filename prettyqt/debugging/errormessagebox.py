@@ -103,7 +103,10 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
         import IPython.core.ultratb
 
         def format_exc_info(exc: Exception, as_html: bool, color="Neutral") -> str:
-            vbtb = IPython.core.ultratb.VerboseTB(color_scheme=color)
+            try:  # IPython >= 9
+                vbtb = IPython.core.ultratb.VerboseTB(theme_name=color.lower())
+            except TypeError:
+                vbtb = IPython.core.ultratb.VerboseTB(color_scheme=color)
             tb = vbtb.text(exc.__class__, exc, exc.__traceback__)
             if as_html:
                 ansi_string = (

@@ -362,9 +362,9 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
     def open_in_browser(self):
         """Open page URL in default system browser."""
         try:
-            webbrowser.open(self.getUrl().toString())
+            webbrowser.open(self.url().toString())
         except ValueError:
-            logger.exception("Error opening URL %r", self.getUrl().toString())
+            logger.exception("Error opening URL %r", self.url().toString())
 
     def insert_stylesheet(
         self, name: str, css: str | os.PathLike[str], immediately: bool = True
