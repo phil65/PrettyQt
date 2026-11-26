@@ -317,7 +317,7 @@ def get_icon(
     if isinstance(icon, str) and icon.startswith(PREFIXES):
         new = _icon(icon, color=color) if color is not None else _icon(icon)
     else:
-        new = QtGui.QIcon(icon)
+        new = QtGui.QIcon(icon)  # ty: ignore[no-matching-overload]  # path str or QPixmap
     result = new if as_qicon else gui.Icon(new)
     icon_cache[key] = result
     return result

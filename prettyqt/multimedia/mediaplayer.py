@@ -90,5 +90,4 @@ class MediaPlayer(core.ObjectMixin, QtMultimedia.QMediaPlayer):
 
 if __name__ == "__main__":
     player = MediaPlayer()
-    source = player.get_source()
-    print(source.isValid())
+    print(player.get_error())

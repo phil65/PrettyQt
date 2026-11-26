@@ -187,7 +187,9 @@ class IconicFont:
     def _parse_options(
         self, specific_options: dict, general_options: dict, name: str
     ) -> dict[str, Any]:
-        options = dict(_default_options, **general_options) | specific_options
+        options: dict[str, Any] = (
+            dict(_default_options, **general_options) | specific_options
+        )
         # Handle icons for modes (Active, Disabled, Selected, Normal)
         # and states (On, Off)
         char = options.get("char", name)

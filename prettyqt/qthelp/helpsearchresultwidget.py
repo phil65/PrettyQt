@@ -21,8 +21,8 @@ class HelpSearchResultWidget(widgets.WidgetMixin):  # , qthelp.QHelpSearchResult
         core_engine = qthelp.HelpEngineCore("test")
         engine = qthelp.HelpSearchEngine(core_engine)
         widget = engine.get_result_widget()
-        widget.engine = engine
-        widget.core_engine = core_engine
+        # keep the engines alive as long as the widget
+        widget.setProperty("engines", [engine, core_engine])
         return widget
 
     def get_link_at(self, point: datatypes.PointType) -> core.Url:

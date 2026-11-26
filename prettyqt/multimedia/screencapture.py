@@ -40,5 +40,4 @@ class ScreenCapture(core.ObjectMixin, QtMultimedia.QScreenCapture):
 
 if __name__ == "__main__":
     player = ScreenCapture()
-    source = player.get_source()
-    print(source.isValid())
+    print(player.get_error())

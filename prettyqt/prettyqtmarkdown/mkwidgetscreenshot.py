@@ -52,7 +52,7 @@ class MkWidgetScreenShot(mknodes.MkBinaryImage):
         buffer.open(core.QIODeviceBase.OpenModeFlag.WriteOnly)
         pixmap.save(buffer, "PNG")
         super().__init__(
-            data=ba.data(),
+            data=bytes(ba.data()),
             path=path,
             header=header,
             caption=caption,

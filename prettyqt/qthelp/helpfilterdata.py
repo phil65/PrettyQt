@@ -1,8 +1,16 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core
 from prettyqt.qt import QtHelp
 
 
-class HelpFilterDataMixin:
+if TYPE_CHECKING:
+    _HelpFilterDataBase = QtHelp.QHelpFilterData
+else:
+    _HelpFilterDataBase = object
+
+
+class HelpFilterDataMixin(_HelpFilterDataBase):
     def get_versions(self) -> list[core.VersionNumber]:
         return [core.VersionNumber(i) for i in self.versions()]
 

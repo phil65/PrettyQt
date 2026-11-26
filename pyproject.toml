@@ -368,6 +368,18 @@ incompatible-mutable-override = "ignore"
 incompatible-method-override = "ignore"
 lost-keyword-for-regular-parameter = "ignore"
 
+# Project-specific (prettyqt): QScintilla and the designer plugin base classes
+# only exist in PyQt6. Their classes combine PyQt6 bases with prettyqt mixins,
+# which are type-checked against the PySide6 stubs (see prettyqt/qt/__init__.py),
+# so ty sees two different Qt class hierarchies there.
+[[tool.ty.overrides]]
+include = ["prettyqt/scintilla/**", "prettyqt/designer/**"]
+
+[tool.ty.overrides.rules]
+incompatible-attribute-override = "ignore"
+invalid-argument-type = "ignore"
+missing-attribute = "ignore"
+
 [tool.uv]
 default-groups = ["dev", "lint", "docs"]
 

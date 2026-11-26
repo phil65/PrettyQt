@@ -72,8 +72,8 @@ class MkNodesModel(itemmodels.TreeModel):
 if __name__ == "__main__":
     page = mknodes.MkPage()
     page += mknodes.MkAdmonition("test")
-    data = dict(a=["1", "2"], b=["c", "D"])
-    page += mknodes.MkTable(data=data)
+    data = [["1", "c"], ["2", "D"]]
+    page += mknodes.MkTable(data=data, columns=["a", "b"])
     page += mknodes.MkDocStrings(helpers, header="DocStrings")
     model = MkNodesModel(page)
     print(page.to_markdown())

@@ -68,6 +68,6 @@ if __name__ == "__main__":
     console_widget.print_text("hallo")
     console_widget.show()
     console_widget.evaluated.connect(print)
-    console_widget.completion_mode = "ncurses"
+    console_widget.completion_mode = "ncurses"  # ty: ignore[invalid-assignment]  # a traitlet
     with app.debug_mode():
         app.exec()

@@ -115,5 +115,4 @@ class MediaRecorder(core.ObjectMixin, QtMultimedia.QMediaRecorder):
 
 if __name__ == "__main__":
     player = MediaRecorder()
-    source = player.get_source()
-    print(source.isValid())
+    print(player.get_error())

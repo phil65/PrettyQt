@@ -19,7 +19,8 @@ class MkPropertyTable(mknodes.MkTable):
     ):
         lines = []
         headers = ["Qt Property", "Type", "Doc"]
-        properties = core.MetaObject(qobject.staticMetaObject).get_properties()
+        metaobject = qobject.staticMetaObject  # ty: ignore[missing-attribute]  # not in stubs
+        properties = core.MetaObject(metaobject).get_properties()
         doc_dict = core.Property.get_doc_dict(qobject)
         for prop in properties:
             property_name = f"`{prop.get_name()}`"

@@ -19,5 +19,5 @@ class HelpFilterEngine(core.ObjectMixin):
 
 if __name__ == "__main__":
     core_engine = qthelp.HelpEngineCore("test")
-    engine = HelpFilterEngine(core_engine)
-    print(engine.get_filter_data("a"))
+    engine = core_engine.filterEngine()
+    print(engine)

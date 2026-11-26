@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 import webbrowser
 
 from prettyqt import core, webenginecore, widgets
@@ -173,7 +173,7 @@ if __name__ == "__main__":
 
     html = markdown.markdown(path.read_text("utf-8"), extensions=extensions)
     widget.setHtml(html)
-    page = widget.page()
+    page = cast("webenginecore.WebEnginePage", widget.page())
     path = pathlib.Path(
         "E:\\dev\\prettyqt\\site\\assets\\stylesheets\\main.26e3688c.min.css"
     )
