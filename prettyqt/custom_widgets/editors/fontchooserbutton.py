@@ -32,8 +32,8 @@ class FontChooserButton(widgets.Widget):
             dlg.setCurrentFont(self._current_font)
 
         if dlg.exec():
-            self.set_current_font(dlg.current_font())
-            self.value_changed.emit(gui.QFont(dlg.current_font()))
+            self.set_current_font(dlg.get_current_font())
+            self.value_changed.emit(gui.QFont(dlg.get_current_font()))
 
     def set_current_font(self, font: str | gui.QFont | None):
         match font:

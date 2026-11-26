@@ -190,7 +190,7 @@ if __name__ == "__main__":
     window.setCentralWidget(widgets.Label("Press Ctrl+P"))
     window.add_action(text="MainWindowAction", parent=window, triggered=window.close)
     pal = CommandPalette()
-    window.add_shortcut("Ctrl+P", pal.show)
+    window.add_shortcut("Ctrl+P", callback=pal.show)
     actions = [
         gui.Action(
             text="super duper action",

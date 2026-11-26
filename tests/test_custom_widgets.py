@@ -479,3 +479,18 @@ def test_waitingspinner(qtbot):
     spinner.start()
     spinner.stop()
     spinner._update_position()
+
+
+def test_astviewer_rename_variable(qtbot):
+    viewer = custom_widgets.AstViewer()
+    qtbot.addWidget(viewer)
+    viewer.set_ast("a = 1\nb = a + 1\n")
+    viewer.rename_variable("a", "x")
+    assert viewer.textedit.text() == "x = 1\nb = x + 1"
+
+
+def test_localeedit_is_valid(qtbot):
+    edit = custom_widgets.LocaleEdit()
+    qtbot.addWidget(edit)
+    edit.set_current_locale("de_DE")
+    assert edit.is_valid()

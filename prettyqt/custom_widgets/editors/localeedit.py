@@ -37,7 +37,8 @@ class LocaleEdit(widgets.ComboBox):
         self.setCurrentText(self._current_locale.bcp47Name())
 
     def is_valid(self) -> bool:
-        return self._current_locale.isValid()
+        # QLocale falls back to the C locale for names it doesn't know
+        return self._current_locale != core.QLocale.c()
 
     def get_value(self) -> core.QLocale:
         return self._current_locale

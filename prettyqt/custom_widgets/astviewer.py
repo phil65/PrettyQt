@@ -82,21 +82,12 @@ class AstViewer(widgets.Splitter):
         ignore: list[str] | None = None,
         scope: list[str] | None = None,
     ):
-        if scope is None:
-            scope = ["main"]
-        if ignore is None:
-            ignore = []
-        tree = self.tree.get_model(skip_proxies=True).ast_tree
-        for i in ast.iter_fields(tree):
-            if not isinstance(a := getattr(tree, i), list) and (
-                a == old and not {*scope} & {*ignore}
-            ):
-                setattr(tree, i, new)
-            n = a if isinstance(a, list) else [a]
-            s = [tree.name] if tree.__class__.__name__.endswith("Def") else scope
-            for j in n:
-                if isinstance(j, ast.AST):
-                    self.rename_variable(j, old, new, ignore, s)
+        """Rename all identifiers named `old` to `new` (see AstModel.rename_variable)."""
+        model = self.tree.get_model(skip_proxies=True)
+        if not isinstance(model, itemmodels.AstModel):
+            raise TypeError(model)
+        model.rename_variable(old, new, ignore=ignore, scope=scope)
+        self.set_ast(model.ast_tree)
 
     # @classmethod
     # def setup_example(cls):
