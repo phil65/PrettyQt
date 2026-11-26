@@ -265,7 +265,7 @@ class MetaObject:
                 or (only_required and not prop.isRequired())
                 or (only_enum_type and not prop.isEnumType())
                 or (only_flag_type and not prop.isFlagType())
-                or (only_with_notifiers and not prop.hasNotifier())
+                or (only_with_notifiers and not prop.hasNotifySignal())
                 or (only_with_type_name and prop.typeName() != only_with_type_name)
             ):
                 continue
@@ -338,7 +338,7 @@ class MetaObject:
     ):
         conn = constants.CONNECTION_TYPE[connection_type]
         args = tuple(core.Q_ARG(type(arg), arg) for arg in args)
-        return cls.invokeMethod(obj, method, conn, *args)
+        return core.QMetaObject.invokeMethod(obj, method, conn, *args)
 
     def get_new_instance(self, *args, **kwargs):
         args = tuple(core.Q_ARG(type(i), i) for i in args)

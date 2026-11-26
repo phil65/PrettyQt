@@ -313,6 +313,11 @@ def test_line():
     assert abs(line) == 1
     for _p in line:
         pass
+    match line2:
+        case core.Line(1, 0, 0, 0):
+            pass
+        case _:
+            pytest.fail("Line pattern did not match")
 
 
 def test_linef():
@@ -332,6 +337,11 @@ def test_linef():
     assert abs(line) == 1
     for _p in line:
         pass
+    match line2:
+        case core.LineF(1.0, 0.0, 0.0, 0.0):
+            pass
+        case _:
+            pytest.fail("LineF pattern did not match")
 
 
 def test_lockfile():
@@ -396,6 +406,7 @@ def test_metaobject():
     metaobj.get_methods(type_filter="slot")
     metaobj.get_signals()
     metaobj.get_meta_type()
+    assert metaobj.get_properties(only_with_notifiers=True) is not None
 
 
 def test_mimedata():
@@ -562,6 +573,10 @@ def test_regularexpression():
         pass
     matches = regex.findall("123")
     assert len(matches) == 3  # noqa: PLR2004
+    regex = core.RegularExpression("[0-9]+")
+    assert regex.fullmatch("123") is not None
+    assert regex.fullmatch("123a") is None
+    assert regex.fullmatch("a123", pos=1) is not None
 
 
 def test_resource():
@@ -817,3 +832,20 @@ def test_versionnumber():
     assert repr(a) == "VersionNumber(1, 2, 3)"
     assert core.VersionNumber.get_qt_version() > (5, 12, 0)
     assert core.VersionNumber.get_python_version() > (3, 6, 0)
+
+
+def test_locale_to_time():
+    locale = core.Locale("en_US")
+    assert locale.to_time("10:11", "HH:mm") == core.QTime(10, 11)
+
+
+def test_operatingsystemversion_match_args():
+    try:
+        version = core.OperatingSystemVersion("android", 11, 2, 3)
+    except TypeError:
+        pytest.skip("binding cannot subclass QOperatingSystemVersion")
+    match version:
+        case core.OperatingSystemVersion("android", 11, 2, 3):
+            pass
+        case _:
+            pytest.fail("OperatingSystemVersion pattern did not match")

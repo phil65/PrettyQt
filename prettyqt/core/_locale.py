@@ -742,7 +742,7 @@ class Locale(QtCore.QLocale):
     ) -> QtCore.QTime:
         if format_type in {"long", "short", "narrow"}:
             format_type = FORMAT_TYPE[format_type]
-        return self.to_time(text, format_type)
+        return self.toTime(text, format_type)
 
     def get_standalone_month_name(
         self, month: int, format_type: FormatTypeStr = "long"

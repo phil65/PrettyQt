@@ -16,7 +16,7 @@ class LineF(core.QLineF):
 
     @property
     def _x1(self) -> float:
-        return self.get_x1()
+        return self.x1()
 
     @property
     def _y1(self) -> float:

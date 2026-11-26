@@ -128,7 +128,11 @@ class RegularExpression(core.QRegularExpression):
         if endpos:
             string = string[:endpos]
         match = super().match(string, pos)
-        if match.hasMatch() and len(string) == match.end() - match.start():
+        if (
+            match.hasMatch()
+            and match.capturedStart() == pos
+            and match.capturedEnd() == len(string)
+        ):
             return core.RegularExpressionMatch(match)
         return None
 

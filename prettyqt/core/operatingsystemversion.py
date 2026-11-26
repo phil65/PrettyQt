@@ -56,10 +56,10 @@ class OperatingSystemVersion(core.QOperatingSystemVersion):
         return self.minorVersion()
 
     @property
-    def _macroVersion(self) -> int:
-        return self.macroVersion()
+    def _microVersion(self) -> int:
+        return self.microVersion()
 
-    __match_args__ = ("_type", "_majorVersion", "_minorVersion", "_macroVersion")
+    __match_args__ = ("_type", "_majorVersion", "_minorVersion", "_microVersion")
 
     def __reduce__(self):
         return (
