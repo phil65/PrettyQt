@@ -268,7 +268,7 @@ class ScrollAreaTocWidget(widgets.TreeView):
                 self.collapseAll()
             match self.get_scroll_mode():
                 case "multi":
-                    indexes = model.search_tree(visible_widgets, constants.USER_ROLE)
+                    indexes = model.search_tree(visible_widgets, role=constants.USER_ROLE)
                     for index in indexes:
                         children = model.get_child_indexes(index)
                         # only select if all children selected.
@@ -289,7 +289,9 @@ class ScrollAreaTocWidget(widgets.TreeView):
                         self.set_current_index(indexes[0])
                         self.scroll_to(indexes[0])
                 case "single":
-                    if indexes := model.search_tree(visible_widgets, constants.USER_ROLE):
+                    if indexes := model.search_tree(
+                        visible_widgets, role=constants.USER_ROLE
+                    ):
                         viewport = self.scrollarea.viewport()
                         # sort indexes by closest distance to top
                         indexes.sort(

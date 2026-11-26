@@ -544,3 +544,26 @@ def test_svgbuffericonengine_disabled(qapp):
         painter, core.QRect(0, 0, 8, 8), gui.QIcon.Mode.Disabled, gui.QIcon.State.Off
     )
     painter.end()
+
+
+@pytest.mark.parametrize("mode", ["multi", "single"])
+def test_scrollareatocwidget_scroll(qtbot, mode):
+    from prettyqt.custom_widgets import scrollareatocwidget
+
+    window = widgets.Widget()
+    qtbot.addWidget(window)
+    layout = window.set_layout("horizontal")
+    scrollarea = widgets.ScrollArea(parent=window, widget_resizable=True)
+    widget = widgets.Widget()
+    scrollarea.setWidget(widget)
+    toc = scrollareatocwidget.ScrollAreaTocWidget(
+        scrollarea, widget_class=scrollareatocwidget.SectionWidget
+    )
+    toc.set_scroll_mode(mode)
+    layout.add(toc)
+    scroll_layout = widget.set_layout("vertical")
+    layout.add(scrollarea)
+    for i in range(3):
+        scroll_layout.add(scrollareatocwidget.SectionWidget(window_title=f"s{i}"))
+    window.show()
+    toc._on_scroll()
