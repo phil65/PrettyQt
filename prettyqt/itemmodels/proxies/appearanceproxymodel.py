@@ -143,7 +143,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
         self._fonts = collections.defaultdict(lambda: None)
         self.update_all()
 
-    def get_font_default(self) -> QtGui.QFont:
+    def get_font_default(self) -> QtGui.QFont | None:
         return self._font_default
 
     def set_foreground_default(self, foreground: QtGui.QColor | QtGui.QBrush | str):
@@ -153,7 +153,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
         self._foregrounds = collections.defaultdict(lambda: None)
         self.update_all()
 
-    def get_foreground_default(self) -> QtGui.QColor:
+    def get_foreground_default(self) -> QtGui.QColor | QtGui.QBrush | None:
         return self._foreground_default
 
     def set_background_default(self, background: QtGui.QColor | QtGui.QBrush | str):
@@ -163,7 +163,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
         self._backgrounds = collections.defaultdict(lambda: None)
         self.update_all()
 
-    def get_background_default(self) -> QtGui.QFont:
+    def get_background_default(self) -> QtGui.QColor | QtGui.QBrush | None:
         return self._background_default
 
     def set_alignment_default(
@@ -175,7 +175,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
         self._alignments = collections.defaultdict(lambda: None)
         self.update_all()
 
-    def get_alignment_default(self) -> constants.AlignmentFlag:
+    def get_alignment_default(self) -> constants.AlignmentFlag | None:
         return self._alignment_default
 
     font_default = core.Property(

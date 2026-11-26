@@ -79,7 +79,7 @@ class NetworkInterface(network.QNetworkInterface):
         return [network.HostAddress(i) for i in NetworkInterface.allAddresses()]
 
     @staticmethod
-    def get_all_interfaces() -> list[network.HostAddress]:
+    def get_all_interfaces() -> list[network.NetworkInterface]:
         return [network.NetworkInterface(i) for i in NetworkInterface.allInterfaces()]
 
     @staticmethod

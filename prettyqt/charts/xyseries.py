@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Self
 
 import prettyqt
 from prettyqt import charts, gui
@@ -32,12 +32,12 @@ class XYSeriesMixin(charts.AbstractSeriesMixin, _XYSeriesBase):
     # def __reduce__(self):
     #     return type(self), (), self.__getstate__()
 
-    def __add__(self, other: datatypes.PointFType) -> XYSeries:
+    def __add__(self, other: datatypes.PointFType) -> Self:
         """Append a point to the Series."""
         self.append(datatypes.to_pointf(other))
         return self
 
-    def get_points(self) -> list[core.QPoint]:
+    def get_points(self) -> list[core.QPointF]:
         if prettyqt.qt.API == "pyqt6":
             return [self.at(i) for i in range(self.count())]
         return self.points()

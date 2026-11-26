@@ -19,7 +19,7 @@ class HelpEngineCoreMixin(core.ObjectMixin, _HelpEngineCoreBase):
     """The core functionality of the help system."""
 
     def get_file_data(self, url: core.QUrl) -> bytes:
-        return self.fileData(url).data()
+        return bytes(self.fileData(url).data())
 
     def get_files(
         self,

@@ -28,7 +28,7 @@ class SizePolicyEdit(widgets.Widget):
         self._value = self.get_value()
         self.value_changed.emit(self._value)
 
-    def get_value(self) -> core.Point:
+    def get_value(self) -> widgets.SizePolicy:
         policy = widgets.SizePolicy()
         policy.set_horizontal_policy(self.cb_horizontal.get_value())
         policy.set_vertical_policy(self.cb_vertical.get_value())

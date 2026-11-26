@@ -17,7 +17,7 @@ class DefaultDropDownAction(widgets.WidgetAction):
         self.setDefaultWidget(button)
         self._button = button
 
-    def get_menu(self) -> widgets.Menu:
+    def get_menu(self) -> widgets.QMenu:
         """Returns the menu."""
         menu = self._button.menu()
         if menu is None:

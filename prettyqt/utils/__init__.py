@@ -63,7 +63,7 @@ class bidict(bdct.bidict[KT, VT]):  # noqa: N801
         return self[value] if isinstance(value, str) else value
 
     def get_str_value(self, value: KT | VT) -> KT:
-        return value if isinstance(value, str) else self.inverse[value]
+        return self.inverse[value] if isinstance(value, enum.Enum) else value
 
 
 class InvalidParamError(ValueError):

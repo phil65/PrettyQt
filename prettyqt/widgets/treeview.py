@@ -1,5 +1,5 @@
 from collections.abc import Iterable
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from prettyqt import constants, core, widgets
 
@@ -37,7 +37,8 @@ class TreeViewMixin(widgets.AbstractItemViewMixin, _TreeViewBase):
 
     @property
     def h_header(self) -> widgets.HeaderView:
-        return self.header()
+        # prettyqt installs its own HeaderView on construction
+        return cast("widgets.HeaderView", self.header())
 
     @h_header.setter
     def h_header(self, header: widgets.QHeaderView):

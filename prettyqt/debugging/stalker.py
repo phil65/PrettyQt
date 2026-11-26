@@ -140,7 +140,7 @@ class Stalker(core.Object):
         try:
             self.event_detected.emit(event)
         except RuntimeError:
-            return None
+            return False
         match event.type():
             case core.Event.Type.KeyPress:
                 combo = gui.KeySequence(event.keyCombination()).toString()

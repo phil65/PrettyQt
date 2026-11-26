@@ -22,9 +22,10 @@ OPTIONS: bidict[OptionStr, widgets.QFileSystemModel.Option] = bidict(
 
 
 if TYPE_CHECKING:
-    from prettyqt.qt import QtCore
+    from prettyqt.qt import QtWidgets
 
-    _FileSystemModelBase = QtCore.QAbstractItemModel
+    # FSSpecModel emulates the QFileSystemModel API on top of a ColumnItemModel.
+    _FileSystemModelBase = QtWidgets.QFileSystemModel
 else:
     _FileSystemModelBase = object
 

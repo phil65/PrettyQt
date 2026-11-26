@@ -1,5 +1,5 @@
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from prettyqt import constants, widgets
 
@@ -43,7 +43,8 @@ class TableViewMixin(widgets.AbstractItemViewMixin, _TableViewBase):
 
     @property
     def h_header(self) -> widgets.HeaderView:
-        return self.horizontalHeader()
+        # prettyqt installs its own HeaderViews on construction
+        return cast("widgets.HeaderView", self.horizontalHeader())
 
     @h_header.setter
     def h_header(self, header: widgets.QHeaderView):
@@ -51,7 +52,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin, _TableViewBase):
 
     @property
     def v_header(self) -> widgets.HeaderView:
-        return self.verticalHeader()
+        return cast("widgets.HeaderView", self.verticalHeader())
 
     @v_header.setter
     def v_header(self, header: widgets.QHeaderView):

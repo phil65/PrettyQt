@@ -1,6 +1,7 @@
 """Classes to extend Qt GUI with widgets."""
 
 import sys
+from typing import cast
 
 from prettyqt.constants import Qt
 from prettyqt.qt.QtWidgets import *  # noqa: F403
@@ -205,7 +206,8 @@ QT_MODULE = QtWidgets
 def app(args: list[str] | None = None, style: str = "Fusion", **kwargs) -> Application:
     Application.setAttribute(Qt.ApplicationAttribute.AA_ShareOpenGLContexts, True)
     if (instance := Application.instance()) is not None:
-        return instance
+        # Usually prettyqt's Application; an app created elsewhere is returned as is.
+        return cast("Application", instance)
     #  + ["--ignore-gpu-blacklist", "--enable-gpu-rasterization"]
     app = Application(sys.argv if args is None else args, **kwargs)
     app.set_style(style)

@@ -93,5 +93,5 @@ class ModelMixin(_ModelBase):
                 fn(item, value)
                 self.update_row(index.row())
                 return True
-            return None
-        return None
+            return False
+        return False

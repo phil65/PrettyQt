@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, Self
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, colors, texteditselecter
@@ -44,7 +44,7 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin, _TextEditBase):
         self.textChanged.connect(self.on_value_change)
         self.selecter = texteditselecter.TextEditSelecter(self)
 
-    def __add__(self, other: str) -> TextEdit:
+    def __add__(self, other: str) -> Self:
         self.append_text(other)
         return self
 

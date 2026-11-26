@@ -168,14 +168,14 @@ class SliceHighlightCurrentProxyModel(itemmodels.SliceIdentityProxyModel):
         with self.change_layout():
             self._current_column = column
 
-    def get_highlight_column(self) -> int:
+    def get_highlight_column(self) -> int | None:
         return self._current_column
 
     def set_highlight_row(self, row: int):
         with self.change_layout():
             self._current_row = row
 
-    def get_highlight_row(self) -> int:
+    def get_highlight_row(self) -> int | None:
         return self._current_row
 
     def set_current_value(self, value):

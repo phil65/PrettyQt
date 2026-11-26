@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, cast
 
 from prettyqt import constants, widgets
 from prettyqt.utils import bidict
@@ -44,7 +44,8 @@ class AbstractScrollAreaMixin(widgets.FrameMixin, _AbstractScrollAreaBase):
 
     @property
     def h_scrollbar(self) -> widgets.ScrollBar:
-        return self.horizontalScrollBar()
+        # prettyqt installs its own ScrollBar on construction
+        return cast("widgets.ScrollBar", self.horizontalScrollBar())
 
     @h_scrollbar.setter
     def h_scrollbar(self, scrollbar: widgets.ScrollBar):
@@ -52,7 +53,7 @@ class AbstractScrollAreaMixin(widgets.FrameMixin, _AbstractScrollAreaBase):
 
     @property
     def v_scrollbar(self) -> widgets.ScrollBar:
-        return self.verticalScrollBar()
+        return cast("widgets.ScrollBar", self.verticalScrollBar())
 
     @v_scrollbar.setter
     def v_scrollbar(self, scrollbar: widgets.ScrollBar):
@@ -173,11 +174,11 @@ class AbstractScrollAreaMixin(widgets.FrameMixin, _AbstractScrollAreaBase):
 
     def scroll_to_top(self):
         """Scroll to the top of the scroll area."""
-        self.verticalScrollBar().scroll_to_min()
+        self.v_scrollbar.scroll_to_min()
 
     def scroll_to_bottom(self):
         """Scroll to the bottom of the scroll area."""
-        self.verticalScrollBar().scroll_to_max()
+        self.v_scrollbar.scroll_to_max()
 
     def set_viewport_margins(self, margins: int):
         self.setViewportMargins(margins, margins, margins, margins)

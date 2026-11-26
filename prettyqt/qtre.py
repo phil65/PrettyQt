@@ -199,17 +199,23 @@ def compile(pattern: str, flags: int = 0) -> Pattern:  # noqa: A001
     return Pattern(pattern, flags)
 
 
-def search(pattern: str, string: str, flags: int = 0) -> core.RegularExpression | None:
+def search(
+    pattern: str, string: str, flags: int = 0
+) -> core.RegularExpressionMatch | None:
     compiled = compile(pattern, flags)
     return compiled.search(string)
 
 
-def match(pattern: str, string: str, flags: int = 0) -> core.RegularExpression | None:
+def match(
+    pattern: str, string: str, flags: int = 0
+) -> core.RegularExpressionMatch | None:
     compiled = compile(pattern, flags)
     return compiled.match(string)
 
 
-def fullmatch(pattern: str, string: str, flags: int = 0) -> core.RegularExpression | None:
+def fullmatch(
+    pattern: str, string: str, flags: int = 0
+) -> core.RegularExpressionMatch | None:
     compiled = compile(pattern, flags)
     return compiled.fullmatch(string)
 

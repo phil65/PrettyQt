@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, Self
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import bidict
@@ -127,7 +127,7 @@ class WizardMixin(widgets.DialogMixin, _WizardBase):
     def __iter__(self) -> Iterator[widgets.QWizardPage]:
         return iter(self.page(i) for i in self.pageIds())
 
-    def __add__(self, other: widgets.QWizardPage) -> Wizard:
+    def __add__(self, other: widgets.QWizardPage) -> Self:
         self.addPage(other)
         return self
 

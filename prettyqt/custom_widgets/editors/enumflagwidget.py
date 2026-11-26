@@ -1,4 +1,5 @@
 import enum
+from typing import cast
 
 from prettyqt import core, gui, widgets
 
@@ -49,11 +50,11 @@ class EnumFlagWidget(widgets.ToolButton):
         """Return current Enum class."""
         return self._enum_class
 
-    def get_value(self) -> enum.Flag:
+    def get_value(self) -> enum.Flag | None:
         """Current value as Enum member."""
         if self._enum_class is None:
             return None
-        flag = self._enum_class(0)
+        flag = cast("enum.Flag", self._enum_class(0))
         for k, v in self._action_map.items():
             if v.isChecked():
                 flag |= k

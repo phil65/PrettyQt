@@ -29,7 +29,7 @@ class PlaceSearchRequest(location.QPlaceSearchRequest):
     def get_categories(self) -> list[location.PlaceCategory]:
         return [location.PlaceCategory(i) for i in self.categories()]
 
-    def get_search_area(self) -> positioning.GeoShape:
+    def get_search_area(self) -> positioning.QGeoShape:
         area = self.searchArea()
         match area:
             case positioning.QGeoCircle():

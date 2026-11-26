@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from prettyqt import charts
 from prettyqt.utils import datatypes
@@ -15,7 +15,7 @@ class DateTimeAxis(charts.AbstractAxisMixin, charts.QDateTimeAxis):
         self.setMin(minimum)
 
     def get_min(self) -> dt.datetime:
-        return self.min().toPython()
+        return cast("dt.datetime", self.min().toPython())  # stub: object
 
     def set_max(self, maximum: datatypes.DateTimeType):
         """Set maximum value for axis."""
@@ -23,7 +23,7 @@ class DateTimeAxis(charts.AbstractAxisMixin, charts.QDateTimeAxis):
         self.setMax(maximum)
 
     def get_max(self) -> dt.datetime:
-        return self.max().toPython()
+        return cast("dt.datetime", self.max().toPython())  # stub: object
 
     def set_range(self, minimum: datatypes.DateTimeType, maximum: datatypes.DateTimeType):
         """Set value range of datetime axis."""

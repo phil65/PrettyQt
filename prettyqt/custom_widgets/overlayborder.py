@@ -29,7 +29,7 @@ class BaseOverlayWidget(widgets.Widget):
     def set_border_color(self, color: datatypes.ColorType):
         self._border_color = colors.get_color(color)
 
-    def get_fill_color(self) -> gui.Color:
+    def get_fill_color(self) -> gui.Color | None:
         return self._fill_color
 
     def get_border_color(self) -> gui.Color:

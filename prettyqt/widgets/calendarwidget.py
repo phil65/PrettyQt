@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, cast
 
 from prettyqt import constants, widgets
 from prettyqt.utils import bidict, datatypes
@@ -50,7 +50,7 @@ class CalendarWidget(widgets.WidgetMixin, widgets.QCalendarWidget):
         return maps
 
     def get_date(self) -> dt.date:
-        return self.selectedDate().toPython()
+        return cast("dt.date", self.selectedDate().toPython())  # stub: object
 
     def get_value(self) -> dt.date:
         return self.get_date()
