@@ -109,7 +109,7 @@ class TextCursor(gui.QTextCursor):
             case int():
                 self.setPosition(pos, MOVE_MODE[mode])
             case (int() as row, int() as col):
-                position = self.document().find_block_by_number(row).position()
+                position = self.document().findBlockByNumber(row).position()
                 position += col
                 self.set_position(position, mode=mode)
             case _:

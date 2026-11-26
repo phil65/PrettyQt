@@ -75,7 +75,7 @@ class Polygon(serializemixin.SerializeMixin, QtGui.QPolygon):
             import shiboken6
 
             address = shiboken6.getCppPointer(self.data())
-            buffer = (ctypes.c_long * 2 * self.size()).from_address(address[0])
+            buffer = (ctypes.c_int * 2 * self.size()).from_address(address[0])
         else:
             buffer = self.data()
             buffer.setsize(8 * self.size())
@@ -88,9 +88,10 @@ class Polygon(serializemixin.SerializeMixin, QtGui.QPolygon):
         size = len(xdata)
         polyline = cls()
         buffer = polyline.get_data_buffer(size)
-        memory = np.frombuffer(buffer, np.float64)
-        memory[: (size - 1) * 2 + 1 : 2] = np.array(xdata, dtype=np.float64, copy=False)
-        memory[1 : (size - 1) * 2 + 2 : 2] = np.array(ydata, dtype=np.float64, copy=False)
+        # QPoint is two 32-bit ints
+        memory = np.frombuffer(buffer, np.int32)
+        memory[: (size - 1) * 2 + 1 : 2] = np.asarray(xdata, dtype=np.int32)
+        memory[1 : (size - 1) * 2 + 2 : 2] = np.asarray(ydata, dtype=np.int32)
         return polyline
 
 

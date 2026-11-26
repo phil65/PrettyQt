@@ -1,3 +1,5 @@
+import mimetypes
+import os
 from typing import Literal, Self
 
 from prettyqt import core, gui
@@ -53,6 +55,19 @@ class Icon(serializemixin.SerializeMixin, gui.QIcon):
             )
             icon.addPixmap(px)
         return icon
+
+    @classmethod
+    def for_mimetype(cls, path: os.PathLike[str] | str) -> Self | None:
+        """Try to create an icon from theme using the file mimetype.
+
+        Returns None if there is no theme icon for the mimetype.
+        """
+        path = os.fspath(path)
+        if mime := mimetypes.guess_type(path)[0]:
+            name = mime.replace("/", "-")
+            if cls.hasThemeIcon(name) and not (icon := cls(cls.fromTheme(name))).isNull():
+                return icon
+        return None
 
     @classmethod
     def from_image(cls, image: gui.QImage) -> Self:

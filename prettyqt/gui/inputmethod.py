@@ -39,7 +39,8 @@ class InputMethod(core.ObjectMixin):
 
     @classmethod
     def query_focus_object(cls, query: constants.InputMethodQueryStr, argument):
-        return cls.queryFocusObject(constants.INPUT_METHOD_QUERY[query], argument)
+        query_ = constants.INPUT_METHOD_QUERY[query]
+        return QtGui.QInputMethod.queryFocusObject(query_, argument)
 
 
 if __name__ == "__main__":

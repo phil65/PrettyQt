@@ -437,7 +437,7 @@ COLOR_PREFERENCE: bidict[ColorPreferenceStr, Qt.ImageConversionFlag] = bidict(
 )
 
 DitherPreferenceStr = Literal["diffuse", "ordered", "threshold"]
-DITHER_PREFERENCE: bidict[ImageConversionFlagStr, Qt.ImageConversionFlag] = bidict(
+DITHER_PREFERENCE: bidict[DitherPreferenceStr, Qt.ImageConversionFlag] = bidict(
     # Dithering mode preference:
     diffuse=Qt.ImageConversionFlag.DiffuseDither,
     ordered=Qt.ImageConversionFlag.OrderedDither,
@@ -445,11 +445,13 @@ DITHER_PREFERENCE: bidict[ImageConversionFlagStr, Qt.ImageConversionFlag] = bidi
 )
 
 AlphaDitherPreferenceStr = Literal["diffuse", "ordered", "threshold"]
-ALPHA_DITHER_PREFERENCE: bidict[ImageConversionFlagStr, Qt.ImageConversionFlag] = bidict(
-    # Dithering mode preference for 1-bit alpha masks:
-    threshold=Qt.ImageConversionFlag.ThresholdAlphaDither,
-    ordered=Qt.ImageConversionFlag.OrderedAlphaDither,
-    diffuse=Qt.ImageConversionFlag.DiffuseAlphaDither,
+ALPHA_DITHER_PREFERENCE: bidict[AlphaDitherPreferenceStr, Qt.ImageConversionFlag] = (
+    bidict(
+        # Dithering mode preference for 1-bit alpha masks:
+        threshold=Qt.ImageConversionFlag.ThresholdAlphaDither,
+        ordered=Qt.ImageConversionFlag.OrderedAlphaDither,
+        diffuse=Qt.ImageConversionFlag.DiffuseAlphaDither,
+    )
 )
 
 ModePreferenceStr = Literal[

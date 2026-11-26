@@ -22,11 +22,11 @@ else:
 
 
 class PagedPaintDeviceMixin(gui.PaintDeviceMixin, _PagedPaintDeviceBase):
-    def get_page_ranges(self) -> list[gui.PageRanges]:
-        return [gui.PageRanges(i) for i in self.pageRanges()]
+    def get_page_ranges(self) -> gui.PageRanges:
+        return gui.PageRanges(self.pageRanges())
 
     def get_page_layout(self) -> gui.PageLayout:
-        return gui.PageLayout(self.PageLayout())
+        return gui.PageLayout(self.pageLayout())
 
     def set_page_ranges(self, ranges: gui.QPageRanges | list[tuple[int, int]]):
         if isinstance(ranges, gui.QPageRanges):

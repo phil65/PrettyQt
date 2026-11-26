@@ -19,11 +19,11 @@ class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
     ) -> gui.QStandardItem | listdelegators.ListDelegator[gui.QStandardItem]:
         match index:
             case int():
-                if index >= self.childCount():
+                if index >= self.rowCount():
                     raise IndexError(index)
                 return self.child(index)
             case slice():
-                return self.__getitem__(index, 0)
+                return self.__getitem__((index, 0))
             case int() as row, int() as col:
                 return self.child(row, col)
             case (row, col):

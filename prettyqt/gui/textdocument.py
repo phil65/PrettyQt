@@ -243,7 +243,7 @@ class TextDocumentMixin(core.ObjectMixin, _TextDocumentBase):
                 b = b.next()
             h += self.documentMargin()
             return h
-        line_count = self.document().blockCount()
+        line_count = self.blockCount()
         font_metrics = gui.FontMetrics(self.defaultFont())
         return (max(line_count, 1) * font_metrics.height()) + self.documentMargin()
 

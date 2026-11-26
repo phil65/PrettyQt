@@ -28,7 +28,7 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
                     raise IndexError(index)
                 return self.item(index)
             case slice():
-                return self.__getitem__(index, 0)
+                return self.__getitem__((index, 0))
             case core.QModelIndex():
                 return self.itemFromIndex(index)
             case int() as row, int() as col:

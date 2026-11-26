@@ -164,7 +164,7 @@ class Palette(serializemixin.SerializeMixin, gui.QPalette):
         Returns:
             color group
         """
-        return GROUP.inverse[self.colorGroup()]
+        return GROUP.inverse[self.currentColorGroup()]
 
     def inverted(self) -> Self:
         pal = type(self)()

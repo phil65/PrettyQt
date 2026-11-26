@@ -119,8 +119,8 @@ class PolygonF(serializemixin.SerializeMixin, gui.QPolygonF):
         polyline = cls()
         buffer = polyline.get_data_buffer(size)
         memory = np.frombuffer(buffer, np.float64)
-        memory[: (size - 1) * 2 + 1 : 2] = np.array(xdata, dtype=np.float64, copy=False)
-        memory[1 : (size - 1) * 2 + 2 : 2] = np.array(ydata, dtype=np.float64, copy=False)
+        memory[: (size - 1) * 2 + 1 : 2] = np.asarray(xdata, dtype=np.float64)
+        memory[1 : (size - 1) * 2 + 2 : 2] = np.asarray(ydata, dtype=np.float64)
         return polyline
 
 

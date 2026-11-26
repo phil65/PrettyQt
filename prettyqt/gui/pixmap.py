@@ -48,13 +48,12 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin, _PixmapBa
         color_preference: constants.ColorPreferenceStr = "auto",
         dithering: constants.DitherPreferenceStr = "diffuse",
         alpha_dithering: constants.AlphaDitherPreferenceStr = "threshold",
-        mode_preference: constants.ModePreferenceStr = "auto",
+        mode_preference: constants.ModePreferenceStr = "auto_dither",
     ) -> Self:
-        flag = constants.ImageConversionFlag(0)
-        flag |= constants.COLOR_PREFERENCE.inverse[color_preference]
-        flag |= constants.DITHER_PREFERENCE.inverse[dithering]
-        flag |= constants.ALPHA_DITHER_PREFERENCE.inverse[alpha_dithering]
-        flag |= constants.MODE_PREFERENCE.inverse[mode_preference]
+        flag = constants.COLOR_PREFERENCE[color_preference]
+        flag |= constants.DITHER_PREFERENCE[dithering]
+        flag |= constants.ALPHA_DITHER_PREFERENCE[alpha_dithering]
+        flag |= constants.MODE_PREFERENCE[mode_preference]
         return cls(cls.fromImage(img, flag))
 
     def save_to_file(

@@ -308,6 +308,7 @@ def test_inputmethod(qapp):
     input_method.get_keyboard_rectangle()
     input_method.get_locale()
     assert input_method.get_input_direction() == "left_to_right"
+    input_method.query_focus_object("enabled", None)
 
 
 def test_intvalidator():
@@ -375,6 +376,7 @@ def test_shortcut(qtbot):
         shortcut.set_context("test")
     assert shortcut.get_context() == "application"
     assert shortcut.get_key() == seq
+    assert shortcut.get_keys() == [seq]
 
 
 # def test_sessionmanager():
@@ -395,6 +397,12 @@ def test_standarditem(qapp):
     with pytest.raises(InvalidParamError):
         item.set_checkstate("test")
     assert item.get_checkstate() == "unchecked"
+    child = gui.StandardItem("child")
+    item.add(child)
+    assert item[0] is child
+    assert item[0:1] == [child]
+    with pytest.raises(IndexError):
+        item[1]
     item.get_background()
     item.get_foreground()
     item.get_font()
@@ -507,10 +515,15 @@ def test_textcursor():
     cursor.span()
     with cursor.edit_block():
         pass
+    doc = gui.QTextDocument("abc\ndef")
+    cursor = gui.TextCursor(doc)
+    cursor.set_position((1, 2))
+    assert cursor.position() == 6  # noqa: PLR2004
 
 
 def test_textdocument():
     doc = gui.TextDocument("This is a test\nHello")
+    assert doc.get_pixel_height(exact=False) > 0
     for i in doc:
         repr(i)
     assert doc[1].text() == "Hello"
@@ -638,6 +651,7 @@ def test_palette():
     pal["button"] = color
     assert pal["button"] == color
     bytes(pal)
+    assert pal.get_color_group() == "active"
 
 
 def test_pdfwriter():
@@ -648,6 +662,8 @@ def test_pdfwriter():
     assert writer.get_pdf_version() == "v1_6"
     with pytest.raises(InvalidParamError):
         writer.set_pdf_version("test")
+    writer.get_page_layout()
+    assert not writer.get_page_ranges()
 
 
 def test_pen():
@@ -680,6 +696,20 @@ def test_pixmap(qapp):
     pix.get_size()
     pix.get_rect()
     pix.to_image()
+    image = gui.Image(4, 4, gui.QImage.Format.Format_ARGB32)
+    assert not gui.Pixmap.from_image(image, color_preference="color_only").isNull()
+
+
+def test_polygon_from_xy():
+    pytest.importorskip("numpy")
+    poly = gui.Polygon.from_xy([1, 2], [3, 4])
+    assert poly.get_points() == [core.Point(1, 3), core.Point(2, 4)]
+    polyf = gui.PolygonF.from_xy([1.5, 2], [3, 4])
+    assert polyf.value(0) == core.PointF(1.5, 3)
+
+
+def test_icon_for_mimetype():
+    assert gui.Icon.for_mimetype("no_mimetype_for_this") is None
 
 
 # def test_pixmapcache():
