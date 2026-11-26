@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+import annotationlib
 import asyncio
 import functools
 import inspect
 import itertools
 import logging
-from typing import TYPE_CHECKING, Any, Optional, get_args, get_type_hints
+from typing import TYPE_CHECKING, Any, Optional, get_args
 
 from prettyqt.qt import QtCore
 
@@ -63,12 +64,33 @@ def get_concretes(annotations: list) -> list:
     return ret + annotations
 
 
+def _resolve_annotation(annotation: Any) -> Any:
+    """Map an annotation that cannot be evaluated (TYPE_CHECKING-only) to `object`."""
+    if isinstance(annotation, annotationlib.ForwardRef):
+        return object
+    return annotation
+
+
+def _get_slot_annotations(func: Callable) -> dict[str, Any]:
+    """Read annotations without evaluating names that only exist for type checkers.
+
+    A fresh dict, so the function's own `__annotations__` stay untouched.
+    """
+    annotations = annotationlib.get_annotations(
+        func, format=annotationlib.Format.FORWARDREF
+    )
+    return {k: _resolve_annotation(v) for k, v in annotations.items()}
+
+
 def AutoSlot(func):
-    def wrapper(func) -> func:
-        anots: dict[str, Any] = func.__annotations__
+    def wrapper(func):
+        anots = _get_slot_annotations(func)
         return_ = anots.pop("return", None)
+        if return_ is type(None):
+            return_ = None
         if return_ is Any:
             return_ = "QVariant"
+        result = {} if return_ is None else {"result": return_}
         args = list(anots.values())
         stripped_optionals = get_concretes(get_optional_args(args))
         concretes = get_concretes(args)
@@ -80,9 +102,9 @@ def AutoSlot(func):
                 for subset in itertools.combinations(stripped_optionals, i)
             ]
             for combo in combos:
-                func = QtCore.Slot(*combo + required_annotations, result=return_)(func)
+                func = QtCore.Slot(*combo + required_annotations, **result)(func)
             return func
-        return QtCore.Slot(*concretes, result=return_)(func)
+        return QtCore.Slot(*concretes, **result)(func)
 
     return wrapper(func)
 
@@ -99,9 +121,13 @@ class _OverloadedSlotPlaceholder:
 def _build_arguments(
     func: Callable, original_func: Callable | None = None
 ) -> tuple[list, dict]:
-    argspec = inspect.getfullargspec(func)
-    args = argspec.args
-    annotations = get_type_hints(func)
+    signature = inspect.signature(func, annotation_format=annotationlib.Format.FORWARDREF)
+    args = [
+        p.name
+        for p in signature.parameters.values()
+        if p.kind in (p.POSITIONAL_ONLY, p.POSITIONAL_OR_KEYWORD)
+    ]
+    annotations = _get_slot_annotations(func)
 
     slot_args: list[Any] = []
     slot_kwargs: dict[str, Any] = {}
