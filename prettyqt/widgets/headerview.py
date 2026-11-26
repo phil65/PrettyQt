@@ -182,7 +182,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin, _HeaderViewBase):
         minimum_section_size: int | None = None,
     ):
         if stretch_last_section is not None:
-            self.stretchLastSection(stretch_last_section)
+            self.setStretchLastSection(stretch_last_section)
         if minimum_section_size is not None:
             self.setMinimumSectionSize(minimum_section_size)
         if default_section_size is not None:

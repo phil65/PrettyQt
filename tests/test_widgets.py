@@ -653,6 +653,7 @@ def test_listwidget(qtbot):
     widget = widgets.ListWidget()
     qtbot.addWidget(widget)
     widget.add("test_listwidget", icon="mdi.timer")
+    assert len(widget[0:]) == 1
     widget.add("test_listwidget", icon="mdi.timer")
     assert len(widget) == 2  # noqa: PLR2004
     item = widget[0]
@@ -1629,3 +1630,10 @@ def test_wizardpage(qtbot):
     assert page.get_button_text("back") == "test"
     with pytest.raises(InvalidParamError):
         page.get_button_text("test")
+
+
+def test_headerview_set_resize_mode_stretch_last_section(qtbot):
+    table = widgets.TableView()
+    qtbot.addWidget(table)
+    table.h_header.set_resize_mode("interactive", stretch_last_section=True)
+    assert table.h_header.stretchLastSection()

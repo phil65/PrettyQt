@@ -39,7 +39,7 @@ class ListWidget(widgets.ListViewMixin, widgets.QListWidget):
                     raise KeyError(row)
                 return item
             case slice():
-                count = self.itemCount() if row.stop is None else row.stop
+                count = self.count() if row.stop is None else row.stop
                 values = list(range(count)[row])
                 ls = [self.item(i) for i in values]
                 return listdelegators.ListDelegator(ls)
