@@ -22,9 +22,12 @@ def _sort_key(value: Any) -> tuple:
 
 
 if TYPE_CHECKING:
-    from prettyqt.qt import QtCore
+    from prettyqt import core as _core
 
-    _ListBase = QtCore.QAbstractItemModel
+    # prettyqt item models: AbstractItemModel helpers plus data_by_index()
+    class _ListBase(_core.AbstractItemModel):
+        def data_by_index(self, index: _core.ModelIndex) -> Any: ...
+
 else:
     _ListBase = object
 

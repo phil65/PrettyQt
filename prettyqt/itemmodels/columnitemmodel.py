@@ -75,9 +75,12 @@ class ColumnItem:
 
 
 if TYPE_CHECKING:
-    from prettyqt.qt import QtCore
+    from prettyqt import core as _core
 
-    _ColumnItemModelBase = QtCore.QAbstractItemModel
+    # prettyqt item models: AbstractItemModel helpers plus data_by_index()
+    class _ColumnItemModelBase(_core.AbstractItemModel):
+        def data_by_index(self, index: _core.ModelIndex) -> Any: ...
+
 else:
     _ColumnItemModelBase = object
 

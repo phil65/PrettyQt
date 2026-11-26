@@ -27,6 +27,9 @@ if TYPE_CHECKING:
     from PySide6.QtCore import *  # type: ignore
     from PySide6.QtCore import __version__  # type: ignore
     from PySide6 import __version__ as BINDING_VERSION
+
+    # The stubs type the QEnum decorator as returning `object`.
+    def QEnum[T](arg__1: T, /) -> T: ...  # noqa: N802
 elif PYQT6:
     from PyQt6.QtCore import (
         QT_VERSION_STR,

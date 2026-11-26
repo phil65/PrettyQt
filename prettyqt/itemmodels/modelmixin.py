@@ -8,9 +8,12 @@ if TYPE_CHECKING:
 
 
 if TYPE_CHECKING:
-    from prettyqt.qt import QtCore
+    from prettyqt import core as _core
 
-    _ModelBase = QtCore.QAbstractItemModel
+    # prettyqt item models: AbstractItemModel helpers plus data_by_index()
+    class _ModelBase(_core.AbstractItemModel):
+        def data_by_index(self, index: _core.ModelIndex) -> Any: ...
+
 else:
     _ModelBase = object
 

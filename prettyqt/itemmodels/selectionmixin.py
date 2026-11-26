@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 from prettyqt import constants
 
@@ -10,16 +10,18 @@ if TYPE_CHECKING:
 
 
 if TYPE_CHECKING:
-    from prettyqt.qt import QtCore
+    from prettyqt import core as _core
 
-    _SelectionBase = QtCore.QAbstractItemModel
+    # prettyqt item models: AbstractItemModel helpers plus data_by_index()
+    class _SelectionBase(_core.AbstractItemModel):
+        def data_by_index(self, index: _core.ModelIndex) -> Any: ...
+
 else:
     _SelectionBase = object
 
 
 class SelectionMixin(_SelectionBase):
     CHECKSTATE: ClassVar[dict[int, Callable]] = {}  # column: identifier
-    dataChanged: core.Signal  # noqa: N815
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
