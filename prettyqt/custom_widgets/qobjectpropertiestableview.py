@@ -23,7 +23,10 @@ class QObjectPropertiesTableView(widgets.TableView):
         update_on_signal_emission: bool = True,
     ):
         prev_model = self.get_model(skip_proxies=True)
-        if prev_model is not None and prev_model._qobject:
+        if (
+            isinstance(prev_model, itemmodels.QObjectPropertiesModel)
+            and prev_model._qobject
+        ):
             self.unhook()
         model = itemmodels.QObjectPropertiesModel(qobject, parent=self)
         # model.dataChanged.connect(self.repaint)
@@ -43,9 +46,12 @@ class QObjectPropertiesTableView(widgets.TableView):
 
     def unhook(self):
         model = self.get_model(skip_proxies=True)
+        if not isinstance(model, itemmodels.QObjectPropertiesModel):
+            return
         for handle in self._handles:
-            model._qobject.disconnect(handle)
-        model._qobject.removeEventFilter(self.event_catcher)
+            core.QObject.disconnect(handle)
+        if self.event_catcher is not None:
+            model._qobject.removeEventFilter(self.event_catcher)
         logger.debug("Disconnected %r from %r", model._qobject, self)
 
 

@@ -84,21 +84,30 @@ class SettingsWindow(widgets.Widget):
         match setting:
             case SelectionSetting():
                 widget = widgets.ComboBox()
-                widget.add_items(setting.options)
+                if setting.options:
+                    widget.add_items(setting.options)
+                if setting.default is not None:
+                    widget.set_value(setting.default)
             case BoolSetting():
                 widget = widgets.CheckBox()
+                widget.set_value(setting.default)
             case StrSetting():
                 widget = widgets.LineEdit()
+                if setting.default is not None:
+                    widget.set_value(setting.default)
             case IntSetting():
                 widget = widgets.SpinBox()
                 widget.set_range(setting.minimum, setting.maximum)
+                if setting.default is not None:
+                    widget.set_value(setting.default)
+            case _:
+                msg = f"Unsupported setting type: {type(setting)}"
+                raise TypeError(msg)
 
         container = widgets.Widget()
         row_layout = container.set_layout("horizontal")
         row_layout.add(widget)
         row_layout.add(widgets.Label(setting.description), stretch=1)
-        if setting.default is not None:
-            widget.set_value(setting.default)
         layout.add(container)
         self.configwidget.box.add(row_widget)
 

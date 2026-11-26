@@ -41,7 +41,7 @@ class OrientedTableView(widgets.TableView):
     def sectionAt(self, val: int):
         return self.columnAt(val) if self.is_horizontal() else self.rowAt(val)
 
-    def over_header_edge(self, position: int, margin: int = 3) -> int:
+    def over_header_edge(self, position: int, margin: int = 3) -> int | None:
         # Return the index of the column this x position is on the right edge of
         left = self.sectionAt(position - margin)
         right = self.sectionAt(position + margin)
@@ -74,6 +74,6 @@ if __name__ == "__main__":
     app = widgets.app()
     with app.debug_mode():
         app.set_style("fusion")
-        view = OrientedTableView()
+        view = OrientedTableView("vertical")
         view.show()
         app.exec()

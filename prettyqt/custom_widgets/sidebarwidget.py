@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, cast
 
 from prettyqt import constants, gui, iconprovider, widgets
 
@@ -48,7 +48,7 @@ class SidebarWidget(widgets.MainWindow):
         self.spacer_action = self.sidebar.add_spacer()
         self.add_toolbar(self.sidebar, "left")
         self.area = widgets.Widget()
-        self.area.set_layout("stacked")
+        self._stack_layout = self.area.set_layout("stacked")
         w = widgets.Widget()
         w.set_layout(main_layout)
         self.main_layout = w.box
@@ -73,7 +73,7 @@ class SidebarWidget(widgets.MainWindow):
         shortcut: str | None = None,
         area: AreaStr = "top",
     ):
-        self.area.box.add(item)
+        self._stack_layout.add(item)
         act = gui.Action(
             text=title,
             icon=icon,
@@ -91,15 +91,15 @@ class SidebarWidget(widgets.MainWindow):
             self.sidebar.insertWidget(self.spacer_action, button)
         else:
             self.sidebar.addWidget(button)
-        if len(self.area.box) == 1:
+        if len(self._stack_layout) == 1:
             button.setChecked(True)
         self.button_map[item] = button
         self.icon_map[item] = iconprovider.get_icon(icon)
         if show:
-            self.area.box.setCurrentWidget(item)
+            self._stack_layout.setCurrentWidget(item)
 
     def set_marker(
-        self, item: str | int | widgets.Widget, color: datatypes.ColorType = "red"
+        self, item: str | int | widgets.QWidget, color: datatypes.ColorType = "red"
     ):
         widget = item if isinstance(item, widgets.QWidget) else self._get_widget(item)
         if widget == self._get_current_widget():
@@ -112,14 +112,14 @@ class SidebarWidget(widgets.MainWindow):
         icon = gui.Icon(px)
         self.button_map[widget].setIcon(icon)
 
-    def _get_widget(self, item: str | int | widgets.Widget):
+    def _get_widget(self, item: str | int | widgets.QWidget) -> widgets.QWidget:
         """Returns widget page specified by name, offset or content."""
         match item:
             case int():
-                return self.area.box[item]
+                return cast("widgets.QWidget", self._stack_layout[item])
             case str():
                 w = self.area.find_child(widgets.QWidget, name=item, recursive=False)
-                if w not in self.area.box:
+                if w is None or w not in self._stack_layout:
                     msg = "Layout does not contain the chosen widget"
                     raise ValueError(msg)
                 return w
@@ -136,9 +136,10 @@ class SidebarWidget(widgets.MainWindow):
 
     def set_tab(self, item: str | int | widgets.QWidget):
         widget = item if isinstance(item, widgets.QWidget) else self._get_widget(item)
-        current = self.area.box.currentWidget()
-        self.button_map[current].setChecked(False)
-        self.area.box.setCurrentWidget(widget)
+        current = self._stack_layout.currentWidget()
+        if current is not None:
+            self.button_map[current].setChecked(False)
+        self._stack_layout.setCurrentWidget(widget)
         self.button_map[widget].setChecked(True)
 
     def add_spacer(self) -> gui.QAction:
@@ -170,7 +171,7 @@ if __name__ == "__main__":
     app = widgets.app()
     a = commandpalette.CommandPalette()
     ex = SidebarWidget(show_settings=True)
-    ex.add_shortcut("Ctrl+P", a.show)
+    ex.add_shortcut("Ctrl+P", callback=a.show)
     page_1 = widgets.PlainTextEdit()
     page_2 = widgets.ColorDialog()
     page_3 = widgets.FileDialog()

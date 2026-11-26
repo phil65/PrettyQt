@@ -1,12 +1,14 @@
 from collections.abc import Mapping
 import dataclasses
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, cast
 
 from prettyqt import constants, core, gui, widgets
 
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
+
+    from prettyqt import syntaxhighlighters
 
 
 MarkerKindStr = Literal["error", "warning", "info"]
@@ -137,7 +139,9 @@ class CodeEditor(widgets.PlainTextEdit):
     #     return set(start_text) - delim == set()
 
     def set_syntaxhighlighter(
-        self, syntax: str | gui.QSyntaxHighlighter, style: str | None = None
+        self,
+        syntax: str | gui.QSyntaxHighlighter,
+        style: syntaxhighlighters.pygmentshighlighter.StyleStr | None = None,
     ):
         """Set the highlighter; the previous one is detached from the document."""
         old = getattr(self, "_hl", None)
@@ -201,7 +205,12 @@ class CodeEditor(widgets.PlainTextEdit):
             kind: kind for markers given as mapping / tuples
         """
         self._markers.clear()
-        items = markers.items() if isinstance(markers, Mapping) else markers
+        if isinstance(markers, Mapping):
+            items: Iterable[LineMarker | tuple[int, str]] = cast(
+                "Mapping[int, str]", markers
+            ).items()
+        else:
+            items = markers
         for item in items:
             if isinstance(item, LineMarker):
                 marker = item

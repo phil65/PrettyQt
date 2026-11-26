@@ -5,7 +5,7 @@ import logging
 import pathlib
 import re
 import sys
-from typing import Any, Literal, TypeVar, get_args, get_origin
+from typing import Any, Literal, get_args, get_origin
 
 import pydantic
 from pydantic import BaseModel
@@ -14,9 +14,6 @@ from prettyqt import core, custom_widgets, gui, widgets
 
 
 logger = logging.getLogger(__name__)
-
-# TypeVar for the BaseModel generic type
-ModelT = TypeVar("ModelT", bound=BaseModel)
 
 
 class OptionalFieldWidget(widgets.Widget):
@@ -42,8 +39,8 @@ class OptionalFieldWidget(widgets.Widget):
 
         # Connect signals
         self._checkbox.toggled.connect(self._on_checkbox_toggled)
-        if hasattr(self._editor, "value_changed"):
-            self._editor.value_changed.connect(self.value_changed)
+        if (signal := getattr(self._editor, "value_changed", None)) is not None:
+            signal.connect(self.value_changed)
 
     def _on_checkbox_toggled(self, checked: bool) -> None:
         """Handle checkbox state changes."""
@@ -54,8 +51,8 @@ class OptionalFieldWidget(widgets.Widget):
         """Return the current value or None if disabled."""
         if not self._checkbox.isChecked():
             return None
-        if hasattr(self._editor, "get_value"):
-            return self._editor.get_value()
+        if (get_value := getattr(self._editor, "get_value", None)) is not None:
+            return get_value()
         return None
 
     def set_value(self, value: Any | None) -> None:
@@ -64,8 +61,11 @@ class OptionalFieldWidget(widgets.Widget):
         self._checkbox.setChecked(is_enabled)
         self._editor.setEnabled(is_enabled)
 
-        if is_enabled and hasattr(self._editor, "set_value"):
-            self._editor.set_value(value)
+        if (
+            is_enabled
+            and (set_value := getattr(self._editor, "set_value", None)) is not None
+        ):
+            set_value(value)
 
 
 class LiteralWidget(widgets.ComboBox):
@@ -99,7 +99,7 @@ class LiteralWidget(widgets.ComboBox):
             self.setCurrentIndex(0)
 
 
-class ModelWidget[ModelT](widgets.Widget):
+class ModelWidget[ModelT: BaseModel](widgets.Widget):
     """Widget that displays and edits Pydantic model attributes.
 
     Takes either a BaseModel class or instance and generates appropriate
@@ -162,7 +162,7 @@ class ModelWidget[ModelT](widgets.Widget):
 
     def _create_form_fields(self) -> None:
         """Create form fields based on model schema."""
-        model_fields = self._model_class.model_fields  # pyright: ignore
+        model_fields = self._model_class.model_fields
 
         for field_name, field_info in model_fields.items():
             # Skip private fields (starting with underscore)
@@ -179,8 +179,8 @@ class ModelWidget[ModelT](widgets.Widget):
                 continue
 
             # Setup change signal
-            if hasattr(editor, "value_changed"):
-                editor.value_changed.connect(
+            if (signal := getattr(editor, "value_changed", None)) is not None:
+                signal.connect(
                     lambda *args, name=field_name: self._on_field_changed(name)
                 )
 
@@ -388,8 +388,8 @@ class ModelWidget[ModelT](widgets.Widget):
         for field_name, editor in self._editors.items():
             if hasattr(self._current_model, field_name):
                 value = getattr(self._current_model, field_name)
-                if hasattr(editor, "set_value"):
-                    editor.set_value(value)  # pyright: ignore
+                if (set_value := getattr(editor, "set_value", None)) is not None:
+                    set_value(value)
 
     def _on_field_changed(self, field_name: str) -> None:
         """Handle changes in field values."""
@@ -411,8 +411,8 @@ class ModelWidget[ModelT](widgets.Widget):
         """Get a dictionary of field values from editors."""
         data = {}
         for field_name, editor in self._editors.items():
-            if hasattr(editor, "get_value"):
-                data[field_name] = editor.get_value()  # pyright: ignore
+            if (get_value := getattr(editor, "get_value", None)) is not None:
+                data[field_name] = get_value()
         return data
 
     def get_model(self) -> ModelT:

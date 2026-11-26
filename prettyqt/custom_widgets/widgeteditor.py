@@ -1,10 +1,18 @@
 import logging
+from typing import Any, Protocol, cast
 
 from prettyqt import core, eventfilters, widgets
 from prettyqt.utils import bidict, datatypes, helpers
 
 
 logger = logging.getLogger(__name__)
+
+
+class _EditorWidget(Protocol):
+    value_changed: Any
+
+    def get_value(self) -> Any: ...
+    def set_value(self, value: Any) -> Any: ...
 
 
 class WidgetEditor(widgets.Widget):
@@ -41,8 +49,11 @@ class WidgetEditor(widgets.Widget):
             self.box[i, "right"] = widget
             self._initial_prop_values[name] = value
             self._editors[name] = widget
-            if prop.hasNotifySignal() and connect:
-                notify_signal = prop.get_notify_signal()
+            if (
+                prop.hasNotifySignal()
+                and connect
+                and (notify_signal := prop.get_notify_signal()) is not None
+            ):
                 signal_name = notify_signal.get_name()
                 signal = self._qobject.__getattribute__(signal_name)
                 signal.connect(self._update_editors)
@@ -53,7 +64,9 @@ class WidgetEditor(widgets.Widget):
     #     return cls(scrollarea, connect=False)
 
     def _on_value_change(self):
-        editor = self.sender()
+        editor = cast("_EditorWidget | None", self.sender())
+        if editor is None:
+            return
         prop_name = self._editors.inverse[editor]
         prop = self._metaobj.get_property(prop_name)
         value = editor.get_value()

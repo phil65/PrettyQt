@@ -31,7 +31,7 @@ class CycleWidget(widgets.ListWidget):
         self.down_button.set_icon("mdi.arrow-down-bold-outline")
         self.origin_items = list(items)
         self.visible_number = 5
-        self.setItems(items)
+        self.setItems(self.origin_items)
         self.set_vertical_scroll_mode("pixel")
         self.set_scrollbar_smooth(True, animation_duration=250)
         self.v_scrollbar.hide()
@@ -41,11 +41,11 @@ class CycleWidget(widgets.ListWidget):
         self.set_scrollbar_policy("always_off")
         self.itemClicked.connect(self._on_item_clicked)
 
-    def setItems(self, items: list[str]):
+    def setItems(self, items: Iterable):
         self.clear()
-        self._create_items(items)
+        self._create_items(list(items))
 
-    def _create_items(self, items: list[str]):
+    def _create_items(self, items: list):
         N = len(items)  # noqa: N806
         self.is_cycle = self.visible_number < N
 
@@ -65,7 +65,7 @@ class CycleWidget(widgets.ListWidget):
 
             self._current_index = n
 
-    def _add_column_items(self, items: list[str], disabled: bool = False):
+    def _add_column_items(self, items: list, disabled: bool = False):
         for i in items:
             item = widgets.ListWidgetItem(str(i), self)
             item.setSizeHint(self.item_size)

@@ -64,8 +64,6 @@ if __name__ == "__main__":
     textbox2 = widgets.PlainTextEdit()
     container = widgets.Widget()
     container.set_layout("horizontal")
-    container.set_layout(None)
-    container.set_layout("horizontal")
     container.box.add(textbox1)
     dockwidget.setWidget(container)
     mainwindow.add_dockwidget(dockwidget)

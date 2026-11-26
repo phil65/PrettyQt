@@ -1,42 +1,44 @@
-from prettyqt import constants, core, itemmodels, widgets
+from prettyqt import constants, core, gui, itemmodels, widgets
 
 
 class FuzzyCompleter(widgets.Completer):
-    def __init__(self, parent):
+    def __init__(self, parent: widgets.ComboBox):
         super().__init__(parent)
         parent.setEditable(True)
         parent.set_insert_policy("no_insert")
         parent.installEventFilter(self)
         self.set_completion_mode("popup")
         self._local_completion_prefix = ""
-        self._source_model = None
+        self._source_model: core.QAbstractItemModel | None = None
         self._filter_proxy = itemmodels.FuzzyFilterProxyModel(self)
         self._filter_proxy.set_match_color(None)
         self._using_original_model = False
 
-    def setModel(self, model):
+    def setModel(self, model: core.QAbstractItemModel | None):
         self._source_model = model
         self._filter_proxy = itemmodels.FuzzyFilterProxyModel(self)
         self._filter_proxy.set_match_color(None)
-        self._filter_proxy.setSourceModel(self._source_model)
+        if self._source_model is not None:
+            self._filter_proxy.setSourceModel(self._source_model)
         super().setModel(self._filter_proxy)
         self._using_original_model = True
 
-    def eventFilter(self, source: widgets.QLineEdit, event: core.QEvent) -> bool:
-        match event.type():
-            case core.QEvent.Type.FocusIn:
-                source.clearEditText()
-            case core.QEvent.Type.KeyPress:
-                key = event.key()
-                if key == constants.Key.Key_Enter:
-                    text = source.currentText()
-                    source.setCompleter(None)
-                    source.setEditText(text)
-                    source.setCompleter(source.comp)
+    def eventFilter(self, source: core.QObject, event: core.QEvent) -> bool:
+        if isinstance(source, widgets.QComboBox):
+            match event.type():
+                case core.QEvent.Type.FocusIn:
+                    source.clearEditText()
+                case core.QEvent.Type.KeyPress if isinstance(event, gui.QKeyEvent):
+                    key = event.key()
+                    if key == constants.Key.Key_Enter:
+                        text = source.currentText()
+                        source.setCompleter(None)  # ty: ignore[invalid-argument-type]  # Qt accepts None to unset completer
+                        source.setEditText(text)
+                        source.setCompleter(self)
         return super().eventFilter(source, event)
 
     def updateModel(self):
-        if not self._using_original_model:
+        if not self._using_original_model and self._source_model is not None:
             self._filter_proxy.setSourceModel(self._source_model)
 
         self._filter_proxy.set_search_term(self._local_completion_prefix)

@@ -1,4 +1,13 @@
+from typing import Any, Protocol
+
 from prettyqt import core, widgets
+
+
+class ValueWidget(Protocol):
+    value_changed: Any
+
+    def get_value(self) -> Any: ...
+    def setEnabled(self, enabled: bool, /) -> None: ...
 
 
 class OptionalWidget(widgets.GroupBox):
@@ -8,7 +17,7 @@ class OptionalWidget(widgets.GroupBox):
 
     def __init__(
         self,
-        widget: widgets.QWidget,
+        widget: ValueWidget,
         title: str = "",
         parent: widgets.QWidget | None = None,
     ):

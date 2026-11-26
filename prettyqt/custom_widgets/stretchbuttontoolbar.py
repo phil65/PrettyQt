@@ -20,15 +20,18 @@ class StretchButtonToolBar(widgets.ToolBar):
 
     def sizeHint(self):
         hint = super().sizeHint()
+        layout = self.layout()
+        if layout is None:
+            return hint
         width, height = hint.width(), hint.height()
         m1 = self.contentsMargins()
-        m2 = self.layout().contentsMargins()
+        m2 = layout.contentsMargins()
         dx1, dy1, dw1, dh1 = m1.left(), m1.top(), m1.right(), m1.bottom()
         dx2, dy2, dw2, dh2 = m2.left(), m2.top(), m2.right(), m2.bottom()
         dx, dy = dx1 + dx2, dy1 + dy2
         dw, dh = dw1 + dw2, dh1 + dh2
         count = len(self.actions())
-        spacing = self.layout().spacing()
+        spacing = layout.spacing()
         space_spacing = max(count - 1, 0) * spacing
         if self.orientation() == constants.HORIZONTAL:
             width = int(height * 1.618) * count + space_spacing + dw + dx
@@ -38,12 +41,15 @@ class StretchButtonToolBar(widgets.ToolBar):
 
     def _do_layout(self, size):
         """Layout the buttons to fit inside size."""
+        layout = self.layout()
+        if layout is None:
+            return
         geom = self.geometry()
         geom.setSize(size)
 
         # Adjust for margins (both the widgets and the layouts).
         geom = geom.marginsRemoved(self.contentsMargins())
-        geom = geom.marginsRemoved(self.layout().contentsMargins())
+        geom = geom.marginsRemoved(layout.contentsMargins())
 
         actions = self.actions()
         widgets_it = map(self.widgetForAction, actions)
@@ -54,7 +60,7 @@ class StretchButtonToolBar(widgets.ToolBar):
         else:
             widgets = sorted(widgets_it, key=lambda w: w.pos().y())
 
-        spacing = self.layout().spacing()
+        spacing = layout.spacing()
         uniform_layout_helper(widgets, geom, orientation, spacing=spacing)
 
 

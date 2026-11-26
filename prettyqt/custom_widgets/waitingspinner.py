@@ -41,7 +41,7 @@ class BaseWaitingSpinner(widgets.Widget):
     def __init__(
         self,
         parent: widgets.QWidget | None = None,
-        modality: constants.ModalityStr = "none",
+        modality: constants.WindowModalityStr = "none",
     ):
         super().__init__(parent=parent)
 
@@ -278,7 +278,7 @@ class WaitingSpinner(BaseWaitingSpinner):
         parent: widgets.QWidget | None = None,
         center_on_parent: bool = True,
         disable_parent: bool = True,
-        modality: constants.ModalityStr = "none",
+        modality: constants.WindowModalityStr = "none",
         additional_disabled=None,
     ):
         super().__init__(parent=parent, modality=modality)
@@ -293,15 +293,15 @@ class WaitingSpinner(BaseWaitingSpinner):
     def start(self):
         self._update_position()
         super().start()
-        if self.parentWidget and self._disable_parent:
-            self.parentWidget().setEnabled(False)
+        if (parent := self.parentWidget()) is not None and self._disable_parent:
+            parent.setEnabled(False)
             for item in self.additional_disabled:
                 item.setEnabled(False)
 
     def stop(self):
         super().stop()
-        if self.parentWidget() and self._disable_parent:
-            self.parentWidget().setEnabled(True)
+        if (parent := self.parentWidget()) is not None and self._disable_parent:
+            parent.setEnabled(True)
             for item in self.additional_disabled:
                 item.setEnabled(True)
 

@@ -1,6 +1,6 @@
 import enum
 import logging
-from typing import Literal
+from typing import Literal, cast
 
 from prettyqt import constants, core, gui, itemmodels, widgets
 from prettyqt.utils import bidict
@@ -122,11 +122,11 @@ class ScrollAreaTocWidget(widgets.TreeView):
 
     def __init__(
         self,
-        scrollarea: widgets.QScrollArea,
+        scrollarea: widgets.ScrollArea,
         orientation: (
             constants.Orientation | constants.OrientationStr
         ) = constants.VERTICAL,
-        widget_class: type = widgets.QWidget,
+        widget_class: type[widgets.QWidget] = widgets.QWidget,
         **kwargs,
     ) -> None:
         """A TreeView which can show a Table-of-contents list based on a given ScrollArea.
@@ -212,14 +212,14 @@ class ScrollAreaTocWidget(widgets.TreeView):
     #     scrollarea.set_widget(w)
     #     return cls(scrollarea)
 
-    def set_widget(self, widget: widgets.QScrollArea):
+    def set_widget(self, widget: widgets.ScrollArea):
         """Set the ScrollArea widget to follow."""
-        if widget.widget() is None:
+        if (inner := widget.widget()) is None:
             msg = "No widget set on ScrollArea."
             raise RuntimeError(msg)
         self.scrollarea = widget
         model = ScrollAreaTocModel(
-            widget.widget(),
+            inner,
             show_root=True,
             parent=self.scrollarea,
             widget_class=self._WidgetClass,
@@ -230,7 +230,7 @@ class ScrollAreaTocWidget(widgets.TreeView):
         )
         self.proxy.set_filter_case_sensitive(False)
         self.show_root(False)
-        widget.widget().installEventFilter(self)
+        inner.installEventFilter(self)
         self.selectionModel().currentRowChanged.connect(self._on_current_change)
         self.selectionModel().selectionChanged.connect(self._on_selection_change)
         # if self._always_expanded:
@@ -250,11 +250,13 @@ class ScrollAreaTocWidget(widgets.TreeView):
     def _on_selection_change(self, new, old):
         if self.model() is None:
             return
-        widgets = [i.data(constants.USER_ROLE) for i in self.selected_indexes()]
-        self.get_model(skip_proxies=True).set_highlighted_widgets(widgets)
+        selected_widgets = [i.data(constants.USER_ROLE) for i in self.selected_indexes()]
+        source_model = self.get_model(skip_proxies=True)
+        if isinstance(source_model, ScrollAreaTocModel):
+            source_model.set_highlighted_widgets(selected_widgets)
 
     def _on_scroll(self):
-        model: ScrollAreaTocModel | None = self.model()
+        model = cast("core.AbstractItemModel | None", self.model())
         if model is None:
             return
         visible_widgets = self.scrollarea.get_visible_widgets(typ=self._WidgetClass)

@@ -99,7 +99,7 @@ class Notification(widgets.Widget):
 
         # Set Object name for reference
         self.setObjectName(category)
-        self.set_layout("horizontal", margin=0)
+        layout = self.set_layout("horizontal", margin=0)
 
         # Create a message area
         message_area = widgets.HBoxLayout()
@@ -124,7 +124,7 @@ class Notification(widgets.Widget):
         message_area.addWidget(self.message_display)
         # message_area.addStretch(1)
         message_area.addWidget(close_button)
-        self.layout().addLayout(message_area)
+        layout.addLayout(message_area)
 
         # Initialize some variables
         # self.setStyle(category)
@@ -331,11 +331,11 @@ class NotificationArea(widgets.Widget):
     def __delete_notification(self, notification: Notification):
         """Close and destroy the supplied notification."""
         notification.close()
-        self.layout().removeWidget(notification)
+        self.box.removeWidget(notification)
 
         self.adjustSize()
         # Hide notification area if it doesn't contain any items
-        if self.layout().count() == 0:
+        if self.box.count() == 0:
             self.hide()
 
         if self.use_queue:
@@ -405,7 +405,7 @@ class NotificationArea(widgets.Widget):
         notification.close_clicked.connect(self.remove)
 
         # Queue if max amount of notifications is shown
-        if self.use_queue and self.layout().count() >= self.max_messages:
+        if self.use_queue and self.box.count() >= self.max_messages:
             self.queue.put(notification)
         else:
             self._show_notification(notification)
@@ -429,7 +429,7 @@ class NotificationArea(widgets.Widget):
         if not self.isVisible():
             self.show()
             self.raise_()
-        self.layout().addWidget(notification)
+        self.box.addWidget(notification)
         # Check for entry effects
         if self.entry_effect is None:
             notification.display()
@@ -457,14 +457,17 @@ class NotificationArea(widgets.Widget):
         # This function also functions as a pyqt slot. In that case, no
         # notification argument is passed, but this is set as self.sender()
         if notification is None:
-            notification = self.sender()
+            sender = self.sender()
+            if not isinstance(sender, Notification):
+                return
+            notification = sender
         if notification.is_being_removed or notification.is_fading_in:
             return
         notification.is_being_removed = True
 
         # Check if notification is still present (and has not manually been
         # closed before this function is called by a timeout)
-        if notification not in self.layout():
+        if notification not in self.box:
             return
 
         # Implement animation here

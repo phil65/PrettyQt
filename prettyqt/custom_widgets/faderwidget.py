@@ -18,7 +18,7 @@ class FaderWidget(widgets.Widget):
         old_widget.render(self.old_pixmap)
 
         self.timeline = core.TimeLine(duration=duration, finished=self.close)
-        self.timeline.value_changed.connect(self.animate)
+        self.timeline.valueChanged.connect(self.animate)
         self.timeline.start()
 
         self.resize(new_widget.size())
