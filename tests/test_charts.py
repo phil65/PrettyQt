@@ -171,3 +171,12 @@ def test_valueaxis(qtbot):
     axis.get_shades_border_color()
     axis.get_minor_grid_line_pen()
     axis.get_minor_grid_line_color()
+
+
+def test_chart_nice_numbers_with_category_axis(qapp):
+    chart = charts.Chart()
+    chart.addAxis(charts.QBarCategoryAxis(), constants.AlignmentFlag.AlignBottom)
+    chart.addAxis(charts.QValueAxis(), constants.AlignmentFlag.AlignLeft)
+    chart.apply_nice_numbers()
+    chart.update_boundaries()
+    chart.zoom_by_factor(1.1)

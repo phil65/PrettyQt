@@ -89,12 +89,18 @@ class ChartMixin(widgets.GraphicsWidgetMixin, _ChartBase):
             orientation = constants.HORIZONTAL | constants.VERTICAL
         return self.axes(constants.ORIENTATION.get_enum_value(orientation), series)
 
+    def _get_value_axes(
+        self, orientation: constants.OrientationStr | None = None
+    ) -> list[charts.QValueAxis]:
+        axes = self.get_axes(orientation) if orientation else self.get_axes()
+        return [i for i in axes if isinstance(i, charts.QValueAxis)]
+
     def update_boundaries(self):
-        """Set new min/max values based on axis."""
-        if axis_x := self.get_axes("horizontal"):
+        """Set new min/max values based on the value axes."""
+        if axis_x := self._get_value_axes("horizontal"):
             self.max_x = axis_x[0].max()
             self.min_x = axis_x[0].min()
-        if axis_y := self.get_axes("vertical"):
+        if axis_y := self._get_value_axes("vertical"):
             self.max_y = axis_y[0].max()
             self.min_y = axis_y[0].min()
 
@@ -127,7 +133,7 @@ class ChartMixin(widgets.GraphicsWidgetMixin, _ChartBase):
 
     def apply_nice_numbers(self):
         """Adjust both axis to display nice round numbers."""
-        for axis in self.get_axes():
+        for axis in self._get_value_axes():
             axis.applyNiceNumbers()
 
     def zoom_by_factor(self, factor: float):
@@ -136,12 +142,12 @@ class ChartMixin(widgets.GraphicsWidgetMixin, _ChartBase):
         Make sure that we dont zoom out too far
         """
         self.zoom(factor)
-        if axis_x := self.get_axes("horizontal"):
+        if axis_x := self._get_value_axes("horizontal"):
             if axis_x[0].min() < self.min_x:
                 axis_x[0].setMin(self.min_x)
             if axis_x[0].max() > self.max_x:
                 axis_x[0].setMax(self.max_x)
-        if axis_y := self.get_axes("vertical"):
+        if axis_y := self._get_value_axes("vertical"):
             if axis_y[0].max() > self.max_y:
                 axis_y[0].setMax(self.max_y)
 
