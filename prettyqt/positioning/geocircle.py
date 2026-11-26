@@ -12,14 +12,16 @@ class GeoCircle(positioning.GeoShapeMixin, QtPositioning.QGeoCircle):
         | None = None,
         radius: float | None = None,
     ):
-        if center_or_other is None:
-            super().__init__()
-        else:
-            if radius is None:
-                radius = -1
-            if isinstance(center_or_other, tuple):
-                center_or_other = QtPositioning.QGeoCoordinate(*center_or_other)
-            super().__init__(center_or_other, radius)
+        match center_or_other:
+            case None:
+                super().__init__()
+            case QtPositioning.QGeoShape():
+                super().__init__(center_or_other)
+            case tuple():
+                center = QtPositioning.QGeoCoordinate(*center_or_other)
+                super().__init__(center, -1 if radius is None else radius)
+            case _:
+                super().__init__(center_or_other, -1 if radius is None else radius)
 
     def __repr__(self):
         return get_repr(self, self.get_center(), self.radius())

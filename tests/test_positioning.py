@@ -34,6 +34,8 @@ def test_geocircle():
     print(str(circle))
     assert circle.get_center() == coord
     assert repr(circle) == "GeoCircle(GeoCoordinate(1.0, 1.0), 0.5)"
+    assert positioning.GeoCircle(circle).get_center() == coord
+    assert positioning.GeoCircle((1, 1), 0.5).get_center() == coord
 
 
 def test_georectangle():
