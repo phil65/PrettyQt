@@ -1,3 +1,5 @@
+"""Project tasks."""
+
 import os
 from typing import Literal
 

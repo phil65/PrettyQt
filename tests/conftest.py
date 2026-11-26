@@ -1,4 +1,4 @@
-"""Tests for `datacook` package."""
+"""Shared pytest fixtures."""
 
 import sys
 from typing import TYPE_CHECKING

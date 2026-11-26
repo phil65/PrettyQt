@@ -191,7 +191,6 @@ force-exclude = true
 target-version = "py314"
 
 [tool.ruff.lint]
-future-annotations = true
 select = [
   "A",  # Flake8-builtins
   # "ANN",  # Flake8-Annotations
@@ -211,7 +210,6 @@ select = [
   # "ERA",  #  Eradicate
   "EXE",  # flake8-executable
   "F",  # PyFlakes
-  "FA",  # flake8-future-annotations
   # "FBT",  # flake8-boolean-trap
   # "FIX",  # flake8-fixme
   "FLY",  # flynt
@@ -312,6 +310,9 @@ runtime-evaluated-decorators = [
   "fastmcp.FastMCP.tool",
   "typer.Typer.command",
 ]
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"__future__.annotations".msg = "Python 3.14+ evaluates annotations lazily (PEP 649); drop the import."
 
 [tool.ruff.lint.isort]
 lines-after-imports = 2
