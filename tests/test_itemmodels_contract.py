@@ -1,7 +1,5 @@
 """Run the QAbstractItemModel contract checks on all models and proxies."""
 
-from __future__ import annotations
-
 import dataclasses
 import importlib
 import inspect

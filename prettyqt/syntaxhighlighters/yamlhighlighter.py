@@ -2,8 +2,6 @@
 # multimaster_fkie/node_manager_fkie/src/node_manager_fkie/yaml_highlighter.py
 
 
-from __future__ import annotations
-
 from typing import ClassVar
 
 from prettyqt import core, gui, syntaxhighlighters

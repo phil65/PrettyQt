@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import pathlib
 
 from prettyqt import core, qml

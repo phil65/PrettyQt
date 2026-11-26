@@ -23,5 +23,3 @@ Additional "core" editors:
 - ProgressBar
 - TextBrowser
 """
-
-from __future__ import annotations

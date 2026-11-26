@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from prettyqt import constants, core, itemmodels
 from prettyqt.itemmodels.proxies.flatproxymodel import FlatProxyMixin
 

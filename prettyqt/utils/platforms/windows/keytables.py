@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import ctypes
 
 from prettyqt.qt.QtCore import Qt

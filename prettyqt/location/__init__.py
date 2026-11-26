@@ -1,7 +1,5 @@
 """Provides interfaces to create location-aware applications."""
 
-from __future__ import annotations
-
 from prettyqt.qt.QtLocation import *  # noqa: F403
 
 from .qlocation import VISIBILITY, VisibilityStr

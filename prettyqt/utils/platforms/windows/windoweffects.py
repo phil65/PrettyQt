@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from ctypes import POINTER, Structure, byref, c_bool, c_int, cdll, pointer, sizeof
 from ctypes.wintypes import BOOL, DWORD, HRGN, LONG, LPCVOID, ULONG
 import enum

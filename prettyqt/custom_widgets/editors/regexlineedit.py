@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from prettyqt import custom_widgets, validators, widgets
 from prettyqt.utils import datatypes
 

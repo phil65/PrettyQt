@@ -1,7 +1,5 @@
 """This module contains the editor widget implementation."""
 
-from __future__ import annotations
-
 from prettyqt import widgets
 from prettyqt.custom_widgets import regexeditor
 

@@ -6,8 +6,6 @@ as well as a model + widget to preview a generated mknodes tree.
 
 """
 
-from __future__ import annotations
-
 from .qtlinkprovider import QtLinkProvider
 from .markdownmodel import MkNodesModel
 from .markdownwidget import MarkdownWidget

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from prettyqt.qt import QtBluetooth
 from prettyqt.utils import get_repr
 

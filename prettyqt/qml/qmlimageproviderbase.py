@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from prettyqt.qt import QtQml
 from prettyqt.utils import bidict
 

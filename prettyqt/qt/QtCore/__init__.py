@@ -1,7 +1,5 @@
 """Provides QtCore classes and functions."""
 
-from __future__ import annotations
-
 import datetime
 
 from prettyqt.qt import PYQT6, PYSIDE6

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from .baseeventfilter import BaseEventFilter
 from .animatedtooltipeventfilter import AnimatedToolTipEventFilter
 from .autosizecolumnseventfilter import AutoSizeColumnsEventFilter

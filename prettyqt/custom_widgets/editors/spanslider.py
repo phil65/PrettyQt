@@ -2,8 +2,6 @@
 
 # Copyright (c) 2011-2014 Marvin Killing
 
-from __future__ import annotations
-
 from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core, gui, widgets

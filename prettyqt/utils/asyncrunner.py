@@ -1,7 +1,5 @@
 # modified version of https://github.com/nicoddemus/qt-async-threads/
 
-from __future__ import annotations
-
 from collections.abc import (
     Awaitable,
 )

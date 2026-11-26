@@ -1,7 +1,5 @@
 """Provides access to Bluetooth hardware."""
 
-from __future__ import annotations
-
 from prettyqt.qt.QtBluetooth import *  # noqa: F403
 
 from .bluetoothdeviceinfo import BluetoothDeviceInfo

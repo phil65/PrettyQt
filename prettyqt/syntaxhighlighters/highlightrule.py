@@ -1,8 +1,6 @@
 # see https://github.com/ITVRoC/SeekurJr/blob/master/seekur_12.04/packages/
 # multimaster_fkie/node_manager_fkie/src/node_manager_fkie/yaml_highlighter.py
 
-from __future__ import annotations
-
 from dataclasses import dataclass, field
 import re
 

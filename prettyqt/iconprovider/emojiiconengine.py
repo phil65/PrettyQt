@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import emoji
 
 from prettyqt import constants, core, gui

@@ -1,7 +1,5 @@
 """Widget for displaying and editing Pydantic models."""
 
-from __future__ import annotations
-
 import enum
 import logging
 import pathlib

@@ -1,7 +1,5 @@
 # credits to https://stackoverflow.com/a/54819051
 
-from __future__ import annotations
-
 from collections.abc import Sequence
 
 from prettyqt import constants, core, gui, widgets

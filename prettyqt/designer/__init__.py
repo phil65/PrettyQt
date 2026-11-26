@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from prettyqt.qt.QtDesigner import *  # noqa: F403
 
 from prettyqt import qt

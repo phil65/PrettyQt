@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from prettyqt import gui
 from prettyqt.utils import serializemixin
 

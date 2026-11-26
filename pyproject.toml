@@ -186,6 +186,8 @@ qt_qapp_name = "prettyqt-test"
 [tool.ruff]
 line-length = 90
 extend-exclude = ["docs", "prettyqt/qt/"]
+# Project-specific: hooks pass excluded files explicitly; keep them excluded.
+force-exclude = true
 target-version = "py314"
 
 [tool.ruff.lint]

@@ -30,8 +30,6 @@ descriptions and `mapping` labels; they can then be marked as msgids (`N_()`).
 All widget code runs on the GUI thread; `value_changed` is emitted on the GUI thread.
 """
 
-from __future__ import annotations
-
 from collections.abc import Callable, Mapping, Sequence
 import dataclasses
 import enum

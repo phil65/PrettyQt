@@ -1,7 +1,5 @@
 """Syntax highlighter for Markdown markup language."""
 
-from __future__ import annotations
-
 from typing import TYPE_CHECKING, ClassVar
 
 from prettyqt import core, syntaxhighlighters

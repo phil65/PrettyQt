@@ -1,7 +1,5 @@
 """Provides access to position, satellite info and area monitoring classes."""
 
-from __future__ import annotations
-
 from prettyqt.qt.QtPositioning import *  # noqa: F403
 
 from .geoaddress import GeoAddress

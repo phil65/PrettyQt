@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from collections.abc import Iterable, Mapping
 import functools
 from typing import TYPE_CHECKING, Any

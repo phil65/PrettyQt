@@ -1,7 +1,5 @@
 # credits to SuperQt (https://github.com/pyapp-kit/superqt)
 
-from __future__ import annotations
-
 import enum
 from typing import TypeVar
 

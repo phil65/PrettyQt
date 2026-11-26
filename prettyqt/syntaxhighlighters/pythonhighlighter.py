@@ -1,7 +1,5 @@
 """Syntax highlighter for the programming language Python."""
 
-from __future__ import annotations
-
 from typing import ClassVar
 
 from prettyqt import core, gui, syntaxhighlighters

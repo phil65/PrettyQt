@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import ClassVar
 
 from pygments.lexer import RegexLexer, bygroups

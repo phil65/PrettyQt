@@ -1,8 +1,6 @@
 # type: ignore
 # not available in PySide2
 
-from __future__ import annotations
-
 from typing import Literal
 
 from prettyqt import core

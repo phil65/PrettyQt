@@ -1,7 +1,5 @@
 """The charts module provides a set of easy-to-use chart components."""
 
-from __future__ import annotations
-
 from prettyqt.qt.QtCharts import *  # noqa: F403
 
 from .barset import BarSet

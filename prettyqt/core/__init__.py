@@ -1,7 +1,5 @@
 """Core non-graphical classes used by other modules."""
 
-from __future__ import annotations
-
 import contextlib
 import sys
 from prettyqt.qt import QtCore

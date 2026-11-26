@@ -1,7 +1,5 @@
 """Tests for PydanticForm / PydanticDialog."""
 
-from __future__ import annotations
-
 import enum
 import pathlib
 from typing import Annotated, Literal

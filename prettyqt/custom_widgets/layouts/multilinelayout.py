@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import itertools
 
 from prettyqt import core, custom_widgets, widgets

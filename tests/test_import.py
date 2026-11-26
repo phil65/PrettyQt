@@ -1,7 +1,5 @@
 """Smoke test: the package imports and reports its version."""
 
-from __future__ import annotations
-
 import prettyqt
 
 

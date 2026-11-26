@@ -1,7 +1,5 @@
 """Tree model for any filesystem supported by fsspec, with a QFileSystemModel-like API."""
 
-from __future__ import annotations
-
 import contextlib
 import datetime as dt
 import enum

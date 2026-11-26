@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from ctypes import Structure, byref, c_int, sizeof, windll
 from ctypes.wintypes import DWORD, HWND, LPARAM, RECT, UINT
 import os

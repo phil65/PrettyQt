@@ -2,8 +2,6 @@
 
 # from prettyqt.utils import bidict
 
-from __future__ import annotations
-
 
 # VERBOSITY_LEVEL = bidict(
 #     minimum=QtCore.QDebug.MinimumVerbosity,

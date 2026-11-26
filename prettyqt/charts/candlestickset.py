@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from prettyqt import core, gui
 from prettyqt.qt import QtCharts
 from prettyqt.utils import get_repr

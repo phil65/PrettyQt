@@ -35,8 +35,6 @@ lineedit.set_validator("float")
 
 """
 
-from __future__ import annotations
-
 from .alphanumericvalidator import AlphaNumericValidator
 from .blacklistvalidator import BlacklistValidator, NotEmptyValidator, NotZeroValidator
 from .colorvalidator import ColorValidator

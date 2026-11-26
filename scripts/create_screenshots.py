@@ -7,8 +7,6 @@
 #   "packaging",
 # ]
 # ///
-from __future__ import annotations
-
 import inspect
 import pathlib
 from typing import TYPE_CHECKING, Any

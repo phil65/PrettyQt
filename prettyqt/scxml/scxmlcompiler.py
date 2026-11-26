@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import pathlib
 
 from prettyqt.qt import QtScxml

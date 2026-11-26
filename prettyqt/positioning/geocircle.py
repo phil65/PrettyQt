@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from prettyqt import positioning
 from prettyqt.qt import QtPositioning
 from prettyqt.utils import get_repr

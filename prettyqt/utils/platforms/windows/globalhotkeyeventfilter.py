@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from collections import defaultdict
 import ctypes
 from ctypes import WINFUNCTYPE, FormatError, c_bool, c_int

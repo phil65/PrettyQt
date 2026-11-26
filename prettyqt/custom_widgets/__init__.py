@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from .scrollbars.annotatedscrollbar import AnnotatedScrollBar
 from .scrollbars.previewscrollbar import PreviewScrollBar
 from .scrollbars.smoothscrollbar import SmoothScrollBar

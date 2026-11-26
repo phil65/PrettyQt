@@ -1,7 +1,5 @@
 """Object browser GUI in Qt."""
 
-from __future__ import annotations
-
 import logging
 
 from prettyqt import constants, core, custom_widgets, gui, itemmodels, widgets

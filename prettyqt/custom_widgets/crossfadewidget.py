@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import os
 
 from prettyqt import core, gui, widgets

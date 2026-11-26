@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from prettyqt import constants, core
 from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes, get_repr
