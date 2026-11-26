@@ -1,9 +1,13 @@
-# Set update schedule for GitHub Actions
+# Keep GitHub Actions up to date: one grouped PR per month, merged automatically
+# by .github/workflows/dependabot-automerge.yml once the Build workflow passes.
 
 version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      # Check for updates to GitHub Actions every week
-      interval: "weekly"
+      interval: "monthly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"

@@ -180,7 +180,7 @@ class TextDocumentMixin(core.ObjectMixin):
         self.set_default_stylesheet(ss)
 
     def set_default_stylesheet(
-        self, ss: None | qstylizer.style.StyleSheet | datatypes.PathType
+        self, ss: qstylizer.style.StyleSheet | datatypes.PathType | None
     ):
         match ss:
             case os.PathLike():

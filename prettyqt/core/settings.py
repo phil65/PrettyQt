@@ -188,7 +188,7 @@ class Settings_(  # noqa: N801
         cls,
         *exts: str,
         app_name: str | None = None,
-        app_path: None | datatypes.PathType = None,
+        app_path: datatypes.PathType | None = None,
     ):
         logger.debug("assigning extensions %s to %r", exts, app_name)
         s = cls("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.Format.NativeFormat)

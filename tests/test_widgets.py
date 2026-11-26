@@ -1,6 +1,6 @@
 """Tests for `prettyqt` package."""
 
-import datetime
+import datetime as dt
 import pathlib
 
 # import pickle
@@ -53,8 +53,8 @@ def test_calendarwiget(qtbot):
     widget = widgets.CalendarWidget()
     qtbot.addWidget(widget)
     assert widget.get_date() == widget.get_value()
-    widget.set_range(datetime.date(2000, 1, 1), datetime.date(2020, 1, 1))
-    widget.set_value(datetime.date(2000, 10, 10))
+    widget.set_range(dt.date(2000, 1, 1), dt.date(2020, 1, 1))
+    widget.set_value(dt.date(2000, 10, 10))
     widget.set_selection_mode(None)
     widget.set_selection_mode("single")
     assert widget.get_selection_mode() == "single"
@@ -146,9 +146,9 @@ def test_dateedit(qtbot):
     qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
-    dt = datetime.date(2000, 11, 11)
-    widget.set_value(dt)
-    assert widget.get_value() == dt
+    date = dt.date(2000, 11, 11)
+    widget.set_value(date)
+    assert widget.get_value() == date
 
 
 def test_datetimeedit(qtbot):
@@ -156,10 +156,10 @@ def test_datetimeedit(qtbot):
     qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
-    dt = datetime.datetime(2000, 11, 11)
-    widget.set_value(dt)
+    value = dt.datetime(2000, 11, 11)
+    widget.set_value(value)
     widget.set_format("dd.MM.yyyy")
-    # assert widget.get_value() == dt
+    # assert widget.get_value() == value
     assert widget.get_section_text("day") == "11"
     with pytest.raises(InvalidParamError):
         widget.get_section_text("test")
@@ -1194,13 +1194,13 @@ def test_timeedit(qtbot):
     qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
-    widget.set_range(datetime.time(1, 1, 1), datetime.time(3, 3, 3))
-    widget.set_value(datetime.time(0, 0, 0))
+    widget.set_range(dt.time(1, 1, 1), dt.time(3, 3, 3))
+    widget.set_value(dt.time(0, 0, 0))
     assert widget.get_time() == widget.min_time()
-    assert widget.max_time() == datetime.time(3, 3, 3)
-    dt = datetime.time(2, 2, 2)
-    widget.set_value(dt)
-    assert widget.get_value() == dt
+    assert widget.max_time() == dt.time(3, 3, 3)
+    value = dt.time(2, 2, 2)
+    widget.set_value(value)
+    assert widget.get_value() == value
 
 
 def test_toolbar(qtbot):

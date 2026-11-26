@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import datetime
+import datetime as dt
 from typing import Literal
 
 from prettyqt import constants, core, widgets
@@ -35,7 +35,7 @@ SECTIONS: bidict[SectionStr, widgets.QDateTimeEdit.Section] = bidict(
 class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
     """Widget for editing dates and times."""
 
-    value_changed = core.Signal(datetime.datetime)
+    value_changed = core.Signal(dt.datetime)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -84,37 +84,37 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
     def set_format(self, fmt: str):
         self.setDisplayFormat(fmt)
 
-    def get_value(self) -> datetime.datetime:
+    def get_value(self) -> dt.datetime:
         return self.get_datetime()
 
     def set_value(self, value: datatypes.DateTimeType):
         self.setDateTime(datatypes.to_datetime(value))
 
-    def get_datetime(self) -> datetime.datetime:
+    def get_datetime(self) -> dt.datetime:
         return self.dateTime().toPython()  # type: ignore
 
-    def min_datetime(self) -> datetime.datetime:
+    def min_datetime(self) -> dt.datetime:
         return self.minimumDateTime().toPython()  # type: ignore
 
-    def max_datetime(self) -> datetime.datetime:
+    def max_datetime(self) -> dt.datetime:
         return self.maximumDateTime().toPython()  # type: ignore
 
-    def min_date(self) -> datetime.date:
+    def min_date(self) -> dt.date:
         return self.minimumDate().toPython()  # type: ignore
 
-    def max_date(self) -> datetime.date:
+    def max_date(self) -> dt.date:
         return self.maximumDate().toPython()  # type: ignore
 
-    def get_date(self) -> datetime.date:
+    def get_date(self) -> dt.date:
         return self.date().toPython()  # type: ignore
 
-    def min_time(self) -> datetime.time:
+    def min_time(self) -> dt.time:
         return self.minimumTime().toPython()  # type: ignore
 
-    def max_time(self) -> datetime.time:
+    def max_time(self) -> dt.time:
         return self.maximumTime().toPython()  # type: ignore
 
-    def get_time(self) -> datetime.time:
+    def get_time(self) -> dt.time:
         return self.time().toPython()  # type: ignore
 
 

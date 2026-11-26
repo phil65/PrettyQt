@@ -7,7 +7,7 @@ from prettyqt.utils import datatypes
 
 
 if TYPE_CHECKING:
-    import datetime
+    import datetime as dt
 
 
 class DateTimeAxis(charts.AbstractAxisMixin, charts.QDateTimeAxis):
@@ -16,7 +16,7 @@ class DateTimeAxis(charts.AbstractAxisMixin, charts.QDateTimeAxis):
         minimum = datatypes.to_datetime(minimum)
         self.setMin(minimum)
 
-    def get_min(self) -> datetime.datetime:
+    def get_min(self) -> dt.datetime:
         return self.min().toPython()
 
     def set_max(self, maximum: datatypes.DateTimeType):
@@ -24,7 +24,7 @@ class DateTimeAxis(charts.AbstractAxisMixin, charts.QDateTimeAxis):
         maximum = datatypes.to_datetime(maximum)
         self.setMax(maximum)
 
-    def get_max(self) -> datetime.datetime:
+    def get_max(self) -> dt.datetime:
         return self.max().toPython()
 
     def set_range(self, minimum: datatypes.DateTimeType, maximum: datatypes.DateTimeType):

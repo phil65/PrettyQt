@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABCMeta
-import datetime
+import datetime as dt
 import enum
 import os
 import pathlib
@@ -109,10 +109,10 @@ if TYPE_CHECKING:
     SemanticVersionType = str | QtCore.QVersionNumber | tuple[int, int, int]
     IconType = QtGui.QIcon | str | pathlib.Path | None
     ByteArrayType = str | bytes | QtCore.QByteArray
-    TimeType = QtCore.QTime | datetime.time | str | tuple[int, int, int]
-    DateType = QtCore.QDate | datetime.date | str | tuple[int, int, int]
+    TimeType = QtCore.QTime | dt.time | str | tuple[int, int, int]
+    DateType = QtCore.QDate | dt.date | str | tuple[int, int, int]
     DateTimeType = (
-        QtCore.QDateTime | datetime.datetime | str | tuple[int, int, int, int, int, int]
+        QtCore.QDateTime | dt.datetime | str | tuple[int, int, int, int, int, int]
     )
     KeySequenceType = QtGui.QKeySequence | QtCore.QKeyCombination | str | None
     # ContainerType = Union[widgets.Layout, widgets.Splitter]
@@ -270,9 +270,9 @@ def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:  # noqa: P
             return ",".join(map(repr, val))
         case re.Pattern():
             return val.pattern
-        case datetime.date():
+        case dt.date():
             return val.isoformat()
-        case datetime.datetime():
+        case dt.datetime():
             return val.isoformat(sep=" ")
         case core.QRegularExpression():
             return val.pattern()
@@ -295,7 +295,7 @@ def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:  # noqa: P
             case np.bool_():
                 return to_string(bool(val.astype(bool)))
             case np.datetime64():
-                return to_string(val.astype(datetime.datetime), locale)
+                return to_string(val.astype(dt.datetime), locale)
     return repr(val)
 
 
@@ -885,7 +885,7 @@ def to_datetime(date_time: DateTimeType):
             return QtCore.QDateTime(date_, time_)
         case str():
             return dateutil.parser.parse(date_time)
-        case QtCore.QDateTime() | datetime.datetime():
+        case QtCore.QDateTime() | dt.datetime():
             return date_time
         case _:
             raise TypeError(date_time)
@@ -900,7 +900,7 @@ def to_date(value: DateType):
         case str():
             date = dateutil.parser.parse(value).date()
             return QtCore.QDate(date)
-        case QtCore.QDate() | datetime.date():
+        case QtCore.QDate() | dt.date():
             return value
         case _:
             raise TypeError(value)
@@ -921,9 +921,9 @@ def to_time(value: TimeType):
             return core.Time(value)
         case core.QDateTime():
             return core.DateTime(value).get_time()
-        case datetime.time():
+        case dt.time():
             return core.Time(value)
-        case datetime.datetime():
+        case dt.datetime():
             return core.DateTime(value).get_time()
         case _:
             raise TypeError(value)

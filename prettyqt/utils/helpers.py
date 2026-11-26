@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import datetime
+import datetime as dt
 import itertools
 import logging
 import re
@@ -115,7 +115,7 @@ def parse_time(time_str: str) -> int:
         raise ValueError(time_str)
     dct = parts.groupdict()
     time_params = {name: int(param) for (name, param) in dct.items() if param}
-    secs = datetime.timedelta(**time_params).total_seconds()
+    secs = dt.timedelta(**time_params).total_seconds()
     return int(secs * 1000)
 
 

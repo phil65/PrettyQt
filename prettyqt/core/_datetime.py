@@ -6,7 +6,7 @@ from prettyqt import constants, core
 
 
 if TYPE_CHECKING:
-    import datetime
+    import datetime as dt
 
 
 class DateTime(core.QDateTime):
@@ -34,7 +34,7 @@ class DateTime(core.QDateTime):
         new.setMSecsSinceEpoch(int(seconds * 1000))
         return new
 
-    def get_value(self) -> datetime.datetime:
+    def get_value(self) -> dt.datetime:
         return self.toPython()  # type: ignore
 
     def get_date(self) -> core.Date:
@@ -74,5 +74,5 @@ class DateTime(core.QDateTime):
 
 if __name__ == "__main__":
     date = DateTime(2000, 11, 11, 1, 1, 1)
-    dt = DateTime(date)
-    pdt = dt.get_value()
+    date_time = DateTime(date)
+    pdt = date_time.get_value()

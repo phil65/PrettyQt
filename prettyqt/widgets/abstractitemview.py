@@ -478,17 +478,17 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         indexes = sorted(indexes, key=lambda x: x.row())
         return listdelegators.ListDelegator(indexes)
 
-    def selected_names(self) -> Generator[Any, None, None]:
+    def selected_names(self) -> Generator[Any]:
         """Return generator yielding item names."""
         return (x.data(constants.NAME_ROLE) for x in self.selected_indexes())
 
-    def selected_rows(self) -> Generator[int, None, None]:
+    def selected_rows(self) -> Generator[int]:
         """Return generator yielding row nums."""
         return (x.row() for x in self.selected_indexes())
 
     def selected_data(
         self, role: constants.ItemDataRole = constants.USER_ROLE
-    ) -> Generator[Any, None, None]:
+    ) -> Generator[Any]:
         """Return generator yielding selected userData.
 
         Arguments:

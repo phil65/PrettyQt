@@ -6,7 +6,9 @@ PrettyQt is a "pythonic" layer over the whole Qt 6 API, running on either PyQt6 
 PySide6. Each Qt class gets a subclass (Q-prefix dropped) that keeps the original Qt API
 and adds snake_case helpers, string-instead-of-enum setters/getters, `__dunder__` methods
 and extra kwargs. On top of that it ships its own widgets, item models, proxy models,
-delegates, validators and tooling. Not copier-managed; everything here is hand-maintained.
+delegates, validators and tooling. Copier-managed (`copier-phil65`, see `.copier-answers.yml`):
+project-specific deviations in `pyproject.toml` / CI are marked "Project-specific"; keep them
+on `copier update` (flat layout, both Qt bindings in CI, mypy instead of ty, gh-pages docs).
 
 ## Architecture
 
@@ -71,19 +73,21 @@ QT_QPA_PLATFORM=offscreen uv run pytest   # headless; CI uses xvfb instead
 uv run pytest --doctest-modules           # CI's PySide6 run
 QT_API=pyside6 uv run pytest              # force a binding when both are installed
 uv run ruff check . && uv run ruff format --check .
-uv run mypy prettyqt/                     # duty lint_check; not enforced in CI
+uv run mypy prettyqt/                     # duty lint_check; not enforced in CI (ty: separate project)
 uv run mknodes build               # docs (slow: generates a page per class)
 uv build
 ```
 
 `duties.py` wraps these (`duty test`, `duty lint`, `duty lint_check`, `duty version`).
-CI: `.github/workflows/build.yml` runs pytest under PyQt6 and PySide6 on
-Linux/macOS/Windows plus the docs build; the `deploy` job (tags `v*` only) publishes to
-PyPI and gh-pages.
+CI: `.github/workflows/build.yml` (`test` job: ruff, then pytest under PyQt6 and PySide6
+on Linux/macOS/Windows, Python 3.14 + 3.15 required, 3.16 allowed to fail, Codecov); the
+`docs` job builds the docs on every push and deploys them to gh-pages on `v*` tags; the
+`release` job (tags only) publishes to PyPI (trusted publishing) and creates the GitHub
+release (git-cliff notes).
 
 ## Conventions
 
-- Python >= 3.12, `from __future__ import annotations`, ruff (line length 90, preview
+- Python >= 3.14, `from __future__ import annotations`, ruff (line length 90, preview
   format). Typing uses `Literal` string aliases (`...Str`) for enum-accepting APIs.
 - Naming: setters `set_foo()`, getters `get_foo()` (to avoid clashing with Qt's `foo()`),
   string values for enums. Never break the inherited Qt signature; only add.

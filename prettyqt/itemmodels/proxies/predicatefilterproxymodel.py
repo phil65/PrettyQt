@@ -47,7 +47,7 @@ class PredicateFilterProxyModel(core.SortFilterProxyModel):
         def apply(f: Callable):
             try:
                 return f(data)
-            except (TypeError, ValueError):
+            except TypeError, ValueError:
                 return False
 
         return all(apply(f) for f in self._filters)

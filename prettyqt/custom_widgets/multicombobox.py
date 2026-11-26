@@ -130,7 +130,7 @@ class MultiComboBox(widgets.ComboBox):
             if item.is_checked()
         ]
 
-    def get_model_items(self) -> Generator[gui.QStandardItem, None, None]:
+    def get_model_items(self) -> Generator[gui.QStandardItem]:
         for i in range(1, self.model().rowCount()):
             yield self.model().item(i)
 

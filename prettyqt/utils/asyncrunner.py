@@ -145,7 +145,7 @@ class AsyncRunner:
         # that try to submit functions to execute in threads would only be resumed
         # much later, causing a noticeable slow down in the application.
         batch_size = max(self._max_threads // 2, 1)
-        for function_batch in itertools.batched(funcs, batch_size):
+        for function_batch in itertools.batched(funcs, batch_size, strict=False):
             # Submit all functions from the current batch to the thread pool,
             # using the _AsyncTask to track the futures and await when they finish.
             task = _AsyncTask({self._pool.submit(f) for f in function_batch})
@@ -284,7 +284,7 @@ class _AsyncTask(Awaitable[None]):
     coroutine: Coroutine | None = None
     _lock: threading.Lock = dataclasses.field(default_factory=threading.Lock)
 
-    def __await__(self) -> Generator[Any, None, None]:
+    def __await__(self) -> Generator[Any]:
         if any(x for x in self.futures if x.done()):
             return None
         else:

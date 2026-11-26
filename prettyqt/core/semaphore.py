@@ -14,6 +14,6 @@ class Semaphore(QtCore.QSemaphore):
     """General counting semaphore."""
 
     @contextlib.contextmanager
-    def acquire_resources(self, n: int = 1) -> Generator[bool, None, None]:
+    def acquire_resources(self, n: int = 1) -> Generator[bool]:
         yield self.tryAcquire(n)
         self.release(n)

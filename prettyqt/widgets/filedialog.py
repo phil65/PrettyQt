@@ -50,7 +50,7 @@ class FileDialog(widgets.DialogMixin, widgets.QFileDialog):
 
     def __init__(
         self,
-        path: None | datatypes.PathType = None,
+        path: datatypes.PathType | None = None,
         mode: AcceptModeStr = "open",
         caption: str | None = None,
         path_id: str | None = None,

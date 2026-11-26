@@ -118,7 +118,7 @@ class BinsProxyModel(core.IdentityProxyModel):
         source_data = super().data(index, constants.EDIT_ROLE)
         try:
             value = float(source_data)
-        except (ValueError, TypeError):
+        except ValueError, TypeError:
             return super().data(index, role)
         bin_idx = self._get_bin(value)
         if role == constants.DISPLAY_ROLE:

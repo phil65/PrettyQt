@@ -84,9 +84,7 @@ class ObjectMixin:
         """
         return {}
 
-    def __pretty__(
-        self, fmt: Callable[[Any], Any], **kwargs: Any
-    ) -> Generator[Any, None, None]:
+    def __pretty__(self, fmt: Callable[[Any], Any], **kwargs: Any) -> Generator[Any]:
         yield f"{type(self).__name__}("
         yield 1
         for k, v in self.get_properties(only_writable=True).items():

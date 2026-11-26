@@ -7,7 +7,7 @@ from prettyqt.utils import bidict, datatypes, get_repr
 
 
 if TYPE_CHECKING:
-    import datetime
+    import datetime as dt
 
 
 FileErrorStr = Literal[
@@ -117,7 +117,7 @@ class FileDeviceMixin(core.IODeviceMixin):
 
     def get_file_time(
         self, typ: FileTimeStr | core.QFileDevice.FileTime
-    ) -> datetime.datetime | None:
+    ) -> dt.datetime | None:
         """Return current file time.
 
         Returns:

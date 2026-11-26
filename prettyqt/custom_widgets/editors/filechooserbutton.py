@@ -19,7 +19,7 @@ class FileChooserButton(widgets.Widget):
         extensions: dict[str, list[str]] | None = None,
         mode: widgets.filedialog.AcceptModeStr = "save",
         file_mode: widgets.filedialog.FileModeStr = "existing_files",
-        root: None | str | pathlib.Path = None,
+        root: str | pathlib.Path | None = None,
         object_name: str = "file_chooser_button",
         **kwargs: Any,
     ):

@@ -33,7 +33,7 @@ class Timer(core.ObjectMixin, core.QTimer):
             interval = helpers.parse_time(interval)
         self.setInterval(interval)
 
-    def start_timer(self, interval: None | int | str = None):
+    def start_timer(self, interval: int | str | None = None):
         if isinstance(interval, str):
             interval = helpers.parse_time(interval)
         if interval is None:

@@ -64,7 +64,7 @@ def to_module(
             module_path = module if isinstance(module, str) else ".".join(module)
             try:
                 return importlib.import_module(module_path)
-            except (ImportError, AttributeError):
+            except ImportError, AttributeError:
                 logger.warning("Could not import %r", module_path)
                 if return_none:
                     return None
@@ -190,7 +190,7 @@ def get_class_for_id[T: type](base_class: T, id_: str) -> T:
 def iter_classes_for_module(
     module: types.ModuleType | str | tuple[str],
     *,
-    type_filter: type | None | types.UnionType = None,
+    type_filter: type | types.UnionType | None = None,
     module_filter: str | None = None,
     filter_by___all__: bool = False,
     recursive: bool = False,

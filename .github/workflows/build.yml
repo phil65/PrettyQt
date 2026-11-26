@@ -1,151 +1,183 @@
-name: Python package
+name: Build
 
-on: [push]
+on: [push, pull_request]
+
+env:
+  FORCE_COLOR: 1
+  RUFF_OUTPUT_FORMAT: github
 
 jobs:
-  build:
+  test:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    # The newest entry is a CPython pre-release: test it early, but don't let it block the build.
+    # When a new CPython ships: bump this version and the matrix range end (stable versions must pass).
+    continue-on-error: ${{ matrix.python_version == '3.16' }}
     strategy:
       fail-fast: false
       matrix:
-        platform: [macos-latest, windows-latest, ubuntu-latest]
-        python-version: ["3.14", "3.15"]
-        # qt-binding: ["pyside6", "pyqt6"]
-    runs-on: ${{ matrix.platform }}
-    # 3.15 is a pre-release: test it early, but don't let it block the build.
-    continue-on-error: ${{ matrix.python-version == '3.15' }}
-    timeout-minutes: 60
+        python_version: ["3.14", "3.15", "3.16"]
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
     env:
+      # Project-specific (prettyqt): headless Qt.
       DISPLAY: ":99.0"
-      UV_PYTHON: ${{ matrix.python-version }}
       # QtWebEngine segfaults on headless Linux runners with GPU / sandbox enabled
       QTWEBENGINE_CHROMIUM_FLAGS: "--disable-gpu --no-sandbox"
       QTWEBENGINE_DISABLE_SANDBOX: "1"
     steps:
-      - uses: actions/checkout@v7
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v7
-        with:
-          python-version: ${{ matrix.python-version }}
-          allow-prereleases: true
+      - name: Check out repository
+        uses: actions/checkout@v7
 
       - uses: tlambert03/setup-qt-libs@v1
-      # *alternative*:
-      # - uses: pyvista/setup-headless-display-action@v2
-      #   with:
-      #     qt: true
+
       - name: Linux opengl
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y libegl1 libpulse0 libva-drm2 libva-x11-2
 
-      # - name: start TextToSpeech service
-      #   if: runner.os == 'Linux'
-      #   run: |
-      #     sudo apt-get install speech-dispatcher espeak
-      #     speech-dispatcher -d
+      - name: Set up Python ${{ matrix.python_version }}
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python_version }}
+          allow-prereleases: true
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
-
-      - name: Install dependencies
-        run: |
-          uv sync
-
-      - name: Test with pytest  (PyQt6)
-        # combine test coverage with --cov-append?
-        uses: coactions/setup-xvfb@v1
-        timeout-minutes: 5
         with:
-          run: |
-            uv sync --extra pyqt6 --extra addons
-            uv run pytest
+          enable-cache: true
+          cache-dependency-glob: pyproject.toml
+          cache-suffix: py${{ matrix.python_version }}
+          python-version: ${{ matrix.python_version }}
 
-      - name: Test with pytest (PySide6)
+      # Project-specific (prettyqt): the Qt binding is an extra; test both bindings.
+      - name: Install dependencies (PyQt6)
+        run: uv sync --extra pyqt6 --extra addons --no-group docs
+
+      # ruff comes from the pinned `lint` group, same version as pre-commit.
+      - name: Check for code issues (ruff check)
+        run: uv run --no-sync ruff check .
+
+      - name: Check code format (ruff format)
+        run: uv run --no-sync ruff format --check .
+
+      # Project-specific (prettyqt): type-checked with mypy (not enforced, see AGENTS.md),
+      # so no `ty check` step.
+
+      - name: Run tests (PyQt6)
         uses: coactions/setup-xvfb@v1
-        # if: runner.os == 'Linux'
-        timeout-minutes: 5
+        timeout-minutes: 10
         with:
-          run: |
-            uv sync --extra pyside6 --extra addons
-            uv run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
+          run: uv run --no-sync pytest
 
-      - name: Upload coverage to Codecov
-        if: runner.os == 'Windows' && matrix.python-version == '3.14'
+      - name: Install dependencies (PySide6)
+        run: uv sync --extra pyside6 --extra addons --no-group docs
+
+      - name: Run tests (PySide6)
+        uses: coactions/setup-xvfb@v1
+        timeout-minutes: 10
+        with:
+          run: uv run --no-sync pytest --doctest-modules --cov-report=xml --cov=prettyqt --cov-report=term-missing
+
+      - name: Upload test results to Codecov
+        # The upload sometimes hangs; never let it fail or block the build.
+        timeout-minutes: 5
+        continue-on-error: true
         uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+          verbose: true
 
-      - name: Create documentation
-        # generating a page per class is slow, so only build docs once
-        if: matrix.python-version == '3.14' && runner.os == 'Linux'
-        uses: coactions/setup-xvfb@v1
-        timeout-minutes: 40
-        with:
-          run: |
-            uv sync --extra pyside6 --extra addons
-            uv run mknodes build
-
-  deploy:
-    # Linux like the "Create documentation" step of the build job:
-    # the docs build hangs on Windows runners (QtBluetooth section).
+  # Project-specific (prettyqt): docs are built on every push and deployed to gh-pages on tags.
+  # Linux only: the docs build hangs on Windows runners (QtBluetooth section).
+  docs:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
-    needs: build
+    timeout-minutes: 60
     permissions:
       contents: write  # push the docs to gh-pages
-      id-token: write  # PyPI trusted publishing
     env:
       DISPLAY: ":99.0"
       QTWEBENGINE_CHROMIUM_FLAGS: "--disable-gpu --no-sandbox"
       QTWEBENGINE_DISABLE_SANDBOX: "1"
     steps:
-      - uses: actions/checkout@v7
+      - name: Check out repository
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
+
+      - uses: tlambert03/setup-qt-libs@v1
+
+      - name: Linux opengl
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libpulse0 libva-drm2 libva-x11-2
 
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
           python-version: "3.14"
 
-      - uses: tlambert03/setup-qt-libs@v1
-
-      - name: Linux opengl
-        run: sudo apt-get update && sudo apt-get install -y libegl1 libpulse0
-
       - name: Install uv
         uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-dependency-glob: pyproject.toml
+          cache-suffix: docs
 
-      - name: Install packages
-        run: |
-          uv sync --extra pyside6 --extra addons
-
-      - name: Build package
-        run: |
-          uv build
-
-      - name: Publish package on PyPI
-        # --check-url skips already uploaded files, so the job can be re-run.
-        run: |
-          uv publish --check-url https://pypi.org/simple/
+      - name: Install dependencies
+        run: uv sync --extra pyside6 --extra addons
 
       - name: Build documentation
+        # generating a page per class is slow
         uses: coactions/setup-xvfb@v1
         timeout-minutes: 40
         with:
-          run: |
-            uv run mknodes build
+          run: uv run --no-sync mknodes build
 
-      # - name: Publish package on GitHub
-      #   # if: github.event_name == 'push'
-      #   uses: mhausenblas/mkdocs-deploy-gh-pages@master
-      #   # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     # CUSTOM_DOMAIN: optionaldomain.com
-
-      - name: Deploy docs to Github Pages
+      - name: Deploy docs to GitHub Pages
+        if: startsWith(github.ref, 'refs/tags/v')
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
+
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/')
+    permissions:
+      # this permission is mandatory for trusted publishing
+      id-token: write
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0  # the whole history, so the notes cover everything since the last tag
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-dependency-glob: pyproject.toml
+          cache-suffix: py${{ matrix.python_version }}
+
+      - name: Build package
+        run: uv build
+
+      - name: Generate release notes
+        # From the Conventional Commits since the previous tag (cliff.toml)
+        run: uvx git-cliff --latest --strip header --output release-notes.md
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Release package on GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          bodyFile: release-notes.md
+          artifacts: dist/*.whl,dist/*.tar.gz
+          token: ${{ secrets.GITHUB_TOKEN }}

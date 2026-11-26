@@ -358,7 +358,7 @@ class FSSpecTreeModel(
     def _get_info(self, path: str) -> dict[str, Any]:
         try:
             info = self.fs.info(path)
-        except (FileNotFoundError, NotImplementedError):
+        except FileNotFoundError, NotImplementedError:
             info = {"name": path, "type": "directory"}
         return self._normalize_info(info, path)
 
@@ -419,7 +419,7 @@ class FSSpecTreeModel(
         # unknown types (like "other" / "link"), ask the filesystem.
         try:
             return self.fs.isdir(info["name"])
-        except (OSError, NotImplementedError):
+        except OSError, NotImplementedError:
             return False
 
     def get_icon(self, info: dict[str, Any]) -> gui.QIcon:
@@ -514,7 +514,7 @@ class FSSpecTreeModel(
         path = item.obj["name"]
         try:
             children = self.fs.ls(path, detail=True)
-        except (OSError, NotImplementedError):
+        except OSError, NotImplementedError:
             logger.debug("Could not list %s", path)
             children = []
         items = []
@@ -601,7 +601,7 @@ class FSSpecTreeModel(
         path = self.join(parent_item.obj["name"], name)
         try:
             self.fs.mkdir(path)
-        except (OSError, NotImplementedError):
+        except OSError, NotImplementedError:
             logger.exception("Could not create folder %s", path)
             return core.ModelIndex()
         self.refresh(parent)
@@ -615,7 +615,7 @@ class FSSpecTreeModel(
         path = index.internalPointer().obj["name"]
         try:
             func(path)
-        except (OSError, NotImplementedError):
+        except OSError, NotImplementedError:
             logger.exception("Could not remove %s", path)
             return False
         with self.remove_row(index.row(), index.parent()):
@@ -639,7 +639,7 @@ class FSSpecTreeModel(
         target = self.join(folder, new_name)
         try:
             self.fs.mv(path, target, recursive=True)
-        except (OSError, NotImplementedError):
+        except OSError, NotImplementedError:
             logger.exception("Could not rename %s", path)
             return False
         item.obj = self._get_info(target)
@@ -902,7 +902,7 @@ class FSSpecTreeModel(
                     source_folders.add(path.rstrip("/").rsplit("/", 1)[0])
                 else:
                     self.fs.copy(path, target, recursive=True)
-            except (OSError, NotImplementedError):
+            except OSError, NotImplementedError:
                 logger.exception("Could not drop %s to %s", path, target)
                 continue
             changed = True

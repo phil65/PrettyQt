@@ -74,7 +74,7 @@ class SelectionWidget(widgets.GroupBox):
         self,
         label: str = "Other",
         typ: TypeStr = "string",
-        default: None | float | str = None,
+        default: float | str | None = None,
         regex: str | None = None,
     ):
         match typ:

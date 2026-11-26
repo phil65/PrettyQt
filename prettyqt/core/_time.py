@@ -56,7 +56,7 @@ class Time(core.QTime):
 
 
 if __name__ == "__main__":
-    import datetime
+    import datetime as dt
 
-    time = Time(datetime.time(10, 10, 10))
+    time = Time(dt.time(10, 10, 10))
     print(time)

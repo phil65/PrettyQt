@@ -134,7 +134,7 @@ class ActionMixin(core.ObjectMixin):
 
     setIcon = set_icon  # noqa: N815
 
-    def set_shortcut(self, shortcut: None | gui.QKeySequence | str):
+    def set_shortcut(self, shortcut: gui.QKeySequence | str | None):
         if shortcut is None:
             shortcut = ""
         if isinstance(shortcut, str):

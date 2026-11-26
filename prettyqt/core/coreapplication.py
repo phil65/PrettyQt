@@ -55,7 +55,7 @@ class CoreApplicationMixin(core.ObjectMixin):
     def set_metadata(
         self,
         app_name: str | None = None,
-        app_version: None | datatypes.SemanticVersionType = None,
+        app_version: datatypes.SemanticVersionType | None = None,
         org_name: str | None = None,
         org_domain: str | None = None,
     ):

@@ -1,0 +1,23 @@
+# Changes here will be overwritten by Copier
+_commit: v2.14.1
+_src_path: https://github.com/phil65/copier-phil65.git
+author_email: philipptemminghoff@gmail.com
+author_fullname: Philipp Temminghoff
+author_username: phil65
+copyright_date: '2019'
+copyright_holder: Philipp Temminghoff
+copyright_holder_email: philipptemminghoff@gmail.com
+libraries_use_pydantic: false
+libraries_use_qt: true
+project_description: Pythonic layer on top of PyQt6 / PySide6, with extra widgets,
+    models and tooling
+project_name: PrettyQt
+python_minimum_version: '3.14'
+python_package_command_line_name: prettyqt
+python_package_distribution_name: PrettyQt
+python_package_import_name: prettyqt
+repository_name: PrettyQt
+repository_namespace: phil65
+repository_provider: github.com
+specs: []
+

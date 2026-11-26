@@ -241,7 +241,7 @@ class LogTextEdit(widgets.PlainTextEdit):
                     fmt_string = r.format_string(record)
                     try:
                         value = f"%{m.group(1)}" % fmt_string
-                    except (TypeError, ValueError):
+                    except TypeError, ValueError:
                         value = fmt_string
                     c.replace_text(pos, end, value)
                     fmt = r.get_format(fmt_string)

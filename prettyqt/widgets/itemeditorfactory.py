@@ -81,7 +81,7 @@ class ItemEditorFactory(widgets.QItemEditorFactory):
     def register_default_editor(
         cls,
         editor_cls: type[widgets.QWidget],
-        typ: int | None | type = None,
+        typ: int | type | None = None,
         property_name: str = "",
     ):
         factory = cls.defaultFactory()
@@ -103,7 +103,7 @@ class ItemEditorFactory(widgets.QItemEditorFactory):
     def register_editor(
         self,
         editor_cls: type[widgets.QWidget],
-        typ: int | None | type = None,
+        typ: int | type | None = None,
         property_name: str = "",
     ):
         creator = get_creator_class(editor_cls, property_name)()

@@ -82,7 +82,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         self,
         parent: gui.QTextDocument,
         lexer: str,
-        style: None | StyleStr = None,
+        style: StyleStr | None = None,
     ):
         super().__init__(parent)
 
@@ -125,7 +125,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
     def __repr__(self):
         return get_repr(self, lexer=self._lexer.aliases[0])
 
-    def set_style(self, style: None | StyleStr):
+    def set_style(self, style: StyleStr | None):
         match style:
             case None:
                 self.adjust_style_to_palette()

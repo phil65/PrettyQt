@@ -123,7 +123,7 @@ class RankProxyModel(core.IdentityProxyModel):
             val = source.index(row, self._column, parent).data(constants.EDIT_ROLE)
             try:
                 values[row] = float(val)
-            except (ValueError, TypeError):
+            except ValueError, TypeError:
                 na_rows.append(row)
         ranks: dict[int, float | None] = {}
         rows = sorted(values, key=values.__getitem__, reverse=not self._ascending)

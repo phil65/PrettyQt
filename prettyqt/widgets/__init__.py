@@ -299,7 +299,6 @@ __all__ = [
     "GraphicsView",
     "GraphicsViewMixin",
     "GraphicsWidget",
-    "GraphicsWidget",
     "GraphicsWidgetMixin",
     "GridLayout",
     "GroupBox",

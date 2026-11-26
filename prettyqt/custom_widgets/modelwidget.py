@@ -436,11 +436,11 @@ class ModelWidget[ModelT](widgets.Widget):
 
 
 if __name__ == "__main__":
-    from enum import Enum
+    from enum import StrEnum
 
     app = widgets.app()
 
-    class Color(str, Enum):
+    class Color(StrEnum):
         RED = "red"
         GREEN = "green"
         BLUE = "blue"

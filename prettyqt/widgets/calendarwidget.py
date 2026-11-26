@@ -7,7 +7,7 @@ from prettyqt.utils import bidict, datatypes
 
 
 if TYPE_CHECKING:
-    import datetime
+    import datetime as dt
 
 
 SelectionModeStr = Literal["none", "single"]
@@ -51,10 +51,10 @@ class CalendarWidget(widgets.WidgetMixin, widgets.QCalendarWidget):
         }
         return maps
 
-    def get_date(self) -> datetime.date:
+    def get_date(self) -> dt.date:
         return self.selectedDate().toPython()
 
-    def get_value(self) -> datetime.date:
+    def get_value(self) -> dt.date:
         return self.get_date()
 
     def set_value(self, value: datatypes.DateType):

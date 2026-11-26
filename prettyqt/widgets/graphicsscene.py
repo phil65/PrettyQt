@@ -274,7 +274,7 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
                 pen = gui.QPen(self.grid_color, self._pen_width)
                 self._draw_grid(painter, rect, pen, self._grid_size)
             color = self._bg_color.darker(150)
-            if zoom < -0.0:
+            if zoom < 0:
                 color = color.darker(100 - int(zoom * 110))
             pen = gui.QPen(color, self._pen_width)
             self._draw_grid(painter, rect, pen, self._grid_size * 8)

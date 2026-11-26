@@ -273,7 +273,6 @@ __all__ = [
     "ParallelAnimationGroup",
     "PauseAnimation",
     "PersistentModelIndex",
-    "PersistentModelIndex",
     "PluginLoader",
     "Point",
     "PointF",

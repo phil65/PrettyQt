@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import datetime
+import datetime as dt
 
 from prettyqt import core, widgets
 from prettyqt.utils import datatypes
@@ -9,7 +9,7 @@ from prettyqt.utils import datatypes
 class DateEdit(widgets.DateTimeEditMixin, widgets.QDateEdit):
     """Widget for editing dates based on the QDateTimeEdit widget."""
 
-    value_changed = core.Signal(datetime.datetime)
+    value_changed = core.Signal(dt.datetime)
 
     def set_value(self, value: datatypes.DateType):
         self.setDate(datatypes.to_date(value))
@@ -18,7 +18,7 @@ class DateEdit(widgets.DateTimeEditMixin, widgets.QDateEdit):
         self.setToolTip(f"{lower} <= x <= {upper}")
         self.setDateRange(datatypes.to_date(lower), datatypes.to_date(upper))
 
-    def get_value(self) -> datetime.date:
+    def get_value(self) -> dt.date:
         return self.get_date()
 
     @classmethod

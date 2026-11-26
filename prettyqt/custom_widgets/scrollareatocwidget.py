@@ -296,7 +296,8 @@ class ScrollAreaTocWidget(widgets.TreeView):
                         # sort indexes by closest distance to top
                         indexes.sort(
                             key=lambda x: abs(
-                                x.data(constants.USER_ROLE)
+                                x
+                                .data(constants.USER_ROLE)
                                 .map_to(viewport, x.data(constants.USER_ROLE).rect())
                                 .top()
                             ),

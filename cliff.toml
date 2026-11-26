@@ -1,0 +1,52 @@
+# Release notes from Conventional Commits (git-cliff, https://git-cliff.org); no network
+# access: commit links are built from the repository name.
+# CI renders the notes of each tag into its GitHub release; locally:
+#   uvx git-cliff --latest          # notes of the latest tag
+#   uvx git-cliff -o CHANGELOG.md   # the whole history
+
+[changelog]
+header = "# Changelog\n"
+body = """
+{%- macro commit_line(commit) -%}
+- {% if commit.scope %}**{{ commit.scope }}**: {% endif %}{{ commit.message }} \
+([{{ commit.id | truncate(length=7, end="") }}](https://github.com/phil65/PrettyQt/commit/{{ commit.id }}))
+{%- endmacro -%}
+
+{% if version %}\
+## {{ version }} ({{ timestamp | date(format="%Y-%m-%d") }})
+{% else %}\
+## Unreleased
+{% endif %}\
+{% set breaking = commits | filter(attribute="breaking", value=true) %}\
+{% if breaking %}
+### ⚠ Breaking changes
+{% for commit in breaking %}
+{{ self::commit_line(commit=commit) }}
+{%- endfor %}
+{% endif %}\
+{% for group, commits in commits | group_by(attribute="group") %}
+### {{ group | striptags | trim | upper_first }}
+{% for commit in commits %}
+{{ self::commit_line(commit=commit) }}
+{%- endfor %}
+{% endfor %}
+"""
+trim = true
+
+[git]
+conventional_commits = true
+filter_unconventional = true
+split_commits = false
+protect_breaking_commits = true
+commit_parsers = [
+  { message = "^feat", group = "<!-- 0 -->Features" },
+  { message = "^fix", group = "<!-- 1 -->Fixes" },
+  { message = "^perf", group = "<!-- 2 -->Performance" },
+  { message = "^refactor", group = "<!-- 3 -->Refactoring" },
+  { message = "^docs", group = "<!-- 4 -->Documentation" },
+  { message = "^test", group = "<!-- 5 -->Tests" },
+  { message = "^(chore|ci|build|style|release)", skip = true },
+  { message = ".*", group = "<!-- 9 -->Other" },
+]
+tag_pattern = "v[0-9].*"
+sort_commits = "oldest"

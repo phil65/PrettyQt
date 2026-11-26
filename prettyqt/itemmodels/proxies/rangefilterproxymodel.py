@@ -27,7 +27,7 @@ class RangeFilterProxyModel(core.SortFilterProxyModel):
             # also allow numeric strings (DisplayRole often contains strings)
             try:
                 value = float(value)
-            except (TypeError, ValueError):
+            except TypeError, ValueError:
                 return False
         if self._min_value is not None and value < self._min_value:
             return False

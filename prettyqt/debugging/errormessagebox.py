@@ -131,13 +131,14 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
             return tb
 
     except ModuleNotFoundError:
-        import cgitb
         import traceback
+
+        import cgitb
 
         # cgitb does not support error chaining...
         # see https://peps.python.org/pep-3134/#enhanced-reporting
         # this is a workaround
-        def cgitb_chain(exc: Exception) -> Generator[str, None, None]:
+        def cgitb_chain(exc: Exception) -> Generator[str]:
             """Recurse through exception stack and chain cgitb_html calls."""
             if exc.__cause__:
                 yield from cgitb_chain(exc.__cause__)

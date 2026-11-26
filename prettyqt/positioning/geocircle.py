@@ -8,10 +8,10 @@ from prettyqt.utils import get_repr
 class GeoCircle(positioning.GeoShapeMixin, QtPositioning.QGeoCircle):
     def __init__(
         self,
-        center_or_other: None
-        | (
-            QtPositioning.QGeoShape | QtPositioning.QGeoCoordinate | tuple[float, float]
-        ) = None,
+        center_or_other: QtPositioning.QGeoShape
+        | QtPositioning.QGeoCoordinate
+        | tuple[float, float]
+        | None = None,
         radius: float | None = None,
     ):
         if center_or_other is None:

@@ -9,7 +9,7 @@ class PlaceContactDetail(QtLocation.QPlaceContactDetail):
 
     def __init__(
         self,
-        other_or_label: None | str | QtLocation.QPlaceAttribute = None,
+        other_or_label: str | QtLocation.QPlaceAttribute | None = None,
         value: str | None = None,
     ):
         if isinstance(other_or_label, QtLocation.QPlaceAttribute):

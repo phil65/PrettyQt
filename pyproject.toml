@@ -1,3 +1,5 @@
+#:tombi schema.strict = false
+
 [project]
 name = "PrettyQt"
 version = "1.63.1"
@@ -5,6 +7,7 @@ description = "Pythonic layer on top of PyQt6 / PySide6, with extra widgets, mod
 readme = "README.md"
 requires-python = ">=3.14"
 license = "MIT"
+license-files = ["LICENSE"]
 authors = [
   { name = "Philipp Temminghoff", email = "philipptemminghoff@gmail.com" },
 ]
@@ -31,6 +34,8 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
+  # Only add below (Copier)
+  # (no "prettyqt" / "pyside6" from the Qt answer: this is prettyqt, the binding is an extra)
   "anyenv>=0.4.6",
   "bidict",
   "comtypes;platform_system == 'Windows'",
@@ -41,12 +46,11 @@ dependencies = [
   "qstylizer",
   "sublime-search>=0.1.2",
 ]
-# dynamic = ["version"]
 
 [project.urls]
 Changelog = "https://github.com/phil65/PrettyQt/blob/main/CHANGELOG.md"
+"Code coverage" = "https://app.codecov.io/gh/phil65/PrettyQt"
 Documentation = "https://phil65.github.io/PrettyQt/"
-Homepage = "https://github.com/phil65/PrettyQt"
 Issues = "https://github.com/phil65/PrettyQt/issues"
 Source = "https://github.com/phil65/PrettyQt"
 
@@ -74,17 +78,19 @@ pyside6 = ["pyside6", "PySide6-Addons"]
 
 [dependency-groups]
 dev = [
+  # Only add below (Copier)
   "coverage",
+  "deptry",
   "devtools",
   "pyreadline3",
   "pytest",
   "pytest-cov",
   "pytest-qt",
   "pytest-xvfb;platform_system == 'Linux'",
-  "types-Deprecated",
-  "types-python-dateutil",
 ]
+benchmark = ["pyinstrument"]
 docs = [
+  # Only add below (Copier)
   "markdown-exec",
   "mkdocs",
   "mkdocs-glightbox",
@@ -94,8 +100,14 @@ docs = [
   "pymdown-extensions",
 ]
 lint = [
-  "mypy",
-  "ruff",
+  # Only add below (Copier)
+  # Project-specific: prettyqt is type-checked with mypy (see AGENTS.md).
+  "mypy",  # Pinned on purpose: CI, pre-commit and editors all run exactly these versions.
+  # Bump them here (template) and roll out via `copier update`.
+  "ruff==0.17.6",
+  "ty==0.0.110",
+  "types-Deprecated",
+  "types-python-dateutil",
 ]
 
 [build-system]
@@ -113,6 +125,16 @@ exclude_lines = [
 
 [tool.mknodes]
 build-fn = "prettyqt.docs.gen_pages:build"
+allowed-commit-types = [
+  "fix",
+  "feat",
+  "refactor",
+  "docs",
+  "test",
+  "build",
+  "chore",
+]
+docstring-style = "google"
 
 [tool.mypy]
 python_version = "3.14"
@@ -144,14 +166,7 @@ reportUnannotatedClassAttribute = false
 reportSelfClsParameterName = false
 reportPrivateImportUsage = false
 
-[tool.pytest.ini_options]
-junit_family = "xunit2"
-log_cli = true
-log_date_format = "%Y-%m-%d %H:%M:%S"
-log_format = "%(asctime)s %(levelname)s %(message)s"
-minversion = "7.0"
-testpaths = ["tests"]
-qt_qapp_name = "prettyqt-test"
+[tool.pytest]
 # qt_api = "pyside6"
 # No pytest-qt message capture: it swaps the Qt message handler before / after each
 # test, which races with QtWebEngine's Chromium GPU thread logging asynchronously
@@ -159,7 +174,14 @@ qt_qapp_name = "prettyqt-test"
 # handler ("TypeError: 'NoneType' object is not callable" at teardown), PySide6
 # calls a freed one (segfault). Qt messages still end up in pytest's captured stderr.
 addopts = ["--no-qt-log"]
+junit_family = "xunit2"
+log_cli = true
+log_date_format = "%Y-%m-%d %H:%M:%S"
+log_format = "%(asctime)s %(levelname)s %(message)s"
+minversion = "9.0"
+testpaths = ["tests/"]
 asyncio_mode = "auto"
+qt_qapp_name = "prettyqt-test"
 
 [tool.ruff]
 line-length = 90
@@ -255,20 +277,39 @@ ignore = [
   "D408",  # Section underline should be in the line following the section's name ("{name}")
   "D409",  # Section underline should match the length of its name ("{name}")
   "D413",  # Missing blank line after last section ("{name}")
-  "N802",  # Function name should be lowercase
+  "EM101",  # Exception must not use a string literal, assign to variable first
+  "EM102",  # Exception must not use an f-string literal, assign to variable first
   "ISC001",
   "PLC0415",
   "PLR0912",  # Too many branches
   "PLR0913",  # Too many arguments to function call
   "PLR0915",  # Too many statements
+  "PLR0917",  # Too many positional arguments
   # "PLR2004", # Magic values instead of named consts
   "SLF001",  # Private member accessed
   "TRY003",  # Avoid specifying long messages outside the exception class
-  "TC006",
+  "TC006",  # runtime-cast-value
+  # Project-specific (Qt): overrides keep Qt's camelCase names.
+  "N802",  # Function name should be lowercase
 ]
 
 [tool.ruff.lint.flake8-quotes]
 docstring-quotes = "double"
+
+[tool.ruff.lint.flake8-type-checking]
+runtime-evaluated-base-classes = [
+  "pydantic.BaseModel",
+  "sqlalchemy.orm.DeclarativeBase",
+  "schemez.Schema",
+  "sqlmodel.SQLModel",
+]
+runtime-evaluated-decorators = [
+  "pydantic.validate_call",
+  "fastapi.FastAPI.get",
+  "fastapi.FastAPI.post",
+  "fastmcp.FastMCP.tool",
+  "typer.Typer.command",
+]
 
 [tool.ruff.lint.isort]
 lines-after-imports = 2
@@ -277,16 +318,54 @@ lines-after-imports = 2
 force-sort-within-sections = true
 combine-as-imports = true
 
+[tool.ruff.lint.mccabe]
+max-complexity = 15
+
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["E402", "I001"]
 "scripts/*" = ["INP001"]
+"*tests/*" = ["D100"]
 
 [tool.ruff.format]
-# Enable preview style formatting.
 preview = true
+
+[tool.ty.environment]
+python-version = "3.14"
+python-platform = "all"
+
+[tool.ty.src]
+# `ty check` (hooks, CI, editors) type-checks the package code only.
+include = ["prettyqt"]
+
+[tool.ty.analysis]
+# Optional dependencies that are not always installed, e.g. "numpy", "numpy.**".
+# Unresolved imports are errors otherwise, so broken imports are caught.
+allowed-unresolved-imports = []
+
+[tool.ty.rules]
+# Narrowing an overridden class attribute (e.g. pydantic discriminators,
+# `Config` attributes) is an intentional pattern.
+incompatible-mutable-override = "ignore"
 
 [tool.uv]
 default-groups = ["dev", "lint", "docs"]
 
 [tool.uv.build-backend]
+# Project-specific: flat layout (package in prettyqt/, no src/).
 module-root = ""
+wheel-exclude = [
+  ".mypy_cache/**",
+  "__pycache__/**",
+  "*.pyc",
+  "*.pyo",
+  ".pytest_cache/**",
+  ".ruff_cache/**",
+]
+source-exclude = [
+  ".mypy_cache/**",
+  "__pycache__/**",
+  "*.pyc",
+  "*.pyo",
+  ".pytest_cache/**",
+  ".ruff_cache/**",
+]
