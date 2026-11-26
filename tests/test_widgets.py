@@ -848,6 +848,8 @@ def test_plaintextedit(qtbot):
     with widget.selecter.current_cursor() as c:
         c.select_text(2, 4)
     widget.selecter.select_text(2, 4)
+    widget.selecter.replace_block_at_cursor("replaced")
+    assert widget.text() == "replaced"
     widget.set_text("hallo")
     widget.set_disabled()
     widget.allow_wheel_zoom()

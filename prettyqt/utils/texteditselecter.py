@@ -251,7 +251,7 @@ class TextEditSelecter:
 
     def replace_block_at_cursor(self, new_text: str):
         cursor = self._widget.textCursor()
-        cursor.select(gui.QTextCursor.MoveOperation.BlockUnderCursor)
+        cursor.select(gui.QTextCursor.SelectionType.BlockUnderCursor)
         if cursor.selectionStart() != 0:
             new_text = "\n" + new_text
         cursor.removeSelectedText()

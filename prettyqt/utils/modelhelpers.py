@@ -82,7 +82,10 @@ def ci(
             ref: core.AbstractItemModelMixin, index: core.QModelIndex, *args, **kwargs
         ):
             if ref.check_index(
-                index, index_is_valid, do_not_use_parent, parent_is_invalid
+                index,
+                index_is_valid=index_is_valid,
+                do_not_use_parent=do_not_use_parent,
+                parent_is_invalid=parent_is_invalid,
             ):
                 return fn(ref, index, *args, **kwargs)
             msg = "Invalid index"
