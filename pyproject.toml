@@ -309,9 +309,6 @@ python-platform = "all"
 [tool.ty.src]
 # `ty check` (hooks, CI, editors) type-checks the package code only.
 include = ["prettyqt"]
-# Project-specific (prettyqt), temporary: custom_widgets is not cleaned up for ty
-# yet (~235 diagnostics, see AGENTS.md); remove this once it is.
-exclude = ["prettyqt/custom_widgets"]
 
 [tool.ty.analysis]
 # Optional dependencies that are not always installed, e.g. "numpy", "numpy.**".

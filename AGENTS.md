@@ -126,8 +126,6 @@ release (git-cliff notes).
   (scrollbars, headers, layouts, documents): accessors `cast()` to the prettyqt class.
 - Stub gaps (e.g. `getRgb()` typed `object`, `staticMetaObject`, `sip.voidptr`, None
   arguments that unset) get a targeted `# ty: ignore[<rule>]` with a short reason.
-- `prettyqt/custom_widgets` is excluded from `ty check` for now (`[tool.ty.src] exclude`,
-  ~235 diagnostics left); remove the exclude once it is cleaned up.
 
 ## Pitfalls
 
