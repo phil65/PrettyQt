@@ -872,3 +872,11 @@ def test_operatingsystemversion_match_args():
             pass
         case _:
             pytest.fail("OperatingSystemVersion pattern did not match")
+
+
+def test_coreapplication_run_async_available():
+    if not prettyqt.qt.PYSIDE6:
+        pytest.skip("QtAsyncio is PySide6-only")
+    from prettyqt.qt import QtAsyncio
+
+    assert callable(QtAsyncio.run)
