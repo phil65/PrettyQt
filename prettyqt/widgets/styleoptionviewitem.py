@@ -55,8 +55,8 @@ class StyleOptionViewItem(widgets.StyleOptionMixin, widgets.QStyleOptionViewItem
     def get_decoration_position(self) -> PositionStr:
         return POSITION.inverse[self.decorationPosition]
 
-    def get_checkstate(self) -> constants.StateStr:
-        return constants.STATE.inverse[self.checkState]
+    def get_checkstate(self) -> constants.CheckStateStr:
+        return constants.CHECK_STATE.inverse[self.checkState]
 
     def get_decoration_alignment(self) -> constants.AlignmentStr:
         return constants.ALIGNMENTS.inverse[self.decorationAlignment]

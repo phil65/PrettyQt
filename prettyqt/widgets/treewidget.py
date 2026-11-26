@@ -63,7 +63,7 @@ class TreeWidgetMixin(widgets.TreeViewMixin, _TreeWidgetBase):
 
         recursive option is written iteratively to also support original QTreeWidgetItems.
         """
-        root = self.invisibleRootItem(())
+        root = self.invisibleRootItem()
         if not recursive:
             return [root.child(i) for i in range(root.childCount())]
         results = []

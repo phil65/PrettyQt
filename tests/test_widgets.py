@@ -1435,10 +1435,14 @@ def test_treewidget(qtbot):
     widget = widgets.TreeWidget()
     qtbot.addWidget(widget)
     widget.sort()
+    widget.addTopLevelItem(widgets.TreeWidgetItem(["a"]))
+    assert len(widget.get_items(recursive=False)) == 1
 
 
 def test_treewidgetitem(qtbot):
     item = widgets.TreeWidgetItem()
+    item.set_data("payload", "user")
+    assert item.get_data("user") == "payload"
     item.set_icon("mdi.timer")
     item.set_checkstate("unchecked")
     with pytest.raises(InvalidParamError):
@@ -1692,3 +1696,8 @@ def test_lineedit_set_validator_append(qtbot):
     line_edit.set_validator("integer")
     validator = line_edit.set_validator("not_zero", append=True)
     assert line_edit.validator() is validator
+
+
+def test_styleoptionviewitem_checkstate():
+    option = widgets.StyleOptionViewItem()
+    assert option.get_checkstate() == "unchecked"

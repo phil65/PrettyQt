@@ -101,12 +101,6 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
             nodes = items
         return listdelegators.ListDelegator(results[1:])
 
-    def get_top_level_items(
-        self,
-    ) -> listdelegators.ListDelegator[QtWidgets.QTreeWidgetItem]:
-        items = [self.topLevelItem(i) for i in range(self.topLevelItemCount())]
-        return listdelegators.ListDelegator(items)
-
     def collapse(self, recursive: bool = False):
         if recursive:
             for i in range(self.childCount()):
@@ -127,18 +121,23 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         self.sortChildren(column, order)
 
     def set_data(
-        self, data: Any, role: constants.ItemDataRoleStr | constants.ItemDataRole | int
+        self,
+        data: Any,
+        role: constants.ItemDataRoleStr | constants.ItemDataRole | int,
+        column: int = 0,
     ):
-        if not isinstance(role, int):
-            role = constants.ITEM_DATA_ROLE.get_enum_value(role)
-        super().setData(data, role)
+        if isinstance(role, str):
+            role = constants.ITEM_DATA_ROLE[role]
+        super().setData(column, role, data)
 
     def get_data(
-        self, role: constants.ItemDataRoleStr | constants.ItemDataRole | int
+        self,
+        role: constants.ItemDataRoleStr | constants.ItemDataRole | int,
+        column: int = 0,
     ) -> Any:
-        if not isinstance(role, int):
-            role = constants.ITEM_DATA_ROLE.get_enum_value(role)
-        return super().data(role)
+        if isinstance(role, str):
+            role = constants.ITEM_DATA_ROLE[role]
+        return super().data(column, role)
 
     def set_icon(self, icon: datatypes.IconType, column: int = 0):
         """Set the icon for the action.
