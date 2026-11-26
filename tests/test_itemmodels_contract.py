@@ -131,8 +131,10 @@ MODELS = {
     "actions": lambda w: itemmodels.ActionsModel([
         gui.Action(text="a", shortcut="Ctrl+A")
     ]),
+    # The source model is parented to the widget: a garbage-collected source model
+    # leaves a dangling index (segfault on PySide6).
     "modelindex": lambda w: itemmodels.ModelIndexModel([
-        itemmodels.JsonModel({"a": 1}).index(0, 0)
+        itemmodels.JsonModel({"a": 1}, parent=w).index(0, 0)
     ]),
     "storageinfo": lambda w: itemmodels.StorageInfoModel(
         core.StorageInfo.get_mounted_volumes()[:2]
