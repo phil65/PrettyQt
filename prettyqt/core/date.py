@@ -53,9 +53,12 @@ class Date(QtCore.QDate):
 
     @classmethod
     def from_string(cls, text: str, date_format: constants.DateFormatStr | str) -> Self:
-        if date_format in constants.DATE_FORMAT:
-            date_format = constants.DATE_FORMAT[date_format]
-        return cls(cls.fromString(text, date_format))
+        fmt = (
+            constants.DATE_FORMAT[date_format]  # noqa: SIM401
+            if date_format in constants.DATE_FORMAT
+            else date_format
+        )
+        return cls(cls.fromString(text, fmt))
 
     def replace(
         self, year: int | None = None, month: int | None = None, day: int | None = None

@@ -107,11 +107,13 @@ class EasingCurve(serializemixin.SerializeMixin, QtCore.QEasingCurve):
     """Easing curves for controlling animation."""
 
     def __init__(self, other_or_type: TypeStr | int | QtCore.QEasingCurve = "linear"):
-        if isinstance(other_or_type, str) and other_or_type in TYPE:
-            typ = TYPE[other_or_type]
-        else:
-            typ = other_or_type
-        super().__init__(typ)
+        match other_or_type:
+            case str():
+                super().__init__(TYPE[other_or_type])
+            case int():
+                super().__init__(QtCore.QEasingCurve.Type(other_or_type))
+            case _:
+                super().__init__(other_or_type)
 
     def __getitem__(self, value: float) -> float:
         return self.valueForProgress(value)

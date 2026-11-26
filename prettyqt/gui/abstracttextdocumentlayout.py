@@ -21,7 +21,7 @@ class AbstractTextDocumentLayoutMixin(core.ObjectMixin, _AbstractTextDocumentLay
     def get_block_bounding_rect(self, block: QtGui.QTextBlock) -> core.RectF:
         return core.RectF(self.blockBoundingRect(block))
 
-    def get_frame_bounding_rect(self, frame: QtGui.QTextBlock) -> core.RectF:
+    def get_frame_bounding_rect(self, frame: QtGui.QTextFrame) -> core.RectF:
         return core.RectF(self.frameBoundingRect(frame))
 
     def hit_test(self, point: datatypes.PointFType, fuzzy: bool = False) -> int | None:

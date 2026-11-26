@@ -128,9 +128,9 @@ if __name__ == "__main__":
     class Test(widgets.Widget):
         def paintEvent(self, event):
             with gui.Painter(self) as painter:
-                painter.drawPath(gui.PainterPath.create_star(400, 200))
+                painter.drawPath(gui.PainterPath.create_star(400))
 
-    p = PainterPath.create_star(400, 200)
+    p = PainterPath.create_star(400)
     p += core.QPoint(1, 1)
 
     t = Test()

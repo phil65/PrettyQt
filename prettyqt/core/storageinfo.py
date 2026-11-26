@@ -31,13 +31,13 @@ class StorageInfo(QtCore.QStorageInfo):
         return get_repr(self, self.rootPath())
 
     def get_device(self) -> str:
-        return self.device().data().decode()
+        return bytes(self.device().data()).decode()
 
     def get_file_system_type(self) -> str:
-        return self.fileSystemType().data().decode()
+        return bytes(self.fileSystemType().data()).decode()
 
     def get_subvolume(self) -> str:
-        return self.subvolume().data().decode()
+        return bytes(self.subvolume().data()).decode()
 
     def get_root_path(self) -> pathlib.Path:
         return pathlib.Path(self.rootPath())

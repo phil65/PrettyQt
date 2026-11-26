@@ -5,7 +5,7 @@ from prettyqt.utils import datatypes
 
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
+    import types
 
 
 class PropertyAnimation(core.VariantAnimationMixin, core.QPropertyAnimation):
@@ -25,8 +25,10 @@ class PropertyAnimation(core.VariantAnimationMixin, core.QPropertyAnimation):
         maps |= {"easingCurve": core.easingcurve.TYPE}
         return maps
 
-    def apply_to(self, method: Callable):
-        self.setTargetObject(method.__self__)
+    def apply_to(self, method: types.MethodType):
+        if not isinstance(target := method.__self__, core.QObject):
+            raise TypeError(method)
+        self.setTargetObject(target)
         self.set_property_name(method.__name__)
 
     def set_property_name(self, name: datatypes.ByteArrayType):
@@ -34,7 +36,7 @@ class PropertyAnimation(core.VariantAnimationMixin, core.QPropertyAnimation):
         self.setPropertyName(name)
 
     def get_property_name(self) -> str:
-        return self.propertyName().data().decode()
+        return bytes(self.propertyName().data()).decode()
 
     def get_property_value(self) -> Any:
         """Return the value of the property which should get animated."""

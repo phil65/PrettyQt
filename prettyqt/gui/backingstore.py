@@ -18,4 +18,5 @@ if __name__ == "__main__":
 
     app = widgets.app()
     w = widgets.Widget()
-    backingstore = BackingStore(w.backingStore())
+    w.show()
+    backingstore = BackingStore(w.windowHandle())

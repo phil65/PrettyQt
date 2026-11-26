@@ -14,7 +14,7 @@ from prettyqt.utils import colors, datatypes
 
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Iterator, Sequence
+    from collections.abc import Callable, Generator, Sequence
 
     from prettyqt import custom_widgets
 
@@ -760,7 +760,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
     @contextlib.contextmanager
     def grab_mouse_events(
         self, cursor_shape: constants.CursorShapeStr | None = None
-    ) -> Iterator[None]:
+    ) -> Generator[None]:
         """Context manager to grab mouse events."""
         if cursor_shape is not None:
             self.grabMouse(constants.CURSOR_SHAPE[cursor_shape])
@@ -770,14 +770,14 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
         self.releaseMouse()
 
     @contextlib.contextmanager
-    def grab_keyboard_events(self) -> Iterator[None]:
+    def grab_keyboard_events(self) -> Generator[None]:
         """Context manager to grab keyboard events."""
         self.grabKeyboard()
         yield None
         self.releaseKeyboard()
 
     @contextlib.contextmanager
-    def updates_off(self) -> Iterator[None]:
+    def updates_off(self) -> Generator[None]:
         """Context manager to turn off updates for this widget."""
         updates = self.updatesEnabled()
         self.setUpdatesEnabled(False)
@@ -785,7 +785,7 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
         self.setUpdatesEnabled(updates)
 
     @contextlib.contextmanager
-    def edit_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:
+    def edit_stylesheet(self) -> Generator[qstylizer.style.StyleSheet]:
         """Context manager to edit the stylesheet (using qstylizer)."""
         ss = self.get_stylesheet()
         yield ss
@@ -814,14 +814,14 @@ class WidgetMixin(core.ObjectMixin, gui.PaintDeviceMixin, _WidgetBase):
             return qstylizer.style.StyleSheet()
 
     @contextlib.contextmanager
-    def edit_palette(self) -> Iterator[gui.Palette]:
+    def edit_palette(self) -> Generator[gui.Palette]:
         """Context manager to edit the palette of the widget."""
         palette = gui.Palette(self.palette())
         yield palette
         self.setPalette(palette)
 
     @contextlib.contextmanager
-    def edit_font(self) -> Iterator[gui.Font]:
+    def edit_font(self) -> Generator[gui.Font]:
         """Context manager to edit the font of the widget."""
         font = gui.Font(self.font())
         yield font

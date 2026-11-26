@@ -235,7 +235,9 @@ class MetaType(QtCore.QMetaType):
         ]
 
     def get_name(self) -> str | None:
-        return name.decode() if isinstance(name := self.name(), bytes) else name
+        # PyQt6 returns bytes, PySide6 str.
+        name = self.name()
+        return name if isinstance(name, str) else bytes(name).decode()
 
     def get_type_name(self) -> str:
         return TYPE.inverse[QtCore.QMetaType.Type(self.id())]

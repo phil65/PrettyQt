@@ -5,4 +5,4 @@ class ByteArray(QtCore.QByteArray):
     """Array of bytes."""
 
     def __reduce__(self):
-        return type(self), (bytes(self),)
+        return type(self), (bytes(self.data()),)

@@ -1,3 +1,5 @@
+from typing import cast
+
 from prettyqt import gui
 
 
@@ -16,7 +18,13 @@ class NotStrictValidator(gui.Validator):
         )
 
     def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
-        state, text, pos = self._validator.validate(text, pos)
+        if self._validator is None:
+            return self.State.Acceptable, text, pos
+        # The PySide6 stubs type validate()'s result as `object`.
+        result = cast(
+            "tuple[gui.QValidator.State, str, int]", self._validator.validate(text, pos)
+        )
+        state, text, pos = result
         is_invalid = state == self.State.Invalid
         return self.State.Intermediate if is_invalid else state, text, pos
 

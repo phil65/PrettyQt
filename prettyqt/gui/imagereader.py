@@ -52,13 +52,13 @@ class ImageReader(gui.QImageReader):
         return core.Size(self.scaledSize())
 
     def get_format(self) -> str:
-        return self.format().data().decode()
+        return bytes(self.format().data()).decode()
 
     def get_subtype(self) -> str:
-        return self.subType().data().decode()
+        return bytes(self.subType().data()).decode()
 
     def get_supported_subtypes(self) -> list[str]:
-        return [i.data().decode() for i in self.supportedSubTypes()]
+        return [bytes(i.data()).decode() for i in self.supportedSubTypes()]
 
     def set_format(self, fmt: datatypes.ByteArrayType):
         fmt = datatypes.to_bytearray(fmt)
@@ -90,22 +90,24 @@ class ImageReader(gui.QImageReader):
 
     @staticmethod
     def get_image_format(obj: str | core.QIODevice) -> str:
-        return ImageReader.imageFormat(obj).data().decode()
+        return bytes(ImageReader.imageFormat(obj).data()).decode()
 
     @staticmethod
     def get_supported_image_formats() -> list[str]:
-        return [i.data().decode() for i in ImageReader.supportedImageFormats()]
+        return [bytes(i.data()).decode() for i in ImageReader.supportedImageFormats()]
 
     @staticmethod
     def get_supported_mime_types() -> list[str]:
-        return [i.data().decode() for i in ImageReader.supportedMimeTypes()]
+        return [bytes(i.data()).decode() for i in ImageReader.supportedMimeTypes()]
 
     @staticmethod
     def get_image_formats_for_mime_type(typ: datatypes.ByteArrayType) -> list[str]:
         typ = datatypes.to_bytearray(typ)
-        return [i.data().decode() for i in ImageReader.imageFormatsForMimeType(typ)]
+        return [
+            bytes(i.data()).decode() for i in ImageReader.imageFormatsForMimeType(typ)
+        ]
 
 
 if __name__ == "__main__":
-    writer = ImageReader()
-    writer.set_subtype("A8R8G8B8")
+    reader = ImageReader()
+    print(reader.supportedSubTypes())

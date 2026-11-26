@@ -6,7 +6,7 @@ from prettyqt import gui
 
 class BaseScientificValidator(gui.Validator):
     re_pattern: re.Pattern
-    group_map: dict[str, int]
+    group_map: ClassVar[dict[str, int]]
 
     def get_group_dict(self, string: str):
         """Match the input string with the regex of this validator.

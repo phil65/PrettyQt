@@ -118,7 +118,7 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
         tool_tip: str = "",
         whats_this: str | None = None,
         # text_alignment: Optional[str] = None,
-        checkstate: constants.StateStr | None = None,
+        checkstate: constants.CheckStateStr | None = None,
         flags: constants.ItemFlag | None = None,
         size_hint: datatypes.SizeType | None = None,
         is_user_type: bool = False,

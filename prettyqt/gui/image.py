@@ -142,7 +142,7 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
         img = cls(data["data"], data["size"][0], data["size"][1], data["format"])
         if data["colortable"]:
             img.setColorTable(data["colortable"])
-        img.__data = data["data"]
+        img.__data = data["data"]  # ty: ignore[missing-attribute]  # keeps the buffer alive
         return img
 
     def to_pil(self):
@@ -150,8 +150,9 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
 
         buffer = core.Buffer()
         buffer.open(core.Buffer.OpenModeFlag.ReadWrite)
-        self.save(buffer, "PNG")
-        return PILImage.open(io.BytesIO(buffer.data()))
+        # PySide6's stub wants bytes, but only str works at runtime.
+        self.save(buffer, "PNG")  # ty: ignore[no-matching-overload]
+        return PILImage.open(io.BytesIO(buffer.data().data()))
 
     def invert_pixels(self, invert_alpha: bool = False):
         self.invertPixels(
@@ -167,11 +168,9 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
         bits = self.bits()
         if bits is None:
             return b""
-        match API:
-            case "pyqt6":
-                return bits.asstring(self.sizeInBytes())
-            case "pyside6":
-                return bits.tobytes()
+        if API == "pyqt6":  # sip.voidptr, the stubs only know PySide6's memoryview
+            return bits.asstring(self.sizeInBytes())  # ty: ignore[missing-attribute]
+        return bytes(bits)
 
 
 if __name__ == "__main__":

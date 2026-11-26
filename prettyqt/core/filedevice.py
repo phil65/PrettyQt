@@ -143,15 +143,15 @@ class FileDeviceMixin(core.IODeviceMixin, _FileDeviceBase):
 
     def is_readable(self) -> bool:
         """Returns whether file has ReadUser permission flag."""
-        return self.permissions() & core.QFileDevice.Permission.ReadUser
+        return bool(self.permissions() & core.QFileDevice.Permission.ReadUser)
 
     def is_writable(self) -> bool:
         """Returns whether file has WriteUser permission flag."""
-        return self.permissions() & core.QFileDevice.Permission.WriteUser
+        return bool(self.permissions() & core.QFileDevice.Permission.WriteUser)
 
     def is_executable(self) -> bool:
         """Returns whether file has ExeUser permission flag."""
-        return self.permissions() & core.QFileDevice.Permission.ExeUser
+        return bool(self.permissions() & core.QFileDevice.Permission.ExeUser)
 
 
 class FileDevice(FileDeviceMixin, core.QFileDevice):

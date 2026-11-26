@@ -3,6 +3,8 @@ import enum
 import logging
 from typing import TYPE_CHECKING, Any, Literal, overload
 
+import bidict as bdct
+
 from prettyqt import constants, core
 from prettyqt.utils import bidict, helpers, listdelegators, modelhelpers
 
@@ -73,7 +75,7 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
     ) -> listdelegators.ListDelegator[core.ModelIndex]: ...
 
     def __getitem__(
-        self, index: tuple[int | slice, int | slice]
+        self, index: tuple[int | slice, int | slice] | int
     ) -> core.ModelIndex | listdelegators.ListDelegator[core.ModelIndex]:
         # TODO: do proxies need mapToSource here?
         rowcount = self.rowCount()
@@ -279,8 +281,10 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
         self.layoutAboutToBeChanged.emit()
         self.layoutChanged.emit()
 
-    def get_role_names(self) -> bidict[int, str]:
-        return bidict({i: bytes(v.data()).decode() for i, v in self.roleNames().items()})
+    def get_role_names(self) -> bdct.bidict[int, str]:
+        return bdct.bidict({
+            i: bytes(v.data()).decode() for i, v in self.roleNames().items()
+        })
 
     def get_breadcrumbs_path(
         self,

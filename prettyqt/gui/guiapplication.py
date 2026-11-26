@@ -7,7 +7,7 @@ from prettyqt.utils import colors, datatypes
 
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Generator
 
 
 DEFAULT_WINDOW_ICON_COLOR = "darkcyan"
@@ -56,13 +56,13 @@ class GuiApplicationMixin(core.CoreApplicationMixin, _GuiApplicationBase):
 
     @classmethod
     @contextlib.contextmanager
-    def edit_palette(cls) -> Iterator[gui.Palette]:
+    def edit_palette(cls) -> Generator[gui.Palette]:
         palette = gui.Palette(cls.palette())
         yield palette
         cls.setPalette(palette)
 
     @classmethod
-    def find_window(cls, h_wnd: SupportsInt) -> gui.QWindow:
+    def find_window(cls, h_wnd: SupportsInt) -> gui.QWindow | None:
         for window in cls.topLevelWindows():
             if window and int(window.winId()) == int(h_wnd):
                 return window
@@ -132,9 +132,9 @@ class GuiApplicationMixin(core.CoreApplicationMixin, _GuiApplicationBase):
     def get_primary_screen(self) -> gui.Screen:
         return gui.Screen(self.primaryScreen())
 
-    def get_screen_at(self, point: datatypes.PointType) -> gui.Screen:
+    def get_screen_at(self, point: datatypes.PointType) -> gui.Screen | None:
         p = datatypes.to_point(point)
-        return gui.Screen(self.screenAt(p))
+        return gui.Screen(screen) if (screen := self.screenAt(p)) else None
 
     def get_screens(self) -> list[gui.Screen]:
         return [gui.Screen(i) for i in self.screens()]

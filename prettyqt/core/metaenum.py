@@ -56,5 +56,6 @@ if __name__ == "__main__":
     metaobj = widgets.AbstractItemView.get_static_metaobject()
     prop = metaobj.get_property("editTriggers")
     enumerator = prop.get_enumerator()
+    assert enumerator is not None
     print(enumerator)
     print(enumerator.get_scope_object())

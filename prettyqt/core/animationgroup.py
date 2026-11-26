@@ -5,9 +5,8 @@ from prettyqt.utils import listdelegators
 
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
-
-    from prettyqt import widgets
+    from collections.abc import Iterator
+    import types
 
 
 if TYPE_CHECKING:
@@ -53,6 +52,9 @@ class AnimationGroupMixin(core.AbstractAnimationMixin, _AnimationGroupBase):
         self.takeAnimation(index)
         self.insertAnimation(index, value)
 
+    def __iter__(self) -> Iterator[core.QAbstractAnimation]:
+        return (self.animationAt(i) for i in range(self.animationCount()))
+
     def __len__(self):
         return self.animationCount()
 
@@ -65,7 +67,7 @@ class AnimationGroupMixin(core.AbstractAnimationMixin, _AnimationGroupBase):
         self.addAnimation(other)
         return self
 
-    def targetObject(self) -> widgets.QWidget:
+    def targetObject(self) -> core.QObject:
         """Return shared targetObject if existing."""
         targets = [
             anim.targetObject()
@@ -77,7 +79,7 @@ class AnimationGroupMixin(core.AbstractAnimationMixin, _AnimationGroupBase):
             raise RuntimeError(msg)
         return targets[0]
 
-    def add_property_animation(self, obj: Callable) -> core.PropertyAnimation:
+    def add_property_animation(self, obj: types.MethodType) -> core.PropertyAnimation:
         anim = core.PropertyAnimation()
         anim.apply_to(obj)
         self.addAnimation(anim)

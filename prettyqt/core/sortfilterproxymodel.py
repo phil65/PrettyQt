@@ -102,7 +102,7 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, core.QSortFilterProxyMo
             column = -1
         super().sort(column, ascending)
 
-    def setFilterRegularExpression(self, pattern: datatypes.PatternType):
+    def setFilterRegularExpression(self, pattern: datatypes.PatternType | str):
         if isinstance(pattern, re.Pattern):
             pattern = core.RegularExpression(pattern)
         super().setFilterRegularExpression(pattern)
@@ -175,9 +175,12 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, core.QSortFilterProxyMo
         super().setFilterKeyColumn(column)
 
     def set_search_term(self, search_term: str | Iterable[str]):
+        if not isinstance(search_term, str):
+            if self._filter_mode != "fixed_string":
+                raise TypeError(search_term)
+            self.setFixedFilterList(list(search_term))
+            return
         match self._filter_mode:
-            case "fixed_string" if isinstance(search_term, list):
-                self.setFixedFilterList(search_term)
             case "fixed_string":
                 self.setFilterFixedString(search_term)
             case "substring":
@@ -210,10 +213,10 @@ if __name__ == "__main__":
 
     app = widgets.app()
     from prettyqt.itemmodels.importlibdistributionmodel import (
-        ImportlibDistributionModel,
+        ImportlibTreeModel,
     )
 
-    source_model = ImportlibDistributionModel.from_package("prettyqt")
+    source_model = ImportlibTreeModel.from_package("prettyqt")
     model = SortFilterProxyModel()
     model.setSourceModel(source_model)
     model.set_filter_mode("fuzzy")

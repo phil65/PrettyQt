@@ -1,12 +1,8 @@
 import os
-from typing import TYPE_CHECKING, Literal
+from typing import Literal
 
 from prettyqt import core
-from prettyqt.utils import bidict
-
-
-if TYPE_CHECKING:
-    from prettyqt.utils import datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 MatchModeStr = Literal["default", "extension", "content"]
@@ -34,6 +30,8 @@ class MimeDatabase(core.QMimeDatabase):
     def get_mime_type_for_data(
         self, data: datatypes.ByteArrayType | core.QIODevice
     ) -> core.MimeType:
+        if not isinstance(data, core.QIODevice):
+            data = datatypes.to_bytearray(data)
         return core.MimeType(self.mimeTypeForData(data))
 
     def get_mime_type_for_filename_and_data(
@@ -42,6 +40,8 @@ class MimeDatabase(core.QMimeDatabase):
         data: datatypes.ByteArrayType | core.QIODevice,
     ) -> core.MimeType:
         path = os.fspath(filename)
+        if not isinstance(data, core.QIODevice):
+            data = datatypes.to_bytearray(data)
         return core.MimeType(self.mimeTypeForFileNameAndData(path, data))
 
     def get_mime_type_for_name(self, name: str) -> core.MimeType:

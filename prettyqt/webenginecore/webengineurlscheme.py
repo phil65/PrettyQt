@@ -40,7 +40,7 @@ FLAGS: bidict[FlagStr, QWebEngineUrlScheme.Flag] = bidict(
 
 class WebEngineUrlScheme(QtWebEngineCore.QWebEngineUrlScheme):
     def get_name(self) -> str:
-        return self.name().data().decode()
+        return bytes(self.name().data()).decode()
 
     @classmethod
     def get_scheme_by_name(cls, name: datatypes.ByteArrayType) -> Self:

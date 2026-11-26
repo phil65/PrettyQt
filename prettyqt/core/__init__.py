@@ -166,7 +166,8 @@ def update_property_group():
     QtCore.Qt.endPropertyUpdateGroup()
 
 
-def app(args: list[str] | None = None, **kwargs) -> CoreApplication:
+def app(args: list[str] | None = None, **kwargs) -> QtCore.QCoreApplication:
+    # the running instance may be any (prettyqt) application class
     if (instance := CoreApplication.instance()) is not None:
         return instance
     return CoreApplication(sys.argv if args is None else args, **kwargs)

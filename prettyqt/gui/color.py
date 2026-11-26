@@ -1,4 +1,4 @@
-from typing import Any, Literal, Self
+from typing import Any, Literal, Self, cast
 
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, get_repr, helpers
@@ -27,6 +27,11 @@ def is_valid_color(text: str):
     if text.startswith("#") and len(text) in {4, 7} and text[1:].isalnum():
         return True
     return text.lower() in QtGui.QColor.colorNames()
+
+
+def _components(value: object) -> tuple[Any, ...]:
+    # The PySide6 stubs type QColor.getRgb() & co. as `object`.
+    return cast("tuple[Any, ...]", value)
 
 
 class Color(QtGui.QColor):
@@ -118,17 +123,17 @@ class Color(QtGui.QColor):
     #         match colorspace:
     #             case "rgb":
     #                 components = helpers.get_color_percentage(
-    #                     start.getRgb(), end.getRgb(), percent  # type: ignore
+    #                     _components(start.getRgb()), _components(end.getRgb()), percent  # type: ignore
     #                 )
     #                 out.setRgb(*components)
     #             case "hsv":
     #                 components = helpers.get_color_percentage(
-    #                     start.getHsv(), end.getHsv(), percent  # type: ignore
+    #                     _components(start.getHsv()), _components(end.getHsv()), percent  # type: ignore
     #                 )
     #                 out.setHsv(*components)
     #             case "hsl":
     #                 components = helpers.get_color_percentage(
-    #                     start.getHsl(), end.getHsl(), percent  # type: ignore
+    #                     _components(start.getHsl()), _components(end.getHsl()), percent  # type: ignore
     #                 )
     #                 out.setHsl(*components)
     #         return out
@@ -166,27 +171,31 @@ class Color(QtGui.QColor):
             The interpolated QColor, with the same spec as the given start color.
         """
         if colorspace is None:
-            return cls(*end.getRgb()) if percent == 100 else cls(*start.getRgb())  # noqa: PLR2004
+            return (
+                cls(*_components(end.getRgb()))
+                if percent == 100  # noqa: PLR2004
+                else cls(*_components(start.getRgb()))
+            )
         out = cls()
         match colorspace:
             case "rgb":
                 components = helpers.get_color_percentage(
-                    start.getRgb(),
-                    end.getRgb(),
+                    _components(start.getRgb()),
+                    _components(end.getRgb()),
                     percent,  # type: ignore
                 )
                 out.setRgb(*components)
             case "hsv":
                 components = helpers.get_color_percentage(
-                    start.getHsv(),
-                    end.getHsv(),
+                    _components(start.getHsv()),
+                    _components(end.getHsv()),
                     percent,  # type: ignore
                 )
                 out.setHsv(*components)
             case "hsl":
                 components = helpers.get_color_percentage(
-                    start.getHsl(),
-                    end.getHsl(),
+                    _components(start.getHsl()),
+                    _components(end.getHsl()),
                     percent,  # type: ignore
                 )
                 out.setHsl(*components)
@@ -207,19 +216,19 @@ class Color(QtGui.QColor):
         color = type(self)()
         match spec:
             case "rgb":
-                rgb = self.getRgb()
+                rgb = _components(self.getRgb())
                 color.setRgb(*rgb)
             case "hsv":
-                hsv = self.getHsv()
+                hsv = _components(self.getHsv())
                 color.setHsv(*hsv)
             case "cmyk":
-                cmyk = self.getCmyk()
+                cmyk = _components(self.getCmyk())
                 color.setCmyk(*cmyk)
             case "hsl":
-                hsl = self.getHsl()
+                hsl = _components(self.getHsl())
                 color.setHsl(*hsl)
             case "extended_rgb":
-                ergb = self.getRgbF()
+                ergb = _components(self.getRgbF())
                 color.setRgbF(*ergb)
         return color
 
@@ -243,13 +252,13 @@ class Color(QtGui.QColor):
         css_format = fmt or self.spec()
         match css_format:
             case self.Spec.Rgb | "rgba":
-                string = ", ".join([str(i) for i in self.getRgb()])
+                string = ", ".join([str(i) for i in _components(self.getRgb())])
                 return f"rgba({string})"
             case self.Spec.Hsv | "hsva":
-                string = ", ".join([str(i) for i in self.getHsv()])
+                string = ", ".join([str(i) for i in _components(self.getHsv())])
                 return f"hsva({string})"
             case self.Spec.Hsl | "hsla":
-                string = ", ".join([str(i) for i in self.getHsl()])
+                string = ", ".join([str(i) for i in _components(self.getHsl())])
                 return f"hsla({string})"
             case "rgb":
                 return f"rgb({self.red()}, {self.green()}, {self.blue()})"
@@ -267,7 +276,7 @@ class Color(QtGui.QColor):
             255 - self.alpha() if invert_alpha else self.alpha(),
         )
 
-    def drift(self, factor: int = 1.0) -> Self:
+    def drift(self, factor: float = 1.0) -> Self:
         """Return color that is lighter or darker than the base color."""
         kls = type(self)
         if self == Color("#000000"):

@@ -31,4 +31,4 @@ if __name__ == "__main__":
     model = itemmodels.QObjectPropertiesModel(app)
     table = widgets.TableView()
     table.set_model(model)
-    print(model.to_markdown())
+    print(model.get_table_data())

@@ -156,7 +156,8 @@ class Palette(serializemixin.SerializeMixin, gui.QPalette):
             group: color group to use
             kwargs: keyword arguments passed to setColorGroup
         """
-        self.setColorGroup(GROUP.get_enum_value(group), **kwargs)
+        # all nine brushes, as keywords
+        self.setColorGroup(GROUP.get_enum_value(group), **kwargs)  # ty: ignore[missing-argument]
 
     def get_color_group(self) -> GroupStr:
         """Return color group.
@@ -201,9 +202,9 @@ class Palette(serializemixin.SerializeMixin, gui.QPalette):
 
     def is_dark(self) -> bool:
         col = self.color(self.ColorRole.Window)
-        return max(col.getRgb()[:3]) < 115  # noqa: PLR2004
+        return max(col.red(), col.green(), col.blue()) < 115  # noqa: PLR2004
 
 
 if __name__ == "__main__":
     pal = Palette()
-    print(list(pal.yield_dark_colors()))
+    print(pal.is_dark())

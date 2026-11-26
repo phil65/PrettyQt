@@ -8,7 +8,7 @@ from prettyqt.utils import colors
 
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Generator
 
     from prettyqt.utils import datatypes
 
@@ -104,13 +104,13 @@ class TextEditSelecter:
         return (start_block_id, end_block_id)
 
     @contextlib.contextmanager
-    def create_cursor(self) -> Iterator[gui.TextCursor]:
+    def create_cursor(self) -> Generator[gui.TextCursor]:
         cursor = gui.TextCursor(self._widget.document())
         yield cursor
         self._widget.setTextCursor(cursor)
 
     @contextlib.contextmanager
-    def current_cursor(self) -> Iterator[gui.TextCursor]:
+    def current_cursor(self) -> Generator[gui.TextCursor]:
         cursor = gui.TextCursor(self._widget.textCursor())
         yield cursor
         self._widget.setTextCursor(cursor)

@@ -4,7 +4,7 @@ import enum
 import os
 import pathlib
 import re
-from typing import TYPE_CHECKING, Any, ClassVar, Protocol, runtime_checkable
+from typing import TYPE_CHECKING, Any, ClassVar, Protocol, cast, runtime_checkable
 from urllib import parse
 
 import dateutil.parser
@@ -12,18 +12,29 @@ import dateutil.parser
 from prettyqt.qt import QtCore, QtGui
 
 
-class QABCMeta(type(QtCore.QObject), ABCMeta):
-    """Metaclass, mainly used for inheriting from MutableMapping."""
+# The bindings' stubs don't declare the Qt metaclass (Shiboken.ObjectType /
+# sip.wrappertype), so for type checkers `type(QObject)` is plain `type`.
+if TYPE_CHECKING:
+    _QtMeta = type
+
+    class QABCMeta(ABCMeta):
+        """Metaclass, mainly used for inheriting from MutableMapping."""
+
+else:
+    _QtMeta = type(QtCore.QObject)
+
+    class QABCMeta(_QtMeta, ABCMeta):
+        """Metaclass, mainly used for inheriting from MutableMapping."""
 
 
-class Singleton(type(QtCore.QObject), type):
+class Singleton(_QtMeta):
     """Metaclass to create a singleton."""
 
-    def __init__(cls, name, bases, dct):
+    def __init__(cls, name, bases, dct):  # noqa: N805
         super().__init__(name, bases, dct)
         cls.instance = None
 
-    def __call__(cls, *args, **kw):
+    def __call__(cls, *args, **kw):  # noqa: N805
         if cls.instance is None:
             cls.instance = super().__call__(*args, **kw)
         return cls.instance
@@ -627,8 +638,12 @@ def get_editor_for_type(  # noqa: PLR0911
     return None
 
 
-def align_types[T](source: T, target: VariantType | tuple) -> T:  # noqa: PLR0911
+def align_types[T](source: T, target: VariantType | tuple) -> T:
     """Align target to the type of source."""
+    return cast("T", _align_types(source, target))
+
+
+def _align_types(source: Any, target: Any) -> Any:  # noqa: PLR0911
     from prettyqt import core, gui
     from prettyqt.utils import colors
 
@@ -920,7 +935,7 @@ def to_time(value: TimeType):
         case core.QDateTime():
             return core.DateTime(value).get_time()
         case dt.time():
-            return core.Time(value)
+            return core.Time(value)  # ty: ignore[invalid-argument-type]  # works at runtime
         case dt.datetime():
             return core.DateTime(value).get_time()
         case _:

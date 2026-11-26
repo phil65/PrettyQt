@@ -42,7 +42,11 @@ class Drag(core.ObjectMixin, gui.QDrag):
         flag = constants.DropAction(0)
         for i in supported_actions:
             flag |= constants.DROP_ACTION.get_enum_value(i)
-        default_action = constants.DROP_ACTION.get_enum_value(default_drop_action)
+        default_action = (
+            constants.DropAction.IgnoreAction
+            if default_drop_action is None
+            else constants.DROP_ACTION.get_enum_value(default_drop_action)
+        )
         result = super().exec(flag, default_action)
         return constants.DROP_ACTION.inverse[result]
 

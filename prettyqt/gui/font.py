@@ -185,7 +185,7 @@ class Font(gui.QFont):
         self.setPointSize(size)
 
     @classmethod
-    def mono(cls, size=8, as_qt: bool = False) -> Self:
+    def mono(cls, size=8, as_qt: bool = False) -> Self | gui.QFont:
         match sys.platform:
             case "win32":
                 font = "Consolas"

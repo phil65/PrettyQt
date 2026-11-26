@@ -17,7 +17,7 @@ class CompositeValidator(gui.Validator):
 
     def __init__(
         self,
-        validators: Sequence[gui.Validator] | None = None,
+        validators: Sequence[gui.QValidator] | None = None,
         parent: QtCore.QObject | None = None,
     ):
         super().__init__(parent)
@@ -26,10 +26,10 @@ class CompositeValidator(gui.Validator):
     def __repr__(self):
         return get_repr(self, self.validators)
 
-    def __getitem__(self, index: int) -> gui.Validator:
+    def __getitem__(self, index: int) -> gui.QValidator:
         return self.validators[index]
 
-    def __setitem__(self, index: int, value: gui.Validator):
+    def __setitem__(self, index: int, value: gui.QValidator):
         self.validators[index] = value
 
     def __delitem__(self, index: int):
@@ -38,7 +38,7 @@ class CompositeValidator(gui.Validator):
     def __contains__(self, index: int):
         return index in self.validators
 
-    def __iter__(self) -> Iterator[gui.Validator]:
+    def __iter__(self) -> Iterator[gui.QValidator]:
         return iter(self.validators)
 
     def __reduce__(self):

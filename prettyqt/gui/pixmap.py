@@ -73,10 +73,11 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin, _PixmapBa
     def to_image(self) -> gui.Image:
         return gui.Image(self.toImage())
 
-    def rotated(self, rotation: int) -> Pixmap:
+    def rotated(self, rotation: int) -> Self:
         w, h = self.width(), self.height()
         pixmap = self.transformed(gui.Transform().rotate(rotation))
-        return pixmap.copy((pixmap.width() - w) // 2, (pixmap.height() - h) // 2, w, h)
+        x, y = (pixmap.width() - w) // 2, (pixmap.height() - h) // 2
+        return type(self)(pixmap.copy(x, y, w, h))
 
     def get_image_data_url(self) -> str:
         """Render the contents of the pixmap as a data URL (RFC-2397).
@@ -88,7 +89,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin, _PixmapBa
         assert device.open_file("read_write")
         self.save(device, "png")
         device.close()
-        data = bytes(device.data())
+        data = bytes(device.data().data())
         payload = base64.b64encode(data).decode("ascii")
         return f"data:image/png;base64,{payload}"
 

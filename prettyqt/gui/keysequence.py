@@ -128,7 +128,7 @@ class KeySequence(QtGui.QKeySequence):
         return super().__format__(format_spec)
 
     def __getitem__(self, item) -> core.KeyCombination:
-        item = super().__getitem__(item)
+        item = super().__getitem__(item)  # ty: ignore[missing-attribute]  # not in stubs
         return core.KeyCombination(item)
 
     @property

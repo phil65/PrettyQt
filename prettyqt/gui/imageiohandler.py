@@ -89,7 +89,7 @@ class ImageIOHandler(mod):
         self.set_option(key, value)
 
     def get_format(self) -> str:
-        return self.format().data().decode()
+        return bytes(self.format().data()).decode()
 
     def set_option(
         self, option: ImageOptionStr | mod.ImageOption, value: datatypes.Variant

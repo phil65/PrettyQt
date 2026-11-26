@@ -35,13 +35,14 @@ class EventLoop(core.ObjectMixin, core.QEventLoop):
             msg = "Eventloop is already running!"
             raise AssertionError(msg)
         self._executing = True
-        flag = core.QEventLoop.ProcessEventsFlag(0)
+        flags = core.QEventLoop.ProcessEventsFlag
+        flag = flags.AllEvents
         if not user_input:
-            flag |= 1
+            flag |= flags.ExcludeUserInputEvents
         if not socket_notifiers:
-            flag |= 2
+            flag |= flags.ExcludeSocketNotifiers
         if wait_for_more:
-            flag |= 4
+            flag |= flags.WaitForMoreEvents
         status = self.exec(flag)
         self._executing = False
         return status

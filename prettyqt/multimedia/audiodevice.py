@@ -28,7 +28,7 @@ class AudioDevice(multimedia.QAudioDevice):
         return multimedia.audioformat.CHANNEL_CONFIG.inverse[self.channelConfiguration()]
 
     def get_id(self) -> str:
-        return self.id().data().decode()
+        return bytes(self.id().data()).decode()
 
 
 if __name__ == "__main__":

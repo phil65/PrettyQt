@@ -41,11 +41,11 @@ class MimeData(core.ObjectMixin, core.QMimeData):
         self.setData(mime_type, core.QByteArray(bytes_))
 
     def get_data(self, mime_type: str) -> str:
-        return bytes(self.data(mime_type)).decode()
+        return bytes(self.data(mime_type).data()).decode()
 
     def get_json_data(self, mime_type: str) -> datatypes.JSONType:
         data = self.data(mime_type)
-        return anyenv.load_json(bytes(data))
+        return anyenv.load_json(bytes(data.data()))
 
     def keys(self) -> list[str]:
         return self.formats()
@@ -81,7 +81,7 @@ class MimeData(core.ObjectMixin, core.QMimeData):
         return cls(mime_type)
 
     def to_dict(self) -> dict[str, bytes]:
-        return {i: self.data(i).data() for i in self.formats()}
+        return {i: bytes(self.data(i).data()) for i in self.formats()}
 
     @classmethod
     def clone(cls, other: core.QMimeData) -> Self:

@@ -30,7 +30,7 @@ class DeviceColumn(itemmodels.ColumnItem):
     def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return item.device().data().decode()
+                return bytes(item.device().data()).decode()
 
 
 class FileSystemColumn(itemmodels.ColumnItem):
@@ -39,7 +39,7 @@ class FileSystemColumn(itemmodels.ColumnItem):
     def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return item.fileSystemType().data().decode()
+                return bytes(item.fileSystemType().data()).decode()
 
 
 class TotalColumn(itemmodels.ColumnItem):

@@ -11,6 +11,7 @@ from prettyqt.qt import QtCore
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterable
+    import types
 
 
 logger = logging.getLogger(__name__)
@@ -117,7 +118,7 @@ class _OverloadedSlotPlaceholder:
 
 
 def _build_arguments(
-    func: Callable, original_func: Callable | None = None
+    func: types.FunctionType, original_func: types.FunctionType | None = None
 ) -> tuple[list, dict]:
     signature = inspect.signature(func, annotation_format=annotationlib.Format.FORWARDREF)
     args = [
@@ -157,7 +158,7 @@ def _build_arguments(
     return slot_args, slot_kwargs
 
 
-def AutoSlotAlternative(func: Callable):
+def AutoSlotAlternative(func: types.FunctionType):
     """A special slot decorator using function annotations to provide the argument types.
 
     Use like so:

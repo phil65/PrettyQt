@@ -34,8 +34,8 @@ class AbstractProxyModelMixin(core.AbstractItemModelMixin, _AbstractProxyModelBa
             yield f"{k}={v!r}"
             yield 0
         model = self.sourceModel()
-        if hasattr(model, "__pretty__"):
-            yield from model.__pretty__(fmt, **kwargs)
+        if (pretty := getattr(model, "__pretty__", None)) is not None:
+            yield from pretty(fmt, **kwargs)
             yield 0
         yield -1
         # yield -1
@@ -67,12 +67,12 @@ class AbstractProxyModelMixin(core.AbstractItemModelMixin, _AbstractProxyModelBa
         idx = models.index(self)
         if idx == len(models) - 1:
             parent.set_model(models[idx - 1])
-            self.setSourceModel(None)
+            self.setSourceModel(None)  # ty: ignore[invalid-argument-type]  # stub lacks None
         elif idx == 0 and len(models) > 0:
             parent.set_model(models[1])
         elif idx > 0 and len(models) > 2:  # noqa: PLR2004
             models[idx - 1].setSourceModel(models[idx + 1])
-            self.setSourceModel(None)
+            self.setSourceModel(None)  # ty: ignore[invalid-argument-type]  # stub lacks None
 
     def get_source_mapping(self, leaves_only: bool = False):
         _source_key = []

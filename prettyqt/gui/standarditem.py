@@ -26,7 +26,7 @@ class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
                 return self.__getitem__((index, 0))
             case int() as row, int() as col:
                 return self.child(row, col)
-            case (row, col):
+            case (int() | slice() as row, int() | slice() as col):
                 rowcount = self.rowCount()
                 colcount = self.columnCount()
                 children = [

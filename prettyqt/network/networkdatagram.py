@@ -15,7 +15,7 @@ class NetworkDatagram(network.QNetworkDatagram):
         self.setData(QtCore.QByteArray(data.encode()))
 
     def get_data(self) -> str:
-        return self.data().data().decode()
+        return bytes(self.data().data()).decode()
 
 
 if __name__ == "__main__":

@@ -11,6 +11,12 @@ if TYPE_CHECKING:
 
 T = TypeVar("T", bound=core.QObject)
 
+
+def _to_str(val: str | bytes | bytearray | memoryview) -> str:
+    # PyQt6 returns str, the PySide6 stubs claim bytes.
+    return val if isinstance(val, str) else bytes(val).decode()
+
+
 logger = logging.getLogger(__name__)
 
 # TYPES = {
@@ -101,7 +107,7 @@ class MetaObject:
         start = 0 if include_super else self.item.classInfoOffset()
         count = self.item.classInfoCount()
         classinfos = [self.item.classInfo(i) for i in range(start, count)]
-        return {i.name(): i.value() for i in classinfos}
+        return {_to_str(i.name()): _to_str(i.value()) for i in classinfos}
 
     def get_method(self, index: int | str) -> core.MetaMethod:
         """Get MetaMethod based on index or name.
@@ -388,7 +394,7 @@ class MetaObject:
             new = type(qobject)()
         except TypeError:
             # this should should cover most cases.
-            new = type(qobject)(qobject.orientation())
+            new = type(qobject)(qobject.orientation())  # ty: ignore[missing-attribute]
         for prop in self.get_properties(only_writable=True):
             val = prop.read(qobject)
             prop.write(new, val)

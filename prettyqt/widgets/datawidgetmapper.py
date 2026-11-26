@@ -80,7 +80,7 @@ class DataWidgetMapper(core.ObjectMixin, widgets.QDataWidgetMapper):
             self.addMapping(widget, section, ba)
 
     def get_mapped_property_name(self, widget: widgets.QWidget) -> str:
-        return self.mappedPropertyName(widget).data().decode()
+        return bytes(self.mappedPropertyName(widget).data()).decode()
 
 
 if __name__ == "__main__":

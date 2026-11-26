@@ -11,7 +11,7 @@ from prettyqt.utils import bidict, get_repr
 
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Generator, Iterator
 
     from prettyqt.utils import datatypes
 
@@ -180,7 +180,7 @@ class TextDocumentMixin(core.ObjectMixin, _TextDocumentBase):
         self.addResource(RESOURCE_TYPES.get_enum_value(resource_type), url, resource)
 
     @contextlib.contextmanager
-    def edit_default_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:
+    def edit_default_stylesheet(self) -> Generator[qstylizer.style.StyleSheet]:
         ss = self.get_default_stylesheet()
         yield ss
         self.set_default_stylesheet(ss)
@@ -233,7 +233,7 @@ class TextDocumentMixin(core.ObjectMixin, _TextDocumentBase):
             options.setFlags(options.flags() & ~flag)
         self.setDefaultTextOption(options)
 
-    def get_pixel_height(self, exact: bool = True) -> int:
+    def get_pixel_height(self, exact: bool = True) -> float:
         if exact:  # sourcery skip: extract-method
             layout = self.documentLayout()
             h = 0

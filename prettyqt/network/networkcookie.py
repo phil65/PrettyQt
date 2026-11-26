@@ -27,14 +27,14 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
         self.setName(name)
 
     def get_name(self) -> str:
-        return self.name().data().decode()
+        return bytes(self.name().data()).decode()
 
     def set_value(self, value: datatypes.ByteArrayType):
         value = datatypes.to_bytearray(value)
         self.setValue(value)
 
     def get_value(self) -> str:
-        return self.value().data().decode()
+        return bytes(self.value().data()).decode()
 
     def set_expiration_date(self, date: datatypes.DateTimeType | None):
         date = datatypes.to_datetime(date)

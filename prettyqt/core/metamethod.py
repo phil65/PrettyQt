@@ -44,16 +44,17 @@ class MetaMethod:
         return METHOD_TYPE.inverse[self.item.methodType()]
 
     def get_method_signature(self) -> str:
-        return self.item.methodSignature().data().decode()
+        return bytes(self.item.methodSignature().data()).decode()
 
     def get_normalized_method_signature(self) -> str:
         """Returns something like 'objectNameChanged(QString)'."""
         sig = self.item.methodSignature()
-        normalized = core.QMetaObject.normalizedSignature(sig.data().decode())
-        return normalized.data().decode()
+        # PySide6's stub says bytes, but only str works at runtime.
+        normalized = core.QMetaObject.normalizedSignature(bytes(sig.data()).decode())  # ty: ignore[invalid-argument-type]
+        return bytes(normalized.data()).decode()
 
     def get_name(self) -> str:
-        return self.item.name().data().decode()
+        return bytes(self.item.name().data()).decode()
 
     def get_parameters(self) -> list[core.MetaType]:
         count = self.parameterCount()

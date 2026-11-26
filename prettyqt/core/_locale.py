@@ -625,7 +625,7 @@ MEASUREMENT_SYSTEM: bidict[MeasurementSystemStr, QtCore.QLocale.MeasurementSyste
 
 DataSizeFormatStr = Literal["iec", "traditional", "si"]
 
-DATA_SIZE_FORMAT: bidict[DataSizeFormatStr, QtCore.QLocale.DataSizeIecFormat] = bidict(
+DATA_SIZE_FORMAT: bidict[DataSizeFormatStr, QtCore.QLocale.DataSizeFormat] = bidict(
     iec=QtCore.QLocale.DataSizeFormat.DataSizeIecFormat,
     traditional=QtCore.QLocale.DataSizeFormat.DataSizeTraditionalFormat,
     si=QtCore.QLocale.DataSizeFormat.DataSizeSIFormat,
@@ -726,23 +726,20 @@ class Locale(QtCore.QLocale):
     def to_datetime(
         self, text: str, format_type: FormatTypeStr | str = "long"
     ) -> QtCore.QDateTime:
-        if format_type in {"long", "short", "narrow"}:
-            format_type = FORMAT_TYPE[format_type]
-        return self.toDateTime(text, format_type)
+        fmt = FORMAT_TYPE[format_type] if format_type in FORMAT_TYPE else format_type  # noqa: SIM401
+        return self.toDateTime(text, fmt)
 
     def to_date(
         self, text: str, format_type: FormatTypeStr | str = "long"
     ) -> QtCore.QDate:
-        if format_type in {"long", "short", "narrow"}:
-            format_type = FORMAT_TYPE[format_type]
-        return self.toDate(text, format_type)
+        fmt = FORMAT_TYPE[format_type] if format_type in FORMAT_TYPE else format_type  # noqa: SIM401
+        return self.toDate(text, fmt)
 
     def to_time(
         self, text: str, format_type: FormatTypeStr | str = "long"
     ) -> QtCore.QTime:
-        if format_type in {"long", "short", "narrow"}:
-            format_type = FORMAT_TYPE[format_type]
-        return self.toTime(text, format_type)
+        fmt = FORMAT_TYPE[format_type] if format_type in FORMAT_TYPE else format_type  # noqa: SIM401
+        return self.toTime(text, fmt)
 
     def get_standalone_month_name(
         self, month: int, format_type: FormatTypeStr = "long"
@@ -774,6 +771,6 @@ if __name__ == "__main__":
     locale = Locale.get_all_locales()[100].get_flag_unicode()
     p = gui.Pixmap.create_char(locale, 64)
     w = widgets.Label()
-    w.set_pixmap(p)
+    w.setPixmap(p)
     w.show()
     app.exec()

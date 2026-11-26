@@ -349,6 +349,12 @@ allowed-unresolved-imports = []
 # Narrowing an overridden class attribute (e.g. pydantic discriminators,
 # `Config` attributes) is an intentional pattern.
 incompatible-mutable-override = "ignore"
+# Project-specific (prettyqt): the mixins deliberately override Qt methods with
+# friendlier signatures (e.g. `resize(*size)` also takes a tuple, extra kwargs,
+# strings instead of enums) while staying call-compatible at runtime. Rewriting
+# the API to match the stubs is not the goal, so these two rules are off.
+incompatible-method-override = "ignore"
+lost-keyword-for-regular-parameter = "ignore"
 
 [tool.uv]
 default-groups = ["dev", "lint", "docs"]

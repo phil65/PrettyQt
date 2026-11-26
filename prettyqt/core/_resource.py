@@ -31,7 +31,7 @@ class Resource(core.QResource):
         return type(self), (self.absoluteFilePath(), self.get_locale())
 
     def __bytes__(self):
-        return bytes(self.uncompressedData())
+        return bytes(self.uncompressedData().data())
 
     def __bool__(self):
         return self.isValid()

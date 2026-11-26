@@ -59,7 +59,7 @@ class CryptographicHash(QtCore.QCryptographicHash):
         return self.get_result()
 
     def get_result(self) -> bytes:
-        return bytes(self.result())
+        return bytes(self.result().data())
 
     @staticmethod
     def get_hash_length(

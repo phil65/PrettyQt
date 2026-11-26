@@ -42,7 +42,7 @@ class TimeZone(core.QTimeZone):
         return type(self), (self.get_id(),)
 
     def get_id(self) -> str:
-        return self.id().data().decode()
+        return bytes(self.id().data()).decode()
 
     def get_display_name(
         self,
@@ -50,8 +50,10 @@ class TimeZone(core.QTimeZone):
         name_type: NameTypeStr | core.QTimeZone.NameType = "default",
         locale: core.QLocale | None = None,
     ) -> str:
-        if date_time in list(TIME_TYPE) + list(TIME_TYPE.inverse):  # needs rework
-            dt = TIME_TYPE.get_enum_value(date_time)
+        if isinstance(date_time, core.QTimeZone.TimeType):
+            dt = date_time
+        elif isinstance(date_time, str) and date_time in TIME_TYPE:
+            dt = TIME_TYPE[date_time]
         else:
             dt = datatypes.to_datetime(date_time)
         return self.displayName(

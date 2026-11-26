@@ -9,7 +9,7 @@ class ByteArrayMatcher(QtCore.QByteArrayMatcher):
         return get_repr(self, self.get_pattern())
 
     def get_pattern(self) -> bytes:
-        return bytes(self.pattern())
+        return bytes(self.pattern().data())
 
 
 if __name__ == "__main__":

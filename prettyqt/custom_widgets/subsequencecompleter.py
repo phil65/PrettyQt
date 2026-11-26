@@ -56,11 +56,11 @@ class SubsequenceCompleter(widgets.Completer):
 if __name__ == "__main__":
     from prettyqt import widgets
     from prettyqt.itemmodels.importlibdistributionmodel import (
-        ImportlibDistributionModel,
+        ImportlibTreeModel,
     )
 
     app = widgets.app()
-    source_model = ImportlibDistributionModel.from_package("prettyqt")
+    source_model = ImportlibTreeModel.from_package("prettyqt")
     completer = SubsequenceCompleter()
     completer.setModel(source_model)
 

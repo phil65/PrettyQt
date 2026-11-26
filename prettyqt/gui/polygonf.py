@@ -77,7 +77,7 @@ class PolygonF(serializemixin.SerializeMixin, gui.QPolygonF):
         return gui.Polygon(self.toPolygon())
 
     @classmethod
-    def create_star(cls, scale: int = 1) -> Self:
+    def create_star(cls, scale: float = 1) -> Self:
         poly = cls()
         poly.append(core.PointF(0.5 * scale, 0.0))
         for i in range(1, 5):
@@ -87,7 +87,7 @@ class PolygonF(serializemixin.SerializeMixin, gui.QPolygonF):
         return poly
 
     @classmethod
-    def create_diamond(cls, scale: int = 1) -> Self:
+    def create_diamond(cls, scale: float = 1) -> Self:
         points = [
             core.PointF(-0.1 * scale, 0.0),
             core.PointF(0.0, -0.1 * scale),
@@ -95,7 +95,7 @@ class PolygonF(serializemixin.SerializeMixin, gui.QPolygonF):
             core.PointF(0.0, 0.1 * scale),
             core.PointF(-0.1 * scale, 0.0),
         ]
-        poly = gui.PolygonF()
+        poly = cls()
         poly.add_points(*points)
         return poly
 
@@ -108,7 +108,7 @@ class PolygonF(serializemixin.SerializeMixin, gui.QPolygonF):
             buffer = (ctypes.c_double * 2 * self.size()).from_address(address[0])
         else:
             buffer = self.data()
-            buffer.setsize(16 * self.size())
+            buffer.setsize(16 * self.size())  # ty: ignore[missing-attribute]  # sip.voidptr
         return buffer
 
     @classmethod

@@ -848,7 +848,7 @@ class FSSpecTreeModel(
 
     def _get_dropped_paths(self, mime_data: core.QMimeData) -> list[str]:
         if mime_data.hasFormat(PATHS_MIME_TYPE):
-            return json.loads(mime_data.data(PATHS_MIME_TYPE).data().decode())
+            return json.loads(bytes(mime_data.data(PATHS_MIME_TYPE).data()).decode())
         if self.is_local and mime_data.hasUrls():
             return [u.toLocalFile() for u in mime_data.urls() if u.isLocalFile()]
         return []

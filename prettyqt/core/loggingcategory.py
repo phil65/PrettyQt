@@ -39,6 +39,6 @@ class LoggingCategory(QtCore.QLoggingCategory):
 
 
 if __name__ == "__main__":
-    cat = LoggingCategory("test")
+    cat = LoggingCategory(b"test")
     cat.set_disabled("debug")
     print(cat.get_level())

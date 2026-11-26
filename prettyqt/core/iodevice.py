@@ -20,7 +20,7 @@ OpenModeStr = Literal[
     "existing_only",
 ]
 
-OPEN_MODES: Literal[OpenModeStr, mod.OpenModeFlag] = bidict(
+OPEN_MODES: bidict[OpenModeStr, mod.OpenModeFlag] = bidict(
     not_open=mod.OpenModeFlag.NotOpen,
     read_only=mod.OpenModeFlag.ReadOnly,
     write_only=mod.OpenModeFlag.WriteOnly,

@@ -69,7 +69,7 @@ class NetworkProxy(network.QNetworkProxy):
 
     def get_headers(self) -> dict[str, str]:
         return {
-            h.data().decode(): self.rawHeader(h).data().decode()
+            bytes(h.data()).decode(): bytes(self.rawHeader(h).data()).decode()
             for h in self.rawHeaderList()
         }
 

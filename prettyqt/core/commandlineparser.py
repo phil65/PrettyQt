@@ -34,7 +34,7 @@ class CommandLineParser(core.QCommandLineParser):
         self.setSingleDashWordOptionMode(SINGLE_DASH_WORD.get_enum_value(mode))
 
     def set_options_after_positional_arguments_mode(
-        self, mode: SingleDashWordStr | mod.SingleDashWordOptionMode
+        self, mode: OptionsAfterPosArgStr | mod.OptionsAfterPositionalArgumentsMode
     ):
         """Set the options after positional arguments mode.
 

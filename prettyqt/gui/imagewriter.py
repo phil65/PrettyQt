@@ -31,16 +31,16 @@ class ImageWriter(gui.QImageWriter):
         return IMAGE_WRITER_ERROR.inverse[self.error()]
 
     def get_format(self) -> str:
-        return self.format().data().decode()
+        return bytes(self.format().data()).decode()
 
     def get_subtype(self) -> str:
-        return self.subType().data().decode()
+        return bytes(self.subType().data()).decode()
 
     def get_supported_image_formats(self) -> list[str]:
-        return [i.data().decode() for i in self.supportedImageFormats()]
+        return [bytes(i.data()).decode() for i in self.supportedImageFormats()]
 
     def get_supported_subtypes(self) -> list[str]:
-        return [i.data().decode() for i in self.supportedSubTypes()]
+        return [bytes(i.data()).decode() for i in self.supportedSubTypes()]
 
     def set_subtype(self, subtype: datatypes.ByteArrayType):
         subtype = datatypes.to_bytearray(subtype)

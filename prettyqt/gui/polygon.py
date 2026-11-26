@@ -78,7 +78,7 @@ class Polygon(serializemixin.SerializeMixin, QtGui.QPolygon):
             buffer = (ctypes.c_int * 2 * self.size()).from_address(address[0])
         else:
             buffer = self.data()
-            buffer.setsize(8 * self.size())
+            buffer.setsize(8 * self.size())  # ty: ignore[missing-attribute]  # sip.voidptr
         return buffer
 
     @classmethod

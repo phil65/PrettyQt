@@ -1,4 +1,3 @@
-import os
 from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core
@@ -41,7 +40,7 @@ else:
 
 class AbstractFileIconProviderMixin(_AbstractFileIconProviderBase):
     def get_type(self, file: core.QFileInfo | datatypes.PathType) -> str:
-        if isinstance(file, os.PathLike):
+        if not isinstance(file, core.QFileInfo):
             file = core.FileInfo(file)
         return self.type(file)
 

@@ -62,7 +62,7 @@ class VariantAnimationMixin(core.AbstractAnimationMixin, _VariantAnimationBase):
         """True reverse instead of just setting direction."""
         self.setKeyValues(list(reversed(self.keyValues())))
 
-    def reversed(self) -> VariantAnimation:
+    def reversed(self) -> Self:
         """Return a reversed copy of the animation."""
         new = self.get_metaobject().copy(self)
         new.reverse()

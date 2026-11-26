@@ -14,7 +14,14 @@ from prettyqt.utils import asyncrunner, datatypes
 
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Iterable, Iterator, Mapping, MutableMapping
+    from collections.abc import (
+        Callable,
+        Generator,
+        Iterable,
+        Iterator,
+        Mapping,
+        MutableMapping,
+    )
 
     from prettyqt.utils import listdelegators
 
@@ -197,7 +204,7 @@ class ApplicationMixin(gui.GuiApplicationMixin, _ApplicationBase):
         # return None
 
     @contextlib.contextmanager
-    def edit_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:
+    def edit_stylesheet(self) -> Generator[qstylizer.style.StyleSheet]:
         ss = self.get_stylesheet()
         yield ss
         self.set_stylesheet(ss)

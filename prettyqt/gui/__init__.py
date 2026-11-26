@@ -115,7 +115,8 @@ QT_MODULE = QtGui
 # might_be_rich_text = Qt.mightBeRichText
 
 
-def app(args: list[str] | None = None, **kwargs) -> GuiApplication:
+def app(args: list[str] | None = None, **kwargs) -> QtGui.QGuiApplication:
+    # the running instance may be any (prettyqt) application class
     if (instance := GuiApplication.instance()) is not None:
         return instance
     return GuiApplication(sys.argv if args is None else args, **kwargs)

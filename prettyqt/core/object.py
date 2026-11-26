@@ -17,7 +17,9 @@ if TYPE_CHECKING:
 
     from prettyqt import eventfilters
 
-T = TypeVar("T", bound=core.QObject)
+# The default makes `find_children()` without a type return QObjects. Type checkers
+# don't accept `typ: type[T] = QObject` as parameter default yet (hence the ignores).
+T = TypeVar("T", bound=core.QObject, default=core.QObject)
 
 counter_dict: defaultdict = defaultdict(itertools.count)
 
@@ -57,7 +59,7 @@ class ObjectMixin(_ObjectBase):
         #     metaobj = core.MetaObject(klass.staticMetaObject)
         #     _properties[klass] = [i.get_name() for i in metaobj.get_properties()]
         #     _signals[klass] = [i.get_name() for i in metaobj.get_signals()]
-        new = {}
+        new: dict[str, Any] = {}
         if kwargs:
             mapper = self._get_map()
             props = get_properties(type(self))
@@ -216,28 +218,27 @@ class ObjectMixin(_ObjectBase):
         self.setObjectName(name)
 
     @classmethod
-    def get_qt_base_class(cls) -> type[core.QObject] | None:
+    def get_qt_base_class(cls) -> type | None:
         return classhelpers.get_qt_parent_class(cls)
 
     @classmethod
     def get_static_metaobject(cls) -> core.MetaObject:
-        return core.MetaObject(cls.staticMetaObject)
+        # staticMetaObject is missing in the PySide6 stubs.
+        return core.MetaObject(cls.staticMetaObject)  # ty: ignore[missing-attribute]
 
     def get_metaobject(self) -> core.MetaObject:
         return core.MetaObject(self.metaObject())
 
     def get_sender(self, typ: type[T]) -> T | None:
-        sender: T = self.sender()
-        if sender is None or not isinstance(sender, typ):
-            return None
-        return sender
+        sender = self.sender()
+        return sender if isinstance(sender, typ) else None
 
     def find_children(
         self,
-        typ: type[T] = core.QObject,
+        typ: type[T] = core.QObject,  # ty: ignore[invalid-parameter-default]
         name: str | datatypes.PatternType | None = None,
         recursive: bool = True,
-        property_selector: dict[str, datatypes.VariantType | Callable] | None = None,
+        property_selector: dict[str, Any] | None = None,
         only_prettyqt_classes: bool = False,
     ) -> listdelegators.ListDelegator[T]:
         """Find children with given type and name.
@@ -266,12 +267,10 @@ class ObjectMixin(_ObjectBase):
         match typ:
             case types.UnionType():
                 objects = [
-                    i
-                    for t in get_args(typ)
-                    for i in self.findChildren(t, name=name, options=flag)
+                    i for t in get_args(typ) for i in self._find_children(t, name, flag)
                 ]
             case type():
-                objects = self.findChildren(typ, name=name, options=flag)
+                objects = self._find_children(typ, name, flag)
             case _:
                 raise TypeError(typ)
         if property_selector:
@@ -286,9 +285,19 @@ class ObjectMixin(_ObjectBase):
             objects = [i for i in objects if i.__module__.startswith("prettyqt")]
         return listdelegators.ListDelegator(objects)
 
+    def _find_children(
+        self,
+        typ: type[T],
+        name: str | core.QRegularExpression | None,
+        flag: constants.FindChildOption,
+    ) -> list[T]:
+        if name is None:
+            return self.findChildren(typ, options=flag)
+        return self.findChildren(typ, name, options=flag)
+
     def find_child(
         self,
-        typ: type[T] = core.QObject,
+        typ: type[T] = core.QObject,  # ty: ignore[invalid-parameter-default]
         name: str | core.QRegularExpression | None = None,
         recursive: bool = True,
     ) -> T | None:
@@ -308,7 +317,9 @@ class ObjectMixin(_ObjectBase):
                 return self.findChild(typ, name, flag)  # type: ignore
 
     def find_parent(
-        self, typ: type[T] = core.QObject, name: str | None = None
+        self,
+        typ: type[T] = core.QObject,  # ty: ignore[invalid-parameter-default]
+        name: str | None = None,
     ) -> T | None:
         """Find parent with given type or name."""
         node = self
@@ -394,7 +405,7 @@ class ObjectMixin(_ObjectBase):
     def get_dynamic_properties(self) -> dict[str, Any]:
         """Get a dictionary with all dynamic properties."""
         return {
-            (k := i.data().decode()): self.property(k)
+            (k := bytes(i.data()).decode()): self.property(k)
             for i in self.dynamicPropertyNames()
         }
 

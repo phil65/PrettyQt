@@ -37,7 +37,7 @@ class HttpMultiPart(core.ObjectMixin, QtNetwork.QHttpMultiPart):
         self.setBoundary(boundary)
 
     def get_boundary(self) -> str:
-        return self.boundary().data().decode()
+        return bytes(self.boundary().data()).decode()
 
 
 if __name__ == "__main__":

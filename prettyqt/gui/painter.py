@@ -1,12 +1,12 @@
 import contextlib
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, Self
 
 from prettyqt import constants, core, gui
 from prettyqt.utils import bidict, colors, datatypes
 
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Generator
 
 
 CompositionModeStr = Literal[
@@ -68,31 +68,31 @@ class PainterMixin(_PainterBase):
         self.end()
 
     @contextlib.contextmanager
-    def paint_on(self, obj) -> Iterator[Painter]:
+    def paint_on(self, obj) -> Generator[Self]:
         self.begin(obj)
         yield self
         self.end()
 
     @contextlib.contextmanager
-    def backup_state(self) -> Iterator[Painter]:
+    def backup_state(self) -> Generator[Self]:
         self.save()
         yield self
         self.restore()
 
     @contextlib.contextmanager
-    def native_mode(self) -> Iterator[Painter]:
+    def native_mode(self) -> Generator[Self]:
         self.beginNativePainting()
         yield self
         self.endNativePainting()
 
     @contextlib.contextmanager
-    def edit_pen(self) -> Iterator[gui.Pen]:
+    def edit_pen(self) -> Generator[gui.Pen]:
         pen = gui.Pen(self.pen())
         yield pen
         self.setPen(pen)
 
     @contextlib.contextmanager
-    def edit_font(self) -> Iterator[gui.Font]:
+    def edit_font(self) -> Generator[gui.Font]:
         font = gui.Font(self.font())
         yield font
         self.setFont(font)
@@ -103,18 +103,24 @@ class PainterMixin(_PainterBase):
         text: str,
         alignment: constants.AlignmentStr = "center",
     ):
+        # alignment needs a rect, a point is the text's baseline start
+        flag = constants.ALIGNMENTS[alignment]
         match position:
-            case (x, y):
-                # alignment needs a rect, a point is the text's baseline start
-                self.drawText(core.PointF(x, y), text)
             case core.QPoint() | core.QPointF():
                 self.drawText(position, text)
-            case (x, y, w, h):
-                self.drawText(
-                    core.RectF(x, y, w, h), constants.ALIGNMENTS[alignment], text
-                )
+            case (int() | float() as x, int() | float() as y):
+                self.drawText(core.PointF(x, y), text)
+            case core.QRect() | core.QRectF():
+                self.drawText(position, flag, text)
+            case (
+                int() | float() as x,
+                int() | float() as y,
+                int() | float() as w,
+                int() | float() as h,
+            ):
+                self.drawText(core.RectF(x, y, w, h), flag, text)
             case _:
-                self.drawText(position, constants.ALIGNMENTS[alignment], text)
+                raise TypeError(position)
 
     def draw_image(
         self,
@@ -143,7 +149,7 @@ class PainterMixin(_PainterBase):
             if relative
             else constants.SizeMode.AbsoluteSize
         )
-        self.drawRoundedRect(datatypes.to_rect(rect), x_radius, y_radius, flag)
+        self.drawRoundedRect(datatypes.to_rectf(rect), x_radius, y_radius, flag)
 
     def draw_star(self, size: float = 1.0, fill_rule: constants.FillRuleStr = "winding"):
         star = gui.PolygonF.create_star(size)
@@ -166,8 +172,10 @@ class PainterMixin(_PainterBase):
     ):
         color = colors.get_color(color)
         if pattern != "solid":
-            color = gui.Brush(color, constants.BRUSH_STYLE.get_enum_value(pattern))
-        self.fillRect(datatypes.to_rect(rect), color)
+            brush = gui.Brush(color, constants.BRUSH_STYLE.get_enum_value(pattern))
+            self.fillRect(datatypes.to_rectf(rect), brush)
+        else:
+            self.fillRect(datatypes.to_rectf(rect), color)
 
     def set_pen(
         self,
@@ -267,19 +275,19 @@ class PainterMixin(_PainterBase):
     @contextlib.contextmanager
     def clip_path(
         self, operation: constants.ClipOperationStr = "replace"
-    ) -> Iterator[gui.PainterPath]:
+    ) -> Generator[gui.PainterPath]:
         path = gui.PainterPath()
         yield path
         self.set_clip_path(path, operation)
 
     @contextlib.contextmanager
-    def apply_transform(self, combine: bool = True) -> Iterator[gui.Transform]:
+    def apply_transform(self, combine: bool = True) -> Generator[gui.Transform]:
         transform = gui.Transform()
         yield transform
         self.setTransform(transform, combine)
 
     @contextlib.contextmanager
-    def offset_by(self, x: int = 0, y: int = 0) -> Iterator[Painter]:
+    def offset_by(self, x: int = 0, y: int = 0) -> Generator[Self]:
         self.translate(x, y)
         yield self
         self.translate(-x, -y)

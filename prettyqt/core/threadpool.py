@@ -59,7 +59,8 @@ class Worker(core.Runnable):
                 self.signals.result.emit(result)
             self.signals.finished.emit()
         except Exception as e:
-            logger.exception("Error occurred in function %r", self.fn.__name__)
+            name = getattr(self.fn, "__name__", self.fn)
+            logger.exception("Error occurred in function %r", name)
             self.signals.error.emit(e)
 
 

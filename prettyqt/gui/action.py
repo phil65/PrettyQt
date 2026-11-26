@@ -3,13 +3,11 @@ import os
 from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.utils import bidict, get_repr
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
 if TYPE_CHECKING:
     from collections.abc import Callable
-
-    from prettyqt.utils import datatypes
 
 
 ActionEventStr = Literal["trigger", "hover"]
@@ -119,9 +117,9 @@ class ActionMixin(core.ObjectMixin, _ActionBase):
             if size is None:
                 tooltip = f"<img src={path!r}>"
             else:
-                if isinstance(size, core.QSize):
-                    size = (size.width(), size.height())
-                tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
+                qsize = datatypes.to_size(size)
+                w, h = qsize.width(), qsize.height()
+                tooltip = f'<img src={path!r} width="{w}" height="{h}">'
         tooltip = tooltip.replace("\n", "<br/>")
         if rich_text:
             tooltip = f"<html>{html.escape(tooltip)}</html>"

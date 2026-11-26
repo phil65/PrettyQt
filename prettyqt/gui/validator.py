@@ -15,12 +15,12 @@ class ValidatorMixin(core.ObjectMixin, _ValidatorBase):
     def __repr__(self):
         return get_repr(self)
 
-    def __and__(self, other: Validator):
+    def __and__(self, other: QtGui.QValidator):
         from prettyqt import validators
 
         return validators.AndValidator([self, other])
 
-    def __or__(self, other: Validator):
+    def __or__(self, other: QtGui.QValidator):
         from prettyqt import validators
 
         return validators.OrValidator([self, other])

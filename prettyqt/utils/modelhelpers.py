@@ -60,7 +60,7 @@ def get_proxy_chain(model: core.QAbstractItemModel) -> list[core.QAbstractItemMo
 def index_from_key(
     model: core.QAbstractItemModel,
     key_path: Sequence[tuple[int, int] | int],
-    parent_index: core.ModelIndex,
+    parent_index: core.ModelIndex | None,
 ) -> core.ModelIndex:
     if model is None:
         return core.ModelIndex()

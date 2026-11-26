@@ -30,7 +30,7 @@ class TextDocumentWriter(QtGui.QTextDocumentWriter):
 
     @classmethod
     def get_supported_document_formats(cls) -> list[str]:
-        return [i.data().decode() for i in cls.supportedDocumentFormats()]
+        return [bytes(i.data()).decode() for i in cls.supportedDocumentFormats()]
 
     @classmethod
     def serialize_document(
@@ -43,9 +43,9 @@ class TextDocumentWriter(QtGui.QTextDocumentWriter):
         writer.setDevice(buffer)
         writer.set_format(fmt)  # ODF Format
         writer.write(document)
-        return buffer.data().data()
+        return bytes(buffer.data().data())
 
 
 if __name__ == "__main__":
     doc = TextDocumentWriter("a.text", b"plaintext")
-    doc.set_format("UTF-8")
+    doc.set_format("plaintext")
