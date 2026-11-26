@@ -37,7 +37,17 @@ import json
 import logging
 import pathlib
 import types
-from typing import TYPE_CHECKING, Annotated, Any, Literal, Union, get_args, get_origin
+from typing import (
+    TYPE_CHECKING,
+    Annotated,
+    Any,
+    Literal,
+    Protocol,
+    Union,
+    cast,
+    get_args,
+    get_origin,
+)
 
 import annotated_types
 import pydantic
@@ -49,6 +59,12 @@ from prettyqt import core, custom_widgets, widgets
 
 if TYPE_CHECKING:
     from pydantic_core import ErrorDetails
+
+    class _Editor(Protocol):
+        value_changed: Any
+
+        def get_value(self) -> Any: ...
+        def set_value(self, value: Any) -> None: ...
 
 
 logger = logging.getLogger(__name__)
@@ -325,7 +341,7 @@ class OptionalEditor(widgets.Widget):
         layout.addWidget(editor, 1)
         editor.setEnabled(False)
         self.checkbox.toggled.connect(self._on_toggled)
-        editor.value_changed.connect(self._on_inner_change)
+        cast("_Editor", editor).value_changed.connect(self._on_inner_change)
 
     def _on_toggled(self, checked: bool):
         self.editor.setEnabled(checked)
@@ -336,11 +352,15 @@ class OptionalEditor(widgets.Widget):
             self.value_changed.emit(self.get_value())
 
     def get_value(self) -> Any:
-        return self.editor.get_value() if self.checkbox.isChecked() else None
+        return (
+            cast("_Editor", self.editor).get_value()
+            if self.checkbox.isChecked()
+            else None
+        )
 
     def set_value(self, value: Any):
         if value is not None:
-            self.editor.set_value(value)
+            cast("_Editor", self.editor).set_value(value)
         self.checkbox.setChecked(value is not None)
 
 
@@ -444,10 +464,12 @@ class PydanticForm(widgets.Widget):
             kwargs: passed to `widgets.Widget`
         """
         super().__init__(parent=parent, **kwargs)
-        instance = model if isinstance(model, pydantic.BaseModel) else None
-        self._model_cls: type[pydantic.BaseModel] = (
-            type(instance) if instance is not None else model  # type: ignore[assignment]
-        )
+        if isinstance(model, pydantic.BaseModel):
+            instance: pydantic.BaseModel | None = model
+            self._model_cls: type[pydantic.BaseModel] = type(model)
+        else:
+            instance = None
+            self._model_cls = model
         self._factories: dict[str, WidgetFactory] = dict(widget_factories or {})
         self._translate = translate
         self._specs: dict[str, FieldSpec] = {}
@@ -504,7 +526,7 @@ class PydanticForm(widgets.Widget):
         if hints.get("readonly") or spec.info.frozen:
             editor.setEnabled(False)
         editor.setObjectName(spec.name)
-        editor.value_changed.connect(self._on_edit)
+        cast("_Editor", editor).value_changed.connect(self._on_edit)
         self._specs[spec.name] = spec
         self._editors[spec.name] = editor
         error_label = self._make_error_label()
@@ -695,7 +717,7 @@ class PydanticForm(widgets.Widget):
         """Return the unvalidated editor values (plus hidden / kept values)."""
         values = dict(self._kept_values)
         for name, editor in self._editors.items():
-            values[name] = editor.get_value()
+            values[name] = cast("_Editor", editor).get_value()
         return values
 
     def set_raw_value(self, value: pydantic.BaseModel | Mapping[str, Any]):
@@ -710,7 +732,7 @@ class PydanticForm(widgets.Widget):
                 if (editor := self._editors.get(name)) is None:
                     self._kept_values[name] = val
                 else:
-                    editor.set_value(val)
+                    cast("_Editor", editor).set_value(val)
         finally:
             self._loading = False
 

@@ -60,7 +60,7 @@ class Message(Highlighter):
     bold = True
 
     def format_string(self, record: logging.LogRecord) -> str:
-        if record.exc_info is not None:
+        if record.exc_info:
             val = self.formatter.formatException(record.exc_info)
         elif isinstance(record.msg, Exception):
             val = traceback.format_exc()

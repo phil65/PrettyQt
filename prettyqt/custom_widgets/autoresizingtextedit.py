@@ -8,9 +8,19 @@ SH = widgets.QStyle.StyleHint
 
 
 if TYPE_CHECKING:
-    from prettyqt.qt import QtWidgets
+    from typing import Any
 
-    _AutoResizeTextEditBase = QtWidgets.QAbstractScrollArea
+    from prettyqt.qt import QtGui, QtWidgets
+
+    class _AutoResizeTextEditBase(widgets.AbstractScrollAreaMixin):
+        LineWrapMode: type[
+            QtWidgets.QTextEdit.LineWrapMode | QtWidgets.QPlainTextEdit.LineWrapMode
+        ]
+
+        def document(self) -> QtGui.QTextDocument: ...
+        def set_line_wrap_mode(self, mode: Any) -> None: ...
+        def setLineWrapMode(self, mode: Any) -> None: ...
+
 else:
     _AutoResizeTextEditBase = object
 

@@ -48,7 +48,7 @@ class FilterHeader(widgets.HeaderView):
 
     """
 
-    def __init__(self, parent: widgets.TableView):
+    def __init__(self, parent: widgets.TableView | widgets.TreeView):
         self._editors_visible = False
         self._editors = []
         self._proxy: MultiColumnFilterProxyModel = parent.proxifier.get_proxy(  # type: ignore

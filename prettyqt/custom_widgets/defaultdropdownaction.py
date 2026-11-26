@@ -35,8 +35,7 @@ class DefaultDropDownAction(widgets.WidgetAction):
             action.toggled.connect(self._toggled)
 
     def _toggled(self, checked: bool):
-        if checked:
-            action = self.sender()
+        if checked and isinstance(action := self.sender(), gui.QAction):
             self._button.setDefaultAction(action)
 
 

@@ -31,10 +31,10 @@ class CollapsibleFrame(widgets.Frame):
     def set_title(self, title: str):
         self._button.set_text(title)
 
-    def add_widget(self, widget: widgets.Widget):
+    def add_widget(self, widget: widgets.QWidget):
         self._panel_layout.addWidget(widget)
 
-    def remove_widget(self, widget: widgets.Widget):
+    def remove_widget(self, widget: widgets.QWidget):
         self._panel_layout.removeWidget(widget)
 
     def is_expanded(self) -> bool:

@@ -1,6 +1,7 @@
 """Object browser GUI in Qt."""
 
 import logging
+from typing import cast
 
 from prettyqt import constants, core, custom_widgets, gui, itemmodels, widgets
 from prettyqt.itemmodels.pythonobjecttreemodel import (
@@ -90,19 +91,19 @@ class ObjectBrowser(widgets.MainWindow):
 
         # Radio buttons
         radio_widget = widgets.Widget()
-        radio_widget.set_layout("vertical", margin=0)
+        radio_layout = radio_widget.set_layout("vertical", margin=0)
 
         self.button_group = widgets.ButtonGroup(
             self, button_clicked=self._change_details_field
         )
         for button_id, attr_detail in enumerate(self._attr_details):
             radio_button = widgets.RadioButton(attr_detail.name)
-            radio_widget.box.addWidget(radio_button)
+            radio_layout.addWidget(radio_button)
             self.button_group.addButton(radio_button, button_id)
 
         self.button_group.button(0).setChecked(True)
 
-        radio_widget.box.addStretch(1)
+        radio_layout.addStretch(1)
         group_box.box.addWidget(radio_widget)
 
         self.editor = widgets.PlainTextEdit(read_only=True, font=gui.Font.mono())
@@ -117,7 +118,7 @@ class ObjectBrowser(widgets.MainWindow):
 
         selection_model = self.obj_tree.selectionModel()
         selection_model.currentRowChanged.connect(self._update_details)
-        menubar = self.menuBar()
+        menubar = cast("widgets.MenuBar", self.menuBar())
         file_menu = menubar.add_menu("&File")
         file_menu.add_action(text="C&lose", triggered=self.close, shortcut="Ctrl+W")
         file_menu.add_action(
@@ -155,7 +156,7 @@ class ObjectBrowser(widgets.MainWindow):
         """Show the object details in the editor given an index."""
         if self.obj_tree.model() is None or not current_index.isValid():
             return
-        role = self.obj_tree.get_model(skip_proxies=True).ExtraRoles.TreeItemRole
+        role = self._tree_model.ExtraRoles.TreeItemRole
         tree_item = current_index.data(role)
         self._update_details_for_item(tree_item)
 
@@ -167,7 +168,7 @@ class ObjectBrowser(widgets.MainWindow):
         current_index = self.obj_tree.selectionModel().currentIndex()
         if not current_index.isValid():
             return
-        role = self.obj_tree.get_model(skip_proxies=True).ExtraRoles.TreeItemRole
+        role = self._tree_model.ExtraRoles.TreeItemRole
         tree_item = current_index.data(role)
         self._update_details_for_item(tree_item)
 

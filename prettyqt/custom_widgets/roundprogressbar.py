@@ -7,6 +7,8 @@ from prettyqt import constants, core, gui, widgets
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
+    from prettyqt.utils import datatypes
+
 
 BarStyleStr = Literal["donut", "pie", "line", "expand"]
 
@@ -57,7 +59,7 @@ class RoundProgressBar(widgets.Widget):
         self.number_format = "%p%"
         self.decimals = 1
         self._update_flags: ValueTypeStr = "percent"
-        self.gradient_data: Sequence[gui.QColor] = []
+        self.gradient_data: Sequence[tuple[float, datatypes.ColorType]] = []
 
     def minimum(self):
         return self._min_value
@@ -100,7 +102,7 @@ class RoundProgressBar(widgets.Widget):
             self.data_pen_width = width
             self.update()
 
-    def set_data_colors(self, stop_points: list[gui.QColor]):
+    def set_data_colors(self, stop_points: Sequence[tuple[float, datatypes.ColorType]]):
         if stop_points != self.gradient_data:
             self.gradient_data = stop_points
             self._rebuild_brush = True
@@ -147,7 +149,7 @@ class RoundProgressBar(widgets.Widget):
 
     # PAINTING ------------------------------------------------------
 
-    def paintEvent(self, event: gui.PaintEvent):
+    def paintEvent(self, event: gui.QPaintEvent):
         outer_radius = min(self.width(), self.height())
         rect = core.RectF(1, 1, outer_radius - 2, outer_radius - 2)
         with gui.Painter(self) as painter:
@@ -284,17 +286,18 @@ class RoundProgressBar(widgets.Widget):
         if not self._rebuild_brush or not self.gradient_data:
             return
         self._rebuild_brush = False
-        if self.bar_style == "expand":
+        data_brush: gui.RadialGradient | gui.ConicalGradient
+        if self.bar_style == self.BarStyle.Expand:
             data_brush = gui.RadialGradient(0.5, 0.5, 0.5, 0.5, 0.5)
-            for i in self.gradient_data:
-                data_brush[i[0]] = i[1]
+            for pos, color in self.gradient_data:
+                data_brush[pos] = color
         else:
             data_brush = gui.ConicalGradient(0.5, 0.5, self.null_pos)
-            for i in self.gradient_data:
-                data_brush[1 - i[0]] = i[1]
+            for pos, color in self.gradient_data:
+                data_brush[1 - pos] = color
         data_brush.set_coordinate_mode("stretch_to_device")
         with self.edit_palette() as palette:
-            palette.set_brush("highlight", data_brush)
+            palette.set_brush("highlight", gui.Brush(data_brush))
 
     nullPosition = core.Property(  # noqa: N815
         enum.Enum,

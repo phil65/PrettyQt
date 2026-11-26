@@ -6,8 +6,8 @@ from prettyqt import core, gui, widgets
 class CrossFadeWidget(widgets.Widget):
     def __init__(
         self,
-        pixmap_1: gui.QPixmap | os.PathLike[str] | str | None = None,
-        pixmap_2: gui.QPixmap | os.PathLike[str] | str | None = None,
+        pixmap_1: gui.QPixmap | os.PathLike[str] | str | widgets.QWidget | None = None,
+        pixmap_2: gui.QPixmap | os.PathLike[str] | str | widgets.QWidget | None = None,
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -17,7 +17,7 @@ class CrossFadeWidget(widgets.Widget):
         self.set_pixmap_2(pixmap_2)
         self.set_blend_factor(0.0)
         self.timeline = core.TimeLine(finished=self.close)
-        self.timeline.value_changed.connect(self.set_blend_factor)
+        self.timeline.valueChanged.connect(self.set_blend_factor)
         self.set_size_policy("fixed", "fixed")
 
     def start_fade(self, duration: int = 500):

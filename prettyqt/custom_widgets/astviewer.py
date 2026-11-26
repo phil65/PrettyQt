@@ -60,19 +60,20 @@ class AstViewer(widgets.Splitter):
             )
 
     def set_ast(self, ast_or_str: str | ast.AST):
-        if self.tree.model() is None:
+        model = self.tree.get_model(skip_proxies=True)
+        if not isinstance(model, itemmodels.AstModel):
             model = itemmodels.AstModel(ast_or_str, show_root=True, parent=self.tree)
             self.tree.set_model(model)
             self.tree.selectionModel().currentChanged.connect(self._on_current_change)
         else:
-            self.tree.model().set_ast(ast_or_str)
+            model.set_ast(ast_or_str)
         self.tree.show_root(False)
         self.tree.expandAll()
-        ast_tree = self.tree.get_model(skip_proxies=True).ast_tree
+        ast_tree = model.ast_tree
         text = ast_or_str if isinstance(ast_or_str, str) else ast.unparse(ast_or_str)
         with self.textedit.signals_blocked():
             self.textedit.set_text(text)
-        dumped = ast.dump(ast_tree, indent=4)
+        dumped = ast.dump(ast_tree, indent=4) if ast_tree is not None else ""
         self.ast_textedit.set_text(dumped)
 
     def rename_variable(
@@ -87,7 +88,8 @@ class AstViewer(widgets.Splitter):
         if not isinstance(model, itemmodels.AstModel):
             raise TypeError(model)
         model.rename_variable(old, new, ignore=ignore, scope=scope)
-        self.set_ast(model.ast_tree)
+        if model.ast_tree is not None:
+            self.set_ast(model.ast_tree)
 
     # @classmethod
     # def setup_example(cls):

@@ -56,16 +56,16 @@ class CommandTable(widgets.TableView):
         self.h_header.set_resize_mode("stretch")
         self.pressed.connect(self._on_clicked)
         self.set_delegate("html", column=0)
-        self._match_color = gui.QColor("#468cc6")
+        self._proxy.set_match_color("#468cc6")
         self.setShowGrid(False)
 
     @core.Property(gui.QColor)
     def matchColor(self) -> gui.QColor:
-        return self._match_color
+        return self._proxy.get_match_color()
 
     @matchColor.setter
     def matchColor(self, color: gui.QColor):
-        self._match_color = color
+        self._proxy.set_match_color(color)
 
     def _on_clicked(self, index: core.ModelIndex) -> None:
         if index.isValid():
@@ -106,7 +106,11 @@ class CommandPalette(widgets.Widget):
         # self._line.editingFinished.connect(self.hide)
 
     def eventFilter(self, source: core.QObject, e: core.QEvent) -> bool:
-        if source != self._line or e.type() != core.QEvent.Type.KeyPress:
+        if (
+            source != self._line
+            or e.type() != core.QEvent.Type.KeyPress
+            or not isinstance(e, gui.QKeyEvent)
+        ):
             return super().eventFilter(source, e)
         if e.modifiers() in (
             constants.KeyboardModifier.NoModifier,
@@ -132,8 +136,10 @@ class CommandPalette(widgets.Widget):
         self.add_actions(widget.actions())
         if not callable(widget.parent):
             return
-        while widget := widget.parent():
-            self.add_actions(widget.actions())
+        obj: core.QObject | None = widget
+        while (obj := obj.parent()) is not None:
+            if isinstance(obj, widgets.QWidget):
+                self.add_actions(obj.actions())
 
     def add_path_actions(self, path):
         path = pathlib.Path(path)
@@ -142,11 +148,11 @@ class CommandPalette(widgets.Widget):
 
     def match_color(self) -> str:
         """The color used for the matched characters."""
-        return self._table.match_color
+        return self._table._proxy.get_match_color().name()
 
-    def set_match_color(self, color):
+    def set_match_color(self, color: datatypes.ColorType):
         """Set the color used for the matched characters."""
-        self._table.match_color = colors.get_color(color).name()
+        self._table._proxy.set_match_color(colors.get_color(color))
 
     def install_to(self, parent: widgets.Widget):
         self.setParent(parent, constants.WindowType.SubWindow)

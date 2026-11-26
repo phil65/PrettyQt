@@ -59,8 +59,8 @@ class BaseOverlayWidget(widgets.Widget):
         return False
 
     def _do_resize(self):
-        parent = self.parent()
-        self.setGeometry(0, 0, parent.width(), parent.height())
+        if (parent := self.parentWidget()) is not None:
+            self.setGeometry(0, 0, parent.width(), parent.height())
 
     border_color = core.Property(
         gui.QColor,

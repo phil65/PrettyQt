@@ -1,10 +1,10 @@
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, cast
 
 from prettyqt import constants, core, gui, widgets
 
 
 if TYPE_CHECKING:
-    from collections.abc import Generator
+    from collections.abc import Generator, Sequence
 
 
 # Subclass Delegate to increase item height
@@ -22,22 +22,26 @@ class MultiComboBox(widgets.ComboBox):
 
     def __init__(self, parent: widgets.QWidget | None = None, **kwargs):
         super().__init__(parent=parent, **kwargs)
+        self._model = gui.StandardItemModel(self)
+        self.setModel(self._model)
         self.setEditable(True)
-        self.lineEdit().setReadOnly(True)
+        line_edit = self.lineEdit()
+        assert line_edit is not None
+        line_edit.setReadOnly(True)
         self.setItemDelegate(SizeHintDelegate())
 
         # Hide and show popup when clicking the line edit
-        self.lineEdit().installEventFilter(self)
+        line_edit.installEventFilter(self)
         self._close_on_lineedit_click = False
 
         # Prevent popup from closing when clicking on an item
         self.view().viewport().installEventFilter(self)
 
-        self.addItem("Show/Hide All", isChecked=True)
+        self.addItem("Show/Hide All", checked=True)
 
-        self.model().itemChanged.connect(self._update_selection)
-        self.model().dataChanged.connect(self._update_text)
-        self.model().dataChanged.connect(self._emit_current_data)
+        self._model.itemChanged.connect(self._update_selection)
+        self._model.dataChanged.connect(self._update_text)
+        self._model.dataChanged.connect(self._emit_current_data)
 
     def _emit_current_data(self):
         self.selectionChanged.emit(self.currentData())
@@ -45,7 +49,7 @@ class MultiComboBox(widgets.ComboBox):
     def _update_selection(self, item: gui.QStandardItem):
         if item.index().row() == 0:
             state = item.checkState()
-            with self.model().change_layout():
+            with self._model.change_layout():
                 for _item in self.get_model_items():
                     _item.setCheckState(state)
 
@@ -69,8 +73,9 @@ class MultiComboBox(widgets.ComboBox):
             and event.type() == core.QEvent.Type.MouseButtonRelease
         ):
             index = self.view().indexAt(event.pos())
-            item = self.model().itemFromIndex(index)
-            item.toggle_checkstate()
+            item = self._model.itemFromIndex(index)
+            if isinstance(item, gui.StandardItem):
+                item.toggle_checkstate()
             return True
         return False
 
@@ -92,12 +97,15 @@ class MultiComboBox(widgets.ComboBox):
         self._close_on_lineedit_click = False
 
     def _update_text(self):
+        line_edit = self.lineEdit()
+        if line_edit is None:
+            return
         texts = [item.text() for item in self.get_model_items() if item.is_checked()]
         text = ", ".join(texts)
         # Compute elided text (with "...")
-        metrics = gui.FontMetrics(self.lineEdit().font())
-        text = metrics.elided_text(text, "right", self.lineEdit().width())
-        self.lineEdit().setText(text)
+        metrics = gui.FontMetrics(line_edit.font())
+        text = metrics.elided_text(text, "right", line_edit.width())
+        line_edit.setText(text)
 
     def addItem(self, text: str, data: Any = None, checked: bool = False, **kwargs):
         item = gui.StandardItem()
@@ -105,16 +113,16 @@ class MultiComboBox(widgets.ComboBox):
         item.setData(text if data is None else data, constants.USER_ROLE)
         item.setFlags(constants.IS_ENABLED | constants.IS_CHECKABLE)
         item.set_checkstate(checked)
-        self.model().appendRow(item)
+        self._model.appendRow([item])
 
     def addItems(
         self,
-        items: list[str | tuple[str, Any]],
+        items: Sequence[str | tuple[str, Any]],
         all_checked: bool = False,
     ):
         for item in items:
-            data = item[1] if isinstance(item, tuple) else item
-            self.addItem(item, data, all_checked=all_checked)
+            text, data = item if isinstance(item, tuple) else (item, item)
+            self.addItem(text, data, checked=all_checked)
 
     def currentData(
         self, role: constants.ItemDataRole = constants.USER_ROLE
@@ -128,14 +136,14 @@ class MultiComboBox(widgets.ComboBox):
             if item.is_checked()
         ]
 
-    def get_model_items(self) -> Generator[gui.QStandardItem]:
-        for i in range(1, self.model().rowCount()):
-            yield self.model().item(i)
+    def get_model_items(self) -> Generator[gui.StandardItem]:
+        for i in range(1, self._model.rowCount()):
+            if (item := self._model.item(i)) is not None:
+                yield cast("gui.StandardItem", item)
 
     def set_value(self, items: list[Any]):
         for item in self.get_model_items():
-            if item.data(constants.USER_ROLE) in items:
-                item.setChecked(True)
+            item.set_checkstate(item.data(constants.USER_ROLE) in items)
 
     def get_value(self) -> list[Any]:
         return self.currentData()

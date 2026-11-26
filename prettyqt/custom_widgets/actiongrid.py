@@ -120,7 +120,7 @@ class ActionGrid(widgets.Frame):
         self._mapper = core.SignalMapper()
         self._mapper.mappedObject.connect(self._on_clicked)
 
-        self.set_layout("grid", margin=0, spacing=0)
+        self._layout = self.set_layout("grid", margin=0, spacing=0)
         self.set_size_policy("fixed", "minimum_expanding")
 
     def set_button_size(self, size: core.QSize):
@@ -225,7 +225,7 @@ class ActionGrid(widgets.Frame):
             button.setFixedSize(self._button_size)
         row = index // self._columns
         column = index % self._columns
-        self.layout().addWidget(button, row, column)
+        self._layout.addWidget(button, row, column)
         self._grid_slots.insert(index, ActionGridItem(button, action, row, column))
         self._mapper.setMapping(button, action)
         button.installEventFilter(self)
@@ -239,14 +239,14 @@ class ActionGrid(widgets.Frame):
         slot.button.removeEventFilter(self)
         self._mapper.removeMappings(slot.button)
 
-        self.layout().removeWidget(slot.button)
+        self._layout.removeWidget(slot.button)
         self._shift_grid(index + 1, -1)
 
         slot.button.deleteLater()
 
     def _shift_grid(self, start: int, count: int = 1):
         """Shift all buttons starting at index `start` by `count` cells."""
-        layout = self.layout()
+        layout = self._layout
         button_count = layout.count()
         columns = self._columns
 
@@ -257,14 +257,15 @@ class ActionGrid(widgets.Frame):
             start, end = start, button_count
 
         for index in range(start, end, -direction):
-            if item := layout.itemAtPosition(index // columns, index % columns):
-                button = item.widget()
+            if (item := layout.itemAtPosition(index // columns, index % columns)) and (
+                button := item.widget()
+            ) is not None:
                 new_index = index + count
                 layout.addWidget(button, new_index // columns, new_index % columns)
 
     def _relayout(self):
         """Relayout the buttons."""
-        layout = self.layout()
+        layout = self._layout
         layout.clear()
         cols = self._columns
         self._grid_slots = [
