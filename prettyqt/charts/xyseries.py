@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING, Self
 
-import prettyqt
 from prettyqt import charts, gui
+import prettyqt.qt
 from prettyqt.utils import datatypes
 
 

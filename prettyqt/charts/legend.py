@@ -22,7 +22,7 @@ class Legend(widgets.GraphicsWidgetMixin):
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def set_alignment(self, alignment: constants.SideStr | QtCharts.QLegend.MarkerShape):
+    def set_alignment(self, alignment: constants.SideStr | constants.AlignmentFlag):
         """Set the alignment of the legend.
 
         Args:

@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, cast
 
 from prettyqt import charts, constants, core, gui, widgets
 from prettyqt.utils import bidict
@@ -27,25 +27,29 @@ class ChartView(widgets.GraphicsViewMixin, charts.QChartView):
         self.set_rubber_band("rectangle")
         # self.setDragMode(self.RubberBandDrag)
 
+    def get_chart(self) -> charts.Chart:
+        """The chart (a prettyqt Chart unless a plain QChart was passed in)."""
+        return cast("charts.Chart", self.chart())
+
     def keyPressEvent(self, event: gui.QKeyEvent):
         """Handle keypress events to allow navigation via keyboard."""
         match event.key():
             case constants.Key.Key_Escape:
-                self.chart().zoomReset()
+                self.get_chart().zoomReset()
             case constants.Key.Key_Plus:
-                self.chart().zoom_by_factor(ZOOM_IN_FACTOR)
+                self.get_chart().zoom_by_factor(ZOOM_IN_FACTOR)
             case constants.Key.Key_Minus:
-                self.chart().zoom_by_factor(ZOOM_OUT_FACTOR)
+                self.get_chart().zoom_by_factor(ZOOM_OUT_FACTOR)
             case constants.Key.Key_Left:
-                self.chart().scroll(-SCROLL_STEP_SIZE, 0)
+                self.get_chart().scroll(-SCROLL_STEP_SIZE, 0)
             case constants.Key.Key_Right:
-                self.chart().scroll(SCROLL_STEP_SIZE, 0)
+                self.get_chart().scroll(SCROLL_STEP_SIZE, 0)
             case constants.Key.Key_Up:
-                self.chart().scroll(0, SCROLL_STEP_SIZE)
+                self.get_chart().scroll(0, SCROLL_STEP_SIZE)
             case constants.Key.Key_Down:
-                self.chart().scroll(0, -SCROLL_STEP_SIZE)
+                self.get_chart().scroll(0, -SCROLL_STEP_SIZE)
             case constants.Key.Key_0:
-                self.chart().apply_nice_numbers()
+                self.get_chart().apply_nice_numbers()
             case _:
                 super().keyPressEvent(event)
                 return
@@ -54,7 +58,7 @@ class ChartView(widgets.GraphicsViewMixin, charts.QChartView):
     def wheelEvent(self, event: gui.QWheelEvent):
         """Handle wheel event for zooming."""
         fct = ZOOM_IN_FACTOR if event.angleDelta().y() > 0 else ZOOM_OUT_FACTOR
-        self.chart().zoom_by_factor(fct)
+        self.get_chart().zoom_by_factor(fct)
         event.accept()
 
     def mouseReleaseEvent(self, event: gui.QMouseEvent):
@@ -81,7 +85,7 @@ class ChartView(widgets.GraphicsViewMixin, charts.QChartView):
             if not self.last_mouse_pos:
                 return
             pos_diff = event.position() - self.last_mouse_pos
-            self.chart().scroll(-pos_diff.x(), pos_diff.y())
+            self.get_chart().scroll(-pos_diff.x(), pos_diff.y())
 
             self.last_mouse_pos = event.position()
             event.accept()
@@ -97,10 +101,10 @@ class ChartView(widgets.GraphicsViewMixin, charts.QChartView):
         filename = dlg.open_file()
         if not filename:
             return
-        self.chart().show_legend()
+        self.get_chart().show_legend()
         image = self.get_image()
         image.save(str(filename[0]))
-        self.chart().hide_legend()
+        self.get_chart().hide_legend()
 
     def set_rubber_band(self, typ: RubberBandStr | charts.QChartView.RubberBand):
         """Set the rubber band type.
@@ -119,15 +123,15 @@ class ChartView(widgets.GraphicsViewMixin, charts.QChartView):
         return RUBBER_BAND.inverse[self.rubberBand()]
 
     # def hide_legend(self):
-    #     self.chart().hide_legend()
+    #     self.get_chart().hide_legend()
 
     # def show_legend(self):
-    #     self.chart().show_legend()
+    #     self.get_chart().show_legend()
 
     # def set_legend_alignment(self, alignment: str):
     #     if alignment not in constants.SIDES:
     #         raise ValueError(f"{alignment!r} not a valid alignment.")
-    #     self.chart().legend().setAlignment(constants.SIDES[alignment])
+    #     self.get_chart().legend().setAlignment(constants.SIDES[alignment])
 
 
 if __name__ == "__main__":
