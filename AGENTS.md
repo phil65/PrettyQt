@@ -87,7 +87,7 @@ release (git-cliff notes).
 
 ## Conventions
 
-- Python >= 3.14, `from __future__ import annotations`, ruff (line length 90, preview
+- Python >= 3.14, no `from __future__ import annotations` (PEP 649; banned via ruff TID251), ruff (line length 90, preview
   format). Typing uses `Literal` string aliases (`...Str`) for enum-accepting APIs.
 - Naming: setters `set_foo()`, getters `get_foo()` (to avoid clashing with Qt's `foo()`),
   string values for enums. Never break the inherited Qt signature; only add.
