@@ -431,11 +431,25 @@ class FSSpecTreeModel(
         return _icon_provider.icon(icon_type)
 
     def get_permission_flags(self, info: dict[str, Any]) -> core.QFileDevice.Permission:
-        flag = core.QFileDevice.Permission(0)
+        perm = core.QFileDevice.Permission
+        flag = perm(0)
         if (mode := info.get("mode")) is None:
             return flag
-        for i in core.filedevice.PERMISSIONS.get_list(int(mode) & 0o7777):
-            flag |= core.filedevice.PERMISSIONS[i]
+        # unix mode bits -> Qt permission flags (the current user counts as owner)
+        bits = [
+            (0o400, perm.ReadOwner | perm.ReadUser),
+            (0o200, perm.WriteOwner | perm.WriteUser),
+            (0o100, perm.ExeOwner | perm.ExeUser),
+            (0o040, perm.ReadGroup),
+            (0o020, perm.WriteGroup),
+            (0o010, perm.ExeGroup),
+            (0o004, perm.ReadOther),
+            (0o002, perm.WriteOther),
+            (0o001, perm.ExeOther),
+        ]
+        for bit, permission in bits:
+            if int(mode) & bit:
+                flag |= permission
         return flag
 
     def _item_for(self, index: core.ModelIndex | str) -> FSSpecTreeModel.TreeItem | None:

@@ -446,3 +446,16 @@ def test_proxifier_unmelt(qtbot):
     table.set_model(gui.StandardItemModel.from_dict(data))
     proxy = table.proxifier.unmelt(id_columns=[0], variable_column=1, value_column=2)
     assert isinstance(proxy, itemmodels.UnmeltProxyModel)
+
+
+def test_fsspecmodel_permission_flags(qapp):
+    from prettyqt import core
+
+    model = fsspecmodel.FSSpecTreeModel()
+    flags = model.get_permission_flags({"mode": 0o100644})
+    perm = core.QFileDevice.Permission
+    assert flags & perm.ReadOwner
+    assert flags & perm.WriteOwner
+    assert flags & perm.ReadOther
+    assert not flags & perm.WriteOther
+    assert not flags & perm.ExeOwner
