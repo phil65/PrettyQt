@@ -50,3 +50,20 @@ def test_datatypes_to_keysequence_standard_key(qapp):
 
     seq = datatypes.to_keysequence(gui.QKeySequence.StandardKey.Copy)
     assert seq == gui.QKeySequence(gui.QKeySequence.StandardKey.Copy)
+
+
+@pytest.mark.parametrize("hide_ipython", [False, True])
+def test_errormessagebox_tb_formatter(monkeypatch, hide_ipython):
+    import sys
+
+    from prettyqt.debugging import errormessagebox
+
+    if hide_ipython:
+        monkeypatch.setitem(sys.modules, "IPython.core.ultratb", None)
+    else:
+        pytest.importorskip("IPython")
+    formatter = errormessagebox.get_tb_formatter()
+    with pytest.raises(ValueError, match="boom") as info:
+        raise ValueError("boom")
+    assert "boom" in formatter(info.value, False)
+    assert formatter(info.value, True).startswith("<span")

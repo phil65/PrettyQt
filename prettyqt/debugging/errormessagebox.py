@@ -1,5 +1,4 @@
 import logging
-import re
 import sys
 import traceback
 from typing import TYPE_CHECKING
@@ -9,7 +8,7 @@ from prettyqt.utils import helpers
 
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Generator
+    from collections.abc import Callable
 
 
 logger = logging.getLogger(__name__)
@@ -90,29 +89,20 @@ class ErrorMessageBox(widgets.MessageBox):
 def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str], str]:
     """Return a formatter callable that uses IPython VerboseTB if available.
 
-    Imports IPython lazily if available to take advantage of ultratb.VerboseTB.
-    If unavailable, cgitb is used instead, but this function overrides a lot of
-    the hardcoded citgb styles and adds error chaining (for exceptions that
-    result from other exceptions).
+    Imports IPython lazily if available to take advantage of ultratb.VerboseTB,
+    otherwise falls back to the traceback module (which also renders chained
+    exceptions).
 
     Returns:
-        callable: A function that accepts a 3-tuple and a boolean ``(exc_info, as_html)``
-                and returns a formatted traceback string. The ``exc_info`` tuple is of
-                the ``(type, value, traceback)`` format returned by sys.exc_info().
-                The ``as_html`` determines whether the traceback is formatted in html
-                or plain text.
+        callable: A function that accepts ``(exception, as_html, color)`` and returns
+                a formatted traceback string. ``as_html`` determines whether the
+                traceback is formatted in html or plain text.
     """
+    style = f"font-family: monaco,{font},monospace;"
     try:
         import IPython.core.ultratb
 
         def format_exc_info(exc: Exception, as_html: bool, color="Neutral") -> str:
-            # avoids printing the array data
-            # some discussion related to obtaining the current string function
-            # can be found here, https://github.com/numpy/numpy/issues/11266
-            import numpy as np
-
-            np.set_string_function(lambda arr: f"{type(arr)} {arr.shape} {arr.dtype}")
-
             vbtb = IPython.core.ultratb.VerboseTB(color_scheme=color)
             tb = vbtb.text(exc.__class__, exc, exc.__traceback__)
             if as_html:
@@ -121,87 +111,19 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
                 )
                 html = helpers.ansi2html(ansi_string)
                 html = html.replace("\n", "<br>")
-                style = f"font-family: monaco,{font},monospace;"
                 tb = f"<span style='{style}'>{html}</span>"
-
-            # resets to default behavior
-            np.set_string_function(None)
             return tb
 
     except ModuleNotFoundError:
+        import html
         import traceback
 
-        import cgitb
-
-        # cgitb does not support error chaining...
-        # see https://peps.python.org/pep-3134/#enhanced-reporting
-        # this is a workaround
-        def cgitb_chain(exc: Exception) -> Generator[str]:
-            """Recurse through exception stack and chain cgitb_html calls."""
-            if exc.__cause__:
-                yield from cgitb_chain(exc.__cause__)
-                yield (
-                    '<br><br><font color="#51B432">The above exception was '
-                    "the direct cause of the following exception:</font><br>"
-                )
-            elif exc.__context__:
-                yield from cgitb_chain(exc.__context__)
-                yield (
-                    '<br><br><font color="#51B432">During handling of the '
-                    "above exception, another exception occurred:</font><br>"
-                )
-            yield cgitb_html(exc)
-
-        def cgitb_html(exc: Exception) -> str:
-            """Format exception with cgitb.html."""
-            info = (type(exc), exc, exc.__traceback__)
-            return cgitb.html(info)
-
         def format_exc_info(exc: Exception, as_html: bool, color=None) -> str:
-            info = (
-                exc.__class__,
-                exc,
-                exc.__traceback__,
-            )
-            # avoids printing the array data
-            try:
-                import numpy as np
-
-                np.set_string_function(lambda arr: f"{type(arr)} {arr.shape} {arr.dtype}")
-                np_imported = True
-            except ImportError:
-                np_imported = False
-            if as_html:
-                html = "\n".join(cgitb_chain(exc))
-                # cgitb has a lot of hardcoded colors that don't work for us
-                # remove bgcolor, and let theme handle it
-                html = re.sub('bgcolor="#.*"', "", html)
-                # remove superfluous whitespace
-                html = html.replace("<br>\n", "\n")
-                # but retain it around the <small> bits
-                html = re.sub(r"(<tr><td><small.*</tr>)", "<br>\\1<br>", html)
-                # weird 2-part syntax is a workaround for hard-to-grep text.
-                html = html.replace(
-                    "<p>A problem occurred in a Python script. Here is the sequence of",
-                    "",
-                )
-                html = html.replace(
-                    "function calls leading up to the error, "
-                    "in the order they occurred.</p>",
-                    "<br>",
-                )
-                # remove hardcoded fonts
-                html = html.replace("\n", "<br>")
-                style = f"font-family: monaco,{font},monospace;"
-                tb_text = f"<span style='{style}'>{html}</span>"
-            else:
-                # if we don't need HTML, just use traceback
-                strings = traceback.format_exception(*info)
-                tb_text = "".join(strings)
-            # resets to default behavior
-            if np_imported:
-                np.set_string_function(None)
-            return tb_text
+            tb_text = "".join(traceback.format_exception(exc))
+            if not as_html:
+                return tb_text
+            body = html.escape(tb_text).replace(" ", "&nbsp;").replace("\n", "<br>")
+            return f"<span style='{style}'>{body}</span>"
 
     return format_exc_info
 
