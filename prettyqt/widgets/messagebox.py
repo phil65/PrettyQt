@@ -188,6 +188,7 @@ class MessageBox(widgets.DialogMixin, widgets.QMessageBox):
         btn = self.addButton(button, BUTTON_ROLE.get_enum_value(role))
         if callback:
             btn.clicked.connect(callback)
+        return btn
 
     # @classmethod
     # def show_exception(cls, exception):

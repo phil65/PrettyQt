@@ -781,9 +781,7 @@ class StyleMixin(core.ObjectMixin, _StyleBase):
         painter: QtGui.QPainter,
         widget: widgets.QWidget | None = None,
     ):
-        self.drawPrimitive(
-            CONTROL_ELEMENT.get_enum_value(control), option, painter, widget
-        )
+        self.drawControl(CONTROL_ELEMENT.get_enum_value(control), option, painter, widget)
 
     def get_layout_spacing(
         self,

@@ -56,7 +56,7 @@ class TabBarWrapper:
         )
 
     def __getattr__(self, val: str):
-        method = self._widget.__getattr__(val)
+        method = getattr(self._widget, val)
 
         if len(self._range) == 1:
 
@@ -97,7 +97,7 @@ class TabBarMixin(widgets.WidgetMixin, _TabBarBase):
     def get_tab_button(
         self, index: int, position: PositionStr | widgets.QTabBar.ButtonPosition
     ) -> widgets.QWidget:
-        return self.tabButton(index[0], POSITIONS.get_enum_value(index[1]))
+        return self.tabButton(index, POSITIONS.get_enum_value(position))
 
     #  Send the tab_doubleclicked when a tab is double clicked
     def mouseDoubleClickEvent(self, event):

@@ -1701,3 +1701,30 @@ def test_lineedit_set_validator_append(qtbot):
 def test_styleoptionviewitem_checkstate():
     option = widgets.StyleOptionViewItem()
     assert option.get_checkstate() == "unchecked"
+
+
+def test_tabbar_wrapper_and_tab_button(qtbot):
+    widget = widgets.TabBar()
+    qtbot.addWidget(widget)
+    widget.addTab("a")
+    widget.addTab("b")
+    assert widget[0].tabText() == "a"
+    assert widget[0:2].tabText() == ["a", "b"]
+    button = widgets.PushButton()
+    widget.setTabButton(0, widgets.QTabBar.ButtonPosition.RightSide, button)
+    assert widget.get_tab_button(0, "right") is button
+
+
+def test_messagebox_add_custom_button(qtbot):
+    box = widgets.MessageBox()
+    btn = box.add_custom_button("Custom", "accept")
+    assert btn.text() == "Custom"
+
+
+def test_style_draw_control(qapp):
+    style = widgets.Application.style()
+    pixmap = gui.Pixmap(10, 10)
+    painter = gui.Painter(pixmap)
+    option = widgets.QStyleOptionButton()
+    widgets.Style.draw_control(style, "push_button", option, painter)
+    painter.end()
