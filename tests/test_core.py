@@ -287,6 +287,14 @@ def test_jsonvalue():
 def test_keycombination():
     comb = core.KeyCombination("a")
     assert comb.get_key() == "a"
+    event = gui.QKeyEvent(
+        core.QEvent.Type.KeyPress,
+        constants.Key.Key_A,
+        constants.KeyboardModifier.ControlModifier,
+    )
+    comb = core.KeyCombination(event)
+    assert comb.key() == constants.Key.Key_A
+    assert comb.keyboardModifiers() == constants.KeyboardModifier.ControlModifier
 
 
 def test_library():

@@ -101,12 +101,11 @@ class KeyCombination(serializemixin.SerializeMixin, QtCore.QKeyCombination):
                 qtkey = getattr(Key, f"Key_{btn}") if btn != "{}" else Keys.Any
                 super().__init__(qtmod, qtkey)
             case (QtCore.QEvent(),):
-                modifier = args[0].modifiers()
-                modifier ^= Mod.KeypadModifier
-                key = args[0].key()
+                modifier = args[0].modifiers() & ~Mod.KeypadModifier
+                key = Key(args[0].key())
                 if key in MODIFIER_KEYS:  # modifier only
                     key = Keys.No
-                super().__init__(key, modifier)
+                super().__init__(modifier, key)
             case _:
                 super().__init__(*args, **kwargs)
 
