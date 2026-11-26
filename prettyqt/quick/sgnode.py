@@ -81,7 +81,7 @@ class SGNode(QtQuick.QSGNode):
     def get_flags(self) -> list[FlagStr]:
         return FLAG.get_list(self.flags())
 
-    def get_children(self, recursive: bool = False) -> list[SGNode]:
+    def get_children(self, recursive: bool = False) -> list[QtQuick.QSGNode]:
         """Get children of this item.
 
         recursive option is written iteratively to also support original QTreeWidgetItems.

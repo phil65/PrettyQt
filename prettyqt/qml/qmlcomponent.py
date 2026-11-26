@@ -1,12 +1,6 @@
-from typing import TYPE_CHECKING
-
 from prettyqt import core
 from prettyqt.qt import QtQml
-from prettyqt.utils import bidict
-
-
-if TYPE_CHECKING:
-    from prettyqt.utils import datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 COMPILATION_MODES = bidict(
@@ -32,6 +26,9 @@ class QmlComponent(core.ObjectMixin, QtQml.QQmlComponent):
         return core.Url(self.url())
 
     def load_url(self, url: datatypes.UrlType, mode: str):
-        if isinstance(url, str):
-            url = core.Url.from_user_input(url)
-        self.loadUrl(url, COMPILATION_MODES[mode])
+        qurl = (
+            core.Url.from_user_input(url)
+            if isinstance(url, str)
+            else datatypes.to_url(url)
+        )
+        self.loadUrl(qurl, COMPILATION_MODES[mode])

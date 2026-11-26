@@ -1,10 +1,7 @@
 from typing import TYPE_CHECKING
 
 from prettyqt import core, qthelp
-
-
-if TYPE_CHECKING:
-    from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes
 
 
 if TYPE_CHECKING:
@@ -34,9 +31,7 @@ class HelpEngineCoreMixin(core.ObjectMixin, _HelpEngineCoreBase):
         ]
 
     def find_file(self, url: datatypes.UrlType) -> core.Url:
-        if not isinstance(url, core.QUrl):
-            url = core.QUrl(url)
-        return core.Url(self.findFile(url))
+        return core.Url(self.findFile(datatypes.to_url(url)))
 
     def get_filter_engine(self) -> qthelp.HelpFilterEngine:
         return qthelp.HelpFilterEngine(self.filterEngine())

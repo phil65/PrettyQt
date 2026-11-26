@@ -382,7 +382,7 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
                 core.File.OpenModeFlag.ReadOnly | core.File.OpenModeFlag.Text
             ):
                 return
-            css = path.readAll().data().decode("utf-8")
+            css = bytes(path.readAll().data()).decode("utf-8")
         script = webenginecore.WebEngineScript()
         s = """
         (function() {

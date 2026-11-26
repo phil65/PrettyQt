@@ -90,7 +90,7 @@ if TYPE_CHECKING:
     from prettyqt import core, widgets
     from prettyqt.qt import QtWidgets
 
-    UrlType = str | QtCore.QUrl
+    UrlType = str | os.PathLike[str] | QtCore.QUrl
     PointType = tuple[int, int] | QtCore.QPoint
     PointFType = tuple[int | float, int | float] | QtCore.QPointF
     SizeType = tuple[int, int] | QtCore.QSize | int
@@ -888,7 +888,7 @@ def to_marginsf(margins: MarginsFType | QtCore.QMargins | None) -> QtCore.QMargi
             raise TypeError(margins)
 
 
-def to_datetime(date_time: DateTimeType):
+def to_datetime(date_time: DateTimeType | None) -> QtCore.QDateTime:
     match date_time:
         case None:
             return QtCore.QDateTime()
@@ -897,9 +897,11 @@ def to_datetime(date_time: DateTimeType):
             time_ = QtCore.QTime(*date_time[3:])
             return QtCore.QDateTime(date_, time_)
         case str():
-            return dateutil.parser.parse(date_time)
-        case QtCore.QDateTime() | dt.datetime():
+            return QtCore.QDateTime(dateutil.parser.parse(date_time))
+        case QtCore.QDateTime():
             return date_time
+        case dt.datetime():
+            return QtCore.QDateTime(date_time)
         case _:
             raise TypeError(date_time)
 

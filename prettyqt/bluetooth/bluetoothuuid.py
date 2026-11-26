@@ -592,7 +592,7 @@ class BluetoothUuid(core.UuidMixin, QtBluetooth.QBluetoothUuid):
         return cls.protocolToString(PROTOCOL_UUID.get_enum_value(protocol))
 
     @classmethod
-    def service_class_to_string(cls, service_class: DescriptorTypeStr | su) -> str:
+    def service_class_to_string(cls, service_class: ServiceClassUuidStr | su) -> str:
         """Return string representation for given service class."""
         return cls.serviceClassToString(SERVICE_CLASS_UUID.get_enum_value(service_class))
 

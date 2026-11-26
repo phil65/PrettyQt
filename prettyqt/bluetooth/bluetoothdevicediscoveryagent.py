@@ -110,5 +110,4 @@ if __name__ == "__main__":
     agent.device_discovered.connect(lambda x: logging.info(x))
     agent.finished.connect(app.quit)
     agent.start_discovery()
-    with app.debug_mode():
-        app.exec()
+    app.exec()

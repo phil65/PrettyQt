@@ -2,13 +2,11 @@ from typing import TYPE_CHECKING, Any, Literal, TypedDict
 
 from prettyqt import core
 from prettyqt.qt import QtNetwork
-from prettyqt.utils import bidict, get_repr
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
-
-    from prettyqt.utils import datatypes
 
 
 Req = QtNetwork.QNetworkRequest
@@ -197,14 +195,13 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
     def get_headers(self) -> Mapping[str, str]:
         return {
             bytes(h.data()).decode(): bytes(
-                self.rawHeader(bytes(h).decode()).data()
+                self.rawHeader(bytes(h.data()).decode()).data()
             ).decode()
             for h in self.rawHeaderList()
         }
 
-    def set_url(self, url: str | core.QUrl):
-        url = core.Url(url)
-        self.setUrl(url)
+    def set_url(self, url: datatypes.UrlType):
+        self.setUrl(datatypes.to_url(url))
 
     def get_url(self) -> core.Url:
         return core.Url(self.url())
@@ -230,6 +227,6 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
     ):
         self.setAttribute(ATTRIBUTE.get_enum_value(attribute), value)
 
-    def set_attributes(self, **kwargs):
+    def set_attributes(self, **kwargs: datatypes.Variant):
         for k, v in kwargs.items():
-            self.set_attribute(k, v)
+            self.set_attribute(k, v)  # ty: ignore[invalid-argument-type]  # validated there

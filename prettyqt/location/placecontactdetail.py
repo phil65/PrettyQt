@@ -7,10 +7,10 @@ class PlaceContactDetail(QtLocation.QPlaceContactDetail):
 
     def __init__(
         self,
-        other_or_label: str | QtLocation.QPlaceAttribute | None = None,
+        other_or_label: str | QtLocation.QPlaceContactDetail | None = None,
         value: str | None = None,
     ):
-        if isinstance(other_or_label, QtLocation.QPlaceAttribute):
+        if isinstance(other_or_label, QtLocation.QPlaceContactDetail):
             super().__init__(other_or_label)
         else:
             super().__init__()
