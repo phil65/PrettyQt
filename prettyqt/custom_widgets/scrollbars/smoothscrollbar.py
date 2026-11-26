@@ -90,7 +90,7 @@ class SmoothScrollBar(widgets.ScrollBar):
         return self._animation.get_easing()
 
     def animationEasing(self) -> core.QEasingCurve.Type:
-        return self._animation.type()
+        return self._animation.easingCurve().type()
 
     animation_duration = core.Property(
         int,

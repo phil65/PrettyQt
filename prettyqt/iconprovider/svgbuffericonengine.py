@@ -35,7 +35,8 @@ class SVGBufferIconEngine(gui.IconEngine):
         """Paint the icon int ``rect`` using ``painter``."""
         color = self._color
         if mode == gui.QIcon.Mode.Disabled:
-            color = self._color.transparent(0.3)
+            color = gui.Color(self._color)
+            color.setAlphaF(0.3)
 
         xml = self._xml.replace('fill="currentColor"', color.get_name("svg_argb"))
         xml_byte = xml.encode()

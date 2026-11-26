@@ -45,8 +45,8 @@ class SectionAutoSpanEventFilter(eventfilters.BaseEventFilter):
         return super().eventFilter(obj, event)
 
     def _update_spans(self, force: bool = False):
-        cols = self._widget.get_visible_section_span("horizontal", margin=1)
-        rows = self._widget.get_visible_section_span("vertical", margin=1)
+        cols = self._widget.get_visible_section_span("horizontal")
+        rows = self._widget.get_visible_section_span("vertical")
         start = (rows[0], cols[0])
         end = (rows[1], cols[1])
         if start == self._last_start and end == self._last_end and not force:

@@ -95,7 +95,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
         widget = widgets.Widget()
         layout = widget.set_layout("horizontal")
         layout.add(qobject)
-        self.set_central_widget(widget)
+        self.setCentralWidget(widget)
         # qobject.position_on(widget)
 
         self.add_dockwidget(self.hierarchyview, window_title="Hierarchy view")
@@ -104,7 +104,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
         self.add_dockwidget(self.console, window_title="Console", visible=False)
         self.menubar = self.menuBar()
         action = widgets.mainwindow.PopupMenuAction("Docks", parent=self)
-        self.menubar.add_action(action)
+        self.menubar.addAction(action)
         self.position_on("screen", scale_ratio=0.8)
 
     @classmethod

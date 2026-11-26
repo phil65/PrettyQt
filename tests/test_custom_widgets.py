@@ -502,3 +502,45 @@ def test_subsequencecompleter(qtbot):
     completer.setModel(model)
     completer.proxy_model.set_search_term("ple")
     assert completer.proxy_model.rowCount() == 2  # noqa: PLR2004
+
+
+def test_widgeteditor_and_details_dialog(qtbot):
+    from prettyqt import debugging
+
+    button = widgets.PushButton()
+    qtbot.addWidget(button)
+    editor = custom_widgets.WidgetEditor(button)
+    qtbot.addWidget(editor)
+    dialog = debugging.QObjectDetailsDialog(button)
+    qtbot.addWidget(dialog)
+
+
+def test_smoothscrollbar_easing(qtbot):
+    area = widgets.ScrollArea()
+    qtbot.addWidget(area)
+    bar = custom_widgets.SmoothScrollBar(parent=area)
+    assert isinstance(bar.animationEasing(), core.QEasingCurve.Type)
+
+
+def test_sectionautospan_eventfilter(qtbot):
+    from prettyqt import eventfilters, gui
+
+    table = widgets.TableView()
+    qtbot.addWidget(table)
+    table.set_model(gui.StandardItemModel.from_dict(dict(a=[1, 1], b=[2, 3])))
+    event_filter = eventfilters.SectionAutoSpanEventFilter(table)
+    event_filter._update_spans(force=True)
+
+
+def test_svgbuffericonengine_disabled(qapp):
+    from prettyqt import gui
+    from prettyqt.iconprovider import svgbuffericonengine
+
+    svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect width="1" height="1" fill="currentColor"/></svg>'  # noqa: E501
+    engine = svgbuffericonengine.SVGBufferIconEngine(svg)
+    pixmap = gui.Pixmap(8, 8)
+    painter = gui.Painter(pixmap)
+    engine.paint(
+        painter, core.QRect(0, 0, 8, 8), gui.QIcon.Mode.Disabled, gui.QIcon.State.Off
+    )
+    painter.end()

@@ -21,7 +21,7 @@ class WidgetEditor(widgets.Widget):
         if connect:
             self.event_catcher.caught.connect(self._update_editors)
             self._qobject.installEventFilter(self.event_catcher)
-        self.set_minimum_size(800, 1000)
+        self.set_min_size((800, 1000))
         self._editors = bidict()
         self._metaobj = core.MetaObject(self._qobject.metaObject())
         for i, prop in enumerate(self._metaobj.get_properties()):
