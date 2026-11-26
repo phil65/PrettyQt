@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 class Transformer:
     fn: Callable[[Any], Any]
     role: int | constants.ItemDataRole
-    selector: Callable[[Any], bool]
+    selector: Callable[[Any], bool] | None
     selector_role: int | constants.ItemDataRole
 
 

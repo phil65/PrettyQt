@@ -1,4 +1,5 @@
 import logging
+from typing import cast
 
 from prettyqt import core
 from prettyqt.utils import modelhelpers
@@ -66,7 +67,11 @@ class ProxyMapper(core.Object):
             raise RuntimeError(msg)
         common_source = common_list[0]
         logger.debug("Common source: %s", common_source)
-        self._chains = [chain[: chain.index(common_source)] for chain in chains]
+        # everything before the common source is a proxy
+        self._chains = [
+            cast("list[core.QAbstractProxyModel]", chain[: chain.index(common_source)])
+            for chain in chains
+        ]
 
     def map_index(
         self, source: int, target: int, index: core.ModelIndex

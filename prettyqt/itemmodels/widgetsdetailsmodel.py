@@ -16,9 +16,8 @@ class WidgetsDetailsModel(core.AbstractTableModel):
         self.items = items
         common_ancestor = classhelpers.find_common_ancestor([type(i) for i in self.items])
         logger.debug("%s: found common ancestor %s", type(self).__name__, common_ancestor)
-        self.props = core.MetaObject(common_ancestor.staticMetaObject).get_properties(
-            only_stored=True
-        )
+        metaobject = common_ancestor.staticMetaObject  # ty: ignore[missing-attribute]
+        self.props = core.MetaObject(metaobject).get_properties(only_stored=True)
         self.props.sort(key=lambda x: x.get_name())
 
     @classmethod

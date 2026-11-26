@@ -27,7 +27,9 @@ class LinkedSelectionModel(core.ItemSelectionModel):
             w.selectionModel().selectionChanged.connect(self._on_selection_change)
 
     def _on_current_change(self, new: core.ModelIndex, _):
-        source = self.sender().model()
+        if not isinstance(sender := self.sender(), core.QItemSelectionModel):
+            return
+        source = sender.model()
         source_index = self._models.index(source)
         target_indexes = list(range(len(self._models)))
         target_indexes.remove(source_index)
@@ -38,7 +40,9 @@ class LinkedSelectionModel(core.ItemSelectionModel):
             self._itemviews[target_index].setCurrentIndex(mapped)
 
     def _on_selection_change(self, new: core.QItemSelection, _):
-        source_model = self.sender().model()
+        if not isinstance(sender := self.sender(), core.QItemSelectionModel):
+            return
+        source_model = sender.model()
         source_index = self._models.index(source_model)
         target_indexes = list(range(len(self._models)))
         target_indexes.remove(source_index)

@@ -231,6 +231,8 @@ class AstModel(itemmodels.TreeModel):
 
     def get_variable_names(self):
         current_names = set()
+        if self.ast_tree is None:
+            return current_names
         for node in ast.walk(self.ast_tree):
             match node:
                 case ast.Name(id=name) | ast.arg(arg=name):

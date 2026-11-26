@@ -27,11 +27,14 @@ class DataClassModel(itemmodels.BaseDataclassModel):
                 return False
 
     def get_fields(self) -> dict[str, Any]:
-        fields = dataclasses.fields(self.Class)
+        if self.Class is None:
+            return {}
+        fields = dataclasses.fields(self.Class)  # ty: ignore[invalid-argument-type]  # a dataclass type
         return {field.name: field for field in fields}
 
     def _is_frozen(self) -> bool:
-        return self.Class.__dataclass_params__.frozen
+        params = getattr(self.Class, "__dataclass_params__", None)
+        return params is not None and params.frozen
 
 
 if __name__ == "__main__":

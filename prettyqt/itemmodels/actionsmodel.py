@@ -179,8 +179,10 @@ class ActionsModel(itemmodels.ColumnTableModel):
         UsageCountColumn,
     ]
 
-    def __init__(self, actions: list[gui.QAction], parent: core.QObject | None = None):
-        super().__init__(actions, self.COLUMNS, parent=parent)
+    def __init__(
+        self, actions: Sequence[gui.QAction], parent: core.QObject | None = None
+    ):
+        super().__init__(list(actions), self.COLUMNS, parent=parent)
 
     @classmethod
     def supports(cls, instance) -> bool:

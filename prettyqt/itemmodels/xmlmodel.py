@@ -1,7 +1,7 @@
 import enum
 import io
 import logging
-from typing import ClassVar
+from typing import Any, ClassVar
 import xml.etree.ElementTree as ET
 
 from prettyqt import constants, core, itemmodels
@@ -92,7 +92,11 @@ class XmlModel(BaseXmlModel):
 
     def __init__(
         self,
-        obj: str | io.StringIO | datatypes.IsTreeIterator | ET.ElementTree | ET.Element,
+        obj: str
+        | io.StringIO
+        | datatypes.IsTreeIterator
+        | ET.ElementTree[Any]
+        | ET.Element,
         show_root: bool = True,
         **kwargs,
     ):
@@ -107,7 +111,7 @@ class XmlModel(BaseXmlModel):
                 root = obj.getroot()
             case datatypes.IsTreeIterator():
                 # consume the whole iterator, otherwise the tree is incomplete.
-                for _ in obj:
+                for _ in obj:  # ty: ignore[not-iterable]  # an iterparse() iterator
                     pass
                 root = obj.root
             case _:

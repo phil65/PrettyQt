@@ -95,7 +95,7 @@ class RankProxyModel(core.IdentityProxyModel):
         if (old := self.sourceModel()) is not None:
             for signal in self._cache_signals(old):
                 signal.disconnect(self._clear_cache)
-        super().setSourceModel(model)
+        super().setSourceModel(model)  # ty: ignore[invalid-argument-type]  # None unsets
         self._clear_cache()
         if model is not None:
             for signal in self._cache_signals(model):

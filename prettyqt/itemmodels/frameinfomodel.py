@@ -92,7 +92,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
     view = widgets.TableView()
-    view.set_word_wrap(True)
+    view.setWordWrap(True)
     view.set_icon("mdi.folder")
     with app.debug_mode():
         stack = inspect.stack()

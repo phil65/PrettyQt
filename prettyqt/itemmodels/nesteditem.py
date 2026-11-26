@@ -19,7 +19,7 @@ class NestedItem:
         self.dynamic_name = dynamic_name or self.item_name
         self.count = count
         # self.timestamp = kwargs.pop("timestamp", time.time())
-        self.children: Sequence[Self] = []
+        self.children: list[Self] = []
         if children:
             self.add_children(children)
 
@@ -52,7 +52,7 @@ class NestedItem:
         Returns:
             row number
         """
-        return self.parent.children.index(self) if self.parent else 0
+        return self.parent.children.index(self) if self.parent else 0  # ty: ignore[invalid-argument-type]  # Self per method
 
     def iter_tree(
         self,

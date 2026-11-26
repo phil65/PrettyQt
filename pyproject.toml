@@ -79,6 +79,7 @@ pyside6 = ["pyside6", "PySide6-Addons"]
 [dependency-groups]
 dev = [
   # Only add below (Copier)
+  "attrs",  # Project-specific: optional dep of itemmodels.attrs*model, so ty can check them
   "coverage",
   "deptry",
   "devtools",
@@ -347,8 +348,6 @@ include = ["prettyqt"]
 # lazily by the module that needs it.
 allowed-unresolved-imports = [
   "PyInstaller.**",  # __pyinstaller hook
-  "attr",
-  "attrs",
   "comtypes.**",  # Windows taskbar integration
   "emoji",
   "pandas",

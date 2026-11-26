@@ -1,3 +1,5 @@
+from typing import cast
+
 from prettyqt import constants, core
 
 
@@ -128,7 +130,7 @@ class FlattenTreeProxyModel(core.AbstractProxyModel):
     def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
         if not source_index.isValid():
             return source_index
-        key = self.get_index_key(source_index)
+        key = cast("tuple[int, ...]", self.get_index_key(source_index))  # rows only
         row = self._source_offset[key] + source_index.row()
         return self.index(row, 0)
 
@@ -177,7 +179,7 @@ class FlattenTreeProxyModel(core.AbstractProxyModel):
     ):
         if role == constants.DISPLAY_ROLE and self._show_path:
             index = self.mapToSource(index)
-            model = self.sourceModel()
+            model = cast("core.AbstractItemModelMixin", self.sourceModel())
             path = model.get_breadcrumbs_path(index)
             return self.PATH_SEPARATOR.join(str(i) for i in path)
         return super().data(index, role)

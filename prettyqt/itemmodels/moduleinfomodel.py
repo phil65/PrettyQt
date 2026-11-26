@@ -77,7 +77,9 @@ class ModuleInfoModel(itemmodels.TreeModel):
     def _get_package_path(info: pkgutil.ModuleInfo) -> str | None:
         if not info.ispkg:
             return None
-        return os.path.join(info.module_finder.path, info.name)  # noqa: PTH118
+        if (path := getattr(info.module_finder, "path", None)) is None:
+            return None
+        return os.path.join(path, info.name)  # noqa: PTH118
 
     def _fetch_object_children(
         self, item: ModuleInfoModel.TreeItem

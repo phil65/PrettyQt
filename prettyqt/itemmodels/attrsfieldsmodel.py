@@ -1,7 +1,7 @@
 import logging
 from typing import TYPE_CHECKING, ClassVar
 
-import attr
+from attr import _make
 import attrs
 
 from prettyqt import constants, gui, itemmodels
@@ -97,7 +97,7 @@ class AttrsFieldsModel(itemmodels.BaseFieldsModel):
         #     base_cls.__setattr__ is not attr._make._frozen_setattrs
         #     for base_cls in type(self._instance).__bases__
         # )
-        return not attr._make._has_frozen_base_class(type(self._instance))
+        return not _make._has_frozen_base_class(type(self._instance))
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         # the metadata checkboxes are read-only, show them disabled.
@@ -131,9 +131,9 @@ if __name__ == "__main__":
     view = widgets.TableView()
     view.set_icon("mdi.folder")
     with app.debug_mode():
-        model = AttrsFieldsModel(app_style)
-        print(dir(app_style))
-        print(dir(app_style.__attrs_attrs__))
+        # attrs classes don't declare __attrs_attrs__ statically
+        model = AttrsFieldsModel(app_style)  # ty: ignore[invalid-argument-type]
+        print(attrs.fields(type(app_style)))
         model.dataChanged.connect(view.repaint)
         view.set_model(model)
         view.set_selection_behavior("rows")

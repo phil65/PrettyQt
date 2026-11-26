@@ -32,10 +32,10 @@ class PydanticModel(itemmodels.BaseDataclassModel):
                 return False
 
     def get_fields(self) -> dict:
-        return self.Class.model_fields
+        return getattr(self.Class, "model_fields", {})
 
     def _is_frozen(self) -> bool:
-        return bool(self.Class.model_config.get("frozen"))
+        return bool(getattr(self.Class, "model_config", {}).get("frozen"))
 
     def _is_writable(self, instance, field_name: str, value) -> bool:
         return not (self._is_frozen() or self._fields[field_name].frozen)

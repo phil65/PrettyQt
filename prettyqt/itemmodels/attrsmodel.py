@@ -38,7 +38,7 @@ class AttrsModel(itemmodels.BaseDataclassModel):
 if __name__ == "__main__":
     from prettyqt import widgets
 
-    @attrs.define
+    @attrs.define(frozen=True)
     class BaseSetting:
         name: str
         label: str
@@ -51,7 +51,6 @@ if __name__ == "__main__":
         minimum: float = 0.0
         maximum: float = 0.0
         pattern: str = ""
-        requires_restart: bool = False
 
     app_style = SelectionSetting(
         name="app_style",
@@ -65,7 +64,8 @@ if __name__ == "__main__":
     klasses = [type(i) for i in items]
     view = widgets.TableView()
     view.set_icon("mdi.folder")
-    model = AttrsModel(items, parent=view)
+    # attrs classes don't declare __attrs_attrs__ statically
+    model = AttrsModel(items, parent=view)  # ty: ignore[invalid-argument-type]
     view.set_model(model)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_delegate("editor")

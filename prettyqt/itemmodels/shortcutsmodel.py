@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING, ClassVar
 
 from prettyqt import constants, gui, itemmodels
+from prettyqt.qt import QtWidgets
 
 
 if TYPE_CHECKING:
@@ -104,7 +105,10 @@ class ParentColumn(itemmodels.ColumnItem):
     def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return item.parent().windowTitle() or item.parent().__class__.__name__
+                parent = item.parent()
+                if isinstance(parent, QtWidgets.QWidget) and parent.windowTitle():
+                    return parent.windowTitle()
+                return type(parent).__name__
 
 
 class ShortcutsModel(itemmodels.ColumnTableModel):

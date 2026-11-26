@@ -7,7 +7,7 @@ import fnmatch
 import json
 import logging
 import os
-from typing import TYPE_CHECKING, Any, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar, cast
 
 import fsspec
 
@@ -15,6 +15,7 @@ from prettyqt import constants, core, gui, itemmodels, widgets
 
 
 if TYPE_CHECKING:
+    import builtins
     from collections.abc import Iterable
 
     from upath import UPath
@@ -63,10 +64,11 @@ def _get_filesystem(protocol: str, **storage_options: Any) -> fsspec.AbstractFil
 
 class FsSpecCompleter(widgets.Completer):
     def pathFromIndex(self, index):
-        return index.data(self.model().Roles.FilePathRole)
+        return index.data(FSSpecTreeModel.Roles.FilePathRole)
 
     def splitPath(self, path: str):
-        return path.split(self.model().fs.sep)
+        model = cast("FSSpecTreeModel", self.model())
+        return path.split(model.fs.sep)
 
 
 _icon_provider = widgets.FileIconProvider()
@@ -259,12 +261,12 @@ class FSSpecTreeModel(
     """
 
     SUPPORTS = FsSpecProtocolStr | fsspec.AbstractFileSystem
-    DEFAULT_COLUMNS: ClassVar[list[type[FsSpecColumnItem]]] = [
+    DEFAULT_COLUMNS: ClassVar[list[builtins.type[FsSpecColumnItem]]] = [
         NameColumn,
         SizeColumn,
         TypeColumn,
     ]
-    EXTRA_COLUMNS: ClassVar[list[type[FsSpecColumnItem]]] = [
+    EXTRA_COLUMNS: ClassVar[list[builtins.type[FsSpecColumnItem]]] = [
         PathColumn,
         CreatedColumn,
         ModifiedColumn,
@@ -277,7 +279,7 @@ class FSSpecTreeModel(
     fileRenamed = core.Signal(str, str, str)  # noqa: N815
     rootPathChanged = core.Signal(str)  # noqa: N815
 
-    class Roles(enum.IntEnum):
+    class Roles(enum.IntEnum):  # ty: ignore[incompatible-attribute-override]  # own roles
         FileIconRole = constants.DECORATION_ROLE
         FilePathRole = constants.USER_ROLE + 1
         FileNameRole = constants.USER_ROLE + 2
@@ -375,7 +377,7 @@ class FSSpecTreeModel(
             return True  # Empty string is valid root
         return "/" in value or value == self.fs.root_marker
 
-    def _get_extra_columns(self) -> list[type[FsSpecColumnItem]]:
+    def _get_extra_columns(self) -> list[builtins.type[FsSpecColumnItem]]:
         protocol = (
             self.fs.protocol if isinstance(self.fs.protocol, str) else self.fs.protocol[0]
         )
@@ -744,7 +746,7 @@ class FSSpecTreeModel(
     ) -> core.ModelIndex:
         """Return index for given row/column/parent or for given path."""
         if isinstance(path_or_row, int):
-            return super().index(path_or_row, column, parent)
+            return super().index(path_or_row, column, parent or core.ModelIndex())
         return self._find_index(path_or_row, column)
 
     def _find_index(

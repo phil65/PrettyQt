@@ -384,7 +384,7 @@ class Proxifier:
         self._widget = widget
         self._wrapper = None
 
-    def __getitem__(self, value: slice) -> Sliced:
+    def __getitem__(self, value: int | slice | tuple[int | slice, int | slice]) -> Sliced:
         """Return a Sliced Object."""
         logger.debug("Building %r ProxyModel for %r", value, self._widget)
         self._wrapper = Sliced(indexer=value, widget=self._widget, proxifier=self)
@@ -662,7 +662,7 @@ class Proxifier:
         self._widget.set_model(proxy)
         return proxy
 
-    def get_proxy(self, proxy: ProxyStr, **kwargs) -> core.QAbstractProxyModel:
+    def get_proxy(self, proxy: ProxyStr | str, **kwargs) -> core.QAbstractProxyModel:
         kls = classhelpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
         proxy_instance = kls(
             parent=self._widget, source_model=self._widget.model(), **kwargs

@@ -32,7 +32,7 @@ class SliceCheckableProxyModel(itemmodels.SliceIdentityProxyModel):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._checked: set[tuple[int, int]] = set()
+        self._checked: set[tuple[tuple[int, int] | int, ...]] = set()
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         if not index.isValid():
@@ -100,7 +100,7 @@ class SliceCheckableTreeProxyModel(itemmodels.SliceIdentityProxyModel):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._checked: dict[tuple[int, int], constants.CheckState] = {}
+        self._checked: dict[tuple[tuple[int, int] | int, ...], constants.CheckState] = {}
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         if not index.isValid():

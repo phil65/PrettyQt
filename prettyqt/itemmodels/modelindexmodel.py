@@ -82,7 +82,7 @@ class ModelIndexModel(itemmodels.ListMixin, core.AbstractTableModel):
                 return str(section)
         return None
 
-    def _get_column_role(self, column: int) -> constants.ItemDataRole | None:
+    def _get_column_role(self, column: int) -> constants.ItemDataRole | int | None:
         if column < len(self.FIXED_HEADER):
             return None
         return self.role_mapping[self.headers[column]]

@@ -50,6 +50,7 @@ def get_parent_indexes(index: core.ModelIndex) -> list[core.ModelIndex]:
 
 
 def get_proxy_chain(model: core.QAbstractItemModel) -> list[core.QAbstractItemModel]:
+    """Model followed by its source models; all but the last are proxies."""
     models = [model]
     while isinstance(model, core.QAbstractProxyModel):
         model = model.sourceModel()

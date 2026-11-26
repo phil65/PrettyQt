@@ -18,7 +18,7 @@ class ProxyComparerWidget(widgets.Splitter):
 
     def __init__(
         self,
-        model: core.QAbstractProxyModel,
+        model: core.QAbstractItemModel,
         itemview: (
             Literal["tree", "table", "list"] | type[widgets.QAbstractItemView]
         ) = "table",

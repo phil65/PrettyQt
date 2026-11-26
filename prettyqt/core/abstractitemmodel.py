@@ -333,7 +333,7 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
         self,
         value: Any,
         *,
-        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+        role: constants.ItemDataRole | int = constants.DISPLAY_ROLE,
         parent_index: core.ModelIndex | None = None,
         max_results: int | None = None,
         depth: int | None = None,

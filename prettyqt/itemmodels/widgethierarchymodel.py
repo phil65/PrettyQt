@@ -1,5 +1,6 @@
 import enum
 import logging
+from typing import Any, cast
 
 from prettyqt import constants, core, itemmodels
 from prettyqt.utils import classhelpers
@@ -89,18 +90,22 @@ class BaseHierarchyModel(itemmodels.TreeModel):
     def _set_base_class(self, klass: str | type[core.QObject]):
         from prettyqt import widgets
 
+        base: type[core.QObject] = core.QObject
         if isinstance(klass, str):
             for kls in classhelpers.get_subclasses(core.QObject):
                 if kls.__name__ == klass:
-                    klass = kls
+                    base = cast("type[core.QObject]", kls)
                     break
-            else:
-                klass = core.QObject
-        self.BaseClass = klass
-        metaobj = klass.staticMetaObject
-        self.props = core.MetaObject(metaobj).get_properties(only_stored=True)
+        else:
+            base = klass
+        self.BaseClass = base
+        metaobj = base.staticMetaObject  # ty: ignore[missing-attribute]  # not in stubs
+        # real MetaProperties plus duck-typed fake ones (get_name / read / write)
+        self.props: list[Any] = list(
+            core.MetaObject(metaobj).get_properties(only_stored=True)
+        )
         self.props.insert(0, FakeClassNameProp())
-        if issubclass(klass, widgets.QWidget):
+        if issubclass(base, widgets.QWidget):
             self.props.insert(1, FakeLayoutProp())
         self.props.insert(1, FakeUserPropertyNameProp())
         self.props.insert(1, FakeUserPropertyValueProp())

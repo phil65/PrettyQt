@@ -59,7 +59,7 @@ class ChangeHeadersProxyModel(core.IdentityProxyModel):
             raise ValueError(msg)
         super().setSourceModel(model)
 
-    def get_header(self) -> list[int]:
+    def get_header(self) -> list[Any] | dict[int, Any]:
         return self._header
 
     def set_header(

@@ -1,12 +1,13 @@
 import enum
 import logging
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, cast
 
 from prettyqt import constants, core, gui, itemmodels
 from prettyqt.utils import bidict, colors, helpers
 
 
 if TYPE_CHECKING:
+    from prettyqt import widgets
     from prettyqt.utils import datatypes
 
 
@@ -142,12 +143,12 @@ class SliceColorValuesProxyModel(itemmodels.SliceIdentityProxyModel):
                 value = data / self._max
                 return self.get_color_for_value(abs(value))
             case self.ColorMode.Visible:
-                widget = self.parent()
+                widget = cast("widgets.AbstractItemViewMixin", self.parent())
                 h_span = widget.get_visible_section_span("horizontal")
                 v_span = widget.get_visible_section_span("vertical")
                 if (span := (h_span, v_span)) != self._last_span:
                     self._last_span = span
-                    model = self.sourceModel()
+                    model = cast("core.AbstractItemModelMixin", self.sourceModel())
                     # TODO: we probably should clamp based on self._indexer.
                     delegator = model[v_span[0] : v_span[1], h_span[0] : h_span[1]]
                     data = delegator.data(self._role)
@@ -163,10 +164,14 @@ class SliceColorValuesProxyModel(itemmodels.SliceIdentityProxyModel):
                 data = abs(index.data(self._role))
                 max_ = abs(max(abs(max_), data))
                 return self.get_color_for_value(data / max_)
+            case _:
+                raise ValueError(self._mode)
 
     def get_color_for_value(self, value: float) -> gui.QColor:
         col = helpers.get_color_percentage(
-            self._low_color.getRgb(), self._high_color.getRgb(), value * 100
+            self._low_color.getRgb(),  # ty: ignore[invalid-argument-type]  # stub: object
+            self._high_color.getRgb(),  # ty: ignore[invalid-argument-type]
+            value * 100,
         )
         return gui.QColor(*col)
 

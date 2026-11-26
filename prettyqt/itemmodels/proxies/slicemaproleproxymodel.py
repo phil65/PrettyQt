@@ -82,7 +82,9 @@ if __name__ == "__main__":
     mapping = {
         source_model.Roles.ProtocolPathRole: constants.DISPLAY_ROLE,
     }
-    model = SliceMapRoleProxyModel(mapping, indexer=0, parent=table)
+    # IntEnum roles work at runtime
+    # IntEnum roles work at runtime (Mapping keys are invariant)
+    model = SliceMapRoleProxyModel(mapping, indexer=0, parent=table)  # ty: ignore[invalid-argument-type]
     model.setSourceModel(source_model)
     table.set_model(model)
     table.show()

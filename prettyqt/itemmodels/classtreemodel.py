@@ -35,7 +35,8 @@ def get_source(klass: type) -> str:
 
 @functools.cache
 def get_module(klass: type):
-    return inspect.getmodule(klass).__name__
+    module = inspect.getmodule(klass)
+    return module.__name__ if module is not None else ""
 
 
 SOURCE_FONT = gui.Font.mono(as_qt=True)

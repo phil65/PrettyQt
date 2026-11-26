@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from prettyqt import constants, core
 
@@ -32,7 +32,8 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
     ICON = "mdi.reorder-vertical"
 
     def __init__(self, order: Sequence[int | str], **kwargs):
-        self._column_order = list(order)
+        # str entries get resolved to column numbers once a source model is set
+        self._column_order = cast("list[int]", list(order))
         super().__init__(**kwargs)
         self.set_column_order(self._column_order)
 
@@ -58,9 +59,9 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
             new_order.append(index)
         self._column_order = new_order
 
-    def set_column_order(self, order: list[int | str]):
+    def set_column_order(self, order: Sequence[int | str]):
         with self.reset_model():
-            self._column_order = order
+            self._column_order = cast("list[int]", list(order))
             if self.sourceModel() is not None:
                 self._resolve_string_indexes()
 
