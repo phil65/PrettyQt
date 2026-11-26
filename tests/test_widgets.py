@@ -1665,3 +1665,17 @@ def test_graphicsscene_dot_grid_pen(qapp):
     painter = gui.Painter(pixmap)
     scene._draw_dots(painter, core.QRectF(0, 0, 10, 10), gui.QPen(), 20)
     painter.end()
+
+
+def test_layout_delitem(qapp):
+    layout = widgets.VBoxLayout()
+    layout.add(widgets.Widget())
+    del layout[0]
+    assert layout.count() == 0
+
+
+def test_gridlayout_iter_yields_widgets(qapp):
+    layout = widgets.GridLayout()
+    widget = widgets.Widget()
+    layout.add(widget, 0, 0)
+    assert list(layout) == [widget]

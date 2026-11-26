@@ -84,7 +84,9 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
 
     def __iter__(self) -> Iterator[widgets.QWidget | widgets.QLayout]:
         return iter(
-            item for i in range(self.count()) if (item := self.itemAt(i)) is not None
+            w if (w := item.widget()) is not None else item.layout()
+            for i in range(self.count())
+            if (item := self.itemAt(i)) is not None
         )
 
     def __add__(

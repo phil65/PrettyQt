@@ -121,10 +121,14 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, _LayoutBase):
             self._container.__setitem__(key, value)
 
     def __delitem__(self, item: int | widgets.QLayoutItem):
-        if isinstance(item, int):
-            item = self.itemAt(item)
-        self.removeItem(item)
-        item.deleteLater()
+        layout_item = self.itemAt(item) if isinstance(item, int) else item
+        if layout_item is None:
+            raise IndexError(item)
+        w = layout_item.widget()
+        child = w if w is not None else layout_item.layout()
+        self.removeItem(layout_item)
+        if child is not None:
+            child.deleteLater()
 
     def __len__(self) -> int:
         return self.count()
