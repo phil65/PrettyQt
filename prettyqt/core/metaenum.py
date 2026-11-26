@@ -25,7 +25,7 @@ class MetaEnum:
                 raise TypeError(index)
         if result == -1:
             raise KeyError(index)
-        return result  # type: ignore
+        return result
 
     def __repr__(self):
         return get_repr(self, self.get_name())

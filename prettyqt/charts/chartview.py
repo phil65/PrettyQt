@@ -77,7 +77,7 @@ class ChartView(widgets.GraphicsViewMixin, charts.QChartView):
     def mouseMoveEvent(self, event: gui.QMouseEvent):
         """Override to allow dragging the chart."""
         # pan the chart with a middle mouse drag
-        if event.buttons() & constants.MouseButton.RightButton:  # type: ignore
+        if event.buttons() & constants.MouseButton.RightButton:
             if not self.last_mouse_pos:
                 return
             pos_diff = event.position() - self.last_mouse_pos

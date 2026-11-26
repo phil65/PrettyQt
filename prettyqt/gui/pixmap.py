@@ -97,7 +97,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin, _PixmapBa
     def create_dot(cls, color: datatypes.ColorType = "black", size: int = 16) -> Self:
         col = colors.get_color(color)
         px = cls(size, size)
-        px.fill(constants.GlobalColor.transparent)  # type: ignore
+        px.fill(constants.GlobalColor.transparent)
         px_size = px.rect().adjusted(1, 1, -1, -1)
         with gui.Painter(px) as painter:
             painter.use_antialiasing()

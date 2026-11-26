@@ -250,7 +250,7 @@ class ModelWidget[ModelT](widgets.Widget):
                 editor = custom_widgets.FileChooserButton()
             elif isinstance(field_type, type) and issubclass(field_type, BaseModel):
                 # Nested model support
-                editor = ModelWidget(field_type)  # type: ignore
+                editor = ModelWidget(field_type)
             else:
                 # Add more type checks as needed
                 editor = None

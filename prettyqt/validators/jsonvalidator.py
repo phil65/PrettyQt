@@ -9,9 +9,7 @@ class JsonValidator(gui.Validator):
     def __eq__(self, other: object):
         return isinstance(other, JsonValidator)
 
-    def validate(  # type: ignore
-        self, text: str, pos: int = 0
-    ) -> tuple[gui.QValidator.State, str, int]:
+    def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
         import anyenv
 
         try:

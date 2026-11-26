@@ -100,7 +100,7 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
             flag |= constants.MatchFlag.MatchRecursive
         if case_sensitive:
             flag |= constants.MatchFlag.MatchCaseSensitive
-        items = self.findItems(text, flag, column)  # type: ignore
+        items = self.findItems(text, flag, column)
         return listdelegators.ListDelegator(items)
 
     def add_item(

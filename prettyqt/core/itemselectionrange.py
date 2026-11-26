@@ -17,7 +17,7 @@ class ItemSelectionRange(core.QItemSelectionRange):
         return not self.isEmpty()
 
     def __iter__(self) -> Iterator[core.ModelIndex]:
-        return iter(self.indexes())  # type: ignore
+        return iter(self.indexes())
 
     def __len__(self):
         return len(self.indexes())

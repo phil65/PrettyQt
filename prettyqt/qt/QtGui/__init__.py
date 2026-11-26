@@ -7,7 +7,7 @@ from prettyqt.utils import get_repr
 
 # Type checkers see PySide6 only (see prettyqt/qt/__init__.py).
 if TYPE_CHECKING:
-    from PySide6.QtGui import *  # type: ignore
+    from PySide6.QtGui import *
 elif PYQT6:
     from PyQt6.QtGui import *
 
@@ -24,14 +24,14 @@ elif PYQT6:
         _pos = self.position(*a)
         return _pos.toPoint()
 
-    QMouseEvent.pos = pos  # type: ignore
+    QMouseEvent.pos = pos
 
     # mightBeRichText is strangely in QtGui.Qt for PySide6..
     from PyQt6.QtCore import Qt
 
 
 elif PYSIDE6:
-    from PySide6.QtGui import *  # type: ignore
+    from PySide6.QtGui import *
 else:
     raise ModuleNotFoundError("No Qt bindings could be found")
 

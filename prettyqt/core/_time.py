@@ -8,7 +8,7 @@ class Time(core.QTime):
 
     def __repr__(self):
         super_repr = super().__repr__()
-        template = str(super_repr).split("(")[1]  # type: ignore
+        template = str(super_repr).split("(")[1]
         return f"{type(self).__name__}({template}"
 
     def __str__(self):

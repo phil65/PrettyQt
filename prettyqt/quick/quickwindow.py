@@ -67,7 +67,7 @@ class QuickWindowMixin(gui.WindowMixin, _QuickWindowBase):
             if val is True:
                 v = CREATE_TEXTURE_OPTION[key]
                 flag |= v
-        return self.createTextureFromImage(image, flag)  # type: ignore
+        return self.createTextureFromImage(image, flag)
 
     def grab_window(self) -> gui.Image:
         return gui.Image(self.grabWindow())

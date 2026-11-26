@@ -1,4 +1,3 @@
-# type: ignore
 # not available in PySide2
 
 from typing import Literal

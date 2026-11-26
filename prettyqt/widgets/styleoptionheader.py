@@ -19,7 +19,7 @@ SELECTED_POSITION = bidict(
 )
 
 SORT_INDICATOR = bidict(
-    none=mod.SortIndicator(0),  # type: ignore
+    none=mod.SortIndicator(0),
     sort_up=mod.SortIndicator.SortUp,
     sort_down=mod.SortIndicator.SortDown,
 )

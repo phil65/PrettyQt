@@ -7,13 +7,9 @@ class Root:
         self.name = name
 
 
-class NestedModel(  # type: ignore
-    itemmodels.ListMixin, itemmodels.ModelMixin, core.AbstractItemModel
-):
+class NestedModel(itemmodels.ListMixin, itemmodels.ModelMixin, core.AbstractItemModel):
     DEFAULT_FLAGS = (
-        constants.DRAG_ENABLED  # type: ignore
-        | constants.IS_ENABLED
-        | constants.IS_SELECTABLE
+        constants.DRAG_ENABLED | constants.IS_ENABLED | constants.IS_SELECTABLE
     )
 
     def __init__(self, *args, **kwargs):

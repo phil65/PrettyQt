@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING, Literal
 
 from prettyqt import gui, widgets
-from prettyqt.qt import Qsci  # type: ignore
+from prettyqt.qt import Qsci
 from prettyqt.utils import bidict, colors
 
 

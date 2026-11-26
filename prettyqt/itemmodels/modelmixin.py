@@ -19,7 +19,7 @@ else:
 
 
 class ModelMixin(_ModelBase):
-    DTYPE_ROLE = constants.USER_ROLE + 1  # type: ignore
+    DTYPE_ROLE = constants.USER_ROLE + 1
     HEADER: ClassVar = ["Name"]
     LABELS: ClassVar = {}
     CHECKSTATE: ClassVar = {}

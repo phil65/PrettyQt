@@ -129,7 +129,7 @@ class CPAlphaShowLabel(widgets.Label):
 if __name__ == "__main__":
     app = widgets.app()
     dlg = ColorDialog()
-    dlg.setOptions(ColorDialog.ColorDialogOption.ShowAlphaChannel)  # type: ignore
+    dlg.setOptions(ColorDialog.ColorDialogOption.ShowAlphaChannel)
     label = CPAlphaShowLabel(dlg)
     dlg.replace_qcolorshowlabel(label)
     cs = dlg.get_qcolorshower()

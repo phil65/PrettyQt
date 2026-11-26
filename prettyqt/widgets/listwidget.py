@@ -144,15 +144,15 @@ class ListWidget(widgets.ListViewMixin, widgets.QListWidget):
             data = label
         item = widgets.ListWidgetItem(label)
         item.set_icon(icon)
-        item.setData(constants.USER_ROLE, data)  # type: ignore
+        item.setData(constants.USER_ROLE, data)
         self.addItem(item)
 
     def get_value(self) -> list[Any]:
-        return [i.data(constants.USER_ROLE) for i in self.selectedItems()]  # type: ignore
+        return [i.data(constants.USER_ROLE) for i in self.selectedItems()]
 
     def set_value(self, value):
         for i in self.get_children():
-            if i.data(constants.USER_ROLE) in value:  # type: ignore
+            if i.data(constants.USER_ROLE) in value:
                 self.setCurrentItem(i)
                 break
 

@@ -59,7 +59,7 @@ class SingleApplicationMixin(_SingleApplicationBase):
     def _on_new_connection(self):
         if self._in_socket:
             self._in_socket.readyRead.disconnect(self._on_ready_read)
-        self._in_socket = self._server.nextPendingConnection()  # type: ignore
+        self._in_socket = self._server.nextPendingConnection()
         if self._in_socket is None:
             return
         self._in_stream = core.TextStream(self._in_socket)

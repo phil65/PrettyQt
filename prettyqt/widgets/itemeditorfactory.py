@@ -95,7 +95,7 @@ class ItemEditorFactory(widgets.QItemEditorFactory):
                 pass
             case _:
                 raise TypeError(typ)
-        factory.registerEditor(typ, creator)  # type: ignore
+        factory.registerEditor(typ, creator)
         cls.setDefaultFactory(factory)
 
     def register_editor(
@@ -115,7 +115,7 @@ class ItemEditorFactory(widgets.QItemEditorFactory):
                 pass
             case _:
                 raise TypeError(typ)
-        self.registerEditor(typ, creator)  # type: ignore
+        self.registerEditor(typ, creator)
 
     @classmethod
     def create_extended(cls) -> Self:
@@ -159,8 +159,7 @@ if __name__ == "__main__":
     table_widget = widgets.TableWidget(15, 2)
     # table_widget.set_delegate(StarDelegate(), column=1)
     table_widget.setEditTriggers(
-        table_widget.EditTrigger.DoubleClicked  # type: ignore
-        | table_widget.EditTrigger.SelectedClicked
+        table_widget.EditTrigger.DoubleClicked | table_widget.EditTrigger.SelectedClicked
     )
     table_widget.set_selection_behavior("rows")
     table_widget.setHorizontalHeaderLabels(["Title", "Rating"])

@@ -33,7 +33,7 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
                     raise IndexError(index)
                 if (item := self.itemAtPosition(row, col)) is None:
                     raise IndexError(index)
-                return i if (i := item.widget()) is not None else item.layout()  # ty: ignore[invalid-explicit-return]  # None for spacers
+                return i if (i := item.widget()) is not None else item.layout()
             case (int() | slice() as row, int() | slice() as col):
                 items = [
                     item
@@ -51,7 +51,7 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
                     raise IndexError(index)
                 if (item := self.itemAt(row)) is None:
                     raise IndexError(index)
-                return i if (i := item.widget()) is not None else item.layout()  # ty: ignore[invalid-explicit-return]  # None for spacers
+                return i if (i := item.widget()) is not None else item.layout()
             case slice() as rowslice:
                 count = rowcount if rowslice.stop is None else rowslice.stop
                 items = [self.itemAt(i) for i in range(count)[rowslice]]

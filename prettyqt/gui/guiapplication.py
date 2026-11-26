@@ -126,7 +126,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin, _GuiApplicationBase):
         return [
             k
             for k, v in constants.APPLICATION_STATES.items()
-            if v & cls.applicationState()  # type: ignore
+            if v & cls.applicationState()
         ]
 
     def get_primary_screen(self) -> gui.Screen:

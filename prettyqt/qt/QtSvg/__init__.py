@@ -8,11 +8,11 @@ from prettyqt.qt import PYQT6, PYSIDE6
 # Type checkers see PySide6 only (see prettyqt/qt/__init__.py).
 if TYPE_CHECKING:
     from PySide6.QtSvg import *
-    from PySide6.QtSvgWidgets import QGraphicsSvgItem, QSvgWidget  # type: ignore
+    from PySide6.QtSvgWidgets import QGraphicsSvgItem, QSvgWidget
 elif PYQT6:
     from PyQt6.QtSvg import *
 elif PYSIDE6:
     from PySide6.QtSvg import *
-    from PySide6.QtSvgWidgets import QGraphicsSvgItem, QSvgWidget  # type: ignore
+    from PySide6.QtSvgWidgets import QGraphicsSvgItem, QSvgWidget
 else:
     raise ModuleNotFoundError("No Qt bindings could be found")

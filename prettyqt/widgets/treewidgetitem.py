@@ -27,10 +27,7 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         return get_repr(self)
 
     def serialize_fields(self):
-        data = [
-            self.data(i, constants.USER_ROLE)  # type: ignore
-            for i in range(self.columnCount())
-        ]
+        data = [self.data(i, constants.USER_ROLE) for i in range(self.columnCount())]
         return dict(
             text=[self.text(i) for i in range(self.columnCount())],
             tool_tip=[self.toolTip(i) for i in range(self.columnCount())],

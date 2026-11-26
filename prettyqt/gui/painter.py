@@ -270,7 +270,7 @@ class PainterMixin(_PainterBase):
         self.setClipPath(path, constants.CLIP_OPERATION.get_enum_value(operation))
 
     def get_text_rect(self, text: str) -> core.Rect:
-        return self.drawText(core.Rect(), constants.TextFlag.TextDontPrint, text)  # type: ignore
+        return self.drawText(core.Rect(), constants.TextFlag.TextDontPrint, text)
 
     @contextlib.contextmanager
     def clip_path(

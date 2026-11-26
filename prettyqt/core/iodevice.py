@@ -5,7 +5,7 @@ from prettyqt import core
 from prettyqt.utils import bidict
 
 
-mod = core.QIODeviceBase  # type: ignore
+mod = core.QIODeviceBase
 
 OpenModeStr = Literal[
     "not_open",

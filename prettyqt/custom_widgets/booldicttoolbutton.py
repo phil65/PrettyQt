@@ -20,7 +20,7 @@ class BoolDictToolButton(widgets.ToolButton):
     def _on_menu_click(self):
         self.value_changed.emit(self.as_dict())
 
-    def __getitem__(self, key: str) -> bool:  # type: ignore
+    def __getitem__(self, key: str) -> bool:
         return self.button_menu[key].isChecked()
 
     def __setitem__(self, key: str, value: bool):

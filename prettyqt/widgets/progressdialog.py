@@ -17,7 +17,7 @@ class ProgressDialog(widgets.DialogMixin, widgets.QProgressDialog):
         self.set_flags(
             minimize=False, maximize=False, close=False, stay_on_top=True, window=True
         )
-        self.setCancelButton(None)  # type: ignore
+        self.setCancelButton(None)
         self.cancel()
 
     def show_message(self, message: str):

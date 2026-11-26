@@ -157,7 +157,7 @@ class IconicFont:
             if (opacity := opt.get("opacity")) is not None:
                 painter.setOpacity(opacity)
 
-            painter.drawText(rect, int(constants.ALIGN_CENTER), opt[char])  # type: ignore
+            painter.drawText(rect, int(constants.ALIGN_CENTER), opt[char])
             painter.restore()
 
     def has_valid_font_ids(self) -> bool:

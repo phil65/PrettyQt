@@ -25,7 +25,7 @@ class RegexMatchesModel(core.AbstractTableModel):
     def columnCount(self, parent=None):
         return len(self.HEADER)
 
-    def headerData(  # type: ignore
+    def headerData(
         self,
         section: int,
         orientation: constants.Orientation,

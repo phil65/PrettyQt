@@ -123,17 +123,17 @@ class Color(QtGui.QColor):
     #         match colorspace:
     #             case "rgb":
     #                 components = helpers.get_color_percentage(
-    #                     _components(start.getRgb()), _components(end.getRgb()), percent  # type: ignore
+    #                     _components(start.getRgb()), _components(end.getRgb()), percent
     #                 )
     #                 out.setRgb(*components)
     #             case "hsv":
     #                 components = helpers.get_color_percentage(
-    #                     _components(start.getHsv()), _components(end.getHsv()), percent  # type: ignore
+    #                     _components(start.getHsv()), _components(end.getHsv()), percent
     #                 )
     #                 out.setHsv(*components)
     #             case "hsl":
     #                 components = helpers.get_color_percentage(
-    #                     _components(start.getHsl()), _components(end.getHsl()), percent  # type: ignore
+    #                     _components(start.getHsl()), _components(end.getHsl()), percent
     #                 )
     #                 out.setHsl(*components)
     #         return out
@@ -182,21 +182,21 @@ class Color(QtGui.QColor):
                 components = helpers.get_color_percentage(
                     _components(start.getRgb()),
                     _components(end.getRgb()),
-                    percent,  # type: ignore
+                    percent,
                 )
                 out.setRgb(*components)
             case "hsv":
                 components = helpers.get_color_percentage(
                     _components(start.getHsv()),
                     _components(end.getHsv()),
-                    percent,  # type: ignore
+                    percent,
                 )
                 out.setHsv(*components)
             case "hsl":
                 components = helpers.get_color_percentage(
                     _components(start.getHsl()),
                     _components(end.getHsl()),
-                    percent,  # type: ignore
+                    percent,
                 )
                 out.setHsl(*components)
             case _:

@@ -41,18 +41,16 @@ class BaseRegexValidator(gui.Validator):
             raise TypeError(msg)
         return self.regex.pattern
 
-    def validate(  # type: ignore
-        self, text: str, pos: int = 0
-    ) -> tuple[gui.QValidator.State, str, int]:
+    def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
         if self.regex is None:
             msg = "Validator not initialized"
             raise TypeError(msg)
         if not text:
             return self.State.Intermediate, text, pos
-        match = self.regex.match(text)  # type: ignore
+        match = self.regex.match(text)
         if match is None:
             #     return self.State.Invalid, text, pos
-            # elif match.partial:  # type: ignore
+            # elif match.partial:
             return self.State.Intermediate, text, pos
         return self.State.Acceptable, text, pos
 

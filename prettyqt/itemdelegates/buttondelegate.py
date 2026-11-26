@@ -119,8 +119,7 @@ if __name__ == "__main__":
     table_widget = widgets.TableWidget(15, 4)
     # table_widget.set_delegate(StarDelegate(), column=1)
     table_widget.setEditTriggers(
-        table_widget.EditTrigger.DoubleClicked  # type: ignore
-        | table_widget.EditTrigger.SelectedClicked
+        table_widget.EditTrigger.DoubleClicked | table_widget.EditTrigger.SelectedClicked
     )
     table_widget.set_selection_behavior("rows")
     # table_widget.set_selection_mode(None)

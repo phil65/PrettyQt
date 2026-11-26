@@ -93,7 +93,7 @@ class TextFormatMixin(_TextFormatBase):
 
     def select_full_width(self, value: bool = True):
         prop = gui.QTextFormat.Property.FullWidthSelection
-        self.setProperty(prop, value)  # type: ignore
+        self.setProperty(prop, value)
 
 
 class TextFormat(TextFormatMixin, gui.QTextFormat):

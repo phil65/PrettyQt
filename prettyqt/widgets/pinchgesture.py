@@ -33,8 +33,8 @@ class PinchGesture(widgets.GestureMixin, widgets.QPinchGesture):
         for k, v in kwargs.items():
             if v is True:
                 val |= CHANGE_FLAGS[k]
-        flag = widgets.QPinchGesture.ChangeFlag(val)  # type: ignore
-        self.setChangeFlags(flag)  # type: ignore
+        flag = widgets.QPinchGesture.ChangeFlag(val)
+        self.setChangeFlags(flag)
 
     def get_total_change_flags(self) -> list[ChangeFlagStr]:
         return CHANGE_FLAGS.get_list(self.totalChangeFlags())
@@ -44,8 +44,8 @@ class PinchGesture(widgets.GestureMixin, widgets.QPinchGesture):
         for k, v in kwargs.items():
             if v is True:
                 val |= CHANGE_FLAGS[k]
-        flag = widgets.QPinchGesture.ChangeFlag(val)  # type: ignore
-        self.setTotalChangeFlags(flag)  # type: ignore
+        flag = widgets.QPinchGesture.ChangeFlag(val)
+        self.setTotalChangeFlags(flag)
 
 
 if __name__ == "__main__":

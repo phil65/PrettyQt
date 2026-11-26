@@ -24,7 +24,7 @@ def to_time(self) -> datetime.time:
 
 # Type checkers see PySide6 only (see prettyqt/qt/__init__.py).
 if TYPE_CHECKING:
-    from PySide6.QtCore import *  # type: ignore
+    from PySide6.QtCore import *
     from PySide6.QtCore import __version__  # type: ignore
     from PySide6 import __version__ as BINDING_VERSION
 
@@ -67,7 +67,7 @@ elif PYQT6:
     QDateTime.toPython = to_datetime
     QDate.toPython = to_date
     QTime.toPython = to_time
-    QLibraryInfo.location = QLibraryInfo.path  # type: ignore
+    QLibraryInfo.location = QLibraryInfo.path
     # Those are imported from `import *`
     del (
         pyqtSignal,
@@ -79,7 +79,7 @@ elif PYQT6:
         pyqtClassInfo,
     )
 elif PYSIDE6:
-    from PySide6.QtCore import *  # type: ignore
+    from PySide6.QtCore import *
     from PySide6.QtCore import __version__  # type: ignore
     from PySide6 import __version__ as BINDING_VERSION
 

@@ -170,7 +170,7 @@ class ObjectMixin(_ObjectBase):
         # dct = {}
         # for klass in reversed(inspect.getmro(type(self))):
         #     if "serialize_fields" in klass.__dict__:
-        #         data = klass.serialize_fields(self)  # type: ignore
+        #         data = klass.serialize_fields(self)
         #         dct |= data
         # return dct
 

@@ -325,7 +325,7 @@ class NotificationArea(widgets.Widget):
         self.target_resize_event = target_widget.resizeEvent
         # Overwrite resizeEvent function of target_widget to capture it ourself
         # (parent's resizeEvent will be called in our function too)
-        self.target_widget.resizeEvent = self.resizeEvent  # type: ignore
+        self.target_widget.resizeEvent = self.resizeEvent
         self.hide()
 
     def __delete_notification(self, notification: Notification):

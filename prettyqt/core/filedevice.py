@@ -119,7 +119,7 @@ class FileDeviceMixin(core.IODeviceMixin, _FileDeviceBase):
             typ: file time type
         """
         file_time = datatypes.to_datetime(file_time)
-        return self.setFileTime(file_time, FILE_TIME.get_enum_value(typ))  # type: ignore
+        return self.setFileTime(file_time, FILE_TIME.get_enum_value(typ))
 
     def get_file_time(
         self, typ: FileTimeStr | core.QFileDevice.FileTime

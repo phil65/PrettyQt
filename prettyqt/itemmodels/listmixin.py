@@ -44,7 +44,7 @@ class ListMixin(_ListBase):
     MIME_TYPE: str = ""
 
     def __init__(self, items: Sequence | None = None, **kwargs):
-        super().__init__(**kwargs)  # type: ignore
+        super().__init__(**kwargs)
         self.items = items if isinstance(items, list) else list(items or [])
 
     def setData(
@@ -57,7 +57,7 @@ class ListMixin(_ListBase):
             self.items[index.row()] = value
             self.update_row(index.row())
             return True
-        return super().setData(index, value, role)  # type: ignore
+        return super().setData(index, value, role)
 
     def removeRows(
         self, row: int, count: int, parent: core.ModelIndex | None = None
@@ -108,24 +108,23 @@ class ListMixin(_ListBase):
             old_rows: for each new row, the row the item had before
         """
         # no arguments: PySide6 does not accept parents / hint for the emit call.
-        self.layoutAboutToBeChanged.emit()  # type: ignore
+        self.layoutAboutToBeChanged.emit()
         new_row_for_old = {old: new for new, old in enumerate(old_rows)}
-        old_persistent = self.persistentIndexList()  # type: ignore
+        old_persistent = self.persistentIndexList()
         new_persistent = [
-            self.index(new_row_for_old[idx.row()], idx.column())  # type: ignore
-            for idx in old_persistent
+            self.index(new_row_for_old[idx.row()], idx.column()) for idx in old_persistent
         ]
         self.items = new_items
-        self.changePersistentIndexList(old_persistent, new_persistent)  # type: ignore
-        self.layoutChanged.emit()  # type: ignore
+        self.changePersistentIndexList(old_persistent, new_persistent)
+        self.layoutChanged.emit()
 
     def _get_sort_value(self, row: int, column: int) -> Any:
         if sorter := self.SORT_METHODS.get(column):
             return sorter(self.items[row])
-        index = self.index(row, column)  # type: ignore
-        value = self.data(index, constants.SORT_ROLE)  # type: ignore
+        index = self.index(row, column)
+        value = self.data(index, constants.SORT_ROLE)
         if value is None:
-            value = self.data(index, constants.DISPLAY_ROLE)  # type: ignore
+            value = self.data(index, constants.DISPLAY_ROLE)
         return value
 
     def sort(self, column: int, order=constants.ASCENDING):
@@ -199,11 +198,11 @@ class ListMixin(_ListBase):
                     self.set_list(new)
                     return
                 for i, val in zip(indices, values, strict=True):
-                    self.setData(self.index(i, 0), val, role=constants.USER_ROLE)  # type: ignore
+                    self.setData(self.index(i, 0), val, role=constants.USER_ROLE)
             case int():
                 if row < 0:
                     row += len(self.items)
-                self.setData(self.index(row, 0), value, role=constants.USER_ROLE)  # type: ignore
+                self.setData(self.index(row, 0), value, role=constants.USER_ROLE)
             case _:
                 raise TypeError(row)
 

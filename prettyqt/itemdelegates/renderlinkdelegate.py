@@ -41,8 +41,8 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         b_rect = fm.get_bounding_rect(rect, constants.ALIGN_CENTER_LEFT, text)
         if (
             event.type() == core.QEvent.Type.MouseButtonPress
-            and event.button() == constants.MouseButton.LeftButton  # type: ignore
-            and b_rect.contains(event.position())  # type: ignore
+            and event.button() == constants.MouseButton.LeftButton
+            and b_rect.contains(event.position())
         ):
             text = index.data()
             gui.DesktopServices.open_url(text)

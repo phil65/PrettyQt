@@ -124,9 +124,9 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin, _PlainTextEditBase):
         options = doc.defaultTextOption()
         flag = gui.QTextOption.Flag.ShowTabsAndSpaces
         if show:
-            options.setFlags(options.flags() | flag)  # type: ignore
+            options.setFlags(options.flags() | flag)
         else:
-            options.setFlags(options.flags() & ~flag)  # type: ignore
+            options.setFlags(options.flags() & ~flag)
         doc.setDefaultTextOption(options)
 
     def paintEvent(self, event: gui.QPaintEvent):

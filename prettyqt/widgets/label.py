@@ -159,21 +159,21 @@ class Label(widgets.FrameMixin, widgets.QLabel):
 
     def get_horizontal_alignment(self) -> constants.HorizontalAlignmentStr:
         align = self.alignment()
-        if align & constants.ALIGN_RIGHT:  # type: ignore
+        if align & constants.ALIGN_RIGHT:
             return "right"
-        if align & constants.ALIGN_H_CENTER:  # type: ignore
+        if align & constants.ALIGN_H_CENTER:
             return "center"
-        if align & constants.ALIGN_JUSTIFY:  # type: ignore
+        if align & constants.ALIGN_JUSTIFY:
             return "justify"
         return "left"
 
     def get_vertical_alignment(self) -> constants.VerticalAlignmentStr:
         align = self.alignment()
-        if align & constants.ALIGN_TOP:  # type: ignore
+        if align & constants.ALIGN_TOP:
             return "top"
-        if align & constants.ALIGN_BOTTOM:  # type: ignore
+        if align & constants.ALIGN_BOTTOM:
             return "bottom"
-        if align & constants.ALIGN_BASELINE:  # type: ignore
+        if align & constants.ALIGN_BASELINE:
             return "baseline"
         return "center"
 

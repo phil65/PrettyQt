@@ -151,8 +151,8 @@ from .collator import Collator
 from .jsonvalue import JsonValue
 from .jsondocument import JsonDocument
 
-from .library import Library  # type: ignore
-from .pluginloader import PluginLoader  # type: ignore
+from .library import Library
+from .pluginloader import PluginLoader
 
 from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
 from .transposeproxymodel import TransposeProxyModel

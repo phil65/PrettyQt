@@ -8,7 +8,7 @@ ToolBarFeatureStr = Literal["none", "movable"]
 
 TOOLBAR_FEATURE: bidict[ToolBarFeatureStr, widgets.QStyleOptionToolBar.ToolBarFeature] = (
     bidict(
-        none=widgets.QStyleOptionToolBar.ToolBarFeature(0),  # type: ignore
+        none=widgets.QStyleOptionToolBar.ToolBarFeature(0),
         movable=widgets.QStyleOptionToolBar.ToolBarFeature.Movable,
     )
 )

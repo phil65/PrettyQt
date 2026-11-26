@@ -38,7 +38,7 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
 
     def set_expiration_date(self, date: datatypes.DateTimeType | None):
         date = datatypes.to_datetime(date)
-        self.setExpirationDate(date)  # type: ignore
+        self.setExpirationDate(date)
 
 
 if __name__ == "__main__":

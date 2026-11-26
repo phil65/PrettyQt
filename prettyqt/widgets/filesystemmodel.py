@@ -33,7 +33,7 @@ else:
 class FileSystemModelMixin(_FileSystemModelBase):
     """Class to populate a filesystem treeview."""
 
-    DATA_ROLE = constants.USER_ROLE + 33  # type: ignore
+    DATA_ROLE = constants.USER_ROLE + 33
     content_type = "files"
 
     def __init__(self, *args, read_only: bool = False, **kwargs):

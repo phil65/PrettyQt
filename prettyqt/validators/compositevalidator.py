@@ -54,9 +54,7 @@ class CompositeValidator(gui.Validator):
             else False
         )
 
-    def validate(  # type: ignore
-        self, text: str, pos: int = 0
-    ) -> tuple[gui.QValidator.State, str, int]:
+    def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
         return NotImplemented
 
 
@@ -65,9 +63,7 @@ class AndValidator(CompositeValidator):
 
     ID = "and"
 
-    def validate(  # type: ignore
-        self, text: str, pos: int = 0
-    ) -> tuple[gui.QValidator.State, str, int]:
+    def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
         vals = [v.validate(text, pos)[0] for v in self.validators]  # type: ignore
         if self.State.Invalid in vals:
             return self.State.Invalid, text, pos
@@ -81,9 +77,7 @@ class OrValidator(CompositeValidator):
 
     ID = "or"
 
-    def validate(  # type: ignore
-        self, text: str, pos: int = 0
-    ) -> tuple[gui.QValidator.State, str, int]:
+    def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
         vals = [v.validate(text, pos)[0] for v in self.validators]  # type: ignore
         if self.State.Acceptable in vals:
             return self.State.Acceptable, text, pos

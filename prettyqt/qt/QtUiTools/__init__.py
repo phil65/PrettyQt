@@ -4,7 +4,7 @@ from prettyqt.qt import PYSIDE6
 
 
 if PYSIDE6:
-    from PySide6.QtUiTools import QUiLoader, loadUiType  # type: ignore
+    from PySide6.QtUiTools import QUiLoader, loadUiType
 
     RCC_CMD = "pyside6-rcc --no-compress --verbose"
     LUPDATE_CMD = "pyside6-lupdate -verbose"

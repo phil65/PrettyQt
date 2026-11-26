@@ -192,7 +192,7 @@ class ApplicationMixin(gui.GuiApplicationMixin, _ApplicationBase):
         if mw is None:
             logger.warning("Trying to get widget from nonexistent mainwindow")
             return None
-        return mw.findChild(widgets.QWidget, name)  # type: ignore
+        return mw.findChild(widgets.QWidget, name)
         # widget_list = cls.instance().allWidgets()
         # for widget in widget_list:
         #     if isinstance(widget, widgets.QWidget) and widget.objectName() == name:

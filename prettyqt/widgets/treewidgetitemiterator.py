@@ -77,46 +77,46 @@ class TreeWidgetItemIterator(QtWidgets.QTreeWidgetItemIterator):
             super().__init__(other)
         else:
             if flags is None:
-                flags = mod.IteratorFlag.All  # type: ignore
+                flags = mod.IteratorFlag.All
             if hidden is True:
-                flags |= mod.IteratorFlag.Hidden  # type: ignore
+                flags |= mod.IteratorFlag.Hidden
             elif hidden is False:
-                flags |= mod.IteratorFlag.NotHidden  # type: ignore
+                flags |= mod.IteratorFlag.NotHidden
             if selected is True:
-                flags |= mod.IteratorFlag.Selected  # type: ignore
+                flags |= mod.IteratorFlag.Selected
             elif selected is False:
-                flags |= mod.IteratorFlag.Unselected  # type: ignore
+                flags |= mod.IteratorFlag.Unselected
             if selectable is True:
-                flags |= mod.IteratorFlag.Selectable  # type: ignore
+                flags |= mod.IteratorFlag.Selectable
             elif selectable is False:
-                flags |= mod.IteratorFlag.NotSelectable  # type: ignore
+                flags |= mod.IteratorFlag.NotSelectable
             if draggable is True:
-                flags |= mod.IteratorFlag.DragEnabled  # type: ignore
+                flags |= mod.IteratorFlag.DragEnabled
             elif draggable is False:
-                flags |= mod.IteratorFlag.DragDisabled  # type: ignore
+                flags |= mod.IteratorFlag.DragDisabled
             if droppable is True:
-                flags |= mod.IteratorFlag.DropEnabled  # type: ignore
+                flags |= mod.IteratorFlag.DropEnabled
             elif droppable is False:
-                flags |= mod.IteratorFlag.DropDisabled  # type: ignore
+                flags |= mod.IteratorFlag.DropDisabled
             if has_children is True:
-                flags |= mod.IteratorFlag.HasChildren  # type: ignore
+                flags |= mod.IteratorFlag.HasChildren
             elif has_children is False:
-                flags |= mod.IteratorFlag.NoChildren  # type: ignore
+                flags |= mod.IteratorFlag.NoChildren
             if checked is True:
-                flags |= mod.IteratorFlag.Checked  # type: ignore
+                flags |= mod.IteratorFlag.Checked
             elif checked is False:
-                flags |= mod.IteratorFlag.NotChecked  # type: ignore
+                flags |= mod.IteratorFlag.NotChecked
             if enabled is True:
-                flags |= mod.IteratorFlag.Enabled  # type: ignore
+                flags |= mod.IteratorFlag.Enabled
             elif enabled is False:
-                flags |= mod.IteratorFlag.Disabled  # type: ignore
+                flags |= mod.IteratorFlag.Disabled
             if editable is True:
-                flags |= mod.IteratorFlag.Editable  # type: ignore
+                flags |= mod.IteratorFlag.Editable
             elif editable is False:
-                flags |= mod.IteratorFlag.NotEditable  # type: ignore
+                flags |= mod.IteratorFlag.NotEditable
             if user_flag:
-                flags |= mod.IteratorFlag.UserFlag  # type: ignore
-            super().__init__(other, flags)  # type: ignore
+                flags |= mod.IteratorFlag.UserFlag
+            super().__init__(other, flags)
 
 
 if __name__ == "__main__":

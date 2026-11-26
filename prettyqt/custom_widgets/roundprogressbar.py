@@ -255,7 +255,7 @@ class RoundProgressBar(widgets.Widget):
         painter.setFont(font)
         painter.setPen(self.palette().text().color())
         text = self._value_to_text(value)
-        painter.drawText(inner_rect, constants.ALIGN_CENTER, text)  # type: ignore
+        painter.drawText(inner_rect, constants.ALIGN_CENTER, text)
 
     def _value_to_text(self, value: float) -> str:
         text_to_draw = self.number_format

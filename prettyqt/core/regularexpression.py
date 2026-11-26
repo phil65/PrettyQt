@@ -55,7 +55,7 @@ MatchOptionStr = Literal["none", "anchored"]
 
 MATCH_OPTIONS: bidict[MatchOptionStr, mod.MatchOption] = bidict(
     none=mod.MatchOption.NoMatchOption,
-    anchored=mod.MatchOption.AnchorAtOffsetMatchOption,  # type: ignore
+    anchored=mod.MatchOption.AnchorAtOffsetMatchOption,
 )
 
 
@@ -78,8 +78,8 @@ class RegularExpression(core.QRegularExpression):
                 super().__init__(pattern.pattern, qflag)
             case _:
                 if isinstance(flags, int):
-                    flags = core.RegularExpression.PatternOption(flags)  # type: ignore
-                super().__init__(pattern, flags)  # type: ignore
+                    flags = core.RegularExpression.PatternOption(flags)
+                super().__init__(pattern, flags)
 
     def __repr__(self):
         return get_repr(self, self.pattern())
@@ -107,7 +107,7 @@ class RegularExpression(core.QRegularExpression):
         options = MATCH_OPTIONS["anchored"] if anchored else MATCH_OPTIONS["none"]
         return self.globalMatch(text, offset, MATCH_TYPE[match_type], options)
 
-    def match(  # type: ignore
+    def match(
         self,
         text: str,
         offset: int = 0,

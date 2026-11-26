@@ -25,7 +25,7 @@ ViewItemFeatureStr = Literal[
 VIEW_ITEM_FEATURE: bidict[
     ViewItemFeatureStr, widgets.QStyleOptionViewItem.ViewItemFeature
 ] = bidict(
-    none=widgets.QStyleOptionViewItem.ViewItemFeature(0),  # type: ignore
+    none=widgets.QStyleOptionViewItem.ViewItemFeature(0),
     wrap_text=widgets.QStyleOptionViewItem.ViewItemFeature.WrapText,
     alternate=widgets.QStyleOptionViewItem.ViewItemFeature.Alternate,
     has_check_indicator=widgets.QStyleOptionViewItem.ViewItemFeature.HasCheckIndicator,
