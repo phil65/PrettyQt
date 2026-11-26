@@ -21,3 +21,14 @@ def test_fx(qtbot):
     widget.fx.fade_in(duration=10)
     widget.fx.zoom(start=1, end=1.5, duration=10)
     widget.fx.slide(start=(0, 0), end=(100, 0), duration=10)
+
+
+def test_textanimation_color(qtbot):
+    from prettyqt import gui, widgets
+
+    label = widgets.Label()
+    qtbot.addWidget(label)
+    anim = animations.TextAnimation(parent=label)
+    anim.apply_to(label.text)
+    anim.updateCurrentValue(gui.QColor("red"))
+    anim.updateCurrentValue(1.5)

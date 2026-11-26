@@ -1,7 +1,7 @@
 import logging
 from typing import TYPE_CHECKING, Literal
 
-from prettyqt import core
+from prettyqt import core, gui
 
 
 if TYPE_CHECKING:
@@ -23,7 +23,7 @@ class TextAnimation(core.PropertyAnimation):
         end: datatypes.VariantType | None = None,
         duration: int = 1000,
         easing: core.easingcurve.TypeStr = "in_out_sine",
-        fmt: NameStr = "html",
+        fmt: NameStr | None = "hex_rgb",
         mask: str = "{text}",
         parent: core.QObject | None = None,
     ):
@@ -67,7 +67,7 @@ class TextAnimation(core.PropertyAnimation):
                 return None
             case gui.QColor():
                 color = gui.Color(value)
-                text = color.get_name(self._fmt) if self._fmt else color.toString()
+                text = color.get_name(self._fmt) if self._fmt else color.name()
                 value = self._mask.format(text=text)
             case int() | float():
                 value = self._mask.format(text=str(value))
