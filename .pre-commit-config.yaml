@@ -52,8 +52,13 @@ repos:
         language: system
         types: [python]
         require_serial: true
-      # Project-specific (prettyqt): no `ty check` hook; the project uses mypy
-      # (`uv run mypy prettyqt/`, not enforced yet, see AGENTS.md).
+      - id: ty
+        name: ty
+        entry: uv run --no-sync ty check
+        language: system
+        types: [python]
+        pass_filenames: false
+        require_serial: true
 
   # Phase 4: Tests (most expensive, system command)
   - repo: local

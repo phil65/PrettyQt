@@ -102,8 +102,7 @@ docs = [
 ]
 lint = [
   # Only add below (Copier)
-  # Project-specific: prettyqt is type-checked with mypy (see AGENTS.md).
-  "mypy",  # Pinned on purpose: CI, pre-commit and editors all run exactly these versions.
+  # Pinned on purpose: CI, pre-commit and editors all run exactly these versions.
   # Bump them here (template) and roll out via `copier update`.
   "ruff==0.17.6",
   "ty==0.0.110",
@@ -136,36 +135,6 @@ allowed-commit-types = [
   "chore",
 ]
 docstring-style = "google"
-
-[tool.mypy]
-python_version = "3.14"
-disable_error_code = [
-  "assignment",
-  "misc",
-  "attr-defined",
-  "import",
-  "misc",
-  "attr-defined",
-]
-
-[tool.pyright]
-venvPath = "."
-venv = ".venv"
-pythonVersion = "3.14"
-pythonPlatform = "All"
-typeCheckingMode = "basic"
-deprecateTypingAliases = true
-reportMissingTypeStubs = false
-reportUnusedCallResult = false
-reportUnknownVariableType = false
-reportAny = false
-reportImplicitOverride = false
-reportUnusedFunction = false
-reportImplicitStringConcatenation = false
-reportIgnoreCommentWithoutRule = false
-reportUnannotatedClassAttribute = false
-reportSelfClsParameterName = false
-reportPrivateImportUsage = false
 
 [tool.pytest]
 # qt_api = "pyside6"
@@ -340,6 +309,9 @@ python-platform = "all"
 [tool.ty.src]
 # `ty check` (hooks, CI, editors) type-checks the package code only.
 include = ["prettyqt"]
+# Project-specific (prettyqt), temporary: custom_widgets is not cleaned up for ty
+# yet (~235 diagnostics, see AGENTS.md); remove this once it is.
+exclude = ["prettyqt/custom_widgets"]
 
 [tool.ty.analysis]
 # Optional dependencies that are not always installed, e.g. "numpy", "numpy.**".
@@ -387,7 +359,6 @@ default-groups = ["dev", "lint", "docs"]
 # Project-specific: flat layout (package in prettyqt/, no src/).
 module-root = ""
 wheel-exclude = [
-  ".mypy_cache/**",
   "__pycache__/**",
   "*.pyc",
   "*.pyo",
@@ -395,7 +366,6 @@ wheel-exclude = [
   ".ruff_cache/**",
 ]
 source-exclude = [
-  ".mypy_cache/**",
   "__pycache__/**",
   "*.pyc",
   "*.pyo",

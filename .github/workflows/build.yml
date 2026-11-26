@@ -59,9 +59,6 @@ jobs:
       - name: Check code format (ruff format)
         run: uv run --no-sync ruff format --check .
 
-      # Project-specific (prettyqt): type-checked with mypy (not enforced, see AGENTS.md),
-      # so no `ty check` step.
-
       - name: Run tests (PyQt6)
         uses: coactions/setup-xvfb@v1
         timeout-minutes: 10
@@ -76,6 +73,14 @@ jobs:
         timeout-minutes: 10
         with:
           run: uv run --no-sync pytest --doctest-modules --cov-report=xml --cov=prettyqt --cov-report=term-missing
+
+      # Project-specific (prettyqt): ty checks against the PySide6 stubs, and the
+      # PyQt6-only modules (QScintilla) need PyQt6, so install both bindings.
+      - name: Install dependencies (both bindings, for ty)
+        run: uv sync --extra pyqt6 --extra pyside6 --extra addons --no-group docs
+
+      - name: Static type checking (ty)
+        run: uv run --no-sync ty check
 
       - name: Upload test results to Codecov
         # The upload sometimes hangs; never let it fail or block the build.

@@ -8,7 +8,7 @@ and adds snake_case helpers, string-instead-of-enum setters/getters, `__dunder__
 and extra kwargs. On top of that it ships its own widgets, item models, proxy models,
 delegates, validators and tooling. Copier-managed (`copier-phil65`, see `.copier-answers.yml`):
 project-specific deviations in `pyproject.toml` / CI are marked "Project-specific"; keep them
-on `copier update` (flat layout, both Qt bindings in CI, mypy instead of ty, gh-pages docs).
+on `copier update` (flat layout, both Qt bindings in CI, ty overrides, gh-pages docs).
 
 ## Architecture
 
@@ -73,14 +73,14 @@ QT_QPA_PLATFORM=offscreen uv run pytest   # headless; CI uses xvfb instead
 uv run pytest --doctest-modules           # CI's PySide6 run
 QT_API=pyside6 uv run pytest              # force a binding when both are installed
 uv run ruff check . && uv run ruff format --check .
-uv run mypy prettyqt/                     # duty lint_check; not enforced in CI (ty: separate project)
+uv run ty check                           # needs both bindings: uv sync --all-extras
 uv run mknodes build               # docs (slow: generates a page per class)
 uv build
 ```
 
 `duties.py` wraps these (`duty test`, `duty lint`, `duty lint_check`, `duty version`).
-CI: `.github/workflows/build.yml` (`test` job: ruff, then pytest under PyQt6 and PySide6
-on Linux/macOS/Windows, Python 3.14 + 3.15 required, 3.16 allowed to fail, Codecov); the
+CI: `.github/workflows/build.yml` (`test` job: ruff, pytest under PyQt6 and PySide6, then
+`ty check` with both bindings installed, on Linux/macOS/Windows, Python 3.14 + 3.15 required, 3.16 allowed to fail, Codecov); the
 `docs` job builds the docs on every push and deploys them to gh-pages on `v*` tags; the
 `release` job (tags only) publishes to PyPI (trusted publishing) and creates the GitHub
 release (git-cliff notes).
@@ -96,6 +96,37 @@ release (git-cliff notes).
 - Tests are flat functions using pytest-qt's `qtbot` / `qapp` (app class is
   `widgets.Application`, see `tests/conftest.py`). Modules missing from a binding are skipped
   with `pytest.importorskip`.
+
+## Type checking (ty)
+
+`ty check` runs in the pre-commit hook and CI and must pass (warnings fail too).
+
+- Type checkers see PySide6 only: each `prettyqt/qt/Qt<Module>/__init__.py` has an
+  `if TYPE_CHECKING:` branch importing PySide6 in front of the runtime binding switch
+  (checking against both stub sets at once takes minutes and >10 GB). Both bindings share
+  the Qt API; PyQt6-only modules (`scintilla`, the designer plugins) have a ty override.
+- Mixins get a type-checking-only Qt base, so `self` is "mixin & Qt class":
+
+  ```python
+  if TYPE_CHECKING:
+      _FrameBase = QtWidgets.QFrame
+  else:
+      _FrameBase = object
+
+  class FrameMixin(widgets.WidgetMixin, _FrameBase): ...
+  ```
+
+  The base is the most derived Qt class all users of the mixin share. At runtime the base
+  is `object`, so MRO, metaclass and signal registration are unchanged. New mixins follow
+  this pattern; add-on mixins for item models use `core.AbstractItemModel` as base.
+- `incompatible-method-override` / `lost-keyword-for-regular-parameter` are off rule-wide:
+  the mixins override Qt methods with friendlier signatures on purpose.
+- Qt getters are typed with the Qt base class, but prettyqt installs its own subclasses
+  (scrollbars, headers, layouts, documents): accessors `cast()` to the prettyqt class.
+- Stub gaps (e.g. `getRgb()` typed `object`, `staticMetaObject`, `sip.voidptr`, None
+  arguments that unset) get a targeted `# ty: ignore[<rule>]` with a short reason.
+- `prettyqt/custom_widgets` is excluded from `ty check` for now (`[tool.ty.src] exclude`,
+  ~235 diagnostics left); remove the exclude once it is cleaned up.
 
 ## Pitfalls
 

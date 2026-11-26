@@ -63,7 +63,7 @@ def lint(ctx):
     """Lint and fix the code."""
     ctx.run("uv run ruff check --fix .")
     ctx.run("uv run ruff format .")
-    ctx.run("uv run mypy prettyqt/")
+    ctx.run("uv run ty check")
 
 
 @duty(capture=False)
@@ -71,7 +71,7 @@ def lint_check(ctx):
     """Lint the code."""
     ctx.run("uv run ruff check .")
     ctx.run("uv run ruff format --check .")
-    ctx.run("uv run mypy prettyqt/")
+    ctx.run("uv run ty check")
 
 
 @duty(capture=False)
