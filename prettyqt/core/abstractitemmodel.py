@@ -80,7 +80,7 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
         colcount = self.columnCount()
         match index:
             case int() as row, int() as col:
-                if row >= rowcount or col >= rowcount:
+                if row >= rowcount or col >= colcount:
                     raise IndexError(index)
                 return self.index(row, col)
             case (row, col):
@@ -280,7 +280,7 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
         self.layoutChanged.emit()
 
     def get_role_names(self) -> bidict[int, str]:
-        return bidict({i: v.data().decode() for i, v in self.roleNames().items()})
+        return bidict({i: bytes(v.data()).decode() for i, v in self.roleNames().items()})
 
     def get_breadcrumbs_path(
         self,
@@ -376,7 +376,7 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
         *,
         include_column: bool = False,
         parent_index: core.ModelIndex | None = None,
-    ) -> tuple[tuple[int, int], ...]:
+    ) -> tuple[tuple[int, int] | int, ...]:
         """Return a key tuple for given ModelIndex.
 
         The key tuple consists either of row integers or (row, column) indices
@@ -387,7 +387,7 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
             include_column: whether to include the column in the index key.
             parent_index: Get key up to given ModelIndex. By default, get key up to root.
         """
-        key_path = []
+        key_path: list[tuple[int, int] | int] = []
         parent = index
         while parent.isValid() and parent != parent_index:
             key = (parent.row(), parent.column()) if include_column else parent.row()

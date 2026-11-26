@@ -45,6 +45,18 @@ def test_abstracttablemodel():
     model = Test()
     assert model.rowCount() == 0
     assert model.columnCount() == 0
+
+    class Wide(core.AbstractTableModel):
+        def rowCount(self, parent=None):
+            return 1
+
+        def columnCount(self, parent=None):
+            return 3
+
+    wide = Wide()
+    assert wide[0, 2].column() == 2  # noqa: PLR2004
+    with pytest.raises(IndexError):
+        wide[0, 3]
     with model.change_layout():
         pass
     with model.reset_model():
