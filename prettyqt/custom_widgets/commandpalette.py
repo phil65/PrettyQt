@@ -53,7 +53,15 @@ class CommandTable(widgets.TableView):
         # self._proxy.set_sort_role(constants.SORT_ROLE)
         self._proxy.setSourceModel(self._model)
         self.setModel(self._proxy)
-        self.h_header.set_resize_mode("stretch")
+        self.h_header.hide()
+        self.v_header.hide()
+        for col in range(3, self._model.columnCount()):
+            self.setColumnHidden(col, True)
+        resize_mode = widgets.QHeaderView.ResizeMode
+        self.h_header.setSectionResizeMode(0, resize_mode.Interactive)
+        self.h_header.setSectionResizeMode(1, resize_mode.Stretch)
+        self.h_header.setSectionResizeMode(2, resize_mode.ResizeToContents)
+        self.setColumnWidth(0, 220)
         self.pressed.connect(self._on_clicked)
         self.set_delegate("html", column=0)
         self._proxy.set_match_color("#468cc6")
@@ -71,11 +79,14 @@ class CommandTable(widgets.TableView):
         if index.isValid():
             role = self._model.ExtraRoles.TreeItemRole
             data = index.data(role)
-            data.trigger()
+            self.action_clicked.emit(index.row())
+            if data is not None:
+                data.trigger()
 
     def execute_focused(self):
         fn = self.current_data()
-        fn.trigger()
+        if fn is not None:
+            fn.trigger()
 
 
 class CommandPalette(widgets.Widget):
@@ -88,13 +99,16 @@ class CommandPalette(widgets.Widget):
             | constants.WindowType.FramelessWindowHint
             # | constants.WindowType.ToolTip
         )
+        self.setAutoFillBackground(True)
+        self.setAttribute(constants.WidgetAttribute.WA_StyledBackground, True)
         self.set_focus_policy("strong")
-        self.setMinimumWidth(700)
+        self.setMinimumWidth(420)
         self._line = widgets.LineEdit()
         self.setFocusProxy(self._line)
         self._table = CommandTable()
         # self._line.value_changed.connect(self._table.select_first_row)
         self._line.value_changed.connect(self._table._proxy.set_search_term)
+        self._table.action_clicked.connect(self.hide)
         layout = self.set_layout("vertical")
         layout.addWidget(self._line)
         layout.addWidget(self._table)
@@ -154,7 +168,7 @@ class CommandPalette(widgets.Widget):
         """Set the color used for the matched characters."""
         self._table._proxy.set_match_color(colors.get_color(color))
 
-    def install_to(self, parent: widgets.Widget):
+    def install_to(self, parent: widgets.QWidget):
         self.setParent(parent, constants.WindowType.SubWindow)
         self.hide()
 
@@ -180,8 +194,16 @@ class CommandPalette(widgets.Widget):
 
     def show(self):
         self._line.setText("")
-        self.resize(1000, 300)
-        self.position_on("screen")
+        parent = self.parentWidget()
+        if parent is not None and self.windowType() == constants.WindowType.SubWindow:
+            width = min(680, max(420, parent.width() - 80))
+            height = min(380, max(240, parent.height() - 120))
+            x = max(12, (parent.width() - width) // 2)
+            y = max(36, int(parent.height() * 0.12))
+            self.setGeometry(x, y, width, height)
+        else:
+            self.resize(1000, 300)
+            self.position_on("screen")
         super().show()
         self.raise_()
         self._line.setFocus()

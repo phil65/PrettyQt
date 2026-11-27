@@ -289,8 +289,8 @@ class CodeEditor(widgets.PlainTextEdit):
         self.line_area.setGeometry(rect)
 
     def line_area_width(self) -> int:
-        digits = len(str(self.blockCount()))
-        return 3 + self.fontMetrics().boundingRect("9").width() * digits
+        digits = max(2, len(str(self.blockCount())))
+        return 10 + self.fontMetrics().horizontalAdvance("9") * digits
 
     def update_line_area_width(self, _):
         self.setViewportMargins(self.line_area_width(), 0, 0, 0)
@@ -323,7 +323,7 @@ class CodeEditor(widgets.PlainTextEdit):
                             core.QRectF(0, top, width, bottom - top).toRect(), color
                         )
                     painter.drawText(
-                        0, int(top), width, height, constants.ALIGN_RIGHT, number
+                        0, int(top), width - 4, height, constants.ALIGN_RIGHT, number
                     )
                 block = block.next()
                 top = bottom

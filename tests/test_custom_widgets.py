@@ -70,6 +70,62 @@ def test_commandpalette(qtbot):
     assert proxy.rowCount() == 0
 
 
+def test_commandpalette_subwindow_and_click(qtbot):
+    from prettyqt import debugging
+
+    win = widgets.MainWindow()
+    qtbot.addWidget(win)
+    win.resize(1200, 800)
+    win.show()
+
+    palette = custom_widgets.CommandPalette()
+    palette.install_to(win)
+    triggered: list[str] = []
+    action = gui.Action(
+        text="Run command",
+        tool_tip="Runs the command",
+        shortcut="Ctrl+R",
+        triggered=lambda: triggered.append("ran"),
+    )
+    palette.set_actions([action])
+
+    # Default columns: Name, ToolTip, Shortcut visible; metadata columns hidden
+    table = palette._table
+    assert not table.isColumnHidden(0)
+    assert not table.isColumnHidden(1)
+    assert not table.isColumnHidden(2)
+    assert all(table.isColumnHidden(c) for c in range(3, table._model.columnCount()))
+
+    palette.show()
+    debugging.pump(ms=20)
+    assert palette.isVisible()
+    assert (palette.width(), palette.height()) == (680, 380)
+    assert palette.x() == (1200 - 680) // 2
+    assert palette.y() == int(800 * 0.12)
+    _, warnings = debugging.inspect_tree(win)
+    assert not any(w.kind == "out-of-bounds" for w in warnings)
+
+    # Responsive sizing on a smaller parent window
+    win.resize(560, 400)
+    palette.show()
+    debugging.pump(ms=20)
+    assert (palette.width(), palette.height()) == (480, 280)
+    assert palette.x() == 40  # noqa: PLR2004
+    assert palette.y() == 48  # noqa: PLR2004
+
+    # Clicking an action triggers it and hides the palette
+    table._on_clicked(table._proxy.index(0, 0))
+    assert triggered == ["ran"]
+    assert not palette.isVisible()
+
+    # Standalone (top-level) palette keeps its default top-level size
+    standalone = custom_widgets.CommandPalette()
+    qtbot.addWidget(standalone)
+    standalone.show()
+    assert (standalone.width(), standalone.height()) == (1000, 300)
+    standalone.close()
+
+
 def test_colorchooserbutton(qtbot):
     btn = custom_widgets.ColorChooserButton()
     qtbot.addWidget(btn)
@@ -229,6 +285,17 @@ def test_codeeditor(qtbot):
     event = gui.QResizeEvent(core.Size(10, 10), core.Size(20, 20))
     editor.resizeEvent(event)
     editor.repaint()
+
+
+def test_codeeditor_line_area_width(qtbot):
+    editor = custom_widgets.CodeEditor()
+    qtbot.addWidget(editor)
+    advance = editor.fontMetrics().horizontalAdvance("9")
+    # Single-digit line count still reserves at least 2 digits + 10px padding
+    assert editor.line_area_width() == 10 + advance * 2
+    editor.set_text("\n".join(f"x = {i}" for i in range(100)))
+    assert editor.line_area_width() == 10 + advance * 3
+    assert editor.line_area_width() > 10 + advance * 2
 
 
 def test_codeeditor_python_highlighting(qtbot):
