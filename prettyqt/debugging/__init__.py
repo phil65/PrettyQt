@@ -7,6 +7,18 @@ from prettyqt import qt
 from prettyqt.qt import QtCore
 
 from .errormessagebox import ErrorMessageBox
+from .inspector import (
+    CaptureInfo,
+    LayoutWarning,
+    UIInspector,
+    capture,
+    default_ignore_zero_size,
+    ensure_offscreen,
+    find_widget,
+    inspect_tree,
+    pump,
+    wait_until,
+)
 from .messagehandler import MessageHandler
 from .qobjectdetailsdialog import QObjectDetailsDialog
 from .stalker import Stalker
@@ -173,10 +185,20 @@ def example_widget():
 
 
 __all__ = [
+    "CaptureInfo",
     "ErrorMessageBox",
+    "LayoutWarning",
     "MessageHandler",
     "ProxyComparerWidget",
     "QObjectDetailsDialog",
     "Stalker",
     "TracebackDialog",
+    "UIInspector",
+    "capture",
+    "default_ignore_zero_size",
+    "ensure_offscreen",
+    "find_widget",
+    "inspect_tree",
+    "pump",
+    "wait_until",
 ]
