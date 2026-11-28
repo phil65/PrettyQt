@@ -646,6 +646,18 @@
         <loc>https://phil65.github.io/PrettyQt/Additional%20modules/syntaxhighlighters/YamlHighlighter/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Additional%20modules/telemetry/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Additional%20modules/telemetry/QtInstrumentor/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Additional%20modules/telemetry/TelemetrySignalHook/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Additional%20modules/telemetry/TracingStalker/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Additional%20modules/utils/</loc>
       </url>
       <url>
@@ -929,6 +941,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/AnimationGroupMixin/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/AsyncBridge/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/BasicTimer/</loc>
