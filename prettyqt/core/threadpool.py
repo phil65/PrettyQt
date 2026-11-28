@@ -118,6 +118,10 @@ class ThreadPool(core.ObjectMixin, core.QThreadPool):
             cls.__instance = cls()
         return cls.__instance
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._active_workers: set[Worker] = set()
+
     def start_worker(
         self,
         fn_or_worker: Callable | Worker,
@@ -137,6 +141,15 @@ class ThreadPool(core.ObjectMixin, core.QThreadPool):
             runnable = Worker(fn_or_worker, *args, **kwargs)
         else:
             runnable = fn_or_worker
+        runnable.setAutoDelete(False)
+        self._active_workers.add(runnable)
+
+        def _release_worker(*_args):
+            self._active_workers.discard(runnable)
+
+        _release_worker._prettyqt_skip_trace = True  # ty: ignore[missing-attribute]
+        runnable.signals.finished.connect(_release_worker)
+        runnable.signals.error.connect(_release_worker)
         runnable.signals.finished.connect(self._on_job_ended)
         runnable.signals.error.connect(self._on_job_ended)
         runnable.signals.error.connect(self._on_exception)
@@ -160,8 +173,12 @@ class ThreadPool(core.ObjectMixin, core.QThreadPool):
             self.busy_state_changed.emit(False)
         self.job_num_updated.emit(thread_count - 1)  # -1 because we didnt really end yet.
 
+    _on_job_ended._prettyqt_skip_trace = True  # ty: ignore[missing-attribute]
+
     def _on_exception(self, exception):
         self.error_occured.emit(exception)
+
+    _on_exception._prettyqt_skip_trace = True  # ty: ignore[missing-attribute]
 
 
 if __name__ == "__main__":

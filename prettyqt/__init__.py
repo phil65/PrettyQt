@@ -108,6 +108,7 @@ __all__ = [
     "svg",
     "svgwidgets",
     "syntaxhighlighters",
+    "telemetry",
     "texttospeech",
     "utils",
     "validators",

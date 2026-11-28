@@ -29,6 +29,15 @@ from prettyqt.qt.QtCore import (
 
 from .event import Event
 from .slot import Slot
+from .aio import (
+    AsyncBridge,
+    async_slots_enabled,
+    disable_async_slots,
+    enable_async_slots,
+    run_in_gui_thread,
+    schedule_coroutine,
+    wait_for_signal,
+)
 
 from .property import Property
 from .loggingcategory import LoggingCategory
@@ -211,6 +220,7 @@ __all__ = [
     "AbstractTableModelMixin",
     "AnimationGroup",
     "AnimationGroupMixin",
+    "AsyncBridge",
     "BasicTimer",
     "BluetoothPermission",
     "Buffer",
@@ -368,6 +378,12 @@ __all__ = [
     "XmlStreamReader",
     "XmlStreamWriter",
     "app",
+    "async_slots_enabled",
+    "disable_async_slots",
+    "enable_async_slots",
     "install_message_handler",
+    "run_in_gui_thread",
+    "schedule_coroutine",
     "update_property_group",
+    "wait_for_signal",
 ]

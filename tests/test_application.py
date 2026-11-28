@@ -87,10 +87,13 @@ class _Emitter(QtCore.QObject):
 
 
 def test_connect_passes_connection_type(qapp):
-    """Application's connect wrapper must not drop the connection type."""
+    """Signal hook connect wrapper must not drop the connection type."""
     receiver = _Receiver()
     emitter = _Emitter()
-    emitter.fired.connect(receiver.on_signal, QtCore.Qt.ConnectionType.QueuedConnection)
+    with core.async_slots_enabled():
+        emitter.fired.connect(
+            receiver.on_signal, QtCore.Qt.ConnectionType.QueuedConnection
+        )
     emitter.fired.emit()
     assert receiver.threads == []  # queued: not delivered directly
     qapp.processEvents()
@@ -118,9 +121,13 @@ def test_coroutine_slot(qapp, qtbot):
         results.append(1)
 
     emitter = _Emitter()
-    emitter.fired.connect(slot)
-    emitter.fired.emit()
-    qtbot.waitUntil(lambda: results == [1], timeout=5000)
+    try:
+        with core.async_slots_enabled():
+            emitter.fired.connect(slot)
+            emitter.fired.emit()
+            qtbot.waitUntil(lambda: results == [1], timeout=5000)
+    finally:
+        core.aio.stop_async_bridge()
 
 
 def test_widgets_work_under_plain_qapplication():

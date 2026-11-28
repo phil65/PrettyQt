@@ -75,6 +75,7 @@ addons = [
 pydantic = ["pydantic>=2.11"]
 pyqt6 = ["PyQt6", "PyQt6-Charts", "PyQt6-Pdf", "PyQt6-WebEngine", "PyQt6-QScintilla"]
 pyside6 = ["pyside6", "PySide6-Addons"]
+telemetry = ["opentelemetry-api"]
 
 [dependency-groups]
 dev = [
@@ -83,6 +84,7 @@ dev = [
   "coverage",
   "deptry",
   "devtools",
+  "opentelemetry-sdk",  # Project-specific: optional dep for prettyqt[telemetry] tests & ty
   "pyreadline3",
   "pytest",
   "pytest-cov",
@@ -319,7 +321,10 @@ allowed-unresolved-imports = [
   "PyInstaller.**",  # __pyinstaller hook
   "comtypes.**",  # Windows taskbar integration
   "emoji",
+  "opentelemetry.**",
   "pandas",
+  "qasync",
+  "qtinter",
   "win32api",  # pywin32 (Windows only)
   "win32con",
   "win32gui",

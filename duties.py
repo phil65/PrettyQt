@@ -1,6 +1,8 @@
 """Project tasks."""
 
 import os
+import pathlib
+import shutil
 from typing import Literal
 
 from duty import duty
@@ -108,3 +110,35 @@ def version(
     tag = f"v{new_version}"
     ctx.run(f"git tag {tag}")
     print(f"Created tag: {tag}")
+
+
+# Project-specific: local OpenTelemetry trace/metric viewer via Aspire Dashboard.
+@duty(capture=False)
+def aspire(
+    ctx,
+    runtime: Literal["auto", "docker", "podman"] = "auto",
+    port: int = 18888,
+):
+    """Run local .NET Aspire Dashboard (OTLP UI on :18888, gRPC :4317, HTTP :4318)."""
+    if runtime == "auto":
+        cmd = shutil.which("docker") or shutil.which("podman")
+        if cmd is None:
+            msg = "Neither 'docker' nor 'podman' found on PATH."
+            raise RuntimeError(msg)
+        engine = pathlib.Path(cmd).name
+    else:
+        engine = runtime
+    print(f"Starting Aspire Dashboard via {engine}:")
+    print(f"  UI:        http://localhost:{port}")
+    print("  OTLP gRPC: localhost:4317")
+    print("  OTLP HTTP: http://localhost:4318/v1/traces")
+    ctx.run(
+        f"{engine} run --rm -it"
+        f" -p {port}:18888"
+        " -p 4317:18889"
+        " -p 4318:18890"
+        " -e DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true"
+        " -e DOTNET_DASHBOARD_OTLP_HTTP_ENDPOINT_URL=http://+:18890"
+        " --name prettyqt-aspire-dashboard"
+        " mcr.microsoft.com/dotnet/aspire-dashboard:latest"
+    )

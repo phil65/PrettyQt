@@ -1,5 +1,4 @@
 import annotationlib
-import asyncio
 import functools
 import inspect
 import itertools
@@ -17,20 +16,33 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-def Slot(*args, auto: bool = False, **kwargs):
+def Slot(
+    *args: Any,
+    auto: bool = False,
+    trace: bool = False,
+    span_name: str | None = None,
+    **kwargs: Any,
+):
     if auto:
         return AutoSlot
 
     def outer_decorator(fn):
-        if inspect.iscoroutinefunction(fn):
+        target = fn
+        if trace:
+            from prettyqt import telemetry
 
-            @QtCore.Slot(*args)
+            target = telemetry.traced_slot(span_name)(target)
+        if inspect.iscoroutinefunction(target):
+
+            @QtCore.Slot(*args, **kwargs)
             @functools.wraps(fn)
-            def wrapper(*args, **kwargs):
-                return asyncio.create_task(fn(*args, **kwargs))
+            def wrapper(*call_args, **call_kwargs):
+                from prettyqt.core import aio
+
+                return aio.schedule_coroutine(target(*call_args, **call_kwargs))
 
             return wrapper
-        return QtCore.Slot(*args, **kwargs)(fn)
+        return QtCore.Slot(*args, **kwargs)(target)
 
     return outer_decorator
 

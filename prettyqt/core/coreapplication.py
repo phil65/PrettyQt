@@ -2,7 +2,7 @@ import logging
 import os
 import pathlib
 import sys
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 from prettyqt import constants, core
 
@@ -10,6 +10,7 @@ from prettyqt import constants, core
 if TYPE_CHECKING:
     from collections.abc import Callable, Coroutine
 
+    from prettyqt.core import aio
     from prettyqt.utils import datatypes
 
 
@@ -26,6 +27,15 @@ else:
 
 class CoreApplicationMixin(core.ObjectMixin, _CoreApplicationBase):
     translators: ClassVar[dict[str, core.Translator]] = {}
+    _notify_hook: ClassVar[
+        Callable[[Any, Any, Callable[[Any, Any], bool]], bool] | None
+    ] = None
+
+    def notify(self, receiver: core.QObject, event: core.QEvent) -> bool:
+        hook = self._notify_hook
+        if hook is None:
+            return super().notify(receiver, event)
+        return hook(receiver, event, super().notify)
 
     @classmethod
     def call_on_exit(cls, func: Callable):
@@ -128,22 +138,38 @@ class CoreApplicationMixin(core.ObjectMixin, _CoreApplicationBase):
 
     @staticmethod
     def run_async(
-        coro: Coroutine | None = None,
+        coro: Coroutine[Any, Any, Any] | None = None,
         keep_running: bool = True,
         quit_qapp: bool = True,
         *,
+        backend: aio.AsyncBackendStr = "auto",
         handle_sigint: bool = False,
         debug: bool | None = None,
     ) -> int:
-        from prettyqt.qt import QtAsyncio
+        from prettyqt.core import aio as _aio
 
-        return QtAsyncio.run(
+        return _aio.run_async(
             coro=coro,
+            backend=backend,
             keep_running=keep_running,
             quit_qapp=quit_qapp,
             handle_sigint=handle_sigint,
             debug=debug,
         )
+
+    @staticmethod
+    def enable_async_slots(*, on_error: Callable[[BaseException], Any] | None = None):
+        """Allow connecting `async def` functions directly to Qt signals."""
+        from prettyqt.core import aio as _aio
+
+        return _aio.enable_async_slots(on_error=on_error)
+
+    @staticmethod
+    def disable_async_slots() -> None:
+        """Disable direct `async def` signal connections."""
+        from prettyqt.core import aio as _aio
+
+        _aio.disable_async_slots()
 
     @staticmethod
     def restart():

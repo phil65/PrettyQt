@@ -10,14 +10,12 @@ import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, paths, widgets
-from prettyqt.utils import asyncrunner, datatypes
+from prettyqt.utils import datatypes
 
 
 if TYPE_CHECKING:
     from collections.abc import (
-        Callable,
         Generator,
-        Iterable,
         Iterator,
         Mapping,
         MutableMapping,
@@ -34,39 +32,6 @@ SAVE_STATES = dict(
 )
 
 
-_runner: asyncrunner.AsyncRunner | None = None
-
-
-def setup_runner() -> asyncrunner.AsyncRunner:
-    """Create the app's AsyncRunner and let signals connect to coroutine functions.
-
-    `SignalInstance.connect` gets wrapped once per process so that coroutine
-    functions are converted via the current runner. All other arguments
-    (connection type etc.) are passed through unchanged.
-    """
-    global _runner
-    import inspect
-
-    from prettyqt.qt.QtCore import SignalInstance
-
-    _runner = asyncrunner.AsyncRunner()
-    old_connect = SignalInstance.connect
-    if getattr(old_connect, "_prettyqt_wrapped", False):
-        return _runner
-
-    def connect(self, slot, *args, **kwargs):
-        if _runner is not None and inspect.iscoroutinefunction(slot):
-            slot = _runner.to_sync(slot)
-        return old_connect(self, slot, *args, **kwargs)
-
-    connect._prettyqt_wrapped = True  # ty: ignore[missing-attribute]
-    try:
-        SignalInstance.connect = connect
-    except TypeError:  # binding does not allow patching its signal type
-        logger.debug("Could not enable coroutine slots for %s", SignalInstance)
-    return _runner
-
-
 if TYPE_CHECKING:
     from prettyqt.qt import QtWidgets
 
@@ -79,16 +44,20 @@ class ApplicationMixin(gui.GuiApplicationMixin, _ApplicationBase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._debug = False
-        self.runner = setup_runner()
 
     def __iter__(self) -> Iterator[widgets.QWidget]:
         return iter(self.topLevelWidgets())
 
-    def run_parallel(self, fns: Iterable[Callable]):
-        self.runner.run_parallel(fns)
-
     def is_debug(self) -> bool:
         return self._debug
+
+    @contextlib.contextmanager
+    def trace_mode(self, **kwargs):
+        """Context manager enabling OpenTelemetry instrumentation for Qt."""
+        from prettyqt import telemetry
+
+        with telemetry.QtInstrumentor(**kwargs) as instrumentor:
+            yield instrumentor
 
     @contextlib.contextmanager
     def debug_mode(self, log_level: int = logging.DEBUG):
