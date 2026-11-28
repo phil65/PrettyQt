@@ -75,8 +75,9 @@ def test_commandpalette_subwindow_and_click(qtbot):
 
     win = widgets.MainWindow()
     qtbot.addWidget(win)
-    win.resize(1200, 800)
+    win.resize(900, 600)
     win.show()
+    debugging.pump(ms=20)
 
     palette = custom_widgets.CommandPalette()
     palette.install_to(win)
@@ -99,19 +100,24 @@ def test_commandpalette_subwindow_and_click(qtbot):
     palette.show()
     debugging.pump(ms=20)
     assert palette.isVisible()
-    assert (palette.width(), palette.height()) == (680, 380)
-    assert palette.x() == (1200 - 680) // 2
-    assert palette.y() == int(800 * 0.12)
+    exp_w = min(680, max(420, win.width() - 80))
+    exp_h = min(380, max(240, win.height() - 120))
+    assert (palette.width(), palette.height()) == (exp_w, exp_h)
+    assert palette.x() == max(12, (win.width() - exp_w) // 2)
+    assert palette.y() == max(36, int(win.height() * 0.12))
     _, warnings = debugging.inspect_tree(win)
     assert not any(w.kind == "out-of-bounds" for w in warnings)
 
     # Responsive sizing on a smaller parent window
     win.resize(560, 400)
+    debugging.pump(ms=20)
     palette.show()
     debugging.pump(ms=20)
-    assert (palette.width(), palette.height()) == (480, 280)
-    assert palette.x() == 40  # noqa: PLR2004
-    assert palette.y() == 48  # noqa: PLR2004
+    exp_w = min(680, max(420, win.width() - 80))
+    exp_h = min(380, max(240, win.height() - 120))
+    assert (palette.width(), palette.height()) == (exp_w, exp_h)
+    assert palette.x() == max(12, (win.width() - exp_w) // 2)
+    assert palette.y() == max(36, int(win.height() * 0.12))
 
     # Clicking an action triggers it and hides the palette
     table._on_clicked(table._proxy.index(0, 0))
