@@ -271,7 +271,13 @@
         <loc>https://phil65.github.io/PrettyQt/Additional%20modules/debugging/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Additional%20modules/debugging/CaptureInfo/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Additional%20modules/debugging/ErrorMessageBox/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Additional%20modules/debugging/LayoutWarning/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Additional%20modules/debugging/MessageHandler/</loc>
@@ -287,6 +293,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Additional%20modules/debugging/TracebackDialog/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Additional%20modules/debugging/UIInspector/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Additional%20modules/docs/</loc>
