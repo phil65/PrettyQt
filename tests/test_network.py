@@ -177,3 +177,89 @@ def test_tcpsocket():
     assert socket.get_socket_type() == "tcp"
     assert socket.get_state() == "unconnected"
     assert not socket.get_local_address()
+
+
+def test_httpheaders():
+    headers = network.HttpHeaders()
+    assert not headers
+    assert len(headers) == 0
+    headers.append_header("content_type", "application/json")
+    headers.append_header("X-Custom", "value1")
+    headers.append_header("X-Custom", "value2")
+    assert bool(headers)
+    assert len(headers) == 3  # noqa: PLR2004
+    assert "content_type" in headers
+    assert "Content-Type" in headers
+    assert "X-Custom" in headers
+    assert "missing" not in headers
+    assert headers["content_type"] == "application/json"
+    assert headers.get_value("content_type") == "application/json"
+    assert headers.get_value("missing", "fallback") == "fallback"
+    assert headers.get_values("X-Custom") == ["value1", "value2"]
+    assert headers.get_combined_value("X-Custom") == "value1, value2"
+    headers["X-Custom"] = "replaced"
+    assert headers["X-Custom"] == "replaced"
+    del headers["X-Custom"]
+    assert "X-Custom" not in headers
+    with pytest.raises(KeyError):
+        _ = headers["missing"]
+    with pytest.raises(KeyError):
+        del headers["missing"]
+    assert headers.to_dict() == {"content-type": "application/json"}
+    assert headers.to_list() == [("content-type", "application/json")]
+    repr(headers)
+    from_dict = network.HttpHeaders.from_dict({"accept": "text/plain", "X-A": "1"})
+    assert from_dict["accept"] == "text/plain"
+    assert from_dict["X-A"] == "1"
+    assert "content_type" in network.httpheaders.WELL_KNOWN_HEADER
+
+
+def test_networkrequestfactory():
+    factory = network.NetworkRequestFactory("https://example.com/api")
+    assert factory.get_base_url() == core.Url("https://example.com/api")
+    factory.set_base_url("https://api.example.org/v1")
+    assert factory.get_base_url() == core.Url("https://api.example.org/v1")
+    factory.set_common_headers({"content_type": "application/json", "X-Key": "abc"})
+    common = factory.get_common_headers()
+    assert isinstance(common, network.HttpHeaders)
+    assert common["content_type"] == "application/json"
+    assert common["X-Key"] == "abc"
+    factory.set_bearer_token("secret-token")
+    assert factory.get_bearer_token() == "secret-token"
+    factory.set_priority("high")
+    assert factory.get_priority() == "high"
+    with pytest.raises(InvalidParamError):
+        factory.set_priority("invalid")
+    factory.set_attribute("http2_allowed", False)
+    assert factory.get_attribute("http2_allowed") is False
+    factory.clear_attribute("http2_allowed")
+    assert factory.get_attribute("http2_allowed", "default") == "default"
+    req = factory.create_request("users")
+    assert isinstance(req, network.NetworkRequest)
+    assert req.get_url() == core.Url("https://api.example.org/v1/users")
+    query = core.QUrlQuery()
+    query.addQueryItem("page", "2")
+    req_q = factory.create_request("users", query)
+    assert req_q.get_url() == core.Url("https://api.example.org/v1/users?page=2")
+    req_only_q = factory.create_request(query=query)
+    assert req_only_q.get_url() == core.Url("https://api.example.org/v1?page=2")
+    req_base = factory.create_request()
+    assert req_base.get_url() == core.Url("https://api.example.org/v1")
+    repr(factory)
+
+
+def test_restaccessmanager_and_restreply(qapp):
+    nam = network.NetworkAccessManager()
+    rest = network.RestAccessManager(nam)
+    assert rest.get_network_access_manager() is nam
+    reply = network.RestReply(None)  # ty: ignore[invalid-argument-type]
+    assert not reply
+    assert reply.is_success() is False
+    assert reply.is_http_status_success() is False
+    assert reply.get_http_status() == 0
+    assert reply.get_error() == "none"
+    assert reply.read_text() == ""
+    assert reply.read_body() == b""
+    assert reply.read_json() is None
+    assert reply.get_network_reply() is None
+    repr(reply)

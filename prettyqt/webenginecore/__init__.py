@@ -16,6 +16,7 @@ try:
     from .webengineurlscheme import WebEngineUrlScheme
     from .webengineurlschemehandler import WebEngineUrlSchemeHandler
     from .webenginesettings import WebEngineSettings
+    from .webenginepermission import WebEnginePermission
     from .webenginepage import WebEnginePage
     from .webenginescript import WebEngineScript
     from .webenginescriptcollection import WebEngineScriptCollection
@@ -31,6 +32,7 @@ try:
         "WebEngineHistoryModel",
         "WebEngineHttpRequest",
         "WebEnginePage",
+        "WebEnginePermission",
         "WebEngineProfile",
         "WebEngineScript",
         "WebEngineScriptCollection",

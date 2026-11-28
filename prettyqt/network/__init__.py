@@ -19,7 +19,11 @@ from .tcpsocket import TcpSocket
 from .udpsocket import UdpSocket
 from .httppart import HttpPart
 from .httpmultipart import HttpMultiPart
+from .httpheaders import HttpHeaders
+from .networkrequestfactory import NetworkRequestFactory
 from .networkaccessmanager import NetworkAccessManager
+from .restreply import RestReply
+from .restaccessmanager import RestAccessManager
 from prettyqt.qt import QtNetwork
 
 QT_MODULE = QtNetwork
@@ -28,6 +32,7 @@ __all__ = [
     "AbstractSocket",
     "AbstractSocketMixin",
     "HostAddress",
+    "HttpHeaders",
     "HttpMultiPart",
     "HttpPart",
     "LocalServer",
@@ -41,6 +46,9 @@ __all__ = [
     "NetworkProxy",
     "NetworkReply",
     "NetworkRequest",
+    "NetworkRequestFactory",
+    "RestAccessManager",
+    "RestReply",
     "TcpServer",
     "TcpSocket",
     "UdpSocket",

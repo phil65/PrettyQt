@@ -1,15 +1,18 @@
 import functools
 import logging
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
-from pygments import lexer, lexers, styles
+from pygments import filter as pygments_filter, lexer, lexers, styles
 from pygments.formatters import html
+from pygments.token import Error, Whitespace, _TokenType
 
 from prettyqt import core, gui, paths
 from prettyqt.utils import get_repr
 
 
 if TYPE_CHECKING:
+    from collections.abc import Iterable, Iterator
+
     from pygments import style
 
 
@@ -115,22 +118,17 @@ def qstring_length(text: str) -> int:
     return length
 
 
-def get_tokens_unprocessed(self, text: str, stack=("root",)):
-    """Split ``text`` into (tokentype, text) pairs.
+def _get_tokens_unprocessed(
+    lex: lexer.RegexLexer, text: str, statestack: list[str]
+) -> Iterator[tuple[int, Any, str]]:
+    """Split ``text`` into ``(index, tokentype, value)`` triples.
 
-    Monkeypatched to store the final stack on the object itself.
-
-    The `text` parameter this gets passed is only the current line, so to
-    highlight things like multiline strings correctly, we need to retrieve
-    the state from the previous line (this is done in PygmentsHighlighter,
-    below), and use it to continue processing the current line.
+    Mirrors ``pygments.lexer.RegexLexer.get_tokens_unprocessed`` while mutating
+    ``statestack`` in place so the caller receives the end-of-line lexer state
+    for multiline highlighting without monkeypatching Pygments globally.
     """
     pos = 0
-    tokendefs = self._tokens
-    if hasattr(self, "_saved_state_stack"):
-        statestack = list(self._saved_state_stack)
-    else:
-        statestack = list(stack)
+    tokendefs = lex._tokens
     statetokens = tokendefs[statestack[-1]]
     while True:
         for rexmatch, action, new_state in statetokens:
@@ -138,49 +136,46 @@ def get_tokens_unprocessed(self, text: str, stack=("root",)):
             if not m:
                 continue
             if action is not None:
-                if isinstance(action, lexer._TokenType):
+                if type(action) is _TokenType:
                     yield pos, action, m.group()
                 else:
-                    yield from action(self, m)
+                    yield from action(lex, m)
             pos = m.end()
-            match new_state:
-                case None:
-                    break
-                case tuple():
+            if new_state is not None:
+                if isinstance(new_state, tuple):
                     for state in new_state:
-                        match state:
-                            case "#pop":
+                        if state == "#pop":
+                            if len(statestack) > 1:
                                 statestack.pop()
-                            case "#push":
-                                statestack.append(statestack[-1])
-                            case _:
-                                statestack.append(state)
-                case int():
-                    del statestack[new_state:]
-                case "#push":
+                        elif state == "#push":
+                            statestack.append(statestack[-1])
+                        else:
+                            statestack.append(state)
+                elif isinstance(new_state, int):
+                    if abs(new_state) >= len(statestack):
+                        del statestack[1:]
+                    else:
+                        del statestack[new_state:]
+                elif new_state == "#push":
                     statestack.append(statestack[-1])
-                case _:
+                else:
                     msg = f"wrong state def: {new_state!r}"
                     raise AssertionError(msg)
-            statetokens = tokendefs[statestack[-1]]
+                statetokens = tokendefs[statestack[-1]]
             break
         else:
             try:
                 if text[pos] == "\n":
                     # at EOL, reset state to "root"
-                    statestack = ["root"]
+                    statestack[:] = ["root"]
                     statetokens = tokendefs["root"]
-                    yield pos + 1, lexer.Text, "\n"
-                else:
-                    yield pos, lexer.Error, text[pos]
+                    yield pos, Whitespace, "\n"
+                    pos += 1
+                    continue
+                yield pos, Error, text[pos]
                 pos += 1
             except IndexError:
                 break
-    self._saved_state_stack = list(statestack)
-
-
-# Monkeypatch!
-lexer.RegexLexer.get_tokens_unprocessed = get_tokens_unprocessed
 
 
 class PygmentsHighlighter(gui.SyntaxHighlighter):
@@ -216,23 +211,36 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
 
     def highlightBlock(self, string):
         """Highlight a block of text."""
-        if (prev_data := self.currentBlock().previous().userData()) is not None:
-            self._lexer._saved_state_stack = prev_data.syntax_stack  # ty: ignore[missing-attribute]  # set by us
-        elif hasattr(self._lexer, "_saved_state_stack"):
-            del self._lexer._saved_state_stack
-
-        # Lex the text using Pygments
-        index = 0
-        for token, text in self._lexer.get_tokens(string):
-            length = qstring_length(text)
-            self.setFormat(index, length, self._get_format(token))
-            index += length
-
-        if hasattr(self._lexer, "_saved_state_stack"):
-            data = gui.TextBlockUserData(syntax_stack=self._lexer._saved_state_stack)
+        if (
+            isinstance(self._lexer, lexer.RegexLexer)
+            and type(self._lexer).get_tokens_unprocessed
+            is lexer.RegexLexer.get_tokens_unprocessed
+        ):
+            prev_data = self.currentBlock().previous().userData()
+            prev_stack = getattr(prev_data, "syntax_stack", None)
+            statestack = list(prev_stack) if isinstance(prev_stack, list) else ["root"]
+            text = self._lexer._preprocess_lexer_input(string)
+            tokens: Iterable[tuple[Any, str]] = (
+                (tok, val)
+                for _, tok, val in _get_tokens_unprocessed(self._lexer, text, statestack)
+            )
+            if self._lexer.filters:
+                tokens = pygments_filter.apply_filters(
+                    tokens, self._lexer.filters, self._lexer
+                )
+            index = 0
+            for token, chunk in tokens:
+                length = qstring_length(chunk)
+                self.setFormat(index, length, self._get_format(token))
+                index += length
+            data = gui.TextBlockUserData(syntax_stack=statestack)
             self.currentBlock().setUserData(data)
-            # Clean up for the next go-round.
-            del self._lexer._saved_state_stack
+        else:
+            index = 0
+            for token, chunk in self._lexer.get_tokens(string):
+                length = qstring_length(chunk)
+                self.setFormat(index, length, self._get_format(token))
+                index += length
 
     # ---------------------------------------------------------------------------
     # "PygmentsHighlighter" interface

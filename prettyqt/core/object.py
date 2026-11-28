@@ -29,17 +29,34 @@ _properties = {}
 _signals = {}
 
 
-def get_properties(klass):
+def _get_metaobject(
+    klass: type, metaobj: core.QMetaObject | None = None
+) -> core.MetaObject:
+    if metaobj is not None:
+        return core.MetaObject(metaobj)
+    for cls in klass.__mro__:
+        if (static_meta := getattr(cls, "staticMetaObject", None)) is None:
+            continue
+        try:
+            static_meta.propertyCount()
+        except RuntimeError:
+            continue
+        return core.MetaObject(static_meta)
+    msg = f"Could not resolve valid QMetaObject for {klass}"
+    raise RuntimeError(msg)
+
+
+def get_properties(klass: type, metaobj: core.QMetaObject | None = None) -> list[str]:
     if klass not in _properties:
-        metaobj = core.MetaObject(klass.staticMetaObject)
-        _properties[klass] = [i.get_name() for i in metaobj.get_properties()]
+        meta = _get_metaobject(klass, metaobj)
+        _properties[klass] = [i.get_name() for i in meta.get_properties()]
     return _properties[klass]
 
 
-def get_signals(klass):
+def get_signals(klass: type, metaobj: core.QMetaObject | None = None) -> list[str]:
     if klass not in _signals:
-        metaobj = core.MetaObject(klass.staticMetaObject)
-        _signals[klass] = [i.get_name() for i in metaobj.get_signals()]
+        meta = _get_metaobject(klass, metaobj)
+        _signals[klass] = [i.get_name() for i in meta.get_signals()]
     return _signals[klass]
 
 
@@ -235,8 +252,7 @@ class ObjectMixin(_ObjectBase):
 
     @classmethod
     def get_static_metaobject(cls) -> core.MetaObject:
-        # staticMetaObject is missing in the PySide6 stubs.
-        return core.MetaObject(cls.staticMetaObject)  # ty: ignore[missing-attribute]
+        return _get_metaobject(cls)
 
     def get_metaobject(self) -> core.MetaObject:
         return core.MetaObject(self.metaObject())

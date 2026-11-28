@@ -1,5 +1,7 @@
 """Tests for `prettyqt` package."""
 
+import warnings
+
 import pytest
 
 from prettyqt import core, webenginecore
@@ -127,9 +129,11 @@ def test_webenginepage(qapp, tmp_path):
         page.set_lifecycle_state("test")
     assert page.get_lifecycle_state() == "discarded"
     page.trigger_action("select_all")
-    page.set_feature_permission(
-        "http://www.google.de", "clipboard_read_write", "granted_by_user"
-    )
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", DeprecationWarning)
+        page.set_feature_permission(
+            "http://www.google.de", "clipboard_read_write", "granted_by_user"
+        )
     page.insert_stylesheet("percent_css", "body { width: 100%; }", immediately=False)
     assert "percent_css" in [s.name() for s in page.get_scripts()]
     css_file = tmp_path / "style.css"
@@ -144,3 +148,19 @@ def test_webenginepage(qapp, tmp_path):
     page.get_scroll_position()
     page.get_contents_size()
     # page.choose_files("open", [], [])
+
+
+def test_webenginepermission(qapp):
+    perm = webenginecore.WebEnginePermission()
+    assert not perm
+    assert not perm.isValid()
+    assert perm.get_origin() == core.Url()
+    assert perm.get_permission_type() == "unsupported"
+    assert perm.get_state() == "invalid"
+    repr(perm)
+    assert webenginecore.WebEnginePermission.is_persistent("notifications") is True
+    assert webenginecore.WebEnginePermission.is_persistent("unsupported") is False
+    with pytest.raises(InvalidParamError):
+        webenginecore.WebEnginePermission.is_persistent("invalid")
+    assert "geolocation" in webenginecore.webenginepermission.PERMISSION_TYPE
+    assert "granted" in webenginecore.webenginepermission.STATE

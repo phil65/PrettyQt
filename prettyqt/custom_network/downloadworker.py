@@ -1,6 +1,5 @@
 import logging
-
-import requests
+import urllib.request
 
 from prettyqt import core
 
@@ -24,14 +23,14 @@ class DownloadWorker(core.QRunnable):
 
     def run(self) -> None:
         try:
-            req = requests.get(self.url, verify=True, timeout=self.timeout)
-            req.raise_for_status()
+            with urllib.request.urlopen(self.url, timeout=self.timeout) as resp:
+                content = resp.read()
         except Exception as e:
             msg = f"Exception '{e}' during download of '{self.url}'"
             logger.exception(msg)
             self.signals.download_failed.emit(msg, self.url)
         else:
-            self.signals.download_finished.emit(req.content, self.url)
+            self.signals.download_finished.emit(content, self.url)
 
 
 if __name__ == "__main__":

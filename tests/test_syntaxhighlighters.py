@@ -64,6 +64,31 @@ def test_pygmentshighlighter_stylesheet_preserves_document(qapp):
     assert doc.toPlainText() == "def foo():\n    return 42\n"
 
 
+def test_pygmentshighlighter_no_monkeypatch_and_multiline_string(qapp):
+    pygments_lexer = pytest.importorskip("pygments.lexer")
+    token = pytest.importorskip("pygments.token")
+    doc = gui.QTextDocument('x = """\ninside string\nstill string"""\ny = 1\n')
+    highlighter = syntaxhighlighters.PygmentsHighlighter(
+        doc, lexer="python", style="default"
+    )
+    assert pygments_lexer.RegexLexer.get_tokens_unprocessed.__module__ == "pygments.lexer"
+    highlighter.rehighlight()
+
+    string_fmt = highlighter._get_format(token.String.Double)
+    block1 = doc.findBlockByNumber(1)
+    block2 = doc.findBlockByNumber(2)
+    block3 = doc.findBlockByNumber(3)
+    formats1 = block1.layout().formats()
+    formats2 = block2.layout().formats()
+    formats3 = block3.layout().formats()
+    assert formats1
+    assert formats1[0].format.foreground() == string_fmt.foreground()
+    assert formats2
+    assert formats2[0].format.foreground() == string_fmt.foreground()
+    assert formats3
+    assert formats3[0].format.foreground() != string_fmt.foreground()
+
+
 def test_selectedwordhighlighter_standalone_and_escape(qapp):
     doc = gui.QTextDocument("foo.bar(1) and fooXbar(1)")
     highlighter = syntaxhighlighters.SelectedWordHighlighter(doc)
