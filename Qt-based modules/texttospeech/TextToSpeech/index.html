@@ -1328,6 +1328,38 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1400,6 +1432,8 @@
       
         
       
+        
+      
     
     
     
@@ -1456,6 +1490,22 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -2042,6 +2092,14 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2482,6 +2540,8 @@
       
         
       
+        
+      
     
     
     
@@ -2572,6 +2632,8 @@
       
         
       
+        
+      
     
     
     
@@ -2628,6 +2690,8 @@
       
         
           
+        
+      
         
       
         
@@ -2788,6 +2852,8 @@
       
         
       
+        
+      
     
     
     
@@ -2912,6 +2978,12 @@
       
         
           
+        
+      
+        
+      
+        
+      
         
       
         
@@ -3389,6 +3461,8 @@
       
         
       
+        
+      
     
     
     
@@ -3505,6 +3579,24 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -4427,8 +4519,7 @@
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>prettyqt/texttospeech/texttospeech.py</code></summary>
-                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-21">21</a></span>
+                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-21">21</a></span>
 <span class="normal"><a href="#prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-22">22</a></span>
 <span class="normal"><a href="#prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-23">23</a></span>
 <span class="normal"><a href="#prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-24">24</a></span>
@@ -4441,21 +4532,22 @@
 <span class="normal"><a href="#prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-31">31</a></span>
 <span class="normal"><a href="#prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-32">32</a></span>
 <span class="normal"><a href="#prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-20"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-20" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-20"></a><span class="k">class</span><span class="w"> </span><span class="nc">TextToSpeech</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">texttospeech</span><span class="o">.</span><span class="n">QTextToSpeech</span><span class="p">):</span>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-21"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-21" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-21"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-22"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-22" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-22"></a>        <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-23"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-23" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-23"></a>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-24"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-24" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-24"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_locale</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Locale</span><span class="p">:</span>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-25"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-25" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-25"></a>        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Locale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">locale</span><span class="p">())</span>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-26"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-26" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-26"></a>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-27"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-27" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-27"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_available_locales</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">Locale</span><span class="p">]:</span>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-28"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-28" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-28"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">Locale</span><span class="p">(</span><span class="n">locale</span><span class="p">)</span> <span class="k">for</span> <span class="n">locale</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">availableLocales</span><span class="p">()]</span>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-29"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-29" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-29"></a>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-30"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-30" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-30"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_voice</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">texttospeech</span><span class="o">.</span><span class="n">Voice</span><span class="p">:</span>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-31"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-31" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-31"></a>        <span class="k">return</span> <span class="n">texttospeech</span><span class="o">.</span><span class="n">Voice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">voice</span><span class="p">())</span>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-32"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-32" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-32"></a>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-33"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-33" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-33"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_available_voices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">texttospeech</span><span class="o">.</span><span class="n">Voice</span><span class="p">]:</span>
-</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-34"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-34" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-34"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">texttospeech</span><span class="o">.</span><span class="n">Voice</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span> <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">availableVoices</span><span class="p">()]</span>
+<span class="normal"><a href="#prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-21"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-21" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-21"></a><span class="k">class</span><span class="w"> </span><span class="nc">TextToSpeech</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">texttospeech</span><span class="o">.</span><span class="n">QTextToSpeech</span><span class="p">):</span>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-22"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-22" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-22"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-23"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-23" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-23"></a>        <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-24"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-24" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-24"></a>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-25"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-25" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-25"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_locale</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Locale</span><span class="p">:</span>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-26"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-26" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-26"></a>        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Locale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">locale</span><span class="p">())</span>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-27"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-27" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-27"></a>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-28"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-28" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-28"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_available_locales</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">Locale</span><span class="p">]:</span>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-29"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-29" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-29"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">Locale</span><span class="p">(</span><span class="n">locale</span><span class="p">)</span> <span class="k">for</span> <span class="n">locale</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">availableLocales</span><span class="p">()]</span>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-30"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-30" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-30"></a>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-31"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-31" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-31"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_voice</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">texttospeech</span><span class="o">.</span><span class="n">Voice</span><span class="p">:</span>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-32"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-32" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-32"></a>        <span class="k">return</span> <span class="n">texttospeech</span><span class="o">.</span><span class="n">Voice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">voice</span><span class="p">())</span>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-33"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-33" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-33"></a>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-34"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-34" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-34"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_available_voices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">texttospeech</span><span class="o">.</span><span class="n">Voice</span><span class="p">]:</span>
+</span><span id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__span-0-35"><a id="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-35" name="prettyqt.texttospeech.texttospeech.TextToSpeech--source--__codelineno-0-35"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">texttospeech</span><span class="o">.</span><span class="n">Voice</span><span class="p">(</span><span class="n">voice</span><span class="p">)</span> <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">availableVoices</span><span class="p">()]</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 

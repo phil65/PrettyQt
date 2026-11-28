@@ -934,6 +934,9 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/BasicTimer/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/BluetoothPermission/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/Buffer/</loc>
       </url>
       <url>
@@ -944,6 +947,12 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/Calendar/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/CalendarPermission/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/CameraPermission/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/Collator/</loc>
@@ -959,6 +968,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/ConcatenateTablesProxyModel/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/ContactsPermission/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/CoreApplication/</loc>
@@ -1063,6 +1075,9 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/Locale/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/LocationPermission/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/LockFile/</loc>
       </url>
       <url>
@@ -1073,6 +1088,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/MarginsF/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/MessageAuthenticationCode/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/MetaEnum/</loc>
@@ -1090,6 +1108,9 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/MetaType/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/MicrophonePermission/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/MimeData/</loc>
       </url>
       <url>
@@ -1105,6 +1126,9 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/Mutex/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/NativeIpcKey/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/Object/</loc>
       </url>
       <url>
@@ -1118,6 +1142,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/PauseAnimation/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/Permission/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/PersistentModelIndex/</loc>
@@ -1136,6 +1163,12 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/RandomGenerator/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/RangeModel/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/ReadWriteLock/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/RegularExpression/</loc>
@@ -1190,6 +1223,18 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/StorageInfo/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/StringConverter/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/StringConverterMixin/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/StringDecoder/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/StringEncoder/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/StringListModel/</loc>
@@ -1258,6 +1303,9 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/XmlStreamReader/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/core/XmlStreamWriter/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/designer/</loc>
       </url>
       <url>
@@ -1265,6 +1313,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/designer/AbstractFormBuilder/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/designer/AbstractFormBuilderMixin/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/designer/DesignerCustomWidgetInterface/</loc>
@@ -1297,6 +1348,12 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/AbstractTextDocumentLayoutMixin/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/AccessibilityHints/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/AccessibilityHintsMixin/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/Action/</loc>
       </url>
       <url>
@@ -1322,6 +1379,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/ColorSpace/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/ColorTransform/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/ConicalGradient/</loc>
@@ -1352,6 +1412,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/FontMetricsF/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/FontVariableAxis/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/Gradient/</loc>
@@ -1444,6 +1507,9 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/Palette/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/PdfOutputIntent/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/PdfWriter/</loc>
       </url>
       <url>
@@ -1466,6 +1532,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/PolygonF/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/Quaternion/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/RadialGradient/</loc>
@@ -1499,6 +1568,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/StyleHints/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/StyleHintsMixin/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/Surface/</loc>
@@ -1610,6 +1682,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/ValidatorMixin/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/Vector2D/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/gui/Vector3D/</loc>
@@ -1777,6 +1852,9 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/network/HostAddress/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/network/HttpHeaders/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/network/HttpMultiPart/</loc>
       </url>
       <url>
@@ -1814,6 +1892,15 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/network/NetworkRequest/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/network/NetworkRequestFactory/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/network/RestAccessManager/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/network/RestReply/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/network/TcpServer/</loc>
@@ -1981,6 +2068,9 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/qml/QmlPropertyMap/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/qml/QmlPropertyMapMixin/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/qthelp/</loc>
       </url>
       <url>
@@ -2003,6 +2093,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/qthelp/HelpFilterData/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/qthelp/HelpFilterDataMixin/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/qthelp/HelpFilterEngine/</loc>
@@ -2071,6 +2164,9 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/quick/QuickWindow/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/quick/QuickWindowMixin/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/quick/SGNode/</loc>
       </url>
       <url>
@@ -2090,6 +2186,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/scxml/ScxmlDataModel/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/scxml/ScxmlDataModelMixin/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/scxml/ScxmlInvokableService/</loc>
@@ -2146,6 +2245,12 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/statemachine/HistoryState/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/statemachine/KeyEventTransition/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/statemachine/MouseEventTransition/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/statemachine/SignalTransition/</loc>
       </url>
       <url>
@@ -2153,6 +2258,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/statemachine/StateMachine/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/statemachine/StateMixin/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/svg/</loc>
@@ -2207,6 +2315,9 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/webenginecore/WebEnginePage/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/webenginecore/WebEnginePermission/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/webenginecore/WebEngineProfile/</loc>
@@ -2381,6 +2492,15 @@
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/GestureMixin/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/GestureRecognizer/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/GestureRecognizerMixin/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/GraphicsAnchor/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/GraphicsAnchorLayout/</loc>
@@ -2602,6 +2722,12 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/RadioButton/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/RhiWidget/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/RhiWidgetMixin/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/RubberBand/</loc>
       </url>
       <url>
@@ -2692,7 +2818,19 @@
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/StyleOptionHeader/</loc>
       </url>
       <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/StyleOptionHeaderMixin/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/StyleOptionHeaderV2/</loc>
+      </url>
+      <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/StyleOptionMenuItem/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/StyleOptionMenuItemMixin/</loc>
+      </url>
+      <url>
+        <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/StyleOptionMenuItemV2/</loc>
       </url>
       <url>
         <loc>https://phil65.github.io/PrettyQt/Qt-based%20modules/widgets/StyleOptionMixin/</loc>

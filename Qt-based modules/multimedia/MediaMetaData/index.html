@@ -1328,6 +1328,38 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1400,6 +1432,8 @@
       
         
       
+        
+      
     
     
     
@@ -1456,6 +1490,22 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -2358,6 +2408,14 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2798,6 +2856,8 @@
       
         
       
+        
+      
     
     
     
@@ -2888,6 +2948,8 @@
       
         
       
+        
+      
     
     
     
@@ -2944,6 +3006,8 @@
       
         
           
+        
+      
         
       
         
@@ -3104,6 +3168,8 @@
       
         
       
+        
+      
     
     
     
@@ -3228,6 +3294,12 @@
       
         
           
+        
+      
+        
+      
+        
+      
         
       
         
@@ -3578,6 +3650,8 @@
       
         
       
+        
+      
     
     
     
@@ -3694,6 +3768,24 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -4640,9 +4732,7 @@
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>prettyqt/multimedia/mediametadata.py</code></summary>
-                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-71"> 71</a></span>
-<span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-72"> 72</a></span>
-<span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-73"> 73</a></span>
+                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-73"> 73</a></span>
 <span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-74"> 74</a></span>
 <span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-75"> 75</a></span>
 <span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-76"> 76</a></span>
@@ -4671,38 +4761,40 @@
 <span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-99"> 99</a></span>
 <span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-100">100</a></span>
 <span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-101">101</a></span>
-<span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-102">102</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-71"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-71" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-71"></a><span class="k">class</span><span class="w"> </span><span class="nc">MediaMetaData</span><span class="p">(</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-72"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-72" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-72"></a>    <span class="n">QtMultimedia</span><span class="o">.</span><span class="n">QMediaMetaData</span><span class="p">,</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-73"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-73" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-73"></a>    <span class="n">MutableMapping</span><span class="p">,</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-74"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-74" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-74"></a>    <span class="n">metaclass</span><span class="o">=</span><span class="n">datatypes</span><span class="o">.</span><span class="n">QABCMeta</span><span class="p">,</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-75"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-75" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-75"></a><span class="p">):</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-76"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-76" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-76"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-77"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-77" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-77"></a>        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-78"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-78" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-78"></a>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-79"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-79" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-79"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__setitem__</span><span class="p">(</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-80"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-80" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-80"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">KeyStr</span> <span class="o">|</span> <span class="n">QtMultimedia</span><span class="o">.</span><span class="n">QMediaMetaData</span><span class="o">.</span><span class="n">Key</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-81"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-81" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-81"></a>    <span class="p">):</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-82"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-82" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-82"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">KEY</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-83"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-83" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-83"></a>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-84"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-84" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-84"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-85"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-85" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-85"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">KeyStr</span> <span class="o">|</span> <span class="n">QtMultimedia</span><span class="o">.</span><span class="n">QMediaMetaData</span><span class="o">.</span><span class="n">Key</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-86"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-86" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-86"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span><span class="p">:</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-87"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-87" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-87"></a>        <span class="n">qt_key</span> <span class="o">=</span> <span class="n">KEY</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-88"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-88" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-88"></a>        <span class="k">if</span> <span class="n">qt_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-89"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-89" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-89"></a>            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-90"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-90" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-90"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">qt_key</span><span class="p">)</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-91"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-91" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-91"></a>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-92"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-92" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-92"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">KeyStr</span> <span class="o">|</span> <span class="n">QtMultimedia</span><span class="o">.</span><span class="n">QMediaMetaData</span><span class="o">.</span><span class="n">Key</span><span class="p">):</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-93"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-93" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-93"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">KEY</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-94"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-94" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-94"></a>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-95"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-95" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-95"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-96"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-96" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-96"></a>        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">()</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-97"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-97" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-97"></a>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-98"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-98" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-98"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-99"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-99" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-99"></a>        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-100"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-100" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-100"></a>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-101"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-101" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-101"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-102"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-102" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-102"></a>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-102">102</a></span>
+<span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-103">103</a></span>
+<span class="normal"><a href="#prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-104">104</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-73"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-73" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-73"></a><span class="k">class</span><span class="w"> </span><span class="nc">MediaMetaData</span><span class="p">(</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-74"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-74" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-74"></a>    <span class="n">QtMultimedia</span><span class="o">.</span><span class="n">QMediaMetaData</span><span class="p">,</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-75"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-75" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-75"></a>    <span class="n">MutableMapping</span><span class="p">,</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-76"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-76" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-76"></a>    <span class="n">metaclass</span><span class="o">=</span><span class="n">datatypes</span><span class="o">.</span><span class="n">QABCMeta</span><span class="p">,</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-77"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-77" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-77"></a><span class="p">):</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-78"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-78" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-78"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-79"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-79" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-79"></a>        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-80"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-80" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-80"></a>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-81"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-81" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-81"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__setitem__</span><span class="p">(</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-82"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-82" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-82"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">KeyStr</span> <span class="o">|</span> <span class="n">QtMultimedia</span><span class="o">.</span><span class="n">QMediaMetaData</span><span class="o">.</span><span class="n">Key</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-83"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-83" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-83"></a>    <span class="p">):</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-84"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-84" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-84"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">KEY</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-85"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-85" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-85"></a>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-86"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-86" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-86"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-87"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-87" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-87"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">KeyStr</span> <span class="o">|</span> <span class="n">QtMultimedia</span><span class="o">.</span><span class="n">QMediaMetaData</span><span class="o">.</span><span class="n">Key</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-88"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-88" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-88"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span><span class="p">:</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-89"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-89" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-89"></a>        <span class="n">qt_key</span> <span class="o">=</span> <span class="n">KEY</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-90"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-90" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-90"></a>        <span class="k">if</span> <span class="n">qt_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-91"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-91" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-91"></a>            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-92"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-92" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-92"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">qt_key</span><span class="p">)</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-93"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-93" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-93"></a>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-94"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-94" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-94"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">KeyStr</span> <span class="o">|</span> <span class="n">QtMultimedia</span><span class="o">.</span><span class="n">QMediaMetaData</span><span class="o">.</span><span class="n">Key</span><span class="p">):</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-95"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-95" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-95"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">KEY</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-96"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-96" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-96"></a>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-97"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-97" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-97"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-98"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-98" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-98"></a>        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">()</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-99"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-99" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-99"></a>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-100"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-100" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-100"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-101"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-101" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-101"></a>        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-102"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-102" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-102"></a>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-103"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-103" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-103"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__span-0-104"><a id="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-104" name="prettyqt.multimedia.mediametadata.MediaMetaData--source--__codelineno-0-104"></a>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 

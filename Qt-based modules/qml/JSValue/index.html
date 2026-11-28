@@ -1328,6 +1328,38 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1400,6 +1432,8 @@
       
         
       
+        
+      
     
     
     
@@ -1456,6 +1490,22 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -2042,6 +2092,14 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2450,6 +2508,8 @@
       
         
           
+        
+      
         
       
         
@@ -3034,6 +3094,33 @@
 
                 
               
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QmlPropertyMapMixin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  QmlPropertyMapMixin
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
             </ul>
           </nav>
         
@@ -3054,6 +3141,8 @@
       
         
           
+        
+      
         
       
         
@@ -3144,6 +3233,8 @@
       
         
           
+        
+      
         
       
         
@@ -3304,6 +3395,8 @@
       
         
       
+        
+      
     
     
     
@@ -3428,6 +3521,12 @@
       
         
           
+        
+      
+        
+      
+        
+      
         
       
         
@@ -3778,6 +3877,8 @@
       
         
       
+        
+      
     
     
     
@@ -3894,6 +3995,24 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -4763,6 +4882,8 @@
       
         
       
+        
+      
     
     
     
@@ -4847,10 +4968,7 @@
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>prettyqt/qml/jsvalue.py</code></summary>
-                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-26">26</a></span>
+                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-26">26</a></span>
 <span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-27">27</a></span>
 <span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-28">28</a></span>
 <span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-29">29</a></span>
@@ -4906,66 +5024,69 @@
 <span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-79">79</a></span>
 <span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-80">80</a></span>
 <span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-81">81</a></span>
-<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-82">82</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-23"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-23" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-23"></a><span class="k">class</span><span class="w"> </span><span class="nc">JSValue</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">QJSValue</span><span class="p">):</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-24"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-24" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-24"></a><span class="w">    </span><span class="sd">"""Acts as a container for Qt/JavaScript data types."""</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-25"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-25" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-25"></a>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-26"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-26" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-26"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-27"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-27" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-27"></a>        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">toVariant</span><span class="p">())</span>
+<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-82">82</a></span>
+<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-83">83</a></span>
+<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-85">85</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-26"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-26" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-26"></a><span class="k">class</span><span class="w"> </span><span class="nc">JSValue</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">QJSValue</span><span class="p">):</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-27"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-27" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-27"></a><span class="w">    </span><span class="sd">"""Acts as a container for Qt/JavaScript data types."""</span>
 </span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-28"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-28" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-28"></a>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-29"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-29" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-29"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-30"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-30" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-30"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s2">"length"</span><span class="p">)</span><span class="o">.</span><span class="n">toVariant</span><span class="p">()</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-29"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-29" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-29"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-30"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-30" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-30"></a>        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">toVariant</span><span class="p">())</span>
 </span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-31"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-31" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-31"></a>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-32"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-32" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-32"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-33"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-33" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-33"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">toVariant</span><span class="p">()</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-32"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-32" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-32"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-33"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-33" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-33"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s2">"length"</span><span class="p">)</span><span class="o">.</span><span class="n">toVariant</span><span class="p">()</span>
 </span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-34"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-34" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-34"></a>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-35"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-35" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-35"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-36"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-36" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-36"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">deleteProperty</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-35"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-35" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-35"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-36"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-36" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-36"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">toVariant</span><span class="p">()</span>
 </span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-37"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-37" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-37"></a>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-38"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-38" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-38"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-39"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-39" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-39"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-38"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-38" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-38"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-39"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-39" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-39"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">deleteProperty</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 </span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-40"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-40" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-40"></a>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-41"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-41" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-41"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-42"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-42" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-42"></a>        <span class="n">iterator</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">JSValueIterator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-43"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-43" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-43"></a>        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">iterator</span><span class="p">))</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-44"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-44" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-44"></a>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-45"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-45" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-45"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-46"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-46" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-46"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasProperty</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-41"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-41" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-41"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-42"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-42" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-42"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-43"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-43" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-43"></a>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-44"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-44" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-44"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-45"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-45" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-45"></a>        <span class="n">iterator</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">JSValueIterator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-46"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-46" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-46"></a>        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">iterator</span><span class="p">))</span>
 </span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-47"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-47" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-47"></a>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-48"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-48" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-48"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-49"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-49" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-49"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-50"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-50" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-50"></a>        <span class="k">return</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-51"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-51" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-51"></a>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-52"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-52" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-52"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-53"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-53" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-53"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">toVariant</span><span class="p">()</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-48"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-48" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-48"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-49"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-49" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-49"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasProperty</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-50"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-50" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-50"></a>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-51"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-51" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-51"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-52"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-52" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-52"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-53"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-53" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-53"></a>        <span class="k">return</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-54"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-54" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-54"></a>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-55"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-55" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-55"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_error_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorTypeStr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-56"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-56" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-56"></a>        <span class="k">if</span> <span class="p">(</span><span class="n">error_type</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">errorType</span><span class="p">())</span> <span class="o">==</span> <span class="n">qml</span><span class="o">.</span><span class="n">QJSValue</span><span class="o">.</span><span class="n">ErrorType</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-57"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-57" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-57"></a>            <span class="k">return</span> <span class="kc">None</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-58"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-58" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-58"></a>        <span class="k">return</span> <span class="n">ERROR_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">error_type</span><span class="p">]</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-59"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-59" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-59"></a>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-60"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-60" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-60"></a>    <span class="nd">@classmethod</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-61"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-61" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-61"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">:</span> <span class="n">qml</span><span class="o">.</span><span class="n">QJSEngine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-62"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-62" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-62"></a><span class="w">        </span><span class="sd">"""Convert any python object into a QJSValue (must happen in GUI thread)."""</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-63"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-63" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-63"></a>        <span class="k">match</span> <span class="n">obj</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-64"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-64" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-64"></a>            <span class="k">case</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-65"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-65" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-65"></a>                <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-66"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-66" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-66"></a>            <span class="k">case</span> <span class="nb">list</span><span class="p">()</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">():</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-67"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-67" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-67"></a>                <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-68"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-68" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-68"></a>                <span class="n">array</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-69"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-69" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-69"></a>                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-70"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-70" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-70"></a>                    <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-71"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-71" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-71"></a>                <span class="k">return</span> <span class="n">array</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-72"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-72" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-72"></a>            <span class="k">case</span> <span class="nb">dict</span><span class="p">():</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-73"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-73" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-73"></a>                <span class="n">array</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">())</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-74"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-74" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-74"></a>                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-75"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-75" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-75"></a>                    <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-76"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-76" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-76"></a>                <span class="k">return</span> <span class="n">array</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-77"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-77" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-77"></a>            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-78"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-78" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-78"></a>                <span class="k">try</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-79"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-79" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-79"></a>                    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-80"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-80" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-80"></a>                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-81"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-81" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-81"></a>                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"unknown type: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-82"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-82" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-82"></a>                    <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-55"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-55" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-55"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-56"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-56" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-56"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">toVariant</span><span class="p">()</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-57"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-57" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-57"></a>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-58"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-58" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-58"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_error_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorTypeStr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-59"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-59" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-59"></a>        <span class="k">if</span> <span class="p">(</span><span class="n">error_type</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">errorType</span><span class="p">())</span> <span class="o">==</span> <span class="n">qml</span><span class="o">.</span><span class="n">QJSValue</span><span class="o">.</span><span class="n">ErrorType</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-60"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-60" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-60"></a>            <span class="k">return</span> <span class="kc">None</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-61"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-61" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-61"></a>        <span class="k">return</span> <span class="n">ERROR_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">error_type</span><span class="p">]</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-62"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-62" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-62"></a>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-63"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-63" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-63"></a>    <span class="nd">@classmethod</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-64"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-64" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-64"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">:</span> <span class="n">qml</span><span class="o">.</span><span class="n">QJSEngine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-65"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-65" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-65"></a><span class="w">        </span><span class="sd">"""Convert any python object into a QJSValue (must happen in GUI thread)."""</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-66"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-66" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-66"></a>        <span class="k">match</span> <span class="n">obj</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-67"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-67" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-67"></a>            <span class="k">case</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-68"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-68" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-68"></a>                <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-69"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-69" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-69"></a>            <span class="k">case</span> <span class="nb">list</span><span class="p">()</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">():</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-70"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-70" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-70"></a>                <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-71"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-71" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-71"></a>                <span class="n">array</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-72"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-72" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-72"></a>                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-73"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-73" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-73"></a>                    <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-74"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-74" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-74"></a>                <span class="k">return</span> <span class="n">array</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-75"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-75" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-75"></a>            <span class="k">case</span> <span class="nb">dict</span><span class="p">():</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-76"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-76" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-76"></a>                <span class="n">js_obj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newObject</span><span class="p">())</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-77"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-77" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-77"></a>                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-78"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-78" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-78"></a>                    <span class="n">js_obj</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-79"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-79" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-79"></a>                <span class="k">return</span> <span class="n">js_obj</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-80"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-80" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-80"></a>            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-81"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-81" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-81"></a>                <span class="k">try</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-82"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-82" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-82"></a>                    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-83"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-83" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-83"></a>                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-84"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-84" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-84"></a>                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"unknown type: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue--source--__span-0-85"><a id="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-85" name="prettyqt.qml.jsvalue.JSValue--source--__codelineno-0-85"></a>                    <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 
@@ -5002,10 +5123,7 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>prettyqt/qml/jsvalue.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-60">60</a></span>
-<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-61">61</a></span>
-<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-62">62</a></span>
-<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-63">63</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-63">63</a></span>
 <span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-64">64</a></span>
 <span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-65">65</a></span>
 <span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-66">66</a></span>
@@ -5024,29 +5142,32 @@
 <span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-79">79</a></span>
 <span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-80">80</a></span>
 <span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-81">81</a></span>
-<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-82">82</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-60"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-60" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-60"></a><span class="nd">@classmethod</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-61"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-61" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-61"></a><span class="k">def</span><span class="w"> </span><span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">:</span> <span class="n">qml</span><span class="o">.</span><span class="n">QJSEngine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-62"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-62" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-62"></a><span class="w">    </span><span class="sd">"""Convert any python object into a QJSValue (must happen in GUI thread)."""</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-63"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-63" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-63"></a>    <span class="k">match</span> <span class="n">obj</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-64"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-64" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-64"></a>        <span class="k">case</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-65"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-65" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-65"></a>            <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-66"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-66" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-66"></a>        <span class="k">case</span> <span class="nb">list</span><span class="p">()</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">():</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-67"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-67" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-67"></a>            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-68"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-68" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-68"></a>            <span class="n">array</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-69"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-69" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-69"></a>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-70"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-70" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-70"></a>                <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-71"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-71" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-71"></a>            <span class="k">return</span> <span class="n">array</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-72"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-72" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-72"></a>        <span class="k">case</span> <span class="nb">dict</span><span class="p">():</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-73"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-73" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-73"></a>            <span class="n">array</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">())</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-74"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-74" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-74"></a>            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-75"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-75" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-75"></a>                <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-76"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-76" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-76"></a>            <span class="k">return</span> <span class="n">array</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-77"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-77" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-77"></a>        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-78"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-78" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-78"></a>            <span class="k">try</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-79"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-79" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-79"></a>                <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-80"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-80" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-80"></a>            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-81"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-81" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-81"></a>                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"unknown type: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
-</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-82"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-82" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-82"></a>                <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
+<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-82">82</a></span>
+<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-83">83</a></span>
+<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-85">85</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-63"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-63" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-63"></a><span class="nd">@classmethod</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-64"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-64" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-64"></a><span class="k">def</span><span class="w"> </span><span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">:</span> <span class="n">qml</span><span class="o">.</span><span class="n">QJSEngine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-65"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-65" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-65"></a><span class="w">    </span><span class="sd">"""Convert any python object into a QJSValue (must happen in GUI thread)."""</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-66"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-66" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-66"></a>    <span class="k">match</span> <span class="n">obj</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-67"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-67" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-67"></a>        <span class="k">case</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-68"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-68" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-68"></a>            <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-69"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-69" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-69"></a>        <span class="k">case</span> <span class="nb">list</span><span class="p">()</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">():</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-70"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-70" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-70"></a>            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-71"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-71" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-71"></a>            <span class="n">array</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-72"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-72" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-72"></a>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-73"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-73" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-73"></a>                <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-74"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-74" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-74"></a>            <span class="k">return</span> <span class="n">array</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-75"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-75" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-75"></a>        <span class="k">case</span> <span class="nb">dict</span><span class="p">():</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-76"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-76" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-76"></a>            <span class="n">js_obj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newObject</span><span class="p">())</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-77"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-77" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-77"></a>            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-78"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-78" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-78"></a>                <span class="n">js_obj</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-79"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-79" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-79"></a>            <span class="k">return</span> <span class="n">js_obj</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-80"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-80" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-80"></a>        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-81"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-81" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-81"></a>            <span class="k">try</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-82"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-82" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-82"></a>                <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-83"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-83" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-83"></a>            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-84"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-84" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-84"></a>                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"unknown type: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+</span><span id="prettyqt.qml.jsvalue.JSValue.from_object--source--__span-0-85"><a id="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-85" name="prettyqt.qml.jsvalue.JSValue.from_object--source--__codelineno-0-85"></a>                <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>

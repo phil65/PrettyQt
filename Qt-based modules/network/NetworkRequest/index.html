@@ -22,7 +22,7 @@
         <link rel="prev" href="../NetworkReply/">
       
       
-        <link rel="next" href="../TcpServer/">
+        <link rel="next" href="../NetworkRequestFactory/">
       
       
         
@@ -1328,6 +1328,38 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1400,6 +1432,8 @@
       
         
       
+        
+      
     
     
     
@@ -1456,6 +1490,22 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -2044,6 +2094,14 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2166,6 +2224,33 @@
     
   
   HostAddress
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HttpHeaders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  HttpHeaders
 
     
   </span>
@@ -2600,6 +2685,87 @@
   
 </nav>
       
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NetworkRequestFactory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  NetworkRequestFactory
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RestAccessManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  RestAccessManager
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RestReply/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  RestReply
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -3090,6 +3256,8 @@
       
         
       
+        
+      
     
     
     
@@ -3180,6 +3348,8 @@
       
         
       
+        
+      
     
     
     
@@ -3236,6 +3406,8 @@
       
         
           
+        
+      
         
       
         
@@ -3396,6 +3568,8 @@
       
         
       
+        
+      
     
     
     
@@ -3520,6 +3694,12 @@
       
         
           
+        
+      
+        
+      
+        
+      
         
       
         
@@ -3870,6 +4050,8 @@
       
         
       
+        
+      
     
     
     
@@ -3986,6 +4168,24 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -4872,6 +5072,14 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -4956,9 +5164,7 @@
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>prettyqt/network/networkrequest.py</code></summary>
-                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-171">171</a></span>
-<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-172">172</a></span>
-<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-173">173</a></span>
+                <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-173">173</a></span>
 <span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-174">174</a></span>
 <span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-175">175</a></span>
 <span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-176">176</a></span>
@@ -5017,68 +5223,70 @@
 <span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-229">229</a></span>
 <span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-230">230</a></span>
 <span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-231">231</a></span>
-<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-232">232</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-171"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-171" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-171"></a><span class="k">class</span><span class="w"> </span><span class="nc">NetworkRequest</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-172"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-172" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-172"></a><span class="w">    </span><span class="sd">"""Holds a request to be sent with QNetworkAccessManager."""</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-173"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-173" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-173"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-174"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-174" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-174"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-175"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-175" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-175"></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-176"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-176" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-176"></a>            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-177"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-177" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-177"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-178"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-178" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-178"></a>            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-179"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-179" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-179"></a>            <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-180"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-180" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-180"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">set_url</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-181"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-181" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-181"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-182"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-182" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-182"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-183"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-183" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-183"></a>        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">())</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-184"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-184" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-184"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-185"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-185" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-185"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">KnownHeaderStr</span> <span class="o">|</span> <span class="n">Req</span><span class="o">.</span><span class="n">KnownHeaders</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-186"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-186" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-186"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">setHeader</span><span class="p">(</span><span class="n">KNOWN_HEADER</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-187"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-187" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-187"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-188"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-188" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-188"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">KnownHeaderStr</span> <span class="o">|</span> <span class="n">Req</span><span class="o">.</span><span class="n">KnownHeaders</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-189"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-189" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-189"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="n">KNOWN_HEADER</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-190"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-190" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-190"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-191"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-191" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-191"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]):</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-192"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-192" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-192"></a>        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-193"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-193" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-193"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">setRawHeader</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">encode</span><span class="p">()),</span> <span class="n">core</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">encode</span><span class="p">()))</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-194"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-194" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-194"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-195"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-195" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-195"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-196"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-196" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-196"></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-197"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-197" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-197"></a>            <span class="nb">bytes</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">data</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span> <span class="nb">bytes</span><span class="p">(</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-198"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-198" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-198"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">rawHeader</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">data</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-199"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-199" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-199"></a>            <span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-200"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-200" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-200"></a>            <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawHeaderList</span><span class="p">()</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-201"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-201" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-201"></a>        <span class="p">}</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-202"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-202" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-202"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-203"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-203" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-203"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span><span class="p">):</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-204"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-204" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-204"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">datatypes</span><span class="o">.</span><span class="n">to_url</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-205"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-205" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-205"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-206"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-206" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-206"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">:</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-207"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-207" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-207"></a>        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">())</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-208"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-208" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-208"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-209"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-209" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-209"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="n">PriorityStr</span> <span class="o">|</span> <span class="n">Req</span><span class="o">.</span><span class="n">Priority</span><span class="p">):</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-210"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-210" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-210"></a><span class="w">        </span><span class="sd">"""Set priority.</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-211"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-211" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-211"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-212"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-212" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-212"></a><span class="sd">        Args:</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-213"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-213" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-213"></a><span class="sd">            priority: priority</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-214"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-214" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-214"></a><span class="sd">        """</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-215"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-215" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-215"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">setPriority</span><span class="p">(</span><span class="n">PRIORITY</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">priority</span><span class="p">))</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-216"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-216" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-216"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-217"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-217" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-217"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PriorityStr</span><span class="p">:</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-218"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-218" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-218"></a><span class="w">        </span><span class="sd">"""Get the current priority.</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-219"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-219" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-219"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-220"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-220" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-220"></a><span class="sd">        Returns:</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-221"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-221" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-221"></a><span class="sd">            priority</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-222"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-222" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-222"></a><span class="sd">        """</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-223"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-223" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-223"></a>        <span class="k">return</span> <span class="n">PRIORITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">priority</span><span class="p">()]</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-224"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-224" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-224"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-225"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-225" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-225"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_attribute</span><span class="p">(</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-226"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-226" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-226"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">:</span> <span class="n">AttributeStr</span> <span class="o">|</span> <span class="n">Req</span><span class="o">.</span><span class="n">Attribute</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-227"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-227" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-227"></a>    <span class="p">):</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-228"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-228" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-228"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">ATTRIBUTE</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">attribute</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-229"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-229" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-229"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-230"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-230" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-230"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span><span class="p">):</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-231"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-231" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-231"></a>        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-232"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-232" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-232"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>  <span class="c1"># ty: ignore[invalid-argument-type]  # validated there</span>
+<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-232">232</a></span>
+<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-233">233</a></span>
+<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-234">234</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-173"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-173" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-173"></a><span class="k">class</span><span class="w"> </span><span class="nc">NetworkRequest</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-174"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-174" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-174"></a><span class="w">    </span><span class="sd">"""Holds a request to be sent with QNetworkAccessManager."""</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-175"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-175" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-175"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-176"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-176" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-176"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-177"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-177" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-177"></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-178"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-178" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-178"></a>            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-179"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-179" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-179"></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-180"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-180" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-180"></a>            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-181"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-181" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-181"></a>            <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-182"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-182" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-182"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">set_url</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-183"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-183" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-183"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-184"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-184" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-184"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-185"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-185" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-185"></a>        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">())</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-186"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-186" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-186"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-187"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-187" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-187"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">KnownHeaderStr</span> <span class="o">|</span> <span class="n">Req</span><span class="o">.</span><span class="n">KnownHeaders</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-188"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-188" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-188"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">setHeader</span><span class="p">(</span><span class="n">KNOWN_HEADER</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-189"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-189" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-189"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-190"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-190" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-190"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">KnownHeaderStr</span> <span class="o">|</span> <span class="n">Req</span><span class="o">.</span><span class="n">KnownHeaders</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-191"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-191" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-191"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="n">KNOWN_HEADER</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-192"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-192" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-192"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-193"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-193" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-193"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]):</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-194"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-194" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-194"></a>        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-195"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-195" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-195"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">setRawHeader</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">encode</span><span class="p">()),</span> <span class="n">core</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">encode</span><span class="p">()))</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-196"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-196" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-196"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-197"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-197" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-197"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-198"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-198" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-198"></a>        <span class="k">return</span> <span class="p">{</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-199"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-199" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-199"></a>            <span class="nb">bytes</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">data</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span> <span class="nb">bytes</span><span class="p">(</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-200"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-200" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-200"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">rawHeader</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">data</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-201"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-201" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-201"></a>            <span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-202"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-202" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-202"></a>            <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawHeaderList</span><span class="p">()</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-203"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-203" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-203"></a>        <span class="p">}</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-204"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-204" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-204"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-205"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-205" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-205"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span><span class="p">):</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-206"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-206" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-206"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">datatypes</span><span class="o">.</span><span class="n">to_url</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-207"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-207" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-207"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-208"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-208" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-208"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">:</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-209"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-209" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-209"></a>        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">())</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-210"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-210" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-210"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-211"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-211" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-211"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="n">PriorityStr</span> <span class="o">|</span> <span class="n">Req</span><span class="o">.</span><span class="n">Priority</span><span class="p">):</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-212"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-212" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-212"></a><span class="w">        </span><span class="sd">"""Set priority.</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-213"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-213" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-213"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-214"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-214" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-214"></a><span class="sd">        Args:</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-215"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-215" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-215"></a><span class="sd">            priority: priority</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-216"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-216" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-216"></a><span class="sd">        """</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-217"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-217" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-217"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">setPriority</span><span class="p">(</span><span class="n">PRIORITY</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">priority</span><span class="p">))</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-218"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-218" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-218"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-219"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-219" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-219"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PriorityStr</span><span class="p">:</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-220"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-220" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-220"></a><span class="w">        </span><span class="sd">"""Get the current priority.</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-221"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-221" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-221"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-222"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-222" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-222"></a><span class="sd">        Returns:</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-223"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-223" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-223"></a><span class="sd">            priority</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-224"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-224" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-224"></a><span class="sd">        """</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-225"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-225" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-225"></a>        <span class="k">return</span> <span class="n">PRIORITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">priority</span><span class="p">()]</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-226"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-226" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-226"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-227"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-227" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-227"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_attribute</span><span class="p">(</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-228"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-228" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-228"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">:</span> <span class="n">AttributeStr</span> <span class="o">|</span> <span class="n">Req</span><span class="o">.</span><span class="n">Attribute</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-229"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-229" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-229"></a>    <span class="p">):</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-230"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-230" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-230"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">ATTRIBUTE</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">attribute</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-231"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-231" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-231"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-232"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-232" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-232"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span><span class="p">):</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-233"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-233" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-233"></a>        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest--source--__span-0-234"><a id="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-234" name="prettyqt.network.networkrequest.NetworkRequest--source--__codelineno-0-234"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>  <span class="c1"># ty: ignore[invalid-argument-type]  # validated there</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 
@@ -5111,19 +5319,19 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>prettyqt/network/networkrequest.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-217">217</a></span>
-<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-218">218</a></span>
-<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-219">219</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-219">219</a></span>
 <span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-220">220</a></span>
 <span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-221">221</a></span>
 <span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-222">222</a></span>
-<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-223">223</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-217"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-217" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-217"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PriorityStr</span><span class="p">:</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-218"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-218" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-218"></a><span class="w">    </span><span class="sd">"""Get the current priority.</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-219"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-219" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-219"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-220"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-220" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-220"></a><span class="sd">    Returns:</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-221"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-221" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-221"></a><span class="sd">        priority</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-222"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-222" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-222"></a><span class="sd">    """</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-223"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-223" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-223"></a>    <span class="k">return</span> <span class="n">PRIORITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">priority</span><span class="p">()]</span>
+<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-223">223</a></span>
+<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-224">224</a></span>
+<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-225">225</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-219"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-219" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-219"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PriorityStr</span><span class="p">:</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-220"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-220" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-220"></a><span class="w">    </span><span class="sd">"""Get the current priority.</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-221"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-221" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-221"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-222"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-222" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-222"></a><span class="sd">    Returns:</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-223"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-223" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-223"></a><span class="sd">        priority</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-224"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-224" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-224"></a><span class="sd">    """</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__span-0-225"><a id="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-225" name="prettyqt.network.networkrequest.NetworkRequest.get_priority--source--__codelineno-0-225"></a>    <span class="k">return</span> <span class="n">PRIORITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">priority</span><span class="p">()]</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -5177,19 +5385,19 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>prettyqt/network/networkrequest.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-209">209</a></span>
-<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-210">210</a></span>
-<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-211">211</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-211">211</a></span>
 <span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-212">212</a></span>
 <span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-213">213</a></span>
 <span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-214">214</a></span>
-<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-215">215</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-209"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-209" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-209"></a><span class="k">def</span><span class="w"> </span><span class="nf">set_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="n">PriorityStr</span> <span class="o">|</span> <span class="n">Req</span><span class="o">.</span><span class="n">Priority</span><span class="p">):</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-210"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-210" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-210"></a><span class="w">    </span><span class="sd">"""Set priority.</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-211"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-211" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-211"></a>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-212"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-212" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-212"></a><span class="sd">    Args:</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-213"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-213" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-213"></a><span class="sd">        priority: priority</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-214"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-214" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-214"></a><span class="sd">    """</span>
-</span><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-215"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-215" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-215"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">setPriority</span><span class="p">(</span><span class="n">PRIORITY</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">priority</span><span class="p">))</span>
+<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-215">215</a></span>
+<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-216">216</a></span>
+<span class="normal"><a href="#prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-217">217</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-211"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-211" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-211"></a><span class="k">def</span><span class="w"> </span><span class="nf">set_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="n">PriorityStr</span> <span class="o">|</span> <span class="n">Req</span><span class="o">.</span><span class="n">Priority</span><span class="p">):</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-212"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-212" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-212"></a><span class="w">    </span><span class="sd">"""Set priority.</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-213"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-213" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-213"></a>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-214"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-214" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-214"></a><span class="sd">    Args:</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-215"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-215" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-215"></a><span class="sd">        priority: priority</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-216"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-216" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-216"></a><span class="sd">    """</span>
+</span><span id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__span-0-217"><a id="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-217" name="prettyqt.network.networkrequest.NetworkRequest.set_priority--source--__codelineno-0-217"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">setPriority</span><span class="p">(</span><span class="n">PRIORITY</span><span class="o">.</span><span class="n">get_enum_value</span><span class="p">(</span><span class="n">priority</span><span class="p">))</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -5260,13 +5468,13 @@
         
         
           
-          <a href="../TcpServer/" class="md-footer__link md-footer__link--next" aria-label="Next: TcpServer">
+          <a href="../NetworkRequestFactory/" class="md-footer__link md-footer__link--next" aria-label="Next: NetworkRequestFactory">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                TcpServer
+                NetworkRequestFactory
               </div>
             </div>
             <div class="md-footer__button md-icon">
