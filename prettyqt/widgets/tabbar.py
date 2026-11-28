@@ -46,11 +46,7 @@ class TabBarWrapper:
     def __init__(self, indexer, widget: widgets.QTabBar):
         self._widget = widget
         self._range = (
-            range(
-                indexer.start or 0,
-                indexer.stop or self._widget.count(),
-                indexer.step or 1,
-            )
+            range(*indexer.indices(self._widget.count()))
             if isinstance(indexer, slice)
             else range(indexer, indexer + 1)
         )

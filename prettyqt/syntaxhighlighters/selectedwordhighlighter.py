@@ -24,9 +24,13 @@ class SelectedWordHighlighter(gui.SyntaxHighlighter):
         self._highlight_pattern = None
         if parent is None:
             raise TypeError(parent)
-        # the document belongs to a prettyqt text edit
-        self._widget = cast("widgets.PlainTextEdit", parent.parent())
-        self._widget.selectionChanged.connect(self._filter_selection_for_single_word)
+        # the document may belong to a prettyqt text edit
+        widget = parent.parent()
+        self._widget: widgets.PlainTextEdit | None = (
+            cast("widgets.PlainTextEdit", widget) if widget is not None else None
+        )
+        if self._widget is not None and hasattr(self._widget, "selectionChanged"):
+            self._widget.selectionChanged.connect(self._filter_selection_for_single_word)
 
     def set_selection_term(self, term: str):
         if term == self._selection_term:
@@ -35,11 +39,12 @@ class SelectedWordHighlighter(gui.SyntaxHighlighter):
         self._update()
 
     def _update(self):
+        escaped = re.escape(self._selection_term)
         match self._mode:
             case "all":
-                search_pattern = self._selection_term
+                search_pattern = escaped
             case "word":
-                search_pattern = f"\\b{self._selection_term}\\b"
+                search_pattern = f"\\b{escaped}\\b"
             case _:
                 raise ValueError(self._mode)
         self._highlight_pattern = core.RegularExpression(search_pattern)
@@ -69,9 +74,11 @@ class SelectedWordHighlighter(gui.SyntaxHighlighter):
             self.setFormat(m.span()[0], length, self._highlight_format)
 
     def _filter_selection_for_single_word(self):
+        if self._widget is None:
+            return
         tc = self._widget.selecter.get_text_cursor()
         current_selection = tc.selectedText()
-        if not PAT.split(current_selection):  # SkipEmptyParts
+        if not [p for p in PAT.split(current_selection) if p]:  # SkipEmptyParts
             self.set_selection_term("")
             return
         tc.select_text("start_of_word", "end_of_word")

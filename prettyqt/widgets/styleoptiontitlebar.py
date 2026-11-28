@@ -1,5 +1,5 @@
 from prettyqt import widgets
 
 
-class StyleOptionTitleBar(widgets.StyleOptionComplex, widgets.QStyleOptionTitleBar):
+class StyleOptionTitleBar(widgets.StyleOptionComplexMixin, widgets.QStyleOptionTitleBar):
     pass

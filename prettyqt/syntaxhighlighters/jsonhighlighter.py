@@ -24,7 +24,7 @@ class JsonHighlighter(gui.SyntaxHighlighter):
         for m in BRACKETS.finditer(text):
             self.setFormat(m.span()[0], m.span()[1] - m.span()[0], SYMBOL_FORMAT)
 
-        text.replace('\\"', "  ")
+        text = text.replace('\\"', "  ")
         for m in REGEXP1.finditer(text):
             self.setFormat(m.span()[0], m.span()[1] - m.span()[0], NAME_FORMAT)
         for m in REGEXP2.finditer(text):

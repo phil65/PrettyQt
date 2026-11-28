@@ -8,9 +8,10 @@ PDF_VERSION = bidict(
     v1_4=gui.QPagedPaintDevice.PdfVersion.PdfVersion_1_4,
     va1b=gui.QPagedPaintDevice.PdfVersion.PdfVersion_A1b,
     v1_6=gui.QPagedPaintDevice.PdfVersion.PdfVersion_1_6,
+    vx4=gui.QPagedPaintDevice.PdfVersion.PdfVersion_X4,
 )
 
-PdfVersionStr = Literal["v1_4", "va1b", "v1_6"]
+PdfVersionStr = Literal["v1_4", "va1b", "v1_6", "vx4"]
 
 
 if TYPE_CHECKING:

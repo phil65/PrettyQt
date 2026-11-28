@@ -4,7 +4,18 @@ from prettyqt.qt import QtPositioning
 from prettyqt.utils import bidict
 
 
-SatelliteSystemStr = Literal["undefined", "gps", "glonass"]
+SatelliteSystemStr = Literal[
+    "undefined",
+    "gps",
+    "glonass",
+    "galileo",
+    "beidou",
+    "qzss",
+    "irnss",
+    "sbas",
+    "multiple",
+    "custom",
+]
 
 SATELLITE_SYSTEMS: bidict[
     SatelliteSystemStr, QtPositioning.QGeoSatelliteInfo.SatelliteSystem
@@ -12,6 +23,13 @@ SATELLITE_SYSTEMS: bidict[
     undefined=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.Undefined,
     gps=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.GPS,
     glonass=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.GLONASS,
+    galileo=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.GALILEO,
+    beidou=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.BEIDOU,
+    qzss=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.QZSS,
+    irnss=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.IRNSS,
+    sbas=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.SBAS,
+    multiple=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.Multiple,
+    custom=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.CustomType,
 )
 
 AttributeStr = Literal["elevation", "azimuth"]
@@ -32,7 +50,9 @@ class GeoSatelliteInfo(QtPositioning.QGeoSatelliteInfo):
     def __delitem__(self, index: AttributeStr):
         self.removeAttribute(ATTRIBUTE[index])
 
-    def __contains__(self, value: AttributeStr):
+    def __contains__(self, value: object) -> bool:
+        if not isinstance(value, str) or value not in ATTRIBUTE:
+            return False
         return self.hasAttribute(ATTRIBUTE[value])
 
     def __int__(self):

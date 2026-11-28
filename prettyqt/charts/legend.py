@@ -5,13 +5,26 @@ from prettyqt.qt import QtCharts
 from prettyqt.utils import bidict
 
 
-MarkerShapeStr = Literal["default", "rectangle", "circle", "from_series"]
+MarkerShapeStr = Literal[
+    "default",
+    "rectangle",
+    "circle",
+    "from_series",
+    "rotated_rectangle",
+    "triangle",
+    "star",
+    "pentagon",
+]
 
 MARKER_SHAPES: bidict[MarkerShapeStr, QtCharts.QLegend.MarkerShape] = bidict(
     default=QtCharts.QLegend.MarkerShape.MarkerShapeDefault,
     rectangle=QtCharts.QLegend.MarkerShape.MarkerShapeRectangle,
     circle=QtCharts.QLegend.MarkerShape.MarkerShapeCircle,
     from_series=QtCharts.QLegend.MarkerShape.MarkerShapeFromSeries,
+    rotated_rectangle=QtCharts.QLegend.MarkerShape.MarkerShapeRotatedRectangle,
+    triangle=QtCharts.QLegend.MarkerShape.MarkerShapeTriangle,
+    star=QtCharts.QLegend.MarkerShape.MarkerShapeStar,
+    pentagon=QtCharts.QLegend.MarkerShape.MarkerShapePentagon,
 )
 
 

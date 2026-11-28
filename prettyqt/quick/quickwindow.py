@@ -46,11 +46,12 @@ RENDER_STAGE: bidict[RenderStageStr, QtQuick.QQuickWindow.RenderStage] = bidict(
     no_stage=QtQuick.QQuickWindow.RenderStage.NoStage,
 )
 
-TextRenderTypeStr = Literal["qt_text", "native_text"]
+TextRenderTypeStr = Literal["qt_text", "native_text", "curve_text"]
 
 TEXT_RENDER_TYPE: bidict[TextRenderTypeStr, QtQuick.QQuickWindow.TextRenderType] = bidict(
     qt_text=QtQuick.QQuickWindow.TextRenderType.QtTextRendering,
     native_text=QtQuick.QQuickWindow.TextRenderType.NativeTextRendering,
+    curve_text=QtQuick.QQuickWindow.TextRenderType.CurveTextRendering,
 )
 
 
@@ -65,7 +66,7 @@ class QuickWindowMixin(gui.WindowMixin, _QuickWindowBase):
         flag = self.CreateTextureOption(0)
         for key, val in kwargs.items():
             if val is True:
-                v = CREATE_TEXTURE_OPTION[key]
+                v = CREATE_TEXTURE_OPTION.get_enum_value(key)  # ty: ignore[invalid-argument-type]
                 flag |= v
         return self.createTextureFromImage(image, flag)
 
@@ -99,8 +100,10 @@ class QuickWindowMixin(gui.WindowMixin, _QuickWindowBase):
     @contextlib.contextmanager
     def external_commands(self):
         self.beginExternalCommands()
-        yield self
-        self.endExternalCommands()
+        try:
+            yield self
+        finally:
+            self.endExternalCommands()
 
     def schedule_render_job(
         self,

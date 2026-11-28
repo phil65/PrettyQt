@@ -3,6 +3,7 @@ import logging
 import pathlib
 from typing import TYPE_CHECKING, ClassVar, Literal
 
+from prettyqt import gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
@@ -136,8 +137,10 @@ class FontDatabase(QtGui.QFontDatabase):
         cls.removeApplicationFont(font_id)
 
     @classmethod
-    def get_system_font(cls, font_type: SystemFontStr | QtGui.QFontDatabase.SystemFont):
-        return cls.systemFont(SYSTEM_FONT[font_type])
+    def get_system_font(
+        cls, font_type: SystemFontStr | QtGui.QFontDatabase.SystemFont
+    ) -> gui.Font:
+        return gui.Font(cls.systemFont(SYSTEM_FONT.get_enum_value(font_type)))
 
 
 if __name__ == "__main__":

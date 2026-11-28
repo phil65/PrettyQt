@@ -25,6 +25,10 @@ StandardLocationStr = Literal[
     "app_data",
     "app_local_data",
     "app_config",
+    "public_share",
+    "templates",
+    "state",
+    "generic_state",
 ]
 
 STANDARD_LOCATION: bidict[StandardLocationStr, QtCore.QStandardPaths.StandardLocation] = (
@@ -48,6 +52,10 @@ STANDARD_LOCATION: bidict[StandardLocationStr, QtCore.QStandardPaths.StandardLoc
         app_data=QtCore.QStandardPaths.StandardLocation.AppDataLocation,
         app_local_data=QtCore.QStandardPaths.StandardLocation.AppLocalDataLocation,
         app_config=QtCore.QStandardPaths.StandardLocation.AppConfigLocation,
+        public_share=QtCore.QStandardPaths.StandardLocation.PublicShareLocation,
+        templates=QtCore.QStandardPaths.StandardLocation.TemplatesLocation,
+        state=QtCore.QStandardPaths.StandardLocation.StateLocation,
+        generic_state=QtCore.QStandardPaths.StandardLocation.GenericStateLocation,
     )
 )
 

@@ -23,7 +23,8 @@ class VideoWidget(widgets.WidgetMixin, QtMultimediaWidgets.QVideoWidget):
         ):
             self.setFullScreen(not self.isFullScreen())
             event.accept()
-        return super().mouseDoubleClickEvent(event)
+            return
+        super().mouseDoubleClickEvent(event)
 
 
 if __name__ == "__main__":

@@ -33,8 +33,8 @@ class BaseResolver:
     def get_root(self, node):
         prev = node
         while node:
-            node = self.get_parent(node)
             prev = node
+            node = self.get_parent(node)
         return prev
 
     def get_separator(self, node) -> str:

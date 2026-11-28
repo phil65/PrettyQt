@@ -65,7 +65,7 @@ class Message(Highlighter):
         elif isinstance(record.msg, Exception):
             val = traceback.format_exc()
         else:
-            val = record.msg % record.args
+            val = record.getMessage()
         return f"\n{val}" if "\n" in val else val
 
 

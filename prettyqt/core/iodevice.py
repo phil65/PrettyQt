@@ -49,8 +49,10 @@ class IODeviceMixin(core.ObjectMixin, _IODeviceBase):
     @contextlib.contextmanager
     def open_file(self, mode: OpenModeStr | mod.OpenModeFlag):
         self.open(OPEN_MODES.get_enum_value(mode))
-        yield self
-        self.close()
+        try:
+            yield self
+        finally:
+            self.close()
 
     def get_open_mode(self) -> OpenModeStr:
         return OPEN_MODES.inverse[self.openMode()]

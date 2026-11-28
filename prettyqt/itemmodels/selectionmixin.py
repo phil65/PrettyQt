@@ -37,7 +37,10 @@ class SelectionMixin(_SelectionBase):
             return False
         if role == constants.CHECKSTATE_ROLE:
             name = self._get_selection_id(index)
-            self.selected[name] = not self.selected[name]
+            self.selected[name] = value is True or value in (
+                constants.CheckState.Checked,
+                constants.CheckState.Checked.value,
+            )
             self.dataChanged.emit(index, index)
             return True
         return super().setData(index, value, role)
@@ -48,13 +51,13 @@ class SelectionMixin(_SelectionBase):
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         if not index.isValid():
-            return False
+            return None
         if role == constants.CHECKSTATE_ROLE and index.column() == 0:
             name = self._get_selection_id(index)
             selected = self.selected.get(name, False)
             if name not in self.selected:
                 self.selected[name] = selected
-            return selected
+            return self.to_checkstate(selected)
         return super().data(index, role)
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:

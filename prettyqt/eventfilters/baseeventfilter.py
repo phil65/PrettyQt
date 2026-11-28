@@ -12,8 +12,10 @@ class BaseEventFilter(core.Object):
     @contextlib.contextmanager
     def applied_to(self, obj):
         obj.installEventFilter(self)
-        yield obj
-        obj.removeEventFilter(self)
+        try:
+            yield obj
+        finally:
+            obj.removeEventFilter(self)
 
 
 if __name__ == "__main__":

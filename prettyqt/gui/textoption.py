@@ -31,6 +31,8 @@ FLAG = bidict(
     show_document_terminator=QtGui.QTextOption.Flag.ShowDocumentTerminator,
     add_space_for_separators=QtGui.QTextOption.Flag.AddSpaceForLineAndParagraphSeparators,
     suppress_colors=QtGui.QTextOption.Flag.SuppressColors,
+    show_default_ignorables=QtGui.QTextOption.Flag.ShowDefaultIgnorables,
+    disable_emoji_parsing=QtGui.QTextOption.Flag.DisableEmojiParsing,
 )
 
 FlagStr = Literal[
@@ -40,6 +42,8 @@ FlagStr = Literal[
     "show_document_terminator",
     "add_space_for_separators",
     "suppress_colors",
+    "show_default_ignorables",
+    "disable_emoji_parsing",
 ]
 
 

@@ -14,14 +14,13 @@ AttributeIdStr = Literal[
     "browse_group_list",
     "language_base_attribute_id_list",
     "service_info_time_to_live",
-    "service_availablity",
+    "service_availability",
     "bluetooth_profile_descriptor_list",
     "documentation_url",
     "client_executable_url",
     "icon_url",
     "additional_protocol_descriptor_list",
     "primary_language_base",
-    "service_name",
     "service_description",
     "service_provider",
 ]
@@ -37,7 +36,7 @@ ATTRIBUTE_IDS: bidict[AttributeIdStr, AttributeId] = bidict(
     browse_group_list=AttributeId.BrowseGroupList,
     language_base_attribute_id_list=AttributeId.LanguageBaseAttributeIdList,
     service_info_time_to_live=AttributeId.ServiceInfoTimeToLive,
-    service_availablity=AttributeId.ServiceAvailability,
+    service_availability=AttributeId.ServiceAvailability,
     bluetooth_profile_descriptor_list=AttributeId.BluetoothProfileDescriptorList,
     documentation_url=AttributeId.DocumentationUrl,
     client_executable_url=AttributeId.ClientExecutableUrl,
@@ -90,6 +89,8 @@ class BluetoothServiceInfo(
                 flag = ATTRIBUTE_IDS[value].value
             case AttributeId():
                 flag = value.value
+            case _:
+                raise KeyError(value)
         return self.removeAttribute(flag)
 
     def __setitem__(self, index: str | int | AttributeId, value):
@@ -101,12 +102,23 @@ class BluetoothServiceInfo(
                 flag = ATTRIBUTE_IDS[index].value
             case AttributeId():
                 flag = index.value
+            case _:
+                raise KeyError(index)
         return self.setAttribute(flag, value)
 
-    def __contains__(self, value: int | AttributeIdStr | AttributeId) -> bool:
-        if isinstance(value, str):
-            value = ATTRIBUTE_IDS[value]
-        return self.contains(value if isinstance(value, int) else value.value)
+    def __contains__(self, value: object) -> bool:
+        match value:
+            case int():
+                flag = value
+            case str():
+                if value not in ATTRIBUTE_IDS:
+                    return False
+                flag = ATTRIBUTE_IDS[value].value
+            case AttributeId():
+                flag = value.value
+            case _:
+                return False
+        return self.contains(flag)
 
     def __iter__(self):
         """Iter the info attributes."""

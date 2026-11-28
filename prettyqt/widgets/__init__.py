@@ -22,6 +22,7 @@ from .abstractspinbox import AbstractSpinBox, AbstractSpinBoxMixin
 from .abstractitemview import AbstractItemView, AbstractItemViewMixin
 from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
+from .rhiwidget import RhiWidget, RhiWidgetMixin
 from .rubberband import RubberBand
 from .graphicstransform import GraphicsTransform, GraphicsTransformMixin
 from .graphicsrotation import GraphicsRotation
@@ -39,6 +40,7 @@ from .graphicslayoutitem import GraphicsLayoutItem, GraphicsLayoutItemMixin
 from .graphicslayout import GraphicsLayout, GraphicsLayoutMixin
 from .graphicsgridlayout import GraphicsGridLayout
 from .graphicslinearlayout import GraphicsLinearLayout
+from .graphicsanchor import GraphicsAnchor
 from .graphicsanchorlayout import GraphicsAnchorLayout
 from .graphicswidget import GraphicsWidget, GraphicsWidgetMixin
 from .graphicsproxywidget import GraphicsProxyWidget
@@ -62,8 +64,10 @@ from .styleoptiondockwidget import StyleOptionDockWidget
 from .styleoptionfocusrect import StyleOptionFocusRect
 from .styleoptionframe import StyleOptionFrame
 from .styleoptiongraphicsitem import StyleOptionGraphicsItem
-from .styleoptionheader import StyleOptionHeader
-from .styleoptionmenuitem import StyleOptionMenuItem
+from .styleoptionheader import StyleOptionHeader, StyleOptionHeaderMixin
+from .styleoptionheaderv2 import StyleOptionHeaderV2
+from .styleoptionmenuitem import StyleOptionMenuItem, StyleOptionMenuItemMixin
+from .styleoptionmenuitemv2 import StyleOptionMenuItemV2
 from .styleoptionprogressbar import StyleOptionProgressBar
 from .styleoptionrubberband import StyleOptionRubberBand
 from .styleoptiontab import StyleOptionTab
@@ -183,6 +187,7 @@ from .sizegrip import SizeGrip
 from .plaintextdocumentlayout import PlainTextDocumentLayout
 
 from .gesture import Gesture, GestureMixin
+from .gesturerecognizer import GestureRecognizer, GestureRecognizerMixin
 from .tapgesture import TapGesture
 from .tapandholdgesture import TapAndHoldGesture
 from .pangesture import PanGesture
@@ -264,6 +269,9 @@ __all__ = [
     "FrameMixin",
     "Gesture",
     "GestureMixin",
+    "GestureRecognizer",
+    "GestureRecognizerMixin",
+    "GraphicsAnchor",
     "GraphicsAnchorLayout",
     "GraphicsBlurEffect",
     "GraphicsColorizeEffect",
@@ -349,6 +357,8 @@ __all__ = [
     "PushButton",
     "PushButtonMixin",
     "RadioButton",
+    "RhiWidget",
+    "RhiWidgetMixin",
     "RubberBand",
     "ScrollArea",
     "ScrollBar",
@@ -379,7 +389,11 @@ __all__ = [
     "StyleOptionGraphicsItem",
     "StyleOptionGroupBox",
     "StyleOptionHeader",
+    "StyleOptionHeaderMixin",
+    "StyleOptionHeaderV2",
     "StyleOptionMenuItem",
+    "StyleOptionMenuItemMixin",
+    "StyleOptionMenuItemV2",
     "StyleOptionMixin",
     "StyleOptionProgressBar",
     "StyleOptionRubberBand",

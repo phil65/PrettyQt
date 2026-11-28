@@ -9,12 +9,13 @@ if TYPE_CHECKING:
     from prettyqt.utils import datatypes
 
 
-OptionStr = Literal["show_alpha", "no_buttons", "no_native"]
+OptionStr = Literal["show_alpha", "no_buttons", "no_native", "no_eye_dropper_button"]
 
 OPTIONS: bidict[OptionStr, widgets.QColorDialog.ColorDialogOption] = bidict(
     show_alpha=widgets.QColorDialog.ColorDialogOption.ShowAlphaChannel,
     no_buttons=widgets.QColorDialog.ColorDialogOption.NoButtons,
     no_native=widgets.QColorDialog.ColorDialogOption.DontUseNativeDialog,
+    no_eye_dropper_button=widgets.QColorDialog.ColorDialogOption.NoEyeDropperButton,
 )
 
 

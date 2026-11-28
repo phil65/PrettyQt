@@ -26,7 +26,9 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin, _PixmapBa
         return not self.isNull()
 
     def __eq__(self, other):
-        return self.toImage() == other.toImage() if isinstance(other, Pixmap) else False
+        return (
+            self.toImage() == other.toImage() if isinstance(other, gui.QPixmap) else False
+        )
 
     def __hash__(self):
         return self.cacheKey()

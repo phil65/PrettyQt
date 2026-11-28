@@ -20,13 +20,16 @@ BYTE_ORDER: bidict[ByteOrderStr, QtCore.QDataStream.ByteOrder] = bidict(
     little_endian=QtCore.QDataStream.ByteOrder.LittleEndian,
 )
 
-StatusStr = Literal["ok", "read_past_end", "read_corrupt_data", "write_failed"]
+StatusStr = Literal[
+    "ok", "read_past_end", "read_corrupt_data", "write_failed", "size_limit_exceeded"
+]
 
 STATUS: bidict[StatusStr, QtCore.QDataStream.Status] = bidict(
     ok=QtCore.QDataStream.Status.Ok,
     read_past_end=QtCore.QDataStream.Status.ReadPastEnd,
     read_corrupt_data=QtCore.QDataStream.Status.ReadCorruptData,
     write_failed=QtCore.QDataStream.Status.WriteFailed,
+    size_limit_exceeded=QtCore.QDataStream.Status.SizeLimitExceeded,
 )
 
 

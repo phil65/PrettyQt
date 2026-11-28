@@ -16,15 +16,16 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         option = widgets.StyleOptionViewItem(option)
         self.initStyleOption(option, index)
         painter.save()
-
-        if option.state and widgets.Style.StateFlag.State_MouseOver:
-            font = option.font
-            font.setUnderline(True)
-            painter.setFont(font)
-            painter.setPen(option.palette.link().color())
-        rect = option.rect.toRectF()
-        painter.drawText(rect, constants.ALIGN_CENTER_LEFT, text)
-        painter.restore()
+        try:
+            if option.state & widgets.Style.StateFlag.State_MouseOver:
+                font = option.font
+                font.setUnderline(True)
+                painter.setFont(font)
+                painter.setPen(option.palette.link().color())
+            rect = option.rect.toRectF()
+            painter.drawText(rect, constants.ALIGN_CENTER_LEFT, text)
+        finally:
+            painter.restore()
 
     def editorEvent(
         self,

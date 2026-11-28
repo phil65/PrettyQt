@@ -22,10 +22,10 @@ class DownloadWorker(core.QRunnable):
         self.timeout = timeout
         self.signals = WorkerSignals()
 
-    @core.Slot()
     def run(self) -> None:
         try:
             req = requests.get(self.url, verify=True, timeout=self.timeout)
+            req.raise_for_status()
         except Exception as e:
             msg = f"Exception '{e}' during download of '{self.url}'"
             logger.exception(msg)

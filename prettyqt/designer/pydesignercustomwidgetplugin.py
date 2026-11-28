@@ -11,30 +11,6 @@ if TYPE_CHECKING:
 class PyDesignerCustomWidgetPlugin(
     core.ObjectMixin, QtDesigner.QPyDesignerCustomWidgetPlugin
 ):
-    def name(self):
-        return "Hallo"
-
-    def icon(self):
-        return "icon"
-
-    def group(self):
-        return "group"
-
-    def includeFile(self):
-        return "includeFile"
-
-    def isContainer(self):
-        return True
-
-    def toolTip(self):
-        return "toolTip"
-
-    def whatsThis(self):
-        return "whatsThis"
-
-    def initialize(self, interface: QtDesigner.QDesignerFormEditorInterface):
-        return super().initialize(interface)
-
     def get_code_template(self):
         return self.codeTemplate()
 

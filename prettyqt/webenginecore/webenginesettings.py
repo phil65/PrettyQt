@@ -37,7 +37,7 @@ pol = mod.UnknownUrlSchemePolicy
 
 
 UnknownUrlSchemePolicyStr = Literal[
-    "disallow", "allow_from_user_interaction", "allow_all"
+    "disallow", "allow_from_user_interaction", "allow_all", "inherited"
 ]
 
 UNKNOWN_URL_SCHEME_POLICY: bidict[UnknownUrlSchemePolicyStr, pol] = bidict(
@@ -45,6 +45,8 @@ UNKNOWN_URL_SCHEME_POLICY: bidict[UnknownUrlSchemePolicyStr, pol] = bidict(
     allow_from_user_interaction=pol.AllowUnknownUrlSchemesFromUserInteraction,
     allow_all=pol.AllowAllUnknownUrlSchemes,
 )
+if hasattr(pol, "InheritedUnknownUrlSchemePolicy"):
+    UNKNOWN_URL_SCHEME_POLICY["inherited"] = pol.InheritedUnknownUrlSchemePolicy
 
 
 attr = mod.WebAttribute
@@ -80,6 +82,15 @@ WebAttributeStr = Literal[
     "web_rtc_public_interfaces_only",
     "dns_prefetch_enabled",
     "pdf_viewer_enabled",
+    "back_forward_cache_enabled",
+    "force_dark_mode",
+    "navigate_on_drop_enabled",
+    "prefer_css_margins_for_printing",
+    "print_header_and_footer",
+    "reading_from_canvas_enabled",
+    "touch_events_api_enabled",
+    "trim_accessibility_identifiers",
+    "xss_auditing_enabled",
 ]
 
 WEB_ATTRIBUTES = bidict[WebAttributeStr, mod.WebAttribute](
@@ -112,7 +123,16 @@ WEB_ATTRIBUTES = bidict[WebAttributeStr, mod.WebAttribute](
     javascript_can_paste=attr.JavascriptCanPaste,
     web_rtc_public_interfaces_only=attr.WebRTCPublicInterfacesOnly,
     dns_prefetch_enabled=attr.DnsPrefetchEnabled,
-    pdf_viewer_enabled=mod.WebAttribute.PdfViewerEnabled,
+    pdf_viewer_enabled=attr.PdfViewerEnabled,
+    back_forward_cache_enabled=attr.BackForwardCacheEnabled,
+    force_dark_mode=attr.ForceDarkMode,
+    navigate_on_drop_enabled=attr.NavigateOnDropEnabled,
+    prefer_css_margins_for_printing=attr.PreferCSSMarginsForPrinting,
+    print_header_and_footer=attr.PrintHeaderAndFooter,
+    reading_from_canvas_enabled=attr.ReadingFromCanvasEnabled,
+    touch_events_api_enabled=attr.TouchEventsApiEnabled,
+    trim_accessibility_identifiers=attr.TrimAccessibilityIdentifiers,
+    xss_auditing_enabled=attr.XSSAuditingEnabled,
 )
 
 
@@ -174,7 +194,9 @@ class WebEngineSettings(MutableMapping):
         """
         self.item.setFontFamily(FONT_FAMILY.get_enum_value(which), family)
 
-    def get_font_family(self, family: FontFamilyStr) -> str:
+    def get_font_family(
+        self, family: FontFamilyStr | QtWebEngineCore.QWebEngineSettings.FontFamily
+    ) -> str:
         """Return the actual font family for the specified generic font family.
 
         Args:
@@ -183,7 +205,7 @@ class WebEngineSettings(MutableMapping):
         Returns:
             Font family
         """
-        return self.item.fontFamily(FONT_FAMILY[family])
+        return self.item.fontFamily(FONT_FAMILY.get_enum_value(family))
 
     def set_font_size(
         self, typ: FontSizeStr | QtWebEngineCore.QWebEngineSettings.FontSize, size: int
@@ -196,7 +218,9 @@ class WebEngineSettings(MutableMapping):
         """
         self.item.setFontSize(FONT_SIZE.get_enum_value(typ), size)
 
-    def get_font_size(self, typ: FontSizeStr) -> int:
+    def get_font_size(
+        self, typ: FontSizeStr | QtWebEngineCore.QWebEngineSettings.FontSize
+    ) -> int:
         """Return the default font size for type in pixels.
 
         Args:
@@ -205,7 +229,7 @@ class WebEngineSettings(MutableMapping):
         Returns:
             Font size
         """
-        return self.item.fontSize(FONT_SIZE[typ])
+        return self.item.fontSize(FONT_SIZE.get_enum_value(typ))
 
 
 if __name__ == "__main__":

@@ -29,12 +29,15 @@ class ProgressBarDelegate(widgets.StyledItemDelegate):
         index: core.ModelIndex,
     ):
         progress = index.data(self._role)
+        if progress is None:
+            return
         opt = widgets.StyleOptionProgressBar()
         opt.rect = option.rect
         opt.minimum = 0
         opt.maximum = self._total
-        opt.progress = progress
-        opt.text = f"{progress}%"
+        opt.progress = int(progress)
+        pct = round(progress * 100 / self._total) if self._total else 0
+        opt.text = f"{pct}%"
         opt.textVisible = True
         opt.state |= widgets.Style.StateFlag.State_Horizontal
         widgets.Application.style().drawControl(

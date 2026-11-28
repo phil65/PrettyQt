@@ -15,6 +15,9 @@ class CharIconEngine(gui.IconEngine):
     def paint(self, painter: gui.QPainter, rect: core.QRect, mode, state):
         self.iconic.paint(painter, rect, mode, state, self.options)
 
+    def clone(self):
+        return CharIconEngine(self.iconic, self.options)
+
     def pixmap(self, size, mode, state) -> gui.QPixmap:
         pm = gui.QPixmap(size)
         pm.fill(constants.GlobalColor.transparent)

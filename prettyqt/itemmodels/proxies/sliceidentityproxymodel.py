@@ -75,7 +75,7 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
             case slice() as col_slice:
                 sl = col_slice
             case int() as col:
-                sl = slice(col, col + 1)
+                sl = slice(col, col + 1 if col != -1 else None)
             case None:
                 sl = slice(None)
             case (
@@ -96,7 +96,7 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
             case slice() as row_slice:
                 sl = row_slice
             case int() as row:
-                sl = slice(row, row + 1)
+                sl = slice(row, row + 1 if row != -1 else None)
             case None:
                 sl = slice(None)
             case (
@@ -158,7 +158,7 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
     row_slice = core.Property(
         list,
         get_row_tuple,
-        set_column_slice,
+        set_row_slice,
         doc="Row slice to include for the proxy",
     )
 

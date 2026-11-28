@@ -53,8 +53,9 @@ class SelectionWidget(widgets.GroupBox):
                 break
 
     def add(self, title: str, data=None, icon: datatypes.IconType = None):
-        # TODO: make use of icon kwarg
         rb = widgets.RadioButton(title)
+        if icon is not None:
+            rb.set_icon(icon)
         rb.toggled.connect(self.update_choice)
         self.buttons[rb] = data
         if len(self.buttons) == 1:
@@ -106,6 +107,7 @@ class SelectionWidget(widgets.GroupBox):
         widget.set_disabled()
         self.rb_other.setText(label)
         self.rb_other.toggled.connect(widget.set_enabled)
+        self.rb_other.toggled.connect(self.update_choice)
         widget.value_changed.connect(lambda: self.update_choice(True))
         layout = widgets.HBoxLayout()
         layout.add(self.rb_other)

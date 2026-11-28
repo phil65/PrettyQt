@@ -71,7 +71,7 @@ class BaseOverlayWidget(widgets.Widget):
     fill_color = core.Property(
         gui.QColor,
         get_fill_color,
-        set_border_color,
+        set_fill_color,
         doc="Color to use for filling",
     )
 

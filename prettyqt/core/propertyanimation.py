@@ -16,7 +16,9 @@ class PropertyAnimation(core.VariantAnimationMixin, core.QPropertyAnimation):
     def __init__(self, *args, **kwargs):
         match args:
             case (core.QObject(), str(), *rest):
-                super().__init__(args[0], bytes(args[1]), *rest, **kwargs)
+                super().__init__(
+                    args[0], datatypes.to_bytearray(args[1]), *rest, **kwargs
+                )
             case _:
                 super().__init__(*args, **kwargs)
 

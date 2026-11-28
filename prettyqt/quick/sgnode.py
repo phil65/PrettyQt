@@ -4,16 +4,6 @@ from prettyqt.qt import QtQuick
 from prettyqt.utils import bidict
 
 
-DIRTY_STATE_BIT = bidict(
-    matrix=QtQuick.QSGNode.DirtyStateBit.DirtyMatrix,
-    node_added=QtQuick.QSGNode.DirtyStateBit.DirtyNodeAdded,
-    node_removed=QtQuick.QSGNode.DirtyStateBit.DirtyNodeRemoved,
-    geometry=QtQuick.QSGNode.DirtyStateBit.DirtyGeometry,
-    material=QtQuick.QSGNode.DirtyStateBit.DirtyMaterial,
-    opacity=QtQuick.QSGNode.DirtyStateBit.DirtyOpacity,
-    # subtree_blocked=QtQuick.QSGNode.DirtyStateBit.DirtySubtreeBlocked,
-)
-
 DirtyStateBitStr = Literal[
     "matrix",
     "node_added",
@@ -24,13 +14,16 @@ DirtyStateBitStr = Literal[
     "subtree_blocked",
 ]
 
-FLAG = bidict(
-    owned_by_parent=QtQuick.QSGNode.Flag.OwnedByParent,
-    use_preprocess=QtQuick.QSGNode.Flag.UsePreprocess,
-    owns_geometry=QtQuick.QSGNode.Flag.OwnsGeometry,
-    owns_material=QtQuick.QSGNode.Flag.OwnsMaterial,
-    owns_opaque_material=QtQuick.QSGNode.Flag.OwnsOpaqueMaterial,
+DIRTY_STATE_BIT: bidict[DirtyStateBitStr, QtQuick.QSGNode.DirtyStateBit] = bidict(
+    matrix=QtQuick.QSGNode.DirtyStateBit.DirtyMatrix,
+    node_added=QtQuick.QSGNode.DirtyStateBit.DirtyNodeAdded,
+    node_removed=QtQuick.QSGNode.DirtyStateBit.DirtyNodeRemoved,
+    geometry=QtQuick.QSGNode.DirtyStateBit.DirtyGeometry,
+    material=QtQuick.QSGNode.DirtyStateBit.DirtyMaterial,
+    opacity=QtQuick.QSGNode.DirtyStateBit.DirtyOpacity,
 )
+if hasattr(QtQuick.QSGNode.DirtyStateBit, "DirtySubtreeBlocked"):
+    DIRTY_STATE_BIT["subtree_blocked"] = QtQuick.QSGNode.DirtyStateBit.DirtySubtreeBlocked
 
 FlagStr = Literal[
     "owned_by_parent",
@@ -40,13 +33,12 @@ FlagStr = Literal[
     "owns_opaque_material",
 ]
 
-NODE_TYPE = bidict(
-    basic=QtQuick.QSGNode.NodeType.BasicNodeType,
-    geometry=QtQuick.QSGNode.NodeType.GeometryNodeType,
-    transform=QtQuick.QSGNode.NodeType.TransformNodeType,
-    clip=QtQuick.QSGNode.NodeType.ClipNodeType,
-    opacity=QtQuick.QSGNode.NodeType.OpacityNodeType,
-    # render=QtQuick.QSGNode.NodeType.RenderNodeType,
+FLAG: bidict[FlagStr, QtQuick.QSGNode.Flag] = bidict(
+    owned_by_parent=QtQuick.QSGNode.Flag.OwnedByParent,
+    use_preprocess=QtQuick.QSGNode.Flag.UsePreprocess,
+    owns_geometry=QtQuick.QSGNode.Flag.OwnsGeometry,
+    owns_material=QtQuick.QSGNode.Flag.OwnsMaterial,
+    owns_opaque_material=QtQuick.QSGNode.Flag.OwnsOpaqueMaterial,
 )
 
 NodeTypeStr = Literal[
@@ -57,6 +49,16 @@ NodeTypeStr = Literal[
     "opacity",
     "render",
 ]
+
+NODE_TYPE: bidict[NodeTypeStr, QtQuick.QSGNode.NodeType] = bidict(
+    basic=QtQuick.QSGNode.NodeType.BasicNodeType,
+    geometry=QtQuick.QSGNode.NodeType.GeometryNodeType,
+    transform=QtQuick.QSGNode.NodeType.TransformNodeType,
+    clip=QtQuick.QSGNode.NodeType.ClipNodeType,
+    opacity=QtQuick.QSGNode.NodeType.OpacityNodeType,
+)
+if hasattr(QtQuick.QSGNode.NodeType, "RenderNodeType"):
+    NODE_TYPE["render"] = QtQuick.QSGNode.NodeType.RenderNodeType
 
 
 class SGNode(QtQuick.QSGNode):

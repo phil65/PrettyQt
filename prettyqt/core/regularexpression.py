@@ -51,11 +51,12 @@ MATCH_TYPE: bidict[MatchTypeStr, mod.MatchType] = bidict(
     no_match=mod.MatchType.NoMatch,
 )
 
-MatchOptionStr = Literal["none", "anchored"]
+MatchOptionStr = Literal["none", "anchored", "dont_check_subject_string"]
 
 MATCH_OPTIONS: bidict[MatchOptionStr, mod.MatchOption] = bidict(
     none=mod.MatchOption.NoMatchOption,
     anchored=mod.MatchOption.AnchorAtOffsetMatchOption,
+    dont_check_subject_string=mod.MatchOption.DontCheckSubjectStringMatchOption,
 )
 
 
@@ -125,7 +126,7 @@ class RegularExpression(core.QRegularExpression):
     def fullmatch(
         self, string: str, pos: int = 0, endpos: int | None = None
     ) -> core.RegularExpressionMatch | None:
-        if endpos:
+        if endpos is not None:
             string = string[:endpos]
         match = super().match(string, pos)
         if (
@@ -151,27 +152,28 @@ class RegularExpression(core.QRegularExpression):
 
     def subn(self, repl: str | Callable, string: str, count: int = 0) -> tuple[str, int]:
         result = string
-        matches = self.global_match(string)
-        matches = list(matches)
+        matches = list(self.global_match(string))
         if count > 0:
             matches = matches[:count]
-        matches = list(reversed(matches))
-        for m in matches:
+        num_subs = len(matches)
+        for m in reversed(matches):
             to_replace = repl if isinstance(repl, str) else repl(m)
-            for j in range(self.groups):
+            for j in range(self.groups + 1):
                 to_replace = to_replace.replace(rf"\g<{j}>", m.group(j))
             for k in self.groupindex:
                 to_replace = to_replace.replace(rf"\g<{k}>", m.group(k))
             result = result[: m.start()] + to_replace + result[m.end() :]
-        return (result, min(len(matches), count))
+        return (result, num_subs)
 
     def sub(self, repl: str | Callable, string: str, count: int = 0) -> str:
         res = self.subn(repl, string, count)
         return res[0]
 
-    def search(self, string: str, pos: int = 0, endpos: int | None = None):
+    def search(
+        self, string: str, pos: int = 0, endpos: int | None = None
+    ) -> core.RegularExpressionMatch | None:
         match = super().match(string[:endpos], pos)
-        return match if match.hasMatch() else None
+        return core.RegularExpressionMatch(match) if match.hasMatch() else None
 
     def split(self, string: str, maxsplit: int = 0):
         raise NotImplementedError
@@ -210,7 +212,7 @@ class RegularExpression(core.QRegularExpression):
 
     @property
     def groupindex(self) -> dict[str, int]:
-        return {k: i for i, k in enumerate(self.namedCaptureGroups()[1:], start=1)}
+        return {k: i for i, k in enumerate(self.namedCaptureGroups()[1:], start=1) if k}
 
     @property
     def flags(self) -> core.QRegularExpression.PatternOption:

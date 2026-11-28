@@ -8,6 +8,7 @@ class PaletteEdit(widgets.Widget):
 
     def __init__(self, *args, object_name: str = "palette_edit", **kwargs):
         super().__init__(*args, object_name=object_name, **kwargs)
+        self._value: gui.Palette = gui.Palette()
 
     def _on_value_change(self):
         self._value = self.get_value()

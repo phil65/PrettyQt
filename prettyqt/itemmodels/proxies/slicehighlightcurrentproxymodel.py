@@ -132,7 +132,7 @@ class SliceHighlightCurrentProxyModel(itemmodels.SliceIdentityProxyModel):
         highlight_color: datatypes.ColorType = "red",
         **kwargs,
     ):
-        self._mode = mode
+        self._highlight_mode = mode
         self._current_value = ...  # Sentinel value
         self._data_role = role
         self._current_column = None
@@ -195,13 +195,16 @@ class SliceHighlightCurrentProxyModel(itemmodels.SliceIdentityProxyModel):
     ):
         if (
             role == constants.BACKGROUND_ROLE
-            and index.data(self._data_role) == self._current_value
+            and super().data(index, self._data_role) == self._current_value
             and self.indexer_contains(index)
             and (
-                (self._mode == "column" and index.column() == self._current_column)
+                (
+                    self._highlight_mode == "column"
+                    and index.column() == self._current_column
+                )
                 or (
-                    (self._mode == "row" and (index.row() == self._current_row))
-                    or self._mode == "all"
+                    (self._highlight_mode == "row" and (index.row() == self._current_row))
+                    or self._highlight_mode == "all"
                 )
             )
         ):

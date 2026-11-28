@@ -11,6 +11,7 @@ MSG_TYPE: bidict[MsgTypeStr, QtCore.QtMsgType] = bidict(
     debug=QtCore.QtMsgType.QtDebugMsg,
     info=QtCore.QtMsgType.QtInfoMsg,
     warning=QtCore.QtMsgType.QtWarningMsg,
+    fatal=QtCore.QtMsgType.QtFatalMsg,
 )
 
 

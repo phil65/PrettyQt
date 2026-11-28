@@ -39,10 +39,10 @@ class TextLengthValidator(gui.Validator):
 
     def validate(self, text: str, pos: int):
         if self._minimum <= len(text) <= self._maximum:
-            return self.State.Acceptable, text, len(text)
+            return self.State.Acceptable, text, pos
         if len(text) <= self._maximum:
-            return self.State.Intermediate, text, len(text)
-        return self.State.Invalid, text, len(text)
+            return self.State.Intermediate, text, pos
+        return self.State.Invalid, text, pos
 
     minimum = core.Property(
         int,

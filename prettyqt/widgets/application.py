@@ -280,15 +280,17 @@ class ApplicationMixin(gui.GuiApplicationMixin, _ApplicationBase):
             effect: desktop effect to set
             enabled: new state
         """
-        self.setEffectEnabled(constants.UI_EFFECTS.get_enum_value(effect))
+        self.setEffectEnabled(constants.UI_EFFECTS.get_enum_value(effect), enabled)
 
-    def is_effect_enabled(self, effect: constants.UiEffectStr) -> bool:
+    def is_effect_enabled(
+        self, effect: constants.UiEffectStr | constants.UIEffect
+    ) -> bool:
         """Return desktop effect state.
 
         Returns:
             desktop effect state
         """
-        return self.isEffectEnabled(constants.UI_EFFECTS[effect])
+        return self.isEffectEnabled(constants.UI_EFFECTS.get_enum_value(effect))
 
     @classmethod
     def sleep(cls, secs: float):

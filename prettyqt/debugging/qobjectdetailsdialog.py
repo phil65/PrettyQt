@@ -96,7 +96,8 @@ class QObjectDetailsDialog(widgets.MainWindow):
         # mdi_area.scene().add(subwindow)
         widget = widgets.Widget()
         layout = widget.set_layout("horizontal")
-        layout.add(qobject)
+        if isinstance(qobject, widgets.QWidget):
+            layout.add(qobject)
         self.setCentralWidget(widget)
         # qobject.position_on(widget)
 
@@ -112,12 +113,6 @@ class QObjectDetailsDialog(widgets.MainWindow):
     @classmethod
     def setup_example(cls):
         return None
-
-    def eventFilter(self, source, event):
-        match event.type():
-            case core.QEvent.Type.MouseButtonRelease:
-                raise ValueError
-        return False
 
     def closeEvent(self, event):
         for stalker in self.stalkers:

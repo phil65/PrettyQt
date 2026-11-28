@@ -9,6 +9,7 @@ if TYPE_CHECKING:
 
 
 StandardButtonStr = Literal[
+    "none",
     "cancel",
     "ok",
     "save",
@@ -31,6 +32,7 @@ StandardButtonStr = Literal[
 
 STANDARD_BUTTON: bidict[StandardButtonStr, widgets.QDialogButtonBox.StandardButton] = (
     bidict(
+        none=widgets.QDialogButtonBox.StandardButton.NoButton,
         cancel=widgets.QDialogButtonBox.StandardButton.Cancel,
         ok=widgets.QDialogButtonBox.StandardButton.Ok,
         save=widgets.QDialogButtonBox.StandardButton.Save,

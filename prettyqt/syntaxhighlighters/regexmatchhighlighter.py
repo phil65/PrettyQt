@@ -31,17 +31,17 @@ class RegexMatchHighlighter(gui.SyntaxHighlighter):
         if not self.spans or not text:
             return
         for i, (start, end) in enumerate(self.spans):
-            if end < start_char:
+            if end <= start_char:
                 continue
-            if start > end_char:
+            if start >= end_char:
                 break
-            starts_in_line = start_char <= start <= end_char
-            ends_in_line = start_char <= end <= end_char
-            if (starts_in_line and ends_in_line) or (not ends_in_line and starts_in_line):
-                # print(f"in line: {line_pos} - {line_pos + match_len}")
+            starts_in_line = start_char <= start < end_char
+            ends_in_line = start_char < end <= end_char
+            if starts_in_line and ends_in_line:
                 self._colorize(start - start_char, end - start, i)
+            elif starts_in_line:
+                self._colorize(start - start_char, len(text) - (start - start_char), i)
             elif ends_in_line:
-                # if self.previousBlockState() == 1:
-                # print(f"ends: {end}")
-                self._colorize(0, end - start, i)
-                # self.setCurrentBlockState(-1)
+                self._colorize(0, end - start_char, i)
+            else:
+                self._colorize(0, len(text), i)

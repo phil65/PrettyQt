@@ -27,21 +27,23 @@ class StarRating:
     ):
         """Paint the stars (and/or diamonds if we're in editing mode)."""
         painter.save()
-        painter.setRenderHint(painter.RenderHint.Antialiasing, True)
-        painter.setPen(constants.PenStyle.NoPen)
-        painter.setBrush(palette.highlight() if is_editable else palette.windowText())
-        y_offset = (rect.height() - PAINTING_SCALE_FACTOR) / 2
-        painter.translate(rect.x() + 10, rect.y() + 10 + y_offset)
-        painter.scale(PAINTING_SCALE_FACTOR, PAINTING_SCALE_FACTOR)
-        for i in range(self.max_stars):
-            if i < self.star_count:
-                painter.drawPolygon(STAR_POLYGON, constants.FillRule.WindingFill)
-            elif is_editable:
-                painter.drawPolygon(DIAMOND_POLYGON, constants.FillRule.WindingFill)
-            else:
-                break
-            painter.translate(1.0, 0.0)
-        painter.restore()
+        try:
+            painter.setRenderHint(painter.RenderHint.Antialiasing, True)
+            painter.setPen(constants.PenStyle.NoPen)
+            painter.setBrush(palette.highlight() if is_editable else palette.windowText())
+            y_offset = (rect.height() - PAINTING_SCALE_FACTOR) / 2
+            painter.translate(rect.x() + 10, rect.y() + 10 + y_offset)
+            painter.scale(PAINTING_SCALE_FACTOR, PAINTING_SCALE_FACTOR)
+            for i in range(self.max_stars):
+                if i < self.star_count:
+                    painter.drawPolygon(STAR_POLYGON, constants.FillRule.WindingFill)
+                elif is_editable:
+                    painter.drawPolygon(DIAMOND_POLYGON, constants.FillRule.WindingFill)
+                else:
+                    break
+                painter.translate(1.0, 0.0)
+        finally:
+            painter.restore()
 
 
 class StarEditor(widgets.Widget):
@@ -81,7 +83,9 @@ class StarEditor(widgets.Widget):
 
     def star_at_position(self, x: float) -> int:
         """Calculate which star the user's mouse cursor is currently hovering over."""
-        val = x // (self.star_rating.sizeHint().width() // self.star_rating.max_stars) + 1
+        val = int(
+            x // (self.star_rating.sizeHint().width() // self.star_rating.max_stars) + 1
+        )
         return val if 0 < val <= self.star_rating.max_stars else -1
 
     def set_star_rating(self, rating: int):
@@ -99,7 +103,11 @@ class StarDelegate(widgets.StyledItemDelegate):
         option: widgets.QStyleOptionViewItem,
         index: core.ModelIndex,
     ):
-        star_rating = StarRating(index.data())
+        rating = index.data()
+        if rating is None:
+            super().paint(painter, option, index)
+            return
+        star_rating = StarRating(rating)
 
         # If the row is currently selected, we need to make sure we
         # paint the background accordingly.
@@ -122,7 +130,8 @@ class StarDelegate(widgets.StyledItemDelegate):
 
     def sizeHint(self, option: widgets.QStyleOptionViewItem, index: core.ModelIndex):
         """Return the size needed to display the item in a QSize object."""
-        star_rating = StarRating(index.data())
+        rating = index.data()
+        star_rating = StarRating(rating if rating is not None else 0)
         return star_rating.sizeHint()
 
     # The next 4 methods handle the custom editing that we need to do.
@@ -142,7 +151,8 @@ class StarDelegate(widgets.StyledItemDelegate):
 
     def setEditorData(self, editor: StarEditor, index: core.ModelIndex):
         """Set the data to be displayed and edited by our custom editor."""
-        editor.set_star_rating(index.data())
+        rating = index.data()
+        editor.set_star_rating(rating if rating is not None else 0)
 
     def setModelData(
         self,

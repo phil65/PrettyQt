@@ -5,13 +5,16 @@ from prettyqt import qml
 from prettyqt.utils import bidict, get_repr
 
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
-ErrorTypeStr = Literal["none", "generic", "range", "reference", "syntax", "type", "uri"]
+ErrorTypeStr = Literal[
+    "none", "generic", "eval", "range", "reference", "syntax", "type", "uri"
+]
 
-ERROR_TYPES = bidict(
+ERROR_TYPES: bidict[ErrorTypeStr, qml.QJSValue.ErrorType] = bidict(
     none=qml.QJSValue.ErrorType(0),
     generic=qml.QJSValue.ErrorType.GenericError,
+    eval=qml.QJSValue.ErrorType.EvalError,
     range=qml.QJSValue.ErrorType.RangeError,
     reference=qml.QJSValue.ErrorType.ReferenceError,
     syntax=qml.QJSValue.ErrorType.SyntaxError,
@@ -70,10 +73,10 @@ class JSValue(qml.QJSValue):
                     array.setProperty(i, cls.from_object(v, jsengine))
                 return array
             case dict():
-                array = cls(jsengine.newArray())
+                js_obj = cls(jsengine.newObject())
                 for k, v in obj.items():
-                    array.setProperty(k, cls.from_object(v, jsengine))
-                return array
+                    js_obj.setProperty(k, cls.from_object(v, jsengine))
+                return js_obj
             case _:
                 try:
                     return cls(obj)

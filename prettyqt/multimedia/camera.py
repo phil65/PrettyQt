@@ -22,7 +22,7 @@ ExposureModeStr = Literal[
     "action",
     "landscape",
     "night_portrait",
-    "threatre",
+    "theatre",
     "sunset",
     "steady_photo",
     "fireworks",
@@ -42,7 +42,7 @@ EXPOSURE_MODE: bidict[ExposureModeStr, multimedia.QCamera.ExposureMode] = bidict
     action=multimedia.QCamera.ExposureMode.ExposureAction,
     landscape=multimedia.QCamera.ExposureMode.ExposureLandscape,
     night_portrait=multimedia.QCamera.ExposureMode.ExposureNightPortrait,
-    threatre=multimedia.QCamera.ExposureMode.ExposureTheatre,
+    theatre=multimedia.QCamera.ExposureMode.ExposureTheatre,
     sunset=multimedia.QCamera.ExposureMode.ExposureSunset,
     steady_photo=multimedia.QCamera.ExposureMode.ExposureSteadyPhoto,
     fireworks=multimedia.QCamera.ExposureMode.ExposureFireworks,
@@ -52,6 +52,7 @@ EXPOSURE_MODE: bidict[ExposureModeStr, multimedia.QCamera.ExposureMode] = bidict
 )
 
 FeatureStr = Literal[
+    "none",
     "color_temperature",
     "exposure_compensation",
     "iso_sensitivity",

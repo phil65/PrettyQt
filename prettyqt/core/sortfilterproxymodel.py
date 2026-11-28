@@ -1,3 +1,4 @@
+import contextlib
 import enum
 import re
 from typing import TYPE_CHECKING, Literal
@@ -19,9 +20,10 @@ class FilterMode(enum.IntEnum):
     fuzzy = 2
     wildcard = 4
     regex = 8
+    substring = 16
 
 
-FilterModeStr = Literal["fixed_string", "fuzzy", "wildcard", "regex"]
+FilterModeStr = Literal["fixed_string", "fuzzy", "wildcard", "regex", "substring"]
 
 
 FILTER_MODE: bidict[FilterModeStr, FilterMode] = bidict(
@@ -29,6 +31,15 @@ FILTER_MODE: bidict[FilterModeStr, FilterMode] = bidict(
     fuzzy=FilterMode.fuzzy,
     wildcard=FilterMode.wildcard,
     regex=FilterMode.regex,
+    substring=FilterMode.substring,
+)
+
+DirectionStr = Literal["rows", "columns", "both"]
+
+DIRECTION: bidict[DirectionStr, core.QSortFilterProxyModel.Direction] = bidict(
+    rows=core.QSortFilterProxyModel.Direction.Rows,
+    columns=core.QSortFilterProxyModel.Direction.Columns,
+    both=core.QSortFilterProxyModel.Direction.Both,
 )
 
 
@@ -69,27 +80,59 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, core.QSortFilterProxyMo
     def filterAcceptsRow(self, source_row: int, source_index: core.ModelIndex) -> bool:
         if self._filter_mode != "fuzzy":
             return super().filterAcceptsRow(source_row, source_index)
-        column = self.filterKeyColumn()
         source_model = self.sourceModel()
-        idx = source_model.index(source_row, column, source_index)
-        text = source_model.data(idx)
-        return sublime_search.fuzzy_match_simple(
-            self.filterRegularExpression().pattern(),
-            text,
-            case_sensitive=self.is_filter_case_sensitive(),
+        if source_model is None:
+            return False
+        column = self.filterKeyColumn()
+        columns = (
+            range(source_model.columnCount(source_index)) if column == -1 else [column]
         )
+        pattern = self.filterRegularExpression().pattern()
+        case_sensitive = self.is_filter_case_sensitive()
+        role = self.filterRole()
+        for col in columns:
+            idx = source_model.index(source_row, col, source_index)
+            data = source_model.data(idx, role)
+            if data is None:
+                continue
+            text = data if isinstance(data, str) else str(data)
+            if sublime_search.fuzzy_match_simple(
+                pattern, text, case_sensitive=case_sensitive
+            ):
+                return True
+        return False
 
     def invalidate(self):
         super().invalidate()
         self.invalidated.emit()
 
+    @contextlib.contextmanager
+    def change_filter(
+        self, direction: DirectionStr | core.QSortFilterProxyModel.Direction = "both"
+    ):
+        """Context manager wrapping beginFilterChange() / endFilterChange()."""
+        self.beginFilterChange()
+        try:
+            yield
+        finally:
+            self.endFilterChange(DIRECTION.get_enum_value(direction))
+
+    def invalidate_rows_filter(self):
+        """Invalidate row filtering using Qt 6.9+ begin/endFilterChange."""
+        self.beginFilterChange()
+        self.endFilterChange(self.Direction.Rows)
+
     def lessThan(self, left, right) -> bool:
         role = super().sortRole()
         left_data = left.data(role)
         right_data = right.data(role)
-        if left_data is not None and right_data is not None:
-            return left_data < right_data
-        return True
+        if left_data is None and right_data is None:
+            return False
+        if left_data is None:
+            return True
+        if right_data is None:
+            return False
+        return left_data < right_data
 
     def sort(
         self,

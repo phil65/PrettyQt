@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
@@ -25,5 +27,17 @@ SORT_INDICATOR = bidict(
 )
 
 
-class StyleOptionHeader(widgets.StyleOptionMixin, widgets.QStyleOptionHeader):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _StyleOptionHeaderBase = QtWidgets.QStyleOptionHeader
+else:
+    _StyleOptionHeaderBase = object
+
+
+class StyleOptionHeaderMixin(widgets.StyleOptionMixin, _StyleOptionHeaderBase):
+    pass
+
+
+class StyleOptionHeader(StyleOptionHeaderMixin, widgets.QStyleOptionHeader):
     pass

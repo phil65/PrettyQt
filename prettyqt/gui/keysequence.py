@@ -23,7 +23,7 @@ SEQUENCE_FORMAT = bidict(
     portable=QtGui.QKeySequence.SequenceFormat.PortableText,
 )
 
-SequenceFormatStr = Literal["native", "Portable"]
+SequenceFormatStr = Literal["native", "portable"]
 
 STANDARD_KEYS = bidict(
     add_tab=QtGui.QKeySequence.StandardKey.AddTab,
@@ -43,7 +43,7 @@ STANDARD_KEYS = bidict(
     find_previous=QtGui.QKeySequence.StandardKey.FindPrevious,
     forward=QtGui.QKeySequence.StandardKey.Forward,
     help_contents=QtGui.QKeySequence.StandardKey.HelpContents,
-    instert_line_separator=QtGui.QKeySequence.StandardKey.InsertLineSeparator,
+    insert_line_separator=QtGui.QKeySequence.StandardKey.InsertLineSeparator,
     insert_paragraph_separator=QtGui.QKeySequence.StandardKey.InsertParagraphSeparator,
     italic=QtGui.QKeySequence.StandardKey.Italic,
     move_to_end_of_block=QtGui.QKeySequence.StandardKey.MoveToEndOfBlock,
@@ -153,8 +153,8 @@ class KeySequence(QtGui.QKeySequence):
         return cls(key).toString()
 
     @classmethod
-    def get_key_bindings(cls, button) -> list[Self]:
-        return [cls(i) for i in cls.keyBindings(button)]
+    def get_key_bindings(cls, button: str | QtGui.QKeySequence.StandardKey) -> list[Self]:
+        return [cls(i) for i in cls.keyBindings(STANDARD_KEYS.get_enum_value(button))]
 
 
 if __name__ == "__main__":

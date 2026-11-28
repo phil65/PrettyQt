@@ -94,11 +94,11 @@ class TreeModel(core.AbstractItemModel):
         child_item = parent_item.children[row]
         return self.createIndex(row, column, child_item)
 
-    def parent(self, index: core.ModelIndex | None = None) -> core.ModelIndex:
-        # hacky way to let the case without any arguments get through.
-        # not really nice, a proper dispatch library would be better.
-        # functools.singledispatchmethod doesnt work here.
-        index = index or core.ModelIndex()
+    def parent(
+        self, index: core.ModelIndex | None = None
+    ) -> core.ModelIndex | core.QObject | None:
+        if index is None:
+            return super().parent()
         if not index.isValid():
             return core.ModelIndex()
 

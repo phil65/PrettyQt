@@ -6,7 +6,7 @@ class PyDesignerCustomWidgetCollectionPlugin(
     core.ObjectMixin, QtDesigner.QPyDesignerCustomWidgetCollectionPlugin
 ):
     def customWidgets(self):
-        pass
+        raise NotImplementedError
 
 
 if __name__ == "__main__":

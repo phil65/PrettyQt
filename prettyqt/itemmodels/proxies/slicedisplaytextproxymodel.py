@@ -53,24 +53,26 @@ class SliceDisplayTextProxyModel(itemmodels.SliceIdentityProxyModel):
             return super().data(index, role)
         data = super().data(index, role)
         match data:
+            case bool():
+                return data
             case int():
                 return self._int_format.format(data)
             case float():
                 return self._float_format.format(data)
             case core.QDateTime():
-                return data.toString(self._datetime_format)
+                return data.toPython().strftime(self._datetime_format)
             case dt.datetime():
                 return data.strftime(self._datetime_format)
             case core.QTime():
-                return data.toString(self._time_format)
+                return data.toPython().strftime(self._time_format)
             case dt.time():
                 return data.strftime(self._time_format)
             case core.QDate():
-                return data.toString(self._date_format)
+                return data.toPython().strftime(self._date_format)
             case dt.date():
                 return data.strftime(self._date_format)
             case _:
-                return super().data(index, role)
+                return data
 
     def set_int_format(self, fmt: str):
         self._int_format = fmt
@@ -87,19 +89,19 @@ class SliceDisplayTextProxyModel(itemmodels.SliceIdentityProxyModel):
     def set_datetime_format(self, fmt: str):
         self._datetime_format = fmt
 
-    def get_datetime_format(self, fmt) -> str:
+    def get_datetime_format(self) -> str:
         return self._datetime_format
 
     def set_date_format(self, fmt: str):
         self._date_format = fmt
 
-    def get_date_format(self, fmt) -> str:
+    def get_date_format(self) -> str:
         return self._date_format
 
     def set_time_format(self, fmt: str):
         self._time_format = fmt
 
-    def get_time_format(self, fmt) -> str:
+    def get_time_format(self) -> str:
         return self._time_format
 
     int_format = core.Property(

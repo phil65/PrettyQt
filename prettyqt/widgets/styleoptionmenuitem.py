@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
@@ -20,5 +22,17 @@ MENU_ITEM_TYPE = bidict(
 )
 
 
-class StyleOptionMenuItem(widgets.StyleOptionMixin, widgets.QStyleOptionMenuItem):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+    _StyleOptionMenuItemBase = QtWidgets.QStyleOptionMenuItem
+else:
+    _StyleOptionMenuItemBase = object
+
+
+class StyleOptionMenuItemMixin(widgets.StyleOptionMixin, _StyleOptionMenuItemBase):
+    pass
+
+
+class StyleOptionMenuItem(StyleOptionMenuItemMixin, widgets.QStyleOptionMenuItem):
     pass

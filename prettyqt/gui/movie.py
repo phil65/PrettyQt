@@ -26,6 +26,11 @@ class Movie(core.ObjectMixin, QtGui.QMovie):
     def __repr__(self):
         return get_repr(self, self.fileName(), self.get_format())
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"cacheMode": CACHE_MODE}
+        return maps
+
     def set_cache_mode(self, mode: CacheModeStr | QtGui.QMovie.CacheMode):
         """Set cache mode.
 

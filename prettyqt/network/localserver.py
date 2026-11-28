@@ -10,9 +10,10 @@ SOCKET_OPTION = bidict(
     group=network.QLocalServer.SocketOption.GroupAccessOption,
     other=network.QLocalServer.SocketOption.OtherAccessOption,
     world=network.QLocalServer.SocketOption.WorldAccessOption,
+    abstract_namespace=network.QLocalServer.SocketOption.AbstractNamespaceOption,
 )
 
-SocketOptionStr = Literal["none", "user", "group", "other", "world"]
+SocketOptionStr = Literal["none", "user", "group", "other", "world", "abstract_namespace"]
 
 
 class LocalServer(core.ObjectMixin, network.QLocalServer):

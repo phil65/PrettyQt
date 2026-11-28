@@ -10,13 +10,13 @@ if TYPE_CHECKING:
 
 mod = gui.QTextCharFormat
 
-FontPropertiesInheritanceBehaviorStr = Literal["none", "single"]
+FontPropertiesInheritanceBehaviorStr = Literal["specified_only", "all"]
 
 FONT_PROPERTY_INHERITANCE_BEHAVIOUR: bidict[
     FontPropertiesInheritanceBehaviorStr, mod.FontPropertiesInheritanceBehavior
 ] = bidict(
-    none=mod.FontPropertiesInheritanceBehavior.FontPropertiesSpecifiedOnly,
-    single=mod.FontPropertiesInheritanceBehavior.FontPropertiesAll,
+    specified_only=mod.FontPropertiesInheritanceBehavior.FontPropertiesSpecifiedOnly,
+    all=mod.FontPropertiesInheritanceBehavior.FontPropertiesAll,
 )
 
 UnderlineStyleStr = Literal[

@@ -19,7 +19,7 @@ FILE_MODE: bidict[FileModeStr, widgets.QFileDialog.FileMode] = bidict(
     directory=widgets.QFileDialog.FileMode.Directory,
 )
 
-LabelStr = Literal["look_in", "filename", "filetype", "accept"]
+LabelStr = Literal["look_in", "filename", "filetype", "accept", "reject"]
 
 LABEL: bidict[LabelStr, widgets.QFileDialog.DialogLabel] = bidict(
     look_in=widgets.QFileDialog.DialogLabel.LookIn,

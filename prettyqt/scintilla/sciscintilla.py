@@ -20,6 +20,7 @@ MATCH_TYPE = bidict(
 MatchTypeStr = Literal["none", "strict", "sloppy"]
 
 LEXER = bidict(
+    avs=Qsci.QsciLexerAVS,
     bash=Qsci.QsciLexerBash,
     batch=Qsci.QsciLexerBatch,
     cmake=Qsci.QsciLexerCMake,
@@ -32,34 +33,40 @@ LEXER = bidict(
     fortran=Qsci.QsciLexerFortran,
     fortran77=Qsci.QsciLexerFortran77,
     html=Qsci.QsciLexerHTML,
+    idl=Qsci.QsciLexerIDL,
+    intel_hex=Qsci.QsciLexerIntelHex,
     java=Qsci.QsciLexerJava,
     javascript=Qsci.QsciLexerJavaScript,
+    json=Qsci.QsciLexerJSON,
     lua=Qsci.QsciLexerLua,
     makefile=Qsci.QsciLexerMakefile,
+    markdown=Qsci.QsciLexerMarkdown,
+    masm=Qsci.QsciLexerMASM,
     matlab=Qsci.QsciLexerMatlab,
+    nasm=Qsci.QsciLexerNASM,
     octave=Qsci.QsciLexerOctave,
-    po=Qsci.QsciLexerPO,
-    pov=Qsci.QsciLexerPOV,
     pascal=Qsci.QsciLexerPascal,
     perl=Qsci.QsciLexerPerl,
+    po=Qsci.QsciLexerPO,
     postscript=Qsci.QsciLexerPostScript,
+    pov=Qsci.QsciLexerPOV,
     properties=Qsci.QsciLexerProperties,
+    python=Qsci.QsciLexerPython,
     ruby=Qsci.QsciLexerRuby,
     spice=Qsci.QsciLexerSpice,
-    tcl=Qsci.QsciLexerTCL,
-    tex=Qsci.QsciLexerTeX,
-    vhdl=Qsci.QsciLexerVHDL,
-    verilog=Qsci.QsciLexerVerilog,
-    xml=Qsci.QsciLexerXML,
-    python=Qsci.QsciLexerPython,
-    yaml=Qsci.QsciLexerYAML,
-    json=Qsci.QsciLexerJSON,
     sql=Qsci.QsciLexerSQL,
-    markdown=Qsci.QsciLexerMarkdown,
-    idl=Qsci.QsciLexerIDL,
+    srec=Qsci.QsciLexerSRec,
+    tcl=Qsci.QsciLexerTCL,
+    tek_hex=Qsci.QsciLexerTekHex,
+    tex=Qsci.QsciLexerTeX,
+    verilog=Qsci.QsciLexerVerilog,
+    vhdl=Qsci.QsciLexerVHDL,
+    xml=Qsci.QsciLexerXML,
+    yaml=Qsci.QsciLexerYAML,
 )
 
 LexerStr = Literal[
+    "avs",
     "bash",
     "batch",
     "cmake",
@@ -72,31 +79,36 @@ LexerStr = Literal[
     "fortran",
     "fortran77",
     "html",
+    "idl",
+    "intel_hex",
     "java",
     "javascript",
+    "json",
     "lua",
     "makefile",
+    "markdown",
+    "masm",
     "matlab",
+    "nasm",
     "octave",
-    "po",
-    "pov",
     "pascal",
     "perl",
+    "po",
     "postscript",
+    "pov",
     "properties",
+    "python",
     "ruby",
     "spice",
-    "tcl",
-    "tex",
-    "vhdl",
-    "verilog",
-    "xml",
-    "python",
-    "yaml",
-    "json",
     "sql",
-    "markdown",
-    "idl",
+    "srec",
+    "tcl",
+    "tek_hex",
+    "tex",
+    "verilog",
+    "vhdl",
+    "xml",
+    "yaml",
 ]
 
 MARKER = bidict(
@@ -212,7 +224,7 @@ class SciScintilla(widgets.AbstractScrollAreaMixin, Qsci.QsciScintilla):
         self.setMarginsBackgroundColor(colors.get_color(color))
 
     def highlight_current_line(
-        self, value: bool = True, color: datatypes.ColorType = None
+        self, value: bool = True, color: datatypes.ColorType | None = None
     ):
         self.setCaretLineVisible(value)
         if color is None:
@@ -237,16 +249,17 @@ class SciScintilla(widgets.AbstractScrollAreaMixin, Qsci.QsciScintilla):
     def set_text(self, text: str):
         self.setText(text)
 
-    def set_syntaxhighlighter(self, language: LexerStr):
+    def set_syntaxhighlighter(self, language: LexerStr | type[Qsci.QsciLexer]):
+        lexer_cls = LEXER.get_enum_value(language)
         self.language = language
         font = gui.Font.mono()
-        self._lexer = LEXER[language]()
+        self._lexer = lexer_cls()
         self._lexer.setDefaultFont(font)
         self._lexer.setFont(font)
         self.setLexer(self._lexer)
 
     def scroll_to_bottom(self):
-        self.ensureLineVisible(self.lines())
+        self.ensureLineVisible(max(0, self.lines() - 1))
 
     def append_text(self, text: str, newline: bool = True):
         self.append(f"\n{text}" if newline else text)
@@ -268,7 +281,7 @@ class SciScintilla(widgets.AbstractScrollAreaMixin, Qsci.QsciScintilla):
 
     def toggle_marker(self, nline: int, marker_num: int):
         # Toggle marker for the line the margin was clicked on
-        if self.markersAtLine(nline) != 0:
+        if bool(self.markersAtLine(nline) & (1 << marker_num)):
             self.markerDelete(nline, marker_num)
         else:
             self.markerAdd(nline, marker_num)

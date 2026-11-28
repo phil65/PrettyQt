@@ -4,7 +4,17 @@ from prettyqt import core
 from prettyqt.utils import bidict, get_repr
 
 
-OsTypeStr = Literal["android", "ios", "mac_os", "tv_os", "watch_os", "windows", "unknown"]
+OsTypeStr = Literal[
+    "android",
+    "ios",
+    "mac_os",
+    "tv_os",
+    "watch_os",
+    "windows",
+    "vision_os",
+    "harmony_os",
+    "unknown",
+]
 
 OS_TYPE: bidict[OsTypeStr, core.QOperatingSystemVersion.OSType] = bidict(
     android=core.QOperatingSystemVersion.OSType.Android,
@@ -15,6 +25,10 @@ OS_TYPE: bidict[OsTypeStr, core.QOperatingSystemVersion.OSType] = bidict(
     windows=core.QOperatingSystemVersion.OSType.Windows,
     unknown=core.QOperatingSystemVersion.OSType.Unknown,
 )
+if hasattr(core.QOperatingSystemVersion.OSType, "VisionOS"):
+    OS_TYPE["vision_os"] = core.QOperatingSystemVersion.OSType.VisionOS
+if hasattr(core.QOperatingSystemVersion.OSType, "HarmonyOS"):
+    OS_TYPE["harmony_os"] = core.QOperatingSystemVersion.OSType.HarmonyOS
 
 
 class OperatingSystemVersion(core.QOperatingSystemVersion):

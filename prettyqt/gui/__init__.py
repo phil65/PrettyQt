@@ -6,7 +6,8 @@ from typing import cast
 from prettyqt.qt.QtGui import *  # noqa: F403
 
 from .backingstore import BackingStore
-from .stylehints import StyleHints
+from .accessibilityhints import AccessibilityHints, AccessibilityHintsMixin
+from .stylehints import StyleHints, StyleHintsMixin
 from .pageranges import PageRanges
 from .shortcut import Shortcut
 from .textobjectinterface import TextObjectInterface
@@ -56,6 +57,7 @@ from .fontmetrics import FontMetrics
 from .fontmetricsf import FontMetricsF
 from .fontinfo import FontInfo
 from .fontdatabase import FontDatabase
+from .fontvariableaxis import FontVariableAxis
 from .region import Region
 from .movie import Movie
 from .transform import Transform
@@ -76,8 +78,10 @@ from .textcursor import TextCursor
 from .pdfwriter import PdfWriter
 from .desktopservices import DesktopServices
 from .matrix4x4 import Matrix4x4
+from .vector2d import Vector2D
 from .vector3d import Vector3D
 from .vector4d import Vector4D
+from .quaternion import Quaternion
 from .imageiohandler import ImageIOHandler
 from .imagereader import ImageReader
 from .imagewriter import ImageWriter
@@ -108,6 +112,8 @@ from .undocommand import UndoCommand
 from .undostack import UndoStack
 from .undogroup import UndoGroup
 from .colorspace import ColorSpace
+from .colortransform import ColorTransform
+from .pdfoutputintent import PdfOutputIntent
 from .action import Action, ActionMixin
 from .actiongroup import ActionGroup
 from prettyqt.qt import QtGui
@@ -128,6 +134,8 @@ __all__ = [
     "AbstractFileIconProviderMixin",
     "AbstractTextDocumentLayout",
     "AbstractTextDocumentLayoutMixin",
+    "AccessibilityHints",
+    "AccessibilityHintsMixin",
     "Action",
     "ActionGroup",
     "ActionMixin",
@@ -137,6 +145,7 @@ __all__ = [
     "Clipboard",
     "Color",
     "ColorSpace",
+    "ColorTransform",
     "ConicalGradient",
     "Cursor",
     "DesktopServices",
@@ -147,6 +156,7 @@ __all__ = [
     "FontInfo",
     "FontMetrics",
     "FontMetricsF",
+    "FontVariableAxis",
     "Gradient",
     "GradientMixin",
     "GuiApplication",
@@ -177,6 +187,7 @@ __all__ = [
     "PainterPath",
     "PainterPathStroker",
     "Palette",
+    "PdfOutputIntent",
     "PdfWriter",
     "Pen",
     "Picture",
@@ -185,6 +196,7 @@ __all__ = [
     "PixmapMixin",
     "Polygon",
     "PolygonF",
+    "Quaternion",
     "RadialGradient",
     "RasterWindow",
     "Region",
@@ -196,6 +208,7 @@ __all__ = [
     "StandardItemModel",
     "StaticText",
     "StyleHints",
+    "StyleHintsMixin",
     "Surface",
     "SurfaceFormat",
     "SurfaceMixin",
@@ -233,6 +246,7 @@ __all__ = [
     "UndoStack",
     "Validator",
     "ValidatorMixin",
+    "Vector2D",
     "Vector3D",
     "Vector4D",
     "Window",

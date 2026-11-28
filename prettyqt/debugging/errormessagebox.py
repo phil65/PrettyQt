@@ -35,7 +35,7 @@ class ErrorMessageBox(widgets.MessageBox):
         self._exc = exc
 
         traceback_button = self.get_button("help")
-        traceback_button.setText("Show trackback")
+        traceback_button.setText("Show traceback")
         close_button = self.get_button("close")
         close_button.setText("Quit application")
 

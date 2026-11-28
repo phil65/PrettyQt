@@ -27,11 +27,7 @@ class HeaderWrapper:
     def __init__(self, indexer, widget: HeaderViewMixin):
         self._widget = widget
         self._range = (
-            range(
-                indexer.start or 0,
-                indexer.stop or self._widget.count(),
-                indexer.step or 1,
-            )
+            range(*indexer.indices(self._widget.count()))
             if isinstance(indexer, slice)
             else range(indexer, indexer + 1)
         )
@@ -99,7 +95,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin, _HeaderViewBase):
     def __getitem__(self, index: int | str) -> HeaderWrapper:
         match index:
             case int():
-                idx = self.count() - index if index < 0 else index
+                idx = self.count() + index if index < 0 else index
                 if idx >= self.count() or idx < 0:
                     raise IndexError(index)
                 return HeaderWrapper(idx, self)
@@ -217,7 +213,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin, _HeaderViewBase):
         end = self.visualIndexAt(length)
         if end == -1:
             end = count - 1
-        sections = (self.logicalIndex(i) for i in range(start, end))
+        sections = (self.logicalIndex(i) for i in range(start, end + 1))
         return section in sections
 
     def get_section_for_label(self, label) -> int:

@@ -9,7 +9,7 @@ import re
 
 import pytest
 
-from prettyqt import constants, core, itemmodels, widgets
+from prettyqt import constants, core, gui, itemmodels, widgets
 from prettyqt.itemmodels import fsspecmodel
 from prettyqt.utils import InvalidParamError
 
@@ -467,4 +467,262 @@ def test_lazylxmlmodel_get_key_for_element():
 
     root = etree.fromstring("<a><b/><c><d/></c></a>")
     d = root[1][0]
-    assert lxmlmodel.LazyLxmlModel.get_key_for_element(d) == [0, 1]
+    assert lxmlmodel.LazyLxmlModel.get_key_for_element(d) == [1, 0]
+    assert lxmlmodel.LxmlModel.get_key_for_element(d) == [1, 0]
+
+
+def test_lxmlmodel_bytes_and_xpath(qapp):
+    pytest.importorskip("lxml.etree")
+    from prettyqt.itemmodels import lxmlmodel
+
+    xml_bytes = b'<?xml version="1.0" encoding="utf-8"?><a><b/><c><d/></c></a>'
+    model = lxmlmodel.LxmlModel(xml_bytes, show_root=False)
+    model.fetchMore(core.ModelIndex())
+    model.fetchMore(model.index(1, 0))
+    indexes = model.get_indexes_from_xpath("c/d")
+    assert len(indexes) == 1
+    assert indexes[0].isValid()
+    assert indexes[0].data() == "d"
+
+
+def test_itemmodels_all_exports():
+    for name in itemmodels.__all__:
+        assert hasattr(itemmodels, name), f"{name} in __all__ is not imported"
+
+
+def test_treemodel_parent_no_args(qapp):
+    parent_obj = core.Object()
+    model = itemmodels.JsonModel({"a": [1, 2]}, parent=parent_obj)
+    assert model.parent() is parent_obj
+    assert not model.parent(core.ModelIndex()).isValid()
+    top = model.index(0, 0)
+    if model.canFetchMore(top):
+        model.fetchMore(top)
+    child = model.index(0, 0, top)
+    assert child.isValid()
+    assert model.parent(child) == top
+
+
+def test_highlight_proxies_mode(qtbot):
+    table = widgets.TableView()
+    model = gui.StandardItemModel.from_dict({"a": ["x", "y"], "b": ["x", "z"]})
+    table.set_model(model)
+
+    mouse_proxy = itemmodels.HighlightMouseProxyModel(parent=table, mode="row")
+    mouse_proxy.setSourceModel(model)
+    assert mouse_proxy.get_highlight_mode() == "row"
+    mouse_proxy.set_highlight_mode("single")
+    assert mouse_proxy.get_highlight_mode() == "single"
+    assert mouse_proxy.highlightMode == "single"
+
+    curr_proxy = itemmodels.SliceHighlightCurrentProxyModel(mode="all")
+    curr_proxy.setSourceModel(model)
+    assert curr_proxy.get_highlight_mode() == "all"
+    curr_proxy.set_highlight_mode("column")
+    assert curr_proxy.get_highlight_mode() == "column"
+    curr_proxy.highlight_index(curr_proxy.index(0, 0))
+    bg = curr_proxy.data(curr_proxy.index(0, 0), constants.BACKGROUND_ROLE)
+    assert bg == curr_proxy.get_highlight_color()
+
+
+def test_slice_display_text_proxy(qapp):
+    model = gui.StandardItemModel(4, 1)
+    model.setData(model.index(0, 0), True, constants.DISPLAY_ROLE)
+    model.setData(
+        model.index(1, 0),
+        core.QDateTime(2024, 3, 15, 10, 30, 0),
+        constants.DISPLAY_ROLE,
+    )
+    model.setData(model.index(2, 0), core.QDate(2024, 3, 15), constants.DISPLAY_ROLE)
+    model.setData(model.index(3, 0), core.QTime(10, 30, 5), constants.DISPLAY_ROLE)
+
+    proxy = itemmodels.SliceDisplayTextProxyModel()
+    proxy.setSourceModel(model)
+    assert proxy.get_datetime_format() == "%m/%d/%Y, %H:%M:%S"
+    assert proxy.get_date_format() == "%m/%d/%Y"
+    assert proxy.get_time_format() == "%H:%M:%S"
+    assert proxy.data(proxy.index(0, 0)) is True
+    assert proxy.data(proxy.index(1, 0)) == "03/15/2024, 10:30:00"
+    assert proxy.data(proxy.index(2, 0)) == "03/15/2024"
+    assert proxy.data(proxy.index(3, 0)) == "10:30:05"
+
+
+def test_slice_identity_proxy_negative_and_row_slice(qapp):
+    model = gui.StandardItemModel(3, 4)
+    proxy = itemmodels.SliceIdentityProxyModel(indexer=(-1, -1))
+    proxy.setSourceModel(model)
+    assert list(proxy.get_row_range()) == [2]
+    assert list(proxy.get_column_range()) == [3]
+    proxy.set_row_slice((0, 2, None))
+    assert list(proxy.get_row_range()) == [0, 1]
+    assert list(proxy.get_column_range()) == [3]
+    proxy.row_slice = (1, 3, None)
+    assert list(proxy.get_row_range()) == [1, 2]
+    assert list(proxy.get_column_range()) == [3]
+
+
+def test_multicolumn_filter_proxy(qapp):
+    model = gui.StandardItemModel.from_dict({
+        "a": ["foobar", "baz", "barfoo"],
+        "b": ["1", "2", "3"],
+    })
+    proxy = itemmodels.MultiColumnFilterProxyModel()
+    proxy.setSourceModel(model)
+    # Clearing non-existent filter must not raise KeyError
+    proxy.set_filter_value(0, "")
+    proxy.set_filter_value(0, None)  # type: ignore[arg-type]
+
+    # Multiple callable filters must all match (no early return True)
+    proxy.set_filter_value(0, lambda v: "foo" in v)  # type: ignore[arg-type]
+    proxy.set_filter_value(1, lambda v: v == "3")  # type: ignore[arg-type]
+    assert proxy.rowCount() == 1
+    assert proxy.data(proxy.index(0, 0)) == "barfoo"
+
+    # Fuzzy mode must not fall through to startswith
+    proxy.clear_filters()
+    proxy.set_filter_mode("fuzzy")
+    proxy.set_filter_value(0, "bar")
+    assert proxy.rowCount() == 2  # noqa: PLR2004
+
+
+def test_change_headers_proxy(qapp):
+    proxy = itemmodels.ChangeHeadersProxyModel(header=["X", "Y"])
+    proxy.setSourceModel(None)
+    assert proxy.headerData(5, constants.HORIZONTAL) is None
+    model = gui.StandardItemModel(2, 2)
+    proxy.setSourceModel(model)
+    assert proxy.headerData(0, constants.HORIZONTAL) == "X"
+    assert proxy.headerData(5, constants.HORIZONTAL) is None
+    proxy.header = ["A", "B"]
+    assert proxy.headerData(1, constants.HORIZONTAL) == "B"
+
+
+def test_flatten_tree_proxy_edge_cases(qapp):
+    src = itemmodels.JsonModel({"a": [1, 2], "b": 3})
+    proxy = itemmodels.FlattenTreeProxyModel()
+    proxy.setSourceModel(src)
+    assert not proxy.index(999, 0).isValid()
+    assert not proxy.mapFromSource(core.ModelIndex()).isValid()
+    received = []
+    proxy.dataChanged.connect(lambda top, bot: received.append((top, bot)))
+    top_idx = src.index(0, 0)
+    src.dataChanged.emit(top_idx, top_idx)
+    assert received
+    assert received[0][0].model() is proxy
+    proxy.setSourceModel(None)
+    assert proxy.rowCount() == 0
+
+
+def test_slice_color_values_proxy_zero(qapp):
+    model = gui.StandardItemModel(2, 1)
+    model.setData(model.index(0, 0), 0, constants.EDIT_ROLE)
+    model.setData(model.index(1, 0), 0, constants.EDIT_ROLE)
+    proxy = itemmodels.SliceColorValuesProxyModel(
+        mode=itemmodels.SliceColorValuesProxyModel.ColorMode.Seen
+    )
+    proxy.setSourceModel(model)
+    color = proxy.data(proxy.index(0, 0), constants.BACKGROUND_ROLE)
+    assert isinstance(color, gui.QColor)
+
+
+def test_selection_mixin(qapp):
+    class _Model(itemmodels.SelectionMixin, core.AbstractTableModel):
+        CHECKSTATE = {0: lambda x: x}  # noqa: RUF012
+
+        def __init__(self):
+            super().__init__()
+            self._items = ["a", "b"]
+
+        def rowCount(self, parent=None):
+            return len(self._items)
+
+        def columnCount(self, parent=None):
+            return 1
+
+        def data(self, index, role=constants.DISPLAY_ROLE):
+            if not index.isValid() or role == constants.CHECKSTATE_ROLE:
+                return super().data(index, role)
+            if role in (constants.DISPLAY_ROLE, constants.USER_ROLE):
+                return self._items[index.row()]
+            return super().data(index, role)
+
+    model = _Model()
+    assert model.data(core.ModelIndex()) is None
+    idx = model.index(0, 0)
+    assert model.data(idx, constants.CHECKSTATE_ROLE) == constants.CheckState.Unchecked
+    assert model.setData(idx, constants.CheckState.Checked, constants.CHECKSTATE_ROLE)
+    assert model.data(idx, constants.CHECKSTATE_ROLE) == constants.CheckState.Checked
+    assert model.setData(idx, constants.CheckState.Unchecked, constants.CHECKSTATE_ROLE)
+    assert model.data(idx, constants.CHECKSTATE_ROLE) == constants.CheckState.Unchecked
+
+
+def test_predicate_filter_proxy(qapp):
+    model = gui.StandardItemModel.from_dict({"v": [1, 5, 10]})
+    proxy = itemmodels.PredicateFilterProxyModel()
+    proxy.setSourceModel(model)
+    proxy.setFilterRole(constants.EDIT_ROLE)
+    threshold = 3
+    proxy.add_filter(lambda x: x > threshold)
+    assert proxy.rowCount() == 2  # noqa: PLR2004
+    proxy.clear_filters()
+    assert proxy.rowCount() == 3  # noqa: PLR2004
+
+
+def test_fuzzy_filter_proxy_none_ordering(qapp):
+    model = gui.StandardItemModel(3, 1)
+    model.setData(model.index(0, 0), None, constants.DISPLAY_ROLE)
+    model.setData(model.index(1, 0), None, constants.DISPLAY_ROLE)
+    model.setData(model.index(2, 0), "hello", constants.DISPLAY_ROLE)
+    proxy = itemmodels.FuzzyFilterProxyModel()
+    proxy.setSourceModel(model)
+    proxy.set_search_term("hel")
+    idx0 = model.index(0, 0)
+    idx1 = model.index(1, 0)
+    idx2 = model.index(2, 0)
+    assert not proxy.lessThan(idx0, idx1)
+    assert proxy.lessThan(idx0, idx2)
+    assert not proxy.lessThan(idx2, idx0)
+    assert proxy.data(proxy.index(0, 0), proxy.Roles.SortRole) is not None
+
+
+def test_slice_change_flags_and_appearance_and_range_proxies(qapp):
+    model = gui.StandardItemModel.from_dict({"a": ["x", "y"]})
+    model.setData(model.index(0, 0), constants.ALIGN_RIGHT, constants.ALIGNMENT_ROLE)
+
+    flags_proxy = itemmodels.SliceChangeFlagsProxyModel(
+        flags_to_remove=constants.IS_ENABLED
+    )
+    flags_proxy.setSourceModel(model)
+    assert not (flags_proxy.flags(flags_proxy.index(0, 0)) & constants.IS_ENABLED)
+
+    app_proxy = itemmodels.AppearanceProxyModel()
+    app_proxy.setSourceModel(model)
+    assert app_proxy.data(app_proxy.index(0, 0), constants.ALIGNMENT_ROLE) == (
+        constants.ALIGN_RIGHT
+    )
+    app_proxy.set_alignment_default("left")
+    assert app_proxy.get_alignment_default() == constants.ALIGN_LEFT
+
+    rng_proxy = itemmodels.RangeFilterProxyModel(1, 10)
+    assert "(1, 10)" in repr(rng_proxy)
+
+
+def test_actions_model_set_data(qapp):
+    act = gui.Action(text="Open", checkable=True, checked=False)
+    model = itemmodels.ActionsModel([act])
+    name_idx = model.index(0, 0)
+    assert not model.setData(name_idx, "Ignored", constants.TOOLTIP_ROLE)
+    assert act.text() == "Open"
+    check_idx = model.index(0, 3)
+    assert model.setData(
+        check_idx, constants.CheckState.Checked, constants.CHECKSTATE_ROLE
+    )
+    assert act.isChecked()
+    assert model.setData(
+        check_idx, constants.CheckState.Checked, constants.CHECKSTATE_ROLE
+    )
+    assert act.isChecked()
+    assert model.setData(
+        check_idx, constants.CheckState.Unchecked, constants.CHECKSTATE_ROLE
+    )
+    assert not act.isChecked()

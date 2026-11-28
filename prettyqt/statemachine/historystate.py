@@ -13,6 +13,11 @@ HISTORY_TYPE: bidict[HistoryTypeStr, statemachine.QHistoryState.HistoryType] = b
 
 
 class HistoryState(statemachine.AbstractStateMixin, statemachine.QHistoryState):
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"historyType": HISTORY_TYPE}
+        return maps
+
     def set_history_type(
         self, typ: HistoryTypeStr | statemachine.QHistoryState.HistoryType
     ):

@@ -13,7 +13,7 @@ elif PYQT6:
         from PyQt6.QtCharts import *
     except ImportError:
         raise ModuleNotFoundError(
-            "The QtChart module was not found. "
+            "The QtCharts module was not found. "
             "It needs to be installed separately for PyQt6."
         )
 

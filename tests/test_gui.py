@@ -641,15 +641,31 @@ def test_painterpathstroker():
 
 def test_palette():
     pal = gui.Palette()
-    assert len(pal.get_colors()) == 21  # noqa: PLR2004
-    assert len(pal.get_brushes()) == 21  # noqa: PLR2004
+    assert len(pal.get_colors()) == 22  # noqa: PLR2004
+    assert len(pal.get_brushes()) == 22  # noqa: PLR2004
     color = gui.Color("red")
     pal.set_brush("window", "red")
     assert pal.get_brush("window") == color
     pal.highlight_inactive()
     pal.set_color("window", "red")
+    pal.set_color("accent", "blue")
+    assert pal.get_color("accent") == gui.Color("blue")
     pal["button"] = color
     assert pal["button"] == color
+    brush = gui.Brush(color)
+    pal.set_color_group(
+        "active",
+        window_text=brush,
+        button=brush,
+        light=brush,
+        dark=brush,
+        mid=brush,
+        text=brush,
+        bright_text=brush,
+        base=brush,
+        window=brush,
+    )
+    assert pal.get_color("window_text") == color
     bytes(pal)
     assert pal.get_color_group() == "active"
 
@@ -1011,3 +1027,221 @@ def test_painter_draw_text(qapp):
     painter.draw_text(core.Point(1, 10), "x")
     painter.draw_text((0, 0, 20, 20), "x", alignment="center")
     painter.end()
+
+
+def test_gui_bugfixes(qapp):
+    # Gradient.change_brightness
+    grad = gui.LinearGradient(0, 0, 10, 10)
+    grad.set_color_at(0.0, "gray")
+    grad.set_color_at(1.0, "blue")
+    grad.change_brightness(1.2)
+    grad.change_brightness(-1.2)
+
+    # Image.__getitem__, from_ndarray, to_ndarray (including scanline padding)
+    pytest.importorskip("numpy")
+    img = gui.Image(10, 5, gui.QImage.Format.Format_RGB888)
+    img.fill(gui.Color("black"))
+    red_rgb = gui.Color("red").rgb()
+    img[4, 9] = red_rgb
+    assert img[4, 9] == red_rgb
+    assert img[4:5, 9:10] == [red_rgb]
+    arr = img.to_ndarray()
+    assert arr.shape == (5, 10, 3)
+    assert tuple(arr[4, 9]) == (255, 0, 0)
+    roundtrip = gui.Image.from_ndarray(arr)
+    assert roundtrip.width() == 10  # noqa: PLR2004
+    assert roundtrip.height() == 5  # noqa: PLR2004
+    assert tuple(roundtrip.to_ndarray()[4, 9]) == (255, 0, 0)
+
+    # Painter: set_pen(brush=...), get_text_rect() -> core.Rect, draw_image() mode restore
+    pixmap = gui.Pixmap(20, 20)
+    with gui.Painter(pixmap) as p:
+        brush = gui.Brush(gui.Color("green"))
+        pen = p.set_pen(brush=brush)
+        assert pen.brush().color() == gui.Color("green")
+        rect = p.get_text_rect("abc")
+        assert isinstance(rect, core.Rect)
+        p.set_composition_mode("source_over")
+        p.draw_image(core.Point(0, 0), img)
+        assert p.get_composition_mode() == "source_over"
+        p.set_composition_mode("multiply")
+        assert p.get_composition_mode() == "multiply"
+
+    # StandardItemModel & StandardItem fixes
+    model = gui.StandardItemModel()
+    item = model.add_item("a", enabled=False, editable=False, selectable=False)
+    assert not item.isEnabled()
+    assert not item.isEditable()
+    assert not item.isSelectable()
+    item2 = model.add_item("b")
+    assert model[-1] is item2
+    with pytest.raises(IndexError):
+        model[-10]
+    with pytest.raises(KeyError):
+        del model[99]
+    child = item.add_item("c", enabled=False, editable=False, selectable=False)
+    assert not child.isEnabled()
+    assert not child.isEditable()
+    assert not child.isSelectable()
+    with pytest.raises(KeyError):
+        del item[99]
+
+    # Screen.get_angle_between returns int
+    screen = qapp.get_primary_screen()
+    assert isinstance(screen.get_angle_between("primary", "landscape"), int)
+
+    # Window.add_shortcut with callback=None
+    wnd = gui.Window()
+    sc = wnd.add_shortcut("Ctrl+K")
+    assert isinstance(sc, gui.Shortcut)
+
+    # PainterPath.add / += with QRect, QRectF, QPolygonF
+    path = gui.PainterPath()
+    path += core.QRect(0, 0, 10, 10)
+    path += core.QRectF(1, 1, 5, 5)
+    path += gui.PolygonF([core.PointF(0, 0), core.PointF(1, 1)])
+    path.set_fill_rule("winding")
+    assert path.get_fill_rule() == "winding"
+    with pytest.raises(InvalidParamError):
+        path.set_fill_rule("invalid")
+
+    # Action: get_shortcut when empty, set_tooltip rich_text, set_shortcut standard key
+    act = gui.Action()
+    assert act.get_shortcut() is None
+    act.set_tooltip("a < b\nc", rich_text=True)
+    assert act.toolTip() == "<html>a &lt; b<br/>c</html>"
+    act.set_shortcut("copy")
+    assert act.get_shortcut() is not None
+
+    # TextBlock.find_parent_scope
+    doc = gui.TextDocument("def foo():\n    x = 1\n    y = 2")
+    doc[0].set_fold_trigger(1)
+    doc[0].set_fold_level(0)
+    doc[1].set_fold_level(1)
+    doc[2].set_fold_level(1)
+    parent = doc[2].find_parent_scope()
+    assert parent is not None
+    assert parent.blockNumber() == 0
+
+    # Color: invalid QColor preserved, is_valid_color, set_color, svg_argb alphaF
+    invalid_c = gui.Color(gui.QColor())
+    assert not invalid_c.isValid()
+    assert invalid_c.get_spec() == "invalid"
+    assert gui.color.is_valid_color("#ff0000")
+    assert gui.color.is_valid_color("#80ff0000")
+    assert not gui.color.is_valid_color("not_a_color")
+    c = gui.Color(255, 0, 0, 128)
+    assert f'fill-opacity="{c.alphaF()}"' in c.get_name("svg_argb")
+
+    # FontDatabase.get_system_font returns gui.Font
+    sys_font = gui.FontDatabase.get_system_font("general")
+    assert isinstance(sys_font, gui.Font)
+
+    # KeySequence.get_key_bindings with str
+    bindings = gui.KeySequence.get_key_bindings("copy")
+    assert all(isinstance(b, gui.KeySequence) for b in bindings)
+
+    # TextDocument.set_default_stylesheet with str
+    doc.set_default_stylesheet("p { color: red; }")
+    assert "color" in doc.defaultStyleSheet()
+
+    # Font.mono(size=..., as_qt=True)
+    qt_mono = gui.Font.mono(size=14, as_qt=True)
+    assert qt_mono.pointSize() == 14  # noqa: PLR2004
+
+    # Icon.get_pixmap returns gui.Pixmap
+    ico = gui.Icon.for_color("red")
+    assert isinstance(ico.get_pixmap(16), gui.Pixmap)
+
+    # Pixmap.__eq__ with QPixmap
+    px = gui.Pixmap(4, 4)
+    px.fill(gui.Color("red"))
+    assert px == gui.QPixmap(px)
+
+    # Polygon & PolygonF negative indexing and IndexError
+    poly = gui.Polygon([core.Point(1, 2), core.Point(3, 4)])
+    assert poly[-1] == core.Point(3, 4)
+    with pytest.raises(IndexError):
+        poly[5]
+    polyf = gui.PolygonF([core.PointF(1.0, 2.0), core.PointF(3.0, 4.0)])
+    assert polyf[-1] == core.PointF(3.0, 4.0)
+    with pytest.raises(IndexError):
+        polyf[5]
+
+    # TextCursor & GuiApplication enum validation
+    cursor = gui.TextCursor()
+    with pytest.raises(InvalidParamError):
+        cursor.move_position("invalid")
+    with pytest.raises(InvalidParamError):
+        cursor.select("invalid")
+    with pytest.raises(InvalidParamError):
+        gui.GuiApplication.set_override_cursor("invalid")
+
+
+def test_stylehints_and_accessibilityhints(qapp):
+    hints = qapp.get_style_hints()
+    assert isinstance(hints, gui.StyleHints)
+    hints.set_color_scheme("dark")
+    assert hints.get_color_scheme() in {"unknown", "light", "dark"}
+    with pytest.raises(InvalidParamError):
+        hints.set_color_scheme("invalid")
+    hints.unset_color_scheme()
+    assert hints.get_context_menu_trigger() in {"press", "release"}
+    acc = hints.get_accessibility()
+    assert isinstance(acc, gui.AccessibilityHints)
+    assert acc.get_contrast_preference() in {"no_preference", "high_contrast"}
+    assert acc.get_motion_preference() in {"no_preference", "reduced_motion"}
+
+
+def test_fontvariableaxis():
+    axis = gui.FontVariableAxis()
+    axis.setName("Weight")
+    axis.setMinimumValue(100.0)
+    axis.setMaximumValue(900.0)
+    axis.setDefaultValue(400.0)
+    axis.set_tag("wght")
+    assert axis.get_tag() == "wght"
+    assert "Weight" in repr(axis)
+
+
+def test_pdfoutputintent():
+    intent = gui.PdfOutputIntent()
+    intent.set_registry_name("http://www.color.org")
+    assert isinstance(intent.get_registry_name(), core.Url)
+    assert isinstance(intent.get_output_profile(), gui.ColorSpace)
+    repr(intent)
+
+
+def test_colortransform():
+    cs1 = gui.ColorSpace(gui.QColorSpace.NamedColorSpace.SRgb)
+    cs2 = gui.ColorSpace(gui.QColorSpace.NamedColorSpace.DisplayP3)
+    ct = gui.ColorTransform(cs1.transformationToColorSpace(cs2))
+    assert not ct.isIdentity()
+    mapped = ct.map_color("red")
+    assert isinstance(mapped, gui.Color)
+    repr(ct)
+
+
+def test_vector2d():
+    vector = gui.Vector2D(3, 4)
+    assert abs(vector) == 5.0  # noqa: PLR2004
+    assert bool(vector)
+    assert isinstance(vector.to_point(), core.Point)
+    assert isinstance(vector.to_pointf(), core.PointF)
+    assert isinstance(vector.to_vector3d(), gui.Vector3D)
+    assert isinstance(vector.to_vector4d(), gui.Vector4D)
+    assert pickle_roundtrip(vector) == vector
+
+
+def test_quaternion():
+    quat = gui.Quaternion(1, 0, 0, 0)
+    assert bool(quat)
+    assert abs(quat) == 1.0
+    assert isinstance(quat.get_vector(), gui.Vector3D)
+    assert isinstance(quat.to_euler_angles(), gui.Vector3D)
+    assert isinstance(quat.to_vector4d(), gui.Vector4D)
+    assert isinstance(quat.get_normalized(), gui.Quaternion)
+    assert isinstance(quat.get_conjugated(), gui.Quaternion)
+    assert isinstance(quat.get_inverted(), gui.Quaternion)
+    assert pickle_roundtrip(quat) == quat
+    repr(quat)

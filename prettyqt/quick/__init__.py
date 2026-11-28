@@ -10,7 +10,7 @@ from .quickasyncimageprovider import QuickAsyncImageProvider
 from .quickitemgrabresult import QuickItemGrabResult
 from .quickitem import QuickItem, QuickItemMixin
 from .quickpainteditem import QuickPaintedItem
-from .quickwindow import QuickWindow
+from .quickwindow import QuickWindow, QuickWindowMixin
 from .quickview import QuickView
 from .sgnode import SGNode
 from prettyqt.qt import QtQuick
@@ -30,5 +30,6 @@ __all__ = [
     "QuickTextDocument",
     "QuickView",
     "QuickWindow",
+    "QuickWindowMixin",
     "SGNode",
 ]

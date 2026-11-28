@@ -134,13 +134,13 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
         """
         self.setRouteOptimization(ROUTE_OPTIMIZATION.get_enum_value(optimization))
 
-    def get_route_optimization(self) -> RouteOptimizationStr:
+    def get_route_optimization(self) -> list[RouteOptimizationStr]:
         """Return current route optimization.
 
         Returns:
             Route optimization
         """
-        return ROUTE_OPTIMIZATION.inverse[self.routeOptimization()]
+        return ROUTE_OPTIMIZATION.get_list(self.routeOptimization())
 
     def get_travel_modes(self) -> list[TravelModeStr]:
         return TRAVEL_MODE.get_list(self.travelModes())

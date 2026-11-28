@@ -43,6 +43,7 @@ FormatStr = Literal[
     "rgbx32fpx4",
     "rgba32fpx4",
     "rgba32fpx4_premultiplied",
+    "cmyk8888",
 ]
 
 FORMAT: bidict[FormatStr, gui.QImage.Format] = bidict(
@@ -82,6 +83,7 @@ FORMAT: bidict[FormatStr, gui.QImage.Format] = bidict(
     rgbx32fpx4=gui.QImage.Format.Format_RGBX32FPx4,
     rgba32fpx4=gui.QImage.Format.Format_RGBA32FPx4,
     rgba32fpx4_premultiplied=gui.QImage.Format.Format_RGBA32FPx4_Premultiplied,
+    cmyk8888=gui.QImage.Format.Format_CMYK8888,
 )
 
 
@@ -89,17 +91,17 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
     """Hardware-independent image representation with direct access to the pixel data."""
 
     def __setitem__(self, index: tuple[int, int], value):
-        self.setPixel(index[0], index[1], value)
+        self.setPixel(index[1], index[0], value)
 
     def __getitem__(self, index: tuple[int, int]) -> int | list[int]:
         match index:
             case int() as row, int() as col:
-                return self.pixel(row, col)
+                return self.pixel(col, row)
             case (row, col):
                 rowcount = self.height()
                 colcount = self.width()
                 return [
-                    self.pixel(i, j)
+                    self.pixel(j, i)
                     for i, j in helpers.iter_positions(row, col, rowcount, colcount)
                 ]
             case _:
@@ -112,14 +114,16 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
         height, width, bytes_per_component = arr.shape
         if arr.dtype in {np.float32, np.float64}:
             arr = (255 * arr).round()
-        arr = arr.astype(np.uint8)
-        return cls(
+        arr = np.ascontiguousarray(arr, dtype=np.uint8)
+        img = cls(
             arr.data,
             width,
             height,
             bytes_per_component * width,
             gui.QImage.Format.Format_RGB888,
         )
+        img.__data = arr  # ty: ignore[missing-attribute]  # keeps the buffer alive
+        return img
 
     def to_ndarray(
         self, fmt: FormatStr | gui.QImage.Format = "rgb888", channels: int = 3
@@ -129,9 +133,17 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
         qimage = self.convert_to_format(fmt)
         width = qimage.width()
         height = qimage.height()
-
         ptr = qimage.constBits()
-        return np.array(ptr).reshape(height, width, channels)  # Copies the data
+        if ptr is None:
+            return np.empty((0, 0, channels), dtype=np.uint8)
+        if API == "pyqt6":
+            raw = ptr.asstring(qimage.sizeInBytes())  # ty: ignore[missing-attribute]
+            arr = np.frombuffer(raw, dtype=np.uint8)
+        else:
+            arr = np.frombuffer(ptr, dtype=np.uint8)
+        bytes_per_line = qimage.bytesPerLine()
+        arr = arr.reshape((height, bytes_per_line))[:, : width * channels]
+        return arr.reshape((height, width, channels)).copy()
 
     @classmethod
     def from_pil(cls, image) -> Self:

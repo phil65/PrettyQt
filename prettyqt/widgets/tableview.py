@@ -23,18 +23,16 @@ class TableViewMixin(widgets.AbstractItemViewMixin, _TableViewBase):
         word_wrap: bool = False,
         **kwargs,
     ):
+        if "object_name" not in kwargs and "objectName" not in kwargs:
+            kwargs["object_name"] = type(self).__name__
         super().__init__(
             *args,
             alternating_row_colors=alternating_row_colors,
             word_wrap=word_wrap,
             **kwargs,
         )
-        class_name = type(self).__name__
-        self.setObjectName(class_name)
         self.setHorizontalHeader(widgets.HeaderView("horizontal", parent=self))
         self.setVerticalHeader(widgets.HeaderView("vertical", parent=self))
-        self.setAlternatingRowColors(True)
-        self.setWordWrap(False)
 
     def _get_map(self):
         maps = super()._get_map()
@@ -132,8 +130,10 @@ class TableViewMixin(widgets.AbstractItemViewMixin, _TableViewBase):
         return (start, end)
 
     def resizeColumnsToContents(self, max_columns: int | None = 500):
-        colcount = self.model().columnCount()
-        if max_columns is None or colcount > max_columns:
+        if (model := self.model()) is None:
+            return
+        colcount = model.columnCount()
+        if max_columns is None:
             super().resizeColumnsToContents()
             return
         to_check = min(colcount, max_columns)

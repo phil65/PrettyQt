@@ -42,11 +42,43 @@ PRINT_ENGINE_PROPERTY_KEY = bidict(
 )
 
 
-PrintEnginePropertyKeyStr = Literal["none", "auto", "long_side", "short_side"]
+PrintEnginePropertyKeyStr = Literal[
+    "collate_copies",
+    "color_mode",
+    "creator",
+    "duplex",
+    "document_name",
+    "font_embedding",
+    "full_page",
+    "number_of_copies",
+    "orientation",
+    "output_file_name",
+    "page_order",
+    "page_rect",
+    "page_size",
+    "paper_rect",
+    "paper_source",
+    "paper_sources",
+    "paper_name",
+    "printer_name",
+    "printer_program",
+    "resolution",
+    "selection_option",
+    "supported_resolutions",
+    "windows_page_size",
+    "custom_paper_size",
+    "page_margins",
+    "copy_count",
+    "supports_multiple_copies",
+    "qpagesize",
+    "qpagemargins",
+    "qpagelayout",
+    "custom_base",
+]
 
 
 class PrintEngine(printsupport.QPrintEngine):
     """Defines an interface for how QPrinter interacts with a given printing subsystem."""
 
-    def get_printer_state(self) -> PrintEnginePropertyKeyStr:
+    def get_printer_state(self) -> printsupport.printer.PrinterStateStr:
         return printsupport.printer.PRINTER_STATE.inverse[self.printerState()]

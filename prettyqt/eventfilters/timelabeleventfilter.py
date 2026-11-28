@@ -6,14 +6,16 @@ from prettyqt import core, eventfilters, widgets
 class TextUpdateEventFilter(eventfilters.BaseEventFilter):
     def __init__(self, parent, interval: int = 1000, **kwargs):
         super().__init__(parent, **kwargs)
-        parent.startTimer(interval)
+        self._timer_id = parent.startTimer(interval)
         self._update_text()
 
     def eventFilter(self, obj, event: core.QEvent) -> bool:
         # if obj is not self.parent():
         #     return super().eventFilter(obj, event)
         match event.type():
-            case core.Event.Type.Timer:
+            case core.Event.Type.Timer if (
+                isinstance(event, core.QTimerEvent) and event.timerId() == self._timer_id
+            ):
                 self._update_text()
                 return True
         return super().eventFilter(obj, event)

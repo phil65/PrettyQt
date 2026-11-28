@@ -45,6 +45,13 @@ SIZE_ADJUST_POLICY: bidict[SizeAdjustPolicyStr, mod.SizeAdjustPolicy] = bidict(
     min_length_with_icon=mod.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon,
 )
 
+LabelDrawingModeStr = Literal["use_style", "use_delegate"]
+
+LABEL_DRAWING_MODE: bidict[LabelDrawingModeStr, mod.LabelDrawingMode] = bidict(
+    use_style=mod.LabelDrawingMode.UseStyle,
+    use_delegate=mod.LabelDrawingMode.UseDelegate,
+)
+
 
 if TYPE_CHECKING:
     from prettyqt.qt import QtWidgets
@@ -71,6 +78,7 @@ class ComboBoxMixin(widgets.WidgetMixin, _ComboBoxBase):
         maps |= {
             "insertPolicy": INSERT_POLICY,
             "sizeAdjustPolicy": SIZE_ADJUST_POLICY,
+            "labelDrawingMode": LABEL_DRAWING_MODE,
         }
         return maps
 
@@ -184,6 +192,22 @@ class ComboBoxMixin(widgets.WidgetMixin, _ComboBoxBase):
         """Hides the completion widget."""
         completer = widgets.Completer(self)
         self.setCompleter(completer)
+
+    def set_label_drawing_mode(self, mode: LabelDrawingModeStr | mod.LabelDrawingMode):
+        """Set label drawing mode.
+
+        Args:
+            mode: label drawing mode to use
+        """
+        self.setLabelDrawingMode(LABEL_DRAWING_MODE.get_enum_value(mode))
+
+    def get_label_drawing_mode(self) -> LabelDrawingModeStr:
+        """Return current label drawing mode.
+
+        Returns:
+            label drawing mode
+        """
+        return LABEL_DRAWING_MODE.inverse[self.labelDrawingMode()]
 
 
 class ComboBox(ComboBoxMixin, widgets.QComboBox):

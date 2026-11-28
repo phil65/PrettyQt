@@ -20,6 +20,14 @@ AlgorithmStr = Literal[
     "keccak_256",
     "keccak_384",
     "keccak_512",
+    "blake2b_160",
+    "blake2b_256",
+    "blake2b_384",
+    "blake2b_512",
+    "blake2s_128",
+    "blake2s_160",
+    "blake2s_224",
+    "blake2s_256",
 ]
 
 
@@ -39,6 +47,14 @@ ALGORITHM: bidict[AlgorithmStr, QtCore.QCryptographicHash.Algorithm] = bidict(
     keccak_256=QtCore.QCryptographicHash.Algorithm.Keccak_256,
     keccak_384=QtCore.QCryptographicHash.Algorithm.Keccak_384,
     keccak_512=QtCore.QCryptographicHash.Algorithm.Keccak_512,
+    blake2b_160=QtCore.QCryptographicHash.Algorithm.Blake2b_160,
+    blake2b_256=QtCore.QCryptographicHash.Algorithm.Blake2b_256,
+    blake2b_384=QtCore.QCryptographicHash.Algorithm.Blake2b_384,
+    blake2b_512=QtCore.QCryptographicHash.Algorithm.Blake2b_512,
+    blake2s_128=QtCore.QCryptographicHash.Algorithm.Blake2s_128,
+    blake2s_160=QtCore.QCryptographicHash.Algorithm.Blake2s_160,
+    blake2s_224=QtCore.QCryptographicHash.Algorithm.Blake2s_224,
+    blake2s_256=QtCore.QCryptographicHash.Algorithm.Blake2s_256,
 )
 
 

@@ -27,6 +27,8 @@ class MarkdownWidget(widgets.Widget):
         self.tree.selectionModel().currentRowChanged.connect(self._on_current_change)
 
     def _on_current_change(self, new, old):
+        if not new.isValid() or new.model() is None:
+            return
         text = new.data(new.model().Roles.MarkdownRole)
         self.textbox.set_text(text)
 

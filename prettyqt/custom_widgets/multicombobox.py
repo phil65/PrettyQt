@@ -72,7 +72,7 @@ class MultiComboBox(widgets.ComboBox):
             source == self.view().viewport()
             and event.type() == core.QEvent.Type.MouseButtonRelease
         ):
-            index = self.view().indexAt(event.pos())
+            index = self.view().indexAt(event.position().toPoint())
             item = self._model.itemFromIndex(index)
             if isinstance(item, gui.StandardItem):
                 item.toggle_checkstate()

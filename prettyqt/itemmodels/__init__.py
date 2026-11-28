@@ -178,10 +178,4 @@ __all__ = [
     "WidgetHierarchyModel",
     "WidgetsDetailsModel",
     "XmlModel",
-    "attrsfieldsmodel",
-    # external
-    "attrsmodel",
-    "fsspectreemodel",
-    "pydanticfieldsmodel",
-    "pydanticmodel",
 ]

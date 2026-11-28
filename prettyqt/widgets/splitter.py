@@ -48,8 +48,7 @@ class SplitterMixin(widgets.FrameMixin, _SplitterBase):
                     raise KeyError(msg)
                 return result
             case slice():
-                stop = index.stop or self.count()
-                rng = range(index.start or 0, stop, index.step or 1)
+                rng = range(*index.indices(self.count()))
                 wdgs = [self.widget(i) for i in rng]
                 return listdelegators.SplitterDelegator(wdgs, parent=self)
             case _:

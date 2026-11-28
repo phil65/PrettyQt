@@ -24,6 +24,7 @@ FlagStr = Literal[
     "view_source_allowed",
     "content_security_policy_ignored",
     "cors_enabled",
+    "fetch_api_allowed",
 ]
 
 FLAGS: bidict[FlagStr, QWebEngineUrlScheme.Flag] = bidict(
@@ -35,6 +36,7 @@ FLAGS: bidict[FlagStr, QWebEngineUrlScheme.Flag] = bidict(
     view_source_allowed=QWebEngineUrlScheme.Flag.ViewSourceAllowed,
     content_security_policy_ignored=QWebEngineUrlScheme.Flag.ContentSecurityPolicyIgnored,
     cors_enabled=QWebEngineUrlScheme.Flag.CorsEnabled,
+    fetch_api_allowed=QWebEngineUrlScheme.Flag.FetchApiAllowed,
 )
 
 

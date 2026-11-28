@@ -1,9 +1,27 @@
+from typing import Literal
+
 from prettyqt import core, gui
-from prettyqt.utils import datatypes
+from prettyqt.utils import bidict, datatypes
+
+
+ColorModelStr = Literal["rgb", "grayscale", "cmyk", "auto"]
+
+COLOR_MODEL: bidict[ColorModelStr, gui.QPdfWriter.ColorModel] = bidict(
+    rgb=gui.QPdfWriter.ColorModel.RGB,
+    grayscale=gui.QPdfWriter.ColorModel.Grayscale,
+    cmyk=gui.QPdfWriter.ColorModel.CMYK,
+    auto=gui.QPdfWriter.ColorModel.Auto,
+)
 
 
 class PdfWriter(core.ObjectMixin, gui.PagedPaintDeviceMixin, gui.QPdfWriter):
     """Class to generate PDFs that can be used as a paint device."""
+
+    def get_color_model(self) -> ColorModelStr:
+        return COLOR_MODEL.inverse[self.colorModel()]
+
+    def set_color_model(self, model: ColorModelStr | gui.QPdfWriter.ColorModel):
+        self.setColorModel(COLOR_MODEL.get_enum_value(model))
 
     def set_desktop_resolution(self):
         primary = gui.app().primaryScreen()

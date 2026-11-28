@@ -448,13 +448,16 @@ class AccordionWidget(widgets.ScrollArea):
     def mouseMoveEvent(self, event):
         if self._scrolling:
             sbar = self.verticalScrollBar()
+            if sbar.height() == 0:
+                event.accept()
+                return
             smax = sbar.maximum()
-            # calculate the distance moved for the moust point
-            dy = event.globalY() - self._scroll_init_y
+            # calculate the distance moved for the mouse point
+            dy = int(event.globalPosition().y()) - self._scroll_init_y
             # calculate the percentage that is of the scroll bar
             dval = smax * (dy / float(sbar.height()))
             # calculate the new value
-            sbar.setValue(self._scroll_init_val - dval)
+            sbar.setValue(int(self._scroll_init_val - dval))
         event.accept()
 
     def mousePressEvent(self, event):
@@ -463,7 +466,7 @@ class AccordionWidget(widgets.ScrollArea):
             and self.v_scrollbar.can_scroll()
         ):
             self._scrolling = True
-            self._scroll_init_y = event.globalY()
+            self._scroll_init_y = int(event.globalPosition().y())
             self._scroll_init_val = self.verticalScrollBar().value()
             widgets.Application.set_override_cursor("closed_hand")
         event.accept()

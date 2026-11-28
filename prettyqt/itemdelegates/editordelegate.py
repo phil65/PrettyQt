@@ -97,12 +97,17 @@ class EditorDelegate(widgets.StyledItemDelegate):
 
         match value := self._data_for_index(index, self._role):
             case gui.QIcon():
-                icon_delegate = itemdelegates.IconDelegate()
+                icon_delegate = itemdelegates.IconDelegate(role=self._role)
                 icon_delegate.paint(painter, option, index)
                 return
             case enum.Enum():  # PySide6 needs this when using Views
-                option.text = value.name
-                option.widget.style().drawControl(
+                option.text = value.name if value.name is not None else str(value)
+                style = (
+                    option.widget.style()
+                    if option.widget is not None
+                    else widgets.Application.style()
+                )
+                style.drawControl(
                     widgets.QStyle.ControlElement.CE_ItemViewItem, option, painter
                 )
             case _:

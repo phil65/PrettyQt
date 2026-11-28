@@ -11,7 +11,7 @@ class RangeFilterProxyModel(core.SortFilterProxyModel):
         super().__init__(**kwargs)
 
     def __repr__(self):
-        return get_repr(self, self.get_range)
+        return get_repr(self, self.get_range())
 
     def filterAcceptsRow(self, source_row: int, parent: core.ModelIndex) -> bool:
         column = self.filterKeyColumn()
@@ -32,8 +32,8 @@ class RangeFilterProxyModel(core.SortFilterProxyModel):
         return self._max_value is None or value <= self._max_value
 
     def set_min_value(self, value: float | None):
-        self._min_value = value
-        self.invalidateRowsFilter()
+        with self.change_filter("rows"):
+            self._min_value = value
 
     def get_min_value(self) -> float | int:
         if self._min_value is None:
@@ -41,8 +41,8 @@ class RangeFilterProxyModel(core.SortFilterProxyModel):
         return self._min_value
 
     def set_max_value(self, value: float):
-        self._max_value = value
-        self.invalidateRowsFilter()
+        with self.change_filter("rows"):
+            self._max_value = value
 
     def get_max_value(self) -> float | int:
         if self._max_value is None:
@@ -50,8 +50,8 @@ class RangeFilterProxyModel(core.SortFilterProxyModel):
         return self._max_value
 
     def set_range(self, rng: tuple[float | int | None, float | int | None]):
-        self._min_value, self._max_value = rng
-        self.invalidateRowsFilter()
+        with self.change_filter("rows"):
+            self._min_value, self._max_value = rng
 
     def get_range(self) -> tuple[float | int | None, float | int | None]:
         return (self._min_value, self._max_value)

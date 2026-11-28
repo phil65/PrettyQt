@@ -80,7 +80,7 @@ class SmoothScrollBar(widgets.ScrollBar):
             and source == self.widget.viewport()
         ):
             v_bar = self.widget.verticalScrollBar()
-            if isinstance(v_bar, widgets.ScrollBar):
+            if isinstance(v_bar, SmoothScrollBar):
                 v_bar.scroll_by_value(-event.angleDelta().y())
             else:
                 v_bar.setValue(v_bar.value() - event.angleDelta().y())
@@ -109,14 +109,14 @@ class SmoothScrollBar(widgets.ScrollBar):
 
     animation_duration = core.Property(
         int,
-        set_animation_duration,
         get_animation_duration,
+        set_animation_duration,
         doc="Duration for the animation",
     )
     animation_easing = core.Property(
         core.EasingCurve.Type,
-        set_animation_easing,
         get_animation_easing,
+        set_animation_easing,
         doc="Animation easing type",
     )
 

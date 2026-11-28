@@ -24,9 +24,9 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
             case int() as row:
                 if row < 0:
                     row = row + rowcount
-                if index >= self.rowCount():
+                if row < 0 or row >= rowcount:
                     raise IndexError(index)
-                return self.item(index)
+                return self.item(row)
             case slice():
                 return self.__getitem__((index, 0))
             case core.QModelIndex():
@@ -52,7 +52,9 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
                 item = self.takeRow(index)
             case (int(), int()):
                 item = self.takeItem(*index)
-        if item is None:
+            case _:
+                raise TypeError(index)
+        if not item:
             raise KeyError(index)
         return item
 
@@ -111,9 +113,9 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
         foreground: gui.QBrush | None = None,
         background: gui.QBrush | None = None,
         font: gui.QFont | None = None,
-        selectable: bool = True,
-        enabled: bool = True,
-        editable: bool = False,
+        selectable: bool | None = None,
+        enabled: bool | None = None,
+        editable: bool | None = None,
         status_tip: str = "",
         tool_tip: str = "",
         whats_this: str | None = None,
@@ -138,11 +140,11 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
             item.setFont(font)
         if flags is not None:
             item.setFlags(flags)
-        if enabled:
+        if enabled is not None:
             item.setEnabled(enabled)
-        if editable:
+        if editable is not None:
             item.setEditable(editable)
-        if selectable:
+        if selectable is not None:
             item.setSelectable(selectable)
         if status_tip:
             item.setStatusTip(status_tip)

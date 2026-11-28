@@ -256,3 +256,57 @@ def test_ui_inspector_workflow(qtbot, tmp_path):
     assert data["language"] == "en"
     assert len(data["captures"]) == 3  # noqa: PLR2004
     assert data["warnings"] == []
+
+
+def test_messagehandler_restores_previous(qapp):
+    import logging
+
+    received: list[str] = []
+
+    def prev_handler(_msg_type, _ctx, msg):
+        received.append(msg)
+
+    old = QtCore.qInstallMessageHandler(prev_handler)
+    try:
+        handler = debugging.MessageHandler(logging.getLogger("test_mh"))
+        with handler:
+            QtCore.qInfo("inside")
+        assert received == []
+        QtCore.qInfo("outside")
+        assert "outside" in received
+    finally:
+        QtCore.qInstallMessageHandler(old)
+
+
+def test_stalker_unhook_and_count_children(qtbot):
+    parent = widgets.Widget()
+    qtbot.addWidget(parent)
+    child = widgets.PushButton(parent=parent)
+    assert child.parent() is parent
+
+    stalker = debugging.Stalker(parent)
+    stalker.unhook()  # calling before hook() must not raise AttributeError
+    counts = stalker.count_children(widgets.QPushButton)
+    assert counts[widgets.PushButton] == 1
+
+
+def test_errormessagebox_traceback_text(qtbot):
+    box = debugging.ErrorMessageBox("Error", "Something failed")
+    qtbot.addWidget(box)
+    assert box.get_button("help").text() == "Show traceback"
+
+
+def test_context_timer_logs_on_exception(caplog):
+    import logging
+
+    def _raise_timed():
+        with debugging.context_timer():
+            msg = "boom"
+            raise RuntimeError(msg)
+
+    with (
+        caplog.at_level(logging.INFO, logger="prettyqt.debugging"),
+        pytest.raises(RuntimeError, match="boom"),
+    ):
+        _raise_timed()
+    assert len(caplog.records) == 1

@@ -69,7 +69,8 @@ class RadioDelegate(widgets.StyledItemDelegate):
                 source.clearMask()
             case core.Event.Type.FocusOut:
                 # another widget has requested focus, set the mask
-                source.setMask(source.property("offMask"))
+                if (mask := source.property("offMask")) is not None:
+                    source.setMask(mask)
                 # update the table viewport to get rid of possible
                 # grid lines left after masking
                 if (container := source.parentWidget()) is not None:
@@ -110,7 +111,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
             model.setData(
                 index,
                 self.items[button],
-                constants.DISPLAY_ROLE,
+                constants.EDIT_ROLE,
             )
             self.choices[button] = index.row()
 

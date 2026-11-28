@@ -7,6 +7,7 @@ from prettyqt.utils import colors
 
 
 if TYPE_CHECKING:
+    from prettyqt import widgets
     from prettyqt.utils import datatypes
 
 
@@ -37,7 +38,7 @@ class HighlightMouseProxyModel(core.IdentityProxyModel):
         highlight_color: datatypes.ColorType = "red",
         **kwargs,
     ):
-        self._mode = mode
+        self._highlight_mode = mode
         self._current_value = ...  # Sentinel value
         self._data_role = role
         self._current_column = None
@@ -88,7 +89,7 @@ class HighlightMouseProxyModel(core.IdentityProxyModel):
             return super().data(index, role)
         is_in_row = index.row() == self._current_row
         is_in_column = index.column() == self._current_column
-        match self._mode:
+        match self._highlight_mode:
             case "column" if is_in_column:
                 return self._highlight_color
             case "row" if is_in_row:

@@ -133,8 +133,11 @@ class AppearanceProxyModel(core.IdentityProxyModel):
                     case _:
                         return self._font_default
             case constants.ALIGNMENT_ROLE:
-                val = self._alignments[key]
-                return val or self._alignment_default
+                if val := self._alignments[key]:
+                    return val
+                if self._alignment_default is None:
+                    return super().data(index, role)
+                return self._alignment_default
             case _:
                 return super().data(index, role)
 
@@ -169,9 +172,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
     def set_alignment_default(
         self, alignment: constants.AlignmentFlag | constants.AlignmentStr
     ):
-        if isinstance(alignment, str):
-            alignment = constants.ALIGNMENTS[alignment]
-        self._alignment_default = alignment
+        self._alignment_default = constants.ALIGNMENTS.get_enum_value(alignment)
         self._alignments = collections.defaultdict(lambda: None)
         self.update_all()
 

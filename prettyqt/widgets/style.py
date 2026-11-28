@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 
 StandardPixmapStr = Literal[
-    "titlebar_min_button=",
+    "titlebar_min_button",
     "titlebar_menu_button",
     "titlebar_max_button",
     "titlebar_close_button",
@@ -56,7 +56,7 @@ StandardPixmapStr = Literal[
     "dialog_save",
     "dialog_close",
     "dialog_apply",
-    "dialor_reset",
+    "dialog_reset",
     "dialog_discard",
     "dialog_yes",
     "dialog_no",
@@ -89,6 +89,10 @@ StandardPixmapStr = Literal[
     "dialog_ignore",
     "restore_defaults",
     "tab_close",
+    "tab_scroll_left_button",
+    "tab_scroll_right_button",
+    "tab_scroll_up_button",
+    "tab_scroll_down_button",
 ]
 
 mod = widgets.QStyle
@@ -141,7 +145,7 @@ STANDARD_PIXMAP: bidict[StandardPixmapStr, mod.StandardPixmap] = bidict(
     dialog_save=mod.StandardPixmap.SP_DialogSaveButton,
     dialog_close=mod.StandardPixmap.SP_DialogCloseButton,
     dialog_apply=mod.StandardPixmap.SP_DialogApplyButton,
-    dialor_reset=mod.StandardPixmap.SP_DialogResetButton,
+    dialog_reset=mod.StandardPixmap.SP_DialogResetButton,
     dialog_discard=mod.StandardPixmap.SP_DialogDiscardButton,
     dialog_yes=mod.StandardPixmap.SP_DialogYesButton,
     dialog_no=mod.StandardPixmap.SP_DialogNoButton,
@@ -174,6 +178,10 @@ STANDARD_PIXMAP: bidict[StandardPixmapStr, mod.StandardPixmap] = bidict(
     dialog_ignore=mod.StandardPixmap.SP_DialogIgnoreButton,
     restore_defaults=mod.StandardPixmap.SP_RestoreDefaultsButton,
     tab_close=mod.StandardPixmap.SP_TabCloseButton,
+    tab_scroll_left_button=mod.StandardPixmap.SP_TabScrollLeftButton,
+    tab_scroll_right_button=mod.StandardPixmap.SP_TabScrollRightButton,
+    tab_scroll_up_button=mod.StandardPixmap.SP_TabScrollUpButton,
+    tab_scroll_down_button=mod.StandardPixmap.SP_TabScrollDownButton,
 )
 
 ComplexControlStr = Literal[
@@ -251,6 +259,7 @@ ControlElementStr = Literal[
     "tool_box_tab_label",
     "header_empty_area",
     "shaped_frame",
+    "column_view_grip",
 ]
 
 CONTROL_ELEMENT: bidict[ControlElementStr, mod.ControlElement] = bidict(
@@ -301,6 +310,7 @@ CONTROL_ELEMENT: bidict[ControlElementStr, mod.ControlElement] = bidict(
     tool_box_tab_label=mod.ControlElement.CE_ToolBoxTabLabel,
     header_empty_area=mod.ControlElement.CE_HeaderEmptyArea,
     shaped_frame=mod.ControlElement.CE_ShapedFrame,
+    column_view_grip=mod.ControlElement.CE_ColumnViewGrip,
 )
 
 SubControlStr = Literal[
@@ -596,6 +606,9 @@ PixelMetricStr = Literal[
     "title_bar_button_size",
     "line_edit_icon_size",
     "line_edit_icon_margin",
+    "dialog_buttons_separator",
+    "dialog_buttons_button_width",
+    "dialog_buttons_button_height",
 ]
 
 pm = mod.PixelMetric
@@ -693,6 +706,9 @@ PIXEL_METRIC: bidict[PixelMetricStr, pm] = bidict(
     title_bar_button_size=pm.PM_TitleBarButtonSize,
     line_edit_icon_size=pm.PM_LineEditIconSize,
     line_edit_icon_margin=pm.PM_LineEditIconMargin,
+    dialog_buttons_separator=pm.PM_DialogButtonsSeparator,
+    dialog_buttons_button_width=pm.PM_DialogButtonsButtonWidth,
+    dialog_buttons_button_height=pm.PM_DialogButtonsButtonHeight,
 )
 
 StateStr = Literal[
@@ -703,7 +719,6 @@ StateStr = Literal[
     "down_arrow",
     "editing",
     "enabled",
-    "has_edit_focus",
     "has_focus",
     "horizontal",
     "keyboard_focus_change",
@@ -721,6 +736,10 @@ StateStr = Literal[
     "up_arrow",
     "mini",
     "small",
+    "top",
+    "bottom",
+    "focus_at_border",
+    "window",
 ]
 
 st = mod.StateFlag
@@ -733,7 +752,6 @@ State: bidict[StateStr, st] = bidict(
     down_arrow=st.State_DownArrow,
     editing=st.State_Editing,
     enabled=st.State_Enabled,
-    # has_edit_focus=st.State_HasEditFocus,
     has_focus=st.State_HasFocus,
     horizontal=st.State_Horizontal,
     keyboard_focus_change=st.State_KeyboardFocusChange,
@@ -751,6 +769,10 @@ State: bidict[StateStr, st] = bidict(
     up_arrow=st.State_UpArrow,
     mini=st.State_Mini,
     small=st.State_Small,
+    top=st.State_Top,
+    bottom=st.State_Bottom,
+    focus_at_border=st.State_FocusAtBorder,
+    window=st.State_Window,
 )
 
 

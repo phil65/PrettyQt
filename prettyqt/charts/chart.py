@@ -77,7 +77,7 @@ class ChartMixin(widgets.GraphicsWidgetMixin, _ChartBase):
     def get_axes(
         self,
         orientation: constants.OrientationStr | constants.Orientation | None = None,
-        series: charts.QAbstractBarSeries | None = None,
+        series: charts.QAbstractSeries | None = None,
     ) -> list[charts.QAbstractAxis]:
         """Get axes of chart.
 
@@ -141,13 +141,15 @@ class ChartMixin(widgets.GraphicsWidgetMixin, _ChartBase):
 
         Make sure that we dont zoom out too far
         """
+        if self.min_x == self.max_x == 0 and self.min_y == self.max_y == 0:
+            self.update_boundaries()
         self.zoom(factor)
-        if axis_x := self._get_value_axes("horizontal"):
+        if (axis_x := self._get_value_axes("horizontal")) and self.min_x < self.max_x:
             if axis_x[0].min() < self.min_x:
                 axis_x[0].setMin(self.min_x)
             if axis_x[0].max() > self.max_x:
                 axis_x[0].setMax(self.max_x)
-        if axis_y := self._get_value_axes("vertical"):
+        if (axis_y := self._get_value_axes("vertical")) and self.min_y < self.max_y:
             if axis_y[0].max() > self.max_y:
                 axis_y[0].setMax(self.max_y)
 

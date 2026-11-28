@@ -34,6 +34,7 @@ KeyStr = Literal[
     "cover_art_image",
     "orientation",
     "resolution",
+    "has_hdr_content",
 ]
 
 KEY: bidict[KeyStr, QtMultimedia.QMediaMetaData.Key] = bidict(
@@ -65,6 +66,7 @@ KEY: bidict[KeyStr, QtMultimedia.QMediaMetaData.Key] = bidict(
     cover_art_image=QtMultimedia.QMediaMetaData.Key.CoverArtImage,
     orientation=QtMultimedia.QMediaMetaData.Key.Orientation,
     resolution=QtMultimedia.QMediaMetaData.Key.Resolution,
+    has_hdr_content=QtMultimedia.QMediaMetaData.Key.HasHdrContent,
 )
 
 

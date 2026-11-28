@@ -56,7 +56,13 @@ class DateTime(core.QDateTime):
         Args:
             spec: time specification to use
         """
-        self.setTimeSpec(constants.TIME_SPEC[spec])
+        time_spec = constants.TIME_SPEC.get_enum_value(spec)
+        if time_spec == constants.TimeSpec.UTC:
+            self.setTimeZone(core.QTimeZone(core.QTimeZone.Initialization.UTC))
+        elif time_spec == constants.TimeSpec.LocalTime:
+            self.setTimeZone(core.QTimeZone(core.QTimeZone.Initialization.LocalTime))
+        else:
+            self.setTimeSpec(time_spec)
 
     def get_time_spec(self) -> constants.TimeSpecStr:
         """Return current time specification.

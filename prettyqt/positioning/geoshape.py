@@ -1,10 +1,12 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt.qt import QtPositioning
 from prettyqt.utils import bidict
 
 
-SHAPE_TYPES = bidict(
+ShapeTypeStr = Literal["unknown", "rectangle", "circle", "path", "polygon"]
+
+SHAPE_TYPES: bidict[ShapeTypeStr, QtPositioning.QGeoShape.ShapeType] = bidict(
     unknown=QtPositioning.QGeoShape.ShapeType.UnknownType,
     rectangle=QtPositioning.QGeoShape.ShapeType.RectangleType,
     circle=QtPositioning.QGeoShape.ShapeType.CircleType,
@@ -26,7 +28,7 @@ class GeoShapeMixin(_GeoShapeBase):
     def __str__(self):
         return self.toString()[1:]
 
-    def get_type(self) -> str:
+    def get_type(self) -> ShapeTypeStr:
         return SHAPE_TYPES.inverse[self.type()]
 
 

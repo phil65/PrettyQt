@@ -4,7 +4,7 @@ from prettyqt.qt.QtScxml import *  # noqa: F403
 
 from .scxmlcompiler import ScxmlCompiler
 from .scxmlstatemachine import ScxmlStateMachine
-from .scxmldatamodel import ScxmlDataModel
+from .scxmldatamodel import ScxmlDataModel, ScxmlDataModelMixin
 from .scxmlcppdatamodel import ScxmlCppDataModel
 from .scxmlnulldatamodel import ScxmlNullDataModel
 from .scxmlinvokableservice import ScxmlInvokableService
@@ -17,6 +17,7 @@ __all__ = [
     "ScxmlCompiler",
     "ScxmlCppDataModel",
     "ScxmlDataModel",
+    "ScxmlDataModelMixin",
     "ScxmlInvokableService",
     "ScxmlInvokableServiceFactory",
     "ScxmlNullDataModel",

@@ -38,6 +38,7 @@ class NameColumn(itemmodels.ColumnItem):
             case constants.EDIT_ROLE:
                 item.setText(value)
                 return True
+        return False
 
 
 class ToolTipColumn(itemmodels.ColumnItem):
@@ -64,6 +65,7 @@ class ToolTipColumn(itemmodels.ColumnItem):
             case constants.EDIT_ROLE:
                 item.setToolTip(value)
                 return True
+        return False
 
 
 class ShortcutColumn(itemmodels.ColumnItem):
@@ -91,6 +93,7 @@ class ShortcutColumn(itemmodels.ColumnItem):
             case constants.EDIT_ROLE:
                 item.setShortcut(value)
                 return True
+        return False
 
 
 class PriorityColumn(itemmodels.ColumnItem):
@@ -118,6 +121,7 @@ class PriorityColumn(itemmodels.ColumnItem):
             case constants.EDIT_ROLE:
                 item.setPriority(value)
                 return True
+        return False
 
 
 class CheckStateColumn(itemmodels.ColumnItem):
@@ -143,7 +147,14 @@ class CheckStateColumn(itemmodels.ColumnItem):
     ):
         match role:
             case constants.CHECKSTATE_ROLE:
-                item.setChecked(not item.isChecked())
+                item.setChecked(
+                    value is True
+                    or value
+                    in (
+                        constants.CheckState.Checked,
+                        constants.CheckState.Checked.value,
+                    )
+                )
                 return True
         return False
 

@@ -24,13 +24,17 @@ class MessageHandler:
     def __init__(self, logger: logging.Logger):
         self._logger = logger
         self._previous_handler = None
+        self._installed = False
 
     def install(self):
         self._previous_handler = QtCore.qInstallMessageHandler(self)
+        self._installed = True
 
     def uninstall(self):
-        if self._previous_handler is None:
+        if self._installed:
             QtCore.qInstallMessageHandler(self._previous_handler)
+            self._previous_handler = None
+            self._installed = False
 
     def __enter__(self):
         self.install()

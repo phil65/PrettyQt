@@ -15,7 +15,7 @@ class PopupInfo(widgets.Dialog):
     def __init__(self, parent: widgets.QWidget | None = None, text: str | None = None):
         super().__init__(parent=parent)
         self.timer = core.Timer(single_shot=True, timeout=self.close)
-        self.label = widgets.Label(alignment="center")
+        self.label = widgets.Label(text or "", alignment="center")
         self.iconlabel = widgets.Label()
         self.set_icon("mdi.information")
         self.set_flags(stay_on_top=True, frameless=True, tooltip=True)

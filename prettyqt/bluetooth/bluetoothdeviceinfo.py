@@ -23,12 +23,14 @@ FieldStr = Literal[
     "rssi",
     "manufacturer_data",
     "service_data",
+    "all",
 ]
 FIELD: bidict[FieldStr, mod.Field] = bidict(
     none=mod.Field(0),
     rssi=mod.Field.RSSI,
     manufacturer_data=mod.Field.ManufacturerData,
     service_data=mod.Field.ServiceData,
+    all=mod.Field.All,
 )
 
 MajorDeviceClassStr = Literal[
@@ -248,11 +250,11 @@ MINOR_TOY_CLASS: bidict[MinorToyClassStr, mod.MinorToyClass] = bidict(
 
 MinorWearableClassStr = Literal[
     "uncategorized",
-    "robot",
-    "vehicle",
-    "doll",
-    "controller",
-    "game",
+    "wrist_watch",
+    "pager",
+    "jacket",
+    "helmet",
+    "glasses",
 ]
 
 MINOR_WEARABLE_CLASS: bidict[MinorWearableClassStr, mod.MinorWearableClass] = bidict(
@@ -352,6 +354,8 @@ class BluetoothDeviceInfo(bluetooth.QBluetoothDeviceInfo):
             case "health":
                 flag = mod.MinorHealthClass(self.minorDeviceClass())
                 return MINOR_HEALTH_CLASS.inverse[flag]
+            case "miscellaneous":
+                return "uncategorized"
             case "uncategorized":
                 return "misc"
             case _:

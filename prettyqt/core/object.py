@@ -184,8 +184,10 @@ class ObjectMixin(_ObjectBase):
     def signals_blocked(self):
         """Context manager to temporarily block emitting signals."""
         blocked = self.blockSignals(True)
-        yield self
-        self.blockSignals(blocked)
+        try:
+            yield self
+        finally:
+            self.blockSignals(blocked)
 
     @contextlib.contextmanager
     def signal_blocked(
@@ -193,8 +195,10 @@ class ObjectMixin(_ObjectBase):
     ):
         """Context manager to temporarily disconnect specific signal."""
         signal.disconnect(receiver)
-        yield self
-        signal.connect(receiver)
+        try:
+            yield self
+        finally:
+            signal.connect(receiver)
 
     @contextlib.contextmanager
     def properties_set_to(self, **kwargs):
@@ -202,9 +206,11 @@ class ObjectMixin(_ObjectBase):
         props = {k: self.property(k) for k in kwargs}
         for k, v in kwargs.items():
             self.setProperty(k, v)
-        yield self
-        for k, v in props.items():
-            self.setProperty(k, v)
+        try:
+            yield self
+        finally:
+            for k, v in props.items():
+                self.setProperty(k, v)
 
     def to_json(self):
         dct = self.__getstate__()
@@ -283,9 +289,10 @@ class ObjectMixin(_ObjectBase):
             objects = [
                 o
                 for o in objects
-                for k, v in property_selector.items()
-                if (callable(v) and v(o.property(k)))
-                or (not callable(v) and o.property(k) == v)
+                if all(
+                    v(o.property(k)) if callable(v) else o.property(k) == v
+                    for k, v in property_selector.items()
+                )
             ]
         if only_prettyqt_classes:
             objects = [i for i in objects if i.__module__.startswith("prettyqt")]
@@ -417,10 +424,10 @@ class ObjectMixin(_ObjectBase):
 
     def bind_property(self, object_name: str, prop_name: str) -> property:
         def getter(self):
-            return self.findChild(self, object_name).property(prop_name)
+            return self.findChild(core.QObject, object_name).property(prop_name)
 
         def setter(self, value):
-            self.findChild(self, object_name).setProperty(prop_name, value)
+            self.findChild(core.QObject, object_name).setProperty(prop_name, value)
 
         return property(getter, setter)
 

@@ -21,7 +21,8 @@ class AmbientSound(core.ObjectMixin, QtSpatialAudio.QAmbientSound):
         self.setSource(datatypes.to_local_url(source))
 
     def get_source(self) -> pathlib.Path:
-        return pathlib.Path(self.source().toString())
+        url = self.source()
+        return pathlib.Path(url.toLocalFile() if url.isLocalFile() else url.toString())
 
 
 if __name__ == "__main__":

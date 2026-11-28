@@ -20,17 +20,26 @@ class PathValidator(gui.Validator):
         return isinstance(other, PathValidator) and self._mode == other._mode
 
     def validate(self, text: str, pos: int = 0):
-        path = pathlib.Path(text)
-        if not path.exists():
+        if not text:
+            return self.State.Intermediate, text, pos
+        try:
+            path = pathlib.Path(text)
+            exists = path.exists()
+        except ValueError, OSError:
+            return self.State.Invalid, text, pos
+        if not exists:
             return self.State.Intermediate, text, pos
         match self._mode:
             case "any":
-                return self.State.Acceptable, text, pos
-            case "file" if path.is_file():
-                return self.State.Acceptable, text, pos
-            case "folder" if path.is_dir():
-                return self.State.Acceptable, text, pos
-        return self.State.Intermediate, text, pos
+                is_valid = True
+            case "file":
+                is_valid = path.is_file()
+            case "folder":
+                is_valid = path.is_dir()
+            case _:
+                is_valid = False
+        state = self.State.Acceptable if is_valid else self.State.Intermediate
+        return state, text, pos
 
     def set_mode(self, mode: ModeStr):
         self._mode = mode

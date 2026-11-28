@@ -42,7 +42,7 @@ class BrushEdit(widgets.Widget):
         if dlg.exec():
             new_color = dlg.current_color()
             self.set_current_brush(new_color)
-            self.value_changed.emit(new_color)
+            self.value_changed.emit(self._current_brush)
 
     def set_current_brush(self, color: datatypes.ColorAndBrushType):
         if isinstance(color, gui.QBrush):

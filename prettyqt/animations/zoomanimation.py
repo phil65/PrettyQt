@@ -10,7 +10,7 @@ class ZoomAnimation(core.ParallelAnimationGroup):
     ID = "zoom"
 
     def _widget(self) -> widgets.QWidget:
-        return cast("widgets.QWidget", self.parent())
+        return cast("widgets.QWidget", self.parent() or self.anim1.targetObject())
 
     def __init__(
         self,
@@ -29,10 +29,11 @@ class ZoomAnimation(core.ParallelAnimationGroup):
         self.anim1 = core.PropertyAnimation()
         # slide animation
         self.anim2 = core.PropertyAnimation()
-        self.apply_to(cast("widgets.QWidget", parent))
+        if parent is not None:
+            self.apply_to(cast("widgets.QWidget", parent))
+            self.set_start_value(start)
+            self.set_end_value(end)
         self.set_easing(easing)
-        self.set_start_value(start)
-        self.set_end_value(end)
         self.set_duration(duration)
         self.addAnimation(self.anim1)
         self.addAnimation(self.anim2)
@@ -48,11 +49,11 @@ class ZoomAnimation(core.ParallelAnimationGroup):
         zoom_ratio = self._end / self._start
         # setup zoom
         size = self._widget().size()
-        new = size.toSizeF() * zoom_ratio * zoom_ratio
+        new = size.toSizeF() * zoom_ratio
         self.anim1.setEndValue(new.toSize())
         # setup move
-        move_x = -zoom_ratio * self._widget().width()
-        move_y = -zoom_ratio * self._widget().height()
+        move_x = -(zoom_ratio - 1) * self._widget().width()
+        move_y = -(zoom_ratio - 1) * self._widget().height()
         match self._anchor:
             case "center":
                 movement = core.Point(int(move_x / 2), int(move_y / 2))

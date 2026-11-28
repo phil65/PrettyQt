@@ -62,7 +62,7 @@ class TabWidget(widgets.WidgetMixin, widgets.QTabWidget):
                     raise IndexError(index)
                 return widget
             case slice():
-                rng = range(index.start or 0, index.stop or self.count(), index.step or 1)
+                rng = range(*index.indices(self.count()))
                 return listdelegators.ListDelegator(self.widget(i) for i in rng)
             case _:
                 raise TypeError(index)

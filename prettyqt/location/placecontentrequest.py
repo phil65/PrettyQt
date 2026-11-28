@@ -10,7 +10,7 @@ class PlaceContentRequest(location.QPlaceContentRequest):
         """Set the content type.
 
         Args:
-            typ: Relevance type
+            typ: Content type
         """
         self.setContentType(location.placecontent.TYPE.get_enum_value(typ))
 
@@ -18,7 +18,7 @@ class PlaceContentRequest(location.QPlaceContentRequest):
         """Return current content type.
 
         Returns:
-            Relevance type
+            Content type
         """
         return location.placecontent.TYPE.inverse[self.contentType()]
 

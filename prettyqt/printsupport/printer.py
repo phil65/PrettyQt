@@ -29,11 +29,11 @@ OUTPUT_FORMAT = bidict(
 OutputFormatStr = Literal["native", "pdf"]
 
 PAGE_ORDER = bidict(
-    first_page_last=QtPrintSupport.QPrinter.PageOrder.FirstPageFirst,
+    first_page_first=QtPrintSupport.QPrinter.PageOrder.FirstPageFirst,
     last_page_first=QtPrintSupport.QPrinter.PageOrder.LastPageFirst,
 )
 
-PageOrderStr = Literal["first_page_last", "last_page_first"]
+PageOrderStr = Literal["first_page_first", "last_page_first"]
 
 PRINT_RANGE = bidict(
     all_pages=QtPrintSupport.QPrinter.PrintRange.AllPages,

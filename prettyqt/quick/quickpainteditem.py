@@ -36,7 +36,7 @@ class QuickPaintedItem(quick.QuickItemMixin, quick.QQuickPaintedItem):
         Args:
             target: render target to use
         """
-        self.setRenderTarget(RENDER_TARGET[target])
+        self.setRenderTarget(RENDER_TARGET.get_enum_value(target))
 
     def get_render_target(self) -> RenderTargetStr:
         """Return the render target.

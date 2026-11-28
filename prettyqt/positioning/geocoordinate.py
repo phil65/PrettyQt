@@ -25,20 +25,22 @@ CoordinateFormatStr = Literal[
 ]
 
 
-COORDINATE_TYPE = bidict({
+CoordinateTypeStr = Literal["invalid", "2d", "3d"]
+
+COORDINATE_TYPE: bidict[CoordinateTypeStr, mod.CoordinateType] = bidict({
     "invalid": mod.CoordinateType.InvalidCoordinate,
     "2d": mod.CoordinateType.Coordinate2D,
     "3d": mod.CoordinateType.Coordinate3D,
 })
-
-CoordinateTypeStr = Literal["invalid", "2d", "3d"]
 
 
 class GeoCoordinate(QtPositioning.QGeoCoordinate):
     def __str__(self):
         return self.toString()
 
-    def __format__(self, format_spec: CoordinateFormatStr):
+    def __format__(self, format_spec: CoordinateFormatStr | Literal[""]):
+        if not format_spec:
+            return self.toString()
         return self.toString(COORDINATE_FORMAT[format_spec])
 
     def __repr__(self):
@@ -47,7 +49,7 @@ class GeoCoordinate(QtPositioning.QGeoCoordinate):
     def __bool__(self):
         return self.isValid()
 
-    def get_type(self) -> str:
+    def get_type(self) -> CoordinateTypeStr:
         return COORDINATE_TYPE.inverse[self.type()]
 
 

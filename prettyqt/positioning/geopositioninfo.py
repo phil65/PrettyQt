@@ -5,15 +5,6 @@ from prettyqt.qt import QtPositioning
 from prettyqt.utils import bidict, datatypes, get_repr
 
 
-ATTRIBUTE = bidict(
-    direction=QtPositioning.QGeoPositionInfo.Attribute.Direction,
-    ground_speed=QtPositioning.QGeoPositionInfo.Attribute.GroundSpeed,
-    vertical_speed=QtPositioning.QGeoPositionInfo.Attribute.VerticalSpeed,
-    magnetic_variation=QtPositioning.QGeoPositionInfo.Attribute.MagneticVariation,
-    horizontal_accuracy=QtPositioning.QGeoPositionInfo.Attribute.HorizontalAccuracy,
-    vertical_accuracy=QtPositioning.QGeoPositionInfo.Attribute.VerticalAccuracy,
-)
-
 AttributeStr = Literal[
     "direction",
     "ground_speed",
@@ -21,14 +12,27 @@ AttributeStr = Literal[
     "magnetic_variation",
     "horizontal_accuracy",
     "vertical_accuracy",
+    "direction_accuracy",
 ]
+
+ATTRIBUTE: bidict[AttributeStr, QtPositioning.QGeoPositionInfo.Attribute] = bidict(
+    direction=QtPositioning.QGeoPositionInfo.Attribute.Direction,
+    ground_speed=QtPositioning.QGeoPositionInfo.Attribute.GroundSpeed,
+    vertical_speed=QtPositioning.QGeoPositionInfo.Attribute.VerticalSpeed,
+    magnetic_variation=QtPositioning.QGeoPositionInfo.Attribute.MagneticVariation,
+    horizontal_accuracy=QtPositioning.QGeoPositionInfo.Attribute.HorizontalAccuracy,
+    vertical_accuracy=QtPositioning.QGeoPositionInfo.Attribute.VerticalAccuracy,
+    direction_accuracy=QtPositioning.QGeoPositionInfo.Attribute.DirectionAccuracy,
+)
 
 
 class GeoPositionInfo(QtPositioning.QGeoPositionInfo):
     def __repr__(self):
         return get_repr(self, self.get_coordinate(), self.get_timestamp())
 
-    def __contains__(self, index: AttributeStr):
+    def __contains__(self, index: object) -> bool:
+        if not isinstance(index, str) or index not in ATTRIBUTE:
+            return False
         return self.hasAttribute(ATTRIBUTE[index])
 
     def __getitem__(self, index: AttributeStr) -> float:

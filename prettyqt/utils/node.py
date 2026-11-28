@@ -23,7 +23,7 @@ class NodeResolver(baseresolver.BaseResolver):
         self.path_attr = path_attr
 
     def get_parent(self, node):
-        return node.parent
+        return node.parent()
 
     def get_children(self, node):
         return node.children

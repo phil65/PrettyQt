@@ -20,6 +20,8 @@ ViewItemFeatureStr = Literal[
     "has_check_indicator",
     "has_display",
     "has_decoration",
+    "is_decorated_root_column",
+    "is_decoration_for_root_column",
 ]
 
 VIEW_ITEM_FEATURE: bidict[
@@ -31,6 +33,8 @@ VIEW_ITEM_FEATURE: bidict[
     has_check_indicator=widgets.QStyleOptionViewItem.ViewItemFeature.HasCheckIndicator,
     has_display=widgets.QStyleOptionViewItem.ViewItemFeature.HasDisplay,
     has_decoration=widgets.QStyleOptionViewItem.ViewItemFeature.HasDecoration,
+    is_decorated_root_column=widgets.QStyleOptionViewItem.ViewItemFeature.IsDecoratedRootColumn,
+    is_decoration_for_root_column=widgets.QStyleOptionViewItem.ViewItemFeature.IsDecorationForRootColumn,
 )
 
 

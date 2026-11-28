@@ -64,7 +64,6 @@ class FilterHeader(widgets.HeaderView):
         self.sectionResized.connect(self._adjust_positions)
         parent.h_scrollbar.valueChanged.connect(self._adjust_positions)
         parent.model_changed.connect(self._update_filter_boxes)
-        self.sectionResized.connect(self._adjust_positions)
         self._update_filter_boxes()
         self.updateGeometries()
 
@@ -135,8 +134,8 @@ class FilterHeader(widgets.HeaderView):
                 title = model.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
                 widget.setPlaceholderText(f"Filter {title}...")
             else:
-                widget = widgets.Widget()
-            widget.show()
+                widget = widgets.Widget(parent=self)
+            widget.setVisible(self._editors_visible)
             self._editors.append(widget)
 
     def sizeHint(self) -> core.QSize:

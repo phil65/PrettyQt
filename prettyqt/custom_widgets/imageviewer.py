@@ -72,7 +72,7 @@ class ImageViewer(widgets.Widget):
         match pixmap:
             case gui.QPixmap():
                 self._pixmap = pixmap
-            case os.PathLike():
+            case os.PathLike() | str():
                 self._pixmap = gui.Pixmap.from_file(pixmap)
             case None:
                 self._pixmap = gui.Pixmap()

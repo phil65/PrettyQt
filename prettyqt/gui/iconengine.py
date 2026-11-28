@@ -2,20 +2,18 @@ import os
 from typing import Literal
 
 from prettyqt import core, gui
-from prettyqt.utils import bidict, datatypes, get_repr, serializemixin
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
-IconEngineHookStr = Literal["available_sizes", "icon_name", "is_null", "scaled_pixmap"]
+IconEngineHookStr = Literal["is_null", "scaled_pixmap"]
 
 ICON_ENGINE_HOOK: bidict[IconEngineHookStr, gui.QIconEngine.IconEngineHook] = bidict(
-    # available_sizes=gui.QIconEngine.AvailableSizesHook,
-    # icon_name=gui.QIconEngine.IconNameHook,
     is_null=gui.QIconEngine.IconEngineHook.IsNullHook,
     scaled_pixmap=gui.QIconEngine.IconEngineHook.ScaledPixmapHook,
 )
 
 
-class IconEngine(serializemixin.SerializeMixin, gui.QIconEngine):
+class IconEngine(gui.QIconEngine):
     """Abstract base class for QIcon renderers."""
 
     def __repr__(self):

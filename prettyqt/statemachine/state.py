@@ -28,6 +28,11 @@ else:
 
 
 class StateMixin(statemachine.AbstractStateMixin, _StateBase):
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"childMode": CHILD_MODE}
+        return maps
+
     def set_child_mode(self, mode: ChildModeStr | statemachine.QState.ChildMode):
         """Set child mode to use.
 

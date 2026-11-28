@@ -19,6 +19,8 @@ def test_httppart():
     part.set_body("test")
     part.set_headers(dict(a="b"))
     part.set_header("location", "c")
+    with pytest.raises(InvalidParamError):
+        part.set_header("invalid", "c")
 
 
 def test_localserver():
@@ -26,6 +28,7 @@ def test_localserver():
     assert server.get_server_error() == "unknown_socket"
     server.set_socket_options("user")
     assert server.get_socket_options() == ["user", "world"]
+    assert "abstract_namespace" in network.localserver.SOCKET_OPTION
 
 
 def test_httpmultipart():
@@ -102,6 +105,13 @@ def test_networkrequest():
     with pytest.raises(InvalidParamError):
         req.get_header("test")
     assert req.get_header("location") == "test"
+    assert "set_cookie" in network.networkrequest.KNOWN_HEADER
+    assert "full_local_server_name" in network.networkrequest.ATTRIBUTE
+    assert "operation_canceled" in network.networkreply.NETWORK_ERROR
+    assert "datagram_too_large" in network.abstractsocket.SOCKET_ERROR
+    assert "keep_alive_count" in network.abstractsocket.SOCKET_OPTION
+    assert "keep_alive_idle" in network.abstractsocket.SOCKET_OPTION
+    assert "keep_alive_interval" in network.abstractsocket.SOCKET_OPTION
 
 
 def test_networkaccessmanager():
@@ -118,7 +128,11 @@ def test_networkcookie():
     assert cookie.get_name() == "test"
     cookie.set_value("testus")
     assert cookie.get_value() == "testus"
-    assert cookie.to_raw_form(full=False) is None
+    assert cookie.to_raw_form(full=False) == b"test=testus"
+    cookie.set_same_site_policy("strict")
+    assert cookie.get_same_site_policy() == "strict"
+    with pytest.raises(InvalidParamError):
+        cookie.set_same_site_policy("invalid")
     cookie.set_expiration_date(None)
 
 
@@ -141,6 +155,8 @@ def test_udpsocket():
 
 def test_tcpserver():
     server = network.TcpServer()
+    assert server.listen()
+    server.close()
     server.get_server_address()
     server.get_proxy()
     assert server.get_server_error() == "unknown_socket"

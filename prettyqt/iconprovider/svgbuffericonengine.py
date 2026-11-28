@@ -38,7 +38,8 @@ class SVGBufferIconEngine(gui.IconEngine):
             color = gui.Color(self._color)
             color.setAlphaF(0.3)
 
-        xml = self._xml.replace('fill="currentColor"', color.get_name("svg_argb"))
+        fill_attr = f'fill="{color.get_name("hex_rgb")}" fill-opacity="{color.alphaF()}"'
+        xml = self._xml.replace('fill="currentColor"', fill_attr)
         xml_byte = xml.encode()
         renderer = svg.SvgRenderer(xml_byte)
         renderer.render(painter, core.RectF(rect))
@@ -57,7 +58,8 @@ class SVGBufferIconEngine(gui.IconEngine):
             img, constants.ImageConversionFlag.NoFormatConversion
         )
         rect = core.QRect(core.QPoint(0, 0), size)
-        self.paint(gui.QPainter(pixmap), rect, mode, state)
+        with gui.Painter(pixmap) as painter:
+            self.paint(painter, rect, mode, state)
         return pixmap
 
     def change_color(self, color: datatypes.ColorType) -> None:

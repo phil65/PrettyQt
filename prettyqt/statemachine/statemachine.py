@@ -14,16 +14,16 @@ ErrorStr = Literal[
     "none",
     "no_initial_state",
     "no_default_state_in_history_state",
-    "no_common_ancestor_for_transistion",
-    "state_machine_child_Mode_set_to_parallel",
+    "no_common_ancestor_for_transition",
+    "state_machine_child_mode_set_to_parallel",
 ]
 
 ERROR: bidict[ErrorStr, sm] = bidict(
     none=sm.NoError,
     no_initial_state=sm.NoInitialStateError,
     no_default_state_in_history_state=sm.NoDefaultStateInHistoryStateError,
-    no_common_ancestor_for_transistion=sm.NoCommonAncestorForTransitionError,
-    state_machine_child_Mode_set_to_parallel=sm.StateMachineChildModeSetToParallelError,
+    no_common_ancestor_for_transition=sm.NoCommonAncestorForTransitionError,
+    state_machine_child_mode_set_to_parallel=sm.StateMachineChildModeSetToParallelError,
 )
 
 PriorityStr = Literal["normal", "high"]
@@ -35,6 +35,11 @@ PRIORITY: bidict[PriorityStr, statemachine.QStateMachine.EventPriority] = bidict
 
 
 class StateMachine(statemachine.state.StateMixin, statemachine.QStateMachine):
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"globalRestorePolicy": statemachine.state.RESTORE_POLICY}
+        return maps
+
     def __add__(self, other: statemachine.QAbstractState) -> StateMachine:
         self.addState(other)
         return self

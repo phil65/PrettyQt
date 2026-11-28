@@ -30,7 +30,7 @@ class SubsequenceCompleter(widgets.Completer):
         self.proxy_model.set_search_term(self.completion_search_term)
         self.proxy_model.setSourceModel(self.source_model)
         super().setModel(self.proxy_model)
-        self.proxy_model.invalidateRowsFilter()
+        self.proxy_model.invalidate_rows_filter()
         # self.proxy_model.sort(0)
         self._force_next_update = True
 
@@ -51,7 +51,7 @@ class SubsequenceCompleter(widgets.Completer):
         if count > 1:
             self.proxy_model.sort(0)
         self._force_next_update = False
-        self.proxy_model.invalidateRowsFilter()  # force sorting/filtering
+        self.proxy_model.invalidate_rows_filter()  # force sorting/filtering
 
 
 if __name__ == "__main__":

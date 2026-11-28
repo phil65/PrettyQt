@@ -78,9 +78,10 @@ class ScientificFloatValidator(BaseScientificValidator):
     group_map: ClassVar = {"match": 0, "sign": 1, "mantissa": 2, "exponent": 3, "si": 4}
 
     def validate(self, string, position):  # noqa: PLR0911
+        stripped = string.strip()
         if (
-            string.strip() in "+.-."
-            or string.strip() in list("YZEPTGMkmµunpfazy")
+            stripped in {"", "+", "-", "."}
+            or stripped in list("YZEPTGMkmµunpfazy")
             or re.match(r"[+-]?(in$|i$)", string, re.IGNORECASE)
         ):
             return self.State.Intermediate, string, position
@@ -89,6 +90,7 @@ class ScientificFloatValidator(BaseScientificValidator):
         if re.match(r"[+-]?\binf$", string, re.IGNORECASE):
             return self.State.Acceptable, string.lower(), position
 
+        position = min(position, len(string))
         if not (group_dict := self.get_group_dict(string)):
             return (
                 (self.State.Intermediate, string, position)
@@ -99,7 +101,6 @@ class ScientificFloatValidator(BaseScientificValidator):
             return self.State.Acceptable, string, position
         if string.count(".") > 1:
             return self.State.Invalid, group_dict["match"], position
-        position = min(position, len(string))
         if string[position - 1] in "eE-+" and "i" not in string.lower():
             return self.State.Intermediate, string, position
         return self.State.Invalid, group_dict["match"], position

@@ -87,9 +87,9 @@ class SliceChangeFlagsProxyModel(itemmodels.SliceIdentityProxyModel):
     ICON = "mdi.flag"
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
         self._flags_to_remove: constants.ItemFlag = constants.ItemFlag(0)
         self._flags_to_add: constants.ItemFlag = constants.ItemFlag(0)
+        super().__init__(*args, **kwargs)
 
     # def setData(
     #     self,

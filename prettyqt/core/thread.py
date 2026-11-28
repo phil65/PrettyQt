@@ -1,5 +1,6 @@
 from typing import Literal
 
+from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
@@ -20,7 +21,7 @@ PRIORITY: bidict[PriorityStr, QtCore.QThread.Priority] = bidict(
 )
 
 
-class Thread(QtCore.QThread):
+class Thread(core.ObjectMixin, QtCore.QThread):
     """Platform-independent way to manage threads."""
 
     def get_priority(self) -> PriorityStr:

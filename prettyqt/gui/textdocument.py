@@ -51,12 +51,15 @@ FIND_FLAGS: bidict[FindFlagStr, gui.QTextDocument.FindFlag] = bidict(
     whole_words=gui.QTextDocument.FindFlag.FindWholeWords,
 )
 
-MetaInformationStr = Literal["document_title", "document_url", "css_media"]
+MetaInformationStr = Literal[
+    "document_title", "document_url", "css_media", "front_matter"
+]
 
 META_INFORMATION: bidict[MetaInformationStr, gui.QTextDocument.MetaInformation] = bidict(
     document_title=gui.QTextDocument.MetaInformation.DocumentTitle,
     document_url=gui.QTextDocument.MetaInformation.DocumentUrl,
     css_media=gui.QTextDocument.MetaInformation.CssMedia,
+    front_matter=gui.QTextDocument.MetaInformation.FrontMatter,
 )
 
 
@@ -182,8 +185,10 @@ class TextDocumentMixin(core.ObjectMixin, _TextDocumentBase):
     @contextlib.contextmanager
     def edit_default_stylesheet(self) -> Generator[qstylizer.style.StyleSheet]:
         ss = self.get_default_stylesheet()
-        yield ss
-        self.set_default_stylesheet(ss)
+        try:
+            yield ss
+        finally:
+            self.set_default_stylesheet(ss)
 
     def set_default_stylesheet(
         self, ss: qstylizer.style.StyleSheet | datatypes.PathType | None
@@ -191,6 +196,8 @@ class TextDocumentMixin(core.ObjectMixin, _TextDocumentBase):
         match ss:
             case os.PathLike():
                 ss = pathlib.Path(ss).read_text("utf-8")
+            case str():
+                pass
             case None:
                 ss = ""
             case qstylizer.style.StyleSheet():

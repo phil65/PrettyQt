@@ -71,6 +71,7 @@ class Stalker(core.Object):
         )
         self.include = include
         self._handles: list[core.QMetaObject.Connection] = []
+        self.eventcatcher: eventfilters.EventCatcher | None = None
 
     def __enter__(self):
         self.hook()
@@ -179,7 +180,7 @@ class Stalker(core.Object):
         self,
         type_filter: type[T] = core.QObject,  # ty: ignore[invalid-parameter-default]
     ) -> collections.Counter:
-        objects = self.findChildren(type_filter)
+        objects = self._obj.findChildren(type_filter)
         return collections.Counter([type(o) for o in objects])
 
     def show(self):

@@ -23,7 +23,7 @@ HTTP_CACHE_TYPE: bidict[HttpCacheTypeStr, mod.HttpCacheType] = bidict(
     memory=mod.HttpCacheType.MemoryHttpCache,
 )
 
-PersistentCookiePolicyStr = Literal["none", "allow", "force"]
+PersistentCookiePolicyStr = Literal["none", "allow", "force", "only_persistent"]
 
 PERSISTENT_COOKIE_POLICY: bidict[
     PersistentCookiePolicyStr, mod.PersistentCookiesPolicy
@@ -31,6 +31,7 @@ PERSISTENT_COOKIE_POLICY: bidict[
     none=mod.PersistentCookiesPolicy.NoPersistentCookies,
     allow=mod.PersistentCookiesPolicy.AllowPersistentCookies,
     force=mod.PersistentCookiesPolicy.ForcePersistentCookies,
+    only_persistent=mod.PersistentCookiesPolicy.OnlyPersistentCookies,
 )
 
 
@@ -75,7 +76,7 @@ class WebEngineProfile(core.ObjectMixin, webenginecore.QWebEngineProfile):
         callback: Callable[[QWebEngineUrlRequestJob], Any],
     ):
         """Install a URL scheme handler."""
-        handler = CallbackWebEngineUrlSchemeHandler(callback)
+        handler = CallbackWebEngineUrlSchemeHandler(callback, parent=self)
         self.installUrlSchemeHandler(scheme.encode(), handler)
 
     def get_scripts(self) -> webenginecore.WebEngineScriptCollection:

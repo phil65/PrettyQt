@@ -39,7 +39,7 @@ class TextAnimation(core.PropertyAnimation):
         if end is not None:
             self._child_anim.set_end_value(end)
         self.setStartValue("")
-        self.setStartValue("")
+        self.setEndValue("")
 
     def start(self, *args, **kwargs):
         self._child_anim.start(*args, **kwargs)
@@ -64,7 +64,7 @@ class TextAnimation(core.PropertyAnimation):
     def updateCurrentValue(self, value: datatypes.VariantType):
         match value:
             case None:
-                return None
+                return
             case gui.QColor():
                 color = gui.Color(value)
                 text = color.get_name(self._fmt) if self._fmt else color.name()
@@ -72,12 +72,12 @@ class TextAnimation(core.PropertyAnimation):
             case int() | float():
                 value = self._mask.format(text=str(value))
             case core.QPoint() | core.QPointF():
-                return f"{value.x()}, {value.y()}"
+                value = self._mask.format(text=f"{value.x()}, {value.y()}")
             case core.QSize() | core.QSizeF():
-                return f"{value.width()}, {value.width()}"
+                value = self._mask.format(text=f"{value.width()}, {value.height()}")
         logger.debug(value)
         super().updateCurrentValue(value)
-        return None
+        return
 
 
 if __name__ == "__main__":

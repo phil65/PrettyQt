@@ -1,5 +1,5 @@
 from prettyqt import widgets
 
 
-class StyleOptionGroupBox(widgets.StyleOptionComplex, widgets.QStyleOptionGroupBox):
+class StyleOptionGroupBox(widgets.StyleOptionComplexMixin, widgets.QStyleOptionGroupBox):
     pass

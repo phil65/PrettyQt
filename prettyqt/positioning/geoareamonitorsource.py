@@ -7,21 +7,21 @@ from prettyqt.utils import bidict, get_repr
 
 mod = QtPositioning.QGeoAreaMonitorSource
 
-ERRORS = bidict(
+ErrorStr = Literal["access_error", "insufficient_pos_info", "none", "unknown_source"]
+
+ERRORS: bidict[ErrorStr, mod.Error] = bidict(
     access_error=mod.Error.AccessError,
     insufficient_pos_info=mod.Error.InsufficientPositionInfo,
     none=mod.Error.NoError,
     unknown_source=mod.Error.UnknownSourceError,
 )
 
-ErrorStr = Literal["access_error", "insufficient_pos_info", "none", "unknown_source"]
+AreaMonitorFeatureStr = Literal["persistent_area", "any_area"]
 
-AREA_MONITOR_FEATURES = bidict(
+AREA_MONITOR_FEATURES: bidict[AreaMonitorFeatureStr, mod.AreaMonitorFeature] = bidict(
     persistent_area=mod.AreaMonitorFeature.PersistentAreaMonitorFeature,
     any_area=mod.AreaMonitorFeature.AnyAreaMonitorFeature,
 )
-
-AreaMonitorFeatureStr = Literal["persistent_area", "any_area"]
 
 
 class GeoAreaMonitorSource(core.ObjectMixin, QtPositioning.QGeoAreaMonitorSource):
@@ -31,7 +31,7 @@ class GeoAreaMonitorSource(core.ObjectMixin, QtPositioning.QGeoAreaMonitorSource
     def __repr__(self):
         return get_repr(self, self.sourceName())
 
-    def get_error(self) -> AreaMonitorFeatureStr:
+    def get_error(self) -> ErrorStr:
         """Return error type.
 
         Returns:

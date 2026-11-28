@@ -96,7 +96,11 @@ class Scroller(core.ObjectMixin):
 
     @staticmethod
     def grabbed_gesture(target: core.QObject) -> constants.GestureTypeStr:
-        return constants.GESTURE_TYPE.inverse[widgets.QScroller.grabbedGesture(target)]
+        gesture = widgets.QScroller.grabbedGesture(target)
+        value = gesture.value
+        if value >= 256:  # noqa: PLR2004  # custom gesture ids start at 256
+            value -= 256
+        return constants.GESTURE_TYPE.inverse[constants.GestureType(value)]
 
 
 if __name__ == "__main__":

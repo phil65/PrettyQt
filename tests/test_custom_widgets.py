@@ -5,7 +5,6 @@ import re
 
 import pytest
 
-import prettyqt
 from prettyqt import constants, core, custom_widgets, gui, widgets
 
 
@@ -141,7 +140,6 @@ def test_colorchooserbutton(qtbot):
     assert btn.is_valid()
 
 
-@pytest.mark.skipif(prettyqt.qt.API == "pyside6", reason="Segmentation fault")
 def test_regexeditor(qtbot):
     from prettyqt.custom_widgets import regexeditor
 
@@ -658,3 +656,248 @@ def test_accordionwidget(qtbot):
     assert accordion.takeAt(0) is not None
     accordion.clear()
     assert accordion.count() == 0
+
+
+def test_smoothscrollbar_properties_and_eventfilter(qtbot):
+    area = widgets.ScrollArea()
+    qtbot.addWidget(area)
+    bar = custom_widgets.SmoothScrollBar("horizontal", parent=area)
+    bar.animation_duration = 250
+    assert bar.animation_duration == 250  # noqa: PLR2004
+    bar.animation_easing = "linear"
+    assert bar.get_animation_easing() == "linear"
+    v_bar = widgets.ScrollBar("vertical", parent=area)
+    area.setVerticalScrollBar(v_bar)
+    v_bar.setRange(0, 1000)
+    wheel_ev = gui.QWheelEvent(
+        core.PointF(0, 0),
+        core.PointF(0, 0),
+        core.Point(0, 0),
+        core.Point(0, -120),
+        constants.MouseButton.NoButton,
+        constants.KeyboardModifier.NoModifier,
+        constants.ScrollPhase.NoScrollPhase,
+        False,
+    )
+    assert bar.eventFilter(area.viewport(), wheel_ev) is True
+    assert v_bar.value() == 120  # noqa: PLR2004
+
+
+def test_accordionwidget_drag_scroll(qtbot):
+    from prettyqt.custom_widgets.accordionwidget import AccordionWidget
+
+    accordion = AccordionWidget()
+    qtbot.addWidget(accordion)
+    for i in range(5):
+        lbl = widgets.Label(f"item {i}")
+        lbl.setMinimumHeight(200)
+        accordion.addItem(f"Item {i}", lbl)
+    accordion.resize(200, 150)
+    accordion.show()
+    press = gui.QMouseEvent(
+        core.QEvent.Type.MouseButtonPress,
+        core.PointF(10, 10),
+        core.PointF(10, 10),
+        constants.MouseButton.LeftButton,
+        constants.MouseButton.LeftButton,
+        constants.KeyboardModifier.NoModifier,
+    )
+    move = gui.QMouseEvent(
+        core.QEvent.Type.MouseMove,
+        core.PointF(10, 50),
+        core.PointF(10, 50),
+        constants.MouseButton.LeftButton,
+        constants.MouseButton.LeftButton,
+        constants.KeyboardModifier.NoModifier,
+    )
+    release = gui.QMouseEvent(
+        core.QEvent.Type.MouseButtonRelease,
+        core.PointF(10, 50),
+        core.PointF(10, 50),
+        constants.MouseButton.LeftButton,
+        constants.MouseButton.NoButton,
+        constants.KeyboardModifier.NoModifier,
+    )
+    accordion.mousePressEvent(press)
+    accordion.mouseMoveEvent(move)
+    accordion.mouseReleaseEvent(release)
+
+
+def test_iconedit_and_paletteedit_defaults(qtbot):
+    icon_edit = custom_widgets.IconEdit()
+    qtbot.addWidget(icon_edit)
+    assert isinstance(icon_edit.get_value(), gui.Icon)
+
+    palette_edit = custom_widgets.PaletteEdit()
+    qtbot.addWidget(palette_edit)
+    assert isinstance(palette_edit.get_value(), gui.Palette)
+
+
+def test_sliceedit(qtbot):
+    edit = custom_widgets.SliceEdit()
+    qtbot.addWidget(edit)
+    assert edit.get_value() == slice(None, None, None)
+    edit.set_value(slice(1, 10, 2))
+    assert edit.get_value() == slice(1, 10, 2)
+    with qtbot.wait_signal(edit.value_changed):
+        edit.checkbox_start.setChecked(False)
+    assert edit.get_value() == slice(None, 10, 2)
+    with qtbot.wait_signal(edit.value_changed):
+        edit.checkbox_step.setChecked(False)
+    assert edit.get_value() == slice(None, 10, None)
+    assert edit.spinbox_step.minimum() >= 1
+
+
+def test_enumflagwidget_clears_bits(qtbot):
+    widget = custom_widgets.EnumFlagWidget()
+    qtbot.addWidget(widget)
+    both = constants.AlignmentFlag.AlignLeft | constants.AlignmentFlag.AlignTop
+    widget.set_value(both)
+    assert widget.get_value() == both
+    widget.set_value(constants.AlignmentFlag.AlignLeft)
+    assert widget.get_value() == constants.AlignmentFlag.AlignLeft
+    widget.set_value(constants.AlignmentFlag(0))
+    assert widget.get_value() == constants.AlignmentFlag(0)
+
+
+def test_numfilterwidget_intermediate_input(qtbot):
+    widget = custom_widgets.NumFilterWidget()
+    qtbot.addWidget(widget)
+    fn = widget.get_filter_fn()
+    assert fn is not None
+    assert fn(42) is True
+    for intermediate in ("-", ".", "1e"):
+        widget.lineedit.setText(intermediate)
+        assert widget.get_filter_fn() is None
+    widget.lineedit.setText("5.5")
+    fn = widget.get_filter_fn()
+    assert fn is not None
+    assert fn(5.5) is True
+    assert fn(6.0) is False
+
+
+def test_actiongridbutton_no_default_action(qtbot):
+    from prettyqt.custom_widgets import actiongrid
+
+    assert actiongrid.AcionGridButton is actiongrid.ActionGridButton
+    btn = actiongrid.ActionGridButton()
+    qtbot.addWidget(btn)
+    btn._update_text()
+    btn.resize(80, 40)
+
+
+def test_overlayborder_fill_color_property(qtbot):
+    from prettyqt.custom_widgets.overlayborder import OverlayBorder
+
+    parent = widgets.Widget()
+    qtbot.addWidget(parent)
+    overlay = OverlayBorder(parent)
+    original_border = overlay.get_border_color()
+    overlay.setProperty("fill_color", gui.QColor("blue"))
+    assert overlay.get_fill_color() == gui.Color("blue")
+    assert overlay.get_border_color() == original_border
+
+
+def test_filterheader_editors_parent_and_visibility(qtbot):
+    view = widgets.TableView()
+    qtbot.addWidget(view)
+    model = gui.StandardItemModel.from_dict(dict(a=["x"], b=[object()]))
+    view.set_model(model)
+    header = custom_widgets.FilterHeader(parent=view)
+    view.setHorizontalHeader(header)
+    assert len(header._editors) == 2  # noqa: PLR2004
+    assert all(ed.parent() is header for ed in header._editors)
+    assert all(not ed.isVisible() for ed in header._editors)
+    header.set_editors_visible(True)
+    assert header.are_editors_visible() is True
+
+
+def test_crossfadewidget_and_imageviewer_str_path(qtbot, tmp_path):
+    img_path = tmp_path / "test.png"
+    pm = gui.Pixmap(16, 16)
+    pm.fill(gui.Color("red"))
+    assert pm.save(str(img_path))
+
+    cf = custom_widgets.CrossFadeWidget(str(img_path), img_path)
+    qtbot.addWidget(cf)
+    assert cf.pixmap_1 is not None
+    assert not cf.pixmap_1.isNull()
+    assert cf.pixmap_2 is not None
+    assert not cf.pixmap_2.isNull()
+
+    viewer = custom_widgets.ImageViewer(str(img_path))
+    qtbot.addWidget(viewer)
+    assert not viewer.pixmap().isNull()
+
+
+def test_gridsplitter_empty_and_indexing(qtbot):
+    from prettyqt.custom_widgets.gridsplitter import GridSplitter
+
+    splitter = GridSplitter()
+    qtbot.addWidget(splitter)
+    assert splitter.columnCount() == 0
+    w00 = widgets.Label("0,0")
+    w01 = widgets.Label("0,1")
+    w10 = widgets.Label("1,0")
+    w11 = widgets.Label("1,1")
+    splitter[0, 0] = w00
+    splitter[0, 1] = w01
+    splitter[1, 0] = w10
+    splitter[1, 1] = w11
+    assert splitter.columnCount() == 2  # noqa: PLR2004
+    assert splitter[0] is w00
+    assert splitter[3] is w11
+    assert splitter[-1] is w11
+    assert list(splitter[1:3]) == [w01, w10]
+    with pytest.raises(IndexError):
+        _ = splitter[4]
+
+
+def test_misc_custom_widgets_fixes(qtbot):
+    from prettyqt.custom_widgets.joystickbutton import JoystickButton
+    from prettyqt.custom_widgets.twolistsselectionwidget import TwoListsSelectionWidget
+
+    # TwoListsSelectionWidget
+    two = TwoListsSelectionWidget()
+    qtbot.addWidget(two)
+    two.add_items_left(["a", "b"])
+    two.right_list.addItem("r0")
+    two.right_list.setCurrentRow(0)
+    two.left_list.item(0).setSelected(True)
+    assert two.to_right_btn.isEnabled()
+
+    # BorderLayout & FlowLayout negative index
+    bl = custom_widgets.BorderLayout()
+    assert bl.itemAt(-1) is None
+    assert bl.takeAt(-1) is None
+    fl = custom_widgets.FlowLayout()
+    assert fl.itemAt(-1) is None
+    assert fl.takeAt(-1) is None
+
+    # JoystickButton resize keeps state and move before press is safe
+    jb = JoystickButton()
+    qtbot.addWidget(jb)
+    jb.set_state((100.0, 0.0))
+    state_before = jb.get_state()
+    jb.resizeEvent(gui.QResizeEvent(core.Size(60, 60), core.Size(50, 50)))
+    assert jb.get_state() == state_before
+
+    # PopupInfo text kwarg
+    popup = custom_widgets.PopupInfo(text="Hello")
+    qtbot.addWidget(popup)
+    assert popup.label.text() == "Hello"
+
+    # UrlLineEdit object_name
+    url_edit = custom_widgets.UrlLineEdit()
+    qtbot.addWidget(url_edit)
+    assert url_edit.objectName() == "url_lineedit"
+
+    # SidebarWidget add_tab(show=True)
+    sb = custom_widgets.SidebarWidget()
+    qtbot.addWidget(sb)
+    p1 = widgets.Widget()
+    p2 = widgets.Widget()
+    sb.add_tab(p1, "One")
+    sb.add_tab(p2, "Two", show=True)
+    assert sb.button_map[p2].isChecked()
+    assert not sb.button_map[p1].isChecked()

@@ -4,7 +4,7 @@ from prettyqt import core
 
 
 if TYPE_CHECKING:
-    _Base = core.QAbstractProxyModel
+    _Base = core.AbstractProxyModel
 else:
     _Base = object
 
@@ -27,12 +27,11 @@ class FlatProxyMixin(_Base):
         if (old := self.sourceModel()) is not None:
             for signal in self._structure_signals(old):
                 signal.disconnect(self._on_source_changed)
-        self.beginResetModel()
-        # Explicitly use the QAbstractProxyModel implementation, this way
-        # QIdentityProxyModel does not connect its signal forwarding.
-        core.QAbstractProxyModel.setSourceModel(self, model)
-        self._update_cache()
-        self.endResetModel()
+        with self.reset_model():
+            # Explicitly use the QAbstractProxyModel implementation, this way
+            # QIdentityProxyModel does not connect its signal forwarding.
+            core.QAbstractProxyModel.setSourceModel(self, model)
+            self._update_cache()
         if model is not None:
             for signal in self._structure_signals(model):
                 signal.connect(self._on_source_changed)
@@ -57,9 +56,8 @@ class FlatProxyMixin(_Base):
         """Hook to recompute cached data, called on every source change."""
 
     def _on_source_changed(self, *_args):
-        self.beginResetModel()
-        self._update_cache()
-        self.endResetModel()
+        with self.reset_model():
+            self._update_cache()
 
     def index(
         self, row: int, column: int = 0, parent: core.ModelIndex | None = None

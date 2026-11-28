@@ -14,6 +14,7 @@ texttospeech = pytest.importorskip("prettyqt.texttospeech")
 def test_texttospeech():
     tts = texttospeech.TextToSpeech()
     assert tts.get_state() in ["ready", "error"]
+    assert "synthesizing" in texttospeech.texttospeech.STATE
     tts.get_locale()
     tts.get_available_locales()
     tts.get_voice()

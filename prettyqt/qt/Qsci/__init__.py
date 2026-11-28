@@ -1,4 +1,4 @@
-"""Provides QtStateMachine classes and functions."""
+"""Provides Qsci classes and functions."""
 
 from prettyqt.qt import PYQT6
 

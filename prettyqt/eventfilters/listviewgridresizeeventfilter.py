@@ -29,8 +29,8 @@ class ListViewGridResizeEventFilter(eventfilters.BaseEventFilter):
         # The minus 30 above ensures we don't end up with an item width that
         # can't be drawn the expected number of times across the view without
         # being wrapped. Without this, the view can flicker during resize
-        tile_width = int(width / self._view_columns)
-        icon_width = int(tile_width * 0.8)
+        tile_width = max(1, int(width / self._view_columns))
+        icon_width = max(1, int(tile_width * 0.8))
         source.setGridSize(core.QSize(tile_width, tile_width))
         source.setIconSize(core.QSize(icon_width, icon_width))
 

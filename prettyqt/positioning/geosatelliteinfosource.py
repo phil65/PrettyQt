@@ -5,14 +5,21 @@ from prettyqt.qt import QtPositioning
 from prettyqt.utils import bidict, get_repr
 
 
-ERROR = bidict(
+ErrorStr = Literal[
+    "access_error",
+    "closed_error",
+    "none",
+    "unknown_source",
+    "update_timeout",
+]
+
+ERROR: bidict[ErrorStr, QtPositioning.QGeoSatelliteInfoSource.Error] = bidict(
     access_error=QtPositioning.QGeoSatelliteInfoSource.Error.AccessError,
     closed_error=QtPositioning.QGeoSatelliteInfoSource.Error.ClosedError,
     none=QtPositioning.QGeoSatelliteInfoSource.Error.NoError,
     unknown_source=QtPositioning.QGeoSatelliteInfoSource.Error.UnknownSourceError,
+    update_timeout=QtPositioning.QGeoSatelliteInfoSource.Error.UpdateTimeoutError,
 )
-
-ErrorStr = Literal["access_error", "closed_error", "none", "unknown_source"]
 
 
 class GeoSatelliteInfoSource(core.ObjectMixin, QtPositioning.QGeoSatelliteInfoSource):

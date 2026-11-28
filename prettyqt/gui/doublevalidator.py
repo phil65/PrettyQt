@@ -1,5 +1,15 @@
+from typing import Literal
+
 from prettyqt import core, gui
-from prettyqt.utils import get_repr
+from prettyqt.utils import bidict, get_repr
+
+
+NotationStr = Literal["standard", "scientific"]
+
+NOTATION: bidict[NotationStr, gui.QDoubleValidator.Notation] = bidict(
+    standard=gui.QDoubleValidator.Notation.StandardNotation,
+    scientific=gui.QDoubleValidator.Notation.ScientificNotation,
+)
 
 
 class DoubleValidator(gui.ValidatorMixin, gui.QDoubleValidator):
@@ -10,6 +20,17 @@ class DoubleValidator(gui.ValidatorMixin, gui.QDoubleValidator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setLocale(core.Locale("en-En"))
+
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"notation": NOTATION}
+        return maps
+
+    def get_notation(self) -> NotationStr:
+        return NOTATION.inverse[self.notation()]
+
+    def set_notation(self, notation: NotationStr | gui.QDoubleValidator.Notation):
+        self.setNotation(NOTATION.get_enum_value(notation))
 
     def __repr__(self):
         return get_repr(self, self.bottom(), self.top(), self.decimals())

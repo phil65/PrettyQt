@@ -29,8 +29,10 @@ class UndoStackMixin(core.ObjectMixin, _UndoStackBase):
     @contextlib.contextmanager
     def create_macro(self, text: str):
         self.beginMacro(text)
-        yield None
-        self.endMacro()
+        try:
+            yield None
+        finally:
+            self.endMacro()
 
     def add_command(self, title: str, redo: Callable, undo: Callable) -> gui.UndoCommand:
         class MyCommand(gui.UndoCommand):

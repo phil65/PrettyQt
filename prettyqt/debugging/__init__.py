@@ -52,8 +52,10 @@ def timeit(func: Callable) -> Callable:
 @contextlib.contextmanager
 def context_timer():
     now = time.perf_counter()
-    yield
-    logger.info(time.perf_counter() - now)
+    try:
+        yield
+    finally:
+        logger.info(time.perf_counter() - now)
 
 
 def for_all_methods(decorator: Callable) -> Callable:

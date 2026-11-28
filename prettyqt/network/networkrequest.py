@@ -38,6 +38,7 @@ AttributeStr = Literal[
     "connection_cache_expiry_timeout_seconds",
     "http2_cleartext_allowed",
     "use_credentials",
+    "full_local_server_name",
     "user",
     "user_max",
 ]
@@ -68,6 +69,7 @@ ATTRIBUTE: bidict[AttributeStr, Req.Attribute] = bidict(
     connection_cache_expiry_timeout_seconds=CE,
     http2_cleartext_allowed=Req.Attribute.Http2CleartextAllowedAttribute,
     use_credentials=Req.Attribute.UseCredentialsAttribute,
+    full_local_server_name=Req.Attribute.FullLocalServerNameAttribute,
     user=Req.Attribute.User,
     user_max=Req.Attribute.UserMax,
 )
@@ -111,7 +113,7 @@ KnownHeaderStr = Literal[
     "if_match",
     "if_none_match",
     "cookie",
-    "set_cooke",
+    "set_cookie",
     "user_agent",
     "server",
 ]
@@ -127,7 +129,7 @@ KNOWN_HEADER: bidict[KnownHeaderStr, Req.KnownHeaders] = bidict(
     if_match=Req.KnownHeaders.IfMatchHeader,
     if_none_match=Req.KnownHeaders.IfNoneMatchHeader,
     cookie=Req.KnownHeaders.CookieHeader,
-    set_cooke=Req.KnownHeaders.SetCookieHeader,
+    set_cookie=Req.KnownHeaders.SetCookieHeader,
     user_agent=Req.KnownHeaders.UserAgentHeader,
     server=Req.KnownHeaders.ServerHeader,
 )

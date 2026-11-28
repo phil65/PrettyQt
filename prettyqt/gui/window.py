@@ -45,6 +45,16 @@ class WindowMixin(core.ObjectMixin, gui.SurfaceMixin, _WindowBase):
     def __repr__(self):
         return get_repr(self)
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "modality": constants.WINDOW_MODALITY,
+            "flags": constants.WINDOW_TYPE,
+            "visibility": VISIBILITY,
+            "contentOrientation": constants.SCREEN_ORIENTATION,
+        }
+        return maps
+
     def add_shortcut(
         self,
         keysequence: datatypes.KeyCombinationType,
@@ -54,7 +64,9 @@ class WindowMixin(core.ObjectMixin, gui.SurfaceMixin, _WindowBase):
         if not isinstance(keysequence, gui.QKeySequence):
             keysequence = gui.KeySequence(keysequence)
         context = constants.SHORTCUT_CONTEXT.get_enum_value(context)
-        return gui.Shortcut(keysequence, self, callback, context=context)
+        if callback is not None:
+            return gui.Shortcut(keysequence, self, callback, context=context)
+        return gui.Shortcut(keysequence, self, context=context)
 
     def set_visibility(self, visibility: VisibilityStr | gui.QWindow.Visibility):
         """Set window visibility.

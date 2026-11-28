@@ -36,7 +36,7 @@ class DebugMode(eventfilters.BaseEventFilter):
             ) and isinstance(source, widgets.QWidget):
                 mods = widgets.Application.query_keyboard_modifiers()
                 if "ctrl" in mods:
-                    pos = source.mapToGlobal(event.pos())
+                    pos = source.mapToGlobal(event.position().toPoint())
                     candidates = widgets.Application.widgets_at(pos)
                     self.menu.clear()
                     for candidate in candidates:
@@ -47,9 +47,9 @@ class DebugMode(eventfilters.BaseEventFilter):
                     from prettyqt import ipython
 
                     self.frame.hide()
-                    console = ipython.InProcessIPythonWidget(self)
+                    console = ipython.InProcessIPythonWidget(None)
                     console.show()
-                    pos = source.mapToGlobal(event.pos())
+                    pos = source.mapToGlobal(event.position().toPoint())
                     widgets.Application.sleep(1)
                     variables = {}
                     i = 0

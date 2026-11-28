@@ -4,13 +4,14 @@ from prettyqt import charts, constants, core, gui, widgets
 from prettyqt.utils import bidict
 
 
-RubberBandStr = Literal["none", "vertical", "horizontal", "rectangle"]
+RubberBandStr = Literal["none", "vertical", "horizontal", "rectangle", "click_through"]
 
 RUBBER_BAND: bidict[RubberBandStr, charts.QChartView.RubberBand] = bidict(
     none=charts.QChartView.RubberBand.NoRubberBand,
     vertical=charts.QChartView.RubberBand.VerticalRubberBand,
     horizontal=charts.QChartView.RubberBand.HorizontalRubberBand,
     rectangle=charts.QChartView.RubberBand.RectangleRubberBand,
+    click_through=charts.QChartView.RubberBand.ClickThroughRubberBand,
 )
 
 ZOOM_IN_FACTOR = 1.1
@@ -21,6 +22,7 @@ SCROLL_STEP_SIZE = 10
 class ChartView(widgets.GraphicsViewMixin, charts.QChartView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.last_mouse_pos: core.QPointF | None = None
         if not args or not isinstance(args[0], charts.QChart):
             self.setChart(charts.Chart())
         self.setRenderHint(gui.Painter.RenderHint.Antialiasing)
@@ -120,7 +122,20 @@ class ChartView(widgets.GraphicsViewMixin, charts.QChartView):
         Returns:
             Rubber band type
         """
-        return RUBBER_BAND.inverse[self.rubberBand()]
+        rb = self.rubberBand()
+        if rb in RUBBER_BAND.inverse:
+            return RUBBER_BAND.inverse[rb]
+        base = rb & ~charts.QChartView.RubberBand.ClickThroughRubberBand
+        return RUBBER_BAND.inverse[base]
+
+    def get_rubber_bands(self) -> list[RubberBandStr]:
+        """Return active rubber band flags.
+
+        Returns:
+            List of active rubber band flag names
+        """
+        rb = self.rubberBand()
+        return [k for k, v in RUBBER_BAND.items() if v and (rb & v) == v]
 
     # def hide_legend(self):
     #     self.get_chart().hide_legend()

@@ -57,7 +57,7 @@ class FloatLineEdit(widgets.LineEdit):
 class UrlLineEdit(widgets.LineEdit):
     value_changed = core.Signal(core.QUrl)
 
-    def __init__(self, *args, object_name: str = "float_lineedit", **kwargs):
+    def __init__(self, *args, object_name: str = "url_lineedit", **kwargs):
         super().__init__(*args, object_name=object_name, **kwargs)
         self.set_validator("website")
 

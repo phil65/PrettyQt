@@ -42,14 +42,17 @@ class IntegerValidator(gui.Validator):
         return self._top
 
     def validate(self, text: str, pos: int):
-        if not text.lstrip("-"):
-            return self.State.Intermediate, text, len(text)
-        if text.lstrip("-").isnumeric():
-            left = float("-inf") if self._bottom is None else self._bottom
-            right = float("inf") if self._top is None else self._top
-            if left <= int(text) <= right:
-                return self.State.Acceptable, text, len(text)
-        return self.State.Invalid, text, len(text)
+        if text in {"", "-"}:
+            return self.State.Intermediate, text, pos
+        try:
+            val = int(text)
+        except ValueError:
+            return self.State.Invalid, text, pos
+        if not text.isascii():
+            return self.State.Invalid, text, pos
+        if self._bottom <= val <= self._top:
+            return self.State.Acceptable, text, pos
+        return self.State.Invalid, text, pos
 
     bottom = core.Property(
         int,

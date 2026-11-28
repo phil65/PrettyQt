@@ -1,12 +1,8 @@
-from typing import TYPE_CHECKING, Literal
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtWebEngineCore
-from prettyqt.utils import bidict
-
-
-if TYPE_CHECKING:
-    from prettyqt.utils import datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 MethodStr = Literal["get", "post"]
@@ -32,8 +28,7 @@ class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
         }
 
     def set_url(self, url: datatypes.UrlType):
-        url = core.Url(url)
-        self.setUrl(url)
+        self.setUrl(datatypes.to_url(url))
 
     def get_url(self) -> core.Url:
         return core.Url(self.url())

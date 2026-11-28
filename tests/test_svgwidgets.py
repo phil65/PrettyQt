@@ -1,13 +1,16 @@
 """Tests for `prettyqt` package."""
 
-# from prettyqt import svgwidgets
+import pytest
 
 
-# def test_svgwidget():
-#     widget = svgwidgets.SvgWidget()
-#     widget.load_file("")
+svgwidgets = pytest.importorskip("prettyqt.svgwidgets")
 
 
-# def test_svggraphicsitem():
-#     item = svgwidgets.GraphicsSvgItem()
-#     assert item
+def test_svgwidget(qapp):
+    widget = svgwidgets.SvgWidget()
+    widget.load_file("")
+
+
+def test_svggraphicsitem(qapp):
+    item = svgwidgets.GraphicsSvgItem()
+    assert item is not None

@@ -50,8 +50,8 @@ class Screen:
         self,
         orientation_1: constants.ScreenOrientationStr | constants.ScreenOrientation,
         orientation_2: constants.ScreenOrientationStr | constants.ScreenOrientation,
-    ):
-        self.angleBetween(
+    ) -> int:
+        return self.angleBetween(
             constants.SCREEN_ORIENTATION.get_enum_value(orientation_1),
             constants.SCREEN_ORIENTATION.get_enum_value(orientation_2),
         )

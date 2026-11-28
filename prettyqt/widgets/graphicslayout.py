@@ -26,8 +26,7 @@ class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin, _GraphicsLayoutBase):
                     raise IndexError(index)
                 return self._graphics_item(index)
             case slice():
-                stop = index.stop or self.count()
-                rng = range(index.start or 0, stop, index.step or 1)
+                rng = range(*index.indices(self.count()))
                 items = [self._graphics_item(i) for i in rng]
                 return listdelegators.ListDelegator(items)
             case _:

@@ -4,8 +4,7 @@ from prettyqt import core
 
 
 if TYPE_CHECKING:
-    from prettyqt import gui
-    from prettyqt.qt import QtWidgets
+    from prettyqt.qt import QtGui, QtWidgets
 
 
 class Spin:
@@ -29,15 +28,18 @@ class Spin:
         self.info[self.parent_widget] = timer, angle, step
         self.parent_widget.update()
 
-    def setup(self, painter: gui.Painter, rect: core.QRect):
+    def setup(self, painter: QtGui.QPainter, rect: core.QRect):
         if self.parent_widget not in self.info:
             timer = core.Timer(self.parent_widget, timeout=self._update)
             self.info[self.parent_widget] = timer, 0, self.step
             timer.start(self.interval)
         else:
             timer, angle, self.step = self.info[self.parent_widget]
-            with painter.offset_by(int(rect.width() * 0.5), int(rect.height() * 0.5)):
-                painter.rotate(angle)
+            x_offset = rect.width() * 0.5
+            y_offset = rect.height() * 0.5
+            painter.translate(x_offset, y_offset)
+            painter.rotate(angle)
+            painter.translate(-x_offset, -y_offset)
 
 
 class Pulse(Spin):

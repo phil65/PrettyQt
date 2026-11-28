@@ -1,4 +1,4 @@
-"""Provides QtWebEngineCore classes and functions."""
+"""Provides QtWebChannel classes and functions."""
 
 from typing import TYPE_CHECKING
 

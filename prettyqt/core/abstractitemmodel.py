@@ -82,7 +82,11 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
         colcount = self.columnCount()
         match index:
             case int() as row, int() as col:
-                if row >= rowcount or col >= colcount:
+                if row < 0:
+                    row += rowcount
+                if col < 0:
+                    col += colcount
+                if not (0 <= row < rowcount and 0 <= col < colcount):
                     raise IndexError(index)
                 return self.index(row, col)
             case (int() | slice() as row, int() | slice() as col):
@@ -92,7 +96,9 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
                 ]
                 return listdelegators.ListDelegator(indexes)
             case int() as row:
-                if row >= rowcount:
+                if row < 0:
+                    row += rowcount
+                if not (0 <= row < rowcount):
                     raise IndexError(index)
                 # this here breaks PySide6 IPython test...
                 return self.index(row, 0)
@@ -144,8 +150,10 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
 
         """
         self.layoutAboutToBeChanged.emit()
-        yield None
-        self.layoutChanged.emit()
+        try:
+            yield None
+        finally:
+            self.layoutChanged.emit()
 
     @contextlib.contextmanager
     def reset_model(self):
@@ -157,8 +165,10 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
 
         """
         self.beginResetModel()
-        yield None
-        self.endResetModel()
+        try:
+            yield None
+        finally:
+            self.endResetModel()
 
     def get_column_type(
         self,
@@ -199,8 +209,10 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
     def remove_row(self, row: int, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
         self.beginRemoveRows(parent, row, row)
-        yield None
-        self.endRemoveRows()
+        try:
+            yield None
+        finally:
+            self.endRemoveRows()
 
     @contextlib.contextmanager
     def remove_rows(
@@ -213,8 +225,10 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
         first = first or 0
         last = last if last is not None else self.rowCount(parent) - 1
         self.beginRemoveRows(parent, first, last)
-        yield None
-        self.endRemoveRows()
+        try:
+            yield None
+        finally:
+            self.endRemoveRows()
 
     @contextlib.contextmanager
     def remove_columns(
@@ -227,15 +241,19 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
         first = first or 0
         last = last if last is not None else self.columnCount(parent) - 1
         self.beginRemoveColumns(parent, first, last)
-        yield None
-        self.endRemoveColumns()
+        try:
+            yield None
+        finally:
+            self.endRemoveColumns()
 
     @contextlib.contextmanager
     def insert_row(self, row: int, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
         self.beginInsertRows(parent, row, row)
-        yield None
-        self.endInsertRows()
+        try:
+            yield None
+        finally:
+            self.endInsertRows()
 
     @contextlib.contextmanager
     def insert_rows(
@@ -248,16 +266,20 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
         first = first or 0
         last = last if last is not None else first
         self.beginInsertRows(parent, first, last)
-        yield None
-        self.endInsertRows()
+        try:
+            yield None
+        finally:
+            self.endInsertRows()
 
     @contextlib.contextmanager
     def append_rows(self, num_rows: int, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
-        row_count = self.rowCount()
+        row_count = self.rowCount(parent)
         self.beginInsertRows(parent, row_count, row_count + num_rows - 1)
-        yield None
-        self.endInsertRows()
+        try:
+            yield None
+        finally:
+            self.endInsertRows()
 
     @contextlib.contextmanager
     def insert_columns(
@@ -270,8 +292,10 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
         first = first or 0
         last = last if last is not None else first
         self.beginInsertColumns(parent, first, last)
-        yield None
-        self.endInsertColumns()
+        try:
+            yield None
+        finally:
+            self.endInsertColumns()
 
     def force_reset(self):
         self.beginResetModel()
@@ -511,7 +535,7 @@ class AbstractItemModelMixin(core.ObjectMixin, _AbstractItemModelBase):
             for i, row in enumerate(data):
                 for j, _column in enumerate(row):
                     if check_data[i][j] is not None:
-                        data[i][j] = bool(check_data[i][j])
+                        data[i][j] = self.from_checkstate(check_data[i][j])
         h_header = [self.headerData(i, constants.HORIZONTAL) for i in colrange]
         v_header = (
             [self.headerData(i, constants.VERTICAL) for i in rowrange]

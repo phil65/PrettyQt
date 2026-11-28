@@ -53,6 +53,7 @@ class AdjustingBoxLayoutDockWidget(widgets.DockWidget):
 
         This is useful for tabbed dock widgets.
         """
+        super().showEvent(event)
         self.raise_()
 
 

@@ -118,14 +118,17 @@ class CycleWidget(widgets.ListWidget):
         self.scrollToItem(self.currentItem())
 
     def enterEvent(self, e):
+        super().enterEvent(e)
         self.up_button.show()
         self.down_button.show()
 
     def leaveEvent(self, e):
+        super().leaveEvent(e)
         self.up_button.hide()
         self.down_button.hide()
 
     def resizeEvent(self, e):
+        super().resizeEvent(e)
         self.up_button.resize(self.width(), 34)
         self.down_button.resize(self.width(), 34)
         self.down_button.move(0, self.height() - 34)

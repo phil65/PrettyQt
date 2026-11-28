@@ -49,7 +49,7 @@ class PdfDocument(core.ObjectMixin, QtPdf.QPdfDocument):
         """Return current error.
 
         Returns:
-            page mode
+            current error
         """
         return ERROR.inverse[self.error()]
 
@@ -57,7 +57,7 @@ class PdfDocument(core.ObjectMixin, QtPdf.QPdfDocument):
         """Return current status.
 
         Returns:
-            zoom mode
+            current status
         """
         return STATUS.inverse[self.status()]
 

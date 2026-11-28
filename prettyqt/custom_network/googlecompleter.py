@@ -22,7 +22,10 @@ class BaseScrapeModel(gui.StandardItemModel):
             self._reply.finished.connect(self.on_finished)
             loop = core.EventLoop()
             self.finished.connect(loop.quit)
-            loop.exec()
+            try:
+                loop.exec()
+            finally:
+                self.finished.disconnect(loop.quit)
 
     @core.Slot()
     def on_finished(self):

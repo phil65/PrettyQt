@@ -18,7 +18,7 @@ CT = widgets.QStyle.ContentsType
 CC = widgets.QStyle.ComplexControl
 
 
-class AcionGridButton(widgets.ToolButton):
+class ActionGridButton(widgets.ToolButton):
     def __init__(self, parent=None, **kwargs):
         super().__init__(parent, **kwargs)
         self._elided_text = ""
@@ -38,8 +38,10 @@ class AcionGridButton(widgets.ToolButton):
         self.addAction(action)
 
     def _update_text(self):
+        if (action := self.defaultAction()) is None:
+            return
         fm = self.get_font_metrics()
-        text = self.defaultAction().text()
+        text = action.text()
         words = text.split()
 
         option = widgets.QStyleOptionToolButton()
@@ -85,6 +87,9 @@ class AcionGridButton(widgets.ToolButton):
         csize.setHeight(csize.height() + margin + 2 * opt.fontMetrics.lineSpacing())
         csize.setWidth(csize.width() * 3 // 2)
         return style.sizeFromContents(CT.CT_ToolButton, opt, csize, self)
+
+
+AcionGridButton = ActionGridButton
 
 
 class ActionGrid(widgets.Frame):
@@ -213,7 +218,7 @@ class ActionGrid(widgets.Frame):
     def _insert_action_button(self, index, action):
         """Create a button for the action and add it to the layout at index."""
         self._shift_grid(index, 1)
-        button = AcionGridButton(
+        button = ActionGridButton(
             self,
             tool_button_style=self._tool_button_style,
             triggered=self._mapper.map,

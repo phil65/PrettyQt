@@ -15,7 +15,10 @@ class WebEngineScriptCollection:
         return getattr(self.item, val)
 
     def __getitem__(self, index: str) -> QtWebEngineCore.QWebEngineScript:
-        return self.item.find(index)[0]
+        scripts = self.item.find(index)
+        if not scripts:
+            raise KeyError(index)
+        return scripts[0]
 
     def __len__(self):
         return self.item.count()

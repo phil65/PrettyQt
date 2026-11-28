@@ -112,8 +112,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, _LayoutBase):
                     return cast("widgets.QWidget | widgets.QLayout", item)
                 raise KeyError(index)
             case slice():
-                stop = index.stop or self.count()
-                rng = range(index.start or 0, stop, index.step or 1)
+                rng = range(*index.indices(self.count()))
                 children = [self[i] for i in rng]
                 return listdelegators.ListDelegator(children, parent=self)
             case _:

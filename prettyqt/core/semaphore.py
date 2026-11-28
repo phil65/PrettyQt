@@ -13,5 +13,9 @@ class Semaphore(QtCore.QSemaphore):
 
     @contextlib.contextmanager
     def acquire_resources(self, n: int = 1) -> Generator[bool]:
-        yield self.tryAcquire(n)
-        self.release(n)
+        acquired = self.tryAcquire(n)
+        try:
+            yield acquired
+        finally:
+            if acquired:
+                self.release(n)

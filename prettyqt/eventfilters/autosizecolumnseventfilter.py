@@ -1,10 +1,4 @@
-from typing import TYPE_CHECKING
-
-from prettyqt import constants, core, eventfilters
-
-
-if TYPE_CHECKING:
-    from prettyqt import widgets
+from prettyqt import constants, core, eventfilters, widgets
 
 
 class AutoSizeColumnsEventFilter(eventfilters.BaseEventFilter):
@@ -50,8 +44,10 @@ class AutoSizeColumnsEventFilter(eventfilters.BaseEventFilter):
     #         self._widget.scrollTo(new_index)
 
     def _on_scroll(self):
+        if (model := self._widget.model()) is None:
+            return
         if self.orientation == constants.VERTICAL:
-            colcount = self._widget.model().columnCount()
+            colcount = model.columnCount()
             span = self._widget.get_visible_section_span("horizontal")
             if span == self.last_span:
                 return
@@ -66,7 +62,7 @@ class AutoSizeColumnsEventFilter(eventfilters.BaseEventFilter):
                 end = self._widget.columnAt(width)
                 end = colcount if end == -1 else end
         elif isinstance(self._widget, widgets.QTableView):  # rows: tables only
-            rowcount = self._widget.model().rowCount()
+            rowcount = model.rowCount()
             span = self._widget.get_visible_section_span("vertical")
             if span == self.last_span:
                 return

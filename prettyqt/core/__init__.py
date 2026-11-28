@@ -38,14 +38,23 @@ from ._time import Time
 from ._datetime import DateTime
 from .semaphore import Semaphore
 from .mutex import Mutex
+from .readwritelock import ReadWriteLock
 from .metaenum import MetaEnum
 from .metamethod import MetaMethod
 from .metaproperty import MetaProperty
 from .metatype import MetaType
+from .permission import Permission
+from .bluetoothpermission import BluetoothPermission
+from .calendarpermission import CalendarPermission
+from .camerapermission import CameraPermission
+from .contactspermission import ContactsPermission
+from .locationpermission import LocationPermission
+from .microphonepermission import MicrophonePermission
 from .metaobject import MetaObject
 from .modelroledata import ModelRoleData
 from .persistentmodelindex import PersistentModelIndex
 from .cryptographichash import CryptographicHash
+from .messageauthenticationcode import MessageAuthenticationCode
 from ._uuid import Uuid, UuidMixin
 from .signalblocker import SignalBlocker
 from .abstractnativeeventfilter import AbstractNativeEventFilter
@@ -63,6 +72,7 @@ from .elapsedtimer import ElapsedTimer
 from .basictimer import BasicTimer
 from .object import Object, ObjectMixin
 from .socketnotifier import SocketNotifier
+from .nativeipckey import NativeIpcKey
 from .sharedmemory import SharedMemory
 from .signalmapper import SignalMapper
 from .timeline import TimeLine
@@ -141,8 +151,13 @@ from .abstractlistmodel import AbstractListModel, AbstractListModelMixin
 from .stringlistmodel import StringListModel, StringListModelMixin
 from .sortfilterproxymodel import SortFilterProxyModel
 from .abstracttablemodel import AbstractTableModel, AbstractTableModelMixin
+from .rangemodel import RangeModel
 from .standardpaths import StandardPaths
+from .stringconverter import StringConverter, StringConverterMixin
+from .stringencoder import StringEncoder
+from .stringdecoder import StringDecoder
 from .xmlstreamreader import XmlStreamReader
+from .xmlstreamwriter import XmlStreamWriter
 from .commandlineoption import CommandLineOption
 from .commandlineparser import CommandLineParser
 from .collatorsortkey import CollatorSortKey
@@ -162,9 +177,14 @@ QT_MODULE = QtCore
 
 @contextlib.contextmanager
 def update_property_group():
-    QtCore.Qt.beginPropertyUpdateGroup()
-    yield None
-    QtCore.Qt.endPropertyUpdateGroup()
+    if hasattr(QtCore.Qt, "beginPropertyUpdateGroup"):
+        QtCore.Qt.beginPropertyUpdateGroup()
+        try:
+            yield None
+        finally:
+            QtCore.Qt.endPropertyUpdateGroup()
+    else:
+        yield None
 
 
 def app(args: list[str] | None = None, **kwargs) -> CoreApplication:
@@ -192,10 +212,13 @@ __all__ = [
     "AnimationGroup",
     "AnimationGroupMixin",
     "BasicTimer",
+    "BluetoothPermission",
     "Buffer",
     "ByteArray",
     "ByteArrayMatcher",
     "Calendar",
+    "CalendarPermission",
+    "CameraPermission",
     "Collator",
     "CollatorSortKey",
     # "AbstractState",
@@ -209,6 +232,7 @@ __all__ = [
     "CommandLineOption",
     "CommandLineParser",
     "ConcatenateTablesProxyModel",
+    "ContactsPermission",
     "CoreApplication",
     "CoreApplicationMixin",
     "CryptographicHash",
@@ -247,6 +271,7 @@ __all__ = [
     "Line",
     "LineF",
     "Locale",
+    "LocationPermission",
     "LockFile",
     "LoggingCategory",
     "Margins",
@@ -255,11 +280,13 @@ __all__ = [
     # "Q_ARG",
     # "Q_RETURN_ARG",
     # "DynamicPropertyChangeEvent",
+    "MessageAuthenticationCode",
     "MetaEnum",
     "MetaMethod",
     "MetaObject",
     "MetaProperty",
     "MetaType",
+    "MicrophonePermission",
     "MimeData",
     "MimeDatabase",
     "MimeType",
@@ -267,11 +294,13 @@ __all__ = [
     "ModelRoleData",
     "MsgType",
     "Mutex",
+    "NativeIpcKey",
     "Object",
     "ObjectMixin",
     "OperatingSystemVersion",
     "ParallelAnimationGroup",
     "PauseAnimation",
+    "Permission",
     "PersistentModelIndex",
     "PluginLoader",
     "Point",
@@ -281,6 +310,8 @@ __all__ = [
     "Property",
     "PropertyAnimation",
     "RandomGenerator",
+    "RangeModel",
+    "ReadWriteLock",
     "Rect",
     "RectF",
     "RegularExpression",
@@ -309,6 +340,10 @@ __all__ = [
     "SortFilterProxyModel",
     "StandardPaths",
     "StorageInfo",
+    "StringConverter",
+    "StringConverterMixin",
+    "StringDecoder",
+    "StringEncoder",
     "StringListModel",
     "StringListModelMixin",
     "TemporaryDir",
@@ -331,6 +366,8 @@ __all__ = [
     "VariantAnimationMixin",
     "VersionNumber",
     "XmlStreamReader",
+    "XmlStreamWriter",
     "app",
     "install_message_handler",
+    "update_property_group",
 ]

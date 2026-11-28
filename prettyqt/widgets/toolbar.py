@@ -157,7 +157,11 @@ class ToolBarMixin(widgets.WidgetMixin, _ToolBarBase):
         duration_ms: int = 2000,
         content: Literal["tool_tip", "shortcut", "status_tip"] = "tool_tip",
     ):
-        """Show all the tooltips."""
+        """Show or hide all the tooltips."""
+        if not value:
+            self._tooltip_timer.stop()
+            self.hide_tooltips()
+            return
         if self._tooltip_labels:
             self._tooltip_timer.start(duration_ms)
             return

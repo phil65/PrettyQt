@@ -101,21 +101,20 @@ TYPE = bidict(
     qchar=QtCore.QMetaType.Type.QChar,
     qstring=QtCore.QMetaType.Type.QString,
     byte_array=QtCore.QMetaType.Type.QByteArray,
-    # nullptr=QtCore.QMetaType.Type.Nullptr,
     void_star=QtCore.QMetaType.Type.VoidStar,
     long=QtCore.QMetaType.Type.Long,
     long_long=QtCore.QMetaType.Type.LongLong,
     short=QtCore.QMetaType.Type.Short,
     char=QtCore.QMetaType.Type.Char,
-    # char_16=QtCore.QMetaType.Type.Char16,
-    # char_32=QtCore.QMetaType.Type.Char32,
+    char_16=QtCore.QMetaType.Type.Char16,
+    char_32=QtCore.QMetaType.Type.Char32,
     u_long=QtCore.QMetaType.Type.ULong,
     u_long_long=QtCore.QMetaType.Type.ULongLong,
     u_short=QtCore.QMetaType.Type.UShort,
     s_char=QtCore.QMetaType.Type.SChar,
     u_char=QtCore.QMetaType.Type.UChar,
     float=QtCore.QMetaType.Type.Float,
-    # float_16=QtCore.QMetaType.Type.Float16,
+    float_16=QtCore.QMetaType.Type.Float16,
     object_star=QtCore.QMetaType.Type.QObjectStar,
     cursor=QtCore.QMetaType.Type.QCursor,
     date=QtCore.QMetaType.Type.QDate,
@@ -133,7 +132,7 @@ TYPE = bidict(
     string_list=QtCore.QMetaType.Type.QStringList,
     variant_map=QtCore.QMetaType.Type.QVariantMap,
     variant_hash=QtCore.QMetaType.Type.QVariantHash,
-    # variant_pair=QtCore.QMetaType.Type.QVariantPair,
+    variant_pair=QtCore.QMetaType.Type.QVariantPair,
     icon=QtCore.QMetaType.Type.QIcon,
     pen=QtCore.QMetaType.Type.QPen,
     linef=QtCore.QMetaType.Type.QLineF,
@@ -179,6 +178,9 @@ TYPE = bidict(
     unknown_type=QtCore.QMetaType.Type.UnknownType,
 )
 
+if hasattr(QtCore.QMetaType.Type, "Nullptr"):
+    TYPE["nullptr"] = QtCore.QMetaType.Type.Nullptr
+
 TypeFlagStr = Literal[
     "needs_construction",
     "needs_copy_construction",
@@ -190,6 +192,7 @@ TypeFlagStr = Literal[
     "pointer_to_qobject",
     "is_pointer",
     "is_const",
+    "is_qml_list",
 ]
 
 TYPE_FLAG: bidict[TypeFlagStr, QtCore.QMetaType.TypeFlag] = bidict(
@@ -203,6 +206,7 @@ TYPE_FLAG: bidict[TypeFlagStr, QtCore.QMetaType.TypeFlag] = bidict(
     pointer_to_qobject=QtCore.QMetaType.TypeFlag.PointerToQObject,
     is_pointer=QtCore.QMetaType.TypeFlag.IsPointer,
     is_const=QtCore.QMetaType.TypeFlag.IsConst,
+    is_qml_list=QtCore.QMetaType.TypeFlag.IsQmlList,
 )
 
 TYPE_END_INDEX = 63
@@ -237,6 +241,8 @@ class MetaType(QtCore.QMetaType):
     def get_name(self) -> str | None:
         # PyQt6 returns bytes, PySide6 str.
         name = self.name()
+        if name is None:
+            return None
         return name if isinstance(name, str) else bytes(name).decode()
 
     def get_type_name(self) -> str:

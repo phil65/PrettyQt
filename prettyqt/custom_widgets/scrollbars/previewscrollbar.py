@@ -75,6 +75,9 @@ class PreviewScrollBar(widgets.ScrollBar):
             minimap_height = textarea_height * self._scale
             minimap_visible_height = min(minimap_height, v_scroll.height())
             # minimap_fully_visible = minimap_visible_height == minimap_height
+            if v_scroll.height() == 0:
+                painter.restore()
+                return
             height_ratio = minimap_height / v_scroll.height()
             map_scroll_distance = minimap_height - minimap_visible_height
             if v_scroll.maximum():

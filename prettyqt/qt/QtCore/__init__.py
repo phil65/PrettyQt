@@ -51,15 +51,7 @@ elif PYQT6:
         pyqtClassInfo,
         pyqtClassInfo as ClassInfo,
         PYQT_VERSION_STR as BINDING_VERSION,
-        QtMsgType,
     )
-
-    QtCriticalMsg = QtMsgType.QtCriticalMsg
-    QtDebugMsg = QtMsgType.QtDebugMsg
-    QtFatalMsg = QtMsgType.QtFatalMsg
-    QtInfoMsg = QtMsgType.QtInfoMsg
-    QtSystemMsg = QtMsgType.QtSystemMsg
-    QtWarningMsg = QtMsgType.QtWarningMsg
 
     # For issue #153
     from PyQt6.QtCore import *
@@ -74,6 +66,9 @@ elif PYQT6:
         pyqtBoundSignal,
         pyqtSlot,
         pyqtProperty,
+        PYQT_VERSION,
+        PYQT_VERSION_STR,
+        QT_VERSION,
         QT_VERSION_STR,
         pyqtEnum,
         pyqtClassInfo,

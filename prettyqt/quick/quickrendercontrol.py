@@ -10,8 +10,10 @@ class QuickRenderControl(core.ObjectMixin, QtQuick.QQuickRenderControl):
     @contextlib.contextmanager
     def edit_frame(self):
         self.beginFrame()
-        yield None
-        self.endFrame()
+        try:
+            yield None
+        finally:
+            self.endFrame()
 
 
 if __name__ == "__main__":

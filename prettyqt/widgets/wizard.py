@@ -20,6 +20,7 @@ WizardButtonStr = Literal[
     "custom_1",
     "custom_2",
     "custom_3",
+    "stretch",
 ]
 
 WIZARD_BUTTON: bidict[WizardButtonStr, mod.WizardButton] = bidict(
@@ -32,6 +33,7 @@ WIZARD_BUTTON: bidict[WizardButtonStr, mod.WizardButton] = bidict(
     custom_1=mod.WizardButton.CustomButton1,
     custom_2=mod.WizardButton.CustomButton2,
     custom_3=mod.WizardButton.CustomButton3,
+    stretch=mod.WizardButton.Stretch,
 )
 
 WizardOptionStr = Literal[
@@ -52,6 +54,7 @@ WizardOptionStr = Literal[
     "custom_button_2",
     "custom_button_3",
     "no_cancel_button_on_last_page",
+    "stretch_banner",
 ]
 
 WIZARD_OPTIONS: bidict[WizardOptionStr, mod.WizardOption] = bidict(
@@ -72,6 +75,7 @@ WIZARD_OPTIONS: bidict[WizardOptionStr, mod.WizardOption] = bidict(
     custom_button_2=mod.WizardOption.HaveCustomButton2,
     custom_button_3=mod.WizardOption.HaveCustomButton3,
     no_cancel_button_on_last_page=mod.WizardOption.NoCancelButtonOnLastPage,
+    stretch_banner=mod.WizardOption.StretchBanner,
 )
 
 WizardPixmapStr = Literal["watermark", "logo", "banner", "background"]

@@ -16,14 +16,21 @@ POSITIONING_METHODS = bidict(
 
 PositioningMethodStr = Literal["none", "satellite", "non_satellite", "all"]
 
-ERRORS = bidict(
+ErrorStr = Literal[
+    "access_error",
+    "closed_error",
+    "none",
+    "unknown_source",
+    "update_timeout",
+]
+
+ERRORS: bidict[ErrorStr, QGeoPositionInfoSource.Error] = bidict(
     access_error=QGeoPositionInfoSource.Error.AccessError,
     closed_error=QGeoPositionInfoSource.Error.ClosedError,
     none=QGeoPositionInfoSource.Error.NoError,
     unknown_source=QGeoPositionInfoSource.Error.UnknownSourceError,
+    update_timeout=QGeoPositionInfoSource.Error.UpdateTimeoutError,
 )
-
-ErrorStr = Literal["access_error", "closed_error", "none", "unknown_source"]
 
 
 if TYPE_CHECKING:

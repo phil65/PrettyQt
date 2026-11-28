@@ -343,8 +343,9 @@ class Fx:
     def highlight_widget(self, widget: widgets.QWidget):
         from prettyqt.custom_widgets.overlayborder import FocusWidget
 
-        widget = FocusWidget(self, widget)
-        widget.show()
+        overlay = FocusWidget(self._widget, widget)
+        overlay.show()
+        return overlay
 
 
 if __name__ == "__main__":

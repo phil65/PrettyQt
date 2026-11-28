@@ -10,8 +10,12 @@ from prettyqt.qt import QtGui
 class FlashEffect(widgets.GraphicsColorizeEffect):
     def __init__(self, duration: int = 1000, color="green", **kwargs):
         super().__init__(**kwargs)
+        self._duration = duration
+        self._color = color
         self._flash_animation = core.PropertyAnimation(self, b"color")
+        self._flash_animation.setDuration(duration)
         self._flash_animation.setStartValue(QtGui.QColor(0, 0, 0, 0))
+        self._flash_animation.setKeyValueAt(0.1, QtGui.QColor(color))
         self._flash_animation.setEndValue(QtGui.QColor(0, 0, 0, 0))
         self._flash_animation.setLoopCount(1)
 
@@ -30,14 +34,15 @@ class FlashEffect(widgets.GraphicsColorizeEffect):
 
         # let's make sure to remove the animation from the widget because
         # if we don't, the widget will actually be black and white.
-        self._flash_animation.finished.connect(
-            functools.partial(
-                remove_flash_animation,
-                weakref.ref(cast("widgets.QWidget", self.parent())),
+        if (parent := self.parent()) is not None:
+            self._flash_animation.finished.connect(
+                functools.partial(
+                    remove_flash_animation,
+                    weakref.ref(cast("widgets.QWidget", parent)),
+                )
             )
-        )
 
-    def flash(self, duration: int = 1000, color="red"):
+    def flash(self, duration: int | None = None, color=None):
         """Add flash animation to widget to highlight certain action.
 
         Parameters
@@ -47,12 +52,14 @@ class FlashEffect(widgets.GraphicsColorizeEffect):
         duration : int
             Duration of the flash animation.
         color : Array
-            Color of the flash animation. By default, we use red.
+            Color of the flash animation. Defaults to the configured color.
         """
-        color = QtGui.QColor(color)
+        qcolor = QtGui.QColor(self._color if color is None else color)
         # now  set an actual time for the flashing and an intermediate color
-        self._flash_animation.setDuration(duration)
-        self._flash_animation.setKeyValueAt(0.1, color)
+        self._flash_animation.setDuration(
+            self._duration if duration is None else duration
+        )
+        self._flash_animation.setKeyValueAt(0.1, qcolor)
         self._flash_animation.start()
 
 

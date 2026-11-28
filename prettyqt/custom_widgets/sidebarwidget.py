@@ -96,7 +96,7 @@ class SidebarWidget(widgets.MainWindow):
         self.button_map[item] = button
         self.icon_map[item] = iconprovider.get_icon(icon)
         if show:
-            self._stack_layout.setCurrentWidget(item)
+            self.set_tab(item)
 
     def set_marker(
         self, item: str | int | widgets.QWidget, color: datatypes.ColorType = "red"

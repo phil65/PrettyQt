@@ -38,8 +38,6 @@ PAUSE_MODES: bidict[PauseModeStr, mod.PauseMode] = bidict(
     on_ssl_errors=mod.PauseMode.PauseOnSslErrors,
 )
 
-mod = mod
-
 SocketErrorStr = Literal[
     "connection_refused",
     "remote_host_closed",
@@ -47,7 +45,7 @@ SocketErrorStr = Literal[
     "socket_access",
     "socket_resource",
     "socket_timeout",
-    "diagram_too_large",
+    "datagram_too_large",
     "network",
     "address_in_use",
     "socket_address_not_available",
@@ -74,7 +72,7 @@ SOCKET_ERROR: bidict[SocketErrorStr, mod.SocketError] = bidict(
     socket_access=mod.SocketError.SocketAccessError,
     socket_resource=mod.SocketError.SocketResourceError,
     socket_timeout=mod.SocketError.SocketTimeoutError,
-    diagram_too_large=mod.SocketError.DatagramTooLargeError,
+    datagram_too_large=mod.SocketError.DatagramTooLargeError,
     network=mod.SocketError.NetworkError,
     address_in_use=mod.SocketError.AddressInUseError,
     socket_address_not_available=mod.SocketError.SocketAddressNotAvailableError,
@@ -103,6 +101,9 @@ SocketOptionStr = Literal[
     "send_buffer_size_socket",
     "receive_buffer_size",
     "path_mtu_socket",
+    "keep_alive_count",
+    "keep_alive_idle",
+    "keep_alive_interval",
 ]
 
 SOCKET_OPTION: bidict[SocketOptionStr, mod.SocketOption] = bidict(
@@ -114,6 +115,9 @@ SOCKET_OPTION: bidict[SocketOptionStr, mod.SocketOption] = bidict(
     send_buffer_size_socket=mod.SocketOption.SendBufferSizeSocketOption,
     receive_buffer_size=mod.SocketOption.ReceiveBufferSizeSocketOption,
     path_mtu_socket=mod.SocketOption.PathMtuSocketOption,
+    keep_alive_count=mod.SocketOption.KeepAliveCountOption,
+    keep_alive_idle=mod.SocketOption.KeepAliveIdleOption,
+    keep_alive_interval=mod.SocketOption.KeepAliveIntervalOption,
 )
 
 SocketStateStr = Literal[

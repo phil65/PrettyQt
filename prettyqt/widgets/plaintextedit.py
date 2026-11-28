@@ -31,7 +31,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin, _PlainTextEditBase):
         super().__init__(**kwargs)
         self._allow_wheel_zoom = False
         self._hl = None
-        self._current_line_color = gui.Color(0, 0, 0, 0)
+        self._current_line_color: gui.Color | None = None
         self._validation_color = gui.Color("orange")
         self.selecter = texteditselecter.TextEditSelecter(self)
         self.validator: gui.QValidator | None = None
@@ -222,11 +222,16 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin, _PlainTextEditBase):
         return self.text()
 
     def set_current_line_color(self, color: datatypes.ColorType):
-        if self._current_line_color is None:
-            self.cursorPositionChanged.connect(self.selecter._update_on_block_change)
-        if color is None:
-            self.cursorPositionChanged.disconnect(self.selecter._update_on_block_change)
-        self._current_line_color = colors.get_color(color) if color else None
+        if color:
+            if self._current_line_color is None:
+                self.cursorPositionChanged.connect(self.selecter._update_on_block_change)
+            self._current_line_color = colors.get_color(color)
+        else:
+            if self._current_line_color is not None:
+                self.cursorPositionChanged.disconnect(
+                    self.selecter._update_on_block_change
+                )
+            self._current_line_color = None
 
     def get_current_line_color(self) -> gui.Color | None:
         return self._current_line_color

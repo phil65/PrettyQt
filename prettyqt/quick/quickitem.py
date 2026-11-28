@@ -11,6 +11,8 @@ FlagStr = Literal[
     "is_focus_scope",
     "has_contents",
     "accepts_drops",
+    "is_viewport",
+    "observes_viewport",
 ]
 
 FLAGS: bidict[FlagStr, QtQuick.QQuickItem.Flag] = bidict(
@@ -19,6 +21,8 @@ FLAGS: bidict[FlagStr, QtQuick.QQuickItem.Flag] = bidict(
     is_focus_scope=QtQuick.QQuickItem.Flag.ItemIsFocusScope,
     has_contents=QtQuick.QQuickItem.Flag.ItemHasContents,
     accepts_drops=QtQuick.QQuickItem.Flag.ItemAcceptsDrops,
+    is_viewport=QtQuick.QQuickItem.Flag.ItemIsViewport,
+    observes_viewport=QtQuick.QQuickItem.Flag.ItemObservesViewport,
 )
 
 ItemChangeStr = Literal[
@@ -33,6 +37,8 @@ ItemChangeStr = Literal[
     "pixel_ratio_has_changed",
     "anti_aliasing_has_changed",
     "enabled_has_changed",
+    "scale_has_changed",
+    "transform_has_changed",
 ]
 
 ITEM_CHANGE: bidict[ItemChangeStr, QtQuick.QQuickItem.ItemChange] = bidict(
@@ -47,6 +53,8 @@ ITEM_CHANGE: bidict[ItemChangeStr, QtQuick.QQuickItem.ItemChange] = bidict(
     pixel_ratio_has_changed=QtQuick.QQuickItem.ItemChange.ItemDevicePixelRatioHasChanged,
     anti_aliasing_has_changed=QtQuick.QQuickItem.ItemChange.ItemAntialiasingHasChanged,
     enabled_has_changed=QtQuick.QQuickItem.ItemChange.ItemEnabledHasChanged,
+    scale_has_changed=QtQuick.QQuickItem.ItemChange.ItemScaleHasChanged,
+    transform_has_changed=QtQuick.QQuickItem.ItemChange.ItemTransformHasChanged,
 )
 
 TransformOriginStr = Literal[
@@ -93,8 +101,8 @@ class QuickItemMixin(core.ObjectMixin, qml.QmlParserStatusMixin, _QuickItemBase)
     def get_cursor(self) -> gui.Cursor:
         return gui.Cursor(self.cursor())
 
-    def get_flags(self):
-        pass
+    def get_flags(self) -> list[FlagStr]:
+        return FLAGS.get_list(self.flags())
 
     def set_transform_origin(
         self, origin: TransformOriginStr | QtQuick.QQuickItem.TransformOrigin
@@ -109,7 +117,7 @@ class QuickItemMixin(core.ObjectMixin, qml.QmlParserStatusMixin, _QuickItemBase)
         self.setTransformOrigin(TRANSFORM_ORIGIN.get_enum_value(origin))
 
     def get_transform_origin(self) -> TransformOriginStr:
-        """Return the render type of text-like elements in Qt Quick.
+        """Return the transform origin.
 
         Returns:
             transform origin

@@ -60,7 +60,13 @@ class bidict(bdct.bidict[KT, VT]):  # noqa: N801
     #     return {k: v & flag for k, v in self.items()}
 
     def merge_flags(self, flags: Iterable[KT]) -> VT:
-        return functools.reduce(operator.ior, [self[t] for t in flags])
+        flag_list = [self[t] for t in flags]
+        if not flag_list:
+            if not self:
+                return cast("VT", 0)
+            first_val = next(iter(self.values()))
+            return type(first_val)(0)
+        return functools.reduce(operator.ior, flag_list)
 
     def get_enum_value(self, value: KT | VT) -> VT:
         return self[value] if isinstance(value, str) else value

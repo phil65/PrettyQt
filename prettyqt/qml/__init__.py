@@ -10,7 +10,7 @@ from .qmlparserstatus import QmlParserStatus, QmlParserStatusMixin
 from .qmlerror import QmlError
 from .qmlexpression import QmlExpression
 from .qmlproperty import QmlProperty
-from .qmlpropertymap import QmlPropertyMap
+from .qmlpropertymap import QmlPropertyMap, QmlPropertyMapMixin
 from .jsvalue import JSValue
 from .jsvalueiterator import JSValueIterator
 from .jsengine import JSEngine, JSEngineMixin
@@ -53,6 +53,7 @@ __all__ = [
     "QmlParserStatusMixin",
     "QmlProperty",
     "QmlPropertyMap",
+    "QmlPropertyMapMixin",
     "clear_type_registrations",
     "register_qml_type",
 ]

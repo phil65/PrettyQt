@@ -48,8 +48,8 @@ class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
         self.setRecursiveFilteringEnabled(True)
 
     def clear_filters(self):
-        self._filters = {}
-        self.invalidateRowsFilter()
+        with self.change_filter("rows"):
+            self._filters = {}
 
     def set_filter_value(
         self,
@@ -57,11 +57,11 @@ class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
         value: str,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
-        if value == "" or value is None:  # False is a valid value.
-            del self._filters[column]
-        else:
-            self._filters[column] = Filter(column=column, value=value, role=role)
-        self.invalidateRowsFilter()
+        with self.change_filter("rows"):
+            if value == "" or value is None:  # False is a valid value.
+                self._filters.pop(column, None)
+            else:
+                self._filters[column] = Filter(column=column, value=value, role=role)
 
     def setFilterKeyColumn(self, column: int):
         msg = "Not supported."
@@ -81,22 +81,22 @@ class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
                 case str():
                     search_val = str(search_val)
                     data = str(data)
-                    if (
-                        self.filterMode == "fuzzy"
-                        and not sublime_search.fuzzy_match_simple(
+                    if self.filterMode == "fuzzy":
+                        if not sublime_search.fuzzy_match_simple(
                             search_val,
                             data,
                             case_sensitive=self.is_filter_case_sensitive(),
-                        )
-                    ):
-                        return False
-                    if not self.is_filter_case_sensitive():
-                        search_val = search_val.lower()
-                        data = data.lower()
-                    if not data.startswith(search_val):
-                        return False
+                        ):
+                            return False
+                    else:
+                        if not self.is_filter_case_sensitive():
+                            search_val = search_val.lower()
+                            data = data.lower()
+                        if not data.startswith(search_val):
+                            return False
                 case Callable():
-                    return search_val(data)
+                    if not search_val(data):
+                        return False
                 case _:
                     if data != search_val:
                         return False

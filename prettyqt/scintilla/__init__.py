@@ -1,5 +1,7 @@
 """Text editor component for Qt."""
 
+from prettyqt.qt.Qsci import *  # noqa: F403
+
 from .sciscintilla import SciScintilla
 from prettyqt.qt import Qsci
 

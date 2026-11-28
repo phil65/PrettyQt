@@ -32,8 +32,11 @@ class PolygonF(serializemixin.SerializeMixin, gui.QPolygonF):
         return self.containsPoint(point, constants.FillRule.OddEvenFill)
 
     def __getitem__(self, index: int) -> core.PointF:
-        if index >= self.size():
-            raise KeyError(index)
+        size = self.size()
+        if index < 0:
+            index += size
+        if index < 0 or index >= size:
+            raise IndexError(index)
         return self.get_point(index)
 
     # def __setitem__(self, index: int, value: datatypes.PointType):

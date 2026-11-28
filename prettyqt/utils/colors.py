@@ -63,12 +63,20 @@ def interpolate_text_colors(
     m = 35
     hue_base = 90 if bg.hue() == -1 else bg.hue()
     for i in range(n_colors):
-        h = hue_base + (360.0 / n_colors * i) % 360
+        h = (hue_base + 360.0 / n_colors * i) % 360
         s = 240.0
         v = max(bg.value(), fg.value()) * 0.85
         if (bg.hue() - m < h < bg.hue() + m) or (fg.hue() - m < h < fg.hue() + m):
             h = ((bg.hue() + fg.hue()) / (i + 1)) % 360
             s = ((bg.saturation() + fg.saturation() + 2 * i) / 2) % 256
             v = ((bg.value() + fg.value() + 2 * i) / 2) % 256
-        pal.append(gui.Color.from_hsv(h, s, v))
+        pal.append(
+            gui.Color(
+                gui.QColor.fromHsv(
+                    int(h) % 360,
+                    min(max(int(s), 0), 255),
+                    min(max(int(v), 0), 255),
+                )
+            )
+        )
     return pal

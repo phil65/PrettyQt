@@ -880,3 +880,290 @@ def test_coreapplication_run_async_available():
     from prettyqt.qt import QtAsyncio
 
     assert callable(QtAsyncio.run)
+
+
+def test_propertyanimation_str_init():
+    obj = core.Object()
+    anim = core.PropertyAnimation(obj, "objectName")
+    assert anim.get_property_name() == "objectName"
+
+
+def test_line_and_linef_pickle():
+    line = core.Line(core.Point(1, 2), core.Point(3, 4))
+    restored = pickle_roundtrip(line)
+    assert restored == line
+    assert restored.get_p1() == core.Point(1, 2)
+    assert restored.get_p2() == core.Point(3, 4)
+
+    linef = core.LineF(core.PointF(1.5, 2.5), core.PointF(3.5, 4.5))
+    restored_f = pickle_roundtrip(linef)
+    assert restored_f == linef
+    assert restored_f.get_p1() == core.PointF(1.5, 2.5)
+    assert restored_f.get_p2() == core.PointF(3.5, 4.5)
+
+
+def test_sharedmemory_pickle():
+    mem = core.SharedMemory("prettyqt_test_key")
+    restored = pickle_roundtrip(mem)
+    assert restored.key() == "prettyqt_test_key"
+
+
+def test_calendar_pickle():
+    for name in ("gregorian", "julian", "islamic_civil"):
+        cal = core.Calendar(name)
+        restored = pickle_roundtrip(cal)
+        assert restored.name() == cal.name()
+
+
+def test_metatype_invalid_name():
+    invalid = core.MetaType()
+    assert invalid.get_name() is None or invalid.get_name() == ""
+    assert repr(invalid)
+
+
+def test_object_property_selector_and_bind():
+    parent = core.Object()
+    c1 = core.Object(parent, object_name="child1")
+    c1.setProperty("a", 1)
+    c1.setProperty("b", 2)
+    c2 = core.Object(parent, object_name="child2")
+    c2.setProperty("a", 1)
+    c2.setProperty("b", 99)
+
+    found = parent.find_children(property_selector={"a": 1, "b": 2})
+    assert found == [c1]
+
+    class Host(core.Object):
+        child_a = core.ObjectMixin.bind_property(None, "child1", "a")  # type: ignore[arg-type]
+
+    host = Host()
+    sub = core.Object(host, object_name="child1")
+    sub.setProperty("a", 42)
+    assert host.child_a == 42  # noqa: PLR2004
+    host.child_a = 100
+    assert sub.property("a") == 100  # noqa: PLR2004
+
+
+def test_regularexpression_fixes():
+    regex = core.RegularExpression(r"(\w+)=(\d+)")
+    res, count = regex.subn(r"\g<2>:\g<1>", "a=1 b=2")
+    assert res == "1:a 2:b"
+    assert count == 2  # noqa: PLR2004
+
+    res2, count2 = regex.subn(r"\g<2>:\g<1>", "a=1 b=2", count=1)
+    assert res2 == "1:a b=2"
+    assert count2 == 1
+
+    named = core.RegularExpression(r"(\w+)-(?P<num>\d+)")
+    assert named.groupindex == {"num": 2}
+
+    empty_re = core.RegularExpression("")
+    assert empty_re.fullmatch("abc", pos=0, endpos=0) is not None
+
+    m = regex.search("xx a=1 yy")
+    assert isinstance(m, core.RegularExpressionMatch)
+    assert m.group(1) == "a"
+    assert m.group(2) == "1"
+
+
+def test_mutex_and_semaphore_context_managers():
+    mutex = core.Mutex()
+    with mutex.lock_mutex(0) as acquired:
+        assert acquired is True
+        with mutex.lock_mutex(0) as acquired_again:
+            assert acquired_again is False
+
+    sem = core.Semaphore(1)
+    with sem.acquire_resources(1) as acquired:
+        assert acquired is True
+        with sem.acquire_resources(1) as acquired_again:
+            assert acquired_again is False
+    assert sem.available() == 1
+
+
+def test_sortfilterproxymodel_fixes():
+    source = gui.StandardItemModel()
+    source.appendRow([gui.StandardItem("alpha"), gui.StandardItem("one")])
+    source.appendRow([gui.StandardItem(None), gui.StandardItem("two")])
+    source.appendRow([gui.StandardItem("beta"), gui.StandardItem(None)])
+
+    proxy = core.SortFilterProxyModel()
+    proxy.setSourceModel(source)
+
+    # lessThan strict weak ordering with None
+    idx_none = source.index(1, 0)
+    idx_alpha = source.index(0, 0)
+    assert proxy.lessThan(idx_none, idx_none) is False
+    assert proxy.lessThan(idx_none, idx_alpha) is True
+    assert proxy.lessThan(idx_alpha, idx_none) is False
+
+    # fuzzy filter with filterKeyColumn == -1 and None cells
+    proxy.set_filter_mode("fuzzy")
+    proxy.set_filter_key_column(-1)
+    proxy.set_search_term("two")
+    assert proxy.rowCount() == 1
+
+    # substring mode
+    proxy.set_filter_mode("substring")
+    proxy.set_search_term("alp")
+    assert proxy.rowCount() == 1
+
+
+def test_abstractitemmodel_fixes():
+    class Model(core.AbstractTableModel):
+        def rowCount(self, parent=None):
+            return 2
+
+        def columnCount(self, parent=None):
+            return 2
+
+        def data(self, index, role=constants.DISPLAY_ROLE):
+            if role == constants.CHECKSTATE_ROLE:
+                return (
+                    constants.CheckState.Unchecked
+                    if index.row() == 0
+                    else constants.CheckState.Checked
+                )
+            return f"{index.row()},{index.column()}"
+
+    model = Model()
+    assert model[-1].row() == 1
+    assert model[-1, -1].row() == 1
+    assert model[-1, -1].column() == 1
+    with pytest.raises(IndexError):
+        _ = model[-3]
+    with pytest.raises(IndexError):
+        _ = model[-3, 0]
+
+    data, _, _ = model.get_table_data(use_checkstate_role=True)
+    assert data == [[False, False], [True, True]]
+
+
+def test_thread_object_mixin():
+    thread = core.Thread(object_name="worker_thread")
+    assert isinstance(thread, core.ObjectMixin)
+    assert thread.objectName() == "worker_thread"
+
+
+def test_datetime_set_time_spec_enum():
+    dt = core.DateTime(2025, 1, 1, 12, 0, 0)
+    dt.set_time_spec(constants.TimeSpec.UTC)
+    assert dt.get_time_spec() == "utc"
+    dt.set_time_spec("local_time")
+    assert dt.get_time_spec() == "local_time"
+
+
+def test_settings_kwargs():
+    s = core.Settings("1", "2", object_name="my_settings")
+    assert s.objectName() == "my_settings"
+
+
+def test_update_property_group():
+    with core.update_property_group():
+        pass
+
+
+def test_rangemodel():
+    if prettyqt.qt.PYQT6:
+        pytest.skip(
+            "PyQt6 6.12.1 segfaults when subclassing QRangeModel with QApplication"
+        )
+    model = core.RangeModel([10, 20, 30])
+    assert isinstance(model, core.AbstractItemModelMixin)
+    assert model.rowCount() == 3  # noqa: PLR2004
+    assert model.columnCount() == 1
+    assert model.data(model.index(0, 0)) == 10  # noqa: PLR2004
+    model.set_auto_connect_policy("full")
+    assert model.get_auto_connect_policy() == "full"
+
+    table = core.RangeModel([[1, 2], [3, 4]])
+    assert table.rowCount() == 2  # noqa: PLR2004
+    assert table.columnCount() == 2  # noqa: PLR2004
+    assert table.data(table.index(1, 1)) == 4  # noqa: PLR2004
+
+
+def test_permissions():
+    perm = core.Permission()
+    assert perm.get_status() == "undetermined"
+    assert isinstance(perm.get_type(), core.MetaType)
+
+    bt = core.BluetoothPermission()
+    bt.set_communication_modes("access")
+    assert "access" in bt.get_communication_modes()
+
+    cal = core.CalendarPermission()
+    cal.set_access_mode("read_write")
+    assert cal.get_access_mode() == "read_write"
+
+    core.CameraPermission()
+
+    contacts = core.ContactsPermission()
+    contacts.set_access_mode("read_only")
+    assert contacts.get_access_mode() == "read_only"
+
+    loc = core.LocationPermission()
+    loc.set_accuracy("precise")
+    assert loc.get_accuracy() == "precise"
+    loc.set_availability("always")
+    assert loc.get_availability() == "always"
+
+    core.MicrophonePermission()
+
+
+def test_nativeipckey():
+    key = core.NativeIpcKey("my_key", "posix_realtime")
+    assert bool(key) is True
+    assert key.get_type() == "posix_realtime"
+    assert str(key)
+    key.set_type("system_v")
+    assert key.get_type() == "system_v"
+    parsed = core.NativeIpcKey.from_string(str(key))
+    assert parsed.nativeKey() == "my_key"
+
+
+def test_string_converters():
+    assert core.StringConverter.get_name_for_encoding("utf8") == "UTF-8"
+    enc = core.StringEncoder("utf8")
+    assert bool(enc) is True
+    assert enc.get_name() == "UTF-8"
+    dec = core.StringDecoder("utf8")
+    assert bool(dec) is True
+    assert dec.get_name() == "UTF-8"
+    if prettyqt.qt.PYSIDE6:
+        # PyQt6 6.12.1 has a UAF/segfault in QStringDecoder.decoderForHtml
+        html_dec = core.StringDecoder.for_html(b'<meta charset="utf-8"><html></html>')
+        assert isinstance(html_dec, core.StringDecoder)
+        assert html_dec.get_name() == "UTF-8"
+
+
+def test_xmlstreamwriter():
+    buf = core.Buffer()
+    with buf.open_file("write_only"):
+        writer = core.XmlStreamWriter(buf)
+        with writer.document(), writer.element("root"):
+            writer.writeTextElement("item", "value")
+        assert writer.get_error() == "none"
+    content = bytes(buf.data().data()).decode()
+    assert "<root><item>value</item></root>" in content
+
+
+def test_messageauthenticationcode():
+    mac = core.MessageAuthenticationCode("sha_256", b"secret")
+    mac.add_data(b"hello")
+    result = mac.get_result()
+    assert bytes(mac) == result
+    assert result == core.MessageAuthenticationCode.compute_hash(
+        b"hello", b"secret", "sha_256"
+    )
+
+
+def test_readwritelock():
+    lock = core.ReadWriteLock("non_recursive")
+    with lock.lock_for_read() as acquired:
+        assert acquired is True
+        with lock.lock_for_write(0) as write_acquired:
+            assert write_acquired is False
+    with lock.lock_for_write() as acquired:
+        assert acquired is True
+        with lock.lock_for_read(0) as read_acquired:
+            assert read_acquired is False

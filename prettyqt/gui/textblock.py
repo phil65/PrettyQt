@@ -50,8 +50,10 @@ class TextBlock(QtGui.QTextBlock):
     @contextlib.contextmanager
     def edit_user_state(self):
         state = self.userState()
-        yield state
-        self.setUserState(state)
+        try:
+            yield state
+        finally:
+            self.setUserState(state)
 
     def get_state(self) -> int:
         """Get the user state, generally used for syntax highlighting.
@@ -152,16 +154,16 @@ class TextBlock(QtGui.QTextBlock):
         if not self.is_fold_trigger():
             # search level of next non blank line
             while not start.text().strip() and start.isValid():
-                start = start.next()
+                start = TextBlock(start.next())
             ref_level = self.get_fold_level() - 1
             start = original
             while (
                 start.blockNumber()
                 and counter < limit
-                and (not self.is_fold_trigger() or self.get_fold_level() > ref_level)
+                and (not start.is_fold_trigger() or start.get_fold_level() > ref_level)
             ):
                 counter += 1
-                start = start.previous()
+                start = TextBlock(start.previous())
         return TextBlock(start) if counter < limit else None
 
 

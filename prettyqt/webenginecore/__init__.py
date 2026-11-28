@@ -9,6 +9,7 @@ try:
 
     from .webenginehistoryitem import WebEngineHistoryItem
     from .webenginehistory import WebEngineHistory
+    from .webenginehistorymodel import WebEngineHistoryModel
     from .webenginehttprequest import WebEngineHttpRequest
     from .webenginecontextmenurequest import WebEngineContextMenuRequest
     from .webenginedownloadrequest import WebEngineDownloadRequest
@@ -27,6 +28,7 @@ try:
         "WebEngineDownloadRequest",
         "WebEngineHistory",
         "WebEngineHistoryItem",
+        "WebEngineHistoryModel",
         "WebEngineHttpRequest",
         "WebEnginePage",
         "WebEngineProfile",

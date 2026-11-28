@@ -1,4 +1,10 @@
+from typing import TYPE_CHECKING
+
 from prettyqt import core, location, positioning
+
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 class PlaceManager(core.Object):
@@ -14,9 +20,10 @@ class PlaceManager(core.Object):
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def _on_finished(self, reply: location.QPlaceSearchReply):
-        reply = location.PlaceSearchReply.clone_from(reply)
-        self.on_finished.emit(reply)
+    def _on_finished(self, reply: location.QPlaceReply):
+        if isinstance(reply, location.QPlaceSearchReply):
+            search_reply = location.PlaceSearchReply.clone_from(reply)
+            self.on_finished.emit(search_reply)
 
     def get_category(self, cat_id: str) -> location.PlaceCategory:
         return location.PlaceCategory(self.item.category(cat_id))
@@ -34,7 +41,7 @@ class PlaceManager(core.Object):
         radius: float | None = None,
         limit: int | None = None,
         relevance: location.placesearchrequest.RelevanceHintStr | None = None,
-        categories: list[str] | None = None,
+        categories: Sequence[location.QPlaceCategory] | None = None,
     ):
         request = location.PlaceSearchRequest()
         request.setSearchTerm(search_term)
@@ -49,7 +56,7 @@ class PlaceManager(core.Object):
         if relevance is not None:
             request.set_relevance_hint(relevance)
         if categories is not None:
-            self.setCategories(categories)
+            request.setCategories(categories)
         return self.search(request)
 
 
@@ -57,6 +64,7 @@ if __name__ == "__main__":
     app = core.app()
     provider = location.GeoServiceProvider("osm")
     manager = provider.get_place_manager()
-    reply = manager.search_place("Shop", coord=(51, 7))
-    manager.on_finished.connect(lambda x: print(x.get_results()))
+    if manager is not None:
+        reply = manager.search_place("Shop", coord=(51, 7))
+        manager.on_finished.connect(lambda x: print(x.get_results()))
     app.exec()

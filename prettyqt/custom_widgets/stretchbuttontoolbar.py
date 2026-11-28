@@ -52,7 +52,7 @@ class StretchButtonToolBar(widgets.ToolBar):
         geom = geom.marginsRemoved(layout.contentsMargins())
 
         actions = self.actions()
-        widgets_it = map(self.widgetForAction, actions)
+        widgets_it = [w for a in actions if (w := self.widgetForAction(a)) is not None]
 
         orientation = self.orientation()
         if orientation == constants.HORIZONTAL:

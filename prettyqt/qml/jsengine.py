@@ -1,10 +1,12 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import core, qml
 from prettyqt.utils import bidict
 
 
-EXTENSIONS = bidict(
+ExtensionStr = Literal["translation", "console", "garbage_collection", "all"]
+
+EXTENSIONS: bidict[ExtensionStr, qml.QJSEngine.Extension] = bidict(
     translation=qml.QJSEngine.Extension.TranslationExtension,
     console=qml.QJSEngine.Extension.ConsoleExtension,
     garbage_collection=qml.QJSEngine.Extension.GarbageCollectionExtension,
@@ -21,10 +23,14 @@ else:
 
 
 class JSEngineMixin(core.ObjectMixin, _JSEngineBase):
-    def install_extensions(self, extension: str, obj: qml.QJSValue | None = None):
+    def install_extensions(
+        self,
+        extension: ExtensionStr | qml.QJSEngine.Extension,
+        obj: qml.QJSValue | None = None,
+    ):
         if obj is None:
             obj = qml.QJSValue()
-        self.installExtensions(EXTENSIONS[extension], obj)
+        self.installExtensions(EXTENSIONS.get_enum_value(extension), obj)
 
     def new_array(self, length: int = 0) -> qml.JSValue:
         return qml.JSValue(self.newArray(length))

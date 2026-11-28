@@ -98,7 +98,7 @@ def find_common_ancestor(cls_list: list[type]) -> type:
     mros = [list(inspect.getmro(cls)) for cls in cls_list]
     track: collections.defaultdict[type, int] = collections.defaultdict(int)
     while mros:
-        for mro in mros:
+        for mro in list(mros):
             cur = mro.pop(0)
             track[cur] += 1
             if (
@@ -123,7 +123,7 @@ def get_subclasses(klass: type, include_abstract: bool = False) -> typing.Iterat
     if getattr(klass.__subclasses__, "__self__", None) is None:
         return
     for i in klass.__subclasses__():
-        yield from get_subclasses(i)
+        yield from get_subclasses(i, include_abstract=include_abstract)
         if include_abstract or not inspect.isabstract(i):
             yield i
 
@@ -158,8 +158,14 @@ def get_qt_parent_class(klass: type, only_direct: bool = False) -> type | None:
         only_direct: whether only the direct parent should be checked.
     """
     if only_direct:
-        name = klass.mro()[0].__name__
-        return klass if name.startswith(("PyQt", "PySide")) else None
+        return next(
+            (
+                kls
+                for kls in klass.__bases__
+                if kls.__module__.startswith(("PyQt", "PySide"))
+            ),
+            None,
+        )
     return next(
         (kls for kls in klass.mro() if kls.__module__.startswith(("PyQt", "PySide"))),
         None,

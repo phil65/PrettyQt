@@ -75,7 +75,7 @@ class FormLayout(widgets.LayoutMixin, widgets.QFormLayout):
     def _get_map(self):
         maps = super()._get_map()
         maps |= {
-            "FieldGrowthPolicy": FIELD_GROWTH_POLICY,
+            "fieldGrowthPolicy": FIELD_GROWTH_POLICY,
             "formAlignment": constants.ALIGNMENTS,
             "labelAlignment": constants.ALIGNMENTS,
             "rowWrapPolicy": ROW_WRAP_POLICY,
@@ -108,7 +108,7 @@ class FormLayout(widgets.LayoutMixin, widgets.QFormLayout):
         Args:
             alignment: alignment for the label
         """
-        self.setFormAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
+        self.setLabelAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
 
     def get_label_alignment(self) -> constants.AlignmentStr:
         """Return current label alignment.

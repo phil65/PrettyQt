@@ -1,3 +1,5 @@
+from typing import Any
+
 from prettyqt import network
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes
@@ -16,8 +18,13 @@ class HttpPart(network.QHttpPart):
                 QtCore.QByteArray(k.encode()), QtCore.QByteArray(v.encode())
             )
 
-    def set_header(self, name: str, value: network.networkrequest.KnownHeaderStr):
-        self.setHeader(network.networkrequest.KNOWN_HEADER[name], value)
+    def set_header(
+        self,
+        name: network.networkrequest.KnownHeaderStr
+        | network.QNetworkRequest.KnownHeaders,
+        value: Any,
+    ):
+        self.setHeader(network.networkrequest.KNOWN_HEADER.get_enum_value(name), value)
 
 
 if __name__ == "__main__":

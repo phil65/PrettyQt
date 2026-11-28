@@ -92,6 +92,12 @@ BUTTON_ROLE: bidict[ButtonRoleStr, widgets.QMessageBox.ButtonRole] = bidict(
     reset=widgets.QMessageBox.ButtonRole.ResetRole,
 )
 
+OptionStr = Literal["dont_use_native_dialog"]
+
+OPTION: bidict[OptionStr, widgets.QMessageBox.Option] = bidict(
+    dont_use_native_dialog=widgets.QMessageBox.Option.DontUseNativeDialog,
+)
+
 
 class MessageBox(widgets.DialogMixin, widgets.QMessageBox):
     """Modal dialog for informing the user (and for receiving an answer)."""
@@ -135,10 +141,22 @@ class MessageBox(widgets.DialogMixin, widgets.QMessageBox):
         return m.show_blocking()
 
     @classmethod
-    def show_exception(cls, exception: Exception):
-        exctype, value = sys.exc_info()[:2]
-        tb = traceback.format_exc()
-        dlg = cls(text=str(value), title=str(exctype), icon="critical", details=tb)
+    def show_exception(cls, exception: Exception | None = None):
+        if exception is None:
+            exctype, value = sys.exc_info()[:2]
+            title = str(exctype)
+            text = str(value)
+            tb = traceback.format_exc()
+        else:
+            title = type(exception).__name__
+            text = str(exception)
+            tb = "".join(traceback.format_exception(exception))
+        dlg = cls(
+            text=text,
+            window_title=title,
+            icon="critical",
+            detailed_text=tb,
+        )
         dlg.show_blocking()
 
     def set_icon(self, icon: datatypes.IconType | IconStr):
@@ -225,6 +243,23 @@ class MessageBox(widgets.DialogMixin, widgets.QMessageBox):
             self.setDefaultButton(button)
         else:
             self.setDefaultButton(STANDARD_BUTTON.get_enum_value(button))
+
+    def set_option(self, option: OptionStr | widgets.QMessageBox.Option, on: bool = True):
+        """Set a message box option.
+
+        Args:
+            option: option to set
+            on: whether to enable or disable the option
+        """
+        self.setOption(OPTION.get_enum_value(option), on)
+
+    def test_option(self, option: OptionStr | widgets.QMessageBox.Option) -> bool:
+        """Return whether a message box option is enabled.
+
+        Args:
+            option: option to test
+        """
+        return self.testOption(OPTION.get_enum_value(option))
 
 
 if __name__ == "__main__":

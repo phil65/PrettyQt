@@ -279,16 +279,16 @@ def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:  # noqa: P
             return ",".join(map(repr, val))
         case re.Pattern():
             return val.pattern
-        case dt.date():
-            return val.isoformat()
         case dt.datetime():
             return val.isoformat(sep=" ")
+        case dt.date():
+            return val.isoformat()
         case core.QRegularExpression():
             return val.pattern()
         case core.QUrl():
             return val.toString()
         case slice() | range():
-            return f"({val.start=}, {val.stop=}, {val.step=}"
+            return f"({val.start=}, {val.stop=}, {val.step=})"
     try:
         import numpy as np
     except ImportError:
@@ -488,6 +488,9 @@ def get_editor_for_type(  # noqa: PLR0911
             editor.set_path(default_value)
         return editor
 
+    if not isinstance(typ, type):
+        return None
+
     # Qt types
     if issubclass(typ, core.QRegularExpression) or typ is re.Pattern:
         editor = custom_widgets.RegexInput(show_error=False, parent=parent)
@@ -629,6 +632,8 @@ def get_editor_for_type(  # noqa: PLR0911
                 editor = custom_widgets.FloatLineEdit(parent=parent)
             elif issubclass(typ, np.integer):
                 editor = custom_widgets.IntLineEdit(parent=parent)
+            else:
+                return None
             if default_value is not None:
                 editor.set_value(default_value)
             return editor
@@ -915,8 +920,10 @@ def to_date(value: DateType):
         case str():
             date = dateutil.parser.parse(value).date()
             return QtCore.QDate(date)
-        case QtCore.QDate() | dt.date():
+        case QtCore.QDate():
             return value
+        case dt.date():
+            return QtCore.QDate(value.year, value.month, value.day)
         case _:
             raise TypeError(value)
 

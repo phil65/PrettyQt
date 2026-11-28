@@ -34,7 +34,7 @@ class Line(core.QLine):
     __match_args__ = ("_x1", "_y1", "_x2", "_y2")
 
     def __reduce__(self):
-        return type(self), (self.get_p1(), self.get_p1())
+        return type(self), (self.get_p1(), self.get_p2())
 
     def __abs__(self) -> float:
         p = self.get_p2() - self.get_p1()

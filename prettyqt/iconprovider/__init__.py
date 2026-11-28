@@ -19,7 +19,7 @@ icon_cache: dict[key_type, QtGui.QIcon] = {}
 # Linux packagers, please set this to True if you want to make qtawesome
 # use system fonts
 SYSTEM_FONTS = False
-PREFIXES = ("mdi.", "mdi6.", "fa5.", "fa5s.", "ei.", "ph.")
+PREFIXES = ("mdi.", "mdi6.", "fa5.", "fa5s.", "fa5b.", "ei.", "ph.", "ri.", "msc.")
 
 
 def hook(obj: dict) -> dict:

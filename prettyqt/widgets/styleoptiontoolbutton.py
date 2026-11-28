@@ -1,5 +1,7 @@
 from prettyqt import widgets
 
 
-class StyleOptionToolButton(widgets.StyleOptionComplex, widgets.QStyleOptionToolButton):
+class StyleOptionToolButton(
+    widgets.StyleOptionComplexMixin, widgets.QStyleOptionToolButton
+):
     pass

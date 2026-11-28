@@ -46,8 +46,8 @@ class CrossFadeWidget(widgets.Widget):
         match pixmap:
             case gui.QPixmap():
                 return pixmap
-            case os.PathLike():
-                return gui.Pixmap(pixmap)
+            case os.PathLike() | str():
+                return gui.Pixmap(os.fspath(pixmap))
             case widgets.QWidget():
                 return pixmap.grab()
             case None:

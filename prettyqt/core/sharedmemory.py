@@ -38,7 +38,7 @@ class SharedMemory(core.ObjectMixin, core.QSharedMemory):
         return get_repr(self, self.key())
 
     def __reduce__(self):
-        return type(self), (self.key())
+        return type(self), (self.key(),)
 
     def get_error(self) -> SharedMemoryErrorStr:
         return SHARED_MEMORY_ERROR.inverse[self.error()]

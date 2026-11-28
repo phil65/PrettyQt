@@ -4,7 +4,7 @@ from prettyqt.qt.QtHelp import *  # noqa: F403
 
 from .helplink import HelpLink
 from .helpindexmodel import HelpIndexModel
-from .helpfilterdata import HelpFilterData
+from .helpfilterdata import HelpFilterData, HelpFilterDataMixin
 from .helpcontentitem import HelpContentItem
 from .helpsearchresult import HelpSearchResult
 from .helpcontentmodel import HelpContentModel
@@ -29,6 +29,7 @@ __all__ = [
     "HelpEngineCore",
     "HelpEngineCoreMixin",
     "HelpFilterData",
+    "HelpFilterDataMixin",
     "HelpFilterEngine",
     "HelpFilterSettingsWidget",
     "HelpIndexModel",

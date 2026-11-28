@@ -46,7 +46,7 @@ class RegexEditorWidget(widgets.Widget):
         cb_quickref = widgets.CheckBox(
             "Show Regular Expression Quick Reference",
             checked=True,
-            state_changed=textedit_quickref.setVisible,
+            toggled=textedit_quickref.setVisible,
         )
         model = itemmodels.RegexMatchesModel()
         self.table_matches.set_model(model)
@@ -73,11 +73,11 @@ class RegexEditorWidget(widgets.Widget):
         layout_sub[0, 0] = self.lineedit_sub
         layout_sub[1, 0] = self.textedit_sub
         layout = self.set_layout("horizontal")
-        with layout.get_sub_layout("vertical") as layout:
-            layout.add(groupbox)
-            layout.add(groupbox_teststring)
-            layout.add(groupbox_sub)
-            layout.add(cb_quickref)
+        with layout.get_sub_layout("vertical") as sub:
+            sub.add(groupbox)
+            sub.add(groupbox_teststring)
+            sub.add(groupbox_sub)
+            sub.add(cb_quickref)
         sub_layout = widgets.VBoxLayout()
         layout.add(sub_layout)
         sub_layout.add(self.label_num_matches)

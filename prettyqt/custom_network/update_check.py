@@ -107,11 +107,21 @@ class UpdateChecker(core.Object):
 
         if self.message_box.show_blocking() == "ok":
             update_url = self.releases_url if self.packaged else self.changelog_url
-            self.update_button_clicked.emit(update_url)
+            if update_url is not None:
+                self.update_button_clicked.emit(update_url)
 
     def check_for_update(self) -> None:
         """Start the update check."""
-        url = f"{self.releases_url}.atom" if self.packaged else f"{self.pypi_url}/json"
+        if self.packaged:
+            if self.releases_url is None:
+                logger.warning("Cannot check for update: releases_url is not set")
+                return
+            url = f"{self.releases_url}.atom"
+        else:
+            if self.pypi_url is None:
+                logger.warning("Cannot check for update: pypi_url is not set")
+                return
+            url = f"{self.pypi_url}/json"
         logger.debug("Search for new version on %s", url)
         self.get(url, timeout=10)
 

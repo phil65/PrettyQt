@@ -22,7 +22,9 @@ VARIANTS: bidict[VariantStr, QtCore.QUuid.Variant] = bidict(
     reserved=QtCore.QUuid.Variant.Reserved,
 )
 
-VersionStr = Literal["unknown", "time", "embedded_posix", "name", "random", "sha1"]
+VersionStr = Literal[
+    "unknown", "time", "embedded_posix", "name", "random", "sha1", "unix_epoch"
+]
 
 VERSION: bidict[VersionStr, QtCore.QUuid.Version] = bidict(
     unknown=QtCore.QUuid.Version.VerUnknown,
@@ -32,6 +34,7 @@ VERSION: bidict[VersionStr, QtCore.QUuid.Version] = bidict(
     # md5=QtCore.QUuid.Version.Md5,
     random=QtCore.QUuid.Version.Random,
     sha1=QtCore.QUuid.Version.Sha1,
+    unix_epoch=QtCore.QUuid.Version.UnixEpoch,
 )
 
 

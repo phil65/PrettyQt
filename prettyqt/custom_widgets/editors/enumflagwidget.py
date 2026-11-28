@@ -93,8 +93,9 @@ class EnumFlagWidget(widgets.ToolButton):
         for i in enum_cls.__members__.values():
             if i.value == 0:
                 continue
-            if value & i == i:
-                self._action_map[i].setChecked(True)
+            checked = (value & i) == i
+            self._action_map[i].setChecked(checked)
+            if checked:
                 values.append(i)
         text = (
             " | ".join(i.name for i in values if i.name)

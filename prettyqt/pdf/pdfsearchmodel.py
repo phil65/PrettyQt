@@ -13,7 +13,7 @@ RoleStr = Literal[
     "page",
     "index_on_page",
     "location",
-    "context_Before",
+    "context_before",
     "context_after",
 ]
 
@@ -21,7 +21,7 @@ ROLE = bidict[RoleStr, pdf.QPdfSearchModel.Role](
     page=pdf.QPdfSearchModel.Role.Page,
     index_on_page=pdf.QPdfSearchModel.Role.IndexOnPage,
     location=pdf.QPdfSearchModel.Role.Location,
-    context_Before=pdf.QPdfSearchModel.Role.ContextBefore,
+    context_before=pdf.QPdfSearchModel.Role.ContextBefore,
     context_after=pdf.QPdfSearchModel.Role.ContextAfter,
 )
 

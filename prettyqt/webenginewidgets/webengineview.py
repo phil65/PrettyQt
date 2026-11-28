@@ -117,7 +117,7 @@ class WebEngineView(widgets.WidgetMixin, QtWebEngineWidgets.QWebEngineView):
     @classmethod
     def register_as_browser(cls, tabwidget: widgets.TabWidget):
         class BuiltInBrowser(webbrowser.BaseBrowser):
-            def open(self, url: str, new: int = 0, autoraise: bool = True):
+            def open(self, url: str, new: int = 0, autoraise: bool = True) -> bool:
                 # logger.info(f"opening {url} with builtin browser..")
                 webview = cls()
                 webview.load_url(url)
@@ -125,6 +125,7 @@ class WebEngineView(widgets.WidgetMixin, QtWebEngineWidgets.QWebEngineView):
                     webview.show()
                 else:
                     tabwidget.add_tab(webview, url, show=autoraise)
+                return True
 
         webbrowser.register("BuiltInBrowser", BuiltInBrowser)
 

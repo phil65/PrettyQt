@@ -72,7 +72,7 @@ class AbstractSpinBoxMixin(widgets.WidgetMixin, _AbstractSpinBoxBase):
     ) -> QtGui.QValidator | None:
         # prettyqt installs its own LineEdit
         line_edit = cast("widgets.LineEdit", self.lineEdit())
-        return line_edit.set_validator(validator)
+        return line_edit.set_validator(validator, **kwargs)
 
     def get_button_symbols(self) -> SymbolStr:
         """Return button symbol type.

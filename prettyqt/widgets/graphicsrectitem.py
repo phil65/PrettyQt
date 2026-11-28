@@ -14,6 +14,11 @@ class GraphicsRectItem(widgets.AbstractGraphicsShapeItemMixin, widgets.QGraphics
     def serialize_fields(self):
         return dict(rect=self.get_rect())
 
+    def __getstate__(self):
+        return self.serialize_fields()
+
     def __setstate__(self, state):
-        super().__setstate__(state)  # ty: ignore[missing-attribute]  # from SerializeMixin
         self.setRect(state["rect"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()

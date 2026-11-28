@@ -6,10 +6,10 @@ class PyDesignerTaskMenuExtension(
     core.ObjectMixin, QtDesigner.QPyDesignerTaskMenuExtension
 ):
     def preferredEditAction(self):
-        return NotImplemented
+        raise NotImplementedError
 
     def taskActions(self):
-        return NotImplemented
+        raise NotImplementedError
 
 
 if __name__ == "__main__":

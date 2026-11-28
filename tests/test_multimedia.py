@@ -22,6 +22,9 @@ def test_camera():
     cam = multimedia.Camera()
     cam.set_exposure_mode("auto")
     assert cam.get_exposure_mode() == "auto"
+    cam.set_exposure_mode("theatre")
+    assert "theatre" in multimedia.camera.EXPOSURE_MODE
+    assert "none" in multimedia.camera.FEATURE
     with pytest.raises(InvalidParamError):
         cam.set_exposure_mode("test")
     cam.set_torch_mode("off")
@@ -79,3 +82,30 @@ def test_mediametadata_mapping():
 def test_audiodevice_sample_formats(qapp):
     device = multimedia.AudioDevice()
     assert isinstance(device.get_supported_sample_formats(), list)
+
+
+def test_mediarecorder(qapp):
+    recorder = multimedia.MediaRecorder()
+    recorder.set_encoding_mode("constant_bit_rate")
+    assert recorder.get_encoding_mode() == "constant_bit_rate"
+    recorder.set_encoding_mode(
+        multimedia.QMediaRecorder.EncodingMode.ConstantQualityEncoding
+    )
+    assert recorder.get_encoding_mode() == "constant_quality"
+    with pytest.raises(InvalidParamError):
+        recorder.set_encoding_mode("test")
+    recorder.set_quality("high")
+    assert recorder.get_quality() == "high"
+    recorder.set_quality(multimedia.QMediaRecorder.Quality.LowQuality)
+    assert recorder.get_quality() == "low"
+    with pytest.raises(InvalidParamError):
+        recorder.set_quality("test")
+
+
+def test_screencapture(qapp):
+    capture = multimedia.ScreenCapture()
+    assert capture.get_error() == "no_error"
+
+
+def test_mediametadata_has_hdr_content():
+    assert "has_hdr_content" in multimedia.mediametadata.KEY

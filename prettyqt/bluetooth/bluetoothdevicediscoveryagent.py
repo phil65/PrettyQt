@@ -23,6 +23,8 @@ ErrorStr = Literal[
     "invalid_bluetooth_adapter",
     "unsupported_platform",
     "unsupported_discovery",
+    "location_service_turned_off",
+    "missing_permissions",
     "unknown",
 ]
 
@@ -33,6 +35,8 @@ ERROR: bidict[ErrorStr, Error] = bidict(
     invalid_bluetooth_adapter=Error.InvalidBluetoothAdapterError,
     unsupported_platform=Error.UnsupportedPlatformError,
     unsupported_discovery=Error.UnsupportedDiscoveryMethod,
+    location_service_turned_off=Error.LocationServiceTurnedOffError,
+    missing_permissions=Error.MissingPermissionsError,
     unknown=Error.UnknownError,
 )
 

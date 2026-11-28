@@ -80,13 +80,15 @@ class MediaRecorder(core.ObjectMixin, QtMultimedia.QMediaRecorder):
         """
         return ENCODING_MODE.inverse[self.encodingMode()]
 
-    def set_encoding_mode(self, mode: EncodingModeStr):
+    def set_encoding_mode(
+        self, mode: EncodingModeStr | QtMultimedia.QMediaRecorder.EncodingMode
+    ):
         """Set encoding mode.
 
         Args:
             mode: encoding mode to use
         """
-        self.setEncodingMode(ENCODING_MODE[mode])
+        self.setEncodingMode(ENCODING_MODE.get_enum_value(mode))
 
     def get_quality(self) -> QualityStr:
         """Return current quality setting.
@@ -96,13 +98,13 @@ class MediaRecorder(core.ObjectMixin, QtMultimedia.QMediaRecorder):
         """
         return QUALITY.inverse[self.quality()]
 
-    def set_quality(self, quality: QualityStr):
+    def set_quality(self, quality: QualityStr | QtMultimedia.QMediaRecorder.Quality):
         """Set quality.
 
         Args:
             quality: quality to use
         """
-        self.setQuality(QUALITY[quality])
+        self.setQuality(QUALITY.get_enum_value(quality))
 
     def get_error(self) -> ErrorStr:
         """Return error type.

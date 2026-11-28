@@ -197,7 +197,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         style: StyleStr | None = None,
     ):
         super().__init__(parent)
-        self._document = self.document()
+        self._document = gui.QTextDocument(self)
         self._formatter = html.HtmlFormatter(nowrap=True)
         self._style = None
         self._stylename = ""

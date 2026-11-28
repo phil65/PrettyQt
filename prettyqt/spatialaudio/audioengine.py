@@ -5,7 +5,7 @@ from prettyqt.qt import QtSpatialAudio
 from prettyqt.utils import bidict
 
 
-OutputModeStr = Literal["infinite", "once"]
+OutputModeStr = Literal["headphone", "stereo", "surround"]
 
 OUTPUT_MODE: bidict[OutputModeStr, QtSpatialAudio.QAudioEngine.OutputMode] = bidict(
     surround=QtSpatialAudio.QAudioEngine.OutputMode.Surround,
@@ -38,4 +38,4 @@ class AudioEngine(core.ObjectMixin, QtSpatialAudio.QAudioEngine):
 
 if __name__ == "__main__":
     engine = AudioEngine()
-    engine.set_output_mode("infinite")
+    engine.set_output_mode("stereo")

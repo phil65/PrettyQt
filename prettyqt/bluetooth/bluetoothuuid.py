@@ -87,7 +87,7 @@ CharacteristicTypeStr = Literal[
     "location_and_speed",
     "magnetic_declination",
     "magnetic_flux_density_2d",
-    "magnetic_magnetic_flux_density_3d",
+    "magnetic_flux_density_3d",
     "manufacturer_name_string",
     "measurement_interval",
     "model_number_string",
@@ -227,7 +227,7 @@ CHARACTERISTIC_TYPES: bidict[CharacteristicTypeStr, md] = bidict(
     location_and_speed=md.LocationAndSpeed,
     magnetic_declination=md.MagneticDeclination,
     magnetic_flux_density_2d=md.MagneticFluxDensity2D,
-    magnetic_magnetic_flux_density_3d=md.MagneticFluxDensity3D,
+    magnetic_flux_density_3d=md.MagneticFluxDensity3D,
     manufacturer_name_string=md.ManufacturerNameString,
     measurement_interval=md.MeasurementInterval,
     model_number_string=md.ModelNumberString,
@@ -324,7 +324,7 @@ DESCRIPTOR_TYPE: bidict[DescriptorTypeStr, dt] = bidict(
 
 pu = QtBluetooth.QBluetoothUuid.ProtocolUuid
 
-ProtocolUuidstr = Literal[
+ProtocolUuidStr = Literal[
     "sdp",
     "udp",
     "rfcomm",
@@ -352,7 +352,7 @@ ProtocolUuidstr = Literal[
     "l2_cap",
 ]
 
-PROTOCOL_UUID: bidict[ProtocolUuidstr, pu] = bidict(
+PROTOCOL_UUID: bidict[ProtocolUuidStr, pu] = bidict(
     sdp=pu.Sdp,
     udp=pu.Udp,
     rfcomm=pu.Rfcomm,
@@ -587,7 +587,7 @@ class BluetoothUuid(core.UuidMixin, QtBluetooth.QBluetoothUuid):
         return cls.descriptorToString(DESCRIPTOR_TYPE.get_enum_value(descriptor))
 
     @classmethod
-    def protocol_to_string(cls, protocol: ProtocolUuidstr | pu) -> str:
+    def protocol_to_string(cls, protocol: ProtocolUuidStr | pu) -> str:
         """Return string representation for given protocol."""
         return cls.protocolToString(PROTOCOL_UUID.get_enum_value(protocol))
 

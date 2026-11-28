@@ -41,7 +41,7 @@ class IconDelegate(widgets.StyledItemDelegate):
         match value:
             case gui.QPixmap():
                 icon = gui.QIcon(value)
-                option.decorationSize = int(value.size() / value.devicePixelRatio())
+                option.decorationSize = value.size() / value.devicePixelRatio()
 
             case gui.QColor():
                 pixmap = gui.QPixmap(option.decorationSize)
@@ -50,14 +50,14 @@ class IconDelegate(widgets.StyledItemDelegate):
 
             case gui.QImage():
                 icon = gui.QIcon(gui.QPixmap.fromImage(value))
-                option.decorationSize = int(value.size() / value.devicePixelRatio())
+                option.decorationSize = value.size() / value.devicePixelRatio()
 
             case gui.QIcon():
                 icon = value
                 is_on = option.state & widgets.Style.StateFlag.State_Open
                 state = gui.Icon.State.On if is_on else gui.Icon.State.Off
-                actual_size = option.icon.actualSize(option.decorationSize, mode, state)
-                option.decorationSize.boundedTo(actual_size)
+                actual_size = icon.actualSize(option.decorationSize, mode, state)
+                option.decorationSize = option.decorationSize.boundedTo(actual_size)
             case _:
                 raise ValueError(value)
         r = core.Rect(core.Point(), cast("core.QSize", option.decorationSize))

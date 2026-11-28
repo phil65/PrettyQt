@@ -38,11 +38,21 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsGridLayou
                     raise IndexError(index)
                 return self.itemAt(row)
             case slice() as rowslice:
-                count = rowcount if rowslice.stop is None else rowslice.stop
-                items = [self.itemAt(i) for i in range(count)[rowslice]]
-                return listdelegators.ListDelegator(list(set(item)))
+                items = [
+                    item
+                    for i in range(*rowslice.indices(self.count()))
+                    if (item := self.itemAt(i)) is not None
+                ]
+                return listdelegators.ListDelegator(list(set(items)))
             case str():
-                return self.find_child(widgets.QGraphicsWidget, index)
+                for i in range(self.count()):
+                    item = self.itemAt(i)
+                    if (
+                        isinstance(item, widgets.QGraphicsWidget)
+                        and item.objectName() == index
+                    ):
+                        return item
+                return None
             case _:
                 raise TypeError(index)
 
@@ -69,13 +79,16 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsGridLayou
                     positions.append((row, col))
         return dict(widgets=items, positions=positions)
 
+    def __getstate__(self):
+        return self.serialize_fields()
+
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
     def __setstate__(self, state):
         for item, pos in zip(state["widgets"], state["positions"]):
-            x, y, w, h = pos
-            self[x : x + w - 1, y : y + h - 1] = item
+            row, col = pos
+            self[row, col] = item
 
     def __iter__(self) -> Iterator[widgets.QGraphicsLayoutItem]:
         return iter(i for n in range(self.count()) if (i := self.itemAt(n)) is not None)

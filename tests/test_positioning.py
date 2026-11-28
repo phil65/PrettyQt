@@ -22,7 +22,8 @@ def test_geolocation():
 
 def test_geocoordinate():
     coord = positioning.GeoCoordinate(11, 11)
-    print(str(coord))
+    assert f"{coord}" == str(coord)
+    assert f"{coord:default}"
     assert repr(coord) == "GeoCoordinate(11.0, 11.0)"
     assert coord.get_type() == "2d"
     assert bool(coord)
@@ -77,7 +78,11 @@ def test_geopositioninfo():
     info = positioning.GeoPositionInfo()
     info["direction"] = 10.0
     assert "direction" in info
+    assert "nonexistent" not in info
     assert info["direction"] == 10.0  # noqa: PLR2004
+    info["direction_accuracy"] = 2.5
+    assert "direction_accuracy" in info
+    assert info["direction_accuracy"] == 2.5  # noqa: PLR2004
     del info["direction"]
     assert not bool(info)
     info.get_coordinate()
@@ -89,12 +94,24 @@ def test_geosatelliteinfo():
     info["elevation"] = 1.0
     assert info["elevation"] == 1.0
     assert "elevation" in info
+    assert "nonexistent" not in info
     info.setSatelliteIdentifier(1)
     assert int(info) == 1
-    info.set_satellite_system("gps")
+    for system in (
+        "gps",
+        "glonass",
+        "galileo",
+        "beidou",
+        "qzss",
+        "irnss",
+        "sbas",
+        "multiple",
+        "custom",
+    ):
+        info.set_satellite_system(system)
+        assert info.get_satellite_system() == system
     with pytest.raises(InvalidParamError):
         info.set_satellite_system("test")
-    assert info.get_satellite_system() == "gps"
     del info["elevation"]
 
 
@@ -113,11 +130,17 @@ def test_geoareamonitorinfo():
 
 
 def test_nmeapositioninfosource():
+    source_no_parent = positioning.NmeaPositionInfoSource("simulation")
+    assert source_no_parent.get_update_mode() == "simulation"
+    with pytest.raises(InvalidParamError):
+        positioning.NmeaPositionInfoSource("invalid")  # type: ignore[arg-type]
     obj = QtCore.QObject()
     source = positioning.NmeaPositionInfoSource("real_time", obj)
     print(repr(source))
     assert source.get_update_mode() == "real_time"
     assert source.get_error() == "unknown_source"
+    assert "update_timeout" in positioning.geopositioninfosource.ERRORS
+    assert "update_timeout" in positioning.geosatelliteinfosource.ERROR
     source.set_preferred_positioning_methods("satellite")
     # PySide6 6.12 on Windows / Python 3.15 aliases AllPositioningMethods to
     # SatellitePositioningMethods, so "all" is dropped from the mapping there.
@@ -128,3 +151,5 @@ def test_nmeapositioninfosource():
     with pytest.raises(InvalidParamError):
         source.set_preferred_positioning_methods("test")
     source.get_supported_positioning_methods()
+    circle = positioning.GeoCircle(positioning.GeoCoordinate(1, 1), 1.0)
+    assert circle.get_type() == "circle"

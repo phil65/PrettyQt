@@ -16,6 +16,7 @@ class ProgressBar(widgets.WidgetMixin, widgets.QProgressBar):
     """Horizontal or vertical progress bar."""
 
     def __init__(self, *args, text_visible: bool = True, **kwargs):
+        self._text_direction = widgets.QProgressBar.Direction.TopToBottom
         super().__init__(*args, text_visible=text_visible, **kwargs)
 
     def set_alignment(self, alignment: constants.AlignmentStr | constants.AlignmentFlag):
@@ -42,7 +43,9 @@ class ProgressBar(widgets.WidgetMixin, widgets.QProgressBar):
         Args:
             text_direction: text direction for the layout
         """
-        self.setTextDirection(TEXT_DIRECTIONS.get_enum_value(text_direction))
+        val = TEXT_DIRECTIONS.get_enum_value(text_direction)
+        self._text_direction = val
+        self.setTextDirection(val)
 
     def get_text_direction(self) -> TextDirectionStr:
         """Return current text direction.
@@ -50,7 +53,12 @@ class ProgressBar(widgets.WidgetMixin, widgets.QProgressBar):
         Returns:
             Text direction
         """
-        return TEXT_DIRECTIONS.inverse[self.textDirection()]
+        direction = (
+            self.textDirection()
+            if hasattr(self, "textDirection")
+            else self._text_direction
+        )
+        return TEXT_DIRECTIONS.inverse[direction]
 
     def set_orientation(
         self, orientation: constants.OrientationStr | constants.Orientation

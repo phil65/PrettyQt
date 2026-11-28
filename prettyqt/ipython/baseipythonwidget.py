@@ -24,13 +24,10 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
     code_executed = core.Signal(str)
 
     def __init__(self, *args, **kwargs):
-        super().__init__(
-            gui_completion="droplist",  # 'plain', 'droplist', 'ncurses'
-            kind="rich",  # 'plain', 'rich', only applies when no custom control set.
-            paging="vsplit",  # h  'inside', 'hsplit', 'vsplit', 'custom', 'none'
-            # custom_control=widgets.TextEdit,
-            # custom_page_control=widgets.TextEdit,
-        )
+        kwargs.setdefault("gui_completion", "droplist")
+        kwargs.setdefault("kind", "rich")
+        kwargs.setdefault("paging", "vsplit")
+        super().__init__(*args, **kwargs)
         self.banner = "IPython Console"
         self.font_size = 6
         # self.gui_completion = "droplist"
@@ -107,7 +104,7 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
 
     def print_text(self, text: str, before_prompt: bool = False):
         """Print some plain text to the console."""
-        self._append_plain_text(text)
+        self._append_plain_text(text, before_prompt=before_prompt)
 
     def execute(
         self,

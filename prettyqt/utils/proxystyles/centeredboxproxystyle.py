@@ -15,7 +15,11 @@ class CenteredBoxProxyStyle(widgets.QProxyStyle):
 
     def subElementRect(self, element, option, widget):
         base_res = super().subElementRect(element, option, widget)
-        if element != widgets.QStyle.ControlElement.CE_ItemViewItem:
+        if element not in (
+            SE.SE_ItemViewItemCheckIndicator,
+            SE.SE_ItemViewItemDecoration,
+            SE.SE_ItemViewItemFocusRect,
+        ) or not isinstance(option, widgets.QStyleOptionViewItem):
             return base_res
         item_opt = widgets.QStyleOptionViewItem(option)
         # item_opt = QStyleOptionViewItem()

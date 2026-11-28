@@ -28,6 +28,11 @@ class GuiApplicationMixin(core.CoreApplicationMixin, _GuiApplicationBase):
         self._window_icon_color = DEFAULT_WINDOW_ICON_COLOR
         super().__init__(*args, **kwargs)
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"layoutDirection": constants.LAYOUT_DIRECTION}
+        return maps
+
     def event(self, e):
         match e.type():
             case core.QEvent.Type.ApplicationPaletteChange:
@@ -36,14 +41,18 @@ class GuiApplicationMixin(core.CoreApplicationMixin, _GuiApplicationBase):
 
     @classmethod
     @contextlib.contextmanager
-    def override_cursor(cls, cursor: constants.CursorShapeStr):
+    def override_cursor(cls, cursor: constants.CursorShapeStr | constants.CursorShape):
         cls.set_override_cursor(cursor)
-        yield cursor
-        cls.restore_override_cursor()
+        try:
+            yield cursor
+        finally:
+            cls.restore_override_cursor()
 
     @classmethod
-    def set_override_cursor(cls, cursor: constants.CursorShapeStr):
-        crs = gui.Cursor(constants.CURSOR_SHAPE[cursor])
+    def set_override_cursor(
+        cls, cursor: constants.CursorShapeStr | constants.CursorShape
+    ):
+        crs = gui.Cursor(constants.CURSOR_SHAPE.get_enum_value(cursor))
         cls.setOverrideCursor(crs)
 
     @classmethod
@@ -58,8 +67,10 @@ class GuiApplicationMixin(core.CoreApplicationMixin, _GuiApplicationBase):
     @contextlib.contextmanager
     def edit_palette(cls) -> Generator[gui.Palette]:
         palette = gui.Palette(cls.palette())
-        yield palette
-        cls.setPalette(palette)
+        try:
+            yield palette
+        finally:
+            cls.setPalette(palette)
 
     @classmethod
     def find_window(cls, h_wnd: SupportsInt) -> gui.QWindow | None:
@@ -142,6 +153,10 @@ class GuiApplicationMixin(core.CoreApplicationMixin, _GuiApplicationBase):
     @classmethod
     def get_input_method(cls) -> gui.InputMethod:
         return gui.InputMethod(cls.inputMethod())
+
+    @classmethod
+    def get_style_hints(cls) -> gui.StyleHints:
+        return gui.StyleHints(cls.styleHints())
 
     @classmethod
     def copy_to_clipboard(cls, text: str):

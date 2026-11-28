@@ -29,6 +29,7 @@ RoleStr = Literal[
     "highlighted_text",
     "link",
     "link_visited",
+    "accent",
     "none",
 ]
 
@@ -54,6 +55,7 @@ ROLE: bidict[RoleStr, gui.QPalette.ColorRole] = bidict(
     highlighted_text=gui.QPalette.ColorRole.HighlightedText,
     link=gui.QPalette.ColorRole.Link,
     link_visited=gui.QPalette.ColorRole.LinkVisited,
+    accent=gui.QPalette.ColorRole.Accent,
     none=gui.QPalette.ColorRole.NoRole,
 )
 
@@ -148,16 +150,44 @@ class Palette(serializemixin.SerializeMixin, gui.QPalette):
         )
 
     def set_color_group(
-        self, group: GroupStr | gui.QPalette.ColorGroup, **kwargs: gui.QBrush
+        self,
+        group: GroupStr | gui.QPalette.ColorGroup,
+        window_text: gui.QBrush,
+        button: gui.QBrush,
+        light: gui.QBrush,
+        dark: gui.QBrush,
+        mid: gui.QBrush,
+        text: gui.QBrush,
+        bright_text: gui.QBrush,
+        base: gui.QBrush,
+        window: gui.QBrush,
     ):
         """Set the color group.
 
         Args:
             group: color group to use
-            kwargs: keyword arguments passed to setColorGroup
+            window_text: window text brush
+            button: button brush
+            light: light brush
+            dark: dark brush
+            mid: mid brush
+            text: text brush
+            bright_text: bright text brush
+            base: base brush
+            window: window brush
         """
-        # all nine brushes, as keywords
-        self.setColorGroup(GROUP.get_enum_value(group), **kwargs)  # ty: ignore[missing-argument]
+        self.setColorGroup(
+            GROUP.get_enum_value(group),
+            window_text,
+            button,
+            light,
+            dark,
+            mid,
+            text,
+            bright_text,
+            base,
+            window,
+        )
 
     def get_color_group(self) -> GroupStr:
         """Return color group.

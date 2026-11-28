@@ -233,7 +233,12 @@ class AsyncRunner:
                 # At this point, return control to the event loop; when one
                 # of the futures running in the task finishes, it will resume the
                 # coroutine back in the main thread.
-                value.coroutine = coroutine
+                with value._lock:
+                    resumed_future = next((x for x in value.futures if x.done()), None)
+                    if resumed_future is None:
+                        value.coroutine = coroutine
+                        return
+                self._signaller.future_done_signal.emit(resumed_future, coroutine)
                 return
             raise ValueError(value)
 

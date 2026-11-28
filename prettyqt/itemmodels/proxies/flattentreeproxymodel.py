@@ -69,7 +69,7 @@ class FlattenTreeProxyModel(core.AbstractProxyModel):
 
     ID = "flatten_tree"
 
-    def __init__(self, parent: widgets.QWidget | None = None, **kwargs):
+    def __init__(self, parent: core.QObject | None = None, **kwargs):
         self._leaves_only = False
         self._show_path = False
         self._source_column = 0
@@ -79,20 +79,23 @@ class FlattenTreeProxyModel(core.AbstractProxyModel):
         self._source_offset: dict[tuple[int, ...], int] = {}
         super().__init__(parent, **kwargs)
 
-    def setSourceModel(self, model: core.QAbstractItemModel):
+    def setSourceModel(self, model: core.QAbstractItemModel | None):
         if (old_model := self.sourceModel()) is not None:
             old_model.dataChanged.disconnect(self._source_data_changed)
             old_model.rowsInserted.disconnect(self._on_reset)
             old_model.rowsRemoved.disconnect(self._on_reset)
             old_model.rowsMoved.disconnect(self._on_row_move)
         with self.reset_model():
-            super().setSourceModel(model)
+            super().setSourceModel(
+                model  # ty: ignore[invalid-argument-type]  # stub: None unsets source model
+            )
             self._update_mapping()
 
-        model.dataChanged.connect(self._source_data_changed)
-        model.rowsInserted.connect(self._on_reset)
-        model.rowsRemoved.connect(self._on_reset)
-        model.rowsMoved.connect(self._on_row_move)
+        if model is not None:
+            model.dataChanged.connect(self._source_data_changed)
+            model.rowsInserted.connect(self._on_reset)
+            model.rowsRemoved.connect(self._on_reset)
+            model.rowsMoved.connect(self._on_row_move)
 
     def set_source_column(self, column: int):
         with self.reset_model():
@@ -131,6 +134,8 @@ class FlattenTreeProxyModel(core.AbstractProxyModel):
         if not source_index.isValid():
             return source_index
         key = cast("tuple[int, ...]", self.get_index_key(source_index))  # rows only
+        if key not in self._source_offset:
+            return core.ModelIndex()
         row = self._source_offset[key] + source_index.row()
         return self.index(row, 0)
 
@@ -145,11 +150,9 @@ class FlattenTreeProxyModel(core.AbstractProxyModel):
         self, row: int, column: int = 0, parent: core.ModelIndex | None = None
     ) -> core.ModelIndex:
         parent = parent or core.ModelIndex()
-        return (
-            core.ModelIndex()
-            if parent.isValid()
-            else self.createIndex(row, column, row)  # object=row)
-        )
+        if parent.isValid() or not self.hasIndex(row, column, parent):
+            return core.ModelIndex()
+        return self.createIndex(row, column, row)
 
     def parent(self, child=None) -> core.ModelIndex:
         return super().parent() if child is None else core.ModelIndex()
@@ -186,13 +189,17 @@ class FlattenTreeProxyModel(core.AbstractProxyModel):
 
     def _update_mapping(self):
         if self.sourceModel() is None:
+            self._source_key = []
+            self._source_offset = {}
             return
         self._source_key, self._source_offset = self.get_source_mapping(self._leaves_only)
 
     def _source_data_changed(self, top: core.ModelIndex, bottom: core.ModelIndex):
         changed_indexes = [top.sibling(i, 0) for i in range(top.row(), bottom.row() + 1)]
         for ind in changed_indexes:
-            self.dataChanged.emit(ind, ind)
+            mapped = self.mapFromSource(ind)
+            if mapped.isValid():
+                self.dataChanged.emit(mapped, mapped)
 
     def _on_reset(self, parent: core.ModelIndex, start: int, end: int):
         with self.reset_model():

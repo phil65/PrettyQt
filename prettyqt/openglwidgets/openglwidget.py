@@ -34,7 +34,7 @@ class OpenGLWidget(widgets.WidgetMixin, QtOpenGLWidgets.QOpenGLWidget):
         """
         self.setUpdateBehavior(UPDATE_BEHAVIOR.get_enum_value(behavior))
 
-    def get_update_behavior(self) -> UpdateBehaviorStr | None:
+    def get_update_behavior(self) -> UpdateBehaviorStr:
         """Return current update behavior.
 
         Returns:

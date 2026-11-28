@@ -25,10 +25,10 @@ else:
 
 class PlaceContentMixin(_PlaceContentBase):
     def get_type(self) -> TypeStr:
-        """Return the visibility of the place.
+        """Return the content type.
 
         Returns:
-            Place type
+            Content type
         """
         return TYPE.inverse[self.type()]
 

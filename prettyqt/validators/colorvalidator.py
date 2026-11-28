@@ -10,7 +10,7 @@ class ColorValidator(gui.Validator):
         return isinstance(other, ColorValidator)
 
     def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
-        color = gui.Color(text)
+        color = gui.QColor(text)
         if color.isValid():
             return self.State.Acceptable, text, pos
         return self.State.Intermediate, text, pos

@@ -63,11 +63,13 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
     def lessThan(self, left: core.ModelIndex, right: core.ModelIndex):
         if not self._search_term:
             return super().lessThan(left, right)
-        if left.data() is None or right.data() is None:
-            return True
+        left_val = left.data()
+        right_val = right.data()
+        if left_val is None or right_val is None:
+            return left_val is None and right_val is not None
         # since fuzzy scores are cached, it should be fine to do this here.
-        left_data = sublime_search.fuzzy_match(self._search_term, str(left.data()))
-        right_data = sublime_search.fuzzy_match(self._search_term, str(right.data()))
+        left_data = sublime_search.fuzzy_match(self._search_term, str(left_val))
+        right_data = sublime_search.fuzzy_match(self._search_term, str(right_val))
 
         return left_data < right_data
 
@@ -110,9 +112,11 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
             case self.Roles.BackupRole, _:
                 return super().data(index, constants.DISPLAY_ROLE)
             case self.Roles.SortRole, _:
-                idx = self.index(index.row(), filter_column)
+                idx = self.index(index.row(), filter_column, index.parent())
                 label = super().data(idx, constants.DISPLAY_ROLE)
-                result = sublime_search.fuzzy_match(self._search_term, label)
+                if label is None:
+                    return 0
+                result = sublime_search.fuzzy_match(self._search_term, str(label))
                 return result[1]
             case _, _:
                 return super().data(index, role)

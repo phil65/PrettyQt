@@ -9,8 +9,10 @@ class BackingStore(QtGui.QBackingStore):
     @contextlib.contextmanager
     def paint_on_region(self, region: QtGui.QRegion):
         self.beginPaint(region)
-        yield self
-        self.endPaint()
+        try:
+            yield self
+        finally:
+            self.endPaint()
 
 
 if __name__ == "__main__":

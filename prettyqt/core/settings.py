@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-FormatStr = Literal["user", "system"]
+FormatStr = Literal["native", "ini"]
 
 FORMAT: bidict[FormatStr, core.QSettings.Format] = bidict(
     native=core.QSettings.Format.NativeFormat, ini=core.QSettings.Format.IniFormat
@@ -34,8 +34,8 @@ class Settings_(  # noqa: N801
     """Persistent platform-independent application settings."""
 
     # Setting class with original behavior, compatible with original QSettings
-    def __init__(self, *args, settings_id: str | None = None):
-        super().__init__(*args)
+    def __init__(self, *args, settings_id: str | None = None, **kwargs):
+        super().__init__(*args, **kwargs)
         self.settings_id = settings_id
 
     def __repr__(self):
@@ -139,8 +139,10 @@ class Settings_(  # noqa: N801
             prefix: setting prefix for group
         """
         self.beginGroup(prefix)
-        yield None
-        self.endGroup()
+        try:
+            yield None
+        finally:
+            self.endGroup()
 
     def write_array(self, prefix: str, array: Sequence) -> Iterator[tuple[Self, Any]]:
         """Context manager for writing arrays.

@@ -50,7 +50,7 @@ class BorderLayout(widgets.Layout):
         return len(self.items)
 
     def itemAt(self, index: int) -> widgets.QWidgetItem | None:
-        return self.items[index].item if index < len(self.items) else None
+        return self.items[index].item if 0 <= index < len(self.items) else None
 
     def minimumSize(self):
         return self.calculate_size("minimum")
@@ -101,6 +101,7 @@ class BorderLayout(widgets.Layout):
                     item.setGeometry(geom)
                     east_width += item.geometry().width() + self.spacing()
                     x = rect.x() + rect.width() - east_width + self.spacing()
+                    geo = item.geometry()
                     geom = core.Rect(x, north_height, geo.width(), geo.height())
                     item.setGeometry(geom)
 

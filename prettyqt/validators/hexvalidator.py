@@ -15,7 +15,7 @@ class HexValidator(gui.Validator):
 
     def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
         try:
-            val = int(text, 0)
+            val = int(text, 16)
         except ValueError:
             return self.State.Intermediate, text, pos
         if self._maximum is not None and val > self._maximum:

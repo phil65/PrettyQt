@@ -37,7 +37,6 @@ class InputDialog(widgets.DialogMixin, widgets.QInputDialog):
         maps |= {
             "textEchoMode": widgets.lineedit.ECHO_MODE,
             "inputMode": INPUT_MODE,
-            "options": INPUT_DIALOG_OPTION,
         }
         return maps
 

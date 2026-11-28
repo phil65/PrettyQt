@@ -84,7 +84,8 @@ class WidgetEditor(widgets.Widget):
     def _update_editors(self):
         for prop_name, editor in self._editors.items():
             value = self._qobject.property(prop_name)
-            editor.set_value(value)
+            with editor.signals_blocked():
+                editor.set_value(value)
 
 
 if __name__ == "__main__":

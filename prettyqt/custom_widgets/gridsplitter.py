@@ -36,13 +36,14 @@ class GridSplitter(widgets.Splitter):
                 ]
                 return listdelegators.ListDelegator(list(set(items)))
             case int() as row:
-                if row >= rowcount:
-                    raise IndexError(index)
-                return self.itemAt(row)
+                all_widgets = [w for s in self.sub_splitters for w in s.get_widgets()]
+                return all_widgets[row]
             case slice() as rowslice:
-                count = rowcount if rowslice.stop is None else rowslice.stop
-                items = [self.itemAt(i) for i in range(count)[rowslice]]
-                return listdelegators.ListDelegator(list(set(items)))
+                all_widgets = [w for s in self.sub_splitters for w in s.get_widgets()]
+                items = [
+                    all_widgets[i] for i in range(*rowslice.indices(len(all_widgets)))
+                ]
+                return listdelegators.ListDelegator(items)
             case str():
                 return self.find_child(widgets.QWidget, index)
             case _:
@@ -52,6 +53,8 @@ class GridSplitter(widgets.Splitter):
         return len(self.sub_splitters)
 
     def columnCount(self) -> int:
+        if not self.sub_splitters:
+            return 0
         return max(splitter.count() for splitter in self.sub_splitters)
 
     def itemAtPosition(self, row: int, col: int) -> widgets.QWidget:

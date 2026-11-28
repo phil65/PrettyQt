@@ -14,7 +14,12 @@ DISCOVERY_MODES: bidict[DiscoveryModeStr, module.DiscoveryMode] = bidict(
 )
 
 ErrorStr = Literal[
-    "none", "powered_off", "input_output", "invalid_bluetooth_adapter", "unknown"
+    "none",
+    "powered_off",
+    "input_output",
+    "invalid_bluetooth_adapter",
+    "missing_permissions",
+    "unknown",
 ]
 
 ERRORS: bidict[ErrorStr, module.Error] = bidict(
@@ -22,6 +27,7 @@ ERRORS: bidict[ErrorStr, module.Error] = bidict(
     powered_off=module.Error.PoweredOffError,
     input_output=module.Error.InputOutputError,
     invalid_bluetooth_adapter=module.Error.InvalidBluetoothAdapterError,
+    missing_permissions=module.Error.MissingPermissionsError,
     unknown=module.Error.UnknownError,
 )
 

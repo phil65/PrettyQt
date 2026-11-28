@@ -11,7 +11,7 @@ methods returning instances of ``QIcon``.
 # Standard library imports
 from typing import TYPE_CHECKING, Any
 
-from prettyqt import constants, gui
+from prettyqt import constants, core, gui
 from prettyqt.iconprovider import chariconengine
 
 
@@ -122,6 +122,7 @@ class IconicFont:
     ):
         color_str, char = COLOR_OPTIONS[state][mode]
         for opt in options:
+            draw_rect = core.QRect(rect)
             painter.save()
             color = gui.Color(opt[color_str])
             painter.setPen(color)
@@ -131,19 +132,19 @@ class IconicFont:
             # The reason why the glyph size is smaller than the icon size is to
             # account for font bearing.
 
-            draw_size = round(0.875 * rect.height() * opt["scale_factor"])
+            draw_size = round(0.875 * draw_rect.height() * opt["scale_factor"])
             # Animation setup hook
             if (animation := opt.get("animation")) is not None:
-                animation.setup(painter, rect)
+                animation.setup(painter, draw_rect)
             font = self.fonts[opt["prefix"]].get_font(draw_size)
             painter.setFont(font)
             if "offset" in opt:
-                rect.translate(
-                    round(opt["offset"][0] * rect.width()),
-                    round(opt["offset"][1] * rect.height()),
+                draw_rect.translate(
+                    round(opt["offset"][0] * draw_rect.width()),
+                    round(opt["offset"][1] * draw_rect.height()),
                 )
-            x_center = rect.width() * 0.5
-            y_center = rect.height() * 0.5
+            x_center = draw_rect.width() * 0.5
+            y_center = draw_rect.height() * 0.5
             painter.translate(x_center, y_center)
             transform = gui.Transform()
             if opt.get("vflip") is True:
@@ -157,7 +158,7 @@ class IconicFont:
             if (opacity := opt.get("opacity")) is not None:
                 painter.setOpacity(opacity)
 
-            painter.drawText(rect, int(constants.ALIGN_CENTER), opt[char])
+            painter.drawText(draw_rect, int(constants.ALIGN_CENTER), opt[char])
             painter.restore()
 
     def has_valid_font_ids(self) -> bool:

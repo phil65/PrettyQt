@@ -26,7 +26,7 @@ class Calendar(core.QCalendar):
         return get_repr(self, self.name())
 
     def __reduce__(self):
-        return type(self), (self.name(),)
+        return type(self), (self.name().lower().replace(" ", "_"),)
 
     # def __bool__(self):
     #     return self.isValid()

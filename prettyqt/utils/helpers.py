@@ -108,8 +108,8 @@ def parse_time(time_str: str) -> int:
     Arguments:
         time_str: String to parse
     """
-    parts = TIME_REGEX.match(time_str)
-    if not parts:
+    parts = TIME_REGEX.fullmatch(time_str)
+    if not parts or not any(parts.groupdict().values()):
         raise ValueError(time_str)
     dct = parts.groupdict()
     time_params = {name: int(param) for (name, param) in dct.items() if param}
@@ -178,11 +178,11 @@ def move_in_list(ls: list, indexes: list[int], target_row: int) -> list:
     """Moves items with given indexes inside list ls to target row."""
     new = [ls[i] for i in indexes]
     in_range = target_row < len(ls) and target_row != -1
-    pos = ls.index(ls[target_row]) if in_range else len(ls)
+    pos = target_row if in_range else len(ls)
     rem = 0
     for i in sorted(indexes, reverse=True):
         ls.pop(i)
-        if i <= pos:
+        if i < pos:
             rem += 1
     for item in reversed(new):
         ls.insert(pos - rem, item)
@@ -196,14 +196,14 @@ def format_name(name) -> str:
 
 
 ANSI_STYLES = {
-    1: {"font_weight": "bold"},
-    2: {"font_weight": "lighter"},
-    3: {"font_weight": "italic"},
-    4: {"text_decoration": "underline"},
-    5: {"text_decoration": "blink"},
-    6: {"text_decoration": "blink"},
+    1: {"font-weight": "bold"},
+    2: {"font-weight": "lighter"},
+    3: {"font-style": "italic"},
+    4: {"text-decoration": "underline"},
+    5: {"text-decoration": "blink"},
+    6: {"text-decoration": "blink"},
     8: {"visibility": "hidden"},
-    9: {"text_decoration": "line-through"},
+    9: {"text-decoration": "line-through"},
     30: {"color": "black"},
     31: {"color": "red"},
     32: {"color": "green"},
@@ -231,7 +231,7 @@ def ansi2html(ansi_string: str, styles: dict[int, dict[str, str]] = ANSI_STYLES)
     previous_end = 0
     in_span = False
     ansi_codes: list[int] = []
-    ansi_finder = re.compile("\033\\[([\\d;]*)([a-zA-z])")
+    ansi_finder = re.compile("\033\\[([\\d;]*)([a-zA-Z])")
     parts = []
     for match in ansi_finder.finditer(ansi_string):
         parts.append(ansi_string[previous_end : match.start()])

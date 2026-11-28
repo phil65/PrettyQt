@@ -7,8 +7,10 @@ from .abstracttransition import AbstractTransition, AbstractTransitionMixin
 from .eventtransition import EventTransition
 from .finalstate import FinalState
 from .historystate import HistoryState
+from .keyeventtransition import KeyEventTransition
+from .mouseeventtransition import MouseEventTransition
 from .signaltransition import SignalTransition
-from .state import State
+from .state import State, StateMixin
 from .statemachine import StateMachine
 from prettyqt.qt import QtStateMachine
 
@@ -22,7 +24,10 @@ __all__ = [
     "EventTransition",
     "FinalState",
     "HistoryState",
+    "KeyEventTransition",
+    "MouseEventTransition",
     "SignalTransition",
     "State",
     "StateMachine",
+    "StateMixin",
 ]

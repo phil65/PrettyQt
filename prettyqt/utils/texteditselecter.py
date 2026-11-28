@@ -36,12 +36,17 @@ class TextEditSelecter:
         doc = self._widget.document()
         if isinstance(index, int):
             return doc.findBlockByNumber(index)
-        start = doc.findBlockByNumber(index.start)
-        end = doc.findBlockByNumber(index.stop)
+        start_idx = 0 if index.start is None else index.start
+        stop_idx = doc.blockCount() - 1 if index.stop is None else index.stop
+        start = doc.findBlockByNumber(start_idx)
+        end = doc.findBlockByNumber(stop_idx)
+        if not start.isValid():
+            return []
         blocks = [start]
         while start != end and start.isValid():
             start = start.next()
-            blocks.append(start)
+            if start.isValid():
+                blocks.append(start)
         return blocks
 
     def goto_line(self, line_no: int, end_pos: Literal["top", "bottom"] | None = None):
@@ -233,7 +238,7 @@ class TextEditSelecter:
             self._widget.textCursor().insertText(replace_buffer)
             times += 1
         if times:
-            logger.info("%s instance %s replaced", times, "s" if times else "")
+            logger.info("%s instance%s replaced", times, "s" if times > 1 else "")
         else:
             logger.error("Text not found")
         self._widget.setTextCursor(temp_cursor)

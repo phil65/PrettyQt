@@ -162,11 +162,14 @@ class GeoServiceProvider(core.ObjectMixin, location.QGeoServiceProvider):
     def get_routing_features(self) -> list[RoutingFeatureStr]:
         return ROUTING_FEATURES.get_list(self.routingFeatures())
 
-    def get_geocoding_manager(self) -> location.GeoCodingManager:
-        return location.GeoCodingManager(self.geocodingManager())
+    def get_geocoding_manager(self) -> location.GeoCodingManager | None:
+        manager = self.geocodingManager()
+        return location.GeoCodingManager(manager) if manager is not None else None
 
-    def get_routing_manager(self) -> location.GeoRoutingManager:
-        return location.GeoRoutingManager(self.routingManager())
+    def get_routing_manager(self) -> location.GeoRoutingManager | None:
+        manager = self.routingManager()
+        return location.GeoRoutingManager(manager) if manager is not None else None
 
-    def get_place_manager(self) -> location.PlaceManager:
-        return location.PlaceManager(self.placeManager())
+    def get_place_manager(self) -> location.PlaceManager | None:
+        manager = self.placeManager()
+        return location.PlaceManager(manager) if manager is not None else None

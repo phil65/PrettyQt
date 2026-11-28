@@ -1,4 +1,4 @@
-"""Provides QtSvg classes and functions."""
+"""Provides QtSvgWidgets classes and functions."""
 
 from typing import TYPE_CHECKING
 

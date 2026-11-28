@@ -39,9 +39,13 @@ class WidgetDelegate(widgets.StyledItemDelegate):
         painter.drawPixmap(option.rect, pixmap)
         # super().paint(painter, option, index)
 
-    def _editor_for_index(self, index: core.ModelIndex) -> widgets.QWidget:
+    def _editor_for_index(self, index: core.ModelIndex) -> widgets.QWidget | None:
+        if not index.isValid():
+            return None
         # using index.data() does not work with PyQt6, it casts widgets to QObjects
         model = index.model()
+        if model is None:
+            return None
         editor = model.data(index, self._widget_role)
         if not self._cache_editors:
             return editor
@@ -98,7 +102,7 @@ class WidgetDelegate(widgets.StyledItemDelegate):
         option: widgets.QStyleOptionViewItem,
         index: core.ModelIndex,
     ):
-        pass
+        editor.setGeometry(option.rect)
 
 
 if __name__ == "__main__":

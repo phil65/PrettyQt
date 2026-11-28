@@ -28,12 +28,12 @@ class PredicateFilterProxyModel(core.SortFilterProxyModel):
         self._filters: list[Callable[[Any], bool]] = []
 
     def clear_filters(self):
-        self._filters = []
-        self.invalidateFilter()
+        with self.change_filter("rows"):
+            self._filters = []
 
     def add_filter(self, predicate: Callable[[Any], bool]):
-        self._filters.append(predicate)
-        self.invalidateFilter()
+        with self.change_filter("rows"):
+            self._filters.append(predicate)
 
     def filterAcceptsRow(self, row, parent):
         source = self.sourceModel()

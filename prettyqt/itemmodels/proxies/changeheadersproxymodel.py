@@ -49,6 +49,9 @@ class ChangeHeadersProxyModel(core.IdentityProxyModel):
         self._role = role
 
     def setSourceModel(self, model):
+        if model is None:
+            super().setSourceModel(model)
+            return
         header_len = (
             model.columnCount()
             if self._orientation == constants.HORIZONTAL
@@ -65,7 +68,7 @@ class ChangeHeadersProxyModel(core.IdentityProxyModel):
     def set_header(
         self,
         header: list[str] | dict[int, str],
-        orientation: constants.Orientation | constants.OrientationStr,
+        orientation: constants.Orientation | constants.OrientationStr = "horizontal",
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         with self.reset_model():
@@ -80,11 +83,14 @@ class ChangeHeadersProxyModel(core.IdentityProxyModel):
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         if orientation == self._orientation and role == self._role:  # noqa: SIM102
-            if (isinstance(self._header, dict) and section in self._header) or isinstance(
-                self._header, list
+            if (isinstance(self._header, dict) and section in self._header) or (
+                isinstance(self._header, list) and 0 <= section < len(self._header)
             ):
                 return self._header[section]
-        return self.sourceModel().headerData(section, orientation, role)
+        source = self.sourceModel()
+        if source is None:
+            return None
+        return source.headerData(section, orientation, role)
 
     header = core.Property(
         object,

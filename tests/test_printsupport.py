@@ -1,18 +1,9 @@
 """Tests for `prettyqt` package."""
 
-import sys
-
 import pytest
 
-import prettyqt
 from prettyqt import printsupport
 from prettyqt.utils import InvalidParamError
-
-
-pytestmark = pytest.mark.skipif(
-    sys.platform == "linux" and prettyqt.qt.API.startswith("pyside"),
-    reason="Segmentation fault",
-)
 
 
 def test_printer(qapp):
@@ -22,6 +13,11 @@ def test_printer(qapp):
     assert printer.get_pdf_version() == "v1_6"
     with pytest.raises(InvalidParamError):
         printer.set_pdf_version("test")
+    assert (
+        printsupport.printer.PAGE_ORDER["first_page_first"]
+        == printsupport.QPrinter.PageOrder.FirstPageFirst
+    )
+    assert "collate_copies" in printsupport.printengine.PRINT_ENGINE_PROPERTY_KEY
 
 
 def test_printdialog(qapp):

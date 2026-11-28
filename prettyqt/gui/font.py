@@ -73,12 +73,16 @@ STYLE_STRATEGY = bidict(
     prefer_device=gui.QFont.StyleStrategy.PreferDevice,
     prefer_outline=gui.QFont.StyleStrategy.PreferOutline,
     force_outline=gui.QFont.StyleStrategy.ForceOutline,
+    prefer_match=gui.QFont.StyleStrategy.PreferMatch,
+    prefer_quality=gui.QFont.StyleStrategy.PreferQuality,
     no_antialias=gui.QFont.StyleStrategy.NoAntialias,
-    so_subpixel_antialias=gui.QFont.StyleStrategy.NoSubpixelAntialias,
+    no_subpixel_antialias=gui.QFont.StyleStrategy.NoSubpixelAntialias,
     prefer_antialias=gui.QFont.StyleStrategy.PreferAntialias,
     no_font_merging=gui.QFont.StyleStrategy.NoFontMerging,
     prefer_no_shaping=gui.QFont.StyleStrategy.PreferNoShaping,
-)  # ORed with PreferMatch, PreferQuality, ForceIntegerMetrics
+    context_font_merging=gui.QFont.StyleStrategy.ContextFontMerging,
+    prefer_typo_line_metrics=gui.QFont.StyleStrategy.PreferTypoLineMetrics,
+)
 
 StyleStrategyStr = Literal[
     "prefer_default",
@@ -86,11 +90,15 @@ StyleStrategyStr = Literal[
     "prefer_device",
     "prefer_outline",
     "force_outline",
+    "prefer_match",
+    "prefer_quality",
     "no_antialias",
-    "so_subpixel_antialias",
+    "no_subpixel_antialias",
     "prefer_antialias",
     "no_font_merging",
     "prefer_no_shaping",
+    "context_font_merging",
+    "prefer_typo_line_metrics",
 ]
 
 STYLE_HINTS = bidict(
@@ -194,7 +202,7 @@ class Font(gui.QFont):
             case _:
                 font = "Monospace"
         if as_qt:
-            return gui.QFont(font)
+            return gui.QFont(font, size)
         return cls(font, size)
         # font.setStyleHint()
 

@@ -23,10 +23,8 @@ NAME_FORMAT: bidict[NameFormatStr, QtGui.QColor.NameFormat] = bidict(
 )
 
 
-def is_valid_color(text: str):
-    if text.startswith("#") and len(text) in {4, 7} and text[1:].isalnum():
-        return True
-    return text.lower() in QtGui.QColor.colorNames()
+def is_valid_color(text: str) -> bool:
+    return isinstance(text, str) and QtGui.QColor.isValidColorName(text)
 
 
 def _components(value: object) -> tuple[Any, ...]:
@@ -39,9 +37,11 @@ class Color(QtGui.QColor):
 
     def __init__(self, *args):
         match args:
-            case (QtGui.QColor(),):
-                super().__init__()
-                self.setRgba(args[0].rgba())
+            case (QtGui.QColor() as color,):
+                if not color.isValid():
+                    super().__init__()
+                else:
+                    super().__init__(color.convertTo(color.spec()))
             case (str(),):
                 if not is_valid_color(args[0]):
                     raise ValueError(args[0])
@@ -87,7 +87,10 @@ class Color(QtGui.QColor):
 
     def set_color(self, color: str | tuple):
         if isinstance(color, str):
-            self.setNamedColor(color)
+            parsed = QtGui.QColor.fromString(color)
+            if not parsed.isValid():
+                raise ValueError(color)
+            self.setRgba(parsed.rgba())
         else:
             self.setRgb(*color)
 
@@ -240,7 +243,7 @@ class Color(QtGui.QColor):
                 return f'fill="rgb({self.red()}, {self.green()}, {self.blue()})"'
             case "svg_argb":
                 fill_str = f"rgb({self.red()}, {self.green()}, {self.blue()})"
-                return f'fill="{fill_str}" fill-opacity="{self.alpha()}"'
+                return f'fill="{fill_str}" fill-opacity="{self.alphaF()}"'
             case "qcss_argb" | "qcss_rgb":
                 return self.get_css(fmt="rgba" if name_format == "qcss_argb" else "rgb")
             case _ if name_format in NAME_FORMAT:

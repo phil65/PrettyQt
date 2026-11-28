@@ -29,17 +29,15 @@ class FlowLayout(widgets.Layout):
     def addItem(self, item):
         self._items.append(item)
 
-    def itemAt(self, idx):
-        try:
+    def itemAt(self, idx: int):
+        if 0 <= idx < len(self._items):
             return self._items[idx]
-        except IndexError:
-            pass
+        return None
 
-    def takeAt(self, idx):
-        try:
+    def takeAt(self, idx: int):
+        if 0 <= idx < len(self._items):
             return self._items.pop(idx)
-        except IndexError:
-            pass
+        return None
 
     def count(self):
         return len(self._items)

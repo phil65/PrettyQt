@@ -40,24 +40,28 @@ class NumFilterWidget(widgets.Widget):
         self.op_button.setText(action.text())
         self._on_filter_change()
 
-    def get_filter_fn(self) -> Callable:
+    def get_filter_fn(self) -> Callable | None:
         val = self.lineedit.get_value()
         if not val:
             return lambda x: True
-        val = float(val)
+        try:
+            num = float(val)
+        except ValueError:
+            return None
         match self.op_button.text():
             case "=":
-                return functools.partial(operator.eq, val)
+                op = operator.eq
             case "<=":
-                return functools.partial(operator.ge, val)
+                op = operator.ge
             case "<":
-                return functools.partial(operator.gt, val)
+                op = operator.gt
             case ">=":
-                return functools.partial(operator.le, val)
+                op = operator.le
             case ">":
-                return functools.partial(operator.lt, val)
+                op = operator.lt
             case _:
                 raise ValueError
+        return functools.partial(op, num)
 
 
 if __name__ == "__main__":

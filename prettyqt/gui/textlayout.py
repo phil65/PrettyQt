@@ -11,8 +11,10 @@ class TextLayout(gui.QTextLayout):
     @contextlib.contextmanager
     def process_layout(self):
         self.beginLayout()
-        yield self
-        self.endLayout()
+        try:
+            yield self
+        finally:
+            self.endLayout()
 
     def get_text_option(self) -> gui.TextOption:
         return gui.TextOption(self.textOption())

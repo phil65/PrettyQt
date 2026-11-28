@@ -72,7 +72,7 @@ class FileTree(widgets.TreeView):
 
         with self.updates_off():
             for i in range(model.rowCount(root)):
-                _restore_expanded_on_level(model.index(i, 0))
+                _restore_expanded_on_level(model.index(i, 0, root))
 
     def set_root_path(self, path: datatypes.PathType):
         """Set tree rootpath to given path."""

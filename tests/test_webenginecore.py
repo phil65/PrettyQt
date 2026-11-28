@@ -14,6 +14,12 @@ def test_webengineurlscheme(qapp):
     with pytest.raises(InvalidParamError):
         scheme.set_syntax("test")
     assert scheme.get_syntax() == "host"
+    assert "fetch_api_allowed" in webenginecore.webengineurlscheme.FLAGS
+    assert hasattr(webenginecore, "WebEngineHistoryModel")
+    assert (
+        "network_failed"
+        in webenginecore.webenginedownloadrequest.DOWNLOAD_INTERRUPT_REASONS
+    )
 
 
 def test_webenginehttprequest(qapp):
@@ -32,6 +38,8 @@ def test_webenginehttprequest(qapp):
 
 def test_webengineprofile(qapp):
     profile = webenginecore.WebEngineProfile("MyProfile")
+    profile.set_persistent_cookie_policy("only_persistent")
+    assert profile.get_persistent_cookie_policy() == "only_persistent"
     profile.set_persistent_cookie_policy("force")
     with pytest.raises(InvalidParamError):
         profile.set_persistent_cookie_policy("test")
@@ -40,6 +48,8 @@ def test_webengineprofile(qapp):
     with pytest.raises(InvalidParamError):
         profile.set_http_cache_type("test")
     assert profile.get_http_cache_type() == "disk"
+    profile.install_url_scheme_handler("custom", lambda _job: None)
+    assert profile.urlSchemeHandler(b"custom") is not None
     profile.get_scripts()
 
 
@@ -64,6 +74,8 @@ def test_webenginescriptcollection(qapp):
     for _scr in item:
         pass
     assert item["test"] == script
+    with pytest.raises(KeyError):
+        _ = item["nonexistent"]
 
 
 def test_webenginesettings(qapp):
@@ -79,11 +91,17 @@ def test_webenginesettings(qapp):
     settings.set_font_family("sans_serif", "verdana")
     with pytest.raises(InvalidParamError):
         settings.set_font_family("test", "test")
+    with pytest.raises(InvalidParamError):
+        settings.get_font_family("test")
     assert settings.get_font_family("sans_serif") == "verdana"
     settings.set_font_size("default_fixed", 14)
     with pytest.raises(InvalidParamError):
         settings.set_font_size("test", "test")
+    with pytest.raises(InvalidParamError):
+        settings.get_font_size("test")
     assert settings.get_font_size("default_fixed") == 14  # noqa: PLR2004
+    settings["force_dark_mode"] = True
+    assert settings["force_dark_mode"] is True
 
 
 def test_webenginehistory(qapp):
@@ -97,7 +115,7 @@ def test_webenginehistory(qapp):
     history.get_items()
 
 
-def test_webenginepage(qapp):
+def test_webenginepage(qapp, tmp_path):
     page = webenginecore.WebEnginePage()
     page.set_zoom(1.5)
     page.set_url("http://www.google.de")
@@ -110,8 +128,14 @@ def test_webenginepage(qapp):
     assert page.get_lifecycle_state() == "discarded"
     page.trigger_action("select_all")
     page.set_feature_permission(
-        "http://www.google.de", "media_audio_capture", "granted_by_user"
+        "http://www.google.de", "clipboard_read_write", "granted_by_user"
     )
+    page.insert_stylesheet("percent_css", "body { width: 100%; }", immediately=False)
+    assert "percent_css" in [s.name() for s in page.get_scripts()]
+    css_file = tmp_path / "style.css"
+    css_file.write_text("p { margin: 50%; }", encoding="utf-8")
+    page.insert_stylesheet("file_css", css_file, immediately=False)
+    assert "file_css" in [s.name() for s in page.get_scripts()]
     page.get_settings()
     page.set_setting("auto_load_images", False)
     assert page.get_setting("auto_load_images") is False

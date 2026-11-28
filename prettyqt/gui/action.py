@@ -120,9 +120,11 @@ class ActionMixin(core.ObjectMixin, _ActionBase):
                 qsize = datatypes.to_size(size)
                 w, h = qsize.width(), qsize.height()
                 tooltip = f'<img src={path!r} width="{w}" height="{h}">'
-        tooltip = tooltip.replace("\n", "<br/>")
         if rich_text:
-            tooltip = f"<html>{html.escape(tooltip)}</html>"
+            tooltip = html.escape(tooltip).replace("\n", "<br/>")
+            tooltip = f"<html>{tooltip}</html>"
+        else:
+            tooltip = tooltip.replace("\n", "<br/>")
         super().setToolTip(tooltip)
 
     setToolTip = set_tooltip  # noqa: N815
@@ -142,9 +144,12 @@ class ActionMixin(core.ObjectMixin, _ActionBase):
         if shortcut is None:
             shortcut = ""
         if isinstance(shortcut, str):
-            shortcut = gui.KeySequence(
-                shortcut, gui.KeySequence.SequenceFormat.PortableText
-            )
+            if shortcut in gui.keysequence.STANDARD_KEYS:
+                shortcut = gui.KeySequence(shortcut)
+            else:
+                shortcut = gui.KeySequence(
+                    shortcut, gui.KeySequence.SequenceFormat.PortableText
+                )
         super().setShortcut(shortcut)
 
     setShortcut = set_shortcut  # noqa: N815
@@ -164,7 +169,7 @@ class ActionMixin(core.ObjectMixin, _ActionBase):
             gui.KeySequence(
                 shortcut.toString(), gui.KeySequence.SequenceFormat.PortableText
             )
-            if shortcut
+            if not shortcut.isEmpty()
             else None
         )
 

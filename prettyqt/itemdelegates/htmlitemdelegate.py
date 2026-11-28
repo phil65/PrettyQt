@@ -21,23 +21,31 @@ class BaseMarkupDelegate(widgets.StyledItemDelegate):
         index: core.ModelIndex,
     ):
         painter.save()
-        option = widgets.StyleOptionViewItem(option)
-        self.initStyleOption(option, index)
-        self.prepare_doc(option)
-        # draw everything without text
-        option.text = ""
-        option.widget.style().drawControl(
-            widgets.QStyle.ControlElement.CE_ItemViewItem, option, painter
-        )
+        try:
+            option = widgets.StyleOptionViewItem(option)
+            self.initStyleOption(option, index)
+            self.prepare_doc(option)
+            # draw everything without text
+            option.text = ""
+            style = (
+                option.widget.style()
+                if option.widget is not None
+                else widgets.Application.style()
+            )
+            style.drawControl(
+                widgets.QStyle.ControlElement.CE_ItemViewItem, option, painter
+            )
 
-        # now we find position of our label and display our TextDocument there.
-        icon_size = option.icon.actualSize(option.decorationSize)
-        margin = icon_size.width()
-        painter.translate(option.rect.left() + margin, option.rect.top())
-        clip = core.QRectF(0, 0, option.rect.width() + margin, option.rect.height())
-        self.doc.drawContents(painter, clip)
-
-        painter.restore()
+            # now we find position of our label and display our TextDocument there.
+            icon_size = option.icon.actualSize(option.decorationSize)
+            margin = icon_size.width()
+            painter.translate(option.rect.left() + margin, option.rect.top())
+            clip = core.QRectF(
+                0, 0, max(0, option.rect.width() - margin), option.rect.height()
+            )
+            self.doc.drawContents(painter, clip)
+        finally:
+            painter.restore()
 
     def sizeHint(
         self,

@@ -21,6 +21,33 @@ CompositionModeStr = Literal[
     "destination_out",
     "source_atop",
     "destination_atop",
+    "xor",
+    "plus",
+    "multiply",
+    "screen",
+    "overlay",
+    "darken",
+    "lighten",
+    "color_dodge",
+    "color_burn",
+    "hard_light",
+    "soft_light",
+    "difference",
+    "exclusion",
+    "raster_op_source_or_destination",
+    "raster_op_source_and_destination",
+    "raster_op_source_xor_destination",
+    "raster_op_not_source_and_not_destination",
+    "raster_op_not_source_or_not_destination",
+    "raster_op_not_source_xor_destination",
+    "raster_op_not_source",
+    "raster_op_not_source_and_destination",
+    "raster_op_source_and_not_destination",
+    "raster_op_not_source_or_destination",
+    "raster_op_source_or_not_destination",
+    "raster_op_clear_destination",
+    "raster_op_set_destination",
+    "raster_op_not_destination",
 ]
 
 COMPOSITION_MODE: bidict[CompositionModeStr, gui.QPainter.CompositionMode] = bidict(
@@ -35,20 +62,51 @@ COMPOSITION_MODE: bidict[CompositionModeStr, gui.QPainter.CompositionMode] = bid
     destination_out=gui.QPainter.CompositionMode.CompositionMode_DestinationOut,
     source_atop=gui.QPainter.CompositionMode.CompositionMode_SourceAtop,
     destination_atop=gui.QPainter.CompositionMode.CompositionMode_DestinationAtop,
+    xor=gui.QPainter.CompositionMode.CompositionMode_Xor,
+    plus=gui.QPainter.CompositionMode.CompositionMode_Plus,
+    multiply=gui.QPainter.CompositionMode.CompositionMode_Multiply,
+    screen=gui.QPainter.CompositionMode.CompositionMode_Screen,
+    overlay=gui.QPainter.CompositionMode.CompositionMode_Overlay,
+    darken=gui.QPainter.CompositionMode.CompositionMode_Darken,
+    lighten=gui.QPainter.CompositionMode.CompositionMode_Lighten,
+    color_dodge=gui.QPainter.CompositionMode.CompositionMode_ColorDodge,
+    color_burn=gui.QPainter.CompositionMode.CompositionMode_ColorBurn,
+    hard_light=gui.QPainter.CompositionMode.CompositionMode_HardLight,
+    soft_light=gui.QPainter.CompositionMode.CompositionMode_SoftLight,
+    difference=gui.QPainter.CompositionMode.CompositionMode_Difference,
+    exclusion=gui.QPainter.CompositionMode.CompositionMode_Exclusion,
+    raster_op_source_or_destination=gui.QPainter.CompositionMode.RasterOp_SourceOrDestination,
+    raster_op_source_and_destination=gui.QPainter.CompositionMode.RasterOp_SourceAndDestination,
+    raster_op_source_xor_destination=gui.QPainter.CompositionMode.RasterOp_SourceXorDestination,
+    raster_op_not_source_and_not_destination=gui.QPainter.CompositionMode.RasterOp_NotSourceAndNotDestination,
+    raster_op_not_source_or_not_destination=gui.QPainter.CompositionMode.RasterOp_NotSourceOrNotDestination,
+    raster_op_not_source_xor_destination=gui.QPainter.CompositionMode.RasterOp_NotSourceXorDestination,
+    raster_op_not_source=gui.QPainter.CompositionMode.RasterOp_NotSource,
+    raster_op_not_source_and_destination=gui.QPainter.CompositionMode.RasterOp_NotSourceAndDestination,
+    raster_op_source_and_not_destination=gui.QPainter.CompositionMode.RasterOp_SourceAndNotDestination,
+    raster_op_not_source_or_destination=gui.QPainter.CompositionMode.RasterOp_NotSourceOrDestination,
+    raster_op_source_or_not_destination=gui.QPainter.CompositionMode.RasterOp_SourceOrNotDestination,
+    raster_op_clear_destination=gui.QPainter.CompositionMode.RasterOp_ClearDestination,
+    raster_op_set_destination=gui.QPainter.CompositionMode.RasterOp_SetDestination,
+    raster_op_not_destination=gui.QPainter.CompositionMode.RasterOp_NotDestination,
 )
 
 RenderHintStr = Literal[
     "antialiasing",
     "text_antialiasing",
     "smooth_pixmap_transform",
+    "vertical_subpixel_positioning",
     "lossless_image_rendering",
+    "non_cosmetic_brush_patterns",
 ]
 
 RENDER_HINTS: bidict[RenderHintStr, gui.QPainter.RenderHint] = bidict(
     antialiasing=gui.QPainter.RenderHint.Antialiasing,
     text_antialiasing=gui.QPainter.RenderHint.TextAntialiasing,
     smooth_pixmap_transform=gui.QPainter.RenderHint.SmoothPixmapTransform,
+    vertical_subpixel_positioning=gui.QPainter.RenderHint.VerticalSubpixelPositioning,
     lossless_image_rendering=gui.QPainter.RenderHint.LosslessImageRendering,
+    non_cosmetic_brush_patterns=gui.QPainter.RenderHint.NonCosmeticBrushPatterns,
 )
 
 
@@ -70,32 +128,42 @@ class PainterMixin(_PainterBase):
     @contextlib.contextmanager
     def paint_on(self, obj) -> Generator[Self]:
         self.begin(obj)
-        yield self
-        self.end()
+        try:
+            yield self
+        finally:
+            self.end()
 
     @contextlib.contextmanager
     def backup_state(self) -> Generator[Self]:
         self.save()
-        yield self
-        self.restore()
+        try:
+            yield self
+        finally:
+            self.restore()
 
     @contextlib.contextmanager
     def native_mode(self) -> Generator[Self]:
         self.beginNativePainting()
-        yield self
-        self.endNativePainting()
+        try:
+            yield self
+        finally:
+            self.endNativePainting()
 
     @contextlib.contextmanager
     def edit_pen(self) -> Generator[gui.Pen]:
         pen = gui.Pen(self.pen())
-        yield pen
-        self.setPen(pen)
+        try:
+            yield pen
+        finally:
+            self.setPen(pen)
 
     @contextlib.contextmanager
     def edit_font(self) -> Generator[gui.Font]:
         font = gui.Font(self.font())
-        yield font
-        self.setFont(font)
+        try:
+            yield font
+        finally:
+            self.setFont(font)
 
     def draw_text(
         self,
@@ -127,8 +195,12 @@ class PainterMixin(_PainterBase):
         target: core.QPoint | core.QPointF | core.QRect | core.QRectF,
         frame_buffer: gui.QImage,
     ):
+        mode = self.compositionMode()
         self.set_composition_mode("source_atop")
-        self.drawImage(target, frame_buffer)
+        try:
+            self.drawImage(target, frame_buffer)
+        finally:
+            self.setCompositionMode(mode)
 
     def draw_polygon(
         self,
@@ -209,7 +281,8 @@ class PainterMixin(_PainterBase):
         pen.setWidthF(width)
         if brush is not None:
             pen.setBrush(brush)
-        pen.set_color(color)
+        else:
+            pen.set_color(color)
         self.setPen(pen)
         return pen
 
@@ -270,27 +343,35 @@ class PainterMixin(_PainterBase):
         self.setClipPath(path, constants.CLIP_OPERATION.get_enum_value(operation))
 
     def get_text_rect(self, text: str) -> core.Rect:
-        return self.drawText(core.Rect(), constants.TextFlag.TextDontPrint, text)
+        return core.Rect(
+            self.drawText(core.Rect(), constants.TextFlag.TextDontPrint, text)
+        )
 
     @contextlib.contextmanager
     def clip_path(
         self, operation: constants.ClipOperationStr = "replace"
     ) -> Generator[gui.PainterPath]:
         path = gui.PainterPath()
-        yield path
-        self.set_clip_path(path, operation)
+        try:
+            yield path
+        finally:
+            self.set_clip_path(path, operation)
 
     @contextlib.contextmanager
     def apply_transform(self, combine: bool = True) -> Generator[gui.Transform]:
         transform = gui.Transform()
-        yield transform
-        self.setTransform(transform, combine)
+        try:
+            yield transform
+        finally:
+            self.setTransform(transform, combine)
 
     @contextlib.contextmanager
     def offset_by(self, x: int = 0, y: int = 0) -> Generator[Self]:
         self.translate(x, y)
-        yield self
-        self.translate(-x, -y)
+        try:
+            yield self
+        finally:
+            self.translate(-x, -y)
 
 
 class Painter(PainterMixin, gui.QPainter):

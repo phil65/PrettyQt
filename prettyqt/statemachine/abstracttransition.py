@@ -5,13 +5,13 @@ from prettyqt.qt import QtStateMachine
 from prettyqt.utils import bidict
 
 
-TransitionTypeStr = Literal["exclusive", "parallel"]
+TransitionTypeStr = Literal["external", "internal"]
 
 TRANSITION_TYPE: bidict[
     TransitionTypeStr, QtStateMachine.QAbstractTransition.TransitionType
 ] = bidict(
-    exclusive=QtStateMachine.QAbstractTransition.TransitionType.ExternalTransition,
-    parallel=QtStateMachine.QAbstractTransition.TransitionType.InternalTransition,
+    external=QtStateMachine.QAbstractTransition.TransitionType.ExternalTransition,
+    internal=QtStateMachine.QAbstractTransition.TransitionType.InternalTransition,
 )
 
 
@@ -22,6 +22,11 @@ else:
 
 
 class AbstractTransitionMixin(core.ObjectMixin, _AbstractTransitionBase):
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"transitionType": TRANSITION_TYPE}
+        return maps
+
     def set_transition_type(
         self, typ: TransitionTypeStr | QtStateMachine.QAbstractTransition.TransitionType
     ):

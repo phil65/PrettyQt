@@ -54,9 +54,7 @@ class TwoListsSelectionWidget(widgets.Widget):
             not bool(self.right_list.selectedItems())
             or self.right_list.currentRow() == (self.right_list.count() - 1)
         )
-        self.to_right_btn.setDisabled(
-            not bool(self.left_list.selectedItems()) or self.right_list.currentRow() == 0
-        )
+        self.to_right_btn.setDisabled(not bool(self.left_list.selectedItems()))
         self.to_left_btn.setDisabled(not bool(self.right_list.selectedItems()))
 
     @core.Slot()

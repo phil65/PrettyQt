@@ -38,19 +38,32 @@ class PainterPath(QtGui.QPainterPath):
     def __iadd__(self, other):
         if not isinstance(
             other,
-            core.QPoint | core.QRect | QtGui.QPainterPath | QtGui.QRegion,
+            core.QRect
+            | core.QRectF
+            | QtGui.QPolygonF
+            | QtGui.QPainterPath
+            | QtGui.QRegion,
         ):
             raise TypeError(other)
         self.add(other)
         return self
 
-    def add(self, other: core.QPoint | core.QRect | QtGui.QPainterPath | QtGui.QRegion):
+    def add(
+        self,
+        other: core.QRect
+        | core.QRectF
+        | QtGui.QPolygonF
+        | QtGui.QPainterPath
+        | QtGui.QRegion,
+    ):
         match other:
             case QtGui.QPolygonF():
                 self.addPolygon(other)
             case QtGui.QPainterPath():
                 self.addPath(other)
             case core.QRect():
+                self.addRect(core.QRectF(other))
+            case core.QRectF():
                 self.addRect(other)
             case QtGui.QRegion():
                 self.addRegion(other)
@@ -64,13 +77,13 @@ class PainterPath(QtGui.QPainterPath):
     def add_rect(self, rect: datatypes.RectType | datatypes.RectFType):
         self.addRect(datatypes.to_rectf(rect))
 
-    def set_fill_rule(self, rule: constants.FillRuleStr):
+    def set_fill_rule(self, rule: constants.FillRuleStr | constants.FillRule):
         """Set fill rule.
 
         Args:
             rule: fill rule to use
         """
-        self.setFillRule(constants.FILL_RULE[rule])
+        self.setFillRule(constants.FILL_RULE.get_enum_value(rule))
 
     def get_fill_rule(self) -> constants.FillRuleStr:
         """Return current fill rule.

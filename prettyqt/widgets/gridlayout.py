@@ -53,8 +53,11 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
                     raise IndexError(index)
                 return i if (i := item.widget()) is not None else item.layout()
             case slice() as rowslice:
-                count = rowcount if rowslice.stop is None else rowslice.stop
-                items = [self.itemAt(i) for i in range(count)[rowslice]]
+                items = [
+                    item
+                    for i in range(*rowslice.indices(self.count()))
+                    if (item := self.itemAt(i)) is not None
+                ]
                 items = [
                     w if (w := i.widget()) is not None else i.layout() for i in items
                 ]
@@ -96,8 +99,9 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
         other: (tuple | list | widgets.QWidget | widgets.QLayout | widgets.QLayoutItem),
     ):
         if isinstance(other, tuple | list):
-            for i, _control in enumerate(other):
-                self[self.rowCount(), i] = other  # type: ignore
+            row = self.rowCount()
+            for i, control in enumerate(other):
+                self[row, i] = control
         else:
             self[self.rowCount(), 0 : self.columnCount() - 1] = other
         return self

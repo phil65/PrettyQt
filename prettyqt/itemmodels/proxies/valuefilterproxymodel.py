@@ -33,8 +33,8 @@ class ValueFilterProxyModel(core.SortFilterProxyModel):
 
     def set_filter_value(self, value):
         """Set the filter value."""
-        self._filter_value = value
-        self.invalidateRowsFilter()
+        with self.change_filter("rows"):
+            self._filter_value = value
 
     def get_filter_value(self):
         """Get the filter value."""

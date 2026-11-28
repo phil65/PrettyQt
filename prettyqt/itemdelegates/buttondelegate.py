@@ -49,7 +49,12 @@ class ButtonDelegate(widgets.StyledItemDelegate):
         btn_callback = index.data(self.method_role)
         if btn_callback is None:
             return None
-        return widgets.PushButton(parent=parent, text=index.data(), clicked=btn_callback)
+        text = index.data()
+        return widgets.PushButton(
+            parent=parent,
+            text="" if text is None else str(text),
+            clicked=btn_callback,
+        )
 
     def setEditorData(self, editor: widgets.QWidget, index: core.ModelIndex):
         pass
@@ -68,7 +73,9 @@ class ButtonDelegate(widgets.StyledItemDelegate):
     def cell_entered(self, index: core.ModelIndex):
         # index = self.parent().indexFromItem(item)
         parent: widgets.QAbstractItemView = self.parent()  # type: ignore
-        if parent.isPersistentEditorOpen(index):
+        if self.current_edited_index.isValid() and parent.isPersistentEditorOpen(
+            self.current_edited_index
+        ):
             parent.closePersistentEditor(self.current_edited_index)
         if parent.itemDelegateForIndex(index) is self:
             # if index.data(self.method_role) is not None:
@@ -86,7 +93,8 @@ class ButtonDelegate(widgets.StyledItemDelegate):
             super().paint(painter, option, index)
             return
         self.btn.setGeometry(option.rect)
-        self.btn.setText(index.data())
+        text = index.data()
+        self.btn.setText("" if text is None else str(text))
         if option.state & widgets.Style.StateFlag.State_MouseOver:
             painter.fillRect(option.rect, option.palette.highlight())
         if option.state & widgets.Style.StateFlag.State_Selected:

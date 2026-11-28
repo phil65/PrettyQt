@@ -32,5 +32,7 @@ class LockFile(QtCore.QLockFile):
     @contextlib.contextmanager
     def lock_file(self):
         self.lock()
-        yield self
-        self.unlock()
+        try:
+            yield self
+        finally:
+            self.unlock()

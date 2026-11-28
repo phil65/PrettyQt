@@ -623,13 +623,15 @@ MEASUREMENT_SYSTEM: bidict[MeasurementSystemStr, QtCore.QLocale.MeasurementSyste
     )
 )
 
-DataSizeFormatStr = Literal["iec", "traditional", "si"]
+DataSizeFormatStr = Literal["iec", "traditional", "si", "base_1000"]
 
 DATA_SIZE_FORMAT: bidict[DataSizeFormatStr, QtCore.QLocale.DataSizeFormat] = bidict(
     iec=QtCore.QLocale.DataSizeFormat.DataSizeIecFormat,
     traditional=QtCore.QLocale.DataSizeFormat.DataSizeTraditionalFormat,
     si=QtCore.QLocale.DataSizeFormat.DataSizeSIFormat,
 )
+if hasattr(QtCore.QLocale.DataSizeFormat, "DataSizeBase1000"):
+    DATA_SIZE_FORMAT["base_1000"] = QtCore.QLocale.DataSizeFormat.DataSizeBase1000
 
 NumberOptionStr = Literal[
     "default",

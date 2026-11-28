@@ -56,13 +56,14 @@ SELECTION_BEHAVIOR: bidict[
     items=widgets.QAbstractItemView.SelectionBehavior.SelectItems,
 )
 
-SelectionModeStr = Literal["single", "extended", "multi", "none"]
+SelectionModeStr = Literal["single", "extended", "multi", "contiguous", "none"]
 
 SELECTION_MODE: bidict[SelectionModeStr, widgets.QAbstractItemView.SelectionMode] = (
     bidict(
         single=widgets.QAbstractItemView.SelectionMode.SingleSelection,
         extended=widgets.QAbstractItemView.SelectionMode.ExtendedSelection,
         multi=widgets.QAbstractItemView.SelectionMode.MultiSelection,
+        contiguous=widgets.QAbstractItemView.SelectionMode.ContiguousSelection,
         none=widgets.QAbstractItemView.SelectionMode.NoSelection,
     )
 )

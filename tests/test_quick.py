@@ -12,7 +12,9 @@ def test_quickitem(qapp):
     item = quick.QuickItem()
     item.get_children_rect()
     item.get_cursor()
-    item.get_flags()
+    assert item.get_flags() == []
+    item.setFlag(quick.QuickItem.Flag.ItemHasContents, True)
+    assert "has_contents" in item.get_flags()
     item.set_transform_origin("bottom")
     with pytest.raises(InvalidParamError):
         item.set_transform_origin("test")
@@ -38,10 +40,15 @@ def test_quickview(qapp):
 
 
 def test_quickwindow(qapp):
+    assert hasattr(quick, "QuickWindowMixin")
     window = quick.QuickWindow()
     window.create_texture_from_image(gui.Image())
+    with pytest.raises(InvalidParamError):
+        window.create_texture_from_image(gui.Image(), invalid_option=True)
     window.grab_window()
     window.get_color()
+    window.set_text_render_type("curve_text")
+    assert window.get_text_render_type() == "curve_text"
     window.set_text_render_type("native_text")
     with pytest.raises(InvalidParamError):
         window.set_text_render_type("test")
@@ -60,3 +67,9 @@ def test_quickwindow(qapp):
     # Qt now owns the job, but PySide6 still frees it with the Python wrapper:
     # release the window first (Python 3.14 clears locals in a different order).
     del window
+
+
+def test_sgnode():
+    node = quick.SGNode()
+    assert node.get_type() == "basic"
+    assert node.get_flags() == ["owned_by_parent"]

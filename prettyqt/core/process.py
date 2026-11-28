@@ -129,8 +129,10 @@ class Process(core.IODeviceMixin, core.QProcess):
     @contextlib.contextmanager
     def edit_process_environment(self):
         env = self.get_process_environment()
-        yield env
-        self.setProcessEnvironment(env)
+        try:
+            yield env
+        finally:
+            self.setProcessEnvironment(env)
 
 
 if __name__ == "__main__":

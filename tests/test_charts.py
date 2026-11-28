@@ -75,6 +75,19 @@ def test_chart(qtbot):
 
 def test_chartview(qtbot, qttester):
     widget = charts.ChartView()
+    assert widget.last_mouse_pos is None
+    widget.set_rubber_band("click_through")
+    assert widget.get_rubber_band() == "click_through"
+    assert widget.get_rubber_bands() == ["click_through"]
+    combined = (
+        charts.QChartView.RubberBand.VerticalRubberBand
+        | charts.QChartView.RubberBand.ClickThroughRubberBand
+    )
+    widget.setRubberBand(combined)
+    assert widget.get_rubber_band() == "vertical"
+    assert widget.get_rubber_bands() == ["vertical", "click_through"]
+    widget.set_rubber_band("rectangle")
+    assert widget.get_rubber_band() == "rectangle"
     widget.show()
     widget.get_image()
     qtbot.add_widget(widget)
@@ -96,10 +109,11 @@ def test_legend(qtbot):
     with pytest.raises(InvalidParamError):
         legend.set_alignment("test")
     assert legend.get_alignment() == "bottom"
-    legend.set_marker_shape("circle")
+    for shape in ("circle", "rotated_rectangle", "triangle", "star", "pentagon"):
+        legend.set_marker_shape(shape)
+        assert legend.get_marker_shape() == shape
     with pytest.raises(InvalidParamError):
         legend.set_marker_shape("test")
-    assert legend.get_marker_shape() == "circle"
     legend.get_border_color()
     legend.get_color()
     legend.get_label_color()
@@ -180,3 +194,16 @@ def test_chart_nice_numbers_with_category_axis(qapp):
     chart.apply_nice_numbers()
     chart.update_boundaries()
     chart.zoom_by_factor(1.1)
+
+
+def test_chart_zoom_without_update_boundaries(qapp):
+    chart = charts.Chart()
+    axis_x = charts.ValueAxis()
+    axis_x.setRange(0.0, 10.0)
+    axis_y = charts.ValueAxis()
+    axis_y.setRange(0.0, 20.0)
+    chart.addAxis(axis_x, constants.AlignmentFlag.AlignBottom)
+    chart.addAxis(axis_y, constants.AlignmentFlag.AlignLeft)
+    chart.zoom_by_factor(1.1)
+    assert axis_x.max() > 0.0
+    assert axis_y.max() > 0.0

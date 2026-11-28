@@ -200,6 +200,8 @@ class Sliced:
             datetime_format=datetime_format or "%m/%d/%Y, %H:%M:%S",
             date_format=date_format or "%m/%d/%Y",
             time_format=time_format or "%H:%M:%S",
+            indexer=self._indexer,
+            parent=self._widget,
             source_model=self._widget.model(),
         )
         self._widget.set_model(proxy)

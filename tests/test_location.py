@@ -65,7 +65,13 @@ def test_georouterequest():
     request.set_route_optimization("most_economic")
     with pytest.raises(InvalidParamError):
         request.set_route_optimization("test")
-    assert request.get_route_optimization() == "most_economic"
+    assert request.get_route_optimization() == ["most_economic"]
+    combined = (
+        QtLocation.QGeoRouteRequest.RouteOptimization.ShortestRoute
+        | QtLocation.QGeoRouteRequest.RouteOptimization.MostScenicRoute
+    )
+    request.setRouteOptimization(combined)
+    assert set(request.get_route_optimization()) == {"shortest", "most_scenic"}
     request.set_travel_modes("car")
     assert request.get_travel_modes() == ["car"]
     request.get_feature_types()
@@ -92,6 +98,11 @@ def test_geoserviceprovider():
     provider.get_places_features()
     assert provider.get_routing_error() == "none"
     provider.get_routing_features()
+
+    missing = location.GeoServiceProvider("nonexistent_provider_xyz")
+    assert missing.get_place_manager() is None
+    assert missing.get_geocoding_manager() is None
+    assert missing.get_routing_manager() is None
 
 
 def test_placeattribute():
@@ -264,14 +275,47 @@ def test_place():
 
 def test_placesearchrequest():
     request = location.PlaceSearchRequest()
-    # if prettyqt.qt.API == "pyqt5":
-    #     request.get_visibility_scope()
+    assert request.get_visibility_scope() == []
+    combined = (
+        QtLocation.QLocation.Visibility.DeviceVisibility
+        | QtLocation.QLocation.Visibility.PublicVisibility
+    )
+    request.setVisibilityScope(combined)
+    assert set(request.get_visibility_scope()) == {"device", "public"}
     request.get_categories()
     request.get_search_area()
     request.set_relevance_hint("distance")
     with pytest.raises(InvalidParamError):
         request.set_relevance_hint("test")
     assert request.get_relevance_hint() == "distance"
+
+
+def test_placemanager_helpers():
+    class _DummyManager(core.Object):
+        finished = core.Signal(object)
+
+        def __init__(self):
+            super().__init__()
+            self.last_request = None
+
+        def search(self, req):
+            self.last_request = req
+            return req
+
+    dummy = _DummyManager()
+    manager = location.PlaceManager(dummy)  # type: ignore[arg-type]
+    cat = location.PlaceCategory()
+    cat.setCategoryId("cat-1")
+    req = manager.search_place("Coffee", coord=(51.0, 7.0), categories=[cat])
+    assert len(req.categories()) == 1
+    assert req.categories()[0].categoryId() == "cat-1"
+
+    emitted = []
+    manager.on_finished.connect(emitted.append)
+    manager._on_finished(QtLocation.QPlaceDetailsReply())
+    assert emitted == []
+    manager._on_finished(QtLocation.QPlaceSearchReply())
+    assert len(emitted) == 1
 
 
 def test_placecontentrequest():

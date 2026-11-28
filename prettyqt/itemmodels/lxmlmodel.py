@@ -24,7 +24,7 @@ class LxmlModel(itemmodels.BaseXmlModel):
     ):
         match obj:
             case bytes():
-                xml_str = etree.XML(obj.decode())
+                xml_str = etree.XML(obj)
                 tree = etree.ElementTree(xml_str)
             case str():
                 tree = etree.ElementTree(etree.XML(obj))
@@ -57,6 +57,7 @@ class LxmlModel(itemmodels.BaseXmlModel):
         while (parent_elem := child_elem.getparent()) is not None:
             key.append(parent_elem.index(child_elem))
             child_elem = parent_elem
+        key.reverse()
         return key
 
     def get_indexes_from_xpath(self, xpath: str):
@@ -121,6 +122,7 @@ class LazyLxmlModel(itemmodels.BaseXmlModel):
         while (parent_elem := child_elem.getparent()) is not None:
             key.append(parent_elem.index(child_elem))
             child_elem = parent_elem
+        key.reverse()
         return key
 
 

@@ -7,14 +7,15 @@ from prettyqt.utils import bidict
 
 logger = logging.getLogger()
 
-STATE = bidict(
+StateStr = Literal["ready", "speaking", "paused", "error", "synthesizing"]
+
+STATE: bidict[StateStr, texttospeech.QTextToSpeech.State] = bidict(
     ready=texttospeech.QTextToSpeech.State.Ready,
     speaking=texttospeech.QTextToSpeech.State.Speaking,
     paused=texttospeech.QTextToSpeech.State.Paused,
     error=texttospeech.QTextToSpeech.State.Error,
+    synthesizing=texttospeech.QTextToSpeech.State.Synthesizing,
 )
-
-StateStr = Literal["ready", "speaking", "paused", "error"]
 
 
 class TextToSpeech(core.ObjectMixin, texttospeech.QTextToSpeech):

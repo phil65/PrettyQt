@@ -26,7 +26,8 @@ class SectionAutoSpanEventFilter(eventfilters.BaseEventFilter):
             parent.h_scrollbar.valueChanged.connect(self._update_spans)
         else:
             parent.v_scrollbar.valueChanged.connect(self._update_spans)
-        parent.model().headerDataChanged.connect(self._on_force_update)
+        if (model := parent.model()) is not None:
+            model.headerDataChanged.connect(self._on_force_update)
         parent.model_changed.connect(self._on_force_update)
         parent.installEventFilter(self)
         self._update_spans()
@@ -45,6 +46,8 @@ class SectionAutoSpanEventFilter(eventfilters.BaseEventFilter):
         return super().eventFilter(obj, event)
 
     def _update_spans(self, force: bool = False):
+        if self._widget.model() is None:
+            return
         cols = self._widget.get_visible_section_span("horizontal")
         rows = self._widget.get_visible_section_span("vertical")
         start = (rows[0], cols[0])

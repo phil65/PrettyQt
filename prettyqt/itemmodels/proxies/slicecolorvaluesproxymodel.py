@@ -140,7 +140,7 @@ class SliceColorValuesProxyModel(itemmodels.SliceIdentityProxyModel):
                 if new_max != self._max:
                     self._max = new_max
                     self.update_all()
-                value = data / self._max
+                value = 0.0 if self._max == 0 else data / self._max
                 return self.get_color_for_value(abs(value))
             case self.ColorMode.Visible:
                 widget = cast("widgets.AbstractItemViewMixin", self.parent())
@@ -163,7 +163,8 @@ class SliceColorValuesProxyModel(itemmodels.SliceIdentityProxyModel):
                     max_ = self._max
                 data = abs(index.data(self._role))
                 max_ = abs(max(abs(max_), data))
-                return self.get_color_for_value(data / max_)
+                ratio = 0.0 if max_ == 0 else data / max_
+                return self.get_color_for_value(ratio)
             case _:
                 raise ValueError(self._mode)
 

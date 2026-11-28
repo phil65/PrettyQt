@@ -19,8 +19,6 @@ class MonotonicListValidator(gui.Validator):
         return isinstance(other, MonotonicListValidator) and other._kind == self._kind
 
     def validate(self, string: str, pos: int) -> tuple[gui.Validator.State, str, int]:
-        if self._kind != "increasing":
-            string = string[::-1]
         for i, c in enumerate(string, start=1):
             if c not in "+-., 0123456789":
                 return self.State.Invalid, string, i
@@ -33,7 +31,9 @@ class MonotonicListValidator(gui.Validator):
                 value = float(valuestr)
             except ValueError:
                 return self.State.Intermediate, string, pos
-            if prev is not None and value <= prev:
+            if prev is not None and (
+                value <= prev if self._kind == "increasing" else value >= prev
+            ):
                 return self.State.Intermediate, string, pos
             prev = value
         return self.State.Acceptable, string, pos

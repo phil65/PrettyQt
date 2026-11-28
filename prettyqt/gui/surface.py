@@ -18,9 +18,12 @@ SURFACE_TYPES = bidict(
     open_vg=QtGui.QSurface.SurfaceType.OpenVGSurface,
     vulkan=QtGui.QSurface.SurfaceType.VulkanSurface,
     metal=QtGui.QSurface.SurfaceType.MetalSurface,
+    direct3d=QtGui.QSurface.SurfaceType.Direct3DSurface,
 )
 
-SurfaceTypeStr = Literal["raster", "open_gl", "raster_gl", "open_vg", "vulkan", "metal"]
+SurfaceTypeStr = Literal[
+    "raster", "open_gl", "raster_gl", "open_vg", "vulkan", "metal", "direct3d"
+]
 
 
 if TYPE_CHECKING:

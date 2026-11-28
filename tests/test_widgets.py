@@ -2,8 +2,7 @@
 
 import datetime as dt
 import pathlib
-
-# import pickle
+import pickle
 import sys
 
 # import logging
@@ -1745,3 +1744,267 @@ def test_messagebox_message(qtbot, monkeypatch):
     assert text == "text"
     if sys.platform != "darwin":  # macOS message boxes have no window title
         assert title == "title"
+
+
+def test_styleoption_complex_subclasses():
+    gb = widgets.StyleOptionGroupBox()
+    gb.text = "group"
+    assert gb.text == "group"
+
+    sb = widgets.StyleOptionSpinBox()
+    sb.frame = True
+    assert sb.frame is True
+
+    tb = widgets.StyleOptionTitleBar()
+    tb.text = "title"
+    assert tb.text == "title"
+
+    btn = widgets.StyleOptionToolButton()
+    btn.text = "tool"
+    assert btn.text == "tool"
+
+
+def test_messagebox_show_exception_and_options(qtbot, monkeypatch):
+    captured = []
+
+    def show_blocking(self):
+        captured.append((self.windowTitle(), self.text(), self.detailedText()))
+        return "ok"
+
+    monkeypatch.setattr(widgets.MessageBox, "show_blocking", show_blocking)
+    exc = ValueError("something failed")
+    widgets.MessageBox.show_exception(exc)
+    title, text, details = captured[0]
+    assert text == "something failed"
+    assert "ValueError" in details
+    if sys.platform != "darwin":
+        assert title == "ValueError"
+
+    box = widgets.MessageBox()
+    qtbot.addWidget(box)
+    box.set_option("dont_use_native_dialog", True)
+    assert box.test_option("dont_use_native_dialog") is True
+    box.set_option("dont_use_native_dialog", False)
+    assert box.test_option("dont_use_native_dialog") is False
+
+
+def test_graphicsgridlayout_fixes(qapp):
+    layout = widgets.GraphicsGridLayout()
+    item1 = widgets.GraphicsWidget(object_name="first")
+    item2 = widgets.GraphicsWidget(object_name="second")
+    layout[0, 0] = item1
+    layout[0, 1] = item2
+    assert len(layout[:2]) == 2  # noqa: PLR2004
+    assert len(layout[:0]) == 0
+    assert layout["first"] is item1
+    assert layout["missing"] is None
+    state = layout.__getstate__()
+    restored = widgets.GraphicsGridLayout()
+    restored.__setstate__(state)
+    assert restored.count() == 2  # noqa: PLR2004
+
+
+def test_formlayout_fixes(qtbot):
+    layout = widgets.FormLayout(field_growth_policy="expanding_fields_grow")
+    assert layout.get_field_growth_policy() == "expanding_fields_grow"
+    layout.set_label_alignment("right")
+    assert layout.get_label_alignment() == "right"
+
+
+def test_progressbar_text_direction(qtbot):
+    bar = widgets.ProgressBar()
+    qtbot.addWidget(bar)
+    assert bar.get_text_direction() == "top_to_bottom"
+    bar.set_text_direction("bottom_to_top")
+    assert bar.get_text_direction() == "bottom_to_top"
+
+
+def test_gridlayout_add_and_slice(qtbot):
+    w = widgets.Widget()
+    qtbot.addWidget(w)
+    layout = widgets.GridLayout(w)
+    btn1 = widgets.PushButton("1")
+    btn2 = widgets.PushButton("2")
+    row = layout.rowCount()
+    layout += [btn1, btn2]
+    assert layout[row, 0] is btn1
+    assert layout[row, 1] is btn2
+    assert len(layout[:0]) == 0
+    assert len(layout[:2]) == 2  # noqa: PLR2004
+
+
+def test_headerview_fixes(qtbot):
+    model = core.StringListModel(["a", "b", "c"])
+    header = widgets.HeaderView("vertical")
+    qtbot.addWidget(header)
+    header.setModel(model)
+    assert header[-1]._range == range(2, 3)
+    assert widgets.headerview.HeaderWrapper(slice(0, 0), header)._range == range(0)
+    header.resize(100, 300)
+    header.show()
+    assert header.is_in_visual_range(2) is True
+
+
+def test_application_effect_enabled(qapp, monkeypatch):
+    calls = []
+
+    def fake_set(effect, enabled=True):
+        calls.append((effect, enabled))
+
+    monkeypatch.setattr(qapp, "setEffectEnabled", fake_set)
+    qapp.set_effect_enabled("animate_menu", False)
+    qapp.set_effect_enabled("animate_menu", True)
+    assert calls == [
+        (constants.UIEffect.UI_AnimateMenu, False),
+        (constants.UIEffect.UI_AnimateMenu, True),
+    ]
+    assert isinstance(qapp.is_effect_enabled("animate_menu"), bool)
+    assert isinstance(qapp.is_effect_enabled(constants.UIEffect.UI_AnimateMenu), bool)
+
+
+def test_tableview_fixes(qtbot):
+    table = widgets.TableView(
+        object_name="custom_name",
+        alternating_row_colors=False,
+        word_wrap=True,
+    )
+    qtbot.addWidget(table)
+    assert table.objectName() == "custom_name"
+    assert table.alternatingRowColors() is False
+    assert table.wordWrap() is True
+    # Must not crash when no model is set
+    table.resizeColumnsToContents()
+    model = gui.StandardItemModel(2, 5)
+    table.setModel(model)
+    table.resizeColumnsToContents(max_columns=2)
+
+
+def test_plaintextedit_current_line_color(qtbot):
+    edit = widgets.PlainTextEdit()
+    qtbot.addWidget(edit)
+    assert edit.get_current_line_color() is None
+    edit.set_current_line_color("red")
+    assert edit.get_current_line_color() is not None
+    edit.set_current_line_color(None)
+    assert edit.get_current_line_color() is None
+
+
+def test_abstractspinbox_set_validator_kwargs(qtbot):
+    spin = widgets.SpinBox()
+    qtbot.addWidget(spin)
+    spin.set_validator("integer")
+    val = spin.set_validator("not_zero", append=True)
+    assert spin.lineEdit().validator() is val
+
+
+def test_toolbar_show_tooltips_false(qtbot):
+    tb = widgets.ToolBar()
+    qtbot.addWidget(tb)
+    tb.add_action(text="a", tool_tip="tip")
+    tb.show_tooltips(True)
+    assert len(tb._tooltip_labels) == 1
+    tb.show_tooltips(False)
+    assert len(tb._tooltip_labels) == 0
+
+
+def test_graphicsrectitem_pickle(qapp):
+    item = widgets.GraphicsRectItem(1, 2, 30, 40)
+    data = pickle.dumps(item)
+    restored = pickle.loads(data)
+    assert restored.get_rect() == core.RectF(1, 2, 30, 40)
+
+
+def test_scroller_grabbed_gesture(qtbot):
+    w = widgets.PlainTextEdit()
+    qtbot.addWidget(w)
+    grabbed = widgets.Scroller.grab_gesture(w, "touch")
+    assert widgets.Scroller.grabbed_gesture(w) == grabbed
+
+
+def test_inputdialog_kwargs(qtbot):
+    dlg = widgets.InputDialog()
+    qtbot.addWidget(dlg)
+    assert "options" not in dlg._get_map()
+    dlg.set_input_mode("int")
+    assert dlg.get_input_mode() == "int"
+
+
+def test_slice_stop_zero(qtbot):
+    layout = widgets.VBoxLayout()
+    layout.add(widgets.Widget())
+    assert len(layout[:0]) == 0
+
+    splitter = widgets.Splitter()
+    qtbot.addWidget(splitter)
+    splitter.addWidget(widgets.Widget())
+    assert len(splitter[:0]) == 0
+
+    stack = widgets.StackedWidget()
+    qtbot.addWidget(stack)
+    stack.addWidget(widgets.Widget())
+    assert len(stack[:0]) == 0
+
+    tabbar = widgets.TabBar()
+    qtbot.addWidget(tabbar)
+    tabbar.addTab("a")
+    assert tabbar[:0]._range == range(0)
+
+    tabwidget = widgets.TabWidget()
+    qtbot.addWidget(tabwidget)
+    tabwidget.add_tab(widgets.Widget(), "a")
+    assert len(tabwidget[:0]) == 0
+
+    toolbox = widgets.ToolBox()
+    qtbot.addWidget(toolbox)
+    toolbox.add_widget(widgets.Widget(), "a")
+    assert len(toolbox[:0]) == 0
+
+
+def test_enum_updates(qtbot):
+    assert "titlebar_min_button" in widgets.style.STANDARD_PIXMAP
+    assert "dialog_reset" in widgets.style.STANDARD_PIXMAP
+    assert "tab_scroll_left_button" in widgets.style.STANDARD_PIXMAP
+    assert "column_view_grip" in widgets.style.CONTROL_ELEMENT
+    assert "dialog_buttons_separator" in widgets.style.PIXEL_METRIC
+    assert "top" in widgets.style.State
+    assert "window" in widgets.style.State
+    assert "no_eye_dropper_button" in widgets.colordialog.OPTIONS
+    assert "contiguous" in widgets.abstractitemview.SELECTION_MODE
+    assert "none" in widgets.dialogbuttonbox.STANDARD_BUTTON
+    assert "minimum_size_hint" in widgets.styleoptiontab.TAB_FEATURE
+    assert "moving" in widgets.styleoptiontab.TAB_POSITION
+    assert "is_decorated_root_column" in widgets.styleoptionviewitem.VIEW_ITEM_FEATURE
+    assert "stretch_banner" in widgets.wizard.WIZARD_OPTIONS
+    assert "stretch" in widgets.wizard.WIZARD_BUTTON
+
+    cb = widgets.ComboBox()
+    qtbot.addWidget(cb)
+    cb.set_label_drawing_mode("use_delegate")
+    assert cb.get_label_drawing_mode() == "use_delegate"
+    cb.set_label_drawing_mode("use_style")
+    assert cb.get_label_drawing_mode() == "use_style"
+
+
+def test_rhiwidget(qtbot):
+    w = widgets.RhiWidget()
+    qtbot.addWidget(w)
+    w.set_api("null")
+    assert w.get_api() == "null"
+    w.set_color_buffer_format("rgba16f")
+    assert w.get_color_buffer_format() == "rgba16f"
+    w.set_fixed_color_buffer_size((64, 64))
+    assert w.get_fixed_color_buffer_size() == core.Size(64, 64)
+
+
+def test_styleoption_v2():
+    header_v2 = widgets.StyleOptionHeaderV2()
+    assert header_v2.get_text_elide_mode() in constants.TEXT_ELIDE_MODE
+    menu_v2 = widgets.StyleOptionMenuItemV2()
+    assert hasattr(menu_v2, "mouseDown")
+
+
+def test_graphicsanchor_and_gesturerecognizer():
+    assert issubclass(widgets.GraphicsAnchor, widgets.QGraphicsAnchor)
+    assert issubclass(widgets.GraphicsAnchor, core.ObjectMixin)
+    assert "trigger_gesture" in widgets.gesturerecognizer.RESULT_FLAG
+    assert issubclass(widgets.GestureRecognizer, widgets.QGestureRecognizer)

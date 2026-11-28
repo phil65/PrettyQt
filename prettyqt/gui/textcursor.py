@@ -90,13 +90,22 @@ class TextCursor(gui.QTextCursor):
         )
 
     def move_position(
-        self, operation: MoveOperationStr, mode: MoveModeStr = "move", n: int = 1
+        self,
+        operation: MoveOperationStr | gui.QTextCursor.MoveOperation,
+        mode: MoveModeStr | gui.QTextCursor.MoveMode = "move",
+        n: int = 1,
     ) -> bool:
         if n < 0:
             raise ValueError(n)
-        return self.movePosition(MOVE_OPERATION[operation], MOVE_MODE[mode], n)
+        return self.movePosition(
+            MOVE_OPERATION.get_enum_value(operation), MOVE_MODE.get_enum_value(mode), n
+        )
 
-    def set_position(self, pos: int | tuple[int, int], mode: MoveModeStr = "move"):
+    def set_position(
+        self,
+        pos: int | tuple[int, int],
+        mode: MoveModeStr | gui.QTextCursor.MoveMode = "move",
+    ):
         """Set cursor to given position.
 
         0-indexed.
@@ -107,7 +116,7 @@ class TextCursor(gui.QTextCursor):
         """
         match pos:
             case int():
-                self.setPosition(pos, MOVE_MODE[mode])
+                self.setPosition(pos, MOVE_MODE.get_enum_value(mode))
             case (int() as row, int() as col):
                 position = self.document().findBlockByNumber(row).position()
                 position += col
@@ -116,11 +125,7 @@ class TextCursor(gui.QTextCursor):
                 raise TypeError(pos)
 
     def select(self, selection: SelectionTypeStr | gui.QTextCursor.SelectionType):
-        if isinstance(selection, gui.QTextCursor.SelectionType):
-            sel = selection
-        else:
-            sel = SELECTION_TYPE[selection]
-        super().select(sel)
+        super().select(SELECTION_TYPE.get_enum_value(selection))
 
     def span(self) -> tuple[int, int]:
         return (self.anchor(), self.position())
@@ -184,8 +189,10 @@ class TextCursor(gui.QTextCursor):
     def edit_block(self, join_previous: bool = False):
         """Context manager for edit blocks. Can be used for undo actions."""
         self.joinPreviousEditBlock() if join_previous else self.beginEditBlock()
-        yield
-        self.endEditBlock()
+        try:
+            yield
+        finally:
+            self.endEditBlock()
 
 
 if __name__ == "__main__":

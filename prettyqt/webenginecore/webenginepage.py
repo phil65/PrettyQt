@@ -1,5 +1,7 @@
+import json
 import logging
 import os
+import pathlib
 from typing import TYPE_CHECKING, Literal
 import webbrowser
 
@@ -25,6 +27,8 @@ FeatureStr = Literal[
     "mouse_lock",
     "desktop_video_capture",
     "desktop_audiovideo_capture",
+    "clipboard_read_write",
+    "local_fonts_access",
 ]
 
 FEATURE: bidict[FeatureStr, mod.Feature] = bidict(
@@ -36,13 +40,17 @@ FEATURE: bidict[FeatureStr, mod.Feature] = bidict(
     mouse_lock=mod.Feature.MouseLock,
     desktop_video_capture=mod.Feature.DesktopVideoCapture,
     desktop_audiovideo_capture=mod.Feature.DesktopAudioVideoCapture,
+    clipboard_read_write=mod.Feature.ClipboardReadWrite,
+    local_fonts_access=mod.Feature.LocalFontsAccess,
 )
 
-FileSelectionModeStr = Literal["open", "open_multiple"]
+FileSelectionModeStr = Literal["open", "open_multiple", "upload_folder", "save"]
 
 FILE_SELECTION_MODE: bidict[FileSelectionModeStr, mod.FileSelectionMode] = bidict(
     open=mod.FileSelectionMode.FileSelectOpen,
     open_multiple=mod.FileSelectionMode.FileSelectOpenMultiple,
+    upload_folder=mod.FileSelectionMode.FileSelectUploadFolder,
+    save=mod.FileSelectionMode.FileSelectSave,
 )
 
 FindFlagStr = Literal["backward", "case_sensitive"]
@@ -70,7 +78,17 @@ LIFECYCLE_STATE: bidict[LifecycleStateStr, mod.LifecycleState] = bidict(
     discarded=mod.LifecycleState.Discarded,
 )
 
-NAVIGATION_TYPES = bidict(
+NavigationTypeStr = Literal[
+    "link_clicked",
+    "typed",
+    "form_submitted",
+    "back_forward",
+    "reload",
+    "redirect",
+    "other",
+]
+
+NAVIGATION_TYPES: bidict[NavigationTypeStr, mod.NavigationType] = bidict(
     link_clicked=mod.NavigationType.NavigationTypeLinkClicked,
     typed=mod.NavigationType.NavigationTypeTyped,
     form_submitted=mod.NavigationType.NavigationTypeFormSubmitted,
@@ -88,7 +106,11 @@ PERMISSION_POLICY: bidict[PermissionPolicyStr, mod.PermissionPolicy] = bidict(
     denied_by_user=mod.PermissionPolicy.PermissionDeniedByUser,
 )
 
-RENDER_PROCESS_TERMINATION_STATUS = bidict(
+RenderProcessTerminationStatusStr = Literal["normal", "abnormal", "crashed", "killed"]
+
+RENDER_PROCESS_TERMINATION_STATUS: bidict[
+    RenderProcessTerminationStatusStr, mod.RenderProcessTerminationStatus
+] = bidict(
     normal=mod.RenderProcessTerminationStatus.NormalTerminationStatus,
     abnormal=mod.RenderProcessTerminationStatus.AbnormalTerminationStatus,
     crashed=mod.RenderProcessTerminationStatus.CrashedTerminationStatus,
@@ -142,6 +164,8 @@ WebActionStr = Literal[
     "outdent",
     "insert_ordered_list",
     "insert_unordered_list",
+    "change_text_direction_ltr",
+    "change_text_direction_rtl",
 ]
 
 WEB_ACTION: bidict[WebActionStr, mod.WebAction] = bidict(
@@ -191,9 +215,13 @@ WEB_ACTION: bidict[WebActionStr, mod.WebAction] = bidict(
     outdent=mod.WebAction.Outdent,
     insert_ordered_list=mod.WebAction.InsertOrderedList,
     insert_unordered_list=mod.WebAction.InsertUnorderedList,
+    change_text_direction_ltr=mod.WebAction.ChangeTextDirectionLTR,
+    change_text_direction_rtl=mod.WebAction.ChangeTextDirectionRTL,
 )
 
-WEB_WINDOW_TYPES = bidict(
+WebWindowTypeStr = Literal["browser_window", "browser_tab", "dialog", "browser_bg_tab"]
+
+WEB_WINDOW_TYPES: bidict[WebWindowTypeStr, mod.WebWindowType] = bidict(
     browser_window=mod.WebWindowType.WebBrowserWindow,
     browser_tab=mod.WebWindowType.WebBrowserTab,
     dialog=mod.WebWindowType.WebDialog,
@@ -326,9 +354,10 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
         policy: PermissionPolicyStr | mod.PermissionPolicy,
     ):
         """Set permission of feature for given URL."""
-        url = core.Url(url)
         self.setFeaturePermission(
-            url, FEATURE.get_enum_value(feature), PERMISSION_POLICY.get_enum_value(policy)
+            datatypes.to_url(url),
+            FEATURE.get_enum_value(feature),
+            PERMISSION_POLICY.get_enum_value(policy),
         )
 
     def get_history(self) -> webenginecore.WebEngineHistory:
@@ -374,26 +403,21 @@ class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
         Arguments:
             name: CSS id
             css: CSS stylesheet, either a string or a PathLike object.
-            immediately: whther to run javascript immediately
+            immediately: whether to run javascript immediately
         """
         if isinstance(css, os.PathLike):
-            path = core.File(os.fspath(css))
-            if not path.open(
-                core.File.OpenModeFlag.ReadOnly | core.File.OpenModeFlag.Text
-            ):
-                return
-            css = bytes(path.readAll().data()).decode("utf-8")
-        script = webenginecore.WebEngineScript()
-        s = """
-        (function() {
+            path = pathlib.Path(css)
+            with path.open(encoding="utf-8") as f:
+                css = f.read()
+        s = f"""
+        (function() {{
         css = document.createElement('style');
         css.type = 'text/css';
-        css.id = "%s";
+        css.id = {json.dumps(name)};
         document.head.appendChild(css);
-        css.innerText = `%s`;
-        })()
+        css.innerText = {json.dumps(css)};
+        }})()
         """
-        s = s % (name, css)
         script = webenginecore.WebEngineScript()
         if immediately:
             self.runJavaScript(s, script.ScriptWorldId.ApplicationWorld)

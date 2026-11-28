@@ -39,7 +39,7 @@ class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
 
     def __delitem__(self, index: int | tuple[int, int]):
         item = self.takeRow(index) if isinstance(index, int) else self.takeChild(*index)
-        if item is None:
+        if not item:
             raise KeyError(index)
         return item
 
@@ -176,9 +176,9 @@ class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
         foreground: gui.QBrush | None = None,
         background: gui.QBrush | None = None,
         font: gui.QFont | None = None,
-        selectable: bool = True,
-        enabled: bool = True,
-        editable: bool = False,
+        selectable: bool | None = None,
+        enabled: bool | None = None,
+        editable: bool | None = None,
         status_tip: str = "",
         tool_tip: str = "",
         whats_this: str | None = None,
@@ -203,11 +203,11 @@ class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
             item.setFont(font)
         if flags is not None:
             item.setFlags(flags)
-        if enabled:
+        if enabled is not None:
             item.setEnabled(enabled)
-        if editable:
+        if editable is not None:
             item.setEditable(editable)
-        if selectable:
+        if selectable is not None:
             item.setSelectable(selectable)
         if status_tip:
             item.setStatusTip(status_tip)

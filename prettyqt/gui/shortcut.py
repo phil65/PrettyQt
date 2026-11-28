@@ -19,6 +19,11 @@ class Shortcut(core.ObjectMixin, gui.QShortcut):
     def __str__(self):
         return self.key().toString()
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"context": constants.SHORTCUT_CONTEXT}
+        return maps
+
     def set_context(
         self, context: constants.ShortcutContextStr | constants.ShortcutContext
     ):
